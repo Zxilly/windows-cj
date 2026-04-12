@@ -1,0 +1,7 @@
+[features.feat_kernel32]
+cfg = "feat_kernel32"
+deps = []
+
+[features.feat_user32]
+deps = ["feat_kernel32"]
+

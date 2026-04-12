@@ -1,0 +1,12 @@
+compile-option = "--cfg ./windows-cj"
+
+[package]
+  name = "missing_cfg_workspace"
+  version = "0.1.0"
+  description = "missing cfg fixture workspace"
+  output-type = "executable"
+  cjc-version = "1.1.0"
+
+[windows-cj]
+features = ["feat_user32"]
+

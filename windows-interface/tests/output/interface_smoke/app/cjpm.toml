@@ -1,0 +1,11 @@
+[package]
+  name = "interface_smoke_app"
+  version = "0.1.0"
+  description = "Smoke test for windows_interface"
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-loleaut32 -lwindowsapp"
+
+[dependencies]
+  windows_interface = { path = "../../../../" }
+  windows_result = { path = "../../../../../windows-result" }

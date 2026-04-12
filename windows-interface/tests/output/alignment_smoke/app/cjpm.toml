@@ -1,0 +1,11 @@
+[package]
+  name = "windows_interface_alignment_smoke"
+  version = "0.1.0"
+  description = "Alignment smoke test for windows_interface"
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-loleaut32 -lwindowsapp"
+
+[dependencies]
+  windows_interface = { path = "../../../../" }
+  windows_strings = { path = "../../../../../windows-strings" }

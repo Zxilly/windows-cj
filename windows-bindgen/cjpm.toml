@@ -1,0 +1,9 @@
+[package]
+  name = "windows_bindgen"
+  version = "0.1.0"
+  description = "Code generator: Windows metadata (.winmd) to Cangjie source"
+  output-type = "executable"
+  cjc-version = "1.1.0"
+
+[dependencies]
+  windows_metadata = { path = "../windows-metadata" }
