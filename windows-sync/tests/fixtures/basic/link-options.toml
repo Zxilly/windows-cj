@@ -1,0 +1,6 @@
+[features.feat_kernel32]
+link = ["-lkernel32"]
+
+[features.feat_user32]
+link = ["-luser32"]
+

@@ -1,0 +1,18 @@
+[workspace]
+members = [
+    "windows-metadata",
+    "windows-bindgen",
+    "windows-sync",
+    "windows-sys",
+    "windows-result",
+    "windows-strings",
+    "windows-interface",
+    "windows-implement",
+    "windows-core",
+    "windows"
+]
+
+compile-option = "--cfg ./windows-cj"
+
+[windows-cj]
+features = []

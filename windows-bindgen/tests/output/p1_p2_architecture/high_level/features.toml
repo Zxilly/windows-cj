@@ -1,0 +1,44 @@
+[features.feat_windows_data_text]
+cfg = "feat_windows_data_text"
+deps = []
+
+[features.feat_windows_foundation]
+cfg = "feat_windows_foundation"
+deps = []
+
+[features.feat_windows_foundation_collections]
+cfg = "feat_windows_foundation_collections"
+deps = []
+
+[features.feat_windows_foundation_diagnostics]
+cfg = "feat_windows_foundation_diagnostics"
+deps = []
+
+[features.feat_windows_foundation_metadata]
+cfg = "feat_windows_foundation_metadata"
+deps = []
+
+[features.feat_windows_foundation_numerics]
+cfg = "feat_windows_foundation_numerics"
+deps = []
+
+[features.feat_windows_storage]
+cfg = "feat_windows_storage"
+deps = []
+
+[features.feat_windows_storage_file_properties]
+cfg = "feat_windows_storage_file_properties"
+deps = []
+
+[features.feat_windows_storage_search]
+cfg = "feat_windows_storage_search"
+deps = []
+
+[features.feat_windows_storage_streams]
+cfg = "feat_windows_storage_streams"
+deps = []
+
+[features.feat_windows_system]
+cfg = "feat_windows_system"
+deps = []
+
