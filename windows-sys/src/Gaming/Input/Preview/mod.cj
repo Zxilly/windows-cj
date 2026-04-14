@@ -3,6 +3,7 @@ package windows_sys.Gaming.Input.Preview
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Gaming.Input as Gaming_Input
 import windows_sys.Gaming.Input.Custom as Gaming_Input_Custom

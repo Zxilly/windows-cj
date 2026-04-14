@@ -3,6 +3,7 @@ package windows_sys.Win32.Storage.Vhd
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.System.IO as Win32_System_IO
@@ -177,14 +178,13 @@ public struct ATTACH_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func version1(): ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -193,9 +193,8 @@ public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -205,9 +204,8 @@ public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public func version2(): ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
             return ptr.read()
         }
@@ -216,9 +214,8 @@ public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version2(val: ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -324,14 +321,13 @@ public struct COMPACT_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func version1(): COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -340,9 +336,8 @@ public struct COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -464,14 +459,13 @@ public struct CREATE_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $10> = VArray<UInt64, $10>(repeat: 0)
+    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
 
     public func version1(): CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -480,9 +474,8 @@ public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -492,9 +485,8 @@ public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public func version2(): CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
             return ptr.read()
         }
@@ -503,9 +495,8 @@ public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version2(val: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -515,9 +506,8 @@ public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public func version3(): CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
             return ptr.read()
         }
@@ -526,9 +516,8 @@ public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version3(val: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -538,9 +527,8 @@ public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public func version4(): CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct>(p)
             return ptr.read()
         }
@@ -549,9 +537,8 @@ public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version4(val: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -914,14 +901,13 @@ public struct EXPAND_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func version1(): EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -930,9 +916,8 @@ public struct EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1024,14 +1009,13 @@ public struct FORK_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func version1(): FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -1040,9 +1024,8 @@ public struct FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1137,14 +1120,13 @@ public struct GET_VIRTUAL_DISK_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func size(): GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct>(p)
             return ptr.read()
         }
@@ -1153,9 +1135,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_size(val: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1165,9 +1146,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func identifier(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -1176,9 +1156,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_identifier(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1188,9 +1167,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func parentLocation(): GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct>(p)
             return ptr.read()
         }
@@ -1199,9 +1177,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_parentLocation(val: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1211,9 +1188,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func parentIdentifier(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -1222,9 +1198,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_parentIdentifier(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1234,22 +1209,16 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func parentTimestamp(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_parentTimestamp(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1257,9 +1226,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func virtualStorageType(): VIRTUAL_STORAGE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VIRTUAL_STORAGE_TYPE>(p)
             return ptr.read()
         }
@@ -1268,9 +1236,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_virtualStorageType(val: VIRTUAL_STORAGE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VIRTUAL_STORAGE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1280,22 +1247,16 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func providerSubtype(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_providerSubtype(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1303,22 +1264,16 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func is4kAligned(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_is4kAligned(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1326,22 +1281,16 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func isLoaded(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_isLoaded(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1349,9 +1298,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func physicalDisk(): GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct>(p)
             return ptr.read()
         }
@@ -1360,9 +1308,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_physicalDisk(val: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1372,22 +1319,16 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func vhdPhysicalSectorSize(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_vhdPhysicalSectorSize(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1395,22 +1336,16 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func smallestSafeVirtualSize(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_smallestSafeVirtualSize(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1418,22 +1353,16 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func fragmentationPercentage(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_fragmentationPercentage(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1441,9 +1370,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func virtualDiskId(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -1452,9 +1380,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_virtualDiskId(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1464,9 +1391,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func changeTrackingState(): GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct>(p)
             return ptr.read()
         }
@@ -1475,9 +1401,8 @@ public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_changeTrackingState(val: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1637,14 +1562,13 @@ public struct MERGE_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func version1(): MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -1653,9 +1577,8 @@ public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1665,9 +1588,8 @@ public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public func version2(): MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
             return ptr.read()
         }
@@ -1676,9 +1598,8 @@ public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version2(val: MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1790,14 +1711,13 @@ public struct MIRROR_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func version1(): MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -1806,9 +1726,8 @@ public struct MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1900,14 +1819,13 @@ public struct MODIFY_VHDSET_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func snapshotPath(): MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct>(p)
             return ptr.read()
         }
@@ -1916,9 +1834,8 @@ public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union {
     public mut func set_snapshotPath(val: MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1928,9 +1845,8 @@ public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union {
     public func snapshotId(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -1939,9 +1855,8 @@ public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union {
     public mut func set_snapshotId(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1951,9 +1866,8 @@ public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union {
     public func defaultFilePath(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -1962,9 +1876,8 @@ public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union {
     public mut func set_defaultFilePath(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2096,14 +2009,13 @@ public struct OPEN_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func version1(): OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -2112,9 +2024,8 @@ public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2124,9 +2035,8 @@ public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public func version2(): OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
             return ptr.read()
         }
@@ -2135,9 +2045,8 @@ public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version2(val: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2147,9 +2056,8 @@ public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public func version3(): OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
             return ptr.read()
         }
@@ -2158,9 +2066,8 @@ public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version3(val: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2319,14 +2226,13 @@ public struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func version1(): RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -2335,9 +2241,8 @@ public struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2373,14 +2278,13 @@ public struct RAW_SCSI_VIRTUAL_DISK_RESPONSE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func version1(): RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -2389,9 +2293,8 @@ public struct RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union {
     public mut func set_version1(val: RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2488,14 +2391,13 @@ public struct RESIZE_VIRTUAL_DISK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func version1(): RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -2504,9 +2406,8 @@ public struct RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
     public mut func set_version1(val: RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2559,14 +2460,13 @@ public struct SET_VIRTUAL_DISK_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func parentFilePath(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -2575,9 +2475,8 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_parentFilePath(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2587,9 +2486,8 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func uniqueIdentifier(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -2598,9 +2496,8 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_uniqueIdentifier(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2610,9 +2507,8 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func parentPathWithDepthInfo(): SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct>(p)
             return ptr.read()
         }
@@ -2621,9 +2517,8 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_parentPathWithDepthInfo(val: SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2633,22 +2528,16 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func vhdPhysicalSectorSize(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_vhdPhysicalSectorSize(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2656,9 +2545,8 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func virtualDiskId(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -2667,9 +2555,8 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_virtualDiskId(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2679,22 +2566,16 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func changeTrackingEnabled(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_changeTrackingEnabled(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2702,9 +2583,8 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public func parentLocator(): SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct>(p)
             return ptr.read()
         }
@@ -2713,9 +2593,8 @@ public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
     public mut func set_parentLocator(val: SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2796,14 +2675,13 @@ public struct STORAGE_DEPENDENCY_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct STORAGE_DEPENDENCY_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func version1Entries(): VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1>>(p)
             return ptr.read()
         }
@@ -2812,9 +2690,8 @@ public struct STORAGE_DEPENDENCY_INFO__Anonymous_e__Union {
     public mut func set_version1Entries(val: VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2824,9 +2701,8 @@ public struct STORAGE_DEPENDENCY_INFO__Anonymous_e__Union {
     public func version2Entries(): VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1>>(p)
             return ptr.read()
         }
@@ -2835,9 +2711,8 @@ public struct STORAGE_DEPENDENCY_INFO__Anonymous_e__Union {
     public mut func set_version2Entries(val: VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1>>(p)
             ptr.write(val)
             _raw = rawStorage

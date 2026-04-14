@@ -3,6 +3,7 @@ package windows_sys.Graphics.Printing.PrintSupport
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Devices.Printers as Devices_Printers
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Graphics.Printing.PrintTicket as Graphics_Printing_PrintTicket

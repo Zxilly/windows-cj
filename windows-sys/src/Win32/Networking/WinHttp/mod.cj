@@ -3,6 +3,7 @@ package windows_sys.Win32.Networking.WinHttp
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -577,14 +578,13 @@ public struct WINHTTP_EXTENDED_HEADER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINHTTP_EXTENDED_HEADER__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pwszName(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -593,9 +593,8 @@ public struct WINHTTP_EXTENDED_HEADER__Anonymous1_e__Union {
     public mut func set_pwszName(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -605,9 +604,8 @@ public struct WINHTTP_EXTENDED_HEADER__Anonymous1_e__Union {
     public func pszName(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -616,9 +614,8 @@ public struct WINHTTP_EXTENDED_HEADER__Anonymous1_e__Union {
     public mut func set_pszName(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -631,14 +628,13 @@ public struct WINHTTP_EXTENDED_HEADER__Anonymous1_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINHTTP_EXTENDED_HEADER__Anonymous2_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pwszValue(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -647,9 +643,8 @@ public struct WINHTTP_EXTENDED_HEADER__Anonymous2_e__Union {
     public mut func set_pwszValue(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -659,9 +654,8 @@ public struct WINHTTP_EXTENDED_HEADER__Anonymous2_e__Union {
     public func pszValue(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -670,9 +664,8 @@ public struct WINHTTP_EXTENDED_HEADER__Anonymous2_e__Union {
     public mut func set_pszValue(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -734,14 +727,13 @@ public struct WINHTTP_FAST_FORWARDING_STATUS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINHTTP_HEADER_NAME {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pwszName(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -750,9 +742,8 @@ public struct WINHTTP_HEADER_NAME {
     public mut func set_pwszName(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -762,9 +753,8 @@ public struct WINHTTP_HEADER_NAME {
     public func pszName(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -773,9 +763,8 @@ public struct WINHTTP_HEADER_NAME {
     public mut func set_pszName(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage

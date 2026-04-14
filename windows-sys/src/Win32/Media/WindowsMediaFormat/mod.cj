@@ -3,6 +3,7 @@ package windows_sys.Win32.Media.WindowsMediaFormat
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.impl as Win32_impl
@@ -16258,13 +16259,77 @@ public let WMT_CLEANPOINT_ONLY: WMT_STREAM_SELECTION = WMT_STREAM_SELECTION(1)
 public let WMT_ON: WMT_STREAM_SELECTION = WMT_STREAM_SELECTION(2)
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]
-// packed(2)
 @C
 public struct WMT_TIMECODE_EXTENSION_DATA {
-    public var wRange: UInt16 = 0
-    public var dwTimecode: UInt32 = 0
-    public var dwUserbits: UInt32 = 0
-    public var dwAmFlags: UInt32 = 0
+    public var _raw: VArray<UInt8, $14> = VArray<UInt8, $14>(repeat: 0u8)
+
+    public func wRange(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_wRange(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTimecode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 2)
+        }
+    }
+
+    public mut func set_dwTimecode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUserbits(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 6)
+        }
+    }
+
+    public mut func set_dwUserbits(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAmFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 10)
+        }
+    }
+
+    public mut func set_dwAmFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 10, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -16642,11 +16707,43 @@ public let WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_CD_BOTTOM: WM_DM_IT_FIRST_FRAME_COHER
 public let WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_DD_BOTTOM: WM_DM_IT_FIRST_FRAME_COHERENCY = WM_DM_IT_FIRST_FRAME_COHERENCY(10)
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]
-// packed(1)
 @C
 public struct WM_LEAKY_BUCKET_PAIR {
-    public var dwBitrate: UInt32 = 0
-    public var msBufferWindow: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func dwBitrate(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwBitrate(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func msBufferWindow(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_msBufferWindow(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -16666,14 +16763,49 @@ public struct WM_MEDIA_TYPE {
 }
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]
-// packed(1)
 @C
 public struct WM_PICTURE {
-    public var pwszMIMEType: CPointer<UInt16> = CPointer<UInt16>()
-    public var bPictureType: UInt8 = 0
-    public var pwszDescription: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwDataLen: UInt32 = 0
-    public var pbData: CPointer<UInt8> = CPointer<UInt8>()
+    public var _raw: VArray<UInt8, $29> = VArray<UInt8, $29>(repeat: 0u8)
+
+    // packed field `pwszMIMEType`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    public func bPictureType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 8)
+        }
+    }
+
+    public mut func set_bPictureType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pwszDescription`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    public func dwDataLen(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 17)
+        }
+    }
+
+    public mut func set_dwDataLen(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 17, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pbData`: type `CPointer<UInt8>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -16794,50 +16926,153 @@ public let WM_SF_DISCONTINUITY: WM_SF_TYPE = WM_SF_TYPE(2)
 public let WM_SF_DATALOSS: WM_SF_TYPE = WM_SF_TYPE(4)
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]
-// packed(2)
 @C
 public struct WM_STREAM_PRIORITY_RECORD {
-    public var wStreamNumber: UInt16 = 0
-    public var fMandatory: Int32 = 0
+    public var _raw: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0u8)
+
+    public func wStreamNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_wStreamNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func fMandatory(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 2)
+        }
+    }
+
+    public mut func set_fMandatory(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 2, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]
-// packed(1)
 @C
 public struct WM_STREAM_TYPE_INFO {
-    public var guidMajorType: GUID = GUID()
-    public var cbFormat: UInt32 = 0
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+
+    // packed field `guidMajorType`: layout unknown; skipped
+
+    public func cbFormat(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_cbFormat(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]
-// packed(1)
 @C
 public struct WM_SYNCHRONISED_LYRICS {
-    public var bTimeStampFormat: UInt8 = 0
-    public var bContentType: UInt8 = 0
-    public var pwszContentDescriptor: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwLyricsLen: UInt32 = 0
-    public var pbLyrics: CPointer<UInt8> = CPointer<UInt8>()
+    public var _raw: VArray<UInt8, $22> = VArray<UInt8, $22>(repeat: 0u8)
+
+    public func bTimeStampFormat(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_bTimeStampFormat(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bContentType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_bContentType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pwszContentDescriptor`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    public func dwLyricsLen(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 10)
+        }
+    }
+
+    public mut func set_dwLyricsLen(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 10, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pbLyrics`: type `CPointer<UInt8>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]
-// packed(1)
 @C
 public struct WM_USER_TEXT {
-    public var pwszDescription: CPointer<UInt16> = CPointer<UInt16>()
-    public var pwszText: CPointer<UInt16> = CPointer<UInt16>()
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    // packed field `pwszDescription`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `pwszText`: type `CPointer<UInt16>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Media_WindowsMediaFormat == "on"]
-// packed(1)
 @C
 public struct WM_USER_WEB_URL {
-    public var pwszDescription: CPointer<UInt16> = CPointer<UInt16>()
-    public var pwszURL: CPointer<UInt16> = CPointer<UInt16>()
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    // packed field `pwszDescription`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `pwszURL`: type `CPointer<UInt16>` not supported by polyfill; skipped
     public init() {}
 }
 

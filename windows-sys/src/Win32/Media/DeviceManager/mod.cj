@@ -3,6 +3,7 @@ package windows_sys.Win32.Media.DeviceManager
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
 import windows_sys.Win32.Media.impl as Win32_Media_impl
@@ -8095,27 +8096,143 @@ public struct MACINFO {
 }
 
 @When[Windows_Win32_Media_DeviceManager == "on"]
-// packed(1)
 @C
 public struct MTP_COMMAND_DATA_IN {
-    public var OpCode: UInt16 = 0
-    public var NumParams: UInt32 = 0
-    public var Params: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
-    public var NextPhase: UInt32 = 0
-    public var CommandWriteDataSize: UInt32 = 0
-    public var CommandWriteData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $35> = VArray<UInt8, $35>(repeat: 0u8)
+
+    public func opCode(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_opCode(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func numParams(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 2)
+        }
+    }
+
+    public mut func set_numParams(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Params`: type `VArray<UInt32, $5>` not supported by polyfill; skipped
+
+    public func nextPhase(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 26)
+        }
+    }
+
+    public mut func set_nextPhase(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 26, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func commandWriteDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 30)
+        }
+    }
+
+    public mut func set_commandWriteDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 30, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `CommandWriteData`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Media_DeviceManager == "on"]
-// packed(1)
 @C
 public struct MTP_COMMAND_DATA_OUT {
-    public var ResponseCode: UInt16 = 0
-    public var NumParams: UInt32 = 0
-    public var Params: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
-    public var CommandReadDataSize: UInt32 = 0
-    public var CommandReadData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $31> = VArray<UInt8, $31>(repeat: 0u8)
+
+    public func responseCode(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_responseCode(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func numParams(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 2)
+        }
+    }
+
+    public mut func set_numParams(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Params`: type `VArray<UInt32, $5>` not supported by polyfill; skipped
+
+    public func commandReadDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 26)
+        }
+    }
+
+    public mut func set_commandReadDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 26, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `CommandReadData`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -8157,14 +8274,13 @@ public struct WMDMDATETIME {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WMDMDetermineMaxPropStringLen {
-    public var _raw: VArray<UInt16, $36> = VArray<UInt16, $36>(repeat: 0)
+    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
 
     public func sz001(): VArray<UInt16, $27> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $27>>(p)
             return ptr.read()
         }
@@ -8173,9 +8289,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz001(val: VArray<UInt16, $27>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $27>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8185,9 +8300,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz002(): VArray<UInt16, $31> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $31>>(p)
             return ptr.read()
         }
@@ -8196,9 +8310,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz002(val: VArray<UInt16, $31>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $31>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8208,9 +8321,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz003(): VArray<UInt16, $14> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             return ptr.read()
         }
@@ -8219,9 +8331,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz003(val: VArray<UInt16, $14>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8231,9 +8342,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz004(): VArray<UInt16, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             return ptr.read()
         }
@@ -8242,9 +8352,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz004(val: VArray<UInt16, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8254,9 +8363,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz005(): VArray<UInt16, $22> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             return ptr.read()
         }
@@ -8265,9 +8373,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz005(val: VArray<UInt16, $22>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8277,9 +8384,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz006(): VArray<UInt16, $14> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             return ptr.read()
         }
@@ -8288,9 +8394,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz006(val: VArray<UInt16, $14>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8300,9 +8405,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz007(): VArray<UInt16, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             return ptr.read()
         }
@@ -8311,9 +8415,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz007(val: VArray<UInt16, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8323,9 +8426,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz008(): VArray<UInt16, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             return ptr.read()
         }
@@ -8334,9 +8436,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz008(val: VArray<UInt16, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8346,9 +8447,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz009(): VArray<UInt16, $22> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             return ptr.read()
         }
@@ -8357,9 +8457,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz009(val: VArray<UInt16, $22>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8369,9 +8468,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz010(): VArray<UInt16, $11> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             return ptr.read()
         }
@@ -8380,9 +8478,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz010(val: VArray<UInt16, $11>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8392,9 +8489,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz011(): VArray<UInt16, $12> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $12>>(p)
             return ptr.read()
         }
@@ -8403,9 +8499,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz011(val: VArray<UInt16, $12>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $12>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8415,9 +8510,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz012(): VArray<UInt16, $17> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             return ptr.read()
         }
@@ -8426,9 +8520,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz012(val: VArray<UInt16, $17>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8438,9 +8531,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz013(): VArray<UInt16, $17> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             return ptr.read()
         }
@@ -8449,9 +8541,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz013(val: VArray<UInt16, $17>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8461,9 +8552,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz014(): VArray<UInt16, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             return ptr.read()
         }
@@ -8472,9 +8562,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz014(val: VArray<UInt16, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8484,9 +8573,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz015(): VArray<UInt16, $17> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             return ptr.read()
         }
@@ -8495,9 +8583,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz015(val: VArray<UInt16, $17>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8507,9 +8594,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz016(): VArray<UInt16, $11> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             return ptr.read()
         }
@@ -8518,9 +8604,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz016(val: VArray<UInt16, $11>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8530,9 +8615,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz017(): VArray<UInt16, $11> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             return ptr.read()
         }
@@ -8541,9 +8625,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz017(val: VArray<UInt16, $11>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8553,9 +8636,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz018(): VArray<UInt16, $15> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $15>>(p)
             return ptr.read()
         }
@@ -8564,9 +8646,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz018(val: VArray<UInt16, $15>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $15>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8576,9 +8657,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz019(): VArray<UInt16, $22> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             return ptr.read()
         }
@@ -8587,9 +8667,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz019(val: VArray<UInt16, $22>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8599,9 +8678,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz020(): VArray<UInt16, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             return ptr.read()
         }
@@ -8610,9 +8688,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz020(val: VArray<UInt16, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8622,9 +8699,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz021(): VArray<UInt16, $22> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             return ptr.read()
         }
@@ -8633,9 +8709,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz021(val: VArray<UInt16, $22>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8645,9 +8720,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz022(): VArray<UInt16, $21> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $21>>(p)
             return ptr.read()
         }
@@ -8656,9 +8730,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz022(val: VArray<UInt16, $21>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $21>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8668,9 +8741,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz023(): VArray<UInt16, $24> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             return ptr.read()
         }
@@ -8679,9 +8751,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz023(val: VArray<UInt16, $24>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8691,9 +8762,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz024(): VArray<UInt16, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             return ptr.read()
         }
@@ -8702,9 +8772,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz024(val: VArray<UInt16, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8714,9 +8783,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz025(): VArray<UInt16, $10> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $10>>(p)
             return ptr.read()
         }
@@ -8725,9 +8793,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz025(val: VArray<UInt16, $10>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $10>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8737,9 +8804,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz026(): VArray<UInt16, $14> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             return ptr.read()
         }
@@ -8748,9 +8814,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz026(val: VArray<UInt16, $14>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8760,9 +8825,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz027(): VArray<UInt16, $11> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             return ptr.read()
         }
@@ -8771,9 +8835,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz027(val: VArray<UInt16, $11>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8783,9 +8846,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz028(): VArray<UInt16, $11> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             return ptr.read()
         }
@@ -8794,9 +8856,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz028(val: VArray<UInt16, $11>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8806,9 +8867,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz029(): VArray<UInt16, $13> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $13>>(p)
             return ptr.read()
         }
@@ -8817,9 +8877,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz029(val: VArray<UInt16, $13>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $13>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8829,9 +8888,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz030(): VArray<UInt16, $17> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             return ptr.read()
         }
@@ -8840,9 +8898,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz030(val: VArray<UInt16, $17>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8852,9 +8909,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz031(): VArray<UInt16, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             return ptr.read()
         }
@@ -8863,9 +8919,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz031(val: VArray<UInt16, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8875,9 +8930,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz032(): VArray<UInt16, $17> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             return ptr.read()
         }
@@ -8886,9 +8940,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz032(val: VArray<UInt16, $17>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $17>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8898,9 +8951,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz033(): VArray<UInt16, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             return ptr.read()
         }
@@ -8909,9 +8961,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz033(val: VArray<UInt16, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8921,9 +8972,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz034(): VArray<UInt16, $19> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $19>>(p)
             return ptr.read()
         }
@@ -8932,9 +8982,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz034(val: VArray<UInt16, $19>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $19>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8944,9 +8993,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz035(): VArray<UInt16, $18> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $18>>(p)
             return ptr.read()
         }
@@ -8955,9 +9003,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz035(val: VArray<UInt16, $18>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $18>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8967,9 +9014,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz036(): VArray<UInt16, $18> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $18>>(p)
             return ptr.read()
         }
@@ -8978,9 +9024,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz036(val: VArray<UInt16, $18>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $18>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8990,9 +9035,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz037(): VArray<UInt16, $15> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $15>>(p)
             return ptr.read()
         }
@@ -9001,9 +9045,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz037(val: VArray<UInt16, $15>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $15>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9013,9 +9056,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz041(): VArray<UInt16, $14> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             return ptr.read()
         }
@@ -9024,9 +9066,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz041(val: VArray<UInt16, $14>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9036,9 +9077,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz043(): VArray<UInt16, $22> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             return ptr.read()
         }
@@ -9047,9 +9087,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz043(val: VArray<UInt16, $22>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9059,9 +9098,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz044(): VArray<UInt16, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             return ptr.read()
         }
@@ -9070,9 +9108,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz044(val: VArray<UInt16, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9082,9 +9119,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz045(): VArray<UInt16, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             return ptr.read()
         }
@@ -9093,9 +9129,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz045(val: VArray<UInt16, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9105,9 +9140,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz046(): VArray<UInt16, $14> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             return ptr.read()
         }
@@ -9116,9 +9150,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz046(val: VArray<UInt16, $14>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9128,9 +9161,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz047(): VArray<UInt16, $14> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             return ptr.read()
         }
@@ -9139,9 +9171,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz047(val: VArray<UInt16, $14>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9151,9 +9182,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz048(): VArray<UInt16, $12> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $12>>(p)
             return ptr.read()
         }
@@ -9162,9 +9192,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz048(val: VArray<UInt16, $12>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $12>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9174,9 +9203,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz049(): VArray<UInt16, $25> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $25>>(p)
             return ptr.read()
         }
@@ -9185,9 +9213,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz049(val: VArray<UInt16, $25>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $25>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9197,9 +9224,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz050(): VArray<UInt16, $26> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $26>>(p)
             return ptr.read()
         }
@@ -9208,9 +9234,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz050(val: VArray<UInt16, $26>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $26>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9220,9 +9245,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz051(): VArray<UInt16, $25> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $25>>(p)
             return ptr.read()
         }
@@ -9231,9 +9255,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz051(val: VArray<UInt16, $25>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $25>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9243,9 +9266,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz052(): VArray<UInt16, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             return ptr.read()
         }
@@ -9254,9 +9276,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz052(val: VArray<UInt16, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9266,9 +9287,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz053(): VArray<UInt16, $24> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             return ptr.read()
         }
@@ -9277,9 +9297,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz053(val: VArray<UInt16, $24>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9289,9 +9308,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz054(): VArray<UInt16, $15> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $15>>(p)
             return ptr.read()
         }
@@ -9300,9 +9318,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz054(val: VArray<UInt16, $15>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $15>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9312,9 +9329,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz055(): VArray<UInt16, $21> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $21>>(p)
             return ptr.read()
         }
@@ -9323,9 +9339,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz055(val: VArray<UInt16, $21>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $21>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9335,9 +9350,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz056(): VArray<UInt16, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             return ptr.read()
         }
@@ -9346,9 +9360,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz056(val: VArray<UInt16, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9358,9 +9371,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz057(): VArray<UInt16, $22> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             return ptr.read()
         }
@@ -9369,9 +9381,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz057(val: VArray<UInt16, $22>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9381,9 +9392,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz058(): VArray<UInt16, $14> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             return ptr.read()
         }
@@ -9392,9 +9402,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz058(val: VArray<UInt16, $14>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9404,9 +9413,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz059(): VArray<UInt16, $25> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $25>>(p)
             return ptr.read()
         }
@@ -9415,9 +9423,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz059(val: VArray<UInt16, $25>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $25>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9427,9 +9434,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz060(): VArray<UInt16, $18> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $18>>(p)
             return ptr.read()
         }
@@ -9438,9 +9444,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz060(val: VArray<UInt16, $18>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $18>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9450,9 +9455,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz061(): VArray<UInt16, $22> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             return ptr.read()
         }
@@ -9461,9 +9465,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz061(val: VArray<UInt16, $22>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9473,9 +9476,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz062(): VArray<UInt16, $26> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $26>>(p)
             return ptr.read()
         }
@@ -9484,9 +9486,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz062(val: VArray<UInt16, $26>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $26>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9496,9 +9497,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz063(): VArray<UInt16, $36> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $36>>(p)
             return ptr.read()
         }
@@ -9507,9 +9507,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz063(val: VArray<UInt16, $36>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $36>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9519,9 +9518,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz064(): VArray<UInt16, $23> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $23>>(p)
             return ptr.read()
         }
@@ -9530,9 +9528,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz064(val: VArray<UInt16, $23>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $23>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9542,9 +9539,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz065(): VArray<UInt16, $12> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $12>>(p)
             return ptr.read()
         }
@@ -9553,9 +9549,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz065(val: VArray<UInt16, $12>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $12>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9565,9 +9560,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz066(): VArray<UInt16, $24> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             return ptr.read()
         }
@@ -9576,9 +9570,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz066(val: VArray<UInt16, $24>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9588,9 +9581,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz067(): VArray<UInt16, $11> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             return ptr.read()
         }
@@ -9599,9 +9591,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz067(val: VArray<UInt16, $11>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $11>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9611,9 +9602,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz068(): VArray<UInt16, $12> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $12>>(p)
             return ptr.read()
         }
@@ -9622,9 +9612,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz068(val: VArray<UInt16, $12>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $12>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9634,9 +9623,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz069(): VArray<UInt16, $14> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             return ptr.read()
         }
@@ -9645,9 +9633,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz069(val: VArray<UInt16, $14>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9657,9 +9644,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz070(): VArray<UInt16, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             return ptr.read()
         }
@@ -9668,9 +9654,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz070(val: VArray<UInt16, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9680,9 +9665,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz071(): VArray<UInt16, $15> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $15>>(p)
             return ptr.read()
         }
@@ -9691,9 +9675,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz071(val: VArray<UInt16, $15>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $15>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9703,9 +9686,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz072(): VArray<UInt16, $14> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             return ptr.read()
         }
@@ -9714,9 +9696,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz072(val: VArray<UInt16, $14>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $14>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9726,9 +9707,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz073(): VArray<UInt16, $31> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $31>>(p)
             return ptr.read()
         }
@@ -9737,9 +9717,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz073(val: VArray<UInt16, $31>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $31>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9749,9 +9728,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz074(): VArray<UInt16, $24> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             return ptr.read()
         }
@@ -9760,9 +9738,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz074(val: VArray<UInt16, $24>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9772,9 +9749,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz075(): VArray<UInt16, $22> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             return ptr.read()
         }
@@ -9783,9 +9759,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz075(val: VArray<UInt16, $22>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $22>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9795,9 +9770,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz076(): VArray<UInt16, $24> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             return ptr.read()
         }
@@ -9806,9 +9780,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz076(val: VArray<UInt16, $24>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $24>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9818,9 +9791,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz077(): VArray<UInt16, $21> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $21>>(p)
             return ptr.read()
         }
@@ -9829,9 +9801,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz077(val: VArray<UInt16, $21>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $21>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9841,9 +9812,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz078(): VArray<UInt16, $27> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $27>>(p)
             return ptr.read()
         }
@@ -9852,9 +9822,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz078(val: VArray<UInt16, $27>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $27>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9864,9 +9833,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz079(): VArray<UInt16, $27> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $27>>(p)
             return ptr.read()
         }
@@ -9875,9 +9843,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz079(val: VArray<UInt16, $27>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $27>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9887,9 +9854,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz080(): VArray<UInt16, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             return ptr.read()
         }
@@ -9898,9 +9864,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz080(val: VArray<UInt16, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $20>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9910,9 +9875,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz081(): VArray<UInt16, $33> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $33>>(p)
             return ptr.read()
         }
@@ -9921,9 +9885,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz081(val: VArray<UInt16, $33>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $33>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9933,9 +9896,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz082(): VArray<UInt16, $21> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $21>>(p)
             return ptr.read()
         }
@@ -9944,9 +9906,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz082(val: VArray<UInt16, $21>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $21>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9956,9 +9917,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz083(): VArray<UInt16, $32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $32>>(p)
             return ptr.read()
         }
@@ -9967,9 +9927,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz083(val: VArray<UInt16, $32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9979,9 +9938,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz084(): VArray<UInt16, $26> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $26>>(p)
             return ptr.read()
         }
@@ -9990,9 +9948,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz084(val: VArray<UInt16, $26>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $26>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10002,9 +9959,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz085(): VArray<UInt16, $18> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $18>>(p)
             return ptr.read()
         }
@@ -10013,9 +9969,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz085(val: VArray<UInt16, $18>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $18>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10025,9 +9980,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public func sz086(): VArray<UInt16, $30> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $30>>(p)
             return ptr.read()
         }
@@ -10036,9 +9990,8 @@ public struct WMDMDetermineMaxPropStringLen {
     public mut func set_sz086(val: VArray<UInt16, $30>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $30>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10533,14 +10486,13 @@ public struct WMDM_PROP_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WMDM_PROP_DESC__ValidValues_e__Union {
-    public var _raw: VArray<UInt64, $9> = VArray<UInt64, $9>(repeat: 0)
+    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
 
     public func validValuesRange(): WMDM_PROP_VALUES_RANGE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WMDM_PROP_VALUES_RANGE>(p)
             return ptr.read()
         }
@@ -10549,9 +10501,8 @@ public struct WMDM_PROP_DESC__ValidValues_e__Union {
     public mut func set_validValuesRange(val: WMDM_PROP_VALUES_RANGE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WMDM_PROP_VALUES_RANGE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10561,9 +10512,8 @@ public struct WMDM_PROP_DESC__ValidValues_e__Union {
     public func enumeratedValidValues(): WMDM_PROP_VALUES_ENUM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WMDM_PROP_VALUES_ENUM>(p)
             return ptr.read()
         }
@@ -10572,9 +10522,8 @@ public struct WMDM_PROP_DESC__ValidValues_e__Union {
     public mut func set_enumeratedValidValues(val: WMDM_PROP_VALUES_ENUM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WMDM_PROP_VALUES_ENUM>(p)
             ptr.write(val)
             _raw = rawStorage

@@ -3,6 +3,7 @@ package windows_sys.Win32.System.WinRT.Pdf
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Direct2D as Win32_Graphics_Direct2D
 import windows_sys.Win32.impl as Win32_impl

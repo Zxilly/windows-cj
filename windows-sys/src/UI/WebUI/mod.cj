@@ -3,6 +3,7 @@ package windows_sys.UI.WebUI
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Devices.Printers.Extensions as Devices_Printers_Extensions
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Graphics.Printing as Graphics_Printing

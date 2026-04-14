@@ -3,6 +3,7 @@ package windows_sys.Win32.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.Security as Win32_Security
@@ -94,27 +95,21 @@ public struct CHAR_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CHAR_INFO__Char_e__Union {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func unicodeChar(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_unicodeChar(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -122,9 +117,8 @@ public struct CHAR_INFO__Char_e__Union {
     public func asciiChar(): Win32_Foundation.CHAR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.CHAR>(p)
             return ptr.read()
         }
@@ -133,9 +127,8 @@ public struct CHAR_INFO__Char_e__Union {
     public mut func set_asciiChar(val: Win32_Foundation.CHAR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.CHAR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -499,12 +492,45 @@ public struct ExtKeyDef {
 }
 
 @When[Windows_Win32_System_Console == "on"]
-// packed(2)
 @C
 public struct ExtKeyDefBuf {
-    public var dwVersion: UInt32 = 0
-    public var dwCheckSum: UInt32 = 0
-    public var table: VArray<ExtKeyDef, $26> = VArray<ExtKeyDef, $26>(repeat: ExtKeyDef())
+    public var _raw: VArray<UInt8, $476> = VArray<UInt8, $476>(repeat: 0u8)
+
+    public func dwVersion(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwVersion(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCheckSum(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwCheckSum(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `table`: type `VArray<ExtKeyDef, $26>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -539,14 +565,13 @@ public struct INPUT_RECORD {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INPUT_RECORD__Event_e__Union {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func keyEvent(): KEY_EVENT_RECORD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KEY_EVENT_RECORD>(p)
             return ptr.read()
         }
@@ -555,9 +580,8 @@ public struct INPUT_RECORD__Event_e__Union {
     public mut func set_keyEvent(val: KEY_EVENT_RECORD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KEY_EVENT_RECORD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -567,9 +591,8 @@ public struct INPUT_RECORD__Event_e__Union {
     public func mouseEvent(): MOUSE_EVENT_RECORD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MOUSE_EVENT_RECORD>(p)
             return ptr.read()
         }
@@ -578,9 +601,8 @@ public struct INPUT_RECORD__Event_e__Union {
     public mut func set_mouseEvent(val: MOUSE_EVENT_RECORD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MOUSE_EVENT_RECORD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -590,9 +612,8 @@ public struct INPUT_RECORD__Event_e__Union {
     public func windowBufferSizeEvent(): WINDOW_BUFFER_SIZE_RECORD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINDOW_BUFFER_SIZE_RECORD>(p)
             return ptr.read()
         }
@@ -601,9 +622,8 @@ public struct INPUT_RECORD__Event_e__Union {
     public mut func set_windowBufferSizeEvent(val: WINDOW_BUFFER_SIZE_RECORD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINDOW_BUFFER_SIZE_RECORD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -613,9 +633,8 @@ public struct INPUT_RECORD__Event_e__Union {
     public func menuEvent(): MENU_EVENT_RECORD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MENU_EVENT_RECORD>(p)
             return ptr.read()
         }
@@ -624,9 +643,8 @@ public struct INPUT_RECORD__Event_e__Union {
     public mut func set_menuEvent(val: MENU_EVENT_RECORD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MENU_EVENT_RECORD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -636,9 +654,8 @@ public struct INPUT_RECORD__Event_e__Union {
     public func focusEvent(): FOCUS_EVENT_RECORD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FOCUS_EVENT_RECORD>(p)
             return ptr.read()
         }
@@ -647,9 +664,8 @@ public struct INPUT_RECORD__Event_e__Union {
     public mut func set_focusEvent(val: FOCUS_EVENT_RECORD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FOCUS_EVENT_RECORD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -674,27 +690,21 @@ public struct KEY_EVENT_RECORD {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct KEY_EVENT_RECORD__uChar_e__Union {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func unicodeChar(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_unicodeChar(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -702,9 +712,8 @@ public struct KEY_EVENT_RECORD__uChar_e__Union {
     public func asciiChar(): Win32_Foundation.CHAR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.CHAR>(p)
             return ptr.read()
         }
@@ -713,9 +722,8 @@ public struct KEY_EVENT_RECORD__uChar_e__Union {
     public mut func set_asciiChar(val: Win32_Foundation.CHAR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.CHAR>(p)
             ptr.write(val)
             _raw = rawStorage

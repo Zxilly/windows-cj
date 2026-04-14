@@ -3,6 +3,7 @@ package windows_sys.Win32.AI.MachineLearning.WinML
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
 import windows_sys.Win32.impl as Win32_impl
@@ -2235,14 +2236,13 @@ public struct MLOperatorAttributeNameValue {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MLOperatorAttributeNameValue__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func reserved(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -2251,9 +2251,8 @@ public struct MLOperatorAttributeNameValue__Anonymous_e__Union {
     public mut func set_reserved(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2263,9 +2262,8 @@ public struct MLOperatorAttributeNameValue__Anonymous_e__Union {
     public func ints(): CPointer<Int64> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int64>>(p)
             return ptr.read()
         }
@@ -2274,9 +2272,8 @@ public struct MLOperatorAttributeNameValue__Anonymous_e__Union {
     public mut func set_ints(val: CPointer<Int64>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int64>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2286,9 +2283,8 @@ public struct MLOperatorAttributeNameValue__Anonymous_e__Union {
     public func strings(): CPointer<CPointer<Int8>> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<Int8>>>(p)
             return ptr.read()
         }
@@ -2297,9 +2293,8 @@ public struct MLOperatorAttributeNameValue__Anonymous_e__Union {
     public mut func set_strings(val: CPointer<CPointer<Int8>>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<Int8>>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2309,9 +2304,8 @@ public struct MLOperatorAttributeNameValue__Anonymous_e__Union {
     public func floats(): CPointer<Float32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float32>>(p)
             return ptr.read()
         }
@@ -2320,9 +2314,8 @@ public struct MLOperatorAttributeNameValue__Anonymous_e__Union {
     public mut func set_floats(val: CPointer<Float32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2383,27 +2376,21 @@ public struct MLOperatorEdgeDescription {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MLOperatorEdgeDescription__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func reserved(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_reserved(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2411,9 +2398,8 @@ public struct MLOperatorEdgeDescription__Anonymous_e__Union {
     public func tensorDataType(): MLOperatorTensorDataType {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MLOperatorTensorDataType>(p)
             return ptr.read()
         }
@@ -2422,9 +2408,8 @@ public struct MLOperatorEdgeDescription__Anonymous_e__Union {
     public mut func set_tensorDataType(val: MLOperatorTensorDataType): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MLOperatorTensorDataType>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2629,14 +2614,13 @@ public struct MLOperatorSchemaEdgeDescription {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MLOperatorSchemaEdgeDescription__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func reserved(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -2645,9 +2629,8 @@ public struct MLOperatorSchemaEdgeDescription__Anonymous_e__Union {
     public mut func set_reserved(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2657,9 +2640,8 @@ public struct MLOperatorSchemaEdgeDescription__Anonymous_e__Union {
     public func typeLabel(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -2668,9 +2650,8 @@ public struct MLOperatorSchemaEdgeDescription__Anonymous_e__Union {
     public mut func set_typeLabel(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2680,9 +2661,8 @@ public struct MLOperatorSchemaEdgeDescription__Anonymous_e__Union {
     public func edgeDescription(): MLOperatorEdgeDescription {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MLOperatorEdgeDescription>(p)
             return ptr.read()
         }
@@ -2691,9 +2671,8 @@ public struct MLOperatorSchemaEdgeDescription__Anonymous_e__Union {
     public mut func set_edgeDescription(val: MLOperatorEdgeDescription): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MLOperatorEdgeDescription>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2815,14 +2794,13 @@ public struct WINML_BINDING_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINML_BINDING_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func tensor(): WINML_TENSOR_BINDING_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_TENSOR_BINDING_DESC>(p)
             return ptr.read()
         }
@@ -2831,9 +2809,8 @@ public struct WINML_BINDING_DESC__Anonymous_e__Union {
     public mut func set_tensor(val: WINML_TENSOR_BINDING_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_TENSOR_BINDING_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2843,9 +2820,8 @@ public struct WINML_BINDING_DESC__Anonymous_e__Union {
     public func sequence(): WINML_SEQUENCE_BINDING_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_SEQUENCE_BINDING_DESC>(p)
             return ptr.read()
         }
@@ -2854,9 +2830,8 @@ public struct WINML_BINDING_DESC__Anonymous_e__Union {
     public mut func set_sequence(val: WINML_SEQUENCE_BINDING_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_SEQUENCE_BINDING_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2866,9 +2841,8 @@ public struct WINML_BINDING_DESC__Anonymous_e__Union {
     public func map(): WINML_MAP_BINDING_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_MAP_BINDING_DESC>(p)
             return ptr.read()
         }
@@ -2877,9 +2851,8 @@ public struct WINML_BINDING_DESC__Anonymous_e__Union {
     public mut func set_map(val: WINML_MAP_BINDING_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_MAP_BINDING_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2889,9 +2862,8 @@ public struct WINML_BINDING_DESC__Anonymous_e__Union {
     public func image(): WINML_IMAGE_BINDING_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_IMAGE_BINDING_DESC>(p)
             return ptr.read()
         }
@@ -2900,9 +2872,8 @@ public struct WINML_BINDING_DESC__Anonymous_e__Union {
     public mut func set_image(val: WINML_IMAGE_BINDING_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_IMAGE_BINDING_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2912,9 +2883,8 @@ public struct WINML_BINDING_DESC__Anonymous_e__Union {
     public func resource(): WINML_RESOURCE_BINDING_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_RESOURCE_BINDING_DESC>(p)
             return ptr.read()
         }
@@ -2923,9 +2893,8 @@ public struct WINML_BINDING_DESC__Anonymous_e__Union {
     public mut func set_resource(val: WINML_RESOURCE_BINDING_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_RESOURCE_BINDING_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3040,14 +3009,13 @@ public struct WINML_MAP_BINDING_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINML_MAP_BINDING_DESC__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pStringKeys(): CPointer<CPointer<UInt16>> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
             return ptr.read()
         }
@@ -3056,9 +3024,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous1_e__Union {
     public mut func set_pStringKeys(val: CPointer<CPointer<UInt16>>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3068,9 +3035,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous1_e__Union {
     public func pIntKeys(): CPointer<Int64> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int64>>(p)
             return ptr.read()
         }
@@ -3079,9 +3045,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous1_e__Union {
     public mut func set_pIntKeys(val: CPointer<Int64>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int64>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3094,14 +3059,13 @@ public struct WINML_MAP_BINDING_DESC__Anonymous1_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINML_MAP_BINDING_DESC__Anonymous2_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pStringFields(): CPointer<CPointer<UInt16>> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
             return ptr.read()
         }
@@ -3110,9 +3074,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous2_e__Union {
     public mut func set_pStringFields(val: CPointer<CPointer<UInt16>>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3122,9 +3085,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous2_e__Union {
     public func pIntFields(): CPointer<Int64> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int64>>(p)
             return ptr.read()
         }
@@ -3133,9 +3095,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous2_e__Union {
     public mut func set_pIntFields(val: CPointer<Int64>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int64>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3145,9 +3106,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous2_e__Union {
     public func pFloatFields(): CPointer<Float32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float32>>(p)
             return ptr.read()
         }
@@ -3156,9 +3116,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous2_e__Union {
     public mut func set_pFloatFields(val: CPointer<Float32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3168,9 +3127,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous2_e__Union {
     public func pDoubleFields(): CPointer<Float64> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float64>>(p)
             return ptr.read()
         }
@@ -3179,9 +3137,8 @@ public struct WINML_MAP_BINDING_DESC__Anonymous2_e__Union {
     public mut func set_pDoubleFields(val: CPointer<Float64>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float64>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3254,14 +3211,13 @@ public struct WINML_SEQUENCE_BINDING_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINML_SEQUENCE_BINDING_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pStrings(): CPointer<CPointer<UInt16>> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
             return ptr.read()
         }
@@ -3270,9 +3226,8 @@ public struct WINML_SEQUENCE_BINDING_DESC__Anonymous_e__Union {
     public mut func set_pStrings(val: CPointer<CPointer<UInt16>>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3282,9 +3237,8 @@ public struct WINML_SEQUENCE_BINDING_DESC__Anonymous_e__Union {
     public func pInts(): CPointer<Int64> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int64>>(p)
             return ptr.read()
         }
@@ -3293,9 +3247,8 @@ public struct WINML_SEQUENCE_BINDING_DESC__Anonymous_e__Union {
     public mut func set_pInts(val: CPointer<Int64>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int64>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3305,9 +3258,8 @@ public struct WINML_SEQUENCE_BINDING_DESC__Anonymous_e__Union {
     public func pFloats(): CPointer<Float32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float32>>(p)
             return ptr.read()
         }
@@ -3316,9 +3268,8 @@ public struct WINML_SEQUENCE_BINDING_DESC__Anonymous_e__Union {
     public mut func set_pFloats(val: CPointer<Float32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3328,9 +3279,8 @@ public struct WINML_SEQUENCE_BINDING_DESC__Anonymous_e__Union {
     public func pDoubles(): CPointer<Float64> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float64>>(p)
             return ptr.read()
         }
@@ -3339,9 +3289,8 @@ public struct WINML_SEQUENCE_BINDING_DESC__Anonymous_e__Union {
     public mut func set_pDoubles(val: CPointer<Float64>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Float64>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3459,14 +3408,13 @@ public struct WINML_VARIABLE_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINML_VARIABLE_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func tensor(): WINML_TENSOR_VARIABLE_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_TENSOR_VARIABLE_DESC>(p)
             return ptr.read()
         }
@@ -3475,9 +3423,8 @@ public struct WINML_VARIABLE_DESC__Anonymous_e__Union {
     public mut func set_tensor(val: WINML_TENSOR_VARIABLE_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_TENSOR_VARIABLE_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3487,9 +3434,8 @@ public struct WINML_VARIABLE_DESC__Anonymous_e__Union {
     public func sequence(): WINML_SEQUENCE_VARIABLE_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_SEQUENCE_VARIABLE_DESC>(p)
             return ptr.read()
         }
@@ -3498,9 +3444,8 @@ public struct WINML_VARIABLE_DESC__Anonymous_e__Union {
     public mut func set_sequence(val: WINML_SEQUENCE_VARIABLE_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_SEQUENCE_VARIABLE_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3510,9 +3455,8 @@ public struct WINML_VARIABLE_DESC__Anonymous_e__Union {
     public func map(): WINML_MAP_VARIABLE_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_MAP_VARIABLE_DESC>(p)
             return ptr.read()
         }
@@ -3521,9 +3465,8 @@ public struct WINML_VARIABLE_DESC__Anonymous_e__Union {
     public mut func set_map(val: WINML_MAP_VARIABLE_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_MAP_VARIABLE_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3533,9 +3476,8 @@ public struct WINML_VARIABLE_DESC__Anonymous_e__Union {
     public func image(): WINML_IMAGE_VARIABLE_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_IMAGE_VARIABLE_DESC>(p)
             return ptr.read()
         }
@@ -3544,9 +3486,8 @@ public struct WINML_VARIABLE_DESC__Anonymous_e__Union {
     public mut func set_image(val: WINML_IMAGE_VARIABLE_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINML_IMAGE_VARIABLE_DESC>(p)
             ptr.write(val)
             _raw = rawStorage

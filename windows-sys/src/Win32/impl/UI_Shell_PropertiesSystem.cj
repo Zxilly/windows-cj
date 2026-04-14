@@ -3,6 +3,7 @@ package windows_sys.Win32.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.Search.Common as Win32_System_Search_Common
 import windows_sys.Win32.Foundation.*
@@ -4538,21 +4539,123 @@ public let PUIFNF_DEFAULT: PROPERTYUI_NAME_FLAGS = PROPERTYUI_NAME_FLAGS(0)
 public let PUIFNF_MNEMONIC: PROPERTYUI_NAME_FLAGS = PROPERTYUI_NAME_FLAGS(1)
 
 @When[Windows_Win32_UI_Shell_PropertiesSystem == "on"]
-// packed(1)
 @C
 public struct PROPPRG {
-    public var flPrg: UInt16 = 0
-    public var flPrgInit: UInt16 = 0
-    public var achTitle: VArray<Win32_Foundation.CHAR, $30> = VArray<Win32_Foundation.CHAR, $30>(repeat: 0)
-    public var achCmdLine: VArray<Win32_Foundation.CHAR, $128> = VArray<Win32_Foundation.CHAR, $128>(repeat: 0)
-    public var achWorkDir: VArray<Win32_Foundation.CHAR, $64> = VArray<Win32_Foundation.CHAR, $64>(repeat: 0)
-    public var wHotKey: UInt16 = 0
-    public var achIconFile: VArray<Win32_Foundation.CHAR, $80> = VArray<Win32_Foundation.CHAR, $80>(repeat: 0)
-    public var wIconIndex: UInt16 = 0
-    public var dwEnhModeFlags: UInt32 = 0
-    public var dwRealModeFlags: UInt32 = 0
-    public var achOtherFile: VArray<Win32_Foundation.CHAR, $80> = VArray<Win32_Foundation.CHAR, $80>(repeat: 0)
-    public var achPIFFile: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var _raw: VArray<UInt8, $658> = VArray<UInt8, $658>(repeat: 0u8)
+
+    public func flPrg(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_flPrg(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func flPrgInit(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_flPrgInit(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `achTitle`: type `VArray<Win32_Foundation.CHAR, $30>` not supported by polyfill; skipped
+
+    // packed field `achCmdLine`: type `VArray<Win32_Foundation.CHAR, $128>` not supported by polyfill; skipped
+
+    // packed field `achWorkDir`: type `VArray<Win32_Foundation.CHAR, $64>` not supported by polyfill; skipped
+
+    public func wHotKey(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 226)
+        }
+    }
+
+    public mut func set_wHotKey(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 226, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `achIconFile`: type `VArray<Win32_Foundation.CHAR, $80>` not supported by polyfill; skipped
+
+    public func wIconIndex(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 308)
+        }
+    }
+
+    public mut func set_wIconIndex(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 308, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwEnhModeFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 310)
+        }
+    }
+
+    public mut func set_dwEnhModeFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 310, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRealModeFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 314)
+        }
+    }
+
+    public mut func set_dwRealModeFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 314, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `achOtherFile`: type `VArray<Win32_Foundation.CHAR, $80>` not supported by polyfill; skipped
+
+    // packed field `achPIFFile`: type `VArray<Win32_Foundation.CHAR, $260>` not supported by polyfill; skipped
     public init() {}
 }
 

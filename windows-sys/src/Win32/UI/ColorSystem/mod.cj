@@ -3,6 +3,7 @@ package windows_sys.Win32.UI.ColorSystem
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.impl as Win32_impl
@@ -173,14 +174,13 @@ public struct CMYKCOLOR {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct COLOR {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func gray(): GRAYCOLOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GRAYCOLOR>(p)
             return ptr.read()
         }
@@ -189,9 +189,8 @@ public struct COLOR {
     public mut func set_gray(val: GRAYCOLOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GRAYCOLOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -201,9 +200,8 @@ public struct COLOR {
     public func rgb(): RGBCOLOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RGBCOLOR>(p)
             return ptr.read()
         }
@@ -212,9 +210,8 @@ public struct COLOR {
     public mut func set_rgb(val: RGBCOLOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RGBCOLOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -224,9 +221,8 @@ public struct COLOR {
     public func cmyk(): CMYKCOLOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CMYKCOLOR>(p)
             return ptr.read()
         }
@@ -235,9 +231,8 @@ public struct COLOR {
     public mut func set_cmyk(val: CMYKCOLOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CMYKCOLOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -247,9 +242,8 @@ public struct COLOR {
     public func xyz(): XYZCOLOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<XYZCOLOR>(p)
             return ptr.read()
         }
@@ -258,9 +252,8 @@ public struct COLOR {
     public mut func set_xyz(val: XYZCOLOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<XYZCOLOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -270,9 +263,8 @@ public struct COLOR {
     public func yxy(): YxyCOLOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<YxyCOLOR>(p)
             return ptr.read()
         }
@@ -281,9 +273,8 @@ public struct COLOR {
     public mut func set_yxy(val: YxyCOLOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<YxyCOLOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -293,9 +284,8 @@ public struct COLOR {
     public func lab(): LabCOLOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LabCOLOR>(p)
             return ptr.read()
         }
@@ -304,9 +294,8 @@ public struct COLOR {
     public mut func set_lab(val: LabCOLOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LabCOLOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -316,9 +305,8 @@ public struct COLOR {
     public func gen3ch(): GENERIC3CHANNEL {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GENERIC3CHANNEL>(p)
             return ptr.read()
         }
@@ -327,9 +315,8 @@ public struct COLOR {
     public mut func set_gen3ch(val: GENERIC3CHANNEL): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GENERIC3CHANNEL>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -339,9 +326,8 @@ public struct COLOR {
     public func named(): NAMEDCOLOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NAMEDCOLOR>(p)
             return ptr.read()
         }
@@ -350,9 +336,8 @@ public struct COLOR {
     public mut func set_named(val: NAMEDCOLOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NAMEDCOLOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -362,9 +347,8 @@ public struct COLOR {
     public func hifi(): HiFiCOLOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HiFiCOLOR>(p)
             return ptr.read()
         }
@@ -373,9 +357,8 @@ public struct COLOR {
     public mut func set_hifi(val: HiFiCOLOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HiFiCOLOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -385,9 +368,8 @@ public struct COLOR {
     public func anonymous(): COLOR__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<COLOR__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -396,9 +378,8 @@ public struct COLOR {
     public mut func set_anonymous(val: COLOR__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<COLOR__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

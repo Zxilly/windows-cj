@@ -3,6 +3,7 @@ package windows_sys.UI.Input.Inking.Core
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.UI.Input.Inking as UI_Input_Inking

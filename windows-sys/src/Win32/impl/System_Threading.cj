@@ -3,6 +3,7 @@ package windows_sys.Win32.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.System.SystemInformation as Win32_System_SystemInformation
@@ -198,14 +199,13 @@ public let GR_USEROBJECTS_PEAK: GET_GUI_RESOURCES_FLAGS = GET_GUI_RESOURCES_FLAG
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INIT_ONCE {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ptr(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -214,9 +214,8 @@ public struct INIT_ONCE {
     public mut func set_ptr(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1887,14 +1886,13 @@ public struct REASON_CONTEXT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct REASON_CONTEXT__Reason_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func detailed(): REASON_CONTEXT__Reason_e__Union__Detailed_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<REASON_CONTEXT__Reason_e__Union__Detailed_e__Struct>(p)
             return ptr.read()
         }
@@ -1903,9 +1901,8 @@ public struct REASON_CONTEXT__Reason_e__Union {
     public mut func set_detailed(val: REASON_CONTEXT__Reason_e__Union__Detailed_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<REASON_CONTEXT__Reason_e__Union__Detailed_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1915,9 +1912,8 @@ public struct REASON_CONTEXT__Reason_e__Union {
     public func simpleReasonString(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -1926,9 +1922,8 @@ public struct REASON_CONTEXT__Reason_e__Union {
     public mut func set_simpleReasonString(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2591,27 +2586,21 @@ public struct TP_CALLBACK_ENVIRON_V3 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct TP_CALLBACK_ENVIRON_V3__u_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func flags(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_flags(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2619,9 +2608,8 @@ public struct TP_CALLBACK_ENVIRON_V3__u_e__Union {
     public func s(): TP_CALLBACK_ENVIRON_V3__u_e__Union__s_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<TP_CALLBACK_ENVIRON_V3__u_e__Union__s_e__Struct>(p)
             return ptr.read()
         }
@@ -2630,9 +2618,8 @@ public struct TP_CALLBACK_ENVIRON_V3__u_e__Union {
     public mut func set_s(val: TP_CALLBACK_ENVIRON_V3__u_e__Union__s_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<TP_CALLBACK_ENVIRON_V3__u_e__Union__s_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2712,14 +2699,13 @@ public struct UMS_SYSTEM_THREAD_INFORMATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2728,9 +2714,8 @@ public struct UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union {
     public mut func set_anonymous(val: UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2740,22 +2725,16 @@ public struct UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union {
     public func threadUmsFlags(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_threadUmsFlags(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }

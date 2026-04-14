@@ -3,6 +3,7 @@ package windows_sys.Win32.Networking.WinInet
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.Networking.WinHttp as Win32_Networking_WinHttp
@@ -335,14 +336,13 @@ public struct GOPHER_ATTRIBUTE_TYPE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func admin(): GOPHER_ADMIN_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_ADMIN_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -351,9 +351,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_admin(val: GOPHER_ADMIN_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_ADMIN_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -363,9 +362,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func modDate(): GOPHER_MOD_DATE_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_MOD_DATE_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -374,9 +372,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_modDate(val: GOPHER_MOD_DATE_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_MOD_DATE_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -386,9 +383,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func ttl(): GOPHER_TTL_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_TTL_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -397,9 +393,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_ttl(val: GOPHER_TTL_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_TTL_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -409,9 +404,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func score(): GOPHER_SCORE_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_SCORE_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -420,9 +414,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_score(val: GOPHER_SCORE_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_SCORE_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -432,9 +425,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func scoreRange(): GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -443,9 +435,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_scoreRange(val: GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_SCORE_RANGE_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -455,9 +446,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func site(): GOPHER_SITE_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_SITE_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -466,9 +456,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_site(val: GOPHER_SITE_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_SITE_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -478,9 +467,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func organization(): GOPHER_ORGANIZATION_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_ORGANIZATION_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -489,9 +477,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_organization(val: GOPHER_ORGANIZATION_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_ORGANIZATION_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -501,9 +488,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func location(): GOPHER_LOCATION_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_LOCATION_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -512,9 +498,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_location(val: GOPHER_LOCATION_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_LOCATION_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -524,9 +509,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func geographicalLocation(): GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -535,9 +519,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_geographicalLocation(val: GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_GEOGRAPHICAL_LOCATION_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -547,9 +530,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func timeZone(): GOPHER_TIMEZONE_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_TIMEZONE_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -558,9 +540,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_timeZone(val: GOPHER_TIMEZONE_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_TIMEZONE_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -570,9 +551,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func provider(): GOPHER_PROVIDER_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_PROVIDER_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -581,9 +561,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_provider(val: GOPHER_PROVIDER_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_PROVIDER_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -593,9 +572,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func version(): GOPHER_VERSION_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_VERSION_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -604,9 +582,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_version(val: GOPHER_VERSION_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_VERSION_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -616,9 +593,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func abstract_(): GOPHER_ABSTRACT_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_ABSTRACT_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -627,9 +603,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_abstract_(val: GOPHER_ABSTRACT_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_ABSTRACT_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -639,9 +614,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func view(): GOPHER_VIEW_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_VIEW_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -650,9 +624,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_view(val: GOPHER_VIEW_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_VIEW_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -662,9 +635,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func veronica(): GOPHER_VERONICA_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_VERONICA_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -673,9 +645,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_veronica(val: GOPHER_VERONICA_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_VERONICA_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -685,9 +656,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func ask(): GOPHER_ASK_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_ASK_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -696,9 +666,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_ask(val: GOPHER_ASK_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_ASK_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -708,9 +677,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public func unknown(): GOPHER_UNKNOWN_ATTRIBUTE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_UNKNOWN_ATTRIBUTE_TYPE>(p)
             return ptr.read()
         }
@@ -719,9 +687,8 @@ public struct GOPHER_ATTRIBUTE_TYPE__AttributeType_e__Union {
     public mut func set_unknown(val: GOPHER_UNKNOWN_ATTRIBUTE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GOPHER_UNKNOWN_ATTRIBUTE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1778,14 +1745,13 @@ public struct INTERNET_CACHE_CONFIG_INFOA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INTERNET_CACHE_CONFIG_INFOA__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $66> = VArray<UInt32, $66>(repeat: 0)
+    public var _raw: VArray<UInt8, $264> = VArray<UInt8, $264>(repeat: 0)
 
     public func anonymous(): INTERNET_CACHE_CONFIG_INFOA__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERNET_CACHE_CONFIG_INFOA__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -1794,9 +1760,8 @@ public struct INTERNET_CACHE_CONFIG_INFOA__Anonymous_e__Union {
     public mut func set_anonymous(val: INTERNET_CACHE_CONFIG_INFOA__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERNET_CACHE_CONFIG_INFOA__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1806,9 +1771,8 @@ public struct INTERNET_CACHE_CONFIG_INFOA__Anonymous_e__Union {
     public func cachePaths(): VArray<INTERNET_CACHE_CONFIG_PATH_ENTRYA, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<INTERNET_CACHE_CONFIG_PATH_ENTRYA, $1>>(p)
             return ptr.read()
         }
@@ -1817,9 +1781,8 @@ public struct INTERNET_CACHE_CONFIG_INFOA__Anonymous_e__Union {
     public mut func set_cachePaths(val: VArray<INTERNET_CACHE_CONFIG_PATH_ENTRYA, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<INTERNET_CACHE_CONFIG_PATH_ENTRYA, $1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1856,14 +1819,13 @@ public struct INTERNET_CACHE_CONFIG_INFOW {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INTERNET_CACHE_CONFIG_INFOW__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $131> = VArray<UInt32, $131>(repeat: 0)
+    public var _raw: VArray<UInt8, $524> = VArray<UInt8, $524>(repeat: 0)
 
     public func anonymous(): INTERNET_CACHE_CONFIG_INFOW__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERNET_CACHE_CONFIG_INFOW__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -1872,9 +1834,8 @@ public struct INTERNET_CACHE_CONFIG_INFOW__Anonymous_e__Union {
     public mut func set_anonymous(val: INTERNET_CACHE_CONFIG_INFOW__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERNET_CACHE_CONFIG_INFOW__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1884,9 +1845,8 @@ public struct INTERNET_CACHE_CONFIG_INFOW__Anonymous_e__Union {
     public func cachePaths(): VArray<INTERNET_CACHE_CONFIG_PATH_ENTRYW, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<INTERNET_CACHE_CONFIG_PATH_ENTRYW, $1>>(p)
             return ptr.read()
         }
@@ -1895,9 +1855,8 @@ public struct INTERNET_CACHE_CONFIG_INFOW__Anonymous_e__Union {
     public mut func set_cachePaths(val: VArray<INTERNET_CACHE_CONFIG_PATH_ENTRYW, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<INTERNET_CACHE_CONFIG_PATH_ENTRYW, $1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1978,27 +1937,21 @@ public struct INTERNET_CACHE_ENTRY_INFOA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INTERNET_CACHE_ENTRY_INFOA__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dwReserved(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwReserved(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2006,22 +1959,16 @@ public struct INTERNET_CACHE_ENTRY_INFOA__Anonymous_e__Union {
     public func dwExemptDelta(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwExemptDelta(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2054,27 +2001,21 @@ public struct INTERNET_CACHE_ENTRY_INFOW {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INTERNET_CACHE_ENTRY_INFOW__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dwReserved(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwReserved(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2082,22 +2023,16 @@ public struct INTERNET_CACHE_ENTRY_INFOW__Anonymous_e__Union {
     public func dwExemptDelta(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwExemptDelta(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2299,14 +2234,13 @@ public struct INTERNET_CREDENTIALS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INTERNET_CREDENTIALS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func anonymous(): INTERNET_CREDENTIALS__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERNET_CREDENTIALS__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2315,9 +2249,8 @@ public struct INTERNET_CREDENTIALS__Anonymous_e__Union {
     public mut func set_anonymous(val: INTERNET_CREDENTIALS__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERNET_CREDENTIALS__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2327,9 +2260,8 @@ public struct INTERNET_CREDENTIALS__Anonymous_e__Union {
     public func pAuthIdentityOpaque(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -2338,9 +2270,8 @@ public struct INTERNET_CREDENTIALS__Anonymous_e__Union {
     public mut func set_pAuthIdentityOpaque(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2441,27 +2372,21 @@ public struct INTERNET_PER_CONN_OPTIONA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INTERNET_PER_CONN_OPTIONA__Value_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func dwValue(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwValue(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2469,9 +2394,8 @@ public struct INTERNET_PER_CONN_OPTIONA__Value_e__Union {
     public func pszValue(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -2480,9 +2404,8 @@ public struct INTERNET_PER_CONN_OPTIONA__Value_e__Union {
     public mut func set_pszValue(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2492,9 +2415,8 @@ public struct INTERNET_PER_CONN_OPTIONA__Value_e__Union {
     public func ftValue(): Win32_Foundation.FILETIME {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.FILETIME>(p)
             return ptr.read()
         }
@@ -2503,9 +2425,8 @@ public struct INTERNET_PER_CONN_OPTIONA__Value_e__Union {
     public mut func set_ftValue(val: Win32_Foundation.FILETIME): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.FILETIME>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2526,27 +2447,21 @@ public struct INTERNET_PER_CONN_OPTIONW {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INTERNET_PER_CONN_OPTIONW__Value_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func dwValue(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwValue(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2554,9 +2469,8 @@ public struct INTERNET_PER_CONN_OPTIONW__Value_e__Union {
     public func pszValue(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -2565,9 +2479,8 @@ public struct INTERNET_PER_CONN_OPTIONW__Value_e__Union {
     public mut func set_pszValue(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2577,9 +2490,8 @@ public struct INTERNET_PER_CONN_OPTIONW__Value_e__Union {
     public func ftValue(): Win32_Foundation.FILETIME {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.FILETIME>(p)
             return ptr.read()
         }
@@ -2588,9 +2500,8 @@ public struct INTERNET_PER_CONN_OPTIONW__Value_e__Union {
     public mut func set_ftValue(val: Win32_Foundation.FILETIME): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.FILETIME>(p)
             ptr.write(val)
             _raw = rawStorage

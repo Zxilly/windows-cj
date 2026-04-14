@@ -3,6 +3,7 @@ package windows_sys.Win32.System.TaskScheduler
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -8625,14 +8626,13 @@ public let TASK_TRIGGER_CUSTOM_TRIGGER_01: TASK_TRIGGER_TYPE2 = TASK_TRIGGER_TYP
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct TRIGGER_TYPE_UNION {
-    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func daily(): DAILY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DAILY>(p)
             return ptr.read()
         }
@@ -8641,9 +8641,8 @@ public struct TRIGGER_TYPE_UNION {
     public mut func set_daily(val: DAILY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DAILY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8653,9 +8652,8 @@ public struct TRIGGER_TYPE_UNION {
     public func weekly(): WEEKLY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WEEKLY>(p)
             return ptr.read()
         }
@@ -8664,9 +8662,8 @@ public struct TRIGGER_TYPE_UNION {
     public mut func set_weekly(val: WEEKLY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WEEKLY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8676,9 +8673,8 @@ public struct TRIGGER_TYPE_UNION {
     public func monthlyDate(): MONTHLYDATE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MONTHLYDATE>(p)
             return ptr.read()
         }
@@ -8687,9 +8683,8 @@ public struct TRIGGER_TYPE_UNION {
     public mut func set_monthlyDate(val: MONTHLYDATE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MONTHLYDATE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8699,9 +8694,8 @@ public struct TRIGGER_TYPE_UNION {
     public func monthlyDOW(): MONTHLYDOW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MONTHLYDOW>(p)
             return ptr.read()
         }
@@ -8710,9 +8704,8 @@ public struct TRIGGER_TYPE_UNION {
     public mut func set_monthlyDOW(val: MONTHLYDOW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MONTHLYDOW>(p)
             ptr.write(val)
             _raw = rawStorage

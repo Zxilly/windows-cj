@@ -3,6 +3,7 @@ package windows_sys.UI.Notifications.Preview
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.UI as UI
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*

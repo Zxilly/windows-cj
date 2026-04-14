@@ -3,45 +3,56 @@ package windows_sys.Win32.NetworkManagement.Snmp
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
 
 @When[Windows_Win32_NetworkManagement_Snmp == "on"]
-// packed(4)
 @C
 public struct AsnAny {
-    public var asnType: UInt8 = 0
-    public var asnValue: AsnAny__asnValue_e__Union = AsnAny__asnValue_e__Union()
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    public func asnType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_asnType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `asnValue`: type `AsnAny__asnValue_e__Union` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Snmp == "on"]
-// packed(4)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct AsnAny__asnValue_e__Union {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func number(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_number(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -49,22 +60,16 @@ public struct AsnAny__asnValue_e__Union {
     public func unsigned32(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_unsigned32(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -72,22 +77,16 @@ public struct AsnAny__asnValue_e__Union {
     public func counter64(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_counter64(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -95,9 +94,8 @@ public struct AsnAny__asnValue_e__Union {
     public func string(): AsnOctetString {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             return ptr.read()
         }
@@ -106,9 +104,8 @@ public struct AsnAny__asnValue_e__Union {
     public mut func set_string(val: AsnOctetString): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -118,9 +115,8 @@ public struct AsnAny__asnValue_e__Union {
     public func bits(): AsnOctetString {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             return ptr.read()
         }
@@ -129,9 +125,8 @@ public struct AsnAny__asnValue_e__Union {
     public mut func set_bits(val: AsnOctetString): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -141,9 +136,8 @@ public struct AsnAny__asnValue_e__Union {
     public func object(): AsnObjectIdentifier {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnObjectIdentifier>(p)
             return ptr.read()
         }
@@ -152,9 +146,8 @@ public struct AsnAny__asnValue_e__Union {
     public mut func set_object(val: AsnObjectIdentifier): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnObjectIdentifier>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -164,9 +157,8 @@ public struct AsnAny__asnValue_e__Union {
     public func sequence(): AsnOctetString {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             return ptr.read()
         }
@@ -175,9 +167,8 @@ public struct AsnAny__asnValue_e__Union {
     public mut func set_sequence(val: AsnOctetString): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -187,9 +178,8 @@ public struct AsnAny__asnValue_e__Union {
     public func address(): AsnOctetString {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             return ptr.read()
         }
@@ -198,9 +188,8 @@ public struct AsnAny__asnValue_e__Union {
     public mut func set_address(val: AsnOctetString): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -210,22 +199,16 @@ public struct AsnAny__asnValue_e__Union {
     public func counter(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_counter(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -233,22 +216,16 @@ public struct AsnAny__asnValue_e__Union {
     public func gauge(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_gauge(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -256,22 +233,16 @@ public struct AsnAny__asnValue_e__Union {
     public func ticks(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_ticks(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -279,9 +250,8 @@ public struct AsnAny__asnValue_e__Union {
     public func arbitrary(): AsnOctetString {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             return ptr.read()
         }
@@ -290,9 +260,8 @@ public struct AsnAny__asnValue_e__Union {
     public mut func set_arbitrary(val: AsnOctetString): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AsnOctetString>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -302,21 +271,71 @@ public struct AsnAny__asnValue_e__Union {
 }
 
 @When[Windows_Win32_NetworkManagement_Snmp == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct AsnObjectIdentifier {
-    public var idLength: UInt32 = 0
-    public var ids: CPointer<UInt32> = CPointer<UInt32>()
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func idLength(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_idLength(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ids`: type `CPointer<UInt32>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Snmp == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct AsnOctetString {
-    public var stream: CPointer<UInt8> = CPointer<UInt8>()
-    public var length: UInt32 = 0
-    public var dynamic: Int32 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    // packed field `stream`: type `CPointer<UInt8>` not supported by polyfill; skipped
+
+    public func length(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_length(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dynamic(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 12)
+        }
+    }
+
+    public mut func set_dynamic(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -735,20 +754,39 @@ public let SNMPAPI_ON: SNMP_STATUS = SNMP_STATUS(1)
 public let SNMPAPI_OFF: SNMP_STATUS = SNMP_STATUS(0)
 
 @When[Windows_Win32_NetworkManagement_Snmp == "on"]
-// packed(4)
 @C
 public struct SnmpVarBind {
-    public var name: AsnObjectIdentifier = AsnObjectIdentifier()
-    public var value: AsnAny = AsnAny()
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    // packed field `name`: type `AsnObjectIdentifier` not supported by polyfill; skipped
+
+    // packed field `value`: type `AsnAny` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Snmp == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct SnmpVarBindList {
-    public var list: CPointer<SnmpVarBind> = CPointer<SnmpVarBind>()
-    public var len: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    // packed field `list`: type `CPointer<SnmpVarBind>` not supported by polyfill; skipped
+
+    public func len(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_len(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -788,27 +826,21 @@ public struct smiVALUE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct smiVALUE__value_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func sNumber(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_sNumber(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -816,22 +848,16 @@ public struct smiVALUE__value_e__Union {
     public func uNumber(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_uNumber(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -839,9 +865,8 @@ public struct smiVALUE__value_e__Union {
     public func hNumber(): smiCNTR64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<smiCNTR64>(p)
             return ptr.read()
         }
@@ -850,9 +875,8 @@ public struct smiVALUE__value_e__Union {
     public mut func set_hNumber(val: smiCNTR64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<smiCNTR64>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -862,9 +886,8 @@ public struct smiVALUE__value_e__Union {
     public func string(): smiOCTETS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<smiOCTETS>(p)
             return ptr.read()
         }
@@ -873,9 +896,8 @@ public struct smiVALUE__value_e__Union {
     public mut func set_string(val: smiOCTETS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<smiOCTETS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -885,9 +907,8 @@ public struct smiVALUE__value_e__Union {
     public func oid(): smiOID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<smiOID>(p)
             return ptr.read()
         }
@@ -896,9 +917,8 @@ public struct smiVALUE__value_e__Union {
     public mut func set_oid(val: smiOID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<smiOID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -908,22 +928,16 @@ public struct smiVALUE__value_e__Union {
     public func empty(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_empty(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }

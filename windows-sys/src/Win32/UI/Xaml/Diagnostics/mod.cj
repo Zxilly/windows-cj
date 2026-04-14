@@ -3,6 +3,7 @@ package windows_sys.Win32.UI.Xaml.Diagnostics
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
 import windows_sys.Win32.System.WinRT as Win32_System_WinRT

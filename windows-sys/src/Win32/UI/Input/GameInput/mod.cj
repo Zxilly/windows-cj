@@ -3,6 +3,7 @@ package windows_sys.Win32.UI.Input.GameInput
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -787,14 +788,13 @@ public struct GameInputForceFeedbackParams {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GameInputForceFeedbackParams__data_e__Union {
-    public var _raw: VArray<UInt64, $13> = VArray<UInt64, $13>(repeat: 0)
+    public var _raw: VArray<UInt8, $104> = VArray<UInt8, $104>(repeat: 0)
 
     public func constant(): GameInputForceFeedbackConstantParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConstantParams>(p)
             return ptr.read()
         }
@@ -803,9 +803,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_constant(val: GameInputForceFeedbackConstantParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConstantParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -815,9 +814,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func ramp(): GameInputForceFeedbackRampParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackRampParams>(p)
             return ptr.read()
         }
@@ -826,9 +824,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_ramp(val: GameInputForceFeedbackRampParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackRampParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -838,9 +835,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func sineWave(): GameInputForceFeedbackPeriodicParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             return ptr.read()
         }
@@ -849,9 +845,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_sineWave(val: GameInputForceFeedbackPeriodicParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -861,9 +856,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func squareWave(): GameInputForceFeedbackPeriodicParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             return ptr.read()
         }
@@ -872,9 +866,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_squareWave(val: GameInputForceFeedbackPeriodicParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -884,9 +877,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func triangleWave(): GameInputForceFeedbackPeriodicParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             return ptr.read()
         }
@@ -895,9 +887,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_triangleWave(val: GameInputForceFeedbackPeriodicParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -907,9 +898,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func sawtoothUpWave(): GameInputForceFeedbackPeriodicParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             return ptr.read()
         }
@@ -918,9 +908,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_sawtoothUpWave(val: GameInputForceFeedbackPeriodicParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -930,9 +919,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func sawtoothDownWave(): GameInputForceFeedbackPeriodicParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             return ptr.read()
         }
@@ -941,9 +929,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_sawtoothDownWave(val: GameInputForceFeedbackPeriodicParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackPeriodicParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -953,9 +940,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func spring(): GameInputForceFeedbackConditionParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConditionParams>(p)
             return ptr.read()
         }
@@ -964,9 +950,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_spring(val: GameInputForceFeedbackConditionParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConditionParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -976,9 +961,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func friction(): GameInputForceFeedbackConditionParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConditionParams>(p)
             return ptr.read()
         }
@@ -987,9 +971,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_friction(val: GameInputForceFeedbackConditionParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConditionParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -999,9 +982,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func damper(): GameInputForceFeedbackConditionParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConditionParams>(p)
             return ptr.read()
         }
@@ -1010,9 +992,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_damper(val: GameInputForceFeedbackConditionParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConditionParams>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1022,9 +1003,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public func inertia(): GameInputForceFeedbackConditionParams {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConditionParams>(p)
             return ptr.read()
         }
@@ -1033,9 +1013,8 @@ public struct GameInputForceFeedbackParams__data_e__Union {
     public mut func set_inertia(val: GameInputForceFeedbackConditionParams): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GameInputForceFeedbackConditionParams>(p)
             ptr.write(val)
             _raw = rawStorage

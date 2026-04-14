@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.BiometricFramework
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.IO as Win32_System_IO
 import windows_sys.Win32.Foundation.*
@@ -499,14 +500,13 @@ public struct WINBIO_ASYNC_RESULT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
-    public var _raw: VArray<UInt64, $38> = VArray<UInt64, $38>(repeat: 0)
+    public var _raw: VArray<UInt8, $304> = VArray<UInt8, $304>(repeat: 0)
 
     public func verify(): WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct>(p)
             return ptr.read()
         }
@@ -515,9 +515,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_verify(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -527,9 +526,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func identify(): WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct>(p)
             return ptr.read()
         }
@@ -538,9 +536,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_identify(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -550,9 +547,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func enrollBegin(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct>(p)
             return ptr.read()
         }
@@ -561,9 +557,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_enrollBegin(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -573,9 +568,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func enrollCapture(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct>(p)
             return ptr.read()
         }
@@ -584,9 +578,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_enrollCapture(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -596,9 +589,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func enrollCommit(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct>(p)
             return ptr.read()
         }
@@ -607,9 +599,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_enrollCommit(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -619,9 +610,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func enumEnrollments(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct>(p)
             return ptr.read()
         }
@@ -630,9 +620,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_enumEnrollments(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -642,9 +631,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func captureSample(): WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct>(p)
             return ptr.read()
         }
@@ -653,9 +641,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_captureSample(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -665,9 +652,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func deleteTemplate(): WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct>(p)
             return ptr.read()
         }
@@ -676,9 +662,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_deleteTemplate(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -688,9 +673,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func getProperty(): WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct>(p)
             return ptr.read()
         }
@@ -699,9 +683,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_getProperty(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -711,9 +694,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func setProperty(): WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct>(p)
             return ptr.read()
         }
@@ -722,9 +704,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_setProperty(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -734,9 +715,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func getEvent(): WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct>(p)
             return ptr.read()
         }
@@ -745,9 +725,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_getEvent(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -757,9 +736,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func controlUnit(): WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct>(p)
             return ptr.read()
         }
@@ -768,9 +746,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_controlUnit(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -780,9 +757,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func enumServiceProviders(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct>(p)
             return ptr.read()
         }
@@ -791,9 +767,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_enumServiceProviders(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -803,9 +778,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func enumBiometricUnits(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct>(p)
             return ptr.read()
         }
@@ -814,9 +788,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_enumBiometricUnits(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -826,9 +799,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func enumDatabases(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct>(p)
             return ptr.read()
         }
@@ -837,9 +809,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_enumDatabases(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -849,9 +820,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func verifyAndReleaseTicket(): WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct>(p)
             return ptr.read()
         }
@@ -860,9 +830,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_verifyAndReleaseTicket(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -872,9 +841,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func identifyAndReleaseTicket(): WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct>(p)
             return ptr.read()
         }
@@ -883,9 +851,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_identifyAndReleaseTicket(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -895,9 +862,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func enrollSelect(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct>(p)
             return ptr.read()
         }
@@ -906,9 +872,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_enrollSelect(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -918,9 +883,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func monitorPresence(): WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct>(p)
             return ptr.read()
         }
@@ -929,9 +893,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_monitorPresence(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -941,9 +904,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func getProtectionPolicy(): WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct>(p)
             return ptr.read()
         }
@@ -952,9 +914,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_getProtectionPolicy(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -964,9 +925,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public func notifyUnitStatusChange(): WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct>(p)
             return ptr.read()
         }
@@ -975,9 +935,8 @@ public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
     public mut func set_notifyUnitStatusChange(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1574,14 +1533,13 @@ public struct WINBIO_EVENT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINBIO_EVENT__Parameters_e__Union {
-    public var _raw: VArray<UInt32, $22> = VArray<UInt32, $22>(repeat: 0)
+    public var _raw: VArray<UInt8, $88> = VArray<UInt8, $88>(repeat: 0)
 
     public func unclaimed(): WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct>(p)
             return ptr.read()
         }
@@ -1590,9 +1548,8 @@ public struct WINBIO_EVENT__Parameters_e__Union {
     public mut func set_unclaimed(val: WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1602,9 +1559,8 @@ public struct WINBIO_EVENT__Parameters_e__Union {
     public func unclaimedIdentify(): WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct>(p)
             return ptr.read()
         }
@@ -1613,9 +1569,8 @@ public struct WINBIO_EVENT__Parameters_e__Union {
     public mut func set_unclaimedIdentify(val: WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1625,9 +1580,8 @@ public struct WINBIO_EVENT__Parameters_e__Union {
     public func error(): WINBIO_EVENT__Parameters_e__Union__Error_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Error_e__Struct>(p)
             return ptr.read()
         }
@@ -1636,9 +1590,8 @@ public struct WINBIO_EVENT__Parameters_e__Union {
     public mut func set_error(val: WINBIO_EVENT__Parameters_e__Union__Error_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Error_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1685,27 +1638,21 @@ public struct WINBIO_EXTENDED_ENGINE_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
-    public var _raw: VArray<UInt32, $7> = VArray<UInt32, $7>(repeat: 0)
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0)
 
     public func null(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_null(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1713,9 +1660,8 @@ public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
     public func facialFeatures(): WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
             return ptr.read()
         }
@@ -1724,9 +1670,8 @@ public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
     public mut func set_facialFeatures(val: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1736,9 +1681,8 @@ public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
     public func fingerprint(): WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
             return ptr.read()
         }
@@ -1747,9 +1691,8 @@ public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
     public mut func set_fingerprint(val: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1759,9 +1702,8 @@ public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
     public func iris(): WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct>(p)
             return ptr.read()
         }
@@ -1770,9 +1712,8 @@ public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
     public mut func set_iris(val: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1782,9 +1723,8 @@ public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
     public func voice(): WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct>(p)
             return ptr.read()
         }
@@ -1793,9 +1733,8 @@ public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
     public mut func set_voice(val: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1893,27 +1832,21 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
-    public var _raw: VArray<UInt64, $42> = VArray<UInt64, $42>(repeat: 0)
+    public var _raw: VArray<UInt8, $332> = VArray<UInt8, $332>(repeat: 0)
 
     public func null(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_null(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1921,9 +1854,8 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
     public func facialFeatures(): WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct>(p)
             return ptr.read()
         }
@@ -1932,9 +1864,8 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
     public mut func set_facialFeatures(val: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1944,9 +1875,8 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
     public func fingerprint(): WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct>(p)
             return ptr.read()
         }
@@ -1955,9 +1885,8 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
     public mut func set_fingerprint(val: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1967,9 +1896,8 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
     public func iris(): WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct>(p)
             return ptr.read()
         }
@@ -1978,9 +1906,8 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
     public mut func set_iris(val: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1990,9 +1917,8 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
     public func voice(): WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct>(p)
             return ptr.read()
         }
@@ -2001,9 +1927,8 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
     public mut func set_voice(val: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2085,27 +2010,21 @@ public struct WINBIO_EXTENDED_SENSOR_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
-    public var _raw: VArray<UInt32, $268> = VArray<UInt32, $268>(repeat: 0)
+    public var _raw: VArray<UInt8, $1072> = VArray<UInt8, $1072>(repeat: 0)
 
     public func null(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_null(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2113,9 +2032,8 @@ public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
     public func facialFeatures(): WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
             return ptr.read()
         }
@@ -2124,9 +2042,8 @@ public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
     public mut func set_facialFeatures(val: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2136,9 +2053,8 @@ public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
     public func fingerprint(): WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
             return ptr.read()
         }
@@ -2147,9 +2063,8 @@ public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
     public mut func set_fingerprint(val: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2159,9 +2074,8 @@ public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
     public func iris(): WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct>(p)
             return ptr.read()
         }
@@ -2170,9 +2084,8 @@ public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
     public mut func set_iris(val: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2182,9 +2095,8 @@ public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
     public func voice(): WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct>(p)
             return ptr.read()
         }
@@ -2193,9 +2105,8 @@ public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
     public mut func set_voice(val: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2259,27 +2170,21 @@ public struct WINBIO_EXTENDED_STORAGE_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func null(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_null(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2287,9 +2192,8 @@ public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
     public func facialFeatures(): WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
             return ptr.read()
         }
@@ -2298,9 +2202,8 @@ public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
     public mut func set_facialFeatures(val: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2310,9 +2213,8 @@ public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
     public func fingerprint(): WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
             return ptr.read()
         }
@@ -2321,9 +2223,8 @@ public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
     public mut func set_fingerprint(val: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2333,9 +2234,8 @@ public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
     public func iris(): WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct>(p)
             return ptr.read()
         }
@@ -2344,9 +2244,8 @@ public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
     public mut func set_iris(val: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2356,9 +2255,8 @@ public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
     public func voice(): WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct>(p)
             return ptr.read()
         }
@@ -2367,9 +2265,8 @@ public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
     public mut func set_voice(val: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2507,27 +2404,21 @@ public struct WINBIO_IDENTITY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINBIO_IDENTITY__Value_e__Union {
-    public var _raw: VArray<UInt32, $18> = VArray<UInt32, $18>(repeat: 0)
+    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
 
     public func null(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_null(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2535,22 +2426,16 @@ public struct WINBIO_IDENTITY__Value_e__Union {
     public func wildcard(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_wildcard(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2558,9 +2443,8 @@ public struct WINBIO_IDENTITY__Value_e__Union {
     public func templateGuid(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -2569,9 +2453,8 @@ public struct WINBIO_IDENTITY__Value_e__Union {
     public mut func set_templateGuid(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2581,9 +2464,8 @@ public struct WINBIO_IDENTITY__Value_e__Union {
     public func accountSid(): WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct>(p)
             return ptr.read()
         }
@@ -2592,9 +2474,8 @@ public struct WINBIO_IDENTITY__Value_e__Union {
     public mut func set_accountSid(val: WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2604,9 +2485,8 @@ public struct WINBIO_IDENTITY__Value_e__Union {
     public func secureId(): VArray<UInt8, $32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $32>>(p)
             return ptr.read()
         }
@@ -2615,9 +2495,8 @@ public struct WINBIO_IDENTITY__Value_e__Union {
     public mut func set_secureId(val: VArray<UInt8, $32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2742,14 +2621,13 @@ public struct WINBIO_PRESENCE__Authorization_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WINBIO_PRESENCE_PROPERTIES {
-    public var _raw: VArray<UInt32, $83> = VArray<UInt32, $83>(repeat: 0)
+    public var _raw: VArray<UInt8, $332> = VArray<UInt8, $332>(repeat: 0)
 
     public func facialFeatures(): WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct>(p)
             return ptr.read()
         }
@@ -2758,9 +2636,8 @@ public struct WINBIO_PRESENCE_PROPERTIES {
     public mut func set_facialFeatures(val: WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2770,9 +2647,8 @@ public struct WINBIO_PRESENCE_PROPERTIES {
     public func iris(): WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct>(p)
             return ptr.read()
         }
@@ -2781,9 +2657,8 @@ public struct WINBIO_PRESENCE_PROPERTIES {
     public mut func set_iris(val: WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

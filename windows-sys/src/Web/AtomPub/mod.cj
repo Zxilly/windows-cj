@@ -3,6 +3,7 @@ package windows_sys.Web.AtomPub
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Web.Syndication as Web_Syndication
 import windows_sys.impl as impl

@@ -3,6 +3,7 @@ package windows_sys.Win32.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.Foundation.*
@@ -32,14 +33,13 @@ public struct INPUT_TRANSFORM {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INPUT_TRANSFORM__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $16> = VArray<UInt32, $16>(repeat: 0)
+    public var _raw: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
 
     public func anonymous(): INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -48,9 +48,8 @@ public struct INPUT_TRANSFORM__Anonymous_e__Union {
     public mut func set_anonymous(val: INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INPUT_TRANSFORM__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -60,9 +59,8 @@ public struct INPUT_TRANSFORM__Anonymous_e__Union {
     public func m(): VArray<Float32, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $16>>(p)
             return ptr.read()
         }
@@ -71,9 +69,8 @@ public struct INPUT_TRANSFORM__Anonymous_e__Union {
     public mut func set_m(val: VArray<Float32, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -434,14 +431,13 @@ public struct POINTER_TYPE_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct POINTER_TYPE_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $18> = VArray<UInt64, $18>(repeat: 0)
+    public var _raw: VArray<UInt8, $144> = VArray<UInt8, $144>(repeat: 0)
 
     public func pointerInfo(): POINTER_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<POINTER_INFO>(p)
             return ptr.read()
         }
@@ -450,9 +446,8 @@ public struct POINTER_TYPE_INFO__Anonymous_e__Union {
     public mut func set_pointerInfo(val: POINTER_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<POINTER_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -462,9 +457,8 @@ public struct POINTER_TYPE_INFO__Anonymous_e__Union {
     public func touchInfo(): POINTER_TOUCH_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<POINTER_TOUCH_INFO>(p)
             return ptr.read()
         }
@@ -473,9 +467,8 @@ public struct POINTER_TYPE_INFO__Anonymous_e__Union {
     public mut func set_touchInfo(val: POINTER_TOUCH_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<POINTER_TOUCH_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -485,9 +478,8 @@ public struct POINTER_TYPE_INFO__Anonymous_e__Union {
     public func penInfo(): POINTER_PEN_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<POINTER_PEN_INFO>(p)
             return ptr.read()
         }
@@ -496,9 +488,8 @@ public struct POINTER_TYPE_INFO__Anonymous_e__Union {
     public mut func set_penInfo(val: POINTER_PEN_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<POINTER_PEN_INFO>(p)
             ptr.write(val)
             _raw = rawStorage

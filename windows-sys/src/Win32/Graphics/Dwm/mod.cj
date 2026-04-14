@@ -3,6 +3,7 @@ package windows_sys.Win32.Graphics.Dwm
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.impl as Win32_impl
@@ -197,28 +198,175 @@ public let DWMWA_BORDER_MARGINS: DWMWINDOWATTRIBUTE = DWMWINDOWATTRIBUTE(40)
 public let DWMWA_LAST: DWMWINDOWATTRIBUTE = DWMWINDOWATTRIBUTE(41)
 
 @When[Windows_Win32_Graphics_Dwm == "on"]
-// packed(1)
 @C
 public struct DWM_BLURBEHIND {
-    public var dwFlags: UInt32 = 0
-    public var fEnable: Int32 = 0
-    public var hRgnBlur: Win32_Graphics_Gdi.HRGN = CPointer<Unit>()
-    public var fTransitionOnMaximized: Int32 = 0
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    public func dwFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func fEnable(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 4)
+        }
+    }
+
+    public mut func set_fEnable(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `hRgnBlur`: type `Win32_Graphics_Gdi.HRGN` not supported by polyfill; skipped
+
+    public func fTransitionOnMaximized(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 16)
+        }
+    }
+
+    public mut func set_fTransitionOnMaximized(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Dwm == "on"]
-// packed(1)
 @C
 public struct DWM_PRESENT_PARAMETERS {
-    public var cbSize: UInt32 = 0
-    public var fQueue: Int32 = 0
-    public var cRefreshStart: UInt64 = 0
-    public var cBuffer: UInt32 = 0
-    public var fUseSourceRate: Int32 = 0
-    public var rateSource: UNSIGNED_RATIO = UNSIGNED_RATIO()
-    public var cRefreshesPerFrame: UInt32 = 0
-    public var eSampling: DWM_SOURCE_FRAME_SAMPLING = DWM_SOURCE_FRAME_SAMPLING()
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
+
+    public func cbSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_cbSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func fQueue(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 4)
+        }
+    }
+
+    public mut func set_fQueue(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefreshStart(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 8)
+        }
+    }
+
+    public mut func set_cRefreshStart(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cBuffer(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_cBuffer(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func fUseSourceRate(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 20)
+        }
+    }
+
+    public mut func set_fUseSourceRate(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `rateSource`: type `UNSIGNED_RATIO` not supported by polyfill; skipped
+
+    public func cRefreshesPerFrame(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_cRefreshesPerFrame(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `eSampling`: type `DWM_SOURCE_FRAME_SAMPLING` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -405,62 +553,738 @@ public let DWMTWR_GROUP_POLICY: DWM_TAB_WINDOW_REQUIREMENTS = DWM_TAB_WINDOW_REQ
 public let DWMTWR_APP_COMPAT: DWM_TAB_WINDOW_REQUIREMENTS = DWM_TAB_WINDOW_REQUIREMENTS(512)
 
 @When[Windows_Win32_Graphics_Dwm == "on"]
-// packed(1)
 @C
 public struct DWM_THUMBNAIL_PROPERTIES {
-    public var dwFlags: UInt32 = 0
-    public var rcDestination: Win32_Foundation.RECT = Win32_Foundation.RECT()
-    public var rcSource: Win32_Foundation.RECT = Win32_Foundation.RECT()
-    public var opacity: UInt8 = 0
-    public var fVisible: Int32 = 0
-    public var fSourceClientAreaOnly: Int32 = 0
+    public var _raw: VArray<UInt8, $45> = VArray<UInt8, $45>(repeat: 0u8)
+
+    public func dwFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `rcDestination`: type `Win32_Foundation.RECT` not supported by polyfill; skipped
+
+    // packed field `rcSource`: type `Win32_Foundation.RECT` not supported by polyfill; skipped
+
+    public func opacity(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 36)
+        }
+    }
+
+    public mut func set_opacity(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func fVisible(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 37)
+        }
+    }
+
+    public mut func set_fVisible(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 37, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func fSourceClientAreaOnly(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 41)
+        }
+    }
+
+    public mut func set_fSourceClientAreaOnly(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 41, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Dwm == "on"]
-// packed(1)
 @C
 public struct DWM_TIMING_INFO {
-    public var cbSize: UInt32 = 0
-    public var rateRefresh: UNSIGNED_RATIO = UNSIGNED_RATIO()
-    public var qpcRefreshPeriod: UInt64 = 0
-    public var rateCompose: UNSIGNED_RATIO = UNSIGNED_RATIO()
-    public var qpcVBlank: UInt64 = 0
-    public var cRefresh: UInt64 = 0
-    public var cDXRefresh: UInt32 = 0
-    public var qpcCompose: UInt64 = 0
-    public var cFrame: UInt64 = 0
-    public var cDXPresent: UInt32 = 0
-    public var cRefreshFrame: UInt64 = 0
-    public var cFrameSubmitted: UInt64 = 0
-    public var cDXPresentSubmitted: UInt32 = 0
-    public var cFrameConfirmed: UInt64 = 0
-    public var cDXPresentConfirmed: UInt32 = 0
-    public var cRefreshConfirmed: UInt64 = 0
-    public var cDXRefreshConfirmed: UInt32 = 0
-    public var cFramesLate: UInt64 = 0
-    public var cFramesOutstanding: UInt32 = 0
-    public var cFrameDisplayed: UInt64 = 0
-    public var qpcFrameDisplayed: UInt64 = 0
-    public var cRefreshFrameDisplayed: UInt64 = 0
-    public var cFrameComplete: UInt64 = 0
-    public var qpcFrameComplete: UInt64 = 0
-    public var cFramePending: UInt64 = 0
-    public var qpcFramePending: UInt64 = 0
-    public var cFramesDisplayed: UInt64 = 0
-    public var cFramesComplete: UInt64 = 0
-    public var cFramesPending: UInt64 = 0
-    public var cFramesAvailable: UInt64 = 0
-    public var cFramesDropped: UInt64 = 0
-    public var cFramesMissed: UInt64 = 0
-    public var cRefreshNextDisplayed: UInt64 = 0
-    public var cRefreshNextPresented: UInt64 = 0
-    public var cRefreshesDisplayed: UInt64 = 0
-    public var cRefreshesPresented: UInt64 = 0
-    public var cRefreshStarted: UInt64 = 0
-    public var cPixelsReceived: UInt64 = 0
-    public var cPixelsDrawn: UInt64 = 0
-    public var cBuffersEmpty: UInt64 = 0
+    public var _raw: VArray<UInt8, $292> = VArray<UInt8, $292>(repeat: 0u8)
+
+    public func cbSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_cbSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `rateRefresh`: type `UNSIGNED_RATIO` not supported by polyfill; skipped
+
+    public func qpcRefreshPeriod(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 12)
+        }
+    }
+
+    public mut func set_qpcRefreshPeriod(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `rateCompose`: type `UNSIGNED_RATIO` not supported by polyfill; skipped
+
+    public func qpcVBlank(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 28)
+        }
+    }
+
+    public mut func set_qpcVBlank(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefresh(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 36)
+        }
+    }
+
+    public mut func set_cRefresh(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cdxRefresh(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_cdxRefresh(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func qpcCompose(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 48)
+        }
+    }
+
+    public mut func set_qpcCompose(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFrame(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 56)
+        }
+    }
+
+    public mut func set_cFrame(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cdxPresent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 64)
+        }
+    }
+
+    public mut func set_cdxPresent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefreshFrame(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 68)
+        }
+    }
+
+    public mut func set_cRefreshFrame(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 68, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFrameSubmitted(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 76)
+        }
+    }
+
+    public mut func set_cFrameSubmitted(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 76, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cdxPresentSubmitted(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 84)
+        }
+    }
+
+    public mut func set_cdxPresentSubmitted(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 84, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFrameConfirmed(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 88)
+        }
+    }
+
+    public mut func set_cFrameConfirmed(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 88, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cdxPresentConfirmed(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 96)
+        }
+    }
+
+    public mut func set_cdxPresentConfirmed(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 96, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefreshConfirmed(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 100)
+        }
+    }
+
+    public mut func set_cRefreshConfirmed(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 100, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cdxRefreshConfirmed(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 108)
+        }
+    }
+
+    public mut func set_cdxRefreshConfirmed(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 108, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFramesLate(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 112)
+        }
+    }
+
+    public mut func set_cFramesLate(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 112, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFramesOutstanding(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 120)
+        }
+    }
+
+    public mut func set_cFramesOutstanding(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 120, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFrameDisplayed(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 124)
+        }
+    }
+
+    public mut func set_cFrameDisplayed(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 124, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func qpcFrameDisplayed(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 132)
+        }
+    }
+
+    public mut func set_qpcFrameDisplayed(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 132, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefreshFrameDisplayed(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 140)
+        }
+    }
+
+    public mut func set_cRefreshFrameDisplayed(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 140, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFrameComplete(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 148)
+        }
+    }
+
+    public mut func set_cFrameComplete(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 148, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func qpcFrameComplete(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 156)
+        }
+    }
+
+    public mut func set_qpcFrameComplete(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 156, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFramePending(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 164)
+        }
+    }
+
+    public mut func set_cFramePending(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 164, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func qpcFramePending(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 172)
+        }
+    }
+
+    public mut func set_qpcFramePending(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 172, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFramesDisplayed(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 180)
+        }
+    }
+
+    public mut func set_cFramesDisplayed(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 180, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFramesComplete(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 188)
+        }
+    }
+
+    public mut func set_cFramesComplete(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 188, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFramesPending(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 196)
+        }
+    }
+
+    public mut func set_cFramesPending(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 196, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFramesAvailable(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 204)
+        }
+    }
+
+    public mut func set_cFramesAvailable(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 204, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFramesDropped(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 212)
+        }
+    }
+
+    public mut func set_cFramesDropped(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 212, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cFramesMissed(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 220)
+        }
+    }
+
+    public mut func set_cFramesMissed(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 220, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefreshNextDisplayed(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 228)
+        }
+    }
+
+    public mut func set_cRefreshNextDisplayed(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 228, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefreshNextPresented(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 236)
+        }
+    }
+
+    public mut func set_cRefreshNextPresented(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 236, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefreshesDisplayed(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 244)
+        }
+    }
+
+    public mut func set_cRefreshesDisplayed(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 244, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefreshesPresented(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 252)
+        }
+    }
+
+    public mut func set_cRefreshesPresented(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 252, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cRefreshStarted(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 260)
+        }
+    }
+
+    public mut func set_cRefreshStarted(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 260, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cPixelsReceived(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 268)
+        }
+    }
+
+    public mut func set_cPixelsReceived(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 268, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cPixelsDrawn(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 276)
+        }
+    }
+
+    public mut func set_cPixelsDrawn(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 276, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cBuffersEmpty(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 284)
+        }
+    }
+
+    public mut func set_cBuffersEmpty(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 284, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -548,24 +1372,152 @@ public let GT_TOUCH_PRESSANDHOLDABORT: GESTURE_TYPE = GESTURE_TYPE(9)
 public let GT_TOUCH_PRESSANDTAP: GESTURE_TYPE = GESTURE_TYPE(10)
 
 @When[Windows_Win32_Graphics_Dwm == "on"]
-// packed(1)
 @C
 public struct MilMatrix3x2D {
-    public var S_11: Float64 = 0.0
-    public var S_12: Float64 = 0.0
-    public var S_21: Float64 = 0.0
-    public var S_22: Float64 = 0.0
-    public var DX: Float64 = 0.0
-    public var DY: Float64 = 0.0
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0u8)
+
+    public func s_11(): Float64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadFloat64(base, 0)
+        }
+    }
+
+    public mut func set_s_11(val: Float64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteFloat64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func s_12(): Float64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadFloat64(base, 8)
+        }
+    }
+
+    public mut func set_s_12(val: Float64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteFloat64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func s_21(): Float64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadFloat64(base, 16)
+        }
+    }
+
+    public mut func set_s_21(val: Float64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteFloat64(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func s_22(): Float64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadFloat64(base, 24)
+        }
+    }
+
+    public mut func set_s_22(val: Float64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteFloat64(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dx(): Float64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadFloat64(base, 32)
+        }
+    }
+
+    public mut func set_dx(val: Float64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteFloat64(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dy(): Float64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadFloat64(base, 40)
+        }
+    }
+
+    public mut func set_dy(val: Float64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteFloat64(base, 40, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Dwm == "on"]
-// packed(1)
 @C
 public struct UNSIGNED_RATIO {
-    public var uiNumerator: UInt32 = 0
-    public var uiDenominator: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func uiNumerator(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_uiNumerator(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func uiDenominator(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_uiDenominator(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 

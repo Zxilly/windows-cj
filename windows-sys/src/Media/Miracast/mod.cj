@@ -3,6 +3,7 @@ package windows_sys.Media.Miracast
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Graphics as Graphics
 import windows_sys.Media.impl as Media_impl

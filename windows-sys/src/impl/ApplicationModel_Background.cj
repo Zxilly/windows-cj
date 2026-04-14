@@ -3,6 +3,7 @@ package windows_sys.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.ApplicationModel.Calls.Background as ApplicationModel_Calls_Background
 import windows_sys.Devices.Geolocation as Devices_Geolocation
 import windows_sys.Foundation.impl as Foundation_impl

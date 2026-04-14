@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.DeviceQuery
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Devices.Properties as Win32_Devices_Properties
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
@@ -330,14 +331,13 @@ public struct DEV_QUERY_RESULT_ACTION_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DEV_QUERY_RESULT_ACTION_DATA__DEV_QUERY_RESULT_UPDATE_PAYLOAD {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func state(): DEV_QUERY_STATE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DEV_QUERY_STATE>(p)
             return ptr.read()
         }
@@ -346,9 +346,8 @@ public struct DEV_QUERY_RESULT_ACTION_DATA__DEV_QUERY_RESULT_UPDATE_PAYLOAD {
     public mut func set_state(val: DEV_QUERY_STATE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DEV_QUERY_STATE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -358,9 +357,8 @@ public struct DEV_QUERY_RESULT_ACTION_DATA__DEV_QUERY_RESULT_UPDATE_PAYLOAD {
     public func deviceObject(): DEV_OBJECT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DEV_OBJECT>(p)
             return ptr.read()
         }
@@ -369,9 +367,8 @@ public struct DEV_QUERY_RESULT_ACTION_DATA__DEV_QUERY_RESULT_UPDATE_PAYLOAD {
     public mut func set_deviceObject(val: DEV_OBJECT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DEV_OBJECT>(p)
             ptr.write(val)
             _raw = rawStorage

@@ -3,6 +3,7 @@ package windows_sys.Devices.Gpio
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Devices.Gpio.Provider as Devices_Gpio_Provider
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Win32.Foundation as Win32_Foundation

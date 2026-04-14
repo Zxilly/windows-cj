@@ -3,6 +3,7 @@ package windows_sys.Wdk.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.System.IO as Win32_System_IO
@@ -36,14 +37,13 @@ public struct ACCESS_STATE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct ACCESS_STATE__Privileges_e__Union {
-    public var _raw: VArray<UInt32, $11> = VArray<UInt32, $11>(repeat: 0)
+    public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0)
 
     public func initialPrivilegeSet(): INITIAL_PRIVILEGE_SET {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INITIAL_PRIVILEGE_SET>(p)
             return ptr.read()
         }
@@ -52,9 +52,8 @@ public struct ACCESS_STATE__Privileges_e__Union {
     public mut func set_initialPrivilegeSet(val: INITIAL_PRIVILEGE_SET): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INITIAL_PRIVILEGE_SET>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -64,9 +63,8 @@ public struct ACCESS_STATE__Privileges_e__Union {
     public func privilegeSet(): Win32_Security.PRIVILEGE_SET {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Security.PRIVILEGE_SET>(p)
             return ptr.read()
         }
@@ -75,9 +73,8 @@ public struct ACCESS_STATE__Privileges_e__Union {
     public mut func set_privilegeSet(val: Win32_Security.PRIVILEGE_SET): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Security.PRIVILEGE_SET>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -121,14 +118,13 @@ public struct DEVICE_OBJECT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DEVICE_OBJECT__Queue_e__Union {
-    public var _raw: VArray<UInt64, $9> = VArray<UInt64, $9>(repeat: 0)
+    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
 
     public func listEntry(): Win32_impl.LIST_ENTRY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.LIST_ENTRY>(p)
             return ptr.read()
         }
@@ -137,9 +133,8 @@ public struct DEVICE_OBJECT__Queue_e__Union {
     public mut func set_listEntry(val: Win32_impl.LIST_ENTRY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.LIST_ENTRY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -149,9 +144,8 @@ public struct DEVICE_OBJECT__Queue_e__Union {
     public func wcb(): WAIT_CONTEXT_BLOCK {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WAIT_CONTEXT_BLOCK>(p)
             return ptr.read()
         }
@@ -160,9 +154,8 @@ public struct DEVICE_OBJECT__Queue_e__Union {
     public mut func set_wcb(val: WAIT_CONTEXT_BLOCK): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WAIT_CONTEXT_BLOCK>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -206,14 +199,13 @@ public struct DISPATCHER_HEADER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DISPATCHER_HEADER__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous1(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous1_e__Union {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous1_e__Union>(p)
             return ptr.read()
         }
@@ -222,9 +214,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public mut func set_anonymous1(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous1_e__Union): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous1_e__Union>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -234,9 +225,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public func anonymous2(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             return ptr.read()
         }
@@ -245,9 +235,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public mut func set_anonymous2(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -257,9 +246,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public func anonymous3(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct>(p)
             return ptr.read()
         }
@@ -268,9 +256,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public mut func set_anonymous3(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -280,9 +267,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public func anonymous4(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct>(p)
             return ptr.read()
         }
@@ -291,9 +277,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public mut func set_anonymous4(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -303,9 +288,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public func anonymous5(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct>(p)
             return ptr.read()
         }
@@ -314,9 +298,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public mut func set_anonymous5(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -326,9 +309,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public func anonymous6(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct>(p)
             return ptr.read()
         }
@@ -337,9 +319,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public mut func set_anonymous6(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -349,9 +330,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public func anonymous7(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous7_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous7_e__Struct>(p)
             return ptr.read()
         }
@@ -360,9 +340,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
     public mut func set_anonymous7(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous7_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous7_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -375,27 +354,21 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous1_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func lock(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_lock(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -403,22 +376,16 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous1_e__Union {
     public func lockNV(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_lockNV(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -454,22 +421,16 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anony
     public func timerControlFlags(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_timerControlFlags(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -477,9 +438,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anony
     public func anonymous(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -488,9 +448,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anony
     public mut func set_anonymous(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -515,22 +474,16 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anony
     public func timerMiscFlags(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_timerMiscFlags(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -538,9 +491,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anony
     public func anonymous(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anonymous2_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anonymous2_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -549,9 +501,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anony
     public mut func set_anonymous(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anonymous2_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous3_e__Struct__Anonymous2_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -586,22 +537,16 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct__Anony
     public func timer2Flags(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_timer2Flags(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -609,9 +554,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct__Anony
     public func anonymous(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -620,9 +564,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct__Anony
     public mut func set_anonymous(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous4_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -657,22 +600,16 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct__Anony
     public func queueControlFlags(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_queueControlFlags(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -680,9 +617,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct__Anony
     public func anonymous(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -691,9 +627,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct__Anony
     public mut func set_anonymous(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous5_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -728,22 +663,16 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct__Anony
     public func threadControlFlags(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_threadControlFlags(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -751,9 +680,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct__Anony
     public func anonymous(): DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -762,9 +690,8 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct__Anony
     public mut func set_anonymous(val: DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -789,22 +716,16 @@ public struct DISPATCHER_HEADER__Anonymous_e__Union__Anonymous6_e__Struct__Anony
     public func debugActive(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_debugActive(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -917,27 +838,21 @@ public struct ERESOURCE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct ERESOURCE__Anonymous1_e__Union {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func flag(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_flag(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -945,9 +860,8 @@ public struct ERESOURCE__Anonymous1_e__Union {
     public func anonymous(): ERESOURCE__Anonymous1_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ERESOURCE__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -956,9 +870,8 @@ public struct ERESOURCE__Anonymous1_e__Union {
     public mut func set_anonymous(val: ERESOURCE__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ERESOURCE__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -979,14 +892,13 @@ public struct ERESOURCE__Anonymous1_e__Union__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct ERESOURCE__Anonymous2_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func address(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -995,9 +907,8 @@ public struct ERESOURCE__Anonymous2_e__Union {
     public mut func set_address(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1007,9 +918,8 @@ public struct ERESOURCE__Anonymous2_e__Union {
     public func creatorBackTraceIndex(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -1018,9 +928,8 @@ public struct ERESOURCE__Anonymous2_e__Union {
     public mut func set_creatorBackTraceIndex(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1272,14 +1181,13 @@ public struct IO_STACK_LOCATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IO_STACK_LOCATION__Parameters_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func create(): IO_STACK_LOCATION__Parameters_e__Union__Create_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Create_e__Struct>(p)
             return ptr.read()
         }
@@ -1288,9 +1196,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_create(val: IO_STACK_LOCATION__Parameters_e__Union__Create_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Create_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1300,9 +1207,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func createPipe(): IO_STACK_LOCATION__Parameters_e__Union__CreatePipe_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__CreatePipe_e__Struct>(p)
             return ptr.read()
         }
@@ -1311,9 +1217,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_createPipe(val: IO_STACK_LOCATION__Parameters_e__Union__CreatePipe_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__CreatePipe_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1323,9 +1228,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func createMailslot(): IO_STACK_LOCATION__Parameters_e__Union__CreateMailslot_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__CreateMailslot_e__Struct>(p)
             return ptr.read()
         }
@@ -1334,9 +1238,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_createMailslot(val: IO_STACK_LOCATION__Parameters_e__Union__CreateMailslot_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__CreateMailslot_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1346,9 +1249,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func read(): IO_STACK_LOCATION__Parameters_e__Union__Read_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Read_e__Struct>(p)
             return ptr.read()
         }
@@ -1357,9 +1259,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_read(val: IO_STACK_LOCATION__Parameters_e__Union__Read_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Read_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1369,9 +1270,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func write(): IO_STACK_LOCATION__Parameters_e__Union__Write_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Write_e__Struct>(p)
             return ptr.read()
         }
@@ -1380,9 +1280,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_write(val: IO_STACK_LOCATION__Parameters_e__Union__Write_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Write_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1392,9 +1291,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func queryDirectory(): IO_STACK_LOCATION__Parameters_e__Union__QueryDirectory_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryDirectory_e__Struct>(p)
             return ptr.read()
         }
@@ -1403,9 +1301,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_queryDirectory(val: IO_STACK_LOCATION__Parameters_e__Union__QueryDirectory_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryDirectory_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1415,9 +1312,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func notifyDirectory(): IO_STACK_LOCATION__Parameters_e__Union__NotifyDirectory_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__NotifyDirectory_e__Struct>(p)
             return ptr.read()
         }
@@ -1426,9 +1322,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_notifyDirectory(val: IO_STACK_LOCATION__Parameters_e__Union__NotifyDirectory_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__NotifyDirectory_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1438,9 +1333,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func notifyDirectoryEx(): IO_STACK_LOCATION__Parameters_e__Union__NotifyDirectoryEx_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__NotifyDirectoryEx_e__Struct>(p)
             return ptr.read()
         }
@@ -1449,9 +1343,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_notifyDirectoryEx(val: IO_STACK_LOCATION__Parameters_e__Union__NotifyDirectoryEx_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__NotifyDirectoryEx_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1461,9 +1354,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func queryFile(): IO_STACK_LOCATION__Parameters_e__Union__QueryFile_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryFile_e__Struct>(p)
             return ptr.read()
         }
@@ -1472,9 +1364,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_queryFile(val: IO_STACK_LOCATION__Parameters_e__Union__QueryFile_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryFile_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1484,9 +1375,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func setFile(): IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct>(p)
             return ptr.read()
         }
@@ -1495,9 +1385,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_setFile(val: IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1507,9 +1396,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func queryEa(): IO_STACK_LOCATION__Parameters_e__Union__QueryEa_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryEa_e__Struct>(p)
             return ptr.read()
         }
@@ -1518,9 +1406,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_queryEa(val: IO_STACK_LOCATION__Parameters_e__Union__QueryEa_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryEa_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1530,9 +1417,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func setEa(): IO_STACK_LOCATION__Parameters_e__Union__SetEa_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetEa_e__Struct>(p)
             return ptr.read()
         }
@@ -1541,9 +1427,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_setEa(val: IO_STACK_LOCATION__Parameters_e__Union__SetEa_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetEa_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1553,9 +1438,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func queryVolume(): IO_STACK_LOCATION__Parameters_e__Union__QueryVolume_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryVolume_e__Struct>(p)
             return ptr.read()
         }
@@ -1564,9 +1448,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_queryVolume(val: IO_STACK_LOCATION__Parameters_e__Union__QueryVolume_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryVolume_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1576,9 +1459,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func setVolume(): IO_STACK_LOCATION__Parameters_e__Union__SetVolume_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetVolume_e__Struct>(p)
             return ptr.read()
         }
@@ -1587,9 +1469,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_setVolume(val: IO_STACK_LOCATION__Parameters_e__Union__SetVolume_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetVolume_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1599,9 +1480,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func fileSystemControl(): IO_STACK_LOCATION__Parameters_e__Union__FileSystemControl_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__FileSystemControl_e__Struct>(p)
             return ptr.read()
         }
@@ -1610,9 +1490,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_fileSystemControl(val: IO_STACK_LOCATION__Parameters_e__Union__FileSystemControl_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__FileSystemControl_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1622,9 +1501,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func lockControl(): IO_STACK_LOCATION__Parameters_e__Union__LockControl_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__LockControl_e__Struct>(p)
             return ptr.read()
         }
@@ -1633,9 +1511,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_lockControl(val: IO_STACK_LOCATION__Parameters_e__Union__LockControl_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__LockControl_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1645,9 +1522,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func deviceIoControl(): IO_STACK_LOCATION__Parameters_e__Union__DeviceIoControl_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__DeviceIoControl_e__Struct>(p)
             return ptr.read()
         }
@@ -1656,9 +1532,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_deviceIoControl(val: IO_STACK_LOCATION__Parameters_e__Union__DeviceIoControl_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__DeviceIoControl_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1668,9 +1543,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func querySecurity(): IO_STACK_LOCATION__Parameters_e__Union__QuerySecurity_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QuerySecurity_e__Struct>(p)
             return ptr.read()
         }
@@ -1679,9 +1553,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_querySecurity(val: IO_STACK_LOCATION__Parameters_e__Union__QuerySecurity_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QuerySecurity_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1691,9 +1564,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func setSecurity(): IO_STACK_LOCATION__Parameters_e__Union__SetSecurity_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetSecurity_e__Struct>(p)
             return ptr.read()
         }
@@ -1702,9 +1574,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_setSecurity(val: IO_STACK_LOCATION__Parameters_e__Union__SetSecurity_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetSecurity_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1714,9 +1585,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func mountVolume(): IO_STACK_LOCATION__Parameters_e__Union__MountVolume_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__MountVolume_e__Struct>(p)
             return ptr.read()
         }
@@ -1725,9 +1595,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_mountVolume(val: IO_STACK_LOCATION__Parameters_e__Union__MountVolume_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__MountVolume_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1737,9 +1606,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func verifyVolume(): IO_STACK_LOCATION__Parameters_e__Union__VerifyVolume_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__VerifyVolume_e__Struct>(p)
             return ptr.read()
         }
@@ -1748,9 +1616,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_verifyVolume(val: IO_STACK_LOCATION__Parameters_e__Union__VerifyVolume_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__VerifyVolume_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1760,9 +1627,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func scsi(): IO_STACK_LOCATION__Parameters_e__Union__Scsi_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Scsi_e__Struct>(p)
             return ptr.read()
         }
@@ -1771,9 +1637,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_scsi(val: IO_STACK_LOCATION__Parameters_e__Union__Scsi_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Scsi_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1783,9 +1648,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func queryQuota(): IO_STACK_LOCATION__Parameters_e__Union__QueryQuota_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryQuota_e__Struct>(p)
             return ptr.read()
         }
@@ -1794,9 +1658,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_queryQuota(val: IO_STACK_LOCATION__Parameters_e__Union__QueryQuota_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryQuota_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1806,9 +1669,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func setQuota(): IO_STACK_LOCATION__Parameters_e__Union__SetQuota_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetQuota_e__Struct>(p)
             return ptr.read()
         }
@@ -1817,9 +1679,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_setQuota(val: IO_STACK_LOCATION__Parameters_e__Union__SetQuota_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetQuota_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1829,9 +1690,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func queryDeviceRelations(): IO_STACK_LOCATION__Parameters_e__Union__QueryDeviceRelations_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryDeviceRelations_e__Struct>(p)
             return ptr.read()
         }
@@ -1840,9 +1700,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_queryDeviceRelations(val: IO_STACK_LOCATION__Parameters_e__Union__QueryDeviceRelations_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryDeviceRelations_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1852,9 +1711,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func queryInterface(): IO_STACK_LOCATION__Parameters_e__Union__QueryInterface_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryInterface_e__Struct>(p)
             return ptr.read()
         }
@@ -1863,9 +1721,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_queryInterface(val: IO_STACK_LOCATION__Parameters_e__Union__QueryInterface_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryInterface_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1875,9 +1732,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func deviceCapabilities(): IO_STACK_LOCATION__Parameters_e__Union__DeviceCapabilities_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__DeviceCapabilities_e__Struct>(p)
             return ptr.read()
         }
@@ -1886,9 +1742,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_deviceCapabilities(val: IO_STACK_LOCATION__Parameters_e__Union__DeviceCapabilities_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__DeviceCapabilities_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1898,9 +1753,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func filterResourceRequirements(): IO_STACK_LOCATION__Parameters_e__Union__FilterResourceRequirements_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__FilterResourceRequirements_e__Struct>(p)
             return ptr.read()
         }
@@ -1909,9 +1763,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_filterResourceRequirements(val: IO_STACK_LOCATION__Parameters_e__Union__FilterResourceRequirements_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__FilterResourceRequirements_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1921,9 +1774,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func readWriteConfig(): IO_STACK_LOCATION__Parameters_e__Union__ReadWriteConfig_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__ReadWriteConfig_e__Struct>(p)
             return ptr.read()
         }
@@ -1932,9 +1784,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_readWriteConfig(val: IO_STACK_LOCATION__Parameters_e__Union__ReadWriteConfig_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__ReadWriteConfig_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1944,9 +1795,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func setLock(): IO_STACK_LOCATION__Parameters_e__Union__SetLock_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetLock_e__Struct>(p)
             return ptr.read()
         }
@@ -1955,9 +1805,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_setLock(val: IO_STACK_LOCATION__Parameters_e__Union__SetLock_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetLock_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1967,9 +1816,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func queryId(): IO_STACK_LOCATION__Parameters_e__Union__QueryId_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryId_e__Struct>(p)
             return ptr.read()
         }
@@ -1978,9 +1826,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_queryId(val: IO_STACK_LOCATION__Parameters_e__Union__QueryId_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryId_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1990,9 +1837,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func queryDeviceText(): IO_STACK_LOCATION__Parameters_e__Union__QueryDeviceText_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryDeviceText_e__Struct>(p)
             return ptr.read()
         }
@@ -2001,9 +1847,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_queryDeviceText(val: IO_STACK_LOCATION__Parameters_e__Union__QueryDeviceText_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__QueryDeviceText_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2013,9 +1858,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func usageNotification(): IO_STACK_LOCATION__Parameters_e__Union__UsageNotification_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__UsageNotification_e__Struct>(p)
             return ptr.read()
         }
@@ -2024,9 +1868,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_usageNotification(val: IO_STACK_LOCATION__Parameters_e__Union__UsageNotification_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__UsageNotification_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2036,9 +1879,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func waitWake(): IO_STACK_LOCATION__Parameters_e__Union__WaitWake_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__WaitWake_e__Struct>(p)
             return ptr.read()
         }
@@ -2047,9 +1889,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_waitWake(val: IO_STACK_LOCATION__Parameters_e__Union__WaitWake_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__WaitWake_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2059,9 +1900,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func powerSequence(): IO_STACK_LOCATION__Parameters_e__Union__PowerSequence_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__PowerSequence_e__Struct>(p)
             return ptr.read()
         }
@@ -2070,9 +1910,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_powerSequence(val: IO_STACK_LOCATION__Parameters_e__Union__PowerSequence_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__PowerSequence_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2082,9 +1921,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func power(): IO_STACK_LOCATION__Parameters_e__Union__Power_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Power_e__Struct>(p)
             return ptr.read()
         }
@@ -2093,9 +1931,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_power(val: IO_STACK_LOCATION__Parameters_e__Union__Power_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Power_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2105,9 +1942,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func startDevice(): IO_STACK_LOCATION__Parameters_e__Union__StartDevice_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__StartDevice_e__Struct>(p)
             return ptr.read()
         }
@@ -2116,9 +1952,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_startDevice(val: IO_STACK_LOCATION__Parameters_e__Union__StartDevice_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__StartDevice_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2128,9 +1963,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func wmi(): IO_STACK_LOCATION__Parameters_e__Union__WMI_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__WMI_e__Struct>(p)
             return ptr.read()
         }
@@ -2139,9 +1973,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_wmi(val: IO_STACK_LOCATION__Parameters_e__Union__WMI_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__WMI_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2151,9 +1984,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public func others(): IO_STACK_LOCATION__Parameters_e__Union__Others_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Others_e__Struct>(p)
             return ptr.read()
         }
@@ -2162,9 +1994,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union {
     public mut func set_others(val: IO_STACK_LOCATION__Parameters_e__Union__Others_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__Others_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2207,22 +2038,118 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__CreateMailslot_e__Struct {
 }
 
 @When[Windows_Wdk_Foundation == "on"]
-// packed(4)
 @C
 public struct IO_STACK_LOCATION__Parameters_e__Union__Read_e__Struct {
-    public var Length: UInt32 = 0
-    public var Key: UInt32 = 0
-    public var ByteOffset: Int64 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func length(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_length(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func key(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_key(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func byteOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 8)
+        }
+    }
+
+    public mut func set_byteOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Wdk_Foundation == "on"]
-// packed(4)
 @C
 public struct IO_STACK_LOCATION__Parameters_e__Union__Write_e__Struct {
-    public var Length: UInt32 = 0
-    public var Key: UInt32 = 0
-    public var ByteOffset: Int64 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func length(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_length(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func key(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_key(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func byteOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 8)
+        }
+    }
+
+    public mut func set_byteOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -2275,14 +2202,13 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func anonymous(): IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2291,9 +2217,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct__Anonymo
     public mut func set_anonymous(val: IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2303,22 +2228,16 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct__Anonymo
     public func clusterCount(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_clusterCount(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2326,9 +2245,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct__Anonymo
     public func deleteHandle(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -2337,9 +2255,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__SetFile_e__Struct__Anonymo
     public mut func set_deleteHandle(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2400,12 +2317,45 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__FileSystemControl_e__Struc
 }
 
 @When[Windows_Wdk_Foundation == "on"]
-// packed(4)
 @C
 public struct IO_STACK_LOCATION__Parameters_e__Union__LockControl_e__Struct {
-    public var Length: CPointer<Int64> = CPointer<Int64>()
-    public var Key: UInt32 = 0
-    public var ByteOffset: Int64 = 0
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    // packed field `Length`: type `CPointer<Int64>` not supported by polyfill; skipped
+
+    public func key(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_key(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func byteOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 12)
+        }
+    }
+
+    public mut func set_byteOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -2576,27 +2526,21 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__Power_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IO_STACK_LOCATION__Parameters_e__Union__Power_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func systemContext(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_systemContext(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2604,9 +2548,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__Power_e__Struct__Anonymous
     public func systemPowerStateContext(): SYSTEM_POWER_STATE_CONTEXT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_POWER_STATE_CONTEXT>(p)
             return ptr.read()
         }
@@ -2615,9 +2558,8 @@ public struct IO_STACK_LOCATION__Parameters_e__Union__Power_e__Struct__Anonymous
     public mut func set_systemPowerStateContext(val: SYSTEM_POWER_STATE_CONTEXT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_POWER_STATE_CONTEXT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2685,14 +2627,13 @@ public struct IRP {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IRP__AssociatedIrp_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func masterIrp(): CPointer<IRP> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<IRP>>(p)
             return ptr.read()
         }
@@ -2701,9 +2642,8 @@ public struct IRP__AssociatedIrp_e__Union {
     public mut func set_masterIrp(val: CPointer<IRP>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<IRP>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2713,22 +2653,16 @@ public struct IRP__AssociatedIrp_e__Union {
     public func irpCount(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_irpCount(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2736,9 +2670,8 @@ public struct IRP__AssociatedIrp_e__Union {
     public func systemBuffer(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -2747,9 +2680,8 @@ public struct IRP__AssociatedIrp_e__Union {
     public mut func set_systemBuffer(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2762,14 +2694,13 @@ public struct IRP__AssociatedIrp_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IRP__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func userIosb(): CPointer<Win32_System_IO.IO_STATUS_BLOCK> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_System_IO.IO_STATUS_BLOCK>>(p)
             return ptr.read()
         }
@@ -2778,9 +2709,8 @@ public struct IRP__Anonymous_e__Union {
     public mut func set_userIosb(val: CPointer<Win32_System_IO.IO_STATUS_BLOCK>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_System_IO.IO_STATUS_BLOCK>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2790,9 +2720,8 @@ public struct IRP__Anonymous_e__Union {
     public func ioRingContext(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -2801,9 +2730,8 @@ public struct IRP__Anonymous_e__Union {
     public mut func set_ioRingContext(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2816,14 +2744,13 @@ public struct IRP__Anonymous_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IRP__Overlay_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func asynchronousParameters(): IRP__Overlay_e__Union__AsynchronousParameters_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IRP__Overlay_e__Union__AsynchronousParameters_e__Struct>(p)
             return ptr.read()
         }
@@ -2832,9 +2759,8 @@ public struct IRP__Overlay_e__Union {
     public mut func set_asynchronousParameters(val: IRP__Overlay_e__Union__AsynchronousParameters_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IRP__Overlay_e__Union__AsynchronousParameters_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2844,22 +2770,16 @@ public struct IRP__Overlay_e__Union {
     public func allocationSize(): Int64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt64(base, 0)
         }
     }
 
     public mut func set_allocationSize(val: Int64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2878,14 +2798,13 @@ public struct IRP__Overlay_e__Union__AsynchronousParameters_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IRP__Overlay_e__Union__AsynchronousParameters_e__Struct__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func issuingProcess(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -2894,9 +2813,8 @@ public struct IRP__Overlay_e__Union__AsynchronousParameters_e__Struct__Anonymous
     public mut func set_issuingProcess(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2909,14 +2827,13 @@ public struct IRP__Overlay_e__Union__AsynchronousParameters_e__Struct__Anonymous
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IRP__Overlay_e__Union__AsynchronousParameters_e__Struct__Anonymous2_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func userApcContext(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -2925,9 +2842,8 @@ public struct IRP__Overlay_e__Union__AsynchronousParameters_e__Struct__Anonymous
     public mut func set_userApcContext(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2937,9 +2853,8 @@ public struct IRP__Overlay_e__Union__AsynchronousParameters_e__Struct__Anonymous
     public func ioRing(): CPointer<_IORING_OBJECT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<_IORING_OBJECT>>(p)
             return ptr.read()
         }
@@ -2948,9 +2863,8 @@ public struct IRP__Overlay_e__Union__AsynchronousParameters_e__Struct__Anonymous
     public mut func set_ioRing(val: CPointer<_IORING_OBJECT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<_IORING_OBJECT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2963,14 +2877,13 @@ public struct IRP__Overlay_e__Union__AsynchronousParameters_e__Struct__Anonymous
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IRP__Tail_e__Union {
-    public var _raw: VArray<UInt64, $11> = VArray<UInt64, $11>(repeat: 0)
+    public var _raw: VArray<UInt8, $88> = VArray<UInt8, $88>(repeat: 0)
 
     public func overlay(): IRP__Tail_e__Union__Overlay_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IRP__Tail_e__Union__Overlay_e__Struct>(p)
             return ptr.read()
         }
@@ -2979,9 +2892,8 @@ public struct IRP__Tail_e__Union {
     public mut func set_overlay(val: IRP__Tail_e__Union__Overlay_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IRP__Tail_e__Union__Overlay_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2991,9 +2903,8 @@ public struct IRP__Tail_e__Union {
     public func apc(): KAPC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KAPC>(p)
             return ptr.read()
         }
@@ -3002,9 +2913,8 @@ public struct IRP__Tail_e__Union {
     public mut func set_apc(val: KAPC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KAPC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3014,9 +2924,8 @@ public struct IRP__Tail_e__Union {
     public func completionKey(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -3025,9 +2934,8 @@ public struct IRP__Tail_e__Union {
     public mut func set_completionKey(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3051,14 +2959,13 @@ public struct IRP__Tail_e__Union__Overlay_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IRP__Tail_e__Union__Overlay_e__Struct__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func deviceQueueEntry(): KDEVICE_QUEUE_ENTRY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KDEVICE_QUEUE_ENTRY>(p)
             return ptr.read()
         }
@@ -3067,9 +2974,8 @@ public struct IRP__Tail_e__Union__Overlay_e__Struct__Anonymous1_e__Union {
     public mut func set_deviceQueueEntry(val: KDEVICE_QUEUE_ENTRY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KDEVICE_QUEUE_ENTRY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3079,9 +2985,8 @@ public struct IRP__Tail_e__Union__Overlay_e__Struct__Anonymous1_e__Union {
     public func anonymous(): IRP__Tail_e__Union__Overlay_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IRP__Tail_e__Union__Overlay_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3090,9 +2995,8 @@ public struct IRP__Tail_e__Union__Overlay_e__Struct__Anonymous1_e__Union {
     public mut func set_anonymous(val: IRP__Tail_e__Union__Overlay_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IRP__Tail_e__Union__Overlay_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3120,14 +3024,13 @@ public struct IRP__Tail_e__Union__Overlay_e__Struct__Anonymous2_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IRP__Tail_e__Union__Overlay_e__Struct__Anonymous2_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func currentStackLocation(): CPointer<IO_STACK_LOCATION> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<IO_STACK_LOCATION>>(p)
             return ptr.read()
         }
@@ -3136,9 +3039,8 @@ public struct IRP__Tail_e__Union__Overlay_e__Struct__Anonymous2_e__Struct__Anony
     public mut func set_currentStackLocation(val: CPointer<IO_STACK_LOCATION>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<IO_STACK_LOCATION>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3148,22 +3050,16 @@ public struct IRP__Tail_e__Union__Overlay_e__Struct__Anonymous2_e__Struct__Anony
     public func packetType(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_packetType(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3199,27 +3095,21 @@ public struct KDPC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct KDPC__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func targetInfoAsUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_targetInfoAsUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3227,9 +3117,8 @@ public struct KDPC__Anonymous_e__Union {
     public func anonymous(): KDPC__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KDPC__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3238,9 +3127,8 @@ public struct KDPC__Anonymous_e__Union {
     public mut func set_anonymous(val: KDPC__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KDPC__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3294,22 +3182,16 @@ public struct KMUTANT__Anonymous_e__Union {
     public func mutantFlags(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_mutantFlags(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3317,9 +3199,8 @@ public struct KMUTANT__Anonymous_e__Union {
     public func anonymous(): KMUTANT__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KMUTANT__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3328,9 +3209,8 @@ public struct KMUTANT__Anonymous_e__Union {
     public mut func set_anonymous(val: KMUTANT__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<KMUTANT__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3465,14 +3345,13 @@ public struct KWAIT_BLOCK {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct KWAIT_BLOCK__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func thread(): CPointer<IntNative> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<IntNative>>(p)
             return ptr.read()
         }
@@ -3481,9 +3360,8 @@ public struct KWAIT_BLOCK__Anonymous_e__Union {
     public mut func set_thread(val: CPointer<IntNative>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<IntNative>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3493,9 +3371,8 @@ public struct KWAIT_BLOCK__Anonymous_e__Union {
     public func notificationQueue(): CPointer<KQUEUE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<KQUEUE>>(p)
             return ptr.read()
         }
@@ -3504,9 +3381,8 @@ public struct KWAIT_BLOCK__Anonymous_e__Union {
     public mut func set_notificationQueue(val: CPointer<KQUEUE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<KQUEUE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3516,9 +3392,8 @@ public struct KWAIT_BLOCK__Anonymous_e__Union {
     public func dpc(): CPointer<KDPC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<KDPC>>(p)
             return ptr.read()
         }
@@ -3527,9 +3402,8 @@ public struct KWAIT_BLOCK__Anonymous_e__Union {
     public mut func set_dpc(val: CPointer<KDPC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<KDPC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3635,14 +3509,13 @@ public struct OWNER_ENTRY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct OWNER_ENTRY__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): OWNER_ENTRY__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<OWNER_ENTRY__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3651,9 +3524,8 @@ public struct OWNER_ENTRY__Anonymous_e__Union {
     public mut func set_anonymous(val: OWNER_ENTRY__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<OWNER_ENTRY__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3663,22 +3535,16 @@ public struct OWNER_ENTRY__Anonymous_e__Union {
     public func tableSize(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_tableSize(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }

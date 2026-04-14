@@ -3,6 +3,7 @@ package windows_sys.Win32.Storage.InstallableFileSystems
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.System.IO as Win32_System_IO
@@ -22,14 +23,13 @@ public struct FILTER_AGGREGATE_BASIC_INFORMATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func miniFilter(): FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union__MiniFilter_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union__MiniFilter_e__Struct>(p)
             return ptr.read()
         }
@@ -38,9 +38,8 @@ public struct FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union {
     public mut func set_miniFilter(val: FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union__MiniFilter_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union__MiniFilter_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -50,9 +49,8 @@ public struct FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union {
     public func legacyFilter(): FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union__LegacyFilter_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union__LegacyFilter_e__Struct>(p)
             return ptr.read()
         }
@@ -61,9 +59,8 @@ public struct FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union {
     public mut func set_legacyFilter(val: FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union__LegacyFilter_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FILTER_AGGREGATE_BASIC_INFORMATION__Type_e__Union__LegacyFilter_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -105,14 +102,13 @@ public struct FILTER_AGGREGATE_STANDARD_INFORMATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union {
-    public var _raw: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
 
     public func miniFilter(): FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__MiniFilter_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__MiniFilter_e__Struct>(p)
             return ptr.read()
         }
@@ -121,9 +117,8 @@ public struct FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union {
     public mut func set_miniFilter(val: FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__MiniFilter_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__MiniFilter_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -133,9 +128,8 @@ public struct FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union {
     public func legacyFilter(): FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__LegacyFilter_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__LegacyFilter_e__Struct>(p)
             return ptr.read()
         }
@@ -144,9 +138,8 @@ public struct FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union {
     public mut func set_legacyFilter(val: FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__LegacyFilter_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FILTER_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__LegacyFilter_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -410,14 +403,13 @@ public struct INSTANCE_AGGREGATE_STANDARD_INFORMATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union {
-    public var _raw: VArray<UInt32, $8> = VArray<UInt32, $8>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func miniFilter(): INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__MiniFilter_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__MiniFilter_e__Struct>(p)
             return ptr.read()
         }
@@ -426,9 +418,8 @@ public struct INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union {
     public mut func set_miniFilter(val: INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__MiniFilter_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__MiniFilter_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -438,9 +429,8 @@ public struct INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union {
     public func legacyFilter(): INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__LegacyFilter_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__LegacyFilter_e__Struct>(p)
             return ptr.read()
         }
@@ -449,9 +439,8 @@ public struct INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union {
     public mut func set_legacyFilter(val: INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__LegacyFilter_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INSTANCE_AGGREGATE_STANDARD_INFORMATION__Type_e__Union__LegacyFilter_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

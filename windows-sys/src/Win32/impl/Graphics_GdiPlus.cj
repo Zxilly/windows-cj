@@ -3,6 +3,7 @@ package windows_sys.Win32.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.Foundation.*
@@ -3662,14 +3663,13 @@ public struct MetafileHeader {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MetafileHeader__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $22> = VArray<UInt32, $22>(repeat: 0)
+    public var _raw: VArray<UInt8, $88> = VArray<UInt8, $88>(repeat: 0)
 
     public func wmfHeader(): Win32_Graphics_Gdi.METAHEADER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Graphics_Gdi.METAHEADER>(p)
             return ptr.read()
         }
@@ -3678,9 +3678,8 @@ public struct MetafileHeader__Anonymous_e__Union {
     public mut func set_wmfHeader(val: Win32_Graphics_Gdi.METAHEADER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Graphics_Gdi.METAHEADER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3690,9 +3689,8 @@ public struct MetafileHeader__Anonymous_e__Union {
     public func emfHeader(): ENHMETAHEADER3 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ENHMETAHEADER3>(p)
             return ptr.read()
         }
@@ -3701,9 +3699,8 @@ public struct MetafileHeader__Anonymous_e__Union {
     public mut func set_emfHeader(val: ENHMETAHEADER3): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ENHMETAHEADER3>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4657,15 +4654,96 @@ public let WarpModePerspective: WarpMode = WarpMode(0)
 public let WarpModeBilinear: WarpMode = WarpMode(1)
 
 @When[Windows_Win32_Graphics_GdiPlus == "on"]
-// packed(2)
 @C
 public struct WmfPlaceableFileHeader {
-    public var Key: UInt32 = 0
-    public var Hmf: Int16 = 0
-    public var BoundingBox: PWMFRect16 = PWMFRect16()
-    public var Inch: Int16 = 0
-    public var Reserved: UInt32 = 0
-    public var Checksum: Int16 = 0
+    public var _raw: VArray<UInt8, $22> = VArray<UInt8, $22>(repeat: 0u8)
+
+    public func key(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_key(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func hmf(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 4)
+        }
+    }
+
+    public mut func set_hmf(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `BoundingBox`: type `PWMFRect16` not supported by polyfill; skipped
+
+    public func inch(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 14)
+        }
+    }
+
+    public mut func set_inch(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_reserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func checksum(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 20)
+        }
+    }
+
+    public mut func set_checksum(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 

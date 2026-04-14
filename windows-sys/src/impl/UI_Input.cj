@@ -3,6 +3,7 @@ package windows_sys.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Devices.Haptics as Devices_Haptics
 import windows_sys.Devices.Input as Devices_Input
 import windows_sys.Foundation.impl as Foundation_impl

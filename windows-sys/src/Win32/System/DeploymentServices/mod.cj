@@ -3,6 +3,7 @@ package windows_sys.Win32.System.DeploymentServices
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.Registry as Win32_System_Registry
 import windows_sys.Win32.impl as Win32_impl
@@ -3770,14 +3771,13 @@ public struct PXE_ADDRESS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PXE_ADDRESS__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func bAddress(): VArray<UInt8, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             return ptr.read()
         }
@@ -3786,9 +3786,8 @@ public struct PXE_ADDRESS__Anonymous_e__Union {
     public mut func set_bAddress(val: VArray<UInt8, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3798,22 +3797,16 @@ public struct PXE_ADDRESS__Anonymous_e__Union {
     public func uIpAddress(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_uIpAddress(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3821,23 +3814,105 @@ public struct PXE_ADDRESS__Anonymous_e__Union {
 }
 
 @When[Windows_Win32_System_DeploymentServices == "on"]
-// packed(1)
 @C
 public struct PXE_DHCPV6_MESSAGE {
-    public var MessageType: UInt8 = 0
-    public var TransactionIDByte1: UInt8 = 0
-    public var TransactionIDByte2: UInt8 = 0
-    public var TransactionIDByte3: UInt8 = 0
-    public var Options: VArray<PXE_DHCPV6_OPTION, $1> = VArray<PXE_DHCPV6_OPTION, $1>(repeat: PXE_DHCPV6_OPTION())
+    public var _raw: VArray<UInt8, $9> = VArray<UInt8, $9>(repeat: 0u8)
+
+    public func messageType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_messageType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func transactionIDByte1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_transactionIDByte1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func transactionIDByte2(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 2)
+        }
+    }
+
+    public mut func set_transactionIDByte2(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func transactionIDByte3(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 3)
+        }
+    }
+
+    public mut func set_transactionIDByte3(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Options`: type `VArray<PXE_DHCPV6_OPTION, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_DeploymentServices == "on"]
-// packed(1)
 @C
 public struct PXE_DHCPV6_MESSAGE_HEADER {
-    public var MessageType: UInt8 = 0
-    public var Message: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func messageType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_messageType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Message`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -3852,52 +3927,300 @@ public struct PXE_DHCPV6_NESTED_RELAY_MESSAGE {
 }
 
 @When[Windows_Win32_System_DeploymentServices == "on"]
-// packed(1)
 @C
 public struct PXE_DHCPV6_OPTION {
-    public var OptionCode: UInt16 = 0
-    public var DataLength: UInt16 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $5> = VArray<UInt8, $5>(repeat: 0u8)
+
+    public func optionCode(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_optionCode(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dataLength(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_dataLength(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Data`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_DeploymentServices == "on"]
-// packed(1)
 @C
 public struct PXE_DHCPV6_RELAY_MESSAGE {
-    public var MessageType: UInt8 = 0
-    public var HopCount: UInt8 = 0
-    public var LinkAddress: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var PeerAddress: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var Options: VArray<PXE_DHCPV6_OPTION, $1> = VArray<PXE_DHCPV6_OPTION, $1>(repeat: PXE_DHCPV6_OPTION())
+    public var _raw: VArray<UInt8, $39> = VArray<UInt8, $39>(repeat: 0u8)
+
+    public func messageType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_messageType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func hopCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_hopCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LinkAddress`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `PeerAddress`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `Options`: type `VArray<PXE_DHCPV6_OPTION, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_DeploymentServices == "on"]
-// packed(1)
 @C
 public struct PXE_DHCP_MESSAGE {
-    public var Operation: UInt8 = 0
-    public var HardwareAddressType: UInt8 = 0
-    public var HardwareAddressLength: UInt8 = 0
-    public var HopCount: UInt8 = 0
-    public var TransactionID: UInt32 = 0
-    public var SecondsSinceBoot: UInt16 = 0
-    public var Reserved: UInt16 = 0
-    public var ClientIpAddress: UInt32 = 0
-    public var YourIpAddress: UInt32 = 0
-    public var BootstrapServerAddress: UInt32 = 0
-    public var RelayAgentIpAddress: UInt32 = 0
-    public var HardwareAddress: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var HostName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
-    public var BootFileName: VArray<UInt8, $128> = VArray<UInt8, $128>(repeat: 0)
-    public var Anonymous: PXE_DHCP_MESSAGE__Anonymous_e__Union = PXE_DHCP_MESSAGE__Anonymous_e__Union()
-    public var Option: PXE_DHCP_OPTION = PXE_DHCP_OPTION()
+    public var _raw: VArray<UInt8, $243> = VArray<UInt8, $243>(repeat: 0u8)
+
+    public func operation(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_operation(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func hardwareAddressType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_hardwareAddressType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func hardwareAddressLength(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 2)
+        }
+    }
+
+    public mut func set_hardwareAddressLength(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func hopCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 3)
+        }
+    }
+
+    public mut func set_hopCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func transactionID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_transactionID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func secondsSinceBoot(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 8)
+        }
+    }
+
+    public mut func set_secondsSinceBoot(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 10)
+        }
+    }
+
+    public mut func set_reserved(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 10, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func clientIpAddress(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_clientIpAddress(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func yourIpAddress(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_yourIpAddress(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bootstrapServerAddress(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_bootstrapServerAddress(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func relayAgentIpAddress(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_relayAgentIpAddress(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `HardwareAddress`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `HostName`: type `VArray<UInt8, $64>` not supported by polyfill; skipped
+
+    // packed field `BootFileName`: type `VArray<UInt8, $128>` not supported by polyfill; skipped
+
+    // packed field `Anonymous`: type `PXE_DHCP_MESSAGE__Anonymous_e__Union` not supported by polyfill; skipped
+
+    // packed field `Option`: type `PXE_DHCP_OPTION` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_DeploymentServices == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PXE_DHCP_MESSAGE__Anonymous_e__Union {
@@ -3906,9 +4229,8 @@ public struct PXE_DHCP_MESSAGE__Anonymous_e__Union {
     public func bMagicCookie(): VArray<UInt8, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $4>>(p)
             return ptr.read()
         }
@@ -3917,9 +4239,8 @@ public struct PXE_DHCP_MESSAGE__Anonymous_e__Union {
     public mut func set_bMagicCookie(val: VArray<UInt8, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3929,22 +4250,16 @@ public struct PXE_DHCP_MESSAGE__Anonymous_e__Union {
     public func uMagicCookie(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_uMagicCookie(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3952,12 +4267,45 @@ public struct PXE_DHCP_MESSAGE__Anonymous_e__Union {
 }
 
 @When[Windows_Win32_System_DeploymentServices == "on"]
-// packed(1)
 @C
 public struct PXE_DHCP_OPTION {
-    public var OptionType: UInt8 = 0
-    public var OptionLength: UInt8 = 0
-    public var OptionValue: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0u8)
+
+    public func optionType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_optionType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func optionLength(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_optionLength(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `OptionValue`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 

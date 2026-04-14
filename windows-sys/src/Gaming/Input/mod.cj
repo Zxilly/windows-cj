@@ -3,6 +3,7 @@ package windows_sys.Gaming.Input
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Devices.Haptics as Devices_Haptics
 import windows_sys.Devices.Power as Devices_Power
 import windows_sys.Foundation.impl as Foundation_impl

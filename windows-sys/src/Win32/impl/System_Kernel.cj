@@ -3,6 +3,7 @@ package windows_sys.Win32.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -192,14 +193,13 @@ public struct NT_TIB {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NT_TIB__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func fiberData(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -208,9 +208,8 @@ public struct NT_TIB__Anonymous_e__Union {
     public mut func set_fiberData(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -220,22 +219,16 @@ public struct NT_TIB__Anonymous_e__Union {
     public func version(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_version(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -270,27 +263,21 @@ public struct QUAD {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct QUAD__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func useThisFieldToCopy(): Int64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt64(base, 0)
         }
     }
 
     public mut func set_useThisFieldToCopy(val: Int64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -298,22 +285,16 @@ public struct QUAD__Anonymous_e__Union {
     public func doNotUseThisField(): Float64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadFloat64(base, 0)
         }
     }
 
     public mut func set_doNotUseThisField(val: Float64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteFloat64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -332,14 +313,13 @@ public struct RTL_BALANCED_NODE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RTL_BALANCED_NODE__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func children(): VArray<CPointer<RTL_BALANCED_NODE>, $2> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<CPointer<RTL_BALANCED_NODE>, $2>>(p)
             return ptr.read()
         }
@@ -348,9 +328,8 @@ public struct RTL_BALANCED_NODE__Anonymous1_e__Union {
     public mut func set_children(val: VArray<CPointer<RTL_BALANCED_NODE>, $2>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<CPointer<RTL_BALANCED_NODE>, $2>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -360,9 +339,8 @@ public struct RTL_BALANCED_NODE__Anonymous1_e__Union {
     public func anonymous(): RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -371,9 +349,8 @@ public struct RTL_BALANCED_NODE__Anonymous1_e__Union {
     public mut func set_anonymous(val: RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -394,27 +371,21 @@ public struct RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RTL_BALANCED_NODE__Anonymous2_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func _bitfield(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set__bitfield(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -422,9 +393,8 @@ public struct RTL_BALANCED_NODE__Anonymous2_e__Union {
     public func parentValue(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -433,9 +403,8 @@ public struct RTL_BALANCED_NODE__Anonymous2_e__Union {
     public mut func set_parentValue(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -469,14 +438,13 @@ public struct SLIST_ENTRY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SLIST_HEADER {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func anonymous(): SLIST_HEADER__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SLIST_HEADER__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -485,9 +453,8 @@ public struct SLIST_HEADER {
     public mut func set_anonymous(val: SLIST_HEADER__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SLIST_HEADER__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -497,9 +464,8 @@ public struct SLIST_HEADER {
     public func headerArm64(): SLIST_HEADER__HeaderArm64_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SLIST_HEADER__HeaderArm64_e__Struct>(p)
             return ptr.read()
         }
@@ -508,9 +474,8 @@ public struct SLIST_HEADER {
     public mut func set_headerArm64(val: SLIST_HEADER__HeaderArm64_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SLIST_HEADER__HeaderArm64_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

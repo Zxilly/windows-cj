@@ -3,6 +3,7 @@ package windows_sys.Win32.Media.MediaPlayer
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
@@ -18763,24 +18764,137 @@ public let wmpttDownload: WMPTransactionType = WMPTransactionType(1)
 public let wmpttBuy: WMPTransactionType = WMPTransactionType(2)
 
 @When[Windows_Win32_Media_MediaPlayer == "on"]
-// packed(1)
 @C
 public struct WMP_WMDM_METADATA_ROUND_TRIP_DEVICE2PC {
-    public var dwCurrentTransactionID: UInt32 = 0
-    public var dwReturnedObjectCount: UInt32 = 0
-    public var dwUnretrievedObjectCount: UInt32 = 0
-    public var dwDeletedObjectStartingOffset: UInt32 = 0
-    public var dwFlags: UInt32 = 0
-    public var wsObjectPathnameList: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $22> = VArray<UInt8, $22>(repeat: 0u8)
+
+    public func dwCurrentTransactionID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwCurrentTransactionID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwReturnedObjectCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwReturnedObjectCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUnretrievedObjectCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUnretrievedObjectCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeletedObjectStartingOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwDeletedObjectStartingOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `wsObjectPathnameList`: type `VArray<UInt16, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Media_MediaPlayer == "on"]
-// packed(1)
 @C
 public struct WMP_WMDM_METADATA_ROUND_TRIP_PC2DEVICE {
-    public var dwChangesSinceTransactionID: UInt32 = 0
-    public var dwResultSetStartingIndex: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func dwChangesSinceTransactionID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwChangesSinceTransactionID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwResultSetStartingIndex(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwResultSetStartingIndex(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 

@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.Geolocation
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Devices.Sensors as Win32_Devices_Sensors
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
@@ -56,14 +57,13 @@ public struct GNSS_AGNSS_INJECT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GNSS_AGNSS_INJECT__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $16> = VArray<UInt64, $16>(repeat: 0)
+    public var _raw: VArray<UInt8, $128> = VArray<UInt8, $128>(repeat: 0)
 
     public func time(): GNSS_AGNSS_INJECTTIME {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_INJECTTIME>(p)
             return ptr.read()
         }
@@ -72,9 +72,8 @@ public struct GNSS_AGNSS_INJECT__Anonymous_e__Union {
     public mut func set_time(val: GNSS_AGNSS_INJECTTIME): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_INJECTTIME>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -84,9 +83,8 @@ public struct GNSS_AGNSS_INJECT__Anonymous_e__Union {
     public func position(): GNSS_AGNSS_INJECTPOSITION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_INJECTPOSITION>(p)
             return ptr.read()
         }
@@ -95,9 +93,8 @@ public struct GNSS_AGNSS_INJECT__Anonymous_e__Union {
     public mut func set_position(val: GNSS_AGNSS_INJECTPOSITION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_INJECTPOSITION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -107,9 +104,8 @@ public struct GNSS_AGNSS_INJECT__Anonymous_e__Union {
     public func blobData(): GNSS_AGNSS_INJECTBLOB {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_INJECTBLOB>(p)
             return ptr.read()
         }
@@ -118,9 +114,8 @@ public struct GNSS_AGNSS_INJECT__Anonymous_e__Union {
     public mut func set_blobData(val: GNSS_AGNSS_INJECTBLOB): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_INJECTBLOB>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -236,14 +231,13 @@ public struct GNSS_BREADCRUMB_LIST {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GNSS_BREADCRUMB_LIST__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $250> = VArray<UInt64, $250>(repeat: 0)
+    public var _raw: VArray<UInt8, $2000> = VArray<UInt8, $2000>(repeat: 0)
 
     public func v1(): VArray<GNSS_BREADCRUMB_V1, $50> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<GNSS_BREADCRUMB_V1, $50>>(p)
             return ptr.read()
         }
@@ -252,9 +246,8 @@ public struct GNSS_BREADCRUMB_LIST__Anonymous_e__Union {
     public mut func set_v1(val: VArray<GNSS_BREADCRUMB_V1, $50>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<GNSS_BREADCRUMB_V1, $50>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -496,14 +489,13 @@ public struct GNSS_EVENT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GNSS_EVENT__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $276> = VArray<UInt64, $276>(repeat: 0)
+    public var _raw: VArray<UInt8, $2208> = VArray<UInt8, $2208>(repeat: 0)
 
     public func fixData(): GNSS_FIXDATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_FIXDATA>(p)
             return ptr.read()
         }
@@ -512,9 +504,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_fixData(val: GNSS_FIXDATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_FIXDATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -524,9 +515,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public func agnssRequest(): GNSS_AGNSS_REQUEST_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_REQUEST_PARAM>(p)
             return ptr.read()
         }
@@ -535,9 +525,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_agnssRequest(val: GNSS_AGNSS_REQUEST_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_REQUEST_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -547,9 +536,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public func niRequest(): GNSS_NI_REQUEST_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_NI_REQUEST_PARAM>(p)
             return ptr.read()
         }
@@ -558,9 +546,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_niRequest(val: GNSS_NI_REQUEST_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_NI_REQUEST_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -570,9 +557,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public func errorInformation(): GNSS_ERRORINFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_ERRORINFO>(p)
             return ptr.read()
         }
@@ -581,9 +567,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_errorInformation(val: GNSS_ERRORINFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_ERRORINFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -593,9 +578,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public func nmeaData(): GNSS_NMEA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_NMEA_DATA>(p)
             return ptr.read()
         }
@@ -604,9 +588,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_nmeaData(val: GNSS_NMEA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_NMEA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -616,9 +599,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public func geofenceAlertData(): GNSS_GEOFENCE_ALERT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOFENCE_ALERT_DATA>(p)
             return ptr.read()
         }
@@ -627,9 +609,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_geofenceAlertData(val: GNSS_GEOFENCE_ALERT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOFENCE_ALERT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -639,9 +620,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public func breadcrumbAlertData(): GNSS_BREADCRUMBING_ALERT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_BREADCRUMBING_ALERT_DATA>(p)
             return ptr.read()
         }
@@ -650,9 +630,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_breadcrumbAlertData(val: GNSS_BREADCRUMBING_ALERT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_BREADCRUMBING_ALERT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -662,9 +641,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public func geofencesTrackingStatus(): GNSS_GEOFENCES_TRACKINGSTATUS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOFENCES_TRACKINGSTATUS_DATA>(p)
             return ptr.read()
         }
@@ -673,9 +651,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_geofencesTrackingStatus(val: GNSS_GEOFENCES_TRACKINGSTATUS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOFENCES_TRACKINGSTATUS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -685,9 +662,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public func driverRequestData(): GNSS_DRIVER_REQUEST_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_DRIVER_REQUEST_DATA>(p)
             return ptr.read()
         }
@@ -696,9 +672,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_driverRequestData(val: GNSS_DRIVER_REQUEST_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_DRIVER_REQUEST_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -708,9 +683,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public func customData(): VArray<UInt8, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $1>>(p)
             return ptr.read()
         }
@@ -719,9 +693,8 @@ public struct GNSS_EVENT__Anonymous_e__Union {
     public mut func set_customData(val: VArray<UInt8, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -746,14 +719,13 @@ public struct GNSS_EVENT_2 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GNSS_EVENT_2__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $284> = VArray<UInt64, $284>(repeat: 0)
+    public var _raw: VArray<UInt8, $2272> = VArray<UInt8, $2272>(repeat: 0)
 
     public func fixData(): GNSS_FIXDATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_FIXDATA>(p)
             return ptr.read()
         }
@@ -762,9 +734,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_fixData(val: GNSS_FIXDATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_FIXDATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -774,9 +745,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func fixData2(): GNSS_FIXDATA_2 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_FIXDATA_2>(p)
             return ptr.read()
         }
@@ -785,9 +755,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_fixData2(val: GNSS_FIXDATA_2): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_FIXDATA_2>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -797,9 +766,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func agnssRequest(): GNSS_AGNSS_REQUEST_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_REQUEST_PARAM>(p)
             return ptr.read()
         }
@@ -808,9 +776,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_agnssRequest(val: GNSS_AGNSS_REQUEST_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_AGNSS_REQUEST_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -820,9 +787,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func niRequest(): GNSS_NI_REQUEST_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_NI_REQUEST_PARAM>(p)
             return ptr.read()
         }
@@ -831,9 +797,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_niRequest(val: GNSS_NI_REQUEST_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_NI_REQUEST_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -843,9 +808,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func errorInformation(): GNSS_ERRORINFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_ERRORINFO>(p)
             return ptr.read()
         }
@@ -854,9 +818,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_errorInformation(val: GNSS_ERRORINFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_ERRORINFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -866,9 +829,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func nmeaData(): GNSS_NMEA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_NMEA_DATA>(p)
             return ptr.read()
         }
@@ -877,9 +839,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_nmeaData(val: GNSS_NMEA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_NMEA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -889,9 +850,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func geofenceAlertData(): GNSS_GEOFENCE_ALERT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOFENCE_ALERT_DATA>(p)
             return ptr.read()
         }
@@ -900,9 +860,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_geofenceAlertData(val: GNSS_GEOFENCE_ALERT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOFENCE_ALERT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -912,9 +871,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func breadcrumbAlertData(): GNSS_BREADCRUMBING_ALERT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_BREADCRUMBING_ALERT_DATA>(p)
             return ptr.read()
         }
@@ -923,9 +881,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_breadcrumbAlertData(val: GNSS_BREADCRUMBING_ALERT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_BREADCRUMBING_ALERT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -935,9 +892,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func geofencesTrackingStatus(): GNSS_GEOFENCES_TRACKINGSTATUS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOFENCES_TRACKINGSTATUS_DATA>(p)
             return ptr.read()
         }
@@ -946,9 +902,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_geofencesTrackingStatus(val: GNSS_GEOFENCES_TRACKINGSTATUS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOFENCES_TRACKINGSTATUS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -958,9 +913,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func driverRequestData(): GNSS_DRIVER_REQUEST_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_DRIVER_REQUEST_DATA>(p)
             return ptr.read()
         }
@@ -969,9 +923,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_driverRequestData(val: GNSS_DRIVER_REQUEST_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_DRIVER_REQUEST_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -981,9 +934,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public func customData(): VArray<UInt8, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $1>>(p)
             return ptr.read()
         }
@@ -992,9 +944,8 @@ public struct GNSS_EVENT_2__Anonymous_e__Union {
     public mut func set_customData(val: VArray<UInt8, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1221,14 +1172,13 @@ public struct GNSS_FIXSESSION_PARAM {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $67> = VArray<UInt32, $67>(repeat: 0)
+    public var _raw: VArray<UInt8, $268> = VArray<UInt8, $268>(repeat: 0)
 
     public func singleShotParam(): GNSS_SINGLESHOT_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_SINGLESHOT_PARAM>(p)
             return ptr.read()
         }
@@ -1237,9 +1187,8 @@ public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
     public mut func set_singleShotParam(val: GNSS_SINGLESHOT_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_SINGLESHOT_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1249,9 +1198,8 @@ public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
     public func distanceParam(): GNSS_DISTANCETRACKING_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_DISTANCETRACKING_PARAM>(p)
             return ptr.read()
         }
@@ -1260,9 +1208,8 @@ public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
     public mut func set_distanceParam(val: GNSS_DISTANCETRACKING_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_DISTANCETRACKING_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1272,9 +1219,8 @@ public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
     public func continuousParam(): GNSS_CONTINUOUSTRACKING_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_CONTINUOUSTRACKING_PARAM>(p)
             return ptr.read()
         }
@@ -1283,9 +1229,8 @@ public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
     public mut func set_continuousParam(val: GNSS_CONTINUOUSTRACKING_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_CONTINUOUSTRACKING_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1295,9 +1240,8 @@ public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
     public func lkgFixParam(): GNSS_LKGFIX_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_LKGFIX_PARAM>(p)
             return ptr.read()
         }
@@ -1306,9 +1250,8 @@ public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
     public mut func set_lkgFixParam(val: GNSS_LKGFIX_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_LKGFIX_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1318,9 +1261,8 @@ public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
     public func unusedParam(): VArray<UInt8, $268> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $268>>(p)
             return ptr.read()
         }
@@ -1329,9 +1271,8 @@ public struct GNSS_FIXSESSION_PARAM__Anonymous_e__Union {
     public mut func set_unusedParam(val: VArray<UInt8, $268>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $268>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1439,14 +1380,13 @@ public struct GNSS_GEOREGION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GNSS_GEOREGION__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $64> = VArray<UInt64, $64>(repeat: 0)
+    public var _raw: VArray<UInt8, $512> = VArray<UInt8, $512>(repeat: 0)
 
     public func circle(): GNSS_GEOREGION_CIRCLE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOREGION_CIRCLE>(p)
             return ptr.read()
         }
@@ -1455,9 +1395,8 @@ public struct GNSS_GEOREGION__Anonymous_e__Union {
     public mut func set_circle(val: GNSS_GEOREGION_CIRCLE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_GEOREGION_CIRCLE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1467,9 +1406,8 @@ public struct GNSS_GEOREGION__Anonymous_e__Union {
     public func unused(): VArray<UInt8, $512> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $512>>(p)
             return ptr.read()
         }
@@ -1478,9 +1416,8 @@ public struct GNSS_GEOREGION__Anonymous_e__Union {
     public mut func set_unused(val: VArray<UInt8, $512>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $512>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1609,14 +1546,13 @@ public struct GNSS_NI_REQUEST_PARAM {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct GNSS_NI_REQUEST_PARAM__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $327> = VArray<UInt32, $327>(repeat: 0)
+    public var _raw: VArray<UInt8, $1308> = VArray<UInt8, $1308>(repeat: 0)
 
     public func suplNiInfo(): GNSS_SUPL_NI_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_SUPL_NI_INFO>(p)
             return ptr.read()
         }
@@ -1625,9 +1561,8 @@ public struct GNSS_NI_REQUEST_PARAM__Anonymous_e__Union {
     public mut func set_suplNiInfo(val: GNSS_SUPL_NI_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_SUPL_NI_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1637,9 +1572,8 @@ public struct GNSS_NI_REQUEST_PARAM__Anonymous_e__Union {
     public func cpNiInfo(): GNSS_CP_NI_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_CP_NI_INFO>(p)
             return ptr.read()
         }
@@ -1648,9 +1582,8 @@ public struct GNSS_NI_REQUEST_PARAM__Anonymous_e__Union {
     public mut func set_cpNiInfo(val: GNSS_CP_NI_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_CP_NI_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1660,9 +1593,8 @@ public struct GNSS_NI_REQUEST_PARAM__Anonymous_e__Union {
     public func v2UplNiInfo(): GNSS_V2UPL_NI_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_V2UPL_NI_INFO>(p)
             return ptr.read()
         }
@@ -1671,9 +1603,8 @@ public struct GNSS_NI_REQUEST_PARAM__Anonymous_e__Union {
     public mut func set_v2UplNiInfo(val: GNSS_V2UPL_NI_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GNSS_V2UPL_NI_INFO>(p)
             ptr.write(val)
             _raw = rawStorage

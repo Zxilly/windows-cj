@@ -3,6 +3,7 @@ package windows_sys.Win32.Storage.Nvme
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -15,7 +16,6 @@ public struct ACTIVE_LATENCY_CONFIGURATION {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union {
@@ -24,9 +24,8 @@ public struct ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union {
     public func anonymous(): ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -35,9 +34,8 @@ public struct ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union {
     public mut func set_anonymous(val: ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -47,22 +45,16 @@ public struct ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -70,29 +62,125 @@ public struct ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct ACTIVE_LATENCY_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct {
-    public var _bitfield: UInt16 = 0
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func _bitfield(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set__bitfield(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct BUCKET_COUNTER {
-    public var Reserved: UInt32 = 0
-    public var Trim: UInt32 = 0
-    public var Write: UInt32 = 0
-    public var Read: UInt32 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func reserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_reserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func trim(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_trim(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func write(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_write(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func read(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_read(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct DEBUG_BIT_FIELD {
-    public var _bitfield: UInt16 = 0
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func _bitfield(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set__bitfield(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -104,22 +192,215 @@ public struct DSSD_POWER_STATE_DESCRIPTOR {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct FIRMWARE_ACTIVATION_HISTORY_ENTRY {
-    public var VersionNumber: UInt8 = 0
-    public var Length: UInt8 = 0
-    public var Reserved0: UInt16 = 0
-    public var ActivationCount: UInt16 = 0
-    public var Timestamp: UInt64 = 0
-    public var Reserved1: UInt64 = 0
-    public var PowerCycleCount: UInt64 = 0
-    public var PreviousFirmware: UInt64 = 0
-    public var NewFirmware: UInt64 = 0
-    public var SlotNumber: UInt8 = 0
-    public var CommitActionType: UInt8 = 0
-    public var Result: UInt16 = 0
-    public var Reserved2: VArray<UInt8, $14> = VArray<UInt8, $14>(repeat: 0)
+    public var _raw: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
+
+    public func versionNumber(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_versionNumber(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func length(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_length(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved0(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_reserved0(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activationCount(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4)
+        }
+    }
+
+    public mut func set_activationCount(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func timestamp(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 6)
+        }
+    }
+
+    public mut func set_timestamp(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved1(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 14)
+        }
+    }
+
+    public mut func set_reserved1(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func powerCycleCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 22)
+        }
+    }
+
+    public mut func set_powerCycleCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 22, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func previousFirmware(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 30)
+        }
+    }
+
+    public mut func set_previousFirmware(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 30, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func newFirmware(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 38)
+        }
+    }
+
+    public mut func set_newFirmware(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 38, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func slotNumber(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 46)
+        }
+    }
+
+    public mut func set_slotNumber(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 46, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func commitActionType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 47)
+        }
+    }
+
+    public mut func set_commitActionType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 47, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func result(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 48)
+        }
+    }
+
+    public mut func set_result(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved2`: type `VArray<UInt8, $14>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -146,9 +427,8 @@ public struct LATENCY_MONITOR_FEATURE_STATUS__Anonymous_e__Union {
     public func anonymous(): LATENCY_MONITOR_FEATURE_STATUS__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LATENCY_MONITOR_FEATURE_STATUS__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -157,9 +437,8 @@ public struct LATENCY_MONITOR_FEATURE_STATUS__Anonymous_e__Union {
     public mut func set_anonymous(val: LATENCY_MONITOR_FEATURE_STATUS__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LATENCY_MONITOR_FEATURE_STATUS__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -169,22 +448,16 @@ public struct LATENCY_MONITOR_FEATURE_STATUS__Anonymous_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -199,48 +472,448 @@ public struct LATENCY_MONITOR_FEATURE_STATUS__Anonymous_e__Union__Anonymous_e__S
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct LATENCY_STAMP {
-    public var Trim3: UInt64 = 0
-    public var Write3: UInt64 = 0
-    public var Read3: UInt64 = 0
-    public var Trim2: UInt64 = 0
-    public var Write2: UInt64 = 0
-    public var Read2: UInt64 = 0
-    public var Trim1: UInt64 = 0
-    public var Write1: UInt64 = 0
-    public var Read1: UInt64 = 0
-    public var Trim0: UInt64 = 0
-    public var Write0: UInt64 = 0
-    public var Read0: UInt64 = 0
+    public var _raw: VArray<UInt8, $96> = VArray<UInt8, $96>(repeat: 0u8)
+
+    public func trim3(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 0)
+        }
+    }
+
+    public mut func set_trim3(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func write3(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 8)
+        }
+    }
+
+    public mut func set_write3(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func read3(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 16)
+        }
+    }
+
+    public mut func set_read3(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func trim2(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 24)
+        }
+    }
+
+    public mut func set_trim2(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func write2(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 32)
+        }
+    }
+
+    public mut func set_write2(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func read2(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 40)
+        }
+    }
+
+    public mut func set_read2(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func trim1(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 48)
+        }
+    }
+
+    public mut func set_trim1(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func write1(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 56)
+        }
+    }
+
+    public mut func set_write1(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func read1(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 64)
+        }
+    }
+
+    public mut func set_read1(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func trim0(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 72)
+        }
+    }
+
+    public mut func set_trim0(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 72, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func write0(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 80)
+        }
+    }
+
+    public mut func set_write0(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func read0(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 88)
+        }
+    }
+
+    public mut func set_read0(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 88, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct LATENCY_STAMP_UNITS {
-    public var _bitfield: UInt16 = 0
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func _bitfield(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set__bitfield(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct MEASURED_LATENCY {
-    public var Trim3: UInt16 = 0
-    public var Write3: UInt16 = 0
-    public var Read3: UInt16 = 0
-    public var Trim2: UInt16 = 0
-    public var Write2: UInt16 = 0
-    public var Read2: UInt16 = 0
-    public var Trim1: UInt16 = 0
-    public var Write1: UInt16 = 0
-    public var Read1: UInt16 = 0
-    public var Trim0: UInt16 = 0
-    public var Write0: UInt16 = 0
-    public var Read0: UInt16 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func trim3(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_trim3(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func write3(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_write3(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func read3(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4)
+        }
+    }
+
+    public mut func set_read3(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func trim2(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 6)
+        }
+    }
+
+    public mut func set_trim2(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func write2(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 8)
+        }
+    }
+
+    public mut func set_write2(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func read2(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 10)
+        }
+    }
+
+    public mut func set_read2(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 10, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func trim1(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 12)
+        }
+    }
+
+    public mut func set_trim1(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func write1(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 14)
+        }
+    }
+
+    public mut func set_write1(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func read1(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 16)
+        }
+    }
+
+    public mut func set_read1(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func trim0(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 18)
+        }
+    }
+
+    public mut func set_trim0(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 18, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func write0(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 20)
+        }
+    }
+
+    public mut func set_write0(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func read0(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 22)
+        }
+    }
+
+    public mut func set_read0(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 22, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -716,9 +1389,8 @@ public struct NVMEOF_CONNECT_COMMAND__CATTR_e__Union {
     public func anonymous(): NVMEOF_CONNECT_COMMAND__CATTR_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_CONNECT_COMMAND__CATTR_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -727,9 +1399,8 @@ public struct NVMEOF_CONNECT_COMMAND__CATTR_e__Union {
     public mut func set_anonymous(val: NVMEOF_CONNECT_COMMAND__CATTR_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_CONNECT_COMMAND__CATTR_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -739,22 +1410,16 @@ public struct NVMEOF_CONNECT_COMMAND__CATTR_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -796,14 +1461,13 @@ public struct NVMEOF_CONNECT_RESPONSE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func success(): NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct>(p)
             return ptr.read()
         }
@@ -812,9 +1476,8 @@ public struct NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union {
     public mut func set_success(val: NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -824,22 +1487,16 @@ public struct NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -858,14 +1515,13 @@ public struct NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct__AUTHREQ_e__Union {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func anonymous(): NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct__AUTHREQ_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct__AUTHREQ_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -874,9 +1530,8 @@ public struct NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct__A
     public mut func set_anonymous(val: NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct__AUTHREQ_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct__AUTHREQ_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -886,22 +1541,16 @@ public struct NVMEOF_CONNECT_RESPONSE__SCSpecific_e__Union__Success_e__Struct__A
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1000,14 +1649,13 @@ public struct NVMEOF_PROPERTY_GET_RESPONSE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVMEOF_PROPERTY_GET_RESPONSE__VALUE_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func fourBytes(): NVMEOF_PROPERTY_GET_RESPONSE__VALUE_e__Union__FourBytes_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_PROPERTY_GET_RESPONSE__VALUE_e__Union__FourBytes_e__Struct>(p)
             return ptr.read()
         }
@@ -1016,9 +1664,8 @@ public struct NVMEOF_PROPERTY_GET_RESPONSE__VALUE_e__Union {
     public mut func set_fourBytes(val: NVMEOF_PROPERTY_GET_RESPONSE__VALUE_e__Union__FourBytes_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_PROPERTY_GET_RESPONSE__VALUE_e__Union__FourBytes_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1028,22 +1675,16 @@ public struct NVMEOF_PROPERTY_GET_RESPONSE__VALUE_e__Union {
     public func eightBytes(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_eightBytes(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1085,14 +1726,13 @@ public struct NVMEOF_PROPERTY_SET_COMMAND__ATTRIB_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVMEOF_PROPERTY_SET_COMMAND__VALUE_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func fourBytes(): NVMEOF_PROPERTY_SET_COMMAND__VALUE_e__Union__FourBytes_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_PROPERTY_SET_COMMAND__VALUE_e__Union__FourBytes_e__Struct>(p)
             return ptr.read()
         }
@@ -1101,9 +1741,8 @@ public struct NVMEOF_PROPERTY_SET_COMMAND__VALUE_e__Union {
     public mut func set_fourBytes(val: NVMEOF_PROPERTY_SET_COMMAND__VALUE_e__Union__FourBytes_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVMEOF_PROPERTY_SET_COMMAND__VALUE_e__Union__FourBytes_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1113,22 +1752,16 @@ public struct NVMEOF_PROPERTY_SET_COMMAND__VALUE_e__Union {
     public func eightBytes(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_eightBytes(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1484,14 +2117,13 @@ public let NVME_ADMIN_COMMAND_GET_LBA_STATUS: NVME_ADMIN_COMMANDS = NVME_ADMIN_C
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func anonymous(): NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -1500,9 +2132,8 @@ public struct NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS {
     public mut func set_anonymous(val: NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1512,22 +2143,16 @@ public struct NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS {
     public func asUlonglong(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_asUlonglong(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1545,14 +2170,13 @@ public struct NVME_ADMIN_COMPLETION_QUEUE_BASE_ADDRESS__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_ADMIN_QUEUE_ATTRIBUTES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_ADMIN_QUEUE_ATTRIBUTES__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_ADMIN_QUEUE_ATTRIBUTES__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -1561,9 +2185,8 @@ public struct NVME_ADMIN_QUEUE_ATTRIBUTES {
     public mut func set_anonymous(val: NVME_ADMIN_QUEUE_ATTRIBUTES__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_ADMIN_QUEUE_ATTRIBUTES__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1573,22 +2196,16 @@ public struct NVME_ADMIN_QUEUE_ATTRIBUTES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1606,14 +2223,13 @@ public struct NVME_ADMIN_QUEUE_ATTRIBUTES__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func anonymous(): NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -1622,9 +2238,8 @@ public struct NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS {
     public mut func set_anonymous(val: NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1634,22 +2249,16 @@ public struct NVME_ADMIN_SUBMISSION_QUEUE_BASE_ADDRESS {
     public func asUlonglong(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_asUlonglong(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1951,14 +2560,13 @@ public let NVME_CC_SHN_ABRUPT_SHUTDOWN: NVME_CC_SHN_SHUTDOWN_NOTIFICATIONS = NVM
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW0_FEATURE_DSSD_POWER_STATE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW0_FEATURE_DSSD_POWER_STATE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_DSSD_POWER_STATE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -1967,9 +2575,8 @@ public struct NVME_CDW0_FEATURE_DSSD_POWER_STATE {
     public mut func set_anonymous(val: NVME_CDW0_FEATURE_DSSD_POWER_STATE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_DSSD_POWER_STATE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1979,22 +2586,16 @@ public struct NVME_CDW0_FEATURE_DSSD_POWER_STATE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2012,14 +2613,13 @@ public struct NVME_CDW0_FEATURE_DSSD_POWER_STATE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2028,9 +2628,8 @@ public struct NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO {
     public mut func set_anonymous(val: NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2040,22 +2639,16 @@ public struct NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2073,14 +2666,13 @@ public struct NVME_CDW0_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW0_FEATURE_ERROR_INJECTION {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW0_FEATURE_ERROR_INJECTION__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_ERROR_INJECTION__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2089,9 +2681,8 @@ public struct NVME_CDW0_FEATURE_ERROR_INJECTION {
     public mut func set_anonymous(val: NVME_CDW0_FEATURE_ERROR_INJECTION__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_ERROR_INJECTION__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2101,22 +2692,16 @@ public struct NVME_CDW0_FEATURE_ERROR_INJECTION {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2134,14 +2719,13 @@ public struct NVME_CDW0_FEATURE_ERROR_INJECTION__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2150,9 +2734,8 @@ public struct NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE {
     public mut func set_anonymous(val: NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2162,22 +2745,16 @@ public struct NVME_CDW0_FEATURE_READONLY_WRITETHROUGH_MODE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2202,14 +2779,13 @@ public struct NVME_CDW0_RESERVATION_PERSISTENCE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_ABORT {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_ABORT__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_ABORT__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2218,9 +2794,8 @@ public struct NVME_CDW10_ABORT {
     public mut func set_anonymous(val: NVME_CDW10_ABORT__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_ABORT__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2230,22 +2805,16 @@ public struct NVME_CDW10_ABORT {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2263,14 +2832,13 @@ public struct NVME_CDW10_ABORT__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_CREATE_IO_QUEUE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_CREATE_IO_QUEUE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_CREATE_IO_QUEUE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2279,9 +2847,8 @@ public struct NVME_CDW10_CREATE_IO_QUEUE {
     public mut func set_anonymous(val: NVME_CDW10_CREATE_IO_QUEUE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_CREATE_IO_QUEUE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2291,22 +2858,16 @@ public struct NVME_CDW10_CREATE_IO_QUEUE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2324,14 +2885,13 @@ public struct NVME_CDW10_CREATE_IO_QUEUE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_DATASET_MANAGEMENT {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_DATASET_MANAGEMENT__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_DATASET_MANAGEMENT__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2340,9 +2900,8 @@ public struct NVME_CDW10_DATASET_MANAGEMENT {
     public mut func set_anonymous(val: NVME_CDW10_DATASET_MANAGEMENT__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_DATASET_MANAGEMENT__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2352,22 +2911,16 @@ public struct NVME_CDW10_DATASET_MANAGEMENT {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2385,14 +2938,13 @@ public struct NVME_CDW10_DATASET_MANAGEMENT__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_DELETE_IO_QUEUE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_DELETE_IO_QUEUE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_DELETE_IO_QUEUE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2401,9 +2953,8 @@ public struct NVME_CDW10_DELETE_IO_QUEUE {
     public mut func set_anonymous(val: NVME_CDW10_DELETE_IO_QUEUE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_DELETE_IO_QUEUE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2413,22 +2964,16 @@ public struct NVME_CDW10_DELETE_IO_QUEUE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2446,14 +2991,13 @@ public struct NVME_CDW10_DELETE_IO_QUEUE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_DEVICE_SELF_TEST {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_DEVICE_SELF_TEST__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_DEVICE_SELF_TEST__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2462,9 +3006,8 @@ public struct NVME_CDW10_DEVICE_SELF_TEST {
     public mut func set_anonymous(val: NVME_CDW10_DEVICE_SELF_TEST__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_DEVICE_SELF_TEST__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2474,22 +3017,16 @@ public struct NVME_CDW10_DEVICE_SELF_TEST {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2521,14 +3058,13 @@ public struct NVME_CDW10_DIRECTIVE_SEND {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_DISCOVERY_INFO_MGMT {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_DISCOVERY_INFO_MGMT__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_DISCOVERY_INFO_MGMT__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2537,9 +3073,8 @@ public struct NVME_CDW10_DISCOVERY_INFO_MGMT {
     public mut func set_anonymous(val: NVME_CDW10_DISCOVERY_INFO_MGMT__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_DISCOVERY_INFO_MGMT__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2549,22 +3084,16 @@ public struct NVME_CDW10_DISCOVERY_INFO_MGMT {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2582,14 +3111,13 @@ public struct NVME_CDW10_DISCOVERY_INFO_MGMT__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_FIRMWARE_ACTIVATE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_FIRMWARE_ACTIVATE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_FIRMWARE_ACTIVATE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2598,9 +3126,8 @@ public struct NVME_CDW10_FIRMWARE_ACTIVATE {
     public mut func set_anonymous(val: NVME_CDW10_FIRMWARE_ACTIVATE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_FIRMWARE_ACTIVATE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2610,22 +3137,16 @@ public struct NVME_CDW10_FIRMWARE_ACTIVATE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2650,14 +3171,13 @@ public struct NVME_CDW10_FIRMWARE_DOWNLOAD {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_FORMAT_NVM {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_FORMAT_NVM__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_FORMAT_NVM__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2666,9 +3186,8 @@ public struct NVME_CDW10_FORMAT_NVM {
     public mut func set_anonymous(val: NVME_CDW10_FORMAT_NVM__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_FORMAT_NVM__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2678,22 +3197,16 @@ public struct NVME_CDW10_FORMAT_NVM {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2711,14 +3224,13 @@ public struct NVME_CDW10_FORMAT_NVM__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_GET_FEATURES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_GET_FEATURES__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_FEATURES__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2727,9 +3239,8 @@ public struct NVME_CDW10_GET_FEATURES {
     public mut func set_anonymous(val: NVME_CDW10_GET_FEATURES__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_FEATURES__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2739,22 +3250,16 @@ public struct NVME_CDW10_GET_FEATURES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2772,14 +3277,13 @@ public struct NVME_CDW10_GET_FEATURES__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_GET_LOG_PAGE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_GET_LOG_PAGE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2788,9 +3292,8 @@ public struct NVME_CDW10_GET_LOG_PAGE {
     public mut func set_anonymous(val: NVME_CDW10_GET_LOG_PAGE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2800,22 +3303,16 @@ public struct NVME_CDW10_GET_LOG_PAGE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2833,14 +3330,13 @@ public struct NVME_CDW10_GET_LOG_PAGE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_GET_LOG_PAGE_V121 {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_GET_LOG_PAGE_V121__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V121__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2849,9 +3345,8 @@ public struct NVME_CDW10_GET_LOG_PAGE_V121 {
     public mut func set_anonymous(val: NVME_CDW10_GET_LOG_PAGE_V121__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V121__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2861,22 +3356,16 @@ public struct NVME_CDW10_GET_LOG_PAGE_V121 {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2894,14 +3383,13 @@ public struct NVME_CDW10_GET_LOG_PAGE_V121__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_GET_LOG_PAGE_V13 {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_GET_LOG_PAGE_V13__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V13__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2910,9 +3398,8 @@ public struct NVME_CDW10_GET_LOG_PAGE_V13 {
     public mut func set_anonymous(val: NVME_CDW10_GET_LOG_PAGE_V13__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V13__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2922,22 +3409,16 @@ public struct NVME_CDW10_GET_LOG_PAGE_V13 {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2955,14 +3436,13 @@ public struct NVME_CDW10_GET_LOG_PAGE_V13__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_GET_LOG_PAGE_V20 {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_GET_LOG_PAGE_V20__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V20__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2971,9 +3451,8 @@ public struct NVME_CDW10_GET_LOG_PAGE_V20 {
     public mut func set_anonymous(val: NVME_CDW10_GET_LOG_PAGE_V20__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V20__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2983,22 +3462,16 @@ public struct NVME_CDW10_GET_LOG_PAGE_V20 {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3016,14 +3489,13 @@ public struct NVME_CDW10_GET_LOG_PAGE_V20__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_IDENTIFY {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_IDENTIFY__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_IDENTIFY__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3032,9 +3504,8 @@ public struct NVME_CDW10_IDENTIFY {
     public mut func set_anonymous(val: NVME_CDW10_IDENTIFY__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_IDENTIFY__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3044,22 +3515,16 @@ public struct NVME_CDW10_IDENTIFY {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3077,14 +3542,13 @@ public struct NVME_CDW10_IDENTIFY__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_RESERVATION_ACQUIRE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_RESERVATION_ACQUIRE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_RESERVATION_ACQUIRE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3093,9 +3557,8 @@ public struct NVME_CDW10_RESERVATION_ACQUIRE {
     public mut func set_anonymous(val: NVME_CDW10_RESERVATION_ACQUIRE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_RESERVATION_ACQUIRE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3105,22 +3568,16 @@ public struct NVME_CDW10_RESERVATION_ACQUIRE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3138,14 +3595,13 @@ public struct NVME_CDW10_RESERVATION_ACQUIRE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_RESERVATION_REGISTER {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_RESERVATION_REGISTER__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_RESERVATION_REGISTER__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3154,9 +3610,8 @@ public struct NVME_CDW10_RESERVATION_REGISTER {
     public mut func set_anonymous(val: NVME_CDW10_RESERVATION_REGISTER__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_RESERVATION_REGISTER__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3166,22 +3621,16 @@ public struct NVME_CDW10_RESERVATION_REGISTER {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3199,14 +3648,13 @@ public struct NVME_CDW10_RESERVATION_REGISTER__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_RESERVATION_RELEASE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_RESERVATION_RELEASE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_RESERVATION_RELEASE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3215,9 +3663,8 @@ public struct NVME_CDW10_RESERVATION_RELEASE {
     public mut func set_anonymous(val: NVME_CDW10_RESERVATION_RELEASE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_RESERVATION_RELEASE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3227,22 +3674,16 @@ public struct NVME_CDW10_RESERVATION_RELEASE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3260,14 +3701,13 @@ public struct NVME_CDW10_RESERVATION_RELEASE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_RESERVATION_REPORT {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_RESERVATION_REPORT__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_RESERVATION_REPORT__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3276,9 +3716,8 @@ public struct NVME_CDW10_RESERVATION_REPORT {
     public mut func set_anonymous(val: NVME_CDW10_RESERVATION_REPORT__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_RESERVATION_REPORT__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3288,22 +3727,16 @@ public struct NVME_CDW10_RESERVATION_REPORT {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3321,14 +3754,13 @@ public struct NVME_CDW10_RESERVATION_REPORT__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_SANITIZE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_SANITIZE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_SANITIZE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3337,9 +3769,8 @@ public struct NVME_CDW10_SANITIZE {
     public mut func set_anonymous(val: NVME_CDW10_SANITIZE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_SANITIZE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3349,22 +3780,16 @@ public struct NVME_CDW10_SANITIZE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3382,14 +3807,13 @@ public struct NVME_CDW10_SANITIZE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_SECURITY_SEND_RECEIVE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_SECURITY_SEND_RECEIVE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_SECURITY_SEND_RECEIVE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3398,9 +3822,8 @@ public struct NVME_CDW10_SECURITY_SEND_RECEIVE {
     public mut func set_anonymous(val: NVME_CDW10_SECURITY_SEND_RECEIVE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_SECURITY_SEND_RECEIVE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3410,22 +3833,16 @@ public struct NVME_CDW10_SECURITY_SEND_RECEIVE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3443,14 +3860,13 @@ public struct NVME_CDW10_SECURITY_SEND_RECEIVE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW10_SET_FEATURES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW10_SET_FEATURES__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_SET_FEATURES__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3459,9 +3875,8 @@ public struct NVME_CDW10_SET_FEATURES {
     public mut func set_anonymous(val: NVME_CDW10_SET_FEATURES__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_SET_FEATURES__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3471,22 +3886,16 @@ public struct NVME_CDW10_SET_FEATURES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3525,14 +3934,13 @@ public struct NVME_CDW10_ZONE_MANAGEMENT_SEND {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_CREATE_IO_CQ {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_CREATE_IO_CQ__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_CREATE_IO_CQ__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3541,9 +3949,8 @@ public struct NVME_CDW11_CREATE_IO_CQ {
     public mut func set_anonymous(val: NVME_CDW11_CREATE_IO_CQ__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_CREATE_IO_CQ__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3553,22 +3960,16 @@ public struct NVME_CDW11_CREATE_IO_CQ {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3586,14 +3987,13 @@ public struct NVME_CDW11_CREATE_IO_CQ__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_CREATE_IO_SQ {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_CREATE_IO_SQ__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_CREATE_IO_SQ__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3602,9 +4002,8 @@ public struct NVME_CDW11_CREATE_IO_SQ {
     public mut func set_anonymous(val: NVME_CDW11_CREATE_IO_SQ__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_CREATE_IO_SQ__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3614,22 +4013,16 @@ public struct NVME_CDW11_CREATE_IO_SQ {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3647,14 +4040,13 @@ public struct NVME_CDW11_CREATE_IO_SQ__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_DATASET_MANAGEMENT {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_DATASET_MANAGEMENT__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_DATASET_MANAGEMENT__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3663,9 +4055,8 @@ public struct NVME_CDW11_DATASET_MANAGEMENT {
     public mut func set_anonymous(val: NVME_CDW11_DATASET_MANAGEMENT__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_DATASET_MANAGEMENT__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3675,22 +4066,16 @@ public struct NVME_CDW11_DATASET_MANAGEMENT {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3708,14 +4093,13 @@ public struct NVME_CDW11_DATASET_MANAGEMENT__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_DIRECTIVE_RECEIVE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_DIRECTIVE_RECEIVE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_DIRECTIVE_RECEIVE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3724,9 +4108,8 @@ public struct NVME_CDW11_DIRECTIVE_RECEIVE {
     public mut func set_anonymous(val: NVME_CDW11_DIRECTIVE_RECEIVE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_DIRECTIVE_RECEIVE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3736,22 +4119,16 @@ public struct NVME_CDW11_DIRECTIVE_RECEIVE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3769,14 +4146,13 @@ public struct NVME_CDW11_DIRECTIVE_RECEIVE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_DIRECTIVE_SEND {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_DIRECTIVE_SEND__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_DIRECTIVE_SEND__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3785,9 +4161,8 @@ public struct NVME_CDW11_DIRECTIVE_SEND {
     public mut func set_anonymous(val: NVME_CDW11_DIRECTIVE_SEND__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_DIRECTIVE_SEND__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3797,22 +4172,16 @@ public struct NVME_CDW11_DIRECTIVE_SEND {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3830,14 +4199,13 @@ public struct NVME_CDW11_DIRECTIVE_SEND__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func numberOfQueues(): NVME_CDW11_FEATURE_NUMBER_OF_QUEUES {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_NUMBER_OF_QUEUES>(p)
             return ptr.read()
         }
@@ -3846,9 +4214,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_numberOfQueues(val: NVME_CDW11_FEATURE_NUMBER_OF_QUEUES): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_NUMBER_OF_QUEUES>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3858,9 +4225,8 @@ public struct NVME_CDW11_FEATURES {
     public func interruptCoalescing(): NVME_CDW11_FEATURE_INTERRUPT_COALESCING {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_INTERRUPT_COALESCING>(p)
             return ptr.read()
         }
@@ -3869,9 +4235,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_interruptCoalescing(val: NVME_CDW11_FEATURE_INTERRUPT_COALESCING): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_INTERRUPT_COALESCING>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3881,9 +4246,8 @@ public struct NVME_CDW11_FEATURES {
     public func interruptVectorConfig(): NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG>(p)
             return ptr.read()
         }
@@ -3892,9 +4256,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_interruptVectorConfig(val: NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3904,9 +4267,8 @@ public struct NVME_CDW11_FEATURES {
     public func lbaRangeType(): NVME_CDW11_FEATURE_LBA_RANGE_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_LBA_RANGE_TYPE>(p)
             return ptr.read()
         }
@@ -3915,9 +4277,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_lbaRangeType(val: NVME_CDW11_FEATURE_LBA_RANGE_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_LBA_RANGE_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3927,9 +4288,8 @@ public struct NVME_CDW11_FEATURES {
     public func arbitration(): NVME_CDW11_FEATURE_ARBITRATION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ARBITRATION>(p)
             return ptr.read()
         }
@@ -3938,9 +4298,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_arbitration(val: NVME_CDW11_FEATURE_ARBITRATION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ARBITRATION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3950,9 +4309,8 @@ public struct NVME_CDW11_FEATURES {
     public func volatileWriteCache(): NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE>(p)
             return ptr.read()
         }
@@ -3961,9 +4319,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_volatileWriteCache(val: NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3973,9 +4330,8 @@ public struct NVME_CDW11_FEATURES {
     public func asyncEventConfig(): NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG>(p)
             return ptr.read()
         }
@@ -3984,9 +4340,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_asyncEventConfig(val: NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3996,9 +4351,8 @@ public struct NVME_CDW11_FEATURES {
     public func powerManagement(): NVME_CDW11_FEATURE_POWER_MANAGEMENT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_POWER_MANAGEMENT>(p)
             return ptr.read()
         }
@@ -4007,9 +4361,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_powerManagement(val: NVME_CDW11_FEATURE_POWER_MANAGEMENT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_POWER_MANAGEMENT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4019,9 +4372,8 @@ public struct NVME_CDW11_FEATURES {
     public func autoPowerStateTransition(): NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION>(p)
             return ptr.read()
         }
@@ -4030,9 +4382,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_autoPowerStateTransition(val: NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4042,9 +4393,8 @@ public struct NVME_CDW11_FEATURES {
     public func temperatureThreshold(): NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD>(p)
             return ptr.read()
         }
@@ -4053,9 +4403,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_temperatureThreshold(val: NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4065,9 +4414,8 @@ public struct NVME_CDW11_FEATURES {
     public func errorRecovery(): NVME_CDW11_FEATURE_ERROR_RECOVERY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ERROR_RECOVERY>(p)
             return ptr.read()
         }
@@ -4076,9 +4424,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_errorRecovery(val: NVME_CDW11_FEATURE_ERROR_RECOVERY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ERROR_RECOVERY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4088,9 +4435,8 @@ public struct NVME_CDW11_FEATURES {
     public func hostMemoryBuffer(): NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER>(p)
             return ptr.read()
         }
@@ -4099,9 +4445,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_hostMemoryBuffer(val: NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4111,9 +4456,8 @@ public struct NVME_CDW11_FEATURES {
     public func writeAtomicityNormal(): NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL>(p)
             return ptr.read()
         }
@@ -4122,9 +4466,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_writeAtomicityNormal(val: NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4134,9 +4477,8 @@ public struct NVME_CDW11_FEATURES {
     public func nonOperationalPowerState(): NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE>(p)
             return ptr.read()
         }
@@ -4145,9 +4487,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_nonOperationalPowerState(val: NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4157,9 +4498,8 @@ public struct NVME_CDW11_FEATURES {
     public func ioCommandSetProfile(): NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE>(p)
             return ptr.read()
         }
@@ -4168,9 +4508,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_ioCommandSetProfile(val: NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4180,9 +4519,8 @@ public struct NVME_CDW11_FEATURES {
     public func errorInjection(): NVME_CDW0_FEATURE_ERROR_INJECTION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_ERROR_INJECTION>(p)
             return ptr.read()
         }
@@ -4191,9 +4529,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_errorInjection(val: NVME_CDW0_FEATURE_ERROR_INJECTION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW0_FEATURE_ERROR_INJECTION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4203,9 +4540,8 @@ public struct NVME_CDW11_FEATURES {
     public func hostIdentifier(): NVME_CDW11_FEATURE_HOST_IDENTIFIER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_HOST_IDENTIFIER>(p)
             return ptr.read()
         }
@@ -4214,9 +4550,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_hostIdentifier(val: NVME_CDW11_FEATURE_HOST_IDENTIFIER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_HOST_IDENTIFIER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4226,9 +4561,8 @@ public struct NVME_CDW11_FEATURES {
     public func reservationPersistence(): NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE>(p)
             return ptr.read()
         }
@@ -4237,9 +4571,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_reservationPersistence(val: NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4249,9 +4582,8 @@ public struct NVME_CDW11_FEATURES {
     public func reservationNotificationMask(): NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK>(p)
             return ptr.read()
         }
@@ -4260,9 +4592,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_reservationNotificationMask(val: NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_RESERVATION_NOTIFICATION_MASK>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4272,9 +4603,8 @@ public struct NVME_CDW11_FEATURES {
     public func getHostMetadata(): NVME_CDW11_FEATURE_GET_HOST_METADATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_GET_HOST_METADATA>(p)
             return ptr.read()
         }
@@ -4283,9 +4613,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_getHostMetadata(val: NVME_CDW11_FEATURE_GET_HOST_METADATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_GET_HOST_METADATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4295,9 +4624,8 @@ public struct NVME_CDW11_FEATURES {
     public func setHostMetadata(): NVME_CDW11_FEATURE_SET_HOST_METADATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_SET_HOST_METADATA>(p)
             return ptr.read()
         }
@@ -4306,9 +4634,8 @@ public struct NVME_CDW11_FEATURES {
     public mut func set_setHostMetadata(val: NVME_CDW11_FEATURE_SET_HOST_METADATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_SET_HOST_METADATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4318,22 +4645,16 @@ public struct NVME_CDW11_FEATURES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4344,14 +4665,13 @@ public struct NVME_CDW11_FEATURES {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_ARBITRATION {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_ARBITRATION__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ARBITRATION__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4360,9 +4680,8 @@ public struct NVME_CDW11_FEATURE_ARBITRATION {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_ARBITRATION__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ARBITRATION__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4372,22 +4691,16 @@ public struct NVME_CDW11_FEATURE_ARBITRATION {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4405,14 +4718,13 @@ public struct NVME_CDW11_FEATURE_ARBITRATION__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4421,9 +4733,8 @@ public struct NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4433,22 +4744,16 @@ public struct NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4466,14 +4771,13 @@ public struct NVME_CDW11_FEATURE_ASYNC_EVENT_CONFIG__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4482,9 +4786,8 @@ public struct NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4494,22 +4797,16 @@ public struct NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4527,14 +4824,13 @@ public struct NVME_CDW11_FEATURE_AUTO_POWER_STATE_TRANSITION__Anonymous_e__Struc
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4543,9 +4839,8 @@ public struct NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4555,22 +4850,16 @@ public struct NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4588,14 +4877,13 @@ public struct NVME_CDW11_FEATURE_CLEAR_FW_UPDATE_HISTORY__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4604,9 +4892,8 @@ public struct NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4616,22 +4903,16 @@ public struct NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4649,14 +4930,13 @@ public struct NVME_CDW11_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS__Anonymou
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4665,9 +4945,8 @@ public struct NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4677,22 +4956,16 @@ public struct NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4710,14 +4983,13 @@ public struct NVME_CDW11_FEATURE_ENABLE_IEEE1667_SILO__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_ERROR_RECOVERY {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_ERROR_RECOVERY__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ERROR_RECOVERY__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4726,9 +4998,8 @@ public struct NVME_CDW11_FEATURE_ERROR_RECOVERY {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_ERROR_RECOVERY__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_ERROR_RECOVERY__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4738,22 +5009,16 @@ public struct NVME_CDW11_FEATURE_ERROR_RECOVERY {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4771,14 +5036,13 @@ public struct NVME_CDW11_FEATURE_ERROR_RECOVERY__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_GET_HOST_METADATA {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_GET_HOST_METADATA__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_GET_HOST_METADATA__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4787,9 +5051,8 @@ public struct NVME_CDW11_FEATURE_GET_HOST_METADATA {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_GET_HOST_METADATA__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_GET_HOST_METADATA__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4799,22 +5062,16 @@ public struct NVME_CDW11_FEATURE_GET_HOST_METADATA {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4839,14 +5096,13 @@ public struct NVME_CDW11_FEATURE_HOST_IDENTIFIER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4855,9 +5111,8 @@ public struct NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4867,22 +5122,16 @@ public struct NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4900,14 +5149,13 @@ public struct NVME_CDW11_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_INTERRUPT_COALESCING {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_INTERRUPT_COALESCING__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_INTERRUPT_COALESCING__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4916,9 +5164,8 @@ public struct NVME_CDW11_FEATURE_INTERRUPT_COALESCING {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_INTERRUPT_COALESCING__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_INTERRUPT_COALESCING__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4928,22 +5175,16 @@ public struct NVME_CDW11_FEATURE_INTERRUPT_COALESCING {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4961,14 +5202,13 @@ public struct NVME_CDW11_FEATURE_INTERRUPT_COALESCING__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -4977,9 +5217,8 @@ public struct NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4989,22 +5228,16 @@ public struct NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5022,14 +5255,13 @@ public struct NVME_CDW11_FEATURE_INTERRUPT_VECTOR_CONFIG__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5038,9 +5270,8 @@ public struct NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5050,22 +5281,16 @@ public struct NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5083,14 +5308,13 @@ public struct NVME_CDW11_FEATURE_IO_COMMAND_SET_PROFILE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_LBA_RANGE_TYPE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_LBA_RANGE_TYPE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_LBA_RANGE_TYPE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5099,9 +5323,8 @@ public struct NVME_CDW11_FEATURE_LBA_RANGE_TYPE {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_LBA_RANGE_TYPE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_LBA_RANGE_TYPE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5111,22 +5334,16 @@ public struct NVME_CDW11_FEATURE_LBA_RANGE_TYPE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5144,14 +5361,13 @@ public struct NVME_CDW11_FEATURE_LBA_RANGE_TYPE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5160,9 +5376,8 @@ public struct NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5172,22 +5387,16 @@ public struct NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5205,14 +5414,13 @@ public struct NVME_CDW11_FEATURE_NON_OPERATIONAL_POWER_STATE__Anonymous_e__Struc
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_NUMBER_OF_QUEUES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_NUMBER_OF_QUEUES__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_NUMBER_OF_QUEUES__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5221,9 +5429,8 @@ public struct NVME_CDW11_FEATURE_NUMBER_OF_QUEUES {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_NUMBER_OF_QUEUES__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_NUMBER_OF_QUEUES__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5233,22 +5440,16 @@ public struct NVME_CDW11_FEATURE_NUMBER_OF_QUEUES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5266,14 +5467,13 @@ public struct NVME_CDW11_FEATURE_NUMBER_OF_QUEUES__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_POWER_MANAGEMENT {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_POWER_MANAGEMENT__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_POWER_MANAGEMENT__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5282,9 +5482,8 @@ public struct NVME_CDW11_FEATURE_POWER_MANAGEMENT {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_POWER_MANAGEMENT__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_POWER_MANAGEMENT__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5294,22 +5493,16 @@ public struct NVME_CDW11_FEATURE_POWER_MANAGEMENT {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5327,14 +5520,13 @@ public struct NVME_CDW11_FEATURE_POWER_MANAGEMENT__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5343,9 +5535,8 @@ public struct NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5355,22 +5546,16 @@ public struct NVME_CDW11_FEATURE_READONLY_WRITETHROUGH_MODE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5402,14 +5587,13 @@ public struct NVME_CDW11_FEATURE_RESERVATION_PERSISTENCE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_SET_HOST_METADATA {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_SET_HOST_METADATA__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_SET_HOST_METADATA__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5418,9 +5602,8 @@ public struct NVME_CDW11_FEATURE_SET_HOST_METADATA {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_SET_HOST_METADATA__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_SET_HOST_METADATA__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5430,22 +5613,16 @@ public struct NVME_CDW11_FEATURE_SET_HOST_METADATA {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5463,14 +5640,13 @@ public struct NVME_CDW11_FEATURE_SET_HOST_METADATA__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5479,9 +5655,8 @@ public struct NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5491,22 +5666,16 @@ public struct NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5524,14 +5693,13 @@ public struct NVME_CDW11_FEATURE_SUPPORTED_CAPABILITY__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5540,9 +5708,8 @@ public struct NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5552,22 +5719,16 @@ public struct NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5585,14 +5746,13 @@ public struct NVME_CDW11_FEATURE_TEMPERATURE_THRESHOLD__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5601,9 +5761,8 @@ public struct NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5613,22 +5772,16 @@ public struct NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5646,14 +5799,13 @@ public struct NVME_CDW11_FEATURE_VOLATILE_WRITE_CACHE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5662,9 +5814,8 @@ public struct NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL {
     public mut func set_anonymous(val: NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5674,22 +5825,16 @@ public struct NVME_CDW11_FEATURE_WRITE_ATOMICITY_NORMAL {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5714,14 +5859,13 @@ public struct NVME_CDW11_FIRMWARE_DOWNLOAD {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_GET_LOG_PAGE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_GET_LOG_PAGE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_GET_LOG_PAGE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5730,9 +5874,8 @@ public struct NVME_CDW11_GET_LOG_PAGE {
     public mut func set_anonymous(val: NVME_CDW11_GET_LOG_PAGE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_GET_LOG_PAGE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5742,22 +5885,16 @@ public struct NVME_CDW11_GET_LOG_PAGE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5775,14 +5912,13 @@ public struct NVME_CDW11_GET_LOG_PAGE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_IDENTIFY {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous1(): NVME_CDW11_IDENTIFY__Anonymous1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_IDENTIFY__Anonymous1_e__Struct>(p)
             return ptr.read()
         }
@@ -5791,9 +5927,8 @@ public struct NVME_CDW11_IDENTIFY {
     public mut func set_anonymous1(val: NVME_CDW11_IDENTIFY__Anonymous1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_IDENTIFY__Anonymous1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5803,9 +5938,8 @@ public struct NVME_CDW11_IDENTIFY {
     public func anonymous2(): NVME_CDW11_IDENTIFY__Anonymous2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_IDENTIFY__Anonymous2_e__Struct>(p)
             return ptr.read()
         }
@@ -5814,9 +5948,8 @@ public struct NVME_CDW11_IDENTIFY {
     public mut func set_anonymous2(val: NVME_CDW11_IDENTIFY__Anonymous2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_IDENTIFY__Anonymous2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5826,22 +5959,16 @@ public struct NVME_CDW11_IDENTIFY {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5867,14 +5994,13 @@ public struct NVME_CDW11_IDENTIFY__Anonymous2_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_RESERVATION_REPORT {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_RESERVATION_REPORT__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_RESERVATION_REPORT__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5883,9 +6009,8 @@ public struct NVME_CDW11_RESERVATION_REPORT {
     public mut func set_anonymous(val: NVME_CDW11_RESERVATION_REPORT__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_RESERVATION_REPORT__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5895,22 +6020,16 @@ public struct NVME_CDW11_RESERVATION_REPORT {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5928,14 +6047,13 @@ public struct NVME_CDW11_RESERVATION_REPORT__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW11_SANITIZE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW11_SANITIZE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_SANITIZE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -5944,9 +6062,8 @@ public struct NVME_CDW11_SANITIZE {
     public mut func set_anonymous(val: NVME_CDW11_SANITIZE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW11_SANITIZE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5956,22 +6073,16 @@ public struct NVME_CDW11_SANITIZE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6003,14 +6114,13 @@ public struct NVME_CDW11_SECURITY_SEND {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_DIRECTIVE_RECEIVE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func allocateResources(): NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES>(p)
             return ptr.read()
         }
@@ -6019,9 +6129,8 @@ public struct NVME_CDW12_DIRECTIVE_RECEIVE {
     public mut func set_allocateResources(val: NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6031,22 +6140,16 @@ public struct NVME_CDW12_DIRECTIVE_RECEIVE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6057,14 +6160,13 @@ public struct NVME_CDW12_DIRECTIVE_RECEIVE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6073,9 +6175,8 @@ public struct NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES {
     public mut func set_anonymous(val: NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6085,22 +6186,16 @@ public struct NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6118,14 +6213,13 @@ public struct NVME_CDW12_DIRECTIVE_RECEIVE_STREAMS_ALLOCATE_RESOURCES__Anonymous
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_DIRECTIVE_SEND {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func enableDirective(): NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE>(p)
             return ptr.read()
         }
@@ -6134,9 +6228,8 @@ public struct NVME_CDW12_DIRECTIVE_SEND {
     public mut func set_enableDirective(val: NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6146,22 +6239,16 @@ public struct NVME_CDW12_DIRECTIVE_SEND {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6172,14 +6259,13 @@ public struct NVME_CDW12_DIRECTIVE_SEND {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6188,9 +6274,8 @@ public struct NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE {
     public mut func set_anonymous(val: NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6200,22 +6285,16 @@ public struct NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6233,14 +6312,13 @@ public struct NVME_CDW12_DIRECTIVE_SEND_IDENTIFY_ENABLE_DIRECTIVE__Anonymous_e__
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_FEATURES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func hostMemoryBuffer(): NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER>(p)
             return ptr.read()
         }
@@ -6249,9 +6327,8 @@ public struct NVME_CDW12_FEATURES {
     public mut func set_hostMemoryBuffer(val: NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6261,22 +6338,16 @@ public struct NVME_CDW12_FEATURES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6287,14 +6358,13 @@ public struct NVME_CDW12_FEATURES {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6303,9 +6373,8 @@ public struct NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER {
     public mut func set_anonymous(val: NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6315,22 +6384,16 @@ public struct NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6348,27 +6411,21 @@ public struct NVME_CDW12_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_GET_LOG_PAGE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func lpol(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_lpol(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6376,22 +6433,16 @@ public struct NVME_CDW12_GET_LOG_PAGE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6402,14 +6453,13 @@ public struct NVME_CDW12_GET_LOG_PAGE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_READ_WRITE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW12_READ_WRITE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_READ_WRITE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6418,9 +6468,8 @@ public struct NVME_CDW12_READ_WRITE {
     public mut func set_anonymous(val: NVME_CDW12_READ_WRITE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_READ_WRITE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6430,22 +6479,16 @@ public struct NVME_CDW12_READ_WRITE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6463,14 +6506,13 @@ public struct NVME_CDW12_READ_WRITE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_VERIFYCOMMAND {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW12_VERIFYCOMMAND__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_VERIFYCOMMAND__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6479,9 +6521,8 @@ public struct NVME_CDW12_VERIFYCOMMAND {
     public mut func set_anonymous(val: NVME_CDW12_VERIFYCOMMAND__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_VERIFYCOMMAND__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6491,22 +6532,16 @@ public struct NVME_CDW12_VERIFYCOMMAND {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6524,14 +6559,13 @@ public struct NVME_CDW12_VERIFYCOMMAND__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW12_ZONE_APPEND {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW12_ZONE_APPEND__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_ZONE_APPEND__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6540,9 +6574,8 @@ public struct NVME_CDW12_ZONE_APPEND {
     public mut func set_anonymous(val: NVME_CDW12_ZONE_APPEND__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW12_ZONE_APPEND__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6552,22 +6585,16 @@ public struct NVME_CDW12_ZONE_APPEND {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6585,14 +6612,13 @@ public struct NVME_CDW12_ZONE_APPEND__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW13_FEATURES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func hostMemoryBuffer(): NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER>(p)
             return ptr.read()
         }
@@ -6601,9 +6627,8 @@ public struct NVME_CDW13_FEATURES {
     public mut func set_hostMemoryBuffer(val: NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6613,22 +6638,16 @@ public struct NVME_CDW13_FEATURES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6639,14 +6658,13 @@ public struct NVME_CDW13_FEATURES {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6655,9 +6673,8 @@ public struct NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER {
     public mut func set_anonymous(val: NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6667,22 +6684,16 @@ public struct NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6700,27 +6711,21 @@ public struct NVME_CDW13_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW13_GET_LOG_PAGE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func lpou(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_lpou(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6728,22 +6733,16 @@ public struct NVME_CDW13_GET_LOG_PAGE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6754,14 +6753,13 @@ public struct NVME_CDW13_GET_LOG_PAGE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW13_READ_WRITE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW13_READ_WRITE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_READ_WRITE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6770,9 +6768,8 @@ public struct NVME_CDW13_READ_WRITE {
     public mut func set_anonymous(val: NVME_CDW13_READ_WRITE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_READ_WRITE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6782,22 +6779,16 @@ public struct NVME_CDW13_READ_WRITE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6824,14 +6815,13 @@ public struct NVME_CDW13_READ_WRITE__Anonymous_e__Struct__DSM_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW13_ZONE_MANAGEMENT_RECEIVE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW13_ZONE_MANAGEMENT_RECEIVE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_ZONE_MANAGEMENT_RECEIVE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6840,9 +6830,8 @@ public struct NVME_CDW13_ZONE_MANAGEMENT_RECEIVE {
     public mut func set_anonymous(val: NVME_CDW13_ZONE_MANAGEMENT_RECEIVE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_ZONE_MANAGEMENT_RECEIVE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6852,22 +6841,16 @@ public struct NVME_CDW13_ZONE_MANAGEMENT_RECEIVE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6885,14 +6868,13 @@ public struct NVME_CDW13_ZONE_MANAGEMENT_RECEIVE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW13_ZONE_MANAGEMENT_SEND {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW13_ZONE_MANAGEMENT_SEND__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_ZONE_MANAGEMENT_SEND__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6901,9 +6883,8 @@ public struct NVME_CDW13_ZONE_MANAGEMENT_SEND {
     public mut func set_anonymous(val: NVME_CDW13_ZONE_MANAGEMENT_SEND__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW13_ZONE_MANAGEMENT_SEND__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6913,22 +6894,16 @@ public struct NVME_CDW13_ZONE_MANAGEMENT_SEND {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6946,14 +6921,13 @@ public struct NVME_CDW13_ZONE_MANAGEMENT_SEND__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW14_FEATURES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func hostMemoryBuffer(): NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER>(p)
             return ptr.read()
         }
@@ -6962,9 +6936,8 @@ public struct NVME_CDW14_FEATURES {
     public mut func set_hostMemoryBuffer(val: NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6974,22 +6947,16 @@ public struct NVME_CDW14_FEATURES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7000,14 +6967,13 @@ public struct NVME_CDW14_FEATURES {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7016,9 +6982,8 @@ public struct NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER {
     public mut func set_anonymous(val: NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7028,22 +6993,16 @@ public struct NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7061,14 +7020,13 @@ public struct NVME_CDW14_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW14_GET_LOG_PAGE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW14_GET_LOG_PAGE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_GET_LOG_PAGE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7077,9 +7035,8 @@ public struct NVME_CDW14_GET_LOG_PAGE {
     public mut func set_anonymous(val: NVME_CDW14_GET_LOG_PAGE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_GET_LOG_PAGE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7089,22 +7046,16 @@ public struct NVME_CDW14_GET_LOG_PAGE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7122,14 +7073,13 @@ public struct NVME_CDW14_GET_LOG_PAGE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW14_GET_LOG_PAGE_V20 {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW14_GET_LOG_PAGE_V20__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_GET_LOG_PAGE_V20__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7138,9 +7088,8 @@ public struct NVME_CDW14_GET_LOG_PAGE_V20 {
     public mut func set_anonymous(val: NVME_CDW14_GET_LOG_PAGE_V20__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_GET_LOG_PAGE_V20__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7150,22 +7099,16 @@ public struct NVME_CDW14_GET_LOG_PAGE_V20 {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7183,14 +7126,13 @@ public struct NVME_CDW14_GET_LOG_PAGE_V20__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW14_IDENTIFY {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW14_IDENTIFY__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_IDENTIFY__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7199,9 +7141,8 @@ public struct NVME_CDW14_IDENTIFY {
     public mut func set_anonymous(val: NVME_CDW14_IDENTIFY__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_IDENTIFY__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7211,22 +7152,16 @@ public struct NVME_CDW14_IDENTIFY {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7244,14 +7179,13 @@ public struct NVME_CDW14_IDENTIFY__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW15_FEATURES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func hostMemoryBuffer(): NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER>(p)
             return ptr.read()
         }
@@ -7260,9 +7194,8 @@ public struct NVME_CDW15_FEATURES {
     public mut func set_hostMemoryBuffer(val: NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7272,22 +7205,16 @@ public struct NVME_CDW15_FEATURES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7298,14 +7225,13 @@ public struct NVME_CDW15_FEATURES {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7314,9 +7240,8 @@ public struct NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER {
     public mut func set_anonymous(val: NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7326,22 +7251,16 @@ public struct NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7359,14 +7278,13 @@ public struct NVME_CDW15_FEATURE_HOST_MEMORY_BUFFER__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW15_READ_WRITE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW15_READ_WRITE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_READ_WRITE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7375,9 +7293,8 @@ public struct NVME_CDW15_READ_WRITE {
     public mut func set_anonymous(val: NVME_CDW15_READ_WRITE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_READ_WRITE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7387,22 +7304,16 @@ public struct NVME_CDW15_READ_WRITE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7420,14 +7331,13 @@ public struct NVME_CDW15_READ_WRITE__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW15_VERIFY_COMMAND {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW15_VERIFY_COMMAND__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_VERIFY_COMMAND__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7436,9 +7346,8 @@ public struct NVME_CDW15_VERIFY_COMMAND {
     public mut func set_anonymous(val: NVME_CDW15_VERIFY_COMMAND__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_VERIFY_COMMAND__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7448,22 +7357,16 @@ public struct NVME_CDW15_VERIFY_COMMAND {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7481,14 +7384,13 @@ public struct NVME_CDW15_VERIFY_COMMAND__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CDW15_ZONE_APPEND {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CDW15_ZONE_APPEND__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_ZONE_APPEND__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7497,9 +7399,8 @@ public struct NVME_CDW15_ZONE_APPEND {
     public mut func set_anonymous(val: NVME_CDW15_ZONE_APPEND__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW15_ZONE_APPEND__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7509,22 +7410,16 @@ public struct NVME_CDW15_ZONE_APPEND {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7610,14 +7505,13 @@ public struct NVME_COMMAND {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMMAND__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func anonymous(): NVME_COMMAND__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7626,9 +7520,8 @@ public struct NVME_COMMAND__Anonymous_e__Union {
     public mut func set_anonymous(val: NVME_COMMAND__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7638,9 +7531,8 @@ public struct NVME_COMMAND__Anonymous_e__Union {
     public func sgl1(): VArray<UInt64, $2> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt64, $2>>(p)
             return ptr.read()
         }
@@ -7649,9 +7541,8 @@ public struct NVME_COMMAND__Anonymous_e__Union {
     public mut func set_sgl1(val: VArray<UInt64, $2>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt64, $2>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7672,14 +7563,13 @@ public struct NVME_COMMAND__Anonymous_e__Union__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMMAND__u_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func general(): NVME_COMMAND__u_e__Union__GENERAL_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__GENERAL_e__Struct>(p)
             return ptr.read()
         }
@@ -7688,9 +7578,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_general(val: NVME_COMMAND__u_e__Union__GENERAL_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__GENERAL_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7700,9 +7589,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func identify(): NVME_COMMAND__u_e__Union__IDENTIFY_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__IDENTIFY_e__Struct>(p)
             return ptr.read()
         }
@@ -7711,9 +7599,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_identify(val: NVME_COMMAND__u_e__Union__IDENTIFY_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__IDENTIFY_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7723,9 +7610,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func abort(): NVME_COMMAND__u_e__Union__ABORT_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__ABORT_e__Struct>(p)
             return ptr.read()
         }
@@ -7734,9 +7620,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_abort(val: NVME_COMMAND__u_e__Union__ABORT_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__ABORT_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7746,9 +7631,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func getfeatures(): NVME_COMMAND__u_e__Union__GETFEATURES_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__GETFEATURES_e__Struct>(p)
             return ptr.read()
         }
@@ -7757,9 +7641,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_getfeatures(val: NVME_COMMAND__u_e__Union__GETFEATURES_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__GETFEATURES_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7769,9 +7652,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func setfeatures(): NVME_COMMAND__u_e__Union__SETFEATURES_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__SETFEATURES_e__Struct>(p)
             return ptr.read()
         }
@@ -7780,9 +7662,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_setfeatures(val: NVME_COMMAND__u_e__Union__SETFEATURES_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__SETFEATURES_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7792,9 +7673,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func getlogpage(): NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct>(p)
             return ptr.read()
         }
@@ -7803,9 +7683,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_getlogpage(val: NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7815,9 +7694,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func createiocq(): NVME_COMMAND__u_e__Union__CREATEIOCQ_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__CREATEIOCQ_e__Struct>(p)
             return ptr.read()
         }
@@ -7826,9 +7704,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_createiocq(val: NVME_COMMAND__u_e__Union__CREATEIOCQ_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__CREATEIOCQ_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7838,9 +7715,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func createiosq(): NVME_COMMAND__u_e__Union__CREATEIOSQ_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__CREATEIOSQ_e__Struct>(p)
             return ptr.read()
         }
@@ -7849,9 +7725,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_createiosq(val: NVME_COMMAND__u_e__Union__CREATEIOSQ_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__CREATEIOSQ_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7861,9 +7736,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func deleteioqueue(): NVME_COMMAND__u_e__Union__DELETEIOQUEUE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DELETEIOQUEUE_e__Struct>(p)
             return ptr.read()
         }
@@ -7872,9 +7746,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_deleteioqueue(val: NVME_COMMAND__u_e__Union__DELETEIOQUEUE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DELETEIOQUEUE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7884,9 +7757,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func datasetmanagement(): NVME_COMMAND__u_e__Union__DATASETMANAGEMENT_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DATASETMANAGEMENT_e__Struct>(p)
             return ptr.read()
         }
@@ -7895,9 +7767,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_datasetmanagement(val: NVME_COMMAND__u_e__Union__DATASETMANAGEMENT_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DATASETMANAGEMENT_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7907,9 +7778,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func securitysend(): NVME_COMMAND__u_e__Union__SECURITYSEND_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__SECURITYSEND_e__Struct>(p)
             return ptr.read()
         }
@@ -7918,9 +7788,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_securitysend(val: NVME_COMMAND__u_e__Union__SECURITYSEND_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__SECURITYSEND_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7930,9 +7799,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func securityreceive(): NVME_COMMAND__u_e__Union__SECURITYRECEIVE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__SECURITYRECEIVE_e__Struct>(p)
             return ptr.read()
         }
@@ -7941,9 +7809,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_securityreceive(val: NVME_COMMAND__u_e__Union__SECURITYRECEIVE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__SECURITYRECEIVE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7953,9 +7820,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func firmwaredownload(): NVME_COMMAND__u_e__Union__FIRMWAREDOWNLOAD_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__FIRMWAREDOWNLOAD_e__Struct>(p)
             return ptr.read()
         }
@@ -7964,9 +7830,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_firmwaredownload(val: NVME_COMMAND__u_e__Union__FIRMWAREDOWNLOAD_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__FIRMWAREDOWNLOAD_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7976,9 +7841,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func firmwareactivate(): NVME_COMMAND__u_e__Union__FIRMWAREACTIVATE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__FIRMWAREACTIVATE_e__Struct>(p)
             return ptr.read()
         }
@@ -7987,9 +7851,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_firmwareactivate(val: NVME_COMMAND__u_e__Union__FIRMWAREACTIVATE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__FIRMWAREACTIVATE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7999,9 +7862,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func formatnvm(): NVME_COMMAND__u_e__Union__FORMATNVM_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__FORMATNVM_e__Struct>(p)
             return ptr.read()
         }
@@ -8010,9 +7872,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_formatnvm(val: NVME_COMMAND__u_e__Union__FORMATNVM_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__FORMATNVM_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8022,9 +7883,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func directivereceive(): NVME_COMMAND__u_e__Union__DIRECTIVERECEIVE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DIRECTIVERECEIVE_e__Struct>(p)
             return ptr.read()
         }
@@ -8033,9 +7893,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_directivereceive(val: NVME_COMMAND__u_e__Union__DIRECTIVERECEIVE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DIRECTIVERECEIVE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8045,9 +7904,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func directivesend(): NVME_COMMAND__u_e__Union__DIRECTIVESEND_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DIRECTIVESEND_e__Struct>(p)
             return ptr.read()
         }
@@ -8056,9 +7914,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_directivesend(val: NVME_COMMAND__u_e__Union__DIRECTIVESEND_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DIRECTIVESEND_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8068,9 +7925,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func sanitize(): NVME_COMMAND__u_e__Union__SANITIZE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__SANITIZE_e__Struct>(p)
             return ptr.read()
         }
@@ -8079,9 +7935,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_sanitize(val: NVME_COMMAND__u_e__Union__SANITIZE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__SANITIZE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8091,9 +7946,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func readwrite(): NVME_COMMAND__u_e__Union__READWRITE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__READWRITE_e__Struct>(p)
             return ptr.read()
         }
@@ -8102,9 +7956,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_readwrite(val: NVME_COMMAND__u_e__Union__READWRITE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__READWRITE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8114,9 +7967,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func reservationacquire(): NVME_COMMAND__u_e__Union__RESERVATIONACQUIRE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__RESERVATIONACQUIRE_e__Struct>(p)
             return ptr.read()
         }
@@ -8125,9 +7977,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_reservationacquire(val: NVME_COMMAND__u_e__Union__RESERVATIONACQUIRE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__RESERVATIONACQUIRE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8137,9 +7988,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func reservationregister(): NVME_COMMAND__u_e__Union__RESERVATIONREGISTER_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__RESERVATIONREGISTER_e__Struct>(p)
             return ptr.read()
         }
@@ -8148,9 +7998,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_reservationregister(val: NVME_COMMAND__u_e__Union__RESERVATIONREGISTER_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__RESERVATIONREGISTER_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8160,9 +8009,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func reservationrelease(): NVME_COMMAND__u_e__Union__RESERVATIONRELEASE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__RESERVATIONRELEASE_e__Struct>(p)
             return ptr.read()
         }
@@ -8171,9 +8019,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_reservationrelease(val: NVME_COMMAND__u_e__Union__RESERVATIONRELEASE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__RESERVATIONRELEASE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8183,9 +8030,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func reservationreport(): NVME_COMMAND__u_e__Union__RESERVATIONREPORT_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__RESERVATIONREPORT_e__Struct>(p)
             return ptr.read()
         }
@@ -8194,9 +8040,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_reservationreport(val: NVME_COMMAND__u_e__Union__RESERVATIONREPORT_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__RESERVATIONREPORT_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8206,9 +8051,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func zonemanagementsend(): NVME_COMMAND__u_e__Union__ZONEMANAGEMENTSEND_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__ZONEMANAGEMENTSEND_e__Struct>(p)
             return ptr.read()
         }
@@ -8217,9 +8061,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_zonemanagementsend(val: NVME_COMMAND__u_e__Union__ZONEMANAGEMENTSEND_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__ZONEMANAGEMENTSEND_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8229,9 +8072,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func zonemanagementreceive(): NVME_COMMAND__u_e__Union__ZONEMANAGEMENTRECEIVE_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__ZONEMANAGEMENTRECEIVE_e__Struct>(p)
             return ptr.read()
         }
@@ -8240,9 +8082,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_zonemanagementreceive(val: NVME_COMMAND__u_e__Union__ZONEMANAGEMENTRECEIVE_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__ZONEMANAGEMENTRECEIVE_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8252,9 +8093,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func zoneappend(): NVME_COMMAND__u_e__Union__ZONEAPPEND_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__ZONEAPPEND_e__Struct>(p)
             return ptr.read()
         }
@@ -8263,9 +8103,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_zoneappend(val: NVME_COMMAND__u_e__Union__ZONEAPPEND_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__ZONEAPPEND_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8275,9 +8114,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func deviceselftest(): NVME_COMMAND__u_e__Union__DEVICESELFTEST_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DEVICESELFTEST_e__Struct>(p)
             return ptr.read()
         }
@@ -8286,9 +8124,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_deviceselftest(val: NVME_COMMAND__u_e__Union__DEVICESELFTEST_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DEVICESELFTEST_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8298,9 +8135,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func discoveryinfomgmt(): NVME_COMMAND__u_e__Union__DISCOVERYINFOMGMT_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DISCOVERYINFOMGMT_e__Struct>(p)
             return ptr.read()
         }
@@ -8309,9 +8145,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_discoveryinfomgmt(val: NVME_COMMAND__u_e__Union__DISCOVERYINFOMGMT_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__DISCOVERYINFOMGMT_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8321,9 +8156,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func vendorspecific(): NVME_COMMAND__u_e__Union__VENDORSPECIFIC_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__VENDORSPECIFIC_e__Struct>(p)
             return ptr.read()
         }
@@ -8332,9 +8166,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_vendorspecific(val: NVME_COMMAND__u_e__Union__VENDORSPECIFIC_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__VENDORSPECIFIC_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8344,9 +8177,8 @@ public struct NVME_COMMAND__u_e__Union {
     public func verifycommand(): NVME_COMMAND__u_e__Union__VERIFYCOMMAND_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__VERIFYCOMMAND_e__Struct>(p)
             return ptr.read()
         }
@@ -8355,9 +8187,8 @@ public struct NVME_COMMAND__u_e__Union {
     public mut func set_verifycommand(val: NVME_COMMAND__u_e__Union__VERIFYCOMMAND_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND__u_e__Union__VERIFYCOMMAND_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8394,27 +8225,21 @@ public struct NVME_COMMAND__u_e__Union__IDENTIFY_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMMAND__u_e__Union__IDENTIFY_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func cdw14(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_cdw14(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -8422,9 +8247,8 @@ public struct NVME_COMMAND__u_e__Union__IDENTIFY_e__Struct__Anonymous_e__Union {
     public func cdw14_V20(): NVME_CDW14_IDENTIFY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_IDENTIFY>(p)
             return ptr.read()
         }
@@ -8433,9 +8257,8 @@ public struct NVME_COMMAND__u_e__Union__IDENTIFY_e__Struct__Anonymous_e__Union {
     public mut func set_cdw14_V20(val: NVME_CDW14_IDENTIFY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_IDENTIFY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8496,14 +8319,13 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous1_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func cdw10(): NVME_CDW10_GET_LOG_PAGE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE>(p)
             return ptr.read()
         }
@@ -8512,9 +8334,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous1_e__Unio
     public mut func set_cdw10(val: NVME_CDW10_GET_LOG_PAGE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8524,9 +8345,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous1_e__Unio
     public func cdw10_V121(): NVME_CDW10_GET_LOG_PAGE_V121 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V121>(p)
             return ptr.read()
         }
@@ -8535,9 +8355,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous1_e__Unio
     public mut func set_cdw10_V121(val: NVME_CDW10_GET_LOG_PAGE_V121): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V121>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8547,9 +8366,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous1_e__Unio
     public func cdw10_V13(): NVME_CDW10_GET_LOG_PAGE_V13 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V13>(p)
             return ptr.read()
         }
@@ -8558,9 +8376,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous1_e__Unio
     public mut func set_cdw10_V13(val: NVME_CDW10_GET_LOG_PAGE_V13): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V13>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8570,9 +8387,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous1_e__Unio
     public func cdw10_V20(): NVME_CDW10_GET_LOG_PAGE_V20 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V20>(p)
             return ptr.read()
         }
@@ -8581,9 +8397,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous1_e__Unio
     public mut func set_cdw10_V20(val: NVME_CDW10_GET_LOG_PAGE_V20): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW10_GET_LOG_PAGE_V20>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8596,14 +8411,13 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous1_e__Unio
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous2_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func cdw14(): NVME_CDW14_GET_LOG_PAGE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_GET_LOG_PAGE>(p)
             return ptr.read()
         }
@@ -8612,9 +8426,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous2_e__Unio
     public mut func set_cdw14(val: NVME_CDW14_GET_LOG_PAGE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_GET_LOG_PAGE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8624,9 +8437,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous2_e__Unio
     public func cdw14_V20(): NVME_CDW14_GET_LOG_PAGE_V20 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_GET_LOG_PAGE_V20>(p)
             return ptr.read()
         }
@@ -8635,9 +8447,8 @@ public struct NVME_COMMAND__u_e__Union__GETLOGPAGE_e__Struct__Anonymous2_e__Unio
     public mut func set_cdw14_V20(val: NVME_CDW14_GET_LOG_PAGE_V20): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CDW14_GET_LOG_PAGE_V20>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8930,14 +8741,13 @@ public struct NVME_COMMAND__u_e__Union__VERIFYCOMMAND_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMMAND_DWORD0 {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_COMMAND_DWORD0__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND_DWORD0__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -8946,9 +8756,8 @@ public struct NVME_COMMAND_DWORD0 {
     public mut func set_anonymous(val: NVME_COMMAND_DWORD0__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND_DWORD0__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8958,22 +8767,16 @@ public struct NVME_COMMAND_DWORD0 {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -8991,14 +8794,13 @@ public struct NVME_COMMAND_DWORD0__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMMAND_EFFECTS_DATA {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_COMMAND_EFFECTS_DATA__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND_EFFECTS_DATA__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9007,9 +8809,8 @@ public struct NVME_COMMAND_EFFECTS_DATA {
     public mut func set_anonymous(val: NVME_COMMAND_EFFECTS_DATA__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND_EFFECTS_DATA__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9019,22 +8820,16 @@ public struct NVME_COMMAND_EFFECTS_DATA {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9117,14 +8912,13 @@ public let NVME_COMMAND_SET_ZONED_NAMESPACE: NVME_COMMAND_SET_IDENTIFIERS = NVME
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMMAND_STATUS {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func anonymous(): NVME_COMMAND_STATUS__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND_STATUS__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9133,9 +8927,8 @@ public struct NVME_COMMAND_STATUS {
     public mut func set_anonymous(val: NVME_COMMAND_STATUS__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMMAND_STATUS__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9145,22 +8938,16 @@ public struct NVME_COMMAND_STATUS {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9210,14 +8997,13 @@ public struct NVME_COMPLETION_ENTRY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMPLETION_ENTRY__DW2_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_COMPLETION_ENTRY__DW2_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMPLETION_ENTRY__DW2_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9226,9 +9012,8 @@ public struct NVME_COMPLETION_ENTRY__DW2_e__Union {
     public mut func set_anonymous(val: NVME_COMPLETION_ENTRY__DW2_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMPLETION_ENTRY__DW2_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9238,22 +9023,16 @@ public struct NVME_COMPLETION_ENTRY__DW2_e__Union {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9272,14 +9051,13 @@ public struct NVME_COMPLETION_ENTRY__DW2_e__Union__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMPLETION_ENTRY__DW3_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_COMPLETION_ENTRY__DW3_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMPLETION_ENTRY__DW3_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9288,9 +9066,8 @@ public struct NVME_COMPLETION_ENTRY__DW3_e__Union {
     public mut func set_anonymous(val: NVME_COMPLETION_ENTRY__DW3_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMPLETION_ENTRY__DW3_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9300,22 +9077,16 @@ public struct NVME_COMPLETION_ENTRY__DW3_e__Union {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9334,14 +9105,13 @@ public struct NVME_COMPLETION_ENTRY__DW3_e__Union__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_COMPLETION_QUEUE_HEAD_DOORBELL {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_COMPLETION_QUEUE_HEAD_DOORBELL__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMPLETION_QUEUE_HEAD_DOORBELL__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9350,9 +9120,8 @@ public struct NVME_COMPLETION_QUEUE_HEAD_DOORBELL {
     public mut func set_anonymous(val: NVME_COMPLETION_QUEUE_HEAD_DOORBELL__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_COMPLETION_QUEUE_HEAD_DOORBELL__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9362,22 +9131,16 @@ public struct NVME_COMPLETION_QUEUE_HEAD_DOORBELL {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9395,14 +9158,13 @@ public struct NVME_COMPLETION_QUEUE_HEAD_DOORBELL__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CONTEXT_ATTRIBUTES {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CONTEXT_ATTRIBUTES__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTEXT_ATTRIBUTES__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9411,9 +9173,8 @@ public struct NVME_CONTEXT_ATTRIBUTES {
     public mut func set_anonymous(val: NVME_CONTEXT_ATTRIBUTES__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTEXT_ATTRIBUTES__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9423,22 +9184,16 @@ public struct NVME_CONTEXT_ATTRIBUTES {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9456,14 +9211,13 @@ public struct NVME_CONTEXT_ATTRIBUTES__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CONTROLLER_CAPABILITIES {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func anonymous(): NVME_CONTROLLER_CAPABILITIES__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_CAPABILITIES__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9472,9 +9226,8 @@ public struct NVME_CONTROLLER_CAPABILITIES {
     public mut func set_anonymous(val: NVME_CONTROLLER_CAPABILITIES__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_CAPABILITIES__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9484,22 +9237,16 @@ public struct NVME_CONTROLLER_CAPABILITIES {
     public func asUlonglong(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_asUlonglong(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9517,14 +9264,13 @@ public struct NVME_CONTROLLER_CAPABILITIES__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CONTROLLER_CONFIGURATION {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CONTROLLER_CONFIGURATION__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_CONFIGURATION__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9533,9 +9279,8 @@ public struct NVME_CONTROLLER_CONFIGURATION {
     public mut func set_anonymous(val: NVME_CONTROLLER_CONFIGURATION__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_CONFIGURATION__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9545,22 +9290,16 @@ public struct NVME_CONTROLLER_CONFIGURATION {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9586,14 +9325,13 @@ public struct NVME_CONTROLLER_LIST {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CONTROLLER_MEMORY_BUFFER_LOCATION {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CONTROLLER_MEMORY_BUFFER_LOCATION__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_MEMORY_BUFFER_LOCATION__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9602,9 +9340,8 @@ public struct NVME_CONTROLLER_MEMORY_BUFFER_LOCATION {
     public mut func set_anonymous(val: NVME_CONTROLLER_MEMORY_BUFFER_LOCATION__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_MEMORY_BUFFER_LOCATION__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9614,22 +9351,16 @@ public struct NVME_CONTROLLER_MEMORY_BUFFER_LOCATION {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9647,14 +9378,13 @@ public struct NVME_CONTROLLER_MEMORY_BUFFER_LOCATION__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CONTROLLER_MEMORY_BUFFER_SIZE {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CONTROLLER_MEMORY_BUFFER_SIZE__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_MEMORY_BUFFER_SIZE__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9663,9 +9393,8 @@ public struct NVME_CONTROLLER_MEMORY_BUFFER_SIZE {
     public mut func set_anonymous(val: NVME_CONTROLLER_MEMORY_BUFFER_SIZE__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_MEMORY_BUFFER_SIZE__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9675,22 +9404,16 @@ public struct NVME_CONTROLLER_MEMORY_BUFFER_SIZE {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9775,14 +9498,13 @@ public let NVME_CONTROLLER_METADATA_HOST_DETERMINED_FAILURE_RECORD: NVME_CONTROL
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CONTROLLER_READY_TIMEOUTS {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CONTROLLER_READY_TIMEOUTS__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_READY_TIMEOUTS__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9791,9 +9513,8 @@ public struct NVME_CONTROLLER_READY_TIMEOUTS {
     public mut func set_anonymous(val: NVME_CONTROLLER_READY_TIMEOUTS__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_READY_TIMEOUTS__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9803,22 +9524,16 @@ public struct NVME_CONTROLLER_READY_TIMEOUTS {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -9862,14 +9577,13 @@ public struct NVME_CONTROLLER_REGISTERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_CONTROLLER_STATUS {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_CONTROLLER_STATUS__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_STATUS__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -9878,9 +9592,8 @@ public struct NVME_CONTROLLER_STATUS {
     public mut func set_anonymous(val: NVME_CONTROLLER_STATUS__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_CONTROLLER_STATUS__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9890,22 +9603,16 @@ public struct NVME_CONTROLLER_STATUS {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -10096,19 +9803,134 @@ public struct NVME_DEVICE_SELF_TEST_LOG__CurrentCompletion_e__Struct {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_DEVICE_SELF_TEST_RESULT_DATA {
-    public var Status: NVME_DEVICE_SELF_TEST_RESULT_DATA__Status_e__Struct = NVME_DEVICE_SELF_TEST_RESULT_DATA__Status_e__Struct()
-    public var SegmentNumber: UInt8 = 0
-    public var ValidDiagnostics: NVME_DEVICE_SELF_TEST_RESULT_DATA__ValidDiagnostics_e__Struct = NVME_DEVICE_SELF_TEST_RESULT_DATA__ValidDiagnostics_e__Struct()
-    public var Reserved: UInt8 = 0
-    public var POH: UInt64 = 0
-    public var NSID: UInt32 = 0
-    public var FailingLBA: UInt64 = 0
-    public var StatusCodeType: NVME_DEVICE_SELF_TEST_RESULT_DATA__StatusCodeType_e__Struct = NVME_DEVICE_SELF_TEST_RESULT_DATA__StatusCodeType_e__Struct()
-    public var StatusCode: UInt8 = 0
-    public var VendorSpecific: UInt16 = 0
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    // packed field `Status`: type `NVME_DEVICE_SELF_TEST_RESULT_DATA__Status_e__Struct` not supported by polyfill; skipped
+
+    public func segmentNumber(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_segmentNumber(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ValidDiagnostics`: type `NVME_DEVICE_SELF_TEST_RESULT_DATA__ValidDiagnostics_e__Struct` not supported by polyfill; skipped
+
+    public func reserved(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 3)
+        }
+    }
+
+    public mut func set_reserved(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func poh(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 4)
+        }
+    }
+
+    public mut func set_poh(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func nsid(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_nsid(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func failingLBA(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 16)
+        }
+    }
+
+    public mut func set_failingLBA(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `StatusCodeType`: type `NVME_DEVICE_SELF_TEST_RESULT_DATA__StatusCodeType_e__Struct` not supported by polyfill; skipped
+
+    public func statusCode(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 25)
+        }
+    }
+
+    public mut func set_statusCode(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 25, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func vendorSpecific(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 26)
+        }
+    }
+
+    public mut func set_vendorSpecific(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 26, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -10323,9 +10145,8 @@ public struct NVME_DISCOVERY_ENTRY__TREQ_e__Union {
     public func anonymous(): NVME_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -10334,9 +10155,8 @@ public struct NVME_DISCOVERY_ENTRY__TREQ_e__Union {
     public mut func set_anonymous(val: NVME_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10346,22 +10166,16 @@ public struct NVME_DISCOVERY_ENTRY__TREQ_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -10379,14 +10193,13 @@ public struct NVME_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_DISCOVERY_ENTRY__EFLAGS_e__Union {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func anonymous(): NVME_DISCOVERY_ENTRY__EFLAGS_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_DISCOVERY_ENTRY__EFLAGS_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -10395,9 +10208,8 @@ public struct NVME_DISCOVERY_ENTRY__EFLAGS_e__Union {
     public mut func set_anonymous(val: NVME_DISCOVERY_ENTRY__EFLAGS_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_DISCOVERY_ENTRY__EFLAGS_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10407,22 +10219,16 @@ public struct NVME_DISCOVERY_ENTRY__EFLAGS_e__Union {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -10458,9 +10264,8 @@ public struct NVME_DISCOVERY_HEADER__DLPF_e__Union {
     public func anonymous(): NVME_DISCOVERY_HEADER__DLPF_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_DISCOVERY_HEADER__DLPF_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -10469,9 +10274,8 @@ public struct NVME_DISCOVERY_HEADER__DLPF_e__Union {
     public mut func set_anonymous(val: NVME_DISCOVERY_HEADER__DLPF_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_DISCOVERY_HEADER__DLPF_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10481,22 +10285,16 @@ public struct NVME_DISCOVERY_HEADER__DLPF_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -10591,14 +10389,13 @@ public struct NVME_DISCOVERY_INFO_MGMT_HEADER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_DISCOVERY_INFO_MGMT_HEADER__EKTYPE_e__Union {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func anonymous(): NVME_DISCOVERY_INFO_MGMT_HEADER__EKTYPE_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_DISCOVERY_INFO_MGMT_HEADER__EKTYPE_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -10607,9 +10404,8 @@ public struct NVME_DISCOVERY_INFO_MGMT_HEADER__EKTYPE_e__Union {
     public mut func set_anonymous(val: NVME_DISCOVERY_INFO_MGMT_HEADER__EKTYPE_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_DISCOVERY_INFO_MGMT_HEADER__EKTYPE_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10619,22 +10415,16 @@ public struct NVME_DISCOVERY_INFO_MGMT_HEADER__EKTYPE_e__Union {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -10711,18 +10501,72 @@ public let NvmeDiscCtrlTypeReserved1: NVME_DISC_CTRL_TYPE = NVME_DISC_CTRL_TYPE(
 public let NvmeDiscCtrlTypeReservedMax: NVME_DISC_CTRL_TYPE = NVME_DISC_CTRL_TYPE(255)
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_ENDURANCE_GROUP_LOG {
-    public var Reserved0: UInt32 = 0
-    public var AvailableSpareThreshold: UInt8 = 0
-    public var PercentageUsed: UInt8 = 0
-    public var Reserved1: VArray<UInt8, $26> = VArray<UInt8, $26>(repeat: 0)
-    public var EnduranceEstimate: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var DataUnitsRead: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var DataUnitsWritten: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var MediaUnitsWritten: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var Reserved2: VArray<UInt8, $416> = VArray<UInt8, $416>(repeat: 0)
+    public var _raw: VArray<UInt8, $512> = VArray<UInt8, $512>(repeat: 0u8)
+
+    public func reserved0(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_reserved0(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func availableSpareThreshold(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 4)
+        }
+    }
+
+    public mut func set_availableSpareThreshold(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func percentageUsed(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 5)
+        }
+    }
+
+    public mut func set_percentageUsed(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 5, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved1`: type `VArray<UInt8, $26>` not supported by polyfill; skipped
+
+    // packed field `EnduranceEstimate`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `DataUnitsRead`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `DataUnitsWritten`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `MediaUnitsWritten`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `Reserved2`: type `VArray<UInt8, $416>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -10771,9 +10615,8 @@ public struct NVME_ERROR_INJECTION_ENTRY__Flags_e__Union {
     public func anonymous(): NVME_ERROR_INJECTION_ENTRY__Flags_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_ERROR_INJECTION_ENTRY__Flags_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -10782,9 +10625,8 @@ public struct NVME_ERROR_INJECTION_ENTRY__Flags_e__Union {
     public mut func set_anonymous(val: NVME_ERROR_INJECTION_ENTRY__Flags_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_ERROR_INJECTION_ENTRY__Flags_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10794,22 +10636,16 @@ public struct NVME_ERROR_INJECTION_ENTRY__Flags_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -10962,9 +10798,8 @@ public struct NVME_EXTENDED_DISCOVERY_ENTRY__TREQ_e__Union {
     public func anonymous(): NVME_EXTENDED_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_EXTENDED_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -10973,9 +10808,8 @@ public struct NVME_EXTENDED_DISCOVERY_ENTRY__TREQ_e__Union {
     public mut func set_anonymous(val: NVME_EXTENDED_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_EXTENDED_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10985,22 +10819,16 @@ public struct NVME_EXTENDED_DISCOVERY_ENTRY__TREQ_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -11018,14 +10846,13 @@ public struct NVME_EXTENDED_DISCOVERY_ENTRY__TREQ_e__Union__Anonymous_e__Struct 
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_EXTENDED_DISCOVERY_ENTRY__EFLAGS_e__Union {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func anonymous(): NVME_EXTENDED_DISCOVERY_ENTRY__EFLAGS_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_EXTENDED_DISCOVERY_ENTRY__EFLAGS_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -11034,9 +10861,8 @@ public struct NVME_EXTENDED_DISCOVERY_ENTRY__EFLAGS_e__Union {
     public mut func set_anonymous(val: NVME_EXTENDED_DISCOVERY_ENTRY__EFLAGS_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_EXTENDED_DISCOVERY_ENTRY__EFLAGS_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11046,22 +10872,16 @@ public struct NVME_EXTENDED_DISCOVERY_ENTRY__EFLAGS_e__Union {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -11457,9 +11277,8 @@ public struct NVME_HEALTH_INFO_LOG__CriticalWarning_e__Union {
     public func anonymous(): NVME_HEALTH_INFO_LOG__CriticalWarning_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_HEALTH_INFO_LOG__CriticalWarning_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -11468,9 +11287,8 @@ public struct NVME_HEALTH_INFO_LOG__CriticalWarning_e__Union {
     public mut func set_anonymous(val: NVME_HEALTH_INFO_LOG__CriticalWarning_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_HEALTH_INFO_LOG__CriticalWarning_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11480,22 +11298,16 @@ public struct NVME_HEALTH_INFO_LOG__CriticalWarning_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12158,20 +11970,181 @@ public struct NVME_IDENTIFY_ZNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_LATENCY_MONITORING_ENTRY {
-    public var ActiveBucketTimerThreshold: UInt16 = 0
-    public var ActiveThresholdA: UInt8 = 0
-    public var ActiveThresholdB: UInt8 = 0
-    public var ActiveThresholdC: UInt8 = 0
-    public var ActiveThresholdD: UInt8 = 0
-    public var ActiveLatencyConfig: UInt16 = 0
-    public var ActiveLatencyMinimumWindow: UInt8 = 0
-    public var DebugLogTriggerEnable: UInt16 = 0
-    public var DiscardDebugLog: UInt8 = 0
-    public var LatencyMonitorFeatureEnable: UInt8 = 0
-    public var Reserved0: VArray<UInt8, $4083> = VArray<UInt8, $4083>(repeat: 0)
+    public var _raw: VArray<UInt8, $4096> = VArray<UInt8, $4096>(repeat: 0u8)
+
+    public func activeBucketTimerThreshold(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_activeBucketTimerThreshold(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeThresholdA(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 2)
+        }
+    }
+
+    public mut func set_activeThresholdA(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeThresholdB(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 3)
+        }
+    }
+
+    public mut func set_activeThresholdB(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeThresholdC(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 4)
+        }
+    }
+
+    public mut func set_activeThresholdC(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeThresholdD(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 5)
+        }
+    }
+
+    public mut func set_activeThresholdD(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 5, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeLatencyConfig(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 6)
+        }
+    }
+
+    public mut func set_activeLatencyConfig(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeLatencyMinimumWindow(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 8)
+        }
+    }
+
+    public mut func set_activeLatencyMinimumWindow(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func debugLogTriggerEnable(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 9)
+        }
+    }
+
+    public mut func set_debugLogTriggerEnable(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 9, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func discardDebugLog(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 11)
+        }
+    }
+
+    public mut func set_discardDebugLog(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 11, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func latencyMonitorFeatureEnable(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 12)
+        }
+    }
+
+    public mut func set_latencyMonitorFeatureEnable(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved0`: type `VArray<UInt8, $4083>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -12179,14 +12152,13 @@ public struct NVME_LATENCY_MONITORING_ENTRY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_LBA_FORMAT {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_LBA_FORMAT__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_LBA_FORMAT__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12195,9 +12167,8 @@ public struct NVME_LBA_FORMAT {
     public mut func set_anonymous(val: NVME_LBA_FORMAT__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_LBA_FORMAT__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12207,22 +12178,16 @@ public struct NVME_LBA_FORMAT {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12611,27 +12576,99 @@ public struct NVME_NVM_SUBSYSTEM_SHUTDOWN {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG {
-    public var PciePorts: UInt16 = 0
-    public var OobMgmtSupport: NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union = NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union()
-    public var WriteZeroesCommand: NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union = NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union()
-    public var SanitizeCommand: NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union = NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union()
-    public var DatasetMgmtCommand: NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union = NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union()
-    public var WriteUncorrectableCommand: NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Union = NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Union()
-    public var FusedCommand: NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union = NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union()
-    public var MinimumValidDSSDPowerState: UInt16 = 0
-    public var Reserved0: UInt8 = 0
-    public var DssdDescriptors: VArray<DSSD_POWER_STATE_DESCRIPTOR, $127> = VArray<DSSD_POWER_STATE_DESCRIPTOR, $127>(repeat: DSSD_POWER_STATE_DESCRIPTOR())
-    public var Reserved1: VArray<UInt8, $3934> = VArray<UInt8, $3934>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $4080> = VArray<UInt8, $4080>(repeat: 0u8)
+
+    public func pciePorts(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_pciePorts(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `OobMgmtSupport`: type `NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union` not supported by polyfill; skipped
+
+    // packed field `WriteZeroesCommand`: type `NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union` not supported by polyfill; skipped
+
+    // packed field `SanitizeCommand`: type `NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union` not supported by polyfill; skipped
+
+    // packed field `DatasetMgmtCommand`: type `NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union` not supported by polyfill; skipped
+
+    // packed field `WriteUncorrectableCommand`: type `NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Union` not supported by polyfill; skipped
+
+    // packed field `FusedCommand`: type `NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union` not supported by polyfill; skipped
+
+    public func minimumValidDSSDPowerState(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 14)
+        }
+    }
+
+    public mut func set_minimumValidDSSDPowerState(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved0(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 16)
+        }
+    }
+
+    public mut func set_reserved0(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `DssdDescriptors`: type `VArray<DSSD_POWER_STATE_DESCRIPTOR, $127>` not supported by polyfill; skipped
+
+    // packed field `Reserved1`: type `VArray<UInt8, $3934>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4078)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4078, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union {
@@ -12640,9 +12677,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union {
     public func anonymous(): NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12651,9 +12687,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union {
     public mut func set_anonymous(val: NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12663,22 +12698,16 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12686,15 +12715,30 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__OobMgmtSupport_e__Union__Anonymous_e__Struct {
-    public var _bitfield: UInt16 = 0
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func _bitfield(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set__bitfield(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union {
@@ -12703,9 +12747,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union {
     public func anonymous(): NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12714,9 +12757,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union {
     public mut func set_anonymous(val: NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12726,22 +12768,16 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12749,15 +12785,30 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteZeroesCommand_e__Union__Anonymous_e__Struct {
-    public var _bitfield: UInt16 = 0
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func _bitfield(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set__bitfield(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union {
@@ -12766,9 +12817,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union {
     public func anonymous(): NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12777,9 +12827,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union {
     public mut func set_anonymous(val: NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12789,22 +12838,16 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12812,15 +12855,30 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__SanitizeCommand_e__Union__Anonymous_e__Struct {
-    public var _bitfield: UInt16 = 0
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func _bitfield(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set__bitfield(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union {
@@ -12829,9 +12887,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union {
     public func anonymous(): NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12840,9 +12897,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union {
     public mut func set_anonymous(val: NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12852,22 +12908,16 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12875,15 +12925,30 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__DatasetMgmtCommand_e__Union__Anonymous_e__Struct {
-    public var _bitfield: UInt16 = 0
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func _bitfield(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set__bitfield(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Union {
@@ -12892,9 +12957,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Uni
     public func anonymous(): NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12903,9 +12967,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Uni
     public mut func set_anonymous(val: NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12915,22 +12978,16 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Uni
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12938,15 +12995,30 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Uni
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__WriteUncorrectableCommand_e__Union__Anonymous_e__Struct {
-    public var _bitfield: UInt16 = 0
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func _bitfield(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set__bitfield(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union {
@@ -12955,9 +13027,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union {
     public func anonymous(): NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12966,9 +13037,8 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union {
     public mut func set_anonymous(val: NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12978,22 +13048,16 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union {
     public func asUshort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_asUshort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -13001,89 +13065,538 @@ public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_CAPABILITIES_LOG__FusedCommand_e__Union__Anonymous_e__Struct {
-    public var _bitfield: UInt16 = 0
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public func _bitfield(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set__bitfield(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_ERROR_RECOVERY_LOG_V2 {
-    public var PanicResetWaitTime: UInt16 = 0
-    public var PanicResetAction: NVME_WCS_DEVICE_RESET_ACTION = NVME_WCS_DEVICE_RESET_ACTION()
-    public var DeviceRecoveryAction1: UInt8 = 0
-    public var PanicId: UInt64 = 0
-    public var DeviceCapabilitiesA: NVME_WCS_DEVICE_CAPABILITIES = NVME_WCS_DEVICE_CAPABILITIES()
-    public var VendorSpecificRecoveryCode: UInt8 = 0
-    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var VendorSpecificCommandCDW12: UInt32 = 0
-    public var VendorSpecificCommandCDW13: UInt32 = 0
-    public var VendorSpecificCommandTimeout: UInt8 = 0
-    public var DeviceRecoveryAction2: UInt8 = 0
-    public var DeviceRecoveryAction2Timeout: UInt8 = 0
-    public var Reserved1: VArray<UInt8, $463> = VArray<UInt8, $463>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $496> = VArray<UInt8, $496>(repeat: 0u8)
+
+    public func panicResetWaitTime(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_panicResetWaitTime(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `PanicResetAction`: type `NVME_WCS_DEVICE_RESET_ACTION` not supported by polyfill; skipped
+
+    public func deviceRecoveryAction1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 3)
+        }
+    }
+
+    public mut func set_deviceRecoveryAction1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func panicId(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 4)
+        }
+    }
+
+    public mut func set_panicId(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `DeviceCapabilitiesA`: type `NVME_WCS_DEVICE_CAPABILITIES` not supported by polyfill; skipped
+
+    public func vendorSpecificRecoveryCode(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 16)
+        }
+    }
+
+    public mut func set_vendorSpecificRecoveryCode(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved0`: type `VArray<UInt8, $3>` not supported by polyfill; skipped
+
+    public func vendorSpecificCommandCDW12(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_vendorSpecificCommandCDW12(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func vendorSpecificCommandCDW13(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_vendorSpecificCommandCDW13(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func vendorSpecificCommandTimeout(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 28)
+        }
+    }
+
+    public mut func set_vendorSpecificCommandTimeout(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func deviceRecoveryAction2(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 29)
+        }
+    }
+
+    public mut func set_deviceRecoveryAction2(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 29, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func deviceRecoveryAction2Timeout(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 30)
+        }
+    }
+
+    public mut func set_deviceRecoveryAction2Timeout(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 30, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved1`: type `VArray<UInt8, $463>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 494)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 494, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_FIRMWARE_ACTIVATION_HISTORY_LOG {
-    public var LID: UInt8 = 0
-    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var ValidNumberOfEntries: UInt32 = 0
-    public var Entries: VArray<FIRMWARE_ACTIVATION_HISTORY_ENTRY, $20> = VArray<FIRMWARE_ACTIVATION_HISTORY_ENTRY, $20>(repeat: FIRMWARE_ACTIVATION_HISTORY_ENTRY())
-    public var Reserved1: VArray<UInt8, $2790> = VArray<UInt8, $2790>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $4080> = VArray<UInt8, $4080>(repeat: 0u8)
+
+    public func lid(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_lid(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved0`: type `VArray<UInt8, $3>` not supported by polyfill; skipped
+
+    public func validNumberOfEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_validNumberOfEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Entries`: type `VArray<FIRMWARE_ACTIVATION_HISTORY_ENTRY, $20>` not supported by polyfill; skipped
+
+    // packed field `Reserved1`: type `VArray<UInt8, $2790>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4078)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4078, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_LATENCY_MONITOR_LOG {
-    public var FeatureStatus: LATENCY_MONITOR_FEATURE_STATUS = LATENCY_MONITOR_FEATURE_STATUS()
-    public var Reserved0: UInt8 = 0
-    public var ActiveBucketTimer: UInt16 = 0
-    public var ActiveBucketTimerThreshold: UInt16 = 0
-    public var ActiveThresholdA: UInt8 = 0
-    public var ActiveThresholdB: UInt8 = 0
-    public var ActiveThresholdC: UInt8 = 0
-    public var ActiveThresholdD: UInt8 = 0
-    public var ActiveLatencyConfig: ACTIVE_LATENCY_CONFIGURATION = ACTIVE_LATENCY_CONFIGURATION()
-    public var ActiveLatencyMinimumWindow: UInt8 = 0
-    public var Reserved1: VArray<UInt8, $19> = VArray<UInt8, $19>(repeat: 0)
-    public var ActiveBucketCounter0: BUCKET_COUNTER = BUCKET_COUNTER()
-    public var ActiveBucketCounter1: BUCKET_COUNTER = BUCKET_COUNTER()
-    public var ActiveBucketCounter2: BUCKET_COUNTER = BUCKET_COUNTER()
-    public var ActiveBucketCounter3: BUCKET_COUNTER = BUCKET_COUNTER()
-    public var ActiveLatencyStamp: LATENCY_STAMP = LATENCY_STAMP()
-    public var ActiveMeasuredLatency: MEASURED_LATENCY = MEASURED_LATENCY()
-    public var ActiveLatencyStampUnits: LATENCY_STAMP_UNITS = LATENCY_STAMP_UNITS()
-    public var Reserved2: VArray<UInt8, $22> = VArray<UInt8, $22>(repeat: 0)
-    public var StaticBucketCounter0: BUCKET_COUNTER = BUCKET_COUNTER()
-    public var StaticBucketCounter1: BUCKET_COUNTER = BUCKET_COUNTER()
-    public var StaticBucketCounter2: BUCKET_COUNTER = BUCKET_COUNTER()
-    public var StaticBucketCounter3: BUCKET_COUNTER = BUCKET_COUNTER()
-    public var StaticLatencyStamp: LATENCY_STAMP = LATENCY_STAMP()
-    public var StaticMeasuredLatency: MEASURED_LATENCY = MEASURED_LATENCY()
-    public var StaticLatencyStampUnits: LATENCY_STAMP_UNITS = LATENCY_STAMP_UNITS()
-    public var Reserved3: VArray<UInt8, $22> = VArray<UInt8, $22>(repeat: 0)
-    public var DebugLogTriggerEnable: DEBUG_BIT_FIELD = DEBUG_BIT_FIELD()
-    public var DebugLogMeasuredLatency: UInt16 = 0
-    public var DebugLogLatencyStamp: UInt64 = 0
-    public var DebugLogPointer: UInt16 = 0
-    public var DebugCounterTriggerSource: DEBUG_BIT_FIELD = DEBUG_BIT_FIELD()
-    public var DebugLogStampUnits: NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union = NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union()
-    public var Reserved4: VArray<UInt8, $29> = VArray<UInt8, $29>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $496> = VArray<UInt8, $496>(repeat: 0u8)
+
+    // packed field `FeatureStatus`: type `LATENCY_MONITOR_FEATURE_STATUS` not supported by polyfill; skipped
+
+    public func reserved0(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_reserved0(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeBucketTimer(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_activeBucketTimer(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeBucketTimerThreshold(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4)
+        }
+    }
+
+    public mut func set_activeBucketTimerThreshold(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeThresholdA(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 6)
+        }
+    }
+
+    public mut func set_activeThresholdA(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeThresholdB(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 7)
+        }
+    }
+
+    public mut func set_activeThresholdB(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 7, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeThresholdC(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 8)
+        }
+    }
+
+    public mut func set_activeThresholdC(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func activeThresholdD(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 9)
+        }
+    }
+
+    public mut func set_activeThresholdD(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 9, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ActiveLatencyConfig`: type `ACTIVE_LATENCY_CONFIGURATION` not supported by polyfill; skipped
+
+    public func activeLatencyMinimumWindow(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 12)
+        }
+    }
+
+    public mut func set_activeLatencyMinimumWindow(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved1`: type `VArray<UInt8, $19>` not supported by polyfill; skipped
+
+    // packed field `ActiveBucketCounter0`: type `BUCKET_COUNTER` not supported by polyfill; skipped
+
+    // packed field `ActiveBucketCounter1`: type `BUCKET_COUNTER` not supported by polyfill; skipped
+
+    // packed field `ActiveBucketCounter2`: type `BUCKET_COUNTER` not supported by polyfill; skipped
+
+    // packed field `ActiveBucketCounter3`: type `BUCKET_COUNTER` not supported by polyfill; skipped
+
+    // packed field `ActiveLatencyStamp`: type `LATENCY_STAMP` not supported by polyfill; skipped
+
+    // packed field `ActiveMeasuredLatency`: type `MEASURED_LATENCY` not supported by polyfill; skipped
+
+    // packed field `ActiveLatencyStampUnits`: type `LATENCY_STAMP_UNITS` not supported by polyfill; skipped
+
+    // packed field `Reserved2`: type `VArray<UInt8, $22>` not supported by polyfill; skipped
+
+    // packed field `StaticBucketCounter0`: type `BUCKET_COUNTER` not supported by polyfill; skipped
+
+    // packed field `StaticBucketCounter1`: type `BUCKET_COUNTER` not supported by polyfill; skipped
+
+    // packed field `StaticBucketCounter2`: type `BUCKET_COUNTER` not supported by polyfill; skipped
+
+    // packed field `StaticBucketCounter3`: type `BUCKET_COUNTER` not supported by polyfill; skipped
+
+    // packed field `StaticLatencyStamp`: type `LATENCY_STAMP` not supported by polyfill; skipped
+
+    // packed field `StaticMeasuredLatency`: type `MEASURED_LATENCY` not supported by polyfill; skipped
+
+    // packed field `StaticLatencyStampUnits`: type `LATENCY_STAMP_UNITS` not supported by polyfill; skipped
+
+    // packed field `Reserved3`: type `VArray<UInt8, $22>` not supported by polyfill; skipped
+
+    // packed field `DebugLogTriggerEnable`: type `DEBUG_BIT_FIELD` not supported by polyfill; skipped
+
+    public func debugLogMeasuredLatency(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 450)
+        }
+    }
+
+    public mut func set_debugLogMeasuredLatency(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 450, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func debugLogLatencyStamp(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 452)
+        }
+    }
+
+    public mut func set_debugLogLatencyStamp(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 452, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func debugLogPointer(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 460)
+        }
+    }
+
+    public mut func set_debugLogPointer(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 460, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `DebugCounterTriggerSource`: type `DEBUG_BIT_FIELD` not supported by polyfill; skipped
+
+    // packed field `DebugLogStampUnits`: type `NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union` not supported by polyfill; skipped
+
+    // packed field `Reserved4`: type `VArray<UInt8, $29>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 494)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 494, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
@@ -13096,9 +13609,8 @@ public struct NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union {
     public func anonymous(): NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -13107,9 +13619,8 @@ public struct NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union {
     public mut func set_anonymous(val: NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13119,22 +13630,16 @@ public struct NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -13149,40 +13654,311 @@ public struct NVME_OCP_DEVICE_LATENCY_MONITOR_LOG__DebugLogStampUnits_e__Union__
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3 {
-    public var MediaUnitsWritten: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var MediaUnitsRead: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var BadUserNANDBlockCount: NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__BadUserNANDBlockCount_e__Struct = NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__BadUserNANDBlockCount_e__Struct()
-    public var BadSystemNANDBlockCount: NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__BadSystemNANDBlockCount_e__Struct = NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__BadSystemNANDBlockCount_e__Struct()
-    public var XORRecoveryCount: UInt64 = 0
-    public var UnrecoverableReadErrorCount: UInt64 = 0
-    public var SoftECCErrorCount: UInt64 = 0
-    public var EndToEndCorrectionCounts: NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__EndToEndCorrectionCounts_e__Struct = NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__EndToEndCorrectionCounts_e__Struct()
-    public var PercentageSystemDataUsed: UInt8 = 0
-    public var RefreshCount: VArray<UInt8, $7> = VArray<UInt8, $7>(repeat: 0)
-    public var UserDataEraseCounts: NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__UserDataEraseCounts_e__Struct = NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__UserDataEraseCounts_e__Struct()
-    public var ThermalThrottling: NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__ThermalThrottling_e__Struct = NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__ThermalThrottling_e__Struct()
-    public var DSSDSpecVersion: NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__DSSDSpecVersion_e__Struct = NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__DSSDSpecVersion_e__Struct()
-    public var PCIeCorrectableErrorCount: UInt64 = 0
-    public var IncompleteShutdownCount: UInt32 = 0
-    public var Reserved1: UInt32 = 0
-    public var PercentageFreeBlocks: UInt8 = 0
-    public var Reserved2: VArray<UInt8, $7> = VArray<UInt8, $7>(repeat: 0)
-    public var CapacitorHealth: UInt16 = 0
-    public var NvmeErrata: UInt8 = 0
-    public var Reserved3: VArray<UInt8, $5> = VArray<UInt8, $5>(repeat: 0)
-    public var UnalignedIOCount: UInt64 = 0
-    public var SecurityVersionNumber: UInt64 = 0
-    public var NUSE: UInt64 = 0
-    public var PLPStartCount: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var EnduranceEstimate: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var PCIeLinkRetrainingCount: UInt64 = 0
-    public var PowerStateChangeCount: UInt64 = 0
-    public var Reserved4: VArray<UInt8, $286> = VArray<UInt8, $286>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $496> = VArray<UInt8, $496>(repeat: 0u8)
+
+    // packed field `MediaUnitsWritten`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `MediaUnitsRead`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `BadUserNANDBlockCount`: type `NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__BadUserNANDBlockCount_e__Struct` not supported by polyfill; skipped
+
+    // packed field `BadSystemNANDBlockCount`: type `NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__BadSystemNANDBlockCount_e__Struct` not supported by polyfill; skipped
+
+    public func xorRecoveryCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 48)
+        }
+    }
+
+    public mut func set_xorRecoveryCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func unrecoverableReadErrorCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 56)
+        }
+    }
+
+    public mut func set_unrecoverableReadErrorCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func softECCErrorCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 64)
+        }
+    }
+
+    public mut func set_softECCErrorCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `EndToEndCorrectionCounts`: type `NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__EndToEndCorrectionCounts_e__Struct` not supported by polyfill; skipped
+
+    public func percentageSystemDataUsed(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 80)
+        }
+    }
+
+    public mut func set_percentageSystemDataUsed(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `RefreshCount`: type `VArray<UInt8, $7>` not supported by polyfill; skipped
+
+    // packed field `UserDataEraseCounts`: type `NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__UserDataEraseCounts_e__Struct` not supported by polyfill; skipped
+
+    // packed field `ThermalThrottling`: type `NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__ThermalThrottling_e__Struct` not supported by polyfill; skipped
+
+    // packed field `DSSDSpecVersion`: type `NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__DSSDSpecVersion_e__Struct` not supported by polyfill; skipped
+
+    public func pcIeCorrectableErrorCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 104)
+        }
+    }
+
+    public mut func set_pcIeCorrectableErrorCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 104, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func incompleteShutdownCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 112)
+        }
+    }
+
+    public mut func set_incompleteShutdownCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 112, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 116)
+        }
+    }
+
+    public mut func set_reserved1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 116, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func percentageFreeBlocks(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 120)
+        }
+    }
+
+    public mut func set_percentageFreeBlocks(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 120, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved2`: type `VArray<UInt8, $7>` not supported by polyfill; skipped
+
+    public func capacitorHealth(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 128)
+        }
+    }
+
+    public mut func set_capacitorHealth(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 128, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func nvmeErrata(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 130)
+        }
+    }
+
+    public mut func set_nvmeErrata(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 130, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved3`: type `VArray<UInt8, $5>` not supported by polyfill; skipped
+
+    public func unalignedIOCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 136)
+        }
+    }
+
+    public mut func set_unalignedIOCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 136, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func securityVersionNumber(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 144)
+        }
+    }
+
+    public mut func set_securityVersionNumber(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 144, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func nuse(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 152)
+        }
+    }
+
+    public mut func set_nuse(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 152, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `PLPStartCount`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `EnduranceEstimate`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    public func pcIeLinkRetrainingCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 192)
+        }
+    }
+
+    public mut func set_pcIeLinkRetrainingCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 192, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func powerStateChangeCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 200)
+        }
+    }
+
+    public mut func set_powerStateChangeCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 200, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved4`: type `VArray<UInt8, $286>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 494)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 494, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
@@ -13203,20 +13979,84 @@ public struct NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__BadSystemNANDBlockCount_
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__EndToEndCorrectionCounts_e__Struct {
-    public var DetectedCounts: UInt32 = 0
-    public var CorrectedCounts: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func detectedCounts(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_detectedCounts(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func correctedCounts(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_correctedCounts(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__UserDataEraseCounts_e__Struct {
-    public var MaximumCount: UInt32 = 0
-    public var MinimumCount: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func maximumCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_maximumCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func minimumCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_minimumCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -13229,41 +14069,381 @@ public struct NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__ThermalThrottling_e__Str
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_SMART_INFORMATION_LOG_V3__DSSDSpecVersion_e__Struct {
-    public var Errata: UInt8 = 0
-    public var PointVersion: UInt16 = 0
-    public var MinorVersion: UInt16 = 0
-    public var MajorVersion: UInt8 = 0
+    public var _raw: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0u8)
+
+    public func errata(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_errata(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func pointVersion(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 1)
+        }
+    }
+
+    public mut func set_pointVersion(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func minorVersion(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 3)
+        }
+    }
+
+    public mut func set_minorVersion(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func majorVersion(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 5)
+        }
+    }
+
+    public mut func set_majorVersion(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 5, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG {
-    public var State: NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union = NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union()
-    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var LSPActivationCount: UInt8 = 0
-    public var TPRevertCount: UInt8 = 0
-    public var LSPRevertCount: UInt8 = 0
-    public var LOCount: UInt8 = 0
-    public var SUMLOCount: UInt8 = 0
-    public var RPLOCount: UInt8 = 0
-    public var NPLOCount: UInt8 = 0
-    public var RLLOCount: UInt8 = 0
-    public var WLLOCount: UInt8 = 0
-    public var RULOCount: UInt8 = 0
-    public var WULOCount: UInt8 = 0
-    public var Reserved1: UInt8 = 0
-    public var SIDAuthTryCount: UInt32 = 0
-    public var SIDAuthTryLimit: UInt32 = 0
-    public var ResetCount: UInt32 = 0
-    public var ResetLockCount: UInt32 = 0
-    public var Reserved2: VArray<UInt8, $462> = VArray<UInt8, $462>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $496> = VArray<UInt8, $496>(repeat: 0u8)
+
+    // packed field `State`: type `NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union` not supported by polyfill; skipped
+
+    // packed field `Reserved0`: type `VArray<UInt8, $3>` not supported by polyfill; skipped
+
+    public func lspActivationCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 4)
+        }
+    }
+
+    public mut func set_lspActivationCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func tpRevertCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 5)
+        }
+    }
+
+    public mut func set_tpRevertCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 5, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func lspRevertCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 6)
+        }
+    }
+
+    public mut func set_lspRevertCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func loCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 7)
+        }
+    }
+
+    public mut func set_loCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 7, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func sumloCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 8)
+        }
+    }
+
+    public mut func set_sumloCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func rploCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 9)
+        }
+    }
+
+    public mut func set_rploCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 9, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func nploCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 10)
+        }
+    }
+
+    public mut func set_nploCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 10, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func rlloCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 11)
+        }
+    }
+
+    public mut func set_rlloCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 11, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wlloCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 12)
+        }
+    }
+
+    public mut func set_wlloCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ruloCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 13)
+        }
+    }
+
+    public mut func set_ruloCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 13, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wuloCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 14)
+        }
+    }
+
+    public mut func set_wuloCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 15)
+        }
+    }
+
+    public mut func set_reserved1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 15, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func sidAuthTryCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_sidAuthTryCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func sidAuthTryLimit(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_sidAuthTryLimit(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func resetCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_resetCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func resetLockCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_resetLockCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved2`: type `VArray<UInt8, $462>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 494)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 494, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
@@ -13276,9 +14456,8 @@ public struct NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union {
     public func anonymous(): NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -13287,9 +14466,8 @@ public struct NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union {
     public mut func set_anonymous(val: NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13299,22 +14477,16 @@ public struct NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -13329,45 +14501,262 @@ public struct NVME_OCP_DEVICE_TCG_CONFIGURATION_LOG__State_e__Union__Anonymous_e
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_TCG_HISTORY_LOG {
-    public var LID: UInt8 = 0
-    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var HistoryEntryCount: UInt32 = 0
-    public var HistoryEntries: VArray<TCG_HISTORY_ENTRY, $84> = VArray<TCG_HISTORY_ENTRY, $84>(repeat: TCG_HISTORY_ENTRY())
-    public var Reserved1: VArray<UInt8, $38> = VArray<UInt8, $38>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $4080> = VArray<UInt8, $4080>(repeat: 0u8)
+
+    public func lid(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_lid(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved0`: type `VArray<UInt8, $3>` not supported by polyfill; skipped
+
+    public func historyEntryCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_historyEntryCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `HistoryEntries`: type `VArray<TCG_HISTORY_ENTRY, $84>` not supported by polyfill; skipped
+
+    // packed field `Reserved1`: type `VArray<UInt8, $38>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4078)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4078, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_OCP_DEVICE_UNSUPPORTED_REQUIREMENTS_LOG {
-    public var UnsupportedCount: UInt16 = 0
-    public var Reserved0: VArray<UInt8, $14> = VArray<UInt8, $14>(repeat: 0)
-    public var UnsupportedReqList: VArray<UNSUPPORTED_REQUIREMENT, $253> = VArray<UNSUPPORTED_REQUIREMENT, $253>(repeat: UNSUPPORTED_REQUIREMENT())
-    public var Reserved1: VArray<UInt8, $14> = VArray<UInt8, $14>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $4080> = VArray<UInt8, $4080>(repeat: 0u8)
+
+    public func unsupportedCount(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_unsupportedCount(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved0`: type `VArray<UInt8, $14>` not supported by polyfill; skipped
+
+    // packed field `UnsupportedReqList`: type `VArray<UNSUPPORTED_REQUIREMENT, $253>` not supported by polyfill; skipped
+
+    // packed field `Reserved1`: type `VArray<UInt8, $14>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4078)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4078, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_PERSISTENT_EVENT_LOG_EVENT_HEADER {
-    public var EventType: UInt8 = 0
-    public var EventTypeRevision: UInt8 = 0
-    public var EventHeaderLength: UInt8 = 0
-    public var Reserved0: UInt8 = 0
-    public var ControllerIdentifier: UInt16 = 0
-    public var EventTimestamp: UInt64 = 0
-    public var Reserved1: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var VendorSpecificInformationLength: UInt16 = 0
-    public var EventLength: UInt16 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func eventType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_eventType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func eventTypeRevision(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_eventTypeRevision(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func eventHeaderLength(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 2)
+        }
+    }
+
+    public mut func set_eventHeaderLength(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved0(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 3)
+        }
+    }
+
+    public mut func set_reserved0(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func controllerIdentifier(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4)
+        }
+    }
+
+    public mut func set_controllerIdentifier(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func eventTimestamp(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 6)
+        }
+    }
+
+    public mut func set_eventTimestamp(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved1`: type `VArray<UInt8, $6>` not supported by polyfill; skipped
+
+    public func vendorSpecificInformationLength(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 20)
+        }
+    }
+
+    public mut func set_vendorSpecificInformationLength(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func eventLength(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 22)
+        }
+    }
+
+    public mut func set_eventLength(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 22, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -13454,26 +14843,193 @@ public let NVME_PERSISTENT_EVENT_TYPE_RESERVED2_END: NVME_PERSISTENT_EVENT_LOG_E
 public let NVME_PERSISTENT_EVENT_TYPE_MAX: NVME_PERSISTENT_EVENT_LOG_EVENT_TYPES = NVME_PERSISTENT_EVENT_LOG_EVENT_TYPES(255)
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_PERSISTENT_EVENT_LOG_HEADER {
-    public var LogIdentifier: UInt8 = 0
-    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var TotalNumberOfEvents: UInt32 = 0
-    public var TotalLogLength: UInt64 = 0
-    public var LogRevision: UInt8 = 0
-    public var Reserved1: UInt8 = 0
-    public var LogHeaderLength: UInt16 = 0
-    public var Timestamp: UInt64 = 0
-    public var PowerOnHours: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var PowerCycleCount: UInt64 = 0
-    public var PciVendorId: UInt16 = 0
-    public var PciSubsystemVendorId: UInt16 = 0
-    public var SerialNumber: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-    public var ModelNumber: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-    public var NVMSubsystemNVMeQualifiedName: VArray<UInt8, $256> = VArray<UInt8, $256>(repeat: 0)
-    public var Reserved: VArray<UInt8, $108> = VArray<UInt8, $108>(repeat: 0)
-    public var SupportedEventsBitmap: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public var _raw: VArray<UInt8, $512> = VArray<UInt8, $512>(repeat: 0u8)
+
+    public func logIdentifier(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_logIdentifier(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved0`: type `VArray<UInt8, $3>` not supported by polyfill; skipped
+
+    public func totalNumberOfEvents(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_totalNumberOfEvents(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func totalLogLength(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 8)
+        }
+    }
+
+    public mut func set_totalLogLength(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func logRevision(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 16)
+        }
+    }
+
+    public mut func set_logRevision(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 17)
+        }
+    }
+
+    public mut func set_reserved1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 17, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func logHeaderLength(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 18)
+        }
+    }
+
+    public mut func set_logHeaderLength(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 18, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func timestamp(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 20)
+        }
+    }
+
+    public mut func set_timestamp(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `PowerOnHours`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    public func powerCycleCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 44)
+        }
+    }
+
+    public mut func set_powerCycleCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func pciVendorId(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 52)
+        }
+    }
+
+    public mut func set_pciVendorId(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func pciSubsystemVendorId(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 54)
+        }
+    }
+
+    public mut func set_pciSubsystemVendorId(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 54, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `SerialNumber`: type `VArray<UInt8, $20>` not supported by polyfill; skipped
+
+    // packed field `ModelNumber`: type `VArray<UInt8, $40>` not supported by polyfill; skipped
+
+    // packed field `NVMSubsystemNVMeQualifiedName`: type `VArray<UInt8, $256>` not supported by polyfill; skipped
+
+    // packed field `Reserved`: type `VArray<UInt8, $108>` not supported by polyfill; skipped
+
+    // packed field `SupportedEventsBitmap`: type `VArray<UInt8, $32>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -13636,14 +15192,13 @@ public let NVME_PROTECTION_INFORMATION_TYPE3: NVME_PROTECTION_INFORMATION_TYPES 
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_PRP_ENTRY {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func anonymous(): NVME_PRP_ENTRY__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_PRP_ENTRY__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -13652,9 +15207,8 @@ public struct NVME_PRP_ENTRY {
     public mut func set_anonymous(val: NVME_PRP_ENTRY__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_PRP_ENTRY__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13664,22 +15218,16 @@ public struct NVME_PRP_ENTRY {
     public func asUlonglong(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_asUlonglong(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -13957,15 +15505,81 @@ public struct NVME_RESERVATION_REPORT_STATUS_EXTENDED_DATA_STRUCTURE {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_RESERVATION_REPORT_STATUS_HEADER {
-    public var GEN: UInt32 = 0
-    public var RTYPE: UInt8 = 0
-    public var REGCTL: UInt16 = 0
-    public var Reserved: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var PTPLS: UInt8 = 0
-    public var Reserved1: VArray<UInt8, $14> = VArray<UInt8, $14>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func gen(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_gen(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func rtype(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 4)
+        }
+    }
+
+    public mut func set_rtype(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func regctl(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 5)
+        }
+    }
+
+    public mut func set_regctl(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 5, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved`: type `VArray<UInt8, $2>` not supported by polyfill; skipped
+
+    public func ptpls(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 9)
+        }
+    }
+
+    public mut func set_ptpls(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 9, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved1`: type `VArray<UInt8, $14>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -14171,9 +15785,8 @@ public struct NVME_SGL_BITBUCKET_DESC__Identifier_e__Union {
     public func anonymous(): NVME_SGL_BITBUCKET_DESC__Identifier_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_BITBUCKET_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -14182,9 +15795,8 @@ public struct NVME_SGL_BITBUCKET_DESC__Identifier_e__Union {
     public mut func set_anonymous(val: NVME_SGL_BITBUCKET_DESC__Identifier_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_BITBUCKET_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14194,22 +15806,16 @@ public struct NVME_SGL_BITBUCKET_DESC__Identifier_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -14242,9 +15848,8 @@ public struct NVME_SGL_DATABLOCK_DESC__Identifier_e__Union {
     public func anonymous(): NVME_SGL_DATABLOCK_DESC__Identifier_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_DATABLOCK_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -14253,9 +15858,8 @@ public struct NVME_SGL_DATABLOCK_DESC__Identifier_e__Union {
     public mut func set_anonymous(val: NVME_SGL_DATABLOCK_DESC__Identifier_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_DATABLOCK_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14265,22 +15869,16 @@ public struct NVME_SGL_DATABLOCK_DESC__Identifier_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -14311,9 +15909,8 @@ public struct NVME_SGL_DESC__Identifier_e__Union {
     public func anonymous(): NVME_SGL_DESC__Identifier_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -14322,9 +15919,8 @@ public struct NVME_SGL_DESC__Identifier_e__Union {
     public mut func set_anonymous(val: NVME_SGL_DESC__Identifier_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14334,22 +15930,16 @@ public struct NVME_SGL_DESC__Identifier_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -14465,9 +16055,8 @@ public struct NVME_SGL_KEYDATABLOCK_DESC__Identifier_e__Union {
     public func anonymous(): NVME_SGL_KEYDATABLOCK_DESC__Identifier_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_KEYDATABLOCK_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -14476,9 +16065,8 @@ public struct NVME_SGL_KEYDATABLOCK_DESC__Identifier_e__Union {
     public mut func set_anonymous(val: NVME_SGL_KEYDATABLOCK_DESC__Identifier_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_KEYDATABLOCK_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14488,22 +16076,16 @@ public struct NVME_SGL_KEYDATABLOCK_DESC__Identifier_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -14536,9 +16118,8 @@ public struct NVME_SGL_LASTSEG_DESC__Identifier_e__Union {
     public func anonymous(): NVME_SGL_LASTSEG_DESC__Identifier_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_LASTSEG_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -14547,9 +16128,8 @@ public struct NVME_SGL_LASTSEG_DESC__Identifier_e__Union {
     public mut func set_anonymous(val: NVME_SGL_LASTSEG_DESC__Identifier_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_LASTSEG_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14559,22 +16139,16 @@ public struct NVME_SGL_LASTSEG_DESC__Identifier_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -14607,9 +16181,8 @@ public struct NVME_SGL_SEGMENT_DESC__Identifier_e__Union {
     public func anonymous(): NVME_SGL_SEGMENT_DESC__Identifier_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_SEGMENT_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -14618,9 +16191,8 @@ public struct NVME_SGL_SEGMENT_DESC__Identifier_e__Union {
     public mut func set_anonymous(val: NVME_SGL_SEGMENT_DESC__Identifier_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_SEGMENT_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14630,22 +16202,16 @@ public struct NVME_SGL_SEGMENT_DESC__Identifier_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -14678,9 +16244,8 @@ public struct NVME_SGL_TRANSPORTDATA_DESC__Identifier_e__Union {
     public func anonymous(): NVME_SGL_TRANSPORTDATA_DESC__Identifier_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_TRANSPORTDATA_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -14689,9 +16254,8 @@ public struct NVME_SGL_TRANSPORTDATA_DESC__Identifier_e__Union {
     public mut func set_anonymous(val: NVME_SGL_TRANSPORTDATA_DESC__Identifier_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SGL_TRANSPORTDATA_DESC__Identifier_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14701,22 +16265,16 @@ public struct NVME_SGL_TRANSPORTDATA_DESC__Identifier_e__Union {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -15241,14 +16799,13 @@ public let NVME_STATUS_TYPE_VENDOR_SPECIFIC: NVME_STATUS_TYPES = NVME_STATUS_TYP
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_SUBMISSION_QUEUE_TAIL_DOORBELL {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_SUBMISSION_QUEUE_TAIL_DOORBELL__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SUBMISSION_QUEUE_TAIL_DOORBELL__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -15257,9 +16814,8 @@ public struct NVME_SUBMISSION_QUEUE_TAIL_DOORBELL {
     public mut func set_anonymous(val: NVME_SUBMISSION_QUEUE_TAIL_DOORBELL__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_SUBMISSION_QUEUE_TAIL_DOORBELL__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15269,22 +16825,16 @@ public struct NVME_SUBMISSION_QUEUE_TAIL_DOORBELL {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -15430,14 +16980,13 @@ public let NVME_LOG_PAGE_OCP_TCG_HISTORY: NVME_VENDOR_LOG_PAGES = NVME_VENDOR_LO
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_VERSION {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_VERSION__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_VERSION__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -15446,9 +16995,8 @@ public struct NVME_VERSION {
     public mut func set_anonymous(val: NVME_VERSION__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_VERSION__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15458,22 +17006,16 @@ public struct NVME_VERSION {
     public func asUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -15498,14 +17040,13 @@ public struct NVME_WCS_DEVICE_CAPABILITIES {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NVME_WCS_DEVICE_CAPABILITIES__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): NVME_WCS_DEVICE_CAPABILITIES__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_WCS_DEVICE_CAPABILITIES__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -15514,9 +17055,8 @@ public struct NVME_WCS_DEVICE_CAPABILITIES__Anonymous_e__Union {
     public mut func set_anonymous(val: NVME_WCS_DEVICE_CAPABILITIES__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_WCS_DEVICE_CAPABILITIES__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15526,22 +17066,16 @@ public struct NVME_WCS_DEVICE_CAPABILITIES__Anonymous_e__Union {
     public func asULONG(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_asULONG(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -15556,21 +17090,138 @@ public struct NVME_WCS_DEVICE_CAPABILITIES__Anonymous_e__Union__Anonymous_e__Str
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_WCS_DEVICE_ERROR_RECOVERY_LOG {
-    public var PanicResetWaitTime: UInt16 = 0
-    public var PanicResetAction: NVME_WCS_DEVICE_RESET_ACTION = NVME_WCS_DEVICE_RESET_ACTION()
-    public var DriveRecoveryAction: UInt8 = 0
-    public var PanicId: UInt64 = 0
-    public var DeviceCapabilitiesA: NVME_WCS_DEVICE_CAPABILITIES = NVME_WCS_DEVICE_CAPABILITIES()
-    public var VendorSpecificRecoveryCode: UInt8 = 0
-    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var VendorSpecificCommandCDW12: UInt32 = 0
-    public var VendorSpecificCommandCDW13: UInt32 = 0
-    public var Reserved1: VArray<UInt8, $466> = VArray<UInt8, $466>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $496> = VArray<UInt8, $496>(repeat: 0u8)
+
+    public func panicResetWaitTime(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_panicResetWaitTime(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `PanicResetAction`: type `NVME_WCS_DEVICE_RESET_ACTION` not supported by polyfill; skipped
+
+    public func driveRecoveryAction(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 3)
+        }
+    }
+
+    public mut func set_driveRecoveryAction(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func panicId(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 4)
+        }
+    }
+
+    public mut func set_panicId(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `DeviceCapabilitiesA`: type `NVME_WCS_DEVICE_CAPABILITIES` not supported by polyfill; skipped
+
+    public func vendorSpecificRecoveryCode(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 16)
+        }
+    }
+
+    public mut func set_vendorSpecificRecoveryCode(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved0`: type `VArray<UInt8, $3>` not supported by polyfill; skipped
+
+    public func vendorSpecificCommandCDW12(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_vendorSpecificCommandCDW12(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func vendorSpecificCommandCDW13(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_vendorSpecificCommandCDW13(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved1`: type `VArray<UInt8, $466>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 494)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 494, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
@@ -15670,9 +17321,8 @@ public struct NVME_WCS_DEVICE_RESET_ACTION__Anonymous_e__Union {
     public func anonymous(): NVME_WCS_DEVICE_RESET_ACTION__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_WCS_DEVICE_RESET_ACTION__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -15681,9 +17331,8 @@ public struct NVME_WCS_DEVICE_RESET_ACTION__Anonymous_e__Union {
     public mut func set_anonymous(val: NVME_WCS_DEVICE_RESET_ACTION__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVME_WCS_DEVICE_RESET_ACTION__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15693,22 +17342,16 @@ public struct NVME_WCS_DEVICE_RESET_ACTION__Anonymous_e__Union {
     public func asUCHAR(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUCHAR(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -15723,47 +17366,288 @@ public struct NVME_WCS_DEVICE_RESET_ACTION__Anonymous_e__Union__Anonymous_e__Str
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG {
-    public var VersionSpecificData: VArray<UInt8, $494> = VArray<UInt8, $494>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $496> = VArray<UInt8, $496>(repeat: 0u8)
+
+    // packed field `VersionSpecificData`: type `VArray<UInt8, $494>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 494)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 494, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2 {
-    public var MediaUnitsWritten: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var MediaUnitsRead: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var BadUserNANDBlockCount: NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__BadUserNANDBlockCount_e__Struct = NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__BadUserNANDBlockCount_e__Struct()
-    public var BadSystemNANDBlockCount: NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__BadSystemNANDBlockCount_e__Struct = NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__BadSystemNANDBlockCount_e__Struct()
-    public var XORRecoveryCount: UInt64 = 0
-    public var UnrecoverableReadErrorCount: UInt64 = 0
-    public var SoftECCErrorCount: UInt64 = 0
-    public var EndToEndCorrectionCounts: NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__EndToEndCorrectionCounts_e__Struct = NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__EndToEndCorrectionCounts_e__Struct()
-    public var PercentageSystemDataUsed: UInt8 = 0
-    public var RefreshCount: VArray<UInt8, $7> = VArray<UInt8, $7>(repeat: 0)
-    public var UserDataEraseCounts: NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__UserDataEraseCounts_e__Struct = NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__UserDataEraseCounts_e__Struct()
-    public var ThermalThrottling: NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__ThermalThrottling_e__Struct = NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__ThermalThrottling_e__Struct()
-    public var Reserved0: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var PCIeCorrectableErrorCount: UInt64 = 0
-    public var IncompleteShutdownCount: UInt32 = 0
-    public var Reserved1: UInt32 = 0
-    public var PercentageFreeBlocks: UInt8 = 0
-    public var Reserved2: VArray<UInt8, $7> = VArray<UInt8, $7>(repeat: 0)
-    public var CapacitorHealth: UInt16 = 0
-    public var Reserved3: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var UnalignedIOCount: UInt64 = 0
-    public var SecurityVersionNumber: UInt64 = 0
-    public var NUSE: UInt64 = 0
-    public var PLPStartCount: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var EnduranceEstimate: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var Reserved4: VArray<UInt8, $302> = VArray<UInt8, $302>(repeat: 0)
-    public var LogPageVersionNumber: UInt16 = 0
-    public var LogPageGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $496> = VArray<UInt8, $496>(repeat: 0u8)
+
+    // packed field `MediaUnitsWritten`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `MediaUnitsRead`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `BadUserNANDBlockCount`: type `NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__BadUserNANDBlockCount_e__Struct` not supported by polyfill; skipped
+
+    // packed field `BadSystemNANDBlockCount`: type `NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__BadSystemNANDBlockCount_e__Struct` not supported by polyfill; skipped
+
+    public func xorRecoveryCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 48)
+        }
+    }
+
+    public mut func set_xorRecoveryCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func unrecoverableReadErrorCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 56)
+        }
+    }
+
+    public mut func set_unrecoverableReadErrorCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func softECCErrorCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 64)
+        }
+    }
+
+    public mut func set_softECCErrorCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `EndToEndCorrectionCounts`: type `NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__EndToEndCorrectionCounts_e__Struct` not supported by polyfill; skipped
+
+    public func percentageSystemDataUsed(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 80)
+        }
+    }
+
+    public mut func set_percentageSystemDataUsed(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `RefreshCount`: type `VArray<UInt8, $7>` not supported by polyfill; skipped
+
+    // packed field `UserDataEraseCounts`: type `NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__UserDataEraseCounts_e__Struct` not supported by polyfill; skipped
+
+    // packed field `ThermalThrottling`: type `NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__ThermalThrottling_e__Struct` not supported by polyfill; skipped
+
+    // packed field `Reserved0`: type `VArray<UInt8, $6>` not supported by polyfill; skipped
+
+    public func pcIeCorrectableErrorCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 104)
+        }
+    }
+
+    public mut func set_pcIeCorrectableErrorCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 104, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func incompleteShutdownCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 112)
+        }
+    }
+
+    public mut func set_incompleteShutdownCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 112, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 116)
+        }
+    }
+
+    public mut func set_reserved1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 116, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func percentageFreeBlocks(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 120)
+        }
+    }
+
+    public mut func set_percentageFreeBlocks(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 120, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved2`: type `VArray<UInt8, $7>` not supported by polyfill; skipped
+
+    public func capacitorHealth(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 128)
+        }
+    }
+
+    public mut func set_capacitorHealth(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 128, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved3`: type `VArray<UInt8, $6>` not supported by polyfill; skipped
+
+    public func unalignedIOCount(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 136)
+        }
+    }
+
+    public mut func set_unalignedIOCount(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 136, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func securityVersionNumber(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 144)
+        }
+    }
+
+    public mut func set_securityVersionNumber(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 144, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func nuse(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 152)
+        }
+    }
+
+    public mut func set_nuse(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 152, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `PLPStartCount`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `EnduranceEstimate`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `Reserved4`: type `VArray<UInt8, $302>` not supported by polyfill; skipped
+
+    public func logPageVersionNumber(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 494)
+        }
+    }
+
+    public mut func set_logPageVersionNumber(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 494, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogPageGUID`: layout unknown; skipped
     public init() {}
 }
 
@@ -15784,20 +17668,84 @@ public struct NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__BadSystemNANDBlockCount_e
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__EndToEndCorrectionCounts_e__Struct {
-    public var DetectedCounts: UInt32 = 0
-    public var CorrectedCounts: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func detectedCounts(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_detectedCounts(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func correctedCounts(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_correctedCounts(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct NVME_WCS_DEVICE_SMART_ATTRIBUTES_LOG_V2__UserDataEraseCounts_e__Struct {
-    public var MaximumCount: UInt32 = 0
-    public var MinimumCount: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func maximumCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_maximumCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func minimumCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_minimumCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -15973,9 +17921,8 @@ public struct NVM_RESERVATION_CAPABILITIES {
     public func anonymous(): NVM_RESERVATION_CAPABILITIES__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVM_RESERVATION_CAPABILITIES__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -15984,9 +17931,8 @@ public struct NVM_RESERVATION_CAPABILITIES {
     public mut func set_anonymous(val: NVM_RESERVATION_CAPABILITIES__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NVM_RESERVATION_CAPABILITIES__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15996,22 +17942,16 @@ public struct NVM_RESERVATION_CAPABILITIES {
     public func asUchar(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_asUchar(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -16042,19 +17982,67 @@ public struct TCG_ACTIVATE_METHOD_SPECIFIC {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct TCG_ASSIGN_METHOD_SPECIFIC {
-    public var NamespaceId: UInt32 = 0
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+
+    public func namespaceId(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_namespaceId(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct TCG_AUTH_METHOD_SPECIFIC {
-    public var AuthorityId: UInt64 = 0
-    public var TriesCount: UInt8 = 0
+    public var _raw: VArray<UInt8, $9> = VArray<UInt8, $9>(repeat: 0u8)
+
+    public func authorityId(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 0)
+        }
+    }
+
+    public mut func set_authorityId(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func triesCount(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 8)
+        }
+    }
+
+    public mut func set_triesCount(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -16066,21 +18054,198 @@ public struct TCG_BLOCKSID_METHOD_SPECIFIC {
 }
 
 @When[Windows_Win32_Storage_Nvme == "on"]
-// packed(1)
 @C
 public struct TCG_HISTORY_ENTRY {
-    public var VersionNumber: UInt8 = 0
-    public var EntryLength: UInt8 = 0
-    public var PowerCycleCount: UInt16 = 0
-    public var TcgCommandCount: UInt32 = 0
-    public var TcgCommandCompletionTS: UInt64 = 0
-    public var InvokingId: UInt64 = 0
-    public var MethodId: UInt64 = 0
-    public var ComId: UInt16 = 0
-    public var ProtocolId: UInt8 = 0
-    public var TcgStatus: UInt8 = 0
-    public var ProcessTime: UInt16 = 0
-    public var CommandSpecific: VArray<UInt8, $10> = VArray<UInt8, $10>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0u8)
+
+    public func versionNumber(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_versionNumber(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func entryLength(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_entryLength(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func powerCycleCount(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_powerCycleCount(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func tcgCommandCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_tcgCommandCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func tcgCommandCompletionTS(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 8)
+        }
+    }
+
+    public mut func set_tcgCommandCompletionTS(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func invokingId(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 16)
+        }
+    }
+
+    public mut func set_invokingId(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func methodId(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 24)
+        }
+    }
+
+    public mut func set_methodId(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func comId(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 32)
+        }
+    }
+
+    public mut func set_comId(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func protocolId(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 34)
+        }
+    }
+
+    public mut func set_protocolId(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 34, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func tcgStatus(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 35)
+        }
+    }
+
+    public mut func set_tcgStatus(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 35, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func processTime(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 36)
+        }
+    }
+
+    public mut func set_processTime(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `CommandSpecific`: type `VArray<UInt8, $10>` not supported by polyfill; skipped
     public init() {}
 }
 

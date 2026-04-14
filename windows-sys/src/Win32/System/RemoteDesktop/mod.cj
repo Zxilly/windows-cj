@@ -3,6 +3,7 @@ package windows_sys.Win32.System.RemoteDesktop
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Media.Audio.Apo as Win32_Media_Audio_Apo
 import windows_sys.Win32.Media.impl as Win32_Media_impl
@@ -204,11 +205,28 @@ public struct BITMAP_RENDERER_STATISTICS {
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]
-// packed(1)
 @C
 public struct CHANNEL_DEF {
-    public var name: VArray<Win32_Foundation.CHAR, $8> = VArray<Win32_Foundation.CHAR, $8>(repeat: 0)
-    public var options: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    // packed field `name`: type `VArray<Win32_Foundation.CHAR, $8>` not supported by polyfill; skipped
+
+    public func options(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_options(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -14936,17 +14954,145 @@ public let RD_FARM_AUTO_PERSONAL_RDSH: RD_FARM_TYPE = RD_FARM_TYPE(5)
 public let RD_FARM_TYPE_UNKNOWN: RD_FARM_TYPE = RD_FARM_TYPE(-1)
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]
-// packed(1)
 @C
 public struct RFX_GFX_MONITOR_INFO {
-    public var left: Int32 = 0
-    public var top: Int32 = 0
-    public var right: Int32 = 0
-    public var bottom: Int32 = 0
-    public var physicalWidth: UInt32 = 0
-    public var physicalHeight: UInt32 = 0
-    public var orientation: UInt32 = 0
-    public var primary: Int32 = 0
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    public func left(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 0)
+        }
+    }
+
+    public mut func set_left(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func top(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 4)
+        }
+    }
+
+    public mut func set_top(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func right(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 8)
+        }
+    }
+
+    public mut func set_right(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bottom(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 12)
+        }
+    }
+
+    public mut func set_bottom(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func physicalWidth(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_physicalWidth(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func physicalHeight(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_physicalHeight(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func orientation(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_orientation(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func primary(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 28)
+        }
+    }
+
+    public mut func set_primary(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -14958,14 +15104,49 @@ public struct RFX_GFX_MSG_CLIENT_DESKTOP_INFO_REQUEST {
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]
-// packed(1)
 @C
 public struct RFX_GFX_MSG_CLIENT_DESKTOP_INFO_RESPONSE {
-    public var channelHdr: RFX_GFX_MSG_HEADER = RFX_GFX_MSG_HEADER()
-    public var reserved: UInt32 = 0
-    public var monitorCount: UInt32 = 0
-    public var MonitorData: VArray<RFX_GFX_MONITOR_INFO, $16> = VArray<RFX_GFX_MONITOR_INFO, $16>(repeat: RFX_GFX_MONITOR_INFO())
-    public var clientUniqueId: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0)
+    public var _raw: VArray<UInt8, $588> = VArray<UInt8, $588>(repeat: 0u8)
+
+    // packed field `channelHdr`: type `RFX_GFX_MSG_HEADER` not supported by polyfill; skipped
+
+    public func reserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_reserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func monitorCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_monitorCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `MonitorData`: type `VArray<RFX_GFX_MONITOR_INFO, $16>` not supported by polyfill; skipped
+
+    // packed field `clientUniqueId`: type `VArray<UInt16, $32>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -14977,24 +15158,122 @@ public struct RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_CONFIRM {
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]
-// packed(1)
 @C
 public struct RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_NOTIFY {
-    public var channelHdr: RFX_GFX_MSG_HEADER = RFX_GFX_MSG_HEADER()
-    public var ulWidth: UInt32 = 0
-    public var ulHeight: UInt32 = 0
-    public var ulBpp: UInt32 = 0
-    public var Reserved: UInt32 = 0
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    // packed field `channelHdr`: type `RFX_GFX_MSG_HEADER` not supported by polyfill; skipped
+
+    public func ulWidth(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_ulWidth(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulHeight(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_ulHeight(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulBpp(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_ulBpp(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_reserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]
-// packed(1)
 @C
 public struct RFX_GFX_MSG_DESKTOP_INPUT_RESET {
-    public var channelHdr: RFX_GFX_MSG_HEADER = RFX_GFX_MSG_HEADER()
-    public var ulWidth: UInt32 = 0
-    public var ulHeight: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    // packed field `channelHdr`: type `RFX_GFX_MSG_HEADER` not supported by polyfill; skipped
+
+    public func ulWidth(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_ulWidth(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulHeight(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_ulHeight(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -15007,20 +15286,69 @@ public struct RFX_GFX_MSG_DESKTOP_RESEND_REQUEST {
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]
-// packed(1)
 @C
 public struct RFX_GFX_MSG_DISCONNECT_NOTIFY {
-    public var channelHdr: RFX_GFX_MSG_HEADER = RFX_GFX_MSG_HEADER()
-    public var DisconnectReason: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    // packed field `channelHdr`: type `RFX_GFX_MSG_HEADER` not supported by polyfill; skipped
+
+    public func disconnectReason(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_disconnectReason(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]
-// packed(1)
 @C
 public struct RFX_GFX_MSG_HEADER {
-    public var uMSGType: UInt16 = 0
-    public var cbSize: UInt16 = 0
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+
+    public func umsgType(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_umsgType(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cbSize(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_cbSize(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -15033,13 +15361,77 @@ public struct RFX_GFX_MSG_RDP_DATA {
 }
 
 @When[Windows_Win32_System_RemoteDesktop == "on"]
-// packed(1)
 @C
 public struct RFX_GFX_RECT {
-    public var left: Int32 = 0
-    public var top: Int32 = 0
-    public var right: Int32 = 0
-    public var bottom: Int32 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func left(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 0)
+        }
+    }
+
+    public mut func set_left(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func top(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 4)
+        }
+    }
+
+    public mut func set_top(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func right(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 8)
+        }
+    }
+
+    public mut func set_right(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bottom(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 12)
+        }
+    }
+
+    public mut func set_bottom(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -15647,14 +16039,13 @@ public struct VM_PATCH_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WRDS_CONNECTION_SETTING {
-    public var _raw: VArray<UInt64, $468> = VArray<UInt64, $468>(repeat: 0)
+    public var _raw: VArray<UInt8, $3744> = VArray<UInt8, $3744>(repeat: 0)
 
     public func wRdsConnectionSettings1(): WRDS_CONNECTION_SETTINGS_1 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WRDS_CONNECTION_SETTINGS_1>(p)
             return ptr.read()
         }
@@ -15663,9 +16054,8 @@ public struct WRDS_CONNECTION_SETTING {
     public mut func set_wRdsConnectionSettings1(val: WRDS_CONNECTION_SETTINGS_1): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WRDS_CONNECTION_SETTINGS_1>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15797,14 +16187,13 @@ public struct WRDS_DYNAMIC_TIME_ZONE_INFORMATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WRDS_LISTENER_SETTING {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func wRdsListenerSettings1(): WRDS_LISTENER_SETTINGS_1 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WRDS_LISTENER_SETTINGS_1>(p)
             return ptr.read()
         }
@@ -15813,9 +16202,8 @@ public struct WRDS_LISTENER_SETTING {
     public mut func set_wRdsListenerSettings1(val: WRDS_LISTENER_SETTINGS_1): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WRDS_LISTENER_SETTINGS_1>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15870,14 +16258,13 @@ public let WRDS_LISTENER_SETTING_LEVEL_1: WRDS_LISTENER_SETTING_LEVEL = WRDS_LIS
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WRDS_SETTING {
-    public var _raw: VArray<UInt32, $31> = VArray<UInt32, $31>(repeat: 0)
+    public var _raw: VArray<UInt8, $124> = VArray<UInt8, $124>(repeat: 0)
 
     public func wRdsSettings1(): WRDS_SETTINGS_1 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WRDS_SETTINGS_1>(p)
             return ptr.read()
         }
@@ -15886,9 +16273,8 @@ public struct WRDS_SETTING {
     public mut func set_wRdsSettings1(val: WRDS_SETTINGS_1): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WRDS_SETTINGS_1>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16227,14 +16613,13 @@ public struct WTSINFOEX_LEVEL1_W {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WTSINFOEX_LEVEL_A {
-    public var _raw: VArray<UInt64, $19> = VArray<UInt64, $19>(repeat: 0)
+    public var _raw: VArray<UInt8, $152> = VArray<UInt8, $152>(repeat: 0)
 
     public func wtsInfoExLevel1(): WTSINFOEX_LEVEL1_A {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTSINFOEX_LEVEL1_A>(p)
             return ptr.read()
         }
@@ -16243,9 +16628,8 @@ public struct WTSINFOEX_LEVEL_A {
     public mut func set_wtsInfoExLevel1(val: WTSINFOEX_LEVEL1_A): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTSINFOEX_LEVEL1_A>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16258,14 +16642,13 @@ public struct WTSINFOEX_LEVEL_A {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WTSINFOEX_LEVEL_W {
-    public var _raw: VArray<UInt64, $28> = VArray<UInt64, $28>(repeat: 0)
+    public var _raw: VArray<UInt8, $224> = VArray<UInt8, $224>(repeat: 0)
 
     public func wtsInfoExLevel1(): WTSINFOEX_LEVEL1_W {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTSINFOEX_LEVEL1_W>(p)
             return ptr.read()
         }
@@ -16274,9 +16657,8 @@ public struct WTSINFOEX_LEVEL_W {
     public mut func set_wtsInfoExLevel1(val: WTSINFOEX_LEVEL1_W): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTSINFOEX_LEVEL1_W>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16675,14 +17057,13 @@ public struct WTS_CACHE_STATS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WTS_CACHE_STATS_UN {
-    public var _raw: VArray<UInt32, $20> = VArray<UInt32, $20>(repeat: 0)
+    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
 
     public func protocolCache(): VArray<WTS_PROTOCOL_CACHE, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<WTS_PROTOCOL_CACHE, $4>>(p)
             return ptr.read()
         }
@@ -16691,9 +17072,8 @@ public struct WTS_CACHE_STATS_UN {
     public mut func set_protocolCache(val: VArray<WTS_PROTOCOL_CACHE, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<WTS_PROTOCOL_CACHE, $4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16703,22 +17083,16 @@ public struct WTS_CACHE_STATS_UN {
     public func tShareCacheStats(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_tShareCacheStats(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -16726,9 +17100,8 @@ public struct WTS_CACHE_STATS_UN {
     public func reserved(): VArray<UInt32, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $20>>(p)
             return ptr.read()
         }
@@ -16737,9 +17110,8 @@ public struct WTS_CACHE_STATS_UN {
     public mut func set_reserved(val: VArray<UInt32, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $20>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17260,27 +17632,21 @@ public struct WTS_PROPERTY_VALUE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WTS_PROPERTY_VALUE__u_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func ulVal(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_ulVal(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17288,9 +17654,8 @@ public struct WTS_PROPERTY_VALUE__u_e__Union {
     public func strVal(): WTS_PROPERTY_VALUE__u_e__Union__strVal_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTS_PROPERTY_VALUE__u_e__Union__strVal_e__Struct>(p)
             return ptr.read()
         }
@@ -17299,9 +17664,8 @@ public struct WTS_PROPERTY_VALUE__u_e__Union {
     public mut func set_strVal(val: WTS_PROPERTY_VALUE__u_e__Union__strVal_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTS_PROPERTY_VALUE__u_e__Union__strVal_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17311,9 +17675,8 @@ public struct WTS_PROPERTY_VALUE__u_e__Union {
     public func bVal(): WTS_PROPERTY_VALUE__u_e__Union__bVal_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTS_PROPERTY_VALUE__u_e__Union__bVal_e__Struct>(p)
             return ptr.read()
         }
@@ -17322,9 +17685,8 @@ public struct WTS_PROPERTY_VALUE__u_e__Union {
     public mut func set_bVal(val: WTS_PROPERTY_VALUE__u_e__Union__bVal_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTS_PROPERTY_VALUE__u_e__Union__bVal_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17334,9 +17696,8 @@ public struct WTS_PROPERTY_VALUE__u_e__Union {
     public func guidVal(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -17345,9 +17706,8 @@ public struct WTS_PROPERTY_VALUE__u_e__Union {
     public mut func set_guidVal(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17664,14 +18024,13 @@ public struct WTS_SOCKADDR {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WTS_SOCKADDR__u_e__Union {
-    public var _raw: VArray<UInt32, $7> = VArray<UInt32, $7>(repeat: 0)
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0)
 
     public func ipv4(): WTS_SOCKADDR__u_e__Union__ipv4_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTS_SOCKADDR__u_e__Union__ipv4_e__Struct>(p)
             return ptr.read()
         }
@@ -17680,9 +18039,8 @@ public struct WTS_SOCKADDR__u_e__Union {
     public mut func set_ipv4(val: WTS_SOCKADDR__u_e__Union__ipv4_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTS_SOCKADDR__u_e__Union__ipv4_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17692,9 +18050,8 @@ public struct WTS_SOCKADDR__u_e__Union {
     public func ipv6(): WTS_SOCKADDR__u_e__Union__ipv6_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTS_SOCKADDR__u_e__Union__ipv6_e__Struct>(p)
             return ptr.read()
         }
@@ -17703,9 +18060,8 @@ public struct WTS_SOCKADDR__u_e__Union {
     public mut func set_ipv6(val: WTS_SOCKADDR__u_e__Union__ipv6_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WTS_SOCKADDR__u_e__Union__ipv6_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

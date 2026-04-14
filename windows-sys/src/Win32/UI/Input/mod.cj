@@ -3,6 +3,7 @@ package windows_sys.Win32.UI.Input
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -141,14 +142,13 @@ public struct RAWINPUT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RAWINPUT__data_e__Union {
-    public var _raw: VArray<UInt32, $6> = VArray<UInt32, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func mouse(): RAWMOUSE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAWMOUSE>(p)
             return ptr.read()
         }
@@ -157,9 +157,8 @@ public struct RAWINPUT__data_e__Union {
     public mut func set_mouse(val: RAWMOUSE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAWMOUSE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -169,9 +168,8 @@ public struct RAWINPUT__data_e__Union {
     public func keyboard(): RAWKEYBOARD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAWKEYBOARD>(p)
             return ptr.read()
         }
@@ -180,9 +178,8 @@ public struct RAWINPUT__data_e__Union {
     public mut func set_keyboard(val: RAWKEYBOARD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAWKEYBOARD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -192,9 +189,8 @@ public struct RAWINPUT__data_e__Union {
     public func hid(): RAWHID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAWHID>(p)
             return ptr.read()
         }
@@ -203,9 +199,8 @@ public struct RAWINPUT__data_e__Union {
     public mut func set_hid(val: RAWHID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAWHID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -333,27 +328,21 @@ public struct RAWMOUSE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RAWMOUSE__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func ulButtons(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_ulButtons(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -361,9 +350,8 @@ public struct RAWMOUSE__Anonymous_e__Union {
     public func anonymous(): RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -372,9 +360,8 @@ public struct RAWMOUSE__Anonymous_e__Union {
     public mut func set_anonymous(val: RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -457,14 +444,13 @@ public struct RID_DEVICE_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RID_DEVICE_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $6> = VArray<UInt32, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func mouse(): RID_DEVICE_INFO_MOUSE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RID_DEVICE_INFO_MOUSE>(p)
             return ptr.read()
         }
@@ -473,9 +459,8 @@ public struct RID_DEVICE_INFO__Anonymous_e__Union {
     public mut func set_mouse(val: RID_DEVICE_INFO_MOUSE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RID_DEVICE_INFO_MOUSE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -485,9 +470,8 @@ public struct RID_DEVICE_INFO__Anonymous_e__Union {
     public func keyboard(): RID_DEVICE_INFO_KEYBOARD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RID_DEVICE_INFO_KEYBOARD>(p)
             return ptr.read()
         }
@@ -496,9 +480,8 @@ public struct RID_DEVICE_INFO__Anonymous_e__Union {
     public mut func set_keyboard(val: RID_DEVICE_INFO_KEYBOARD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RID_DEVICE_INFO_KEYBOARD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -508,9 +491,8 @@ public struct RID_DEVICE_INFO__Anonymous_e__Union {
     public func hid(): RID_DEVICE_INFO_HID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RID_DEVICE_INFO_HID>(p)
             return ptr.read()
         }
@@ -519,9 +501,8 @@ public struct RID_DEVICE_INFO__Anonymous_e__Union {
     public mut func set_hid(val: RID_DEVICE_INFO_HID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RID_DEVICE_INFO_HID>(p)
             ptr.write(val)
             _raw = rawStorage

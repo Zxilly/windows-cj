@@ -3,6 +3,7 @@ package windows_sys.Win32.Security.Cryptography.UI
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -418,14 +419,13 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CRYPTUI_VIEWCERTIFICATE_STRUCTA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pCryptProviderData(): CPointer<Win32_impl.CRYPT_PROVIDER_DATA> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRYPT_PROVIDER_DATA>>(p)
             return ptr.read()
         }
@@ -434,9 +434,8 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTA__Anonymous_e__Union {
     public mut func set_pCryptProviderData(val: CPointer<Win32_impl.CRYPT_PROVIDER_DATA>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRYPT_PROVIDER_DATA>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -446,9 +445,8 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTA__Anonymous_e__Union {
     public func hwvtStateData(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -457,9 +455,8 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTA__Anonymous_e__Union {
     public mut func set_hwvtStateData(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -496,14 +493,13 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTW {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CRYPTUI_VIEWCERTIFICATE_STRUCTW__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pCryptProviderData(): CPointer<Win32_impl.CRYPT_PROVIDER_DATA> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRYPT_PROVIDER_DATA>>(p)
             return ptr.read()
         }
@@ -512,9 +508,8 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTW__Anonymous_e__Union {
     public mut func set_pCryptProviderData(val: CPointer<Win32_impl.CRYPT_PROVIDER_DATA>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRYPT_PROVIDER_DATA>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -524,9 +519,8 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTW__Anonymous_e__Union {
     public func hwvtStateData(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -535,9 +529,8 @@ public struct CRYPTUI_VIEWCERTIFICATE_STRUCTW__Anonymous_e__Union {
     public mut func set_hwvtStateData(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -630,14 +623,13 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pPvkFileInfo(): CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO>>(p)
             return ptr.read()
         }
@@ -646,9 +638,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union {
     public mut func set_pPvkFileInfo(val: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -658,9 +649,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union {
     public func pPvkProvInfo(): CPointer<Win32_impl.CRYPT_KEY_PROV_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRYPT_KEY_PROV_INFO>>(p)
             return ptr.read()
         }
@@ -669,9 +659,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO__Anonymous_e__Union {
     public mut func set_pPvkProvInfo(val: CPointer<Win32_impl.CRYPT_KEY_PROV_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRYPT_KEY_PROV_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -722,14 +711,13 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pwszFileName(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -738,9 +726,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union {
     public mut func set_pwszFileName(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -750,9 +737,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union {
     public func pSignBlobInfo(): CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO>>(p)
             return ptr.read()
         }
@@ -761,9 +747,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union {
     public mut func set_pSignBlobInfo(val: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -776,14 +761,13 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous1_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pSigningCertContext(): CPointer<Win32_impl.CERT_CONTEXT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
             return ptr.read()
         }
@@ -792,9 +776,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union {
     public mut func set_pSigningCertContext(val: CPointer<Win32_impl.CERT_CONTEXT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -804,9 +787,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union {
     public func pSigningCertStore(): CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO>>(p)
             return ptr.read()
         }
@@ -815,9 +797,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union {
     public mut func set_pSigningCertStore(val: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -827,9 +808,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union {
     public func pSigningCertPvkInfo(): CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO>>(p)
             return ptr.read()
         }
@@ -838,9 +818,8 @@ public struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO__Anonymous2_e__Union {
     public mut func set_pSigningCertPvkInfo(val: CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1013,14 +992,13 @@ public struct CRYPTUI_WIZ_EXPORT_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pCertContext(): CPointer<Win32_impl.CERT_CONTEXT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
             return ptr.read()
         }
@@ -1029,9 +1007,8 @@ public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
     public mut func set_pCertContext(val: CPointer<Win32_impl.CERT_CONTEXT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1041,9 +1018,8 @@ public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
     public func pctlContext(): CPointer<Win32_impl.CTL_CONTEXT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CTL_CONTEXT>>(p)
             return ptr.read()
         }
@@ -1052,9 +1028,8 @@ public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
     public mut func set_pctlContext(val: CPointer<Win32_impl.CTL_CONTEXT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CTL_CONTEXT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1064,9 +1039,8 @@ public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
     public func pcrlContext(): CPointer<Win32_impl.CRL_CONTEXT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRL_CONTEXT>>(p)
             return ptr.read()
         }
@@ -1075,9 +1049,8 @@ public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
     public mut func set_pcrlContext(val: CPointer<Win32_impl.CRL_CONTEXT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRL_CONTEXT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1087,9 +1060,8 @@ public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
     public func hCertStore(): Win32_impl.HCERTSTORE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.HCERTSTORE>(p)
             return ptr.read()
         }
@@ -1098,9 +1070,8 @@ public struct CRYPTUI_WIZ_EXPORT_INFO__Anonymous_e__Union {
     public mut func set_hCertStore(val: Win32_impl.HCERTSTORE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.HCERTSTORE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1227,14 +1198,13 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pwszFileName(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -1243,9 +1213,8 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
     public mut func set_pwszFileName(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1255,9 +1224,8 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
     public func pCertContext(): CPointer<Win32_impl.CERT_CONTEXT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
             return ptr.read()
         }
@@ -1266,9 +1234,8 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
     public mut func set_pCertContext(val: CPointer<Win32_impl.CERT_CONTEXT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CERT_CONTEXT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1278,9 +1245,8 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
     public func pctlContext(): CPointer<Win32_impl.CTL_CONTEXT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CTL_CONTEXT>>(p)
             return ptr.read()
         }
@@ -1289,9 +1255,8 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
     public mut func set_pctlContext(val: CPointer<Win32_impl.CTL_CONTEXT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CTL_CONTEXT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1301,9 +1266,8 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
     public func pcrlContext(): CPointer<Win32_impl.CRL_CONTEXT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRL_CONTEXT>>(p)
             return ptr.read()
         }
@@ -1312,9 +1276,8 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
     public mut func set_pcrlContext(val: CPointer<Win32_impl.CRL_CONTEXT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Win32_impl.CRL_CONTEXT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1324,9 +1287,8 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
     public func hCertStore(): Win32_impl.HCERTSTORE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.HCERTSTORE>(p)
             return ptr.read()
         }
@@ -1335,9 +1297,8 @@ public struct CRYPTUI_WIZ_IMPORT_SRC_INFO__Anonymous_e__Union {
     public mut func set_hCertStore(val: Win32_impl.HCERTSTORE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.HCERTSTORE>(p)
             ptr.write(val)
             _raw = rawStorage

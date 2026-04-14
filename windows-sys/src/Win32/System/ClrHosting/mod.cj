@@ -3,6 +3,7 @@ package windows_sys.Win32.System.ClrHosting
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.System.IO as Win32_System_IO
@@ -290,14 +291,13 @@ public struct CustomDumpItem {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CustomDumpItem__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pReserved(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -306,9 +306,8 @@ public struct CustomDumpItem__Anonymous_e__Union {
     public mut func set_pReserved(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage

@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.Sensors
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Devices.PortableDevices as Win32_Devices_PortableDevices
 import windows_sys.Win32.Devices.Properties as Win32_Devices_Properties
 import windows_sys.Win32.Foundation as Win32_Foundation
@@ -1335,14 +1336,13 @@ public struct MATRIX3X3 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MATRIX3X3__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $9> = VArray<UInt32, $9>(repeat: 0)
+    public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
 
     public func anonymous1(): MATRIX3X3__Anonymous_e__Union__Anonymous1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MATRIX3X3__Anonymous_e__Union__Anonymous1_e__Struct>(p)
             return ptr.read()
         }
@@ -1351,9 +1351,8 @@ public struct MATRIX3X3__Anonymous_e__Union {
     public mut func set_anonymous1(val: MATRIX3X3__Anonymous_e__Union__Anonymous1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MATRIX3X3__Anonymous_e__Union__Anonymous1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1363,9 +1362,8 @@ public struct MATRIX3X3__Anonymous_e__Union {
     public func anonymous2(): MATRIX3X3__Anonymous_e__Union__Anonymous2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MATRIX3X3__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             return ptr.read()
         }
@@ -1374,9 +1372,8 @@ public struct MATRIX3X3__Anonymous_e__Union {
     public mut func set_anonymous2(val: MATRIX3X3__Anonymous_e__Union__Anonymous2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MATRIX3X3__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1386,9 +1383,8 @@ public struct MATRIX3X3__Anonymous_e__Union {
     public func m(): VArray<Float32, $9> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $9>>(p)
             return ptr.read()
         }
@@ -1397,9 +1393,8 @@ public struct MATRIX3X3__Anonymous_e__Union {
     public mut func set_m(val: VArray<Float32, $9>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $9>>(p)
             ptr.write(val)
             _raw = rawStorage

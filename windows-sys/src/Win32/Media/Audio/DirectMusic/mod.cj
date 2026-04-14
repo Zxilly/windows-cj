@@ -3,6 +3,7 @@ package windows_sys.Win32.Media.Audio.DirectMusic
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Media.Audio.DirectSound as Win32_Media_Audio_DirectSound
 import windows_sys.Win32.Media.impl as Win32_Media_impl
@@ -210,13 +211,77 @@ public struct DMUS_DOWNLOADINFO {
 }
 
 @When[Windows_Win32_Media_Audio_DirectMusic == "on"]
-// packed(4)
 @C
 public struct DMUS_EVENTHEADER {
-    public var cbEvent: UInt32 = 0
-    public var dwChannelGroup: UInt32 = 0
-    public var rtDelta: Int64 = 0
-    public var dwFlags: UInt32 = 0
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    public func cbEvent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_cbEvent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwChannelGroup(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwChannelGroup(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func rtDelta(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 8)
+        }
+    }
+
+    public mut func set_rtDelta(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -2620,11 +2685,28 @@ public type LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA = CFunc<(CPointer<DSPROPERTY
 public type LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW = CFunc<(CPointer<DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_W_DATA>, CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_Media_Audio_DirectMusic == "on"]
-// packed(1)
 @C
 public struct MDEVICECAPSEX {
-    public var cbSize: UInt32 = 0
-    public var pCaps: CPointer<Unit> = CPointer<Unit>()
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func cbSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_cbSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pCaps`: type `CPointer<Unit>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -2637,15 +2719,36 @@ public struct MIDILOCALE {
 }
 
 @When[Windows_Win32_Media_Audio_DirectMusic == "on"]
-// packed(1)
 @C
 public struct MIDIOPENDESC {
-    public var hMidi: Win32_Media_impl.HMIDI = CPointer<Unit>()
-    public var dwCallback: UIntNative = 0
-    public var dwInstance: UIntNative = 0
-    public var dnDevNode: UIntNative = 0
-    public var cIds: UInt32 = 0
-    public var rgIds: VArray<Win32_Media_impl.MIDIOPENSTRMID, $1> = VArray<Win32_Media_impl.MIDIOPENSTRMID, $1>(repeat: Win32_Media_impl.MIDIOPENSTRMID())
+    public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0u8)
+
+    // packed field `hMidi`: type `Win32_Media_impl.HMIDI` not supported by polyfill; skipped
+
+    // packed field `dwCallback`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `dwInstance`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `dnDevNode`: type `UIntNative` not supported by polyfill; skipped
+
+    public func cIds(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_cIds(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `rgIds`: type `VArray<Win32_Media_impl.MIDIOPENSTRMID, $1>` not supported by polyfill; skipped
     public init() {}
 }
 

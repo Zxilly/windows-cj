@@ -3,6 +3,7 @@ package windows_sys.Win32.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.Foundation.*
@@ -725,16 +726,128 @@ public let DI_DEFAULTSIZE: DI_FLAGS = DI_FLAGS(8)
 public let DI_NOMIRROR: DI_FLAGS = DI_FLAGS(16)
 
 @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-// packed(2)
 @C
 public struct DLGITEMTEMPLATE {
-    public var style: UInt32 = 0
-    public var dwExtendedStyle: UInt32 = 0
-    public var x: Int16 = 0
-    public var y: Int16 = 0
-    public var cx: Int16 = 0
-    public var cy: Int16 = 0
-    public var id: UInt16 = 0
+    public var _raw: VArray<UInt8, $18> = VArray<UInt8, $18>(repeat: 0u8)
+
+    public func style(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_style(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwExtendedStyle(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwExtendedStyle(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func x(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 8)
+        }
+    }
+
+    public mut func set_x(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func y(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 10)
+        }
+    }
+
+    public mut func set_y(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 10, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cx(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 12)
+        }
+    }
+
+    public mut func set_cx(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cy(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 14)
+        }
+    }
+
+    public mut func set_cy(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func id(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 16)
+        }
+    }
+
+    public mut func set_id(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -742,16 +855,128 @@ public struct DLGITEMTEMPLATE {
 public type DLGPROC = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative) -> IntNative>
 
 @When[Windows_Win32_UI_WindowsAndMessaging == "on"]
-// packed(2)
 @C
 public struct DLGTEMPLATE {
-    public var style: UInt32 = 0
-    public var dwExtendedStyle: UInt32 = 0
-    public var cdit: UInt16 = 0
-    public var x: Int16 = 0
-    public var y: Int16 = 0
-    public var cx: Int16 = 0
-    public var cy: Int16 = 0
+    public var _raw: VArray<UInt8, $18> = VArray<UInt8, $18>(repeat: 0u8)
+
+    public func style(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_style(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwExtendedStyle(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwExtendedStyle(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cdit(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 8)
+        }
+    }
+
+    public mut func set_cdit(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func x(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 10)
+        }
+    }
+
+    public mut func set_x(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 10, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func y(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 12)
+        }
+    }
+
+    public mut func set_y(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cx(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 14)
+        }
+    }
+
+    public mut func set_cx(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cy(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 16)
+        }
+    }
+
+    public mut func set_cy(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -1811,14 +2036,13 @@ public struct MENUTEMPLATEEX {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MENUTEMPLATEEX__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $6> = VArray<UInt32, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func menu(): MENUTEMPLATEEX__Anonymous_e__Union__Menu_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MENUTEMPLATEEX__Anonymous_e__Union__Menu_e__Struct>(p)
             return ptr.read()
         }
@@ -1827,9 +2051,8 @@ public struct MENUTEMPLATEEX__Anonymous_e__Union {
     public mut func set_menu(val: MENUTEMPLATEEX__Anonymous_e__Union__Menu_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MENUTEMPLATEEX__Anonymous_e__Union__Menu_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1839,9 +2062,8 @@ public struct MENUTEMPLATEEX__Anonymous_e__Union {
     public func menuEx(): MENUTEMPLATEEX__Anonymous_e__Union__MenuEx_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MENUTEMPLATEEX__Anonymous_e__Union__MenuEx_e__Struct>(p)
             return ptr.read()
         }
@@ -1850,9 +2072,8 @@ public struct MENUTEMPLATEEX__Anonymous_e__Union {
     public mut func set_menuEx(val: MENUTEMPLATEEX__Anonymous_e__Union__MenuEx_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MENUTEMPLATEEX__Anonymous_e__Union__MenuEx_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

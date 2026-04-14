@@ -3,6 +3,7 @@ package windows_sys.Wdk.NetworkManagement.Ndis
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Wdk.impl as Wdk_impl
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.NetworkManagement.Ndis as Win32_NetworkManagement_Ndis
@@ -197,14 +198,13 @@ public struct FILTERDBS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FILTERDBS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ethDB(): CPointer<ETH_FILTER> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<ETH_FILTER>>(p)
             return ptr.read()
         }
@@ -213,9 +213,8 @@ public struct FILTERDBS__Anonymous_e__Union {
     public mut func set_ethDB(val: CPointer<ETH_FILTER>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<ETH_FILTER>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -225,9 +224,8 @@ public struct FILTERDBS__Anonymous_e__Union {
     public func nullDB(): CPointer<IntNative> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<IntNative>>(p)
             return ptr.read()
         }
@@ -236,9 +234,8 @@ public struct FILTERDBS__Anonymous_e__Union {
     public mut func set_nullDB(val: CPointer<IntNative>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<IntNative>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -815,14 +812,13 @@ public struct NDIS_802_11_TEST {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NDIS_802_11_TEST__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
 
     public func authenticationEvent(): NDIS_802_11_AUTHENTICATION_EVENT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_802_11_AUTHENTICATION_EVENT>(p)
             return ptr.read()
         }
@@ -831,9 +827,8 @@ public struct NDIS_802_11_TEST__Anonymous_e__Union {
     public mut func set_authenticationEvent(val: NDIS_802_11_AUTHENTICATION_EVENT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_802_11_AUTHENTICATION_EVENT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -843,22 +838,16 @@ public struct NDIS_802_11_TEST__Anonymous_e__Union {
     public func rssiTrigger(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_rssiTrigger(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1025,27 +1014,21 @@ public struct NDIS_CONFIGURATION_PARAMETER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func integerData(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_integerData(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1053,9 +1036,8 @@ public struct NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union {
     public func stringData(): Win32_Foundation.UNICODE_STRING {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.UNICODE_STRING>(p)
             return ptr.read()
         }
@@ -1064,9 +1046,8 @@ public struct NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union {
     public mut func set_stringData(val: Win32_Foundation.UNICODE_STRING): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Foundation.UNICODE_STRING>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1076,9 +1057,8 @@ public struct NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union {
     public func binaryData(): BINARY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BINARY_DATA>(p)
             return ptr.read()
         }
@@ -1087,9 +1067,8 @@ public struct NDIS_CONFIGURATION_PARAMETER__ParameterData_e__Union {
     public mut func set_binaryData(val: BINARY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BINARY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1437,27 +1416,21 @@ public struct NDIS_GUID {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NDIS_GUID__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func oid(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_oid(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1465,22 +1438,16 @@ public struct NDIS_GUID__Anonymous_e__Union {
     public func status(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_status(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1967,14 +1934,13 @@ public struct NDIS_PACKET_8021Q_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NDIS_PACKET_8021Q_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func tagHeader(): NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct>(p)
             return ptr.read()
         }
@@ -1983,9 +1949,8 @@ public struct NDIS_PACKET_8021Q_INFO__Anonymous_e__Union {
     public mut func set_tagHeader(val: NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_PACKET_8021Q_INFO__Anonymous_e__Union__TagHeader_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1995,9 +1960,8 @@ public struct NDIS_PACKET_8021Q_INFO__Anonymous_e__Union {
     public func value(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -2006,9 +1970,8 @@ public struct NDIS_PACKET_8021Q_INFO__Anonymous_e__Union {
     public mut func set_value(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2639,14 +2602,13 @@ public struct NDIS_RW_LOCK {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NDIS_RW_LOCK__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func anonymous(): NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2655,9 +2617,8 @@ public struct NDIS_RW_LOCK__Anonymous1_e__Union {
     public mut func set_anonymous(val: NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2667,9 +2628,8 @@ public struct NDIS_RW_LOCK__Anonymous1_e__Union {
     public func reserved(): VArray<UInt8, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             return ptr.read()
         }
@@ -2678,9 +2638,8 @@ public struct NDIS_RW_LOCK__Anonymous1_e__Union {
     public mut func set_reserved(val: VArray<UInt8, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2701,14 +2660,13 @@ public struct NDIS_RW_LOCK__Anonymous1_e__Union__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NDIS_RW_LOCK__Anonymous2_e__Union {
-    public var _raw: VArray<UInt64, $64> = VArray<UInt64, $64>(repeat: 0)
+    public var _raw: VArray<UInt8, $512> = VArray<UInt8, $512>(repeat: 0)
 
     public func refCount(): VArray<NDIS_RW_LOCK_REFCOUNT, $32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<NDIS_RW_LOCK_REFCOUNT, $32>>(p)
             return ptr.read()
         }
@@ -2717,9 +2675,8 @@ public struct NDIS_RW_LOCK__Anonymous2_e__Union {
     public mut func set_refCount(val: VArray<NDIS_RW_LOCK_REFCOUNT, $32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<NDIS_RW_LOCK_REFCOUNT, $32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2729,9 +2686,8 @@ public struct NDIS_RW_LOCK__Anonymous2_e__Union {
     public func refCountEx(): VArray<UInt32, $128> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $128>>(p)
             return ptr.read()
         }
@@ -2740,9 +2696,8 @@ public struct NDIS_RW_LOCK__Anonymous2_e__Union {
     public mut func set_refCountEx(val: VArray<UInt32, $128>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $128>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2752,9 +2707,8 @@ public struct NDIS_RW_LOCK__Anonymous2_e__Union {
     public func anonymous(): NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -2763,9 +2717,8 @@ public struct NDIS_RW_LOCK__Anonymous2_e__Union {
     public mut func set_anonymous(val: NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2787,27 +2740,21 @@ public struct NDIS_RW_LOCK__Anonymous2_e__Union__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NDIS_RW_LOCK_REFCOUNT {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func refCount(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_refCount(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2815,9 +2762,8 @@ public struct NDIS_RW_LOCK_REFCOUNT {
     public func cacheLine(): VArray<UInt8, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             return ptr.read()
         }
@@ -2826,9 +2772,8 @@ public struct NDIS_RW_LOCK_REFCOUNT {
     public mut func set_cacheLine(val: VArray<UInt8, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2988,14 +2933,13 @@ public struct NDIS_TCP_IP_CHECKSUM_PACKET_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func transmit(): NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct>(p)
             return ptr.read()
         }
@@ -3004,9 +2948,8 @@ public struct NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union {
     public mut func set_transmit(val: NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Transmit_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3016,9 +2959,8 @@ public struct NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union {
     public func receive(): NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct>(p)
             return ptr.read()
         }
@@ -3027,9 +2969,8 @@ public struct NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union {
     public mut func set_receive(val: NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union__Receive_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3039,22 +2980,16 @@ public struct NDIS_TCP_IP_CHECKSUM_PACKET_INFO__Anonymous_e__Union {
     public func value(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_value(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }

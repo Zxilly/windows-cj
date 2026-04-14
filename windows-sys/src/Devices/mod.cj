@@ -3,6 +3,7 @@ package windows_sys.Devices
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Devices.Adc.Provider as Devices_Adc_Provider
 import windows_sys.Devices.Gpio.Provider as Devices_Gpio_Provider
 import windows_sys.Devices.I2c.Provider as Devices_I2c_Provider

@@ -3,6 +3,7 @@ package windows_sys.Win32.Storage.Packaging.Appx
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.impl as Win32_impl
@@ -12663,29 +12664,102 @@ public class IAppxSourceContentGroupMapReader <: ComInterface & Resource {
 public type PACKAGEDEPENDENCY_CONTEXT = CPointer<Unit>
 
 @When[Windows_Win32_Storage_Packaging_Appx == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct PACKAGE_ID {
-    public var reserved: UInt32 = 0
-    public var processorArchitecture: UInt32 = 0
-    public var version: PACKAGE_VERSION = PACKAGE_VERSION()
-    public var name: CPointer<UInt16> = CPointer<UInt16>()
-    public var publisher: CPointer<UInt16> = CPointer<UInt16>()
-    public var resourceId: CPointer<UInt16> = CPointer<UInt16>()
-    public var publisherId: CPointer<UInt16> = CPointer<UInt16>()
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0u8)
+
+    public func reserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_reserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func processorArchitecture(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_processorArchitecture(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `version`: type `PACKAGE_VERSION` not supported by polyfill; skipped
+
+    // packed field `name`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `publisher`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `resourceId`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `publisherId`: type `CPointer<UInt16>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Storage_Packaging_Appx == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct PACKAGE_INFO {
-    public var reserved: UInt32 = 0
-    public var flags: UInt32 = 0
-    public var path: CPointer<UInt16> = CPointer<UInt16>()
-    public var packageFullName: CPointer<UInt16> = CPointer<UInt16>()
-    public var packageFamilyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var packageId: PACKAGE_ID = PACKAGE_ID()
+    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0u8)
+
+    public func reserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_reserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func flags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_flags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `path`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `packageFullName`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `packageFamilyName`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `packageId`: type `PACKAGE_ID` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -12697,31 +12771,24 @@ public struct PACKAGE_VERSION {
 }
 
 @When[Windows_Win32_Storage_Packaging_Appx == "on"]
-// packed(4)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PACKAGE_VERSION__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func version(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_version(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12729,9 +12796,8 @@ public struct PACKAGE_VERSION__Anonymous_e__Union {
     public func anonymous(): PACKAGE_VERSION__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PACKAGE_VERSION__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12740,9 +12806,8 @@ public struct PACKAGE_VERSION__Anonymous_e__Union {
     public mut func set_anonymous(val: PACKAGE_VERSION__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PACKAGE_VERSION__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

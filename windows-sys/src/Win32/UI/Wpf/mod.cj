@@ -3,6 +3,7 @@ package windows_sys.Win32.UI.Wpf
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Dwm as Win32_Graphics_Dwm
 import windows_sys.Win32.Graphics.Imaging as Win32_Graphics_Imaging

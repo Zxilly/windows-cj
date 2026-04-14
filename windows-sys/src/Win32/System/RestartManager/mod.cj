@@ -3,6 +3,7 @@ package windows_sys.Win32.System.RestartManager
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -135,14 +136,13 @@ public struct RM_FILTER_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RM_FILTER_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
 
     public func strFilename(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -151,9 +151,8 @@ public struct RM_FILTER_INFO__Anonymous_e__Union {
     public mut func set_strFilename(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -163,9 +162,8 @@ public struct RM_FILTER_INFO__Anonymous_e__Union {
     public func process(): RM_UNIQUE_PROCESS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RM_UNIQUE_PROCESS>(p)
             return ptr.read()
         }
@@ -174,9 +172,8 @@ public struct RM_FILTER_INFO__Anonymous_e__Union {
     public mut func set_process(val: RM_UNIQUE_PROCESS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<RM_UNIQUE_PROCESS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -186,9 +183,8 @@ public struct RM_FILTER_INFO__Anonymous_e__Union {
     public func strServiceShortName(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -197,9 +193,8 @@ public struct RM_FILTER_INFO__Anonymous_e__Union {
     public mut func set_strServiceShortName(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage

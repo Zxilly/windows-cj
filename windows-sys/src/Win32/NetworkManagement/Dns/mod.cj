@@ -3,6 +3,7 @@ package windows_sys.Win32.NetworkManagement.Dns
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -23,7 +24,6 @@ public struct DNS_ADDR {
 }
 
 @When[Windows_Win32_NetworkManagement_Dns == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_ADDR__Data_e__Union {
@@ -32,9 +32,8 @@ public struct DNS_ADDR__Data_e__Union {
     public func dnsAddrUserDword(): VArray<UInt32, $8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $8>>(p)
             return ptr.read()
         }
@@ -43,9 +42,8 @@ public struct DNS_ADDR__Data_e__Union {
     public mut func set_dnsAddrUserDword(val: VArray<UInt32, $8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -55,19 +53,164 @@ public struct DNS_ADDR__Data_e__Union {
 }
 
 @When[Windows_Win32_NetworkManagement_Dns == "on"]
-// packed(1)
 @C
 public struct DNS_ADDR_ARRAY {
-    public var MaxCount: UInt32 = 0
-    public var AddrCount: UInt32 = 0
-    public var Tag: UInt32 = 0
-    public var Family: UInt16 = 0
-    public var WordReserved: UInt16 = 0
-    public var Flags: UInt32 = 0
-    public var MatchFlag: UInt32 = 0
-    public var Reserved1: UInt32 = 0
-    public var Reserved2: UInt32 = 0
-    public var AddrArray: VArray<DNS_ADDR, $1> = VArray<DNS_ADDR, $1>(repeat: DNS_ADDR())
+    public var _raw: VArray<UInt8, $96> = VArray<UInt8, $96>(repeat: 0u8)
+
+    public func maxCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_maxCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func addrCount(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_addrCount(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func tag(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_tag(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func family(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 12)
+        }
+    }
+
+    public mut func set_family(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wordReserved(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 14)
+        }
+    }
+
+    public mut func set_wordReserved(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func flags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_flags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func matchFlag(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_matchFlag(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_reserved1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_reserved2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `AddrArray`: type `VArray<DNS_ADDR, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -304,14 +447,13 @@ public struct DNS_CONNECTION_PROXY_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func config(): DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union__DNS_CONNECTION_PROXY_INFO_CONFIG {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union__DNS_CONNECTION_PROXY_INFO_CONFIG>(p)
             return ptr.read()
         }
@@ -320,9 +462,8 @@ public struct DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union {
     public mut func set_config(val: DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union__DNS_CONNECTION_PROXY_INFO_CONFIG): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union__DNS_CONNECTION_PROXY_INFO_CONFIG>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -332,9 +473,8 @@ public struct DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union {
     public func script(): DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union__DNS_CONNECTION_PROXY_INFO_SCRIPT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union__DNS_CONNECTION_PROXY_INFO_SCRIPT>(p)
             return ptr.read()
         }
@@ -343,9 +483,8 @@ public struct DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union {
     public mut func set_script(val: DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union__DNS_CONNECTION_PROXY_INFO_SCRIPT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_CONNECTION_PROXY_INFO__Anonymous_e__Union__DNS_CONNECTION_PROXY_INFO_SCRIPT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -470,14 +609,13 @@ public struct DNS_CUSTOM_SERVER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_CUSTOM_SERVER__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pwszTemplate(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -486,9 +624,8 @@ public struct DNS_CUSTOM_SERVER__Anonymous1_e__Union {
     public mut func set_pwszTemplate(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -498,9 +635,8 @@ public struct DNS_CUSTOM_SERVER__Anonymous1_e__Union {
     public func pwszHostname(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -509,9 +645,8 @@ public struct DNS_CUSTOM_SERVER__Anonymous1_e__Union {
     public mut func set_pwszHostname(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -529,9 +664,8 @@ public struct DNS_CUSTOM_SERVER__Anonymous2_e__Union {
     public func maxSa(): VArray<Win32_Foundation.CHAR, $32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Win32_Foundation.CHAR, $32>>(p)
             return ptr.read()
         }
@@ -540,9 +674,8 @@ public struct DNS_CUSTOM_SERVER__Anonymous2_e__Union {
     public mut func set_maxSa(val: VArray<Win32_Foundation.CHAR, $32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Win32_Foundation.CHAR, $32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -600,16 +733,128 @@ public let DnsFreeRecordList: DNS_FREE_TYPE = DNS_FREE_TYPE(1)
 public let DnsFreeParsedMessageFields: DNS_FREE_TYPE = DNS_FREE_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_Dns == "on"]
-// packed(1)
 @C
 public struct DNS_HEADER {
-    public var Xid: UInt16 = 0
-    public var _bitfield1: UInt8 = 0
-    public var _bitfield2: UInt8 = 0
-    public var QuestionCount: UInt16 = 0
-    public var AnswerCount: UInt16 = 0
-    public var NameServerCount: UInt16 = 0
-    public var AdditionalCount: UInt16 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func xid(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_xid(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func _bitfield1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 2)
+        }
+    }
+
+    public mut func set__bitfield1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func _bitfield2(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 3)
+        }
+    }
+
+    public mut func set__bitfield2(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func questionCount(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4)
+        }
+    }
+
+    public mut func set_questionCount(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func answerCount(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 6)
+        }
+    }
+
+    public mut func set_answerCount(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func nameServerCount(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 8)
+        }
+    }
+
+    public mut func set_nameServerCount(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func additionalCount(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 10)
+        }
+    }
+
+    public mut func set_additionalCount(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 10, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -1066,9 +1311,8 @@ public struct DNS_QUERY_RAW_REQUEST__Anonymous_e__Union {
     public func maxSa(): VArray<Win32_Foundation.CHAR, $32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Win32_Foundation.CHAR, $32>>(p)
             return ptr.read()
         }
@@ -1077,9 +1321,8 @@ public struct DNS_QUERY_RAW_REQUEST__Anonymous_e__Union {
     public mut func set_maxSa(val: VArray<Win32_Foundation.CHAR, $32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Win32_Foundation.CHAR, $32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1113,9 +1356,8 @@ public struct DNS_QUERY_RAW_RESULT__Anonymous_e__Union {
     public func maxSa(): VArray<Win32_Foundation.CHAR, $32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Win32_Foundation.CHAR, $32>>(p)
             return ptr.read()
         }
@@ -1124,9 +1366,8 @@ public struct DNS_QUERY_RAW_RESULT__Anonymous_e__Union {
     public mut func set_maxSa(val: VArray<Win32_Foundation.CHAR, $32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Win32_Foundation.CHAR, $32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1196,27 +1437,21 @@ public struct DNS_RECORDA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_RECORDA__Flags_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dw(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dw(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1224,9 +1459,8 @@ public struct DNS_RECORDA__Flags_e__Union {
     public func s(): DNS_RECORD_FLAGS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_RECORD_FLAGS>(p)
             return ptr.read()
         }
@@ -1235,9 +1469,8 @@ public struct DNS_RECORDA__Flags_e__Union {
     public mut func set_s(val: DNS_RECORD_FLAGS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_RECORD_FLAGS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1250,14 +1483,13 @@ public struct DNS_RECORDA__Flags_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_RECORDA__Data_e__Union {
-    public var _raw: VArray<UInt64, $7> = VArray<UInt64, $7>(repeat: 0)
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0)
 
     public func a(): DNS_A_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_A_DATA>(p)
             return ptr.read()
         }
@@ -1266,9 +1498,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_a(val: DNS_A_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_A_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1278,9 +1509,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func soa(): DNS_SOA_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SOA_DATAA>(p)
             return ptr.read()
         }
@@ -1289,9 +1519,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_soa(val: DNS_SOA_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SOA_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1301,9 +1530,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func soa2(): DNS_SOA_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SOA_DATAA>(p)
             return ptr.read()
         }
@@ -1312,9 +1540,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_soa2(val: DNS_SOA_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SOA_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1324,9 +1551,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func ptr(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1335,9 +1561,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_ptr(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1347,9 +1572,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func ptr2(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1358,9 +1582,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_ptr2(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1370,9 +1593,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func ns(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1381,9 +1603,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_ns(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1393,9 +1614,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func ns2(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1404,9 +1624,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_ns2(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1416,9 +1635,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func cname(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1427,9 +1645,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_cname(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1439,9 +1656,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func cname2(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1450,9 +1666,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_cname2(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1462,9 +1677,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func dname(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1473,9 +1687,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_dname(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1485,9 +1698,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func dname2(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1496,9 +1708,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_dname2(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1508,9 +1719,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mb(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1519,9 +1729,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mb(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1531,9 +1740,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mb2(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1542,9 +1750,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mb2(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1554,9 +1761,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func md(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1565,9 +1771,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_md(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1577,9 +1782,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func md2(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1588,9 +1792,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_md2(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1600,9 +1803,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mf(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1611,9 +1813,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mf(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1623,9 +1824,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mf2(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1634,9 +1834,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mf2(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1646,9 +1845,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mg(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1657,9 +1855,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mg(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1669,9 +1866,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mg2(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1680,9 +1876,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mg2(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1692,9 +1887,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mr(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1703,9 +1897,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mr(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1715,9 +1908,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mr2(): DNS_PTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             return ptr.read()
         }
@@ -1726,9 +1918,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mr2(val: DNS_PTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1738,9 +1929,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func minfo(): DNS_MINFO_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAA>(p)
             return ptr.read()
         }
@@ -1749,9 +1939,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_minfo(val: DNS_MINFO_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1761,9 +1950,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func minfo2(): DNS_MINFO_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAA>(p)
             return ptr.read()
         }
@@ -1772,9 +1960,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_minfo2(val: DNS_MINFO_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1784,9 +1971,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func rp(): DNS_MINFO_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAA>(p)
             return ptr.read()
         }
@@ -1795,9 +1981,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_rp(val: DNS_MINFO_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1807,9 +1992,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func rp2(): DNS_MINFO_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAA>(p)
             return ptr.read()
         }
@@ -1818,9 +2002,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_rp2(val: DNS_MINFO_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1830,9 +2013,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mx(): DNS_MX_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             return ptr.read()
         }
@@ -1841,9 +2023,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mx(val: DNS_MX_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1853,9 +2034,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func mx2(): DNS_MX_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             return ptr.read()
         }
@@ -1864,9 +2044,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_mx2(val: DNS_MX_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1876,9 +2055,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func afsdb(): DNS_MX_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             return ptr.read()
         }
@@ -1887,9 +2065,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_afsdb(val: DNS_MX_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1899,9 +2076,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func afsdb2(): DNS_MX_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             return ptr.read()
         }
@@ -1910,9 +2086,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_afsdb2(val: DNS_MX_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1922,9 +2097,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func rt(): DNS_MX_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             return ptr.read()
         }
@@ -1933,9 +2107,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_rt(val: DNS_MX_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1945,9 +2118,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func rt2(): DNS_MX_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             return ptr.read()
         }
@@ -1956,9 +2128,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_rt2(val: DNS_MX_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1968,9 +2139,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func hinfo(): DNS_TXT_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             return ptr.read()
         }
@@ -1979,9 +2149,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_hinfo(val: DNS_TXT_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1991,9 +2160,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func hinfo2(): DNS_TXT_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             return ptr.read()
         }
@@ -2002,9 +2170,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_hinfo2(val: DNS_TXT_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2014,9 +2181,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func isdn(): DNS_TXT_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             return ptr.read()
         }
@@ -2025,9 +2191,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_isdn(val: DNS_TXT_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2037,9 +2202,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func isdn2(): DNS_TXT_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             return ptr.read()
         }
@@ -2048,9 +2212,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_isdn2(val: DNS_TXT_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2060,9 +2223,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func txt(): DNS_TXT_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             return ptr.read()
         }
@@ -2071,9 +2233,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_txt(val: DNS_TXT_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2083,9 +2244,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func txt2(): DNS_TXT_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             return ptr.read()
         }
@@ -2094,9 +2254,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_txt2(val: DNS_TXT_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2106,9 +2265,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func x25(): DNS_TXT_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             return ptr.read()
         }
@@ -2117,9 +2275,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_x25(val: DNS_TXT_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2129,9 +2286,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func null(): DNS_NULL_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NULL_DATA>(p)
             return ptr.read()
         }
@@ -2140,9 +2296,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_null(val: DNS_NULL_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NULL_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2152,9 +2307,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func wks(): DNS_WKS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WKS_DATA>(p)
             return ptr.read()
         }
@@ -2163,9 +2317,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_wks(val: DNS_WKS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WKS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2175,9 +2328,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func wks2(): DNS_WKS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WKS_DATA>(p)
             return ptr.read()
         }
@@ -2186,9 +2338,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_wks2(val: DNS_WKS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WKS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2198,9 +2349,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func aaaa(): DNS_AAAA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_AAAA_DATA>(p)
             return ptr.read()
         }
@@ -2209,9 +2359,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_aaaa(val: DNS_AAAA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_AAAA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2221,9 +2370,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func key(): DNS_KEY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             return ptr.read()
         }
@@ -2232,9 +2380,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_key(val: DNS_KEY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2244,9 +2391,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func key2(): DNS_KEY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             return ptr.read()
         }
@@ -2255,9 +2401,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_key2(val: DNS_KEY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2267,9 +2412,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func sig(): DNS_SIG_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAA>(p)
             return ptr.read()
         }
@@ -2278,9 +2422,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_sig(val: DNS_SIG_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2290,9 +2433,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func sig2(): DNS_SIG_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAA>(p)
             return ptr.read()
         }
@@ -2301,9 +2443,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_sig2(val: DNS_SIG_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2313,9 +2454,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func atma(): DNS_ATMA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_ATMA_DATA>(p)
             return ptr.read()
         }
@@ -2324,9 +2464,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_atma(val: DNS_ATMA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_ATMA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2336,9 +2475,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func atma2(): DNS_ATMA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_ATMA_DATA>(p)
             return ptr.read()
         }
@@ -2347,9 +2485,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_atma2(val: DNS_ATMA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_ATMA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2359,9 +2496,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nxt(): DNS_NXT_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NXT_DATAA>(p)
             return ptr.read()
         }
@@ -2370,9 +2506,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nxt(val: DNS_NXT_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NXT_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2382,9 +2517,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nxt2(): DNS_NXT_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NXT_DATAA>(p)
             return ptr.read()
         }
@@ -2393,9 +2527,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nxt2(val: DNS_NXT_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NXT_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2405,9 +2538,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func srv(): DNS_SRV_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SRV_DATAA>(p)
             return ptr.read()
         }
@@ -2416,9 +2548,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_srv(val: DNS_SRV_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SRV_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2428,9 +2559,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func srv2(): DNS_SRV_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SRV_DATAA>(p)
             return ptr.read()
         }
@@ -2439,9 +2569,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_srv2(val: DNS_SRV_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SRV_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2451,9 +2580,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func naptr(): DNS_NAPTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NAPTR_DATAA>(p)
             return ptr.read()
         }
@@ -2462,9 +2590,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_naptr(val: DNS_NAPTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NAPTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2474,9 +2601,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func naptr2(): DNS_NAPTR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NAPTR_DATAA>(p)
             return ptr.read()
         }
@@ -2485,9 +2611,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_naptr2(val: DNS_NAPTR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NAPTR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2497,9 +2622,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func opt(): DNS_OPT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             return ptr.read()
         }
@@ -2508,9 +2632,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_opt(val: DNS_OPT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2520,9 +2643,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func opt2(): DNS_OPT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             return ptr.read()
         }
@@ -2531,9 +2653,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_opt2(val: DNS_OPT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2543,9 +2664,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func ds(): DNS_DS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DS_DATA>(p)
             return ptr.read()
         }
@@ -2554,9 +2674,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_ds(val: DNS_DS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2566,9 +2685,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func ds2(): DNS_DS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DS_DATA>(p)
             return ptr.read()
         }
@@ -2577,9 +2695,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_ds2(val: DNS_DS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2589,9 +2706,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func rrsig(): DNS_SIG_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAA>(p)
             return ptr.read()
         }
@@ -2600,9 +2716,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_rrsig(val: DNS_SIG_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2612,9 +2727,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func rrsig2(): DNS_SIG_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAA>(p)
             return ptr.read()
         }
@@ -2623,9 +2737,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_rrsig2(val: DNS_SIG_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2635,9 +2748,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nsec(): DNS_NSEC_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC_DATAA>(p)
             return ptr.read()
         }
@@ -2646,9 +2758,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nsec(val: DNS_NSEC_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2658,9 +2769,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nsec2(): DNS_NSEC_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC_DATAA>(p)
             return ptr.read()
         }
@@ -2669,9 +2779,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nsec2(val: DNS_NSEC_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2681,9 +2790,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func dnskey(): DNS_KEY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             return ptr.read()
         }
@@ -2692,9 +2800,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_dnskey(val: DNS_KEY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2704,9 +2811,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func dnskey2(): DNS_KEY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             return ptr.read()
         }
@@ -2715,9 +2821,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_dnskey2(val: DNS_KEY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2727,9 +2832,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func tkey(): DNS_TKEY_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TKEY_DATAA>(p)
             return ptr.read()
         }
@@ -2738,9 +2842,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_tkey(val: DNS_TKEY_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TKEY_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2750,9 +2853,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func tkey2(): DNS_TKEY_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TKEY_DATAA>(p)
             return ptr.read()
         }
@@ -2761,9 +2863,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_tkey2(val: DNS_TKEY_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TKEY_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2773,9 +2874,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func tsig(): DNS_TSIG_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TSIG_DATAA>(p)
             return ptr.read()
         }
@@ -2784,9 +2884,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_tsig(val: DNS_TSIG_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TSIG_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2796,9 +2895,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func tsig2(): DNS_TSIG_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TSIG_DATAA>(p)
             return ptr.read()
         }
@@ -2807,9 +2905,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_tsig2(val: DNS_TSIG_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TSIG_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2819,9 +2916,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func wins(): DNS_WINS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINS_DATA>(p)
             return ptr.read()
         }
@@ -2830,9 +2926,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_wins(val: DNS_WINS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2842,9 +2937,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func wins2(): DNS_WINS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINS_DATA>(p)
             return ptr.read()
         }
@@ -2853,9 +2947,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_wins2(val: DNS_WINS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2865,9 +2958,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func winsr(): DNS_WINSR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAA>(p)
             return ptr.read()
         }
@@ -2876,9 +2968,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_winsr(val: DNS_WINSR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2888,9 +2979,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func winsR(): DNS_WINSR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAA>(p)
             return ptr.read()
         }
@@ -2899,9 +2989,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_winsR(val: DNS_WINSR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2911,9 +3000,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nbstat(): DNS_WINSR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAA>(p)
             return ptr.read()
         }
@@ -2922,9 +3010,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nbstat(val: DNS_WINSR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2934,9 +3021,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nbstat2(): DNS_WINSR_DATAA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAA>(p)
             return ptr.read()
         }
@@ -2945,9 +3031,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nbstat2(val: DNS_WINSR_DATAA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2957,9 +3042,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func dhcid(): DNS_DHCID_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DHCID_DATA>(p)
             return ptr.read()
         }
@@ -2968,9 +3052,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_dhcid(val: DNS_DHCID_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DHCID_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2980,9 +3063,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nsec3(): DNS_NSEC3_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3_DATA>(p)
             return ptr.read()
         }
@@ -2991,9 +3073,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nsec3(val: DNS_NSEC3_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3003,9 +3084,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nsec32(): DNS_NSEC3_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3_DATA>(p)
             return ptr.read()
         }
@@ -3014,9 +3094,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nsec32(val: DNS_NSEC3_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3026,9 +3105,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nsec3PARAM(): DNS_NSEC3PARAM_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3PARAM_DATA>(p)
             return ptr.read()
         }
@@ -3037,9 +3115,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nsec3PARAM(val: DNS_NSEC3PARAM_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3PARAM_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3049,9 +3126,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func nsec3Param(): DNS_NSEC3PARAM_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3PARAM_DATA>(p)
             return ptr.read()
         }
@@ -3060,9 +3136,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_nsec3Param(val: DNS_NSEC3PARAM_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3PARAM_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3072,9 +3147,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func tlsa(): DNS_TLSA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TLSA_DATA>(p)
             return ptr.read()
         }
@@ -3083,9 +3157,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_tlsa(val: DNS_TLSA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TLSA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3095,9 +3168,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func tlsa2(): DNS_TLSA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TLSA_DATA>(p)
             return ptr.read()
         }
@@ -3106,9 +3178,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_tlsa2(val: DNS_TLSA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TLSA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3118,9 +3189,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func svcb(): DNS_SVCB_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SVCB_DATA>(p)
             return ptr.read()
         }
@@ -3129,9 +3199,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_svcb(val: DNS_SVCB_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SVCB_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3141,9 +3210,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func svcb2(): DNS_SVCB_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SVCB_DATA>(p)
             return ptr.read()
         }
@@ -3152,9 +3220,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_svcb2(val: DNS_SVCB_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SVCB_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3164,9 +3231,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func unknown(): DNS_UNKNOWN_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_UNKNOWN_DATA>(p)
             return ptr.read()
         }
@@ -3175,9 +3241,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_unknown(val: DNS_UNKNOWN_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_UNKNOWN_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3187,9 +3252,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func unknown2(): DNS_UNKNOWN_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_UNKNOWN_DATA>(p)
             return ptr.read()
         }
@@ -3198,9 +3262,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_unknown2(val: DNS_UNKNOWN_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_UNKNOWN_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3210,9 +3273,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public func pDataPtr(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -3221,9 +3283,8 @@ public struct DNS_RECORDA__Data_e__Union {
     public mut func set_pDataPtr(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3250,27 +3311,21 @@ public struct DNS_RECORDW {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_RECORDW__Flags_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dw(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dw(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3278,9 +3333,8 @@ public struct DNS_RECORDW__Flags_e__Union {
     public func s(): DNS_RECORD_FLAGS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_RECORD_FLAGS>(p)
             return ptr.read()
         }
@@ -3289,9 +3343,8 @@ public struct DNS_RECORDW__Flags_e__Union {
     public mut func set_s(val: DNS_RECORD_FLAGS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_RECORD_FLAGS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3304,14 +3357,13 @@ public struct DNS_RECORDW__Flags_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_RECORDW__Data_e__Union {
-    public var _raw: VArray<UInt64, $7> = VArray<UInt64, $7>(repeat: 0)
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0)
 
     public func a(): DNS_A_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_A_DATA>(p)
             return ptr.read()
         }
@@ -3320,9 +3372,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_a(val: DNS_A_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_A_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3332,9 +3383,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func soa(): DNS_SOA_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SOA_DATAW>(p)
             return ptr.read()
         }
@@ -3343,9 +3393,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_soa(val: DNS_SOA_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SOA_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3355,9 +3404,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func soa2(): DNS_SOA_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SOA_DATAW>(p)
             return ptr.read()
         }
@@ -3366,9 +3414,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_soa2(val: DNS_SOA_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SOA_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3378,9 +3425,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func ptr(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3389,9 +3435,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_ptr(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3401,9 +3446,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func ptr2(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3412,9 +3456,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_ptr2(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3424,9 +3467,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func ns(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3435,9 +3477,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_ns(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3447,9 +3488,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func ns2(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3458,9 +3498,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_ns2(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3470,9 +3509,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func cname(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3481,9 +3519,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_cname(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3493,9 +3530,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func cname2(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3504,9 +3540,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_cname2(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3516,9 +3551,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func dname(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3527,9 +3561,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_dname(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3539,9 +3572,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func dname2(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3550,9 +3582,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_dname2(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3562,9 +3593,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mb(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3573,9 +3603,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mb(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3585,9 +3614,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mb2(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3596,9 +3624,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mb2(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3608,9 +3635,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func md(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3619,9 +3645,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_md(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3631,9 +3656,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func md2(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3642,9 +3666,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_md2(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3654,9 +3677,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mf(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3665,9 +3687,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mf(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3677,9 +3698,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mf2(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3688,9 +3708,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mf2(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3700,9 +3719,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mg(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3711,9 +3729,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mg(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3723,9 +3740,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mg2(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3734,9 +3750,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mg2(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3746,9 +3761,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mr(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3757,9 +3771,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mr(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3769,9 +3782,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mr2(): DNS_PTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             return ptr.read()
         }
@@ -3780,9 +3792,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mr2(val: DNS_PTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_PTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3792,9 +3803,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func minfo(): DNS_MINFO_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAW>(p)
             return ptr.read()
         }
@@ -3803,9 +3813,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_minfo(val: DNS_MINFO_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3815,9 +3824,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func minfo2(): DNS_MINFO_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAW>(p)
             return ptr.read()
         }
@@ -3826,9 +3834,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_minfo2(val: DNS_MINFO_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3838,9 +3845,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func rp(): DNS_MINFO_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAW>(p)
             return ptr.read()
         }
@@ -3849,9 +3855,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_rp(val: DNS_MINFO_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3861,9 +3866,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func rp2(): DNS_MINFO_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAW>(p)
             return ptr.read()
         }
@@ -3872,9 +3876,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_rp2(val: DNS_MINFO_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MINFO_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3884,9 +3887,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mx(): DNS_MX_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             return ptr.read()
         }
@@ -3895,9 +3897,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mx(val: DNS_MX_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3907,9 +3908,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func mx2(): DNS_MX_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             return ptr.read()
         }
@@ -3918,9 +3918,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_mx2(val: DNS_MX_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3930,9 +3929,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func afsdb(): DNS_MX_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             return ptr.read()
         }
@@ -3941,9 +3939,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_afsdb(val: DNS_MX_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3953,9 +3950,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func afsdb2(): DNS_MX_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             return ptr.read()
         }
@@ -3964,9 +3960,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_afsdb2(val: DNS_MX_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3976,9 +3971,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func rt(): DNS_MX_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             return ptr.read()
         }
@@ -3987,9 +3981,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_rt(val: DNS_MX_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3999,9 +3992,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func rt2(): DNS_MX_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             return ptr.read()
         }
@@ -4010,9 +4002,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_rt2(val: DNS_MX_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_MX_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4022,9 +4013,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func hinfo(): DNS_TXT_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             return ptr.read()
         }
@@ -4033,9 +4023,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_hinfo(val: DNS_TXT_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4045,9 +4034,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func hinfo2(): DNS_TXT_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             return ptr.read()
         }
@@ -4056,9 +4044,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_hinfo2(val: DNS_TXT_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4068,9 +4055,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func isdn(): DNS_TXT_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             return ptr.read()
         }
@@ -4079,9 +4065,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_isdn(val: DNS_TXT_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4091,9 +4076,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func isdn2(): DNS_TXT_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             return ptr.read()
         }
@@ -4102,9 +4086,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_isdn2(val: DNS_TXT_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4114,9 +4097,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func txt(): DNS_TXT_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             return ptr.read()
         }
@@ -4125,9 +4107,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_txt(val: DNS_TXT_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4137,9 +4118,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func txt2(): DNS_TXT_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             return ptr.read()
         }
@@ -4148,9 +4128,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_txt2(val: DNS_TXT_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4160,9 +4139,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func x25(): DNS_TXT_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             return ptr.read()
         }
@@ -4171,9 +4149,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_x25(val: DNS_TXT_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TXT_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4183,9 +4160,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func null(): DNS_NULL_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NULL_DATA>(p)
             return ptr.read()
         }
@@ -4194,9 +4170,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_null(val: DNS_NULL_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NULL_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4206,9 +4181,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func wks(): DNS_WKS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WKS_DATA>(p)
             return ptr.read()
         }
@@ -4217,9 +4191,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_wks(val: DNS_WKS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WKS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4229,9 +4202,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func wks2(): DNS_WKS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WKS_DATA>(p)
             return ptr.read()
         }
@@ -4240,9 +4212,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_wks2(val: DNS_WKS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WKS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4252,9 +4223,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func aaaa(): DNS_AAAA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_AAAA_DATA>(p)
             return ptr.read()
         }
@@ -4263,9 +4233,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_aaaa(val: DNS_AAAA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_AAAA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4275,9 +4244,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func key(): DNS_KEY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             return ptr.read()
         }
@@ -4286,9 +4254,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_key(val: DNS_KEY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4298,9 +4265,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func key2(): DNS_KEY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             return ptr.read()
         }
@@ -4309,9 +4275,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_key2(val: DNS_KEY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4321,9 +4286,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func sig(): DNS_SIG_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAW>(p)
             return ptr.read()
         }
@@ -4332,9 +4296,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_sig(val: DNS_SIG_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4344,9 +4307,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func sig2(): DNS_SIG_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAW>(p)
             return ptr.read()
         }
@@ -4355,9 +4317,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_sig2(val: DNS_SIG_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4367,9 +4328,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func atma(): DNS_ATMA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_ATMA_DATA>(p)
             return ptr.read()
         }
@@ -4378,9 +4338,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_atma(val: DNS_ATMA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_ATMA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4390,9 +4349,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func atma2(): DNS_ATMA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_ATMA_DATA>(p)
             return ptr.read()
         }
@@ -4401,9 +4359,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_atma2(val: DNS_ATMA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_ATMA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4413,9 +4370,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nxt(): DNS_NXT_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NXT_DATAW>(p)
             return ptr.read()
         }
@@ -4424,9 +4380,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nxt(val: DNS_NXT_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NXT_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4436,9 +4391,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nxt2(): DNS_NXT_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NXT_DATAW>(p)
             return ptr.read()
         }
@@ -4447,9 +4401,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nxt2(val: DNS_NXT_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NXT_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4459,9 +4412,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func srv(): DNS_SRV_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SRV_DATAW>(p)
             return ptr.read()
         }
@@ -4470,9 +4422,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_srv(val: DNS_SRV_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SRV_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4482,9 +4433,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func srv2(): DNS_SRV_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SRV_DATAW>(p)
             return ptr.read()
         }
@@ -4493,9 +4443,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_srv2(val: DNS_SRV_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SRV_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4505,9 +4454,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func naptr(): DNS_NAPTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NAPTR_DATAW>(p)
             return ptr.read()
         }
@@ -4516,9 +4464,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_naptr(val: DNS_NAPTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NAPTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4528,9 +4475,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func naptr2(): DNS_NAPTR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NAPTR_DATAW>(p)
             return ptr.read()
         }
@@ -4539,9 +4485,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_naptr2(val: DNS_NAPTR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NAPTR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4551,9 +4496,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func opt(): DNS_OPT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             return ptr.read()
         }
@@ -4562,9 +4506,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_opt(val: DNS_OPT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4574,9 +4517,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func opt2(): DNS_OPT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             return ptr.read()
         }
@@ -4585,9 +4527,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_opt2(val: DNS_OPT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4597,9 +4538,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func ds(): DNS_DS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DS_DATA>(p)
             return ptr.read()
         }
@@ -4608,9 +4548,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_ds(val: DNS_DS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4620,9 +4559,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func ds2(): DNS_DS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DS_DATA>(p)
             return ptr.read()
         }
@@ -4631,9 +4569,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_ds2(val: DNS_DS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4643,9 +4580,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func rrsig(): DNS_SIG_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAW>(p)
             return ptr.read()
         }
@@ -4654,9 +4590,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_rrsig(val: DNS_SIG_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4666,9 +4601,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func rrsig2(): DNS_SIG_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAW>(p)
             return ptr.read()
         }
@@ -4677,9 +4611,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_rrsig2(val: DNS_SIG_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SIG_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4689,9 +4622,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nsec(): DNS_NSEC_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC_DATAW>(p)
             return ptr.read()
         }
@@ -4700,9 +4632,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nsec(val: DNS_NSEC_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4712,9 +4643,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nsec2(): DNS_NSEC_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC_DATAW>(p)
             return ptr.read()
         }
@@ -4723,9 +4653,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nsec2(val: DNS_NSEC_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4735,9 +4664,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func dnskey(): DNS_KEY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             return ptr.read()
         }
@@ -4746,9 +4674,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_dnskey(val: DNS_KEY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4758,9 +4685,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func dnskey2(): DNS_KEY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             return ptr.read()
         }
@@ -4769,9 +4695,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_dnskey2(val: DNS_KEY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_KEY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4781,9 +4706,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func tkey(): DNS_TKEY_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TKEY_DATAW>(p)
             return ptr.read()
         }
@@ -4792,9 +4716,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_tkey(val: DNS_TKEY_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TKEY_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4804,9 +4727,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func tkey2(): DNS_TKEY_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TKEY_DATAW>(p)
             return ptr.read()
         }
@@ -4815,9 +4737,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_tkey2(val: DNS_TKEY_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TKEY_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4827,9 +4748,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func tsig(): DNS_TSIG_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TSIG_DATAW>(p)
             return ptr.read()
         }
@@ -4838,9 +4758,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_tsig(val: DNS_TSIG_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TSIG_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4850,9 +4769,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func tsig2(): DNS_TSIG_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TSIG_DATAW>(p)
             return ptr.read()
         }
@@ -4861,9 +4779,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_tsig2(val: DNS_TSIG_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TSIG_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4873,9 +4790,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func wins(): DNS_WINS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINS_DATA>(p)
             return ptr.read()
         }
@@ -4884,9 +4800,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_wins(val: DNS_WINS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4896,9 +4811,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func wins2(): DNS_WINS_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINS_DATA>(p)
             return ptr.read()
         }
@@ -4907,9 +4821,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_wins2(val: DNS_WINS_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINS_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4919,9 +4832,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func winsr(): DNS_WINSR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAW>(p)
             return ptr.read()
         }
@@ -4930,9 +4842,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_winsr(val: DNS_WINSR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4942,9 +4853,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func winsR(): DNS_WINSR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAW>(p)
             return ptr.read()
         }
@@ -4953,9 +4863,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_winsR(val: DNS_WINSR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4965,9 +4874,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nbstat(): DNS_WINSR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAW>(p)
             return ptr.read()
         }
@@ -4976,9 +4884,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nbstat(val: DNS_WINSR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4988,9 +4895,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nbstat2(): DNS_WINSR_DATAW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAW>(p)
             return ptr.read()
         }
@@ -4999,9 +4905,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nbstat2(val: DNS_WINSR_DATAW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_WINSR_DATAW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5011,9 +4916,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func dhcid(): DNS_DHCID_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DHCID_DATA>(p)
             return ptr.read()
         }
@@ -5022,9 +4926,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_dhcid(val: DNS_DHCID_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_DHCID_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5034,9 +4937,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nsec3(): DNS_NSEC3_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3_DATA>(p)
             return ptr.read()
         }
@@ -5045,9 +4947,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nsec3(val: DNS_NSEC3_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5057,9 +4958,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nsec32(): DNS_NSEC3_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3_DATA>(p)
             return ptr.read()
         }
@@ -5068,9 +4968,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nsec32(val: DNS_NSEC3_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5080,9 +4979,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nsec3PARAM(): DNS_NSEC3PARAM_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3PARAM_DATA>(p)
             return ptr.read()
         }
@@ -5091,9 +4989,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nsec3PARAM(val: DNS_NSEC3PARAM_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3PARAM_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5103,9 +5000,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func nsec3Param(): DNS_NSEC3PARAM_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3PARAM_DATA>(p)
             return ptr.read()
         }
@@ -5114,9 +5010,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_nsec3Param(val: DNS_NSEC3PARAM_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_NSEC3PARAM_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5126,9 +5021,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func tlsa(): DNS_TLSA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TLSA_DATA>(p)
             return ptr.read()
         }
@@ -5137,9 +5031,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_tlsa(val: DNS_TLSA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TLSA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5149,9 +5042,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func tlsa2(): DNS_TLSA_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TLSA_DATA>(p)
             return ptr.read()
         }
@@ -5160,9 +5052,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_tlsa2(val: DNS_TLSA_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_TLSA_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5172,9 +5063,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func svcb(): DNS_SVCB_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SVCB_DATA>(p)
             return ptr.read()
         }
@@ -5183,9 +5073,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_svcb(val: DNS_SVCB_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SVCB_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5195,9 +5084,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func svcb2(): DNS_SVCB_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SVCB_DATA>(p)
             return ptr.read()
         }
@@ -5206,9 +5094,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_svcb2(val: DNS_SVCB_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_SVCB_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5218,9 +5105,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func unknown(): DNS_UNKNOWN_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_UNKNOWN_DATA>(p)
             return ptr.read()
         }
@@ -5229,9 +5115,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_unknown(val: DNS_UNKNOWN_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_UNKNOWN_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5241,9 +5126,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func unknown2(): DNS_UNKNOWN_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_UNKNOWN_DATA>(p)
             return ptr.read()
         }
@@ -5252,9 +5136,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_unknown2(val: DNS_UNKNOWN_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_UNKNOWN_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5264,9 +5147,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public func pDataPtr(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -5275,9 +5157,8 @@ public struct DNS_RECORDW__Data_e__Union {
     public mut func set_pDataPtr(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5312,27 +5193,21 @@ public struct DNS_RECORD_OPTW {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_RECORD_OPTW__Flags_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dw(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dw(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5340,9 +5215,8 @@ public struct DNS_RECORD_OPTW__Flags_e__Union {
     public func s(): DNS_RECORD_FLAGS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_RECORD_FLAGS>(p)
             return ptr.read()
         }
@@ -5351,9 +5225,8 @@ public struct DNS_RECORD_OPTW__Flags_e__Union {
     public mut func set_s(val: DNS_RECORD_FLAGS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_RECORD_FLAGS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5366,14 +5239,13 @@ public struct DNS_RECORD_OPTW__Flags_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_RECORD_OPTW__Data_e__Union {
-    public var _raw: VArray<UInt16, $3> = VArray<UInt16, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
 
     public func opt(): DNS_OPT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             return ptr.read()
         }
@@ -5382,9 +5254,8 @@ public struct DNS_RECORD_OPTW__Data_e__Union {
     public mut func set_opt(val: DNS_OPT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5394,9 +5265,8 @@ public struct DNS_RECORD_OPTW__Data_e__Union {
     public func opt2(): DNS_OPT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             return ptr.read()
         }
@@ -5405,9 +5275,8 @@ public struct DNS_RECORD_OPTW__Data_e__Union {
     public mut func set_opt2(val: DNS_OPT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5470,7 +5339,7 @@ public struct DNS_SERVICE_BROWSE_REQUEST {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_SERVICE_BROWSE_REQUEST__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
     public init() {}
 }
 
@@ -5624,14 +5493,13 @@ public struct DNS_SVCB_PARAM {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DNS_SVCB_PARAM__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pIpv4Hints(): CPointer<DNS_SVCB_PARAM_IPV4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_IPV4>>(p)
             return ptr.read()
         }
@@ -5640,9 +5508,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public mut func set_pIpv4Hints(val: CPointer<DNS_SVCB_PARAM_IPV4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_IPV4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5652,9 +5519,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public func pIpv6Hints(): CPointer<DNS_SVCB_PARAM_IPV6> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_IPV6>>(p)
             return ptr.read()
         }
@@ -5663,9 +5529,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public mut func set_pIpv6Hints(val: CPointer<DNS_SVCB_PARAM_IPV6>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_IPV6>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5675,9 +5540,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public func pMandatory(): CPointer<DNS_SVCB_PARAM_MANDATORY> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_MANDATORY>>(p)
             return ptr.read()
         }
@@ -5686,9 +5550,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public mut func set_pMandatory(val: CPointer<DNS_SVCB_PARAM_MANDATORY>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_MANDATORY>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5698,9 +5561,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public func pAlpn(): CPointer<DNS_SVCB_PARAM_ALPN> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_ALPN>>(p)
             return ptr.read()
         }
@@ -5709,9 +5571,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public mut func set_pAlpn(val: CPointer<DNS_SVCB_PARAM_ALPN>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_ALPN>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5721,22 +5582,16 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public func wPort(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_wPort(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5744,9 +5599,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public func pUnknown(): CPointer<DNS_SVCB_PARAM_UNKNOWN> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_UNKNOWN>>(p)
             return ptr.read()
         }
@@ -5755,9 +5609,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public mut func set_pUnknown(val: CPointer<DNS_SVCB_PARAM_UNKNOWN>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DNS_SVCB_PARAM_UNKNOWN>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5767,9 +5620,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public func pszDohPath(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -5778,9 +5630,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public mut func set_pszDohPath(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5790,9 +5641,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public func pReserved(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -5801,9 +5651,8 @@ public struct DNS_SVCB_PARAM__Anonymous_e__Union {
     public mut func set_pReserved(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6046,22 +5895,118 @@ public struct DNS_WINS_DATA {
 }
 
 @When[Windows_Win32_NetworkManagement_Dns == "on"]
-// packed(1)
 @C
 public struct DNS_WIRE_QUESTION {
-    public var QuestionType: UInt16 = 0
-    public var QuestionClass: UInt16 = 0
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+
+    public func questionType(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_questionType(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func questionClass(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_questionClass(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_Dns == "on"]
-// packed(1)
 @C
 public struct DNS_WIRE_RECORD {
-    public var RecordType: UInt16 = 0
-    public var RecordClass: UInt16 = 0
-    public var TimeToLive: UInt32 = 0
-    public var DataLength: UInt16 = 0
+    public var _raw: VArray<UInt8, $10> = VArray<UInt8, $10>(repeat: 0u8)
+
+    public func recordType(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_recordType(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func recordClass(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_recordClass(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func timeToLive(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_timeToLive(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dataLength(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 8)
+        }
+    }
+
+    public mut func set_dataLength(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -6086,14 +6031,13 @@ public struct IP4_ARRAY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IP6_ADDRESS {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func ip6Qword(): VArray<UInt64, $2> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt64, $2>>(p)
             return ptr.read()
         }
@@ -6102,9 +6046,8 @@ public struct IP6_ADDRESS {
     public mut func set_ip6Qword(val: VArray<UInt64, $2>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt64, $2>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6114,9 +6057,8 @@ public struct IP6_ADDRESS {
     public func ip6Dword(): VArray<UInt32, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $4>>(p)
             return ptr.read()
         }
@@ -6125,9 +6067,8 @@ public struct IP6_ADDRESS {
     public mut func set_ip6Dword(val: VArray<UInt32, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6137,9 +6078,8 @@ public struct IP6_ADDRESS {
     public func ip6Word(): VArray<UInt16, $8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $8>>(p)
             return ptr.read()
         }
@@ -6148,9 +6088,8 @@ public struct IP6_ADDRESS {
     public mut func set_ip6Word(val: VArray<UInt16, $8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6160,9 +6099,8 @@ public struct IP6_ADDRESS {
     public func ip6Byte(): VArray<UInt8, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             return ptr.read()
         }
@@ -6171,9 +6109,8 @@ public struct IP6_ADDRESS {
     public mut func set_ip6Byte(val: VArray<UInt8, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6243,27 +6180,21 @@ public struct _DnsRecordOptA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct _DnsRecordOptA__Flags_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dw(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dw(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6271,9 +6202,8 @@ public struct _DnsRecordOptA__Flags_e__Union {
     public func s(): DNS_RECORD_FLAGS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_RECORD_FLAGS>(p)
             return ptr.read()
         }
@@ -6282,9 +6212,8 @@ public struct _DnsRecordOptA__Flags_e__Union {
     public mut func set_s(val: DNS_RECORD_FLAGS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_RECORD_FLAGS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6297,14 +6226,13 @@ public struct _DnsRecordOptA__Flags_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct _DnsRecordOptA__Data_e__Union {
-    public var _raw: VArray<UInt16, $3> = VArray<UInt16, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
 
     public func opt(): DNS_OPT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             return ptr.read()
         }
@@ -6313,9 +6241,8 @@ public struct _DnsRecordOptA__Data_e__Union {
     public mut func set_opt(val: DNS_OPT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6325,9 +6252,8 @@ public struct _DnsRecordOptA__Data_e__Union {
     public func opt2(): DNS_OPT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             return ptr.read()
         }
@@ -6336,9 +6262,8 @@ public struct _DnsRecordOptA__Data_e__Union {
     public mut func set_opt2(val: DNS_OPT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DNS_OPT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage

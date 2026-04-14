@@ -3,6 +3,7 @@ package windows_sys.Win32.NetworkManagement.WindowsFirewall
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.impl as Win32_impl
@@ -1603,14 +1604,13 @@ public struct INET_FIREWALL_AC_CHANGE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INET_FIREWALL_AC_CHANGE__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func capabilities(): INET_FIREWALL_AC_CAPABILITIES {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INET_FIREWALL_AC_CAPABILITIES>(p)
             return ptr.read()
         }
@@ -1619,9 +1619,8 @@ public struct INET_FIREWALL_AC_CHANGE__Anonymous_e__Union {
     public mut func set_capabilities(val: INET_FIREWALL_AC_CAPABILITIES): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INET_FIREWALL_AC_CAPABILITIES>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1631,9 +1630,8 @@ public struct INET_FIREWALL_AC_CHANGE__Anonymous_e__Union {
     public func binaries(): INET_FIREWALL_AC_BINARIES {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INET_FIREWALL_AC_BINARIES>(p)
             return ptr.read()
         }
@@ -1642,9 +1640,8 @@ public struct INET_FIREWALL_AC_CHANGE__Anonymous_e__Union {
     public mut func set_binaries(val: INET_FIREWALL_AC_BINARIES): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INET_FIREWALL_AC_BINARIES>(p)
             ptr.write(val)
             _raw = rawStorage

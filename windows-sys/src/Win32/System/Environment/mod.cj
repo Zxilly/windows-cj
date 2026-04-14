@@ -3,25 +3,127 @@ package windows_sys.Win32.System.Environment
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
 
 @When[Windows_Win32_System_Environment == "on"]
-// packed(1)
 @C
 public struct ENCLAVE_IDENTITY {
-    public var OwnerId: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var UniqueId: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var AuthorId: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var FamilyId: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var ImageId: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var EnclaveSvn: UInt32 = 0
-    public var SecureKernelSvn: UInt32 = 0
-    public var PlatformSvn: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var SigningLevel: UInt32 = 0
-    public var EnclaveType: UInt32 = 0
+    public var _raw: VArray<UInt8, $152> = VArray<UInt8, $152>(repeat: 0u8)
+
+    // packed field `OwnerId`: type `VArray<UInt8, $32>` not supported by polyfill; skipped
+
+    // packed field `UniqueId`: type `VArray<UInt8, $32>` not supported by polyfill; skipped
+
+    // packed field `AuthorId`: type `VArray<UInt8, $32>` not supported by polyfill; skipped
+
+    // packed field `FamilyId`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `ImageId`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    public func enclaveSvn(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 128)
+        }
+    }
+
+    public mut func set_enclaveSvn(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 128, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func secureKernelSvn(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 132)
+        }
+    }
+
+    public mut func set_secureKernelSvn(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 132, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func platformSvn(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 136)
+        }
+    }
+
+    public mut func set_platformSvn(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 136, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func flags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 140)
+        }
+    }
+
+    public mut func set_flags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 140, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func signingLevel(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 144)
+        }
+    }
+
+    public mut func set_signingLevel(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 144, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func enclaveType(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 148)
+        }
+    }
+
+    public mut func set_enclaveType(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 148, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -92,14 +194,79 @@ public struct PS_TRUSTLET_TKSESSION_ID {
 }
 
 @When[Windows_Win32_System_Environment == "on"]
-// packed(1)
 @C
 public struct TRUSTLET_BINDING_DATA {
-    public var TrustletIdentity: UInt64 = 0
-    public var TrustletSessionId: PS_TRUSTLET_TKSESSION_ID = PS_TRUSTLET_TKSESSION_ID()
-    public var TrustletSvn: UInt32 = 0
-    public var Reserved1: UInt32 = 0
-    public var Reserved2: UInt64 = 0
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0u8)
+
+    public func trustletIdentity(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 0)
+        }
+    }
+
+    public mut func set_trustletIdentity(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `TrustletSessionId`: type `PS_TRUSTLET_TKSESSION_ID` not supported by polyfill; skipped
+
+    public func trustletSvn(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_trustletSvn(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_reserved1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved2(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 48)
+        }
+    }
+
+    public mut func set_reserved2(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 48, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -200,49 +367,233 @@ public struct VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64 {
 }
 
 @When[Windows_Win32_System_Environment == "on"]
-// packed(1)
 @C
 public struct VBS_ENCLAVE_REPORT {
-    public var ReportSize: UInt32 = 0
-    public var ReportVersion: UInt32 = 0
-    public var EnclaveData: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
-    public var EnclaveIdentity: ENCLAVE_IDENTITY = ENCLAVE_IDENTITY()
+    public var _raw: VArray<UInt8, $224> = VArray<UInt8, $224>(repeat: 0u8)
+
+    public func reportSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_reportSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reportVersion(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_reportVersion(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `EnclaveData`: type `VArray<UInt8, $64>` not supported by polyfill; skipped
+
+    // packed field `EnclaveIdentity`: type `ENCLAVE_IDENTITY` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_Environment == "on"]
-// packed(1)
 @C
 public struct VBS_ENCLAVE_REPORT_MODULE {
-    public var Header: VBS_ENCLAVE_REPORT_VARDATA_HEADER = VBS_ENCLAVE_REPORT_VARDATA_HEADER()
-    public var UniqueId: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var AuthorId: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var FamilyId: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var ImageId: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var Svn: UInt32 = 0
-    public var ModuleName: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $110> = VArray<UInt8, $110>(repeat: 0u8)
+
+    // packed field `Header`: type `VBS_ENCLAVE_REPORT_VARDATA_HEADER` not supported by polyfill; skipped
+
+    // packed field `UniqueId`: type `VArray<UInt8, $32>` not supported by polyfill; skipped
+
+    // packed field `AuthorId`: type `VArray<UInt8, $32>` not supported by polyfill; skipped
+
+    // packed field `FamilyId`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `ImageId`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    public func svn(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 104)
+        }
+    }
+
+    public mut func set_svn(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 104, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ModuleName`: type `VArray<UInt16, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_Environment == "on"]
-// packed(1)
 @C
 public struct VBS_ENCLAVE_REPORT_PKG_HEADER {
-    public var PackageSize: UInt32 = 0
-    public var Version: UInt32 = 0
-    public var SignatureScheme: UInt32 = 0
-    public var SignedStatementSize: UInt32 = 0
-    public var SignatureSize: UInt32 = 0
-    public var Reserved: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func packageSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_packageSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func version(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_version(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func signatureScheme(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_signatureScheme(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func signedStatementSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_signedStatementSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func signatureSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_signatureSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_reserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_System_Environment == "on"]
-// packed(1)
 @C
 public struct VBS_ENCLAVE_REPORT_VARDATA_HEADER {
-    public var DataType: UInt32 = 0
-    public var Size: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func dataType(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dataType(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func size(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_size(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
