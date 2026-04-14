@@ -9,6 +9,7 @@ members = [
     "windows-interface",
     "windows-implement",
     "windows-core",
+    "windows-polyfill",
     "windows"
 ]
 
