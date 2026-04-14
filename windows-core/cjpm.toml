@@ -12,3 +12,4 @@
   windows_interface = { path = "../windows-interface" }
   windows_implement = { path = "../windows-implement" }
   windows_sys = { path = "../windows-sys" }
+  windows_polyfill = { path = "../windows-polyfill" }

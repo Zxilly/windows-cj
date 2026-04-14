@@ -207,15 +207,3 @@ func pointerConstantLiteral(pointerType: String, value: String): Option<String> 
     return Some("unsafe { ${pointerType}(CPointer<UInt8>() + ${stripped}) }")
 }
 
-// Generate GUID constants from GuidAttribute custom attributes
-public func generateGuidConstant(
-    w: CodeWriter,
-    name: String,
-    guidAttr: Array<UInt32> // [data1, data2, data3, d4_0..d4_7] packed
-): Unit {
-    // This would require parsing GuidAttribute blob values
-    // Implemented as helper for COM interface IID generation
-    if (guidAttr.size >= 11) {
-        w.writeLine("public let ${escapeSourceIdentifier(name)}: GUID = GUID(${guidAttr[0]}, ${UInt16(guidAttr[1])}, ${UInt16(guidAttr[2])}, ${UInt8(guidAttr[3])}, ${UInt8(guidAttr[4])}, ${UInt8(guidAttr[5])}, ${UInt8(guidAttr[6])}, ${UInt8(guidAttr[7])}, ${UInt8(guidAttr[8])}, ${UInt8(guidAttr[9])}, ${UInt8(guidAttr[10])})")
-    }
-}
