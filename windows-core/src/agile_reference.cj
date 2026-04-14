@@ -50,25 +50,37 @@ foreign {
 let IID_IAGILEOBJECT = GUID.fromValues(0x94EA2B94u32, 0xE9CCu16, 0x49E0u16, 0xC0u8, 0xFFu8, 0xEEu8, 0x64u8, 0xCAu8, 0x8Fu8, 0x5Bu8, 0x90u8)
 let IID_IAGILEREFERENCE = GUID.fromValues(0xC03F6A43u32, 0x65A4u16, 0x9818u16, 0x98u8, 0x7Eu8, 0xE0u8, 0xB8u8, 0x10u8, 0xD2u8, 0xA6u8, 0xF2u8)
 
-func wrapIAgileObjectOwned(raw: CPointer<Unit>): IAgileObject {
-    IAgileObject(raw, ownsReference: true)
+func takeIAgileObjectFromAbi(raw: CPointer<Unit>): IAgileObject {
+    IAgileObject.fromAbiTake(raw)
 }
 
-func wrapIAgileObjectBorrowed(raw: CPointer<Unit>): IAgileObject {
-    IAgileObject(raw)
+func viewIAgileObject(raw: CPointer<Unit>): IAgileObject {
+    IAgileObject.viewOf(raw)
 }
 
-func wrapIAgileReferenceOwned(raw: CPointer<Unit>): IAgileReference {
-    IAgileReference(raw, ownsReference: true)
+func takeIAgileReferenceFromAbi(raw: CPointer<Unit>): IAgileReference {
+    IAgileReference.fromAbiTake(raw)
 }
 
-func wrapIAgileReferenceBorrowed(raw: CPointer<Unit>): IAgileReference {
-    IAgileReference(raw)
+func viewIAgileReference(raw: CPointer<Unit>): IAgileReference {
+    IAgileReference.viewOf(raw)
 }
 
 public class IAgileObject <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IAgileObject {
+        IAgileObject(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAgileObject {
+        IAgileObject(raw)
     }
 
     public static func iid(): GUID {
@@ -76,7 +88,7 @@ public class IAgileObject <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAgileObject> {
-        InterfaceDescriptor<IAgileObject>("IAgileObject", IID_IAGILEOBJECT, wrapIAgileObjectOwned, wrapIAgileObjectBorrowed)
+        InterfaceDescriptor<IAgileObject>("IAgileObject", IID_IAGILEOBJECT, takeIAgileObjectFromAbi, viewIAgileObject)
     }
 
     public unsafe func vtbl(): IAgileObjectVtbl {
@@ -97,8 +109,20 @@ public func matchesIAgileObjectVtbl(iid: GUID): Bool {
 }
 
 public class IAgileReference <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IAgileReference {
+        IAgileReference(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAgileReference {
+        IAgileReference(raw)
     }
 
     public static func iid(): GUID {
@@ -106,7 +130,7 @@ public class IAgileReference <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAgileReference> {
-        InterfaceDescriptor<IAgileReference>("IAgileReference", IID_IAGILEREFERENCE, wrapIAgileReferenceOwned, wrapIAgileReferenceBorrowed)
+        InterfaceDescriptor<IAgileReference>("IAgileReference", IID_IAGILEREFERENCE, takeIAgileReferenceFromAbi, viewIAgileReference)
     }
 
     public unsafe func vtbl(): IAgileReferenceVtbl {
@@ -128,7 +152,7 @@ public class IAgileReference <: InterfaceWrapperBase & ComInterface {
         if (raw.isNull()) {
             return Result<T>.Err(WinError(E_POINTER))
         }
-        Result<T>.Ok(descriptor.wrapOwned(raw))
+        Result<T>.Ok(descriptor.takeFromAbi(raw))
     }
 }
 
@@ -138,7 +162,7 @@ public interface IAgileReference_Impl {
 
 @C
 func agileReferenceResolveThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     riid: CPointer<GUID>,
     ppvobjectreference: CPointer<CPointer<Unit>>
 ): Int32 {
@@ -152,7 +176,7 @@ func agileReferenceResolveThunk(
         }
     }
 
-    match (lookupComInnerImpl<IAgileReference_Impl>(this_)) {
+    match (lookupComInnerImpl<IAgileReference_Impl>(instanceRaw)) {
         case Some(value) =>
             match (value.Resolve(riid, ppvobjectreference)) {
                 case Result<Unit>.Ok(_) => S_OK.value
@@ -177,10 +201,10 @@ public func matchesIAgileReferenceVtbl(iid: GUID): Bool {
 public class AgileReference<T> <: Resource where T <: ComInterface {
     private let descriptor: InterfaceDescriptor<T>
     private let inner: Option<IAgileReference>
-    private let local: Option<ComPtr<T>>
+    private let local: Option<InterfaceHandle<T>>
     private var closed: Bool = false
 
-    init(inner: Option<IAgileReference>, local: Option<ComPtr<T>>, descriptor: InterfaceDescriptor<T>) {
+    init(inner: Option<IAgileReference>, local: Option<InterfaceHandle<T>>, descriptor: InterfaceDescriptor<T>) {
         this.inner = inner
         this.local = local
         this.descriptor = descriptor
@@ -211,7 +235,7 @@ public class AgileReference<T> <: Resource where T <: ComInterface {
             return Result<AgileReference<T>>.Err(WinError(E_POINTER))
         }
         Result<AgileReference<T>>.Ok(
-            AgileReference<T>(Some(IAgileReference(raw, ownsReference: true)), None, descriptor)
+            AgileReference<T>(Some(IAgileReference.fromAbiTake(raw)), None, descriptor)
         )
     }
 
@@ -243,9 +267,9 @@ public class AgileReference<T> <: Resource where T <: ComInterface {
         }
         match (local) {
             case Some(pointer) =>
-                let cloned = pointer.clonePtr()
-                let raw = cloned.detach()
-                return Result<T>.Ok(descriptor.wrapOwned(raw))
+                let cloned = pointer.retain()
+                let raw = cloned.intoAbi()
+                return Result<T>.Ok(descriptor.takeFromAbi(raw))
             case None =>
                 Result<T>.Err(WinError(E_POINTER))
         }

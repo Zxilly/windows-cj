@@ -18,7 +18,7 @@ public class AmbientLight <: InterfaceWrapperBase & ComInterface & windows_inter
         AmbientLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AmbientLight {
+    public static func viewOf(raw: CPointer<Unit>): AmbientLight {
         AmbientLight(raw)
     }
 
@@ -110,7 +110,7 @@ public class AnimationController <: InterfaceWrapperBase & ComInterface & window
         AnimationController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AnimationController {
+    public static func viewOf(raw: CPointer<Unit>): AnimationController {
         AnimationController(raw)
     }
 
@@ -348,7 +348,7 @@ public class AnimationPropertyInfo <: InterfaceWrapperBase & ComInterface & wind
         AnimationPropertyInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AnimationPropertyInfo {
+    public static func viewOf(raw: CPointer<Unit>): AnimationPropertyInfo {
         AnimationPropertyInfo(raw)
     }
 
@@ -459,7 +459,7 @@ public class BackEasingFunction <: InterfaceWrapperBase & ComInterface & windows
         BackEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BackEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): BackEasingFunction {
         BackEasingFunction(raw)
     }
 
@@ -551,7 +551,7 @@ public class BooleanKeyFrameAnimation <: InterfaceWrapperBase & ComInterface & w
         BooleanKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BooleanKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): BooleanKeyFrameAnimation {
         BooleanKeyFrameAnimation(raw)
     }
 
@@ -647,7 +647,7 @@ public class BounceEasingFunction <: InterfaceWrapperBase & ComInterface & windo
         BounceEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BounceEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): BounceEasingFunction {
         BounceEasingFunction(raw)
     }
 
@@ -743,7 +743,7 @@ public class BounceScalarNaturalMotionAnimation <: InterfaceWrapperBase & ComInt
         BounceScalarNaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BounceScalarNaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): BounceScalarNaturalMotionAnimation {
         BounceScalarNaturalMotionAnimation(raw)
     }
 
@@ -855,7 +855,7 @@ public class BounceVector2NaturalMotionAnimation <: InterfaceWrapperBase & ComIn
         BounceVector2NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BounceVector2NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): BounceVector2NaturalMotionAnimation {
         BounceVector2NaturalMotionAnimation(raw)
     }
 
@@ -967,7 +967,7 @@ public class BounceVector3NaturalMotionAnimation <: InterfaceWrapperBase & ComIn
         BounceVector3NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BounceVector3NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): BounceVector3NaturalMotionAnimation {
         BounceVector3NaturalMotionAnimation(raw)
     }
 
@@ -1079,7 +1079,7 @@ public class CircleEasingFunction <: InterfaceWrapperBase & ComInterface & windo
         CircleEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CircleEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): CircleEasingFunction {
         CircleEasingFunction(raw)
     }
 
@@ -1167,7 +1167,7 @@ public class ColorKeyFrameAnimation <: InterfaceWrapperBase & ComInterface & win
         ColorKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ColorKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): ColorKeyFrameAnimation {
         ColorKeyFrameAnimation(raw)
     }
 
@@ -1275,7 +1275,7 @@ public class CompositionAnimation <: InterfaceWrapperBase & ComInterface & windo
         CompositionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): CompositionAnimation {
         CompositionAnimation(raw)
     }
 
@@ -1403,7 +1403,7 @@ public class CompositionAnimationGroup <: InterfaceWrapperBase & ComInterface & 
         CompositionAnimationGroup(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionAnimationGroup {
+    public static func viewOf(raw: CPointer<Unit>): CompositionAnimationGroup {
         CompositionAnimationGroup(raw)
     }
 
@@ -1511,7 +1511,7 @@ public class CompositionBackdropBrush <: InterfaceWrapperBase & ComInterface & w
         CompositionBackdropBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionBackdropBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionBackdropBrush {
         CompositionBackdropBrush(raw)
     }
 
@@ -1618,7 +1618,7 @@ public class CompositionBatchCompletedEventArgs <: InterfaceWrapperBase & ComInt
         CompositionBatchCompletedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionBatchCompletedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): CompositionBatchCompletedEventArgs {
         CompositionBatchCompletedEventArgs(raw)
     }
 
@@ -1790,7 +1790,7 @@ public class CompositionBrush <: InterfaceWrapperBase & ComInterface & windows_i
         CompositionBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionBrush {
         CompositionBrush(raw)
     }
 
@@ -1870,7 +1870,7 @@ public class CompositionClip <: InterfaceWrapperBase & ComInterface & windows_in
         CompositionClip(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionClip {
+    public static func viewOf(raw: CPointer<Unit>): CompositionClip {
         CompositionClip(raw)
     }
 
@@ -1950,7 +1950,7 @@ public class CompositionColorBrush <: InterfaceWrapperBase & ComInterface & wind
         CompositionColorBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionColorBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionColorBrush {
         CompositionColorBrush(raw)
     }
 
@@ -2042,7 +2042,7 @@ public class CompositionColorGradientStop <: InterfaceWrapperBase & ComInterface
         CompositionColorGradientStop(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionColorGradientStop {
+    public static func viewOf(raw: CPointer<Unit>): CompositionColorGradientStop {
         CompositionColorGradientStop(raw)
     }
 
@@ -2138,7 +2138,7 @@ public class CompositionColorGradientStopCollection <: InterfaceWrapperBase & Co
         CompositionColorGradientStopCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionColorGradientStopCollection {
+    public static func viewOf(raw: CPointer<Unit>): CompositionColorGradientStopCollection {
         CompositionColorGradientStopCollection(raw)
     }
 
@@ -2283,7 +2283,7 @@ public class CompositionCommitBatch <: InterfaceWrapperBase & ComInterface & win
         CompositionCommitBatch(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionCommitBatch {
+    public static func viewOf(raw: CPointer<Unit>): CompositionCommitBatch {
         CompositionCommitBatch(raw)
     }
 
@@ -2403,7 +2403,7 @@ public class CompositionContainerShape <: InterfaceWrapperBase & ComInterface & 
         CompositionContainerShape(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionContainerShape {
+    public static func viewOf(raw: CPointer<Unit>): CompositionContainerShape {
         CompositionContainerShape(raw)
     }
 
@@ -2513,7 +2513,7 @@ public class CompositionEasingFunction <: InterfaceWrapperBase & ComInterface & 
         CompositionEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): CompositionEasingFunction {
         CompositionEasingFunction(raw)
     }
 
@@ -2682,7 +2682,7 @@ public class CompositionEffectBrush <: InterfaceWrapperBase & ComInterface & win
         CompositionEffectBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionEffectBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionEffectBrush {
         CompositionEffectBrush(raw)
     }
 
@@ -2774,7 +2774,7 @@ public class CompositionEffectFactory <: InterfaceWrapperBase & ComInterface & w
         CompositionEffectFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionEffectFactory {
+    public static func viewOf(raw: CPointer<Unit>): CompositionEffectFactory {
         CompositionEffectFactory(raw)
     }
 
@@ -2890,7 +2890,7 @@ public class CompositionEllipseGeometry <: InterfaceWrapperBase & ComInterface &
         CompositionEllipseGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionEllipseGeometry {
+    public static func viewOf(raw: CPointer<Unit>): CompositionEllipseGeometry {
         CompositionEllipseGeometry(raw)
     }
 
@@ -2990,7 +2990,7 @@ public class CompositionGeometricClip <: InterfaceWrapperBase & ComInterface & w
         CompositionGeometricClip(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionGeometricClip {
+    public static func viewOf(raw: CPointer<Unit>): CompositionGeometricClip {
         CompositionGeometricClip(raw)
     }
 
@@ -3090,7 +3090,7 @@ public class CompositionGeometry <: InterfaceWrapperBase & ComInterface & window
         CompositionGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionGeometry {
+    public static func viewOf(raw: CPointer<Unit>): CompositionGeometry {
         CompositionGeometry(raw)
     }
 
@@ -3217,7 +3217,7 @@ public class CompositionGradientBrush <: InterfaceWrapperBase & ComInterface & w
         CompositionGradientBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionGradientBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionGradientBrush {
         CompositionGradientBrush(raw)
     }
 
@@ -3400,7 +3400,7 @@ public class CompositionLight <: InterfaceWrapperBase & ComInterface & windows_i
         CompositionLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionLight {
+    public static func viewOf(raw: CPointer<Unit>): CompositionLight {
         CompositionLight(raw)
     }
 
@@ -3484,7 +3484,7 @@ public class CompositionLineGeometry <: InterfaceWrapperBase & ComInterface & wi
         CompositionLineGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionLineGeometry {
+    public static func viewOf(raw: CPointer<Unit>): CompositionLineGeometry {
         CompositionLineGeometry(raw)
     }
 
@@ -3584,7 +3584,7 @@ public class CompositionLinearGradientBrush <: InterfaceWrapperBase & ComInterfa
         CompositionLinearGradientBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionLinearGradientBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionLinearGradientBrush {
         CompositionLinearGradientBrush(raw)
     }
 
@@ -3710,7 +3710,7 @@ public class CompositionMaskBrush <: InterfaceWrapperBase & ComInterface & windo
         CompositionMaskBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionMaskBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionMaskBrush {
         CompositionMaskBrush(raw)
     }
 
@@ -3810,7 +3810,7 @@ public class CompositionNineGridBrush <: InterfaceWrapperBase & ComInterface & w
         CompositionNineGridBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionNineGridBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionNineGridBrush {
         CompositionNineGridBrush(raw)
     }
 
@@ -3990,7 +3990,7 @@ public class CompositionObject <: InterfaceWrapperBase & ComInterface & windows_
         CompositionObject(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionObject {
+    public static func viewOf(raw: CPointer<Unit>): CompositionObject {
         CompositionObject(raw)
     }
 
@@ -4100,7 +4100,7 @@ public class CompositionPath <: InterfaceWrapperBase & ComInterface & windows_in
         CompositionPath(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionPath {
+    public static func viewOf(raw: CPointer<Unit>): CompositionPath {
         CompositionPath(raw)
     }
 
@@ -4170,7 +4170,7 @@ public class CompositionPathGeometry <: InterfaceWrapperBase & ComInterface & wi
         CompositionPathGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionPathGeometry {
+    public static func viewOf(raw: CPointer<Unit>): CompositionPathGeometry {
         CompositionPathGeometry(raw)
     }
 
@@ -4262,7 +4262,7 @@ public class CompositionProjectedShadow <: InterfaceWrapperBase & ComInterface &
         CompositionProjectedShadow(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionProjectedShadow {
+    public static func viewOf(raw: CPointer<Unit>): CompositionProjectedShadow {
         CompositionProjectedShadow(raw)
     }
 
@@ -4382,7 +4382,7 @@ public class CompositionProjectedShadowCaster <: InterfaceWrapperBase & ComInter
         CompositionProjectedShadowCaster(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionProjectedShadowCaster {
+    public static func viewOf(raw: CPointer<Unit>): CompositionProjectedShadowCaster {
         CompositionProjectedShadowCaster(raw)
     }
 
@@ -4478,7 +4478,7 @@ public class CompositionProjectedShadowCasterCollection <: InterfaceWrapperBase 
         CompositionProjectedShadowCasterCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionProjectedShadowCasterCollection {
+    public static func viewOf(raw: CPointer<Unit>): CompositionProjectedShadowCasterCollection {
         CompositionProjectedShadowCasterCollection(raw)
     }
 
@@ -4600,7 +4600,7 @@ public class CompositionProjectedShadowReceiver <: InterfaceWrapperBase & ComInt
         CompositionProjectedShadowReceiver(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionProjectedShadowReceiver {
+    public static func viewOf(raw: CPointer<Unit>): CompositionProjectedShadowReceiver {
         CompositionProjectedShadowReceiver(raw)
     }
 
@@ -4688,7 +4688,7 @@ public class CompositionProjectedShadowReceiverUnorderedCollection <: InterfaceW
         CompositionProjectedShadowReceiverUnorderedCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionProjectedShadowReceiverUnorderedCollection {
+    public static func viewOf(raw: CPointer<Unit>): CompositionProjectedShadowReceiverUnorderedCollection {
         CompositionProjectedShadowReceiverUnorderedCollection(raw)
     }
 
@@ -4792,7 +4792,7 @@ public class CompositionPropertySet <: InterfaceWrapperBase & ComInterface & win
         CompositionPropertySet(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionPropertySet {
+    public static func viewOf(raw: CPointer<Unit>): CompositionPropertySet {
         CompositionPropertySet(raw)
     }
 
@@ -4936,7 +4936,7 @@ public class CompositionRadialGradientBrush <: InterfaceWrapperBase & ComInterfa
         CompositionRadialGradientBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionRadialGradientBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionRadialGradientBrush {
         CompositionRadialGradientBrush(raw)
     }
 
@@ -5048,7 +5048,7 @@ public class CompositionRectangleGeometry <: InterfaceWrapperBase & ComInterface
         CompositionRectangleGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionRectangleGeometry {
+    public static func viewOf(raw: CPointer<Unit>): CompositionRectangleGeometry {
         CompositionRectangleGeometry(raw)
     }
 
@@ -5148,7 +5148,7 @@ public class CompositionRoundedRectangleGeometry <: InterfaceWrapperBase & ComIn
         CompositionRoundedRectangleGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionRoundedRectangleGeometry {
+    public static func viewOf(raw: CPointer<Unit>): CompositionRoundedRectangleGeometry {
         CompositionRoundedRectangleGeometry(raw)
     }
 
@@ -5256,7 +5256,7 @@ public class CompositionScopedBatch <: InterfaceWrapperBase & ComInterface & win
         CompositionScopedBatch(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionScopedBatch {
+    public static func viewOf(raw: CPointer<Unit>): CompositionScopedBatch {
         CompositionScopedBatch(raw)
     }
 
@@ -5364,7 +5364,7 @@ public class CompositionShadow <: InterfaceWrapperBase & ComInterface & windows_
         CompositionShadow(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionShadow {
+    public static func viewOf(raw: CPointer<Unit>): CompositionShadow {
         CompositionShadow(raw)
     }
 
@@ -5444,7 +5444,7 @@ public class CompositionShape <: InterfaceWrapperBase & ComInterface & windows_i
         CompositionShape(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionShape {
+    public static func viewOf(raw: CPointer<Unit>): CompositionShape {
         CompositionShape(raw)
     }
 
@@ -5572,7 +5572,7 @@ public class CompositionShapeCollection <: InterfaceWrapperBase & ComInterface &
         CompositionShapeCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionShapeCollection {
+    public static func viewOf(raw: CPointer<Unit>): CompositionShapeCollection {
         CompositionShapeCollection(raw)
     }
 
@@ -5708,7 +5708,7 @@ public class CompositionSpriteShape <: InterfaceWrapperBase & ComInterface & win
         CompositionSpriteShape(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionSpriteShape {
+    public static func viewOf(raw: CPointer<Unit>): CompositionSpriteShape {
         CompositionSpriteShape(raw)
     }
 
@@ -5932,7 +5932,7 @@ public class CompositionStrokeDashArray <: InterfaceWrapperBase & ComInterface &
         CompositionStrokeDashArray(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionStrokeDashArray {
+    public static func viewOf(raw: CPointer<Unit>): CompositionStrokeDashArray {
         CompositionStrokeDashArray(raw)
     }
 
@@ -6092,7 +6092,7 @@ public class CompositionSurfaceBrush <: InterfaceWrapperBase & ComInterface & wi
         CompositionSurfaceBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionSurfaceBrush {
+    public static func viewOf(raw: CPointer<Unit>): CompositionSurfaceBrush {
         CompositionSurfaceBrush(raw)
     }
 
@@ -6216,7 +6216,7 @@ public class CompositionTarget <: InterfaceWrapperBase & ComInterface & windows_
         CompositionTarget(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionTarget {
+    public static func viewOf(raw: CPointer<Unit>): CompositionTarget {
         CompositionTarget(raw)
     }
 
@@ -6304,7 +6304,7 @@ public class CompositionViewBox <: InterfaceWrapperBase & ComInterface & windows
         CompositionViewBox(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionViewBox {
+    public static func viewOf(raw: CPointer<Unit>): CompositionViewBox {
         CompositionViewBox(raw)
     }
 
@@ -6424,7 +6424,7 @@ public class CompositionVisualSurface <: InterfaceWrapperBase & ComInterface & w
         CompositionVisualSurface(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CompositionVisualSurface {
+    public static func viewOf(raw: CPointer<Unit>): CompositionVisualSurface {
         CompositionVisualSurface(raw)
     }
 
@@ -6532,7 +6532,7 @@ public class Compositor <: InterfaceWrapperBase & ComInterface & windows_interfa
         Compositor(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Compositor {
+    public static func viewOf(raw: CPointer<Unit>): Compositor {
         Compositor(raw)
     }
 
@@ -6714,7 +6714,7 @@ public class ContainerVisual <: InterfaceWrapperBase & ComInterface & windows_in
         ContainerVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ContainerVisual {
+    public static func viewOf(raw: CPointer<Unit>): ContainerVisual {
         ContainerVisual(raw)
     }
 
@@ -6802,7 +6802,7 @@ public class CubicBezierEasingFunction <: InterfaceWrapperBase & ComInterface & 
         CubicBezierEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CubicBezierEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): CubicBezierEasingFunction {
         CubicBezierEasingFunction(raw)
     }
 
@@ -6894,7 +6894,7 @@ public class DistantLight <: InterfaceWrapperBase & ComInterface & windows_inter
         DistantLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DistantLight {
+    public static func viewOf(raw: CPointer<Unit>): DistantLight {
         DistantLight(raw)
     }
 
@@ -7002,7 +7002,7 @@ public class DropShadow <: InterfaceWrapperBase & ComInterface & windows_interfa
         DropShadow(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DropShadow {
+    public static func viewOf(raw: CPointer<Unit>): DropShadow {
         DropShadow(raw)
     }
 
@@ -7126,7 +7126,7 @@ public class ElasticEasingFunction <: InterfaceWrapperBase & ComInterface & wind
         ElasticEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ElasticEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): ElasticEasingFunction {
         ElasticEasingFunction(raw)
     }
 
@@ -7222,7 +7222,7 @@ public class ExponentialEasingFunction <: InterfaceWrapperBase & ComInterface & 
         ExponentialEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ExponentialEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): ExponentialEasingFunction {
         ExponentialEasingFunction(raw)
     }
 
@@ -7314,7 +7314,7 @@ public class ExpressionAnimation <: InterfaceWrapperBase & ComInterface & window
         ExpressionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ExpressionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): ExpressionAnimation {
         ExpressionAnimation(raw)
     }
 
@@ -7419,7 +7419,7 @@ public class IAmbientLight <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IAmbientLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAmbientLight {
+    public static func viewOf(raw: CPointer<Unit>): IAmbientLight {
         IAmbientLight(raw)
     }
 
@@ -7504,7 +7504,7 @@ public class IAmbientLight2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         IAmbientLight2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAmbientLight2 {
+    public static func viewOf(raw: CPointer<Unit>): IAmbientLight2 {
         IAmbientLight2(raw)
     }
 
@@ -7595,7 +7595,7 @@ public class IAnimationController <: InterfaceWrapperBase & ComInterface & Runti
         IAnimationController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAnimationController {
+    public static func viewOf(raw: CPointer<Unit>): IAnimationController {
         IAnimationController(raw)
     }
 
@@ -7715,7 +7715,7 @@ public struct IAnimationObjectVtbl {
         vtbl.PopulatePropertyInfo = { this_, arg0, arg1 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.PopulatePropertyInfo(arg0, AnimationPropertyInfo.fromRawBorrowed(arg1))) {
+                    match (impl.PopulatePropertyInfo(arg0, AnimationPropertyInfo.viewOf(arg1))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -7751,7 +7751,7 @@ public class IAnimationObject <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IAnimationObject(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAnimationObject {
+    public static func viewOf(raw: CPointer<Unit>): IAnimationObject {
         IAnimationObject(raw)
     }
 
@@ -7828,7 +7828,7 @@ public class IAnimationPropertyInfo <: InterfaceWrapperBase & ComInterface & Run
         IAnimationPropertyInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAnimationPropertyInfo {
+    public static func viewOf(raw: CPointer<Unit>): IAnimationPropertyInfo {
         IAnimationPropertyInfo(raw)
     }
 
@@ -7913,7 +7913,7 @@ public class IAnimationPropertyInfo2 <: InterfaceWrapperBase & ComInterface & Ru
         IAnimationPropertyInfo2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAnimationPropertyInfo2 {
+    public static func viewOf(raw: CPointer<Unit>): IAnimationPropertyInfo2 {
         IAnimationPropertyInfo2(raw)
     }
 
@@ -8000,7 +8000,7 @@ public class IBackEasingFunction <: InterfaceWrapperBase & ComInterface & Runtim
         IBackEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBackEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): IBackEasingFunction {
         IBackEasingFunction(raw)
     }
 
@@ -8086,7 +8086,7 @@ public class IBooleanKeyFrameAnimation <: InterfaceWrapperBase & ComInterface & 
         IBooleanKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBooleanKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IBooleanKeyFrameAnimation {
         IBooleanKeyFrameAnimation(raw)
     }
 
@@ -8164,7 +8164,7 @@ public class IBounceEasingFunction <: InterfaceWrapperBase & ComInterface & Runt
         IBounceEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBounceEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): IBounceEasingFunction {
         IBounceEasingFunction(raw)
     }
 
@@ -8261,7 +8261,7 @@ public class IBounceScalarNaturalMotionAnimation <: InterfaceWrapperBase & ComIn
         IBounceScalarNaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBounceScalarNaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IBounceScalarNaturalMotionAnimation {
         IBounceScalarNaturalMotionAnimation(raw)
     }
 
@@ -8362,7 +8362,7 @@ public class IBounceVector2NaturalMotionAnimation <: InterfaceWrapperBase & ComI
         IBounceVector2NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBounceVector2NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IBounceVector2NaturalMotionAnimation {
         IBounceVector2NaturalMotionAnimation(raw)
     }
 
@@ -8463,7 +8463,7 @@ public class IBounceVector3NaturalMotionAnimation <: InterfaceWrapperBase & ComI
         IBounceVector3NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBounceVector3NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IBounceVector3NaturalMotionAnimation {
         IBounceVector3NaturalMotionAnimation(raw)
     }
 
@@ -8561,7 +8561,7 @@ public class ICircleEasingFunction <: InterfaceWrapperBase & ComInterface & Runt
         ICircleEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICircleEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): ICircleEasingFunction {
         ICircleEasingFunction(raw)
     }
 
@@ -8642,7 +8642,7 @@ public class IColorKeyFrameAnimation <: InterfaceWrapperBase & ComInterface & Ru
         IColorKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IColorKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IColorKeyFrameAnimation {
         IColorKeyFrameAnimation(raw)
     }
 
@@ -8748,7 +8748,7 @@ public class ICompositionAnimation <: InterfaceWrapperBase & ComInterface & Runt
         ICompositionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionAnimation {
         ICompositionAnimation(raw)
     }
 
@@ -8886,7 +8886,7 @@ public class ICompositionAnimation2 <: InterfaceWrapperBase & ComInterface & Run
         ICompositionAnimation2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionAnimation2 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionAnimation2 {
         ICompositionAnimation2(raw)
     }
 
@@ -8976,7 +8976,7 @@ public class ICompositionAnimation3 <: InterfaceWrapperBase & ComInterface & Run
         ICompositionAnimation3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionAnimation3 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionAnimation3 {
         ICompositionAnimation3(raw)
     }
 
@@ -9054,7 +9054,7 @@ public class ICompositionAnimation4 <: InterfaceWrapperBase & ComInterface & Run
         ICompositionAnimation4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionAnimation4 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionAnimation4 {
         ICompositionAnimation4(raw)
     }
 
@@ -9147,7 +9147,7 @@ public class ICompositionAnimationBase <: InterfaceWrapperBase & ComInterface & 
         ICompositionAnimationBase(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionAnimationBase {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionAnimationBase {
         ICompositionAnimationBase(raw)
     }
 
@@ -9220,7 +9220,7 @@ public class ICompositionAnimationGroup <: InterfaceWrapperBase & ComInterface &
         ICompositionAnimationGroup(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionAnimationGroup {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionAnimationGroup {
         ICompositionAnimationGroup(raw)
     }
 
@@ -9315,7 +9315,7 @@ public class ICompositionBackdropBrush <: InterfaceWrapperBase & ComInterface & 
         ICompositionBackdropBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionBackdropBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionBackdropBrush {
         ICompositionBackdropBrush(raw)
     }
 
@@ -9384,7 +9384,7 @@ public class ICompositionBatchCompletedEventArgs <: InterfaceWrapperBase & ComIn
         ICompositionBatchCompletedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionBatchCompletedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionBatchCompletedEventArgs {
         ICompositionBatchCompletedEventArgs(raw)
     }
 
@@ -9453,7 +9453,7 @@ public class ICompositionBrush <: InterfaceWrapperBase & ComInterface & RuntimeN
         ICompositionBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionBrush {
         ICompositionBrush(raw)
     }
 
@@ -9522,7 +9522,7 @@ public class ICompositionClip <: InterfaceWrapperBase & ComInterface & RuntimeNa
         ICompositionClip(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionClip {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionClip {
         ICompositionClip(raw)
     }
 
@@ -9605,7 +9605,7 @@ public class ICompositionClip2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         ICompositionClip2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionClip2 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionClip2 {
         ICompositionClip2(raw)
     }
 
@@ -9774,7 +9774,7 @@ public class ICompositionColorBrush <: InterfaceWrapperBase & ComInterface & Run
         ICompositionColorBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionColorBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionColorBrush {
         ICompositionColorBrush(raw)
     }
 
@@ -9861,7 +9861,7 @@ public class ICompositionColorGradientStop <: InterfaceWrapperBase & ComInterfac
         ICompositionColorGradientStop(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionColorGradientStop {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionColorGradientStop {
         ICompositionColorGradientStop(raw)
     }
 
@@ -9958,7 +9958,7 @@ public class ICompositionColorGradientStopCollection <: InterfaceWrapperBase & C
         ICompositionColorGradientStopCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionColorGradientStopCollection {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionColorGradientStopCollection {
         ICompositionColorGradientStopCollection(raw)
     }
 
@@ -10031,7 +10031,7 @@ public class ICompositionCommitBatch <: InterfaceWrapperBase & ComInterface & Ru
         ICompositionCommitBatch(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionCommitBatch {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionCommitBatch {
         ICompositionCommitBatch(raw)
     }
 
@@ -10131,7 +10131,7 @@ public class ICompositionContainerShape <: InterfaceWrapperBase & ComInterface &
         ICompositionContainerShape(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionContainerShape {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionContainerShape {
         ICompositionContainerShape(raw)
     }
 
@@ -10208,7 +10208,7 @@ public class ICompositionEasingFunction <: InterfaceWrapperBase & ComInterface &
         ICompositionEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionEasingFunction {
         ICompositionEasingFunction(raw)
     }
 
@@ -10279,7 +10279,7 @@ public class ICompositionEffectBrush <: InterfaceWrapperBase & ComInterface & Ru
         ICompositionEffectBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionEffectBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionEffectBrush {
         ICompositionEffectBrush(raw)
     }
 
@@ -10365,7 +10365,7 @@ public class ICompositionEffectFactory <: InterfaceWrapperBase & ComInterface & 
         ICompositionEffectFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionEffectFactory {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionEffectFactory {
         ICompositionEffectFactory(raw)
     }
 
@@ -10462,7 +10462,7 @@ public class ICompositionEllipseGeometry <: InterfaceWrapperBase & ComInterface 
         ICompositionEllipseGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionEllipseGeometry {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionEllipseGeometry {
         ICompositionEllipseGeometry(raw)
     }
 
@@ -10563,7 +10563,7 @@ public class ICompositionGeometricClip <: InterfaceWrapperBase & ComInterface & 
         ICompositionGeometricClip(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionGeometricClip {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionGeometricClip {
         ICompositionGeometricClip(raw)
     }
 
@@ -10666,7 +10666,7 @@ public class ICompositionGeometry <: InterfaceWrapperBase & ComInterface & Runti
         ICompositionGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionGeometry {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionGeometry {
         ICompositionGeometry(raw)
     }
 
@@ -10796,7 +10796,7 @@ public class ICompositionGradientBrush <: InterfaceWrapperBase & ComInterface & 
         ICompositionGradientBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionGradientBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionGradientBrush {
         ICompositionGradientBrush(raw)
     }
 
@@ -11001,7 +11001,7 @@ public class ICompositionGradientBrush2 <: InterfaceWrapperBase & ComInterface &
         ICompositionGradientBrush2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionGradientBrush2 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionGradientBrush2 {
         ICompositionGradientBrush2(raw)
     }
 
@@ -11085,7 +11085,7 @@ public class ICompositionLight <: InterfaceWrapperBase & ComInterface & RuntimeN
         ICompositionLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionLight {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionLight {
         ICompositionLight(raw)
     }
 
@@ -11163,7 +11163,7 @@ public class ICompositionLight2 <: InterfaceWrapperBase & ComInterface & Runtime
         ICompositionLight2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionLight2 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionLight2 {
         ICompositionLight2(raw)
     }
 
@@ -11242,7 +11242,7 @@ public class ICompositionLight3 <: InterfaceWrapperBase & ComInterface & Runtime
         ICompositionLight3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionLight3 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionLight3 {
         ICompositionLight3(raw)
     }
 
@@ -11329,7 +11329,7 @@ public class ICompositionLineGeometry <: InterfaceWrapperBase & ComInterface & R
         ICompositionLineGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionLineGeometry {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionLineGeometry {
         ICompositionLineGeometry(raw)
     }
 
@@ -11430,7 +11430,7 @@ public class ICompositionLinearGradientBrush <: InterfaceWrapperBase & ComInterf
         ICompositionLinearGradientBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionLinearGradientBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionLinearGradientBrush {
         ICompositionLinearGradientBrush(raw)
     }
 
@@ -11531,7 +11531,7 @@ public class ICompositionMaskBrush <: InterfaceWrapperBase & ComInterface & Runt
         ICompositionMaskBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionMaskBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionMaskBrush {
         ICompositionMaskBrush(raw)
     }
 
@@ -11652,7 +11652,7 @@ public class ICompositionNineGridBrush <: InterfaceWrapperBase & ComInterface & 
         ICompositionNineGridBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionNineGridBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionNineGridBrush {
         ICompositionNineGridBrush(raw)
     }
 
@@ -11890,7 +11890,7 @@ public class ICompositionObject <: InterfaceWrapperBase & ComInterface & Runtime
         ICompositionObject(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionObject {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionObject {
         ICompositionObject(raw)
     }
 
@@ -12001,7 +12001,7 @@ public class ICompositionObject2 <: InterfaceWrapperBase & ComInterface & Runtim
         ICompositionObject2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionObject2 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionObject2 {
         ICompositionObject2(raw)
     }
 
@@ -12111,7 +12111,7 @@ public class ICompositionObject3 <: InterfaceWrapperBase & ComInterface & Runtim
         ICompositionObject3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionObject3 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionObject3 {
         ICompositionObject3(raw)
     }
 
@@ -12189,7 +12189,7 @@ public class ICompositionObject4 <: InterfaceWrapperBase & ComInterface & Runtim
         ICompositionObject4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionObject4 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionObject4 {
         ICompositionObject4(raw)
     }
 
@@ -12267,7 +12267,7 @@ public class ICompositionObject5 <: InterfaceWrapperBase & ComInterface & Runtim
         ICompositionObject5(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionObject5 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionObject5 {
         ICompositionObject5(raw)
     }
 
@@ -12342,7 +12342,7 @@ public class ICompositionPath <: InterfaceWrapperBase & ComInterface & RuntimeNa
         ICompositionPath(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionPath {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionPath {
         ICompositionPath(raw)
     }
 
@@ -12413,7 +12413,7 @@ public class ICompositionPathGeometry <: InterfaceWrapperBase & ComInterface & R
         ICompositionPathGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionPathGeometry {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionPathGeometry {
         ICompositionPathGeometry(raw)
     }
 
@@ -12506,7 +12506,7 @@ public class ICompositionProjectedShadow <: InterfaceWrapperBase & ComInterface 
         ICompositionProjectedShadow(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionProjectedShadow {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionProjectedShadow {
         ICompositionProjectedShadow(raw)
     }
 
@@ -12651,7 +12651,7 @@ public class ICompositionProjectedShadowCaster <: InterfaceWrapperBase & ComInte
         ICompositionProjectedShadowCaster(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionProjectedShadowCaster {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionProjectedShadowCaster {
         ICompositionProjectedShadowCaster(raw)
     }
 
@@ -12755,7 +12755,7 @@ public class ICompositionProjectedShadowCasterCollection <: InterfaceWrapperBase
         ICompositionProjectedShadowCasterCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionProjectedShadowCasterCollection {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionProjectedShadowCasterCollection {
         ICompositionProjectedShadowCasterCollection(raw)
     }
 
@@ -12870,7 +12870,7 @@ public class ICompositionProjectedShadowReceiver <: InterfaceWrapperBase & ComIn
         ICompositionProjectedShadowReceiver(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionProjectedShadowReceiver {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionProjectedShadowReceiver {
         ICompositionProjectedShadowReceiver(raw)
     }
 
@@ -12957,7 +12957,7 @@ public class ICompositionProjectedShadowReceiverUnorderedCollection <: Interface
         ICompositionProjectedShadowReceiverUnorderedCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionProjectedShadowReceiverUnorderedCollection {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionProjectedShadowReceiverUnorderedCollection {
         ICompositionProjectedShadowReceiverUnorderedCollection(raw)
     }
 
@@ -13068,7 +13068,7 @@ public class ICompositionPropertySet <: InterfaceWrapperBase & ComInterface & Ru
         ICompositionPropertySet(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionPropertySet {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionPropertySet {
         ICompositionPropertySet(raw)
     }
 
@@ -13251,7 +13251,7 @@ public class ICompositionPropertySet2 <: InterfaceWrapperBase & ComInterface & R
         ICompositionPropertySet2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionPropertySet2 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionPropertySet2 {
         ICompositionPropertySet2(raw)
     }
 
@@ -13340,7 +13340,7 @@ public class ICompositionRadialGradientBrush <: InterfaceWrapperBase & ComInterf
         ICompositionRadialGradientBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionRadialGradientBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionRadialGradientBrush {
         ICompositionRadialGradientBrush(raw)
     }
 
@@ -13455,7 +13455,7 @@ public class ICompositionRectangleGeometry <: InterfaceWrapperBase & ComInterfac
         ICompositionRectangleGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionRectangleGeometry {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionRectangleGeometry {
         ICompositionRectangleGeometry(raw)
     }
 
@@ -13558,7 +13558,7 @@ public class ICompositionRoundedRectangleGeometry <: InterfaceWrapperBase & ComI
         ICompositionRoundedRectangleGeometry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionRoundedRectangleGeometry {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionRoundedRectangleGeometry {
         ICompositionRoundedRectangleGeometry(raw)
     }
 
@@ -13676,7 +13676,7 @@ public class ICompositionScopedBatch <: InterfaceWrapperBase & ComInterface & Ru
         ICompositionScopedBatch(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionScopedBatch {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionScopedBatch {
         ICompositionScopedBatch(raw)
     }
 
@@ -13793,7 +13793,7 @@ public class ICompositionShadow <: InterfaceWrapperBase & ComInterface & Runtime
         ICompositionShadow(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionShadow {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionShadow {
         ICompositionShadow(raw)
     }
 
@@ -13874,7 +13874,7 @@ public class ICompositionShape <: InterfaceWrapperBase & ComInterface & RuntimeN
         ICompositionShape(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionShape {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionShape {
         ICompositionShape(raw)
     }
 
@@ -14050,7 +14050,7 @@ public class ICompositionSpriteShape <: InterfaceWrapperBase & ComInterface & Ru
         ICompositionSpriteShape(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionSpriteShape {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionSpriteShape {
         ICompositionSpriteShape(raw)
     }
 
@@ -14299,7 +14299,7 @@ public class ICompositionSurface <: InterfaceWrapperBase & ComInterface & Runtim
         ICompositionSurface(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionSurface {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionSurface {
         ICompositionSurface(raw)
     }
 
@@ -14378,7 +14378,7 @@ public class ICompositionSurfaceBrush <: InterfaceWrapperBase & ComInterface & R
         ICompositionSurfaceBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionSurfaceBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionSurfaceBrush {
         ICompositionSurfaceBrush(raw)
     }
 
@@ -14531,7 +14531,7 @@ public class ICompositionSurfaceBrush2 <: InterfaceWrapperBase & ComInterface & 
         ICompositionSurfaceBrush2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionSurfaceBrush2 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionSurfaceBrush2 {
         ICompositionSurfaceBrush2(raw)
     }
 
@@ -14700,7 +14700,7 @@ public class ICompositionSurfaceBrush3 <: InterfaceWrapperBase & ComInterface & 
         ICompositionSurfaceBrush3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionSurfaceBrush3 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionSurfaceBrush3 {
         ICompositionSurfaceBrush3(raw)
     }
 
@@ -14785,7 +14785,7 @@ public class ICompositionTarget <: InterfaceWrapperBase & ComInterface & Runtime
         ICompositionTarget(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionTarget {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionTarget {
         ICompositionTarget(raw)
     }
 
@@ -14878,7 +14878,7 @@ public class ICompositionViewBox <: InterfaceWrapperBase & ComInterface & Runtim
         ICompositionViewBox(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionViewBox {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionViewBox {
         ICompositionViewBox(raw)
     }
 
@@ -15023,7 +15023,7 @@ public class ICompositionVisualSurface <: InterfaceWrapperBase & ComInterface & 
         ICompositionVisualSurface(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositionVisualSurface {
+    public static func viewOf(raw: CPointer<Unit>): ICompositionVisualSurface {
         ICompositionVisualSurface(raw)
     }
 
@@ -15158,7 +15158,7 @@ public class ICompositor <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         ICompositor(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositor {
+    public static func viewOf(raw: CPointer<Unit>): ICompositor {
         ICompositor(raw)
     }
 
@@ -15432,7 +15432,7 @@ public class ICompositor2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         ICompositor2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositor2 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositor2 {
         ICompositor2(raw)
     }
 
@@ -15606,7 +15606,7 @@ public class ICompositor3 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         ICompositor3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositor3 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositor3 {
         ICompositor3(raw)
     }
 
@@ -15689,7 +15689,7 @@ public class ICompositor4 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         ICompositor4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositor4 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositor4 {
         ICompositor4(raw)
     }
 
@@ -15826,7 +15826,7 @@ public class ICompositor5 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         ICompositor5(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositor5 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositor5 {
         ICompositor5(raw)
     }
 
@@ -16056,7 +16056,7 @@ public class ICompositor6 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         ICompositor6(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositor6 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositor6 {
         ICompositor6(raw)
     }
 
@@ -16170,7 +16170,7 @@ public class ICompositor7 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         ICompositor7(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositor7 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositor7 {
         ICompositor7(raw)
     }
 
@@ -16280,7 +16280,7 @@ public class ICompositor8 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         ICompositor8(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositor8 {
+    public static func viewOf(raw: CPointer<Unit>): ICompositor8 {
         ICompositor8(raw)
     }
 
@@ -16358,7 +16358,7 @@ public class ICompositorWithBlurredWallpaperBackdropBrush <: InterfaceWrapperBas
         ICompositorWithBlurredWallpaperBackdropBrush(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositorWithBlurredWallpaperBackdropBrush {
+    public static func viewOf(raw: CPointer<Unit>): ICompositorWithBlurredWallpaperBackdropBrush {
         ICompositorWithBlurredWallpaperBackdropBrush(raw)
     }
 
@@ -16438,7 +16438,7 @@ public class ICompositorWithProjectedShadow <: InterfaceWrapperBase & ComInterfa
         ICompositorWithProjectedShadow(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositorWithProjectedShadow {
+    public static func viewOf(raw: CPointer<Unit>): ICompositorWithProjectedShadow {
         ICompositorWithProjectedShadow(raw)
     }
 
@@ -16532,7 +16532,7 @@ public class ICompositorWithRadialGradient <: InterfaceWrapperBase & ComInterfac
         ICompositorWithRadialGradient(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositorWithRadialGradient {
+    public static func viewOf(raw: CPointer<Unit>): ICompositorWithRadialGradient {
         ICompositorWithRadialGradient(raw)
     }
 
@@ -16610,7 +16610,7 @@ public class ICompositorWithVisualSurface <: InterfaceWrapperBase & ComInterface
         ICompositorWithVisualSurface(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompositorWithVisualSurface {
+    public static func viewOf(raw: CPointer<Unit>): ICompositorWithVisualSurface {
         ICompositorWithVisualSurface(raw)
     }
 
@@ -16688,7 +16688,7 @@ public class IContainerVisual <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IContainerVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IContainerVisual {
+    public static func viewOf(raw: CPointer<Unit>): IContainerVisual {
         IContainerVisual(raw)
     }
 
@@ -16767,7 +16767,7 @@ public class ICubicBezierEasingFunction <: InterfaceWrapperBase & ComInterface &
         ICubicBezierEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICubicBezierEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): ICubicBezierEasingFunction {
         ICubicBezierEasingFunction(raw)
     }
 
@@ -16858,7 +16858,7 @@ public class IDistantLight <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IDistantLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDistantLight {
+    public static func viewOf(raw: CPointer<Unit>): IDistantLight {
         IDistantLight(raw)
     }
 
@@ -16971,7 +16971,7 @@ public class IDistantLight2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         IDistantLight2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDistantLight2 {
+    public static func viewOf(raw: CPointer<Unit>): IDistantLight2 {
         IDistantLight2(raw)
     }
 
@@ -17064,7 +17064,7 @@ public class IDropShadow <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IDropShadow(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDropShadow {
+    public static func viewOf(raw: CPointer<Unit>): IDropShadow {
         IDropShadow(raw)
     }
 
@@ -17205,7 +17205,7 @@ public class IDropShadow2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IDropShadow2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDropShadow2 {
+    public static func viewOf(raw: CPointer<Unit>): IDropShadow2 {
         IDropShadow2(raw)
     }
 
@@ -17291,7 +17291,7 @@ public class IElasticEasingFunction <: InterfaceWrapperBase & ComInterface & Run
         IElasticEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IElasticEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): IElasticEasingFunction {
         IElasticEasingFunction(raw)
     }
 
@@ -17386,7 +17386,7 @@ public class IExponentialEasingFunction <: InterfaceWrapperBase & ComInterface &
         IExponentialEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IExponentialEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): IExponentialEasingFunction {
         IExponentialEasingFunction(raw)
     }
 
@@ -17473,7 +17473,7 @@ public class IExpressionAnimation <: InterfaceWrapperBase & ComInterface & Runti
         IExpressionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IExpressionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IExpressionAnimation {
         IExpressionAnimation(raw)
     }
 
@@ -17556,7 +17556,7 @@ public class IImplicitAnimationCollection <: InterfaceWrapperBase & ComInterface
         IImplicitAnimationCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IImplicitAnimationCollection {
+    public static func viewOf(raw: CPointer<Unit>): IImplicitAnimationCollection {
         IImplicitAnimationCollection(raw)
     }
 
@@ -17633,7 +17633,7 @@ public class IInsetClip <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         IInsetClip(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IInsetClip {
+    public static func viewOf(raw: CPointer<Unit>): IInsetClip {
         IInsetClip(raw)
     }
 
@@ -17771,7 +17771,7 @@ public class IKeyFrameAnimation <: InterfaceWrapperBase & ComInterface & Runtime
         IKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IKeyFrameAnimation {
         IKeyFrameAnimation(raw)
     }
 
@@ -17932,7 +17932,7 @@ public class IKeyFrameAnimation2 <: InterfaceWrapperBase & ComInterface & Runtim
         IKeyFrameAnimation2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKeyFrameAnimation2 {
+    public static func viewOf(raw: CPointer<Unit>): IKeyFrameAnimation2 {
         IKeyFrameAnimation2(raw)
     }
 
@@ -18017,7 +18017,7 @@ public class IKeyFrameAnimation3 <: InterfaceWrapperBase & ComInterface & Runtim
         IKeyFrameAnimation3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKeyFrameAnimation3 {
+    public static func viewOf(raw: CPointer<Unit>): IKeyFrameAnimation3 {
         IKeyFrameAnimation3(raw)
     }
 
@@ -18102,7 +18102,7 @@ public class ILayerVisual <: InterfaceWrapperBase & ComInterface & RuntimeName &
         ILayerVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILayerVisual {
+    public static func viewOf(raw: CPointer<Unit>): ILayerVisual {
         ILayerVisual(raw)
     }
 
@@ -18187,7 +18187,7 @@ public class ILayerVisual2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         ILayerVisual2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILayerVisual2 {
+    public static func viewOf(raw: CPointer<Unit>): ILayerVisual2 {
         ILayerVisual2(raw)
     }
 
@@ -18270,7 +18270,7 @@ public class ILinearEasingFunction <: InterfaceWrapperBase & ComInterface & Runt
         ILinearEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILinearEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): ILinearEasingFunction {
         ILinearEasingFunction(raw)
     }
 
@@ -18345,7 +18345,7 @@ public class INaturalMotionAnimation <: InterfaceWrapperBase & ComInterface & Ru
         INaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): INaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): INaturalMotionAnimation {
         INaturalMotionAnimation(raw)
     }
 
@@ -18458,7 +18458,7 @@ public class IPathKeyFrameAnimation <: InterfaceWrapperBase & ComInterface & Run
         IPathKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPathKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IPathKeyFrameAnimation {
         IPathKeyFrameAnimation(raw)
     }
 
@@ -18551,7 +18551,7 @@ public class IPointLight <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IPointLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPointLight {
+    public static func viewOf(raw: CPointer<Unit>): IPointLight {
         IPointLight(raw)
     }
 
@@ -18706,7 +18706,7 @@ public class IPointLight2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IPointLight2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPointLight2 {
+    public static func viewOf(raw: CPointer<Unit>): IPointLight2 {
         IPointLight2(raw)
     }
 
@@ -18793,7 +18793,7 @@ public class IPointLight3 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IPointLight3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPointLight3 {
+    public static func viewOf(raw: CPointer<Unit>): IPointLight3 {
         IPointLight3(raw)
     }
 
@@ -18892,7 +18892,7 @@ public class IPowerEasingFunction <: InterfaceWrapperBase & ComInterface & Runti
         IPowerEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPowerEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): IPowerEasingFunction {
         IPowerEasingFunction(raw)
     }
 
@@ -18979,7 +18979,7 @@ public class IQuaternionKeyFrameAnimation <: InterfaceWrapperBase & ComInterface
         IQuaternionKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IQuaternionKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IQuaternionKeyFrameAnimation {
         IQuaternionKeyFrameAnimation(raw)
     }
 
@@ -19076,7 +19076,7 @@ public class IRectangleClip <: InterfaceWrapperBase & ComInterface & RuntimeName
         IRectangleClip(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRectangleClip {
+    public static func viewOf(raw: CPointer<Unit>): IRectangleClip {
         IRectangleClip(raw)
     }
 
@@ -19259,7 +19259,7 @@ public class IRedirectVisual <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IRedirectVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRedirectVisual {
+    public static func viewOf(raw: CPointer<Unit>): IRedirectVisual {
         IRedirectVisual(raw)
     }
 
@@ -19344,7 +19344,7 @@ public class IScalarKeyFrameAnimation <: InterfaceWrapperBase & ComInterface & R
         IScalarKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IScalarKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IScalarKeyFrameAnimation {
         IScalarKeyFrameAnimation(raw)
     }
 
@@ -19431,7 +19431,7 @@ public class IScalarNaturalMotionAnimation <: InterfaceWrapperBase & ComInterfac
         IScalarNaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IScalarNaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IScalarNaturalMotionAnimation {
         IScalarNaturalMotionAnimation(raw)
     }
 
@@ -19545,7 +19545,7 @@ public class IShapeVisual <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IShapeVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IShapeVisual {
+    public static func viewOf(raw: CPointer<Unit>): IShapeVisual {
         IShapeVisual(raw)
     }
 
@@ -19637,7 +19637,7 @@ public class ISineEasingFunction <: InterfaceWrapperBase & ComInterface & Runtim
         ISineEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISineEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): ISineEasingFunction {
         ISineEasingFunction(raw)
     }
 
@@ -19738,7 +19738,7 @@ public class ISpotLight <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         ISpotLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISpotLight {
+    public static func viewOf(raw: CPointer<Unit>): ISpotLight {
         ISpotLight(raw)
     }
 
@@ -19979,7 +19979,7 @@ public class ISpotLight2 <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         ISpotLight2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISpotLight2 {
+    public static func viewOf(raw: CPointer<Unit>): ISpotLight2 {
         ISpotLight2(raw)
     }
 
@@ -20080,7 +20080,7 @@ public class ISpotLight3 <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         ISpotLight3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISpotLight3 {
+    public static func viewOf(raw: CPointer<Unit>): ISpotLight3 {
         ISpotLight3(raw)
     }
 
@@ -20181,7 +20181,7 @@ public class ISpringScalarNaturalMotionAnimation <: InterfaceWrapperBase & ComIn
         ISpringScalarNaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISpringScalarNaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): ISpringScalarNaturalMotionAnimation {
         ISpringScalarNaturalMotionAnimation(raw)
     }
 
@@ -20282,7 +20282,7 @@ public class ISpringVector2NaturalMotionAnimation <: InterfaceWrapperBase & ComI
         ISpringVector2NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISpringVector2NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): ISpringVector2NaturalMotionAnimation {
         ISpringVector2NaturalMotionAnimation(raw)
     }
 
@@ -20383,7 +20383,7 @@ public class ISpringVector3NaturalMotionAnimation <: InterfaceWrapperBase & ComI
         ISpringVector3NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISpringVector3NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): ISpringVector3NaturalMotionAnimation {
         ISpringVector3NaturalMotionAnimation(raw)
     }
 
@@ -20482,7 +20482,7 @@ public class ISpriteVisual <: InterfaceWrapperBase & ComInterface & RuntimeName 
         ISpriteVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISpriteVisual {
+    public static func viewOf(raw: CPointer<Unit>): ISpriteVisual {
         ISpriteVisual(raw)
     }
 
@@ -20567,7 +20567,7 @@ public class ISpriteVisual2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         ISpriteVisual2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISpriteVisual2 {
+    public static func viewOf(raw: CPointer<Unit>): ISpriteVisual2 {
         ISpriteVisual2(raw)
     }
 
@@ -20660,7 +20660,7 @@ public class IStepEasingFunction <: InterfaceWrapperBase & ComInterface & Runtim
         IStepEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStepEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): IStepEasingFunction {
         IStepEasingFunction(raw)
     }
 
@@ -20801,7 +20801,7 @@ public class IVector2KeyFrameAnimation <: InterfaceWrapperBase & ComInterface & 
         IVector2KeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVector2KeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IVector2KeyFrameAnimation {
         IVector2KeyFrameAnimation(raw)
     }
 
@@ -20888,7 +20888,7 @@ public class IVector2NaturalMotionAnimation <: InterfaceWrapperBase & ComInterfa
         IVector2NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVector2NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IVector2NaturalMotionAnimation {
         IVector2NaturalMotionAnimation(raw)
     }
 
@@ -21001,7 +21001,7 @@ public class IVector3KeyFrameAnimation <: InterfaceWrapperBase & ComInterface & 
         IVector3KeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVector3KeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IVector3KeyFrameAnimation {
         IVector3KeyFrameAnimation(raw)
     }
 
@@ -21088,7 +21088,7 @@ public class IVector3NaturalMotionAnimation <: InterfaceWrapperBase & ComInterfa
         IVector3NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVector3NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IVector3NaturalMotionAnimation {
         IVector3NaturalMotionAnimation(raw)
     }
 
@@ -21201,7 +21201,7 @@ public class IVector4KeyFrameAnimation <: InterfaceWrapperBase & ComInterface & 
         IVector4KeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVector4KeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): IVector4KeyFrameAnimation {
         IVector4KeyFrameAnimation(raw)
     }
 
@@ -21315,7 +21315,7 @@ public class IVisual <: InterfaceWrapperBase & ComInterface & RuntimeName & wind
         IVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVisual {
+    public static func viewOf(raw: CPointer<Unit>): IVisual {
         IVisual(raw)
     }
 
@@ -21622,7 +21622,7 @@ public class IVisual2 <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         IVisual2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVisual2 {
+    public static func viewOf(raw: CPointer<Unit>): IVisual2 {
         IVisual2(raw)
     }
 
@@ -21735,7 +21735,7 @@ public class IVisual3 <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         IVisual3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVisual3 {
+    public static func viewOf(raw: CPointer<Unit>): IVisual3 {
         IVisual3(raw)
     }
 
@@ -21820,7 +21820,7 @@ public class IVisual4 <: InterfaceWrapperBase & ComInterface & RuntimeName & win
         IVisual4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVisual4 {
+    public static func viewOf(raw: CPointer<Unit>): IVisual4 {
         IVisual4(raw)
     }
 
@@ -21910,7 +21910,7 @@ public class IVisualCollection <: InterfaceWrapperBase & ComInterface & RuntimeN
         IVisualCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVisualCollection {
+    public static func viewOf(raw: CPointer<Unit>): IVisualCollection {
         IVisualCollection(raw)
     }
 
@@ -22027,7 +22027,7 @@ public class IVisualUnorderedCollection <: InterfaceWrapperBase & ComInterface &
         IVisualUnorderedCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVisualUnorderedCollection {
+    public static func viewOf(raw: CPointer<Unit>): IVisualUnorderedCollection {
         IVisualUnorderedCollection(raw)
     }
 
@@ -22115,7 +22115,7 @@ public class ImplicitAnimationCollection <: InterfaceWrapperBase & ComInterface 
         ImplicitAnimationCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ImplicitAnimationCollection {
+    public static func viewOf(raw: CPointer<Unit>): ImplicitAnimationCollection {
         ImplicitAnimationCollection(raw)
     }
 
@@ -22235,7 +22235,7 @@ public class InitialValueExpressionCollection <: InterfaceWrapperBase & ComInter
         InitialValueExpressionCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): InitialValueExpressionCollection {
+    public static func viewOf(raw: CPointer<Unit>): InitialValueExpressionCollection {
         InitialValueExpressionCollection(raw)
     }
 
@@ -22351,7 +22351,7 @@ public class InsetClip <: InterfaceWrapperBase & ComInterface & windows_interfac
         InsetClip(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): InsetClip {
+    public static func viewOf(raw: CPointer<Unit>): InsetClip {
         InsetClip(raw)
     }
 
@@ -22467,7 +22467,7 @@ public class KeyFrameAnimation <: InterfaceWrapperBase & ComInterface & windows_
         KeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): KeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): KeyFrameAnimation {
         KeyFrameAnimation(raw)
     }
 
@@ -22607,7 +22607,7 @@ public class LayerVisual <: InterfaceWrapperBase & ComInterface & windows_interf
         LayerVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LayerVisual {
+    public static func viewOf(raw: CPointer<Unit>): LayerVisual {
         LayerVisual(raw)
     }
 
@@ -22703,7 +22703,7 @@ public class LinearEasingFunction <: InterfaceWrapperBase & ComInterface & windo
         LinearEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LinearEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): LinearEasingFunction {
         LinearEasingFunction(raw)
     }
 
@@ -22787,7 +22787,7 @@ public class NaturalMotionAnimation <: InterfaceWrapperBase & ComInterface & win
         NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): NaturalMotionAnimation {
         NaturalMotionAnimation(raw)
     }
 
@@ -22899,7 +22899,7 @@ public class PathKeyFrameAnimation <: InterfaceWrapperBase & ComInterface & wind
         PathKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PathKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): PathKeyFrameAnimation {
         PathKeyFrameAnimation(raw)
     }
 
@@ -22999,7 +22999,7 @@ public class PointLight <: InterfaceWrapperBase & ComInterface & windows_interfa
         PointLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PointLight {
+    public static func viewOf(raw: CPointer<Unit>): PointLight {
         PointLight(raw)
     }
 
@@ -23131,7 +23131,7 @@ public class PowerEasingFunction <: InterfaceWrapperBase & ComInterface & window
         PowerEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PowerEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): PowerEasingFunction {
         PowerEasingFunction(raw)
     }
 
@@ -23223,7 +23223,7 @@ public class QuaternionKeyFrameAnimation <: InterfaceWrapperBase & ComInterface 
         QuaternionKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): QuaternionKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): QuaternionKeyFrameAnimation {
         QuaternionKeyFrameAnimation(raw)
     }
 
@@ -23323,7 +23323,7 @@ public class RectangleClip <: InterfaceWrapperBase & ComInterface & windows_inte
         RectangleClip(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RectangleClip {
+    public static func viewOf(raw: CPointer<Unit>): RectangleClip {
         RectangleClip(raw)
     }
 
@@ -23471,7 +23471,7 @@ public class RedirectVisual <: InterfaceWrapperBase & ComInterface & windows_int
         RedirectVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RedirectVisual {
+    public static func viewOf(raw: CPointer<Unit>): RedirectVisual {
         RedirectVisual(raw)
     }
 
@@ -23567,7 +23567,7 @@ public class ScalarKeyFrameAnimation <: InterfaceWrapperBase & ComInterface & wi
         ScalarKeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ScalarKeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): ScalarKeyFrameAnimation {
         ScalarKeyFrameAnimation(raw)
     }
 
@@ -23667,7 +23667,7 @@ public class ScalarNaturalMotionAnimation <: InterfaceWrapperBase & ComInterface
         ScalarNaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ScalarNaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): ScalarNaturalMotionAnimation {
         ScalarNaturalMotionAnimation(raw)
     }
 
@@ -23783,7 +23783,7 @@ public class ShapeVisual <: InterfaceWrapperBase & ComInterface & windows_interf
         ShapeVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ShapeVisual {
+    public static func viewOf(raw: CPointer<Unit>): ShapeVisual {
         ShapeVisual(raw)
     }
 
@@ -23883,7 +23883,7 @@ public class SineEasingFunction <: InterfaceWrapperBase & ComInterface & windows
         SineEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SineEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): SineEasingFunction {
         SineEasingFunction(raw)
     }
 
@@ -23971,7 +23971,7 @@ public class SpotLight <: InterfaceWrapperBase & ComInterface & windows_interfac
         SpotLight(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SpotLight {
+    public static func viewOf(raw: CPointer<Unit>): SpotLight {
         SpotLight(raw)
     }
 
@@ -24151,7 +24151,7 @@ public class SpringScalarNaturalMotionAnimation <: InterfaceWrapperBase & ComInt
         SpringScalarNaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SpringScalarNaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): SpringScalarNaturalMotionAnimation {
         SpringScalarNaturalMotionAnimation(raw)
     }
 
@@ -24263,7 +24263,7 @@ public class SpringVector2NaturalMotionAnimation <: InterfaceWrapperBase & ComIn
         SpringVector2NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SpringVector2NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): SpringVector2NaturalMotionAnimation {
         SpringVector2NaturalMotionAnimation(raw)
     }
 
@@ -24375,7 +24375,7 @@ public class SpringVector3NaturalMotionAnimation <: InterfaceWrapperBase & ComIn
         SpringVector3NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SpringVector3NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): SpringVector3NaturalMotionAnimation {
         SpringVector3NaturalMotionAnimation(raw)
     }
 
@@ -24487,7 +24487,7 @@ public class SpriteVisual <: InterfaceWrapperBase & ComInterface & windows_inter
         SpriteVisual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SpriteVisual {
+    public static func viewOf(raw: CPointer<Unit>): SpriteVisual {
         SpriteVisual(raw)
     }
 
@@ -24583,7 +24583,7 @@ public class StepEasingFunction <: InterfaceWrapperBase & ComInterface & windows
         StepEasingFunction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StepEasingFunction {
+    public static func viewOf(raw: CPointer<Unit>): StepEasingFunction {
         StepEasingFunction(raw)
     }
 
@@ -24707,7 +24707,7 @@ public class Vector2KeyFrameAnimation <: InterfaceWrapperBase & ComInterface & w
         Vector2KeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Vector2KeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): Vector2KeyFrameAnimation {
         Vector2KeyFrameAnimation(raw)
     }
 
@@ -24807,7 +24807,7 @@ public class Vector2NaturalMotionAnimation <: InterfaceWrapperBase & ComInterfac
         Vector2NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Vector2NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): Vector2NaturalMotionAnimation {
         Vector2NaturalMotionAnimation(raw)
     }
 
@@ -24923,7 +24923,7 @@ public class Vector3KeyFrameAnimation <: InterfaceWrapperBase & ComInterface & w
         Vector3KeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Vector3KeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): Vector3KeyFrameAnimation {
         Vector3KeyFrameAnimation(raw)
     }
 
@@ -25023,7 +25023,7 @@ public class Vector3NaturalMotionAnimation <: InterfaceWrapperBase & ComInterfac
         Vector3NaturalMotionAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Vector3NaturalMotionAnimation {
+    public static func viewOf(raw: CPointer<Unit>): Vector3NaturalMotionAnimation {
         Vector3NaturalMotionAnimation(raw)
     }
 
@@ -25139,7 +25139,7 @@ public class Vector4KeyFrameAnimation <: InterfaceWrapperBase & ComInterface & w
         Vector4KeyFrameAnimation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Vector4KeyFrameAnimation {
+    public static func viewOf(raw: CPointer<Unit>): Vector4KeyFrameAnimation {
         Vector4KeyFrameAnimation(raw)
     }
 
@@ -25239,7 +25239,7 @@ public class Visual <: InterfaceWrapperBase & ComInterface & windows_interface.R
         Visual(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Visual {
+    public static func viewOf(raw: CPointer<Unit>): Visual {
         Visual(raw)
     }
 
@@ -25451,7 +25451,7 @@ public class VisualCollection <: InterfaceWrapperBase & ComInterface & windows_i
         VisualCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VisualCollection {
+    public static func viewOf(raw: CPointer<Unit>): VisualCollection {
         VisualCollection(raw)
     }
 
@@ -25567,7 +25567,7 @@ public class VisualUnorderedCollection <: InterfaceWrapperBase & ComInterface & 
         VisualUnorderedCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VisualUnorderedCollection {
+    public static func viewOf(raw: CPointer<Unit>): VisualUnorderedCollection {
         VisualUnorderedCollection(raw)
     }
 

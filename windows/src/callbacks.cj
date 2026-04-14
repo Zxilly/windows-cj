@@ -4,7 +4,8 @@ import std.collection.HashMap
 import std.sync.Mutex
 import windows_core.*
 import windows_result.Win32Exception
-import windows_sys.{CREATESTRUCTW, ERROR_SUCCESS, WM_NCCREATE, WM_NCDESTROY, user32EnumChildWindows, user32EnumWindows}
+import windows_sys.win32.foundation.{ERROR_SUCCESS}
+import windows_sys.win32.ui.windows_and_messaging.{CREATESTRUCTW, WM_NCCREATE, WM_NCDESTROY}
 
 // =============================================================================
 // Generic callback registry
@@ -112,7 +113,7 @@ public func withEnumWindowsCallback(
 
 public func enumWindows(handler: (CPointer<Unit>) -> Bool): Unit {
     withWndEnumProcCallback(handler) { wrapper: EnumWindowsHandler, thunk: CFunc<(CPointer<Unit>, IntNative) -> Int32>, key: IntNative =>
-        let result = user32EnumWindows(thunk, key)
+        let result = ffiEnumWindows(thunk, key)
         if (result == 0 && !wrapper.stopped) {
             throw Win32Exception(ffiGetLastError())
         }
@@ -121,7 +122,7 @@ public func enumWindows(handler: (CPointer<Unit>) -> Bool): Unit {
 
 public func enumChildWindows(parent: CPointer<Unit>, handler: (CPointer<Unit>) -> Bool): Unit {
     withWndEnumProcCallback(handler) { wrapper: EnumWindowsHandler, thunk: CFunc<(CPointer<Unit>, IntNative) -> Int32>, key: IntNative =>
-        let result = user32EnumChildWindows(parent, thunk, key)
+        let result = ffiEnumChildWindows(parent, thunk, key)
         if (result == 0 && !wrapper.stopped) {
             let error = ffiGetLastError()
             if (error != ERROR_SUCCESS) {

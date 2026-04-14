@@ -89,7 +89,7 @@ public class FileWriter {
             if (!first) {
                 result.append("/")
             }
-            result.append(toLowerSnake(p))
+            result.append(sanitizePackageSegment(p))
             first = false
         }
         return result.toString()
@@ -100,13 +100,12 @@ public class FileWriter {
         let parts = splitString(namespace, b'.')
         let normalized = ArrayList<String>()
         for (p in parts) {
-            normalized.add(toLowerSnake(p))
+            normalized.add(sanitizePackageSegment(p))
         }
         return joinStrings(normalized, ".")
     }
 
-    // Convert a namespace like "Windows.Win32.Foundation" to subpackage suffix "win32_foundation".
-    public static func namespaceToSubpackageSuffix(namespace: String): String {
+    public static func namespaceToPackageRelativeParts(namespace: String): ArrayList<String> {
         let parts = splitString(namespace, b'.')
         let normalized = ArrayList<String>()
         var start: Int64 = 0
@@ -116,22 +115,75 @@ public class FileWriter {
 
         var i = start
         while (i < Int64(parts.size)) {
-            normalized.add(toLowerSnake(parts[i]))
+            normalized.add(sanitizePackageSegment(parts[i]))
             i += 1
         }
-        return joinStrings(normalized, "_")
+        return normalized
     }
 
-    public static func namespaceToSubpackageDirPath(namespace: String): String {
-        return namespaceToSubpackageSuffix(namespace)
+    public static func packageNameToRelativeParts(packageName: String, rootPackage: String): ArrayList<String> {
+        let packageParts = splitString(packageName, b'.')
+        let rootParts = splitString(rootPackage, b'.')
+        let result = ArrayList<String>()
+
+        var start: Int64 = 0
+        if (packageParts.size >= rootParts.size) {
+            var matchesRoot = true
+            var i: Int64 = 0
+            while (i < Int64(rootParts.size)) {
+                if (packageParts[i] != rootParts[i]) {
+                    matchesRoot = false
+                    break
+                }
+                i += 1
+            }
+            if (matchesRoot) {
+                start = Int64(rootParts.size)
+            }
+        }
+
+        var i = start
+        while (i < Int64(packageParts.size)) {
+            result.add(packageParts[i])
+            i += 1
+        }
+        return result
     }
 
-    public static func namespaceToSubpackageName(namespace: String, rootPackage: String): String {
-        let suffix = namespaceToSubpackageSuffix(namespace)
-        if (suffix.isEmpty()) {
+    public static func packageNameToRelativeDirPath(packageName: String, rootPackage: String): String {
+        return joinStrings(packageNameToRelativeParts(packageName, rootPackage), "/")
+    }
+
+    public static func namespaceToHierarchicalDirPath(namespace: String): String {
+        let parts = namespaceToPackageRelativeParts(namespace)
+        return joinStrings(parts, "/")
+    }
+
+    public static func namespaceToHierarchicalPackageName(namespace: String, rootPackage: String): String {
+        let parts = namespaceToPackageRelativeParts(namespace)
+        if (parts.isEmpty()) {
             return rootPackage
         }
-        return "${rootPackage}.${suffix}"
+        return "${rootPackage}.${joinStrings(parts, ".")}"
+    }
+
+    public static func namespaceToGroupedFileStem(namespace: String, packageNamespace: String): String {
+        let namespaceParts = namespaceToPackageRelativeParts(namespace)
+        let packageParts = namespaceToPackageRelativeParts(packageNamespace)
+        if (namespaceParts.size <= packageParts.size) {
+            return "mod"
+        }
+
+        let suffix = ArrayList<String>()
+        var i = Int64(packageParts.size)
+        while (i < Int64(namespaceParts.size)) {
+            suffix.add(namespaceParts[i])
+            i += 1
+        }
+        if (suffix.isEmpty()) {
+            return "mod"
+        }
+        return joinStrings(suffix, "_")
     }
 }
 
@@ -154,10 +206,33 @@ func directoryOf(path: String): String {
 
 // Ensure directory exists (recursive)
 func ensureDir(dirPath: String): Unit {
-    if (exists(dirPath)) {
+    if (directoryExists(dirPath)) {
         return
     }
-    Directory.create(dirPath, recursive: true)
+    var attempt: Int64 = 0
+    while (attempt < 8) {
+        try {
+            Directory.create(dirPath, recursive: true)
+            return
+        } catch (err: Exception) {
+            if (directoryExists(dirPath)) {
+                return
+            }
+            if (attempt == 7) {
+                throw err
+            }
+        }
+        attempt += 1
+    }
+}
+
+func directoryExists(path: String): Bool {
+    try {
+        Directory.readFrom(path)
+        return true
+    } catch (_: Exception) {
+        return false
+    }
 }
 
 // Split a string by a separator byte
@@ -179,70 +254,6 @@ public func splitString(s: String, sep: Byte): ArrayList<String> {
         result.add(String.fromUtf8(arr[start..Int64(arr.size)]))
     }
     return result
-}
-
-// Convert PascalCase / camelCase / acronym strings to lower_snake_case.
-// Rules:
-//   - A transition from lowercase/digit to uppercase inserts an underscore.
-//   - A transition from a run of uppercase to an uppercase-then-lowercase inserts
-//     an underscore before the last uppercase of the run (e.g. "UIAutomation" →
-//     "ui_automation", "D3D11" → "d3d11", "Win32" → "win32").
-//   - A leading underscore is never inserted.
-public func toLowerSnake(s: String): String {
-    let arr = s.toArray()
-    let len = Int64(arr.size)
-    var result = ArrayList<Byte>()
-    var i: Int64 = 0
-    while (i < len) {
-        let ch = arr[i]
-        if (ch >= b'A' && ch <= b'Z') {
-            let lower = ch - b'A' + b'a'
-            // Decide whether to insert an underscore before this character
-            if (i > 0) {
-                let prev = arr[i - 1]
-                let prevIsLower = (prev >= b'a' && prev <= b'z') || (prev >= b'0' && prev <= b'9')
-                // Check if next char is lowercase (end of an uppercase run)
-                let nextIsLower = (i + 1 < len) && arr[i + 1] >= b'a' && arr[i + 1] <= b'z'
-                let prevIsUpper = prev >= b'A' && prev <= b'Z'
-                if (prevIsLower) {
-                    // e.g. "Win32" W→w, i→i, n→n, "3"→3, "2"→2, no underscore before first W
-                    // But here we're looking at subsequent uppercase. "SomeThing": underscore before T
-                    result.add(b'_')
-                } else if (prevIsUpper && nextIsLower) {
-                    // We're at the last capital of a run, e.g. "UIAuto" → the 'A' of "Auto":
-                    // prev='I' (upper), next='u' (lower) → insert underscore before 'A'
-                    result.add(b'_')
-                }
-            }
-            result.add(lower)
-        } else {
-            result.add(ch)
-        }
-        i += 1
-    }
-    return byteListToString(result)
-}
-
-// Convert a name to UPPER_SNAKE_CASE
-public func toUpperSnake(s: String): String {
-    let arr = s.toArray()
-    var result = ArrayList<Byte>()
-    var i: Int64 = 0
-    while (i < Int64(arr.size)) {
-        let ch = arr[i]
-        if (ch >= b'a' && ch <= b'z') {
-            result.add(ch - b'a' + b'A')
-        } else if (ch >= b'A' && ch <= b'Z') {
-            if (i > 0 && arr[i - 1] >= b'a' && arr[i - 1] <= b'z') {
-                result.add(b'_')
-            }
-            result.add(ch)
-        } else {
-            result.add(ch)
-        }
-        i += 1
-    }
-    return byteListToString(result)
 }
 
 func byteListToString(bytes: ArrayList<Byte>): String {

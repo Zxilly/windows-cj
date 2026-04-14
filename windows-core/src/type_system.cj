@@ -24,7 +24,7 @@ public interface CopyType {
     }
 }
 
-// 仓颉只支持顶层类型别名，无法像 Rust 一样用一元别名表达关联类型映射。
+// 仓颉只支持顶层类型别名，无法用一元别名表达关联类型映射。
 // 因此 Type<TProjected, TAbi, TDefault> 本身就是 ABI/Default 的权威来源。
 public interface Type<TProjected, TAbi, TDefault> <: WindowsType {
     static func typeKind(): TypeKind
@@ -36,9 +36,9 @@ public interface Type<TProjected, TAbi, TDefault> <: WindowsType {
 
     static func assumeInitRef(abi: TAbi): TProjected
 
-    static func from_abi(abi: TAbi): Result<TProjected>
+    static func fromAbi(abi: TAbi): Result<TProjected>
 
-    static func from_default(defaultValue: TDefault): Result<TProjected>
+    static func fromDefault(defaultValue: TDefault): Result<TProjected>
 }
 
 func cloneProjectedValue<T>(value: T): T {
@@ -61,7 +61,7 @@ func cloneInterfaceValue<T>(value: T): Result<T> where T <: ComInterface & Inter
                 return Result<T>.Err(WinError(E_POINTER))
             }
             wrapper.addRef()
-            Result<T>.Ok(T.fromRaw(raw))
+            Result<T>.Ok(T.fromAbiTake(raw))
         case None =>
             Result<T>.Ok(value)
     }
@@ -76,11 +76,11 @@ public func assumeInitRef<T, A, D>(abi: A): T where T <: Type<T, A, D> {
 }
 
 public func fromAbi<T, A, D>(abi: A): Result<T> where T <: Type<T, A, D> {
-    T.from_abi(abi)
+    T.fromAbi(abi)
 }
 
 public func fromDefault<T, A, D>(defaultValue: D): Result<T> where T <: Type<T, A, D> {
-    T.from_default(defaultValue)
+    T.fromDefault(defaultValue)
 }
 
 public func assumeInitCopy<T>(abi: T): T where T <: CopyType {

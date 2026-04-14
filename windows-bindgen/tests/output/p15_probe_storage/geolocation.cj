@@ -52,7 +52,7 @@ public class CivicAddress <: InterfaceWrapperBase & ComInterface & windows_inter
         CivicAddress(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CivicAddress {
+    public static func viewOf(raw: CPointer<Unit>): CivicAddress {
         CivicAddress(raw)
     }
 
@@ -132,7 +132,7 @@ public class Geocoordinate <: InterfaceWrapperBase & ComInterface & windows_inte
         Geocoordinate(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Geocoordinate {
+    public static func viewOf(raw: CPointer<Unit>): Geocoordinate {
         Geocoordinate(raw)
     }
 
@@ -224,7 +224,7 @@ public class GeocoordinateSatelliteData <: InterfaceWrapperBase & ComInterface &
         GeocoordinateSatelliteData(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): GeocoordinateSatelliteData {
+    public static func viewOf(raw: CPointer<Unit>): GeocoordinateSatelliteData {
         GeocoordinateSatelliteData(raw)
     }
 
@@ -319,7 +319,7 @@ public class Geolocator <: InterfaceWrapperBase & ComInterface & windows_interfa
         Geolocator(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Geolocator {
+    public static func viewOf(raw: CPointer<Unit>): Geolocator {
         Geolocator(raw)
     }
 
@@ -474,7 +474,7 @@ public class Geopoint <: InterfaceWrapperBase & ComInterface & windows_interface
         Geopoint(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Geopoint {
+    public static func viewOf(raw: CPointer<Unit>): Geopoint {
         Geopoint(raw)
     }
 
@@ -572,7 +572,7 @@ public class Geoposition <: InterfaceWrapperBase & ComInterface & windows_interf
         Geoposition(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Geoposition {
+    public static func viewOf(raw: CPointer<Unit>): Geoposition {
         Geoposition(raw)
     }
 
@@ -676,7 +676,7 @@ public class ICivicAddress <: InterfaceWrapperBase & ComInterface & RuntimeName 
         ICivicAddress(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICivicAddress {
+    public static func viewOf(raw: CPointer<Unit>): ICivicAddress {
         ICivicAddress(raw)
     }
 
@@ -793,7 +793,7 @@ public class IGeocoordinate <: InterfaceWrapperBase & ComInterface & RuntimeName
         IGeocoordinate(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeocoordinate {
+    public static func viewOf(raw: CPointer<Unit>): IGeocoordinate {
         IGeocoordinate(raw)
     }
 
@@ -929,7 +929,7 @@ public class IGeocoordinateSatelliteData <: InterfaceWrapperBase & ComInterface 
         IGeocoordinateSatelliteData(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeocoordinateSatelliteData {
+    public static func viewOf(raw: CPointer<Unit>): IGeocoordinateSatelliteData {
         IGeocoordinateSatelliteData(raw)
     }
 
@@ -1024,7 +1024,7 @@ public class IGeocoordinateSatelliteData2 <: InterfaceWrapperBase & ComInterface
         IGeocoordinateSatelliteData2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeocoordinateSatelliteData2 {
+    public static func viewOf(raw: CPointer<Unit>): IGeocoordinateSatelliteData2 {
         IGeocoordinateSatelliteData2(raw)
     }
 
@@ -1110,7 +1110,7 @@ public class IGeocoordinateWithPoint <: InterfaceWrapperBase & ComInterface & Ru
         IGeocoordinateWithPoint(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeocoordinateWithPoint {
+    public static func viewOf(raw: CPointer<Unit>): IGeocoordinateWithPoint {
         IGeocoordinateWithPoint(raw)
     }
 
@@ -1189,7 +1189,7 @@ public class IGeocoordinateWithPositionData <: InterfaceWrapperBase & ComInterfa
         IGeocoordinateWithPositionData(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeocoordinateWithPositionData {
+    public static func viewOf(raw: CPointer<Unit>): IGeocoordinateWithPositionData {
         IGeocoordinateWithPositionData(raw)
     }
 
@@ -1284,7 +1284,7 @@ public class IGeocoordinateWithPositionSourceTimestamp <: InterfaceWrapperBase &
         IGeocoordinateWithPositionSourceTimestamp(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeocoordinateWithPositionSourceTimestamp {
+    public static func viewOf(raw: CPointer<Unit>): IGeocoordinateWithPositionSourceTimestamp {
         IGeocoordinateWithPositionSourceTimestamp(raw)
     }
 
@@ -1362,7 +1362,7 @@ public class IGeocoordinateWithRemoteSource <: InterfaceWrapperBase & ComInterfa
         IGeocoordinateWithRemoteSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeocoordinateWithRemoteSource {
+    public static func viewOf(raw: CPointer<Unit>): IGeocoordinateWithRemoteSource {
         IGeocoordinateWithRemoteSource(raw)
     }
 
@@ -1452,7 +1452,7 @@ public class IGeolocator <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IGeolocator(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeolocator {
+    public static func viewOf(raw: CPointer<Unit>): IGeolocator {
         IGeolocator(raw)
     }
 
@@ -1616,7 +1616,7 @@ public class IGeolocator2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IGeolocator2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeolocator2 {
+    public static func viewOf(raw: CPointer<Unit>): IGeolocator2 {
         IGeolocator2(raw)
     }
 
@@ -1693,7 +1693,7 @@ public class IGeolocatorWithScalarAccuracy <: InterfaceWrapperBase & ComInterfac
         IGeolocatorWithScalarAccuracy(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeolocatorWithScalarAccuracy {
+    public static func viewOf(raw: CPointer<Unit>): IGeolocatorWithScalarAccuracy {
         IGeolocatorWithScalarAccuracy(raw)
     }
 
@@ -1786,7 +1786,7 @@ public class IGeopoint <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         IGeopoint(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeopoint {
+    public static func viewOf(raw: CPointer<Unit>): IGeopoint {
         IGeopoint(raw)
     }
 
@@ -1874,7 +1874,7 @@ public class IGeoposition <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IGeoposition(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeoposition {
+    public static func viewOf(raw: CPointer<Unit>): IGeoposition {
         IGeoposition(raw)
     }
 
@@ -1960,7 +1960,7 @@ public class IGeoposition2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IGeoposition2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeoposition2 {
+    public static func viewOf(raw: CPointer<Unit>): IGeoposition2 {
         IGeoposition2(raw)
     }
 
@@ -2121,7 +2121,7 @@ public class IGeoshape <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         IGeoshape(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeoshape {
+    public static func viewOf(raw: CPointer<Unit>): IGeoshape {
         IGeoshape(raw)
     }
 
@@ -2215,7 +2215,7 @@ public class IPositionChangedEventArgs <: InterfaceWrapperBase & ComInterface & 
         IPositionChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPositionChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IPositionChangedEventArgs {
         IPositionChangedEventArgs(raw)
     }
 
@@ -2293,7 +2293,7 @@ public class IStatusChangedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
         IStatusChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStatusChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IStatusChangedEventArgs {
         IStatusChangedEventArgs(raw)
     }
 
@@ -2372,7 +2372,7 @@ public class IVenueData <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         IVenueData(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVenueData {
+    public static func viewOf(raw: CPointer<Unit>): IVenueData {
         IVenueData(raw)
     }
 
@@ -2472,7 +2472,7 @@ public class PositionChangedEventArgs <: InterfaceWrapperBase & ComInterface & w
         PositionChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PositionChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): PositionChangedEventArgs {
         PositionChangedEventArgs(raw)
     }
 
@@ -2589,7 +2589,7 @@ public class StatusChangedEventArgs <: InterfaceWrapperBase & ComInterface & win
         StatusChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StatusChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): StatusChangedEventArgs {
         StatusChangedEventArgs(raw)
     }
 
@@ -2653,7 +2653,7 @@ public class VenueData <: InterfaceWrapperBase & ComInterface & windows_interfac
         VenueData(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VenueData {
+    public static func viewOf(raw: CPointer<Unit>): VenueData {
         VenueData(raw)
     }
 

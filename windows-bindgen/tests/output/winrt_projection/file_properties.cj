@@ -3,22 +3,31 @@
 // High-level projection emits WinRT wrapper types and Win32 sys bindings.
 package windows.storage.file_properties
 
+import std.collection.*
 import windows_core.*
 import windows_interface.*
+import windows.foundation
+import windows.foundation.collections
+import windows.storage.streams
+import windows.win32.foundation
 import windows.win32.foundation.*
 
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class BasicProperties <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): BasicProperties {
-        BasicProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BasicProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): BasicProperties {
+        BasicProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BasicProperties {
         BasicProperties(raw)
     }
 
@@ -32,11 +41,11 @@ public class BasicProperties <: InterfaceWrapperBase & ComInterface & windows_in
 
     public static func descriptor(): InterfaceDescriptor<BasicProperties> {
         let ancestors = [IBasicProperties.iid(), IStorageItemExtraProperties.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<BasicProperties>("BasicProperties", IBasicProperties.iid(), ancestors, { raw => BasicProperties(raw, ownsReference: true) }, { raw => BasicProperties(raw) })
+        return InterfaceDescriptor<BasicProperties>("BasicProperties", IBasicProperties.iid(), ancestors, { raw => BasicProperties.fromAbiTake(raw) }, { raw => BasicProperties.viewOf(raw) })
     }
 
     public func defaultInterface(): IBasicProperties {
-        IBasicProperties(asRaw())
+        IBasicProperties.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -56,7 +65,7 @@ public class BasicProperties <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIBasicProperties(): IBasicProperties {
@@ -71,38 +80,42 @@ public class BasicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Size()
     }
 
-    public unsafe func DateModified(): windows.foundation.DateTime {
+    public unsafe func DateModified(): foundation.DateTime {
         return defaultInterface().DateModified()
     }
 
-    public unsafe func ItemDate(): windows.foundation.DateTime {
+    public unsafe func ItemDate(): foundation.DateTime {
         return defaultInterface().ItemDate()
     }
 
-    public unsafe func RetrievePropertiesAsync(operation: CPointer<Unit>): CPointer<Unit> {
+    public unsafe func RetrievePropertiesAsync(operation: collections.IIterable<String>): foundation.IAsyncOperation<collections.IMap<String, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsync(operation: CPointer<Unit>): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsync(operation: collections.IIterable<collections.IKeyValuePair<String, IInspectable>>): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsyncOverloadDefault(): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsyncOverloadDefault(): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsyncOverloadDefault()
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): DocumentProperties {
-        DocumentProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DocumentProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): DocumentProperties {
+        DocumentProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DocumentProperties {
         DocumentProperties(raw)
     }
 
@@ -116,11 +129,11 @@ public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows
 
     public static func descriptor(): InterfaceDescriptor<DocumentProperties> {
         let ancestors = [IDocumentProperties.iid(), IStorageItemExtraProperties.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<DocumentProperties>("DocumentProperties", IDocumentProperties.iid(), ancestors, { raw => DocumentProperties(raw, ownsReference: true) }, { raw => DocumentProperties(raw) })
+        return InterfaceDescriptor<DocumentProperties>("DocumentProperties", IDocumentProperties.iid(), ancestors, { raw => DocumentProperties.fromAbiTake(raw) }, { raw => DocumentProperties.viewOf(raw) })
     }
 
     public func defaultInterface(): IDocumentProperties {
-        IDocumentProperties(asRaw())
+        IDocumentProperties.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -140,7 +153,7 @@ public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIDocumentProperties(): IDocumentProperties {
@@ -151,7 +164,7 @@ public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows
         IStorageItemExtraProperties(asRaw())
     }
 
-    public unsafe func Author(): CPointer<Unit> {
+    public unsafe func Author(): collections.IVector<String> {
         return defaultInterface().Author()
     }
 
@@ -163,7 +176,7 @@ public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().SetTitle(value)
     }
 
-    public unsafe func Keywords(): CPointer<Unit> {
+    public unsafe func Keywords(): collections.IVector<String> {
         return defaultInterface().Keywords()
     }
 
@@ -175,40 +188,44 @@ public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().SetComment(value)
     }
 
-    public unsafe func RetrievePropertiesAsync(operation: CPointer<Unit>): CPointer<Unit> {
+    public unsafe func RetrievePropertiesAsync(operation: collections.IIterable<String>): foundation.IAsyncOperation<collections.IMap<String, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsync(operation: CPointer<Unit>): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsync(operation: collections.IIterable<collections.IKeyValuePair<String, IInspectable>>): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsyncOverloadDefault(): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsyncOverloadDefault(): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsyncOverloadDefault()
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 @C
 public struct IBasicPropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var Size: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var DateModified: CFunc<(CPointer<Unit>, CPointer<windows.foundation.DateTime>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var ItemDate: CFunc<(CPointer<Unit>, CPointer<windows.foundation.DateTime>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var DateModified: CFunc<(CPointer<Unit>, CPointer<foundation.DateTime>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ItemDate: CFunc<(CPointer<Unit>, CPointer<foundation.DateTime>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class IBasicProperties <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IBasicProperties {
-        IBasicProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBasicProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): IBasicProperties {
+        IBasicProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IBasicProperties {
         IBasicProperties(raw)
     }
 
@@ -224,13 +241,13 @@ public class IBasicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<IBasicProperties> {
-        var descriptor = InterfaceDescriptor<IBasicProperties>("IBasicProperties", IBasicProperties.iid(), IInspectable.descriptor(), { raw => IBasicProperties(raw, ownsReference: true) }, { raw => IBasicProperties(raw) })
+        var descriptor = InterfaceDescriptor<IBasicProperties>("IBasicProperties", IBasicProperties.iid(), IInspectable.descriptor(), { raw => IBasicProperties.fromAbiTake(raw) }, { raw => IBasicProperties.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IBasicProperties.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBasicProperties", IBasicProperties.iid(), IInspectable.descriptorSchema(), "IBasicPropertiesVtbl", "IBasicProperties", "IBasicProperties_Impl", [InterfaceMethodSchema("Size", 6, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutRef<UInt64>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DateModified", 7, [InterfaceParameterSchema("result", "CPointer<windows.foundation.DateTime>", "OutRef<windows.foundation.DateTime>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("ItemDate", 8, [InterfaceParameterSchema("result", "CPointer<windows.foundation.DateTime>", "OutRef<windows.foundation.DateTime>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBasicProperties", IBasicProperties.iid(), IInspectable.descriptorSchema(), "IBasicPropertiesVtbl", "IBasicProperties", "IBasicProperties_Impl", [InterfaceMethodSchema("Size", 6, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DateModified", 7, [InterfaceParameterSchema("result", "CPointer<foundation.DateTime>", "OutSlot<foundation.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ItemDate", 8, [InterfaceParameterSchema("result", "CPointer<foundation.DateTime>", "OutSlot<foundation.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IBasicProperties.runtimeType())
         return schema
     }
@@ -252,7 +269,7 @@ public class IBasicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IBasicPropertiesVtbl {
@@ -267,24 +284,24 @@ public class IBasicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result
     }
 
-    public unsafe func DateModified(): windows.foundation.DateTime {
+    public unsafe func DateModified(): foundation.DateTime {
         let v = vtbl()
-        var result = windows.foundation.DateTime()
-        let hr = v.DateModified(asRaw(), CPointer<windows.foundation.DateTime>(inout result))
+        var result = foundation.DateTime()
+        let hr = v.DateModified(asRaw(), CPointer<foundation.DateTime>(inout result))
         HRESULT(hr).ok()
         return result
     }
 
-    public unsafe func ItemDate(): windows.foundation.DateTime {
+    public unsafe func ItemDate(): foundation.DateTime {
         let v = vtbl()
-        var result = windows.foundation.DateTime()
-        let hr = v.ItemDate(asRaw(), CPointer<windows.foundation.DateTime>(inout result))
+        var result = foundation.DateTime()
+        let hr = v.ItemDate(asRaw(), CPointer<foundation.DateTime>(inout result))
         HRESULT(hr).ok()
         return result
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 @C
 public struct IDocumentPropertiesVtbl {
     public var base_: IStorageItemExtraPropertiesVtbl = IStorageItemExtraPropertiesVtbl()
@@ -297,17 +314,21 @@ public struct IDocumentPropertiesVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class IDocumentProperties <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IDocumentProperties {
-        IDocumentProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDocumentProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): IDocumentProperties {
+        IDocumentProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IDocumentProperties {
         IDocumentProperties(raw)
     }
 
@@ -328,13 +349,13 @@ public class IDocumentProperties <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptor(): InterfaceDescriptor<IDocumentProperties> {
-        var descriptor = InterfaceDescriptor<IDocumentProperties>("IDocumentProperties", IDocumentProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IDocumentProperties(raw, ownsReference: true) }, { raw => IDocumentProperties(raw) })
+        var descriptor = InterfaceDescriptor<IDocumentProperties>("IDocumentProperties", IDocumentProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IDocumentProperties.fromAbiTake(raw) }, { raw => IDocumentProperties.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IDocumentProperties.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDocumentProperties", IDocumentProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IDocumentPropertiesVtbl", "IDocumentProperties", "IDocumentProperties_Impl", [InterfaceMethodSchema("Author", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Title", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetTitle", 11, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Keywords", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Comment", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetComment", 14, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDocumentProperties", IDocumentProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IDocumentPropertiesVtbl", "IDocumentProperties", "IDocumentProperties_Impl", [InterfaceMethodSchema("Author", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Title", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 11, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Keywords", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Comment", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetComment", 14, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IDocumentProperties.runtimeType())
         return schema
     }
@@ -356,23 +377,23 @@ public class IDocumentProperties <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItemExtraProperties(): IStorageItemExtraProperties {
-        IStorageItemExtraProperties(asRaw())
+        IStorageItemExtraProperties.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IDocumentPropertiesVtbl {
         readVtbl<IDocumentPropertiesVtbl>(IDocumentPropertiesVtbl())
     }
 
-    public unsafe func Author(): CPointer<Unit> {
+    public unsafe func Author(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Author(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func Title(): CPointer<UInt16> {
@@ -389,12 +410,12 @@ public class IDocumentProperties <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
-    public unsafe func Keywords(): CPointer<Unit> {
+    public unsafe func Keywords(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Keywords(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func Comment(): CPointer<UInt16> {
@@ -412,15 +433,15 @@ public class IDocumentProperties <: InterfaceWrapperBase & ComInterface & Runtim
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 @C
 public struct IImagePropertiesVtbl {
     public var base_: IStorageItemExtraPropertiesVtbl = IStorageItemExtraPropertiesVtbl()
     public var Rating: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetRating: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var DateTaken: CFunc<(CPointer<Unit>, CPointer<windows.foundation.DateTime>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var SetDateTaken: CFunc<(CPointer<Unit>, windows.foundation.DateTime) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var DateTaken: CFunc<(CPointer<Unit>, CPointer<foundation.DateTime>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var SetDateTaken: CFunc<(CPointer<Unit>, foundation.DateTime) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Width: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Height: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -436,17 +457,21 @@ public struct IImagePropertiesVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class IImageProperties <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IImageProperties {
-        IImageProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IImageProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): IImageProperties {
+        IImageProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IImageProperties {
         IImageProperties(raw)
     }
 
@@ -467,13 +492,13 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<IImageProperties> {
-        var descriptor = InterfaceDescriptor<IImageProperties>("IImageProperties", IImageProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IImageProperties(raw, ownsReference: true) }, { raw => IImageProperties(raw) })
+        var descriptor = InterfaceDescriptor<IImageProperties>("IImageProperties", IImageProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IImageProperties.fromAbiTake(raw) }, { raw => IImageProperties.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IImageProperties.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IImageProperties", IImageProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IImagePropertiesVtbl", "IImageProperties", "IImageProperties_Impl", [InterfaceMethodSchema("Rating", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetRating", 10, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Keywords", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DateTaken", 12, [InterfaceParameterSchema("result", "CPointer<windows.foundation.DateTime>", "OutRef<windows.foundation.DateTime>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetDateTaken", 13, [InterfaceParameterSchema("value", "windows.foundation.DateTime", "windows.foundation.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Width", 14, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Height", 15, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Title", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetTitle", 17, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Latitude", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Longitude", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CameraManufacturer", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetCameraManufacturer", 21, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CameraModel", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetCameraModel", 23, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Orientation", 24, [InterfaceParameterSchema("result", "CPointer<PhotoOrientation>", "OutRef<PhotoOrientation>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("PeopleNames", 25, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IImageProperties", IImageProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IImagePropertiesVtbl", "IImageProperties", "IImageProperties_Impl", [InterfaceMethodSchema("Rating", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRating", 10, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Keywords", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DateTaken", 12, [InterfaceParameterSchema("result", "CPointer<foundation.DateTime>", "OutSlot<foundation.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetDateTaken", 13, [InterfaceParameterSchema("value", "foundation.DateTime", "foundation.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Width", 14, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Height", 15, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Title", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 17, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Latitude", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IReference<Float64>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Longitude", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IReference<Float64>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CameraManufacturer", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCameraManufacturer", 21, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CameraModel", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCameraModel", 23, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Orientation", 24, [InterfaceParameterSchema("result", "CPointer<PhotoOrientation>", "OutSlot<PhotoOrientation>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PeopleNames", 25, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVectorView<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IImageProperties.runtimeType())
         return schema
     }
@@ -495,11 +520,11 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItemExtraProperties(): IStorageItemExtraProperties {
-        IStorageItemExtraProperties(asRaw())
+        IStorageItemExtraProperties.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IImagePropertiesVtbl {
@@ -520,23 +545,23 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Keywords(): CPointer<Unit> {
+    public unsafe func Keywords(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Keywords(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
-    public unsafe func DateTaken(): windows.foundation.DateTime {
+    public unsafe func DateTaken(): foundation.DateTime {
         let v = vtbl()
-        var result = windows.foundation.DateTime()
-        let hr = v.DateTaken(asRaw(), CPointer<windows.foundation.DateTime>(inout result))
+        var result = foundation.DateTime()
+        let hr = v.DateTaken(asRaw(), CPointer<foundation.DateTime>(inout result))
         HRESULT(hr).ok()
         return result
     }
 
-    public unsafe func SetDateTaken(value: windows.foundation.DateTime): Unit {
+    public unsafe func SetDateTaken(value: foundation.DateTime): Unit {
         let v = vtbl()
         let hr = v.SetDateTaken(asRaw(), value)
         HRESULT(hr).ok()
@@ -572,20 +597,20 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Latitude(): CPointer<Unit> {
+    public unsafe func Latitude(): foundation.IReference<Float64> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Latitude(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return foundation.IReference<Float64>.fromAbiTake(result)
     }
 
-    public unsafe func Longitude(): CPointer<Unit> {
+    public unsafe func Longitude(): foundation.IReference<Float64> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Longitude(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return foundation.IReference<Float64>.fromAbiTake(result)
     }
 
     public unsafe func CameraManufacturer(): CPointer<UInt16> {
@@ -624,16 +649,16 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result
     }
 
-    public unsafe func PeopleNames(): CPointer<Unit> {
+    public unsafe func PeopleNames(): collections.IVectorView<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.PeopleNames(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVectorView<String>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 @C
 public struct IMusicPropertiesVtbl {
     public var base_: IStorageItemExtraPropertiesVtbl = IStorageItemExtraPropertiesVtbl()
@@ -648,7 +673,7 @@ public struct IMusicPropertiesVtbl {
     public var SetTitle: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Rating: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetRating: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Duration: CFunc<(CPointer<Unit>, CPointer<windows.foundation.TimeSpan>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Duration: CFunc<(CPointer<Unit>, CPointer<foundation.TimeSpan>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Bitrate: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var AlbumArtist: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SetAlbumArtist: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -665,17 +690,21 @@ public struct IMusicPropertiesVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IMusicProperties {
-        IMusicProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMusicProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): IMusicProperties {
+        IMusicProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IMusicProperties {
         IMusicProperties(raw)
     }
 
@@ -696,13 +725,13 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<IMusicProperties> {
-        var descriptor = InterfaceDescriptor<IMusicProperties>("IMusicProperties", IMusicProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IMusicProperties(raw, ownsReference: true) }, { raw => IMusicProperties(raw) })
+        var descriptor = InterfaceDescriptor<IMusicProperties>("IMusicProperties", IMusicProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IMusicProperties.fromAbiTake(raw) }, { raw => IMusicProperties.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMusicProperties.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMusicProperties", IMusicProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IMusicPropertiesVtbl", "IMusicProperties", "IMusicProperties_Impl", [InterfaceMethodSchema("Album", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetAlbum", 10, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Artist", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetArtist", 12, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Genre", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("TrackNumber", 14, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetTrackNumber", 15, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Title", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetTitle", 17, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Rating", 18, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetRating", 19, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Duration", 20, [InterfaceParameterSchema("result", "CPointer<windows.foundation.TimeSpan>", "OutRef<windows.foundation.TimeSpan>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Bitrate", 21, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("AlbumArtist", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetAlbumArtist", 23, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Composers", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Conductors", 25, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Subtitle", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetSubtitle", 27, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Producers", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Publisher", 29, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetPublisher", 30, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Writers", 31, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Year", 32, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetYear", 33, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMusicProperties", IMusicProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IMusicPropertiesVtbl", "IMusicProperties", "IMusicProperties_Impl", [InterfaceMethodSchema("Album", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAlbum", 10, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Artist", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetArtist", 12, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Genre", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TrackNumber", 14, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTrackNumber", 15, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Title", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 17, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Rating", 18, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRating", 19, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Duration", 20, [InterfaceParameterSchema("result", "CPointer<foundation.TimeSpan>", "OutSlot<foundation.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Bitrate", 21, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AlbumArtist", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetAlbumArtist", 23, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Composers", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Conductors", 25, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Subtitle", 26, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSubtitle", 27, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Producers", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Publisher", 29, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPublisher", 30, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Writers", 31, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Year", 32, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetYear", 33, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IMusicProperties.runtimeType())
         return schema
     }
@@ -724,11 +753,11 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItemExtraProperties(): IStorageItemExtraProperties {
-        IStorageItemExtraProperties(asRaw())
+        IStorageItemExtraProperties.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IMusicPropertiesVtbl {
@@ -763,12 +792,12 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Genre(): CPointer<Unit> {
+    public unsafe func Genre(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Genre(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func TrackNumber(): UInt32 {
@@ -813,10 +842,10 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Duration(): windows.foundation.TimeSpan {
+    public unsafe func Duration(): foundation.TimeSpan {
         let v = vtbl()
-        var result = windows.foundation.TimeSpan()
-        let hr = v.Duration(asRaw(), CPointer<windows.foundation.TimeSpan>(inout result))
+        var result = foundation.TimeSpan()
+        let hr = v.Duration(asRaw(), CPointer<foundation.TimeSpan>(inout result))
         HRESULT(hr).ok()
         return result
     }
@@ -843,20 +872,20 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Composers(): CPointer<Unit> {
+    public unsafe func Composers(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Composers(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
-    public unsafe func Conductors(): CPointer<Unit> {
+    public unsafe func Conductors(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Conductors(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func Subtitle(): CPointer<UInt16> {
@@ -873,12 +902,12 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Producers(): CPointer<Unit> {
+    public unsafe func Producers(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Producers(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func Publisher(): CPointer<UInt16> {
@@ -895,12 +924,12 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Writers(): CPointer<Unit> {
+    public unsafe func Writers(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Writers(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func Year(): UInt32 {
@@ -918,7 +947,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 @C
 public struct IStorageItemContentPropertiesVtbl {
     public var base_: IStorageItemExtraPropertiesVtbl = IStorageItemExtraPropertiesVtbl()
@@ -929,17 +958,21 @@ public struct IStorageItemContentPropertiesVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class IStorageItemContentProperties <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageItemContentProperties {
-        IStorageItemContentProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemContentProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageItemContentProperties {
+        IStorageItemContentProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemContentProperties {
         IStorageItemContentProperties(raw)
     }
 
@@ -960,13 +993,13 @@ public class IStorageItemContentProperties <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageItemContentProperties> {
-        var descriptor = InterfaceDescriptor<IStorageItemContentProperties>("IStorageItemContentProperties", IStorageItemContentProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IStorageItemContentProperties(raw, ownsReference: true) }, { raw => IStorageItemContentProperties(raw) })
+        var descriptor = InterfaceDescriptor<IStorageItemContentProperties>("IStorageItemContentProperties", IStorageItemContentProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IStorageItemContentProperties.fromAbiTake(raw) }, { raw => IStorageItemContentProperties.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageItemContentProperties.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItemContentProperties", IStorageItemContentProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IStorageItemContentPropertiesVtbl", "IStorageItemContentProperties", "IStorageItemContentProperties_Impl", [InterfaceMethodSchema("GetMusicPropertiesAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetVideoPropertiesAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetImagePropertiesAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetDocumentPropertiesAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItemContentProperties", IStorageItemContentProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IStorageItemContentPropertiesVtbl", "IStorageItemContentProperties", "IStorageItemContentProperties_Impl", [InterfaceMethodSchema("GetMusicPropertiesAsync", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IAsyncOperation<MusicProperties>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetVideoPropertiesAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IAsyncOperation<VideoProperties>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetImagePropertiesAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IAsyncOperation<ImageProperties>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDocumentPropertiesAsync", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IAsyncOperation<DocumentProperties>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItemContentProperties.runtimeType())
         return schema
     }
@@ -988,51 +1021,51 @@ public class IStorageItemContentProperties <: InterfaceWrapperBase & ComInterfac
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItemExtraProperties(): IStorageItemExtraProperties {
-        IStorageItemExtraProperties(asRaw())
+        IStorageItemExtraProperties.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageItemContentPropertiesVtbl {
         readVtbl<IStorageItemContentPropertiesVtbl>(IStorageItemContentPropertiesVtbl())
     }
 
-    public unsafe func GetMusicPropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetMusicPropertiesAsync(): foundation.IAsyncOperation<MusicProperties> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetMusicPropertiesAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return foundation.IAsyncOperation<MusicProperties>.fromAbiTake(result)
     }
 
-    public unsafe func GetVideoPropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetVideoPropertiesAsync(): foundation.IAsyncOperation<VideoProperties> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetVideoPropertiesAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return foundation.IAsyncOperation<VideoProperties>.fromAbiTake(result)
     }
 
-    public unsafe func GetImagePropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetImagePropertiesAsync(): foundation.IAsyncOperation<ImageProperties> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetImagePropertiesAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return foundation.IAsyncOperation<ImageProperties>.fromAbiTake(result)
     }
 
-    public unsafe func GetDocumentPropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetDocumentPropertiesAsync(): foundation.IAsyncOperation<DocumentProperties> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetDocumentPropertiesAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return foundation.IAsyncOperation<DocumentProperties>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 @C
 public struct IStorageItemExtraPropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1051,17 +1084,16 @@ public struct IStorageItemExtraPropertiesVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.RetrievePropertiesAsync(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                    match (impl.RetrievePropertiesAsync(InParam<collections.IIterable<String>>(collections.IIterable<String>.viewOf(arg0)))) {
+                        case Result<foundation.IAsyncOperation<collections.IMap<String, IInspectable>>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<foundation.IAsyncOperation<collections.IMap<String, IInspectable>>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -1074,17 +1106,16 @@ public struct IStorageItemExtraPropertiesVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.SavePropertiesAsync(arg0)) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                    match (impl.SavePropertiesAsync(InParam<collections.IIterable<collections.IKeyValuePair<String, IInspectable>>>(collections.IIterable<collections.IKeyValuePair<String, IInspectable>>.viewOf(arg0)))) {
+                        case Result<foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -1098,16 +1129,15 @@ public struct IStorageItemExtraPropertiesVtbl {
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
                     match (impl.SavePropertiesAsyncOverloadDefault()) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                        case Result<foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -1125,24 +1155,28 @@ public struct IStorageItemExtraPropertiesVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public interface IStorageItemExtraProperties_Impl {
-    public func RetrievePropertiesAsync(propertiesToRetrieve: CPointer<Unit>): windows_core.Result<CPointer<Unit>>
-    public func SavePropertiesAsync(propertiesToSave: CPointer<Unit>): windows_core.Result<windows.foundation.IAsyncAction>
-    public func SavePropertiesAsyncOverloadDefault(): windows_core.Result<windows.foundation.IAsyncAction>
+    public func RetrievePropertiesAsync(propertiesToRetrieve: InParam<collections.IIterable<String>>): windows_core.Result<foundation.IAsyncOperation<collections.IMap<String, IInspectable>>>
+    public func SavePropertiesAsync(propertiesToSave: InParam<collections.IIterable<collections.IKeyValuePair<String, IInspectable>>>): windows_core.Result<foundation.IAsyncAction>
+    public func SavePropertiesAsyncOverloadDefault(): windows_core.Result<foundation.IAsyncAction>
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class IStorageItemExtraProperties <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageItemExtraProperties {
-        IStorageItemExtraProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemExtraProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageItemExtraProperties {
+        IStorageItemExtraProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemExtraProperties {
         IStorageItemExtraProperties(raw)
     }
 
@@ -1158,13 +1192,13 @@ public class IStorageItemExtraProperties <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageItemExtraProperties> {
-        var descriptor = InterfaceDescriptor<IStorageItemExtraProperties>("IStorageItemExtraProperties", IStorageItemExtraProperties.iid(), IInspectable.descriptor(), { raw => IStorageItemExtraProperties(raw, ownsReference: true) }, { raw => IStorageItemExtraProperties(raw) })
+        var descriptor = InterfaceDescriptor<IStorageItemExtraProperties>("IStorageItemExtraProperties", IStorageItemExtraProperties.iid(), IInspectable.descriptor(), { raw => IStorageItemExtraProperties.fromAbiTake(raw) }, { raw => IStorageItemExtraProperties.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageItemExtraProperties.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItemExtraProperties", IStorageItemExtraProperties.iid(), IInspectable.descriptorSchema(), "IStorageItemExtraPropertiesVtbl", "IStorageItemExtraProperties", "IStorageItemExtraProperties_Impl", [InterfaceMethodSchema("RetrievePropertiesAsync", 6, [InterfaceParameterSchema("propertiesToRetrieve", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SavePropertiesAsync", 7, [InterfaceParameterSchema("propertiesToSave", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SavePropertiesAsyncOverloadDefault", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItemExtraProperties", IStorageItemExtraProperties.iid(), IInspectable.descriptorSchema(), "IStorageItemExtraPropertiesVtbl", "IStorageItemExtraProperties", "IStorageItemExtraProperties_Impl", [InterfaceMethodSchema("RetrievePropertiesAsync", 6, [InterfaceParameterSchema("propertiesToRetrieve", "CPointer<Unit>", "InParam<collections.IIterable<String>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IAsyncOperation<collections.IMap<String, IInspectable>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SavePropertiesAsync", 7, [InterfaceParameterSchema("propertiesToSave", "CPointer<Unit>", "InParam<collections.IIterable<collections.IKeyValuePair<String, IInspectable>>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SavePropertiesAsyncOverloadDefault", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItemExtraProperties.runtimeType())
         return schema
     }
@@ -1186,39 +1220,39 @@ public class IStorageItemExtraProperties <: InterfaceWrapperBase & ComInterface 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageItemExtraPropertiesVtbl {
         readVtbl<IStorageItemExtraPropertiesVtbl>(IStorageItemExtraPropertiesVtbl())
     }
 
-    public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: CPointer<Unit>): CPointer<Unit> {
+    public unsafe func RetrievePropertiesAsync(propertiesToRetrieve: collections.IIterable<String>): foundation.IAsyncOperation<collections.IMap<String, IInspectable>> {
         let v = vtbl()
         var result = CPointer<Unit>()
-        let hr = v.RetrievePropertiesAsync(asRaw(), propertiesToRetrieve, CPointer<CPointer<Unit>>(inout result))
+        let hr = v.RetrievePropertiesAsync(asRaw(), propertiesToRetrieve.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return foundation.IAsyncOperation<collections.IMap<String, IInspectable>>.fromAbiTake(result)
     }
 
-    public unsafe func SavePropertiesAsync(propertiesToSave: CPointer<Unit>): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsync(propertiesToSave: collections.IIterable<collections.IKeyValuePair<String, IInspectable>>): foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
-        let hr = v.SavePropertiesAsync(asRaw(), propertiesToSave, CPointer<CPointer<Unit>>(inout result))
+        let hr = v.SavePropertiesAsync(asRaw(), propertiesToSave.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return foundation.IAsyncAction.fromAbiTake(result)
     }
 
-    public unsafe func SavePropertiesAsyncOverloadDefault(): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsyncOverloadDefault(): foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.SavePropertiesAsyncOverloadDefault(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return foundation.IAsyncAction.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 @C
 public struct IThumbnailPropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1229,17 +1263,21 @@ public struct IThumbnailPropertiesVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class IThumbnailProperties <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IThumbnailProperties {
-        IThumbnailProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IThumbnailProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): IThumbnailProperties {
+        IThumbnailProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IThumbnailProperties {
         IThumbnailProperties(raw)
     }
 
@@ -1255,13 +1293,13 @@ public class IThumbnailProperties <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptor(): InterfaceDescriptor<IThumbnailProperties> {
-        var descriptor = InterfaceDescriptor<IThumbnailProperties>("IThumbnailProperties", IThumbnailProperties.iid(), IInspectable.descriptor(), { raw => IThumbnailProperties(raw, ownsReference: true) }, { raw => IThumbnailProperties(raw) })
+        var descriptor = InterfaceDescriptor<IThumbnailProperties>("IThumbnailProperties", IThumbnailProperties.iid(), IInspectable.descriptor(), { raw => IThumbnailProperties.fromAbiTake(raw) }, { raw => IThumbnailProperties.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IThumbnailProperties.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IThumbnailProperties", IThumbnailProperties.iid(), IInspectable.descriptorSchema(), "IThumbnailPropertiesVtbl", "IThumbnailProperties", "IThumbnailProperties_Impl", [InterfaceMethodSchema("OriginalWidth", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("OriginalHeight", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("ReturnedSmallerCachedSize", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Type", 9, [InterfaceParameterSchema("result", "CPointer<ThumbnailType>", "OutRef<ThumbnailType>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IThumbnailProperties", IThumbnailProperties.iid(), IInspectable.descriptorSchema(), "IThumbnailPropertiesVtbl", "IThumbnailProperties", "IThumbnailProperties_Impl", [InterfaceMethodSchema("OriginalWidth", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OriginalHeight", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReturnedSmallerCachedSize", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Type", 9, [InterfaceParameterSchema("result", "CPointer<ThumbnailType>", "OutSlot<ThumbnailType>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IThumbnailProperties.runtimeType())
         return schema
     }
@@ -1283,7 +1321,7 @@ public class IThumbnailProperties <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IThumbnailPropertiesVtbl {
@@ -1323,7 +1361,7 @@ public class IThumbnailProperties <: InterfaceWrapperBase & ComInterface & Runti
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 @C
 public struct IVideoPropertiesVtbl {
     public var base_: IStorageItemExtraPropertiesVtbl = IStorageItemExtraPropertiesVtbl()
@@ -1332,7 +1370,7 @@ public struct IVideoPropertiesVtbl {
     public var Keywords: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Width: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Height: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Duration: CFunc<(CPointer<Unit>, CPointer<windows.foundation.TimeSpan>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Duration: CFunc<(CPointer<Unit>, CPointer<foundation.TimeSpan>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Latitude: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Longitude: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Title: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1351,17 +1389,21 @@ public struct IVideoPropertiesVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IVideoProperties {
-        IVideoProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): IVideoProperties {
+        IVideoProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IVideoProperties {
         IVideoProperties(raw)
     }
 
@@ -1382,13 +1424,13 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<IVideoProperties> {
-        var descriptor = InterfaceDescriptor<IVideoProperties>("IVideoProperties", IVideoProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IVideoProperties(raw, ownsReference: true) }, { raw => IVideoProperties(raw) })
+        var descriptor = InterfaceDescriptor<IVideoProperties>("IVideoProperties", IVideoProperties.iid(), IStorageItemExtraProperties.descriptor(), { raw => IVideoProperties.fromAbiTake(raw) }, { raw => IVideoProperties.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IVideoProperties.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IVideoProperties", IVideoProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IVideoPropertiesVtbl", "IVideoProperties", "IVideoProperties_Impl", [InterfaceMethodSchema("Rating", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetRating", 10, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Keywords", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Width", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Height", 13, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Duration", 14, [InterfaceParameterSchema("result", "CPointer<windows.foundation.TimeSpan>", "OutRef<windows.foundation.TimeSpan>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Latitude", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Longitude", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Title", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetTitle", 18, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Subtitle", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetSubtitle", 20, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Producers", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Publisher", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetPublisher", 23, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Writers", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Year", 25, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetYear", 26, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Bitrate", 27, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Directors", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Orientation", 29, [InterfaceParameterSchema("result", "CPointer<VideoOrientation>", "OutRef<VideoOrientation>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IVideoProperties", IVideoProperties.iid(), IStorageItemExtraProperties.descriptorSchema(), "IVideoPropertiesVtbl", "IVideoProperties", "IVideoProperties_Impl", [InterfaceMethodSchema("Rating", 9, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRating", 10, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Keywords", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Width", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Height", 13, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Duration", 14, [InterfaceParameterSchema("result", "CPointer<foundation.TimeSpan>", "OutSlot<foundation.TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Latitude", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IReference<Float64>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Longitude", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<foundation.IReference<Float64>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Title", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTitle", 18, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Subtitle", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSubtitle", 20, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Producers", 21, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Publisher", 22, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetPublisher", 23, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Writers", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Year", 25, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetYear", 26, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Bitrate", 27, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Directors", 28, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Orientation", 29, [InterfaceParameterSchema("result", "CPointer<VideoOrientation>", "OutSlot<VideoOrientation>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IVideoProperties.runtimeType())
         return schema
     }
@@ -1410,11 +1452,11 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItemExtraProperties(): IStorageItemExtraProperties {
-        IStorageItemExtraProperties(asRaw())
+        IStorageItemExtraProperties.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IVideoPropertiesVtbl {
@@ -1435,12 +1477,12 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Keywords(): CPointer<Unit> {
+    public unsafe func Keywords(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Keywords(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func Width(): UInt32 {
@@ -1459,28 +1501,28 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result
     }
 
-    public unsafe func Duration(): windows.foundation.TimeSpan {
+    public unsafe func Duration(): foundation.TimeSpan {
         let v = vtbl()
-        var result = windows.foundation.TimeSpan()
-        let hr = v.Duration(asRaw(), CPointer<windows.foundation.TimeSpan>(inout result))
+        var result = foundation.TimeSpan()
+        let hr = v.Duration(asRaw(), CPointer<foundation.TimeSpan>(inout result))
         HRESULT(hr).ok()
         return result
     }
 
-    public unsafe func Latitude(): CPointer<Unit> {
+    public unsafe func Latitude(): foundation.IReference<Float64> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Latitude(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return foundation.IReference<Float64>.fromAbiTake(result)
     }
 
-    public unsafe func Longitude(): CPointer<Unit> {
+    public unsafe func Longitude(): foundation.IReference<Float64> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Longitude(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return foundation.IReference<Float64>.fromAbiTake(result)
     }
 
     public unsafe func Title(): CPointer<UInt16> {
@@ -1511,12 +1553,12 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Producers(): CPointer<Unit> {
+    public unsafe func Producers(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Producers(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func Publisher(): CPointer<UInt16> {
@@ -1533,12 +1575,12 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         HRESULT(hr).ok()
     }
 
-    public unsafe func Writers(): CPointer<Unit> {
+    public unsafe func Writers(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Writers(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func Year(): UInt32 {
@@ -1563,12 +1605,12 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         return result
     }
 
-    public unsafe func Directors(): CPointer<Unit> {
+    public unsafe func Directors(): collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Directors(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func Orientation(): VideoOrientation {
@@ -1580,17 +1622,21 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class ImageProperties <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ImageProperties {
-        ImageProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ImageProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): ImageProperties {
+        ImageProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ImageProperties {
         ImageProperties(raw)
     }
 
@@ -1604,11 +1650,11 @@ public class ImageProperties <: InterfaceWrapperBase & ComInterface & windows_in
 
     public static func descriptor(): InterfaceDescriptor<ImageProperties> {
         let ancestors = [IImageProperties.iid(), IStorageItemExtraProperties.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<ImageProperties>("ImageProperties", IImageProperties.iid(), ancestors, { raw => ImageProperties(raw, ownsReference: true) }, { raw => ImageProperties(raw) })
+        return InterfaceDescriptor<ImageProperties>("ImageProperties", IImageProperties.iid(), ancestors, { raw => ImageProperties.fromAbiTake(raw) }, { raw => ImageProperties.viewOf(raw) })
     }
 
     public func defaultInterface(): IImageProperties {
-        IImageProperties(asRaw())
+        IImageProperties.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -1628,7 +1674,7 @@ public class ImageProperties <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIImageProperties(): IImageProperties {
@@ -1647,15 +1693,15 @@ public class ImageProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetRating(value)
     }
 
-    public unsafe func Keywords(): CPointer<Unit> {
+    public unsafe func Keywords(): collections.IVector<String> {
         return defaultInterface().Keywords()
     }
 
-    public unsafe func DateTaken(): windows.foundation.DateTime {
+    public unsafe func DateTaken(): foundation.DateTime {
         return defaultInterface().DateTaken()
     }
 
-    public unsafe func SetDateTaken(value: windows.foundation.DateTime): Unit {
+    public unsafe func SetDateTaken(value: foundation.DateTime): Unit {
         defaultInterface().SetDateTaken(value)
     }
 
@@ -1675,11 +1721,11 @@ public class ImageProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetTitle(value)
     }
 
-    public unsafe func Latitude(): CPointer<Unit> {
+    public unsafe func Latitude(): foundation.IReference<Float64> {
         return defaultInterface().Latitude()
     }
 
-    public unsafe func Longitude(): CPointer<Unit> {
+    public unsafe func Longitude(): foundation.IReference<Float64> {
         return defaultInterface().Longitude()
     }
 
@@ -1703,34 +1749,38 @@ public class ImageProperties <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Orientation()
     }
 
-    public unsafe func PeopleNames(): CPointer<Unit> {
+    public unsafe func PeopleNames(): collections.IVectorView<String> {
         return defaultInterface().PeopleNames()
     }
 
-    public unsafe func RetrievePropertiesAsync(operation: CPointer<Unit>): CPointer<Unit> {
+    public unsafe func RetrievePropertiesAsync(operation: collections.IIterable<String>): foundation.IAsyncOperation<collections.IMap<String, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsync(operation: CPointer<Unit>): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsync(operation: collections.IIterable<collections.IKeyValuePair<String, IInspectable>>): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsyncOverloadDefault(): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsyncOverloadDefault(): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsyncOverloadDefault()
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): MusicProperties {
-        MusicProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MusicProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): MusicProperties {
+        MusicProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MusicProperties {
         MusicProperties(raw)
     }
 
@@ -1744,11 +1794,11 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
 
     public static func descriptor(): InterfaceDescriptor<MusicProperties> {
         let ancestors = [IMusicProperties.iid(), IStorageItemExtraProperties.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<MusicProperties>("MusicProperties", IMusicProperties.iid(), ancestors, { raw => MusicProperties(raw, ownsReference: true) }, { raw => MusicProperties(raw) })
+        return InterfaceDescriptor<MusicProperties>("MusicProperties", IMusicProperties.iid(), ancestors, { raw => MusicProperties.fromAbiTake(raw) }, { raw => MusicProperties.viewOf(raw) })
     }
 
     public func defaultInterface(): IMusicProperties {
-        IMusicProperties(asRaw())
+        IMusicProperties.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -1768,7 +1818,7 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIMusicProperties(): IMusicProperties {
@@ -1795,7 +1845,7 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetArtist(value)
     }
 
-    public unsafe func Genre(): CPointer<Unit> {
+    public unsafe func Genre(): collections.IVector<String> {
         return defaultInterface().Genre()
     }
 
@@ -1823,7 +1873,7 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetRating(value)
     }
 
-    public unsafe func Duration(): windows.foundation.TimeSpan {
+    public unsafe func Duration(): foundation.TimeSpan {
         return defaultInterface().Duration()
     }
 
@@ -1839,11 +1889,11 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetAlbumArtist(value)
     }
 
-    public unsafe func Composers(): CPointer<Unit> {
+    public unsafe func Composers(): collections.IVector<String> {
         return defaultInterface().Composers()
     }
 
-    public unsafe func Conductors(): CPointer<Unit> {
+    public unsafe func Conductors(): collections.IVector<String> {
         return defaultInterface().Conductors()
     }
 
@@ -1855,7 +1905,7 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetSubtitle(value)
     }
 
-    public unsafe func Producers(): CPointer<Unit> {
+    public unsafe func Producers(): collections.IVector<String> {
         return defaultInterface().Producers()
     }
 
@@ -1867,7 +1917,7 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetPublisher(value)
     }
 
-    public unsafe func Writers(): CPointer<Unit> {
+    public unsafe func Writers(): collections.IVector<String> {
         return defaultInterface().Writers()
     }
 
@@ -1879,39 +1929,29 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetYear(value)
     }
 
-    public unsafe func RetrievePropertiesAsync(operation: CPointer<Unit>): CPointer<Unit> {
+    public unsafe func RetrievePropertiesAsync(operation: collections.IIterable<String>): foundation.IAsyncOperation<collections.IMap<String, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsync(operation: CPointer<Unit>): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsync(operation: collections.IIterable<collections.IKeyValuePair<String, IInspectable>>): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsyncOverloadDefault(): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsyncOverloadDefault(): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsyncOverloadDefault()
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
+@C
 public struct PhotoOrientation {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Unspecified = PhotoOrientation(value: 0)
-    public static let Normal = PhotoOrientation(value: 1)
-    public static let FlipHorizontal = PhotoOrientation(value: 2)
-    public static let Rotate180 = PhotoOrientation(value: 3)
-    public static let FlipVertical = PhotoOrientation(value: 4)
-    public static let Transpose = PhotoOrientation(value: 5)
-    public static let Rotate270 = PhotoOrientation(value: 6)
-    public static let Transverse = PhotoOrientation(value: 7)
-    public static let Rotate90 = PhotoOrientation(value: 8)
 
     public operator func ==(other: PhotoOrientation): Bool {
         return this.value == other.value
@@ -1921,23 +1961,43 @@ public struct PhotoOrientation {
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
-public struct PropertyPrefetchOptions {
-    public let value: UInt32
+@When[feat_windows_storage_file_properties == "on"]
+public let Unspecified: PhotoOrientation = PhotoOrientation(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[feat_windows_storage_file_properties == "on"]
+public let Normal: PhotoOrientation = PhotoOrientation(1)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let FlipHorizontal: PhotoOrientation = PhotoOrientation(2)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let Rotate180: PhotoOrientation = PhotoOrientation(3)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let FlipVertical: PhotoOrientation = PhotoOrientation(4)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let Transpose: PhotoOrientation = PhotoOrientation(5)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let Rotate270: PhotoOrientation = PhotoOrientation(6)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let Transverse: PhotoOrientation = PhotoOrientation(7)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let Rotate90: PhotoOrientation = PhotoOrientation(8)
+
+@When[feat_windows_storage_file_properties == "on"]
+@C
+public struct PropertyPrefetchOptions {
+    public var value: UInt32 = 0
+
+    public init() {}
 
     public init(value: UInt32) {
         this.value = value
     }
-    public static let None = PropertyPrefetchOptions(value: 0)
-    public static let MusicProperties = PropertyPrefetchOptions(value: 1)
-    public static let VideoProperties = PropertyPrefetchOptions(value: 2)
-    public static let ImageProperties = PropertyPrefetchOptions(value: 4)
-    public static let DocumentProperties = PropertyPrefetchOptions(value: 8)
-    public static let BasicProperties = PropertyPrefetchOptions(value: 16)
 
     public operator func ==(other: PropertyPrefetchOptions): Bool {
         return this.value == other.value
@@ -1951,27 +2011,49 @@ public struct PropertyPrefetchOptions {
     }
 
     public operator func |(other: PropertyPrefetchOptions): PropertyPrefetchOptions {
-        return PropertyPrefetchOptions(value: this.value | other.value)
+        return PropertyPrefetchOptions(this.value | other.value)
     }
     public operator func &(other: PropertyPrefetchOptions): PropertyPrefetchOptions {
-        return PropertyPrefetchOptions(value: this.value & other.value)
+        return PropertyPrefetchOptions(this.value & other.value)
     }
-    public operator func ~(): PropertyPrefetchOptions {
-        return PropertyPrefetchOptions(value: ~this.value)
+    public operator func !(): PropertyPrefetchOptions {
+        return PropertyPrefetchOptions(!this.value)
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
+public let None: PropertyPrefetchOptions = PropertyPrefetchOptions(0)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let MusicProperties: PropertyPrefetchOptions = PropertyPrefetchOptions(1)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let VideoProperties: PropertyPrefetchOptions = PropertyPrefetchOptions(2)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let ImageProperties: PropertyPrefetchOptions = PropertyPrefetchOptions(4)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let DocumentProperties: PropertyPrefetchOptions = PropertyPrefetchOptions(8)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let BasicProperties: PropertyPrefetchOptions = PropertyPrefetchOptions(16)
+
+@When[feat_windows_storage_file_properties == "on"]
 public class StorageItemContentProperties <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageItemContentProperties {
-        StorageItemContentProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageItemContentProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageItemContentProperties {
+        StorageItemContentProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageItemContentProperties {
         StorageItemContentProperties(raw)
     }
 
@@ -1985,11 +2067,11 @@ public class StorageItemContentProperties <: InterfaceWrapperBase & ComInterface
 
     public static func descriptor(): InterfaceDescriptor<StorageItemContentProperties> {
         let ancestors = [IStorageItemContentProperties.iid(), IStorageItemExtraProperties.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageItemContentProperties>("StorageItemContentProperties", IStorageItemContentProperties.iid(), ancestors, { raw => StorageItemContentProperties(raw, ownsReference: true) }, { raw => StorageItemContentProperties(raw) })
+        return InterfaceDescriptor<StorageItemContentProperties>("StorageItemContentProperties", IStorageItemContentProperties.iid(), ancestors, { raw => StorageItemContentProperties.fromAbiTake(raw) }, { raw => StorageItemContentProperties.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageItemContentProperties {
-        IStorageItemContentProperties(asRaw())
+        IStorageItemContentProperties.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -2009,7 +2091,7 @@ public class StorageItemContentProperties <: InterfaceWrapperBase & ComInterface
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItemContentProperties(): IStorageItemContentProperties {
@@ -2020,51 +2102,55 @@ public class StorageItemContentProperties <: InterfaceWrapperBase & ComInterface
         IStorageItemExtraProperties(asRaw())
     }
 
-    public unsafe func GetMusicPropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetMusicPropertiesAsync(): foundation.IAsyncOperation<MusicProperties> {
         return defaultInterface().GetMusicPropertiesAsync()
     }
 
-    public unsafe func GetVideoPropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetVideoPropertiesAsync(): foundation.IAsyncOperation<VideoProperties> {
         return defaultInterface().GetVideoPropertiesAsync()
     }
 
-    public unsafe func GetImagePropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetImagePropertiesAsync(): foundation.IAsyncOperation<ImageProperties> {
         return defaultInterface().GetImagePropertiesAsync()
     }
 
-    public unsafe func GetDocumentPropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetDocumentPropertiesAsync(): foundation.IAsyncOperation<DocumentProperties> {
         return defaultInterface().GetDocumentPropertiesAsync()
     }
 
-    public unsafe func RetrievePropertiesAsync(operation: CPointer<Unit>): CPointer<Unit> {
+    public unsafe func RetrievePropertiesAsync(operation: collections.IIterable<String>): foundation.IAsyncOperation<collections.IMap<String, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsync(operation: CPointer<Unit>): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsync(operation: collections.IIterable<collections.IKeyValuePair<String, IInspectable>>): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsyncOverloadDefault(): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsyncOverloadDefault(): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsyncOverloadDefault()
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
 public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageItemThumbnail {
-        StorageItemThumbnail(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageItemThumbnail {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageItemThumbnail {
+        StorageItemThumbnail(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageItemThumbnail {
         StorageItemThumbnail(raw)
     }
 
     public static func iid(): GUID {
-        windows.storage.streams.IRandomAccessStreamWithContentType.iid()
+        streams.IRandomAccessStreamWithContentType.iid()
     }
 
     public static func runtimeName(): String {
@@ -2072,12 +2158,12 @@ public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windo
     }
 
     public static func descriptor(): InterfaceDescriptor<StorageItemThumbnail> {
-        let ancestors = [windows.storage.streams.IRandomAccessStreamWithContentType.iid(), windows.storage.streams.IRandomAccessStream.iid(), windows.foundation.IClosable.iid(), windows.storage.streams.IInputStream.iid(), windows.storage.streams.IOutputStream.iid(), windows.storage.streams.IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageItemThumbnail>("StorageItemThumbnail", windows.storage.streams.IRandomAccessStreamWithContentType.iid(), ancestors, { raw => StorageItemThumbnail(raw, ownsReference: true) }, { raw => StorageItemThumbnail(raw) })
+        let ancestors = [streams.IRandomAccessStreamWithContentType.iid(), streams.IRandomAccessStream.iid(), foundation.IClosable.iid(), streams.IInputStream.iid(), streams.IOutputStream.iid(), streams.IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<StorageItemThumbnail>("StorageItemThumbnail", streams.IRandomAccessStreamWithContentType.iid(), ancestors, { raw => StorageItemThumbnail.fromAbiTake(raw) }, { raw => StorageItemThumbnail.viewOf(raw) })
     }
 
-    public func defaultInterface(): windows.storage.streams.IRandomAccessStreamWithContentType {
-        windows.storage.streams.IRandomAccessStreamWithContentType(asRaw())
+    public func defaultInterface(): streams.IRandomAccessStreamWithContentType {
+        streams.IRandomAccessStreamWithContentType.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -2089,7 +2175,7 @@ public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windo
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.Storage.FileProperties.StorageItemThumbnail", StorageItemThumbnail.signature(), windows.storage.streams.IRandomAccessStreamWithContentType.iid())
+        RuntimeTypeContract("Windows.Storage.FileProperties.StorageItemThumbnail", StorageItemThumbnail.signature(), streams.IRandomAccessStreamWithContentType.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -2097,31 +2183,31 @@ public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windo
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIRandomAccessStreamWithContentType(): windows.storage.streams.IRandomAccessStreamWithContentType {
-        windows.storage.streams.IRandomAccessStreamWithContentType(asRaw())
+    public func asIRandomAccessStreamWithContentType(): streams.IRandomAccessStreamWithContentType {
+        streams.IRandomAccessStreamWithContentType(asRaw())
     }
 
-    public func asIRandomAccessStream(): windows.storage.streams.IRandomAccessStream {
-        windows.storage.streams.IRandomAccessStream(asRaw())
+    public func asIRandomAccessStream(): streams.IRandomAccessStream {
+        streams.IRandomAccessStream(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): foundation.IClosable {
+        foundation.IClosable(asRaw())
     }
 
-    public func asIInputStream(): windows.storage.streams.IInputStream {
-        windows.storage.streams.IInputStream(asRaw())
+    public func asIInputStream(): streams.IInputStream {
+        streams.IInputStream(asRaw())
     }
 
-    public func asIOutputStream(): windows.storage.streams.IOutputStream {
-        windows.storage.streams.IOutputStream(asRaw())
+    public func asIOutputStream(): streams.IOutputStream {
+        streams.IOutputStream(asRaw())
     }
 
-    public func asIContentTypeProvider(): windows.storage.streams.IContentTypeProvider {
-        windows.storage.streams.IContentTypeProvider(asRaw())
+    public func asIContentTypeProvider(): streams.IContentTypeProvider {
+        streams.IContentTypeProvider(asRaw())
     }
 
     public unsafe func Size(): UInt64 {
@@ -2132,11 +2218,11 @@ public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windo
         asIRandomAccessStream().SetSize(value)
     }
 
-    public unsafe func GetInputStreamAt(stream: UInt64): windows.storage.streams.IInputStream {
+    public unsafe func GetInputStreamAt(stream: UInt64): streams.IInputStream {
         return asIRandomAccessStream().GetInputStreamAt(stream)
     }
 
-    public unsafe func GetOutputStreamAt(stream: UInt64): windows.storage.streams.IOutputStream {
+    public unsafe func GetOutputStreamAt(stream: UInt64): streams.IOutputStream {
         return asIRandomAccessStream().GetOutputStreamAt(stream)
     }
 
@@ -2148,7 +2234,7 @@ public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windo
         asIRandomAccessStream().Seek(position)
     }
 
-    public unsafe func CloneStream(): windows.storage.streams.IRandomAccessStream {
+    public unsafe func CloneStream(): streams.IRandomAccessStream {
         return asIRandomAccessStream().CloneStream()
     }
 
@@ -2164,15 +2250,15 @@ public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windo
         asIClosable().Close()
     }
 
-    public unsafe func ReadAsync(operation: windows.storage.streams.IBuffer, buffer: UInt32, count: windows.storage.streams.InputStreamOptions): CPointer<Unit> {
+    public unsafe func ReadAsync(operation: streams.IBuffer, buffer: UInt32, count: streams.InputStreamOptions): foundation.IAsyncOperationWithProgress<streams.IBuffer, UInt32> {
         return asIInputStream().ReadAsync(operation, buffer, count)
     }
 
-    public unsafe func WriteAsync(operation: windows.storage.streams.IBuffer): CPointer<Unit> {
+    public unsafe func WriteAsync(operation: streams.IBuffer): foundation.IAsyncOperationWithProgress<UInt32, UInt32> {
         return asIOutputStream().WriteAsync(operation)
     }
 
-    public unsafe func FlushAsync(): CPointer<Unit> {
+    public unsafe func FlushAsync(): foundation.IAsyncOperation<Bool> {
         return asIOutputStream().FlushAsync()
     }
 
@@ -2181,23 +2267,16 @@ public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windo
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
+@C
 public struct ThumbnailMode {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let PicturesView = ThumbnailMode(value: 0)
-    public static let VideosView = ThumbnailMode(value: 1)
-    public static let MusicView = ThumbnailMode(value: 2)
-    public static let DocumentsView = ThumbnailMode(value: 3)
-    public static let ListView = ThumbnailMode(value: 4)
-    public static let SingleItem = ThumbnailMode(value: 5)
 
     public operator func ==(other: ThumbnailMode): Bool {
         return this.value == other.value
@@ -2207,21 +2286,34 @@ public struct ThumbnailMode {
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
-public struct ThumbnailOptions {
-    public let value: UInt32
+@When[feat_windows_storage_file_properties == "on"]
+public let PicturesView: ThumbnailMode = ThumbnailMode(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[feat_windows_storage_file_properties == "on"]
+public let VideosView: ThumbnailMode = ThumbnailMode(1)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let MusicView: ThumbnailMode = ThumbnailMode(2)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let DocumentsView: ThumbnailMode = ThumbnailMode(3)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let ListView: ThumbnailMode = ThumbnailMode(4)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let SingleItem: ThumbnailMode = ThumbnailMode(5)
+
+@When[feat_windows_storage_file_properties == "on"]
+@C
+public struct ThumbnailOptions {
+    public var value: UInt32 = 0
+
+    public init() {}
 
     public init(value: UInt32) {
         this.value = value
     }
-    public static let None = ThumbnailOptions(value: 0)
-    public static let ReturnOnlyIfCached = ThumbnailOptions(value: 1)
-    public static let ResizeThumbnail = ThumbnailOptions(value: 2)
-    public static let UseCurrentScale = ThumbnailOptions(value: 4)
 
     public operator func ==(other: ThumbnailOptions): Bool {
         return this.value == other.value
@@ -2235,29 +2327,38 @@ public struct ThumbnailOptions {
     }
 
     public operator func |(other: ThumbnailOptions): ThumbnailOptions {
-        return ThumbnailOptions(value: this.value | other.value)
+        return ThumbnailOptions(this.value | other.value)
     }
     public operator func &(other: ThumbnailOptions): ThumbnailOptions {
-        return ThumbnailOptions(value: this.value & other.value)
+        return ThumbnailOptions(this.value & other.value)
     }
-    public operator func ~(): ThumbnailOptions {
-        return ThumbnailOptions(value: ~this.value)
+    public operator func !(): ThumbnailOptions {
+        return ThumbnailOptions(!this.value)
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
-public struct ThumbnailType {
-    public let value: Int32
+@When[feat_windows_storage_file_properties == "on"]
+public let None: ThumbnailOptions = ThumbnailOptions(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[feat_windows_storage_file_properties == "on"]
+public let ReturnOnlyIfCached: ThumbnailOptions = ThumbnailOptions(1)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let ResizeThumbnail: ThumbnailOptions = ThumbnailOptions(2)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let UseCurrentScale: ThumbnailOptions = ThumbnailOptions(4)
+
+@When[feat_windows_storage_file_properties == "on"]
+@C
+public struct ThumbnailType {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Image = ThumbnailType(value: 0)
-    public static let Icon = ThumbnailType(value: 1)
 
     public operator func ==(other: ThumbnailType): Bool {
         return this.value == other.value
@@ -2267,21 +2368,22 @@ public struct ThumbnailType {
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
-public struct VideoOrientation {
-    public let value: Int32
+@When[feat_windows_storage_file_properties == "on"]
+public let Image: ThumbnailType = ThumbnailType(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[feat_windows_storage_file_properties == "on"]
+public let Icon: ThumbnailType = ThumbnailType(1)
+
+@When[feat_windows_storage_file_properties == "on"]
+@C
+public struct VideoOrientation {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Normal = VideoOrientation(value: 0)
-    public static let Rotate90 = VideoOrientation(value: 90)
-    public static let Rotate180 = VideoOrientation(value: 180)
-    public static let Rotate270 = VideoOrientation(value: 270)
 
     public operator func ==(other: VideoOrientation): Bool {
         return this.value == other.value
@@ -2291,17 +2393,33 @@ public struct VideoOrientation {
     }
 }
 
-@When[feature == "feat_windows_storage_file_properties"]
+@When[feat_windows_storage_file_properties == "on"]
+public let Normal: VideoOrientation = VideoOrientation(0)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let Rotate90: VideoOrientation = VideoOrientation(90)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let Rotate180: VideoOrientation = VideoOrientation(180)
+
+@When[feat_windows_storage_file_properties == "on"]
+public let Rotate270: VideoOrientation = VideoOrientation(270)
+
+@When[feat_windows_storage_file_properties == "on"]
 public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): VideoProperties {
-        VideoProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VideoProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): VideoProperties {
+        VideoProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): VideoProperties {
         VideoProperties(raw)
     }
 
@@ -2315,11 +2433,11 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
 
     public static func descriptor(): InterfaceDescriptor<VideoProperties> {
         let ancestors = [IVideoProperties.iid(), IStorageItemExtraProperties.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<VideoProperties>("VideoProperties", IVideoProperties.iid(), ancestors, { raw => VideoProperties(raw, ownsReference: true) }, { raw => VideoProperties(raw) })
+        return InterfaceDescriptor<VideoProperties>("VideoProperties", IVideoProperties.iid(), ancestors, { raw => VideoProperties.fromAbiTake(raw) }, { raw => VideoProperties.viewOf(raw) })
     }
 
     public func defaultInterface(): IVideoProperties {
-        IVideoProperties(asRaw())
+        IVideoProperties.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -2339,7 +2457,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIVideoProperties(): IVideoProperties {
@@ -2358,7 +2476,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetRating(value)
     }
 
-    public unsafe func Keywords(): CPointer<Unit> {
+    public unsafe func Keywords(): collections.IVector<String> {
         return defaultInterface().Keywords()
     }
 
@@ -2370,15 +2488,15 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Height()
     }
 
-    public unsafe func Duration(): windows.foundation.TimeSpan {
+    public unsafe func Duration(): foundation.TimeSpan {
         return defaultInterface().Duration()
     }
 
-    public unsafe func Latitude(): CPointer<Unit> {
+    public unsafe func Latitude(): foundation.IReference<Float64> {
         return defaultInterface().Latitude()
     }
 
-    public unsafe func Longitude(): CPointer<Unit> {
+    public unsafe func Longitude(): foundation.IReference<Float64> {
         return defaultInterface().Longitude()
     }
 
@@ -2398,7 +2516,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetSubtitle(value)
     }
 
-    public unsafe func Producers(): CPointer<Unit> {
+    public unsafe func Producers(): collections.IVector<String> {
         return defaultInterface().Producers()
     }
 
@@ -2410,7 +2528,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         defaultInterface().SetPublisher(value)
     }
 
-    public unsafe func Writers(): CPointer<Unit> {
+    public unsafe func Writers(): collections.IVector<String> {
         return defaultInterface().Writers()
     }
 
@@ -2426,7 +2544,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Bitrate()
     }
 
-    public unsafe func Directors(): CPointer<Unit> {
+    public unsafe func Directors(): collections.IVector<String> {
         return defaultInterface().Directors()
     }
 
@@ -2434,15 +2552,15 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         return defaultInterface().Orientation()
     }
 
-    public unsafe func RetrievePropertiesAsync(operation: CPointer<Unit>): CPointer<Unit> {
+    public unsafe func RetrievePropertiesAsync(operation: collections.IIterable<String>): foundation.IAsyncOperation<collections.IMap<String, IInspectable>> {
         return asIStorageItemExtraProperties().RetrievePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsync(operation: CPointer<Unit>): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsync(operation: collections.IIterable<collections.IKeyValuePair<String, IInspectable>>): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsync(operation)
     }
 
-    public unsafe func SavePropertiesAsyncOverloadDefault(): windows.foundation.IAsyncAction {
+    public unsafe func SavePropertiesAsyncOverloadDefault(): foundation.IAsyncAction {
         return asIStorageItemExtraProperties().SavePropertiesAsyncOverloadDefault()
     }
 }

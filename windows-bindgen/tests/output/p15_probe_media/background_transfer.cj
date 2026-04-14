@@ -82,7 +82,7 @@ public class BackgroundTransferGroup <: InterfaceWrapperBase & ComInterface & wi
         BackgroundTransferGroup(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BackgroundTransferGroup {
+    public static func viewOf(raw: CPointer<Unit>): BackgroundTransferGroup {
         BackgroundTransferGroup(raw)
     }
 
@@ -183,7 +183,7 @@ public class BackgroundTransferRangesDownloadedEventArgs <: InterfaceWrapperBase
         BackgroundTransferRangesDownloadedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BackgroundTransferRangesDownloadedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): BackgroundTransferRangesDownloadedEventArgs {
         BackgroundTransferRangesDownloadedEventArgs(raw)
     }
 
@@ -285,7 +285,7 @@ public class DownloadOperation <: InterfaceWrapperBase & ComInterface & windows_
         DownloadOperation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DownloadOperation {
+    public static func viewOf(raw: CPointer<Unit>): DownloadOperation {
         DownloadOperation(raw)
     }
 
@@ -427,7 +427,7 @@ public class IBackgroundTransferGroup <: InterfaceWrapperBase & ComInterface & R
         IBackgroundTransferGroup(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBackgroundTransferGroup {
+    public static func viewOf(raw: CPointer<Unit>): IBackgroundTransferGroup {
         IBackgroundTransferGroup(raw)
     }
 
@@ -702,7 +702,7 @@ public class IBackgroundTransferOperation <: InterfaceWrapperBase & ComInterface
         IBackgroundTransferOperation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBackgroundTransferOperation {
+    public static func viewOf(raw: CPointer<Unit>): IBackgroundTransferOperation {
         IBackgroundTransferOperation(raw)
     }
 
@@ -885,7 +885,7 @@ public class IBackgroundTransferOperationPriority <: InterfaceWrapperBase & ComI
         IBackgroundTransferOperationPriority(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBackgroundTransferOperationPriority {
+    public static func viewOf(raw: CPointer<Unit>): IBackgroundTransferOperationPriority {
         IBackgroundTransferOperationPriority(raw)
     }
 
@@ -971,7 +971,7 @@ public class IBackgroundTransferRangesDownloadedEventArgs <: InterfaceWrapperBas
         IBackgroundTransferRangesDownloadedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBackgroundTransferRangesDownloadedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IBackgroundTransferRangesDownloadedEventArgs {
         IBackgroundTransferRangesDownloadedEventArgs(raw)
     }
 
@@ -1070,7 +1070,7 @@ public class IDownloadOperation <: InterfaceWrapperBase & ComInterface & Runtime
         IDownloadOperation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDownloadOperation {
+    public static func viewOf(raw: CPointer<Unit>): IDownloadOperation {
         IDownloadOperation(raw)
     }
 
@@ -1193,7 +1193,7 @@ public class IDownloadOperation2 <: InterfaceWrapperBase & ComInterface & Runtim
         IDownloadOperation2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDownloadOperation2 {
+    public static func viewOf(raw: CPointer<Unit>): IDownloadOperation2 {
         IDownloadOperation2(raw)
     }
 
@@ -1279,7 +1279,7 @@ public class IDownloadOperation3 <: InterfaceWrapperBase & ComInterface & Runtim
         IDownloadOperation3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDownloadOperation3 {
+    public static func viewOf(raw: CPointer<Unit>): IDownloadOperation3 {
         IDownloadOperation3(raw)
     }
 
@@ -1415,7 +1415,7 @@ public class IDownloadOperation4 <: InterfaceWrapperBase & ComInterface & Runtim
         IDownloadOperation4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDownloadOperation4 {
+    public static func viewOf(raw: CPointer<Unit>): IDownloadOperation4 {
         IDownloadOperation4(raw)
     }
 
@@ -1492,7 +1492,7 @@ public class IDownloadOperation5 <: InterfaceWrapperBase & ComInterface & Runtim
         IDownloadOperation5(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDownloadOperation5 {
+    public static func viewOf(raw: CPointer<Unit>): IDownloadOperation5 {
         IDownloadOperation5(raw)
     }
 
@@ -1577,7 +1577,7 @@ public class IResponseInformation <: InterfaceWrapperBase & ComInterface & Runti
         IResponseInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IResponseInformation {
+    public static func viewOf(raw: CPointer<Unit>): IResponseInformation {
         IResponseInformation(raw)
     }
 
@@ -1671,7 +1671,7 @@ public class ResponseInformation <: InterfaceWrapperBase & ComInterface & window
         ResponseInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ResponseInformation {
+    public static func viewOf(raw: CPointer<Unit>): ResponseInformation {
         ResponseInformation(raw)
     }
 

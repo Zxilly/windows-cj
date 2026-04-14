@@ -4,7 +4,8 @@
   description = "Smoke test for windows_implement"
   output-type = "executable"
   cjc-version = "1.1.0"
+  compile-option = "-loleaut32 -lwindowsapp"
 
 [dependencies]
-  windows_implement = { path = "E:/Project/CS_Project/2026/ling/windows-cj/windows-implement" }
-  windows_interface = { path = "E:/Project/CS_Project/2026/ling/windows-cj/windows-interface" }
+  windows_implement = { path = "D:/Upstream/wincj/windows-cj/windows-implement" }
+  windows_interface = { path = "D:/Upstream/wincj/windows-cj/windows-interface" }

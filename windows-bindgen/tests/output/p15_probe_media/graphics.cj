@@ -43,7 +43,7 @@ public class IGeometrySource2D <: InterfaceWrapperBase & ComInterface & RuntimeN
         IGeometrySource2D(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeometrySource2D {
+    public static func viewOf(raw: CPointer<Unit>): IGeometrySource2D {
         IGeometrySource2D(raw)
     }
 

@@ -55,7 +55,7 @@ func comQueryInterfaceRaw<T, U>(raw: CPointer<T>, iid: GUID): Option<CPointer<U>
 }
 
 @When[os == "Windows"]
-class ComPtr<T> <: Resource where T <: CType {
+class ComHandle<T> <: Resource where T <: CType {
     private var raw: CPointer<T>
     private var closed: Bool = false
 
@@ -66,8 +66,8 @@ class ComPtr<T> <: Resource where T <: CType {
         }
     }
 
-    public static func attach(raw: CPointer<T>): ComPtr<T> {
-        ComPtr<T>(raw)
+    public static func fromAbiTake(raw: CPointer<T>): ComHandle<T> {
+        ComHandle<T>(raw)
     }
 
     public func asRaw(): CPointer<T> {
@@ -88,33 +88,33 @@ class ComPtr<T> <: Resource where T <: CType {
         comAddRefRaw(raw)
     }
 
-    public func clonePtr(): ComPtr<T> {
+    public func retain(): ComHandle<T> {
         if (closed) {
-            throw Exception("ComPtr.clonePtr called on a closed ComPtr")
+            throw Exception("ComHandle.retain called on a closed handle")
         }
-        ComPtr<T>(raw, addRef: true)
+        ComHandle<T>(raw, addRef: true)
     }
 
-    public func clone(): ComPtr<T> {
-        clonePtr()
+    public func clone(): ComHandle<T> {
+        retain()
     }
 
-    public unsafe func cast<U>(iid: GUID): Option<ComPtr<U>> where U <: CType {
+    public unsafe func cast<U>(iid: GUID): Option<ComHandle<U>> where U <: CType {
         match (comQueryInterfaceRaw<T, U>(asRaw(), iid)) {
-            case Some(result) => Some(ComPtr<U>.attach(result))
+            case Some(result) => Some(ComHandle<U>.fromAbiTake(result))
             case None => None
         }
     }
 
-    public func detach(): CPointer<T> {
+    public func intoAbi(): CPointer<T> {
         if (closed) {
             return CPointer<T>()
         }
 
-        let detached = raw
+        let released = raw
         raw = CPointer<T>()
         closed = true
-        detached
+        released
     }
 
     public func isClosed(): Bool {
@@ -129,7 +129,7 @@ class ComPtr<T> <: Resource where T <: CType {
         }
     }
 
-    public operator func ==(other: ComPtr<T>): Bool {
+    public operator func ==(other: ComHandle<T>): Bool {
         let leftRaw = asRaw()
         let rightRaw = other.asRaw()
         if (leftRaw.isNull() || rightRaw.isNull()) {

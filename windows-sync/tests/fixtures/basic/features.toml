@@ -1,8 +1,7 @@
-[features.feat_kernel32]
-cfg = "feat_kernel32"
+[features.KERNEL32]
+cfg = "KERNEL32"
 deps = []
 
-[features.feat_user32]
-cfg = "feat_user32"
-deps = ["feat_kernel32"]
-
+[features.USER32]
+cfg = "USER32"
+deps = ["KERNEL32"]

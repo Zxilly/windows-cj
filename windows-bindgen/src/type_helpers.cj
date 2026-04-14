@@ -56,43 +56,109 @@ func resolveTypeName(tn: TypeName): String {
 
     // Well-known types from System namespace
     if (ns == "System") {
-        if (name == "Guid") { return "GUID" }
-        if (name == "Void") { return "Unit" }
-        if (name == "Boolean") { return "Bool" }
-        if (name == "SByte") { return "Int8" }
-        if (name == "Byte") { return "UInt8" }
-        if (name == "Int16") { return "Int16" }
-        if (name == "UInt16") { return "UInt16" }
-        if (name == "Int32") { return "Int32" }
-        if (name == "UInt32") { return "UInt32" }
-        if (name == "Int64") { return "Int64" }
-        if (name == "UInt64") { return "UInt64" }
-        if (name == "Single") { return "Float32" }
-        if (name == "Double") { return "Float64" }
-        if (name == "IntPtr") { return "IntNative" }
-        if (name == "UIntPtr") { return "UIntNative" }
-        if (name == "String") { return "CPointer<UInt16>" }
-        if (name == "Object") { return "CPointer<Unit>" }
-        if (name == "Type") { return "CPointer<Unit>" }
+        if (name == "Guid") {
+            return "GUID"
+        }
+        if (name == "Void") {
+            return "Unit"
+        }
+        if (name == "Boolean") {
+            return "Bool"
+        }
+        if (name == "SByte") {
+            return "Int8"
+        }
+        if (name == "Byte") {
+            return "UInt8"
+        }
+        if (name == "Int16") {
+            return "Int16"
+        }
+        if (name == "UInt16") {
+            return "UInt16"
+        }
+        if (name == "Int32") {
+            return "Int32"
+        }
+        if (name == "UInt32") {
+            return "UInt32"
+        }
+        if (name == "Int64") {
+            return "Int64"
+        }
+        if (name == "UInt64") {
+            return "UInt64"
+        }
+        if (name == "Single") {
+            return "Float32"
+        }
+        if (name == "Double") {
+            return "Float64"
+        }
+        if (name == "IntPtr") {
+            return "IntNative"
+        }
+        if (name == "UIntPtr") {
+            return "UIntNative"
+        }
+        if (name == "String") {
+            return "CPointer<UInt16>"
+        }
+        if (name == "Object") {
+            return "CPointer<Unit>"
+        }
+        if (name == "Type") {
+            return "CPointer<Unit>"
+        }
     }
 
     // Well-known Windows types
     if (ns == "Windows.Win32.Foundation") {
-        if (name == "BOOL") { return "Int32" }
-        if (name == "HANDLE") { return "CPointer<Unit>" }
-        if (name == "HWND") { return "CPointer<Unit>" }
-        if (name == "HINSTANCE") { return "CPointer<Unit>" }
-        if (name == "HMODULE") { return "CPointer<Unit>" }
-        if (name == "HRESULT") { return "Int32" }
-        if (name == "PSTR") { return "CPointer<UInt8>" }
-        if (name == "PWSTR") { return "CPointer<UInt16>" }
-        if (name == "PCSTR") { return "CPointer<UInt8>" }
-        if (name == "PCWSTR") { return "CPointer<UInt16>" }
-        if (name == "BSTR") { return "CPointer<UInt16>" }
-        if (name == "NTSTATUS") { return "Int32" }
-        if (name == "LRESULT") { return "IntNative" }
-        if (name == "WPARAM") { return "UIntNative" }
-        if (name == "LPARAM") { return "IntNative" }
+        if (name == "BOOL") {
+            return "Int32"
+        }
+        if (name == "HANDLE") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HWND") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HINSTANCE") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HMODULE") {
+            return "CPointer<Unit>"
+        }
+        if (name == "HRESULT") {
+            return "Int32"
+        }
+        if (name == "PSTR") {
+            return "CPointer<UInt8>"
+        }
+        if (name == "PWSTR") {
+            return "CPointer<UInt16>"
+        }
+        if (name == "PCSTR") {
+            return "CPointer<UInt8>"
+        }
+        if (name == "PCWSTR") {
+            return "CPointer<UInt16>"
+        }
+        if (name == "BSTR") {
+            return "CPointer<UInt16>"
+        }
+        if (name == "NTSTATUS") {
+            return "Int32"
+        }
+        if (name == "LRESULT") {
+            return "IntNative"
+        }
+        if (name == "WPARAM") {
+            return "UIntNative"
+        }
+        if (name == "LPARAM") {
+            return "IntNative"
+        }
     }
 
     // Generic types with type arguments
@@ -150,10 +216,8 @@ public func metadataTypeDefaultValue(ty: MetadataType): String {
         case MetadataType.RefConst(_) => metadataTypeDefaultForPointer(ty)
         case MetadataType.PtrMut(_, _) => metadataTypeDefaultForPointer(ty)
         case MetadataType.PtrConst(_, _) => metadataTypeDefaultForPointer(ty)
-        case MetadataType.ArrayFixed(elem, size) =>
-            "VArray<${metadataTypeToCj(elem)}, \$${size}>(repeat: ${metadataTypeDefaultValue(elem)})"
-        case MetadataType.Packed(inner, _) =>
-            metadataTypeDefaultValue(inner)
+        case MetadataType.ArrayFixed(elem, size) => "VArray<${metadataTypeToCj(elem)}, \$${size}>(repeat: ${metadataTypeDefaultValue(elem)})"
+        case MetadataType.Packed(inner, _) => metadataTypeDefaultValue(inner)
     }
 }
 
@@ -162,10 +226,9 @@ func metadataTypeDefaultForPointer(ty: MetadataType): String {
 }
 
 func isPrimitiveCjType(s: String): Bool {
-    return s == "Int8" || s == "UInt8" || s == "Int16" || s == "UInt16" ||
-           s == "Int32" || s == "UInt32" || s == "Int64" || s == "UInt64" ||
-           s == "Float32" || s == "Float64" || s == "Bool" || s == "Unit" ||
-           s == "IntNative" || s == "UIntNative"
+    return s == "Int8" || s == "UInt8" || s == "Int16" || s == "UInt16" || s == "Int32" || s == "UInt32" || s == "Int64" ||
+        s == "UInt64" || s == "Float32" || s == "Float64" || s == "Bool" || s == "Unit" || s == "IntNative" || s ==
+        "UIntNative"
 }
 
 func isPointerCjType(s: String): Bool {
@@ -175,7 +238,12 @@ func isPointerCjType(s: String): Bool {
 // Convert a MetadataValue to Cangjie literal source code
 public func metadataValueToCj(value: MetadataValue, ty: MetadataType): String {
     match (value) {
-        case ValBool(v) => if (v) { "true" } else { "false" }
+        case ValBool(v) =>
+            if (v) {
+                "true"
+            } else {
+                "false"
+            }
         case ValI8(v) => "${v}i8"
         case ValU8(v) => "${v}u8"
         case ValI16(v) => "${v}i16"
@@ -195,7 +263,7 @@ public func metadataValueToCj(value: MetadataValue, ty: MetadataType): String {
 
 // Format a Float32 value as a valid Cangjie f32 literal
 func formatF32Literal(v: Float32): String {
-    if (v != v) {  // NaN check: NaN != NaN
+    if (v != v) { // NaN check: NaN != NaN
         return "Float32.nan"
     }
     // Check for infinity via comparison (infinity > max finite float)
@@ -212,8 +280,12 @@ func formatF32Literal(v: Float32): String {
     var hasDot = false
     var hasE = false
     for (ch in arr) {
-        if (ch == b'.') { hasDot = true }
-        if (ch == b'e' || ch == b'E') { hasE = true }
+        if (ch == b'.') {
+            hasDot = true
+        }
+        if (ch == b'e' || ch == b'E') {
+            hasE = true
+        }
     }
     if (!hasDot && !hasE) {
         return "${s}.0f32"
@@ -237,8 +309,12 @@ func formatF64Literal(v: Float64): String {
     var hasDot = false
     var hasE = false
     for (ch in arr) {
-        if (ch == b'.') { hasDot = true }
-        if (ch == b'e' || ch == b'E') { hasE = true }
+        if (ch == b'.') {
+            hasDot = true
+        }
+        if (ch == b'e' || ch == b'E') {
+            hasE = true
+        }
     }
     if (!hasDot && !hasE) {
         return "${s}.0f64"
@@ -364,11 +440,19 @@ public func callingConventionAnnotation(attrs: PInvokeAttributes): String {
 // Check if a function can be marked @FastNative (short, non-blocking)
 public func isFastNativeCandidate(funcName: String): Bool {
     let fastNatives = [
-        "GetLastError", "SetLastError", "CloseHandle",
-        "GetTickCount", "GetTickCount64", "GetCurrentThreadId",
-        "GetCurrentProcessId", "GetCurrentProcess", "GetCurrentThread",
-        "InterlockedIncrement", "InterlockedDecrement",
-        "InterlockedExchange", "InterlockedCompareExchange"
+        "GetLastError",
+        "SetLastError",
+        "CloseHandle",
+        "GetTickCount",
+        "GetTickCount64",
+        "GetCurrentThreadId",
+        "GetCurrentProcessId",
+        "GetCurrentProcess",
+        "GetCurrentThread",
+        "InterlockedIncrement",
+        "InterlockedDecrement",
+        "InterlockedExchange",
+        "InterlockedCompareExchange"
     ]
     for (fn in fastNatives) {
         if (funcName == fn) {
@@ -390,31 +474,32 @@ public func moduleToFeature(moduleName: String): String {
             baseName = String.fromUtf8(arr[0..len - 4])
         }
     }
-    // Convert to lowercase
     let baseArr = baseName.toArray()
-    var result = Array<Byte>(baseArr.size, {i =>
-        let ch = baseArr[i]
-        if (ch >= b'A' && ch <= b'Z') {
-            ch - b'A' + b'a'
-        } else if (ch == b'-' || ch == b'.') {
-            b'_'
-        } else {
-            ch
+    var result = Array<Byte>(
+        baseArr.size,
+        {
+            i =>
+                let ch = baseArr[i]
+                if (ch == b'-' || ch == b'.') {
+                    b'_'
+                } else if (ch >= b'a' && ch <= b'z') {
+                    ch - b'a' + b'A'
+                } else {
+                    ch
+                }
         }
-    })
-    return "feat_${String.fromUtf8(result)}"
+    )
+    return sanitizeIdentifier(String.fromUtf8(result))
 }
 
 // Determine the feature name for a namespace
 public func namespaceToFeature(namespace: String): String {
     let parts = splitString(namespace, b'.')
-    var result = StringBuilder()
-    result.append("feat")
+    let normalized = ArrayList<String>()
     for (p in parts) {
-        result.append("_")
-        result.append(toLowerSnake(p))
+        normalized.add(sanitizeIdentifier(p))
     }
-    return result.toString()
+    return joinStrings(normalized, "_")
 }
 
 public func metadataTypeToProjectionCj(index: TypeIndex, ty: MetadataType): String {
@@ -499,8 +584,12 @@ public func typeNameToProjectionCj(index: TypeIndex, tn: TypeName): String {
     let name = trimTick(tn.name)
 
     if (ns == "System") {
-        if (name == "String") { return "String" }
-        if (name == "Object") { return "IInspectable" }
+        if (name == "String") {
+            return "String"
+        }
+        if (name == "Object") {
+            return "IInspectable"
+        }
     }
 
     if (tn.generics.isEmpty()) {
@@ -518,20 +607,48 @@ public func typeNameRuntimeSignature(index: TypeIndex, tn: TypeName): String {
     let ns = tn.namespace
     let name = trimTick(tn.name)
     if (ns == "System") {
-        if (name == "String") { return "string" }
-        if (name == "Object") { return "cinterface(IInspectable)" }
-        if (name == "Guid") { return "g16" }
-        if (name == "Boolean") { return "b1" }
-        if (name == "Byte") { return "u1" }
-        if (name == "SByte") { return "i1" }
-        if (name == "Int16") { return "i2" }
-        if (name == "UInt16") { return "u2" }
-        if (name == "Int32") { return "i4" }
-        if (name == "UInt32") { return "u4" }
-        if (name == "Int64") { return "i8" }
-        if (name == "UInt64") { return "u8" }
-        if (name == "Single") { return "f4" }
-        if (name == "Double") { return "f8" }
+        if (name == "String") {
+            return "string"
+        }
+        if (name == "Object") {
+            return "cinterface(IInspectable)"
+        }
+        if (name == "Guid") {
+            return "g16"
+        }
+        if (name == "Boolean") {
+            return "b1"
+        }
+        if (name == "Byte") {
+            return "u1"
+        }
+        if (name == "SByte") {
+            return "i1"
+        }
+        if (name == "Int16") {
+            return "i2"
+        }
+        if (name == "UInt16") {
+            return "u2"
+        }
+        if (name == "Int32") {
+            return "i4"
+        }
+        if (name == "UInt32") {
+            return "u4"
+        }
+        if (name == "Int64") {
+            return "i8"
+        }
+        if (name == "UInt64") {
+            return "u8"
+        }
+        if (name == "Single") {
+            return "f4"
+        }
+        if (name == "Double") {
+            return "f8"
+        }
     }
 
     let runtimeName = qualifiedRuntimeName(tn)
@@ -544,18 +661,12 @@ public func typeNameRuntimeSignature(index: TypeIndex, tn: TypeName): String {
     let (fileIdx, row) = candidates[0]
     let category = index.typeDefCategory(fileIdx, row)
     match (category) {
-        case Interface =>
-            return interfaceRuntimeSignature(index, fileIdx, row, tn.generics)
-        case Delegate =>
-            return delegateRuntimeSignature(index, fileIdx, row, tn.generics)
-        case Class =>
-            return classRuntimeSignature(index, fileIdx, row)
-        case Enum =>
-            return enumRuntimeSignature(index, fileIdx, row)
-        case Struct =>
-            return structRuntimeSignature(index, fileIdx, row)
-        case Attribute =>
-            return runtimeName
+        case Interface => return interfaceRuntimeSignature(index, fileIdx, row, tn.generics)
+        case Delegate => return delegateRuntimeSignature(index, fileIdx, row, tn.generics)
+        case Class => return classRuntimeSignature(index, fileIdx, row)
+        case Enum => return enumRuntimeSignature(index, fileIdx, row)
+        case Struct => return structRuntimeSignature(index, fileIdx, row)
+        case Attribute => return runtimeName
     }
 }
 
@@ -581,8 +692,8 @@ public func interfaceRuntimeSignature(
             }
             sb.append(")")
             return sb.toString()
-        case None =>
-            return qualifiedRuntimeName(TypeName(index.typeDefNamespace(fileIdx, row), trimTick(index.typeDefName(fileIdx, row)), genericArgs))
+        case None => return qualifiedRuntimeName(
+            TypeName(index.typeDefNamespace(fileIdx, row), trimTick(index.typeDefName(fileIdx, row)), genericArgs))
     }
 }
 
@@ -598,18 +709,16 @@ public func delegateRuntimeSignature(
                 return "delegate({${guidText}})"
             }
             return interfaceRuntimeSignature(index, fileIdx, row, genericArgs)
-        case None =>
-            return qualifiedRuntimeName(TypeName(index.typeDefNamespace(fileIdx, row), trimTick(index.typeDefName(fileIdx, row)), genericArgs))
+        case None => return qualifiedRuntimeName(
+            TypeName(index.typeDefNamespace(fileIdx, row), trimTick(index.typeDefName(fileIdx, row)), genericArgs))
     }
 }
 
 public func classRuntimeSignature(index: TypeIndex, fileIdx: Int64, row: Int64): String {
     let runtimeName = "${index.typeDefNamespace(fileIdx, row)}.${trimTick(index.typeDefName(fileIdx, row))}"
     match (findDefaultInterfaceType(index, fileIdx, row)) {
-        case Some(defaultInterface) =>
-            return "rc(${runtimeName};${typeNameRuntimeSignature(index, defaultInterface)})"
-        case None =>
-            return runtimeName
+        case Some(defaultInterface) => return "rc(${runtimeName};${typeNameRuntimeSignature(index, defaultInterface)})"
+        case None => return runtimeName
     }
 }
 
@@ -669,37 +778,54 @@ func projectedTypePath(namespace: String, name: String): String {
         case Some(context) =>
             let current = currentNamespace()
             if (context.typeMap.containsType(namespace, name)) {
-                if (current.isEmpty() ||
-                    current == namespace ||
-                    context.config.sharesGeneratedPackage(current, namespace)) {
+                if (current.isEmpty() || current == namespace || context
+                    .config
+                    .sharesGeneratedPackage(current, namespace)) {
                     return name
                 }
 
-                return "${importedPackageQualifier(context.config.packageNameForNamespace(namespace))}.${name}"
+                return "${packageTypeQualifier(context.config, namespace)}.${name}"
             }
 
             if (context.references.containsType(namespace, name)) {
                 return context.references.rewriteQualified(namespace, name)
             }
 
-            if (current.isEmpty() ||
-                current == namespace ||
-                context.config.sharesGeneratedPackage(current, namespace)) {
+            if (current.isEmpty() || current == namespace || context.config.sharesGeneratedPackage(current, namespace)) {
                 return name
             }
 
-            return "${importedPackageQualifier(context.config.packageNameForNamespace(namespace))}.${name}"
-        case None =>
-            return name
+            return "${packageTypeQualifier(context.config, namespace)}.${name}"
+        case None => return name
     }
+}
+
+func packageTypeQualifier(config: BindgenConfig, namespace: String): String {
+    let packageName = config.packageNameForNamespace(namespace)
+    return importedPackageQualifier(packageName)
 }
 
 func importedPackageQualifier(packageName: String): String {
     let parts = splitString(packageName, b'.')
-    if (!parts.isEmpty()) {
-        return parts[parts.size - 1]
+    if (parts.isEmpty()) {
+        return packageName
     }
-    return packageName
+
+    let aliasParts = ArrayList<String>()
+    var start: Int64 = 0
+    if (parts.size > 1) {
+        start = 1
+    }
+
+    var i = start
+    while (i < Int64(parts.size)) {
+        aliasParts.add(parts[i])
+        i += 1
+    }
+    if (aliasParts.isEmpty()) {
+        aliasParts.add(parts[parts.size - 1])
+    }
+    return sanitizeIdentifier(joinStrings(aliasParts, "_"))
 }
 
 func wrapProjectionPointer(index: TypeIndex, inner: MetadataType, depth: Int64): String {
@@ -719,12 +845,17 @@ func findDefaultInterfaceType(index: TypeIndex, fileIdx: Int64, row: Int64): Opt
     while (ii < iiEnd) {
         if (index.hasAttribute(TABLE_INTERFACE_IMPL, fileIdx, ii, "DefaultAttribute")) {
             let ifaceValue = file.getUInt(ii, TABLE_INTERFACE_IMPL, 1)
-            let (ifaceTable, ifaceRow) = decodeCodedIndex(ifaceValue, CODED_TYPE_DEF_OR_REF_BITS, CODED_TYPE_DEF_OR_REF_MAP)
+            let (ifaceTable, ifaceRow) = decodeCodedIndex(ifaceValue, CODED_TYPE_DEF_OR_REF_BITS,
+                CODED_TYPE_DEF_OR_REF_MAP)
             if (ifaceTable == TABLE_TYPE_DEF) {
-                return Some(TypeName(file.getString(ifaceRow, TABLE_TYPE_DEF, 2), trimTick(file.getString(ifaceRow, TABLE_TYPE_DEF, 1))))
+                return Some(
+                    TypeName(file.getString(ifaceRow, TABLE_TYPE_DEF, 2),
+                        trimTick(file.getString(ifaceRow, TABLE_TYPE_DEF, 1))))
             }
             if (ifaceTable == TABLE_TYPE_REF) {
-                return Some(TypeName(file.getString(ifaceRow, TABLE_TYPE_REF, 2), trimTick(file.getString(ifaceRow, TABLE_TYPE_REF, 1))))
+                return Some(
+                    TypeName(file.getString(ifaceRow, TABLE_TYPE_REF, 2),
+                        trimTick(file.getString(ifaceRow, TABLE_TYPE_REF, 1))))
             }
         }
         ii += 1

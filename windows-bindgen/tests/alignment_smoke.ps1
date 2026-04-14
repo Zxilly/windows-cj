@@ -1,8 +1,8 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-bindgen"
-$fixtureWinmd = Join-Path $repoRoot "ref/windows-rs/crates/libs/bindgen/default/Windows.Win32.winmd"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
+$fixtureWinmd = Join-Path $repoRoot "windows-cj/winmd/Windows.Win32.winmd"
 $outputRoot = Join-Path $packageRoot "tests/output/alignment_smoke"
 $apiFilteredOut = Join-Path $outputRoot "api_filtered"
 $highLevelOut = Join-Path $outputRoot "high_level"
@@ -48,19 +48,19 @@ finally {
     Pop-Location
 }
 
-$apiFilteredFile = Join-Path $apiFilteredOut "accessibility.cj"
+$apiFilteredFile = Join-Path $apiFilteredOut "Accessibility.cj"
 if (!(Test-Path $apiFilteredFile)) {
     throw "API-level filter did not generate accessibility output"
 }
-$variantFile = Join-Path $apiFilteredOut "variant.cj"
+$variantFile = Join-Path $apiFilteredOut "Variant.cj"
 if (!(Test-Path $variantFile)) {
     throw "API-level filter did not generate dependent variant output"
 }
-$shortNameFile = Join-Path $shortNameOut "system_information.cj"
+$shortNameFile = Join-Path $shortNameOut "SystemInformation.cj"
 if (!(Test-Path $shortNameFile)) {
     throw "Short-name filter did not expand to the owning namespace"
 }
-$identityFile = Join-Path $identityOut "identity.cj"
+$identityFile = Join-Path $identityOut "Identity.cj"
 if (!(Test-Path $identityFile)) {
     throw "Identity namespace filter did not generate identity output"
 }
@@ -93,7 +93,7 @@ if ($variant -notmatch '(?s)public struct VARIANT__Anonymous_e__Union\s*\{[^}]*p
 if ($variant -notmatch '(?s)public struct VARIANT__Anonymous_e__Union\s*\{.*?public mut func set_anonymous\(val: VARIANT__Anonymous_e__Union__Anonymous_e__Struct\): Unit') {
     throw "VARIANT union should expose a setter for the anonymous struct view"
 }
-if ($variant -notmatch '(?s)public struct VARIANT__Anonymous_e__Union\s*\{.*?public mut func set_decVal\(val: foundation\.DECIMAL\): Unit') {
+if ($variant -notmatch '(?s)public struct VARIANT__Anonymous_e__Union\s*\{.*?public mut func set_decVal\(val: win32_foundation\.DECIMAL\): Unit') {
     throw "VARIANT union should expose a setter for the DECIMAL view"
 }
 if ($variant -notmatch '(?s)// WARNING: union simulated as byte array \(size-equivalent, not type-safe\)\s*@C\s+public struct VARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union\s*\{\s*public var _raw: VArray<UInt64, \$2> = VArray<UInt64, \$2>\(repeat: 0\)') {
@@ -112,7 +112,7 @@ if ($identity -notmatch '(?m)^unsafe func RtlGenRandom\(RandomBuffer: CPointer<U
     throw "Import-name remapping should preserve the metadata method name via an unsafe wrapper"
 }
 
-$highLevelFile = Join-Path $highLevelOut "foundation.cj"
+$highLevelFile = Join-Path $highLevelOut "Foundation.cj"
 if (!(Test-Path $highLevelFile)) {
     throw "High-level projection mode did not generate foundation output"
 }

@@ -2,7 +2,7 @@ package windows_strings
 
 func closeHStringState(handle: CPointer<Unit>, closed: Bool): (CPointer<Unit>, Bool) {
     if (!closed && handle.isNotNull()) {
-        // Reference-backed (fast-pass) strings are not heap-owned; skip free.
+        // Reference-backed (fast-pass) strings are not heap-managed here; skip free.
         if (!hStringIsReferenceBacked(handle)) {
             if (hStringRelease(handle) == 0u32) {
                 hStringFree(hStringHeaderFromHandle(handle))
@@ -50,7 +50,7 @@ public class HString <: Resource & Equatable<HString> & ToString & Hashable & Co
 
     static func fromReferenceWide(data: Array<UInt16>, length!: Int64 = -1): HString {
         // Cangjie arrays do not provide a stable static UTF-16 backing store,
-        // so this helper must keep the owned heap allocation semantics.
+        // so this helper must keep heap-managed allocation semantics.
         HString(CPointer<Unit>(hStringAllocFromWide(data, length: length)))
     }
 

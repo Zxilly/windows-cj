@@ -7,5 +7,5 @@
   compile-option = "-loleaut32 -lwindowsapp"
 
 [dependencies]
-  windows_implement = { path = "E:/Project/CS_Project/2026/ling/windows-cj/windows-implement" }
-  windows_interface = { path = "E:/Project/CS_Project/2026/ling/windows-cj/windows-interface" }
+  windows_implement = { path = "../../../../" }
+  windows_interface = { path = "../../../../../windows-interface" }

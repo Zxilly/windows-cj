@@ -18,7 +18,7 @@ public class AutoRepeatModeChangeRequestedEventArgs <: InterfaceWrapperBase & Co
         AutoRepeatModeChangeRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AutoRepeatModeChangeRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): AutoRepeatModeChangeRequestedEventArgs {
         AutoRepeatModeChangeRequestedEventArgs(raw)
     }
 
@@ -90,7 +90,7 @@ public class IAutoRepeatModeChangeRequestedEventArgs <: InterfaceWrapperBase & C
         IAutoRepeatModeChangeRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAutoRepeatModeChangeRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IAutoRepeatModeChangeRequestedEventArgs {
         IAutoRepeatModeChangeRequestedEventArgs(raw)
     }
 
@@ -171,7 +171,7 @@ public class IImageDisplayProperties <: InterfaceWrapperBase & ComInterface & Ru
         IImageDisplayProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IImageDisplayProperties {
+    public static func viewOf(raw: CPointer<Unit>): IImageDisplayProperties {
         IImageDisplayProperties(raw)
     }
 
@@ -280,7 +280,7 @@ public class IMediaTimelineController <: InterfaceWrapperBase & ComInterface & R
         IMediaTimelineController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaTimelineController {
+    public static func viewOf(raw: CPointer<Unit>): IMediaTimelineController {
         IMediaTimelineController(raw)
     }
 
@@ -439,7 +439,7 @@ public class IMediaTimelineController2 <: InterfaceWrapperBase & ComInterface & 
         IMediaTimelineController2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaTimelineController2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaTimelineController2 {
         IMediaTimelineController2(raw)
     }
 
@@ -565,7 +565,7 @@ public class IMediaTimelineControllerFailedEventArgs <: InterfaceWrapperBase & C
         IMediaTimelineControllerFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaTimelineControllerFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaTimelineControllerFailedEventArgs {
         IMediaTimelineControllerFailedEventArgs(raw)
     }
 
@@ -648,7 +648,7 @@ public class IMusicDisplayProperties <: InterfaceWrapperBase & ComInterface & Ru
         IMusicDisplayProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMusicDisplayProperties {
+    public static func viewOf(raw: CPointer<Unit>): IMusicDisplayProperties {
         IMusicDisplayProperties(raw)
     }
 
@@ -764,7 +764,7 @@ public class IMusicDisplayProperties2 <: InterfaceWrapperBase & ComInterface & R
         IMusicDisplayProperties2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMusicDisplayProperties2 {
+    public static func viewOf(raw: CPointer<Unit>): IMusicDisplayProperties2 {
         IMusicDisplayProperties2(raw)
     }
 
@@ -871,7 +871,7 @@ public class IMusicDisplayProperties3 <: InterfaceWrapperBase & ComInterface & R
         IMusicDisplayProperties3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMusicDisplayProperties3 {
+    public static func viewOf(raw: CPointer<Unit>): IMusicDisplayProperties3 {
         IMusicDisplayProperties3(raw)
     }
 
@@ -955,7 +955,7 @@ public class IPlaybackPositionChangeRequestedEventArgs <: InterfaceWrapperBase &
         IPlaybackPositionChangeRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPlaybackPositionChangeRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IPlaybackPositionChangeRequestedEventArgs {
         IPlaybackPositionChangeRequestedEventArgs(raw)
     }
 
@@ -1033,7 +1033,7 @@ public class IPlaybackRateChangeRequestedEventArgs <: InterfaceWrapperBase & Com
         IPlaybackRateChangeRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPlaybackRateChangeRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IPlaybackRateChangeRequestedEventArgs {
         IPlaybackRateChangeRequestedEventArgs(raw)
     }
 
@@ -1111,7 +1111,7 @@ public class IShuffleEnabledChangeRequestedEventArgs <: InterfaceWrapperBase & C
         IShuffleEnabledChangeRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IShuffleEnabledChangeRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IShuffleEnabledChangeRequestedEventArgs {
         IShuffleEnabledChangeRequestedEventArgs(raw)
     }
 
@@ -1218,7 +1218,7 @@ public class ISystemMediaTransportControls <: InterfaceWrapperBase & ComInterfac
         ISystemMediaTransportControls(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemMediaTransportControls {
+    public static func viewOf(raw: CPointer<Unit>): ISystemMediaTransportControls {
         ISystemMediaTransportControls(raw)
     }
 
@@ -1514,7 +1514,7 @@ public class ISystemMediaTransportControls2 <: InterfaceWrapperBase & ComInterfa
         ISystemMediaTransportControls2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemMediaTransportControls2 {
+    public static func viewOf(raw: CPointer<Unit>): ISystemMediaTransportControls2 {
         ISystemMediaTransportControls2(raw)
     }
 
@@ -1688,7 +1688,7 @@ public class ISystemMediaTransportControlsButtonPressedEventArgs <: InterfaceWra
         ISystemMediaTransportControlsButtonPressedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemMediaTransportControlsButtonPressedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ISystemMediaTransportControlsButtonPressedEventArgs {
         ISystemMediaTransportControlsButtonPressedEventArgs(raw)
     }
 
@@ -1777,7 +1777,7 @@ public class ISystemMediaTransportControlsDisplayUpdater <: InterfaceWrapperBase
         ISystemMediaTransportControlsDisplayUpdater(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemMediaTransportControlsDisplayUpdater {
+    public static func viewOf(raw: CPointer<Unit>): ISystemMediaTransportControlsDisplayUpdater {
         ISystemMediaTransportControlsDisplayUpdater(raw)
     }
 
@@ -1933,7 +1933,7 @@ public class ISystemMediaTransportControlsPropertyChangedEventArgs <: InterfaceW
         ISystemMediaTransportControlsPropertyChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemMediaTransportControlsPropertyChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ISystemMediaTransportControlsPropertyChangedEventArgs {
         ISystemMediaTransportControlsPropertyChangedEventArgs(raw)
     }
 
@@ -2020,7 +2020,7 @@ public class ISystemMediaTransportControlsTimelineProperties <: InterfaceWrapper
         ISystemMediaTransportControlsTimelineProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemMediaTransportControlsTimelineProperties {
+    public static func viewOf(raw: CPointer<Unit>): ISystemMediaTransportControlsTimelineProperties {
         ISystemMediaTransportControlsTimelineProperties(raw)
     }
 
@@ -2163,7 +2163,7 @@ public class IVideoDisplayProperties <: InterfaceWrapperBase & ComInterface & Ru
         IVideoDisplayProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoDisplayProperties {
+    public static func viewOf(raw: CPointer<Unit>): IVideoDisplayProperties {
         IVideoDisplayProperties(raw)
     }
 
@@ -2261,7 +2261,7 @@ public class IVideoDisplayProperties2 <: InterfaceWrapperBase & ComInterface & R
         IVideoDisplayProperties2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoDisplayProperties2 {
+    public static func viewOf(raw: CPointer<Unit>): IVideoDisplayProperties2 {
         IVideoDisplayProperties2(raw)
     }
 
@@ -2331,7 +2331,7 @@ public class ImageDisplayProperties <: InterfaceWrapperBase & ComInterface & win
         ImageDisplayProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ImageDisplayProperties {
+    public static func viewOf(raw: CPointer<Unit>): ImageDisplayProperties {
         ImageDisplayProperties(raw)
     }
 
@@ -2487,7 +2487,7 @@ public class MediaTimelineController <: InterfaceWrapperBase & ComInterface & wi
         MediaTimelineController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaTimelineController {
+    public static func viewOf(raw: CPointer<Unit>): MediaTimelineController {
         MediaTimelineController(raw)
     }
 
@@ -2601,7 +2601,7 @@ public class MediaTimelineControllerFailedEventArgs <: InterfaceWrapperBase & Co
         MediaTimelineControllerFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaTimelineControllerFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaTimelineControllerFailedEventArgs {
         MediaTimelineControllerFailedEventArgs(raw)
     }
 
@@ -2689,7 +2689,7 @@ public class MusicDisplayProperties <: InterfaceWrapperBase & ComInterface & win
         MusicDisplayProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MusicDisplayProperties {
+    public static func viewOf(raw: CPointer<Unit>): MusicDisplayProperties {
         MusicDisplayProperties(raw)
     }
 
@@ -2773,7 +2773,7 @@ public class PlaybackPositionChangeRequestedEventArgs <: InterfaceWrapperBase & 
         PlaybackPositionChangeRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PlaybackPositionChangeRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): PlaybackPositionChangeRequestedEventArgs {
         PlaybackPositionChangeRequestedEventArgs(raw)
     }
 
@@ -2837,7 +2837,7 @@ public class PlaybackRateChangeRequestedEventArgs <: InterfaceWrapperBase & ComI
         PlaybackRateChangeRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PlaybackRateChangeRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): PlaybackRateChangeRequestedEventArgs {
         PlaybackRateChangeRequestedEventArgs(raw)
     }
 
@@ -2901,7 +2901,7 @@ public class ShuffleEnabledChangeRequestedEventArgs <: InterfaceWrapperBase & Co
         ShuffleEnabledChangeRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ShuffleEnabledChangeRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ShuffleEnabledChangeRequestedEventArgs {
         ShuffleEnabledChangeRequestedEventArgs(raw)
     }
 
@@ -2988,7 +2988,7 @@ public class SystemMediaTransportControls <: InterfaceWrapperBase & ComInterface
         SystemMediaTransportControls(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemMediaTransportControls {
+    public static func viewOf(raw: CPointer<Unit>): SystemMediaTransportControls {
         SystemMediaTransportControls(raw)
     }
 
@@ -3204,7 +3204,7 @@ public class SystemMediaTransportControlsButtonPressedEventArgs <: InterfaceWrap
         SystemMediaTransportControlsButtonPressedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemMediaTransportControlsButtonPressedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): SystemMediaTransportControlsButtonPressedEventArgs {
         SystemMediaTransportControlsButtonPressedEventArgs(raw)
     }
 
@@ -3268,7 +3268,7 @@ public class SystemMediaTransportControlsDisplayUpdater <: InterfaceWrapperBase 
         SystemMediaTransportControlsDisplayUpdater(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemMediaTransportControlsDisplayUpdater {
+    public static func viewOf(raw: CPointer<Unit>): SystemMediaTransportControlsDisplayUpdater {
         SystemMediaTransportControlsDisplayUpdater(raw)
     }
 
@@ -3397,7 +3397,7 @@ public class SystemMediaTransportControlsPropertyChangedEventArgs <: InterfaceWr
         SystemMediaTransportControlsPropertyChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemMediaTransportControlsPropertyChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): SystemMediaTransportControlsPropertyChangedEventArgs {
         SystemMediaTransportControlsPropertyChangedEventArgs(raw)
     }
 
@@ -3461,7 +3461,7 @@ public class SystemMediaTransportControlsTimelineProperties <: InterfaceWrapperB
         SystemMediaTransportControlsTimelineProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemMediaTransportControlsTimelineProperties {
+    public static func viewOf(raw: CPointer<Unit>): SystemMediaTransportControlsTimelineProperties {
         SystemMediaTransportControlsTimelineProperties(raw)
     }
 
@@ -3567,7 +3567,7 @@ public class VideoDisplayProperties <: InterfaceWrapperBase & ComInterface & win
         VideoDisplayProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VideoDisplayProperties {
+    public static func viewOf(raw: CPointer<Unit>): VideoDisplayProperties {
         VideoDisplayProperties(raw)
     }
 

@@ -18,7 +18,7 @@ public class AppDataPaths <: InterfaceWrapperBase & ComInterface & windows_inter
         AppDataPaths(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AppDataPaths {
+    public static func viewOf(raw: CPointer<Unit>): AppDataPaths {
         AppDataPaths(raw)
     }
 
@@ -126,7 +126,7 @@ public class ApplicationData <: InterfaceWrapperBase & ComInterface & windows_in
         ApplicationData(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ApplicationData {
+    public static func viewOf(raw: CPointer<Unit>): ApplicationData {
         ApplicationData(raw)
     }
 
@@ -258,7 +258,7 @@ public class ApplicationDataCompositeValue <: InterfaceWrapperBase & ComInterfac
         ApplicationDataCompositeValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ApplicationDataCompositeValue {
+    public static func viewOf(raw: CPointer<Unit>): ApplicationDataCompositeValue {
         ApplicationDataCompositeValue(raw)
     }
 
@@ -376,7 +376,7 @@ public class ApplicationDataContainer <: InterfaceWrapperBase & ComInterface & w
         ApplicationDataContainer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ApplicationDataContainer {
+    public static func viewOf(raw: CPointer<Unit>): ApplicationDataContainer {
         ApplicationDataContainer(raw)
     }
 
@@ -468,7 +468,7 @@ public class ApplicationDataContainerSettings <: InterfaceWrapperBase & ComInter
         ApplicationDataContainerSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ApplicationDataContainerSettings {
+    public static func viewOf(raw: CPointer<Unit>): ApplicationDataContainerSettings {
         ApplicationDataContainerSettings(raw)
     }
 
@@ -636,7 +636,7 @@ public class ApplicationDataSetVersionHandler <: InterfaceWrapperBase & ComInter
         ApplicationDataSetVersionHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ApplicationDataSetVersionHandler {
+    public static func viewOf(raw: CPointer<Unit>): ApplicationDataSetVersionHandler {
         ApplicationDataSetVersionHandler(raw)
     }
 
@@ -722,7 +722,7 @@ func buildApplicationDataSetVersionHandlerBoxVtbl(): ApplicationDataSetVersionHa
 func ApplicationDataSetVersionHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<ApplicationDataSetVersionHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(SetVersionRequest.fromRawBorrowed(arg0))
+            invoker.Invoke(SetVersionRequest.viewOf(arg0))
             return S_OK.value
         case None =>
             return E_NOTIMPL.value
@@ -739,7 +739,7 @@ public class CachedFileManager <: InterfaceWrapperBase & ComInterface & windows_
         CachedFileManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CachedFileManager {
+    public static func viewOf(raw: CPointer<Unit>): CachedFileManager {
         CachedFileManager(raw)
     }
 
@@ -827,7 +827,7 @@ public class DownloadsFolder <: InterfaceWrapperBase & ComInterface & windows_in
         DownloadsFolder(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DownloadsFolder {
+    public static func viewOf(raw: CPointer<Unit>): DownloadsFolder {
         DownloadsFolder(raw)
     }
 
@@ -984,7 +984,7 @@ public class FileIO <: InterfaceWrapperBase & ComInterface & windows_interface.R
         FileIO(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileIO {
+    public static func viewOf(raw: CPointer<Unit>): FileIO {
         FileIO(raw)
     }
 
@@ -1141,7 +1141,7 @@ public class IAppDataPaths <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IAppDataPaths(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAppDataPaths {
+    public static func viewOf(raw: CPointer<Unit>): IAppDataPaths {
         IAppDataPaths(raw)
     }
 
@@ -1284,7 +1284,7 @@ public class IAppDataPathsStatics <: InterfaceWrapperBase & ComInterface & Runti
         IAppDataPathsStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAppDataPathsStatics {
+    public static func viewOf(raw: CPointer<Unit>): IAppDataPathsStatics {
         IAppDataPathsStatics(raw)
     }
 
@@ -1382,7 +1382,7 @@ public class IApplicationData <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IApplicationData(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IApplicationData {
+    public static func viewOf(raw: CPointer<Unit>): IApplicationData {
         IApplicationData(raw)
     }
 
@@ -1552,7 +1552,7 @@ public class IApplicationData2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         IApplicationData2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IApplicationData2 {
+    public static func viewOf(raw: CPointer<Unit>): IApplicationData2 {
         IApplicationData2(raw)
     }
 
@@ -1632,7 +1632,7 @@ public class IApplicationData3 <: InterfaceWrapperBase & ComInterface & RuntimeN
         IApplicationData3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IApplicationData3 {
+    public static func viewOf(raw: CPointer<Unit>): IApplicationData3 {
         IApplicationData3(raw)
     }
 
@@ -1731,7 +1731,7 @@ public class IApplicationDataContainer <: InterfaceWrapperBase & ComInterface & 
         IApplicationDataContainer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IApplicationDataContainer {
+    public static func viewOf(raw: CPointer<Unit>): IApplicationDataContainer {
         IApplicationDataContainer(raw)
     }
 
@@ -1847,7 +1847,7 @@ public class IApplicationDataStatics <: InterfaceWrapperBase & ComInterface & Ru
         IApplicationDataStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IApplicationDataStatics {
+    public static func viewOf(raw: CPointer<Unit>): IApplicationDataStatics {
         IApplicationDataStatics(raw)
     }
 
@@ -1925,7 +1925,7 @@ public class IApplicationDataStatics2 <: InterfaceWrapperBase & ComInterface & R
         IApplicationDataStatics2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IApplicationDataStatics2 {
+    public static func viewOf(raw: CPointer<Unit>): IApplicationDataStatics2 {
         IApplicationDataStatics2(raw)
     }
 
@@ -2004,7 +2004,7 @@ public class ICachedFileManagerStatics <: InterfaceWrapperBase & ComInterface & 
         ICachedFileManagerStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICachedFileManagerStatics {
+    public static func viewOf(raw: CPointer<Unit>): ICachedFileManagerStatics {
         ICachedFileManagerStatics(raw)
     }
 
@@ -2091,7 +2091,7 @@ public class IDownloadsFolderStatics <: InterfaceWrapperBase & ComInterface & Ru
         IDownloadsFolderStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDownloadsFolderStatics {
+    public static func viewOf(raw: CPointer<Unit>): IDownloadsFolderStatics {
         IDownloadsFolderStatics(raw)
     }
 
@@ -2196,7 +2196,7 @@ public class IDownloadsFolderStatics2 <: InterfaceWrapperBase & ComInterface & R
         IDownloadsFolderStatics2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDownloadsFolderStatics2 {
+    public static func viewOf(raw: CPointer<Unit>): IDownloadsFolderStatics2 {
         IDownloadsFolderStatics2(raw)
     }
 
@@ -2312,7 +2312,7 @@ public class IFileIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         IFileIOStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileIOStatics {
+    public static func viewOf(raw: CPointer<Unit>): IFileIOStatics {
         IFileIOStatics(raw)
     }
 
@@ -2502,7 +2502,7 @@ public class IKnownFoldersCameraRollStatics <: InterfaceWrapperBase & ComInterfa
         IKnownFoldersCameraRollStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKnownFoldersCameraRollStatics {
+    public static func viewOf(raw: CPointer<Unit>): IKnownFoldersCameraRollStatics {
         IKnownFoldersCameraRollStatics(raw)
     }
 
@@ -2580,7 +2580,7 @@ public class IKnownFoldersPlaylistsStatics <: InterfaceWrapperBase & ComInterfac
         IKnownFoldersPlaylistsStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKnownFoldersPlaylistsStatics {
+    public static func viewOf(raw: CPointer<Unit>): IKnownFoldersPlaylistsStatics {
         IKnownFoldersPlaylistsStatics(raw)
     }
 
@@ -2658,7 +2658,7 @@ public class IKnownFoldersSavedPicturesStatics <: InterfaceWrapperBase & ComInte
         IKnownFoldersSavedPicturesStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKnownFoldersSavedPicturesStatics {
+    public static func viewOf(raw: CPointer<Unit>): IKnownFoldersSavedPicturesStatics {
         IKnownFoldersSavedPicturesStatics(raw)
     }
 
@@ -2742,7 +2742,7 @@ public class IKnownFoldersStatics <: InterfaceWrapperBase & ComInterface & Runti
         IKnownFoldersStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKnownFoldersStatics {
+    public static func viewOf(raw: CPointer<Unit>): IKnownFoldersStatics {
         IKnownFoldersStatics(raw)
     }
 
@@ -2870,7 +2870,7 @@ public class IKnownFoldersStatics2 <: InterfaceWrapperBase & ComInterface & Runt
         IKnownFoldersStatics2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKnownFoldersStatics2 {
+    public static func viewOf(raw: CPointer<Unit>): IKnownFoldersStatics2 {
         IKnownFoldersStatics2(raw)
     }
 
@@ -2964,7 +2964,7 @@ public class IKnownFoldersStatics3 <: InterfaceWrapperBase & ComInterface & Runt
         IKnownFoldersStatics3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKnownFoldersStatics3 {
+    public static func viewOf(raw: CPointer<Unit>): IKnownFoldersStatics3 {
         IKnownFoldersStatics3(raw)
     }
 
@@ -3044,7 +3044,7 @@ public class IKnownFoldersStatics4 <: InterfaceWrapperBase & ComInterface & Runt
         IKnownFoldersStatics4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKnownFoldersStatics4 {
+    public static func viewOf(raw: CPointer<Unit>): IKnownFoldersStatics4 {
         IKnownFoldersStatics4(raw)
     }
 
@@ -3152,7 +3152,7 @@ public class IPathIOStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         IPathIOStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPathIOStatics {
+    public static func viewOf(raw: CPointer<Unit>): IPathIOStatics {
         IPathIOStatics(raw)
     }
 
@@ -3342,7 +3342,7 @@ public class ISetVersionDeferral <: InterfaceWrapperBase & ComInterface & Runtim
         ISetVersionDeferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISetVersionDeferral {
+    public static func viewOf(raw: CPointer<Unit>): ISetVersionDeferral {
         ISetVersionDeferral(raw)
     }
 
@@ -3420,7 +3420,7 @@ public class ISetVersionRequest <: InterfaceWrapperBase & ComInterface & Runtime
         ISetVersionRequest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISetVersionRequest {
+    public static func viewOf(raw: CPointer<Unit>): ISetVersionRequest {
         ISetVersionRequest(raw)
     }
 
@@ -3604,7 +3604,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CopyOverloadDefaultNameAndOptions(IStorageFolder.fromRawBorrowed(arg0))) {
+                    match (impl.CopyOverloadDefaultNameAndOptions(IStorageFolder.viewOf(arg0))) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -3627,7 +3627,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CopyOverloadDefaultOptions(IStorageFolder.fromRawBorrowed(arg0), arg1)) {
+                    match (impl.CopyOverloadDefaultOptions(IStorageFolder.viewOf(arg0), arg1)) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -3650,7 +3650,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CopyOverload(IStorageFolder.fromRawBorrowed(arg0), arg1, arg2)) {
+                    match (impl.CopyOverload(IStorageFolder.viewOf(arg0), arg1, arg2)) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -3673,7 +3673,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CopyAndReplaceAsync(IStorageFile.fromRawBorrowed(arg0))) {
+                    match (impl.CopyAndReplaceAsync(IStorageFile.viewOf(arg0))) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -3696,7 +3696,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.MoveOverloadDefaultNameAndOptions(IStorageFolder.fromRawBorrowed(arg0))) {
+                    match (impl.MoveOverloadDefaultNameAndOptions(IStorageFolder.viewOf(arg0))) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -3719,7 +3719,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.MoveOverloadDefaultOptions(IStorageFolder.fromRawBorrowed(arg0), arg1)) {
+                    match (impl.MoveOverloadDefaultOptions(IStorageFolder.viewOf(arg0), arg1)) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -3742,7 +3742,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.MoveOverload(IStorageFolder.fromRawBorrowed(arg0), arg1, arg2)) {
+                    match (impl.MoveOverload(IStorageFolder.viewOf(arg0), arg1, arg2)) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -3765,7 +3765,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.MoveAndReplaceAsync(IStorageFile.fromRawBorrowed(arg0))) {
+                    match (impl.MoveAndReplaceAsync(IStorageFile.viewOf(arg0))) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -3824,7 +3824,7 @@ public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IStorageFile(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFile {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFile {
         IStorageFile(raw)
     }
 
@@ -4074,7 +4074,7 @@ public class IStorageFile2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IStorageFile2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFile2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFile2 {
         IStorageFile2(raw)
     }
 
@@ -4196,7 +4196,7 @@ public class IStorageFilePropertiesWithAvailability <: InterfaceWrapperBase & Co
         IStorageFilePropertiesWithAvailability(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFilePropertiesWithAvailability {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFilePropertiesWithAvailability {
         IStorageFilePropertiesWithAvailability(raw)
     }
 
@@ -4279,7 +4279,7 @@ public class IStorageFileStatics <: InterfaceWrapperBase & ComInterface & Runtim
         IStorageFileStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileStatics {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileStatics {
         IStorageFileStatics(raw)
     }
 
@@ -4397,7 +4397,7 @@ public class IStorageFileStatics2 <: InterfaceWrapperBase & ComInterface & Runti
         IStorageFileStatics2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileStatics2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileStatics2 {
         IStorageFileStatics2(raw)
     }
 
@@ -4747,7 +4747,7 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
         IStorageFolder(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolder {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolder {
         IStorageFolder(raw)
     }
 
@@ -4948,7 +4948,7 @@ public class IStorageFolder2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IStorageFolder2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolder2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolder2 {
         IStorageFolder2(raw)
     }
 
@@ -5026,7 +5026,7 @@ public class IStorageFolder3 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IStorageFolder3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolder3 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolder3 {
         IStorageFolder3(raw)
     }
 
@@ -5104,7 +5104,7 @@ public class IStorageFolderStatics <: InterfaceWrapperBase & ComInterface & Runt
         IStorageFolderStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderStatics {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderStatics {
         IStorageFolderStatics(raw)
     }
 
@@ -5182,7 +5182,7 @@ public class IStorageFolderStatics2 <: InterfaceWrapperBase & ComInterface & Run
         IStorageFolderStatics2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderStatics2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderStatics2 {
         IStorageFolderStatics2(raw)
     }
 
@@ -5497,7 +5497,7 @@ public class IStorageItem <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IStorageItem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItem {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItem {
         IStorageItem(raw)
     }
 
@@ -5670,7 +5670,7 @@ public struct IStorageItem2Vtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.IsEqual(IStorageItem.fromRawBorrowed(arg0))) {
+                    match (impl.IsEqual(IStorageItem.viewOf(arg0))) {
                         case Result<Bool>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -5713,7 +5713,7 @@ public class IStorageItem2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IStorageItem2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItem2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItem2 {
         IStorageItem2(raw)
     }
 
@@ -5982,7 +5982,7 @@ public class IStorageItemProperties <: InterfaceWrapperBase & ComInterface & Run
         IStorageItemProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemProperties {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemProperties {
         IStorageItemProperties(raw)
     }
 
@@ -6205,7 +6205,7 @@ public class IStorageItemProperties2 <: InterfaceWrapperBase & ComInterface & Ru
         IStorageItemProperties2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemProperties2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemProperties2 {
         IStorageItemProperties2(raw)
     }
 
@@ -6355,7 +6355,7 @@ public class IStorageItemPropertiesWithProvider <: InterfaceWrapperBase & ComInt
         IStorageItemPropertiesWithProvider(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemPropertiesWithProvider {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemPropertiesWithProvider {
         IStorageItemPropertiesWithProvider(raw)
     }
 
@@ -6447,7 +6447,7 @@ public class IStorageLibrary <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IStorageLibrary(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibrary {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibrary {
         IStorageLibrary(raw)
     }
 
@@ -6563,7 +6563,7 @@ public class IStorageLibrary2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IStorageLibrary2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibrary2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibrary2 {
         IStorageLibrary2(raw)
     }
 
@@ -6641,7 +6641,7 @@ public class IStorageLibrary3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IStorageLibrary3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibrary3 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibrary3 {
         IStorageLibrary3(raw)
     }
 
@@ -6723,7 +6723,7 @@ public class IStorageLibraryChange <: InterfaceWrapperBase & ComInterface & Runt
         IStorageLibraryChange(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChange {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChange {
         IStorageLibraryChange(raw)
     }
 
@@ -6834,7 +6834,7 @@ public class IStorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface 
         IStorageLibraryChangeReader(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeReader {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeReader {
         IStorageLibraryChangeReader(raw)
     }
 
@@ -6920,7 +6920,7 @@ public class IStorageLibraryChangeReader2 <: InterfaceWrapperBase & ComInterface
         IStorageLibraryChangeReader2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeReader2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeReader2 {
         IStorageLibraryChangeReader2(raw)
     }
 
@@ -7000,7 +7000,7 @@ public class IStorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface
         IStorageLibraryChangeTracker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTracker {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTracker {
         IStorageLibraryChangeTracker(raw)
     }
 
@@ -7091,7 +7091,7 @@ public class IStorageLibraryChangeTracker2 <: InterfaceWrapperBase & ComInterfac
         IStorageLibraryChangeTracker2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTracker2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTracker2 {
         IStorageLibraryChangeTracker2(raw)
     }
 
@@ -7174,7 +7174,7 @@ public class IStorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComIn
         IStorageLibraryChangeTrackerOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTrackerOptions {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTrackerOptions {
         IStorageLibraryChangeTrackerOptions(raw)
     }
 
@@ -7257,7 +7257,7 @@ public class IStorageLibraryLastChangeId <: InterfaceWrapperBase & ComInterface 
         IStorageLibraryLastChangeId(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryLastChangeId {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryLastChangeId {
         IStorageLibraryLastChangeId(raw)
     }
 
@@ -7327,7 +7327,7 @@ public class IStorageLibraryLastChangeIdStatics <: InterfaceWrapperBase & ComInt
         IStorageLibraryLastChangeIdStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryLastChangeIdStatics {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryLastChangeIdStatics {
         IStorageLibraryLastChangeIdStatics(raw)
     }
 
@@ -7405,7 +7405,7 @@ public class IStorageLibraryStatics <: InterfaceWrapperBase & ComInterface & Run
         IStorageLibraryStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryStatics {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryStatics {
         IStorageLibraryStatics(raw)
     }
 
@@ -7483,7 +7483,7 @@ public class IStorageLibraryStatics2 <: InterfaceWrapperBase & ComInterface & Ru
         IStorageLibraryStatics2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryStatics2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryStatics2 {
         IStorageLibraryStatics2(raw)
     }
 
@@ -7562,7 +7562,7 @@ public class IStorageProvider <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IStorageProvider(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProvider {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProvider {
         IStorageProvider(raw)
     }
 
@@ -7648,7 +7648,7 @@ public class IStorageProvider2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         IStorageProvider2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProvider2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProvider2 {
         IStorageProvider2(raw)
     }
 
@@ -7736,7 +7736,7 @@ public class IStorageStreamTransaction <: InterfaceWrapperBase & ComInterface & 
         IStorageStreamTransaction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageStreamTransaction {
+    public static func viewOf(raw: CPointer<Unit>): IStorageStreamTransaction {
         IStorageStreamTransaction(raw)
     }
 
@@ -7863,7 +7863,7 @@ public class IStreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & R
         IStreamedFileDataRequest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStreamedFileDataRequest {
+    public static func viewOf(raw: CPointer<Unit>): IStreamedFileDataRequest {
         IStreamedFileDataRequest(raw)
     }
 
@@ -7939,7 +7939,7 @@ public class ISystemAudioProperties <: InterfaceWrapperBase & ComInterface & Run
         ISystemAudioProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemAudioProperties {
+    public static func viewOf(raw: CPointer<Unit>): ISystemAudioProperties {
         ISystemAudioProperties(raw)
     }
 
@@ -8032,7 +8032,7 @@ public class ISystemDataPaths <: InterfaceWrapperBase & ComInterface & RuntimeNa
         ISystemDataPaths(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemDataPaths {
+    public static func viewOf(raw: CPointer<Unit>): ISystemDataPaths {
         ISystemDataPaths(raw)
     }
 
@@ -8230,7 +8230,7 @@ public class ISystemDataPathsStatics <: InterfaceWrapperBase & ComInterface & Ru
         ISystemDataPathsStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemDataPathsStatics {
+    public static func viewOf(raw: CPointer<Unit>): ISystemDataPathsStatics {
         ISystemDataPathsStatics(raw)
     }
 
@@ -8309,7 +8309,7 @@ public class ISystemGPSProperties <: InterfaceWrapperBase & ComInterface & Runti
         ISystemGPSProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemGPSProperties {
+    public static func viewOf(raw: CPointer<Unit>): ISystemGPSProperties {
         ISystemGPSProperties(raw)
     }
 
@@ -8396,7 +8396,7 @@ public class ISystemImageProperties <: InterfaceWrapperBase & ComInterface & Run
         ISystemImageProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemImageProperties {
+    public static func viewOf(raw: CPointer<Unit>): ISystemImageProperties {
         ISystemImageProperties(raw)
     }
 
@@ -8487,7 +8487,7 @@ public class ISystemMediaProperties <: InterfaceWrapperBase & ComInterface & Run
         ISystemMediaProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemMediaProperties {
+    public static func viewOf(raw: CPointer<Unit>): ISystemMediaProperties {
         ISystemMediaProperties(raw)
     }
 
@@ -8612,7 +8612,7 @@ public class ISystemMusicProperties <: InterfaceWrapperBase & ComInterface & Run
         ISystemMusicProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemMusicProperties {
+    public static func viewOf(raw: CPointer<Unit>): ISystemMusicProperties {
         ISystemMusicProperties(raw)
     }
 
@@ -8750,7 +8750,7 @@ public class ISystemPhotoProperties <: InterfaceWrapperBase & ComInterface & Run
         ISystemPhotoProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemPhotoProperties {
+    public static func viewOf(raw: CPointer<Unit>): ISystemPhotoProperties {
         ISystemPhotoProperties(raw)
     }
 
@@ -8872,7 +8872,7 @@ public class ISystemProperties <: InterfaceWrapperBase & ComInterface & RuntimeN
         ISystemProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemProperties {
+    public static func viewOf(raw: CPointer<Unit>): ISystemProperties {
         ISystemProperties(raw)
     }
 
@@ -9050,7 +9050,7 @@ public class ISystemVideoProperties <: InterfaceWrapperBase & ComInterface & Run
         ISystemVideoProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISystemVideoProperties {
+    public static func viewOf(raw: CPointer<Unit>): ISystemVideoProperties {
         ISystemVideoProperties(raw)
     }
 
@@ -9178,7 +9178,7 @@ public class IUserDataPaths <: InterfaceWrapperBase & ComInterface & RuntimeName
         IUserDataPaths(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUserDataPaths {
+    public static func viewOf(raw: CPointer<Unit>): IUserDataPaths {
         IUserDataPaths(raw)
     }
 
@@ -9401,7 +9401,7 @@ public class IUserDataPathsStatics <: InterfaceWrapperBase & ComInterface & Runt
         IUserDataPathsStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUserDataPathsStatics {
+    public static func viewOf(raw: CPointer<Unit>): IUserDataPathsStatics {
         IUserDataPathsStatics(raw)
     }
 
@@ -9516,7 +9516,7 @@ public class KnownFolders <: InterfaceWrapperBase & ComInterface & windows_inter
         KnownFolders(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): KnownFolders {
+    public static func viewOf(raw: CPointer<Unit>): KnownFolders {
         KnownFolders(raw)
     }
 
@@ -9742,7 +9742,7 @@ public class PathIO <: InterfaceWrapperBase & ComInterface & windows_interface.R
         PathIO(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PathIO {
+    public static func viewOf(raw: CPointer<Unit>): PathIO {
         PathIO(raw)
     }
 
@@ -9883,7 +9883,7 @@ public class SetVersionDeferral <: InterfaceWrapperBase & ComInterface & windows
         SetVersionDeferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SetVersionDeferral {
+    public static func viewOf(raw: CPointer<Unit>): SetVersionDeferral {
         SetVersionDeferral(raw)
     }
 
@@ -9947,7 +9947,7 @@ public class SetVersionRequest <: InterfaceWrapperBase & ComInterface & windows_
         SetVersionRequest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SetVersionRequest {
+    public static func viewOf(raw: CPointer<Unit>): SetVersionRequest {
         SetVersionRequest(raw)
     }
 
@@ -10041,7 +10041,7 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         StorageFile(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFile {
+    public static func viewOf(raw: CPointer<Unit>): StorageFile {
         StorageFile(raw)
     }
 
@@ -10335,7 +10335,7 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         StorageFolder(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFolder {
+    public static func viewOf(raw: CPointer<Unit>): StorageFolder {
         StorageFolder(raw)
     }
 
@@ -10672,7 +10672,7 @@ public class StorageLibrary <: InterfaceWrapperBase & ComInterface & windows_int
         StorageLibrary(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibrary {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibrary {
         StorageLibrary(raw)
     }
 
@@ -10764,7 +10764,7 @@ public class StorageLibraryChange <: InterfaceWrapperBase & ComInterface & windo
         StorageLibraryChange(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChange {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChange {
         StorageLibraryChange(raw)
     }
 
@@ -10844,7 +10844,7 @@ public class StorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface &
         StorageLibraryChangeReader(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeReader {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeReader {
         StorageLibraryChangeReader(raw)
     }
 
@@ -10912,7 +10912,7 @@ public class StorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface 
         StorageLibraryChangeTracker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeTracker {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeTracker {
         StorageLibraryChangeTracker(raw)
     }
 
@@ -10984,7 +10984,7 @@ public class StorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComInt
         StorageLibraryChangeTrackerOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeTrackerOptions {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeTrackerOptions {
         StorageLibraryChangeTrackerOptions(raw)
     }
 
@@ -11088,7 +11088,7 @@ public class StorageLibraryLastChangeId <: InterfaceWrapperBase & ComInterface &
         StorageLibraryLastChangeId(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryLastChangeId {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryLastChangeId {
         StorageLibraryLastChangeId(raw)
     }
 
@@ -11191,7 +11191,7 @@ public class StorageProvider <: InterfaceWrapperBase & ComInterface & windows_in
         StorageProvider(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProvider {
+    public static func viewOf(raw: CPointer<Unit>): StorageProvider {
         StorageProvider(raw)
     }
 
@@ -11255,7 +11255,7 @@ public class StorageStreamTransaction <: InterfaceWrapperBase & ComInterface & w
         StorageStreamTransaction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageStreamTransaction {
+    public static func viewOf(raw: CPointer<Unit>): StorageStreamTransaction {
         StorageStreamTransaction(raw)
     }
 
@@ -11327,7 +11327,7 @@ public class StreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & wi
         StreamedFileDataRequest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StreamedFileDataRequest {
+    public static func viewOf(raw: CPointer<Unit>): StreamedFileDataRequest {
         StreamedFileDataRequest(raw)
     }
 
@@ -11416,7 +11416,7 @@ public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInter
         StreamedFileDataRequestedHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StreamedFileDataRequestedHandler {
+    public static func viewOf(raw: CPointer<Unit>): StreamedFileDataRequestedHandler {
         StreamedFileDataRequestedHandler(raw)
     }
 
@@ -11502,7 +11502,7 @@ func buildStreamedFileDataRequestedHandlerBoxVtbl(): StreamedFileDataRequestedHa
 func StreamedFileDataRequestedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<StreamedFileDataRequestedHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(StreamedFileDataRequest.fromRawBorrowed(arg0))
+            invoker.Invoke(StreamedFileDataRequest.viewOf(arg0))
             return S_OK.value
         case None =>
             return E_NOTIMPL.value
@@ -11542,7 +11542,7 @@ public class SystemAudioProperties <: InterfaceWrapperBase & ComInterface & wind
         SystemAudioProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemAudioProperties {
+    public static func viewOf(raw: CPointer<Unit>): SystemAudioProperties {
         SystemAudioProperties(raw)
     }
 
@@ -11606,7 +11606,7 @@ public class SystemDataPaths <: InterfaceWrapperBase & ComInterface & windows_in
         SystemDataPaths(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemDataPaths {
+    public static func viewOf(raw: CPointer<Unit>): SystemDataPaths {
         SystemDataPaths(raw)
     }
 
@@ -11736,7 +11736,7 @@ public class SystemGPSProperties <: InterfaceWrapperBase & ComInterface & window
         SystemGPSProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemGPSProperties {
+    public static func viewOf(raw: CPointer<Unit>): SystemGPSProperties {
         SystemGPSProperties(raw)
     }
 
@@ -11804,7 +11804,7 @@ public class SystemImageProperties <: InterfaceWrapperBase & ComInterface & wind
         SystemImageProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemImageProperties {
+    public static func viewOf(raw: CPointer<Unit>): SystemImageProperties {
         SystemImageProperties(raw)
     }
 
@@ -11872,7 +11872,7 @@ public class SystemMediaProperties <: InterfaceWrapperBase & ComInterface & wind
         SystemMediaProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemMediaProperties {
+    public static func viewOf(raw: CPointer<Unit>): SystemMediaProperties {
         SystemMediaProperties(raw)
     }
 
@@ -11956,7 +11956,7 @@ public class SystemMusicProperties <: InterfaceWrapperBase & ComInterface & wind
         SystemMusicProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemMusicProperties {
+    public static func viewOf(raw: CPointer<Unit>): SystemMusicProperties {
         SystemMusicProperties(raw)
     }
 
@@ -12048,7 +12048,7 @@ public class SystemPhotoProperties <: InterfaceWrapperBase & ComInterface & wind
         SystemPhotoProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemPhotoProperties {
+    public static func viewOf(raw: CPointer<Unit>): SystemPhotoProperties {
         SystemPhotoProperties(raw)
     }
 
@@ -12128,7 +12128,7 @@ public class SystemProperties <: InterfaceWrapperBase & ComInterface & windows_i
         SystemProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemProperties {
+    public static func viewOf(raw: CPointer<Unit>): SystemProperties {
         SystemProperties(raw)
     }
 
@@ -12257,7 +12257,7 @@ public class SystemVideoProperties <: InterfaceWrapperBase & ComInterface & wind
         SystemVideoProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SystemVideoProperties {
+    public static func viewOf(raw: CPointer<Unit>): SystemVideoProperties {
         SystemVideoProperties(raw)
     }
 
@@ -12337,7 +12337,7 @@ public class UserDataPaths <: InterfaceWrapperBase & ComInterface & windows_inte
         UserDataPaths(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): UserDataPaths {
+    public static func viewOf(raw: CPointer<Unit>): UserDataPaths {
         UserDataPaths(raw)
     }
 

@@ -49,49 +49,49 @@ public interface InterfaceDescriptorBase {
 
 public interface AbiReferenceDescriptorBase<T> {
     func descriptorName(): String
-    func wrapOwned(raw: CPointer<Unit>): T
-    func wrapBorrowed(raw: CPointer<Unit>): T
+    func takeFromAbi(raw: CPointer<Unit>): T
+    func viewOf(raw: CPointer<Unit>): T
     func addRefPointer(raw: CPointer<Unit>): UInt32
     func releasePointer(raw: CPointer<Unit>): UInt32
 }
 
 public class AbiReferenceDescriptor<T> <: AbiReferenceDescriptorBase<T> {
     public let name: String
-    private let wrapOwned_: (CPointer<Unit>) -> T
-    private let wrapBorrowed_: (CPointer<Unit>) -> T
+    private let takeFromAbi_: (CPointer<Unit>) -> T
+    private let viewOf_: (CPointer<Unit>) -> T
     private let addRefPointer_: (CPointer<Unit>) -> UInt32
     private let releasePointer_: (CPointer<Unit>) -> UInt32
 
     public init(name: String, wrap: (CPointer<Unit>) -> T) {
         this.name = name
-        this.wrapOwned_ = wrap
-        this.wrapBorrowed_ = wrap
+        this.takeFromAbi_ = wrap
+        this.viewOf_ = wrap
         this.addRefPointer_ = { _ => 0u32 }
         this.releasePointer_ = { _ => 0u32 }
     }
 
     public init(
         name: String,
-        wrapOwned: (CPointer<Unit>) -> T,
-        wrapBorrowed: (CPointer<Unit>) -> T
+        takeFromAbi: (CPointer<Unit>) -> T,
+        viewOf: (CPointer<Unit>) -> T
     ) {
         this.name = name
-        this.wrapOwned_ = wrapOwned
-        this.wrapBorrowed_ = wrapBorrowed
+        this.takeFromAbi_ = takeFromAbi
+        this.viewOf_ = viewOf
         this.addRefPointer_ = { _ => 0u32 }
         this.releasePointer_ = { _ => 0u32 }
     }
 
     public init(
         name: String,
-        wrapOwned: (CPointer<Unit>) -> T,
-        wrapBorrowed: (CPointer<Unit>) -> T,
+        takeFromAbi: (CPointer<Unit>) -> T,
+        viewOf: (CPointer<Unit>) -> T,
         addRefPointer: (CPointer<Unit>) -> UInt32,
         releasePointer: (CPointer<Unit>) -> UInt32
     ) {
         this.name = name
-        this.wrapOwned_ = wrapOwned
-        this.wrapBorrowed_ = wrapBorrowed
+        this.takeFromAbi_ = takeFromAbi
+        this.viewOf_ = viewOf
         this.addRefPointer_ = addRefPointer
         this.releasePointer_ = releasePointer
     }
@@ -100,12 +100,12 @@ public class AbiReferenceDescriptor<T> <: AbiReferenceDescriptorBase<T> {
         name
     }
 
-    public func wrapOwned(raw: CPointer<Unit>): T {
-        wrapOwned_(raw)
+    public func takeFromAbi(raw: CPointer<Unit>): T {
+        takeFromAbi_(raw)
     }
 
-    public func wrapBorrowed(raw: CPointer<Unit>): T {
-        wrapBorrowed_(raw)
+    public func viewOf(raw: CPointer<Unit>): T {
+        viewOf_(raw)
     }
 
     public func addRefPointer(raw: CPointer<Unit>): UInt32 {
@@ -129,8 +129,8 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
     public var runtimeTypeContract: Option<RuntimeTypeContract> = None
     private let directBaseName_: Option<String>
     private let directBaseDescriptor_: Option<InterfaceDescriptorBase>
-    private let wrapOwned_: (CPointer<Unit>) -> T
-    private let wrapBorrowed_: (CPointer<Unit>) -> T
+    private let takeFromAbi_: (CPointer<Unit>) -> T
+    private let viewOf_: (CPointer<Unit>) -> T
 
     public prop baseIid: Option<GUID> {
         get() {
@@ -148,8 +148,8 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = 0
         this.directBaseName_ = None
         this.directBaseDescriptor_ = None
-        this.wrapOwned_ = wrap
-        this.wrapBorrowed_ = wrap
+        this.takeFromAbi_ = wrap
+        this.viewOf_ = wrap
     }
 
     public init(name: String, iid: GUID, baseIid: GUID, wrap: (CPointer<Unit>) -> T) {
@@ -159,8 +159,8 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = 0
         this.directBaseName_ = None
         this.directBaseDescriptor_ = None
-        this.wrapOwned_ = wrap
-        this.wrapBorrowed_ = wrap
+        this.takeFromAbi_ = wrap
+        this.viewOf_ = wrap
     }
 
     public init(
@@ -175,8 +175,8 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = 0
         this.directBaseName_ = Some(baseDescriptor.descriptorName())
         this.directBaseDescriptor_ = Some(baseDescriptor)
-        this.wrapOwned_ = wrap
-        this.wrapBorrowed_ = wrap
+        this.takeFromAbi_ = wrap
+        this.viewOf_ = wrap
     }
 
     public init(
@@ -192,8 +192,8 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = ownMethodCount
         this.directBaseName_ = Some(baseDescriptor.descriptorName())
         this.directBaseDescriptor_ = Some(baseDescriptor)
-        this.wrapOwned_ = wrap
-        this.wrapBorrowed_ = wrap
+        this.takeFromAbi_ = wrap
+        this.viewOf_ = wrap
     }
 
     public init(
@@ -208,15 +208,15 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = 0
         this.directBaseName_ = None
         this.directBaseDescriptor_ = None
-        this.wrapOwned_ = wrap
-        this.wrapBorrowed_ = wrap
+        this.takeFromAbi_ = wrap
+        this.viewOf_ = wrap
     }
 
     public init(
         name: String,
         iid: GUID,
-        wrapOwned: (CPointer<Unit>) -> T,
-        wrapBorrowed: (CPointer<Unit>) -> T
+        takeFromAbi: (CPointer<Unit>) -> T,
+        viewOf: (CPointer<Unit>) -> T
     ) {
         this.name = name
         this.iid = iid
@@ -224,16 +224,16 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = 0
         this.directBaseName_ = None
         this.directBaseDescriptor_ = None
-        this.wrapOwned_ = wrapOwned
-        this.wrapBorrowed_ = wrapBorrowed
+        this.takeFromAbi_ = takeFromAbi
+        this.viewOf_ = viewOf
     }
 
     public init(
         name: String,
         iid: GUID,
         baseIid: GUID,
-        wrapOwned: (CPointer<Unit>) -> T,
-        wrapBorrowed: (CPointer<Unit>) -> T
+        takeFromAbi: (CPointer<Unit>) -> T,
+        viewOf: (CPointer<Unit>) -> T
     ) {
         this.name = name
         this.iid = iid
@@ -241,16 +241,16 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = 0
         this.directBaseName_ = None
         this.directBaseDescriptor_ = None
-        this.wrapOwned_ = wrapOwned
-        this.wrapBorrowed_ = wrapBorrowed
+        this.takeFromAbi_ = takeFromAbi
+        this.viewOf_ = viewOf
     }
 
     public init(
         name: String,
         iid: GUID,
         baseDescriptor: InterfaceDescriptorBase,
-        wrapOwned: (CPointer<Unit>) -> T,
-        wrapBorrowed: (CPointer<Unit>) -> T
+        takeFromAbi: (CPointer<Unit>) -> T,
+        viewOf: (CPointer<Unit>) -> T
     ) {
         this.name = name
         this.iid = iid
@@ -258,16 +258,16 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = 0
         this.directBaseName_ = Some(baseDescriptor.descriptorName())
         this.directBaseDescriptor_ = Some(baseDescriptor)
-        this.wrapOwned_ = wrapOwned
-        this.wrapBorrowed_ = wrapBorrowed
+        this.takeFromAbi_ = takeFromAbi
+        this.viewOf_ = viewOf
     }
 
     public init(
         name: String,
         iid: GUID,
         baseDescriptor: InterfaceDescriptorBase,
-        wrapOwned: (CPointer<Unit>) -> T,
-        wrapBorrowed: (CPointer<Unit>) -> T,
+        takeFromAbi: (CPointer<Unit>) -> T,
+        viewOf: (CPointer<Unit>) -> T,
         ownMethodCount!: Int64
     ) {
         this.name = name
@@ -276,16 +276,16 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = ownMethodCount
         this.directBaseName_ = Some(baseDescriptor.descriptorName())
         this.directBaseDescriptor_ = Some(baseDescriptor)
-        this.wrapOwned_ = wrapOwned
-        this.wrapBorrowed_ = wrapBorrowed
+        this.takeFromAbi_ = takeFromAbi
+        this.viewOf_ = viewOf
     }
 
     public init(
         name: String,
         iid: GUID,
         ancestorIids: Array<GUID>,
-        wrapOwned: (CPointer<Unit>) -> T,
-        wrapBorrowed: (CPointer<Unit>) -> T
+        takeFromAbi: (CPointer<Unit>) -> T,
+        viewOf: (CPointer<Unit>) -> T
     ) {
         this.name = name
         this.iid = iid
@@ -293,8 +293,8 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         this.ownMethodCount = 0
         this.directBaseName_ = None
         this.directBaseDescriptor_ = None
-        this.wrapOwned_ = wrapOwned
-        this.wrapBorrowed_ = wrapBorrowed
+        this.takeFromAbi_ = takeFromAbi
+        this.viewOf_ = viewOf
     }
 
     public func descriptorIid(): GUID {
@@ -334,16 +334,12 @@ public class InterfaceDescriptor<T> <: InterfaceDescriptorBase & AbiReferenceDes
         directBaseDescriptor_
     }
 
-    public func wrap(raw: CPointer<Unit>): T {
-        wrapOwned_(raw)
+    public func takeFromAbi(raw: CPointer<Unit>): T {
+        takeFromAbi_(raw)
     }
 
-    public func wrapOwned(raw: CPointer<Unit>): T {
-        wrapOwned_(raw)
-    }
-
-    public func wrapBorrowed(raw: CPointer<Unit>): T {
-        wrapBorrowed_(raw)
+    public func viewOf(raw: CPointer<Unit>): T {
+        viewOf_(raw)
     }
 
     public func addRefPointer(raw: CPointer<Unit>): UInt32 {

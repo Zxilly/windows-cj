@@ -1,8 +1,8 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-bindgen"
-$fixtureWinmd = Join-Path $repoRoot "ref/windows-rs/crates/libs/bindgen/default/Windows.winmd"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
+$fixtureWinmd = Join-Path $repoRoot "windows-cj/winmd/Windows.winmd"
 $outputRoot = Join-Path $packageRoot "tests/output/winrt_projection"
 
 if (!(Test-Path $fixtureWinmd)) {
@@ -24,7 +24,7 @@ finally {
     Pop-Location
 }
 
-$foundationFile = Join-Path $outputRoot "foundation.cj"
+$foundationFile = Join-Path $outputRoot "Foundation.cj"
 if (!(Test-Path $foundationFile)) {
     throw "Missing generated WinRT foundation source: $foundationFile"
 }
@@ -76,8 +76,21 @@ if ($foundation -notmatch 'InterfaceDescriptorSchema\("IAsyncAction", IAsyncActi
 if ($foundation -notmatch 'InterfaceMethodSchema\("GetResults", 13, \[\], "Int32"\)') {
     throw "WinRT interface schemas are missing absolute abiSlot metadata"
 }
-if ($foundation -notmatch 'InterfaceParameterSchema\("result", "CPointer<CPointer<Unit>>", "OutRef<Uri>", InterfaceParameterBridgeKind\.OutRef\)') {
-    throw "WinRT interface schemas are missing caller-side OutRef parameter metadata"
+if ($foundation -notmatch 'InterfaceParameterSchema\("result", "CPointer<CPointer<Unit>>", "OutSlot<Uri>", InterfaceParameterBridgeKind\.OutSlot\)') {
+    throw "WinRT interface schemas are missing caller-side OutSlot parameter metadata"
+}
+if ($foundation -notmatch 'public static func fromAbiTake\(raw: CPointer<Unit>\): IAsyncAction') {
+    throw "WinRT interface wrappers are missing ABI-take constructors"
+}
+$legacyRawViewName = 'fromRaw' + 'Borrowed'
+if ($foundation -match $legacyRawViewName) {
+    throw "High-level WinRT projection should not emit call-view raw constructor aliases"
+}
+if ($foundation -match 'OutRef<') {
+    throw "High-level WinRT projection should not expose OutRef caller-side metadata"
+}
+if ($foundation -match 'Ref<') {
+    throw "High-level WinRT projection should not expose Ref caller-side metadata"
 }
 if ($foundation -notmatch 'descriptor\.runtimeTypeContract = Some\(IUriRuntimeClass\.runtimeType\(\)\)') {
     throw "WinRT descriptors are missing runtime-type metadata wiring"
@@ -85,8 +98,14 @@ if ($foundation -notmatch 'descriptor\.runtimeTypeContract = Some\(IUriRuntimeCl
 if ($foundation -notmatch 'public static func runtimeName\(\): String') {
     throw "WinRT interface wrappers are missing RuntimeName helpers"
 }
-if ($foundation -notmatch 'public static func new\(invoke: \(IAsyncAction, AsyncStatus\) -> Unit\): AsyncActionCompletedHandler') {
-    throw "WinRT delegates are missing boxing entry points"
+if ($foundation -notmatch 'public static func new\(invoke: \(InParam<IAsyncAction>, AsyncStatus\) -> Unit\): AsyncActionCompletedHandler') {
+    throw "WinRT delegates are missing call-bound callback signatures"
+}
+if ($foundation -notmatch 'private open class AsyncActionCompletedHandlerInvoker') {
+    throw "WinRT delegates are missing invoker support types"
+}
+if ($foundation -notmatch 'public override func Invoke\(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus\): Unit') {
+    throw "WinRT delegate box overrides are not using call-bound callback parameters"
 }
 if ($foundation -notmatch 'ComObject<AsyncActionCompletedHandlerBox>\.new\(box, \[AsyncActionCompletedHandler\.descriptorSchema\(\)\], \[box\.vtblPtr\(\)\]\)') {
     throw "WinRT delegates are not boxed through ComObject"

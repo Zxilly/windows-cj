@@ -85,7 +85,7 @@ public class IDirect3DSurface <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IDirect3DSurface(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDirect3DSurface {
+    public static func viewOf(raw: CPointer<Unit>): IDirect3DSurface {
         IDirect3DSurface(raw)
     }
 

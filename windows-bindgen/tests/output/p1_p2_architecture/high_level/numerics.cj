@@ -1,12 +1,13 @@
-package windows.foundation.numerics
+package Windows.Foundation.Numerics
 
 import std.collection.*
 import windows_core.*
 import windows_interface.*
-import windows.win32.foundation.*
+import Windows.Win32.Foundation as Win32_Foundation
+import Windows.Win32.Foundation.*
 
 
-@When[feature == "feat_windows_foundation_numerics"]
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Matrix3x2 {
     public var M11: Float32 = 0.0
@@ -18,7 +19,7 @@ public struct Matrix3x2 {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_numerics"]
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Matrix4x4 {
     public var M11: Float32 = 0.0
@@ -40,7 +41,7 @@ public struct Matrix4x4 {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_numerics"]
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Plane {
     public var Normal: Vector3 = Vector3()
@@ -48,7 +49,7 @@ public struct Plane {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_numerics"]
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Quaternion {
     public var X: Float32 = 0.0
@@ -58,7 +59,7 @@ public struct Quaternion {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_numerics"]
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Rational {
     public var Numerator: UInt32 = 0
@@ -66,7 +67,7 @@ public struct Rational {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_numerics"]
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Vector2 {
     public var X: Float32 = 0.0
@@ -74,7 +75,7 @@ public struct Vector2 {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_numerics"]
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Vector3 {
     public var X: Float32 = 0.0
@@ -83,7 +84,7 @@ public struct Vector3 {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_numerics"]
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Vector4 {
     public var X: Float32 = 0.0

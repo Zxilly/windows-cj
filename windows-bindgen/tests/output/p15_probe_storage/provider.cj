@@ -78,7 +78,7 @@ public class CachedFileUpdater <: InterfaceWrapperBase & ComInterface & windows_
         CachedFileUpdater(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CachedFileUpdater {
+    public static func viewOf(raw: CPointer<Unit>): CachedFileUpdater {
         CachedFileUpdater(raw)
     }
 
@@ -136,7 +136,7 @@ public class CachedFileUpdaterUI <: InterfaceWrapperBase & ComInterface & window
         CachedFileUpdaterUI(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CachedFileUpdaterUI {
+    public static func viewOf(raw: CPointer<Unit>): CachedFileUpdaterUI {
         CachedFileUpdaterUI(raw)
     }
 
@@ -230,7 +230,7 @@ public class FileUpdateRequest <: InterfaceWrapperBase & ComInterface & windows_
         FileUpdateRequest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileUpdateRequest {
+    public static func viewOf(raw: CPointer<Unit>): FileUpdateRequest {
         FileUpdateRequest(raw)
     }
 
@@ -310,7 +310,7 @@ public class FileUpdateRequestDeferral <: InterfaceWrapperBase & ComInterface & 
         FileUpdateRequestDeferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileUpdateRequestDeferral {
+    public static func viewOf(raw: CPointer<Unit>): FileUpdateRequestDeferral {
         FileUpdateRequestDeferral(raw)
     }
 
@@ -370,7 +370,7 @@ public class FileUpdateRequestedEventArgs <: InterfaceWrapperBase & ComInterface
         FileUpdateRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileUpdateRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): FileUpdateRequestedEventArgs {
         FileUpdateRequestedEventArgs(raw)
     }
 
@@ -464,7 +464,7 @@ public class ICachedFileUpdaterStatics <: InterfaceWrapperBase & ComInterface & 
         ICachedFileUpdaterStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICachedFileUpdaterStatics {
+    public static func viewOf(raw: CPointer<Unit>): ICachedFileUpdaterStatics {
         ICachedFileUpdaterStatics(raw)
     }
 
@@ -547,7 +547,7 @@ public class ICachedFileUpdaterUI <: InterfaceWrapperBase & ComInterface & Runti
         ICachedFileUpdaterUI(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICachedFileUpdaterUI {
+    public static func viewOf(raw: CPointer<Unit>): ICachedFileUpdaterUI {
         ICachedFileUpdaterUI(raw)
     }
 
@@ -676,7 +676,7 @@ public class ICachedFileUpdaterUI2 <: InterfaceWrapperBase & ComInterface & Runt
         ICachedFileUpdaterUI2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICachedFileUpdaterUI2 {
+    public static func viewOf(raw: CPointer<Unit>): ICachedFileUpdaterUI2 {
         ICachedFileUpdaterUI2(raw)
     }
 
@@ -776,7 +776,7 @@ public class IFileUpdateRequest <: InterfaceWrapperBase & ComInterface & Runtime
         IFileUpdateRequest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileUpdateRequest {
+    public static func viewOf(raw: CPointer<Unit>): IFileUpdateRequest {
         IFileUpdateRequest(raw)
     }
 
@@ -891,7 +891,7 @@ public class IFileUpdateRequest2 <: InterfaceWrapperBase & ComInterface & Runtim
         IFileUpdateRequest2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileUpdateRequest2 {
+    public static func viewOf(raw: CPointer<Unit>): IFileUpdateRequest2 {
         IFileUpdateRequest2(raw)
     }
 
@@ -984,7 +984,7 @@ public class IFileUpdateRequestDeferral <: InterfaceWrapperBase & ComInterface &
         IFileUpdateRequestDeferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileUpdateRequestDeferral {
+    public static func viewOf(raw: CPointer<Unit>): IFileUpdateRequestDeferral {
         IFileUpdateRequestDeferral(raw)
     }
 
@@ -1060,7 +1060,7 @@ public class IFileUpdateRequestedEventArgs <: InterfaceWrapperBase & ComInterfac
         IFileUpdateRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileUpdateRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IFileUpdateRequestedEventArgs {
         IFileUpdateRequestedEventArgs(raw)
     }
 
@@ -1139,7 +1139,7 @@ public class IStorageProviderFileTypeInfo <: InterfaceWrapperBase & ComInterface
         IStorageProviderFileTypeInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderFileTypeInfo {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderFileTypeInfo {
         IStorageProviderFileTypeInfo(raw)
     }
 
@@ -1225,7 +1225,7 @@ public class IStorageProviderFileTypeInfoFactory <: InterfaceWrapperBase & ComIn
         IStorageProviderFileTypeInfoFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderFileTypeInfoFactory {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderFileTypeInfoFactory {
         IStorageProviderFileTypeInfoFactory(raw)
     }
 
@@ -1308,7 +1308,7 @@ public class IStorageProviderGetContentInfoForPathResult <: InterfaceWrapperBase
         IStorageProviderGetContentInfoForPathResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderGetContentInfoForPathResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderGetContentInfoForPathResult {
         IStorageProviderGetContentInfoForPathResult(raw)
     }
 
@@ -1423,7 +1423,7 @@ public class IStorageProviderGetPathForContentUriResult <: InterfaceWrapperBase 
         IStorageProviderGetPathForContentUriResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderGetPathForContentUriResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderGetPathForContentUriResult {
         IStorageProviderGetPathForContentUriResult(raw)
     }
 
@@ -1521,7 +1521,7 @@ public class IStorageProviderItemPropertiesStatics <: InterfaceWrapperBase & Com
         IStorageProviderItemPropertiesStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderItemPropertiesStatics {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderItemPropertiesStatics {
         IStorageProviderItemPropertiesStatics(raw)
     }
 
@@ -1604,7 +1604,7 @@ public class IStorageProviderItemProperty <: InterfaceWrapperBase & ComInterface
         IStorageProviderItemProperty(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderItemProperty {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderItemProperty {
         IStorageProviderItemProperty(raw)
     }
 
@@ -1719,7 +1719,7 @@ public class IStorageProviderItemPropertyDefinition <: InterfaceWrapperBase & Co
         IStorageProviderItemPropertyDefinition(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderItemPropertyDefinition {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderItemPropertyDefinition {
         IStorageProviderItemPropertyDefinition(raw)
     }
 
@@ -1859,7 +1859,7 @@ public class IStorageProviderItemPropertySource <: InterfaceWrapperBase & ComInt
         IStorageProviderItemPropertySource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderItemPropertySource {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderItemPropertySource {
         IStorageProviderItemPropertySource(raw)
     }
 
@@ -1940,7 +1940,7 @@ public class IStorageProviderKnownFolderEntry <: InterfaceWrapperBase & ComInter
         IStorageProviderKnownFolderEntry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderKnownFolderEntry {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderKnownFolderEntry {
         IStorageProviderKnownFolderEntry(raw)
     }
 
@@ -2042,7 +2042,7 @@ public class IStorageProviderKnownFolderSyncInfo <: InterfaceWrapperBase & ComIn
         IStorageProviderKnownFolderSyncInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderKnownFolderSyncInfo {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderKnownFolderSyncInfo {
         IStorageProviderKnownFolderSyncInfo(raw)
     }
 
@@ -2224,7 +2224,7 @@ public class IStorageProviderKnownFolderSyncInfoSource <: InterfaceWrapperBase &
         IStorageProviderKnownFolderSyncInfoSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderKnownFolderSyncInfoSource {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderKnownFolderSyncInfoSource {
         IStorageProviderKnownFolderSyncInfoSource(raw)
     }
 
@@ -2358,7 +2358,7 @@ public class IStorageProviderKnownFolderSyncInfoSourceFactory <: InterfaceWrappe
         IStorageProviderKnownFolderSyncInfoSourceFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderKnownFolderSyncInfoSourceFactory {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderKnownFolderSyncInfoSourceFactory {
         IStorageProviderKnownFolderSyncInfoSourceFactory(raw)
     }
 
@@ -2437,7 +2437,7 @@ public class IStorageProviderKnownFolderSyncRequestArgs <: InterfaceWrapperBase 
         IStorageProviderKnownFolderSyncRequestArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderKnownFolderSyncRequestArgs {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderKnownFolderSyncRequestArgs {
         IStorageProviderKnownFolderSyncRequestArgs(raw)
     }
 
@@ -2526,7 +2526,7 @@ public class IStorageProviderMoreInfoUI <: InterfaceWrapperBase & ComInterface &
         IStorageProviderMoreInfoUI(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderMoreInfoUI {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderMoreInfoUI {
         IStorageProviderMoreInfoUI(raw)
     }
 
@@ -2660,7 +2660,7 @@ public class IStorageProviderPropertyCapabilities <: InterfaceWrapperBase & ComI
         IStorageProviderPropertyCapabilities(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderPropertyCapabilities {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderPropertyCapabilities {
         IStorageProviderPropertyCapabilities(raw)
     }
 
@@ -2916,7 +2916,7 @@ public class IStorageProviderQueryResult <: InterfaceWrapperBase & ComInterface 
         IStorageProviderQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderQueryResult {
         IStorageProviderQueryResult(raw)
     }
 
@@ -3054,7 +3054,7 @@ public class IStorageProviderQueryResultSet <: InterfaceWrapperBase & ComInterfa
         IStorageProviderQueryResultSet(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderQueryResultSet {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderQueryResultSet {
         IStorageProviderQueryResultSet(raw)
     }
 
@@ -3160,7 +3160,7 @@ public class IStorageProviderQueryResultSetFactory <: InterfaceWrapperBase & Com
         IStorageProviderQueryResultSetFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderQueryResultSetFactory {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderQueryResultSetFactory {
         IStorageProviderQueryResultSetFactory(raw)
     }
 
@@ -3245,7 +3245,7 @@ public class IStorageProviderQuotaUI <: InterfaceWrapperBase & ComInterface & Ru
         IStorageProviderQuotaUI(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderQuotaUI {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderQuotaUI {
         IStorageProviderQuotaUI(raw)
     }
 
@@ -3371,7 +3371,7 @@ public struct IStorageProviderSearchHandlerVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.Find(StorageProviderSearchQueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.Find(StorageProviderSearchQueryOptions.viewOf(arg0))) {
                         case Result<StorageProviderQueryResultSet>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -3428,7 +3428,7 @@ public class IStorageProviderSearchHandler <: InterfaceWrapperBase & ComInterfac
         IStorageProviderSearchHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSearchHandler {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSearchHandler {
         IStorageProviderSearchHandler(raw)
     }
 
@@ -3554,7 +3554,7 @@ public class IStorageProviderSearchHandlerFactory <: InterfaceWrapperBase & ComI
         IStorageProviderSearchHandlerFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSearchHandlerFactory {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSearchHandlerFactory {
         IStorageProviderSearchHandlerFactory(raw)
     }
 
@@ -3639,7 +3639,7 @@ public class IStorageProviderSearchQueryOptions <: InterfaceWrapperBase & ComInt
         IStorageProviderSearchQueryOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSearchQueryOptions {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSearchQueryOptions {
         IStorageProviderSearchQueryOptions(raw)
     }
 
@@ -3778,7 +3778,7 @@ public class IStorageProviderSearchResult <: InterfaceWrapperBase & ComInterface
         IStorageProviderSearchResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSearchResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSearchResult {
         IStorageProviderSearchResult(raw)
     }
 
@@ -3982,7 +3982,7 @@ public class IStorageProviderShareLinkSource <: InterfaceWrapperBase & ComInterf
         IStorageProviderShareLinkSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderShareLinkSource {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderShareLinkSource {
         IStorageProviderShareLinkSource(raw)
     }
 
@@ -4091,7 +4091,7 @@ public class IStorageProviderStatusUI <: InterfaceWrapperBase & ComInterface & R
         IStorageProviderStatusUI(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderStatusUI {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderStatusUI {
         IStorageProviderStatusUI(raw)
     }
 
@@ -4349,7 +4349,7 @@ public class IStorageProviderStatusUISource <: InterfaceWrapperBase & ComInterfa
         IStorageProviderStatusUISource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderStatusUISource {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderStatusUISource {
         IStorageProviderStatusUISource(raw)
     }
 
@@ -4483,7 +4483,7 @@ public class IStorageProviderStatusUISourceFactory <: InterfaceWrapperBase & Com
         IStorageProviderStatusUISourceFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderStatusUISourceFactory {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderStatusUISourceFactory {
         IStorageProviderStatusUISourceFactory(raw)
     }
 
@@ -4564,7 +4564,7 @@ public struct IStorageProviderSuggestionsHandlerVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.GetSuggestions(StorageProviderSuggestionsQueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.GetSuggestions(StorageProviderSuggestionsQueryOptions.viewOf(arg0))) {
                         case Result<StorageProviderQueryResultSet>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -4673,7 +4673,7 @@ public class IStorageProviderSuggestionsHandler <: InterfaceWrapperBase & ComInt
         IStorageProviderSuggestionsHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSuggestionsHandler {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSuggestionsHandler {
         IStorageProviderSuggestionsHandler(raw)
     }
 
@@ -4819,7 +4819,7 @@ public class IStorageProviderSuggestionsHandlerFactory <: InterfaceWrapperBase &
         IStorageProviderSuggestionsHandlerFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSuggestionsHandlerFactory {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSuggestionsHandlerFactory {
         IStorageProviderSuggestionsHandlerFactory(raw)
     }
 
@@ -4901,7 +4901,7 @@ public class IStorageProviderSuggestionsQueryOptions <: InterfaceWrapperBase & C
         IStorageProviderSuggestionsQueryOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSuggestionsQueryOptions {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSuggestionsQueryOptions {
         IStorageProviderSuggestionsQueryOptions(raw)
     }
 
@@ -5041,7 +5041,7 @@ public class IStorageProviderSyncRootInfo <: InterfaceWrapperBase & ComInterface
         IStorageProviderSyncRootInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSyncRootInfo {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSyncRootInfo {
         IStorageProviderSyncRootInfo(raw)
     }
 
@@ -5330,7 +5330,7 @@ public class IStorageProviderSyncRootInfo2 <: InterfaceWrapperBase & ComInterfac
         IStorageProviderSyncRootInfo2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSyncRootInfo2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSyncRootInfo2 {
         IStorageProviderSyncRootInfo2(raw)
     }
 
@@ -5414,7 +5414,7 @@ public class IStorageProviderSyncRootInfo3 <: InterfaceWrapperBase & ComInterfac
         IStorageProviderSyncRootInfo3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSyncRootInfo3 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSyncRootInfo3 {
         IStorageProviderSyncRootInfo3(raw)
     }
 
@@ -5496,7 +5496,7 @@ public class IStorageProviderSyncRootManagerStatics <: InterfaceWrapperBase & Co
         IStorageProviderSyncRootManagerStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSyncRootManagerStatics {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSyncRootManagerStatics {
         IStorageProviderSyncRootManagerStatics(raw)
     }
 
@@ -5602,7 +5602,7 @@ public class IStorageProviderSyncRootManagerStatics2 <: InterfaceWrapperBase & C
         IStorageProviderSyncRootManagerStatics2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderSyncRootManagerStatics2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderSyncRootManagerStatics2 {
         IStorageProviderSyncRootManagerStatics2(raw)
     }
 
@@ -5794,7 +5794,7 @@ public class IStorageProviderUICommand <: InterfaceWrapperBase & ComInterface & 
         IStorageProviderUICommand(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderUICommand {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderUICommand {
         IStorageProviderUICommand(raw)
     }
 
@@ -5899,7 +5899,7 @@ public struct IStorageProviderUriSourceVtbl {
         vtbl.GetPathForContentUri = { this_, arg0, arg1 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.GetPathForContentUri(arg0, StorageProviderGetPathForContentUriResult.fromRawBorrowed(arg1))) {
+                    match (impl.GetPathForContentUri(arg0, StorageProviderGetPathForContentUriResult.viewOf(arg1))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -5912,7 +5912,7 @@ public struct IStorageProviderUriSourceVtbl {
         vtbl.GetContentInfoForPath = { this_, arg0, arg1 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.GetContentInfoForPath(arg0, StorageProviderGetContentInfoForPathResult.fromRawBorrowed(arg1))) {
+                    match (impl.GetContentInfoForPath(arg0, StorageProviderGetContentInfoForPathResult.viewOf(arg1))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -5949,7 +5949,7 @@ public class IStorageProviderUriSource <: InterfaceWrapperBase & ComInterface & 
         IStorageProviderUriSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProviderUriSource {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProviderUriSource {
         IStorageProviderUriSource(raw)
     }
 
@@ -6045,7 +6045,7 @@ public class StorageProviderFileTypeInfo <: InterfaceWrapperBase & ComInterface 
         StorageProviderFileTypeInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderFileTypeInfo {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderFileTypeInfo {
         StorageProviderFileTypeInfo(raw)
     }
 
@@ -6119,7 +6119,7 @@ public class StorageProviderGetContentInfoForPathResult <: InterfaceWrapperBase 
         StorageProviderGetContentInfoForPathResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderGetContentInfoForPathResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderGetContentInfoForPathResult {
         StorageProviderGetContentInfoForPathResult(raw)
     }
 
@@ -6209,7 +6209,7 @@ public class StorageProviderGetPathForContentUriResult <: InterfaceWrapperBase &
         StorageProviderGetPathForContentUriResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderGetPathForContentUriResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderGetPathForContentUriResult {
         StorageProviderGetPathForContentUriResult(raw)
     }
 
@@ -6436,7 +6436,7 @@ public class StorageProviderItemProperties <: InterfaceWrapperBase & ComInterfac
         StorageProviderItemProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderItemProperties {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderItemProperties {
         StorageProviderItemProperties(raw)
     }
 
@@ -6493,7 +6493,7 @@ public class StorageProviderItemProperty <: InterfaceWrapperBase & ComInterface 
         StorageProviderItemProperty(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderItemProperty {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderItemProperty {
         StorageProviderItemProperty(raw)
     }
 
@@ -6583,7 +6583,7 @@ public class StorageProviderItemPropertyDefinition <: InterfaceWrapperBase & Com
         StorageProviderItemPropertyDefinition(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderItemPropertyDefinition {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderItemPropertyDefinition {
         StorageProviderItemPropertyDefinition(raw)
     }
 
@@ -6665,7 +6665,7 @@ public class StorageProviderKnownFolderEntry <: InterfaceWrapperBase & ComInterf
         StorageProviderKnownFolderEntry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderKnownFolderEntry {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderKnownFolderEntry {
         StorageProviderKnownFolderEntry(raw)
     }
 
@@ -6747,7 +6747,7 @@ public class StorageProviderKnownFolderSyncInfo <: InterfaceWrapperBase & ComInt
         StorageProviderKnownFolderSyncInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderKnownFolderSyncInfo {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderKnownFolderSyncInfo {
         StorageProviderKnownFolderSyncInfo(raw)
     }
 
@@ -6833,7 +6833,7 @@ public class StorageProviderKnownFolderSyncRequestArgs <: InterfaceWrapperBase &
         StorageProviderKnownFolderSyncRequestArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderKnownFolderSyncRequestArgs {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderKnownFolderSyncRequestArgs {
         StorageProviderKnownFolderSyncRequestArgs(raw)
     }
 
@@ -6910,7 +6910,7 @@ public class StorageProviderKnownFolderSyncRequestedHandler <: InterfaceWrapperB
         StorageProviderKnownFolderSyncRequestedHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderKnownFolderSyncRequestedHandler {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderKnownFolderSyncRequestedHandler {
         StorageProviderKnownFolderSyncRequestedHandler(raw)
     }
 
@@ -6996,7 +6996,7 @@ func buildStorageProviderKnownFolderSyncRequestedHandlerBoxVtbl(): StorageProvid
 func StorageProviderKnownFolderSyncRequestedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<StorageProviderKnownFolderSyncRequestedHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(StorageProviderKnownFolderSyncRequestArgs.fromRawBorrowed(arg0))
+            invoker.Invoke(StorageProviderKnownFolderSyncRequestArgs.viewOf(arg0))
             return S_OK.value
         case None =>
             return E_NOTIMPL.value
@@ -7036,7 +7036,7 @@ public class StorageProviderMoreInfoUI <: InterfaceWrapperBase & ComInterface & 
         StorageProviderMoreInfoUI(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderMoreInfoUI {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderMoreInfoUI {
         StorageProviderMoreInfoUI(raw)
     }
 
@@ -7162,7 +7162,7 @@ public class StorageProviderQueryResultSet <: InterfaceWrapperBase & ComInterfac
         StorageProviderQueryResultSet(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderQueryResultSet {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderQueryResultSet {
         StorageProviderQueryResultSet(raw)
     }
 
@@ -7248,7 +7248,7 @@ public class StorageProviderQuotaUI <: InterfaceWrapperBase & ComInterface & win
         StorageProviderQuotaUI(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderQuotaUI {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderQuotaUI {
         StorageProviderQuotaUI(raw)
     }
 
@@ -7418,7 +7418,7 @@ public class StorageProviderSearchQueryOptions <: InterfaceWrapperBase & ComInte
         StorageProviderSearchQueryOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderSearchQueryOptions {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderSearchQueryOptions {
         StorageProviderSearchQueryOptions(raw)
     }
 
@@ -7538,7 +7538,7 @@ public class StorageProviderSearchResult <: InterfaceWrapperBase & ComInterface 
         StorageProviderSearchResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderSearchResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderSearchResult {
         StorageProviderSearchResult(raw)
     }
 
@@ -7716,7 +7716,7 @@ public class StorageProviderStatusUI <: InterfaceWrapperBase & ComInterface & wi
         StorageProviderStatusUI(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderStatusUI {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderStatusUI {
         StorageProviderStatusUI(raw)
     }
 
@@ -7846,7 +7846,7 @@ public class StorageProviderSuggestionResult <: InterfaceWrapperBase & ComInterf
         StorageProviderSuggestionResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderSuggestionResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderSuggestionResult {
         StorageProviderSuggestionResult(raw)
     }
 
@@ -7948,7 +7948,7 @@ public class StorageProviderSuggestionsQueryOptions <: InterfaceWrapperBase & Co
         StorageProviderSuggestionsQueryOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderSuggestionsQueryOptions {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderSuggestionsQueryOptions {
         StorageProviderSuggestionsQueryOptions(raw)
     }
 
@@ -8028,7 +8028,7 @@ public class StorageProviderSyncRootInfo <: InterfaceWrapperBase & ComInterface 
         StorageProviderSyncRootInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderSyncRootInfo {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderSyncRootInfo {
         StorageProviderSyncRootInfo(raw)
     }
 
@@ -8218,7 +8218,7 @@ public class StorageProviderSyncRootManager <: InterfaceWrapperBase & ComInterfa
         StorageProviderSyncRootManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProviderSyncRootManager {
+    public static func viewOf(raw: CPointer<Unit>): StorageProviderSyncRootManager {
         StorageProviderSyncRootManager(raw)
     }
 

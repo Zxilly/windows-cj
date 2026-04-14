@@ -56,7 +56,7 @@ func publishObjectArray<T>(
                 case value: ComInterface =>
                     let raw = value.asRaw()
                     if (raw.isNotNull()) {
-                        comPtrAddRefRaw(raw)
+                        interfaceHandleAddRefRaw(raw)
                     }
                     unsafe { (slots + index).write(raw) }
                 case _ =>

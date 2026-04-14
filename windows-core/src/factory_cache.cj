@@ -1,7 +1,7 @@
 package windows_core
 
 import std.sync.*
-import windows_sys.{CO_E_NOTINITIALIZED, REGDB_E_CLASSNOTREG}
+import windows_sys.win32.foundation.{CO_E_NOTINITIALIZED, REGDB_E_CLASSNOTREG}
 
 let DLL_GET_ACTIVATION_FACTORY_PROC_NAME: Array<UInt8> = [
     0x44u8, 0x6Cu8, 0x6Cu8, 0x47u8, 0x65u8, 0x74u8, 0x41u8, 0x63u8,
@@ -121,7 +121,7 @@ func queryFactoryInterface<I>(
         return Result<I>.Err(WinError(E_POINTER))
     }
 
-    let owner = IUnknown(rawFactory, ownsReference: true)
+    let owner = IUnknown.fromAbiTake(rawFactory)
     try {
         match (unsafe { queryInterfaceAs(rawFactory, descriptor) }) {
             case Some(value) =>
@@ -316,7 +316,7 @@ public func loadFactory<C, I>(): Result<I> where C <: RuntimeName, I <: ComInter
 public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInterface & Interface<I> {
     private let descriptor: InterfaceDescriptor<I>
     private let mutex = Mutex()
-    private var cached: Option<ComPtr<I>> = None
+    private var cached: Option<InterfaceHandle<I>> = None
     private var closed: Bool = false
 
     public init(descriptor: InterfaceDescriptor<I>) {
@@ -354,7 +354,7 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
     }
 
     public func factory(loader: () -> Result<I>): Result<I> {
-        var cachedClone: Option<ComPtr<I>> = None
+        var cachedClone: Option<InterfaceHandle<I>> = None
         var rejected = false
         synchronized(mutex) {
             if (closed) {
@@ -362,7 +362,7 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
             } else {
                 match (cached) {
                     case Some(pointer) =>
-                        cachedClone = Some(pointer.clonePtr())
+                        cachedClone = Some(pointer.retain())
                     case None =>
                         ()
                 }
@@ -373,7 +373,7 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
         }
         match (cachedClone) {
             case Some(pointer) =>
-                return Result<I>.Ok(descriptor.wrapOwned(pointer.detach()))
+                return Result<I>.Ok(descriptor.takeFromAbi(pointer.intoAbi()))
             case None => ()
         }
 
@@ -398,12 +398,12 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
                                 ()
                         }
                         if (shouldCache) {
-                            let cachedPointer = ComPtr<I>.fromInterface(factory, descriptor)
+                            let cachedPointer = InterfaceHandle<I>.retainInterface(factory, descriptor)
                             match (storeCachedIfAbsent(cachedPointer)) {
-                                case Result<ComPtr<I>>.Ok(resultPointer) =>
+                                case Result<InterfaceHandle<I>>.Ok(resultPointer) =>
                                     wrapper.close()
-                                    return Result<I>.Ok(descriptor.wrapOwned(resultPointer.detach()))
-                                case Result<ComPtr<I>>.Err(error) =>
+                                    return Result<I>.Ok(descriptor.takeFromAbi(resultPointer.intoAbi()))
+                                case Result<InterfaceHandle<I>>.Err(error) =>
                                     wrapper.close()
                                     return Result<I>.Err(error)
                             }
@@ -411,7 +411,7 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
                         wrapper.addRef()
                         let raw = wrapper.asRaw()
                         wrapper.close()
-                        return Result<I>.Ok(descriptor.wrapOwned(raw))
+                        return Result<I>.Ok(descriptor.takeFromAbi(raw))
                     case None =>
                         return Result<I>.Ok(factory)
                 }
@@ -427,7 +427,7 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
     }
 
     public func close(): Unit {
-        var cachedPointer: Option<ComPtr<I>> = None
+        var cachedPointer: Option<InterfaceHandle<I>> = None
         synchronized(mutex) {
             if (closed) {
                 return
@@ -447,8 +447,8 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
         }
     }
 
-    private func storeCachedIfAbsent(pointer: ComPtr<I>): Result<ComPtr<I>> {
-        var result: Option<ComPtr<I>> = None
+    private func storeCachedIfAbsent(pointer: InterfaceHandle<I>): Result<InterfaceHandle<I>> {
+        var result: Option<InterfaceHandle<I>> = None
         var closeIncoming = false
         var rejected = false
         synchronized(mutex) {
@@ -458,11 +458,11 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
             } else {
                 match (cached) {
                     case Some(existing) =>
-                        result = Some(existing.clonePtr())
+                        result = Some(existing.retain())
                         closeIncoming = true
                     case None =>
                         cached = Some(pointer)
-                        result = Some(pointer.clonePtr())
+                        result = Some(pointer.retain())
                 }
             }
         }
@@ -470,10 +470,10 @@ public class FactoryCache<C, I> <: Resource where C <: RuntimeName, I <: ComInte
             pointer.close()
         }
         if (rejected) {
-            return Result<ComPtr<I>>.Err(WinError(E_POINTER))
+            return Result<InterfaceHandle<I>>.Err(WinError(E_POINTER))
         }
         match (result) {
-            case Some(value) => Result<ComPtr<I>>.Ok(value)
+            case Some(value) => Result<InterfaceHandle<I>>.Ok(value)
             case None => throw IllegalStateException("FactoryCache failed to resolve a cached pointer")
         }
     }

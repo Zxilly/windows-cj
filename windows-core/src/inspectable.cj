@@ -8,7 +8,7 @@ extend<T> ComObjectRuntime<T> <: IInspectableImpl {}
 
 @C
 func iinspectableGetIidsThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     count: CPointer<UInt32>,
     values: CPointer<CPointer<GUID>>
 ): Int32 {
@@ -20,7 +20,7 @@ func iinspectableGetIidsThunk(
         values.write(CPointer<GUID>())
     }
 
-    match (lookupComImpl<IInspectableImpl>(this_)) {
+    match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
         case Some(value) =>
             value.getIidsBase(count, values)
         case None =>
@@ -30,7 +30,7 @@ func iinspectableGetIidsThunk(
 
 @C
 func iinspectableGetRuntimeClassNameThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     value: CPointer<CPointer<Unit>>
 ): Int32 {
     unsafe {
@@ -40,7 +40,7 @@ func iinspectableGetRuntimeClassNameThunk(
         value.write(CPointer<Unit>())
     }
 
-    match (lookupComImpl<IInspectableImpl>(this_)) {
+    match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
         case Some(inspectable) =>
             inspectable.getRuntimeClassNameBase(value)
         case None =>
@@ -50,7 +50,7 @@ func iinspectableGetRuntimeClassNameThunk(
 
 @C
 func iinspectableGetTrustLevelThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     value: CPointer<Int32>
 ): Int32 {
     unsafe {
@@ -60,7 +60,7 @@ func iinspectableGetTrustLevelThunk(
         value.write(0i32)
     }
 
-    match (lookupComImpl<IInspectableImpl>(this_)) {
+    match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
         case Some(inspectable) =>
             inspectable.getTrustLevelBase(value)
         case None =>

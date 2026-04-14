@@ -2,12 +2,12 @@ package windows_core
 
 let IID_IGENERICFACTORY = GUID.fromValues(0x00000035u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
 
-func wrapIGenericFactoryOwned(raw: CPointer<Unit>): IGenericFactory {
-    IGenericFactory(raw, ownsReference: true)
+func takeIGenericFactoryFromAbi(raw: CPointer<Unit>): IGenericFactory {
+    IGenericFactory.fromAbiTake(raw)
 }
 
-func wrapIGenericFactoryBorrowed(raw: CPointer<Unit>): IGenericFactory {
-    IGenericFactory(raw)
+func viewIGenericFactory(raw: CPointer<Unit>): IGenericFactory {
+    IGenericFactory.viewOf(raw)
 }
 
 @C
@@ -19,15 +19,19 @@ public struct IGenericFactoryVtbl {
 }
 
 public class IGenericFactory <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IGenericFactory {
-        IGenericFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGenericFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): IGenericFactory {
+        IGenericFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IGenericFactory {
         IGenericFactory(raw)
     }
 
@@ -40,8 +44,8 @@ public class IGenericFactory <: InterfaceWrapperBase & ComInterface {
             "IGenericFactory",
             IID_IGENERICFACTORY,
             IInspectable.descriptor(),
-            wrapIGenericFactoryOwned,
-            wrapIGenericFactoryBorrowed
+            takeIGenericFactoryFromAbi,
+            viewIGenericFactory
         )
     }
 
@@ -68,14 +72,14 @@ public class IGenericFactory <: InterfaceWrapperBase & ComInterface {
             return Result<T>.Err(WinError(E_POINTER))
         }
         if (descriptor.iid == IInspectable.iid()) {
-            return Result<T>.Ok(descriptor.wrapOwned(raw))
+            return Result<T>.Ok(descriptor.takeFromAbi(raw))
         }
         match (unsafe { queryInterfaceResult(raw, descriptor) }) {
-            case QueryResult<ComPtr<T>>.Ok(pointer) =>
-                comPtrReleaseRaw(raw)
-                return Result<T>.Ok(descriptor.wrapOwned(pointer.detach()))
-            case QueryResult<ComPtr<T>>.Err(error) =>
-                comPtrReleaseRaw(raw)
+            case QueryResult<InterfaceHandle<T>>.Ok(pointer) =>
+                interfaceHandleReleaseRaw(raw)
+                return Result<T>.Ok(descriptor.takeFromAbi(pointer.intoAbi()))
+            case QueryResult<InterfaceHandle<T>>.Err(error) =>
+                interfaceHandleReleaseRaw(raw)
                 return Result<T>.Err(WinError.fromHRESULT(error))
         }
     }

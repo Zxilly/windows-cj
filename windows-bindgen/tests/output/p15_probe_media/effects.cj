@@ -18,7 +18,7 @@ public class AcousticEchoCancellationConfiguration <: InterfaceWrapperBase & Com
         AcousticEchoCancellationConfiguration(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AcousticEchoCancellationConfiguration {
+    public static func viewOf(raw: CPointer<Unit>): AcousticEchoCancellationConfiguration {
         AcousticEchoCancellationConfiguration(raw)
     }
 
@@ -82,7 +82,7 @@ public class AudioCaptureEffectsManager <: InterfaceWrapperBase & ComInterface &
         AudioCaptureEffectsManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AudioCaptureEffectsManager {
+    public static func viewOf(raw: CPointer<Unit>): AudioCaptureEffectsManager {
         AudioCaptureEffectsManager(raw)
     }
 
@@ -154,7 +154,7 @@ public class AudioEffect <: InterfaceWrapperBase & ComInterface & windows_interf
         AudioEffect(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AudioEffect {
+    public static func viewOf(raw: CPointer<Unit>): AudioEffect {
         AudioEffect(raw)
     }
 
@@ -288,7 +288,7 @@ public class IAcousticEchoCancellationConfiguration <: InterfaceWrapperBase & Co
         IAcousticEchoCancellationConfiguration(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAcousticEchoCancellationConfiguration {
+    public static func viewOf(raw: CPointer<Unit>): IAcousticEchoCancellationConfiguration {
         IAcousticEchoCancellationConfiguration(raw)
     }
 
@@ -366,7 +366,7 @@ public class IAudioCaptureEffectsManager <: InterfaceWrapperBase & ComInterface 
         IAudioCaptureEffectsManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioCaptureEffectsManager {
+    public static func viewOf(raw: CPointer<Unit>): IAudioCaptureEffectsManager {
         IAudioCaptureEffectsManager(raw)
     }
 
@@ -458,7 +458,7 @@ public class IAudioEffect <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IAudioEffect(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioEffect {
+    public static func viewOf(raw: CPointer<Unit>): IAudioEffect {
         IAudioEffect(raw)
     }
 
@@ -539,7 +539,7 @@ public class IAudioEffect2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IAudioEffect2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioEffect2 {
+    public static func viewOf(raw: CPointer<Unit>): IAudioEffect2 {
         IAudioEffect2(raw)
     }
 

@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$workRoot = Join-Path $repoRoot "windows-cj/windows-implement/tests/output/alignment_smoke/runner"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$workRoot = Join-Path $packageRoot "tests/output/alignment_smoke/runner"
 
 Push-Location $workRoot
 try {

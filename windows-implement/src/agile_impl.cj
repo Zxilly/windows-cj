@@ -44,25 +44,37 @@ foreign {
     func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>
 }
 
-func wrapIAgileObjectOwned(raw: CPointer<Unit>): IAgileObject {
-    IAgileObject(raw, ownsReference: true)
+func takeIAgileObjectFromAbi(raw: CPointer<Unit>): IAgileObject {
+    IAgileObject.fromAbiTake(raw)
 }
 
-func wrapIAgileObjectBorrowed(raw: CPointer<Unit>): IAgileObject {
-    IAgileObject(raw)
+func viewIAgileObject(raw: CPointer<Unit>): IAgileObject {
+    IAgileObject.viewOf(raw)
 }
 
-func wrapIMarshalOwned(raw: CPointer<Unit>): IMarshal {
-    IMarshal(raw, ownsReference: true)
+func takeIMarshalFromAbi(raw: CPointer<Unit>): IMarshal {
+    IMarshal.fromAbiTake(raw)
 }
 
-func wrapIMarshalBorrowed(raw: CPointer<Unit>): IMarshal {
-    IMarshal(raw)
+func viewIMarshal(raw: CPointer<Unit>): IMarshal {
+    IMarshal.viewOf(raw)
 }
 
 public class IAgileObject <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IAgileObject {
+        IAgileObject(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAgileObject {
+        IAgileObject(raw)
     }
 
     public static func iid(): GUID {
@@ -70,7 +82,7 @@ public class IAgileObject <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IAgileObject> {
-        InterfaceDescriptor<IAgileObject>("IAgileObject", IID_IAGILEOBJECT, wrapIAgileObjectOwned, wrapIAgileObjectBorrowed)
+        InterfaceDescriptor<IAgileObject>("IAgileObject", IID_IAGILEOBJECT, takeIAgileObjectFromAbi, viewIAgileObject)
     }
 
     public unsafe func vtbl(): IAgileObjectVtbl {
@@ -79,8 +91,20 @@ public class IAgileObject <: InterfaceWrapperBase & ComInterface {
 }
 
 public class IMarshal <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IMarshal {
+        IMarshal(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IMarshal {
+        IMarshal(raw)
     }
 
     public static func iid(): GUID {
@@ -88,7 +112,7 @@ public class IMarshal <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMarshal> {
-        InterfaceDescriptor<IMarshal>("IMarshal", IID_IMARSHAL, wrapIMarshalOwned, wrapIMarshalBorrowed)
+        InterfaceDescriptor<IMarshal>("IMarshal", IID_IMARSHAL, takeIMarshalFromAbi, viewIMarshal)
     }
 
     public unsafe func vtbl(): IMarshalVtbl {
@@ -160,7 +184,7 @@ public func createFreeThreadedMarshaler(outer: CPointer<Unit>): Option<IMarshal>
         return None
     }
 
-    let marshalerUnknown = IUnknown(marshalerRaw, ownsReference: true)
+    let marshalerUnknown = IUnknown.fromAbiTake(marshalerRaw)
     match (unsafe { queryInterfaceAs(marshalerRaw, IMarshal.descriptor()) }) {
         case Some(value) =>
             marshalerUnknown.close()
@@ -171,16 +195,16 @@ public func createFreeThreadedMarshaler(outer: CPointer<Unit>): Option<IMarshal>
     }
 }
 
-public func cloneMarshaler(marshaler: IMarshal, ppvObject: CPointer<CPointer<Unit>>): Int32 {
-    if (ppvObject.isNull()) {
+public func cloneMarshaler(marshaler: IMarshal, resultSlot: CPointer<CPointer<Unit>>): Int32 {
+    if (resultSlot.isNull()) {
         return E_POINTER
     }
     let raw = marshaler.asRaw()
     if (raw.isNull()) {
-        unsafe { ppvObject.write(CPointer<Unit>()) }
+        unsafe { resultSlot.write(CPointer<Unit>()) }
         return E_NOINTERFACE
     }
     marshaler.addRef()
-    unsafe { ppvObject.write(raw) }
+    unsafe { resultSlot.write(raw) }
     S_OK
 }

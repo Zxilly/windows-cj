@@ -5,7 +5,7 @@ import windows_interface.*
 import windows_result.*
 
 
-@When[feat_windows_win32_foundation_metadata == "on"]
+@When[Windows_Win32_Foundation_Metadata == "on"]
 @C
 public struct Architecture {
     public var value: Int32 = 0
@@ -38,17 +38,17 @@ public struct Architecture {
     }
 }
 
-@When[feat_windows_win32_foundation_metadata == "on"]
+@When[Windows_Win32_Foundation_Metadata == "on"]
 public let None: Architecture = Architecture(0)
 
-@When[feat_windows_win32_foundation_metadata == "on"]
+@When[Windows_Win32_Foundation_Metadata == "on"]
 public let X86: Architecture = Architecture(1)
 
-@When[feat_windows_win32_foundation_metadata == "on"]
+@When[Windows_Win32_Foundation_Metadata == "on"]
 public let X64: Architecture = Architecture(2)
 
-@When[feat_windows_win32_foundation_metadata == "on"]
+@When[Windows_Win32_Foundation_Metadata == "on"]
 public let Arm64: Architecture = Architecture(4)
 
-@When[feat_windows_win32_foundation_metadata == "on"]
+@When[Windows_Win32_Foundation_Metadata == "on"]
 public let All: Architecture = Architecture(7)

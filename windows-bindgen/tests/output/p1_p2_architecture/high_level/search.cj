@@ -1,28 +1,27 @@
-package windows.storage.search
+package Windows.Storage.Search
 
 import std.collection.*
 import windows_core.*
 import windows_interface.*
-import windows.win32.foundation.*
+import Windows.Data.Text as Data_Text
+import Windows.Foundation as Foundation
+import Windows.Foundation.Collections as Foundation_Collections
+import Windows.Storage as Storage
+import Windows.Storage.FileProperties as Storage_FileProperties
+import Windows.Win32.Foundation as Win32_Foundation
+import Windows.Win32.Foundation.*
 
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
+@C
 public struct CommonFileQuery {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let DefaultQuery = CommonFileQuery(value: 0)
-    public static let OrderByName = CommonFileQuery(value: 1)
-    public static let OrderByTitle = CommonFileQuery(value: 2)
-    public static let OrderByMusicProperties = CommonFileQuery(value: 3)
-    public static let OrderBySearchRank = CommonFileQuery(value: 4)
-    public static let OrderByDate = CommonFileQuery(value: 5)
 
     public operator func ==(other: CommonFileQuery): Bool {
         return this.value == other.value
@@ -32,30 +31,34 @@ public struct CommonFileQuery {
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
-public struct CommonFolderQuery {
-    public let value: Int32
+@When[Windows_Storage_Search == "on"]
+public let DefaultQuery: CommonFileQuery = CommonFileQuery(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Storage_Search == "on"]
+public let OrderByName: CommonFileQuery = CommonFileQuery(1)
+
+@When[Windows_Storage_Search == "on"]
+public let OrderByTitle: CommonFileQuery = CommonFileQuery(2)
+
+@When[Windows_Storage_Search == "on"]
+public let OrderByMusicProperties: CommonFileQuery = CommonFileQuery(3)
+
+@When[Windows_Storage_Search == "on"]
+public let OrderBySearchRank: CommonFileQuery = CommonFileQuery(4)
+
+@When[Windows_Storage_Search == "on"]
+public let OrderByDate: CommonFileQuery = CommonFileQuery(5)
+
+@When[Windows_Storage_Search == "on"]
+@C
+public struct CommonFolderQuery {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let DefaultQuery = CommonFolderQuery(value: 0)
-    public static let GroupByYear = CommonFolderQuery(value: 100)
-    public static let GroupByMonth = CommonFolderQuery(value: 101)
-    public static let GroupByArtist = CommonFolderQuery(value: 102)
-    public static let GroupByAlbum = CommonFolderQuery(value: 103)
-    public static let GroupByAlbumArtist = CommonFolderQuery(value: 104)
-    public static let GroupByComposer = CommonFolderQuery(value: 105)
-    public static let GroupByGenre = CommonFolderQuery(value: 106)
-    public static let GroupByPublishedYear = CommonFolderQuery(value: 107)
-    public static let GroupByRating = CommonFolderQuery(value: 108)
-    public static let GroupByTag = CommonFolderQuery(value: 109)
-    public static let GroupByAuthor = CommonFolderQuery(value: 110)
-    public static let GroupByType = CommonFolderQuery(value: 111)
 
     public operator func ==(other: CommonFolderQuery): Bool {
         return this.value == other.value
@@ -65,20 +68,55 @@ public struct CommonFolderQuery {
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
-public struct DateStackOption {
-    public let value: Int32
+@When[Windows_Storage_Search == "on"]
+public let DefaultQuery: CommonFolderQuery = CommonFolderQuery(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Storage_Search == "on"]
+public let GroupByYear: CommonFolderQuery = CommonFolderQuery(100)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByMonth: CommonFolderQuery = CommonFolderQuery(101)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByArtist: CommonFolderQuery = CommonFolderQuery(102)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByAlbum: CommonFolderQuery = CommonFolderQuery(103)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByAlbumArtist: CommonFolderQuery = CommonFolderQuery(104)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByComposer: CommonFolderQuery = CommonFolderQuery(105)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByGenre: CommonFolderQuery = CommonFolderQuery(106)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByPublishedYear: CommonFolderQuery = CommonFolderQuery(107)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByRating: CommonFolderQuery = CommonFolderQuery(108)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByTag: CommonFolderQuery = CommonFolderQuery(109)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByAuthor: CommonFolderQuery = CommonFolderQuery(110)
+
+@When[Windows_Storage_Search == "on"]
+public let GroupByType: CommonFolderQuery = CommonFolderQuery(111)
+
+@When[Windows_Storage_Search == "on"]
+@C
+public struct DateStackOption {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let None = DateStackOption(value: 0)
-    public static let Year = DateStackOption(value: 1)
-    public static let Month = DateStackOption(value: 2)
 
     public operator func ==(other: DateStackOption): Bool {
         return this.value == other.value
@@ -88,19 +126,25 @@ public struct DateStackOption {
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
-public struct FolderDepth {
-    public let value: Int32
+@When[Windows_Storage_Search == "on"]
+public let None: DateStackOption = DateStackOption(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Storage_Search == "on"]
+public let Year: DateStackOption = DateStackOption(1)
+
+@When[Windows_Storage_Search == "on"]
+public let Month: DateStackOption = DateStackOption(2)
+
+@When[Windows_Storage_Search == "on"]
+@C
+public struct FolderDepth {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Shallow = FolderDepth(value: 0)
-    public static let Deep = FolderDepth(value: 1)
 
     public operator func ==(other: FolderDepth): Bool {
         return this.value == other.value
@@ -110,7 +154,13 @@ public struct FolderDepth {
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
+public let Shallow: FolderDepth = FolderDepth(0)
+
+@When[Windows_Storage_Search == "on"]
+public let Deep: FolderDepth = FolderDepth(1)
+
+@When[Windows_Storage_Search == "on"]
 @C
 public struct IQueryOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -130,22 +180,26 @@ public struct IQueryOptionsVtbl {
     public var DateStackOption: CFunc<(CPointer<Unit>, CPointer<DateStackOption>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var SaveToString: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var LoadFromString: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var SetThumbnailPrefetch: CFunc<(CPointer<Unit>, windows.storage.file_properties.ThumbnailMode, UInt32, windows.storage.file_properties.ThumbnailOptions) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var SetPropertyPrefetch: CFunc<(CPointer<Unit>, windows.storage.file_properties.PropertyPrefetchOptions, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var SetThumbnailPrefetch: CFunc<(CPointer<Unit>, Storage_FileProperties.ThumbnailMode, UInt32, Storage_FileProperties.ThumbnailOptions) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var SetPropertyPrefetch: CFunc<(CPointer<Unit>, Storage_FileProperties.PropertyPrefetchOptions, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class IQueryOptions <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IQueryOptions {
-        IQueryOptions(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IQueryOptions {
+    public static func fromAbiTake(raw: CPointer<Unit>): IQueryOptions {
+        IQueryOptions(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IQueryOptions {
         IQueryOptions(raw)
     }
 
@@ -161,13 +215,13 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IQueryOptions> {
-        var descriptor = InterfaceDescriptor<IQueryOptions>("IQueryOptions", IQueryOptions.iid(), IInspectable.descriptor(), { raw => IQueryOptions(raw, ownsReference: true) }, { raw => IQueryOptions(raw) })
+        var descriptor = InterfaceDescriptor<IQueryOptions>("IQueryOptions", IQueryOptions.iid(), IInspectable.descriptor(), { raw => IQueryOptions.fromAbiTake(raw) }, { raw => IQueryOptions.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IQueryOptions.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IQueryOptions", IQueryOptions.iid(), IInspectable.descriptorSchema(), "IQueryOptionsVtbl", "IQueryOptions", "IQueryOptions_Impl", [InterfaceMethodSchema("FileTypeFilter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("FolderDepth", 7, [InterfaceParameterSchema("result", "CPointer<FolderDepth>", "OutRef<FolderDepth>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetFolderDepth", 8, [InterfaceParameterSchema("value", "FolderDepth", "FolderDepth", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ApplicationSearchFilter", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetApplicationSearchFilter", 10, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UserSearchFilter", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetUserSearchFilter", 12, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Language", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetLanguage", 14, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IndexerOption", 15, [InterfaceParameterSchema("result", "CPointer<IndexerOption>", "OutRef<IndexerOption>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetIndexerOption", 16, [InterfaceParameterSchema("value", "IndexerOption", "IndexerOption", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SortOrder", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GroupPropertyName", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DateStackOption", 19, [InterfaceParameterSchema("result", "CPointer<DateStackOption>", "OutRef<DateStackOption>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SaveToString", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("LoadFromString", 21, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetThumbnailPrefetch", 22, [InterfaceParameterSchema("mode", "windows.storage.file_properties.ThumbnailMode", "windows.storage.file_properties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "windows.storage.file_properties.ThumbnailOptions", "windows.storage.file_properties.ThumbnailOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyPrefetch", 23, [InterfaceParameterSchema("options", "windows.storage.file_properties.PropertyPrefetchOptions", "windows.storage.file_properties.PropertyPrefetchOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("propertiesToRetrieve", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IQueryOptions", IQueryOptions.iid(), IInspectable.descriptorSchema(), "IQueryOptionsVtbl", "IQueryOptions", "IQueryOptions_Impl", [InterfaceMethodSchema("FileTypeFilter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation_Collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FolderDepth", 7, [InterfaceParameterSchema("result", "CPointer<FolderDepth>", "OutSlot<FolderDepth>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetFolderDepth", 8, [InterfaceParameterSchema("value", "FolderDepth", "FolderDepth", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ApplicationSearchFilter", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetApplicationSearchFilter", 10, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("UserSearchFilter", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetUserSearchFilter", 12, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Language", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLanguage", 14, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("IndexerOption", 15, [InterfaceParameterSchema("result", "CPointer<IndexerOption>", "OutSlot<IndexerOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetIndexerOption", 16, [InterfaceParameterSchema("value", "IndexerOption", "IndexerOption", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SortOrder", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation_Collections.IVector<SortEntry>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GroupPropertyName", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DateStackOption", 19, [InterfaceParameterSchema("result", "CPointer<DateStackOption>", "OutSlot<DateStackOption>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveToString", 20, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LoadFromString", 21, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetThumbnailPrefetch", 22, [InterfaceParameterSchema("mode", "Storage_FileProperties.ThumbnailMode", "Storage_FileProperties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "Storage_FileProperties.ThumbnailOptions", "Storage_FileProperties.ThumbnailOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("SetPropertyPrefetch", 23, [InterfaceParameterSchema("options", "Storage_FileProperties.PropertyPrefetchOptions", "Storage_FileProperties.PropertyPrefetchOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("propertiesToRetrieve", "CPointer<Unit>", "InParam<Foundation_Collections.IIterable<String>>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IQueryOptions.runtimeType())
         return schema
     }
@@ -189,19 +243,19 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IQueryOptionsVtbl {
         readVtbl<IQueryOptionsVtbl>(IQueryOptionsVtbl())
     }
 
-    public unsafe func FileTypeFilter(): CPointer<Unit> {
+    public unsafe func FileTypeFilter(): Foundation_Collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.FileTypeFilter(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation_Collections.IVector<String>.fromAbiTake(result)
     }
 
     public unsafe func FolderDepth(): FolderDepth {
@@ -274,12 +328,12 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface & RuntimeName 
         HRESULT(hr).ok()
     }
 
-    public unsafe func SortOrder(): CPointer<Unit> {
+    public unsafe func SortOrder(): Foundation_Collections.IVector<SortEntry> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.SortOrder(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation_Collections.IVector<SortEntry>.fromAbiTake(result)
     }
 
     public unsafe func GroupPropertyName(): CPointer<UInt16> {
@@ -312,20 +366,20 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface & RuntimeName 
         HRESULT(hr).ok()
     }
 
-    public unsafe func SetThumbnailPrefetch(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32, options: windows.storage.file_properties.ThumbnailOptions): Unit {
+    public unsafe func SetThumbnailPrefetch(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32, options: Storage_FileProperties.ThumbnailOptions): Unit {
         let v = vtbl()
         let hr = v.SetThumbnailPrefetch(asRaw(), mode, requestedSize, options)
         HRESULT(hr).ok()
     }
 
-    public unsafe func SetPropertyPrefetch(options: windows.storage.file_properties.PropertyPrefetchOptions, propertiesToRetrieve: CPointer<Unit>): Unit {
+    public unsafe func SetPropertyPrefetch(options: Storage_FileProperties.PropertyPrefetchOptions, propertiesToRetrieve: Foundation_Collections.IIterable<String>): Unit {
         let v = vtbl()
-        let hr = v.SetPropertyPrefetch(asRaw(), options, propertiesToRetrieve)
+        let hr = v.SetPropertyPrefetch(asRaw(), options, propertiesToRetrieve.asRaw())
         HRESULT(hr).ok()
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 @C
 public struct IQueryOptionsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -334,17 +388,21 @@ public struct IQueryOptionsFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class IQueryOptionsFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IQueryOptionsFactory {
-        IQueryOptionsFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IQueryOptionsFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): IQueryOptionsFactory {
+        IQueryOptionsFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IQueryOptionsFactory {
         IQueryOptionsFactory(raw)
     }
 
@@ -360,13 +418,13 @@ public class IQueryOptionsFactory <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptor(): InterfaceDescriptor<IQueryOptionsFactory> {
-        var descriptor = InterfaceDescriptor<IQueryOptionsFactory>("IQueryOptionsFactory", IQueryOptionsFactory.iid(), IInspectable.descriptor(), { raw => IQueryOptionsFactory(raw, ownsReference: true) }, { raw => IQueryOptionsFactory(raw) })
+        var descriptor = InterfaceDescriptor<IQueryOptionsFactory>("IQueryOptionsFactory", IQueryOptionsFactory.iid(), IInspectable.descriptor(), { raw => IQueryOptionsFactory.fromAbiTake(raw) }, { raw => IQueryOptionsFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IQueryOptionsFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IQueryOptionsFactory", IQueryOptionsFactory.iid(), IInspectable.descriptorSchema(), "IQueryOptionsFactoryVtbl", "IQueryOptionsFactory", "IQueryOptionsFactory_Impl", [InterfaceMethodSchema("CreateCommonFileQuery", 6, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fileTypeFilter", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<QueryOptions>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateCommonFolderQuery", 7, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<QueryOptions>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IQueryOptionsFactory", IQueryOptionsFactory.iid(), IInspectable.descriptorSchema(), "IQueryOptionsFactoryVtbl", "IQueryOptionsFactory", "IQueryOptionsFactory_Impl", [InterfaceMethodSchema("CreateCommonFileQuery", 6, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fileTypeFilter", "CPointer<Unit>", "InParam<Foundation_Collections.IIterable<String>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<QueryOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateCommonFolderQuery", 7, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<QueryOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IQueryOptionsFactory.runtimeType())
         return schema
     }
@@ -388,19 +446,19 @@ public class IQueryOptionsFactory <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IQueryOptionsFactoryVtbl {
         readVtbl<IQueryOptionsFactoryVtbl>(IQueryOptionsFactoryVtbl())
     }
 
-    public unsafe func CreateCommonFileQuery(query: CommonFileQuery, fileTypeFilter: CPointer<Unit>): QueryOptions {
+    public unsafe func CreateCommonFileQuery(query: CommonFileQuery, fileTypeFilter: Foundation_Collections.IIterable<String>): QueryOptions {
         let v = vtbl()
         var result = CPointer<Unit>()
-        let hr = v.CreateCommonFileQuery(asRaw(), query, fileTypeFilter, CPointer<CPointer<Unit>>(inout result))
+        let hr = v.CreateCommonFileQuery(asRaw(), query, fileTypeFilter.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return QueryOptions.fromRaw(result)
+        return QueryOptions.fromAbiTake(result)
     }
 
     public unsafe func CreateCommonFolderQuery(query: CommonFolderQuery): QueryOptions {
@@ -408,11 +466,11 @@ public class IQueryOptionsFactory <: InterfaceWrapperBase & ComInterface & Runti
         var result = CPointer<Unit>()
         let hr = v.CreateCommonFolderQuery(asRaw(), query, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return QueryOptions.fromRaw(result)
+        return QueryOptions.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 @C
 public struct IQueryOptionsWithProviderFilterVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -420,17 +478,21 @@ public struct IQueryOptionsWithProviderFilterVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class IQueryOptionsWithProviderFilter <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IQueryOptionsWithProviderFilter {
-        IQueryOptionsWithProviderFilter(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IQueryOptionsWithProviderFilter {
+    public static func fromAbiTake(raw: CPointer<Unit>): IQueryOptionsWithProviderFilter {
+        IQueryOptionsWithProviderFilter(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IQueryOptionsWithProviderFilter {
         IQueryOptionsWithProviderFilter(raw)
     }
 
@@ -446,13 +508,13 @@ public class IQueryOptionsWithProviderFilter <: InterfaceWrapperBase & ComInterf
     }
 
     public static func descriptor(): InterfaceDescriptor<IQueryOptionsWithProviderFilter> {
-        var descriptor = InterfaceDescriptor<IQueryOptionsWithProviderFilter>("IQueryOptionsWithProviderFilter", IQueryOptionsWithProviderFilter.iid(), IInspectable.descriptor(), { raw => IQueryOptionsWithProviderFilter(raw, ownsReference: true) }, { raw => IQueryOptionsWithProviderFilter(raw) })
+        var descriptor = InterfaceDescriptor<IQueryOptionsWithProviderFilter>("IQueryOptionsWithProviderFilter", IQueryOptionsWithProviderFilter.iid(), IInspectable.descriptor(), { raw => IQueryOptionsWithProviderFilter.fromAbiTake(raw) }, { raw => IQueryOptionsWithProviderFilter.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IQueryOptionsWithProviderFilter.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IQueryOptionsWithProviderFilter", IQueryOptionsWithProviderFilter.iid(), IInspectable.descriptorSchema(), "IQueryOptionsWithProviderFilterVtbl", "IQueryOptionsWithProviderFilter", "IQueryOptionsWithProviderFilter_Impl", [InterfaceMethodSchema("StorageProviderIdFilter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IQueryOptionsWithProviderFilter", IQueryOptionsWithProviderFilter.iid(), IInspectable.descriptorSchema(), "IQueryOptionsWithProviderFilterVtbl", "IQueryOptionsWithProviderFilter", "IQueryOptionsWithProviderFilter_Impl", [InterfaceMethodSchema("StorageProviderIdFilter", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation_Collections.IVector<String>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IQueryOptionsWithProviderFilter.runtimeType())
         return schema
     }
@@ -474,23 +536,23 @@ public class IQueryOptionsWithProviderFilter <: InterfaceWrapperBase & ComInterf
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IQueryOptionsWithProviderFilterVtbl {
         readVtbl<IQueryOptionsWithProviderFilterVtbl>(IQueryOptionsWithProviderFilterVtbl())
     }
 
-    public unsafe func StorageProviderIdFilter(): CPointer<Unit> {
+    public unsafe func StorageProviderIdFilter(): Foundation_Collections.IVector<String> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.StorageProviderIdFilter(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation_Collections.IVector<String>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 @C
 public struct IStorageFileQueryResultVtbl {
     public var base_: IStorageQueryResultBaseVtbl = IStorageQueryResultBaseVtbl()
@@ -499,17 +561,21 @@ public struct IStorageFileQueryResultVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class IStorageFileQueryResult <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFileQueryResult {
-        IStorageFileQueryResult(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileQueryResult {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFileQueryResult {
+        IStorageFileQueryResult(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileQueryResult {
         IStorageFileQueryResult(raw)
     }
 
@@ -530,13 +596,13 @@ public class IStorageFileQueryResult <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFileQueryResult> {
-        var descriptor = InterfaceDescriptor<IStorageFileQueryResult>("IStorageFileQueryResult", IStorageFileQueryResult.iid(), IStorageQueryResultBase.descriptor(), { raw => IStorageFileQueryResult(raw, ownsReference: true) }, { raw => IStorageFileQueryResult(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFileQueryResult>("IStorageFileQueryResult", IStorageFileQueryResult.iid(), IStorageQueryResultBase.descriptor(), { raw => IStorageFileQueryResult.fromAbiTake(raw) }, { raw => IStorageFileQueryResult.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFileQueryResult.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFileQueryResult", IStorageFileQueryResult.iid(), IStorageQueryResultBase.descriptorSchema(), "IStorageFileQueryResultVtbl", "IStorageFileQueryResult", "IStorageFileQueryResult_Impl", [InterfaceMethodSchema("GetFilesAsync", 15, [InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxNumberOfItems", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFilesAsyncDefaultStartAndCount", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFileQueryResult", IStorageFileQueryResult.iid(), IStorageQueryResultBase.descriptorSchema(), "IStorageFileQueryResultVtbl", "IStorageFileQueryResult", "IStorageFileQueryResult_Impl", [InterfaceMethodSchema("GetFilesAsync", 15, [InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxNumberOfItems", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFilesAsyncDefaultStartAndCount", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFileQueryResult.runtimeType())
         return schema
     }
@@ -558,35 +624,35 @@ public class IStorageFileQueryResult <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageQueryResultBase(): IStorageQueryResultBase {
-        IStorageQueryResultBase(asRaw())
+        IStorageQueryResultBase.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFileQueryResultVtbl {
         readVtbl<IStorageFileQueryResultVtbl>(IStorageFileQueryResultVtbl())
     }
 
-    public unsafe func GetFilesAsync(startIndex: UInt32, maxNumberOfItems: UInt32): CPointer<Unit> {
+    public unsafe func GetFilesAsync(startIndex: UInt32, maxNumberOfItems: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFilesAsync(asRaw(), startIndex, maxNumberOfItems, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>.fromAbiTake(result)
     }
 
-    public unsafe func GetFilesAsyncDefaultStartAndCount(): CPointer<Unit> {
+    public unsafe func GetFilesAsyncDefaultStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFilesAsyncDefaultStartAndCount(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 @C
 public struct IStorageFileQueryResult2Vtbl {
     public var base_: IStorageQueryResultBaseVtbl = IStorageQueryResultBaseVtbl()
@@ -594,17 +660,21 @@ public struct IStorageFileQueryResult2Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class IStorageFileQueryResult2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFileQueryResult2 {
-        IStorageFileQueryResult2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileQueryResult2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFileQueryResult2 {
+        IStorageFileQueryResult2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileQueryResult2 {
         IStorageFileQueryResult2(raw)
     }
 
@@ -625,13 +695,13 @@ public class IStorageFileQueryResult2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFileQueryResult2> {
-        var descriptor = InterfaceDescriptor<IStorageFileQueryResult2>("IStorageFileQueryResult2", IStorageFileQueryResult2.iid(), IStorageQueryResultBase.descriptor(), { raw => IStorageFileQueryResult2(raw, ownsReference: true) }, { raw => IStorageFileQueryResult2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFileQueryResult2>("IStorageFileQueryResult2", IStorageFileQueryResult2.iid(), IStorageQueryResultBase.descriptor(), { raw => IStorageFileQueryResult2.fromAbiTake(raw) }, { raw => IStorageFileQueryResult2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFileQueryResult2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFileQueryResult2", IStorageFileQueryResult2.iid(), IStorageQueryResultBase.descriptorSchema(), "IStorageFileQueryResult2Vtbl", "IStorageFileQueryResult2", "IStorageFileQueryResult2_Impl", [InterfaceMethodSchema("GetMatchingPropertiesWithRanges", 15, [InterfaceParameterSchema("file", "CPointer<Unit>", "Ref<windows.storage.StorageFile>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFileQueryResult2", IStorageFileQueryResult2.iid(), IStorageQueryResultBase.descriptorSchema(), "IStorageFileQueryResult2Vtbl", "IStorageFileQueryResult2", "IStorageFileQueryResult2_Impl", [InterfaceMethodSchema("GetMatchingPropertiesWithRanges", 15, [InterfaceParameterSchema("file", "CPointer<Unit>", "InParam<Storage.StorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation_Collections.IMap<String, Foundation_Collections.IVectorView<Data_Text.TextSegment>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFileQueryResult2.runtimeType())
         return schema
     }
@@ -653,27 +723,27 @@ public class IStorageFileQueryResult2 <: InterfaceWrapperBase & ComInterface & R
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageQueryResultBase(): IStorageQueryResultBase {
-        IStorageQueryResultBase(asRaw())
+        IStorageQueryResultBase.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFileQueryResult2Vtbl {
         readVtbl<IStorageFileQueryResult2Vtbl>(IStorageFileQueryResult2Vtbl())
     }
 
-    public unsafe func GetMatchingPropertiesWithRanges(file: windows.storage.StorageFile): CPointer<Unit> {
+    public unsafe func GetMatchingPropertiesWithRanges(file: Storage.StorageFile): Foundation_Collections.IMap<String, Foundation_Collections.IVectorView<Data_Text.TextSegment>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetMatchingPropertiesWithRanges(asRaw(), file.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation_Collections.IMap<String, Foundation_Collections.IVectorView<Data_Text.TextSegment>>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 @C
 public struct IStorageFolderQueryOperationsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -700,42 +770,40 @@ public struct IStorageFolderQueryOperationsVtbl {
         let _ = offset
         var vtbl = IStorageFolderQueryOperationsVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetIndexedStateAsync = { this_, result__ =>
+        vtbl.GetIndexedStateAsync = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetIndexedStateAsync()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<IndexedState>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<IndexedState>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateFileQueryOverloadDefault = { this_, result__ =>
+        vtbl.CreateFileQueryOverloadDefault = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateFileQueryOverloadDefault()) {
                         case Result<StorageFileQueryResult>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -746,19 +814,18 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateFileQuery = { this_, arg0, result__ =>
+        vtbl.CreateFileQuery = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateFileQuery(arg0)) {
                         case Result<StorageFileQueryResult>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -769,19 +836,18 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateFileQueryWithOptions = { this_, arg0, result__ =>
+        vtbl.CreateFileQueryWithOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.CreateFileQueryWithOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.CreateFileQueryWithOptions(InParam<QueryOptions>(QueryOptions.viewOf(arg0)))) {
                         case Result<StorageFileQueryResult>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -792,19 +858,18 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateFolderQueryOverloadDefault = { this_, result__ =>
+        vtbl.CreateFolderQueryOverloadDefault = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateFolderQueryOverloadDefault()) {
                         case Result<StorageFolderQueryResult>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -815,19 +880,18 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateFolderQuery = { this_, arg0, result__ =>
+        vtbl.CreateFolderQuery = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateFolderQuery(arg0)) {
                         case Result<StorageFolderQueryResult>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -838,19 +902,18 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateFolderQueryWithOptions = { this_, arg0, result__ =>
+        vtbl.CreateFolderQueryWithOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.CreateFolderQueryWithOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.CreateFolderQueryWithOptions(InParam<QueryOptions>(QueryOptions.viewOf(arg0)))) {
                         case Result<StorageFolderQueryResult>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -861,19 +924,18 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateItemQuery = { this_, result__ =>
+        vtbl.CreateItemQuery = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateItemQuery()) {
                         case Result<StorageItemQueryResult>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -884,19 +946,18 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateItemQueryWithOptions = { this_, arg0, result__ =>
+        vtbl.CreateItemQueryWithOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.CreateItemQueryWithOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.CreateItemQueryWithOptions(InParam<QueryOptions>(QueryOptions.viewOf(arg0)))) {
                         case Result<StorageItemQueryResult>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -907,128 +968,123 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFilesAsync = { this_, arg0, arg1, arg2, result__ =>
+        vtbl.GetFilesAsync = { instanceRaw, arg0, arg1, arg2, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetFilesAsync(arg0, arg1, arg2)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFilesAsyncOverloadDefaultStartAndCount = { this_, arg0, result__ =>
+        vtbl.GetFilesAsyncOverloadDefaultStartAndCount = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetFilesAsyncOverloadDefaultStartAndCount(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFoldersAsync = { this_, arg0, arg1, arg2, result__ =>
+        vtbl.GetFoldersAsync = { instanceRaw, arg0, arg1, arg2, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetFoldersAsync(arg0, arg1, arg2)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFoldersAsyncOverloadDefaultStartAndCount = { this_, arg0, result__ =>
+        vtbl.GetFoldersAsyncOverloadDefaultStartAndCount = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetFoldersAsyncOverloadDefaultStartAndCount(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetItemsAsync = { this_, arg0, arg1, result__ =>
+        vtbl.GetItemsAsync = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetItemsAsync(arg0, arg1)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.AreQueryOptionsSupported = { this_, arg0, result__ =>
+        vtbl.AreQueryOptionsSupported = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.AreQueryOptionsSupported(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.AreQueryOptionsSupported(InParam<QueryOptions>(QueryOptions.viewOf(arg0)))) {
                         case Result<Bool>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -1039,11 +1095,11 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.IsCommonFolderQuerySupported = { this_, arg0, result__ =>
+        vtbl.IsCommonFolderQuerySupported = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.IsCommonFolderQuerySupported(arg0)) {
                         case Result<Bool>.Ok(value) =>
@@ -1056,11 +1112,11 @@ public struct IStorageFolderQueryOperationsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.IsCommonFileQuerySupported = { this_, arg0, result__ =>
+        vtbl.IsCommonFileQuerySupported = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.IsCommonFileQuerySupported(arg0)) {
                         case Result<Bool>.Ok(value) =>
@@ -1084,38 +1140,42 @@ public struct IStorageFolderQueryOperationsVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public interface IStorageFolderQueryOperations_Impl {
-    public func GetIndexedStateAsync(): windows_core.Result<CPointer<Unit>>
+    public func GetIndexedStateAsync(): windows_core.Result<Foundation.IAsyncOperation<IndexedState>>
     public func CreateFileQueryOverloadDefault(): windows_core.Result<StorageFileQueryResult>
     public func CreateFileQuery(query: CommonFileQuery): windows_core.Result<StorageFileQueryResult>
-    public func CreateFileQueryWithOptions(queryOptions: QueryOptions): windows_core.Result<StorageFileQueryResult>
+    public func CreateFileQueryWithOptions(queryOptions: InParam<QueryOptions>): windows_core.Result<StorageFileQueryResult>
     public func CreateFolderQueryOverloadDefault(): windows_core.Result<StorageFolderQueryResult>
     public func CreateFolderQuery(query: CommonFolderQuery): windows_core.Result<StorageFolderQueryResult>
-    public func CreateFolderQueryWithOptions(queryOptions: QueryOptions): windows_core.Result<StorageFolderQueryResult>
+    public func CreateFolderQueryWithOptions(queryOptions: InParam<QueryOptions>): windows_core.Result<StorageFolderQueryResult>
     public func CreateItemQuery(): windows_core.Result<StorageItemQueryResult>
-    public func CreateItemQueryWithOptions(queryOptions: QueryOptions): windows_core.Result<StorageItemQueryResult>
-    public func GetFilesAsync(query: CommonFileQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_core.Result<CPointer<Unit>>
-    public func GetFilesAsyncOverloadDefaultStartAndCount(query: CommonFileQuery): windows_core.Result<CPointer<Unit>>
-    public func GetFoldersAsync(query: CommonFolderQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_core.Result<CPointer<Unit>>
-    public func GetFoldersAsyncOverloadDefaultStartAndCount(query: CommonFolderQuery): windows_core.Result<CPointer<Unit>>
-    public func GetItemsAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_core.Result<CPointer<Unit>>
-    public func AreQueryOptionsSupported(queryOptions: QueryOptions): windows_core.Result<Bool>
+    public func CreateItemQueryWithOptions(queryOptions: InParam<QueryOptions>): windows_core.Result<StorageItemQueryResult>
+    public func GetFilesAsync(query: CommonFileQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_core.Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>
+    public func GetFilesAsyncOverloadDefaultStartAndCount(query: CommonFileQuery): windows_core.Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>
+    public func GetFoldersAsync(query: CommonFolderQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_core.Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>
+    public func GetFoldersAsyncOverloadDefaultStartAndCount(query: CommonFolderQuery): windows_core.Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>
+    public func GetItemsAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32): windows_core.Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>>>
+    public func AreQueryOptionsSupported(queryOptions: InParam<QueryOptions>): windows_core.Result<Bool>
     public func IsCommonFolderQuerySupported(query: CommonFolderQuery): windows_core.Result<Bool>
     public func IsCommonFileQuerySupported(query: CommonFileQuery): windows_core.Result<Bool>
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFolderQueryOperations {
-        IStorageFolderQueryOperations(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderQueryOperations {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFolderQueryOperations {
+        IStorageFolderQueryOperations(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderQueryOperations {
         IStorageFolderQueryOperations(raw)
     }
 
@@ -1131,13 +1191,13 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFolderQueryOperations> {
-        var descriptor = InterfaceDescriptor<IStorageFolderQueryOperations>("IStorageFolderQueryOperations", IStorageFolderQueryOperations.iid(), IInspectable.descriptor(), { raw => IStorageFolderQueryOperations(raw, ownsReference: true) }, { raw => IStorageFolderQueryOperations(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFolderQueryOperations>("IStorageFolderQueryOperations", IStorageFolderQueryOperations.iid(), IInspectable.descriptor(), { raw => IStorageFolderQueryOperations.fromAbiTake(raw) }, { raw => IStorageFolderQueryOperations.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFolderQueryOperations.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFolderQueryOperations", IStorageFolderQueryOperations.iid(), IInspectable.descriptorSchema(), "IStorageFolderQueryOperationsVtbl", "IStorageFolderQueryOperations", "IStorageFolderQueryOperations_Impl", [InterfaceMethodSchema("GetIndexedStateAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateFileQueryOverloadDefault", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageFileQueryResult>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateFileQuery", 8, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageFileQueryResult>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateFileQueryWithOptions", 9, [InterfaceParameterSchema("queryOptions", "CPointer<Unit>", "Ref<QueryOptions>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageFileQueryResult>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateFolderQueryOverloadDefault", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageFolderQueryResult>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateFolderQuery", 11, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageFolderQueryResult>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateFolderQueryWithOptions", 12, [InterfaceParameterSchema("queryOptions", "CPointer<Unit>", "Ref<QueryOptions>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageFolderQueryResult>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateItemQuery", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageItemQueryResult>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateItemQueryWithOptions", 14, [InterfaceParameterSchema("queryOptions", "CPointer<Unit>", "Ref<QueryOptions>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageItemQueryResult>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFilesAsync", 15, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxItemsToRetrieve", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFilesAsyncOverloadDefaultStartAndCount", 16, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFoldersAsync", 17, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxItemsToRetrieve", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFoldersAsyncOverloadDefaultStartAndCount", 18, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetItemsAsync", 19, [InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxItemsToRetrieve", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("AreQueryOptionsSupported", 20, [InterfaceParameterSchema("queryOptions", "CPointer<Unit>", "Ref<QueryOptions>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsCommonFolderQuerySupported", 21, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsCommonFileQuerySupported", 22, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFolderQueryOperations", IStorageFolderQueryOperations.iid(), IInspectable.descriptorSchema(), "IStorageFolderQueryOperationsVtbl", "IStorageFolderQueryOperations", "IStorageFolderQueryOperations_Impl", [InterfaceMethodSchema("GetIndexedStateAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<IndexedState>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFileQueryOverloadDefault", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageFileQueryResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFileQuery", 8, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageFileQueryResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFileQueryWithOptions", 9, [InterfaceParameterSchema("queryOptions", "CPointer<Unit>", "InParam<QueryOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageFileQueryResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFolderQueryOverloadDefault", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageFolderQueryResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFolderQuery", 11, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageFolderQueryResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFolderQueryWithOptions", 12, [InterfaceParameterSchema("queryOptions", "CPointer<Unit>", "InParam<QueryOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageFolderQueryResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateItemQuery", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageItemQueryResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateItemQueryWithOptions", 14, [InterfaceParameterSchema("queryOptions", "CPointer<Unit>", "InParam<QueryOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageItemQueryResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFilesAsync", 15, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxItemsToRetrieve", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFilesAsyncOverloadDefaultStartAndCount", 16, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFoldersAsync", 17, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxItemsToRetrieve", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFoldersAsyncOverloadDefaultStartAndCount", 18, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetItemsAsync", 19, [InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxItemsToRetrieve", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AreQueryOptionsSupported", 20, [InterfaceParameterSchema("queryOptions", "CPointer<Unit>", "InParam<QueryOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsCommonFolderQuerySupported", 21, [InterfaceParameterSchema("query", "CommonFolderQuery", "CommonFolderQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsCommonFileQuerySupported", 22, [InterfaceParameterSchema("query", "CommonFileQuery", "CommonFileQuery", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFolderQueryOperations.runtimeType())
         return schema
     }
@@ -1159,19 +1219,19 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFolderQueryOperationsVtbl {
         readVtbl<IStorageFolderQueryOperationsVtbl>(IStorageFolderQueryOperationsVtbl())
     }
 
-    public unsafe func GetIndexedStateAsync(): CPointer<Unit> {
+    public unsafe func GetIndexedStateAsync(): Foundation.IAsyncOperation<IndexedState> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetIndexedStateAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<IndexedState>.fromAbiTake(result)
     }
 
     public unsafe func CreateFileQueryOverloadDefault(): StorageFileQueryResult {
@@ -1179,7 +1239,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         var result = CPointer<Unit>()
         let hr = v.CreateFileQueryOverloadDefault(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageFileQueryResult.fromRaw(result)
+        return StorageFileQueryResult.fromAbiTake(result)
     }
 
     public unsafe func CreateFileQuery(query: CommonFileQuery): StorageFileQueryResult {
@@ -1187,7 +1247,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         var result = CPointer<Unit>()
         let hr = v.CreateFileQuery(asRaw(), query, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageFileQueryResult.fromRaw(result)
+        return StorageFileQueryResult.fromAbiTake(result)
     }
 
     public unsafe func CreateFileQueryWithOptions(queryOptions: QueryOptions): StorageFileQueryResult {
@@ -1195,7 +1255,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         var result = CPointer<Unit>()
         let hr = v.CreateFileQueryWithOptions(asRaw(), queryOptions.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageFileQueryResult.fromRaw(result)
+        return StorageFileQueryResult.fromAbiTake(result)
     }
 
     public unsafe func CreateFolderQueryOverloadDefault(): StorageFolderQueryResult {
@@ -1203,7 +1263,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         var result = CPointer<Unit>()
         let hr = v.CreateFolderQueryOverloadDefault(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageFolderQueryResult.fromRaw(result)
+        return StorageFolderQueryResult.fromAbiTake(result)
     }
 
     public unsafe func CreateFolderQuery(query: CommonFolderQuery): StorageFolderQueryResult {
@@ -1211,7 +1271,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         var result = CPointer<Unit>()
         let hr = v.CreateFolderQuery(asRaw(), query, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageFolderQueryResult.fromRaw(result)
+        return StorageFolderQueryResult.fromAbiTake(result)
     }
 
     public unsafe func CreateFolderQueryWithOptions(queryOptions: QueryOptions): StorageFolderQueryResult {
@@ -1219,7 +1279,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         var result = CPointer<Unit>()
         let hr = v.CreateFolderQueryWithOptions(asRaw(), queryOptions.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageFolderQueryResult.fromRaw(result)
+        return StorageFolderQueryResult.fromAbiTake(result)
     }
 
     public unsafe func CreateItemQuery(): StorageItemQueryResult {
@@ -1227,7 +1287,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         var result = CPointer<Unit>()
         let hr = v.CreateItemQuery(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageItemQueryResult.fromRaw(result)
+        return StorageItemQueryResult.fromAbiTake(result)
     }
 
     public unsafe func CreateItemQueryWithOptions(queryOptions: QueryOptions): StorageItemQueryResult {
@@ -1235,47 +1295,47 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         var result = CPointer<Unit>()
         let hr = v.CreateItemQueryWithOptions(asRaw(), queryOptions.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageItemQueryResult.fromRaw(result)
+        return StorageItemQueryResult.fromAbiTake(result)
     }
 
-    public unsafe func GetFilesAsync(query: CommonFileQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): CPointer<Unit> {
+    public unsafe func GetFilesAsync(query: CommonFileQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFilesAsync(asRaw(), query, startIndex, maxItemsToRetrieve, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>.fromAbiTake(result)
     }
 
-    public unsafe func GetFilesAsyncOverloadDefaultStartAndCount(query: CommonFileQuery): CPointer<Unit> {
+    public unsafe func GetFilesAsyncOverloadDefaultStartAndCount(query: CommonFileQuery): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFilesAsyncOverloadDefaultStartAndCount(asRaw(), query, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>>.fromAbiTake(result)
     }
 
-    public unsafe func GetFoldersAsync(query: CommonFolderQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): CPointer<Unit> {
+    public unsafe func GetFoldersAsync(query: CommonFolderQuery, startIndex: UInt32, maxItemsToRetrieve: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFoldersAsync(asRaw(), query, startIndex, maxItemsToRetrieve, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>.fromAbiTake(result)
     }
 
-    public unsafe func GetFoldersAsyncOverloadDefaultStartAndCount(query: CommonFolderQuery): CPointer<Unit> {
+    public unsafe func GetFoldersAsyncOverloadDefaultStartAndCount(query: CommonFolderQuery): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFoldersAsyncOverloadDefaultStartAndCount(asRaw(), query, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>.fromAbiTake(result)
     }
 
-    public unsafe func GetItemsAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32): CPointer<Unit> {
+    public unsafe func GetItemsAsync(startIndex: UInt32, maxItemsToRetrieve: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetItemsAsync(asRaw(), startIndex, maxItemsToRetrieve, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>>.fromAbiTake(result)
     }
 
     public unsafe func AreQueryOptionsSupported(queryOptions: QueryOptions): Bool {
@@ -1303,7 +1363,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 @C
 public struct IStorageFolderQueryResultVtbl {
     public var base_: IStorageQueryResultBaseVtbl = IStorageQueryResultBaseVtbl()
@@ -1312,17 +1372,21 @@ public struct IStorageFolderQueryResultVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class IStorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFolderQueryResult {
-        IStorageFolderQueryResult(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderQueryResult {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFolderQueryResult {
+        IStorageFolderQueryResult(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderQueryResult {
         IStorageFolderQueryResult(raw)
     }
 
@@ -1343,13 +1407,13 @@ public class IStorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFolderQueryResult> {
-        var descriptor = InterfaceDescriptor<IStorageFolderQueryResult>("IStorageFolderQueryResult", IStorageFolderQueryResult.iid(), IStorageQueryResultBase.descriptor(), { raw => IStorageFolderQueryResult(raw, ownsReference: true) }, { raw => IStorageFolderQueryResult(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFolderQueryResult>("IStorageFolderQueryResult", IStorageFolderQueryResult.iid(), IStorageQueryResultBase.descriptor(), { raw => IStorageFolderQueryResult.fromAbiTake(raw) }, { raw => IStorageFolderQueryResult.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFolderQueryResult.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFolderQueryResult", IStorageFolderQueryResult.iid(), IStorageQueryResultBase.descriptorSchema(), "IStorageFolderQueryResultVtbl", "IStorageFolderQueryResult", "IStorageFolderQueryResult_Impl", [InterfaceMethodSchema("GetFoldersAsync", 15, [InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxNumberOfItems", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFoldersAsyncDefaultStartAndCount", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFolderQueryResult", IStorageFolderQueryResult.iid(), IStorageQueryResultBase.descriptorSchema(), "IStorageFolderQueryResultVtbl", "IStorageFolderQueryResult", "IStorageFolderQueryResult_Impl", [InterfaceMethodSchema("GetFoldersAsync", 15, [InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxNumberOfItems", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFoldersAsyncDefaultStartAndCount", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFolderQueryResult.runtimeType())
         return schema
     }
@@ -1371,35 +1435,35 @@ public class IStorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageQueryResultBase(): IStorageQueryResultBase {
-        IStorageQueryResultBase(asRaw())
+        IStorageQueryResultBase.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFolderQueryResultVtbl {
         readVtbl<IStorageFolderQueryResultVtbl>(IStorageFolderQueryResultVtbl())
     }
 
-    public unsafe func GetFoldersAsync(startIndex: UInt32, maxNumberOfItems: UInt32): CPointer<Unit> {
+    public unsafe func GetFoldersAsync(startIndex: UInt32, maxNumberOfItems: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFoldersAsync(asRaw(), startIndex, maxNumberOfItems, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>.fromAbiTake(result)
     }
 
-    public unsafe func GetFoldersAsyncDefaultStartAndCount(): CPointer<Unit> {
+    public unsafe func GetFoldersAsyncDefaultStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFoldersAsyncDefaultStartAndCount(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 @C
 public struct IStorageItemQueryResultVtbl {
     public var base_: IStorageQueryResultBaseVtbl = IStorageQueryResultBaseVtbl()
@@ -1408,17 +1472,21 @@ public struct IStorageItemQueryResultVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class IStorageItemQueryResult <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageItemQueryResult {
-        IStorageItemQueryResult(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemQueryResult {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageItemQueryResult {
+        IStorageItemQueryResult(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemQueryResult {
         IStorageItemQueryResult(raw)
     }
 
@@ -1439,13 +1507,13 @@ public class IStorageItemQueryResult <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageItemQueryResult> {
-        var descriptor = InterfaceDescriptor<IStorageItemQueryResult>("IStorageItemQueryResult", IStorageItemQueryResult.iid(), IStorageQueryResultBase.descriptor(), { raw => IStorageItemQueryResult(raw, ownsReference: true) }, { raw => IStorageItemQueryResult(raw) })
+        var descriptor = InterfaceDescriptor<IStorageItemQueryResult>("IStorageItemQueryResult", IStorageItemQueryResult.iid(), IStorageQueryResultBase.descriptor(), { raw => IStorageItemQueryResult.fromAbiTake(raw) }, { raw => IStorageItemQueryResult.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageItemQueryResult.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItemQueryResult", IStorageItemQueryResult.iid(), IStorageQueryResultBase.descriptorSchema(), "IStorageItemQueryResultVtbl", "IStorageItemQueryResult", "IStorageItemQueryResult_Impl", [InterfaceMethodSchema("GetItemsAsync", 15, [InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxNumberOfItems", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetItemsAsyncDefaultStartAndCount", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItemQueryResult", IStorageItemQueryResult.iid(), IStorageQueryResultBase.descriptorSchema(), "IStorageItemQueryResultVtbl", "IStorageItemQueryResult", "IStorageItemQueryResult_Impl", [InterfaceMethodSchema("GetItemsAsync", 15, [InterfaceParameterSchema("startIndex", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("maxNumberOfItems", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetItemsAsyncDefaultStartAndCount", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItemQueryResult.runtimeType())
         return schema
     }
@@ -1467,44 +1535,44 @@ public class IStorageItemQueryResult <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageQueryResultBase(): IStorageQueryResultBase {
-        IStorageQueryResultBase(asRaw())
+        IStorageQueryResultBase.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageItemQueryResultVtbl {
         readVtbl<IStorageItemQueryResultVtbl>(IStorageItemQueryResultVtbl())
     }
 
-    public unsafe func GetItemsAsync(startIndex: UInt32, maxNumberOfItems: UInt32): CPointer<Unit> {
+    public unsafe func GetItemsAsync(startIndex: UInt32, maxNumberOfItems: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetItemsAsync(asRaw(), startIndex, maxNumberOfItems, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>>.fromAbiTake(result)
     }
 
-    public unsafe func GetItemsAsyncDefaultStartAndCount(): CPointer<Unit> {
+    public unsafe func GetItemsAsyncDefaultStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetItemsAsyncDefaultStartAndCount(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 @C
 public struct IStorageQueryResultBaseVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var GetItemCountAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Folder: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var ContentsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows.foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var RemoveContentsChanged: CFunc<(CPointer<Unit>, windows.foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var OptionsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows.foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var RemoveOptionsChanged: CFunc<(CPointer<Unit>, windows.foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ContentsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var RemoveContentsChanged: CFunc<(CPointer<Unit>, Foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var OptionsChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var RemoveOptionsChanged: CFunc<(CPointer<Unit>, Foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FindStartIndexAsync: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var GetCurrentQueryOptions: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var ApplyNewQueryOptions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -1514,71 +1582,69 @@ public struct IStorageQueryResultBaseVtbl {
         let _ = offset
         var vtbl = IStorageQueryResultBaseVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetItemCountAsync = { this_, result__ =>
+        vtbl.GetItemCountAsync = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetItemCountAsync()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<UInt32>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<UInt32>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Folder = { this_, result__ =>
+        vtbl.Folder = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Folder()) {
-                        case Result<windows.storage.StorageFolder>.Ok(value) =>
-                            let raw = value.asRaw()
+                        case Result<Storage.StorageFolder>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.storage.StorageFolder>.Err(error) =>
+                        case Result<Storage.StorageFolder>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.ContentsChanged = { this_, arg0, result__ =>
+        vtbl.ContentsChanged = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.ContentsChanged(arg0)) {
-                        case Result<windows.foundation.EventRegistrationToken>.Ok(value) =>
+                    match (impl.ContentsChanged(InParam<Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>>(Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>.viewOf(arg0)))) {
+                        case Result<Foundation.EventRegistrationToken>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
-                        case Result<windows.foundation.EventRegistrationToken>.Err(error) =>
+                        case Result<Foundation.EventRegistrationToken>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.RemoveContentsChanged = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.RemoveContentsChanged = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.RemoveContentsChanged(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -1590,25 +1656,25 @@ public struct IStorageQueryResultBaseVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.OptionsChanged = { this_, arg0, result__ =>
+        vtbl.OptionsChanged = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.OptionsChanged(arg0)) {
-                        case Result<windows.foundation.EventRegistrationToken>.Ok(value) =>
+                    match (impl.OptionsChanged(InParam<Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>>(Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>.viewOf(arg0)))) {
+                        case Result<Foundation.EventRegistrationToken>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
-                        case Result<windows.foundation.EventRegistrationToken>.Err(error) =>
+                        case Result<Foundation.EventRegistrationToken>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.RemoveOptionsChanged = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.RemoveOptionsChanged = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.RemoveOptionsChanged(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -1620,42 +1686,40 @@ public struct IStorageQueryResultBaseVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.FindStartIndexAsync = { this_, arg0, result__ =>
+        vtbl.FindStartIndexAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.FindStartIndexAsync(IInspectable.fromRawBorrowed(arg0))) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                    match (impl.FindStartIndexAsync(InParam<IInspectable>(IInspectable.viewOf(arg0)))) {
+                        case Result<Foundation.IAsyncOperation<UInt32>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<UInt32>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetCurrentQueryOptions = { this_, result__ =>
+        vtbl.GetCurrentQueryOptions = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetCurrentQueryOptions()) {
                         case Result<QueryOptions>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -1666,10 +1730,10 @@ public struct IStorageQueryResultBaseVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.ApplyNewQueryOptions = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.ApplyNewQueryOptions = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.ApplyNewQueryOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.ApplyNewQueryOptions(InParam<QueryOptions>(QueryOptions.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -1690,30 +1754,34 @@ public struct IStorageQueryResultBaseVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public interface IStorageQueryResultBase_Impl {
-    public func GetItemCountAsync(): windows_core.Result<CPointer<Unit>>
-    public func Folder(): windows_core.Result<windows.storage.StorageFolder>
-    public func ContentsChanged(handler: CPointer<Unit>): windows_core.Result<windows.foundation.EventRegistrationToken>
-    public func RemoveContentsChanged(eventCookie: windows.foundation.EventRegistrationToken): windows_core.Result<Unit>
-    public func OptionsChanged(changedHandler: CPointer<Unit>): windows_core.Result<windows.foundation.EventRegistrationToken>
-    public func RemoveOptionsChanged(eventCookie: windows.foundation.EventRegistrationToken): windows_core.Result<Unit>
-    public func FindStartIndexAsync(value: IInspectable): windows_core.Result<CPointer<Unit>>
+    public func GetItemCountAsync(): windows_core.Result<Foundation.IAsyncOperation<UInt32>>
+    public func Folder(): windows_core.Result<Storage.StorageFolder>
+    public func ContentsChanged(handler: InParam<Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>>): windows_core.Result<Foundation.EventRegistrationToken>
+    public func RemoveContentsChanged(eventCookie: Foundation.EventRegistrationToken): windows_core.Result<Unit>
+    public func OptionsChanged(changedHandler: InParam<Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>>): windows_core.Result<Foundation.EventRegistrationToken>
+    public func RemoveOptionsChanged(eventCookie: Foundation.EventRegistrationToken): windows_core.Result<Unit>
+    public func FindStartIndexAsync(value: InParam<IInspectable>): windows_core.Result<Foundation.IAsyncOperation<UInt32>>
     public func GetCurrentQueryOptions(): windows_core.Result<QueryOptions>
-    public func ApplyNewQueryOptions(newQueryOptions: QueryOptions): windows_core.Result<Unit>
+    public func ApplyNewQueryOptions(newQueryOptions: InParam<QueryOptions>): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class IStorageQueryResultBase <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageQueryResultBase {
-        IStorageQueryResultBase(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageQueryResultBase {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageQueryResultBase {
+        IStorageQueryResultBase(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageQueryResultBase {
         IStorageQueryResultBase(raw)
     }
 
@@ -1729,13 +1797,13 @@ public class IStorageQueryResultBase <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageQueryResultBase> {
-        var descriptor = InterfaceDescriptor<IStorageQueryResultBase>("IStorageQueryResultBase", IStorageQueryResultBase.iid(), IInspectable.descriptor(), { raw => IStorageQueryResultBase(raw, ownsReference: true) }, { raw => IStorageQueryResultBase(raw) })
+        var descriptor = InterfaceDescriptor<IStorageQueryResultBase>("IStorageQueryResultBase", IStorageQueryResultBase.iid(), IInspectable.descriptor(), { raw => IStorageQueryResultBase.fromAbiTake(raw) }, { raw => IStorageQueryResultBase.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageQueryResultBase.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageQueryResultBase", IStorageQueryResultBase.iid(), IInspectable.descriptorSchema(), "IStorageQueryResultBaseVtbl", "IStorageQueryResultBase", "IStorageQueryResultBase_Impl", [InterfaceMethodSchema("GetItemCountAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Folder", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.storage.StorageFolder>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("ContentsChanged", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows.foundation.EventRegistrationToken>", "OutRef<windows.foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("RemoveContentsChanged", 9, [InterfaceParameterSchema("eventCookie", "windows.foundation.EventRegistrationToken", "windows.foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("OptionsChanged", 10, [InterfaceParameterSchema("changedHandler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows.foundation.EventRegistrationToken>", "OutRef<windows.foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("RemoveOptionsChanged", 11, [InterfaceParameterSchema("eventCookie", "windows.foundation.EventRegistrationToken", "windows.foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindStartIndexAsync", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "Ref<IInspectable>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetCurrentQueryOptions", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<QueryOptions>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("ApplyNewQueryOptions", 14, [InterfaceParameterSchema("newQueryOptions", "CPointer<Unit>", "Ref<QueryOptions>", InterfaceParameterBridgeKind.Ref)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageQueryResultBase", IStorageQueryResultBase.iid(), IInspectable.descriptorSchema(), "IStorageQueryResultBaseVtbl", "IStorageQueryResultBase", "IStorageQueryResultBase_Impl", [InterfaceMethodSchema("GetItemCountAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Folder", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Storage.StorageFolder>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContentsChanged", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Foundation.EventRegistrationToken>", "OutSlot<Foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveContentsChanged", 9, [InterfaceParameterSchema("eventCookie", "Foundation.EventRegistrationToken", "Foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("OptionsChanged", 10, [InterfaceParameterSchema("changedHandler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Foundation.EventRegistrationToken>", "OutSlot<Foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveOptionsChanged", 11, [InterfaceParameterSchema("eventCookie", "Foundation.EventRegistrationToken", "Foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("FindStartIndexAsync", 12, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetCurrentQueryOptions", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<QueryOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ApplyNewQueryOptions", 14, [InterfaceParameterSchema("newQueryOptions", "CPointer<Unit>", "InParam<QueryOptions>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageQueryResultBase.runtimeType())
         return schema
     }
@@ -1757,63 +1825,63 @@ public class IStorageQueryResultBase <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageQueryResultBaseVtbl {
         readVtbl<IStorageQueryResultBaseVtbl>(IStorageQueryResultBaseVtbl())
     }
 
-    public unsafe func GetItemCountAsync(): CPointer<Unit> {
+    public unsafe func GetItemCountAsync(): Foundation.IAsyncOperation<UInt32> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetItemCountAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<UInt32>.fromAbiTake(result)
     }
 
-    public unsafe func Folder(): windows.storage.StorageFolder {
+    public unsafe func Folder(): Storage.StorageFolder {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Folder(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.storage.StorageFolder.fromRaw(result)
+        return Storage.StorageFolder.fromAbiTake(result)
     }
 
-    public unsafe func ContentsChanged(handler: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func ContentsChanged(handler: Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>): Foundation.EventRegistrationToken {
         let v = vtbl()
-        var result = windows.foundation.EventRegistrationToken()
-        let hr = v.ContentsChanged(asRaw(), handler, CPointer<windows.foundation.EventRegistrationToken>(inout result))
+        var result = Foundation.EventRegistrationToken()
+        let hr = v.ContentsChanged(asRaw(), handler.asRaw(), CPointer<Foundation.EventRegistrationToken>(inout result))
         HRESULT(hr).ok()
         return result
     }
 
-    public unsafe func RemoveContentsChanged(eventCookie: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveContentsChanged(eventCookie: Foundation.EventRegistrationToken): Unit {
         let v = vtbl()
         let hr = v.RemoveContentsChanged(asRaw(), eventCookie)
         HRESULT(hr).ok()
     }
 
-    public unsafe func OptionsChanged(changedHandler: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func OptionsChanged(changedHandler: Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>): Foundation.EventRegistrationToken {
         let v = vtbl()
-        var result = windows.foundation.EventRegistrationToken()
-        let hr = v.OptionsChanged(asRaw(), changedHandler, CPointer<windows.foundation.EventRegistrationToken>(inout result))
+        var result = Foundation.EventRegistrationToken()
+        let hr = v.OptionsChanged(asRaw(), changedHandler.asRaw(), CPointer<Foundation.EventRegistrationToken>(inout result))
         HRESULT(hr).ok()
         return result
     }
 
-    public unsafe func RemoveOptionsChanged(eventCookie: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveOptionsChanged(eventCookie: Foundation.EventRegistrationToken): Unit {
         let v = vtbl()
         let hr = v.RemoveOptionsChanged(asRaw(), eventCookie)
         HRESULT(hr).ok()
     }
 
-    public unsafe func FindStartIndexAsync(value: IInspectable): CPointer<Unit> {
+    public unsafe func FindStartIndexAsync(value: IInspectable): Foundation.IAsyncOperation<UInt32> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.FindStartIndexAsync(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<UInt32>.fromAbiTake(result)
     }
 
     public unsafe func GetCurrentQueryOptions(): QueryOptions {
@@ -1821,7 +1889,7 @@ public class IStorageQueryResultBase <: InterfaceWrapperBase & ComInterface & Ru
         var result = CPointer<Unit>()
         let hr = v.GetCurrentQueryOptions(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return QueryOptions.fromRaw(result)
+        return QueryOptions.fromAbiTake(result)
     }
 
     public unsafe func ApplyNewQueryOptions(newQueryOptions: QueryOptions): Unit {
@@ -1831,21 +1899,16 @@ public class IStorageQueryResultBase <: InterfaceWrapperBase & ComInterface & Ru
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
+@C
 public struct IndexedState {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Unknown = IndexedState(value: 0)
-    public static let NotIndexed = IndexedState(value: 1)
-    public static let PartiallyIndexed = IndexedState(value: 2)
-    public static let FullyIndexed = IndexedState(value: 3)
 
     public operator func ==(other: IndexedState): Bool {
         return this.value == other.value
@@ -1855,21 +1918,28 @@ public struct IndexedState {
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
-public struct IndexerOption {
-    public let value: Int32
+@When[Windows_Storage_Search == "on"]
+public let Unknown: IndexedState = IndexedState(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Storage_Search == "on"]
+public let NotIndexed: IndexedState = IndexedState(1)
+
+@When[Windows_Storage_Search == "on"]
+public let PartiallyIndexed: IndexedState = IndexedState(2)
+
+@When[Windows_Storage_Search == "on"]
+public let FullyIndexed: IndexedState = IndexedState(3)
+
+@When[Windows_Storage_Search == "on"]
+@C
+public struct IndexerOption {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let UseIndexerWhenAvailable = IndexerOption(value: 0)
-    public static let OnlyUseIndexer = IndexerOption(value: 1)
-    public static let DoNotUseIndexer = IndexerOption(value: 2)
-    public static let OnlyUseIndexerAndOptimizeForIndexedProperties = IndexerOption(value: 3)
 
     public operator func ==(other: IndexerOption): Bool {
         return this.value == other.value
@@ -1879,17 +1949,33 @@ public struct IndexerOption {
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
+public let UseIndexerWhenAvailable: IndexerOption = IndexerOption(0)
+
+@When[Windows_Storage_Search == "on"]
+public let OnlyUseIndexer: IndexerOption = IndexerOption(1)
+
+@When[Windows_Storage_Search == "on"]
+public let DoNotUseIndexer: IndexerOption = IndexerOption(2)
+
+@When[Windows_Storage_Search == "on"]
+public let OnlyUseIndexerAndOptimizeForIndexedProperties: IndexerOption = IndexerOption(3)
+
+@When[Windows_Storage_Search == "on"]
 public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): QueryOptions {
-        QueryOptions(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): QueryOptions {
+    public static func fromAbiTake(raw: CPointer<Unit>): QueryOptions {
+        QueryOptions(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): QueryOptions {
         QueryOptions(raw)
     }
 
@@ -1903,11 +1989,11 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
 
     public static func descriptor(): InterfaceDescriptor<QueryOptions> {
         let ancestors = [IQueryOptions.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<QueryOptions>("QueryOptions", IQueryOptions.iid(), ancestors, { raw => QueryOptions(raw, ownsReference: true) }, { raw => QueryOptions(raw) })
+        return InterfaceDescriptor<QueryOptions>("QueryOptions", IQueryOptions.iid(), ancestors, { raw => QueryOptions.fromAbiTake(raw) }, { raw => QueryOptions.viewOf(raw) })
     }
 
     public func defaultInterface(): IQueryOptions {
-        IQueryOptions(asRaw())
+        IQueryOptions.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -1937,14 +2023,14 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIQueryOptions(): IQueryOptions {
         IQueryOptions(asRaw())
     }
 
-    public static unsafe func CreateCommonFileQuery(query: CommonFileQuery, fileTypeFilter: CPointer<Unit>): QueryOptions {
+    public static unsafe func CreateCommonFileQuery(query: CommonFileQuery, fileTypeFilter: Foundation_Collections.IIterable<String>): QueryOptions {
         try (factory = windows_interface.getActivationFactoryByName<IQueryOptionsFactory>(QueryOptions.runtimeName(), IQueryOptionsFactory.descriptor()).unwrap()) {
             return factory.CreateCommonFileQuery(query, fileTypeFilter)
         }
@@ -1956,7 +2042,7 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
         }
     }
 
-    public unsafe func FileTypeFilter(): CPointer<Unit> {
+    public unsafe func FileTypeFilter(): Foundation_Collections.IVector<String> {
         return defaultInterface().FileTypeFilter()
     }
 
@@ -2000,7 +2086,7 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
         defaultInterface().SetIndexerOption(value)
     }
 
-    public unsafe func SortOrder(): CPointer<Unit> {
+    public unsafe func SortOrder(): Foundation_Collections.IVector<SortEntry> {
         return defaultInterface().SortOrder()
     }
 
@@ -2020,16 +2106,16 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
         defaultInterface().LoadFromString(value)
     }
 
-    public unsafe func SetThumbnailPrefetch(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32, options: windows.storage.file_properties.ThumbnailOptions): Unit {
+    public unsafe func SetThumbnailPrefetch(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32, options: Storage_FileProperties.ThumbnailOptions): Unit {
         defaultInterface().SetThumbnailPrefetch(mode, requestedSize, options)
     }
 
-    public unsafe func SetPropertyPrefetch(options: windows.storage.file_properties.PropertyPrefetchOptions, propertiesToRetrieve: CPointer<Unit>): Unit {
+    public unsafe func SetPropertyPrefetch(options: Storage_FileProperties.PropertyPrefetchOptions, propertiesToRetrieve: Foundation_Collections.IIterable<String>): Unit {
         defaultInterface().SetPropertyPrefetch(options, propertiesToRetrieve)
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 @C
 public struct SortEntry {
     public var PropertyName: CPointer<UInt16> = CPointer<UInt16>()
@@ -2037,17 +2123,21 @@ public struct SortEntry {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class StorageFileQueryResult <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageFileQueryResult {
-        StorageFileQueryResult(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFileQueryResult {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageFileQueryResult {
+        StorageFileQueryResult(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageFileQueryResult {
         StorageFileQueryResult(raw)
     }
 
@@ -2061,11 +2151,11 @@ public class StorageFileQueryResult <: InterfaceWrapperBase & ComInterface & win
 
     public static func descriptor(): InterfaceDescriptor<StorageFileQueryResult> {
         let ancestors = [IStorageFileQueryResult.iid(), IStorageQueryResultBase.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageFileQueryResult>("StorageFileQueryResult", IStorageFileQueryResult.iid(), ancestors, { raw => StorageFileQueryResult(raw, ownsReference: true) }, { raw => StorageFileQueryResult(raw) })
+        return InterfaceDescriptor<StorageFileQueryResult>("StorageFileQueryResult", IStorageFileQueryResult.iid(), ancestors, { raw => StorageFileQueryResult.fromAbiTake(raw) }, { raw => StorageFileQueryResult.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageFileQueryResult {
-        IStorageFileQueryResult(asRaw())
+        IStorageFileQueryResult.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -2085,7 +2175,7 @@ public class StorageFileQueryResult <: InterfaceWrapperBase & ComInterface & win
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageFileQueryResult(): IStorageFileQueryResult {
@@ -2096,39 +2186,39 @@ public class StorageFileQueryResult <: InterfaceWrapperBase & ComInterface & win
         IStorageQueryResultBase(asRaw())
     }
 
-    public unsafe func GetFilesAsync(operation: UInt32, startIndex: UInt32): CPointer<Unit> {
+    public unsafe func GetFilesAsync(operation: UInt32, startIndex: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>> {
         return defaultInterface().GetFilesAsync(operation, startIndex)
     }
 
-    public unsafe func GetFilesAsyncDefaultStartAndCount(): CPointer<Unit> {
+    public unsafe func GetFilesAsyncDefaultStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFile>> {
         return defaultInterface().GetFilesAsyncDefaultStartAndCount()
     }
 
-    public unsafe func GetItemCountAsync(): CPointer<Unit> {
+    public unsafe func GetItemCountAsync(): Foundation.IAsyncOperation<UInt32> {
         return asIStorageQueryResultBase().GetItemCountAsync()
     }
 
-    public unsafe func Folder(): windows.storage.StorageFolder {
+    public unsafe func Folder(): Storage.StorageFolder {
         return asIStorageQueryResultBase().Folder()
     }
 
-    public unsafe func ContentsChanged(eventCookie: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func ContentsChanged(eventCookie: Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>): Foundation.EventRegistrationToken {
         return asIStorageQueryResultBase().ContentsChanged(eventCookie)
     }
 
-    public unsafe func RemoveContentsChanged(eventCookie: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveContentsChanged(eventCookie: Foundation.EventRegistrationToken): Unit {
         asIStorageQueryResultBase().RemoveContentsChanged(eventCookie)
     }
 
-    public unsafe func OptionsChanged(eventCookie: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func OptionsChanged(eventCookie: Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>): Foundation.EventRegistrationToken {
         return asIStorageQueryResultBase().OptionsChanged(eventCookie)
     }
 
-    public unsafe func RemoveOptionsChanged(eventCookie: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveOptionsChanged(eventCookie: Foundation.EventRegistrationToken): Unit {
         asIStorageQueryResultBase().RemoveOptionsChanged(eventCookie)
     }
 
-    public unsafe func FindStartIndexAsync(operation: IInspectable): CPointer<Unit> {
+    public unsafe func FindStartIndexAsync(operation: IInspectable): Foundation.IAsyncOperation<UInt32> {
         return asIStorageQueryResultBase().FindStartIndexAsync(operation)
     }
 
@@ -2141,17 +2231,21 @@ public class StorageFileQueryResult <: InterfaceWrapperBase & ComInterface & win
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class StorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageFolderQueryResult {
-        StorageFolderQueryResult(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFolderQueryResult {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageFolderQueryResult {
+        StorageFolderQueryResult(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageFolderQueryResult {
         StorageFolderQueryResult(raw)
     }
 
@@ -2165,11 +2259,11 @@ public class StorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & w
 
     public static func descriptor(): InterfaceDescriptor<StorageFolderQueryResult> {
         let ancestors = [IStorageFolderQueryResult.iid(), IStorageQueryResultBase.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageFolderQueryResult>("StorageFolderQueryResult", IStorageFolderQueryResult.iid(), ancestors, { raw => StorageFolderQueryResult(raw, ownsReference: true) }, { raw => StorageFolderQueryResult(raw) })
+        return InterfaceDescriptor<StorageFolderQueryResult>("StorageFolderQueryResult", IStorageFolderQueryResult.iid(), ancestors, { raw => StorageFolderQueryResult.fromAbiTake(raw) }, { raw => StorageFolderQueryResult.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageFolderQueryResult {
-        IStorageFolderQueryResult(asRaw())
+        IStorageFolderQueryResult.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -2189,7 +2283,7 @@ public class StorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & w
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageFolderQueryResult(): IStorageFolderQueryResult {
@@ -2200,39 +2294,39 @@ public class StorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & w
         IStorageQueryResultBase(asRaw())
     }
 
-    public unsafe func GetFoldersAsync(operation: UInt32, startIndex: UInt32): CPointer<Unit> {
+    public unsafe func GetFoldersAsync(operation: UInt32, startIndex: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>> {
         return defaultInterface().GetFoldersAsync(operation, startIndex)
     }
 
-    public unsafe func GetFoldersAsyncDefaultStartAndCount(): CPointer<Unit> {
+    public unsafe func GetFoldersAsyncDefaultStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.StorageFolder>> {
         return defaultInterface().GetFoldersAsyncDefaultStartAndCount()
     }
 
-    public unsafe func GetItemCountAsync(): CPointer<Unit> {
+    public unsafe func GetItemCountAsync(): Foundation.IAsyncOperation<UInt32> {
         return asIStorageQueryResultBase().GetItemCountAsync()
     }
 
-    public unsafe func Folder(): windows.storage.StorageFolder {
+    public unsafe func Folder(): Storage.StorageFolder {
         return asIStorageQueryResultBase().Folder()
     }
 
-    public unsafe func ContentsChanged(eventCookie: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func ContentsChanged(eventCookie: Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>): Foundation.EventRegistrationToken {
         return asIStorageQueryResultBase().ContentsChanged(eventCookie)
     }
 
-    public unsafe func RemoveContentsChanged(eventCookie: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveContentsChanged(eventCookie: Foundation.EventRegistrationToken): Unit {
         asIStorageQueryResultBase().RemoveContentsChanged(eventCookie)
     }
 
-    public unsafe func OptionsChanged(eventCookie: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func OptionsChanged(eventCookie: Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>): Foundation.EventRegistrationToken {
         return asIStorageQueryResultBase().OptionsChanged(eventCookie)
     }
 
-    public unsafe func RemoveOptionsChanged(eventCookie: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveOptionsChanged(eventCookie: Foundation.EventRegistrationToken): Unit {
         asIStorageQueryResultBase().RemoveOptionsChanged(eventCookie)
     }
 
-    public unsafe func FindStartIndexAsync(operation: IInspectable): CPointer<Unit> {
+    public unsafe func FindStartIndexAsync(operation: IInspectable): Foundation.IAsyncOperation<UInt32> {
         return asIStorageQueryResultBase().FindStartIndexAsync(operation)
     }
 
@@ -2245,17 +2339,21 @@ public class StorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[feature == "feat_windows_storage_search"]
+@When[Windows_Storage_Search == "on"]
 public class StorageItemQueryResult <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageItemQueryResult {
-        StorageItemQueryResult(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageItemQueryResult {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageItemQueryResult {
+        StorageItemQueryResult(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageItemQueryResult {
         StorageItemQueryResult(raw)
     }
 
@@ -2269,11 +2367,11 @@ public class StorageItemQueryResult <: InterfaceWrapperBase & ComInterface & win
 
     public static func descriptor(): InterfaceDescriptor<StorageItemQueryResult> {
         let ancestors = [IStorageItemQueryResult.iid(), IStorageQueryResultBase.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageItemQueryResult>("StorageItemQueryResult", IStorageItemQueryResult.iid(), ancestors, { raw => StorageItemQueryResult(raw, ownsReference: true) }, { raw => StorageItemQueryResult(raw) })
+        return InterfaceDescriptor<StorageItemQueryResult>("StorageItemQueryResult", IStorageItemQueryResult.iid(), ancestors, { raw => StorageItemQueryResult.fromAbiTake(raw) }, { raw => StorageItemQueryResult.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageItemQueryResult {
-        IStorageItemQueryResult(asRaw())
+        IStorageItemQueryResult.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -2293,7 +2391,7 @@ public class StorageItemQueryResult <: InterfaceWrapperBase & ComInterface & win
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItemQueryResult(): IStorageItemQueryResult {
@@ -2304,39 +2402,39 @@ public class StorageItemQueryResult <: InterfaceWrapperBase & ComInterface & win
         IStorageQueryResultBase(asRaw())
     }
 
-    public unsafe func GetItemsAsync(operation: UInt32, startIndex: UInt32): CPointer<Unit> {
+    public unsafe func GetItemsAsync(operation: UInt32, startIndex: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>> {
         return defaultInterface().GetItemsAsync(operation, startIndex)
     }
 
-    public unsafe func GetItemsAsyncDefaultStartAndCount(): CPointer<Unit> {
+    public unsafe func GetItemsAsyncDefaultStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<Storage.IStorageItem>> {
         return defaultInterface().GetItemsAsyncDefaultStartAndCount()
     }
 
-    public unsafe func GetItemCountAsync(): CPointer<Unit> {
+    public unsafe func GetItemCountAsync(): Foundation.IAsyncOperation<UInt32> {
         return asIStorageQueryResultBase().GetItemCountAsync()
     }
 
-    public unsafe func Folder(): windows.storage.StorageFolder {
+    public unsafe func Folder(): Storage.StorageFolder {
         return asIStorageQueryResultBase().Folder()
     }
 
-    public unsafe func ContentsChanged(eventCookie: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func ContentsChanged(eventCookie: Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>): Foundation.EventRegistrationToken {
         return asIStorageQueryResultBase().ContentsChanged(eventCookie)
     }
 
-    public unsafe func RemoveContentsChanged(eventCookie: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveContentsChanged(eventCookie: Foundation.EventRegistrationToken): Unit {
         asIStorageQueryResultBase().RemoveContentsChanged(eventCookie)
     }
 
-    public unsafe func OptionsChanged(eventCookie: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func OptionsChanged(eventCookie: Foundation.TypedEventHandler<IStorageQueryResultBase, IInspectable>): Foundation.EventRegistrationToken {
         return asIStorageQueryResultBase().OptionsChanged(eventCookie)
     }
 
-    public unsafe func RemoveOptionsChanged(eventCookie: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveOptionsChanged(eventCookie: Foundation.EventRegistrationToken): Unit {
         asIStorageQueryResultBase().RemoveOptionsChanged(eventCookie)
     }
 
-    public unsafe func FindStartIndexAsync(operation: IInspectable): CPointer<Unit> {
+    public unsafe func FindStartIndexAsync(operation: IInspectable): Foundation.IAsyncOperation<UInt32> {
         return asIStorageQueryResultBase().FindStartIndexAsync(operation)
     }
 

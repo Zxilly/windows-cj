@@ -11,7 +11,7 @@ func appendThunkSignature(
 ): Unit {
     sb.append(thunkName(descriptor, method))
     sb.append("(")
-    sb.append("this_: CPointer<Unit>")
+    sb.append("instanceRaw: CPointer<Unit>")
     for (parameter in method.parameters) {
         sb.append(", ")
         if (isResultBridgeParameter(parameter)) {
@@ -77,8 +77,8 @@ func appendRuntimeTypeLiteral(sb: StringBuilder, contract: RuntimeTypeContract):
 
 func bridgeKindLiteral(kind: InterfaceParameterBridgeKind): String {
     match (kind) {
-        case InterfaceParameterBridgeKind.Ref => "InterfaceParameterBridgeKind.Ref"
-        case InterfaceParameterBridgeKind.OutRef => "InterfaceParameterBridgeKind.OutRef"
+        case InterfaceParameterBridgeKind.InParam => "InterfaceParameterBridgeKind.InParam"
+        case InterfaceParameterBridgeKind.OutSlot => "InterfaceParameterBridgeKind.OutSlot"
         case InterfaceParameterBridgeKind.Value => "InterfaceParameterBridgeKind.Value"
     }
 }
@@ -163,8 +163,8 @@ func baseVtableBuilderName(descriptor: ResolvedDescriptor): String {
 
 func bridgeArgumentExpr(parameter: InterfaceParameterSchema): String {
     match (parameter.bridgeKind) {
-        case InterfaceParameterBridgeKind.Ref => "${parameter.name}.borrow()"
-        case InterfaceParameterBridgeKind.OutRef => "${parameter.name}.borrowMut()"
+        case InterfaceParameterBridgeKind.InParam => "${parameter.name}.borrow()"
+        case InterfaceParameterBridgeKind.OutSlot => "${parameter.name}.borrowMut()"
         case InterfaceParameterBridgeKind.Value => parameter.name
     }
 }
@@ -194,7 +194,7 @@ func unwrapGenericType(value: String, wrapperName: String): Option<String> {
 
 func isResultBridgeParameter(parameter: InterfaceParameterSchema): Bool {
     match (parameter.bridgeKind) {
-        case InterfaceParameterBridgeKind.OutRef => parameter.name == "result"
+        case InterfaceParameterBridgeKind.OutSlot => parameter.name == "result"
         case _ => false
     }
 }
@@ -224,7 +224,7 @@ func visibleParameterCount(method: InterfaceMethodSchema): Int64 {
 func visibleCallerReturnType(method: InterfaceMethodSchema): String {
     match (resultBridgeParameter(method)) {
         case Some(parameter) =>
-            match (unwrapGenericType(parameter.callerType, "OutRef")) {
+            match (unwrapGenericType(parameter.callerType, "OutSlot")) {
                 case Some(inner) => inner
                 case None => method.returnType
             }
@@ -235,7 +235,7 @@ func visibleCallerReturnType(method: InterfaceMethodSchema): String {
 func implSurfaceReturnType(method: InterfaceMethodSchema): String {
     match (resultBridgeParameter(method)) {
         case Some(parameter) =>
-            match (unwrapGenericType(parameter.callerType, "OutRef")) {
+            match (unwrapGenericType(parameter.callerType, "OutSlot")) {
                 case Some(inner) => "windows_result.Result<${inner}>"
                 case None => method.returnType
             }
@@ -252,7 +252,7 @@ func resultAbiValueType(method: InterfaceMethodSchema): Option<String> {
 
 func resultCallerValueType(method: InterfaceMethodSchema): Option<String> {
     match (resultBridgeParameter(method)) {
-        case Some(parameter) => unwrapGenericType(parameter.callerType, "OutRef")
+        case Some(parameter) => unwrapGenericType(parameter.callerType, "OutSlot")
         case None => None
     }
 }
@@ -292,7 +292,7 @@ func callerResultReturnExpr(method: InterfaceMethodSchema, abiValueType: String,
                 return valueName
             }
             if (abiValueType == "CPointer<Unit>") {
-                return "${callerType}(${valueName}, ownsReference: true)"
+                return "${callerType}.fromAbiTake(${valueName})"
             }
             valueName
         case None => valueName
@@ -484,24 +484,28 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
         case None => ()
     }
     sb.append(" {\n")
-    sb.append("    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {\n")
-    sb.append("        super(raw, ownsReference: ownsReference)\n")
+    sb.append("    public init(raw: CPointer<Unit>) {\n")
+    sb.append("        super(raw)\n")
     sb.append("    }\n\n")
 
-    sb.append("    public static func fromRaw(raw: CPointer<Unit>): ")
-    sb.append(descriptor.wrapperTypeName)
-    sb.append(" {\n")
-    sb.append("        ")
-    sb.append(descriptor.wrapperTypeName)
-    sb.append("(raw, ownsReference: true)\n")
+    sb.append("    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {\n")
+    sb.append("        super(raw, takeOwnership: takeOwnership)\n")
     sb.append("    }\n\n")
 
-    sb.append("    public static func fromRawBorrowed(raw: CPointer<Unit>): ")
+    sb.append("    public static func viewOf(raw: CPointer<Unit>): ")
     sb.append(descriptor.wrapperTypeName)
     sb.append(" {\n")
     sb.append("        ")
     sb.append(descriptor.wrapperTypeName)
     sb.append("(raw)\n")
+    sb.append("    }\n\n")
+
+    sb.append("    public static func fromAbiTake(raw: CPointer<Unit>): ")
+    sb.append(descriptor.wrapperTypeName)
+    sb.append(" {\n")
+    sb.append("        ")
+    sb.append(descriptor.wrapperTypeName)
+    sb.append("(raw, takeOwnership: true)\n")
     sb.append("    }\n\n")
 
     sb.append("    public static func iid(): GUID {\n")
@@ -584,9 +588,9 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
             sb.append(name)
             sb.append(".descriptor(), { raw => ")
             sb.append(descriptor.wrapperTypeName)
-            sb.append("(raw, ownsReference: true) }, { raw => ")
+            sb.append(".fromAbiTake(raw) }, { raw => ")
             sb.append(descriptor.wrapperTypeName)
-            sb.append("(raw) })\n")
+            sb.append(".viewOf(raw) })\n")
         case None =>
             sb.append("        var descriptor = InterfaceDescriptor<")
             sb.append(descriptor.wrapperTypeName)
@@ -598,9 +602,9 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
             appendGuidArrayLiteral(sb, descriptor.ancestorIids)
             sb.append(", { raw => ")
             sb.append(descriptor.wrapperTypeName)
-            sb.append("(raw, ownsReference: true) }, { raw => ")
+            sb.append(".fromAbiTake(raw) }, { raw => ")
             sb.append(descriptor.wrapperTypeName)
-            sb.append("(raw) })\n")
+            sb.append(".viewOf(raw) })\n")
     }
     sb.append("        descriptor.methods = methods\n")
     match (descriptor.runtimeTypeContract) {
@@ -672,13 +676,13 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
     sb.append("    }\n\n")
 
     if (!descriptor.isComInterface) {
-        sb.append("    public static func new<T>(this: T): ScopedInterface<")
+        sb.append("    public static func new<T>(this: T): InterfaceResource<")
         sb.append(descriptor.wrapperTypeName)
         sb.append("> where T <: Object & ")
         sb.append(descriptor.implSurfaceName)
         sb.append(" {\n")
         sb.append("        unsafe {\n")
-        sb.append("            createScopedInterfaceFromTarget(descriptor(), this, ")
+        sb.append("            createInterfaceResourceFromTarget(descriptor(), this, ")
         sb.append(descriptor.wrapperTypeName)
         sb.append(".vtablePtr())\n")
         sb.append("        }\n")
@@ -722,7 +726,7 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
     sb.append("        }\n")
     sb.append("        ")
     sb.append(descriptor.wrapperTypeName)
-    sb.append("(raw, ownsReference: true)\n")
+    sb.append(".fromAbiTake(raw)\n")
     sb.append("    }\n\n")
 
     sb.append("    public operator func ==(right: ")
@@ -755,7 +759,7 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
     }
     sb.append("    match (unsafe { asImplFromRaw<")
     sb.append(descriptor.implSurfaceName)
-    sb.append(">(this_")
+    sb.append(">(instanceRaw")
     if (descriptor.slotIndex > 0) {
         sb.append(", slotOffset: ")
         sb.append(descriptor.slotIndex.toString())
@@ -786,7 +790,6 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
                             sb.append("                            if (raw.isNull()) {\n")
                             sb.append("                                E_POINTER\n")
                             sb.append("                            } else {\n")
-                            sb.append("                                addRefRaw(raw)\n")
                             sb.append("                                unsafe { result__.write(raw) }\n")
                             sb.append("                                S_OK\n")
                             sb.append("                            }\n")

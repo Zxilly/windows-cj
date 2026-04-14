@@ -22,6 +22,6 @@ public unsafe func asImplFromRaw<T>(raw: CPointer<Unit>, slotOffset!: Int64 = -1
                 case access: ImplementationAccess => access.getImplAs<T>()
                 case _ => None
             }
-        case None => lookupScopedInterfaceTarget<T>(scopedLookupRaw)
+        case None => lookupInterfaceTarget<T>(scopedLookupRaw)
     }
 }

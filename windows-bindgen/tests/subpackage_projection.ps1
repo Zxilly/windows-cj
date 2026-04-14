@@ -1,8 +1,8 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-bindgen"
-$fixtureWin32 = Join-Path $repoRoot "ref/windows-rs/crates/libs/bindgen/default/Windows.Win32.winmd"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
+$fixtureWin32 = Join-Path $repoRoot "windows-cj/winmd/Windows.Win32.winmd"
 $outputRoot = Join-Path $packageRoot "tests/output/subpackage_projection"
 $generatedPackageRoot = Join-Path $outputRoot "windows_sys_pkg"
 $generatedSrcRoot = Join-Path $generatedPackageRoot "src"
@@ -34,16 +34,24 @@ try {
         --flat `
         --sys `
         --filter Windows.Win32.Foundation `
-        --filter Windows.Win32.System.Threading | Out-Host
+        --filter Windows.Win32.Security.Cryptography `
+        --filter Windows.Win32.Security.Cryptography.Sip `
+        --filter Windows.Win32.Security.Cryptography.Catalog | Out-Host
 }
 finally {
     Pop-Location
 }
 
-$foundationFile = Join-Path $generatedSrcRoot "win32_foundation/mod.cj"
-$threadingFile = Join-Path $generatedSrcRoot "win32_system_threading/mod.cj"
-$legacyFoundationFile = Join-Path $generatedSrcRoot "foundation.cj"
-$legacyThreadingFile = Join-Path $generatedSrcRoot "threading.cj"
+$foundationFile = Join-Path $generatedSrcRoot "Win32/Foundation/mod.cj"
+$catalogImplFile = Join-Path $generatedSrcRoot "Win32/Security/Cryptography/impl/Catalog.cj"
+$sipImplFile = Join-Path $generatedSrcRoot "Win32/Security/Cryptography/impl/Sip.cj"
+$catalogFacadeFile = Join-Path $generatedSrcRoot "Win32/Security/Cryptography/Catalog/mod.cj"
+$sipFacadeFile = Join-Path $generatedSrcRoot "Win32/Security/Cryptography/Sip/mod.cj"
+$rootModFile = Join-Path $generatedSrcRoot "mod.cj"
+$win32ModFile = Join-Path $generatedSrcRoot "Win32/mod.cj"
+$securityModFile = Join-Path $generatedSrcRoot "Win32/Security/mod.cj"
+$cryptographyModFile = Join-Path $generatedSrcRoot "Win32/Security/Cryptography/mod.cj"
+$implModFile = Join-Path $generatedSrcRoot "Win32/Security/Cryptography/impl/mod.cj"
 $rootCfgFile = Join-Path $generatedPackageRoot "cfg.toml"
 $rootFeaturesFile = Join-Path $generatedPackageRoot "features.toml"
 $rootLinkOptionsFile = Join-Path $generatedPackageRoot "link-options.toml"
@@ -51,15 +59,15 @@ $legacyCfgFile = Join-Path $generatedSrcRoot "cfg.toml"
 $legacyFeaturesFile = Join-Path $generatedSrcRoot "features.toml"
 $legacyLinkOptionsFile = Join-Path $generatedSrcRoot "link-options.toml"
 
-foreach ($path in @($foundationFile, $threadingFile)) {
+foreach ($path in @($foundationFile, $catalogImplFile, $sipImplFile, $catalogFacadeFile, $sipFacadeFile)) {
     if (!(Test-Path $path)) {
-        throw "Missing generated subpackage source file: $path"
+        throw "Missing generated source file: $path"
     }
 }
 
-foreach ($path in @($legacyFoundationFile, $legacyThreadingFile)) {
-    if (Test-Path $path) {
-        throw "Legacy flat output should not be generated in src package mode: $path"
+foreach ($path in @($rootModFile, $win32ModFile, $securityModFile, $cryptographyModFile, $implModFile)) {
+    if (!(Test-Path $path)) {
+        throw "Missing generated package layer mod.cj: $path"
     }
 }
 
@@ -76,35 +84,59 @@ foreach ($path in @($legacyCfgFile, $legacyFeaturesFile, $legacyLinkOptionsFile)
 }
 
 $foundation = Get-Content -Raw $foundationFile
-$threading = Get-Content -Raw $threadingFile
+$catalogImpl = Get-Content -Raw $catalogImplFile
+$sipImpl = Get-Content -Raw $sipImplFile
+$catalogFacade = Get-Content -Raw $catalogFacadeFile
+$sipFacade = Get-Content -Raw $sipFacadeFile
 $cfg = Get-Content -Raw $rootCfgFile
 
-if ($foundation -notmatch '(?m)^package windows_sys\.win32_foundation$') {
-    throw "Foundation subpackage declaration is incorrect"
+if ($foundation -notmatch '(?m)^package windows_sys\.Win32\.Foundation$') {
+    throw "Foundation direct package declaration is incorrect"
 }
-if ($threading -notmatch '(?m)^package windows_sys\.win32_system_threading$') {
-    throw "Threading subpackage declaration is incorrect"
+if ($catalogImpl -notmatch '(?m)^package windows_sys\.Win32\.Security\.Cryptography\.impl$') {
+    throw "Catalog impl package declaration is incorrect"
 }
-if ($threading -notmatch '(?m)^import windows_sys\.win32_foundation\.\*$') {
-    throw "Threading subpackage should import windows_sys.win32_foundation"
+if ($sipImpl -notmatch '(?m)^package windows_sys\.Win32\.Security\.Cryptography\.impl$') {
+    throw "Sip impl package declaration is incorrect"
 }
-if ($foundation -notmatch '@When\[feat_windows_win32_foundation == "on"\]') {
-    throw 'Foundation subpackage should gate namespace members with feat_windows_win32_foundation == "on"'
+if ($catalogFacade -notmatch '(?m)^package windows_sys\.Win32\.Security\.Cryptography\.Catalog$') {
+    throw "Catalog facade package declaration is incorrect"
 }
-if ($foundation -notmatch '@When\[feat_kernel32 == "on"\]') {
-    throw 'Foundation subpackage should gate DLL-linked members with feat_kernel32 == "on"'
+if ($sipFacade -notmatch '(?m)^package windows_sys\.Win32\.Security\.Cryptography\.Sip$') {
+    throw "Sip facade package declaration is incorrect"
+}
+if ($catalogFacade -notmatch '(?m)^public import windows_sys\.Win32\.Security\.Cryptography\.impl\.') {
+    throw "Catalog facade should re-export from cryptography impl"
+}
+if ($sipFacade -notmatch '(?m)^public import windows_sys\.Win32\.Security\.Cryptography\.impl\.') {
+    throw "Sip facade should re-export from cryptography impl"
+}
+if ($catalogFacade -match '(?m)^public struct ' -or $catalogFacade -match '(?m)^public enum ' -or $catalogFacade -match '(?m)^foreign\s*\{') {
+    throw "Catalog facade must not contain real ABI definitions"
+}
+if ($sipFacade -match '(?m)^public struct ' -or $sipFacade -match '(?m)^public enum ' -or $sipFacade -match '(?m)^foreign\s*\{') {
+    throw "Sip facade must not contain real ABI definitions"
+}
+if ($foundation -notmatch '@When\[Windows_Win32_Foundation == "on"\]') {
+    throw 'Foundation direct package should gate namespace members with Windows_Win32_Foundation == "on"'
+}
+if ($foundation -notmatch '@When\[KERNEL32 == "on"\]') {
+    throw 'Foundation direct package should gate DLL-linked members with KERNEL32 == "on"'
 }
 if ($foundation -match '@CallingConv\[STDCALL\]\s*foreign\s*\{') {
-    throw "Foundation subpackage should not emit unsupported @CallingConv[STDCALL] on foreign blocks"
+    throw "Foundation direct package should not emit unsupported @CallingConv[STDCALL] on foreign blocks"
 }
 if ($foundation -match '@CallingConv\[CDECL\]\s*public type') {
-    throw "Foundation subpackage should not emit @CallingConv on CFunc aliases"
+    throw "Foundation direct package should not emit @CallingConv on CFunc aliases"
 }
-if ($cfg -notmatch '(?m)^feat_windows_win32_foundation = "on"$') {
-    throw "cfg.toml should enable feat_windows_win32_foundation by default"
+if ($cfg -notmatch '(?m)^Windows_Win32_Foundation = "on"$') {
+    throw "cfg.toml should enable Windows_Win32_Foundation by default"
 }
-if ($cfg -notmatch '(?m)^feat_kernel32 = "on"$') {
-    throw "cfg.toml should enable feat_kernel32 by default"
+if ($cfg -notmatch '(?m)^KERNEL32 = "on"$') {
+    throw "cfg.toml should enable KERNEL32 by default"
+}
+if (Get-ChildItem -Path $generatedSrcRoot -Recurse -Filter "__package__.cj" | Select-Object -First 1) {
+    throw "__package__.cj stubs should not be generated"
 }
 
-Write-Host "windows-bindgen subpackage projection smoke test passed."
+Write-Host "windows-bindgen mixed direct/impl facade projection smoke test passed."

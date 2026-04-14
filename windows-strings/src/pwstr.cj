@@ -47,8 +47,8 @@ public struct PWSTR <: Equatable<PWSTR> {
 
     /// Snapshot the UTF-16 units pointed to by this string.
     ///
-    /// Rust exposes a borrowed wide slice here. Cangjie does not provide an
-    /// equivalent lifetime-tracked slice for this FFI pointer, so this returns
+    /// Cangjie does not provide a call-bound UTF-16 slice view for this FFI
+    /// pointer, so this returns
     /// the same copied snapshot as `toArray()`.
     public unsafe func asWide(): Array<UInt16> {
         toArray()
@@ -81,7 +81,7 @@ public struct PWSTR <: Equatable<PWSTR> {
         StringDisplay(toStringLossy())
     }
 
-    // Equatable<PWSTR> — pointer identity equality (matches Rust PartialEq).
+    // Equatable<PWSTR> — pointer identity equality.
     public operator func ==(other: PWSTR): Bool {
         Value.toUIntNative() == other.Value.toUIntNative()
     }

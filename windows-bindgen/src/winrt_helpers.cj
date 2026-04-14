@@ -172,10 +172,12 @@ public func winrtPublicType(index: TypeIndex, ty: MetadataType): String {
             // Use typed projection name for both generic and non-generic reference types
             return typeNameToProjectionCj(index, tn)
         case MetadataType.ValueName(tn) =>
-            if (isReferenceProjectionType(index, tn)) {
+            if (!tn.generics.isEmpty() || isReferenceProjectionType(index, tn)) {
                 return typeNameToProjectionCj(index, tn)
             }
             return metadataTypeToWinrtAbiCj(ty)
+        case MetadataType.Generic(_, _) =>
+            return metadataTypeToProjectionCj(index, ty)
         case _ =>
             return metadataTypeToWinrtAbiCj(ty)
     }
@@ -214,13 +216,14 @@ public func winrtArgumentExpr(index: TypeIndex, ty: MetadataType, expr: String):
 
 public func winrtThunkParamExpr(index: TypeIndex, ty: MetadataType, expr: String): String {
     match (ty) {
-        case MetadataType.MdObject => "IInspectable.fromRawBorrowed(${expr})"
+        case MetadataType.MdObject => "InParam<IInspectable>(IInspectable.viewOf(${expr}))"
         case MetadataType.ClassName(tn) =>
-            // Generic reference types also need fromRawBorrowed via projection name
-            return "${typeNameToProjectionCj(index, tn)}.fromRawBorrowed(${expr})"
+            let projection = typeNameToProjectionCj(index, tn)
+            return "InParam<${projection}>(${projection}.viewOf(${expr}))"
         case MetadataType.ValueName(tn) =>
-            if (isReferenceProjectionType(index, tn)) {
-                return "${typeNameToProjectionCj(index, tn)}.fromRawBorrowed(${expr})"
+            if (!tn.generics.isEmpty() || isReferenceProjectionType(index, tn)) {
+                let projection = typeNameToProjectionCj(index, tn)
+                return "InParam<${projection}>(${projection}.viewOf(${expr}))"
             }
             return expr
         case _ =>
@@ -230,13 +233,12 @@ public func winrtThunkParamExpr(index: TypeIndex, ty: MetadataType, expr: String
 
 public func winrtReturnExpr(index: TypeIndex, ty: MetadataType, expr: String): String {
     match (ty) {
-        case MetadataType.MdObject => "IInspectable.fromRaw(${expr})"
+        case MetadataType.MdObject => "IInspectable.fromAbiTake(${expr})"
         case MetadataType.ClassName(tn) =>
-            // Generic reference types also need fromRaw via projection name
-            return "${typeNameToProjectionCj(index, tn)}.fromRaw(${expr})"
+            return "${typeNameToProjectionCj(index, tn)}.fromAbiTake(${expr})"
         case MetadataType.ValueName(tn) =>
-            if (isReferenceProjectionType(index, tn)) {
-                return "${typeNameToProjectionCj(index, tn)}.fromRaw(${expr})"
+            if (!tn.generics.isEmpty() || isReferenceProjectionType(index, tn)) {
+                return "${typeNameToProjectionCj(index, tn)}.fromAbiTake(${expr})"
             }
             return expr
         case _ =>
@@ -246,13 +248,12 @@ public func winrtReturnExpr(index: TypeIndex, ty: MetadataType, expr: String): S
 
 public func winrtThunkReturnExpr(index: TypeIndex, ty: MetadataType, expr: String): String {
     match (ty) {
-        case MetadataType.MdObject => "${expr}.asRaw()"
+        case MetadataType.MdObject => "${expr}.intoAbi()"
         case MetadataType.ClassName(_) =>
-            // Generic reference types also pass back as raw pointer
-            return "${expr}.asRaw()"
+            return "${expr}.intoAbi()"
         case MetadataType.ValueName(tn) =>
-            if (isReferenceProjectionType(index, tn)) {
-                return "${expr}.asRaw()"
+            if (!tn.generics.isEmpty() || isReferenceProjectionType(index, tn)) {
+                return "${expr}.intoAbi()"
             }
             return expr
         case _ =>

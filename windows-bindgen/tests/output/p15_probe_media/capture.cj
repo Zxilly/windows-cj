@@ -30,7 +30,7 @@ public class IMediaCaptureVideoProfileMediaDescription <: InterfaceWrapperBase &
         IMediaCaptureVideoProfileMediaDescription(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaCaptureVideoProfileMediaDescription {
+    public static func viewOf(raw: CPointer<Unit>): IMediaCaptureVideoProfileMediaDescription {
         IMediaCaptureVideoProfileMediaDescription(raw)
     }
 
@@ -141,7 +141,7 @@ public class IMediaCaptureVideoProfileMediaDescription2 <: InterfaceWrapperBase 
         IMediaCaptureVideoProfileMediaDescription2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaCaptureVideoProfileMediaDescription2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaCaptureVideoProfileMediaDescription2 {
         IMediaCaptureVideoProfileMediaDescription2(raw)
     }
 
@@ -241,7 +241,7 @@ public class MediaCaptureVideoProfileMediaDescription <: InterfaceWrapperBase & 
         MediaCaptureVideoProfileMediaDescription(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaCaptureVideoProfileMediaDescription {
+    public static func viewOf(raw: CPointer<Unit>): MediaCaptureVideoProfileMediaDescription {
         MediaCaptureVideoProfileMediaDescription(raw)
     }
 

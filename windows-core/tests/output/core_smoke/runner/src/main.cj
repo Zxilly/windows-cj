@@ -32,20 +32,6 @@ public class MissingInterface <: ComInterface {
     }
 }
 
-public class FreeProbe <: Free & CloneResource<FreeProbe> {
-    public var freeCount: Int32 = 0
-
-    public init() {}
-
-    public func clone(): FreeProbe {
-        this
-    }
-
-    public func free(): Unit {
-        freeCount += 1
-    }
-}
-
 public class DemoAbiType <: RuntimeType & Type<DemoAbiType, String, String> & CloneType {
     public init() {}
 
@@ -427,10 +413,7 @@ main(_: Array<String>) {
             fail("GUID.tryFrom failed unexpectedly: ")
     }
     if (GUID.fromSignature(signatureText) != signatureGuid) {
-        fail("GUID.fromSignature should route through the same signature hashing logic")
-    }
-    if (GUID.from_signature(signatureText) != signatureGuid) {
-        fail("GUID.from_signature should share the same signature hashing logic")
+        fail("GUID.fromSignature should share the same signature hashing logic")
     }
     if (unknownDescriptor.iid != IUnknown.iid()) {
         fail("InterfaceDescriptor should be re-exported through windows_core")
@@ -443,41 +426,6 @@ main(_: Array<String>) {
     }
     if (queryRequiredFor<IUnknown, IInspectable>()) {
         fail("queryRequiredFor should detect direct interface upcasts without QI")
-    }
-
-    let freeProbe = FreeProbe()
-    let ownedProbe = unsafe { Owned<FreeProbe>.new(freeProbe) }
-    if (ownedProbe.get().freeCount != 0i32) {
-        fail("Owned.get should expose the wrapped value before drop")
-    }
-    ownedProbe.drop()
-    if (freeProbe.freeCount != 1i32) {
-        fail("Owned.drop should call Free.free exactly once")
-    }
-    ownedProbe.drop()
-    if (freeProbe.freeCount != 1i32) {
-        fail("Owned.drop should be idempotent after the resource is released")
-    }
-    var ownedGetFailed = false
-    try {
-        ownedProbe.get()
-    } catch (_: IllegalStateException) {
-        ownedGetFailed = true
-    }
-    if (!ownedGetFailed) {
-        fail("Owned.get should reject access after drop")
-    }
-    let ownedTransferred = unsafe { Owned<FreeProbe>.new(FreeProbe()) }
-    let transferredProbe = ownedTransferred.intoRaw()
-    if (!ownedTransferred.isClosed()) {
-        fail("Owned.intoRaw should leave the ownership wrapper closed")
-    }
-    if (transferredProbe.freeCount != 0i32) {
-        fail("Owned.intoRaw should hand off the live value without freeing it")
-    }
-    transferredProbe.free()
-    if (transferredProbe.freeCount != 1i32) {
-        fail("Owned.intoRaw should leave the caller responsible for the raw resource")
     }
 
     let builtUnknownVtbl = buildUnknownVtblFor<ComObjectRuntime<DemoImpl>>()
@@ -585,9 +533,9 @@ main(_: Array<String>) {
     if (!samePointer(unknownRef.asRaw(), borrowedUnknown.asRaw())) {
         fail("InterfaceRef.fromInterface should retain the borrowed COM pointer")
     }
-    let ownedUnknown = unknownRef.toOwned()
+    let ownedUnknown = unknownRef.retain()
     if (!samePointer(ownedUnknown.asRaw(), borrowedUnknown.asRaw())) {
-        fail("InterfaceRef.toOwned should clone the same COM identity")
+        fail("InterfaceRef.retain should clone the same COM identity")
     }
     ownedUnknown.close()
     borrowedUnknown.close()
@@ -596,7 +544,7 @@ main(_: Array<String>) {
     if (genericFactoryDescriptor.iid != IGenericFactory.iid()) {
         fail("IGenericFactory should expose a stable descriptor")
     }
-    let genericFactory = IGenericFactory.fromRawBorrowed(CPointer<Unit>())
+    let genericFactory = IGenericFactory.viewOf(CPointer<Unit>())
     match (unsafe { genericFactory.ActivateInstance(IInspectable.descriptor()) }) {
         case Result<IInspectable>.Ok(_) =>
             fail("IGenericFactory.ActivateInstance should reject null factories")
@@ -641,38 +589,38 @@ main(_: Array<String>) {
     }
 
     var scopedObject = createComObjectFromSchemas(DemoImpl(), supported, vtblPtr)
-    let scopedUnknown = ScopedInterface<IUnknown>(scopedObject.asRaw(), IUnknown.descriptor(), addRef: true)
-    let scopedHeap = scopedUnknown.heap()
+    let scopedUnknown = InterfaceResource<IUnknown>(scopedObject.asRaw(), IUnknown.descriptor(), addRef: true)
+    let scopedHeap = scopedUnknown.slotInfo()
     if (scopedHeap.this_ptr != scopedObject.asRaw().toUIntNative()) {
-        fail("ScopedInterface should capture the COM this pointer")
+        fail("InterfaceResource should capture the COM this pointer")
     }
     if (scopedHeap.vtable == UIntNative(0)) {
-        fail("ScopedInterface should capture the COM vtable pointer")
+        fail("InterfaceResource should capture the COM vtable pointer")
     }
     if (scopedUnknown.isClosed()) {
-        fail("ScopedInterface should start open")
+        fail("InterfaceResource should start open")
     }
     let scopedView = scopedUnknown.value()
     if (scopedView.asRaw().toUIntNative() != scopedObject.asRaw().toUIntNative()) {
-        fail("ScopedInterface.value should expose the wrapped COM interface")
+        fail("InterfaceResource.value should expose the wrapped COM interface")
     }
     scopedView.close()
     scopedUnknown.close()
     if (!scopedUnknown.isClosed()) {
-        fail("ScopedInterface.close should mark the scope as closed")
+        fail("InterfaceResource.close should mark the scope as closed")
     }
     let scopedProbe = IUnknown(scopedObject.asRaw())
     let afterScopedClose = scopedProbe.addRef()
     if (afterScopedClose != 2u32) {
-        fail("ScopedInterface.close should leave the underlying COM reference count unchanged")
+        fail("InterfaceResource.close should leave the underlying COM reference count unchanged")
     }
     let resetScopedClose = scopedProbe.release()
     if (resetScopedClose != 1u32) {
-        fail("ScopedInterface close probe should restore the original COM refcount")
+        fail("InterfaceResource close probe should restore the original COM refcount")
     }
     let scopedFinalCount = IUnknown(scopedObject.asRaw()).release()
     if (scopedFinalCount != 0u32) {
-        fail("ScopedInterface test object should release cleanly")
+        fail("InterfaceResource test object should release cleanly")
     }
 
     var identityLeftObject = createComObjectFromSchemas(DemoImpl(), supported, vtblPtr)
@@ -733,39 +681,39 @@ main(_: Array<String>) {
     }
 
     let unknown = IUnknown(object.asRaw())
-    let unknownPtr = ComPtr<IUnknown>(unknown.asRaw(), IUnknown.descriptor(), addRef: true)
+    let unknownPtr = InterfaceHandle<IUnknown>(unknown.asRaw(), IUnknown.descriptor(), addRef: true)
     if (!unknownPtr.hasValue()) {
-        fail("ComPtr.hasValue should report a live owning pointer")
+        fail("InterfaceHandle.hasValue should report a live owning pointer")
     }
     let unknownView = unknownPtr.value()
     if (unknownView.asRaw().toUIntNative() != object.asRaw().toUIntNative()) {
-        fail("ComPtr<IUnknown>.value should wrap the attached raw pointer")
+        fail("InterfaceHandle<IUnknown>.value should wrap the attached raw pointer")
     }
     unknownView.close()
     let borrowedUnknownProbe = IUnknown(object.asRaw())
     let afterBorrowedUnknownClose = borrowedUnknownProbe.addRef()
     if (afterBorrowedUnknownClose != 3u32) {
-        fail("closing a borrowed ComPtr value view should not consume the owned COM reference")
+        fail("closing a borrowed InterfaceHandle value view should not consume the owned COM reference")
     }
     let resetBorrowedUnknownClose = borrowedUnknownProbe.release()
     if (resetBorrowedUnknownClose != 2u32) {
-        fail("borrowed ComPtr value probe should restore the reference count")
+        fail("borrowed InterfaceHandle value probe should restore the reference count")
     }
 
-    let cloned = unknownPtr.clonePtr()
+    let cloned = unknownPtr.retain()
     let clonedView = cloned.value()
     if (clonedView.asRaw().toUIntNative() != object.asRaw().toUIntNative()) {
-        fail("clonePtr should preserve the wrapped raw pointer")
+        fail("retain should preserve the wrapped raw pointer")
     }
     clonedView.close()
 
-    let detachedPtr = unknownPtr.clonePtr()
-    let detachedRaw = detachedPtr.detach()
+    let detachedPtr = unknownPtr.retain()
+    let detachedRaw = detachedPtr.intoAbi()
     if (detachedRaw.toUIntNative() != object.asRaw().toUIntNative()) {
-        fail("ComPtr.detach should yield the wrapped raw pointer")
+        fail("InterfaceHandle.intoAbi should yield the wrapped raw pointer")
     }
     if (detachedPtr.hasValue()) {
-        fail("ComPtr.detach should leave the source pointer empty")
+        fail("InterfaceHandle.intoAbi should leave the source pointer empty")
     }
     detachedPtr.close()
 
@@ -801,7 +749,7 @@ main(_: Array<String>) {
             var trustLevel = -1i32
             let trustHr = unsafe { inspectableView.getTrustLevel(CPointer<Int32>(inout trustLevel)) }
             if (trustHr.value != 0i32) {
-                fail("default IInspectable trust level should report S_OK through ComPtr")
+                fail("default IInspectable trust level should report S_OK through InterfaceHandle")
             }
             if (trustLevel != 0i32) {
                 fail("default IInspectable trust level should return BaseTrust")
@@ -810,15 +758,15 @@ main(_: Array<String>) {
             let borrowedInspectableProbe = IUnknown(object.asRaw())
             let afterBorrowedInspectableClose = borrowedInspectableProbe.addRef()
             if (afterBorrowedInspectableClose != 6u32) {
-                fail("closing borrowed views from ComPtr.query should not consume the owned ComPtr reference")
+                fail("closing borrowed views from InterfaceHandle.query should not consume the owned InterfaceHandle reference")
             }
             let resetBorrowedInspectableClose = borrowedInspectableProbe.release()
             if (resetBorrowedInspectableClose != 5u32) {
-                fail("borrowed ComPtr.query probe should restore the reference count")
+                fail("borrowed InterfaceHandle.query probe should restore the reference count")
             }
             inspectablePtr.close()
         case None =>
-            fail("ComPtr.query should succeed for IInspectable")
+            fail("InterfaceHandle.query should succeed for IInspectable")
     }
 
     cloned.close()
@@ -828,11 +776,11 @@ main(_: Array<String>) {
         fail("detached COM references should remain owned until released explicitly")
     }
     if (unknownPtr.hasValue()) {
-        fail("closed ComPtr instances should report no value")
+        fail("closed InterfaceHandle instances should report no value")
     }
 
     let finalCount = IUnknown(object.asRaw()).release()
     if (finalCount != 0u32) {
-        fail("closing ComPtr instances should release their references")
+        fail("closing InterfaceHandle instances should release their references")
     }
 }

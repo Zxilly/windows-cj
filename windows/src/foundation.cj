@@ -2,7 +2,11 @@ package windows
 
 import windows_core.*
 import windows_result.Win32Exception
-import windows_sys.*
+import windows_sys.win32.foundation.*
+import windows_sys.win32.security.*
+import windows_sys.win32.storage.file_system.*
+import windows_sys.win32.system.library_loader.*
+import windows_sys.win32.ui.windows_and_messaging.*
 
 // =============================================================================
 // Win32 Foundation — high-level safe wrappers
@@ -11,22 +15,39 @@ import windows_sys.*
 // createFile — opens or creates a file, throwing Win32Exception on failure.
 public func createFile(
     path: String,
-    desiredAccess: FILE_ACCESS_FLAGS,
+    desiredAccess: GENERIC_ACCESS_RIGHTS,
     shareMode: FILE_SHARE_MODE,
     creationDisposition: FILE_CREATION_DISPOSITION,
-    flagsAndAttributes: UInt32
+    flagsAndAttributes: FILE_FLAGS_AND_ATTRIBUTES
 ): HANDLE {
-    let desiredAccessValue = desiredAccess.value
-    let shareModeValue = shareMode.value
-    let creationDispositionValue = creationDisposition.value
+    createFile(path, desiredAccess.value, shareMode, creationDisposition, flagsAndAttributes)
+}
+
+public func createFile(
+    path: String,
+    desiredAccess: FILE_ACCESS_RIGHTS,
+    shareMode: FILE_SHARE_MODE,
+    creationDisposition: FILE_CREATION_DISPOSITION,
+    flagsAndAttributes: FILE_FLAGS_AND_ATTRIBUTES
+): HANDLE {
+    createFile(path, desiredAccess.value, shareMode, creationDisposition, flagsAndAttributes)
+}
+
+public func createFile(
+    path: String,
+    desiredAccess: UInt32,
+    shareMode: FILE_SHARE_MODE,
+    creationDisposition: FILE_CREATION_DISPOSITION,
+    flagsAndAttributes: FILE_FLAGS_AND_ATTRIBUTES
+): HANDLE {
     let handle = withWideString(path) { p: CPointer<UInt16> =>
         unsafe {
             ffiCreateFileW(
                 p,
-                desiredAccessValue,
-                shareModeValue,
+                desiredAccess,
+                shareMode,
                 CPointer<SECURITY_ATTRIBUTES>(),
-                creationDispositionValue,
+                creationDisposition,
                 flagsAndAttributes,
                 CPointer<Unit>()
             )
@@ -41,22 +62,39 @@ public func createFile(
 // tryCreateFile — returns None on failure instead of throwing.
 public func tryCreateFile(
     path: String,
-    desiredAccess: FILE_ACCESS_FLAGS,
+    desiredAccess: GENERIC_ACCESS_RIGHTS,
     shareMode: FILE_SHARE_MODE,
     creationDisposition: FILE_CREATION_DISPOSITION,
-    flagsAndAttributes: UInt32
+    flagsAndAttributes: FILE_FLAGS_AND_ATTRIBUTES
 ): Option<HANDLE> {
-    let desiredAccessValue = desiredAccess.value
-    let shareModeValue = shareMode.value
-    let creationDispositionValue = creationDisposition.value
+    tryCreateFile(path, desiredAccess.value, shareMode, creationDisposition, flagsAndAttributes)
+}
+
+public func tryCreateFile(
+    path: String,
+    desiredAccess: FILE_ACCESS_RIGHTS,
+    shareMode: FILE_SHARE_MODE,
+    creationDisposition: FILE_CREATION_DISPOSITION,
+    flagsAndAttributes: FILE_FLAGS_AND_ATTRIBUTES
+): Option<HANDLE> {
+    tryCreateFile(path, desiredAccess.value, shareMode, creationDisposition, flagsAndAttributes)
+}
+
+public func tryCreateFile(
+    path: String,
+    desiredAccess: UInt32,
+    shareMode: FILE_SHARE_MODE,
+    creationDisposition: FILE_CREATION_DISPOSITION,
+    flagsAndAttributes: FILE_FLAGS_AND_ATTRIBUTES
+): Option<HANDLE> {
     let handle = withWideString(path) { p: CPointer<UInt16> =>
         unsafe {
             ffiCreateFileW(
                 p,
-                desiredAccessValue,
-                shareModeValue,
+                desiredAccess,
+                shareMode,
                 CPointer<SECURITY_ATTRIBUTES>(),
-                creationDispositionValue,
+                creationDisposition,
                 flagsAndAttributes,
                 CPointer<Unit>()
             )
@@ -79,8 +117,8 @@ public func messageBox(
     owner: HWND,
     text: String,
     caption: String,
-    boxType: UInt32
-): Int32 {
+    boxType: MESSAGEBOX_STYLE
+): MESSAGEBOX_RESULT {
     let result = withWideString(text) { pText: CPointer<UInt16> =>
         withWideString(caption) { pCaption: CPointer<UInt16> =>
             unsafe {
@@ -88,7 +126,7 @@ public func messageBox(
             }
         }
     }
-    if (result == 0) {
+    if (result == MESSAGEBOX_RESULT(0)) {
         throw Win32Exception(ffiGetLastError())
     }
     result

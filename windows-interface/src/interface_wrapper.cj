@@ -52,20 +52,20 @@ func releaseRaw(raw: CPointer<Unit>): UInt32 {
     }
 }
 
-func wrapIUnknownOwned(raw: CPointer<Unit>): IUnknown {
-    IUnknown(raw, ownsReference: true)
+func takeIUnknownFromAbi(raw: CPointer<Unit>): IUnknown {
+    IUnknown.fromAbiTake(raw)
 }
 
-func wrapIUnknownBorrowed(raw: CPointer<Unit>): IUnknown {
-    IUnknown(raw)
+func viewIUnknown(raw: CPointer<Unit>): IUnknown {
+    IUnknown.viewOf(raw)
 }
 
-func wrapIInspectableOwned(raw: CPointer<Unit>): IInspectable {
-    IInspectable(raw, ownsReference: true)
+func takeIInspectableFromAbi(raw: CPointer<Unit>): IInspectable {
+    IInspectable.fromAbiTake(raw)
 }
 
-func wrapIInspectableBorrowed(raw: CPointer<Unit>): IInspectable {
-    IInspectable(raw)
+func viewIInspectable(raw: CPointer<Unit>): IInspectable {
+    IInspectable.viewOf(raw)
 }
 
 @C
@@ -101,12 +101,17 @@ public struct IInspectableVtbl {
 
 public open class InterfaceWrapperBase <: Resource {
     private let raw_: CPointer<Unit>
-    private let ownsReference_: Bool
+    private let ownsHandle_: Bool
     private var closed_: Bool = false
 
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
+    public init(raw: CPointer<Unit>) {
         this.raw_ = raw
-        this.ownsReference_ = ownsReference
+        this.ownsHandle_ = false
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        this.raw_ = raw
+        this.ownsHandle_ = takeOwnership
     }
 
     public func asRaw(): CPointer<Unit> {
@@ -116,16 +121,33 @@ public open class InterfaceWrapperBase <: Resource {
         raw_
     }
 
-    public func isOwned(): Bool {
-        ownsReference_
-    }
-
     public func isClosed(): Bool {
         closed_
     }
 
     public func addRef(): UInt32 {
         addRefRaw(asRaw())
+    }
+
+    public func retainRaw(): CPointer<Unit> {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            return CPointer<Unit>()
+        }
+        addRefRaw(liveRaw)
+        liveRaw
+    }
+
+    public func intoAbi(): CPointer<Unit> {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            return CPointer<Unit>()
+        }
+        if (!ownsHandle_) {
+            addRefRaw(liveRaw)
+        }
+        closed_ = true
+        liveRaw
     }
 
     public func release(): UInt32 {
@@ -153,23 +175,28 @@ public open class InterfaceWrapperBase <: Resource {
 
     public func close(): Unit {
         let liveRaw = asRaw()
-        if (!liveRaw.isNull() && ownsReference_) {
+        if (!liveRaw.isNull() && ownsHandle_) {
             releaseRaw(liveRaw)
         }
         closed_ = true
     }
+
 }
 
 public class IUnknown <: InterfaceWrapperBase & ComInterface & RuntimeName {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IUnknown {
-        IUnknown(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUnknown {
+    public static func fromAbiTake(raw: CPointer<Unit>): IUnknown {
+        IUnknown(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IUnknown {
         IUnknown(raw)
     }
 
@@ -178,7 +205,7 @@ public class IUnknown <: InterfaceWrapperBase & ComInterface & RuntimeName {
     }
 
     public static func descriptor(): InterfaceDescriptor<IUnknown> {
-        InterfaceDescriptor<IUnknown>("IUnknown", IID_IUNKNOWN, wrapIUnknownOwned, wrapIUnknownBorrowed)
+        InterfaceDescriptor<IUnknown>("IUnknown", IID_IUNKNOWN, takeIUnknownFromAbi, viewIUnknown)
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
@@ -203,15 +230,19 @@ public class IUnknown <: InterfaceWrapperBase & ComInterface & RuntimeName {
 
 public class IInspectable <: InterfaceWrapperBase & ComInterface & RuntimeName {
 
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IInspectable {
-        IInspectable(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IInspectable {
+    public static func fromAbiTake(raw: CPointer<Unit>): IInspectable {
+        IInspectable(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IInspectable {
         IInspectable(raw)
     }
 
@@ -224,8 +255,8 @@ public class IInspectable <: InterfaceWrapperBase & ComInterface & RuntimeName {
             "IInspectable",
             IID_IINSPECTABLE,
             IUnknown.descriptor(),
-            wrapIInspectableOwned,
-            wrapIInspectableBorrowed
+            takeIInspectableFromAbi,
+            viewIInspectable
         )
     }
 
@@ -302,25 +333,29 @@ public struct IActivationFactoryVtbl {
     public init() {}
 }
 
-func wrapIActivationFactoryOwned(raw: CPointer<Unit>): IActivationFactory {
-    IActivationFactory(raw, ownsReference: true)
+func takeIActivationFactoryFromAbi(raw: CPointer<Unit>): IActivationFactory {
+    IActivationFactory.fromAbiTake(raw)
 }
 
-func wrapIActivationFactoryBorrowed(raw: CPointer<Unit>): IActivationFactory {
-    IActivationFactory(raw)
+func viewIActivationFactory(raw: CPointer<Unit>): IActivationFactory {
+    IActivationFactory.viewOf(raw)
 }
 
 public class IActivationFactory <: InterfaceWrapperBase & ComInterface & RuntimeName {
 
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IActivationFactory {
-        IActivationFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IActivationFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): IActivationFactory {
+        IActivationFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IActivationFactory {
         IActivationFactory(raw)
     }
 
@@ -333,8 +368,8 @@ public class IActivationFactory <: InterfaceWrapperBase & ComInterface & Runtime
             "IActivationFactory",
             IID_IACTIVATIONFACTORY,
             IInspectable.descriptor(),
-            wrapIActivationFactoryOwned,
-            wrapIActivationFactoryBorrowed
+            takeIActivationFactoryFromAbi,
+            viewIActivationFactory
         )
     }
 
@@ -388,7 +423,7 @@ public unsafe func queryInterfaceRaw(source: CPointer<Unit>, targetIid: GUID): O
 
 public unsafe func queryInterfaceAs<T>(source: CPointer<Unit>, descriptor: InterfaceDescriptor<T>): Option<T> {
     match (queryInterfaceRaw(source, descriptor.iid)) {
-        case Some(raw) => Some(descriptor.wrapOwned(raw))
+        case Some(raw) => Some(descriptor.takeFromAbi(raw))
         case None => None
     }
 }
@@ -527,5 +562,5 @@ public func getActivationFactory<T>(
     if (raw.isNull()) {
         return Result<T>.Err(WinResultError.fromHRESULT(E_POINTER))
     }
-    Result<T>.Ok(descriptor.wrapOwned(raw))
+    Result<T>.Ok(descriptor.takeFromAbi(raw))
 }

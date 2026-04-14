@@ -1,26 +1,28 @@
-package windows.storage
+package Windows.Storage
 
 import std.collection.*
 import windows_core.*
 import windows_interface.*
-import windows.win32.foundation.*
+import Windows.Foundation as Foundation
+import Windows.Foundation.Collections as Foundation_Collections
+import Windows.Storage.FileProperties as Storage_FileProperties
+import Windows.Storage.Search as Storage_Search
+import Windows.Storage.Streams as Storage_Streams
+import Windows.System as System
+import Windows.Win32.Foundation as Win32_Foundation
+import Windows.Win32.Foundation.*
 
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
+@C
 public struct CreationCollisionOption {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let GenerateUniqueName = CreationCollisionOption(value: 0)
-    public static let ReplaceExisting = CreationCollisionOption(value: 1)
-    public static let FailIfExists = CreationCollisionOption(value: 2)
-    public static let OpenIfExists = CreationCollisionOption(value: 3)
 
     public operator func ==(other: CreationCollisionOption): Bool {
         return this.value == other.value
@@ -30,19 +32,28 @@ public struct CreationCollisionOption {
     }
 }
 
-@When[feature == "feat_windows_storage"]
-public struct FileAccessMode {
-    public let value: Int32
+@When[Windows_Storage == "on"]
+public let GenerateUniqueName: CreationCollisionOption = CreationCollisionOption(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Storage == "on"]
+public let ReplaceExisting: CreationCollisionOption = CreationCollisionOption(1)
+
+@When[Windows_Storage == "on"]
+public let FailIfExists: CreationCollisionOption = CreationCollisionOption(2)
+
+@When[Windows_Storage == "on"]
+public let OpenIfExists: CreationCollisionOption = CreationCollisionOption(3)
+
+@When[Windows_Storage == "on"]
+@C
+public struct FileAccessMode {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Read = FileAccessMode(value: 0)
-    public static let ReadWrite = FileAccessMode(value: 1)
 
     public operator func ==(other: FileAccessMode): Bool {
         return this.value == other.value
@@ -52,23 +63,22 @@ public struct FileAccessMode {
     }
 }
 
-@When[feature == "feat_windows_storage"]
-public struct FileAttributes {
-    public let value: UInt32
+@When[Windows_Storage == "on"]
+public let Read: FileAccessMode = FileAccessMode(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Storage == "on"]
+public let ReadWrite: FileAccessMode = FileAccessMode(1)
+
+@When[Windows_Storage == "on"]
+@C
+public struct FileAttributes {
+    public var value: UInt32 = 0
+
+    public init() {}
 
     public init(value: UInt32) {
         this.value = value
     }
-    public static let Normal = FileAttributes(value: 0)
-    public static let ReadOnly = FileAttributes(value: 1)
-    public static let Directory = FileAttributes(value: 16)
-    public static let Archive = FileAttributes(value: 32)
-    public static let Temporary = FileAttributes(value: 256)
-    public static let LocallyIncomplete = FileAttributes(value: 512)
 
     public operator func ==(other: FileAttributes): Bool {
         return this.value == other.value
@@ -82,17 +92,35 @@ public struct FileAttributes {
     }
 
     public operator func |(other: FileAttributes): FileAttributes {
-        return FileAttributes(value: this.value | other.value)
+        return FileAttributes(this.value | other.value)
     }
     public operator func &(other: FileAttributes): FileAttributes {
-        return FileAttributes(value: this.value & other.value)
+        return FileAttributes(this.value & other.value)
     }
-    public operator func ~(): FileAttributes {
-        return FileAttributes(value: ~this.value)
+    public operator func !(): FileAttributes {
+        return FileAttributes(!this.value)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
+public let Normal: FileAttributes = FileAttributes(0)
+
+@When[Windows_Storage == "on"]
+public let ReadOnly: FileAttributes = FileAttributes(1)
+
+@When[Windows_Storage == "on"]
+public let Directory: FileAttributes = FileAttributes(16)
+
+@When[Windows_Storage == "on"]
+public let Archive: FileAttributes = FileAttributes(32)
+
+@When[Windows_Storage == "on"]
+public let Temporary: FileAttributes = FileAttributes(256)
+
+@When[Windows_Storage == "on"]
+public let LocallyIncomplete: FileAttributes = FileAttributes(512)
+
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFileVtbl {
     public var base_: IStorageItemVtbl = IStorageItemVtbl()
@@ -114,11 +142,11 @@ public struct IStorageFileVtbl {
         let _ = offset
         var vtbl = IStorageFileVtbl()
         vtbl.base_ = IStorageItemVtbl.new<Identity>(offset: offset)
-        vtbl.FileType = { this_, result__ =>
+        vtbl.FileType = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.FileType()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -131,11 +159,11 @@ public struct IStorageFileVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.ContentType = { this_, result__ =>
+        vtbl.ContentType = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.ContentType()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -148,230 +176,220 @@ public struct IStorageFileVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.OpenAsync = { this_, arg0, result__ =>
+        vtbl.OpenAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.OpenAsync(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.OpenTransactedWriteAsync = { this_, result__ =>
+        vtbl.OpenTransactedWriteAsync = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.OpenTransactedWriteAsync()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<StorageStreamTransaction>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageStreamTransaction>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CopyOverloadDefaultNameAndOptions = { this_, arg0, result__ =>
+        vtbl.CopyOverloadDefaultNameAndOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.CopyOverloadDefaultNameAndOptions(IStorageFolder.fromRawBorrowed(arg0))) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                    match (impl.CopyOverloadDefaultNameAndOptions(InParam<IStorageFolder>(IStorageFolder.viewOf(arg0)))) {
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CopyOverloadDefaultOptions = { this_, arg0, arg1, result__ =>
+        vtbl.CopyOverloadDefaultOptions = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.CopyOverloadDefaultOptions(IStorageFolder.fromRawBorrowed(arg0), arg1)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                    match (impl.CopyOverloadDefaultOptions(InParam<IStorageFolder>(IStorageFolder.viewOf(arg0)), arg1)) {
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CopyOverload = { this_, arg0, arg1, arg2, result__ =>
+        vtbl.CopyOverload = { instanceRaw, arg0, arg1, arg2, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.CopyOverload(IStorageFolder.fromRawBorrowed(arg0), arg1, arg2)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                    match (impl.CopyOverload(InParam<IStorageFolder>(IStorageFolder.viewOf(arg0)), arg1, arg2)) {
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CopyAndReplaceAsync = { this_, arg0, result__ =>
+        vtbl.CopyAndReplaceAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.CopyAndReplaceAsync(IStorageFile.fromRawBorrowed(arg0))) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                    match (impl.CopyAndReplaceAsync(InParam<IStorageFile>(IStorageFile.viewOf(arg0)))) {
+                        case Result<Foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<Foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.MoveOverloadDefaultNameAndOptions = { this_, arg0, result__ =>
+        vtbl.MoveOverloadDefaultNameAndOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.MoveOverloadDefaultNameAndOptions(IStorageFolder.fromRawBorrowed(arg0))) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                    match (impl.MoveOverloadDefaultNameAndOptions(InParam<IStorageFolder>(IStorageFolder.viewOf(arg0)))) {
+                        case Result<Foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<Foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.MoveOverloadDefaultOptions = { this_, arg0, arg1, result__ =>
+        vtbl.MoveOverloadDefaultOptions = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.MoveOverloadDefaultOptions(IStorageFolder.fromRawBorrowed(arg0), arg1)) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                    match (impl.MoveOverloadDefaultOptions(InParam<IStorageFolder>(IStorageFolder.viewOf(arg0)), arg1)) {
+                        case Result<Foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<Foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.MoveOverload = { this_, arg0, arg1, arg2, result__ =>
+        vtbl.MoveOverload = { instanceRaw, arg0, arg1, arg2, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.MoveOverload(IStorageFolder.fromRawBorrowed(arg0), arg1, arg2)) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                    match (impl.MoveOverload(InParam<IStorageFolder>(IStorageFolder.viewOf(arg0)), arg1, arg2)) {
+                        case Result<Foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<Foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.MoveAndReplaceAsync = { this_, arg0, result__ =>
+        vtbl.MoveAndReplaceAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.MoveAndReplaceAsync(IStorageFile.fromRawBorrowed(arg0))) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                    match (impl.MoveAndReplaceAsync(InParam<IStorageFile>(IStorageFile.viewOf(arg0)))) {
+                        case Result<Foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<Foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -385,7 +403,7 @@ public struct IStorageFileVtbl {
         if (iid == IStorageFile.iid()) {
             return true
         }
-        for (ancestor in [IStorageItem.iid(), windows.storage.streams.IRandomAccessStreamReference.iid(), windows.storage.streams.IInputStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IStorageItem.iid(), Storage_Streams.IRandomAccessStreamReference.iid(), Storage_Streams.IInputStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -394,33 +412,37 @@ public struct IStorageFileVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageFile_Impl <: IStorageItem_Impl & IRandomAccessStreamReference_Impl & IInputStreamReference_Impl {
     public func FileType(): windows_core.Result<CPointer<UInt16>>
     public func ContentType(): windows_core.Result<CPointer<UInt16>>
-    public func OpenAsync(accessMode: FileAccessMode): windows_core.Result<CPointer<Unit>>
-    public func OpenTransactedWriteAsync(): windows_core.Result<CPointer<Unit>>
-    public func CopyOverloadDefaultNameAndOptions(destinationFolder: IStorageFolder): windows_core.Result<CPointer<Unit>>
-    public func CopyOverloadDefaultOptions(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>): windows_core.Result<CPointer<Unit>>
-    public func CopyOverload(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>, option: NameCollisionOption): windows_core.Result<CPointer<Unit>>
-    public func CopyAndReplaceAsync(fileToReplace: IStorageFile): windows_core.Result<windows.foundation.IAsyncAction>
-    public func MoveOverloadDefaultNameAndOptions(destinationFolder: IStorageFolder): windows_core.Result<windows.foundation.IAsyncAction>
-    public func MoveOverloadDefaultOptions(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>): windows_core.Result<windows.foundation.IAsyncAction>
-    public func MoveOverload(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>, option: NameCollisionOption): windows_core.Result<windows.foundation.IAsyncAction>
-    public func MoveAndReplaceAsync(fileToReplace: IStorageFile): windows_core.Result<windows.foundation.IAsyncAction>
+    public func OpenAsync(accessMode: FileAccessMode): windows_core.Result<Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>>
+    public func OpenTransactedWriteAsync(): windows_core.Result<Foundation.IAsyncOperation<StorageStreamTransaction>>
+    public func CopyOverloadDefaultNameAndOptions(destinationFolder: InParam<IStorageFolder>): windows_core.Result<Foundation.IAsyncOperation<StorageFile>>
+    public func CopyOverloadDefaultOptions(destinationFolder: InParam<IStorageFolder>, desiredNewName: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncOperation<StorageFile>>
+    public func CopyOverload(destinationFolder: InParam<IStorageFolder>, desiredNewName: CPointer<UInt16>, option: NameCollisionOption): windows_core.Result<Foundation.IAsyncOperation<StorageFile>>
+    public func CopyAndReplaceAsync(fileToReplace: InParam<IStorageFile>): windows_core.Result<Foundation.IAsyncAction>
+    public func MoveOverloadDefaultNameAndOptions(destinationFolder: InParam<IStorageFolder>): windows_core.Result<Foundation.IAsyncAction>
+    public func MoveOverloadDefaultOptions(destinationFolder: InParam<IStorageFolder>, desiredNewName: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncAction>
+    public func MoveOverload(destinationFolder: InParam<IStorageFolder>, desiredNewName: CPointer<UInt16>, option: NameCollisionOption): windows_core.Result<Foundation.IAsyncAction>
+    public func MoveAndReplaceAsync(fileToReplace: InParam<IStorageFile>): windows_core.Result<Foundation.IAsyncAction>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFile {
-        IStorageFile(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFile {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFile {
+        IStorageFile(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFile {
         IStorageFile(raw)
     }
 
@@ -432,7 +454,7 @@ public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName &
         if (iid == IStorageFile.iid()) {
             return true
         }
-        for (ancestor in [IStorageItem.iid(), windows.storage.streams.IRandomAccessStreamReference.iid(), windows.storage.streams.IInputStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IStorageItem.iid(), Storage_Streams.IRandomAccessStreamReference.iid(), Storage_Streams.IInputStreamReference.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -441,13 +463,13 @@ public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFile> {
-        var descriptor = InterfaceDescriptor<IStorageFile>("IStorageFile", IStorageFile.iid(), IStorageItem.descriptor(), { raw => IStorageFile(raw, ownsReference: true) }, { raw => IStorageFile(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFile>("IStorageFile", IStorageFile.iid(), IStorageItem.descriptor(), { raw => IStorageFile.fromAbiTake(raw) }, { raw => IStorageFile.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFile.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFile", IStorageFile.iid(), IStorageItem.descriptorSchema(), "IStorageFileVtbl", "IStorageFile", "IStorageFile_Impl", [InterfaceMethodSchema("FileType", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("ContentType", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("OpenAsync", 18, [InterfaceParameterSchema("accessMode", "FileAccessMode", "FileAccessMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("OpenTransactedWriteAsync", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CopyOverloadDefaultNameAndOptions", 20, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "Ref<IStorageFolder>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CopyOverloadDefaultOptions", 21, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "Ref<IStorageFolder>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("desiredNewName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CopyOverload", 22, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "Ref<IStorageFolder>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("desiredNewName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("option", "NameCollisionOption", "NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CopyAndReplaceAsync", 23, [InterfaceParameterSchema("fileToReplace", "CPointer<Unit>", "Ref<IStorageFile>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("MoveOverloadDefaultNameAndOptions", 24, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "Ref<IStorageFolder>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("MoveOverloadDefaultOptions", 25, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "Ref<IStorageFolder>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("desiredNewName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("MoveOverload", 26, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "Ref<IStorageFolder>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("desiredNewName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("option", "NameCollisionOption", "NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("MoveAndReplaceAsync", 27, [InterfaceParameterSchema("fileToReplace", "CPointer<Unit>", "Ref<IStorageFile>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFile", IStorageFile.iid(), IStorageItem.descriptorSchema(), "IStorageFileVtbl", "IStorageFile", "IStorageFile_Impl", [InterfaceMethodSchema("FileType", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ContentType", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OpenAsync", 18, [InterfaceParameterSchema("accessMode", "FileAccessMode", "FileAccessMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OpenTransactedWriteAsync", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageStreamTransaction>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyOverloadDefaultNameAndOptions", 20, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "InParam<IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyOverloadDefaultOptions", 21, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "InParam<IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredNewName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyOverload", 22, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "InParam<IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredNewName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("option", "NameCollisionOption", "NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CopyAndReplaceAsync", 23, [InterfaceParameterSchema("fileToReplace", "CPointer<Unit>", "InParam<IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MoveOverloadDefaultNameAndOptions", 24, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "InParam<IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MoveOverloadDefaultOptions", 25, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "InParam<IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredNewName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MoveOverload", 26, [InterfaceParameterSchema("destinationFolder", "CPointer<Unit>", "InParam<IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("desiredNewName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("option", "NameCollisionOption", "NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("MoveAndReplaceAsync", 27, [InterfaceParameterSchema("fileToReplace", "CPointer<Unit>", "InParam<IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFile.runtimeType())
         return schema
     }
@@ -469,19 +491,19 @@ public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItem(): IStorageItem {
-        IStorageItem(asRaw())
+        IStorageItem.viewOf(asRaw())
     }
 
-    public func asIRandomAccessStreamReference(): windows.storage.streams.IRandomAccessStreamReference {
-        windows.storage.streams.IRandomAccessStreamReference(asRaw())
+    public func asIRandomAccessStreamReference(): Storage_Streams.IRandomAccessStreamReference {
+        Storage_Streams.IRandomAccessStreamReference.viewOf(asRaw())
     }
 
-    public func asIInputStreamReference(): windows.storage.streams.IInputStreamReference {
-        windows.storage.streams.IInputStreamReference(asRaw())
+    public func asIInputStreamReference(): Storage_Streams.IInputStreamReference {
+        Storage_Streams.IInputStreamReference.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFileVtbl {
@@ -504,88 +526,88 @@ public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return result
     }
 
-    public unsafe func OpenAsync(accessMode: FileAccessMode): CPointer<Unit> {
+    public unsafe func OpenAsync(accessMode: FileAccessMode): Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.OpenAsync(asRaw(), accessMode, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>.fromAbiTake(result)
     }
 
-    public unsafe func OpenTransactedWriteAsync(): CPointer<Unit> {
+    public unsafe func OpenTransactedWriteAsync(): Foundation.IAsyncOperation<StorageStreamTransaction> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.OpenTransactedWriteAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageStreamTransaction>.fromAbiTake(result)
     }
 
-    public unsafe func CopyOverloadDefaultNameAndOptions(destinationFolder: IStorageFolder): CPointer<Unit> {
+    public unsafe func CopyOverloadDefaultNameAndOptions(destinationFolder: IStorageFolder): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CopyOverloadDefaultNameAndOptions(asRaw(), destinationFolder.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func CopyOverloadDefaultOptions(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func CopyOverloadDefaultOptions(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CopyOverloadDefaultOptions(asRaw(), destinationFolder.asRaw(), desiredNewName, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func CopyOverload(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>, option: NameCollisionOption): CPointer<Unit> {
+    public unsafe func CopyOverload(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>, option: NameCollisionOption): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CopyOverload(asRaw(), destinationFolder.asRaw(), desiredNewName, option, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func CopyAndReplaceAsync(fileToReplace: IStorageFile): windows.foundation.IAsyncAction {
+    public unsafe func CopyAndReplaceAsync(fileToReplace: IStorageFile): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CopyAndReplaceAsync(asRaw(), fileToReplace.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 
-    public unsafe func MoveOverloadDefaultNameAndOptions(destinationFolder: IStorageFolder): windows.foundation.IAsyncAction {
+    public unsafe func MoveOverloadDefaultNameAndOptions(destinationFolder: IStorageFolder): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.MoveOverloadDefaultNameAndOptions(asRaw(), destinationFolder.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 
-    public unsafe func MoveOverloadDefaultOptions(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>): windows.foundation.IAsyncAction {
+    public unsafe func MoveOverloadDefaultOptions(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.MoveOverloadDefaultOptions(asRaw(), destinationFolder.asRaw(), desiredNewName, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 
-    public unsafe func MoveOverload(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>, option: NameCollisionOption): windows.foundation.IAsyncAction {
+    public unsafe func MoveOverload(destinationFolder: IStorageFolder, desiredNewName: CPointer<UInt16>, option: NameCollisionOption): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.MoveOverload(asRaw(), destinationFolder.asRaw(), desiredNewName, option, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 
-    public unsafe func MoveAndReplaceAsync(fileToReplace: IStorageFile): windows.foundation.IAsyncAction {
+    public unsafe func MoveAndReplaceAsync(fileToReplace: IStorageFile): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.MoveAndReplaceAsync(asRaw(), fileToReplace.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFile2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -597,46 +619,44 @@ public struct IStorageFile2Vtbl {
         let _ = offset
         var vtbl = IStorageFile2Vtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.OpenWithOptionsAsync = { this_, arg0, arg1, result__ =>
+        vtbl.OpenWithOptionsAsync = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.OpenWithOptionsAsync(arg0, arg1)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.OpenTransactedWriteWithOptionsAsync = { this_, arg0, result__ =>
+        vtbl.OpenTransactedWriteWithOptionsAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.OpenTransactedWriteWithOptionsAsync(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<StorageStreamTransaction>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageStreamTransaction>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -654,23 +674,27 @@ public struct IStorageFile2Vtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageFile2_Impl {
-    public func OpenWithOptionsAsync(accessMode: FileAccessMode, options: StorageOpenOptions): windows_core.Result<CPointer<Unit>>
-    public func OpenTransactedWriteWithOptionsAsync(options: StorageOpenOptions): windows_core.Result<CPointer<Unit>>
+    public func OpenWithOptionsAsync(accessMode: FileAccessMode, options: StorageOpenOptions): windows_core.Result<Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>>
+    public func OpenTransactedWriteWithOptionsAsync(options: StorageOpenOptions): windows_core.Result<Foundation.IAsyncOperation<StorageStreamTransaction>>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFile2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFile2 {
-        IStorageFile2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFile2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFile2 {
+        IStorageFile2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFile2 {
         IStorageFile2(raw)
     }
 
@@ -686,13 +710,13 @@ public class IStorageFile2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFile2> {
-        var descriptor = InterfaceDescriptor<IStorageFile2>("IStorageFile2", IStorageFile2.iid(), IInspectable.descriptor(), { raw => IStorageFile2(raw, ownsReference: true) }, { raw => IStorageFile2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFile2>("IStorageFile2", IStorageFile2.iid(), IInspectable.descriptor(), { raw => IStorageFile2.fromAbiTake(raw) }, { raw => IStorageFile2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFile2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFile2", IStorageFile2.iid(), IInspectable.descriptorSchema(), "IStorageFile2Vtbl", "IStorageFile2", "IStorageFile2_Impl", [InterfaceMethodSchema("OpenWithOptionsAsync", 6, [InterfaceParameterSchema("accessMode", "FileAccessMode", "FileAccessMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "StorageOpenOptions", "StorageOpenOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("OpenTransactedWriteWithOptionsAsync", 7, [InterfaceParameterSchema("options", "StorageOpenOptions", "StorageOpenOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFile2", IStorageFile2.iid(), IInspectable.descriptorSchema(), "IStorageFile2Vtbl", "IStorageFile2", "IStorageFile2_Impl", [InterfaceMethodSchema("OpenWithOptionsAsync", 6, [InterfaceParameterSchema("accessMode", "FileAccessMode", "FileAccessMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "StorageOpenOptions", "StorageOpenOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("OpenTransactedWriteWithOptionsAsync", 7, [InterfaceParameterSchema("options", "StorageOpenOptions", "StorageOpenOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageStreamTransaction>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFile2.runtimeType())
         return schema
     }
@@ -714,31 +738,31 @@ public class IStorageFile2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFile2Vtbl {
         readVtbl<IStorageFile2Vtbl>(IStorageFile2Vtbl())
     }
 
-    public unsafe func OpenWithOptionsAsync(accessMode: FileAccessMode, options: StorageOpenOptions): CPointer<Unit> {
+    public unsafe func OpenWithOptionsAsync(accessMode: FileAccessMode, options: StorageOpenOptions): Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.OpenWithOptionsAsync(asRaw(), accessMode, options, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream>.fromAbiTake(result)
     }
 
-    public unsafe func OpenTransactedWriteWithOptionsAsync(options: StorageOpenOptions): CPointer<Unit> {
+    public unsafe func OpenTransactedWriteWithOptionsAsync(options: StorageOpenOptions): Foundation.IAsyncOperation<StorageStreamTransaction> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.OpenTransactedWriteWithOptionsAsync(asRaw(), options, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageStreamTransaction>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFilePropertiesWithAvailabilityVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -749,11 +773,11 @@ public struct IStorageFilePropertiesWithAvailabilityVtbl {
         let _ = offset
         var vtbl = IStorageFilePropertiesWithAvailabilityVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.IsAvailable = { this_, result__ =>
+        vtbl.IsAvailable = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.IsAvailable()) {
                         case Result<Bool>.Ok(value) =>
@@ -777,22 +801,26 @@ public struct IStorageFilePropertiesWithAvailabilityVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageFilePropertiesWithAvailability_Impl {
     public func IsAvailable(): windows_core.Result<Bool>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFilePropertiesWithAvailability <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFilePropertiesWithAvailability {
-        IStorageFilePropertiesWithAvailability(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFilePropertiesWithAvailability {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFilePropertiesWithAvailability {
+        IStorageFilePropertiesWithAvailability(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFilePropertiesWithAvailability {
         IStorageFilePropertiesWithAvailability(raw)
     }
 
@@ -808,13 +836,13 @@ public class IStorageFilePropertiesWithAvailability <: InterfaceWrapperBase & Co
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFilePropertiesWithAvailability> {
-        var descriptor = InterfaceDescriptor<IStorageFilePropertiesWithAvailability>("IStorageFilePropertiesWithAvailability", IStorageFilePropertiesWithAvailability.iid(), IInspectable.descriptor(), { raw => IStorageFilePropertiesWithAvailability(raw, ownsReference: true) }, { raw => IStorageFilePropertiesWithAvailability(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFilePropertiesWithAvailability>("IStorageFilePropertiesWithAvailability", IStorageFilePropertiesWithAvailability.iid(), IInspectable.descriptor(), { raw => IStorageFilePropertiesWithAvailability.fromAbiTake(raw) }, { raw => IStorageFilePropertiesWithAvailability.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFilePropertiesWithAvailability.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFilePropertiesWithAvailability", IStorageFilePropertiesWithAvailability.iid(), IInspectable.descriptorSchema(), "IStorageFilePropertiesWithAvailabilityVtbl", "IStorageFilePropertiesWithAvailability", "IStorageFilePropertiesWithAvailability_Impl", [InterfaceMethodSchema("IsAvailable", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFilePropertiesWithAvailability", IStorageFilePropertiesWithAvailability.iid(), IInspectable.descriptorSchema(), "IStorageFilePropertiesWithAvailabilityVtbl", "IStorageFilePropertiesWithAvailability", "IStorageFilePropertiesWithAvailability_Impl", [InterfaceMethodSchema("IsAvailable", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFilePropertiesWithAvailability.runtimeType())
         return schema
     }
@@ -836,7 +864,7 @@ public class IStorageFilePropertiesWithAvailability <: InterfaceWrapperBase & Co
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFilePropertiesWithAvailabilityVtbl {
@@ -852,7 +880,7 @@ public class IStorageFilePropertiesWithAvailability <: InterfaceWrapperBase & Co
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFileStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -865,17 +893,21 @@ public struct IStorageFileStaticsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFileStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFileStatics {
-        IStorageFileStatics(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileStatics {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFileStatics {
+        IStorageFileStatics(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileStatics {
         IStorageFileStatics(raw)
     }
 
@@ -891,13 +923,13 @@ public class IStorageFileStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFileStatics> {
-        var descriptor = InterfaceDescriptor<IStorageFileStatics>("IStorageFileStatics", IStorageFileStatics.iid(), IInspectable.descriptor(), { raw => IStorageFileStatics(raw, ownsReference: true) }, { raw => IStorageFileStatics(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFileStatics>("IStorageFileStatics", IStorageFileStatics.iid(), IInspectable.descriptor(), { raw => IStorageFileStatics.fromAbiTake(raw) }, { raw => IStorageFileStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFileStatics.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFileStatics", IStorageFileStatics.iid(), IInspectable.descriptorSchema(), "IStorageFileStaticsVtbl", "IStorageFileStatics", "IStorageFileStatics_Impl", [InterfaceMethodSchema("GetFileFromPathAsync", 6, [InterfaceParameterSchema("path", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFileFromApplicationUriAsync", 7, [InterfaceParameterSchema("uri", "CPointer<Unit>", "Ref<windows.foundation.Uri>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateStreamedFileAsync", 8, [InterfaceParameterSchema("displayNameWithExtension", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("dataRequested", "CPointer<Unit>", "Ref<StreamedFileDataRequestedHandler>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "Ref<windows.storage.streams.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("ReplaceWithStreamedFileAsync", 9, [InterfaceParameterSchema("fileToReplace", "CPointer<Unit>", "Ref<IStorageFile>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("dataRequested", "CPointer<Unit>", "Ref<StreamedFileDataRequestedHandler>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "Ref<windows.storage.streams.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateStreamedFileFromUriAsync", 10, [InterfaceParameterSchema("displayNameWithExtension", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("uri", "CPointer<Unit>", "Ref<windows.foundation.Uri>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "Ref<windows.storage.streams.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("ReplaceWithStreamedFileFromUriAsync", 11, [InterfaceParameterSchema("fileToReplace", "CPointer<Unit>", "Ref<IStorageFile>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("uri", "CPointer<Unit>", "Ref<windows.foundation.Uri>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "Ref<windows.storage.streams.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFileStatics", IStorageFileStatics.iid(), IInspectable.descriptorSchema(), "IStorageFileStaticsVtbl", "IStorageFileStatics", "IStorageFileStatics_Impl", [InterfaceMethodSchema("GetFileFromPathAsync", 6, [InterfaceParameterSchema("path", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFileFromApplicationUriAsync", 7, [InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateStreamedFileAsync", 8, [InterfaceParameterSchema("displayNameWithExtension", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("dataRequested", "CPointer<Unit>", "InParam<StreamedFileDataRequestedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "InParam<Storage_Streams.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReplaceWithStreamedFileAsync", 9, [InterfaceParameterSchema("fileToReplace", "CPointer<Unit>", "InParam<IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("dataRequested", "CPointer<Unit>", "InParam<StreamedFileDataRequestedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "InParam<Storage_Streams.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateStreamedFileFromUriAsync", 10, [InterfaceParameterSchema("displayNameWithExtension", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "InParam<Storage_Streams.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ReplaceWithStreamedFileFromUriAsync", 11, [InterfaceParameterSchema("fileToReplace", "CPointer<Unit>", "InParam<IStorageFile>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("uri", "CPointer<Unit>", "InParam<Foundation.Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("thumbnail", "CPointer<Unit>", "InParam<Storage_Streams.IRandomAccessStreamReference>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFileStatics.runtimeType())
         return schema
     }
@@ -919,63 +951,63 @@ public class IStorageFileStatics <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFileStaticsVtbl {
         readVtbl<IStorageFileStaticsVtbl>(IStorageFileStaticsVtbl())
     }
 
-    public unsafe func GetFileFromPathAsync(path: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetFileFromPathAsync(path: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFileFromPathAsync(asRaw(), path, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func GetFileFromApplicationUriAsync(uri: windows.foundation.Uri): CPointer<Unit> {
+    public unsafe func GetFileFromApplicationUriAsync(uri: Foundation.Uri): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFileFromApplicationUriAsync(asRaw(), uri.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func CreateStreamedFileAsync(displayNameWithExtension: CPointer<UInt16>, dataRequested: StreamedFileDataRequestedHandler, thumbnail: windows.storage.streams.IRandomAccessStreamReference): CPointer<Unit> {
+    public unsafe func CreateStreamedFileAsync(displayNameWithExtension: CPointer<UInt16>, dataRequested: StreamedFileDataRequestedHandler, thumbnail: Storage_Streams.IRandomAccessStreamReference): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CreateStreamedFileAsync(asRaw(), displayNameWithExtension, dataRequested.asRaw(), thumbnail.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func ReplaceWithStreamedFileAsync(fileToReplace: IStorageFile, dataRequested: StreamedFileDataRequestedHandler, thumbnail: windows.storage.streams.IRandomAccessStreamReference): CPointer<Unit> {
+    public unsafe func ReplaceWithStreamedFileAsync(fileToReplace: IStorageFile, dataRequested: StreamedFileDataRequestedHandler, thumbnail: Storage_Streams.IRandomAccessStreamReference): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.ReplaceWithStreamedFileAsync(asRaw(), fileToReplace.asRaw(), dataRequested.asRaw(), thumbnail.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func CreateStreamedFileFromUriAsync(displayNameWithExtension: CPointer<UInt16>, uri: windows.foundation.Uri, thumbnail: windows.storage.streams.IRandomAccessStreamReference): CPointer<Unit> {
+    public unsafe func CreateStreamedFileFromUriAsync(displayNameWithExtension: CPointer<UInt16>, uri: Foundation.Uri, thumbnail: Storage_Streams.IRandomAccessStreamReference): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CreateStreamedFileFromUriAsync(asRaw(), displayNameWithExtension, uri.asRaw(), thumbnail.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func ReplaceWithStreamedFileFromUriAsync(fileToReplace: IStorageFile, uri: windows.foundation.Uri, thumbnail: windows.storage.streams.IRandomAccessStreamReference): CPointer<Unit> {
+    public unsafe func ReplaceWithStreamedFileFromUriAsync(fileToReplace: IStorageFile, uri: Foundation.Uri, thumbnail: Storage_Streams.IRandomAccessStreamReference): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.ReplaceWithStreamedFileFromUriAsync(asRaw(), fileToReplace.asRaw(), uri.asRaw(), thumbnail.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFileStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -983,17 +1015,21 @@ public struct IStorageFileStatics2Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFileStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFileStatics2 {
-        IStorageFileStatics2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileStatics2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFileStatics2 {
+        IStorageFileStatics2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileStatics2 {
         IStorageFileStatics2(raw)
     }
 
@@ -1009,13 +1045,13 @@ public class IStorageFileStatics2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFileStatics2> {
-        var descriptor = InterfaceDescriptor<IStorageFileStatics2>("IStorageFileStatics2", IStorageFileStatics2.iid(), IInspectable.descriptor(), { raw => IStorageFileStatics2(raw, ownsReference: true) }, { raw => IStorageFileStatics2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFileStatics2>("IStorageFileStatics2", IStorageFileStatics2.iid(), IInspectable.descriptor(), { raw => IStorageFileStatics2.fromAbiTake(raw) }, { raw => IStorageFileStatics2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFileStatics2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFileStatics2", IStorageFileStatics2.iid(), IInspectable.descriptorSchema(), "IStorageFileStatics2Vtbl", "IStorageFileStatics2", "IStorageFileStatics2_Impl", [InterfaceMethodSchema("GetFileFromPathForUserAsync", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "Ref<windows.system.User>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("path", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFileStatics2", IStorageFileStatics2.iid(), IInspectable.descriptorSchema(), "IStorageFileStatics2Vtbl", "IStorageFileStatics2", "IStorageFileStatics2_Impl", [InterfaceMethodSchema("GetFileFromPathForUserAsync", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<System.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("path", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFileStatics2.runtimeType())
         return schema
     }
@@ -1037,23 +1073,23 @@ public class IStorageFileStatics2 <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFileStatics2Vtbl {
         readVtbl<IStorageFileStatics2Vtbl>(IStorageFileStatics2Vtbl())
     }
 
-    public unsafe func GetFileFromPathForUserAsync(user: windows.system.User, path: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetFileFromPathForUserAsync(user: System.User, path: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFileFromPathForUserAsync(asRaw(), user.asRaw(), path, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFolderVtbl {
     public var base_: IStorageItemVtbl = IStorageItemVtbl()
@@ -1073,230 +1109,220 @@ public struct IStorageFolderVtbl {
         let _ = offset
         var vtbl = IStorageFolderVtbl()
         vtbl.base_ = IStorageItemVtbl.new<Identity>(offset: offset)
-        vtbl.CreateFileAsyncOverloadDefaultOptions = { this_, arg0, result__ =>
+        vtbl.CreateFileAsyncOverloadDefaultOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateFileAsyncOverloadDefaultOptions(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateFileAsync = { this_, arg0, arg1, result__ =>
+        vtbl.CreateFileAsync = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateFileAsync(arg0, arg1)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateFolderAsyncOverloadDefaultOptions = { this_, arg0, result__ =>
+        vtbl.CreateFolderAsyncOverloadDefaultOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateFolderAsyncOverloadDefaultOptions(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<StorageFolder>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFolder>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CreateFolderAsync = { this_, arg0, arg1, result__ =>
+        vtbl.CreateFolderAsync = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateFolderAsync(arg0, arg1)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<StorageFolder>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFolder>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFileAsync = { this_, arg0, result__ =>
+        vtbl.GetFileAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetFileAsync(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFile>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFolderAsync = { this_, arg0, result__ =>
+        vtbl.GetFolderAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetFolderAsync(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<StorageFolder>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFolder>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetItemAsync = { this_, arg0, result__ =>
+        vtbl.GetItemAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetItemAsync(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<IStorageItem>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<IStorageItem>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFilesAsyncOverloadDefaultOptionsStartAndCount = { this_, result__ =>
+        vtbl.GetFilesAsyncOverloadDefaultOptionsStartAndCount = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetFilesAsyncOverloadDefaultOptionsStartAndCount()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFile>>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFile>>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetFoldersAsyncOverloadDefaultOptionsStartAndCount = { this_, result__ =>
+        vtbl.GetFoldersAsyncOverloadDefaultOptionsStartAndCount = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetFoldersAsyncOverloadDefaultOptionsStartAndCount()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFolder>>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFolder>>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetItemsAsyncOverloadDefaultStartAndCount = { this_, result__ =>
+        vtbl.GetItemsAsyncOverloadDefaultStartAndCount = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetItemsAsyncOverloadDefaultStartAndCount()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<IStorageItem>>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<IStorageItem>>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -1319,31 +1345,35 @@ public struct IStorageFolderVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageFolder_Impl <: IStorageItem_Impl {
-    public func CreateFileAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): windows_core.Result<CPointer<Unit>>
-    public func CreateFileAsync(desiredName: CPointer<UInt16>, options: CreationCollisionOption): windows_core.Result<CPointer<Unit>>
-    public func CreateFolderAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): windows_core.Result<CPointer<Unit>>
-    public func CreateFolderAsync(desiredName: CPointer<UInt16>, options: CreationCollisionOption): windows_core.Result<CPointer<Unit>>
-    public func GetFileAsync(name: CPointer<UInt16>): windows_core.Result<CPointer<Unit>>
-    public func GetFolderAsync(name: CPointer<UInt16>): windows_core.Result<CPointer<Unit>>
-    public func GetItemAsync(name: CPointer<UInt16>): windows_core.Result<CPointer<Unit>>
-    public func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): windows_core.Result<CPointer<Unit>>
-    public func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): windows_core.Result<CPointer<Unit>>
-    public func GetItemsAsyncOverloadDefaultStartAndCount(): windows_core.Result<CPointer<Unit>>
+    public func CreateFileAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncOperation<StorageFile>>
+    public func CreateFileAsync(desiredName: CPointer<UInt16>, options: CreationCollisionOption): windows_core.Result<Foundation.IAsyncOperation<StorageFile>>
+    public func CreateFolderAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncOperation<StorageFolder>>
+    public func CreateFolderAsync(desiredName: CPointer<UInt16>, options: CreationCollisionOption): windows_core.Result<Foundation.IAsyncOperation<StorageFolder>>
+    public func GetFileAsync(name: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncOperation<StorageFile>>
+    public func GetFolderAsync(name: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncOperation<StorageFolder>>
+    public func GetItemAsync(name: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncOperation<IStorageItem>>
+    public func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): windows_core.Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFile>>>
+    public func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): windows_core.Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFolder>>>
+    public func GetItemsAsyncOverloadDefaultStartAndCount(): windows_core.Result<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<IStorageItem>>>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFolder {
-        IStorageFolder(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolder {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFolder {
+        IStorageFolder(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolder {
         IStorageFolder(raw)
     }
 
@@ -1364,13 +1394,13 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFolder> {
-        var descriptor = InterfaceDescriptor<IStorageFolder>("IStorageFolder", IStorageFolder.iid(), IStorageItem.descriptor(), { raw => IStorageFolder(raw, ownsReference: true) }, { raw => IStorageFolder(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFolder>("IStorageFolder", IStorageFolder.iid(), IStorageItem.descriptor(), { raw => IStorageFolder.fromAbiTake(raw) }, { raw => IStorageFolder.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFolder.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFolder", IStorageFolder.iid(), IStorageItem.descriptorSchema(), "IStorageFolderVtbl", "IStorageFolder", "IStorageFolder_Impl", [InterfaceMethodSchema("CreateFileAsyncOverloadDefaultOptions", 16, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateFileAsync", 17, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CreationCollisionOption", "CreationCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateFolderAsyncOverloadDefaultOptions", 18, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateFolderAsync", 19, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CreationCollisionOption", "CreationCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFileAsync", 20, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFolderAsync", 21, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetItemAsync", 22, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFilesAsyncOverloadDefaultOptionsStartAndCount", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetFoldersAsyncOverloadDefaultOptionsStartAndCount", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetItemsAsyncOverloadDefaultStartAndCount", 25, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFolder", IStorageFolder.iid(), IStorageItem.descriptorSchema(), "IStorageFolderVtbl", "IStorageFolder", "IStorageFolder_Impl", [InterfaceMethodSchema("CreateFileAsyncOverloadDefaultOptions", 16, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFileAsync", 17, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CreationCollisionOption", "CreationCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFolderAsyncOverloadDefaultOptions", 18, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateFolderAsync", 19, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CreationCollisionOption", "CreationCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFileAsync", 20, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFolderAsync", 21, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetItemAsync", 22, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<IStorageItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFilesAsyncOverloadDefaultOptionsStartAndCount", 23, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFile>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetFoldersAsyncOverloadDefaultOptionsStartAndCount", 24, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFolder>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetItemsAsyncOverloadDefaultStartAndCount", 25, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<IStorageItem>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFolder.runtimeType())
         return schema
     }
@@ -1392,99 +1422,99 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItem(): IStorageItem {
-        IStorageItem(asRaw())
+        IStorageItem.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFolderVtbl {
         readVtbl<IStorageFolderVtbl>(IStorageFolderVtbl())
     }
 
-    public unsafe func CreateFileAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func CreateFileAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CreateFileAsyncOverloadDefaultOptions(asRaw(), desiredName, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func CreateFileAsync(desiredName: CPointer<UInt16>, options: CreationCollisionOption): CPointer<Unit> {
+    public unsafe func CreateFileAsync(desiredName: CPointer<UInt16>, options: CreationCollisionOption): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CreateFileAsync(asRaw(), desiredName, options, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func CreateFolderAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func CreateFolderAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFolder> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CreateFolderAsyncOverloadDefaultOptions(asRaw(), desiredName, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFolder>.fromAbiTake(result)
     }
 
-    public unsafe func CreateFolderAsync(desiredName: CPointer<UInt16>, options: CreationCollisionOption): CPointer<Unit> {
+    public unsafe func CreateFolderAsync(desiredName: CPointer<UInt16>, options: CreationCollisionOption): Foundation.IAsyncOperation<StorageFolder> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CreateFolderAsync(asRaw(), desiredName, options, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFolder>.fromAbiTake(result)
     }
 
-    public unsafe func GetFileAsync(name: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetFileAsync(name: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFileAsync(asRaw(), name, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func GetFolderAsync(name: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetFolderAsync(name: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFolder> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFolderAsync(asRaw(), name, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFolder>.fromAbiTake(result)
     }
 
-    public unsafe func GetItemAsync(name: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetItemAsync(name: CPointer<UInt16>): Foundation.IAsyncOperation<IStorageItem> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetItemAsync(asRaw(), name, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<IStorageItem>.fromAbiTake(result)
     }
 
-    public unsafe func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): CPointer<Unit> {
+    public unsafe func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFile>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFilesAsyncOverloadDefaultOptionsStartAndCount(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFile>>.fromAbiTake(result)
     }
 
-    public unsafe func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): CPointer<Unit> {
+    public unsafe func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFolder>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFoldersAsyncOverloadDefaultOptionsStartAndCount(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFolder>>.fromAbiTake(result)
     }
 
-    public unsafe func GetItemsAsyncOverloadDefaultStartAndCount(): CPointer<Unit> {
+    public unsafe func GetItemsAsyncOverloadDefaultStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<IStorageItem>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetItemsAsyncOverloadDefaultStartAndCount(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<IStorageItem>>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFolder2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1495,23 +1525,22 @@ public struct IStorageFolder2Vtbl {
         let _ = offset
         var vtbl = IStorageFolder2Vtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.TryGetItemAsync = { this_, arg0, result__ =>
+        vtbl.TryGetItemAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.TryGetItemAsync(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<IStorageItem>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<IStorageItem>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -1529,22 +1558,26 @@ public struct IStorageFolder2Vtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageFolder2_Impl {
-    public func TryGetItemAsync(name: CPointer<UInt16>): windows_core.Result<CPointer<Unit>>
+    public func TryGetItemAsync(name: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncOperation<IStorageItem>>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFolder2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFolder2 {
-        IStorageFolder2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolder2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFolder2 {
+        IStorageFolder2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolder2 {
         IStorageFolder2(raw)
     }
 
@@ -1560,13 +1593,13 @@ public class IStorageFolder2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFolder2> {
-        var descriptor = InterfaceDescriptor<IStorageFolder2>("IStorageFolder2", IStorageFolder2.iid(), IInspectable.descriptor(), { raw => IStorageFolder2(raw, ownsReference: true) }, { raw => IStorageFolder2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFolder2>("IStorageFolder2", IStorageFolder2.iid(), IInspectable.descriptor(), { raw => IStorageFolder2.fromAbiTake(raw) }, { raw => IStorageFolder2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFolder2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFolder2", IStorageFolder2.iid(), IInspectable.descriptorSchema(), "IStorageFolder2Vtbl", "IStorageFolder2", "IStorageFolder2_Impl", [InterfaceMethodSchema("TryGetItemAsync", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFolder2", IStorageFolder2.iid(), IInspectable.descriptorSchema(), "IStorageFolder2Vtbl", "IStorageFolder2", "IStorageFolder2_Impl", [InterfaceMethodSchema("TryGetItemAsync", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<IStorageItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFolder2.runtimeType())
         return schema
     }
@@ -1588,23 +1621,23 @@ public class IStorageFolder2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFolder2Vtbl {
         readVtbl<IStorageFolder2Vtbl>(IStorageFolder2Vtbl())
     }
 
-    public unsafe func TryGetItemAsync(name: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func TryGetItemAsync(name: CPointer<UInt16>): Foundation.IAsyncOperation<IStorageItem> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.TryGetItemAsync(asRaw(), name, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<IStorageItem>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFolder3Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1612,17 +1645,21 @@ public struct IStorageFolder3Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFolder3 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFolder3 {
-        IStorageFolder3(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolder3 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFolder3 {
+        IStorageFolder3(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolder3 {
         IStorageFolder3(raw)
     }
 
@@ -1638,13 +1675,13 @@ public class IStorageFolder3 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFolder3> {
-        var descriptor = InterfaceDescriptor<IStorageFolder3>("IStorageFolder3", IStorageFolder3.iid(), IInspectable.descriptor(), { raw => IStorageFolder3(raw, ownsReference: true) }, { raw => IStorageFolder3(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFolder3>("IStorageFolder3", IStorageFolder3.iid(), IInspectable.descriptor(), { raw => IStorageFolder3.fromAbiTake(raw) }, { raw => IStorageFolder3.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFolder3.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFolder3", IStorageFolder3.iid(), IInspectable.descriptorSchema(), "IStorageFolder3Vtbl", "IStorageFolder3", "IStorageFolder3_Impl", [InterfaceMethodSchema("TryGetChangeTracker", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageLibraryChangeTracker>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFolder3", IStorageFolder3.iid(), IInspectable.descriptorSchema(), "IStorageFolder3Vtbl", "IStorageFolder3", "IStorageFolder3_Impl", [InterfaceMethodSchema("TryGetChangeTracker", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageLibraryChangeTracker>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFolder3.runtimeType())
         return schema
     }
@@ -1666,7 +1703,7 @@ public class IStorageFolder3 <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFolder3Vtbl {
@@ -1678,11 +1715,11 @@ public class IStorageFolder3 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         var result = CPointer<Unit>()
         let hr = v.TryGetChangeTracker(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageLibraryChangeTracker.fromRaw(result)
+        return StorageLibraryChangeTracker.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFolderStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1690,17 +1727,21 @@ public struct IStorageFolderStaticsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFolderStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFolderStatics {
-        IStorageFolderStatics(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderStatics {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFolderStatics {
+        IStorageFolderStatics(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderStatics {
         IStorageFolderStatics(raw)
     }
 
@@ -1716,13 +1757,13 @@ public class IStorageFolderStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFolderStatics> {
-        var descriptor = InterfaceDescriptor<IStorageFolderStatics>("IStorageFolderStatics", IStorageFolderStatics.iid(), IInspectable.descriptor(), { raw => IStorageFolderStatics(raw, ownsReference: true) }, { raw => IStorageFolderStatics(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFolderStatics>("IStorageFolderStatics", IStorageFolderStatics.iid(), IInspectable.descriptor(), { raw => IStorageFolderStatics.fromAbiTake(raw) }, { raw => IStorageFolderStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFolderStatics.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFolderStatics", IStorageFolderStatics.iid(), IInspectable.descriptorSchema(), "IStorageFolderStaticsVtbl", "IStorageFolderStatics", "IStorageFolderStatics_Impl", [InterfaceMethodSchema("GetFolderFromPathAsync", 6, [InterfaceParameterSchema("path", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFolderStatics", IStorageFolderStatics.iid(), IInspectable.descriptorSchema(), "IStorageFolderStaticsVtbl", "IStorageFolderStatics", "IStorageFolderStatics_Impl", [InterfaceMethodSchema("GetFolderFromPathAsync", 6, [InterfaceParameterSchema("path", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFolderStatics.runtimeType())
         return schema
     }
@@ -1744,23 +1785,23 @@ public class IStorageFolderStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFolderStaticsVtbl {
         readVtbl<IStorageFolderStaticsVtbl>(IStorageFolderStaticsVtbl())
     }
 
-    public unsafe func GetFolderFromPathAsync(path: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetFolderFromPathAsync(path: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFolder> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFolderFromPathAsync(asRaw(), path, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFolder>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageFolderStatics2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1768,17 +1809,21 @@ public struct IStorageFolderStatics2Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageFolderStatics2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageFolderStatics2 {
-        IStorageFolderStatics2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderStatics2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageFolderStatics2 {
+        IStorageFolderStatics2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderStatics2 {
         IStorageFolderStatics2(raw)
     }
 
@@ -1794,13 +1839,13 @@ public class IStorageFolderStatics2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageFolderStatics2> {
-        var descriptor = InterfaceDescriptor<IStorageFolderStatics2>("IStorageFolderStatics2", IStorageFolderStatics2.iid(), IInspectable.descriptor(), { raw => IStorageFolderStatics2(raw, ownsReference: true) }, { raw => IStorageFolderStatics2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageFolderStatics2>("IStorageFolderStatics2", IStorageFolderStatics2.iid(), IInspectable.descriptor(), { raw => IStorageFolderStatics2.fromAbiTake(raw) }, { raw => IStorageFolderStatics2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageFolderStatics2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageFolderStatics2", IStorageFolderStatics2.iid(), IInspectable.descriptorSchema(), "IStorageFolderStatics2Vtbl", "IStorageFolderStatics2", "IStorageFolderStatics2_Impl", [InterfaceMethodSchema("GetFolderFromPathForUserAsync", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "Ref<windows.system.User>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("path", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageFolderStatics2", IStorageFolderStatics2.iid(), IInspectable.descriptorSchema(), "IStorageFolderStatics2Vtbl", "IStorageFolderStatics2", "IStorageFolderStatics2_Impl", [InterfaceMethodSchema("GetFolderFromPathForUserAsync", 6, [InterfaceParameterSchema("user", "CPointer<Unit>", "InParam<System.User>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("path", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageFolderStatics2.runtimeType())
         return schema
     }
@@ -1822,23 +1867,23 @@ public class IStorageFolderStatics2 <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageFolderStatics2Vtbl {
         readVtbl<IStorageFolderStatics2Vtbl>(IStorageFolderStatics2Vtbl())
     }
 
-    public unsafe func GetFolderFromPathForUserAsync(user: windows.system.User, path: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetFolderFromPathForUserAsync(user: System.User, path: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFolder> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetFolderFromPathForUserAsync(asRaw(), user.asRaw(), path, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFolder>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageItemVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1850,7 +1895,7 @@ public struct IStorageItemVtbl {
     public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Attributes: CFunc<(CPointer<Unit>, CPointer<FileAttributes>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var DateCreated: CFunc<(CPointer<Unit>, CPointer<windows.foundation.DateTime>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var DateCreated: CFunc<(CPointer<Unit>, CPointer<Foundation.DateTime>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var IsOfType: CFunc<(CPointer<Unit>, StorageItemTypes, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 
@@ -1858,126 +1903,121 @@ public struct IStorageItemVtbl {
         let _ = offset
         var vtbl = IStorageItemVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.RenameAsyncOverloadDefaultOptions = { this_, arg0, result__ =>
+        vtbl.RenameAsyncOverloadDefaultOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.RenameAsyncOverloadDefaultOptions(arg0)) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                        case Result<Foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<Foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.RenameAsync = { this_, arg0, arg1, result__ =>
+        vtbl.RenameAsync = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.RenameAsync(arg0, arg1)) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                        case Result<Foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<Foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.DeleteAsyncOverloadDefaultOptions = { this_, result__ =>
+        vtbl.DeleteAsyncOverloadDefaultOptions = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.DeleteAsyncOverloadDefaultOptions()) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                        case Result<Foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<Foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.DeleteAsync = { this_, arg0, result__ =>
+        vtbl.DeleteAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.DeleteAsync(arg0)) {
-                        case Result<windows.foundation.IAsyncAction>.Ok(value) =>
-                            let raw = value.asRaw()
+                        case Result<Foundation.IAsyncAction>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.foundation.IAsyncAction>.Err(error) =>
+                        case Result<Foundation.IAsyncAction>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetBasicPropertiesAsync = { this_, result__ =>
+        vtbl.GetBasicPropertiesAsync = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetBasicPropertiesAsync()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.BasicProperties>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.BasicProperties>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Name = { this_, result__ =>
+        vtbl.Name = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Name()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -1990,11 +2030,11 @@ public struct IStorageItemVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Path = { this_, result__ =>
+        vtbl.Path = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Path()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -2007,11 +2047,11 @@ public struct IStorageItemVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Attributes = { this_, result__ =>
+        vtbl.Attributes = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Attributes()) {
                         case Result<FileAttributes>.Ok(value) =>
@@ -2024,28 +2064,28 @@ public struct IStorageItemVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.DateCreated = { this_, result__ =>
+        vtbl.DateCreated = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.DateCreated()) {
-                        case Result<windows.foundation.DateTime>.Ok(value) =>
+                        case Result<Foundation.DateTime>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
-                        case Result<windows.foundation.DateTime>.Err(error) =>
+                        case Result<Foundation.DateTime>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.IsOfType = { this_, arg0, result__ =>
+        vtbl.IsOfType = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.IsOfType(arg0)) {
                         case Result<Bool>.Ok(value) =>
@@ -2069,31 +2109,35 @@ public struct IStorageItemVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageItem_Impl {
-    public func RenameAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): windows_core.Result<windows.foundation.IAsyncAction>
-    public func RenameAsync(desiredName: CPointer<UInt16>, option: NameCollisionOption): windows_core.Result<windows.foundation.IAsyncAction>
-    public func DeleteAsyncOverloadDefaultOptions(): windows_core.Result<windows.foundation.IAsyncAction>
-    public func DeleteAsync(option: StorageDeleteOption): windows_core.Result<windows.foundation.IAsyncAction>
-    public func GetBasicPropertiesAsync(): windows_core.Result<CPointer<Unit>>
+    public func RenameAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncAction>
+    public func RenameAsync(desiredName: CPointer<UInt16>, option: NameCollisionOption): windows_core.Result<Foundation.IAsyncAction>
+    public func DeleteAsyncOverloadDefaultOptions(): windows_core.Result<Foundation.IAsyncAction>
+    public func DeleteAsync(option: StorageDeleteOption): windows_core.Result<Foundation.IAsyncAction>
+    public func GetBasicPropertiesAsync(): windows_core.Result<Foundation.IAsyncOperation<Storage_FileProperties.BasicProperties>>
     public func Name(): windows_core.Result<CPointer<UInt16>>
     public func Path(): windows_core.Result<CPointer<UInt16>>
     public func Attributes(): windows_core.Result<FileAttributes>
-    public func DateCreated(): windows_core.Result<windows.foundation.DateTime>
+    public func DateCreated(): windows_core.Result<Foundation.DateTime>
     public func IsOfType(type_: StorageItemTypes): windows_core.Result<Bool>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageItem <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageItem {
-        IStorageItem(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItem {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageItem {
+        IStorageItem(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageItem {
         IStorageItem(raw)
     }
 
@@ -2109,13 +2153,13 @@ public class IStorageItem <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageItem> {
-        var descriptor = InterfaceDescriptor<IStorageItem>("IStorageItem", IStorageItem.iid(), IInspectable.descriptor(), { raw => IStorageItem(raw, ownsReference: true) }, { raw => IStorageItem(raw) })
+        var descriptor = InterfaceDescriptor<IStorageItem>("IStorageItem", IStorageItem.iid(), IInspectable.descriptor(), { raw => IStorageItem.fromAbiTake(raw) }, { raw => IStorageItem.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageItem.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItem", IStorageItem.iid(), IInspectable.descriptorSchema(), "IStorageItemVtbl", "IStorageItem", "IStorageItem_Impl", [InterfaceMethodSchema("RenameAsyncOverloadDefaultOptions", 6, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("RenameAsync", 7, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("option", "NameCollisionOption", "NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DeleteAsyncOverloadDefaultOptions", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DeleteAsync", 9, [InterfaceParameterSchema("option", "StorageDeleteOption", "StorageDeleteOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetBasicPropertiesAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Name", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Path", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Attributes", 13, [InterfaceParameterSchema("result", "CPointer<FileAttributes>", "OutRef<FileAttributes>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DateCreated", 14, [InterfaceParameterSchema("result", "CPointer<windows.foundation.DateTime>", "OutRef<windows.foundation.DateTime>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsOfType", 15, [InterfaceParameterSchema("type_", "StorageItemTypes", "StorageItemTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItem", IStorageItem.iid(), IInspectable.descriptorSchema(), "IStorageItemVtbl", "IStorageItem", "IStorageItem_Impl", [InterfaceMethodSchema("RenameAsyncOverloadDefaultOptions", 6, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RenameAsync", 7, [InterfaceParameterSchema("desiredName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("option", "NameCollisionOption", "NameCollisionOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteAsyncOverloadDefaultOptions", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DeleteAsync", 9, [InterfaceParameterSchema("option", "StorageDeleteOption", "StorageDeleteOption", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBasicPropertiesAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage_FileProperties.BasicProperties>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Name", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Path", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Attributes", 13, [InterfaceParameterSchema("result", "CPointer<FileAttributes>", "OutSlot<FileAttributes>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DateCreated", 14, [InterfaceParameterSchema("result", "CPointer<Foundation.DateTime>", "OutSlot<Foundation.DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsOfType", 15, [InterfaceParameterSchema("type_", "StorageItemTypes", "StorageItemTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItem.runtimeType())
         return schema
     }
@@ -2137,51 +2181,51 @@ public class IStorageItem <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageItemVtbl {
         readVtbl<IStorageItemVtbl>(IStorageItemVtbl())
     }
 
-    public unsafe func RenameAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): windows.foundation.IAsyncAction {
+    public unsafe func RenameAsyncOverloadDefaultOptions(desiredName: CPointer<UInt16>): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.RenameAsyncOverloadDefaultOptions(asRaw(), desiredName, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 
-    public unsafe func RenameAsync(desiredName: CPointer<UInt16>, option: NameCollisionOption): windows.foundation.IAsyncAction {
+    public unsafe func RenameAsync(desiredName: CPointer<UInt16>, option: NameCollisionOption): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.RenameAsync(asRaw(), desiredName, option, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 
-    public unsafe func DeleteAsyncOverloadDefaultOptions(): windows.foundation.IAsyncAction {
+    public unsafe func DeleteAsyncOverloadDefaultOptions(): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.DeleteAsyncOverloadDefaultOptions(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 
-    public unsafe func DeleteAsync(option: StorageDeleteOption): windows.foundation.IAsyncAction {
+    public unsafe func DeleteAsync(option: StorageDeleteOption): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.DeleteAsync(asRaw(), option, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 
-    public unsafe func GetBasicPropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetBasicPropertiesAsync(): Foundation.IAsyncOperation<Storage_FileProperties.BasicProperties> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetBasicPropertiesAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage_FileProperties.BasicProperties>.fromAbiTake(result)
     }
 
     public unsafe func Name(): CPointer<UInt16> {
@@ -2208,10 +2252,10 @@ public class IStorageItem <: InterfaceWrapperBase & ComInterface & RuntimeName &
         return result
     }
 
-    public unsafe func DateCreated(): windows.foundation.DateTime {
+    public unsafe func DateCreated(): Foundation.DateTime {
         let v = vtbl()
-        var result = windows.foundation.DateTime()
-        let hr = v.DateCreated(asRaw(), CPointer<windows.foundation.DateTime>(inout result))
+        var result = Foundation.DateTime()
+        let hr = v.DateCreated(asRaw(), CPointer<Foundation.DateTime>(inout result))
         HRESULT(hr).ok()
         return result
     }
@@ -2225,7 +2269,7 @@ public class IStorageItem <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageItem2Vtbl {
     public var base_: IStorageItemVtbl = IStorageItemVtbl()
@@ -2237,36 +2281,35 @@ public struct IStorageItem2Vtbl {
         let _ = offset
         var vtbl = IStorageItem2Vtbl()
         vtbl.base_ = IStorageItemVtbl.new<Identity>(offset: offset)
-        vtbl.GetParentAsync = { this_, result__ =>
+        vtbl.GetParentAsync = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetParentAsync()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<StorageFolder>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<StorageFolder>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.IsEqual = { this_, arg0, result__ =>
+        vtbl.IsEqual = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.IsEqual(IStorageItem.fromRawBorrowed(arg0))) {
+                    match (impl.IsEqual(InParam<IStorageItem>(IStorageItem.viewOf(arg0)))) {
                         case Result<Bool>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -2293,23 +2336,27 @@ public struct IStorageItem2Vtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageItem2_Impl <: IStorageItem_Impl {
-    public func GetParentAsync(): windows_core.Result<CPointer<Unit>>
-    public func IsEqual(item: IStorageItem): windows_core.Result<Bool>
+    public func GetParentAsync(): windows_core.Result<Foundation.IAsyncOperation<StorageFolder>>
+    public func IsEqual(item: InParam<IStorageItem>): windows_core.Result<Bool>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageItem2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageItem2 {
-        IStorageItem2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItem2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageItem2 {
+        IStorageItem2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageItem2 {
         IStorageItem2(raw)
     }
 
@@ -2330,13 +2377,13 @@ public class IStorageItem2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageItem2> {
-        var descriptor = InterfaceDescriptor<IStorageItem2>("IStorageItem2", IStorageItem2.iid(), IStorageItem.descriptor(), { raw => IStorageItem2(raw, ownsReference: true) }, { raw => IStorageItem2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageItem2>("IStorageItem2", IStorageItem2.iid(), IStorageItem.descriptor(), { raw => IStorageItem2.fromAbiTake(raw) }, { raw => IStorageItem2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageItem2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItem2", IStorageItem2.iid(), IStorageItem.descriptorSchema(), "IStorageItem2Vtbl", "IStorageItem2", "IStorageItem2_Impl", [InterfaceMethodSchema("GetParentAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsEqual", 17, [InterfaceParameterSchema("item", "CPointer<Unit>", "Ref<IStorageItem>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItem2", IStorageItem2.iid(), IStorageItem.descriptorSchema(), "IStorageItem2Vtbl", "IStorageItem2", "IStorageItem2_Impl", [InterfaceMethodSchema("GetParentAsync", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<StorageFolder>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEqual", 17, [InterfaceParameterSchema("item", "CPointer<Unit>", "InParam<IStorageItem>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItem2.runtimeType())
         return schema
     }
@@ -2358,23 +2405,23 @@ public class IStorageItem2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItem(): IStorageItem {
-        IStorageItem(asRaw())
+        IStorageItem.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageItem2Vtbl {
         readVtbl<IStorageItem2Vtbl>(IStorageItem2Vtbl())
     }
 
-    public unsafe func GetParentAsync(): CPointer<Unit> {
+    public unsafe func GetParentAsync(): Foundation.IAsyncOperation<StorageFolder> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetParentAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<StorageFolder>.fromAbiTake(result)
     }
 
     public unsafe func IsEqual(item: IStorageItem): Bool {
@@ -2386,13 +2433,13 @@ public class IStorageItem2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageItemPropertiesVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var GetThumbnailAsyncOverloadDefaultSizeDefaultOptions: CFunc<(CPointer<Unit>, windows.storage.file_properties.ThumbnailMode, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetThumbnailAsyncOverloadDefaultOptions: CFunc<(CPointer<Unit>, windows.storage.file_properties.ThumbnailMode, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var GetThumbnailAsync: CFunc<(CPointer<Unit>, windows.storage.file_properties.ThumbnailMode, UInt32, windows.storage.file_properties.ThumbnailOptions, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var GetThumbnailAsyncOverloadDefaultSizeDefaultOptions: CFunc<(CPointer<Unit>, Storage_FileProperties.ThumbnailMode, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var GetThumbnailAsyncOverloadDefaultOptions: CFunc<(CPointer<Unit>, Storage_FileProperties.ThumbnailMode, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var GetThumbnailAsync: CFunc<(CPointer<Unit>, Storage_FileProperties.ThumbnailMode, UInt32, Storage_FileProperties.ThumbnailOptions, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public var DisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisplayType: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var FolderRelativeId: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
@@ -2403,80 +2450,77 @@ public struct IStorageItemPropertiesVtbl {
         let _ = offset
         var vtbl = IStorageItemPropertiesVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetThumbnailAsyncOverloadDefaultSizeDefaultOptions = { this_, arg0, result__ =>
+        vtbl.GetThumbnailAsyncOverloadDefaultSizeDefaultOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetThumbnailAsyncOverloadDefaultOptions = { this_, arg0, arg1, result__ =>
+        vtbl.GetThumbnailAsyncOverloadDefaultOptions = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetThumbnailAsyncOverloadDefaultOptions(arg0, arg1)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetThumbnailAsync = { this_, arg0, arg1, arg2, result__ =>
+        vtbl.GetThumbnailAsync = { instanceRaw, arg0, arg1, arg2, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetThumbnailAsync(arg0, arg1, arg2)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.DisplayName = { this_, result__ =>
+        vtbl.DisplayName = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.DisplayName()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -2489,11 +2533,11 @@ public struct IStorageItemPropertiesVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.DisplayType = { this_, result__ =>
+        vtbl.DisplayType = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.DisplayType()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -2506,11 +2550,11 @@ public struct IStorageItemPropertiesVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.FolderRelativeId = { this_, result__ =>
+        vtbl.FolderRelativeId = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.FolderRelativeId()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -2523,23 +2567,22 @@ public struct IStorageItemPropertiesVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Properties = { this_, result__ =>
+        vtbl.Properties = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Properties()) {
-                        case Result<windows.storage.file_properties.StorageItemContentProperties>.Ok(value) =>
-                            let raw = value.asRaw()
+                        case Result<Storage_FileProperties.StorageItemContentProperties>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<windows.storage.file_properties.StorageItemContentProperties>.Err(error) =>
+                        case Result<Storage_FileProperties.StorageItemContentProperties>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -2557,28 +2600,32 @@ public struct IStorageItemPropertiesVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageItemProperties_Impl {
-    public func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: windows.storage.file_properties.ThumbnailMode): windows_core.Result<CPointer<Unit>>
-    public func GetThumbnailAsyncOverloadDefaultOptions(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32): windows_core.Result<CPointer<Unit>>
-    public func GetThumbnailAsync(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32, options: windows.storage.file_properties.ThumbnailOptions): windows_core.Result<CPointer<Unit>>
+    public func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: Storage_FileProperties.ThumbnailMode): windows_core.Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>
+    public func GetThumbnailAsyncOverloadDefaultOptions(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32): windows_core.Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>
+    public func GetThumbnailAsync(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32, options: Storage_FileProperties.ThumbnailOptions): windows_core.Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>
     public func DisplayName(): windows_core.Result<CPointer<UInt16>>
     public func DisplayType(): windows_core.Result<CPointer<UInt16>>
     public func FolderRelativeId(): windows_core.Result<CPointer<UInt16>>
-    public func Properties(): windows_core.Result<windows.storage.file_properties.StorageItemContentProperties>
+    public func Properties(): windows_core.Result<Storage_FileProperties.StorageItemContentProperties>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageItemProperties <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageItemProperties {
-        IStorageItemProperties(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemProperties {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageItemProperties {
+        IStorageItemProperties(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemProperties {
         IStorageItemProperties(raw)
     }
 
@@ -2594,13 +2641,13 @@ public class IStorageItemProperties <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageItemProperties> {
-        var descriptor = InterfaceDescriptor<IStorageItemProperties>("IStorageItemProperties", IStorageItemProperties.iid(), IInspectable.descriptor(), { raw => IStorageItemProperties(raw, ownsReference: true) }, { raw => IStorageItemProperties(raw) })
+        var descriptor = InterfaceDescriptor<IStorageItemProperties>("IStorageItemProperties", IStorageItemProperties.iid(), IInspectable.descriptor(), { raw => IStorageItemProperties.fromAbiTake(raw) }, { raw => IStorageItemProperties.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageItemProperties.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItemProperties", IStorageItemProperties.iid(), IInspectable.descriptorSchema(), "IStorageItemPropertiesVtbl", "IStorageItemProperties", "IStorageItemProperties_Impl", [InterfaceMethodSchema("GetThumbnailAsyncOverloadDefaultSizeDefaultOptions", 6, [InterfaceParameterSchema("mode", "windows.storage.file_properties.ThumbnailMode", "windows.storage.file_properties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetThumbnailAsyncOverloadDefaultOptions", 7, [InterfaceParameterSchema("mode", "windows.storage.file_properties.ThumbnailMode", "windows.storage.file_properties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetThumbnailAsync", 8, [InterfaceParameterSchema("mode", "windows.storage.file_properties.ThumbnailMode", "windows.storage.file_properties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "windows.storage.file_properties.ThumbnailOptions", "windows.storage.file_properties.ThumbnailOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DisplayName", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DisplayType", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("FolderRelativeId", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Properties", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.storage.file_properties.StorageItemContentProperties>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItemProperties", IStorageItemProperties.iid(), IInspectable.descriptorSchema(), "IStorageItemPropertiesVtbl", "IStorageItemProperties", "IStorageItemProperties_Impl", [InterfaceMethodSchema("GetThumbnailAsyncOverloadDefaultSizeDefaultOptions", 6, [InterfaceParameterSchema("mode", "Storage_FileProperties.ThumbnailMode", "Storage_FileProperties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetThumbnailAsyncOverloadDefaultOptions", 7, [InterfaceParameterSchema("mode", "Storage_FileProperties.ThumbnailMode", "Storage_FileProperties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetThumbnailAsync", 8, [InterfaceParameterSchema("mode", "Storage_FileProperties.ThumbnailMode", "Storage_FileProperties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "Storage_FileProperties.ThumbnailOptions", "Storage_FileProperties.ThumbnailOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayType", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FolderRelativeId", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Properties", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Storage_FileProperties.StorageItemContentProperties>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItemProperties.runtimeType())
         return schema
     }
@@ -2622,35 +2669,35 @@ public class IStorageItemProperties <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageItemPropertiesVtbl {
         readVtbl<IStorageItemPropertiesVtbl>(IStorageItemPropertiesVtbl())
     }
 
-    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: windows.storage.file_properties.ThumbnailMode): CPointer<Unit> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: Storage_FileProperties.ThumbnailMode): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(asRaw(), mode, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>.fromAbiTake(result)
     }
 
-    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32): CPointer<Unit> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetThumbnailAsyncOverloadDefaultOptions(asRaw(), mode, requestedSize, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>.fromAbiTake(result)
     }
 
-    public unsafe func GetThumbnailAsync(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32, options: windows.storage.file_properties.ThumbnailOptions): CPointer<Unit> {
+    public unsafe func GetThumbnailAsync(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32, options: Storage_FileProperties.ThumbnailOptions): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetThumbnailAsync(asRaw(), mode, requestedSize, options, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>.fromAbiTake(result)
     }
 
     public unsafe func DisplayName(): CPointer<UInt16> {
@@ -2677,91 +2724,88 @@ public class IStorageItemProperties <: InterfaceWrapperBase & ComInterface & Run
         return result
     }
 
-    public unsafe func Properties(): windows.storage.file_properties.StorageItemContentProperties {
+    public unsafe func Properties(): Storage_FileProperties.StorageItemContentProperties {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Properties(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.storage.file_properties.StorageItemContentProperties.fromRaw(result)
+        return Storage_FileProperties.StorageItemContentProperties.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageItemProperties2Vtbl {
     public var base_: IStorageItemPropertiesVtbl = IStorageItemPropertiesVtbl()
-    public var GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions: CFunc<(CPointer<Unit>, windows.storage.file_properties.ThumbnailMode, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetScaledImageAsThumbnailAsyncOverloadDefaultOptions: CFunc<(CPointer<Unit>, windows.storage.file_properties.ThumbnailMode, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var GetScaledImageAsThumbnailAsync: CFunc<(CPointer<Unit>, windows.storage.file_properties.ThumbnailMode, UInt32, windows.storage.file_properties.ThumbnailOptions, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions: CFunc<(CPointer<Unit>, Storage_FileProperties.ThumbnailMode, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var GetScaledImageAsThumbnailAsyncOverloadDefaultOptions: CFunc<(CPointer<Unit>, Storage_FileProperties.ThumbnailMode, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var GetScaledImageAsThumbnailAsync: CFunc<(CPointer<Unit>, Storage_FileProperties.ThumbnailMode, UInt32, Storage_FileProperties.ThumbnailOptions, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 
     public static func new<Identity>(offset!: Int64 = 0): IStorageItemProperties2Vtbl where Identity <: IStorageItemProperties2_Impl {
         let _ = offset
         var vtbl = IStorageItemProperties2Vtbl()
         vtbl.base_ = IStorageItemPropertiesVtbl.new<Identity>(offset: offset)
-        vtbl.GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions = { this_, arg0, result__ =>
+        vtbl.GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(arg0)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetScaledImageAsThumbnailAsyncOverloadDefaultOptions = { this_, arg0, arg1, result__ =>
+        vtbl.GetScaledImageAsThumbnailAsyncOverloadDefaultOptions = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(arg0, arg1)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetScaledImageAsThumbnailAsync = { this_, arg0, arg1, arg2, result__ =>
+        vtbl.GetScaledImageAsThumbnailAsync = { instanceRaw, arg0, arg1, arg2, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetScaledImageAsThumbnailAsync(arg0, arg1, arg2)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -2784,24 +2828,28 @@ public struct IStorageItemProperties2Vtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageItemProperties2_Impl <: IStorageItemProperties_Impl {
-    public func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: windows.storage.file_properties.ThumbnailMode): windows_core.Result<CPointer<Unit>>
-    public func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32): windows_core.Result<CPointer<Unit>>
-    public func GetScaledImageAsThumbnailAsync(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32, options: windows.storage.file_properties.ThumbnailOptions): windows_core.Result<CPointer<Unit>>
+    public func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: Storage_FileProperties.ThumbnailMode): windows_core.Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>
+    public func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32): windows_core.Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>
+    public func GetScaledImageAsThumbnailAsync(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32, options: Storage_FileProperties.ThumbnailOptions): windows_core.Result<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageItemProperties2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageItemProperties2 {
-        IStorageItemProperties2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemProperties2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageItemProperties2 {
+        IStorageItemProperties2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemProperties2 {
         IStorageItemProperties2(raw)
     }
 
@@ -2822,13 +2870,13 @@ public class IStorageItemProperties2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageItemProperties2> {
-        var descriptor = InterfaceDescriptor<IStorageItemProperties2>("IStorageItemProperties2", IStorageItemProperties2.iid(), IStorageItemProperties.descriptor(), { raw => IStorageItemProperties2(raw, ownsReference: true) }, { raw => IStorageItemProperties2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageItemProperties2>("IStorageItemProperties2", IStorageItemProperties2.iid(), IStorageItemProperties.descriptor(), { raw => IStorageItemProperties2.fromAbiTake(raw) }, { raw => IStorageItemProperties2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageItemProperties2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItemProperties2", IStorageItemProperties2.iid(), IStorageItemProperties.descriptorSchema(), "IStorageItemProperties2Vtbl", "IStorageItemProperties2", "IStorageItemProperties2_Impl", [InterfaceMethodSchema("GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions", 13, [InterfaceParameterSchema("mode", "windows.storage.file_properties.ThumbnailMode", "windows.storage.file_properties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetScaledImageAsThumbnailAsyncOverloadDefaultOptions", 14, [InterfaceParameterSchema("mode", "windows.storage.file_properties.ThumbnailMode", "windows.storage.file_properties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetScaledImageAsThumbnailAsync", 15, [InterfaceParameterSchema("mode", "windows.storage.file_properties.ThumbnailMode", "windows.storage.file_properties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "windows.storage.file_properties.ThumbnailOptions", "windows.storage.file_properties.ThumbnailOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItemProperties2", IStorageItemProperties2.iid(), IStorageItemProperties.descriptorSchema(), "IStorageItemProperties2Vtbl", "IStorageItemProperties2", "IStorageItemProperties2_Impl", [InterfaceMethodSchema("GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions", 13, [InterfaceParameterSchema("mode", "Storage_FileProperties.ThumbnailMode", "Storage_FileProperties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetScaledImageAsThumbnailAsyncOverloadDefaultOptions", 14, [InterfaceParameterSchema("mode", "Storage_FileProperties.ThumbnailMode", "Storage_FileProperties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetScaledImageAsThumbnailAsync", 15, [InterfaceParameterSchema("mode", "Storage_FileProperties.ThumbnailMode", "Storage_FileProperties.ThumbnailMode", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("requestedSize", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "Storage_FileProperties.ThumbnailOptions", "Storage_FileProperties.ThumbnailOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItemProperties2.runtimeType())
         return schema
     }
@@ -2850,43 +2898,43 @@ public class IStorageItemProperties2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItemProperties(): IStorageItemProperties {
-        IStorageItemProperties(asRaw())
+        IStorageItemProperties.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageItemProperties2Vtbl {
         readVtbl<IStorageItemProperties2Vtbl>(IStorageItemProperties2Vtbl())
     }
 
-    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: windows.storage.file_properties.ThumbnailMode): CPointer<Unit> {
+    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: Storage_FileProperties.ThumbnailMode): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(asRaw(), mode, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>.fromAbiTake(result)
     }
 
-    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32): CPointer<Unit> {
+    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(asRaw(), mode, requestedSize, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>.fromAbiTake(result)
     }
 
-    public unsafe func GetScaledImageAsThumbnailAsync(mode: windows.storage.file_properties.ThumbnailMode, requestedSize: UInt32, options: windows.storage.file_properties.ThumbnailOptions): CPointer<Unit> {
+    public unsafe func GetScaledImageAsThumbnailAsync(mode: Storage_FileProperties.ThumbnailMode, requestedSize: UInt32, options: Storage_FileProperties.ThumbnailOptions): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetScaledImageAsThumbnailAsync(asRaw(), mode, requestedSize, options, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageItemPropertiesWithProviderVtbl {
     public var base_: IStorageItemPropertiesVtbl = IStorageItemPropertiesVtbl()
@@ -2897,19 +2945,18 @@ public struct IStorageItemPropertiesWithProviderVtbl {
         let _ = offset
         var vtbl = IStorageItemPropertiesWithProviderVtbl()
         vtbl.base_ = IStorageItemPropertiesVtbl.new<Identity>(offset: offset)
-        vtbl.Provider = { this_, result__ =>
+        vtbl.Provider = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Provider()) {
                         case Result<StorageProvider>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -2936,22 +2983,26 @@ public struct IStorageItemPropertiesWithProviderVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStorageItemPropertiesWithProvider_Impl <: IStorageItemProperties_Impl {
     public func Provider(): windows_core.Result<StorageProvider>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageItemPropertiesWithProvider <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageItemPropertiesWithProvider {
-        IStorageItemPropertiesWithProvider(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemPropertiesWithProvider {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageItemPropertiesWithProvider {
+        IStorageItemPropertiesWithProvider(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemPropertiesWithProvider {
         IStorageItemPropertiesWithProvider(raw)
     }
 
@@ -2972,13 +3023,13 @@ public class IStorageItemPropertiesWithProvider <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageItemPropertiesWithProvider> {
-        var descriptor = InterfaceDescriptor<IStorageItemPropertiesWithProvider>("IStorageItemPropertiesWithProvider", IStorageItemPropertiesWithProvider.iid(), IStorageItemProperties.descriptor(), { raw => IStorageItemPropertiesWithProvider(raw, ownsReference: true) }, { raw => IStorageItemPropertiesWithProvider(raw) })
+        var descriptor = InterfaceDescriptor<IStorageItemPropertiesWithProvider>("IStorageItemPropertiesWithProvider", IStorageItemPropertiesWithProvider.iid(), IStorageItemProperties.descriptor(), { raw => IStorageItemPropertiesWithProvider.fromAbiTake(raw) }, { raw => IStorageItemPropertiesWithProvider.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageItemPropertiesWithProvider.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageItemPropertiesWithProvider", IStorageItemPropertiesWithProvider.iid(), IStorageItemProperties.descriptorSchema(), "IStorageItemPropertiesWithProviderVtbl", "IStorageItemPropertiesWithProvider", "IStorageItemPropertiesWithProvider_Impl", [InterfaceMethodSchema("Provider", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageProvider>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageItemPropertiesWithProvider", IStorageItemPropertiesWithProvider.iid(), IStorageItemProperties.descriptorSchema(), "IStorageItemPropertiesWithProviderVtbl", "IStorageItemPropertiesWithProvider", "IStorageItemPropertiesWithProvider_Impl", [InterfaceMethodSchema("Provider", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageProvider>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageItemPropertiesWithProvider.runtimeType())
         return schema
     }
@@ -3000,11 +3051,11 @@ public class IStorageItemPropertiesWithProvider <: InterfaceWrapperBase & ComInt
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageItemProperties(): IStorageItemProperties {
-        IStorageItemProperties(asRaw())
+        IStorageItemProperties.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageItemPropertiesWithProviderVtbl {
@@ -3016,11 +3067,11 @@ public class IStorageItemPropertiesWithProvider <: InterfaceWrapperBase & ComInt
         var result = CPointer<Unit>()
         let hr = v.Provider(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageProvider.fromRaw(result)
+        return StorageProvider.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageLibraryChangeVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3032,17 +3083,21 @@ public struct IStorageLibraryChangeVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageLibraryChange <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageLibraryChange {
-        IStorageLibraryChange(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChange {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageLibraryChange {
+        IStorageLibraryChange(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChange {
         IStorageLibraryChange(raw)
     }
 
@@ -3058,13 +3113,13 @@ public class IStorageLibraryChange <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageLibraryChange> {
-        var descriptor = InterfaceDescriptor<IStorageLibraryChange>("IStorageLibraryChange", IStorageLibraryChange.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChange(raw, ownsReference: true) }, { raw => IStorageLibraryChange(raw) })
+        var descriptor = InterfaceDescriptor<IStorageLibraryChange>("IStorageLibraryChange", IStorageLibraryChange.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChange.fromAbiTake(raw) }, { raw => IStorageLibraryChange.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageLibraryChange.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageLibraryChange", IStorageLibraryChange.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeVtbl", "IStorageLibraryChange", "IStorageLibraryChange_Impl", [InterfaceMethodSchema("ChangeType", 6, [InterfaceParameterSchema("result", "CPointer<StorageLibraryChangeType>", "OutRef<StorageLibraryChangeType>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Path", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("PreviousPath", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsOfType", 9, [InterfaceParameterSchema("type_", "StorageItemTypes", "StorageItemTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetStorageItemAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageLibraryChange", IStorageLibraryChange.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeVtbl", "IStorageLibraryChange", "IStorageLibraryChange_Impl", [InterfaceMethodSchema("ChangeType", 6, [InterfaceParameterSchema("result", "CPointer<StorageLibraryChangeType>", "OutSlot<StorageLibraryChangeType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Path", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("PreviousPath", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsOfType", 9, [InterfaceParameterSchema("type_", "StorageItemTypes", "StorageItemTypes", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetStorageItemAsync", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<IStorageItem>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageLibraryChange.runtimeType())
         return schema
     }
@@ -3086,7 +3141,7 @@ public class IStorageLibraryChange <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageLibraryChangeVtbl {
@@ -3125,16 +3180,16 @@ public class IStorageLibraryChange <: InterfaceWrapperBase & ComInterface & Runt
         return result
     }
 
-    public unsafe func GetStorageItemAsync(): CPointer<Unit> {
+    public unsafe func GetStorageItemAsync(): Foundation.IAsyncOperation<IStorageItem> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetStorageItemAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<IStorageItem>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageLibraryChangeReaderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3143,17 +3198,21 @@ public struct IStorageLibraryChangeReaderVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageLibraryChangeReader {
-        IStorageLibraryChangeReader(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeReader {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageLibraryChangeReader {
+        IStorageLibraryChangeReader(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeReader {
         IStorageLibraryChangeReader(raw)
     }
 
@@ -3169,13 +3228,13 @@ public class IStorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageLibraryChangeReader> {
-        var descriptor = InterfaceDescriptor<IStorageLibraryChangeReader>("IStorageLibraryChangeReader", IStorageLibraryChangeReader.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeReader(raw, ownsReference: true) }, { raw => IStorageLibraryChangeReader(raw) })
+        var descriptor = InterfaceDescriptor<IStorageLibraryChangeReader>("IStorageLibraryChangeReader", IStorageLibraryChangeReader.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeReader.fromAbiTake(raw) }, { raw => IStorageLibraryChangeReader.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageLibraryChangeReader.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeReader", IStorageLibraryChangeReader.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeReaderVtbl", "IStorageLibraryChangeReader", "IStorageLibraryChangeReader_Impl", [InterfaceMethodSchema("ReadBatchAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("AcceptChangesAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeReader", IStorageLibraryChangeReader.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeReaderVtbl", "IStorageLibraryChangeReader", "IStorageLibraryChangeReader_Impl", [InterfaceMethodSchema("ReadBatchAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageLibraryChange>>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AcceptChangesAsync", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageLibraryChangeReader.runtimeType())
         return schema
     }
@@ -3197,31 +3256,31 @@ public class IStorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageLibraryChangeReaderVtbl {
         readVtbl<IStorageLibraryChangeReaderVtbl>(IStorageLibraryChangeReaderVtbl())
     }
 
-    public unsafe func ReadBatchAsync(): CPointer<Unit> {
+    public unsafe func ReadBatchAsync(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageLibraryChange>> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.ReadBatchAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageLibraryChange>>.fromAbiTake(result)
     }
 
-    public unsafe func AcceptChangesAsync(): windows.foundation.IAsyncAction {
+    public unsafe func AcceptChangesAsync(): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.AcceptChangesAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageLibraryChangeReader2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3229,17 +3288,21 @@ public struct IStorageLibraryChangeReader2Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageLibraryChangeReader2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageLibraryChangeReader2 {
-        IStorageLibraryChangeReader2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeReader2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageLibraryChangeReader2 {
+        IStorageLibraryChangeReader2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeReader2 {
         IStorageLibraryChangeReader2(raw)
     }
 
@@ -3255,13 +3318,13 @@ public class IStorageLibraryChangeReader2 <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageLibraryChangeReader2> {
-        var descriptor = InterfaceDescriptor<IStorageLibraryChangeReader2>("IStorageLibraryChangeReader2", IStorageLibraryChangeReader2.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeReader2(raw, ownsReference: true) }, { raw => IStorageLibraryChangeReader2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageLibraryChangeReader2>("IStorageLibraryChangeReader2", IStorageLibraryChangeReader2.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeReader2.fromAbiTake(raw) }, { raw => IStorageLibraryChangeReader2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageLibraryChangeReader2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeReader2", IStorageLibraryChangeReader2.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeReader2Vtbl", "IStorageLibraryChangeReader2", "IStorageLibraryChangeReader2_Impl", [InterfaceMethodSchema("GetLastChangeId", 6, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutRef<UInt64>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeReader2", IStorageLibraryChangeReader2.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeReader2Vtbl", "IStorageLibraryChangeReader2", "IStorageLibraryChangeReader2_Impl", [InterfaceMethodSchema("GetLastChangeId", 6, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageLibraryChangeReader2.runtimeType())
         return schema
     }
@@ -3283,7 +3346,7 @@ public class IStorageLibraryChangeReader2 <: InterfaceWrapperBase & ComInterface
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageLibraryChangeReader2Vtbl {
@@ -3299,7 +3362,7 @@ public class IStorageLibraryChangeReader2 <: InterfaceWrapperBase & ComInterface
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageLibraryChangeTrackerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3309,17 +3372,21 @@ public struct IStorageLibraryChangeTrackerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageLibraryChangeTracker {
-        IStorageLibraryChangeTracker(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTracker {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageLibraryChangeTracker {
+        IStorageLibraryChangeTracker(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTracker {
         IStorageLibraryChangeTracker(raw)
     }
 
@@ -3335,13 +3402,13 @@ public class IStorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageLibraryChangeTracker> {
-        var descriptor = InterfaceDescriptor<IStorageLibraryChangeTracker>("IStorageLibraryChangeTracker", IStorageLibraryChangeTracker.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeTracker(raw, ownsReference: true) }, { raw => IStorageLibraryChangeTracker(raw) })
+        var descriptor = InterfaceDescriptor<IStorageLibraryChangeTracker>("IStorageLibraryChangeTracker", IStorageLibraryChangeTracker.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeTracker.fromAbiTake(raw) }, { raw => IStorageLibraryChangeTracker.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageLibraryChangeTracker.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeTracker", IStorageLibraryChangeTracker.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeTrackerVtbl", "IStorageLibraryChangeTracker", "IStorageLibraryChangeTracker_Impl", [InterfaceMethodSchema("GetChangeReader", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<StorageLibraryChangeReader>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Enable", 7, [], "Int32"), InterfaceMethodSchema("Reset", 8, [], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeTracker", IStorageLibraryChangeTracker.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeTrackerVtbl", "IStorageLibraryChangeTracker", "IStorageLibraryChangeTracker_Impl", [InterfaceMethodSchema("GetChangeReader", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<StorageLibraryChangeReader>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Enable", 7, [], "Int32"), InterfaceMethodSchema("Reset", 8, [], "Int32")])
         schema.runtimeTypeContract = Some(IStorageLibraryChangeTracker.runtimeType())
         return schema
     }
@@ -3363,7 +3430,7 @@ public class IStorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageLibraryChangeTrackerVtbl {
@@ -3375,7 +3442,7 @@ public class IStorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface
         var result = CPointer<Unit>()
         let hr = v.GetChangeReader(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return StorageLibraryChangeReader.fromRaw(result)
+        return StorageLibraryChangeReader.fromAbiTake(result)
     }
 
     public unsafe func Enable(): Unit {
@@ -3391,7 +3458,7 @@ public class IStorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageLibraryChangeTracker2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3400,17 +3467,21 @@ public struct IStorageLibraryChangeTracker2Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageLibraryChangeTracker2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageLibraryChangeTracker2 {
-        IStorageLibraryChangeTracker2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTracker2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageLibraryChangeTracker2 {
+        IStorageLibraryChangeTracker2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTracker2 {
         IStorageLibraryChangeTracker2(raw)
     }
 
@@ -3426,13 +3497,13 @@ public class IStorageLibraryChangeTracker2 <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageLibraryChangeTracker2> {
-        var descriptor = InterfaceDescriptor<IStorageLibraryChangeTracker2>("IStorageLibraryChangeTracker2", IStorageLibraryChangeTracker2.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeTracker2(raw, ownsReference: true) }, { raw => IStorageLibraryChangeTracker2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageLibraryChangeTracker2>("IStorageLibraryChangeTracker2", IStorageLibraryChangeTracker2.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeTracker2.fromAbiTake(raw) }, { raw => IStorageLibraryChangeTracker2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageLibraryChangeTracker2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeTracker2", IStorageLibraryChangeTracker2.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeTracker2Vtbl", "IStorageLibraryChangeTracker2", "IStorageLibraryChangeTracker2_Impl", [InterfaceMethodSchema("EnableWithOptions", 6, [InterfaceParameterSchema("options", "CPointer<Unit>", "Ref<StorageLibraryChangeTrackerOptions>", InterfaceParameterBridgeKind.Ref)], "Int32"), InterfaceMethodSchema("Disable", 7, [], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeTracker2", IStorageLibraryChangeTracker2.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeTracker2Vtbl", "IStorageLibraryChangeTracker2", "IStorageLibraryChangeTracker2_Impl", [InterfaceMethodSchema("EnableWithOptions", 6, [InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<StorageLibraryChangeTrackerOptions>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Disable", 7, [], "Int32")])
         schema.runtimeTypeContract = Some(IStorageLibraryChangeTracker2.runtimeType())
         return schema
     }
@@ -3454,7 +3525,7 @@ public class IStorageLibraryChangeTracker2 <: InterfaceWrapperBase & ComInterfac
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageLibraryChangeTracker2Vtbl {
@@ -3474,7 +3545,7 @@ public class IStorageLibraryChangeTracker2 <: InterfaceWrapperBase & ComInterfac
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageLibraryChangeTrackerOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3483,17 +3554,21 @@ public struct IStorageLibraryChangeTrackerOptionsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageLibraryChangeTrackerOptions {
-        IStorageLibraryChangeTrackerOptions(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTrackerOptions {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageLibraryChangeTrackerOptions {
+        IStorageLibraryChangeTrackerOptions(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTrackerOptions {
         IStorageLibraryChangeTrackerOptions(raw)
     }
 
@@ -3509,13 +3584,13 @@ public class IStorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageLibraryChangeTrackerOptions> {
-        var descriptor = InterfaceDescriptor<IStorageLibraryChangeTrackerOptions>("IStorageLibraryChangeTrackerOptions", IStorageLibraryChangeTrackerOptions.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeTrackerOptions(raw, ownsReference: true) }, { raw => IStorageLibraryChangeTrackerOptions(raw) })
+        var descriptor = InterfaceDescriptor<IStorageLibraryChangeTrackerOptions>("IStorageLibraryChangeTrackerOptions", IStorageLibraryChangeTrackerOptions.iid(), IInspectable.descriptor(), { raw => IStorageLibraryChangeTrackerOptions.fromAbiTake(raw) }, { raw => IStorageLibraryChangeTrackerOptions.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageLibraryChangeTrackerOptions.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeTrackerOptions", IStorageLibraryChangeTrackerOptions.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeTrackerOptionsVtbl", "IStorageLibraryChangeTrackerOptions", "IStorageLibraryChangeTrackerOptions_Impl", [InterfaceMethodSchema("TrackChangeDetails", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetTrackChangeDetails", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageLibraryChangeTrackerOptions", IStorageLibraryChangeTrackerOptions.iid(), IInspectable.descriptorSchema(), "IStorageLibraryChangeTrackerOptionsVtbl", "IStorageLibraryChangeTrackerOptions", "IStorageLibraryChangeTrackerOptions_Impl", [InterfaceMethodSchema("TrackChangeDetails", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTrackChangeDetails", 7, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageLibraryChangeTrackerOptions.runtimeType())
         return schema
     }
@@ -3537,7 +3612,7 @@ public class IStorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComIn
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageLibraryChangeTrackerOptionsVtbl {
@@ -3559,7 +3634,7 @@ public class IStorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComIn
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageProviderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3568,17 +3643,21 @@ public struct IStorageProviderVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageProvider <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageProvider {
-        IStorageProvider(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProvider {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageProvider {
+        IStorageProvider(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageProvider {
         IStorageProvider(raw)
     }
 
@@ -3594,13 +3673,13 @@ public class IStorageProvider <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageProvider> {
-        var descriptor = InterfaceDescriptor<IStorageProvider>("IStorageProvider", IStorageProvider.iid(), IInspectable.descriptor(), { raw => IStorageProvider(raw, ownsReference: true) }, { raw => IStorageProvider(raw) })
+        var descriptor = InterfaceDescriptor<IStorageProvider>("IStorageProvider", IStorageProvider.iid(), IInspectable.descriptor(), { raw => IStorageProvider.fromAbiTake(raw) }, { raw => IStorageProvider.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageProvider.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageProvider", IStorageProvider.iid(), IInspectable.descriptorSchema(), "IStorageProviderVtbl", "IStorageProvider", "IStorageProvider_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DisplayName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageProvider", IStorageProvider.iid(), IInspectable.descriptorSchema(), "IStorageProviderVtbl", "IStorageProvider", "IStorageProvider_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayName", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageProvider.runtimeType())
         return schema
     }
@@ -3622,7 +3701,7 @@ public class IStorageProvider <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageProviderVtbl {
@@ -3646,7 +3725,7 @@ public class IStorageProvider <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageProvider2Vtbl {
     public var base_: IStorageProviderVtbl = IStorageProviderVtbl()
@@ -3654,17 +3733,21 @@ public struct IStorageProvider2Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageProvider2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageProvider2 {
-        IStorageProvider2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProvider2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageProvider2 {
+        IStorageProvider2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageProvider2 {
         IStorageProvider2(raw)
     }
 
@@ -3685,13 +3768,13 @@ public class IStorageProvider2 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageProvider2> {
-        var descriptor = InterfaceDescriptor<IStorageProvider2>("IStorageProvider2", IStorageProvider2.iid(), IStorageProvider.descriptor(), { raw => IStorageProvider2(raw, ownsReference: true) }, { raw => IStorageProvider2(raw) })
+        var descriptor = InterfaceDescriptor<IStorageProvider2>("IStorageProvider2", IStorageProvider2.iid(), IStorageProvider.descriptor(), { raw => IStorageProvider2.fromAbiTake(raw) }, { raw => IStorageProvider2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageProvider2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageProvider2", IStorageProvider2.iid(), IStorageProvider.descriptorSchema(), "IStorageProvider2Vtbl", "IStorageProvider2", "IStorageProvider2_Impl", [InterfaceMethodSchema("IsPropertySupportedForPartialFileAsync", 8, [InterfaceParameterSchema("propertyCanonicalName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageProvider2", IStorageProvider2.iid(), IStorageProvider.descriptorSchema(), "IStorageProvider2Vtbl", "IStorageProvider2", "IStorageProvider2_Impl", [InterfaceMethodSchema("IsPropertySupportedForPartialFileAsync", 8, [InterfaceParameterSchema("propertyCanonicalName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageProvider2.runtimeType())
         return schema
     }
@@ -3713,27 +3796,27 @@ public class IStorageProvider2 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageProvider(): IStorageProvider {
-        IStorageProvider(asRaw())
+        IStorageProvider.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageProvider2Vtbl {
         readVtbl<IStorageProvider2Vtbl>(IStorageProvider2Vtbl())
     }
 
-    public unsafe func IsPropertySupportedForPartialFileAsync(propertyCanonicalName: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func IsPropertySupportedForPartialFileAsync(propertyCanonicalName: CPointer<UInt16>): Foundation.IAsyncOperation<Bool> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.IsPropertySupportedForPartialFileAsync(asRaw(), propertyCanonicalName, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Bool>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStorageStreamTransactionVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -3742,17 +3825,21 @@ public struct IStorageStreamTransactionVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStorageStreamTransaction <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStorageStreamTransaction {
-        IStorageStreamTransaction(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageStreamTransaction {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStorageStreamTransaction {
+        IStorageStreamTransaction(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStorageStreamTransaction {
         IStorageStreamTransaction(raw)
     }
 
@@ -3764,7 +3851,7 @@ public class IStorageStreamTransaction <: InterfaceWrapperBase & ComInterface & 
         if (iid == IStorageStreamTransaction.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -3773,13 +3860,13 @@ public class IStorageStreamTransaction <: InterfaceWrapperBase & ComInterface & 
     }
 
     public static func descriptor(): InterfaceDescriptor<IStorageStreamTransaction> {
-        var descriptor = InterfaceDescriptor<IStorageStreamTransaction>("IStorageStreamTransaction", IStorageStreamTransaction.iid(), windows.foundation.IClosable.descriptor(), { raw => IStorageStreamTransaction(raw, ownsReference: true) }, { raw => IStorageStreamTransaction(raw) })
+        var descriptor = InterfaceDescriptor<IStorageStreamTransaction>("IStorageStreamTransaction", IStorageStreamTransaction.iid(), Foundation.IClosable.descriptor(), { raw => IStorageStreamTransaction.fromAbiTake(raw) }, { raw => IStorageStreamTransaction.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStorageStreamTransaction.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStorageStreamTransaction", IStorageStreamTransaction.iid(), windows.foundation.IClosable.descriptorSchema(), "IStorageStreamTransactionVtbl", "IStorageStreamTransaction", "IStorageStreamTransaction_Impl", [InterfaceMethodSchema("Stream", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.storage.streams.IRandomAccessStream>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CommitAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStorageStreamTransaction", IStorageStreamTransaction.iid(), Foundation.IClosable.descriptorSchema(), "IStorageStreamTransactionVtbl", "IStorageStreamTransaction", "IStorageStreamTransaction_Impl", [InterfaceMethodSchema("Stream", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Storage_Streams.IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CommitAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncAction>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStorageStreamTransaction.runtimeType())
         return schema
     }
@@ -3801,35 +3888,35 @@ public class IStorageStreamTransaction <: InterfaceWrapperBase & ComInterface & 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStorageStreamTransactionVtbl {
         readVtbl<IStorageStreamTransactionVtbl>(IStorageStreamTransactionVtbl())
     }
 
-    public unsafe func Stream(): windows.storage.streams.IRandomAccessStream {
+    public unsafe func Stream(): Storage_Streams.IRandomAccessStream {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Stream(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.storage.streams.IRandomAccessStream.fromRaw(result)
+        return Storage_Streams.IRandomAccessStream.fromAbiTake(result)
     }
 
-    public unsafe func CommitAsync(): windows.foundation.IAsyncAction {
+    public unsafe func CommitAsync(): Foundation.IAsyncAction {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CommitAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.IAsyncAction.fromRaw(result)
+        return Foundation.IAsyncAction.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct IStreamedFileDataRequestVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3840,8 +3927,8 @@ public struct IStreamedFileDataRequestVtbl {
         let _ = offset
         var vtbl = IStreamedFileDataRequestVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.FailAndClose = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.FailAndClose = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.FailAndClose(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3864,22 +3951,26 @@ public struct IStreamedFileDataRequestVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public interface IStreamedFileDataRequest_Impl {
     public func FailAndClose(failureMode: StreamedFileFailureMode): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class IStreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStreamedFileDataRequest {
-        IStreamedFileDataRequest(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStreamedFileDataRequest {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStreamedFileDataRequest {
+        IStreamedFileDataRequest(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStreamedFileDataRequest {
         IStreamedFileDataRequest(raw)
     }
 
@@ -3895,7 +3986,7 @@ public class IStreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptor(): InterfaceDescriptor<IStreamedFileDataRequest> {
-        var descriptor = InterfaceDescriptor<IStreamedFileDataRequest>("IStreamedFileDataRequest", IStreamedFileDataRequest.iid(), IInspectable.descriptor(), { raw => IStreamedFileDataRequest(raw, ownsReference: true) }, { raw => IStreamedFileDataRequest(raw) })
+        var descriptor = InterfaceDescriptor<IStreamedFileDataRequest>("IStreamedFileDataRequest", IStreamedFileDataRequest.iid(), IInspectable.descriptor(), { raw => IStreamedFileDataRequest.fromAbiTake(raw) }, { raw => IStreamedFileDataRequest.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStreamedFileDataRequest.runtimeType())
         return descriptor
     }
@@ -3923,7 +4014,7 @@ public class IStreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & R
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStreamedFileDataRequestVtbl {
@@ -3937,20 +4028,16 @@ public class IStreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & R
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
+@C
 public struct NameCollisionOption {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let GenerateUniqueName = NameCollisionOption(value: 0)
-    public static let ReplaceExisting = NameCollisionOption(value: 1)
-    public static let FailIfExists = NameCollisionOption(value: 2)
 
     public operator func ==(other: NameCollisionOption): Bool {
         return this.value == other.value
@@ -3960,19 +4047,25 @@ public struct NameCollisionOption {
     }
 }
 
-@When[feature == "feat_windows_storage"]
-public struct StorageDeleteOption {
-    public let value: Int32
+@When[Windows_Storage == "on"]
+public let GenerateUniqueName: NameCollisionOption = NameCollisionOption(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Storage == "on"]
+public let ReplaceExisting: NameCollisionOption = NameCollisionOption(1)
+
+@When[Windows_Storage == "on"]
+public let FailIfExists: NameCollisionOption = NameCollisionOption(2)
+
+@When[Windows_Storage == "on"]
+@C
+public struct StorageDeleteOption {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Default = StorageDeleteOption(value: 0)
-    public static let PermanentDelete = StorageDeleteOption(value: 1)
 
     public operator func ==(other: StorageDeleteOption): Bool {
         return this.value == other.value
@@ -3982,17 +4075,27 @@ public struct StorageDeleteOption {
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
+public let Default: StorageDeleteOption = StorageDeleteOption(0)
+
+@When[Windows_Storage == "on"]
+public let PermanentDelete: StorageDeleteOption = StorageDeleteOption(1)
+
+@When[Windows_Storage == "on"]
 public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageFile {
-        StorageFile(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFile {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageFile {
+        StorageFile(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageFile {
         StorageFile(raw)
     }
 
@@ -4005,12 +4108,12 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     public static func descriptor(): InterfaceDescriptor<StorageFile> {
-        let ancestors = [IStorageFile.iid(), IStorageItem.iid(), windows.storage.streams.IRandomAccessStreamReference.iid(), windows.storage.streams.IInputStreamReference.iid(), IStorageItemProperties.iid(), IStorageItemProperties2.iid(), IStorageItem2.iid(), IStorageItemPropertiesWithProvider.iid(), IStorageFilePropertiesWithAvailability.iid(), IStorageFile2.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageFile>("StorageFile", IStorageFile.iid(), ancestors, { raw => StorageFile(raw, ownsReference: true) }, { raw => StorageFile(raw) })
+        let ancestors = [IStorageFile.iid(), IStorageItem.iid(), Storage_Streams.IRandomAccessStreamReference.iid(), Storage_Streams.IInputStreamReference.iid(), IStorageItemProperties.iid(), IStorageItemProperties2.iid(), IStorageItem2.iid(), IStorageItemPropertiesWithProvider.iid(), IStorageFilePropertiesWithAvailability.iid(), IStorageFile2.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<StorageFile>("StorageFile", IStorageFile.iid(), ancestors, { raw => StorageFile.fromAbiTake(raw) }, { raw => StorageFile.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageFile {
-        IStorageFile(asRaw())
+        IStorageFile.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4030,7 +4133,7 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageFile(): IStorageFile {
@@ -4041,12 +4144,12 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         IStorageItem(asRaw())
     }
 
-    public func asIRandomAccessStreamReference(): windows.storage.streams.IRandomAccessStreamReference {
-        windows.storage.streams.IRandomAccessStreamReference(asRaw())
+    public func asIRandomAccessStreamReference(): Storage_Streams.IRandomAccessStreamReference {
+        Storage_Streams.IRandomAccessStreamReference(asRaw())
     }
 
-    public func asIInputStreamReference(): windows.storage.streams.IInputStreamReference {
-        windows.storage.streams.IInputStreamReference(asRaw())
+    public func asIInputStreamReference(): Storage_Streams.IInputStreamReference {
+        Storage_Streams.IInputStreamReference(asRaw())
     }
 
     public func asIStorageItemProperties(): IStorageItemProperties {
@@ -4073,43 +4176,43 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         IStorageFile2(asRaw())
     }
 
-    public static unsafe func GetFileFromPathForUserAsync(user: windows.system.User, path: CPointer<UInt16>): CPointer<Unit> {
+    public static unsafe func GetFileFromPathForUserAsync(user: System.User, path: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         try (factory = windows_interface.getActivationFactoryByName<IStorageFileStatics2>(StorageFile.runtimeName(), IStorageFileStatics2.descriptor()).unwrap()) {
             return factory.GetFileFromPathForUserAsync(user, path)
         }
     }
 
-    public static unsafe func GetFileFromPathAsync(path: CPointer<UInt16>): CPointer<Unit> {
+    public static unsafe func GetFileFromPathAsync(path: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         try (factory = windows_interface.getActivationFactoryByName<IStorageFileStatics>(StorageFile.runtimeName(), IStorageFileStatics.descriptor()).unwrap()) {
             return factory.GetFileFromPathAsync(path)
         }
     }
 
-    public static unsafe func GetFileFromApplicationUriAsync(uri: windows.foundation.Uri): CPointer<Unit> {
+    public static unsafe func GetFileFromApplicationUriAsync(uri: Foundation.Uri): Foundation.IAsyncOperation<StorageFile> {
         try (factory = windows_interface.getActivationFactoryByName<IStorageFileStatics>(StorageFile.runtimeName(), IStorageFileStatics.descriptor()).unwrap()) {
             return factory.GetFileFromApplicationUriAsync(uri)
         }
     }
 
-    public static unsafe func CreateStreamedFileAsync(displayNameWithExtension: CPointer<UInt16>, dataRequested: StreamedFileDataRequestedHandler, thumbnail: windows.storage.streams.IRandomAccessStreamReference): CPointer<Unit> {
+    public static unsafe func CreateStreamedFileAsync(displayNameWithExtension: CPointer<UInt16>, dataRequested: StreamedFileDataRequestedHandler, thumbnail: Storage_Streams.IRandomAccessStreamReference): Foundation.IAsyncOperation<StorageFile> {
         try (factory = windows_interface.getActivationFactoryByName<IStorageFileStatics>(StorageFile.runtimeName(), IStorageFileStatics.descriptor()).unwrap()) {
             return factory.CreateStreamedFileAsync(displayNameWithExtension, dataRequested, thumbnail)
         }
     }
 
-    public static unsafe func ReplaceWithStreamedFileAsync(fileToReplace: IStorageFile, dataRequested: StreamedFileDataRequestedHandler, thumbnail: windows.storage.streams.IRandomAccessStreamReference): CPointer<Unit> {
+    public static unsafe func ReplaceWithStreamedFileAsync(fileToReplace: IStorageFile, dataRequested: StreamedFileDataRequestedHandler, thumbnail: Storage_Streams.IRandomAccessStreamReference): Foundation.IAsyncOperation<StorageFile> {
         try (factory = windows_interface.getActivationFactoryByName<IStorageFileStatics>(StorageFile.runtimeName(), IStorageFileStatics.descriptor()).unwrap()) {
             return factory.ReplaceWithStreamedFileAsync(fileToReplace, dataRequested, thumbnail)
         }
     }
 
-    public static unsafe func CreateStreamedFileFromUriAsync(displayNameWithExtension: CPointer<UInt16>, uri: windows.foundation.Uri, thumbnail: windows.storage.streams.IRandomAccessStreamReference): CPointer<Unit> {
+    public static unsafe func CreateStreamedFileFromUriAsync(displayNameWithExtension: CPointer<UInt16>, uri: Foundation.Uri, thumbnail: Storage_Streams.IRandomAccessStreamReference): Foundation.IAsyncOperation<StorageFile> {
         try (factory = windows_interface.getActivationFactoryByName<IStorageFileStatics>(StorageFile.runtimeName(), IStorageFileStatics.descriptor()).unwrap()) {
             return factory.CreateStreamedFileFromUriAsync(displayNameWithExtension, uri, thumbnail)
         }
     }
 
-    public static unsafe func ReplaceWithStreamedFileFromUriAsync(fileToReplace: IStorageFile, uri: windows.foundation.Uri, thumbnail: windows.storage.streams.IRandomAccessStreamReference): CPointer<Unit> {
+    public static unsafe func ReplaceWithStreamedFileFromUriAsync(fileToReplace: IStorageFile, uri: Foundation.Uri, thumbnail: Storage_Streams.IRandomAccessStreamReference): Foundation.IAsyncOperation<StorageFile> {
         try (factory = windows_interface.getActivationFactoryByName<IStorageFileStatics>(StorageFile.runtimeName(), IStorageFileStatics.descriptor()).unwrap()) {
             return factory.ReplaceWithStreamedFileFromUriAsync(fileToReplace, uri, thumbnail)
         }
@@ -4123,63 +4226,63 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         return defaultInterface().ContentType()
     }
 
-    public unsafe func OpenAsync(operation: FileAccessMode): CPointer<Unit> {
+    public unsafe func OpenAsync(operation: FileAccessMode): Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream> {
         return defaultInterface().OpenAsync(operation)
     }
 
-    public unsafe func OpenTransactedWriteAsync(): CPointer<Unit> {
+    public unsafe func OpenTransactedWriteAsync(): Foundation.IAsyncOperation<StorageStreamTransaction> {
         return defaultInterface().OpenTransactedWriteAsync()
     }
 
-    public unsafe func CopyOverloadDefaultNameAndOptions(operation: IStorageFolder): CPointer<Unit> {
+    public unsafe func CopyOverloadDefaultNameAndOptions(operation: IStorageFolder): Foundation.IAsyncOperation<StorageFile> {
         return defaultInterface().CopyOverloadDefaultNameAndOptions(operation)
     }
 
-    public unsafe func CopyOverloadDefaultOptions(operation: IStorageFolder, destinationFolder: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func CopyOverloadDefaultOptions(operation: IStorageFolder, destinationFolder: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         return defaultInterface().CopyOverloadDefaultOptions(operation, destinationFolder)
     }
 
-    public unsafe func CopyOverload(operation: IStorageFolder, destinationFolder: CPointer<UInt16>, desiredNewName: NameCollisionOption): CPointer<Unit> {
+    public unsafe func CopyOverload(operation: IStorageFolder, destinationFolder: CPointer<UInt16>, desiredNewName: NameCollisionOption): Foundation.IAsyncOperation<StorageFile> {
         return defaultInterface().CopyOverload(operation, destinationFolder, desiredNewName)
     }
 
-    public unsafe func CopyAndReplaceAsync(operation: IStorageFile): windows.foundation.IAsyncAction {
+    public unsafe func CopyAndReplaceAsync(operation: IStorageFile): Foundation.IAsyncAction {
         return defaultInterface().CopyAndReplaceAsync(operation)
     }
 
-    public unsafe func MoveOverloadDefaultNameAndOptions(operation: IStorageFolder): windows.foundation.IAsyncAction {
+    public unsafe func MoveOverloadDefaultNameAndOptions(operation: IStorageFolder): Foundation.IAsyncAction {
         return defaultInterface().MoveOverloadDefaultNameAndOptions(operation)
     }
 
-    public unsafe func MoveOverloadDefaultOptions(operation: IStorageFolder, destinationFolder: CPointer<UInt16>): windows.foundation.IAsyncAction {
+    public unsafe func MoveOverloadDefaultOptions(operation: IStorageFolder, destinationFolder: CPointer<UInt16>): Foundation.IAsyncAction {
         return defaultInterface().MoveOverloadDefaultOptions(operation, destinationFolder)
     }
 
-    public unsafe func MoveOverload(operation: IStorageFolder, destinationFolder: CPointer<UInt16>, desiredNewName: NameCollisionOption): windows.foundation.IAsyncAction {
+    public unsafe func MoveOverload(operation: IStorageFolder, destinationFolder: CPointer<UInt16>, desiredNewName: NameCollisionOption): Foundation.IAsyncAction {
         return defaultInterface().MoveOverload(operation, destinationFolder, desiredNewName)
     }
 
-    public unsafe func MoveAndReplaceAsync(operation: IStorageFile): windows.foundation.IAsyncAction {
+    public unsafe func MoveAndReplaceAsync(operation: IStorageFile): Foundation.IAsyncAction {
         return defaultInterface().MoveAndReplaceAsync(operation)
     }
 
-    public unsafe func RenameAsyncOverloadDefaultOptions(operation: CPointer<UInt16>): windows.foundation.IAsyncAction {
+    public unsafe func RenameAsyncOverloadDefaultOptions(operation: CPointer<UInt16>): Foundation.IAsyncAction {
         return asIStorageItem().RenameAsyncOverloadDefaultOptions(operation)
     }
 
-    public unsafe func RenameAsync(operation: CPointer<UInt16>, desiredName: NameCollisionOption): windows.foundation.IAsyncAction {
+    public unsafe func RenameAsync(operation: CPointer<UInt16>, desiredName: NameCollisionOption): Foundation.IAsyncAction {
         return asIStorageItem().RenameAsync(operation, desiredName)
     }
 
-    public unsafe func DeleteAsyncOverloadDefaultOptions(): windows.foundation.IAsyncAction {
+    public unsafe func DeleteAsyncOverloadDefaultOptions(): Foundation.IAsyncAction {
         return asIStorageItem().DeleteAsyncOverloadDefaultOptions()
     }
 
-    public unsafe func DeleteAsync(operation: StorageDeleteOption): windows.foundation.IAsyncAction {
+    public unsafe func DeleteAsync(operation: StorageDeleteOption): Foundation.IAsyncAction {
         return asIStorageItem().DeleteAsync(operation)
     }
 
-    public unsafe func GetBasicPropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetBasicPropertiesAsync(): Foundation.IAsyncOperation<Storage_FileProperties.BasicProperties> {
         return asIStorageItem().GetBasicPropertiesAsync()
     }
 
@@ -4195,7 +4298,7 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIStorageItem().Attributes()
     }
 
-    public unsafe func DateCreated(): windows.foundation.DateTime {
+    public unsafe func DateCreated(): Foundation.DateTime {
         return asIStorageItem().DateCreated()
     }
 
@@ -4203,23 +4306,23 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIStorageItem().IsOfType(value)
     }
 
-    public unsafe func OpenReadAsync(): CPointer<Unit> {
+    public unsafe func OpenReadAsync(): Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStreamWithContentType> {
         return asIRandomAccessStreamReference().OpenReadAsync()
     }
 
-    public unsafe func OpenSequentialReadAsync(): CPointer<Unit> {
+    public unsafe func OpenSequentialReadAsync(): Foundation.IAsyncOperation<Storage_Streams.IInputStream> {
         return asIInputStreamReference().OpenSequentialReadAsync()
     }
 
-    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation: windows.storage.file_properties.ThumbnailMode): CPointer<Unit> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation: Storage_FileProperties.ThumbnailMode): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation)
     }
 
-    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(operation: windows.storage.file_properties.ThumbnailMode, mode: UInt32): CPointer<Unit> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(operation: Storage_FileProperties.ThumbnailMode, mode: UInt32): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultOptions(operation, mode)
     }
 
-    public unsafe func GetThumbnailAsync(operation: windows.storage.file_properties.ThumbnailMode, mode: UInt32, requestedSize: windows.storage.file_properties.ThumbnailOptions): CPointer<Unit> {
+    public unsafe func GetThumbnailAsync(operation: Storage_FileProperties.ThumbnailMode, mode: UInt32, requestedSize: Storage_FileProperties.ThumbnailOptions): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsync(operation, mode, requestedSize)
     }
 
@@ -4235,23 +4338,23 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIStorageItemProperties().FolderRelativeId()
     }
 
-    public unsafe func Properties(): windows.storage.file_properties.StorageItemContentProperties {
+    public unsafe func Properties(): Storage_FileProperties.StorageItemContentProperties {
         return asIStorageItemProperties().Properties()
     }
 
-    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation: windows.storage.file_properties.ThumbnailMode): CPointer<Unit> {
+    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation: Storage_FileProperties.ThumbnailMode): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation)
     }
 
-    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(operation: windows.storage.file_properties.ThumbnailMode, mode: UInt32): CPointer<Unit> {
+    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(operation: Storage_FileProperties.ThumbnailMode, mode: UInt32): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(operation, mode)
     }
 
-    public unsafe func GetScaledImageAsThumbnailAsync(operation: windows.storage.file_properties.ThumbnailMode, mode: UInt32, requestedSize: windows.storage.file_properties.ThumbnailOptions): CPointer<Unit> {
+    public unsafe func GetScaledImageAsThumbnailAsync(operation: Storage_FileProperties.ThumbnailMode, mode: UInt32, requestedSize: Storage_FileProperties.ThumbnailOptions): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsync(operation, mode, requestedSize)
     }
 
-    public unsafe func GetParentAsync(): CPointer<Unit> {
+    public unsafe func GetParentAsync(): Foundation.IAsyncOperation<StorageFolder> {
         return asIStorageItem2().GetParentAsync()
     }
 
@@ -4267,26 +4370,30 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         return asIStorageFilePropertiesWithAvailability().IsAvailable()
     }
 
-    public unsafe func OpenWithOptionsAsync(operation: FileAccessMode, accessMode: StorageOpenOptions): CPointer<Unit> {
+    public unsafe func OpenWithOptionsAsync(operation: FileAccessMode, accessMode: StorageOpenOptions): Foundation.IAsyncOperation<Storage_Streams.IRandomAccessStream> {
         return asIStorageFile2().OpenWithOptionsAsync(operation, accessMode)
     }
 
-    public unsafe func OpenTransactedWriteWithOptionsAsync(operation: StorageOpenOptions): CPointer<Unit> {
+    public unsafe func OpenTransactedWriteWithOptionsAsync(operation: StorageOpenOptions): Foundation.IAsyncOperation<StorageStreamTransaction> {
         return asIStorageFile2().OpenTransactedWriteWithOptionsAsync(operation)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageFolder {
-        StorageFolder(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFolder {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageFolder {
+        StorageFolder(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageFolder {
         StorageFolder(raw)
     }
 
@@ -4299,12 +4406,12 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     public static func descriptor(): InterfaceDescriptor<StorageFolder> {
-        let ancestors = [IStorageFolder.iid(), IStorageItem.iid(), windows.storage.search.IStorageFolderQueryOperations.iid(), IStorageItemProperties.iid(), IStorageItemProperties2.iid(), IStorageItem2.iid(), IStorageFolder2.iid(), IStorageItemPropertiesWithProvider.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageFolder>("StorageFolder", IStorageFolder.iid(), ancestors, { raw => StorageFolder(raw, ownsReference: true) }, { raw => StorageFolder(raw) })
+        let ancestors = [IStorageFolder.iid(), IStorageItem.iid(), Storage_Search.IStorageFolderQueryOperations.iid(), IStorageItemProperties.iid(), IStorageItemProperties2.iid(), IStorageItem2.iid(), IStorageFolder2.iid(), IStorageItemPropertiesWithProvider.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<StorageFolder>("StorageFolder", IStorageFolder.iid(), ancestors, { raw => StorageFolder.fromAbiTake(raw) }, { raw => StorageFolder.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageFolder {
-        IStorageFolder(asRaw())
+        IStorageFolder.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4324,7 +4431,7 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageFolder(): IStorageFolder {
@@ -4335,8 +4442,8 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         IStorageItem(asRaw())
     }
 
-    public func asIStorageFolderQueryOperations(): windows.storage.search.IStorageFolderQueryOperations {
-        windows.storage.search.IStorageFolderQueryOperations(asRaw())
+    public func asIStorageFolderQueryOperations(): Storage_Search.IStorageFolderQueryOperations {
+        Storage_Search.IStorageFolderQueryOperations(asRaw())
     }
 
     public func asIStorageItemProperties(): IStorageItemProperties {
@@ -4359,75 +4466,75 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         IStorageItemPropertiesWithProvider(asRaw())
     }
 
-    public static unsafe func GetFolderFromPathForUserAsync(user: windows.system.User, path: CPointer<UInt16>): CPointer<Unit> {
+    public static unsafe func GetFolderFromPathForUserAsync(user: System.User, path: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFolder> {
         try (factory = windows_interface.getActivationFactoryByName<IStorageFolderStatics2>(StorageFolder.runtimeName(), IStorageFolderStatics2.descriptor()).unwrap()) {
             return factory.GetFolderFromPathForUserAsync(user, path)
         }
     }
 
-    public static unsafe func GetFolderFromPathAsync(path: CPointer<UInt16>): CPointer<Unit> {
+    public static unsafe func GetFolderFromPathAsync(path: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFolder> {
         try (factory = windows_interface.getActivationFactoryByName<IStorageFolderStatics>(StorageFolder.runtimeName(), IStorageFolderStatics.descriptor()).unwrap()) {
             return factory.GetFolderFromPathAsync(path)
         }
     }
 
-    public unsafe func CreateFileAsyncOverloadDefaultOptions(operation: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func CreateFileAsyncOverloadDefaultOptions(operation: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         return defaultInterface().CreateFileAsyncOverloadDefaultOptions(operation)
     }
 
-    public unsafe func CreateFileAsync(operation: CPointer<UInt16>, desiredName: CreationCollisionOption): CPointer<Unit> {
+    public unsafe func CreateFileAsync(operation: CPointer<UInt16>, desiredName: CreationCollisionOption): Foundation.IAsyncOperation<StorageFile> {
         return defaultInterface().CreateFileAsync(operation, desiredName)
     }
 
-    public unsafe func CreateFolderAsyncOverloadDefaultOptions(operation: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func CreateFolderAsyncOverloadDefaultOptions(operation: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFolder> {
         return defaultInterface().CreateFolderAsyncOverloadDefaultOptions(operation)
     }
 
-    public unsafe func CreateFolderAsync(operation: CPointer<UInt16>, desiredName: CreationCollisionOption): CPointer<Unit> {
+    public unsafe func CreateFolderAsync(operation: CPointer<UInt16>, desiredName: CreationCollisionOption): Foundation.IAsyncOperation<StorageFolder> {
         return defaultInterface().CreateFolderAsync(operation, desiredName)
     }
 
-    public unsafe func GetFileAsync(operation: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetFileAsync(operation: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFile> {
         return defaultInterface().GetFileAsync(operation)
     }
 
-    public unsafe func GetFolderAsync(operation: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetFolderAsync(operation: CPointer<UInt16>): Foundation.IAsyncOperation<StorageFolder> {
         return defaultInterface().GetFolderAsync(operation)
     }
 
-    public unsafe func GetItemAsync(operation: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func GetItemAsync(operation: CPointer<UInt16>): Foundation.IAsyncOperation<IStorageItem> {
         return defaultInterface().GetItemAsync(operation)
     }
 
-    public unsafe func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): CPointer<Unit> {
+    public unsafe func GetFilesAsyncOverloadDefaultOptionsStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFile>> {
         return defaultInterface().GetFilesAsyncOverloadDefaultOptionsStartAndCount()
     }
 
-    public unsafe func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): CPointer<Unit> {
+    public unsafe func GetFoldersAsyncOverloadDefaultOptionsStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFolder>> {
         return defaultInterface().GetFoldersAsyncOverloadDefaultOptionsStartAndCount()
     }
 
-    public unsafe func GetItemsAsyncOverloadDefaultStartAndCount(): CPointer<Unit> {
+    public unsafe func GetItemsAsyncOverloadDefaultStartAndCount(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<IStorageItem>> {
         return defaultInterface().GetItemsAsyncOverloadDefaultStartAndCount()
     }
 
-    public unsafe func RenameAsyncOverloadDefaultOptions(operation: CPointer<UInt16>): windows.foundation.IAsyncAction {
+    public unsafe func RenameAsyncOverloadDefaultOptions(operation: CPointer<UInt16>): Foundation.IAsyncAction {
         return asIStorageItem().RenameAsyncOverloadDefaultOptions(operation)
     }
 
-    public unsafe func RenameAsync(operation: CPointer<UInt16>, desiredName: NameCollisionOption): windows.foundation.IAsyncAction {
+    public unsafe func RenameAsync(operation: CPointer<UInt16>, desiredName: NameCollisionOption): Foundation.IAsyncAction {
         return asIStorageItem().RenameAsync(operation, desiredName)
     }
 
-    public unsafe func DeleteAsyncOverloadDefaultOptions(): windows.foundation.IAsyncAction {
+    public unsafe func DeleteAsyncOverloadDefaultOptions(): Foundation.IAsyncAction {
         return asIStorageItem().DeleteAsyncOverloadDefaultOptions()
     }
 
-    public unsafe func DeleteAsync(operation: StorageDeleteOption): windows.foundation.IAsyncAction {
+    public unsafe func DeleteAsync(operation: StorageDeleteOption): Foundation.IAsyncAction {
         return asIStorageItem().DeleteAsync(operation)
     }
 
-    public unsafe func GetBasicPropertiesAsync(): CPointer<Unit> {
+    public unsafe func GetBasicPropertiesAsync(): Foundation.IAsyncOperation<Storage_FileProperties.BasicProperties> {
         return asIStorageItem().GetBasicPropertiesAsync()
     }
 
@@ -4443,7 +4550,7 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         return asIStorageItem().Attributes()
     }
 
-    public unsafe func DateCreated(): windows.foundation.DateTime {
+    public unsafe func DateCreated(): Foundation.DateTime {
         return asIStorageItem().DateCreated()
     }
 
@@ -4451,83 +4558,83 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         return asIStorageItem().IsOfType(value)
     }
 
-    public unsafe func GetIndexedStateAsync(): CPointer<Unit> {
+    public unsafe func GetIndexedStateAsync(): Foundation.IAsyncOperation<Storage_Search.IndexedState> {
         return asIStorageFolderQueryOperations().GetIndexedStateAsync()
     }
 
-    public unsafe func CreateFileQueryOverloadDefault(): windows.storage.search.StorageFileQueryResult {
+    public unsafe func CreateFileQueryOverloadDefault(): Storage_Search.StorageFileQueryResult {
         return asIStorageFolderQueryOperations().CreateFileQueryOverloadDefault()
     }
 
-    public unsafe func CreateFileQuery(value: windows.storage.search.CommonFileQuery): windows.storage.search.StorageFileQueryResult {
+    public unsafe func CreateFileQuery(value: Storage_Search.CommonFileQuery): Storage_Search.StorageFileQueryResult {
         return asIStorageFolderQueryOperations().CreateFileQuery(value)
     }
 
-    public unsafe func CreateFileQueryWithOptions(value: windows.storage.search.QueryOptions): windows.storage.search.StorageFileQueryResult {
+    public unsafe func CreateFileQueryWithOptions(value: Storage_Search.QueryOptions): Storage_Search.StorageFileQueryResult {
         return asIStorageFolderQueryOperations().CreateFileQueryWithOptions(value)
     }
 
-    public unsafe func CreateFolderQueryOverloadDefault(): windows.storage.search.StorageFolderQueryResult {
+    public unsafe func CreateFolderQueryOverloadDefault(): Storage_Search.StorageFolderQueryResult {
         return asIStorageFolderQueryOperations().CreateFolderQueryOverloadDefault()
     }
 
-    public unsafe func CreateFolderQuery(value: windows.storage.search.CommonFolderQuery): windows.storage.search.StorageFolderQueryResult {
+    public unsafe func CreateFolderQuery(value: Storage_Search.CommonFolderQuery): Storage_Search.StorageFolderQueryResult {
         return asIStorageFolderQueryOperations().CreateFolderQuery(value)
     }
 
-    public unsafe func CreateFolderQueryWithOptions(value: windows.storage.search.QueryOptions): windows.storage.search.StorageFolderQueryResult {
+    public unsafe func CreateFolderQueryWithOptions(value: Storage_Search.QueryOptions): Storage_Search.StorageFolderQueryResult {
         return asIStorageFolderQueryOperations().CreateFolderQueryWithOptions(value)
     }
 
-    public unsafe func CreateItemQuery(): windows.storage.search.StorageItemQueryResult {
+    public unsafe func CreateItemQuery(): Storage_Search.StorageItemQueryResult {
         return asIStorageFolderQueryOperations().CreateItemQuery()
     }
 
-    public unsafe func CreateItemQueryWithOptions(value: windows.storage.search.QueryOptions): windows.storage.search.StorageItemQueryResult {
+    public unsafe func CreateItemQueryWithOptions(value: Storage_Search.QueryOptions): Storage_Search.StorageItemQueryResult {
         return asIStorageFolderQueryOperations().CreateItemQueryWithOptions(value)
     }
 
-    public unsafe func GetFilesAsync(operation: windows.storage.search.CommonFileQuery, query: UInt32, startIndex: UInt32): CPointer<Unit> {
+    public unsafe func GetFilesAsync(operation: Storage_Search.CommonFileQuery, query: UInt32, startIndex: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFile>> {
         return asIStorageFolderQueryOperations().GetFilesAsync(operation, query, startIndex)
     }
 
-    public unsafe func GetFilesAsyncOverloadDefaultStartAndCount(operation: windows.storage.search.CommonFileQuery): CPointer<Unit> {
+    public unsafe func GetFilesAsyncOverloadDefaultStartAndCount(operation: Storage_Search.CommonFileQuery): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFile>> {
         return asIStorageFolderQueryOperations().GetFilesAsyncOverloadDefaultStartAndCount(operation)
     }
 
-    public unsafe func GetFoldersAsync(operation: windows.storage.search.CommonFolderQuery, query: UInt32, startIndex: UInt32): CPointer<Unit> {
+    public unsafe func GetFoldersAsync(operation: Storage_Search.CommonFolderQuery, query: UInt32, startIndex: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFolder>> {
         return asIStorageFolderQueryOperations().GetFoldersAsync(operation, query, startIndex)
     }
 
-    public unsafe func GetFoldersAsyncOverloadDefaultStartAndCount(operation: windows.storage.search.CommonFolderQuery): CPointer<Unit> {
+    public unsafe func GetFoldersAsyncOverloadDefaultStartAndCount(operation: Storage_Search.CommonFolderQuery): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageFolder>> {
         return asIStorageFolderQueryOperations().GetFoldersAsyncOverloadDefaultStartAndCount(operation)
     }
 
-    public unsafe func GetItemsAsync(operation: UInt32, startIndex: UInt32): CPointer<Unit> {
+    public unsafe func GetItemsAsync(operation: UInt32, startIndex: UInt32): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<IStorageItem>> {
         return asIStorageFolderQueryOperations().GetItemsAsync(operation, startIndex)
     }
 
-    public unsafe func AreQueryOptionsSupported(value: windows.storage.search.QueryOptions): Bool {
+    public unsafe func AreQueryOptionsSupported(value: Storage_Search.QueryOptions): Bool {
         return asIStorageFolderQueryOperations().AreQueryOptionsSupported(value)
     }
 
-    public unsafe func IsCommonFolderQuerySupported(value: windows.storage.search.CommonFolderQuery): Bool {
+    public unsafe func IsCommonFolderQuerySupported(value: Storage_Search.CommonFolderQuery): Bool {
         return asIStorageFolderQueryOperations().IsCommonFolderQuerySupported(value)
     }
 
-    public unsafe func IsCommonFileQuerySupported(value: windows.storage.search.CommonFileQuery): Bool {
+    public unsafe func IsCommonFileQuerySupported(value: Storage_Search.CommonFileQuery): Bool {
         return asIStorageFolderQueryOperations().IsCommonFileQuerySupported(value)
     }
 
-    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation: windows.storage.file_properties.ThumbnailMode): CPointer<Unit> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation: Storage_FileProperties.ThumbnailMode): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation)
     }
 
-    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(operation: windows.storage.file_properties.ThumbnailMode, mode: UInt32): CPointer<Unit> {
+    public unsafe func GetThumbnailAsyncOverloadDefaultOptions(operation: Storage_FileProperties.ThumbnailMode, mode: UInt32): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsyncOverloadDefaultOptions(operation, mode)
     }
 
-    public unsafe func GetThumbnailAsync(operation: windows.storage.file_properties.ThumbnailMode, mode: UInt32, requestedSize: windows.storage.file_properties.ThumbnailOptions): CPointer<Unit> {
+    public unsafe func GetThumbnailAsync(operation: Storage_FileProperties.ThumbnailMode, mode: UInt32, requestedSize: Storage_FileProperties.ThumbnailOptions): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties().GetThumbnailAsync(operation, mode, requestedSize)
     }
 
@@ -4543,23 +4650,23 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         return asIStorageItemProperties().FolderRelativeId()
     }
 
-    public unsafe func Properties(): windows.storage.file_properties.StorageItemContentProperties {
+    public unsafe func Properties(): Storage_FileProperties.StorageItemContentProperties {
         return asIStorageItemProperties().Properties()
     }
 
-    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation: windows.storage.file_properties.ThumbnailMode): CPointer<Unit> {
+    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation: Storage_FileProperties.ThumbnailMode): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(operation)
     }
 
-    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(operation: windows.storage.file_properties.ThumbnailMode, mode: UInt32): CPointer<Unit> {
+    public unsafe func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(operation: Storage_FileProperties.ThumbnailMode, mode: UInt32): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(operation, mode)
     }
 
-    public unsafe func GetScaledImageAsThumbnailAsync(operation: windows.storage.file_properties.ThumbnailMode, mode: UInt32, requestedSize: windows.storage.file_properties.ThumbnailOptions): CPointer<Unit> {
+    public unsafe func GetScaledImageAsThumbnailAsync(operation: Storage_FileProperties.ThumbnailMode, mode: UInt32, requestedSize: Storage_FileProperties.ThumbnailOptions): Foundation.IAsyncOperation<Storage_FileProperties.StorageItemThumbnail> {
         return asIStorageItemProperties2().GetScaledImageAsThumbnailAsync(operation, mode, requestedSize)
     }
 
-    public unsafe func GetParentAsync(): CPointer<Unit> {
+    public unsafe func GetParentAsync(): Foundation.IAsyncOperation<StorageFolder> {
         return asIStorageItem2().GetParentAsync()
     }
 
@@ -4567,7 +4674,7 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         return asIStorageItem2().IsEqual(value)
     }
 
-    public unsafe func TryGetItemAsync(operation: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func TryGetItemAsync(operation: CPointer<UInt16>): Foundation.IAsyncOperation<IStorageItem> {
         return asIStorageFolder2().TryGetItemAsync(operation)
     }
 
@@ -4576,20 +4683,16 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
+@C
 public struct StorageItemTypes {
-    public let value: UInt32
+    public var value: UInt32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: UInt32) {
         this.value = value
     }
-    public static let None = StorageItemTypes(value: 0)
-    public static let File = StorageItemTypes(value: 1)
-    public static let Folder = StorageItemTypes(value: 2)
 
     public operator func ==(other: StorageItemTypes): Bool {
         return this.value == other.value
@@ -4603,27 +4706,40 @@ public struct StorageItemTypes {
     }
 
     public operator func |(other: StorageItemTypes): StorageItemTypes {
-        return StorageItemTypes(value: this.value | other.value)
+        return StorageItemTypes(this.value | other.value)
     }
     public operator func &(other: StorageItemTypes): StorageItemTypes {
-        return StorageItemTypes(value: this.value & other.value)
+        return StorageItemTypes(this.value & other.value)
     }
-    public operator func ~(): StorageItemTypes {
-        return StorageItemTypes(value: ~this.value)
+    public operator func !(): StorageItemTypes {
+        return StorageItemTypes(!this.value)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
+public let None: StorageItemTypes = StorageItemTypes(0)
+
+@When[Windows_Storage == "on"]
+public let File: StorageItemTypes = StorageItemTypes(1)
+
+@When[Windows_Storage == "on"]
+public let Folder: StorageItemTypes = StorageItemTypes(2)
+
+@When[Windows_Storage == "on"]
 public class StorageLibraryChange <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageLibraryChange {
-        StorageLibraryChange(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChange {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageLibraryChange {
+        StorageLibraryChange(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChange {
         StorageLibraryChange(raw)
     }
 
@@ -4637,11 +4753,11 @@ public class StorageLibraryChange <: InterfaceWrapperBase & ComInterface & windo
 
     public static func descriptor(): InterfaceDescriptor<StorageLibraryChange> {
         let ancestors = [IStorageLibraryChange.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageLibraryChange>("StorageLibraryChange", IStorageLibraryChange.iid(), ancestors, { raw => StorageLibraryChange(raw, ownsReference: true) }, { raw => StorageLibraryChange(raw) })
+        return InterfaceDescriptor<StorageLibraryChange>("StorageLibraryChange", IStorageLibraryChange.iid(), ancestors, { raw => StorageLibraryChange.fromAbiTake(raw) }, { raw => StorageLibraryChange.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageLibraryChange {
-        IStorageLibraryChange(asRaw())
+        IStorageLibraryChange.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4665,7 +4781,7 @@ public class StorageLibraryChange <: InterfaceWrapperBase & ComInterface & windo
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageLibraryChange(): IStorageLibraryChange {
@@ -4688,22 +4804,26 @@ public class StorageLibraryChange <: InterfaceWrapperBase & ComInterface & windo
         return defaultInterface().IsOfType(value)
     }
 
-    public unsafe func GetStorageItemAsync(): CPointer<Unit> {
+    public unsafe func GetStorageItemAsync(): Foundation.IAsyncOperation<IStorageItem> {
         return defaultInterface().GetStorageItemAsync()
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class StorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageLibraryChangeReader {
-        StorageLibraryChangeReader(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeReader {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageLibraryChangeReader {
+        StorageLibraryChangeReader(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeReader {
         StorageLibraryChangeReader(raw)
     }
 
@@ -4717,11 +4837,11 @@ public class StorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface &
 
     public static func descriptor(): InterfaceDescriptor<StorageLibraryChangeReader> {
         let ancestors = [IStorageLibraryChangeReader.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageLibraryChangeReader>("StorageLibraryChangeReader", IStorageLibraryChangeReader.iid(), ancestors, { raw => StorageLibraryChangeReader(raw, ownsReference: true) }, { raw => StorageLibraryChangeReader(raw) })
+        return InterfaceDescriptor<StorageLibraryChangeReader>("StorageLibraryChangeReader", IStorageLibraryChangeReader.iid(), ancestors, { raw => StorageLibraryChangeReader.fromAbiTake(raw) }, { raw => StorageLibraryChangeReader.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageLibraryChangeReader {
-        IStorageLibraryChangeReader(asRaw())
+        IStorageLibraryChangeReader.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4745,33 +4865,37 @@ public class StorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface &
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageLibraryChangeReader(): IStorageLibraryChangeReader {
         IStorageLibraryChangeReader(asRaw())
     }
 
-    public unsafe func ReadBatchAsync(): CPointer<Unit> {
+    public unsafe func ReadBatchAsync(): Foundation.IAsyncOperation<Foundation_Collections.IVectorView<StorageLibraryChange>> {
         return defaultInterface().ReadBatchAsync()
     }
 
-    public unsafe func AcceptChangesAsync(): windows.foundation.IAsyncAction {
+    public unsafe func AcceptChangesAsync(): Foundation.IAsyncAction {
         return defaultInterface().AcceptChangesAsync()
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class StorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageLibraryChangeTracker {
-        StorageLibraryChangeTracker(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeTracker {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageLibraryChangeTracker {
+        StorageLibraryChangeTracker(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeTracker {
         StorageLibraryChangeTracker(raw)
     }
 
@@ -4785,11 +4909,11 @@ public class StorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface 
 
     public static func descriptor(): InterfaceDescriptor<StorageLibraryChangeTracker> {
         let ancestors = [IStorageLibraryChangeTracker.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageLibraryChangeTracker>("StorageLibraryChangeTracker", IStorageLibraryChangeTracker.iid(), ancestors, { raw => StorageLibraryChangeTracker(raw, ownsReference: true) }, { raw => StorageLibraryChangeTracker(raw) })
+        return InterfaceDescriptor<StorageLibraryChangeTracker>("StorageLibraryChangeTracker", IStorageLibraryChangeTracker.iid(), ancestors, { raw => StorageLibraryChangeTracker.fromAbiTake(raw) }, { raw => StorageLibraryChangeTracker.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageLibraryChangeTracker {
-        IStorageLibraryChangeTracker(asRaw())
+        IStorageLibraryChangeTracker.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4813,7 +4937,7 @@ public class StorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageLibraryChangeTracker(): IStorageLibraryChangeTracker {
@@ -4833,17 +4957,21 @@ public class StorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface 
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class StorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageLibraryChangeTrackerOptions {
-        StorageLibraryChangeTrackerOptions(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeTrackerOptions {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageLibraryChangeTrackerOptions {
+        StorageLibraryChangeTrackerOptions(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeTrackerOptions {
         StorageLibraryChangeTrackerOptions(raw)
     }
 
@@ -4857,11 +4985,11 @@ public class StorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComInt
 
     public static func descriptor(): InterfaceDescriptor<StorageLibraryChangeTrackerOptions> {
         let ancestors = [IStorageLibraryChangeTrackerOptions.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageLibraryChangeTrackerOptions>("StorageLibraryChangeTrackerOptions", IStorageLibraryChangeTrackerOptions.iid(), ancestors, { raw => StorageLibraryChangeTrackerOptions(raw, ownsReference: true) }, { raw => StorageLibraryChangeTrackerOptions(raw) })
+        return InterfaceDescriptor<StorageLibraryChangeTrackerOptions>("StorageLibraryChangeTrackerOptions", IStorageLibraryChangeTrackerOptions.iid(), ancestors, { raw => StorageLibraryChangeTrackerOptions.fromAbiTake(raw) }, { raw => StorageLibraryChangeTrackerOptions.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageLibraryChangeTrackerOptions {
-        IStorageLibraryChangeTrackerOptions(asRaw())
+        IStorageLibraryChangeTrackerOptions.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4891,7 +5019,7 @@ public class StorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComInt
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageLibraryChangeTrackerOptions(): IStorageLibraryChangeTrackerOptions {
@@ -4907,27 +5035,16 @@ public class StorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComInt
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
+@C
 public struct StorageLibraryChangeType {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Created = StorageLibraryChangeType(value: 0)
-    public static let Deleted = StorageLibraryChangeType(value: 1)
-    public static let MovedOrRenamed = StorageLibraryChangeType(value: 2)
-    public static let ContentsChanged = StorageLibraryChangeType(value: 3)
-    public static let MovedOutOfLibrary = StorageLibraryChangeType(value: 4)
-    public static let MovedIntoLibrary = StorageLibraryChangeType(value: 5)
-    public static let ContentsReplaced = StorageLibraryChangeType(value: 6)
-    public static let IndexingStatusChanged = StorageLibraryChangeType(value: 7)
-    public static let EncryptionChanged = StorageLibraryChangeType(value: 8)
-    public static let ChangeTrackingLost = StorageLibraryChangeType(value: 9)
 
     public operator func ==(other: StorageLibraryChangeType): Bool {
         return this.value == other.value
@@ -4937,20 +5054,46 @@ public struct StorageLibraryChangeType {
     }
 }
 
-@When[feature == "feat_windows_storage"]
-public struct StorageOpenOptions {
-    public let value: UInt32
+@When[Windows_Storage == "on"]
+public let Created: StorageLibraryChangeType = StorageLibraryChangeType(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Storage == "on"]
+public let Deleted: StorageLibraryChangeType = StorageLibraryChangeType(1)
+
+@When[Windows_Storage == "on"]
+public let MovedOrRenamed: StorageLibraryChangeType = StorageLibraryChangeType(2)
+
+@When[Windows_Storage == "on"]
+public let ContentsChanged: StorageLibraryChangeType = StorageLibraryChangeType(3)
+
+@When[Windows_Storage == "on"]
+public let MovedOutOfLibrary: StorageLibraryChangeType = StorageLibraryChangeType(4)
+
+@When[Windows_Storage == "on"]
+public let MovedIntoLibrary: StorageLibraryChangeType = StorageLibraryChangeType(5)
+
+@When[Windows_Storage == "on"]
+public let ContentsReplaced: StorageLibraryChangeType = StorageLibraryChangeType(6)
+
+@When[Windows_Storage == "on"]
+public let IndexingStatusChanged: StorageLibraryChangeType = StorageLibraryChangeType(7)
+
+@When[Windows_Storage == "on"]
+public let EncryptionChanged: StorageLibraryChangeType = StorageLibraryChangeType(8)
+
+@When[Windows_Storage == "on"]
+public let ChangeTrackingLost: StorageLibraryChangeType = StorageLibraryChangeType(9)
+
+@When[Windows_Storage == "on"]
+@C
+public struct StorageOpenOptions {
+    public var value: UInt32 = 0
+
+    public init() {}
 
     public init(value: UInt32) {
         this.value = value
     }
-    public static let None = StorageOpenOptions(value: 0)
-    public static let AllowOnlyReaders = StorageOpenOptions(value: 1)
-    public static let AllowReadersAndWriters = StorageOpenOptions(value: 2)
 
     public operator func ==(other: StorageOpenOptions): Bool {
         return this.value == other.value
@@ -4964,27 +5107,40 @@ public struct StorageOpenOptions {
     }
 
     public operator func |(other: StorageOpenOptions): StorageOpenOptions {
-        return StorageOpenOptions(value: this.value | other.value)
+        return StorageOpenOptions(this.value | other.value)
     }
     public operator func &(other: StorageOpenOptions): StorageOpenOptions {
-        return StorageOpenOptions(value: this.value & other.value)
+        return StorageOpenOptions(this.value & other.value)
     }
-    public operator func ~(): StorageOpenOptions {
-        return StorageOpenOptions(value: ~this.value)
+    public operator func !(): StorageOpenOptions {
+        return StorageOpenOptions(!this.value)
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
+public let None: StorageOpenOptions = StorageOpenOptions(0)
+
+@When[Windows_Storage == "on"]
+public let AllowOnlyReaders: StorageOpenOptions = StorageOpenOptions(1)
+
+@When[Windows_Storage == "on"]
+public let AllowReadersAndWriters: StorageOpenOptions = StorageOpenOptions(2)
+
+@When[Windows_Storage == "on"]
 public class StorageProvider <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageProvider {
-        StorageProvider(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProvider {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageProvider {
+        StorageProvider(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageProvider {
         StorageProvider(raw)
     }
 
@@ -4998,11 +5154,11 @@ public class StorageProvider <: InterfaceWrapperBase & ComInterface & windows_in
 
     public static func descriptor(): InterfaceDescriptor<StorageProvider> {
         let ancestors = [IStorageProvider.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageProvider>("StorageProvider", IStorageProvider.iid(), ancestors, { raw => StorageProvider(raw, ownsReference: true) }, { raw => StorageProvider(raw) })
+        return InterfaceDescriptor<StorageProvider>("StorageProvider", IStorageProvider.iid(), ancestors, { raw => StorageProvider.fromAbiTake(raw) }, { raw => StorageProvider.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageProvider {
-        IStorageProvider(asRaw())
+        IStorageProvider.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -5022,7 +5178,7 @@ public class StorageProvider <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageProvider(): IStorageProvider {
@@ -5038,17 +5194,21 @@ public class StorageProvider <: InterfaceWrapperBase & ComInterface & windows_in
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class StorageStreamTransaction <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StorageStreamTransaction {
-        StorageStreamTransaction(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageStreamTransaction {
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageStreamTransaction {
+        StorageStreamTransaction(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageStreamTransaction {
         StorageStreamTransaction(raw)
     }
 
@@ -5061,12 +5221,12 @@ public class StorageStreamTransaction <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func descriptor(): InterfaceDescriptor<StorageStreamTransaction> {
-        let ancestors = [IStorageStreamTransaction.iid(), windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StorageStreamTransaction>("StorageStreamTransaction", IStorageStreamTransaction.iid(), ancestors, { raw => StorageStreamTransaction(raw, ownsReference: true) }, { raw => StorageStreamTransaction(raw) })
+        let ancestors = [IStorageStreamTransaction.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<StorageStreamTransaction>("StorageStreamTransaction", IStorageStreamTransaction.iid(), ancestors, { raw => StorageStreamTransaction.fromAbiTake(raw) }, { raw => StorageStreamTransaction.viewOf(raw) })
     }
 
     public func defaultInterface(): IStorageStreamTransaction {
-        IStorageStreamTransaction(asRaw())
+        IStorageStreamTransaction.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -5086,22 +5246,22 @@ public class StorageStreamTransaction <: InterfaceWrapperBase & ComInterface & w
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIStorageStreamTransaction(): IStorageStreamTransaction {
         IStorageStreamTransaction(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable(asRaw())
     }
 
-    public unsafe func Stream(): windows.storage.streams.IRandomAccessStream {
+    public unsafe func Stream(): Storage_Streams.IRandomAccessStream {
         return defaultInterface().Stream()
     }
 
-    public unsafe func CommitAsync(): windows.foundation.IAsyncAction {
+    public unsafe func CommitAsync(): Foundation.IAsyncAction {
         return defaultInterface().CommitAsync()
     }
 
@@ -5110,22 +5270,26 @@ public class StorageStreamTransaction <: InterfaceWrapperBase & ComInterface & w
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class StreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StreamedFileDataRequest {
-        StreamedFileDataRequest(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StreamedFileDataRequest {
+    public static func fromAbiTake(raw: CPointer<Unit>): StreamedFileDataRequest {
+        StreamedFileDataRequest(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StreamedFileDataRequest {
         StreamedFileDataRequest(raw)
     }
 
     public static func iid(): GUID {
-        windows.storage.streams.IOutputStream.iid()
+        Storage_Streams.IOutputStream.iid()
     }
 
     public static func runtimeName(): String {
@@ -5133,12 +5297,12 @@ public class StreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & wi
     }
 
     public static func descriptor(): InterfaceDescriptor<StreamedFileDataRequest> {
-        let ancestors = [windows.storage.streams.IOutputStream.iid(), windows.foundation.IClosable.iid(), IStreamedFileDataRequest.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<StreamedFileDataRequest>("StreamedFileDataRequest", windows.storage.streams.IOutputStream.iid(), ancestors, { raw => StreamedFileDataRequest(raw, ownsReference: true) }, { raw => StreamedFileDataRequest(raw) })
+        let ancestors = [Storage_Streams.IOutputStream.iid(), Foundation.IClosable.iid(), IStreamedFileDataRequest.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<StreamedFileDataRequest>("StreamedFileDataRequest", Storage_Streams.IOutputStream.iid(), ancestors, { raw => StreamedFileDataRequest.fromAbiTake(raw) }, { raw => StreamedFileDataRequest.viewOf(raw) })
     }
 
-    public func defaultInterface(): windows.storage.streams.IOutputStream {
-        windows.storage.streams.IOutputStream(asRaw())
+    public func defaultInterface(): Storage_Streams.IOutputStream {
+        Storage_Streams.IOutputStream.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -5150,7 +5314,7 @@ public class StreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & wi
     }
 
     public static func runtimeType(): RuntimeTypeContract {
-        RuntimeTypeContract("Windows.Storage.StreamedFileDataRequest", StreamedFileDataRequest.signature(), windows.storage.streams.IOutputStream.iid())
+        RuntimeTypeContract("Windows.Storage.StreamedFileDataRequest", StreamedFileDataRequest.signature(), Storage_Streams.IOutputStream.iid())
     }
 
     public static func activationFactory(): Option<IActivationFactory> {
@@ -5158,26 +5322,26 @@ public class StreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & wi
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIOutputStream(): windows.storage.streams.IOutputStream {
-        windows.storage.streams.IOutputStream(asRaw())
+    public func asIOutputStream(): Storage_Streams.IOutputStream {
+        Storage_Streams.IOutputStream(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable(asRaw())
     }
 
     public func asIStreamedFileDataRequest(): IStreamedFileDataRequest {
         IStreamedFileDataRequest(asRaw())
     }
 
-    public unsafe func WriteAsync(operation: windows.storage.streams.IBuffer): CPointer<Unit> {
+    public unsafe func WriteAsync(operation: Storage_Streams.IBuffer): Foundation.IAsyncOperationWithProgress<UInt32, UInt32> {
         return defaultInterface().WriteAsync(operation)
     }
 
-    public unsafe func FlushAsync(): CPointer<Unit> {
+    public unsafe func FlushAsync(): Foundation.IAsyncOperation<Bool> {
         return defaultInterface().FlushAsync()
     }
 
@@ -5190,7 +5354,7 @@ public class StreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & wi
     }
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 @C
 public struct StreamedFileDataRequestedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -5199,17 +5363,21 @@ public struct StreamedFileDataRequestedHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_storage"]
+@When[Windows_Storage == "on"]
 public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): StreamedFileDataRequestedHandler {
-        StreamedFileDataRequestedHandler(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StreamedFileDataRequestedHandler {
+    public static func fromAbiTake(raw: CPointer<Unit>): StreamedFileDataRequestedHandler {
+        StreamedFileDataRequestedHandler(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StreamedFileDataRequestedHandler {
         StreamedFileDataRequestedHandler(raw)
     }
 
@@ -5218,7 +5386,7 @@ public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInter
     }
 
     public static func descriptor(): InterfaceDescriptor<StreamedFileDataRequestedHandler> {
-        return InterfaceDescriptor<StreamedFileDataRequestedHandler>("StreamedFileDataRequestedHandler", StreamedFileDataRequestedHandler.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => StreamedFileDataRequestedHandler(raw, ownsReference: true) }, { raw => StreamedFileDataRequestedHandler(raw) })
+        return InterfaceDescriptor<StreamedFileDataRequestedHandler>("StreamedFileDataRequestedHandler", StreamedFileDataRequestedHandler.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => StreamedFileDataRequestedHandler.fromAbiTake(raw) }, { raw => StreamedFileDataRequestedHandler.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -5234,7 +5402,7 @@ public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInter
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): StreamedFileDataRequestedHandlerVtbl {
@@ -5253,7 +5421,7 @@ public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInter
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (StreamedFileDataRequest) -> Unit): StreamedFileDataRequestedHandler {
+    public static func new(invoke: (InParam<StreamedFileDataRequest>) -> Unit): StreamedFileDataRequestedHandler {
         let box = StreamedFileDataRequestedHandlerBox(invoke)
         let object = ComObject<StreamedFileDataRequestedHandlerBox>.new(box, [StreamedFileDataRequestedHandler.descriptorSchema()], [box.vtblPtr()])
         return object.intoInterface(StreamedFileDataRequestedHandler.descriptor())
@@ -5261,16 +5429,16 @@ public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInter
 }
 
 private open class StreamedFileDataRequestedHandlerInvoker {
-    public open func Invoke(stream: StreamedFileDataRequest): Unit {
+    public open func Invoke(stream: InParam<StreamedFileDataRequest>): Unit {
         ()
     }
 }
 
 private class StreamedFileDataRequestedHandlerBox <: StreamedFileDataRequestedHandlerInvoker {
-    public let invoke_: (StreamedFileDataRequest) -> Unit
+    public let invoke_: (InParam<StreamedFileDataRequest>) -> Unit
     private let vtblHandle: CPointerHandle<StreamedFileDataRequestedHandlerVtbl>
 
-    public init(invoke: (StreamedFileDataRequest) -> Unit) {
+    public init(invoke: (InParam<StreamedFileDataRequest>) -> Unit) {
         this.invoke_ = invoke
         this.vtblHandle = unsafe { acquireArrayRawData(Array<StreamedFileDataRequestedHandlerVtbl>(1, { _ => buildStreamedFileDataRequestedHandlerBoxVtbl() })) }
     }
@@ -5279,7 +5447,7 @@ private class StreamedFileDataRequestedHandlerBox <: StreamedFileDataRequestedHa
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(stream: StreamedFileDataRequest): Unit {
+    public override func Invoke(stream: InParam<StreamedFileDataRequest>): Unit {
         invoke_(stream)
     }
 }
@@ -5287,35 +5455,28 @@ private class StreamedFileDataRequestedHandlerBox <: StreamedFileDataRequestedHa
 func buildStreamedFileDataRequestedHandlerBoxVtbl(): StreamedFileDataRequestedHandlerVtbl {
     var vtbl = StreamedFileDataRequestedHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = StreamedFileDataRequestedHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit> =>
+        match (unsafe { asImplFromRaw<StreamedFileDataRequestedHandlerInvoker>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke(InParam<StreamedFileDataRequest>(StreamedFileDataRequest.viewOf(arg0)))
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
+@When[Windows_Storage == "on"]
 @C
-func StreamedFileDataRequestedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>): Int32 {
-    match (unsafe { asImplFromRaw<StreamedFileDataRequestedHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke(StreamedFileDataRequest.fromRawBorrowed(arg0))
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_storage"]
 public struct StreamedFileFailureMode {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Failed = StreamedFileFailureMode(value: 0)
-    public static let CurrentlyUnavailable = StreamedFileFailureMode(value: 1)
-    public static let Incomplete = StreamedFileFailureMode(value: 2)
 
     public operator func ==(other: StreamedFileFailureMode): Bool {
         return this.value == other.value
@@ -5324,3 +5485,12 @@ public struct StreamedFileFailureMode {
         return this.value != other.value
     }
 }
+
+@When[Windows_Storage == "on"]
+public let Failed: StreamedFileFailureMode = StreamedFileFailureMode(0)
+
+@When[Windows_Storage == "on"]
+public let CurrentlyUnavailable: StreamedFileFailureMode = StreamedFileFailureMode(1)
+
+@When[Windows_Storage == "on"]
+public let Incomplete: StreamedFileFailureMode = StreamedFileFailureMode(2)

@@ -28,12 +28,12 @@ public func coerceInterfaceValue<T, U>(
     }
 
     if (!queryRequiredFor<T, U>()) {
-        return Result<T>.Ok(target.wrapBorrowed(raw))
+        return Result<T>.Ok(target.viewOf(raw))
     }
 
     match (unsafe { queryInterfaceRaw(raw, target.iid) }) {
         case Some(resolved) =>
-            Result<T>.Ok(target.wrapOwned(resolved))
+            Result<T>.Ok(target.takeFromAbi(resolved))
         case None =>
             Result<T>.Err(WinError(E_NOINTERFACE))
     }

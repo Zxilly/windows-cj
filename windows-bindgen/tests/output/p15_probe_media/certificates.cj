@@ -18,7 +18,7 @@ public class Certificate <: InterfaceWrapperBase & ComInterface & windows_interf
         Certificate(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Certificate {
+    public static func viewOf(raw: CPointer<Unit>): Certificate {
         Certificate(raw)
     }
 
@@ -144,7 +144,7 @@ public class CertificateChain <: InterfaceWrapperBase & ComInterface & windows_i
         CertificateChain(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CertificateChain {
+    public static func viewOf(raw: CPointer<Unit>): CertificateChain {
         CertificateChain(raw)
     }
 
@@ -240,7 +240,7 @@ public class CertificateExtension <: InterfaceWrapperBase & ComInterface & windo
         CertificateExtension(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CertificateExtension {
+    public static func viewOf(raw: CPointer<Unit>): CertificateExtension {
         CertificateExtension(raw)
     }
 
@@ -334,7 +334,7 @@ public class CertificateKeyUsages <: InterfaceWrapperBase & ComInterface & windo
         CertificateKeyUsages(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CertificateKeyUsages {
+    public static func viewOf(raw: CPointer<Unit>): CertificateKeyUsages {
         CertificateKeyUsages(raw)
     }
 
@@ -464,7 +464,7 @@ public class ChainBuildingParameters <: InterfaceWrapperBase & ComInterface & wi
         ChainBuildingParameters(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ChainBuildingParameters {
+    public static func viewOf(raw: CPointer<Unit>): ChainBuildingParameters {
         ChainBuildingParameters(raw)
     }
 
@@ -578,7 +578,7 @@ public class ChainValidationParameters <: InterfaceWrapperBase & ComInterface & 
         ChainValidationParameters(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ChainValidationParameters {
+    public static func viewOf(raw: CPointer<Unit>): ChainValidationParameters {
         ChainValidationParameters(raw)
     }
 
@@ -716,7 +716,7 @@ public class ICertificate <: InterfaceWrapperBase & ComInterface & RuntimeName &
         ICertificate(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICertificate {
+    public static func viewOf(raw: CPointer<Unit>): ICertificate {
         ICertificate(raw)
     }
 
@@ -909,7 +909,7 @@ public class ICertificate2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         ICertificate2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICertificate2 {
+    public static func viewOf(raw: CPointer<Unit>): ICertificate2 {
         ICertificate2(raw)
     }
 
@@ -1029,7 +1029,7 @@ public class ICertificate3 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         ICertificate3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICertificate3 {
+    public static func viewOf(raw: CPointer<Unit>): ICertificate3 {
         ICertificate3(raw)
     }
 
@@ -1125,7 +1125,7 @@ public class ICertificateChain <: InterfaceWrapperBase & ComInterface & RuntimeN
         ICertificateChain(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICertificateChain {
+    public static func viewOf(raw: CPointer<Unit>): ICertificateChain {
         ICertificateChain(raw)
     }
 
@@ -1225,7 +1225,7 @@ public class ICertificateExtension <: InterfaceWrapperBase & ComInterface & Runt
         ICertificateExtension(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICertificateExtension {
+    public static func viewOf(raw: CPointer<Unit>): ICertificateExtension {
         ICertificateExtension(raw)
     }
 
@@ -1358,7 +1358,7 @@ public class ICertificateKeyUsages <: InterfaceWrapperBase & ComInterface & Runt
         ICertificateKeyUsages(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICertificateKeyUsages {
+    public static func viewOf(raw: CPointer<Unit>): ICertificateKeyUsages {
         ICertificateKeyUsages(raw)
     }
 
@@ -1551,7 +1551,7 @@ public class IChainBuildingParameters <: InterfaceWrapperBase & ComInterface & R
         IChainBuildingParameters(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IChainBuildingParameters {
+    public static func viewOf(raw: CPointer<Unit>): IChainBuildingParameters {
         IChainBuildingParameters(raw)
     }
 
@@ -1710,7 +1710,7 @@ public class IChainValidationParameters <: InterfaceWrapperBase & ComInterface &
         IChainValidationParameters(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IChainValidationParameters {
+    public static func viewOf(raw: CPointer<Unit>): IChainValidationParameters {
         IChainValidationParameters(raw)
     }
 
@@ -1813,7 +1813,7 @@ public class ISubjectAlternativeNameInfo <: InterfaceWrapperBase & ComInterface 
         ISubjectAlternativeNameInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISubjectAlternativeNameInfo {
+    public static func viewOf(raw: CPointer<Unit>): ISubjectAlternativeNameInfo {
         ISubjectAlternativeNameInfo(raw)
     }
 
@@ -1937,7 +1937,7 @@ public class ISubjectAlternativeNameInfo2 <: InterfaceWrapperBase & ComInterface
         ISubjectAlternativeNameInfo2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISubjectAlternativeNameInfo2 {
+    public static func viewOf(raw: CPointer<Unit>): ISubjectAlternativeNameInfo2 {
         ISubjectAlternativeNameInfo2(raw)
     }
 
@@ -2055,7 +2055,7 @@ public class SubjectAlternativeNameInfo <: InterfaceWrapperBase & ComInterface &
         SubjectAlternativeNameInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SubjectAlternativeNameInfo {
+    public static func viewOf(raw: CPointer<Unit>): SubjectAlternativeNameInfo {
         SubjectAlternativeNameInfo(raw)
     }
 

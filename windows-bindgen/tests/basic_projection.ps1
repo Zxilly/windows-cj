@@ -1,8 +1,8 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-bindgen"
-$fixtureWinmd = Join-Path $repoRoot "ref/windows-rs/crates/libs/bindgen/default/Windows.Win32.winmd"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
+$fixtureWinmd = Join-Path $repoRoot "windows-cj/winmd/Windows.Win32.winmd"
 $outputRoot = Join-Path $packageRoot "tests/output/basic_projection"
 $systemInformationOut = Join-Path $outputRoot "system_information"
 $foundationOut = Join-Path $outputRoot "foundation"
@@ -46,7 +46,7 @@ finally {
     Pop-Location
 }
 
-$generatedFile = Join-Path $systemInformationOut "system_information.cj"
+$generatedFile = Join-Path $systemInformationOut "SystemInformation.cj"
 $featuresToml = Join-Path $systemInformationOut "features.toml"
 $linkToml = Join-Path $systemInformationOut "link-options.toml"
 $cfgToml = Join-Path $systemInformationOut "cfg.toml"
@@ -72,21 +72,21 @@ $generated = Get-Content -Raw $generatedFile
 if ($generated -notmatch 'public struct IMAGE_FILE_MACHINE') {
     throw "Generated source is missing IMAGE_FILE_MACHINE"
 }
-if ($generated -notmatch 'public let value: UInt32') {
-    throw "IMAGE_FILE_MACHINE value field is not UInt32"
+if ($generated -notmatch 'public var value: UInt16') {
+    throw "IMAGE_FILE_MACHINE value field is not UInt16"
 }
-if ($generated -match '_Anonymous_e__Union|_Anonymous_e__Struct') {
-    throw "Generated source still contains anonymous nested helper names"
+if ($generated -notmatch 'public struct SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct') {
+    throw "Generated source is missing the projected SYSTEM_INFO anonymous helper struct"
 }
-if ($generated -notmatch 'public struct SYSTEM_INFO_0') {
-    throw "Generated source is missing flattened nested type SYSTEM_INFO_0"
+if ($generated -notmatch 'public func anonymous\(\): SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct') {
+    throw "Generated source is missing the SYSTEM_INFO anonymous union accessor"
 }
 
 $featureSections = [regex]::Matches($features, '^\[features\.([^\]]+)\]$', 'Multiline') | ForEach-Object { $_.Groups[1].Value }
 if ($featureSections.Count -eq 0) {
     throw "features.toml has no [features.*] sections"
 }
-if (($featureSections | Where-Object { $_ -notmatch '^feat_[a-z0-9_]+$' }).Count -ne 0) {
+if (($featureSections | Where-Object { $_ -notmatch '^[A-Za-z0-9_]+$' }).Count -ne 0) {
     throw "features.toml contains non-normalized feature names"
 }
 $duplicateFeatureSections = $featureSections | Group-Object | Where-Object { $_.Count -gt 1 }
@@ -97,11 +97,11 @@ $sortedFeatureSections = @($featureSections | Sort-Object)
 if ((Compare-Object -ReferenceObject $featureSections -DifferenceObject $sortedFeatureSections).Count -ne 0) {
     throw "features.toml sections are not sorted"
 }
-if ($features -notmatch '\[features\.feat_kernel32\]') {
-    throw "features.toml is missing kernel32 feature block"
+if ($features -notmatch '\[features\.KERNEL32\]') {
+    throw "features.toml is missing KERNEL32 feature block"
 }
-if ($features -notmatch 'cfg = "feat_kernel32"') {
-    throw "features.toml is missing kernel32 cfg entry"
+if ($features -notmatch 'cfg = "KERNEL32"') {
+    throw "features.toml is missing KERNEL32 cfg entry"
 }
 if ($features -notmatch 'deps = \[\]') {
     throw "features.toml is missing deps arrays"
@@ -109,11 +109,11 @@ if ($features -notmatch 'deps = \[\]') {
 if ($features -match 'deps = \[\s*\r?\n') {
     throw "features.toml deps should be inline arrays"
 }
-if ($features -notmatch 'deps = \["feat_') {
+if ($features -notmatch 'deps = \["[A-Za-z0-9_]+') {
     throw "features.toml is missing inline dependency entries"
 }
-if ($links -notmatch '\[features\.feat_kernel32\]') {
-    throw "link-options.toml is missing kernel32 feature block"
+if ($links -notmatch '\[features\.KERNEL32\]') {
+    throw "link-options.toml is missing KERNEL32 feature block"
 }
 if ($links -notmatch 'link = \["-l') {
     throw "link-options.toml is missing prefixed link entries"
@@ -122,7 +122,7 @@ $linkSections = [regex]::Matches($links, '^\[features\.([^\]]+)\]$', 'Multiline'
 if ($linkSections.Count -eq 0) {
     throw "link-options.toml has no [features.*] sections"
 }
-if (($linkSections | Where-Object { $_ -notmatch '^feat_[a-z0-9_]+$' }).Count -ne 0) {
+if (($linkSections | Where-Object { $_ -notmatch '^[A-Za-z0-9_]+$' }).Count -ne 0) {
     throw "link-options.toml contains non-normalized feature names"
 }
 $duplicateLinkSections = $linkSections | Group-Object | Where-Object { $_.Count -gt 1 }
@@ -133,14 +133,14 @@ $sortedLinkSections = @($linkSections | Sort-Object)
 if ((Compare-Object -ReferenceObject $linkSections -DifferenceObject $sortedLinkSections).Count -ne 0) {
     throw "link-options.toml sections are not sorted"
 }
-if ($cfg -notmatch 'feat_kernel32 = "on"') {
-    throw "cfg.toml is missing kernel32 feature toggle"
+if ($cfg -notmatch '(?m)^KERNEL32 = "on"$') {
+    throw "cfg.toml is missing KERNEL32 feature toggle"
 }
-$cfgFeatures = [regex]::Matches($cfg, '^(feat_[A-Za-z0-9_]+) = "on"$', 'Multiline') | ForEach-Object { $_.Groups[1].Value }
+$cfgFeatures = [regex]::Matches($cfg, '^([A-Za-z0-9_]+) = "on"$', 'Multiline') | ForEach-Object { $_.Groups[1].Value }
 if ($cfgFeatures.Count -eq 0) {
     throw "cfg.toml has no feature toggles"
 }
-if (($cfgFeatures | Where-Object { $_ -notmatch '^feat_[a-z0-9_]+$' }).Count -ne 0) {
+if (($cfgFeatures | Where-Object { $_ -notmatch '^[A-Za-z0-9_]+$' }).Count -ne 0) {
     throw "cfg.toml contains non-normalized feature names"
 }
 $duplicateCfgFeatures = $cfgFeatures | Group-Object | Where-Object { $_.Count -gt 1 }
@@ -155,7 +155,7 @@ if ($generated -notmatch 'GetTickCount') {
     throw "Generated source is missing GetTickCount"
 }
 
-$foundationMetadata = Join-Path $foundationOut "metadata.cj"
+$foundationMetadata = Join-Path $foundationOut "Metadata.cj"
 $foundationFeaturesToml = Join-Path $foundationOut "features.toml"
 $foundationCfgToml = Join-Path $foundationOut "cfg.toml"
 
@@ -167,13 +167,13 @@ $foundationFeatures = Get-Content -Raw $foundationFeaturesToml
 $foundationCfg = Get-Content -Raw $foundationCfgToml
 $foundationGenerated = Get-Content -Raw $foundationMetadata
 
-if ($foundationFeatures -notmatch '\[features\.feat_windows_win32_foundation_metadata\]') {
+if ($foundationFeatures -notmatch '\[features\.Windows_Win32_Foundation_Metadata\]') {
     throw "foundation features.toml is missing metadata namespace feature block"
 }
-if ($foundationCfg -notmatch 'feat_windows_win32_foundation_metadata = "on"') {
+if ($foundationCfg -notmatch '(?m)^Windows_Win32_Foundation_Metadata = "on"$') {
     throw "foundation cfg.toml is missing metadata namespace feature toggle"
 }
-if ($foundationGenerated -notmatch '@When\[cfg\.feat_windows_win32_foundation_metadata\]') {
+if ($foundationGenerated -notmatch '@When\[Windows_Win32_Foundation_Metadata == "on"\]') {
     throw "foundation metadata source is missing the expected feature guard"
 }
 if ($generated -match '@When\[cfg\.feat\]') {
@@ -213,7 +213,7 @@ if ((Compare-Object -ReferenceObject $broadLinkSections -DifferenceObject $broad
     throw "broad link-options.toml sections are not sorted"
 }
 
-$broadCfgFeatures = [regex]::Matches($broadCfg, '^(feat_[A-Za-z0-9_]+) = "on"$', 'Multiline') | ForEach-Object { $_.Groups[1].Value }
+$broadCfgFeatures = [regex]::Matches($broadCfg, '^([A-Za-z0-9_]+) = "on"$', 'Multiline') | ForEach-Object { $_.Groups[1].Value }
 if ($broadCfgFeatures.Count -eq 0) {
     throw "broad cfg.toml has no feature toggles"
 }
@@ -226,70 +226,64 @@ if ((Compare-Object -ReferenceObject $broadCfgFeatures -DifferenceObject $broadS
     throw "broad cfg.toml toggles are not sorted"
 }
 
-$hypervisorFile = Join-Path $broadOut "hypervisor.cj"
+$hypervisorFile = Join-Path $broadOut "Hypervisor.cj"
 if (!(Test-Path $hypervisorFile)) {
     throw "Missing hypervisor source: $hypervisorFile"
 }
 $hypervisor = Get-Content -Raw $hypervisorFile
-if ($hypervisor -notmatch 'public var Anonymous: WHV_X64_FP_CONTROL_STATUS_REGISTER_0 = WHV_X64_FP_CONTROL_STATUS_REGISTER_0\(\)') {
-    throw "Hypervisor FP control register outer field was not flattened to _0"
+if ($hypervisor -notmatch 'public var Anonymous: WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union = WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union\(\)') {
+    throw "Hypervisor FP control register outer anonymous field shape regressed"
 }
-if ($hypervisor -notmatch 'public var Anonymous: WHV_X64_XMM_CONTROL_STATUS_REGISTER_0 = WHV_X64_XMM_CONTROL_STATUS_REGISTER_0\(\)') {
-    throw "Hypervisor XMM control register outer field was not flattened to _0"
+if ($hypervisor -notmatch 'public var Anonymous: WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union = WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union\(\)') {
+    throw "Hypervisor XMM control register outer anonymous field shape regressed"
 }
 
-$variantFile = Join-Path $broadOut "variant.cj"
+$variantFile = Join-Path $broadOut "Variant.cj"
 if (!(Test-Path $variantFile)) {
     throw "Missing variant source: $variantFile"
 }
 $variant = Get-Content -Raw $variantFile
-if ($variant -notmatch 'public var Anonymous: VARIANT_0 = VARIANT_0\(\)') {
-    throw "VARIANT outer anonymous field was not flattened to _0"
+if ($variant -notmatch 'public var Anonymous: VARIANT__Anonymous_e__Union = VARIANT__Anonymous_e__Union\(\)') {
+    throw "VARIANT outer anonymous union shape regressed"
 }
-if ($variant -notmatch 'public var Anonymous: VARIANT_0_0 = VARIANT_0_0\(\)') {
-    throw "VARIANT first nested anonymous field was not flattened to _0_0"
-}
-if ($variant -notmatch 'public var Anonymous: VARIANT_0_0_0 = VARIANT_0_0_0\(\)') {
-    throw "VARIANT second nested anonymous field was not flattened to _0_0_0"
-}
-if ($variant -notmatch 'public var Anonymous: VARIANT_0_0_0_0 = VARIANT_0_0_0_0\(\)') {
-    throw "VARIANT deepest anonymous field was not flattened to _0_0_0_0"
+if ($variant -notmatch 'public var Anonymous: VARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union = VARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union\(\)') {
+    throw "VARIANT nested anonymous union shape regressed"
 }
 
-$cloudFiltersFile = Join-Path $broadOut "cloud_filters.cj"
+$cloudFiltersFile = Join-Path $broadOut "CloudFilters.cj"
 if (!(Test-Path $cloudFiltersFile)) {
     throw "Missing cloud filters source: $cloudFiltersFile"
 }
 $cloudFilters = Get-Content -Raw $cloudFiltersFile
-if ($cloudFilters -notmatch 'public var Anonymous: CF_CALLBACK_PARAMETERS_0 = CF_CALLBACK_PARAMETERS_0\(\)') {
-    throw "CF_CALLBACK_PARAMETERS outer anonymous field was not flattened to _0"
+if ($cloudFilters -notmatch 'public var Anonymous: CF_CALLBACK_PARAMETERS__Anonymous_e__Union = CF_CALLBACK_PARAMETERS__Anonymous_e__Union\(\)') {
+    throw "CF_CALLBACK_PARAMETERS outer anonymous union shape regressed"
 }
-if ($cloudFilters -notmatch 'public var Anonymous: CF_CALLBACK_PARAMETERS_0_0_0 = CF_CALLBACK_PARAMETERS_0_0_0\(\)') {
-    throw "CF_CALLBACK_PARAMETERS nested anonymous field was not flattened to _0_0_0"
+if ($cloudFilters -notmatch 'public var Anonymous: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union = CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union\(\)') {
+    throw "CF_CALLBACK_PARAMETERS nested anonymous union shape regressed"
 }
-if ($cloudFilters -notmatch 'public var FetchData: CF_CALLBACK_PARAMETERS_0_0_0_0 = CF_CALLBACK_PARAMETERS_0_0_0_0\(\)') {
-    throw "CF_CALLBACK_PARAMETERS deep branch was not flattened to _0_0_0_0"
+if ($cloudFilters -notmatch 'public func fetchData\(\): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct') {
+    throw "CF_CALLBACK_PARAMETERS fetchData branch projection regressed"
 }
 
-$accessibilityFile = Join-Path $broadOut "accessibility.cj"
+$accessibilityFile = Join-Path $broadOut "Accessibility.cj"
 if (!(Test-Path $accessibilityFile)) {
     throw "Missing accessibility source: $accessibilityFile"
 }
 $accessibility = Get-Content -Raw $accessibilityFile
-if ($accessibility -notmatch 'func wrapIAccessibleOwned\(raw: CPointer<Unit>\): IAccessible') {
-    throw "Generated COM interfaces are missing owned wrapper helpers"
+if ($accessibility -notmatch 'func takeIAccessibleFromAbi\(raw: CPointer<Unit>\): IAccessible') {
+    throw "Generated COM interfaces are missing ABI-take helpers"
 }
-if ($accessibility -notmatch 'func wrapIAccessibleBorrowed\(raw: CPointer<Unit>\): IAccessible') {
-    throw "Generated COM interfaces are missing borrowed wrapper helpers"
+if ($accessibility -notmatch 'func viewIAccessible\(raw: CPointer<Unit>\): IAccessible') {
+    throw "Generated COM interfaces are missing call-bound view helpers"
 }
 if ($accessibility -notmatch 'public class IAccessible <: ComInterface & Resource') {
     throw "Generated COM interfaces should implement Resource semantics"
 }
-if ($accessibility -notmatch 'public static func fromRaw\(raw: CPointer<Unit>\): IAccessible') {
-    throw "Generated COM interfaces are missing fromRaw constructors"
+if ($accessibility -notmatch 'public static func fromAbiTake\(raw: CPointer<Unit>\): IAccessible') {
+    throw "Generated COM interfaces are missing ABI-take constructors"
 }
-if ($accessibility -notmatch 'public static func fromRawBorrowed\(raw: CPointer<Unit>\): IAccessible') {
-    throw "Generated COM interfaces are missing fromRawBorrowed constructors"
+if ($accessibility -notmatch 'public static func viewOf\(raw: CPointer<Unit>\): IAccessible') {
+    throw "Generated COM interfaces are missing call-bound view constructors"
 }
 if ($accessibility -notmatch 'public static func descriptor\(\): InterfaceDescriptor<IAccessible>') {
     throw "Generated COM interfaces are missing interface descriptors"
@@ -297,7 +291,7 @@ if ($accessibility -notmatch 'public static func descriptor\(\): InterfaceDescri
 if ($accessibility -notmatch 'public unsafe func query<T>\(descriptor: InterfaceDescriptor<T>\): Option<T>') {
     throw "Generated COM interfaces are missing generic QueryInterface helpers"
 }
-if ($accessibility -notmatch 'private let ownsReference_: Bool') {
+if ($accessibility -notmatch 'private let ownsHandle_: Bool') {
     throw "Generated COM interfaces are missing ownership tracking"
 }
 if ($accessibility -notmatch 'public func close\(\): Unit') {
@@ -308,9 +302,9 @@ $hashTargets = @(
     "features.toml",
     "link-options.toml",
     "cfg.toml",
-    "cloud_filters.cj",
-    "hypervisor.cj",
-    "variant.cj"
+    "CloudFilters.cj",
+    "Hypervisor.cj",
+    "Variant.cj"
 )
 foreach ($relPath in $hashTargets) {
     $first = Get-FileHash -Algorithm SHA256 (Join-Path $broadOut $relPath)

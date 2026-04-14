@@ -1,6 +1,6 @@
 package windows_core
 
-func comPtrAddRefRaw(raw: CPointer<Unit>): UInt32 {
+func interfaceHandleAddRefRaw(raw: CPointer<Unit>): UInt32 {
     if (raw.isNull()) {
         return 0u32
     }
@@ -11,7 +11,7 @@ func comPtrAddRefRaw(raw: CPointer<Unit>): UInt32 {
     }
 }
 
-func comPtrReleaseRaw(raw: CPointer<Unit>): UInt32 {
+func interfaceHandleReleaseRaw(raw: CPointer<Unit>): UInt32 {
     if (raw.isNull()) {
         return 0u32
     }
@@ -22,8 +22,8 @@ func comPtrReleaseRaw(raw: CPointer<Unit>): UInt32 {
     }
 }
 
-// ComPtr<T> is a small owning COM smart pointer over an interface wrapper.
-public class ComPtr<T> <: Resource {
+// InterfaceHandle<T> keeps a live COM interface reference as a Resource.
+public class InterfaceHandle<T> <: Resource {
     private let descriptor: InterfaceDescriptor<T>
     private var raw: CPointer<Unit>
     private var closed: Bool = false
@@ -32,16 +32,16 @@ public class ComPtr<T> <: Resource {
         this.raw = raw
         this.descriptor = descriptor
         if (addRef) {
-            comPtrAddRefRaw(raw)
+            interfaceHandleAddRefRaw(raw)
         }
     }
 
-    public static func attach(raw: CPointer<Unit>, descriptor: InterfaceDescriptor<T>): ComPtr<T> {
-        ComPtr<T>(raw, descriptor)
+    public static func fromAbiTake(raw: CPointer<Unit>, descriptor: InterfaceDescriptor<T>): InterfaceHandle<T> {
+        InterfaceHandle<T>(raw, descriptor)
     }
 
-    public static func fromInterface(source: ComInterface, descriptor: InterfaceDescriptor<T>): ComPtr<T> {
-        ComPtr<T>(source.asRaw(), descriptor, addRef: true)
+    public static func retainInterface(source: ComInterface, descriptor: InterfaceDescriptor<T>): InterfaceHandle<T> {
+        InterfaceHandle<T>(source.asRaw(), descriptor, addRef: true)
     }
 
     public func asRaw(): CPointer<Unit> {
@@ -56,27 +56,27 @@ public class ComPtr<T> <: Resource {
     }
 
     public func value(): T {
-        descriptor.wrapBorrowed(asRaw())
+        descriptor.viewOf(asRaw())
     }
 
     public func addRef(): UInt32 {
         if (closed) {
             return 0u32
         }
-        comPtrAddRefRaw(raw)
+        interfaceHandleAddRefRaw(raw)
     }
 
-    public func clonePtr(): ComPtr<T> {
+    public func retain(): InterfaceHandle<T> {
         if (closed) {
-            throw Exception("ComPtr.clonePtr called on a closed ComPtr")
+            throw Exception("InterfaceHandle.retain called on a closed handle")
         }
-        ComPtr<T>(raw, descriptor, addRef: true)
+        InterfaceHandle<T>(raw, descriptor, addRef: true)
     }
 
-    public unsafe func query<U>(target: InterfaceDescriptor<U>): Option<ComPtr<U>> where U <: ComInterface {
+    public unsafe func query<U>(target: InterfaceDescriptor<U>): Option<InterfaceHandle<U>> where U <: ComInterface {
         match (queryInterfaceRaw(asRaw(), target.iid)) {
-            case Some(raw) => Some(ComPtr<U>.attach(raw, target))
-            case None => Option<ComPtr<U>>.None
+            case Some(raw) => Some(InterfaceHandle<U>.fromAbiTake(raw, target))
+            case None => Option<InterfaceHandle<U>>.None
         }
     }
 
@@ -84,19 +84,19 @@ public class ComPtr<T> <: Resource {
         closed
     }
 
-    public func detach(): CPointer<Unit> {
+    public func intoAbi(): CPointer<Unit> {
         if (closed) {
             return CPointer<Unit>()
         }
-        let detached = raw
+        let released = raw
         raw = CPointer<Unit>()
         closed = true
-        detached
+        released
     }
 
     public func close(): Unit {
         if (!closed) {
-            comPtrReleaseRaw(raw)
+            interfaceHandleReleaseRaw(raw)
             raw = CPointer<Unit>()
             closed = true
         }

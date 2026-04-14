@@ -1,9 +1,9 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-bindgen"
-$fixtureWin32 = Join-Path $repoRoot "ref/windows-rs/crates/libs/bindgen/default/Windows.Win32.winmd"
-$fixtureWinrt = Join-Path $repoRoot "ref/windows-rs/crates/libs/bindgen/default/Windows.winmd"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
+$fixtureWin32 = Join-Path $repoRoot "windows-cj/winmd/Windows.Win32.winmd"
+$fixtureWinrt = Join-Path $repoRoot "windows-cj/winmd/Windows.winmd"
 $outputRoot = Join-Path $packageRoot "tests/output/p1_p2_architecture"
 $highLevelOut = Join-Path $outputRoot "high_level"
 $sysOut = Join-Path $outputRoot "sys"
@@ -32,7 +32,6 @@ try {
         --high-level `
         --index `
         --link windows_link `
-        --rustfmt rustfmt `
         --no-comment `
         --no-allow `
         --filter Windows.Foundation.Collections `
@@ -51,11 +50,11 @@ finally {
     Pop-Location
 }
 
-$collectionsFile = Join-Path $highLevelOut "collections.cj"
-$foundationFile = Join-Path $highLevelOut "foundation.cj"
+$collectionsFile = Join-Path $highLevelOut "Collections.cj"
+$foundationFile = Join-Path $highLevelOut "Foundation.cj"
 $featuresIndexFile = Join-Path $highLevelOut "features.json"
 $librariesFile = Join-Path $highLevelOut "libraries.cj"
-$sysFile = Join-Path $sysOut "system_information.cj"
+$sysFile = Join-Path $sysOut "SystemInformation.cj"
 $sysLibrariesFile = Join-Path $sysOut "libraries.cj"
 
 foreach ($path in @($collectionsFile, $foundationFile, $featuresIndexFile, $librariesFile, $sysFile, $sysLibrariesFile)) {

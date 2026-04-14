@@ -15,7 +15,6 @@ public class BindgenConfig {
     public var flat: Bool = false
     public var referenceArgs: ArrayList<String> = ArrayList<String>()
     public var implement: Bool = false
-    public var rustfmt: String = ""
     public var noAllow: Bool = false
     public var noComment: Bool = false
     public var sysFnPtrs: Bool = false
@@ -33,6 +32,7 @@ public class BindgenConfig {
     var resolvedOutputRootPackageName: Bool = false
     var inferredOutputPackageRoot: String = ""
     var resolvedOutputPackageRoot: Bool = false
+    var generatedPackageNamespaces: HashMap<String, String> = HashMap<String, String>()
 
     public init() {}
 
@@ -56,7 +56,6 @@ public class BindgenConfig {
                         config.implement = true
                         kind = ArgKind.Implement
                     case "--derive" => kind = ArgKind.Derive
-                    case "--rustfmt" => kind = ArgKind.Rustfmt
                     case "--link" => kind = ArgKind.Link
                     case "--package" => kind = ArgKind.Package
                     case "--specific-deps" =>
@@ -92,8 +91,7 @@ public class BindgenConfig {
                     case "--index" =>
                         config.index = true
                         kind = ArgKind.None
-                    case _ =>
-                        kind = ArgKind.None
+                    case _ => kind = ArgKind.None
                 }
                 i += 1
                 continue
@@ -101,8 +99,7 @@ public class BindgenConfig {
 
             match (kind) {
                 case None => ()
-                case Input =>
-                    config.winmdPaths.add(arg)
+                case Input => config.winmdPaths.add(arg)
                 case Output =>
                     config.outputDir = arg
                     kind = ArgKind.None
@@ -124,9 +121,6 @@ public class BindgenConfig {
                     kind = ArgKind.None
                 case Derive =>
                     addDeriveConfig(config, arg)
-                    kind = ArgKind.None
-                case Rustfmt =>
-                    config.rustfmt = arg
                     kind = ArgKind.None
                 case Link =>
                     config.link = arg
@@ -167,12 +161,34 @@ public class BindgenConfig {
 
     public func packageNameForNamespace(namespace: String): String {
         if (usesSubpackageLayout()) {
-            return FileWriter.namespaceToSubpackageName(namespace, outputRootPackageName())
+            return FileWriter.namespaceToHierarchicalPackageName(packageNamespaceForNamespace(namespace),
+                outputRootPackageName())
         }
         if (!packageName.isEmpty()) {
             return packageName
         }
         return FileWriter.namespaceToPackageName(namespace)
+    }
+
+    public func packageNamespaceForNamespace(namespace: String): String {
+        if (usesSubpackageLayout() && generatedPackageNamespaces.contains(namespace)) {
+            return generatedPackageNamespaces[namespace]
+        }
+        return namespace
+    }
+
+    public func namespaceNeedsFacade(namespace: String): Bool {
+        if (!usesSubpackageLayout()) {
+            return false
+        }
+        return packageNamespaceForNamespace(namespace) != namespace
+    }
+
+    public func facadePackageNameForNamespace(namespace: String): String {
+        if (usesSubpackageLayout()) {
+            return FileWriter.namespaceToHierarchicalPackageName(namespace, outputRootPackageName())
+        }
+        return packageNameForNamespace(namespace)
     }
 
     public func usesSubpackageLayout(): Bool {
@@ -215,7 +231,111 @@ public class BindgenConfig {
         if (leftNamespace.isEmpty() || rightNamespace.isEmpty()) {
             return false
         }
-        return packageNameForNamespace(leftNamespace) == packageNameForNamespace(rightNamespace)
+        return packageNamespaceForNamespace(leftNamespace) == packageNamespaceForNamespace(rightNamespace)
+    }
+
+    public func outputRelativePathForNamespace(namespace: String): String {
+        if (usesSubpackageLayout()) {
+            let packageNamespace = packageNamespaceForNamespace(namespace)
+            let dirPath = FileWriter.namespaceToHierarchicalDirPath(packageNamespace)
+            let stem = groupedFileStemForNamespace(namespace, packageNamespace)
+            if (dirPath.isEmpty()) {
+                return "${stem}.cj"
+            }
+            return "${dirPath}/${stem}.cj"
+        }
+        let dirPath = FileWriter.namespaceToDirPath(namespace)
+        if (flat) {
+            return "${sanitizePackageSegment(lastNamespaceComponent(namespace))}.cj"
+        }
+        if (packageOutput) {
+            return "src/${dirPath}/mod.cj"
+        }
+        return "${dirPath}/mod.cj"
+    }
+
+    public func facadeOutputRelativePathForNamespace(namespace: String): String {
+        if (usesSubpackageLayout()) {
+            let dirPath = FileWriter.namespaceToHierarchicalDirPath(namespace)
+            if (dirPath.isEmpty()) {
+                return "mod.cj"
+            }
+            return "${dirPath}/mod.cj"
+        }
+        return outputRelativePathForNamespace(namespace)
+    }
+
+    public func resolveGeneratedPackages(index: TypeIndex, typeMap: TypeMap): Unit {
+        generatedPackageNamespaces.clear()
+        if (!usesSubpackageLayout()) {
+            return
+        }
+        let namespaces = typeMap.namespaces()
+        let graph = buildNamespaceDependencyGraph(index, typeMap)
+        let components = computeNamespaceComponents(namespaces, graph)
+        for (component in components) {
+            if (component.isEmpty()) {
+                continue
+            }
+
+            let mergedNamespace = if (component.size == 1) {
+                component[0]
+            } else {
+                "${chooseComponentPackageNamespace(component)}.impl"
+            }
+
+            for (namespace in component) {
+                generatedPackageNamespaces[namespace] = mergedNamespace
+            }
+        }
+
+        var changed = true
+        while (changed) {
+            changed = false
+            let packageGraph = buildGeneratedPackageDependencyGraph(namespaces, graph, generatedPackageNamespaces)
+            let packageNames = ArrayList<String>()
+            for ((packageName, _) in packageGraph) {
+                if (!containsString(packageNames, packageName)) {
+                    packageNames.add(packageName)
+                }
+            }
+            for (namespace in namespaces) {
+                let packageName = generatedPackageNamespaces[namespace]
+                if (!containsString(packageNames, packageName)) {
+                    packageNames.add(packageName)
+                }
+            }
+
+            let packageComponents = computeNamespaceComponents(packageNames, packageGraph)
+            for (component in packageComponents) {
+                if (component.size <= 1) {
+                    continue
+                }
+
+                let mergedNamespaces = collectNamespacesForGeneratedPackages(namespaces, generatedPackageNamespaces,
+                    component)
+                if (mergedNamespaces.isEmpty()) {
+                    continue
+                }
+
+                let mergedPackage = "${chooseComponentPackageNamespace(mergedNamespaces)}.impl"
+                var needsMerge = false
+                for (namespace in mergedNamespaces) {
+                    if (generatedPackageNamespaces[namespace] != mergedPackage) {
+                        needsMerge = true
+                        break
+                    }
+                }
+                if (!needsMerge) {
+                    continue
+                }
+
+                for (namespace in mergedNamespaces) {
+                    generatedPackageNamespaces[namespace] = mergedPackage
+                }
+                changed = true
+            }
+        }
     }
 
     public func resolveDeriveTargets(index: TypeIndex, typeMap: TypeMap): Unit {
@@ -273,6 +393,252 @@ public class BindgenConfig {
     }
 }
 
+func buildNamespaceDependencyGraph(
+    index: TypeIndex,
+    typeMap: TypeMap
+): HashMap<String, ArrayList<String>> {
+    let graph = HashMap<String, ArrayList<String>>()
+    for (namespace in typeMap.namespaces()) {
+        graph[namespace] = ArrayList<String>()
+    }
+
+    for (namespace in typeMap.namespaces()) {
+        let dependencies = HashMap<String, Bool>()
+        for (entry in typeMap.typesInNamespace(namespace)) {
+            let typeDependencies = collectTypeDependencies(index, entry.fileIdx, entry.row)
+            for (dependency in typeDependencies) {
+                let dependencyName = dependency.definition()
+                if (dependencyName.namespace.isEmpty() || dependencyName.namespace == namespace ||
+                    !typeMap.containsType(dependencyName)) {
+                    continue
+                }
+                dependencies[dependencyName.namespace] = true
+            }
+        }
+
+        let edges = ArrayList<String>()
+        for ((dependencyNamespace, _) in dependencies) {
+            edges.add(dependencyNamespace)
+        }
+        sortStrings(edges)
+        graph[namespace] = edges
+    }
+
+    return graph
+}
+
+func computeNamespaceComponents(
+    namespaces: ArrayList<String>,
+    graph: HashMap<String, ArrayList<String>>
+): ArrayList<ArrayList<String>> {
+    let visited = HashMap<String, Bool>()
+    let order = ArrayList<String>()
+    for (namespace in namespaces) {
+        dfsNamespaceOrder(namespace, graph, visited, order)
+    }
+
+    let reversed = reverseNamespaceGraph(namespaces, graph)
+    visited.clear()
+    let components = ArrayList<ArrayList<String>>()
+    var i = Int64(order.size) - 1
+    while (i >= 0) {
+        let namespace = order[i]
+        if (visited.contains(namespace)) {
+            i -= 1
+            continue
+        }
+
+        let component = ArrayList<String>()
+        dfsNamespaceCollect(namespace, reversed, visited, component)
+        sortStrings(component)
+        components.add(component)
+        i -= 1
+    }
+
+    return components
+}
+
+func reverseNamespaceGraph(
+    namespaces: ArrayList<String>,
+    graph: HashMap<String, ArrayList<String>>
+): HashMap<String, ArrayList<String>> {
+    let reversed = HashMap<String, ArrayList<String>>()
+    for (namespace in namespaces) {
+        reversed[namespace] = ArrayList<String>()
+    }
+
+    for ((namespace, edges) in graph) {
+        for (edge in edges) {
+            if (!reversed.contains(edge)) {
+                reversed[edge] = ArrayList<String>()
+            }
+            reversed[edge].add(namespace)
+        }
+    }
+
+    for ((_, edges) in reversed) {
+        sortStrings(edges)
+    }
+    return reversed
+}
+
+func dfsNamespaceOrder(
+    namespace: String,
+    graph: HashMap<String, ArrayList<String>>,
+    visited: HashMap<String, Bool>,
+    order: ArrayList<String>
+): Unit {
+    if (visited.contains(namespace)) {
+        return
+    }
+
+    visited[namespace] = true
+    if (graph.contains(namespace)) {
+        for (dependency in graph[namespace]) {
+            dfsNamespaceOrder(dependency, graph, visited, order)
+        }
+    }
+    order.add(namespace)
+}
+
+func dfsNamespaceCollect(
+    namespace: String,
+    graph: HashMap<String, ArrayList<String>>,
+    visited: HashMap<String, Bool>,
+    component: ArrayList<String>
+): Unit {
+    if (visited.contains(namespace)) {
+        return
+    }
+
+    visited[namespace] = true
+    component.add(namespace)
+    if (graph.contains(namespace)) {
+        for (dependency in graph[namespace]) {
+            dfsNamespaceCollect(dependency, graph, visited, component)
+        }
+    }
+}
+
+func chooseComponentPackageNamespace(component: ArrayList<String>): String {
+    if (component.isEmpty()) {
+        return ""
+    }
+    if (component.size == 1) {
+        return component[0]
+    }
+
+    let firstParts = splitString(component[0], b'.')
+    let prefix = ArrayList<String>()
+    var i: Int64 = 0
+    while (i < Int64(firstParts.size)) {
+        let candidate = firstParts[i]
+        var matchesAll = true
+        for (namespace in component) {
+            let parts = splitString(namespace, b'.')
+            if (i >= Int64(parts.size) || parts[i] != candidate) {
+                matchesAll = false
+                break
+            }
+        }
+        if (!matchesAll) {
+            break
+        }
+        prefix.add(candidate)
+        i += 1
+    }
+
+    if (prefix.isEmpty()) {
+        return component[0]
+    }
+    return joinStrings(prefix, ".")
+}
+
+func buildGeneratedPackageDependencyGraph(
+    namespaces: ArrayList<String>,
+    namespaceGraph: HashMap<String, ArrayList<String>>,
+    packageAssignments: HashMap<String, String>
+): HashMap<String, ArrayList<String>> {
+    let result = HashMap<String, ArrayList<String>>()
+
+    for (namespace in namespaces) {
+        if (!packageAssignments.contains(namespace)) {
+            continue
+        }
+        let sourcePackage = packageAssignments[namespace]
+        if (!result.contains(sourcePackage)) {
+            result[sourcePackage] = ArrayList<String>()
+        }
+
+        if (!namespaceGraph.contains(namespace)) {
+            continue
+        }
+
+        for (dependency in namespaceGraph[namespace]) {
+            if (!packageAssignments.contains(dependency)) {
+                continue
+            }
+            let targetPackage = packageAssignments[dependency]
+            if (targetPackage == sourcePackage) {
+                continue
+            }
+            if (!containsString(result[sourcePackage], targetPackage)) {
+                result[sourcePackage].add(targetPackage)
+            }
+        }
+    }
+
+    for ((_, edges) in result) {
+        sortStrings(edges)
+    }
+    return result
+}
+
+func collectNamespacesForGeneratedPackages(
+    namespaces: ArrayList<String>,
+    packageAssignments: HashMap<String, String>,
+    packages: ArrayList<String>
+): ArrayList<String> {
+    let result = ArrayList<String>()
+    for (namespace in namespaces) {
+        if (!packageAssignments.contains(namespace)) {
+            continue
+        }
+        if (containsString(packages, packageAssignments[namespace])) {
+            result.add(namespace)
+        }
+    }
+    sortStrings(result)
+    return result
+}
+
+func lastNamespaceComponent(namespace: String): String {
+    let parts = splitString(namespace, b'.')
+    if (parts.isEmpty()) {
+        return namespace
+    }
+    return parts[parts.size - 1]
+}
+
+func isImplementationPackageNamespace(namespace: String): Bool {
+    return namespace.endsWith(".impl")
+}
+
+func implementationOwnerNamespace(namespace: String): String {
+    if (!isImplementationPackageNamespace(namespace)) {
+        return namespace
+    }
+    let arr = namespace.toArray()
+    return String.fromUtf8(arr[0..Int64(arr.size) - Int64(".impl".toArray().size)])
+}
+
+func groupedFileStemForNamespace(namespace: String, packageNamespace: String): String {
+    if (!isImplementationPackageNamespace(packageNamespace)) {
+        return FileWriter.namespaceToGroupedFileStem(namespace, packageNamespace)
+    }
+    return FileWriter.namespaceToGroupedFileStem(namespace, implementationOwnerNamespace(packageNamespace))
+}
+
 enum ArgKind {
     | None
     | Input
@@ -281,7 +647,6 @@ enum ArgKind {
     | Reference
     | Implement
     | Derive
-    | Rustfmt
     | Link
     | Package
 }
@@ -329,8 +694,7 @@ func addDeriveConfig(config: BindgenConfig, value: String): Unit {
             let traits = normalizeDeriveTraits(rawTraits)
             config.deriveTargetOrder.add(target)
             config.rawDerivesByType[target] = traits
-        case None =>
-            throw Exception("`--derive` must be `<type name>=Comma,Separated,List`")
+        case None => throw Exception("`--derive` must be `<type name>=Comma,Separated,List`")
     }
 }
 
@@ -339,10 +703,7 @@ func splitDeriveArg(value: String): Option<(String, ArrayList<String>)> {
     var i: Int64 = 0
     while (i < Int64(arr.size)) {
         if (arr[i] == b'=') {
-            return Some((
-                String.fromUtf8(arr[0..i]),
-                splitCsv(String.fromUtf8(arr[i + 1..Int64(arr.size)]))
-            ))
+            return Some((String.fromUtf8(arr[0..i]), splitCsv(String.fromUtf8(arr[i + 1..Int64(arr.size)]))))
         }
         i += 1
     }
@@ -376,8 +737,7 @@ func normalizeDeriveTraitName(rawTrait: String): String {
         case "Ord" => return "Comparable"
         case "PartialOrd" => return "Comparable"
         case "Comparable" => return "Comparable"
-        case _ =>
-            throw Exception("unsupported derive trait: `${rawTrait}`")
+        case _ => throw Exception("unsupported derive trait: `${rawTrait}`")
     }
 }
 
@@ -417,8 +777,7 @@ func resolveDeriveTargetName(index: TypeIndex, typeMap: TypeMap, rawTarget: Stri
             let erased = typeName.definition()
             validateDeriveTarget(index, typeMap, erased.namespace, trimTick(erased.name), target)
             return erased
-        case None =>
-            return resolveShortDeriveTargetName(index, typeMap, target)
+        case None => return resolveShortDeriveTargetName(index, typeMap, target)
     }
 }
 
@@ -480,8 +839,7 @@ func validateDeriveTarget(
                 throw Exception("unsupported derive target: `${rawTarget}`")
             }
         case Enum => ()
-        case _ =>
-            throw Exception("unsupported derive target: `${rawTarget}`")
+        case _ => throw Exception("unsupported derive target: `${rawTarget}`")
     }
 }
 
@@ -721,6 +1079,5 @@ func namespaceStartsWith(namespace: String, prefix: String): Bool {
     }
     let nsArr = namespace.toArray()
     let pLen = Int64(prefix.toArray().size)
-    return Int64(nsArr.size) == pLen ||
-           (Int64(nsArr.size) > pLen && nsArr[pLen] == b'.')
+    return Int64(nsArr.size) == pLen || (Int64(nsArr.size) > pLen && nsArr[pLen] == b'.')
 }

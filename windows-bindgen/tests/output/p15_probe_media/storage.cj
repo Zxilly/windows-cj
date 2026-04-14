@@ -202,7 +202,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CopyOverloadDefaultNameAndOptions(IStorageFolder.fromRawBorrowed(arg0))) {
+                    match (impl.CopyOverloadDefaultNameAndOptions(IStorageFolder.viewOf(arg0))) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -225,7 +225,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CopyOverloadDefaultOptions(IStorageFolder.fromRawBorrowed(arg0), arg1)) {
+                    match (impl.CopyOverloadDefaultOptions(IStorageFolder.viewOf(arg0), arg1)) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -248,7 +248,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CopyOverload(IStorageFolder.fromRawBorrowed(arg0), arg1, arg2)) {
+                    match (impl.CopyOverload(IStorageFolder.viewOf(arg0), arg1, arg2)) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -271,7 +271,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CopyAndReplaceAsync(IStorageFile.fromRawBorrowed(arg0))) {
+                    match (impl.CopyAndReplaceAsync(IStorageFile.viewOf(arg0))) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -294,7 +294,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.MoveOverloadDefaultNameAndOptions(IStorageFolder.fromRawBorrowed(arg0))) {
+                    match (impl.MoveOverloadDefaultNameAndOptions(IStorageFolder.viewOf(arg0))) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -317,7 +317,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.MoveOverloadDefaultOptions(IStorageFolder.fromRawBorrowed(arg0), arg1)) {
+                    match (impl.MoveOverloadDefaultOptions(IStorageFolder.viewOf(arg0), arg1)) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -340,7 +340,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.MoveOverload(IStorageFolder.fromRawBorrowed(arg0), arg1, arg2)) {
+                    match (impl.MoveOverload(IStorageFolder.viewOf(arg0), arg1, arg2)) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -363,7 +363,7 @@ public struct IStorageFileVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.MoveAndReplaceAsync(IStorageFile.fromRawBorrowed(arg0))) {
+                    match (impl.MoveAndReplaceAsync(IStorageFile.viewOf(arg0))) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -422,7 +422,7 @@ public class IStorageFile <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IStorageFile(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFile {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFile {
         IStorageFile(raw)
     }
 
@@ -672,7 +672,7 @@ public class IStorageFile2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IStorageFile2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFile2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFile2 {
         IStorageFile2(raw)
     }
 
@@ -794,7 +794,7 @@ public class IStorageFilePropertiesWithAvailability <: InterfaceWrapperBase & Co
         IStorageFilePropertiesWithAvailability(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFilePropertiesWithAvailability {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFilePropertiesWithAvailability {
         IStorageFilePropertiesWithAvailability(raw)
     }
 
@@ -1144,7 +1144,7 @@ public class IStorageFolder <: InterfaceWrapperBase & ComInterface & RuntimeName
         IStorageFolder(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolder {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolder {
         IStorageFolder(raw)
     }
 
@@ -1345,7 +1345,7 @@ public class IStorageFolder2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IStorageFolder2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolder2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolder2 {
         IStorageFolder2(raw)
     }
 
@@ -1423,7 +1423,7 @@ public class IStorageFolder3 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IStorageFolder3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolder3 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolder3 {
         IStorageFolder3(raw)
     }
 
@@ -1738,7 +1738,7 @@ public class IStorageItem <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IStorageItem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItem {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItem {
         IStorageItem(raw)
     }
 
@@ -1911,7 +1911,7 @@ public struct IStorageItem2Vtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.IsEqual(IStorageItem.fromRawBorrowed(arg0))) {
+                    match (impl.IsEqual(IStorageItem.viewOf(arg0))) {
                         case Result<Bool>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -1954,7 +1954,7 @@ public class IStorageItem2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IStorageItem2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItem2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItem2 {
         IStorageItem2(raw)
     }
 
@@ -2223,7 +2223,7 @@ public class IStorageItemProperties <: InterfaceWrapperBase & ComInterface & Run
         IStorageItemProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemProperties {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemProperties {
         IStorageItemProperties(raw)
     }
 
@@ -2446,7 +2446,7 @@ public class IStorageItemProperties2 <: InterfaceWrapperBase & ComInterface & Ru
         IStorageItemProperties2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemProperties2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemProperties2 {
         IStorageItemProperties2(raw)
     }
 
@@ -2596,7 +2596,7 @@ public class IStorageItemPropertiesWithProvider <: InterfaceWrapperBase & ComInt
         IStorageItemPropertiesWithProvider(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemPropertiesWithProvider {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemPropertiesWithProvider {
         IStorageItemPropertiesWithProvider(raw)
     }
 
@@ -2687,7 +2687,7 @@ public class IStorageLibraryChange <: InterfaceWrapperBase & ComInterface & Runt
         IStorageLibraryChange(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChange {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChange {
         IStorageLibraryChange(raw)
     }
 
@@ -2798,7 +2798,7 @@ public class IStorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface 
         IStorageLibraryChangeReader(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeReader {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeReader {
         IStorageLibraryChangeReader(raw)
     }
 
@@ -2884,7 +2884,7 @@ public class IStorageLibraryChangeReader2 <: InterfaceWrapperBase & ComInterface
         IStorageLibraryChangeReader2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeReader2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeReader2 {
         IStorageLibraryChangeReader2(raw)
     }
 
@@ -2964,7 +2964,7 @@ public class IStorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface
         IStorageLibraryChangeTracker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTracker {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTracker {
         IStorageLibraryChangeTracker(raw)
     }
 
@@ -3055,7 +3055,7 @@ public class IStorageLibraryChangeTracker2 <: InterfaceWrapperBase & ComInterfac
         IStorageLibraryChangeTracker2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTracker2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTracker2 {
         IStorageLibraryChangeTracker2(raw)
     }
 
@@ -3138,7 +3138,7 @@ public class IStorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComIn
         IStorageLibraryChangeTrackerOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTrackerOptions {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTrackerOptions {
         IStorageLibraryChangeTrackerOptions(raw)
     }
 
@@ -3223,7 +3223,7 @@ public class IStorageProvider <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IStorageProvider(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProvider {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProvider {
         IStorageProvider(raw)
     }
 
@@ -3309,7 +3309,7 @@ public class IStorageProvider2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         IStorageProvider2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageProvider2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageProvider2 {
         IStorageProvider2(raw)
     }
 
@@ -3397,7 +3397,7 @@ public class IStorageStreamTransaction <: InterfaceWrapperBase & ComInterface & 
         IStorageStreamTransaction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageStreamTransaction {
+    public static func viewOf(raw: CPointer<Unit>): IStorageStreamTransaction {
         IStorageStreamTransaction(raw)
     }
 
@@ -3524,7 +3524,7 @@ public class IStreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & R
         IStreamedFileDataRequest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStreamedFileDataRequest {
+    public static func viewOf(raw: CPointer<Unit>): IStreamedFileDataRequest {
         IStreamedFileDataRequest(raw)
     }
 
@@ -3637,7 +3637,7 @@ public class StorageFile <: InterfaceWrapperBase & ComInterface & windows_interf
         StorageFile(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFile {
+    public static func viewOf(raw: CPointer<Unit>): StorageFile {
         StorageFile(raw)
     }
 
@@ -3931,7 +3931,7 @@ public class StorageFolder <: InterfaceWrapperBase & ComInterface & windows_inte
         StorageFolder(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFolder {
+    public static func viewOf(raw: CPointer<Unit>): StorageFolder {
         StorageFolder(raw)
     }
 
@@ -4268,7 +4268,7 @@ public class StorageLibraryChange <: InterfaceWrapperBase & ComInterface & windo
         StorageLibraryChange(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChange {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChange {
         StorageLibraryChange(raw)
     }
 
@@ -4348,7 +4348,7 @@ public class StorageLibraryChangeReader <: InterfaceWrapperBase & ComInterface &
         StorageLibraryChangeReader(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeReader {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeReader {
         StorageLibraryChangeReader(raw)
     }
 
@@ -4416,7 +4416,7 @@ public class StorageLibraryChangeTracker <: InterfaceWrapperBase & ComInterface 
         StorageLibraryChangeTracker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeTracker {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeTracker {
         StorageLibraryChangeTracker(raw)
     }
 
@@ -4488,7 +4488,7 @@ public class StorageLibraryChangeTrackerOptions <: InterfaceWrapperBase & ComInt
         StorageLibraryChangeTrackerOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeTrackerOptions {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeTrackerOptions {
         StorageLibraryChangeTrackerOptions(raw)
     }
 
@@ -4629,7 +4629,7 @@ public class StorageProvider <: InterfaceWrapperBase & ComInterface & windows_in
         StorageProvider(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageProvider {
+    public static func viewOf(raw: CPointer<Unit>): StorageProvider {
         StorageProvider(raw)
     }
 
@@ -4693,7 +4693,7 @@ public class StorageStreamTransaction <: InterfaceWrapperBase & ComInterface & w
         StorageStreamTransaction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageStreamTransaction {
+    public static func viewOf(raw: CPointer<Unit>): StorageStreamTransaction {
         StorageStreamTransaction(raw)
     }
 
@@ -4765,7 +4765,7 @@ public class StreamedFileDataRequest <: InterfaceWrapperBase & ComInterface & wi
         StreamedFileDataRequest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StreamedFileDataRequest {
+    public static func viewOf(raw: CPointer<Unit>): StreamedFileDataRequest {
         StreamedFileDataRequest(raw)
     }
 
@@ -4854,7 +4854,7 @@ public class StreamedFileDataRequestedHandler <: InterfaceWrapperBase & ComInter
         StreamedFileDataRequestedHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StreamedFileDataRequestedHandler {
+    public static func viewOf(raw: CPointer<Unit>): StreamedFileDataRequestedHandler {
         StreamedFileDataRequestedHandler(raw)
     }
 
@@ -4940,7 +4940,7 @@ func buildStreamedFileDataRequestedHandlerBoxVtbl(): StreamedFileDataRequestedHa
 func StreamedFileDataRequestedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<StreamedFileDataRequestedHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(StreamedFileDataRequest.fromRawBorrowed(arg0))
+            invoker.Invoke(StreamedFileDataRequest.viewOf(arg0))
             return S_OK.value
         case None =>
             return E_NOTIMPL.value

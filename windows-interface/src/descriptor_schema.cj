@@ -54,8 +54,8 @@ func expandedAncestorSchemaIids(baseSchema: InterfaceDescriptorSchema): Array<GU
 // will consume when it starts generating vtables and `_Impl` surfaces.
 public enum InterfaceParameterBridgeKind {
     | Value
-    | Ref
-    | OutRef
+    | InParam
+    | OutSlot
 }
 
 public class InterfaceParameterSchema {

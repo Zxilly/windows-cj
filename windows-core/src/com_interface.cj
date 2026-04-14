@@ -30,10 +30,10 @@ public unsafe func queryInterface(source: CPointer<Unit>, targetIid: GUID): Opti
 public unsafe func queryInterfaceResult<U>(
     source: CPointer<Unit>,
     target: InterfaceDescriptor<U>
-): QueryResult<ComPtr<U>> where U <: ComInterface {
+): QueryResult<InterfaceHandle<U>> where U <: ComInterface {
     let pointerError = HRESULT(-2147467261i32)
     if (source.isNull()) {
-        return QueryResult<ComPtr<U>>.Err(pointerError)
+        return QueryResult<InterfaceHandle<U>>.Err(pointerError)
     }
 
     var iid = target.iid
@@ -44,12 +44,12 @@ public unsafe func queryInterfaceResult<U>(
 
     if (hr.succeeded()) {
         if (!result.isNull()) {
-            return QueryResult<ComPtr<U>>.Ok(ComPtr<U>.attach(result, target))
+            return QueryResult<InterfaceHandle<U>>.Ok(InterfaceHandle<U>.fromAbiTake(result, target))
         }
-        return QueryResult<ComPtr<U>>.Err(pointerError)
+        return QueryResult<InterfaceHandle<U>>.Err(pointerError)
     }
 
-    QueryResult<ComPtr<U>>.Err(hr)
+    QueryResult<InterfaceHandle<U>>.Err(hr)
 }
 
 // 比较两个 COM 包装是否指向同一个 IUnknown 身份。
@@ -65,11 +65,11 @@ public unsafe func sameComIdentity(left: ComInterface, right: ComInterface): Boo
             match (queryInterfaceRaw(rightRaw, IID_IUNKNOWN)) {
                 case Some(rightIdentity) =>
                     let same = leftIdentity.toUIntNative() == rightIdentity.toUIntNative()
-                    comPtrReleaseRaw(leftIdentity)
-                    comPtrReleaseRaw(rightIdentity)
+                    interfaceHandleReleaseRaw(leftIdentity)
+                    interfaceHandleReleaseRaw(rightIdentity)
                     return same
                 case None =>
-                    comPtrReleaseRaw(leftIdentity)
+                    interfaceHandleReleaseRaw(leftIdentity)
                     return false
             }
         case None =>

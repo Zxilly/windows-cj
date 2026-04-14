@@ -226,7 +226,7 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
     }
 
     /// Unsafe: caller must guarantee `ptr` remains valid for all uses of the returned wrapper.
-    public static func unsafeFromBorrowedRaw(ptr: CPointer<UInt16>): BSTR {
+    public static func unsafeFromRawView(ptr: CPointer<UInt16>): BSTR {
         BSTR(ptr, false)
     }
 
@@ -236,7 +236,7 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
         BSTR(ptr, ptr.isNotNull())
     }
 
-/// Create an independent copy of this BSTR (analogous to Rust Clone).
+/// Create an independent copy of this BSTR.
     public func clone(): BSTR {
         if (closed || ptr.isNull()) {
             return BSTR()
@@ -272,7 +272,7 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
         length() == 0
     }
 
-    public func isOwned(): Bool {
+    public func ownsStorage(): Bool {
         ownsStorage && !closed
     }
 

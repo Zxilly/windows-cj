@@ -45,7 +45,7 @@ public class DeviceInformation <: InterfaceWrapperBase & ComInterface & windows_
         DeviceInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeviceInformation {
+    public static func viewOf(raw: CPointer<Unit>): DeviceInformation {
         DeviceInformation(raw)
     }
 
@@ -243,7 +243,7 @@ public class DeviceInformationCollection <: InterfaceWrapperBase & ComInterface 
         DeviceInformationCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeviceInformationCollection {
+    public static func viewOf(raw: CPointer<Unit>): DeviceInformationCollection {
         DeviceInformationCollection(raw)
     }
 
@@ -327,7 +327,7 @@ public class DeviceInformationCustomPairing <: InterfaceWrapperBase & ComInterfa
         DeviceInformationCustomPairing(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeviceInformationCustomPairing {
+    public static func viewOf(raw: CPointer<Unit>): DeviceInformationCustomPairing {
         DeviceInformationCustomPairing(raw)
     }
 
@@ -437,7 +437,7 @@ public class DeviceInformationPairing <: InterfaceWrapperBase & ComInterface & w
         DeviceInformationPairing(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeviceInformationPairing {
+    public static func viewOf(raw: CPointer<Unit>): DeviceInformationPairing {
         DeviceInformationPairing(raw)
     }
 
@@ -525,7 +525,7 @@ public class DeviceInformationUpdate <: InterfaceWrapperBase & ComInterface & wi
         DeviceInformationUpdate(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeviceInformationUpdate {
+    public static func viewOf(raw: CPointer<Unit>): DeviceInformationUpdate {
         DeviceInformationUpdate(raw)
     }
 
@@ -684,7 +684,7 @@ public class DevicePairingRequestedEventArgs <: InterfaceWrapperBase & ComInterf
         DevicePairingRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DevicePairingRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): DevicePairingRequestedEventArgs {
         DevicePairingRequestedEventArgs(raw)
     }
 
@@ -768,7 +768,7 @@ public class DevicePairingResult <: InterfaceWrapperBase & ComInterface & window
         DevicePairingResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DevicePairingResult {
+    public static func viewOf(raw: CPointer<Unit>): DevicePairingResult {
         DevicePairingResult(raw)
     }
 
@@ -876,7 +876,7 @@ public class DevicePairingSetMembersRequestedEventArgs <: InterfaceWrapperBase &
         DevicePairingSetMembersRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DevicePairingSetMembersRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): DevicePairingSetMembersRequestedEventArgs {
         DevicePairingSetMembersRequestedEventArgs(raw)
     }
 
@@ -948,7 +948,7 @@ public class DeviceThumbnail <: InterfaceWrapperBase & ComInterface & windows_in
         DeviceThumbnail(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeviceThumbnail {
+    public static func viewOf(raw: CPointer<Unit>): DeviceThumbnail {
         DeviceThumbnail(raw)
     }
 
@@ -1084,7 +1084,7 @@ public class DeviceUnpairingResult <: InterfaceWrapperBase & ComInterface & wind
         DeviceUnpairingResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeviceUnpairingResult {
+    public static func viewOf(raw: CPointer<Unit>): DeviceUnpairingResult {
         DeviceUnpairingResult(raw)
     }
 
@@ -1173,7 +1173,7 @@ public class DeviceWatcher <: InterfaceWrapperBase & ComInterface & windows_inte
         DeviceWatcher(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeviceWatcher {
+    public static func viewOf(raw: CPointer<Unit>): DeviceWatcher {
         DeviceWatcher(raw)
     }
 
@@ -1334,7 +1334,7 @@ public class EnclosureLocation <: InterfaceWrapperBase & ComInterface & windows_
         EnclosureLocation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): EnclosureLocation {
+    public static func viewOf(raw: CPointer<Unit>): EnclosureLocation {
         EnclosureLocation(raw)
     }
 
@@ -1431,7 +1431,7 @@ public class IDeviceEnumerationSettings <: InterfaceWrapperBase & ComInterface &
         IDeviceEnumerationSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceEnumerationSettings {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceEnumerationSettings {
         IDeviceEnumerationSettings(raw)
     }
 
@@ -1509,7 +1509,7 @@ public class IDeviceInformation <: InterfaceWrapperBase & ComInterface & Runtime
         IDeviceInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceInformation {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceInformation {
         IDeviceInformation(raw)
     }
 
@@ -1650,7 +1650,7 @@ public class IDeviceInformation2 <: InterfaceWrapperBase & ComInterface & Runtim
         IDeviceInformation2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceInformation2 {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceInformation2 {
         IDeviceInformation2(raw)
     }
 
@@ -1740,7 +1740,7 @@ public class IDeviceInformationCustomPairing <: InterfaceWrapperBase & ComInterf
         IDeviceInformationCustomPairing(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceInformationCustomPairing {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceInformationCustomPairing {
         IDeviceInformationCustomPairing(raw)
     }
 
@@ -1850,7 +1850,7 @@ public class IDeviceInformationCustomPairing2 <: InterfaceWrapperBase & ComInter
         IDeviceInformationCustomPairing2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceInformationCustomPairing2 {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceInformationCustomPairing2 {
         IDeviceInformationCustomPairing2(raw)
     }
 
@@ -1943,7 +1943,7 @@ public class IDeviceInformationPairing <: InterfaceWrapperBase & ComInterface & 
         IDeviceInformationPairing(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceInformationPairing {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceInformationPairing {
         IDeviceInformationPairing(raw)
     }
 
@@ -2048,7 +2048,7 @@ public class IDeviceInformationPairing2 <: InterfaceWrapperBase & ComInterface &
         IDeviceInformationPairing2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceInformationPairing2 {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceInformationPairing2 {
         IDeviceInformationPairing2(raw)
     }
 
@@ -2151,7 +2151,7 @@ public class IDeviceInformationUpdate <: InterfaceWrapperBase & ComInterface & R
         IDeviceInformationUpdate(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceInformationUpdate {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceInformationUpdate {
         IDeviceInformationUpdate(raw)
     }
 
@@ -2237,7 +2237,7 @@ public class IDeviceInformationUpdate2 <: InterfaceWrapperBase & ComInterface & 
         IDeviceInformationUpdate2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceInformationUpdate2 {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceInformationUpdate2 {
         IDeviceInformationUpdate2(raw)
     }
 
@@ -2320,7 +2320,7 @@ public class IDevicePairingRequestedEventArgs <: InterfaceWrapperBase & ComInter
         IDevicePairingRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDevicePairingRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IDevicePairingRequestedEventArgs {
         IDevicePairingRequestedEventArgs(raw)
     }
 
@@ -2434,7 +2434,7 @@ public class IDevicePairingRequestedEventArgs2 <: InterfaceWrapperBase & ComInte
         IDevicePairingRequestedEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDevicePairingRequestedEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): IDevicePairingRequestedEventArgs2 {
         IDevicePairingRequestedEventArgs2(raw)
     }
 
@@ -2510,7 +2510,7 @@ public class IDevicePairingRequestedEventArgs3 <: InterfaceWrapperBase & ComInte
         IDevicePairingRequestedEventArgs3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDevicePairingRequestedEventArgs3 {
+    public static func viewOf(raw: CPointer<Unit>): IDevicePairingRequestedEventArgs3 {
         IDevicePairingRequestedEventArgs3(raw)
     }
 
@@ -2587,7 +2587,7 @@ public class IDevicePairingResult <: InterfaceWrapperBase & ComInterface & Runti
         IDevicePairingResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDevicePairingResult {
+    public static func viewOf(raw: CPointer<Unit>): IDevicePairingResult {
         IDevicePairingResult(raw)
     }
 
@@ -2675,7 +2675,7 @@ public class IDevicePairingSetMembersRequestedEventArgs <: InterfaceWrapperBase 
         IDevicePairingSetMembersRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDevicePairingSetMembersRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IDevicePairingSetMembersRequestedEventArgs {
         IDevicePairingSetMembersRequestedEventArgs(raw)
     }
 
@@ -2786,7 +2786,7 @@ public class IDevicePairingSettings <: InterfaceWrapperBase & ComInterface & Run
         IDevicePairingSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDevicePairingSettings {
+    public static func viewOf(raw: CPointer<Unit>): IDevicePairingSettings {
         IDevicePairingSettings(raw)
     }
 
@@ -2856,7 +2856,7 @@ public class IDeviceUnpairingResult <: InterfaceWrapperBase & ComInterface & Run
         IDeviceUnpairingResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceUnpairingResult {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceUnpairingResult {
         IDeviceUnpairingResult(raw)
     }
 
@@ -2946,7 +2946,7 @@ public class IDeviceWatcher <: InterfaceWrapperBase & ComInterface & RuntimeName
         IDeviceWatcher(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceWatcher {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceWatcher {
         IDeviceWatcher(raw)
     }
 
@@ -3106,7 +3106,7 @@ public class IDeviceWatcher2 <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IDeviceWatcher2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceWatcher2 {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceWatcher2 {
         IDeviceWatcher2(raw)
     }
 
@@ -3186,7 +3186,7 @@ public class IEnclosureLocation <: InterfaceWrapperBase & ComInterface & Runtime
         IEnclosureLocation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IEnclosureLocation {
+    public static func viewOf(raw: CPointer<Unit>): IEnclosureLocation {
         IEnclosureLocation(raw)
     }
 
@@ -3280,7 +3280,7 @@ public class IEnclosureLocation2 <: InterfaceWrapperBase & ComInterface & Runtim
         IEnclosureLocation2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IEnclosureLocation2 {
+    public static func viewOf(raw: CPointer<Unit>): IEnclosureLocation2 {
         IEnclosureLocation2(raw)
     }
 

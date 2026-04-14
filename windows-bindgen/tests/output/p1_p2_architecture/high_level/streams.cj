@@ -1,12 +1,14 @@
-package windows.storage.streams
+package Windows.Storage.Streams
 
 import std.collection.*
 import windows_core.*
 import windows_interface.*
-import windows.win32.foundation.*
+import Windows.Foundation as Foundation
+import Windows.Win32.Foundation as Win32_Foundation
+import Windows.Win32.Foundation.*
 
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 @C
 public struct IBufferVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -19,11 +21,11 @@ public struct IBufferVtbl {
         let _ = offset
         var vtbl = IBufferVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.Capacity = { this_, result__ =>
+        vtbl.Capacity = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Capacity()) {
                         case Result<UInt32>.Ok(value) =>
@@ -36,11 +38,11 @@ public struct IBufferVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Length = { this_, result__ =>
+        vtbl.Length = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Length()) {
                         case Result<UInt32>.Ok(value) =>
@@ -53,8 +55,8 @@ public struct IBufferVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SetLength = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.SetLength = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.SetLength(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -77,24 +79,28 @@ public struct IBufferVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public interface IBuffer_Impl {
     public func Capacity(): windows_core.Result<UInt32>
     public func Length(): windows_core.Result<UInt32>
     public func SetLength(value: UInt32): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public class IBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IBuffer {
-        IBuffer(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBuffer {
+    public static func fromAbiTake(raw: CPointer<Unit>): IBuffer {
+        IBuffer(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IBuffer {
         IBuffer(raw)
     }
 
@@ -110,13 +116,13 @@ public class IBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName & wind
     }
 
     public static func descriptor(): InterfaceDescriptor<IBuffer> {
-        var descriptor = InterfaceDescriptor<IBuffer>("IBuffer", IBuffer.iid(), IInspectable.descriptor(), { raw => IBuffer(raw, ownsReference: true) }, { raw => IBuffer(raw) })
+        var descriptor = InterfaceDescriptor<IBuffer>("IBuffer", IBuffer.iid(), IInspectable.descriptor(), { raw => IBuffer.fromAbiTake(raw) }, { raw => IBuffer.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IBuffer.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IBuffer", IBuffer.iid(), IInspectable.descriptorSchema(), "IBufferVtbl", "IBuffer", "IBuffer_Impl", [InterfaceMethodSchema("Capacity", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Length", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetLength", 8, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IBuffer", IBuffer.iid(), IInspectable.descriptorSchema(), "IBufferVtbl", "IBuffer", "IBuffer_Impl", [InterfaceMethodSchema("Capacity", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Length", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetLength", 8, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IBuffer.runtimeType())
         return schema
     }
@@ -138,7 +144,7 @@ public class IBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName & wind
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IBufferVtbl {
@@ -168,7 +174,7 @@ public class IBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName & wind
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 @C
 public struct IContentTypeProviderVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -179,11 +185,11 @@ public struct IContentTypeProviderVtbl {
         let _ = offset
         var vtbl = IContentTypeProviderVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.ContentType = { this_, result__ =>
+        vtbl.ContentType = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.ContentType()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -207,22 +213,26 @@ public struct IContentTypeProviderVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public interface IContentTypeProvider_Impl {
     public func ContentType(): windows_core.Result<CPointer<UInt16>>
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public class IContentTypeProvider <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IContentTypeProvider {
-        IContentTypeProvider(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IContentTypeProvider {
+    public static func fromAbiTake(raw: CPointer<Unit>): IContentTypeProvider {
+        IContentTypeProvider(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IContentTypeProvider {
         IContentTypeProvider(raw)
     }
 
@@ -238,13 +248,13 @@ public class IContentTypeProvider <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptor(): InterfaceDescriptor<IContentTypeProvider> {
-        var descriptor = InterfaceDescriptor<IContentTypeProvider>("IContentTypeProvider", IContentTypeProvider.iid(), IInspectable.descriptor(), { raw => IContentTypeProvider(raw, ownsReference: true) }, { raw => IContentTypeProvider(raw) })
+        var descriptor = InterfaceDescriptor<IContentTypeProvider>("IContentTypeProvider", IContentTypeProvider.iid(), IInspectable.descriptor(), { raw => IContentTypeProvider.fromAbiTake(raw) }, { raw => IContentTypeProvider.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IContentTypeProvider.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IContentTypeProvider", IContentTypeProvider.iid(), IInspectable.descriptorSchema(), "IContentTypeProviderVtbl", "IContentTypeProvider", "IContentTypeProvider_Impl", [InterfaceMethodSchema("ContentType", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IContentTypeProvider", IContentTypeProvider.iid(), IInspectable.descriptorSchema(), "IContentTypeProviderVtbl", "IContentTypeProvider", "IContentTypeProvider_Impl", [InterfaceMethodSchema("ContentType", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IContentTypeProvider.runtimeType())
         return schema
     }
@@ -266,7 +276,7 @@ public class IContentTypeProvider <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IContentTypeProviderVtbl {
@@ -282,7 +292,7 @@ public class IContentTypeProvider <: InterfaceWrapperBase & ComInterface & Runti
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 @C
 public struct IInputStreamVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -293,23 +303,22 @@ public struct IInputStreamVtbl {
         let _ = offset
         var vtbl = IInputStreamVtbl()
         vtbl.base_ = IClosableVtbl.new<Identity>(offset: offset)
-        vtbl.ReadAsync = { this_, arg0, arg1, arg2, result__ =>
+        vtbl.ReadAsync = { instanceRaw, arg0, arg1, arg2, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.ReadAsync(IBuffer.fromRawBorrowed(arg0), arg1, arg2)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                    match (impl.ReadAsync(InParam<IBuffer>(IBuffer.viewOf(arg0)), arg1, arg2)) {
+                        case Result<Foundation.IAsyncOperationWithProgress<IBuffer, UInt32>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperationWithProgress<IBuffer, UInt32>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -323,7 +332,7 @@ public struct IInputStreamVtbl {
         if (iid == IInputStream.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -332,22 +341,26 @@ public struct IInputStreamVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public interface IInputStream_Impl <: IClosable_Impl {
-    public func ReadAsync(buffer: IBuffer, count: UInt32, options: InputStreamOptions): windows_core.Result<CPointer<Unit>>
+    public func ReadAsync(buffer: InParam<IBuffer>, count: UInt32, options: InputStreamOptions): windows_core.Result<Foundation.IAsyncOperationWithProgress<IBuffer, UInt32>>
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public class IInputStream <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IInputStream {
-        IInputStream(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IInputStream {
+    public static func fromAbiTake(raw: CPointer<Unit>): IInputStream {
+        IInputStream(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IInputStream {
         IInputStream(raw)
     }
 
@@ -359,7 +372,7 @@ public class IInputStream <: InterfaceWrapperBase & ComInterface & RuntimeName &
         if (iid == IInputStream.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -368,13 +381,13 @@ public class IInputStream <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptor(): InterfaceDescriptor<IInputStream> {
-        var descriptor = InterfaceDescriptor<IInputStream>("IInputStream", IInputStream.iid(), windows.foundation.IClosable.descriptor(), { raw => IInputStream(raw, ownsReference: true) }, { raw => IInputStream(raw) })
+        var descriptor = InterfaceDescriptor<IInputStream>("IInputStream", IInputStream.iid(), Foundation.IClosable.descriptor(), { raw => IInputStream.fromAbiTake(raw) }, { raw => IInputStream.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IInputStream.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInputStream", IInputStream.iid(), windows.foundation.IClosable.descriptorSchema(), "IInputStreamVtbl", "IInputStream", "IInputStream_Impl", [InterfaceMethodSchema("ReadAsync", 7, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "Ref<IBuffer>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("count", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "InputStreamOptions", "InputStreamOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInputStream", IInputStream.iid(), Foundation.IClosable.descriptorSchema(), "IInputStreamVtbl", "IInputStream", "IInputStream_Impl", [InterfaceMethodSchema("ReadAsync", 7, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("count", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "InputStreamOptions", "InputStreamOptions", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperationWithProgress<IBuffer, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInputStream.runtimeType())
         return schema
     }
@@ -396,27 +409,27 @@ public class IInputStream <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IInputStreamVtbl {
         readVtbl<IInputStreamVtbl>(IInputStreamVtbl())
     }
 
-    public unsafe func ReadAsync(buffer: IBuffer, count: UInt32, options: InputStreamOptions): CPointer<Unit> {
+    public unsafe func ReadAsync(buffer: IBuffer, count: UInt32, options: InputStreamOptions): Foundation.IAsyncOperationWithProgress<IBuffer, UInt32> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.ReadAsync(asRaw(), buffer.asRaw(), count, options, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperationWithProgress<IBuffer, UInt32>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 @C
 public struct IInputStreamReferenceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -427,23 +440,22 @@ public struct IInputStreamReferenceVtbl {
         let _ = offset
         var vtbl = IInputStreamReferenceVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.OpenSequentialReadAsync = { this_, result__ =>
+        vtbl.OpenSequentialReadAsync = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.OpenSequentialReadAsync()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<IInputStream>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<IInputStream>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -461,22 +473,26 @@ public struct IInputStreamReferenceVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public interface IInputStreamReference_Impl {
-    public func OpenSequentialReadAsync(): windows_core.Result<CPointer<Unit>>
+    public func OpenSequentialReadAsync(): windows_core.Result<Foundation.IAsyncOperation<IInputStream>>
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public class IInputStreamReference <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IInputStreamReference {
-        IInputStreamReference(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IInputStreamReference {
+    public static func fromAbiTake(raw: CPointer<Unit>): IInputStreamReference {
+        IInputStreamReference(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IInputStreamReference {
         IInputStreamReference(raw)
     }
 
@@ -492,13 +508,13 @@ public class IInputStreamReference <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptor(): InterfaceDescriptor<IInputStreamReference> {
-        var descriptor = InterfaceDescriptor<IInputStreamReference>("IInputStreamReference", IInputStreamReference.iid(), IInspectable.descriptor(), { raw => IInputStreamReference(raw, ownsReference: true) }, { raw => IInputStreamReference(raw) })
+        var descriptor = InterfaceDescriptor<IInputStreamReference>("IInputStreamReference", IInputStreamReference.iid(), IInspectable.descriptor(), { raw => IInputStreamReference.fromAbiTake(raw) }, { raw => IInputStreamReference.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IInputStreamReference.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IInputStreamReference", IInputStreamReference.iid(), IInspectable.descriptorSchema(), "IInputStreamReferenceVtbl", "IInputStreamReference", "IInputStreamReference_Impl", [InterfaceMethodSchema("OpenSequentialReadAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IInputStreamReference", IInputStreamReference.iid(), IInspectable.descriptorSchema(), "IInputStreamReferenceVtbl", "IInputStreamReference", "IInputStreamReference_Impl", [InterfaceMethodSchema("OpenSequentialReadAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<IInputStream>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IInputStreamReference.runtimeType())
         return schema
     }
@@ -520,23 +536,23 @@ public class IInputStreamReference <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IInputStreamReferenceVtbl {
         readVtbl<IInputStreamReferenceVtbl>(IInputStreamReferenceVtbl())
     }
 
-    public unsafe func OpenSequentialReadAsync(): CPointer<Unit> {
+    public unsafe func OpenSequentialReadAsync(): Foundation.IAsyncOperation<IInputStream> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.OpenSequentialReadAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<IInputStream>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 @C
 public struct IOutputStreamVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -548,46 +564,44 @@ public struct IOutputStreamVtbl {
         let _ = offset
         var vtbl = IOutputStreamVtbl()
         vtbl.base_ = IClosableVtbl.new<Identity>(offset: offset)
-        vtbl.WriteAsync = { this_, arg0, result__ =>
+        vtbl.WriteAsync = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.WriteAsync(IBuffer.fromRawBorrowed(arg0))) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                    match (impl.WriteAsync(InParam<IBuffer>(IBuffer.viewOf(arg0)))) {
+                        case Result<Foundation.IAsyncOperationWithProgress<UInt32, UInt32>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperationWithProgress<UInt32, UInt32>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.FlushAsync = { this_, result__ =>
+        vtbl.FlushAsync = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.FlushAsync()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Bool>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Bool>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -601,7 +615,7 @@ public struct IOutputStreamVtbl {
         if (iid == IOutputStream.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -610,23 +624,27 @@ public struct IOutputStreamVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public interface IOutputStream_Impl <: IClosable_Impl {
-    public func WriteAsync(buffer: IBuffer): windows_core.Result<CPointer<Unit>>
-    public func FlushAsync(): windows_core.Result<CPointer<Unit>>
+    public func WriteAsync(buffer: InParam<IBuffer>): windows_core.Result<Foundation.IAsyncOperationWithProgress<UInt32, UInt32>>
+    public func FlushAsync(): windows_core.Result<Foundation.IAsyncOperation<Bool>>
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public class IOutputStream <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IOutputStream {
-        IOutputStream(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IOutputStream {
+    public static func fromAbiTake(raw: CPointer<Unit>): IOutputStream {
+        IOutputStream(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IOutputStream {
         IOutputStream(raw)
     }
 
@@ -638,7 +656,7 @@ public class IOutputStream <: InterfaceWrapperBase & ComInterface & RuntimeName 
         if (iid == IOutputStream.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -647,13 +665,13 @@ public class IOutputStream <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IOutputStream> {
-        var descriptor = InterfaceDescriptor<IOutputStream>("IOutputStream", IOutputStream.iid(), windows.foundation.IClosable.descriptor(), { raw => IOutputStream(raw, ownsReference: true) }, { raw => IOutputStream(raw) })
+        var descriptor = InterfaceDescriptor<IOutputStream>("IOutputStream", IOutputStream.iid(), Foundation.IClosable.descriptor(), { raw => IOutputStream.fromAbiTake(raw) }, { raw => IOutputStream.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IOutputStream.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IOutputStream", IOutputStream.iid(), windows.foundation.IClosable.descriptorSchema(), "IOutputStreamVtbl", "IOutputStream", "IOutputStream_Impl", [InterfaceMethodSchema("WriteAsync", 7, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "Ref<IBuffer>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("FlushAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IOutputStream", IOutputStream.iid(), Foundation.IClosable.descriptorSchema(), "IOutputStreamVtbl", "IOutputStream", "IOutputStream_Impl", [InterfaceMethodSchema("WriteAsync", 7, [InterfaceParameterSchema("buffer", "CPointer<Unit>", "InParam<IBuffer>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperationWithProgress<UInt32, UInt32>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("FlushAsync", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Bool>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IOutputStream.runtimeType())
         return schema
     }
@@ -675,35 +693,35 @@ public class IOutputStream <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IOutputStreamVtbl {
         readVtbl<IOutputStreamVtbl>(IOutputStreamVtbl())
     }
 
-    public unsafe func WriteAsync(buffer: IBuffer): CPointer<Unit> {
+    public unsafe func WriteAsync(buffer: IBuffer): Foundation.IAsyncOperationWithProgress<UInt32, UInt32> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.WriteAsync(asRaw(), buffer.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperationWithProgress<UInt32, UInt32>.fromAbiTake(result)
     }
 
-    public unsafe func FlushAsync(): CPointer<Unit> {
+    public unsafe func FlushAsync(): Foundation.IAsyncOperation<Bool> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.FlushAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Bool>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 @C
 public struct IRandomAccessStreamVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -722,11 +740,11 @@ public struct IRandomAccessStreamVtbl {
         let _ = offset
         var vtbl = IRandomAccessStreamVtbl()
         vtbl.base_ = IClosableVtbl.new<Identity>(offset: offset)
-        vtbl.Size = { this_, result__ =>
+        vtbl.Size = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Size()) {
                         case Result<UInt64>.Ok(value) =>
@@ -739,8 +757,8 @@ public struct IRandomAccessStreamVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SetSize = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.SetSize = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.SetSize(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -752,19 +770,18 @@ public struct IRandomAccessStreamVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetInputStreamAt = { this_, arg0, result__ =>
+        vtbl.GetInputStreamAt = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetInputStreamAt(arg0)) {
                         case Result<IInputStream>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -775,19 +792,18 @@ public struct IRandomAccessStreamVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetOutputStreamAt = { this_, arg0, result__ =>
+        vtbl.GetOutputStreamAt = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetOutputStreamAt(arg0)) {
                         case Result<IOutputStream>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -798,11 +814,11 @@ public struct IRandomAccessStreamVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Position = { this_, result__ =>
+        vtbl.Position = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Position()) {
                         case Result<UInt64>.Ok(value) =>
@@ -815,8 +831,8 @@ public struct IRandomAccessStreamVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Seek = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.Seek = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Seek(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -828,19 +844,18 @@ public struct IRandomAccessStreamVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CloneStream = { this_, result__ =>
+        vtbl.CloneStream = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CloneStream()) {
                         case Result<IRandomAccessStream>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -851,11 +866,11 @@ public struct IRandomAccessStreamVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CanRead = { this_, result__ =>
+        vtbl.CanRead = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CanRead()) {
                         case Result<Bool>.Ok(value) =>
@@ -868,11 +883,11 @@ public struct IRandomAccessStreamVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CanWrite = { this_, result__ =>
+        vtbl.CanWrite = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CanWrite()) {
                         case Result<Bool>.Ok(value) =>
@@ -892,7 +907,7 @@ public struct IRandomAccessStreamVtbl {
         if (iid == IRandomAccessStream.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -901,7 +916,7 @@ public struct IRandomAccessStreamVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public interface IRandomAccessStream_Impl <: IClosable_Impl & IInputStream_Impl & IOutputStream_Impl {
     public func Size(): windows_core.Result<UInt64>
     public func SetSize(value: UInt64): windows_core.Result<Unit>
@@ -914,17 +929,21 @@ public interface IRandomAccessStream_Impl <: IClosable_Impl & IInputStream_Impl 
     public func CanWrite(): windows_core.Result<Bool>
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IRandomAccessStream {
-        IRandomAccessStream(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStream {
+    public static func fromAbiTake(raw: CPointer<Unit>): IRandomAccessStream {
+        IRandomAccessStream(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStream {
         IRandomAccessStream(raw)
     }
 
@@ -936,7 +955,7 @@ public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & Runtim
         if (iid == IRandomAccessStream.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -945,13 +964,13 @@ public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptor(): InterfaceDescriptor<IRandomAccessStream> {
-        var descriptor = InterfaceDescriptor<IRandomAccessStream>("IRandomAccessStream", IRandomAccessStream.iid(), windows.foundation.IClosable.descriptor(), { raw => IRandomAccessStream(raw, ownsReference: true) }, { raw => IRandomAccessStream(raw) })
+        var descriptor = InterfaceDescriptor<IRandomAccessStream>("IRandomAccessStream", IRandomAccessStream.iid(), Foundation.IClosable.descriptor(), { raw => IRandomAccessStream.fromAbiTake(raw) }, { raw => IRandomAccessStream.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IRandomAccessStream.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IRandomAccessStream", IRandomAccessStream.iid(), windows.foundation.IClosable.descriptorSchema(), "IRandomAccessStreamVtbl", "IRandomAccessStream", "IRandomAccessStream_Impl", [InterfaceMethodSchema("Size", 7, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutRef<UInt64>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetSize", 8, [InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInputStreamAt", 9, [InterfaceParameterSchema("position", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInputStream>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetOutputStreamAt", 10, [InterfaceParameterSchema("position", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IOutputStream>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Position", 11, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutRef<UInt64>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Seek", 12, [InterfaceParameterSchema("position", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CloneStream", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IRandomAccessStream>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CanRead", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CanWrite", 15, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IRandomAccessStream", IRandomAccessStream.iid(), Foundation.IClosable.descriptorSchema(), "IRandomAccessStreamVtbl", "IRandomAccessStream", "IRandomAccessStream_Impl", [InterfaceMethodSchema("Size", 7, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetSize", 8, [InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInputStreamAt", 9, [InterfaceParameterSchema("position", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetOutputStreamAt", 10, [InterfaceParameterSchema("position", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IOutputStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Position", 11, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Seek", 12, [InterfaceParameterSchema("position", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("CloneStream", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IRandomAccessStream>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanRead", 14, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CanWrite", 15, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IRandomAccessStream.runtimeType())
         return schema
     }
@@ -973,19 +992,19 @@ public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public func asIInputStream(): IInputStream {
-        IInputStream(asRaw())
+        IInputStream.viewOf(asRaw())
     }
 
     public func asIOutputStream(): IOutputStream {
-        IOutputStream(asRaw())
+        IOutputStream.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IRandomAccessStreamVtbl {
@@ -1011,7 +1030,7 @@ public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & Runtim
         var result = CPointer<Unit>()
         let hr = v.GetInputStreamAt(asRaw(), position, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInputStream.fromRaw(result)
+        return IInputStream.fromAbiTake(result)
     }
 
     public unsafe func GetOutputStreamAt(position: UInt64): IOutputStream {
@@ -1019,7 +1038,7 @@ public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & Runtim
         var result = CPointer<Unit>()
         let hr = v.GetOutputStreamAt(asRaw(), position, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IOutputStream.fromRaw(result)
+        return IOutputStream.fromAbiTake(result)
     }
 
     public unsafe func Position(): UInt64 {
@@ -1041,7 +1060,7 @@ public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & Runtim
         var result = CPointer<Unit>()
         let hr = v.CloneStream(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IRandomAccessStream.fromRaw(result)
+        return IRandomAccessStream.fromAbiTake(result)
     }
 
     public unsafe func CanRead(): Bool {
@@ -1061,7 +1080,7 @@ public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & Runtim
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 @C
 public struct IRandomAccessStreamReferenceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1072,23 +1091,22 @@ public struct IRandomAccessStreamReferenceVtbl {
         let _ = offset
         var vtbl = IRandomAccessStreamReferenceVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.OpenReadAsync = { this_, result__ =>
+        vtbl.OpenReadAsync = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.OpenReadAsync()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<IRandomAccessStreamWithContentType>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<IRandomAccessStreamWithContentType>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -1106,22 +1124,26 @@ public struct IRandomAccessStreamReferenceVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public interface IRandomAccessStreamReference_Impl {
-    public func OpenReadAsync(): windows_core.Result<CPointer<Unit>>
+    public func OpenReadAsync(): windows_core.Result<Foundation.IAsyncOperation<IRandomAccessStreamWithContentType>>
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public class IRandomAccessStreamReference <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IRandomAccessStreamReference {
-        IRandomAccessStreamReference(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStreamReference {
+    public static func fromAbiTake(raw: CPointer<Unit>): IRandomAccessStreamReference {
+        IRandomAccessStreamReference(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStreamReference {
         IRandomAccessStreamReference(raw)
     }
 
@@ -1137,13 +1159,13 @@ public class IRandomAccessStreamReference <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IRandomAccessStreamReference> {
-        var descriptor = InterfaceDescriptor<IRandomAccessStreamReference>("IRandomAccessStreamReference", IRandomAccessStreamReference.iid(), IInspectable.descriptor(), { raw => IRandomAccessStreamReference(raw, ownsReference: true) }, { raw => IRandomAccessStreamReference(raw) })
+        var descriptor = InterfaceDescriptor<IRandomAccessStreamReference>("IRandomAccessStreamReference", IRandomAccessStreamReference.iid(), IInspectable.descriptor(), { raw => IRandomAccessStreamReference.fromAbiTake(raw) }, { raw => IRandomAccessStreamReference.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IRandomAccessStreamReference.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IRandomAccessStreamReference", IRandomAccessStreamReference.iid(), IInspectable.descriptorSchema(), "IRandomAccessStreamReferenceVtbl", "IRandomAccessStreamReference", "IRandomAccessStreamReference_Impl", [InterfaceMethodSchema("OpenReadAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IRandomAccessStreamReference", IRandomAccessStreamReference.iid(), IInspectable.descriptorSchema(), "IRandomAccessStreamReferenceVtbl", "IRandomAccessStreamReference", "IRandomAccessStreamReference_Impl", [InterfaceMethodSchema("OpenReadAsync", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<IRandomAccessStreamWithContentType>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IRandomAccessStreamReference.runtimeType())
         return schema
     }
@@ -1165,23 +1187,23 @@ public class IRandomAccessStreamReference <: InterfaceWrapperBase & ComInterface
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IRandomAccessStreamReferenceVtbl {
         readVtbl<IRandomAccessStreamReferenceVtbl>(IRandomAccessStreamReferenceVtbl())
     }
 
-    public unsafe func OpenReadAsync(): CPointer<Unit> {
+    public unsafe func OpenReadAsync(): Foundation.IAsyncOperation<IRandomAccessStreamWithContentType> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.OpenReadAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<IRandomAccessStreamWithContentType>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 @C
 public struct IRandomAccessStreamWithContentTypeVtbl {
     public var base_: IRandomAccessStreamVtbl = IRandomAccessStreamVtbl()
@@ -1198,7 +1220,7 @@ public struct IRandomAccessStreamWithContentTypeVtbl {
         if (iid == IRandomAccessStreamWithContentType.iid()) {
             return true
         }
-        for (ancestor in [IRandomAccessStream.iid(), windows.foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IRandomAccessStream.iid(), Foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -1207,21 +1229,25 @@ public struct IRandomAccessStreamWithContentTypeVtbl {
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public interface IRandomAccessStreamWithContentType_Impl <: IRandomAccessStream_Impl & IClosable_Impl & IInputStream_Impl & IOutputStream_Impl & IContentTypeProvider_Impl {
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
 public class IRandomAccessStreamWithContentType <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IRandomAccessStreamWithContentType {
-        IRandomAccessStreamWithContentType(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStreamWithContentType {
+    public static func fromAbiTake(raw: CPointer<Unit>): IRandomAccessStreamWithContentType {
+        IRandomAccessStreamWithContentType(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStreamWithContentType {
         IRandomAccessStreamWithContentType(raw)
     }
 
@@ -1233,7 +1259,7 @@ public class IRandomAccessStreamWithContentType <: InterfaceWrapperBase & ComInt
         if (iid == IRandomAccessStreamWithContentType.iid()) {
             return true
         }
-        for (ancestor in [IRandomAccessStream.iid(), windows.foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [IRandomAccessStream.iid(), Foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), IContentTypeProvider.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -1242,7 +1268,7 @@ public class IRandomAccessStreamWithContentType <: InterfaceWrapperBase & ComInt
     }
 
     public static func descriptor(): InterfaceDescriptor<IRandomAccessStreamWithContentType> {
-        var descriptor = InterfaceDescriptor<IRandomAccessStreamWithContentType>("IRandomAccessStreamWithContentType", IRandomAccessStreamWithContentType.iid(), IRandomAccessStream.descriptor(), { raw => IRandomAccessStreamWithContentType(raw, ownsReference: true) }, { raw => IRandomAccessStreamWithContentType(raw) })
+        var descriptor = InterfaceDescriptor<IRandomAccessStreamWithContentType>("IRandomAccessStreamWithContentType", IRandomAccessStreamWithContentType.iid(), IRandomAccessStream.descriptor(), { raw => IRandomAccessStreamWithContentType.fromAbiTake(raw) }, { raw => IRandomAccessStreamWithContentType.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IRandomAccessStreamWithContentType.runtimeType())
         return descriptor
     }
@@ -1270,27 +1296,27 @@ public class IRandomAccessStreamWithContentType <: InterfaceWrapperBase & ComInt
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIRandomAccessStream(): IRandomAccessStream {
-        IRandomAccessStream(asRaw())
+        IRandomAccessStream.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public func asIInputStream(): IInputStream {
-        IInputStream(asRaw())
+        IInputStream.viewOf(asRaw())
     }
 
     public func asIOutputStream(): IOutputStream {
-        IOutputStream(asRaw())
+        IOutputStream.viewOf(asRaw())
     }
 
     public func asIContentTypeProvider(): IContentTypeProvider {
-        IContentTypeProvider(asRaw())
+        IContentTypeProvider.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IRandomAccessStreamWithContentTypeVtbl {
@@ -1298,20 +1324,16 @@ public class IRandomAccessStreamWithContentType <: InterfaceWrapperBase & ComInt
     }
 }
 
-@When[feature == "feat_windows_storage_streams"]
+@When[Windows_Storage_Streams == "on"]
+@C
 public struct InputStreamOptions {
-    public let value: UInt32
+    public var value: UInt32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: UInt32) {
         this.value = value
     }
-    public static let None = InputStreamOptions(value: 0)
-    public static let Partial = InputStreamOptions(value: 1)
-    public static let ReadAhead = InputStreamOptions(value: 2)
 
     public operator func ==(other: InputStreamOptions): Bool {
         return this.value == other.value
@@ -1325,12 +1347,21 @@ public struct InputStreamOptions {
     }
 
     public operator func |(other: InputStreamOptions): InputStreamOptions {
-        return InputStreamOptions(value: this.value | other.value)
+        return InputStreamOptions(this.value | other.value)
     }
     public operator func &(other: InputStreamOptions): InputStreamOptions {
-        return InputStreamOptions(value: this.value & other.value)
+        return InputStreamOptions(this.value & other.value)
     }
-    public operator func ~(): InputStreamOptions {
-        return InputStreamOptions(value: ~this.value)
+    public operator func !(): InputStreamOptions {
+        return InputStreamOptions(!this.value)
     }
 }
+
+@When[Windows_Storage_Streams == "on"]
+public let None: InputStreamOptions = InputStreamOptions(0)
+
+@When[Windows_Storage_Streams == "on"]
+public let Partial: InputStreamOptions = InputStreamOptions(1)
+
+@When[Windows_Storage_Streams == "on"]
+public let ReadAhead: InputStreamOptions = InputStreamOptions(2)

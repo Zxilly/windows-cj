@@ -25,13 +25,13 @@ public struct EventToken {
 
 class EventEntry<T> where T <: ComInterface {
     public let token: EventToken
-    public let direct: Option<ComPtr<T>>
-    public let indirect: Option<ComPtr<IAgileReference>>
+    public let direct: Option<InterfaceHandle<T>>
+    public let indirect: Option<InterfaceHandle<IAgileReference>>
 
     public init(
         token: EventToken,
-        direct: Option<ComPtr<T>>,
-        indirect: Option<ComPtr<IAgileReference>>
+        direct: Option<InterfaceHandle<T>>,
+        indirect: Option<InterfaceHandle<IAgileReference>>
     ) {
         this.token = token
         this.direct = direct
@@ -39,14 +39,14 @@ class EventEntry<T> where T <: ComInterface {
     }
 
     public func cloneEntry(): EventEntry<T> {
-        var directClone: Option<ComPtr<T>> = None
+        var directClone: Option<InterfaceHandle<T>> = None
         match (direct) {
-            case Some(pointer) => directClone = Some(pointer.clonePtr())
+            case Some(pointer) => directClone = Some(pointer.retain())
             case None => ()
         }
-        var indirectClone: Option<ComPtr<IAgileReference>> = None
+        var indirectClone: Option<InterfaceHandle<IAgileReference>> = None
         match (indirect) {
-            case Some(pointer) => indirectClone = Some(pointer.clonePtr())
+            case Some(pointer) => indirectClone = Some(pointer.retain())
             case None => ()
         }
         EventEntry<T>(token, directClone, indirectClone)
@@ -227,7 +227,7 @@ public class Event<T> <: Resource where T <: ComInterface {
                 match (unsafe { wrapper.query(IAgileObject.descriptor()) }) {
                     case Some(agile) =>
                         agile.close()
-                        let pointer = ComPtr<T>.fromInterface(delegate, descriptor)
+                        let pointer = InterfaceHandle<T>.retainInterface(delegate, descriptor)
                         return Result<EventEntry<T>>.Ok(
                             EventEntry<T>(encodeEventToken(pointer.asRaw()), Some(pointer), None)
                         )
@@ -235,7 +235,7 @@ public class Event<T> <: Resource where T <: ComInterface {
                         ()
                 }
             case None =>
-                let pointer = ComPtr<T>.fromInterface(delegate, descriptor)
+                let pointer = InterfaceHandle<T>.retainInterface(delegate, descriptor)
                 return Result<EventEntry<T>>.Ok(
                     EventEntry<T>(encodeEventToken(pointer.asRaw()), Some(pointer), None)
                 )
@@ -259,7 +259,7 @@ public class Event<T> <: Resource where T <: ComInterface {
         if (raw.isNull()) {
             return Result<EventEntry<T>>.Err(WinError(E_POINTER))
         }
-        let pointer = ComPtr<IAgileReference>.attach(raw, IAgileReference.descriptor())
+        let pointer = InterfaceHandle<IAgileReference>.fromAbiTake(raw, IAgileReference.descriptor())
         Result<EventEntry<T>>.Ok(
             EventEntry<T>(encodeEventToken(pointer.asRaw()), None, Some(pointer))
         )

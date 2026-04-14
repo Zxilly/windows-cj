@@ -39,7 +39,7 @@ main(): Unit {
 
     customError.intoThread()
     let roundTripped = WinError.fromHRESULTWithInfo(E_FAIL)
-    expect(roundTripped.as_ptr().isNotNull(), "Error.fromHRESULTWithInfo should keep COM error info in full mode")
+    expect(roundTripped.asPtr().isNotNull(), "Error.fromHRESULTWithInfo should keep COM error info in full mode")
     expect(roundTripped.message() == "public custom failure", "Error.fromHRESULTWithInfo should recover thread error info")
 
     let okResult = Result<Int32>.Ok(7i32)

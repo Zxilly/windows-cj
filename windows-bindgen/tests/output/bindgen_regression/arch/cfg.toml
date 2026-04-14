@@ -2,9 +2,9 @@
 # Conditional compilation variables
 # Features enabled for the generated projection.
 
-feat_mrmsupport = "on"
-feat_user32 = "on"
-feat_windows_win32_foundation = "on"
-feat_windows_win32_graphics_gdi = "on"
-feat_windows_win32_ui_shell = "on"
-feat_windows_win32_ui_windows_and_messaging = "on"
+MRMSUPPORT = "on"
+USER32 = "on"
+Windows_Win32_Foundation = "on"
+Windows_Win32_Graphics_Gdi = "on"
+Windows_Win32_UI_Shell = "on"
+Windows_Win32_UI_WindowsAndMessaging = "on"

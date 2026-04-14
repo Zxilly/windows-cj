@@ -44,7 +44,7 @@ public class Compressor <: InterfaceWrapperBase & ComInterface & windows_interfa
         Compressor(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Compressor {
+    public static func viewOf(raw: CPointer<Unit>): Compressor {
         Compressor(raw)
     }
 
@@ -144,7 +144,7 @@ public class Decompressor <: InterfaceWrapperBase & ComInterface & windows_inter
         Decompressor(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Decompressor {
+    public static func viewOf(raw: CPointer<Unit>): Decompressor {
         Decompressor(raw)
     }
 
@@ -239,7 +239,7 @@ public class ICompressor <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         ICompressor(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompressor {
+    public static func viewOf(raw: CPointer<Unit>): ICompressor {
         ICompressor(raw)
     }
 
@@ -339,7 +339,7 @@ public class ICompressorFactory <: InterfaceWrapperBase & ComInterface & Runtime
         ICompressorFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICompressorFactory {
+    public static func viewOf(raw: CPointer<Unit>): ICompressorFactory {
         ICompressorFactory(raw)
     }
 
@@ -425,7 +425,7 @@ public class IDecompressor <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IDecompressor(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDecompressor {
+    public static func viewOf(raw: CPointer<Unit>): IDecompressor {
         IDecompressor(raw)
     }
 
@@ -516,7 +516,7 @@ public class IDecompressorFactory <: InterfaceWrapperBase & ComInterface & Runti
         IDecompressorFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDecompressorFactory {
+    public static func viewOf(raw: CPointer<Unit>): IDecompressorFactory {
         IDecompressorFactory(raw)
     }
 

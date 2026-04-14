@@ -123,13 +123,13 @@ func generateStructNamed(
     while (ki < fEnd) {
         let fieldFlags = index.fieldFlags(fileIdx, ki)
         if (fieldFlags.contains(FieldAttributes.Literal)) {
-            let constName = index.fieldName(fileIdx, ki)
+            let constName = projectedConstantName(index, "${name}_${index.fieldName(fileIdx, ki)}", namespace)
             match (readFieldConstantLiteral(index, fileIdx, ki)) {
                 case Some((constType, constValue)) =>
                     let cjType = cppConstantType(constType)
                     w.writeBlankLine()
                     writeAvailabilityForTags(w, feature, mergeCfgTagsLocal(typeTags, itemAvailabilityTags(TABLE_FIELD, fileIdx, ki)))
-                    w.writeLine("public let ${name}_${constName}: ${cjType} = ${constValue}")
+                    w.writeLine("public let ${escapeSourceIdentifier("${name}_${constName}")}: ${cjType} = ${constValue}")
                 case None => ()
             }
         }

@@ -18,7 +18,7 @@ public class DeviceWatcherTrigger <: InterfaceWrapperBase & ComInterface & windo
         DeviceWatcherTrigger(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeviceWatcherTrigger {
+    public static func viewOf(raw: CPointer<Unit>): DeviceWatcherTrigger {
         DeviceWatcherTrigger(raw)
     }
 
@@ -103,7 +103,7 @@ public class IBackgroundTrigger <: InterfaceWrapperBase & ComInterface & Runtime
         IBackgroundTrigger(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBackgroundTrigger {
+    public static func viewOf(raw: CPointer<Unit>): IBackgroundTrigger {
         IBackgroundTrigger(raw)
     }
 
@@ -172,7 +172,7 @@ public class IDeviceWatcherTrigger <: InterfaceWrapperBase & ComInterface & Runt
         IDeviceWatcherTrigger(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeviceWatcherTrigger {
+    public static func viewOf(raw: CPointer<Unit>): IDeviceWatcherTrigger {
         IDeviceWatcherTrigger(raw)
     }
 

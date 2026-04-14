@@ -139,7 +139,7 @@ func parseReferenceStyle(value: String): ReferenceStyle {
 }
 
 func throwInvalidReference(): Unit {
-    throw Exception("`--reference` must be `<crate>,<full/flat/skip-root>,<type name>`")
+    throw Exception("`--reference` must be `<package>,<full/flat/skip-root>,<type name>`")
 }
 
 func buildImportPath(entry: ReferenceEntry, namespace: String): String {
@@ -228,7 +228,7 @@ func sliceStringParts(parts: ArrayList<String>, start: Int64): ArrayList<String>
 func joinPackageParts(parts: ArrayList<String>): String {
     let normalized = ArrayList<String>()
     for (part in parts) {
-        normalized.add(toLowerSnake(part))
+        normalized.add(sanitizePackageSegment(part))
     }
     return joinStrings(normalized, ".")
 }

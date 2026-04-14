@@ -43,11 +43,11 @@ func samePointer(left: CPointer<Unit>, right: CPointer<Unit>): Bool {
 }
 
 func readImplMut<T, U>(value: T): Option<U> where T <: IUnknownImpl {
-    value.get_impl_mut<U>()
+    value.getImplMut<U>()
 }
 
 func readIsReferenceCountOne<T>(value: T): Bool where T <: IUnknownImpl {
-    value.is_reference_count_one()
+    value.isReferenceCountOne()
 }
 
 func readTrustLevel<T>(value: T): (HRESULT, Int32) where T <: IUnknownImpl {
@@ -58,16 +58,16 @@ func readTrustLevel<T>(value: T): (HRESULT, Int32) where T <: IUnknownImpl {
 
 func readAsInterface<T, U>(value: T, descriptor: InterfaceDescriptor<U>): U
 where T <: IUnknownImpl, U <: ComInterface & Interface<U> {
-    value.as_interface(descriptor)
+    value.asInterface(descriptor)
 }
 
 func readToInterface<T, U>(value: T, descriptor: InterfaceDescriptor<U>): U
 where T <: IUnknownImpl, U <: ComInterface & Interface<U> {
-    value.to_interface(descriptor)
+    value.toInterface(descriptor)
 }
 
 func readToObject<T, U>(value: T): ComObject<U> where T <: IUnknownImpl {
-    value.to_object()
+    value.toObject()
 }
 
 func expectAbiArray(): Unit {
@@ -250,13 +250,13 @@ func expectIUnknownImplHelpers(): Unit {
     let schemas = Array(1, { _ => IInspectable.descriptorSchema() })
     let object = createComObjectFromSchemas(DemoInner(), schemas)
     if (!readIsReferenceCountOne(object.runtime)) {
-        fail("IUnknownImpl.is_reference_count_one should report unique ownership for a fresh object")
+        fail("IUnknownImpl.isReferenceCountOne should report unique ownership for a fresh object")
     }
     match (readImplMut<ComObjectRuntime<DemoInner>, DemoInner>(object.runtime)) {
         case Some(inner) =>
             inner.value = 21i32
         case None =>
-            fail("IUnknownImpl.get_impl_mut should surface the mutable inner implementation")
+            fail("IUnknownImpl.getImplMut should surface the mutable inner implementation")
     }
     let (trustHr, trustLevel) = readTrustLevel(object.runtime)
     if (trustHr.failed() || trustLevel != 0i32) {
@@ -264,26 +264,26 @@ func expectIUnknownImplHelpers(): Unit {
     }
     let borrowedUnknown = readAsInterface(object.runtime, IUnknown.descriptor())
     if (!samePointer(borrowedUnknown.asRaw(), object.asRaw())) {
-        fail("IUnknownImpl.as_interface should expose the current COM identity")
+        fail("IUnknownImpl.asInterface should expose the current COM identity")
     }
     borrowedUnknown.close()
     let ownedUnknown = readToInterface(object.runtime, IUnknown.descriptor())
     if (!samePointer(ownedUnknown.asRaw(), object.asRaw())) {
-        fail("IUnknownImpl.to_interface should clone the current COM identity")
+        fail("IUnknownImpl.toInterface should clone the current COM identity")
     }
     ownedUnknown.close()
     let rebound = readToObject<ComObjectRuntime<DemoInner>, DemoInner>(object.runtime)
     if (!samePointer(rebound.asRaw(), object.asRaw())) {
-        fail("IUnknownImpl.to_object should rebuild the current ComObject view")
+        fail("IUnknownImpl.toObject should rebuild the current ComObject view")
     }
     if (!readIsReferenceCountOne(object.runtime)) {
-        fail("IUnknownImpl.to_object should not add an extra strong reference for the returned ComObject view")
+        fail("IUnknownImpl.toObject should not add an extra strong reference for the returned ComObject view")
     }
     let reboundUnknown = rebound.toInterface(IUnknown.descriptor())
     reboundUnknown.close()
     let finalCount = IUnknown(object.asRaw()).release()
     if (finalCount != 0u32) {
-        fail("IUnknownImpl.to_object view should not retain an extra COM reference")
+        fail("IUnknownImpl.toObject view should not retain an extra COM reference")
     }
 }
 
@@ -316,9 +316,9 @@ func expectWeakAndAgile(): Unit {
     let schemas = Array(1, { _ => IInspectable.descriptorSchema() })
     var object = createComObjectFromSchemas(DemoInner(), schemas)
     let unknown = object.toInterface(IUnknown.descriptor())
-    let scopedUnknown = ScopedInterface<IUnknown>.new(unknown, IUnknown.descriptor())
+    let scopedUnknown = InterfaceResource<IUnknown>.new(unknown, IUnknown.descriptor())
     if (!samePointer(scopedUnknown.asRaw(), object.asRaw())) {
-        fail("ScopedInterface.new should retain the same COM identity")
+        fail("InterfaceResource.new should retain the same COM identity")
     }
     scopedUnknown.close()
 

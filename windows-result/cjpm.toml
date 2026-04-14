@@ -4,7 +4,7 @@
   description = "Result and status-code primitives for Windows bindings in Cangjie"
   output-type = "static"
   cjc-version = "1.1.0"
-  compile-option = "--cfg=\"E:/Project/CS_Project/2026/ling/windows-cj/windows-result\" -loleaut32 -lwindowsapp"
+  compile-option = "-loleaut32 -lwindowsapp"
 
 [dependencies]
 

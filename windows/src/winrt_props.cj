@@ -182,6 +182,6 @@ public class CreateStructView {
 
     public func close(): Unit {
         closed = true
-        // Note: raw pointer is borrowed, not owned; caller manages lifetime
+        // Note: this is only a call-scoped raw view; the caller still manages lifetime.
     }
 }
