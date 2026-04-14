@@ -58,13 +58,11 @@ func generateStructNamed(
     let typeTags = mergedStructTypeAvailabilityTags(index, namespace, name, fileIdx, row, structSignature)
     writeAvailabilityForTags(w, feature, typeTags)
 
-    // Packing annotation if needed
+    // Packing annotation and packed-struct dispatch
+    var structPacking = 0u32
     match (layout) {
         case Some((packing, _)) =>
-            if (packing > 0 && packing != 8) {
-                w.writeLine("// packed(${packing})")
-                eprintln("warning: skipping packed layout for `${fullName}` with packed(${packing})")
-            }
+            structPacking = UInt32(packing)
         case None => ()
     }
 
@@ -85,11 +83,17 @@ func generateStructNamed(
         }
     }
 
+    // Packed struct with non-default packing (1/2/4/16): use byte storage + polyfill accessors
+    let usePackedLayout = !isUnion && structPacking != 0u32 && structPacking != 8u32
+    let immutablePacking = structPacking  // capture immutable copy for lambda
+
     writeDeriveAttributes(w, namespace, name)
     w.writeLine("@C")
     w.writeBlock("public struct ${name}", {=>
         if (isUnion) {
             writeUnionStructBody(w, index, fileIdx, row, nestedNames, unionSize, unionRawElemType, unionRawLen)
+        } else if (usePackedLayout) {
+            writePackedStructBody(w, index, fileIdx, row, nestedNames, fullName, immutablePacking)
         } else {
             var fi = fStart
             while (fi < fEnd) {
@@ -697,30 +701,14 @@ func nativePointerSize(): UInt32 {
 }
 
 func unionRawStorageSpec(unionSize: UInt32, unionAlign: UInt32): (String, UInt32) {
+    // Always use UInt8 byte storage; alignment-specific types are no longer
+    // needed because polyfill helpers work on CPointer<UInt8>. Keep unused
+    // parameter for call-site compatibility during transition.
+    let _ = unionAlign
     if (unionSize == 0u32) {
         return ("UInt8", 0u32)
     }
-
-    let storageAlign = if (unionAlign >= 8u32) {
-        8u32
-    } else if (unionAlign >= 4u32) {
-        4u32
-    } else if (unionAlign >= 2u32) {
-        2u32
-    } else {
-        1u32
-    }
-    let paddedSize = roundUpUInt32(unionSize, storageAlign)
-    if (storageAlign == 8u32) {
-        return ("UInt64", paddedSize / 8u32)
-    }
-    if (storageAlign == 4u32) {
-        return ("UInt32", paddedSize / 4u32)
-    }
-    if (storageAlign == 2u32) {
-        return ("UInt16", paddedSize / 2u32)
-    }
-    return ("UInt8", paddedSize)
+    return ("UInt8", unionSize)
 }
 
 func applyPacking(align: UInt32, packing: UInt32): UInt32 {
@@ -862,23 +850,81 @@ func lowerCamelIdentifier(value: String): String {
     return byteListToString(bytes)
 }
 
-func writeUnionAccessor(
+// Map a Cangjie primitive type to the polyfill read function name.
+// Returns empty string for non-primitive types (use generic pointer-cast fallback).
+func polyfillUnionAccessorName(cjType: String): String {
+    if (cjType == "UInt8") { return "unionReadUInt8" }
+    if (cjType == "Int8") { return "unionReadInt8" }
+    if (cjType == "UInt16") { return "unionReadUInt16" }
+    if (cjType == "Int16") { return "unionReadInt16" }
+    if (cjType == "UInt32") { return "unionReadUInt32" }
+    if (cjType == "Int32") { return "unionReadInt32" }
+    if (cjType == "UInt64") { return "unionReadUInt64" }
+    if (cjType == "Int64") { return "unionReadInt64" }
+    if (cjType == "Float32") { return "unionReadFloat32" }
+    if (cjType == "Float64") { return "unionReadFloat64" }
+    return ""
+}
+
+// Map a Cangjie primitive type to the polyfill read function name for packed fields.
+// Returns empty string for non-primitive types.
+func polyfillPackedAccessorName(cjType: String): String {
+    if (cjType == "UInt8") { return "packedReadUInt8" }
+    if (cjType == "Int8") { return "packedReadInt8" }
+    if (cjType == "UInt16") { return "packedReadUInt16" }
+    if (cjType == "Int16") { return "packedReadInt16" }
+    if (cjType == "UInt32") { return "packedReadUInt32" }
+    if (cjType == "Int32") { return "packedReadInt32" }
+    if (cjType == "UInt64") { return "packedReadUInt64" }
+    if (cjType == "Int64") { return "packedReadInt64" }
+    if (cjType == "Float32") { return "packedReadFloat32" }
+    if (cjType == "Float64") { return "packedReadFloat64" }
+    return ""
+}
+
+// Map a polyfill read function name to the corresponding write function name.
+// Handles both "unionReadXxx" → "unionWriteXxx" and "packedReadXxx" → "packedWriteXxx".
+func polyfillWriteFnName(readFn: String): String {
+    if (readFn == "unionReadUInt8")   { return "unionWriteUInt8" }
+    if (readFn == "unionReadInt8")    { return "unionWriteInt8" }
+    if (readFn == "unionReadUInt16")  { return "unionWriteUInt16" }
+    if (readFn == "unionReadInt16")   { return "unionWriteInt16" }
+    if (readFn == "unionReadUInt32")  { return "unionWriteUInt32" }
+    if (readFn == "unionReadInt32")   { return "unionWriteInt32" }
+    if (readFn == "unionReadUInt64")  { return "unionWriteUInt64" }
+    if (readFn == "unionReadInt64")   { return "unionWriteInt64" }
+    if (readFn == "unionReadFloat32") { return "unionWriteFloat32" }
+    if (readFn == "unionReadFloat64") { return "unionWriteFloat64" }
+    if (readFn == "packedReadUInt8")   { return "packedWriteUInt8" }
+    if (readFn == "packedReadInt8")    { return "packedWriteInt8" }
+    if (readFn == "packedReadUInt16")  { return "packedWriteUInt16" }
+    if (readFn == "packedReadInt16")   { return "packedWriteInt16" }
+    if (readFn == "packedReadUInt32")  { return "packedWriteUInt32" }
+    if (readFn == "packedReadInt32")   { return "packedWriteInt32" }
+    if (readFn == "packedReadUInt64")  { return "packedWriteUInt64" }
+    if (readFn == "packedReadInt64")   { return "packedWriteInt64" }
+    if (readFn == "packedReadFloat32") { return "packedWriteFloat32" }
+    if (readFn == "packedReadFloat64") { return "packedWriteFloat64" }
+    return readFn  // fallback: return unchanged (should not happen)
+}
+
+// Generic fallback for union accessors when field type is not a primitive.
+// Uses pointer-cast approach on the UInt8 byte array storage.
+func writeUnionAccessorGeneric(
     w: CodeWriter,
     accessorName: String,
     fieldCjType: String,
-    offset: UInt32,
-    unionRawElemType: String
+    offset: UInt32
 ): Unit {
     w.writeBlock("public func ${accessorName}(): ${fieldCjType}", {=>
         w.writeLine("unsafe {")
         w.indent()
         w.writeLine("var rawStorage = _raw")
-        w.writeLine("let storage = CPointer<${unionRawElemType}>(inout rawStorage)")
-        w.writeLine("let raw = CPointer<UInt8>(storage)")
+        w.writeLine("let base = CPointer<UInt8>(inout rawStorage)")
         if (offset > 0u32) {
-            w.writeLine("let p = raw + Int64(${offset})")
+            w.writeLine("let p = base + Int64(${offset})")
         } else {
-            w.writeLine("let p = raw")
+            w.writeLine("let p = base")
         }
         w.writeLine("let ptr = CPointer<${fieldCjType}>(p)")
         w.writeLine("return ptr.read()")
@@ -890,12 +936,11 @@ func writeUnionAccessor(
         w.writeLine("unsafe {")
         w.indent()
         w.writeLine("var rawStorage = _raw")
-        w.writeLine("let storage = CPointer<${unionRawElemType}>(inout rawStorage)")
-        w.writeLine("let raw = CPointer<UInt8>(storage)")
+        w.writeLine("let base = CPointer<UInt8>(inout rawStorage)")
         if (offset > 0u32) {
-            w.writeLine("let p = raw + Int64(${offset})")
+            w.writeLine("let p = base + Int64(${offset})")
         } else {
-            w.writeLine("let p = raw")
+            w.writeLine("let p = base")
         }
         w.writeLine("let ptr = CPointer<${fieldCjType}>(p)")
         w.writeLine("ptr.write(val)")
@@ -903,4 +948,135 @@ func writeUnionAccessor(
         w.dedent()
         w.writeLine("}")
     })
+}
+
+func writeUnionAccessor(
+    w: CodeWriter,
+    accessorName: String,
+    fieldCjType: String,
+    offset: UInt32,
+    unionRawElemType: String  // now always "UInt8", kept for signature compatibility
+): Unit {
+    let polyfillFn = polyfillUnionAccessorName(fieldCjType)
+    if (polyfillFn.isEmpty()) {
+        // Fallback to generic pointer-cast for non-primitive types (nested struct, etc.)
+        writeUnionAccessorGeneric(w, accessorName, fieldCjType, offset)
+        return
+    }
+
+    // Primitive types: use polyfill helpers
+    let writeFn = polyfillWriteFnName(polyfillFn)
+    w.writeBlock("public func ${accessorName}(): ${fieldCjType}", {=>
+        w.writeLine("unsafe {")
+        w.indent()
+        w.writeLine("var rawStorage = _raw")
+        w.writeLine("let base = CPointer<UInt8>(inout rawStorage)")
+        w.writeLine("return ${polyfillFn}(base, ${Int64(offset)})")
+        w.dedent()
+        w.writeLine("}")
+    })
+    w.writeBlankLine()
+    w.writeBlock("public mut func set_${accessorName}(val: ${fieldCjType}): Unit", {=>
+        w.writeLine("unsafe {")
+        w.indent()
+        w.writeLine("var rawStorage = _raw")
+        w.writeLine("let base = CPointer<UInt8>(inout rawStorage)")
+        w.writeLine("${writeFn}(base, ${Int64(offset)}, val)")
+        w.writeLine("_raw = rawStorage")
+        w.dedent()
+        w.writeLine("}")
+    })
+}
+
+// Generate body for packed(N) structs (N != 0 && N != 8).
+// Uses VArray<UInt8, $size> storage with packedReadXxx/packedWriteXxx accessors.
+func writePackedStructBody(
+    w: CodeWriter,
+    index: TypeIndex,
+    fileIdx: Int64,
+    row: Int64,
+    nestedNames: HashMap<String, String>,
+    fullName: String,
+    packing: UInt32
+): Unit {
+    // Compute total struct size via layout engine
+    let visiting = HashMap<String, Bool>()
+    let totalSize = match (computeTypeDefLayout(index, fileIdx, row, typeLayoutCache_, visiting)) {
+        case Some((size, _)) => size
+        case None => 0u32
+    }
+
+    if (totalSize == 0u32) {
+        eprintln("warning: cannot compute size for packed struct `${fullName}` with packing(${packing}); skipping packed body")
+        return
+    }
+
+    w.writeLine("public var _raw: VArray<UInt8, \$${totalSize}> = VArray<UInt8, \$${totalSize}>(repeat: 0u8)")
+
+    // Walk fields and compute their offsets following packing rules (sequential layout)
+    let nestedKeys = directNestedTypeKeyMap(index, fileIdx, row)
+    let cache = typeLayoutCache_
+    var offset = 0u32
+    let (fStart, fEnd) = index.typeDefFields(fileIdx, row)
+    var fi = fStart
+    while (fi < fEnd) {
+        let fieldFlags = index.fieldFlags(fileIdx, fi)
+        if (fieldFlags.contains(FieldAttributes.Literal)) {
+            fi += 1
+            continue
+        }
+
+        let fieldType = resolveNestedType(index.fieldType(fileIdx, fi), nestedNames)
+        let fieldCjType = cppType(fieldType)
+        let visitingField = HashMap<String, Bool>()
+        match (computeMetadataTypeLayout(index, fileIdx, row, index.fieldType(fileIdx, fi), nestedKeys, cache, visitingField)) {
+            case Some((fieldSize, fieldAlign)) =>
+                let effectiveAlign = applyPacking(fieldAlign, packing)
+                offset = roundUpUInt32(offset, effectiveAlign)
+                let fieldOffset = offset
+                offset += fieldSize
+
+                let fieldTags = itemAvailabilityTags(TABLE_FIELD, fileIdx, fi)
+                let polyfillFn = polyfillPackedAccessorName(fieldCjType)
+                if (polyfillFn.isEmpty()) {
+                    // Non-primitive type: skip with warning
+                    w.writeBlankLine()
+                    w.writeLine("// packed field `${index.fieldName(fileIdx, fi)}`: type `${fieldCjType}` not supported by polyfill; skipped")
+                    eprintln("warning: packed struct `${fullName}` field `${index.fieldName(fileIdx, fi)}` type `${fieldCjType}` not in polyfill; skipped")
+                } else {
+                    let writeFn = polyfillWriteFnName(polyfillFn)
+                    let accessorName = sanitizeIdentifier(lowerCamelIdentifier(sanitizeIdentifier(index.fieldName(fileIdx, fi))))
+                    w.writeBlankLine()
+                    if (!fieldTags.isEmpty()) {
+                        writeAvailabilityForTags(w, "", fieldTags)
+                    }
+                    w.writeBlock("public func ${accessorName}(): ${fieldCjType}", {=>
+                        w.writeLine("unsafe {")
+                        w.indent()
+                        w.writeLine("var rawStorage = _raw")
+                        w.writeLine("let base = CPointer<UInt8>(inout rawStorage)")
+                        w.writeLine("return ${polyfillFn}(base, ${Int64(fieldOffset)})")
+                        w.dedent()
+                        w.writeLine("}")
+                    })
+                    w.writeBlankLine()
+                    w.writeBlock("public mut func set_${accessorName}(val: ${fieldCjType}): Unit", {=>
+                        w.writeLine("unsafe {")
+                        w.indent()
+                        w.writeLine("var rawStorage = _raw")
+                        w.writeLine("let base = CPointer<UInt8>(inout rawStorage)")
+                        w.writeLine("${writeFn}(base, ${Int64(fieldOffset)}, val)")
+                        w.writeLine("_raw = rawStorage")
+                        w.dedent()
+                        w.writeLine("}")
+                    })
+                }
+            case None =>
+                w.writeBlankLine()
+                w.writeLine("// packed field `${index.fieldName(fileIdx, fi)}`: layout unknown; skipped")
+                eprintln("warning: packed struct `${fullName}` field `${index.fieldName(fileIdx, fi)}` layout unknown; skipped")
+        }
+
+        fi += 1
+    }
 }

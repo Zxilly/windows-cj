@@ -9,3 +9,4 @@
 [dependencies]
   windows_result = { path = "../windows-result" }
   windows_interface = { path = "../windows-interface" }
+  windows_polyfill = { path = "../windows-polyfill" }

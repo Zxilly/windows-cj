@@ -215,9 +215,11 @@ func writeNamespacePrelude(
         case GenerationMode.HighLevel =>
             w.writeLine("import windows_core.*")
             w.writeLine("import windows_interface.*")
+            w.writeLine("import windows_polyfill.*")
         case GenerationMode.Sys =>
             w.writeLine("import windows_interface.*")
             w.writeLine("import windows_result.*")
+            w.writeLine("import windows_polyfill.*")
     }
     for (packageImport in packageImports) {
         w.writeLine("import ${packageImport} as ${importedPackageQualifier(packageImport)}")
