@@ -1,0 +1,8 @@
+[package]
+  name = "windows_polyfill"
+  version = "0.1.0"
+  description = "Runtime polyfill for windows-cj bindgen-generated code"
+  output-type = "static"
+  cjc-version = "1.1.0"
+
+[dependencies]
