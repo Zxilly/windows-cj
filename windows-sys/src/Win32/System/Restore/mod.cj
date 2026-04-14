@@ -3,41 +3,130 @@ package windows_sys.Win32.System.Restore
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
 
 @When[Windows_Win32_System_Restore == "on"]
-// packed(1)
 @C
 public struct RESTOREPOINTINFOA {
-    public var dwEventType: RESTOREPOINTINFO_EVENT_TYPE = RESTOREPOINTINFO_EVENT_TYPE()
-    public var dwRestorePtType: RESTOREPOINTINFO_TYPE = RESTOREPOINTINFO_TYPE()
-    public var llSequenceNumber: Int64 = 0
-    public var szDescription: VArray<Win32_Foundation.CHAR, $64> = VArray<Win32_Foundation.CHAR, $64>(repeat: 0)
+    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0u8)
+
+    // packed field `dwEventType`: type `RESTOREPOINTINFO_EVENT_TYPE` not supported by polyfill; skipped
+
+    // packed field `dwRestorePtType`: type `RESTOREPOINTINFO_TYPE` not supported by polyfill; skipped
+
+    public func llSequenceNumber(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 8)
+        }
+    }
+
+    public mut func set_llSequenceNumber(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `szDescription`: type `VArray<Win32_Foundation.CHAR, $64>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_Restore == "on"]
-// packed(1)
 @C
 public struct RESTOREPOINTINFOEX {
-    public var ftCreation: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var dwEventType: UInt32 = 0
-    public var dwRestorePtType: UInt32 = 0
-    public var dwRPNum: UInt32 = 0
-    public var szDescription: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var _raw: VArray<UInt8, $532> = VArray<UInt8, $532>(repeat: 0u8)
+
+    // packed field `ftCreation`: type `Win32_Foundation.FILETIME` not supported by polyfill; skipped
+
+    public func dwEventType(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwEventType(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRestorePtType(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwRestorePtType(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRPNum(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwRPNum(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `szDescription`: type `VArray<UInt16, $256>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_Restore == "on"]
-// packed(1)
 @C
 public struct RESTOREPOINTINFOW {
-    public var dwEventType: RESTOREPOINTINFO_EVENT_TYPE = RESTOREPOINTINFO_EVENT_TYPE()
-    public var dwRestorePtType: RESTOREPOINTINFO_TYPE = RESTOREPOINTINFO_TYPE()
-    public var llSequenceNumber: Int64 = 0
-    public var szDescription: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var _raw: VArray<UInt8, $528> = VArray<UInt8, $528>(repeat: 0u8)
+
+    // packed field `dwEventType`: type `RESTOREPOINTINFO_EVENT_TYPE` not supported by polyfill; skipped
+
+    // packed field `dwRestorePtType`: type `RESTOREPOINTINFO_TYPE` not supported by polyfill; skipped
+
+    public func llSequenceNumber(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 8)
+        }
+    }
+
+    public mut func set_llSequenceNumber(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `szDescription`: type `VArray<UInt16, $256>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -107,11 +196,28 @@ public let MODIFY_SETTINGS: RESTOREPOINTINFO_TYPE = RESTOREPOINTINFO_TYPE(12)
 public let CANCELLED_OPERATION: RESTOREPOINTINFO_TYPE = RESTOREPOINTINFO_TYPE(13)
 
 @When[Windows_Win32_System_Restore == "on"]
-// packed(1)
 @C
 public struct STATEMGRSTATUS {
-    public var nStatus: Win32_Foundation.WIN32_ERROR = Win32_Foundation.WIN32_ERROR()
-    public var llSequenceNumber: Int64 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    // packed field `nStatus`: type `Win32_Foundation.WIN32_ERROR` not supported by polyfill; skipped
+
+    public func llSequenceNumber(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 4)
+        }
+    }
+
+    public mut func set_llSequenceNumber(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 

@@ -3,6 +3,7 @@ package windows_sys.Win32.Networking.Ldap
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security.Authentication.Identity as Win32_Security_Authentication_Identity
 import windows_sys.Win32.impl as Win32_impl
@@ -147,14 +148,13 @@ public struct LDAPModA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct LDAPModA__mod_vals_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func modv_strvals(): CPointer<CPointer<UInt8>> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt8>>>(p)
             return ptr.read()
         }
@@ -163,9 +163,8 @@ public struct LDAPModA__mod_vals_e__Union {
     public mut func set_modv_strvals(val: CPointer<CPointer<UInt8>>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt8>>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -175,9 +174,8 @@ public struct LDAPModA__mod_vals_e__Union {
     public func modv_bvals(): CPointer<CPointer<LDAP_BERVAL>> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<LDAP_BERVAL>>>(p)
             return ptr.read()
         }
@@ -186,9 +184,8 @@ public struct LDAPModA__mod_vals_e__Union {
     public mut func set_modv_bvals(val: CPointer<CPointer<LDAP_BERVAL>>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<LDAP_BERVAL>>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -210,14 +207,13 @@ public struct LDAPModW {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct LDAPModW__mod_vals_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func modv_strvals(): CPointer<CPointer<UInt16>> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
             return ptr.read()
         }
@@ -226,9 +222,8 @@ public struct LDAPModW__mod_vals_e__Union {
     public mut func set_modv_strvals(val: CPointer<CPointer<UInt16>>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -238,9 +233,8 @@ public struct LDAPModW__mod_vals_e__Union {
     public func modv_bvals(): CPointer<CPointer<LDAP_BERVAL>> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<LDAP_BERVAL>>>(p)
             return ptr.read()
         }
@@ -249,9 +243,8 @@ public struct LDAPModW__mod_vals_e__Union {
     public mut func set_modv_bvals(val: CPointer<CPointer<LDAP_BERVAL>>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<LDAP_BERVAL>>>(p)
             ptr.write(val)
             _raw = rawStorage

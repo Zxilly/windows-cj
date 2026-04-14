@@ -3,6 +3,7 @@ package windows_sys.Win32.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
 import windows_sys.Win32.Foundation.*
@@ -479,14 +480,13 @@ public struct D2D_MATRIX_3X2_F {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D2D_MATRIX_3X2_F__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $6> = VArray<UInt32, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func anonymous1(): D2D_MATRIX_3X2_F__Anonymous_e__Union__Anonymous1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_3X2_F__Anonymous_e__Union__Anonymous1_e__Struct>(p)
             return ptr.read()
         }
@@ -495,9 +495,8 @@ public struct D2D_MATRIX_3X2_F__Anonymous_e__Union {
     public mut func set_anonymous1(val: D2D_MATRIX_3X2_F__Anonymous_e__Union__Anonymous1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_3X2_F__Anonymous_e__Union__Anonymous1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -507,9 +506,8 @@ public struct D2D_MATRIX_3X2_F__Anonymous_e__Union {
     public func anonymous2(): D2D_MATRIX_3X2_F__Anonymous_e__Union__Anonymous2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_3X2_F__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             return ptr.read()
         }
@@ -518,9 +516,8 @@ public struct D2D_MATRIX_3X2_F__Anonymous_e__Union {
     public mut func set_anonymous2(val: D2D_MATRIX_3X2_F__Anonymous_e__Union__Anonymous2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_3X2_F__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -530,9 +527,8 @@ public struct D2D_MATRIX_3X2_F__Anonymous_e__Union {
     public func m(): VArray<Float32, $6> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $6>>(p)
             return ptr.read()
         }
@@ -541,9 +537,8 @@ public struct D2D_MATRIX_3X2_F__Anonymous_e__Union {
     public mut func set_m(val: VArray<Float32, $6>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $6>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -587,14 +582,13 @@ public struct D2D_MATRIX_4X3_F {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D2D_MATRIX_4X3_F__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $12> = VArray<UInt32, $12>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func anonymous(): D2D_MATRIX_4X3_F__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_4X3_F__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -603,9 +597,8 @@ public struct D2D_MATRIX_4X3_F__Anonymous_e__Union {
     public mut func set_anonymous(val: D2D_MATRIX_4X3_F__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_4X3_F__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -615,9 +608,8 @@ public struct D2D_MATRIX_4X3_F__Anonymous_e__Union {
     public func m(): VArray<Float32, $12> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $12>>(p)
             return ptr.read()
         }
@@ -626,9 +618,8 @@ public struct D2D_MATRIX_4X3_F__Anonymous_e__Union {
     public mut func set_m(val: VArray<Float32, $12>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $12>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -666,14 +657,13 @@ public struct D2D_MATRIX_4X4_F {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D2D_MATRIX_4X4_F__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $16> = VArray<UInt32, $16>(repeat: 0)
+    public var _raw: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
 
     public func anonymous(): D2D_MATRIX_4X4_F__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_4X4_F__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -682,9 +672,8 @@ public struct D2D_MATRIX_4X4_F__Anonymous_e__Union {
     public mut func set_anonymous(val: D2D_MATRIX_4X4_F__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_4X4_F__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -694,9 +683,8 @@ public struct D2D_MATRIX_4X4_F__Anonymous_e__Union {
     public func m(): VArray<Float32, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $16>>(p)
             return ptr.read()
         }
@@ -705,9 +693,8 @@ public struct D2D_MATRIX_4X4_F__Anonymous_e__Union {
     public mut func set_m(val: VArray<Float32, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -749,14 +736,13 @@ public struct D2D_MATRIX_5X4_F {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D2D_MATRIX_5X4_F__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $20> = VArray<UInt32, $20>(repeat: 0)
+    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
 
     public func anonymous(): D2D_MATRIX_5X4_F__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_5X4_F__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -765,9 +751,8 @@ public struct D2D_MATRIX_5X4_F__Anonymous_e__Union {
     public mut func set_anonymous(val: D2D_MATRIX_5X4_F__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D2D_MATRIX_5X4_F__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -777,9 +762,8 @@ public struct D2D_MATRIX_5X4_F__Anonymous_e__Union {
     public func m(): VArray<Float32, $20> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $20>>(p)
             return ptr.read()
         }
@@ -788,9 +772,8 @@ public struct D2D_MATRIX_5X4_F__Anonymous_e__Union {
     public mut func set_m(val: VArray<Float32, $20>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $20>>(p)
             ptr.write(val)
             _raw = rawStorage

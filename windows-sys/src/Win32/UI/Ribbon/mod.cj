@@ -3,6 +3,7 @@ package windows_sys.Win32.UI.Ribbon
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.impl as Win32_impl
@@ -1755,27 +1756,21 @@ public struct UI_EVENTPARAMS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct UI_EVENTPARAMS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func modes(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_modes(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1783,9 +1778,8 @@ public struct UI_EVENTPARAMS__Anonymous_e__Union {
     public func params(): UI_EVENTPARAMS_COMMAND {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UI_EVENTPARAMS_COMMAND>(p)
             return ptr.read()
         }
@@ -1794,9 +1788,8 @@ public struct UI_EVENTPARAMS__Anonymous_e__Union {
     public mut func set_params(val: UI_EVENTPARAMS_COMMAND): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UI_EVENTPARAMS_COMMAND>(p)
             ptr.write(val)
             _raw = rawStorage

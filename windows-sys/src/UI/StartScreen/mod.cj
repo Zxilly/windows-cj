@@ -3,6 +3,7 @@ package windows_sys.UI.StartScreen
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.UI as UI
 import windows_sys.UI.Popups as UI_Popups

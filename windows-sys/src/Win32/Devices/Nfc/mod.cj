@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.Nfc
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -162,27 +163,21 @@ public struct NFC_LLCP_SOCKET_CONNECT_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NFC_LLCP_SOCKET_CONNECT_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func bsap(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_bsap(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -190,9 +185,8 @@ public struct NFC_LLCP_SOCKET_CONNECT_INFO__Anonymous_e__Union {
     public func sServiceName(): NFC_LLCP_SERVICE_NAME_ENTRY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NFC_LLCP_SERVICE_NAME_ENTRY>(p)
             return ptr.read()
         }
@@ -201,9 +195,8 @@ public struct NFC_LLCP_SOCKET_CONNECT_INFO__Anonymous_e__Union {
     public mut func set_sServiceName(val: NFC_LLCP_SERVICE_NAME_ENTRY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NFC_LLCP_SERVICE_NAME_ENTRY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -591,14 +584,13 @@ public struct NFC_SE_ROUTING_TABLE_ENTRY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func techRoutingInfo(): NFC_SE_TECH_ROUTING_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NFC_SE_TECH_ROUTING_INFO>(p)
             return ptr.read()
         }
@@ -607,9 +599,8 @@ public struct NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public mut func set_techRoutingInfo(val: NFC_SE_TECH_ROUTING_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NFC_SE_TECH_ROUTING_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -619,9 +610,8 @@ public struct NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public func protoRoutingInfo(): NFC_SE_PROTO_ROUTING_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NFC_SE_PROTO_ROUTING_INFO>(p)
             return ptr.read()
         }
@@ -630,9 +620,8 @@ public struct NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public mut func set_protoRoutingInfo(val: NFC_SE_PROTO_ROUTING_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NFC_SE_PROTO_ROUTING_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -642,9 +631,8 @@ public struct NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public func aidRoutingInfo(): NFC_SE_AID_ROUTING_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NFC_SE_AID_ROUTING_INFO>(p)
             return ptr.read()
         }
@@ -653,9 +641,8 @@ public struct NFC_SE_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public mut func set_aidRoutingInfo(val: NFC_SE_AID_ROUTING_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NFC_SE_AID_ROUTING_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -987,14 +974,13 @@ public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
 
     public func techRoutingInfo(): SECURE_ELEMENT_TECH_ROUTING_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECURE_ELEMENT_TECH_ROUTING_INFO>(p)
             return ptr.read()
         }
@@ -1003,9 +989,8 @@ public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public mut func set_techRoutingInfo(val: SECURE_ELEMENT_TECH_ROUTING_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECURE_ELEMENT_TECH_ROUTING_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1015,9 +1000,8 @@ public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public func protoRoutingInfo(): SECURE_ELEMENT_PROTO_ROUTING_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECURE_ELEMENT_PROTO_ROUTING_INFO>(p)
             return ptr.read()
         }
@@ -1026,9 +1010,8 @@ public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public mut func set_protoRoutingInfo(val: SECURE_ELEMENT_PROTO_ROUTING_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECURE_ELEMENT_PROTO_ROUTING_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1038,9 +1021,8 @@ public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public func aidRoutingInfo(): SECURE_ELEMENT_AID_ROUTING_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECURE_ELEMENT_AID_ROUTING_INFO>(p)
             return ptr.read()
         }
@@ -1049,9 +1031,8 @@ public struct SECURE_ELEMENT_ROUTING_TABLE_ENTRY__Anonymous_e__Union {
     public mut func set_aidRoutingInfo(val: SECURE_ELEMENT_AID_ROUTING_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECURE_ELEMENT_AID_ROUTING_INFO>(p)
             ptr.write(val)
             _raw = rawStorage

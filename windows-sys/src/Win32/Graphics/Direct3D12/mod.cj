@@ -3,6 +3,7 @@ package windows_sys.Win32.Graphics.Direct3D12
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Dxgi.Common as Win32_Graphics_Dxgi_Common
 import windows_sys.Win32.Security as Win32_Security
@@ -478,14 +479,13 @@ public struct D3D12_BARRIER_GROUP {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_BARRIER_GROUP__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pGlobalBarriers(): CPointer<D3D12_GLOBAL_BARRIER> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_GLOBAL_BARRIER>>(p)
             return ptr.read()
         }
@@ -494,9 +494,8 @@ public struct D3D12_BARRIER_GROUP__Anonymous_e__Union {
     public mut func set_pGlobalBarriers(val: CPointer<D3D12_GLOBAL_BARRIER>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_GLOBAL_BARRIER>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -506,9 +505,8 @@ public struct D3D12_BARRIER_GROUP__Anonymous_e__Union {
     public func pTextureBarriers(): CPointer<D3D12_TEXTURE_BARRIER> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_TEXTURE_BARRIER>>(p)
             return ptr.read()
         }
@@ -517,9 +515,8 @@ public struct D3D12_BARRIER_GROUP__Anonymous_e__Union {
     public mut func set_pTextureBarriers(val: CPointer<D3D12_TEXTURE_BARRIER>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_TEXTURE_BARRIER>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -529,9 +526,8 @@ public struct D3D12_BARRIER_GROUP__Anonymous_e__Union {
     public func pBufferBarriers(): CPointer<D3D12_BUFFER_BARRIER> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_BUFFER_BARRIER>>(p)
             return ptr.read()
         }
@@ -540,9 +536,8 @@ public struct D3D12_BARRIER_GROUP__Anonymous_e__Union {
     public mut func set_pBufferBarriers(val: CPointer<D3D12_BUFFER_BARRIER>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_BUFFER_BARRIER>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1104,27 +1099,21 @@ public struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func instanceDescs(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_instanceDescs(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1132,9 +1121,8 @@ public struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS__Anonymous_e_
     public func pGeometryDescs(): CPointer<D3D12_RAYTRACING_GEOMETRY_DESC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_RAYTRACING_GEOMETRY_DESC>>(p)
             return ptr.read()
         }
@@ -1143,9 +1131,8 @@ public struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS__Anonymous_e_
     public mut func set_pGeometryDescs(val: CPointer<D3D12_RAYTRACING_GEOMETRY_DESC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_RAYTRACING_GEOMETRY_DESC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1155,9 +1142,8 @@ public struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS__Anonymous_e_
     public func ppGeometryDescs(): CPointer<CPointer<D3D12_RAYTRACING_GEOMETRY_DESC>> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<D3D12_RAYTRACING_GEOMETRY_DESC>>>(p)
             return ptr.read()
         }
@@ -1166,9 +1152,8 @@ public struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS__Anonymous_e_
     public mut func set_ppGeometryDescs(val: CPointer<CPointer<D3D12_RAYTRACING_GEOMETRY_DESC>>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CPointer<D3D12_RAYTRACING_GEOMETRY_DESC>>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1178,9 +1163,8 @@ public struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS__Anonymous_e_
     public func pOpacityMicromapArrayDesc(): CPointer<D3D12_RAYTRACING_OPACITY_MICROMAP_ARRAY_DESC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_RAYTRACING_OPACITY_MICROMAP_ARRAY_DESC>>(p)
             return ptr.read()
         }
@@ -1189,9 +1173,8 @@ public struct D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS__Anonymous_e_
     public mut func set_pOpacityMicromapArrayDesc(val: CPointer<D3D12_RAYTRACING_OPACITY_MICROMAP_ARRAY_DESC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_RAYTRACING_OPACITY_MICROMAP_ARRAY_DESC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1267,14 +1250,13 @@ public struct D3D12_CLEAR_VALUE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_CLEAR_VALUE__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func color(): VArray<Float32, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $4>>(p)
             return ptr.read()
         }
@@ -1283,9 +1265,8 @@ public struct D3D12_CLEAR_VALUE__Anonymous_e__Union {
     public mut func set_color(val: VArray<Float32, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1295,9 +1276,8 @@ public struct D3D12_CLEAR_VALUE__Anonymous_e__Union {
     public func depthStencil(): D3D12_DEPTH_STENCIL_VALUE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEPTH_STENCIL_VALUE>(p)
             return ptr.read()
         }
@@ -1306,9 +1286,8 @@ public struct D3D12_CLEAR_VALUE__Anonymous_e__Union {
     public mut func set_depthStencil(val: D3D12_DEPTH_STENCIL_VALUE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEPTH_STENCIL_VALUE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2392,14 +2371,13 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
 
     public func texture1D(): D3D12_TEX1D_DSV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_DSV>(p)
             return ptr.read()
         }
@@ -2408,9 +2386,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture1D(val: D3D12_TEX1D_DSV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_DSV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2420,9 +2397,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public func texture1DArray(): D3D12_TEX1D_ARRAY_DSV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_ARRAY_DSV>(p)
             return ptr.read()
         }
@@ -2431,9 +2407,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture1DArray(val: D3D12_TEX1D_ARRAY_DSV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_ARRAY_DSV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2443,9 +2418,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public func texture2D(): D3D12_TEX2D_DSV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_DSV>(p)
             return ptr.read()
         }
@@ -2454,9 +2428,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2D(val: D3D12_TEX2D_DSV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_DSV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2466,9 +2439,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public func texture2DArray(): D3D12_TEX2D_ARRAY_DSV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_ARRAY_DSV>(p)
             return ptr.read()
         }
@@ -2477,9 +2449,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DArray(val: D3D12_TEX2D_ARRAY_DSV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_ARRAY_DSV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2489,9 +2460,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public func texture2DMS(): D3D12_TEX2DMS_DSV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_DSV>(p)
             return ptr.read()
         }
@@ -2500,9 +2470,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DMS(val: D3D12_TEX2DMS_DSV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_DSV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2512,9 +2481,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public func texture2DMSArray(): D3D12_TEX2DMS_ARRAY_DSV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_ARRAY_DSV>(p)
             return ptr.read()
         }
@@ -2523,9 +2491,8 @@ public struct D3D12_DEPTH_STENCIL_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DMSArray(val: D3D12_TEX2DMS_ARRAY_DSV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_ARRAY_DSV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2938,14 +2905,13 @@ public struct D3D12_DISPATCH_GRAPH_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_DISPATCH_GRAPH_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func nodeCPUInput(): D3D12_NODE_CPU_INPUT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_NODE_CPU_INPUT>(p)
             return ptr.read()
         }
@@ -2954,9 +2920,8 @@ public struct D3D12_DISPATCH_GRAPH_DESC__Anonymous_e__Union {
     public mut func set_nodeCPUInput(val: D3D12_NODE_CPU_INPUT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_NODE_CPU_INPUT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2966,22 +2931,16 @@ public struct D3D12_DISPATCH_GRAPH_DESC__Anonymous_e__Union {
     public func nodeGPUInput(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_nodeGPUInput(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2989,9 +2948,8 @@ public struct D3D12_DISPATCH_GRAPH_DESC__Anonymous_e__Union {
     public func multiNodeCPUInput(): D3D12_MULTI_NODE_CPU_INPUT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_MULTI_NODE_CPU_INPUT>(p)
             return ptr.read()
         }
@@ -3000,9 +2958,8 @@ public struct D3D12_DISPATCH_GRAPH_DESC__Anonymous_e__Union {
     public mut func set_multiNodeCPUInput(val: D3D12_MULTI_NODE_CPU_INPUT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_MULTI_NODE_CPU_INPUT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3012,22 +2969,16 @@ public struct D3D12_DISPATCH_GRAPH_DESC__Anonymous_e__Union {
     public func multiNodeGPUInput(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_multiNodeGPUInput(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5393,14 +5344,13 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
 
     public func vertexBuffer(): D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__VertexBuffer_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__VertexBuffer_e__Struct>(p)
             return ptr.read()
         }
@@ -5409,9 +5359,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public mut func set_vertexBuffer(val: D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__VertexBuffer_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__VertexBuffer_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5421,9 +5370,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public func constant(): D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__Constant_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__Constant_e__Struct>(p)
             return ptr.read()
         }
@@ -5432,9 +5380,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public mut func set_constant(val: D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__Constant_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__Constant_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5444,9 +5391,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public func constantBufferView(): D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__ConstantBufferView_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__ConstantBufferView_e__Struct>(p)
             return ptr.read()
         }
@@ -5455,9 +5401,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public mut func set_constantBufferView(val: D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__ConstantBufferView_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__ConstantBufferView_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5467,9 +5412,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public func shaderResourceView(): D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__ShaderResourceView_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__ShaderResourceView_e__Struct>(p)
             return ptr.read()
         }
@@ -5478,9 +5422,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public mut func set_shaderResourceView(val: D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__ShaderResourceView_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__ShaderResourceView_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5490,9 +5433,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public func unorderedAccessView(): D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__UnorderedAccessView_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__UnorderedAccessView_e__Struct>(p)
             return ptr.read()
         }
@@ -5501,9 +5443,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public mut func set_unorderedAccessView(val: D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__UnorderedAccessView_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__UnorderedAccessView_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5513,9 +5454,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public func incrementingConstant(): D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__IncrementingConstant_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__IncrementingConstant_e__Struct>(p)
             return ptr.read()
         }
@@ -5524,9 +5464,8 @@ public struct D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union {
     public mut func set_incrementingConstant(val: D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__IncrementingConstant_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_INDIRECT_ARGUMENT_DESC__Anonymous_e__Union__IncrementingConstant_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9496,14 +9435,13 @@ public struct D3D12_NODE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_NODE__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func shader(): D3D12_SHADER_NODE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_SHADER_NODE>(p)
             return ptr.read()
         }
@@ -9512,9 +9450,8 @@ public struct D3D12_NODE__Anonymous_e__Union {
     public mut func set_shader(val: D3D12_SHADER_NODE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_SHADER_NODE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10417,27 +10354,21 @@ public struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATI
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func numBottomLevelAccelerationStructurePointers(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_numBottomLevelAccelerationStructurePointers(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -10445,22 +10376,16 @@ public struct D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATI
     public func numBottomLevelAccelerationStructureHeaderAndPointerListPairs(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_numBottomLevelAccelerationStructureHeaderAndPointerListPairs(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -10570,14 +10495,13 @@ public struct D3D12_RAYTRACING_GEOMETRY_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_RAYTRACING_GEOMETRY_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func triangles(): D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC>(p)
             return ptr.read()
         }
@@ -10586,9 +10510,8 @@ public struct D3D12_RAYTRACING_GEOMETRY_DESC__Anonymous_e__Union {
     public mut func set_triangles(val: D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10598,9 +10521,8 @@ public struct D3D12_RAYTRACING_GEOMETRY_DESC__Anonymous_e__Union {
     public func aabBs(): D3D12_RAYTRACING_GEOMETRY_AABBS_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RAYTRACING_GEOMETRY_AABBS_DESC>(p)
             return ptr.read()
         }
@@ -10609,9 +10531,8 @@ public struct D3D12_RAYTRACING_GEOMETRY_DESC__Anonymous_e__Union {
     public mut func set_aabBs(val: D3D12_RAYTRACING_GEOMETRY_AABBS_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RAYTRACING_GEOMETRY_AABBS_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -10621,9 +10542,8 @@ public struct D3D12_RAYTRACING_GEOMETRY_DESC__Anonymous_e__Union {
     public func ommTriangles(): D3D12_RAYTRACING_GEOMETRY_OMM_TRIANGLES_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RAYTRACING_GEOMETRY_OMM_TRIANGLES_DESC>(p)
             return ptr.read()
         }
@@ -10632,9 +10552,8 @@ public struct D3D12_RAYTRACING_GEOMETRY_DESC__Anonymous_e__Union {
     public mut func set_ommTriangles(val: D3D12_RAYTRACING_GEOMETRY_OMM_TRIANGLES_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RAYTRACING_GEOMETRY_OMM_TRIANGLES_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11182,14 +11101,13 @@ public struct D3D12_RENDER_PASS_BEGINNING_ACCESS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_RENDER_PASS_BEGINNING_ACCESS__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
 
     public func clear(): D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS>(p)
             return ptr.read()
         }
@@ -11198,9 +11116,8 @@ public struct D3D12_RENDER_PASS_BEGINNING_ACCESS__Anonymous_e__Union {
     public mut func set_clear(val: D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11210,9 +11127,8 @@ public struct D3D12_RENDER_PASS_BEGINNING_ACCESS__Anonymous_e__Union {
     public func preserveLocal(): D3D12_RENDER_PASS_BEGINNING_ACCESS_PRESERVE_LOCAL_PARAMETERS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RENDER_PASS_BEGINNING_ACCESS_PRESERVE_LOCAL_PARAMETERS>(p)
             return ptr.read()
         }
@@ -11221,9 +11137,8 @@ public struct D3D12_RENDER_PASS_BEGINNING_ACCESS__Anonymous_e__Union {
     public mut func set_preserveLocal(val: D3D12_RENDER_PASS_BEGINNING_ACCESS_PRESERVE_LOCAL_PARAMETERS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RENDER_PASS_BEGINNING_ACCESS_PRESERVE_LOCAL_PARAMETERS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11310,14 +11225,13 @@ public struct D3D12_RENDER_PASS_ENDING_ACCESS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_RENDER_PASS_ENDING_ACCESS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func resolve(): D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS>(p)
             return ptr.read()
         }
@@ -11326,9 +11240,8 @@ public struct D3D12_RENDER_PASS_ENDING_ACCESS__Anonymous_e__Union {
     public mut func set_resolve(val: D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11338,9 +11251,8 @@ public struct D3D12_RENDER_PASS_ENDING_ACCESS__Anonymous_e__Union {
     public func preserveLocal(): D3D12_RENDER_PASS_ENDING_ACCESS_PRESERVE_LOCAL_PARAMETERS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RENDER_PASS_ENDING_ACCESS_PRESERVE_LOCAL_PARAMETERS>(p)
             return ptr.read()
         }
@@ -11349,9 +11261,8 @@ public struct D3D12_RENDER_PASS_ENDING_ACCESS__Anonymous_e__Union {
     public mut func set_preserveLocal(val: D3D12_RENDER_PASS_ENDING_ACCESS_PRESERVE_LOCAL_PARAMETERS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RENDER_PASS_ENDING_ACCESS_PRESERVE_LOCAL_PARAMETERS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11549,14 +11460,13 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func buffer(): D3D12_BUFFER_RTV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_BUFFER_RTV>(p)
             return ptr.read()
         }
@@ -11565,9 +11475,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public mut func set_buffer(val: D3D12_BUFFER_RTV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_BUFFER_RTV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11577,9 +11486,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public func texture1D(): D3D12_TEX1D_RTV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_RTV>(p)
             return ptr.read()
         }
@@ -11588,9 +11496,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture1D(val: D3D12_TEX1D_RTV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_RTV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11600,9 +11507,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public func texture1DArray(): D3D12_TEX1D_ARRAY_RTV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_ARRAY_RTV>(p)
             return ptr.read()
         }
@@ -11611,9 +11517,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture1DArray(val: D3D12_TEX1D_ARRAY_RTV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_ARRAY_RTV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11623,9 +11528,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public func texture2D(): D3D12_TEX2D_RTV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_RTV>(p)
             return ptr.read()
         }
@@ -11634,9 +11538,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2D(val: D3D12_TEX2D_RTV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_RTV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11646,9 +11549,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public func texture2DArray(): D3D12_TEX2D_ARRAY_RTV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_ARRAY_RTV>(p)
             return ptr.read()
         }
@@ -11657,9 +11559,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DArray(val: D3D12_TEX2D_ARRAY_RTV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_ARRAY_RTV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11669,9 +11570,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public func texture2DMS(): D3D12_TEX2DMS_RTV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_RTV>(p)
             return ptr.read()
         }
@@ -11680,9 +11580,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DMS(val: D3D12_TEX2DMS_RTV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_RTV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11692,9 +11591,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public func texture2DMSArray(): D3D12_TEX2DMS_ARRAY_RTV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_ARRAY_RTV>(p)
             return ptr.read()
         }
@@ -11703,9 +11601,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DMSArray(val: D3D12_TEX2DMS_ARRAY_RTV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_ARRAY_RTV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11715,9 +11612,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public func texture3D(): D3D12_TEX3D_RTV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX3D_RTV>(p)
             return ptr.read()
         }
@@ -11726,9 +11622,8 @@ public struct D3D12_RENDER_TARGET_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture3D(val: D3D12_TEX3D_RTV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX3D_RTV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11885,14 +11780,13 @@ public struct D3D12_RESOURCE_BARRIER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_RESOURCE_BARRIER__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func transition(): D3D12_RESOURCE_TRANSITION_BARRIER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RESOURCE_TRANSITION_BARRIER>(p)
             return ptr.read()
         }
@@ -11901,9 +11795,8 @@ public struct D3D12_RESOURCE_BARRIER__Anonymous_e__Union {
     public mut func set_transition(val: D3D12_RESOURCE_TRANSITION_BARRIER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RESOURCE_TRANSITION_BARRIER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11913,9 +11806,8 @@ public struct D3D12_RESOURCE_BARRIER__Anonymous_e__Union {
     public func aliasing(): D3D12_RESOURCE_ALIASING_BARRIER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RESOURCE_ALIASING_BARRIER>(p)
             return ptr.read()
         }
@@ -11924,9 +11816,8 @@ public struct D3D12_RESOURCE_BARRIER__Anonymous_e__Union {
     public mut func set_aliasing(val: D3D12_RESOURCE_ALIASING_BARRIER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RESOURCE_ALIASING_BARRIER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11936,9 +11827,8 @@ public struct D3D12_RESOURCE_BARRIER__Anonymous_e__Union {
     public func uav(): D3D12_RESOURCE_UAV_BARRIER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RESOURCE_UAV_BARRIER>(p)
             return ptr.read()
         }
@@ -11947,9 +11837,8 @@ public struct D3D12_RESOURCE_BARRIER__Anonymous_e__Union {
     public mut func set_uav(val: D3D12_RESOURCE_UAV_BARRIER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RESOURCE_UAV_BARRIER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12505,14 +12394,13 @@ public struct D3D12_ROOT_PARAMETER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_ROOT_PARAMETER__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func descriptorTable(): D3D12_ROOT_DESCRIPTOR_TABLE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_DESCRIPTOR_TABLE>(p)
             return ptr.read()
         }
@@ -12521,9 +12409,8 @@ public struct D3D12_ROOT_PARAMETER__Anonymous_e__Union {
     public mut func set_descriptorTable(val: D3D12_ROOT_DESCRIPTOR_TABLE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_DESCRIPTOR_TABLE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12533,9 +12420,8 @@ public struct D3D12_ROOT_PARAMETER__Anonymous_e__Union {
     public func constants(): D3D12_ROOT_CONSTANTS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_CONSTANTS>(p)
             return ptr.read()
         }
@@ -12544,9 +12430,8 @@ public struct D3D12_ROOT_PARAMETER__Anonymous_e__Union {
     public mut func set_constants(val: D3D12_ROOT_CONSTANTS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_CONSTANTS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12556,9 +12441,8 @@ public struct D3D12_ROOT_PARAMETER__Anonymous_e__Union {
     public func descriptor(): D3D12_ROOT_DESCRIPTOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_DESCRIPTOR>(p)
             return ptr.read()
         }
@@ -12567,9 +12451,8 @@ public struct D3D12_ROOT_PARAMETER__Anonymous_e__Union {
     public mut func set_descriptor(val: D3D12_ROOT_DESCRIPTOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_DESCRIPTOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12591,14 +12474,13 @@ public struct D3D12_ROOT_PARAMETER1 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_ROOT_PARAMETER1__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func descriptorTable(): D3D12_ROOT_DESCRIPTOR_TABLE1 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_DESCRIPTOR_TABLE1>(p)
             return ptr.read()
         }
@@ -12607,9 +12489,8 @@ public struct D3D12_ROOT_PARAMETER1__Anonymous_e__Union {
     public mut func set_descriptorTable(val: D3D12_ROOT_DESCRIPTOR_TABLE1): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_DESCRIPTOR_TABLE1>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12619,9 +12500,8 @@ public struct D3D12_ROOT_PARAMETER1__Anonymous_e__Union {
     public func constants(): D3D12_ROOT_CONSTANTS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_CONSTANTS>(p)
             return ptr.read()
         }
@@ -12630,9 +12510,8 @@ public struct D3D12_ROOT_PARAMETER1__Anonymous_e__Union {
     public mut func set_constants(val: D3D12_ROOT_CONSTANTS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_CONSTANTS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12642,9 +12521,8 @@ public struct D3D12_ROOT_PARAMETER1__Anonymous_e__Union {
     public func descriptor(): D3D12_ROOT_DESCRIPTOR1 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_DESCRIPTOR1>(p)
             return ptr.read()
         }
@@ -12653,9 +12531,8 @@ public struct D3D12_ROOT_PARAMETER1__Anonymous_e__Union {
     public mut func set_descriptor(val: D3D12_ROOT_DESCRIPTOR1): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_DESCRIPTOR1>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12894,14 +12771,13 @@ public struct D3D12_SAMPLER_DESC2 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_SAMPLER_DESC2__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func floatBorderColor(): VArray<Float32, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $4>>(p)
             return ptr.read()
         }
@@ -12910,9 +12786,8 @@ public struct D3D12_SAMPLER_DESC2__Anonymous_e__Union {
     public mut func set_floatBorderColor(val: VArray<Float32, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Float32, $4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12922,9 +12797,8 @@ public struct D3D12_SAMPLER_DESC2__Anonymous_e__Union {
     public func uintBorderColor(): VArray<UInt32, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $4>>(p)
             return ptr.read()
         }
@@ -12933,9 +12807,8 @@ public struct D3D12_SAMPLER_DESC2__Anonymous_e__Union {
     public mut func set_uintBorderColor(val: VArray<UInt32, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13109,27 +12982,21 @@ public struct D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER1 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER1__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func numBottomLevelAccelerationStructurePointersAfterHeader(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_numBottomLevelAccelerationStructurePointersAfterHeader(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -13137,22 +13004,16 @@ public struct D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER1__Anonym
     public func numBlocks(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_numBlocks(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -13214,14 +13075,13 @@ public struct D3D12_SET_PROGRAM_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_SET_PROGRAM_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $10> = VArray<UInt64, $10>(repeat: 0)
+    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
 
     public func genericPipeline(): D3D12_SET_GENERIC_PIPELINE_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_SET_GENERIC_PIPELINE_DESC>(p)
             return ptr.read()
         }
@@ -13230,9 +13090,8 @@ public struct D3D12_SET_PROGRAM_DESC__Anonymous_e__Union {
     public mut func set_genericPipeline(val: D3D12_SET_GENERIC_PIPELINE_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_SET_GENERIC_PIPELINE_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13242,9 +13101,8 @@ public struct D3D12_SET_PROGRAM_DESC__Anonymous_e__Union {
     public func raytracingPipeline(): D3D12_SET_RAYTRACING_PIPELINE_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_SET_RAYTRACING_PIPELINE_DESC>(p)
             return ptr.read()
         }
@@ -13253,9 +13111,8 @@ public struct D3D12_SET_PROGRAM_DESC__Anonymous_e__Union {
     public mut func set_raytracingPipeline(val: D3D12_SET_RAYTRACING_PIPELINE_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_SET_RAYTRACING_PIPELINE_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13265,9 +13122,8 @@ public struct D3D12_SET_PROGRAM_DESC__Anonymous_e__Union {
     public func workGraph(): D3D12_SET_WORK_GRAPH_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_SET_WORK_GRAPH_DESC>(p)
             return ptr.read()
         }
@@ -13276,9 +13132,8 @@ public struct D3D12_SET_PROGRAM_DESC__Anonymous_e__Union {
     public mut func set_workGraph(val: D3D12_SET_WORK_GRAPH_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_SET_WORK_GRAPH_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13738,14 +13593,13 @@ public struct D3D12_SHADER_NODE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_SHADER_NODE__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pBroadcastingLaunchOverrides(): CPointer<D3D12_BROADCASTING_LAUNCH_OVERRIDES> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_BROADCASTING_LAUNCH_OVERRIDES>>(p)
             return ptr.read()
         }
@@ -13754,9 +13608,8 @@ public struct D3D12_SHADER_NODE__Anonymous_e__Union {
     public mut func set_pBroadcastingLaunchOverrides(val: CPointer<D3D12_BROADCASTING_LAUNCH_OVERRIDES>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_BROADCASTING_LAUNCH_OVERRIDES>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13766,9 +13619,8 @@ public struct D3D12_SHADER_NODE__Anonymous_e__Union {
     public func pCoalescingLaunchOverrides(): CPointer<D3D12_COALESCING_LAUNCH_OVERRIDES> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_COALESCING_LAUNCH_OVERRIDES>>(p)
             return ptr.read()
         }
@@ -13777,9 +13629,8 @@ public struct D3D12_SHADER_NODE__Anonymous_e__Union {
     public mut func set_pCoalescingLaunchOverrides(val: CPointer<D3D12_COALESCING_LAUNCH_OVERRIDES>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_COALESCING_LAUNCH_OVERRIDES>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13789,9 +13640,8 @@ public struct D3D12_SHADER_NODE__Anonymous_e__Union {
     public func pThreadLaunchOverrides(): CPointer<D3D12_THREAD_LAUNCH_OVERRIDES> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_THREAD_LAUNCH_OVERRIDES>>(p)
             return ptr.read()
         }
@@ -13800,9 +13650,8 @@ public struct D3D12_SHADER_NODE__Anonymous_e__Union {
     public mut func set_pThreadLaunchOverrides(val: CPointer<D3D12_THREAD_LAUNCH_OVERRIDES>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_THREAD_LAUNCH_OVERRIDES>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13812,9 +13661,8 @@ public struct D3D12_SHADER_NODE__Anonymous_e__Union {
     public func pCommonComputeNodeOverrides(): CPointer<D3D12_COMMON_COMPUTE_NODE_OVERRIDES> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_COMMON_COMPUTE_NODE_OVERRIDES>>(p)
             return ptr.read()
         }
@@ -13823,9 +13671,8 @@ public struct D3D12_SHADER_NODE__Anonymous_e__Union {
     public mut func set_pCommonComputeNodeOverrides(val: CPointer<D3D12_COMMON_COMPUTE_NODE_OVERRIDES>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_COMMON_COMPUTE_NODE_OVERRIDES>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13848,14 +13695,13 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func buffer(): D3D12_BUFFER_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_BUFFER_SRV>(p)
             return ptr.read()
         }
@@ -13864,9 +13710,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_buffer(val: D3D12_BUFFER_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_BUFFER_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13876,9 +13721,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func texture1D(): D3D12_TEX1D_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_SRV>(p)
             return ptr.read()
         }
@@ -13887,9 +13731,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture1D(val: D3D12_TEX1D_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13899,9 +13742,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func texture1DArray(): D3D12_TEX1D_ARRAY_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_ARRAY_SRV>(p)
             return ptr.read()
         }
@@ -13910,9 +13752,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture1DArray(val: D3D12_TEX1D_ARRAY_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_ARRAY_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13922,9 +13763,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func texture2D(): D3D12_TEX2D_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_SRV>(p)
             return ptr.read()
         }
@@ -13933,9 +13773,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2D(val: D3D12_TEX2D_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13945,9 +13784,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func texture2DArray(): D3D12_TEX2D_ARRAY_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_ARRAY_SRV>(p)
             return ptr.read()
         }
@@ -13956,9 +13794,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DArray(val: D3D12_TEX2D_ARRAY_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_ARRAY_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13968,9 +13805,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func texture2DMS(): D3D12_TEX2DMS_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_SRV>(p)
             return ptr.read()
         }
@@ -13979,9 +13815,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DMS(val: D3D12_TEX2DMS_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -13991,9 +13826,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func texture2DMSArray(): D3D12_TEX2DMS_ARRAY_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_ARRAY_SRV>(p)
             return ptr.read()
         }
@@ -14002,9 +13836,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DMSArray(val: D3D12_TEX2DMS_ARRAY_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_ARRAY_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14014,9 +13847,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func texture3D(): D3D12_TEX3D_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX3D_SRV>(p)
             return ptr.read()
         }
@@ -14025,9 +13857,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture3D(val: D3D12_TEX3D_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX3D_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14037,9 +13868,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func textureCube(): D3D12_TEXCUBE_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEXCUBE_SRV>(p)
             return ptr.read()
         }
@@ -14048,9 +13878,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_textureCube(val: D3D12_TEXCUBE_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEXCUBE_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14060,9 +13889,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func textureCubeArray(): D3D12_TEXCUBE_ARRAY_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEXCUBE_ARRAY_SRV>(p)
             return ptr.read()
         }
@@ -14071,9 +13899,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_textureCubeArray(val: D3D12_TEXCUBE_ARRAY_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEXCUBE_ARRAY_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -14083,9 +13910,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public func raytracingAccelerationStructure(): D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV>(p)
             return ptr.read()
         }
@@ -14094,9 +13920,8 @@ public struct D3D12_SHADER_RESOURCE_VIEW_DESC__Anonymous_e__Union {
     public mut func set_raytracingAccelerationStructure(val: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15255,14 +15080,13 @@ public struct D3D12_TEXTURE_COPY_LOCATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_TEXTURE_COPY_LOCATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func placedFootprint(): D3D12_PLACED_SUBRESOURCE_FOOTPRINT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_PLACED_SUBRESOURCE_FOOTPRINT>(p)
             return ptr.read()
         }
@@ -15271,9 +15095,8 @@ public struct D3D12_TEXTURE_COPY_LOCATION__Anonymous_e__Union {
     public mut func set_placedFootprint(val: D3D12_PLACED_SUBRESOURCE_FOOTPRINT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_PLACED_SUBRESOURCE_FOOTPRINT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15283,22 +15106,16 @@ public struct D3D12_TEXTURE_COPY_LOCATION__Anonymous_e__Union {
     public func subresourceIndex(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_subresourceIndex(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -15664,14 +15481,13 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func buffer(): D3D12_BUFFER_UAV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_BUFFER_UAV>(p)
             return ptr.read()
         }
@@ -15680,9 +15496,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public mut func set_buffer(val: D3D12_BUFFER_UAV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_BUFFER_UAV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15692,9 +15507,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public func texture1D(): D3D12_TEX1D_UAV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_UAV>(p)
             return ptr.read()
         }
@@ -15703,9 +15517,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture1D(val: D3D12_TEX1D_UAV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_UAV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15715,9 +15528,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public func texture1DArray(): D3D12_TEX1D_ARRAY_UAV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_ARRAY_UAV>(p)
             return ptr.read()
         }
@@ -15726,9 +15538,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture1DArray(val: D3D12_TEX1D_ARRAY_UAV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX1D_ARRAY_UAV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15738,9 +15549,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public func texture2D(): D3D12_TEX2D_UAV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_UAV>(p)
             return ptr.read()
         }
@@ -15749,9 +15559,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2D(val: D3D12_TEX2D_UAV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_UAV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15761,9 +15570,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public func texture2DArray(): D3D12_TEX2D_ARRAY_UAV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_ARRAY_UAV>(p)
             return ptr.read()
         }
@@ -15772,9 +15580,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DArray(val: D3D12_TEX2D_ARRAY_UAV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2D_ARRAY_UAV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15784,9 +15591,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public func texture2DMS(): D3D12_TEX2DMS_UAV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_UAV>(p)
             return ptr.read()
         }
@@ -15795,9 +15601,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DMS(val: D3D12_TEX2DMS_UAV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_UAV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15807,9 +15612,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public func texture2DMSArray(): D3D12_TEX2DMS_ARRAY_UAV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_ARRAY_UAV>(p)
             return ptr.read()
         }
@@ -15818,9 +15622,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture2DMSArray(val: D3D12_TEX2DMS_ARRAY_UAV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX2DMS_ARRAY_UAV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15830,9 +15633,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public func texture3D(): D3D12_TEX3D_UAV {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX3D_UAV>(p)
             return ptr.read()
         }
@@ -15841,9 +15643,8 @@ public struct D3D12_UNORDERED_ACCESS_VIEW_DESC__Anonymous_e__Union {
     public mut func set_texture3D(val: D3D12_TEX3D_UAV): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_TEX3D_UAV>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15892,14 +15693,13 @@ public struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $7> = VArray<UInt64, $7>(repeat: 0)
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0)
 
     public func dred_1_0(): D3D12_DEVICE_REMOVED_EXTENDED_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEVICE_REMOVED_EXTENDED_DATA>(p)
             return ptr.read()
         }
@@ -15908,9 +15708,8 @@ public struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA__Anonymous_e__Union {
     public mut func set_dred_1_0(val: D3D12_DEVICE_REMOVED_EXTENDED_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEVICE_REMOVED_EXTENDED_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15920,9 +15719,8 @@ public struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA__Anonymous_e__Union {
     public func dred_1_1(): D3D12_DEVICE_REMOVED_EXTENDED_DATA1 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEVICE_REMOVED_EXTENDED_DATA1>(p)
             return ptr.read()
         }
@@ -15931,9 +15729,8 @@ public struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA__Anonymous_e__Union {
     public mut func set_dred_1_1(val: D3D12_DEVICE_REMOVED_EXTENDED_DATA1): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEVICE_REMOVED_EXTENDED_DATA1>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15943,9 +15740,8 @@ public struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA__Anonymous_e__Union {
     public func dred_1_2(): D3D12_DEVICE_REMOVED_EXTENDED_DATA2 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEVICE_REMOVED_EXTENDED_DATA2>(p)
             return ptr.read()
         }
@@ -15954,9 +15750,8 @@ public struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA__Anonymous_e__Union {
     public mut func set_dred_1_2(val: D3D12_DEVICE_REMOVED_EXTENDED_DATA2): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEVICE_REMOVED_EXTENDED_DATA2>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15966,9 +15761,8 @@ public struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA__Anonymous_e__Union {
     public func dred_1_3(): D3D12_DEVICE_REMOVED_EXTENDED_DATA3 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEVICE_REMOVED_EXTENDED_DATA3>(p)
             return ptr.read()
         }
@@ -15977,9 +15771,8 @@ public struct D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA__Anonymous_e__Union {
     public mut func set_dred_1_3(val: D3D12_DEVICE_REMOVED_EXTENDED_DATA3): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_DEVICE_REMOVED_EXTENDED_DATA3>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16000,14 +15793,13 @@ public struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func desc_1_0(): D3D12_ROOT_SIGNATURE_DESC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_SIGNATURE_DESC>(p)
             return ptr.read()
         }
@@ -16016,9 +15808,8 @@ public struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC__Anonymous_e__Union {
     public mut func set_desc_1_0(val: D3D12_ROOT_SIGNATURE_DESC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_SIGNATURE_DESC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16028,9 +15819,8 @@ public struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC__Anonymous_e__Union {
     public func desc_1_1(): D3D12_ROOT_SIGNATURE_DESC1 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_SIGNATURE_DESC1>(p)
             return ptr.read()
         }
@@ -16039,9 +15829,8 @@ public struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC__Anonymous_e__Union {
     public mut func set_desc_1_1(val: D3D12_ROOT_SIGNATURE_DESC1): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_SIGNATURE_DESC1>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16051,9 +15840,8 @@ public struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC__Anonymous_e__Union {
     public func desc_1_2(): D3D12_ROOT_SIGNATURE_DESC2 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_SIGNATURE_DESC2>(p)
             return ptr.read()
         }
@@ -16062,9 +15850,8 @@ public struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC__Anonymous_e__Union {
     public mut func set_desc_1_2(val: D3D12_ROOT_SIGNATURE_DESC2): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_ROOT_SIGNATURE_DESC2>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16077,27 +15864,21 @@ public struct D3D12_VERSIONED_ROOT_SIGNATURE_DESC__Anonymous_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VERSION_NUMBER {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func version(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_version(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -16105,9 +15886,8 @@ public struct D3D12_VERSION_NUMBER {
     public func versionParts(): VArray<UInt16, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $4>>(p)
             return ptr.read()
         }
@@ -16116,9 +15896,8 @@ public struct D3D12_VERSION_NUMBER {
     public mut func set_versionParts(val: VArray<UInt16, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $4>>(p)
             ptr.write(val)
             _raw = rawStorage

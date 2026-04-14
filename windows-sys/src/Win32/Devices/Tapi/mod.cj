@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.Tapi
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Media.DirectShow as Win32_Media_DirectShow
 import windows_sys.Win32.Media.MediaFoundation as Win32_Media_MediaFoundation
@@ -1177,16 +1178,128 @@ public let DC_NOANSWER: DISCONNECT_CODE = DISCONNECT_CODE(1)
 public let DC_REJECTED: DISCONNECT_CODE = DISCONNECT_CODE(2)
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct DTR {
-    public var wYear: UInt16 = 0
-    public var wMonth: UInt16 = 0
-    public var wDay: UInt16 = 0
-    public var wHour: UInt16 = 0
-    public var wMinute: UInt16 = 0
-    public var wSecond: UInt16 = 0
-    public var wDayOfWeek: UInt16 = 0
+    public var _raw: VArray<UInt8, $14> = VArray<UInt8, $14>(repeat: 0u8)
+
+    public func wYear(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_wYear(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wMonth(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_wMonth(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wDay(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4)
+        }
+    }
+
+    public mut func set_wDay(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wHour(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 6)
+        }
+    }
+
+    public mut func set_wHour(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wMinute(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 8)
+        }
+    }
+
+    public mut func set_wMinute(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wSecond(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 10)
+        }
+    }
+
+    public mut func set_wSecond(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 10, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wDayOfWeek(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 12)
+        }
+    }
+
+    public mut func set_wDayOfWeek(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -19200,301 +19313,3218 @@ public class ITnef <: ComInterface & Resource {
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEADDRESSCAPS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwLineDeviceID: UInt32 = 0
-    public var dwAddressSize: UInt32 = 0
-    public var dwAddressOffset: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
-    public var dwAddressSharing: UInt32 = 0
-    public var dwAddressStates: UInt32 = 0
-    public var dwCallInfoStates: UInt32 = 0
-    public var dwCallerIDFlags: UInt32 = 0
-    public var dwCalledIDFlags: UInt32 = 0
-    public var dwConnectedIDFlags: UInt32 = 0
-    public var dwRedirectionIDFlags: UInt32 = 0
-    public var dwRedirectingIDFlags: UInt32 = 0
-    public var dwCallStates: UInt32 = 0
-    public var dwDialToneModes: UInt32 = 0
-    public var dwBusyModes: UInt32 = 0
-    public var dwSpecialInfo: UInt32 = 0
-    public var dwDisconnectModes: UInt32 = 0
-    public var dwMaxNumActiveCalls: UInt32 = 0
-    public var dwMaxNumOnHoldCalls: UInt32 = 0
-    public var dwMaxNumOnHoldPendingCalls: UInt32 = 0
-    public var dwMaxNumConference: UInt32 = 0
-    public var dwMaxNumTransConf: UInt32 = 0
-    public var dwAddrCapFlags: UInt32 = 0
-    public var dwCallFeatures: UInt32 = 0
-    public var dwRemoveFromConfCaps: UInt32 = 0
-    public var dwRemoveFromConfState: UInt32 = 0
-    public var dwTransferModes: UInt32 = 0
-    public var dwParkModes: UInt32 = 0
-    public var dwForwardModes: UInt32 = 0
-    public var dwMaxForwardEntries: UInt32 = 0
-    public var dwMaxSpecificEntries: UInt32 = 0
-    public var dwMinFwdNumRings: UInt32 = 0
-    public var dwMaxFwdNumRings: UInt32 = 0
-    public var dwMaxCallCompletions: UInt32 = 0
-    public var dwCallCompletionConds: UInt32 = 0
-    public var dwCallCompletionModes: UInt32 = 0
-    public var dwNumCompletionMessages: UInt32 = 0
-    public var dwCompletionMsgTextEntrySize: UInt32 = 0
-    public var dwCompletionMsgTextSize: UInt32 = 0
-    public var dwCompletionMsgTextOffset: UInt32 = 0
-    public var dwAddressFeatures: UInt32 = 0
-    public var dwPredictiveAutoTransferStates: UInt32 = 0
-    public var dwNumCallTreatments: UInt32 = 0
-    public var dwCallTreatmentListSize: UInt32 = 0
-    public var dwCallTreatmentListOffset: UInt32 = 0
-    public var dwDeviceClassesSize: UInt32 = 0
-    public var dwDeviceClassesOffset: UInt32 = 0
-    public var dwMaxCallDataSize: UInt32 = 0
-    public var dwCallFeatures2: UInt32 = 0
-    public var dwMaxNoAnswerTimeout: UInt32 = 0
-    public var dwConnectedModes: UInt32 = 0
-    public var dwOfferingModes: UInt32 = 0
-    public var dwAvailableMediaModes: UInt32 = 0
+    public var _raw: VArray<UInt8, $228> = VArray<UInt8, $228>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLineDeviceID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwLineDeviceID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwAddressSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwAddressOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressSharing(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwAddressSharing(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwAddressStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallInfoStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwCallInfoStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallerIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwCallerIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwCalledIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwConnectedIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwConnectedIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectionIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwRedirectionIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectingIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_dwRedirectingIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 64)
+        }
+    }
+
+    public mut func set_dwCallStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDialToneModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 68)
+        }
+    }
+
+    public mut func set_dwDialToneModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 68, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwBusyModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 72)
+        }
+    }
+
+    public mut func set_dwBusyModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 72, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSpecialInfo(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 76)
+        }
+    }
+
+    public mut func set_dwSpecialInfo(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 76, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisconnectModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 80)
+        }
+    }
+
+    public mut func set_dwDisconnectModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxNumActiveCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 84)
+        }
+    }
+
+    public mut func set_dwMaxNumActiveCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 84, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxNumOnHoldCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 88)
+        }
+    }
+
+    public mut func set_dwMaxNumOnHoldCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 88, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxNumOnHoldPendingCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 92)
+        }
+    }
+
+    public mut func set_dwMaxNumOnHoldPendingCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 92, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxNumConference(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 96)
+        }
+    }
+
+    public mut func set_dwMaxNumConference(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 96, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxNumTransConf(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 100)
+        }
+    }
+
+    public mut func set_dwMaxNumTransConf(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 100, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddrCapFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 104)
+        }
+    }
+
+    public mut func set_dwAddrCapFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 104, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 108)
+        }
+    }
+
+    public mut func set_dwCallFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 108, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRemoveFromConfCaps(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 112)
+        }
+    }
+
+    public mut func set_dwRemoveFromConfCaps(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 112, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRemoveFromConfState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 116)
+        }
+    }
+
+    public mut func set_dwRemoveFromConfState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 116, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTransferModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 120)
+        }
+    }
+
+    public mut func set_dwTransferModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 120, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwParkModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 124)
+        }
+    }
+
+    public mut func set_dwParkModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 124, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwForwardModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 128)
+        }
+    }
+
+    public mut func set_dwForwardModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 128, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxForwardEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 132)
+        }
+    }
+
+    public mut func set_dwMaxForwardEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 132, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxSpecificEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 136)
+        }
+    }
+
+    public mut func set_dwMaxSpecificEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 136, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMinFwdNumRings(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 140)
+        }
+    }
+
+    public mut func set_dwMinFwdNumRings(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 140, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxFwdNumRings(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 144)
+        }
+    }
+
+    public mut func set_dwMaxFwdNumRings(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 144, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxCallCompletions(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 148)
+        }
+    }
+
+    public mut func set_dwMaxCallCompletions(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 148, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallCompletionConds(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 152)
+        }
+    }
+
+    public mut func set_dwCallCompletionConds(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 152, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallCompletionModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 156)
+        }
+    }
+
+    public mut func set_dwCallCompletionModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 156, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumCompletionMessages(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 160)
+        }
+    }
+
+    public mut func set_dwNumCompletionMessages(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 160, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCompletionMsgTextEntrySize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 164)
+        }
+    }
+
+    public mut func set_dwCompletionMsgTextEntrySize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 164, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCompletionMsgTextSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 168)
+        }
+    }
+
+    public mut func set_dwCompletionMsgTextSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 168, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCompletionMsgTextOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 172)
+        }
+    }
+
+    public mut func set_dwCompletionMsgTextOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 172, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 176)
+        }
+    }
+
+    public mut func set_dwAddressFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 176, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPredictiveAutoTransferStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 180)
+        }
+    }
+
+    public mut func set_dwPredictiveAutoTransferStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 180, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumCallTreatments(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 184)
+        }
+    }
+
+    public mut func set_dwNumCallTreatments(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 184, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallTreatmentListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 188)
+        }
+    }
+
+    public mut func set_dwCallTreatmentListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 188, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallTreatmentListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 192)
+        }
+    }
+
+    public mut func set_dwCallTreatmentListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 192, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceClassesSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 196)
+        }
+    }
+
+    public mut func set_dwDeviceClassesSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 196, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceClassesOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 200)
+        }
+    }
+
+    public mut func set_dwDeviceClassesOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 200, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxCallDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 204)
+        }
+    }
+
+    public mut func set_dwMaxCallDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 204, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallFeatures2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 208)
+        }
+    }
+
+    public mut func set_dwCallFeatures2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 208, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxNoAnswerTimeout(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 212)
+        }
+    }
+
+    public mut func set_dwMaxNoAnswerTimeout(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 212, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwConnectedModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 216)
+        }
+    }
+
+    public mut func set_dwConnectedModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 216, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwOfferingModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 220)
+        }
+    }
+
+    public mut func set_dwOfferingModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 220, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAvailableMediaModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 224)
+        }
+    }
+
+    public mut func set_dwAvailableMediaModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 224, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEADDRESSSTATUS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumInUse: UInt32 = 0
-    public var dwNumActiveCalls: UInt32 = 0
-    public var dwNumOnHoldCalls: UInt32 = 0
-    public var dwNumOnHoldPendCalls: UInt32 = 0
-    public var dwAddressFeatures: UInt32 = 0
-    public var dwNumRingsNoAnswer: UInt32 = 0
-    public var dwForwardNumEntries: UInt32 = 0
-    public var dwForwardSize: UInt32 = 0
-    public var dwForwardOffset: UInt32 = 0
-    public var dwTerminalModesSize: UInt32 = 0
-    public var dwTerminalModesOffset: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumInUse(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumInUse(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumActiveCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwNumActiveCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumOnHoldCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwNumOnHoldCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumOnHoldPendCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwNumOnHoldPendCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwAddressFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumRingsNoAnswer(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwNumRingsNoAnswer(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwForwardNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwForwardNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwForwardSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwForwardSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwForwardOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwForwardOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalModesSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwTerminalModesSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalModesOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwTerminalModesOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTACTIVITYENTRY {
-    public var dwID: UInt32 = 0
-    public var dwNameSize: UInt32 = 0
-    public var dwNameOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func dwID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTACTIVITYLIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumEntries: UInt32 = 0
-    public var dwListSize: UInt32 = 0
-    public var dwListOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTCAPS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwAgentHandlerInfoSize: UInt32 = 0
-    public var dwAgentHandlerInfoOffset: UInt32 = 0
-    public var dwCapsVersion: UInt32 = 0
-    public var dwFeatures: UInt32 = 0
-    public var dwStates: UInt32 = 0
-    public var dwNextStates: UInt32 = 0
-    public var dwMaxNumGroupEntries: UInt32 = 0
-    public var dwAgentStatusMessages: UInt32 = 0
-    public var dwNumAgentExtensionIDs: UInt32 = 0
-    public var dwAgentExtensionIDListSize: UInt32 = 0
-    public var dwAgentExtensionIDListOffset: UInt32 = 0
-    public var ProxyGUID: GUID = GUID()
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentHandlerInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwAgentHandlerInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentHandlerInfoOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwAgentHandlerInfoOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCapsVersion(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwCapsVersion(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNextStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwNextStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxNumGroupEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwMaxNumGroupEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentStatusMessages(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwAgentStatusMessages(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumAgentExtensionIDs(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwNumAgentExtensionIDs(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentExtensionIDListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwAgentExtensionIDListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentExtensionIDListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwAgentExtensionIDListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ProxyGUID`: layout unknown; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTENTRY {
-    public var hAgent: UInt32 = 0
-    public var dwNameSize: UInt32 = 0
-    public var dwNameOffset: UInt32 = 0
-    public var dwIDSize: UInt32 = 0
-    public var dwIDOffset: UInt32 = 0
-    public var dwPINSize: UInt32 = 0
-    public var dwPINOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    public func hAgent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwIDSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwIDSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwIDOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwIDOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPINSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwPINSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPINOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwPINOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTGROUPENTRY {
-    public var GroupID: LINEAGENTGROUPENTRY__GroupID_e__Struct = LINEAGENTGROUPENTRY__GroupID_e__Struct()
-    public var dwNameSize: UInt32 = 0
-    public var dwNameOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    // packed field `GroupID`: type `LINEAGENTGROUPENTRY__GroupID_e__Struct` not supported by polyfill; skipped
+
+    public func dwNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTGROUPENTRY__GroupID_e__Struct {
-    public var dwGroupID1: UInt32 = 0
-    public var dwGroupID2: UInt32 = 0
-    public var dwGroupID3: UInt32 = 0
-    public var dwGroupID4: UInt32 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func dwGroupID1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwGroupID1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGroupID2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwGroupID2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGroupID3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwGroupID3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGroupID4(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwGroupID4(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTGROUPLIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumEntries: UInt32 = 0
-    public var dwListSize: UInt32 = 0
-    public var dwListOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTINFO {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwAgentState: UInt32 = 0
-    public var dwNextAgentState: UInt32 = 0
-    public var dwMeasurementPeriod: UInt32 = 0
-    public var cyOverallCallRate: Win32_impl.CY = Win32_impl.CY()
-    public var dwNumberOfACDCalls: UInt32 = 0
-    public var dwNumberOfIncomingCalls: UInt32 = 0
-    public var dwNumberOfOutgoingCalls: UInt32 = 0
-    public var dwTotalACDTalkTime: UInt32 = 0
-    public var dwTotalACDCallTime: UInt32 = 0
-    public var dwTotalACDWrapUpTime: UInt32 = 0
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwAgentState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNextAgentState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwNextAgentState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMeasurementPeriod(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwMeasurementPeriod(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `cyOverallCallRate`: type `Win32_impl.CY` not supported by polyfill; skipped
+
+    public func dwNumberOfACDCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwNumberOfACDCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumberOfIncomingCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwNumberOfIncomingCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumberOfOutgoingCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwNumberOfOutgoingCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalACDTalkTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwTotalACDTalkTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalACDCallTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwTotalACDCallTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalACDWrapUpTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwTotalACDWrapUpTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTLIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumEntries: UInt32 = 0
-    public var dwListSize: UInt32 = 0
-    public var dwListOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTSESSIONENTRY {
-    public var hAgentSession: UInt32 = 0
-    public var hAgent: UInt32 = 0
-    public var GroupID: GUID = GUID()
-    public var dwWorkingAddressID: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func hAgentSession(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgentSession(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func hAgent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_hAgent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `GroupID`: layout unknown; skipped
+
+    public func dwWorkingAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwWorkingAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTSESSIONINFO {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwAgentSessionState: UInt32 = 0
-    public var dwNextAgentSessionState: UInt32 = 0
-    public var dateSessionStartTime: Float64 = 0.0
-    public var dwSessionDuration: UInt32 = 0
-    public var dwNumberOfCalls: UInt32 = 0
-    public var dwTotalTalkTime: UInt32 = 0
-    public var dwAverageTalkTime: UInt32 = 0
-    public var dwTotalCallTime: UInt32 = 0
-    public var dwAverageCallTime: UInt32 = 0
-    public var dwTotalWrapUpTime: UInt32 = 0
-    public var dwAverageWrapUpTime: UInt32 = 0
-    public var cyACDCallRate: Win32_impl.CY = Win32_impl.CY()
-    public var dwLongestTimeToAnswer: UInt32 = 0
-    public var dwAverageTimeToAnswer: UInt32 = 0
+    public var _raw: VArray<UInt8, $76> = VArray<UInt8, $76>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentSessionState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwAgentSessionState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNextAgentSessionState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwNextAgentSessionState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dateSessionStartTime(): Float64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadFloat64(base, 20)
+        }
+    }
+
+    public mut func set_dateSessionStartTime(val: Float64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteFloat64(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSessionDuration(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwSessionDuration(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumberOfCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwNumberOfCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalTalkTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwTotalTalkTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAverageTalkTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwAverageTalkTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalCallTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwTotalCallTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAverageCallTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwAverageCallTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalWrapUpTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwTotalWrapUpTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAverageWrapUpTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwAverageWrapUpTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `cyACDCallRate`: type `Win32_impl.CY` not supported by polyfill; skipped
+
+    public func dwLongestTimeToAnswer(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 68)
+        }
+    }
+
+    public mut func set_dwLongestTimeToAnswer(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 68, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAverageTimeToAnswer(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 72)
+        }
+    }
+
+    public mut func set_dwAverageTimeToAnswer(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 72, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTSESSIONLIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumEntries: UInt32 = 0
-    public var dwListSize: UInt32 = 0
-    public var dwListOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAGENTSTATUS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumEntries: UInt32 = 0
-    public var dwGroupListSize: UInt32 = 0
-    public var dwGroupListOffset: UInt32 = 0
-    public var dwState: UInt32 = 0
-    public var dwNextState: UInt32 = 0
-    public var dwActivityID: UInt32 = 0
-    public var dwActivitySize: UInt32 = 0
-    public var dwActivityOffset: UInt32 = 0
-    public var dwAgentFeatures: UInt32 = 0
-    public var dwValidStates: UInt32 = 0
-    public var dwValidNextStates: UInt32 = 0
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGroupListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwGroupListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGroupListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwGroupListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNextState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwNextState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwActivityID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwActivityID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwActivitySize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwActivitySize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwActivityOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwActivityOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwAgentFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwValidStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwValidStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwValidNextStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwValidNextStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEAPPINFO {
-    public var dwMachineNameSize: UInt32 = 0
-    public var dwMachineNameOffset: UInt32 = 0
-    public var dwUserNameSize: UInt32 = 0
-    public var dwUserNameOffset: UInt32 = 0
-    public var dwModuleFilenameSize: UInt32 = 0
-    public var dwModuleFilenameOffset: UInt32 = 0
-    public var dwFriendlyNameSize: UInt32 = 0
-    public var dwFriendlyNameOffset: UInt32 = 0
-    public var dwMediaModes: UInt32 = 0
-    public var dwAddressID: UInt32 = 0
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
+
+    public func dwMachineNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwMachineNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMachineNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwMachineNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUserNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUserNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUserNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwUserNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwModuleFilenameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwModuleFilenameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwModuleFilenameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwModuleFilenameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFriendlyNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwFriendlyNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFriendlyNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwFriendlyNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMediaModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwMediaModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -19502,327 +22532,4190 @@ public struct LINEAPPINFO {
 public type LINECALLBACK = CFunc<(UInt32, UInt32, UIntNative, UIntNative, UIntNative, UIntNative) -> Unit>
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINECALLINFO {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var hLine: UInt32 = 0
-    public var dwLineDeviceID: UInt32 = 0
-    public var dwAddressID: UInt32 = 0
-    public var dwBearerMode: UInt32 = 0
-    public var dwRate: UInt32 = 0
-    public var dwMediaMode: UInt32 = 0
-    public var dwAppSpecific: UInt32 = 0
-    public var dwCallID: UInt32 = 0
-    public var dwRelatedCallID: UInt32 = 0
-    public var dwCallParamFlags: UInt32 = 0
-    public var dwCallStates: UInt32 = 0
-    public var dwMonitorDigitModes: UInt32 = 0
-    public var dwMonitorMediaModes: UInt32 = 0
-    public var DialParams: LINEDIALPARAMS = LINEDIALPARAMS()
-    public var dwOrigin: UInt32 = 0
-    public var dwReason: UInt32 = 0
-    public var dwCompletionID: UInt32 = 0
-    public var dwNumOwners: UInt32 = 0
-    public var dwNumMonitors: UInt32 = 0
-    public var dwCountryCode: UInt32 = 0
-    public var dwTrunk: UInt32 = 0
-    public var dwCallerIDFlags: UInt32 = 0
-    public var dwCallerIDSize: UInt32 = 0
-    public var dwCallerIDOffset: UInt32 = 0
-    public var dwCallerIDNameSize: UInt32 = 0
-    public var dwCallerIDNameOffset: UInt32 = 0
-    public var dwCalledIDFlags: UInt32 = 0
-    public var dwCalledIDSize: UInt32 = 0
-    public var dwCalledIDOffset: UInt32 = 0
-    public var dwCalledIDNameSize: UInt32 = 0
-    public var dwCalledIDNameOffset: UInt32 = 0
-    public var dwConnectedIDFlags: UInt32 = 0
-    public var dwConnectedIDSize: UInt32 = 0
-    public var dwConnectedIDOffset: UInt32 = 0
-    public var dwConnectedIDNameSize: UInt32 = 0
-    public var dwConnectedIDNameOffset: UInt32 = 0
-    public var dwRedirectionIDFlags: UInt32 = 0
-    public var dwRedirectionIDSize: UInt32 = 0
-    public var dwRedirectionIDOffset: UInt32 = 0
-    public var dwRedirectionIDNameSize: UInt32 = 0
-    public var dwRedirectionIDNameOffset: UInt32 = 0
-    public var dwRedirectingIDFlags: UInt32 = 0
-    public var dwRedirectingIDSize: UInt32 = 0
-    public var dwRedirectingIDOffset: UInt32 = 0
-    public var dwRedirectingIDNameSize: UInt32 = 0
-    public var dwRedirectingIDNameOffset: UInt32 = 0
-    public var dwAppNameSize: UInt32 = 0
-    public var dwAppNameOffset: UInt32 = 0
-    public var dwDisplayableAddressSize: UInt32 = 0
-    public var dwDisplayableAddressOffset: UInt32 = 0
-    public var dwCalledPartySize: UInt32 = 0
-    public var dwCalledPartyOffset: UInt32 = 0
-    public var dwCommentSize: UInt32 = 0
-    public var dwCommentOffset: UInt32 = 0
-    public var dwDisplaySize: UInt32 = 0
-    public var dwDisplayOffset: UInt32 = 0
-    public var dwUserUserInfoSize: UInt32 = 0
-    public var dwUserUserInfoOffset: UInt32 = 0
-    public var dwHighLevelCompSize: UInt32 = 0
-    public var dwHighLevelCompOffset: UInt32 = 0
-    public var dwLowLevelCompSize: UInt32 = 0
-    public var dwLowLevelCompOffset: UInt32 = 0
-    public var dwChargingInfoSize: UInt32 = 0
-    public var dwChargingInfoOffset: UInt32 = 0
-    public var dwTerminalModesSize: UInt32 = 0
-    public var dwTerminalModesOffset: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
-    public var dwCallTreatment: UInt32 = 0
-    public var dwCallDataSize: UInt32 = 0
-    public var dwCallDataOffset: UInt32 = 0
-    public var dwSendingFlowspecSize: UInt32 = 0
-    public var dwSendingFlowspecOffset: UInt32 = 0
-    public var dwReceivingFlowspecSize: UInt32 = 0
-    public var dwReceivingFlowspecOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $324> = VArray<UInt8, $324>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func hLine(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_hLine(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLineDeviceID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwLineDeviceID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwBearerMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwBearerMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRate(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwRate(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMediaMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwMediaMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAppSpecific(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwAppSpecific(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwCallID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRelatedCallID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwRelatedCallID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallParamFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwCallParamFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwCallStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMonitorDigitModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwMonitorDigitModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMonitorMediaModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_dwMonitorMediaModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `DialParams`: type `LINEDIALPARAMS` not supported by polyfill; skipped
+
+    public func dwOrigin(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 80)
+        }
+    }
+
+    public mut func set_dwOrigin(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwReason(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 84)
+        }
+    }
+
+    public mut func set_dwReason(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 84, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCompletionID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 88)
+        }
+    }
+
+    public mut func set_dwCompletionID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 88, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumOwners(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 92)
+        }
+    }
+
+    public mut func set_dwNumOwners(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 92, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumMonitors(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 96)
+        }
+    }
+
+    public mut func set_dwNumMonitors(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 96, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCountryCode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 100)
+        }
+    }
+
+    public mut func set_dwCountryCode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 100, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTrunk(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 104)
+        }
+    }
+
+    public mut func set_dwTrunk(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 104, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallerIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 108)
+        }
+    }
+
+    public mut func set_dwCallerIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 108, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallerIDSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 112)
+        }
+    }
+
+    public mut func set_dwCallerIDSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 112, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallerIDOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 116)
+        }
+    }
+
+    public mut func set_dwCallerIDOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 116, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallerIDNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 120)
+        }
+    }
+
+    public mut func set_dwCallerIDNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 120, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallerIDNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 124)
+        }
+    }
+
+    public mut func set_dwCallerIDNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 124, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 128)
+        }
+    }
+
+    public mut func set_dwCalledIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 128, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledIDSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 132)
+        }
+    }
+
+    public mut func set_dwCalledIDSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 132, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledIDOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 136)
+        }
+    }
+
+    public mut func set_dwCalledIDOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 136, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledIDNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 140)
+        }
+    }
+
+    public mut func set_dwCalledIDNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 140, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledIDNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 144)
+        }
+    }
+
+    public mut func set_dwCalledIDNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 144, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwConnectedIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 148)
+        }
+    }
+
+    public mut func set_dwConnectedIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 148, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwConnectedIDSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 152)
+        }
+    }
+
+    public mut func set_dwConnectedIDSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 152, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwConnectedIDOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 156)
+        }
+    }
+
+    public mut func set_dwConnectedIDOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 156, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwConnectedIDNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 160)
+        }
+    }
+
+    public mut func set_dwConnectedIDNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 160, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwConnectedIDNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 164)
+        }
+    }
+
+    public mut func set_dwConnectedIDNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 164, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectionIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 168)
+        }
+    }
+
+    public mut func set_dwRedirectionIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 168, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectionIDSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 172)
+        }
+    }
+
+    public mut func set_dwRedirectionIDSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 172, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectionIDOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 176)
+        }
+    }
+
+    public mut func set_dwRedirectionIDOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 176, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectionIDNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 180)
+        }
+    }
+
+    public mut func set_dwRedirectionIDNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 180, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectionIDNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 184)
+        }
+    }
+
+    public mut func set_dwRedirectionIDNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 184, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectingIDFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 188)
+        }
+    }
+
+    public mut func set_dwRedirectingIDFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 188, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectingIDSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 192)
+        }
+    }
+
+    public mut func set_dwRedirectingIDSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 192, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectingIDOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 196)
+        }
+    }
+
+    public mut func set_dwRedirectingIDOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 196, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectingIDNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 200)
+        }
+    }
+
+    public mut func set_dwRedirectingIDNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 200, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRedirectingIDNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 204)
+        }
+    }
+
+    public mut func set_dwRedirectingIDNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 204, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAppNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 208)
+        }
+    }
+
+    public mut func set_dwAppNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 208, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAppNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 212)
+        }
+    }
+
+    public mut func set_dwAppNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 212, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayableAddressSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 216)
+        }
+    }
+
+    public mut func set_dwDisplayableAddressSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 216, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayableAddressOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 220)
+        }
+    }
+
+    public mut func set_dwDisplayableAddressOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 220, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledPartySize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 224)
+        }
+    }
+
+    public mut func set_dwCalledPartySize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 224, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledPartyOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 228)
+        }
+    }
+
+    public mut func set_dwCalledPartyOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 228, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCommentSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 232)
+        }
+    }
+
+    public mut func set_dwCommentSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 232, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCommentOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 236)
+        }
+    }
+
+    public mut func set_dwCommentOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 236, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplaySize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 240)
+        }
+    }
+
+    public mut func set_dwDisplaySize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 240, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 244)
+        }
+    }
+
+    public mut func set_dwDisplayOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 244, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUserUserInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 248)
+        }
+    }
+
+    public mut func set_dwUserUserInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 248, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUserUserInfoOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 252)
+        }
+    }
+
+    public mut func set_dwUserUserInfoOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 252, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHighLevelCompSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 256)
+        }
+    }
+
+    public mut func set_dwHighLevelCompSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 256, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHighLevelCompOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 260)
+        }
+    }
+
+    public mut func set_dwHighLevelCompOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 260, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLowLevelCompSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 264)
+        }
+    }
+
+    public mut func set_dwLowLevelCompSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 264, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLowLevelCompOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 268)
+        }
+    }
+
+    public mut func set_dwLowLevelCompOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 268, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwChargingInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 272)
+        }
+    }
+
+    public mut func set_dwChargingInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 272, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwChargingInfoOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 276)
+        }
+    }
+
+    public mut func set_dwChargingInfoOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 276, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalModesSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 280)
+        }
+    }
+
+    public mut func set_dwTerminalModesSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 280, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalModesOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 284)
+        }
+    }
+
+    public mut func set_dwTerminalModesOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 284, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 288)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 288, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 292)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 292, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallTreatment(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 296)
+        }
+    }
+
+    public mut func set_dwCallTreatment(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 296, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 300)
+        }
+    }
+
+    public mut func set_dwCallDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 300, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallDataOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 304)
+        }
+    }
+
+    public mut func set_dwCallDataOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 304, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSendingFlowspecSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 308)
+        }
+    }
+
+    public mut func set_dwSendingFlowspecSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 308, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSendingFlowspecOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 312)
+        }
+    }
+
+    public mut func set_dwSendingFlowspecOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 312, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwReceivingFlowspecSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 316)
+        }
+    }
+
+    public mut func set_dwReceivingFlowspecSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 316, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwReceivingFlowspecOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 320)
+        }
+    }
+
+    public mut func set_dwReceivingFlowspecOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 320, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINECALLLIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwCallsNumEntries: UInt32 = 0
-    public var dwCallsSize: UInt32 = 0
-    public var dwCallsOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallsNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwCallsNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallsSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwCallsSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallsOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwCallsOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINECALLPARAMS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwBearerMode: UInt32 = 0
-    public var dwMinRate: UInt32 = 0
-    public var dwMaxRate: UInt32 = 0
-    public var dwMediaMode: UInt32 = 0
-    public var dwCallParamFlags: UInt32 = 0
-    public var dwAddressMode: UInt32 = 0
-    public var dwAddressID: UInt32 = 0
-    public var DialParams: LINEDIALPARAMS = LINEDIALPARAMS()
-    public var dwOrigAddressSize: UInt32 = 0
-    public var dwOrigAddressOffset: UInt32 = 0
-    public var dwDisplayableAddressSize: UInt32 = 0
-    public var dwDisplayableAddressOffset: UInt32 = 0
-    public var dwCalledPartySize: UInt32 = 0
-    public var dwCalledPartyOffset: UInt32 = 0
-    public var dwCommentSize: UInt32 = 0
-    public var dwCommentOffset: UInt32 = 0
-    public var dwUserUserInfoSize: UInt32 = 0
-    public var dwUserUserInfoOffset: UInt32 = 0
-    public var dwHighLevelCompSize: UInt32 = 0
-    public var dwHighLevelCompOffset: UInt32 = 0
-    public var dwLowLevelCompSize: UInt32 = 0
-    public var dwLowLevelCompOffset: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
-    public var dwPredictiveAutoTransferStates: UInt32 = 0
-    public var dwTargetAddressSize: UInt32 = 0
-    public var dwTargetAddressOffset: UInt32 = 0
-    public var dwSendingFlowspecSize: UInt32 = 0
-    public var dwSendingFlowspecOffset: UInt32 = 0
-    public var dwReceivingFlowspecSize: UInt32 = 0
-    public var dwReceivingFlowspecOffset: UInt32 = 0
-    public var dwDeviceClassSize: UInt32 = 0
-    public var dwDeviceClassOffset: UInt32 = 0
-    public var dwDeviceConfigSize: UInt32 = 0
-    public var dwDeviceConfigOffset: UInt32 = 0
-    public var dwCallDataSize: UInt32 = 0
-    public var dwCallDataOffset: UInt32 = 0
-    public var dwNoAnswerTimeout: UInt32 = 0
-    public var dwCallingPartyIDSize: UInt32 = 0
-    public var dwCallingPartyIDOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $176> = VArray<UInt8, $176>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwBearerMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwBearerMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMinRate(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwMinRate(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxRate(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwMaxRate(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMediaMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwMediaMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallParamFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwCallParamFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwAddressMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `DialParams`: type `LINEDIALPARAMS` not supported by polyfill; skipped
+
+    public func dwOrigAddressSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwOrigAddressSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwOrigAddressOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwOrigAddressOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayableAddressSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwDisplayableAddressSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayableAddressOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_dwDisplayableAddressOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledPartySize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 64)
+        }
+    }
+
+    public mut func set_dwCalledPartySize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCalledPartyOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 68)
+        }
+    }
+
+    public mut func set_dwCalledPartyOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 68, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCommentSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 72)
+        }
+    }
+
+    public mut func set_dwCommentSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 72, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCommentOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 76)
+        }
+    }
+
+    public mut func set_dwCommentOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 76, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUserUserInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 80)
+        }
+    }
+
+    public mut func set_dwUserUserInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUserUserInfoOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 84)
+        }
+    }
+
+    public mut func set_dwUserUserInfoOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 84, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHighLevelCompSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 88)
+        }
+    }
+
+    public mut func set_dwHighLevelCompSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 88, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHighLevelCompOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 92)
+        }
+    }
+
+    public mut func set_dwHighLevelCompOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 92, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLowLevelCompSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 96)
+        }
+    }
+
+    public mut func set_dwLowLevelCompSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 96, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLowLevelCompOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 100)
+        }
+    }
+
+    public mut func set_dwLowLevelCompOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 100, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 104)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 104, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 108)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 108, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPredictiveAutoTransferStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 112)
+        }
+    }
+
+    public mut func set_dwPredictiveAutoTransferStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 112, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTargetAddressSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 116)
+        }
+    }
+
+    public mut func set_dwTargetAddressSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 116, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTargetAddressOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 120)
+        }
+    }
+
+    public mut func set_dwTargetAddressOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 120, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSendingFlowspecSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 124)
+        }
+    }
+
+    public mut func set_dwSendingFlowspecSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 124, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSendingFlowspecOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 128)
+        }
+    }
+
+    public mut func set_dwSendingFlowspecOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 128, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwReceivingFlowspecSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 132)
+        }
+    }
+
+    public mut func set_dwReceivingFlowspecSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 132, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwReceivingFlowspecOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 136)
+        }
+    }
+
+    public mut func set_dwReceivingFlowspecOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 136, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceClassSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 140)
+        }
+    }
+
+    public mut func set_dwDeviceClassSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 140, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceClassOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 144)
+        }
+    }
+
+    public mut func set_dwDeviceClassOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 144, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceConfigSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 148)
+        }
+    }
+
+    public mut func set_dwDeviceConfigSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 148, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceConfigOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 152)
+        }
+    }
+
+    public mut func set_dwDeviceConfigOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 152, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 156)
+        }
+    }
+
+    public mut func set_dwCallDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 156, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallDataOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 160)
+        }
+    }
+
+    public mut func set_dwCallDataOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 160, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNoAnswerTimeout(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 164)
+        }
+    }
+
+    public mut func set_dwNoAnswerTimeout(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 164, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallingPartyIDSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 168)
+        }
+    }
+
+    public mut func set_dwCallingPartyIDSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 168, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallingPartyIDOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 172)
+        }
+    }
+
+    public mut func set_dwCallingPartyIDOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 172, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINECALLSTATUS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwCallState: UInt32 = 0
-    public var dwCallStateMode: UInt32 = 0
-    public var dwCallPrivilege: UInt32 = 0
-    public var dwCallFeatures: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
-    public var dwCallFeatures2: UInt32 = 0
-    public var tStateEntryTime: Win32_Foundation.SYSTEMTIME = Win32_Foundation.SYSTEMTIME()
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwCallState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallStateMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwCallStateMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallPrivilege(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwCallPrivilege(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwCallFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallFeatures2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwCallFeatures2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `tStateEntryTime`: type `Win32_Foundation.SYSTEMTIME` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINECALLTREATMENTENTRY {
-    public var dwCallTreatmentID: UInt32 = 0
-    public var dwCallTreatmentNameSize: UInt32 = 0
-    public var dwCallTreatmentNameOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func dwCallTreatmentID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwCallTreatmentID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallTreatmentNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwCallTreatmentNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallTreatmentNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwCallTreatmentNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINECARDENTRY {
-    public var dwPermanentCardID: UInt32 = 0
-    public var dwCardNameSize: UInt32 = 0
-    public var dwCardNameOffset: UInt32 = 0
-    public var dwCardNumberDigits: UInt32 = 0
-    public var dwSameAreaRuleSize: UInt32 = 0
-    public var dwSameAreaRuleOffset: UInt32 = 0
-    public var dwLongDistanceRuleSize: UInt32 = 0
-    public var dwLongDistanceRuleOffset: UInt32 = 0
-    public var dwInternationalRuleSize: UInt32 = 0
-    public var dwInternationalRuleOffset: UInt32 = 0
-    public var dwOptions: UInt32 = 0
+    public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0u8)
+
+    public func dwPermanentCardID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwPermanentCardID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCardNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwCardNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCardNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwCardNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCardNumberDigits(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwCardNumberDigits(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSameAreaRuleSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwSameAreaRuleSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSameAreaRuleOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwSameAreaRuleOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLongDistanceRuleSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwLongDistanceRuleSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLongDistanceRuleOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwLongDistanceRuleOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwInternationalRuleSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwInternationalRuleSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwInternationalRuleOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwInternationalRuleOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwOptions(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwOptions(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINECOUNTRYENTRY {
-    public var dwCountryID: UInt32 = 0
-    public var dwCountryCode: UInt32 = 0
-    public var dwNextCountryID: UInt32 = 0
-    public var dwCountryNameSize: UInt32 = 0
-    public var dwCountryNameOffset: UInt32 = 0
-    public var dwSameAreaRuleSize: UInt32 = 0
-    public var dwSameAreaRuleOffset: UInt32 = 0
-    public var dwLongDistanceRuleSize: UInt32 = 0
-    public var dwLongDistanceRuleOffset: UInt32 = 0
-    public var dwInternationalRuleSize: UInt32 = 0
-    public var dwInternationalRuleOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0u8)
+
+    public func dwCountryID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwCountryID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCountryCode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwCountryCode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNextCountryID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwNextCountryID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCountryNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwCountryNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCountryNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwCountryNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSameAreaRuleSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwSameAreaRuleSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSameAreaRuleOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwSameAreaRuleOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLongDistanceRuleSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwLongDistanceRuleSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLongDistanceRuleOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwLongDistanceRuleOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwInternationalRuleSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwInternationalRuleSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwInternationalRuleOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwInternationalRuleOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINECOUNTRYLIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumCountries: UInt32 = 0
-    public var dwCountryListSize: UInt32 = 0
-    public var dwCountryListOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumCountries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumCountries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCountryListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwCountryListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCountryListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwCountryListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEDEVCAPS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwProviderInfoSize: UInt32 = 0
-    public var dwProviderInfoOffset: UInt32 = 0
-    public var dwSwitchInfoSize: UInt32 = 0
-    public var dwSwitchInfoOffset: UInt32 = 0
-    public var dwPermanentLineID: UInt32 = 0
-    public var dwLineNameSize: UInt32 = 0
-    public var dwLineNameOffset: UInt32 = 0
-    public var dwStringFormat: UInt32 = 0
-    public var dwAddressModes: UInt32 = 0
-    public var dwNumAddresses: UInt32 = 0
-    public var dwBearerModes: UInt32 = 0
-    public var dwMaxRate: UInt32 = 0
-    public var dwMediaModes: UInt32 = 0
-    public var dwGenerateToneModes: UInt32 = 0
-    public var dwGenerateToneMaxNumFreq: UInt32 = 0
-    public var dwGenerateDigitModes: UInt32 = 0
-    public var dwMonitorToneMaxNumFreq: UInt32 = 0
-    public var dwMonitorToneMaxNumEntries: UInt32 = 0
-    public var dwMonitorDigitModes: UInt32 = 0
-    public var dwGatherDigitsMinTimeout: UInt32 = 0
-    public var dwGatherDigitsMaxTimeout: UInt32 = 0
-    public var dwMedCtlDigitMaxListSize: UInt32 = 0
-    public var dwMedCtlMediaMaxListSize: UInt32 = 0
-    public var dwMedCtlToneMaxListSize: UInt32 = 0
-    public var dwMedCtlCallStateMaxListSize: UInt32 = 0
-    public var dwDevCapFlags: UInt32 = 0
-    public var dwMaxNumActiveCalls: UInt32 = 0
-    public var dwAnswerMode: UInt32 = 0
-    public var dwRingModes: UInt32 = 0
-    public var dwLineStates: UInt32 = 0
-    public var dwUUIAcceptSize: UInt32 = 0
-    public var dwUUIAnswerSize: UInt32 = 0
-    public var dwUUIMakeCallSize: UInt32 = 0
-    public var dwUUIDropSize: UInt32 = 0
-    public var dwUUISendUserUserInfoSize: UInt32 = 0
-    public var dwUUICallInfoSize: UInt32 = 0
-    public var MinDialParams: LINEDIALPARAMS = LINEDIALPARAMS()
-    public var MaxDialParams: LINEDIALPARAMS = LINEDIALPARAMS()
-    public var DefaultDialParams: LINEDIALPARAMS = LINEDIALPARAMS()
-    public var dwNumTerminals: UInt32 = 0
-    public var dwTerminalCapsSize: UInt32 = 0
-    public var dwTerminalCapsOffset: UInt32 = 0
-    public var dwTerminalTextEntrySize: UInt32 = 0
-    public var dwTerminalTextSize: UInt32 = 0
-    public var dwTerminalTextOffset: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
-    public var dwLineFeatures: UInt32 = 0
-    public var dwSettableDevStatus: UInt32 = 0
-    public var dwDeviceClassesSize: UInt32 = 0
-    public var dwDeviceClassesOffset: UInt32 = 0
-    public var PermanentLineGuid: GUID = GUID()
+    public var _raw: VArray<UInt8, $252> = VArray<UInt8, $252>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwProviderInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwProviderInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwProviderInfoOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwProviderInfoOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSwitchInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwSwitchInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSwitchInfoOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwSwitchInfoOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPermanentLineID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwPermanentLineID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLineNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwLineNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLineNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwLineNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwStringFormat(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwStringFormat(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddressModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwAddressModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumAddresses(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwNumAddresses(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwBearerModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwBearerModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxRate(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwMaxRate(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMediaModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_dwMediaModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGenerateToneModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 64)
+        }
+    }
+
+    public mut func set_dwGenerateToneModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGenerateToneMaxNumFreq(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 68)
+        }
+    }
+
+    public mut func set_dwGenerateToneMaxNumFreq(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 68, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGenerateDigitModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 72)
+        }
+    }
+
+    public mut func set_dwGenerateDigitModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 72, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMonitorToneMaxNumFreq(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 76)
+        }
+    }
+
+    public mut func set_dwMonitorToneMaxNumFreq(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 76, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMonitorToneMaxNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 80)
+        }
+    }
+
+    public mut func set_dwMonitorToneMaxNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMonitorDigitModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 84)
+        }
+    }
+
+    public mut func set_dwMonitorDigitModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 84, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGatherDigitsMinTimeout(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 88)
+        }
+    }
+
+    public mut func set_dwGatherDigitsMinTimeout(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 88, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGatherDigitsMaxTimeout(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 92)
+        }
+    }
+
+    public mut func set_dwGatherDigitsMaxTimeout(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 92, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMedCtlDigitMaxListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 96)
+        }
+    }
+
+    public mut func set_dwMedCtlDigitMaxListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 96, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMedCtlMediaMaxListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 100)
+        }
+    }
+
+    public mut func set_dwMedCtlMediaMaxListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 100, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMedCtlToneMaxListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 104)
+        }
+    }
+
+    public mut func set_dwMedCtlToneMaxListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 104, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMedCtlCallStateMaxListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 108)
+        }
+    }
+
+    public mut func set_dwMedCtlCallStateMaxListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 108, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevCapFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 112)
+        }
+    }
+
+    public mut func set_dwDevCapFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 112, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMaxNumActiveCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 116)
+        }
+    }
+
+    public mut func set_dwMaxNumActiveCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 116, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAnswerMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 120)
+        }
+    }
+
+    public mut func set_dwAnswerMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 120, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRingModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 124)
+        }
+    }
+
+    public mut func set_dwRingModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 124, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLineStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 128)
+        }
+    }
+
+    public mut func set_dwLineStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 128, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUUIAcceptSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 132)
+        }
+    }
+
+    public mut func set_dwUUIAcceptSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 132, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUUIAnswerSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 136)
+        }
+    }
+
+    public mut func set_dwUUIAnswerSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 136, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUUIMakeCallSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 140)
+        }
+    }
+
+    public mut func set_dwUUIMakeCallSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 140, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUUIDropSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 144)
+        }
+    }
+
+    public mut func set_dwUUIDropSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 144, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUUISendUserUserInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 148)
+        }
+    }
+
+    public mut func set_dwUUISendUserUserInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 148, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUUICallInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 152)
+        }
+    }
+
+    public mut func set_dwUUICallInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 152, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `MinDialParams`: type `LINEDIALPARAMS` not supported by polyfill; skipped
+
+    // packed field `MaxDialParams`: type `LINEDIALPARAMS` not supported by polyfill; skipped
+
+    // packed field `DefaultDialParams`: type `LINEDIALPARAMS` not supported by polyfill; skipped
+
+    public func dwNumTerminals(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 204)
+        }
+    }
+
+    public mut func set_dwNumTerminals(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 204, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalCapsSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 208)
+        }
+    }
+
+    public mut func set_dwTerminalCapsSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 208, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalCapsOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 212)
+        }
+    }
+
+    public mut func set_dwTerminalCapsOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 212, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalTextEntrySize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 216)
+        }
+    }
+
+    public mut func set_dwTerminalTextEntrySize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 216, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalTextSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 220)
+        }
+    }
+
+    public mut func set_dwTerminalTextSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 220, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalTextOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 224)
+        }
+    }
+
+    public mut func set_dwTerminalTextOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 224, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 228)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 228, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 232)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 232, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLineFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 236)
+        }
+    }
+
+    public mut func set_dwLineFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 236, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSettableDevStatus(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 240)
+        }
+    }
+
+    public mut func set_dwSettableDevStatus(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 240, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceClassesSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 244)
+        }
+    }
+
+    public mut func set_dwDeviceClassesSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 244, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceClassesOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 248)
+        }
+    }
+
+    public mut func set_dwDeviceClassesOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 248, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `PermanentLineGuid`: layout unknown; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEDEVSTATUS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumOpens: UInt32 = 0
-    public var dwOpenMediaModes: UInt32 = 0
-    public var dwNumActiveCalls: UInt32 = 0
-    public var dwNumOnHoldCalls: UInt32 = 0
-    public var dwNumOnHoldPendCalls: UInt32 = 0
-    public var dwLineFeatures: UInt32 = 0
-    public var dwNumCallCompletions: UInt32 = 0
-    public var dwRingMode: UInt32 = 0
-    public var dwSignalLevel: UInt32 = 0
-    public var dwBatteryLevel: UInt32 = 0
-    public var dwRoamMode: UInt32 = 0
-    public var dwDevStatusFlags: UInt32 = 0
-    public var dwTerminalModesSize: UInt32 = 0
-    public var dwTerminalModesOffset: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
-    public var dwAvailableMediaModes: UInt32 = 0
-    public var dwAppInfoSize: UInt32 = 0
-    public var dwAppInfoOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $88> = VArray<UInt8, $88>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumOpens(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumOpens(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwOpenMediaModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwOpenMediaModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumActiveCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwNumActiveCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumOnHoldCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwNumOnHoldCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumOnHoldPendCalls(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwNumOnHoldPendCalls(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLineFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwLineFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumCallCompletions(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwNumCallCompletions(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRingMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwRingMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSignalLevel(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwSignalLevel(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwBatteryLevel(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwBatteryLevel(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRoamMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwRoamMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevStatusFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwDevStatusFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalModesSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_dwTerminalModesSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTerminalModesOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 64)
+        }
+    }
+
+    public mut func set_dwTerminalModesOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 68)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 68, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 72)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 72, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAvailableMediaModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 76)
+        }
+    }
+
+    public mut func set_dwAvailableMediaModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 76, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAppInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 80)
+        }
+    }
+
+    public mut func set_dwAppInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAppInfoOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 84)
+        }
+    }
+
+    public mut func set_dwAppInfoOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 84, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEDIALPARAMS {
-    public var dwDialPause: UInt32 = 0
-    public var dwDialSpeed: UInt32 = 0
-    public var dwDigitDuration: UInt32 = 0
-    public var dwWaitForDialtone: UInt32 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func dwDialPause(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwDialPause(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDialSpeed(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwDialSpeed(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDigitDuration(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwDigitDuration(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwWaitForDialtone(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwWaitForDialtone(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -19830,65 +26723,402 @@ public struct LINEDIALPARAMS {
 public type LINEEVENT = CFunc<(HTAPILINE, HTAPICALL, UInt32, UIntNative, UIntNative, UIntNative) -> Unit>
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEEXTENSIONID {
-    public var dwExtensionID0: UInt32 = 0
-    public var dwExtensionID1: UInt32 = 0
-    public var dwExtensionID2: UInt32 = 0
-    public var dwExtensionID3: UInt32 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func dwExtensionID0(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwExtensionID0(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwExtensionID1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwExtensionID1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwExtensionID2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwExtensionID2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwExtensionID3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwExtensionID3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEFORWARD {
-    public var dwForwardMode: UInt32 = 0
-    public var dwCallerAddressSize: UInt32 = 0
-    public var dwCallerAddressOffset: UInt32 = 0
-    public var dwDestCountryCode: UInt32 = 0
-    public var dwDestAddressSize: UInt32 = 0
-    public var dwDestAddressOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwForwardMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwForwardMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallerAddressSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwCallerAddressSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCallerAddressOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwCallerAddressOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDestCountryCode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwDestCountryCode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDestAddressSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwDestAddressSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDestAddressOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwDestAddressOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEFORWARDLIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNumEntries: UInt32 = 0
-    public var ForwardList: VArray<LINEFORWARD, $1> = VArray<LINEFORWARD, $1>(repeat: LINEFORWARD())
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ForwardList`: type `VArray<LINEFORWARD, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEGENERATETONE {
-    public var dwFrequency: UInt32 = 0
-    public var dwCadenceOn: UInt32 = 0
-    public var dwCadenceOff: UInt32 = 0
-    public var dwVolume: UInt32 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func dwFrequency(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwFrequency(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCadenceOn(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwCadenceOn(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCadenceOff(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwCadenceOff(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwVolume(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwVolume(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEINITIALIZEEXPARAMS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwOptions: UInt32 = 0
-    public var Handles: LINEINITIALIZEEXPARAMS__Handles_e__Union = LINEINITIALIZEEXPARAMS__Handles_e__Union()
-    public var dwCompletionKey: UInt32 = 0
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwOptions(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwOptions(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Handles`: type `LINEINITIALIZEEXPARAMS__Handles_e__Union` not supported by polyfill; skipped
+
+    public func dwCompletionKey(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwCompletionKey(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct LINEINITIALIZEEXPARAMS__Handles_e__Union {
@@ -19897,9 +27127,8 @@ public struct LINEINITIALIZEEXPARAMS__Handles_e__Union {
     public func hEvent(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -19908,9 +27137,8 @@ public struct LINEINITIALIZEEXPARAMS__Handles_e__Union {
     public mut func set_hEvent(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -19920,9 +27148,8 @@ public struct LINEINITIALIZEEXPARAMS__Handles_e__Union {
     public func hCompletionPort(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -19931,9 +27158,8 @@ public struct LINEINITIALIZEEXPARAMS__Handles_e__Union {
     public mut func set_hCompletionPort(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -19943,131 +27169,1000 @@ public struct LINEINITIALIZEEXPARAMS__Handles_e__Union {
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINELOCATIONENTRY {
-    public var dwPermanentLocationID: UInt32 = 0
-    public var dwLocationNameSize: UInt32 = 0
-    public var dwLocationNameOffset: UInt32 = 0
-    public var dwCountryCode: UInt32 = 0
-    public var dwCityCodeSize: UInt32 = 0
-    public var dwCityCodeOffset: UInt32 = 0
-    public var dwPreferredCardID: UInt32 = 0
-    public var dwLocalAccessCodeSize: UInt32 = 0
-    public var dwLocalAccessCodeOffset: UInt32 = 0
-    public var dwLongDistanceAccessCodeSize: UInt32 = 0
-    public var dwLongDistanceAccessCodeOffset: UInt32 = 0
-    public var dwTollPrefixListSize: UInt32 = 0
-    public var dwTollPrefixListOffset: UInt32 = 0
-    public var dwCountryID: UInt32 = 0
-    public var dwOptions: UInt32 = 0
-    public var dwCancelCallWaitingSize: UInt32 = 0
-    public var dwCancelCallWaitingOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $68> = VArray<UInt8, $68>(repeat: 0u8)
+
+    public func dwPermanentLocationID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwPermanentLocationID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLocationNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwLocationNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLocationNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwLocationNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCountryCode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwCountryCode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCityCodeSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwCityCodeSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCityCodeOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwCityCodeOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPreferredCardID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwPreferredCardID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLocalAccessCodeSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwLocalAccessCodeSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLocalAccessCodeOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwLocalAccessCodeOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLongDistanceAccessCodeSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwLongDistanceAccessCodeSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLongDistanceAccessCodeOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwLongDistanceAccessCodeOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTollPrefixListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwTollPrefixListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTollPrefixListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwTollPrefixListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCountryID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwCountryID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwOptions(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwOptions(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCancelCallWaitingSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_dwCancelCallWaitingSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCancelCallWaitingOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 64)
+        }
+    }
+
+    public mut func set_dwCancelCallWaitingOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 64, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEMEDIACONTROLCALLSTATE {
-    public var dwCallStates: UInt32 = 0
-    public var dwMediaControl: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func dwCallStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwCallStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMediaControl(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwMediaControl(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEMEDIACONTROLDIGIT {
-    public var dwDigit: UInt32 = 0
-    public var dwDigitModes: UInt32 = 0
-    public var dwMediaControl: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func dwDigit(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwDigit(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDigitModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwDigitModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMediaControl(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwMediaControl(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEMEDIACONTROLMEDIA {
-    public var dwMediaModes: UInt32 = 0
-    public var dwDuration: UInt32 = 0
-    public var dwMediaControl: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func dwMediaModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwMediaModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDuration(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwDuration(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMediaControl(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwMediaControl(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEMEDIACONTROLTONE {
-    public var dwAppSpecific: UInt32 = 0
-    public var dwDuration: UInt32 = 0
-    public var dwFrequency1: UInt32 = 0
-    public var dwFrequency2: UInt32 = 0
-    public var dwFrequency3: UInt32 = 0
-    public var dwMediaControl: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwAppSpecific(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAppSpecific(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDuration(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwDuration(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFrequency1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwFrequency1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFrequency2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwFrequency2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFrequency3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwFrequency3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMediaControl(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwMediaControl(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEMESSAGE {
-    public var hDevice: UInt32 = 0
-    public var dwMessageID: UInt32 = 0
-    public var dwCallbackInstance: UIntNative = 0
-    public var dwParam1: UIntNative = 0
-    public var dwParam2: UIntNative = 0
-    public var dwParam3: UIntNative = 0
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
+
+    public func hDevice(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hDevice(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMessageID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwMessageID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `dwCallbackInstance`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `dwParam1`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `dwParam2`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `dwParam3`: type `UIntNative` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEMONITORTONE {
-    public var dwAppSpecific: UInt32 = 0
-    public var dwDuration: UInt32 = 0
-    public var dwFrequency1: UInt32 = 0
-    public var dwFrequency2: UInt32 = 0
-    public var dwFrequency3: UInt32 = 0
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    public func dwAppSpecific(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAppSpecific(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDuration(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwDuration(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFrequency1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwFrequency1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFrequency2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwFrequency2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFrequency3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwFrequency3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROVIDERENTRY {
-    public var dwPermanentProviderID: UInt32 = 0
-    public var dwProviderFilenameSize: UInt32 = 0
-    public var dwProviderFilenameOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func dwPermanentProviderID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwPermanentProviderID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwProviderFilenameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwProviderFilenameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwProviderFilenameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwProviderFilenameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROVIDERLIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumProviders: UInt32 = 0
-    public var dwProviderListSize: UInt32 = 0
-    public var dwProviderListOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumProviders(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumProviders(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwProviderListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwProviderListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwProviderListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwProviderListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST {
-    public var dwSize: UInt32 = 0
-    public var dwClientMachineNameSize: UInt32 = 0
-    public var dwClientMachineNameOffset: UInt32 = 0
-    public var dwClientUserNameSize: UInt32 = 0
-    public var dwClientUserNameOffset: UInt32 = 0
-    public var dwClientAppAPIVersion: UInt32 = 0
-    public var dwRequestType: UInt32 = 0
-    public var Anonymous: LINEPROXYREQUEST__Anonymous_e__Union = LINEPROXYREQUEST__Anonymous_e__Union()
+    public var _raw: VArray<UInt8, $108> = VArray<UInt8, $108>(repeat: 0u8)
+
+    public func dwSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwClientMachineNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwClientMachineNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwClientMachineNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwClientMachineNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwClientUserNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwClientUserNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwClientUserNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwClientUserNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwClientAppAPIVersion(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwClientAppAPIVersion(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRequestType(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwRequestType(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Anonymous`: type `LINEPROXYREQUEST__Anonymous_e__Union` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -20080,9 +28175,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func setAgentGroup(): LINEPROXYREQUEST__Anonymous_e__Union__SetAgentGroup_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentGroup_e__Struct>(p)
             return ptr.read()
         }
@@ -20091,9 +28185,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_setAgentGroup(val: LINEPROXYREQUEST__Anonymous_e__Union__SetAgentGroup_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentGroup_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20103,9 +28196,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func setAgentState(): LINEPROXYREQUEST__Anonymous_e__Union__SetAgentState_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentState_e__Struct>(p)
             return ptr.read()
         }
@@ -20114,9 +28206,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_setAgentState(val: LINEPROXYREQUEST__Anonymous_e__Union__SetAgentState_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentState_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20126,9 +28217,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func setAgentActivity(): LINEPROXYREQUEST__Anonymous_e__Union__SetAgentActivity_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentActivity_e__Struct>(p)
             return ptr.read()
         }
@@ -20137,9 +28227,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_setAgentActivity(val: LINEPROXYREQUEST__Anonymous_e__Union__SetAgentActivity_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentActivity_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20149,9 +28238,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getAgentCaps(): LINEPROXYREQUEST__Anonymous_e__Union__GetAgentCaps_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentCaps_e__Struct>(p)
             return ptr.read()
         }
@@ -20160,9 +28248,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getAgentCaps(val: LINEPROXYREQUEST__Anonymous_e__Union__GetAgentCaps_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentCaps_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20172,9 +28259,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getAgentStatus(): LINEPROXYREQUEST__Anonymous_e__Union__GetAgentStatus_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentStatus_e__Struct>(p)
             return ptr.read()
         }
@@ -20183,9 +28269,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getAgentStatus(val: LINEPROXYREQUEST__Anonymous_e__Union__GetAgentStatus_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentStatus_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20195,9 +28280,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func agentSpecific(): LINEPROXYREQUEST__Anonymous_e__Union__AgentSpecific_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__AgentSpecific_e__Struct>(p)
             return ptr.read()
         }
@@ -20206,9 +28290,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_agentSpecific(val: LINEPROXYREQUEST__Anonymous_e__Union__AgentSpecific_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__AgentSpecific_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20218,9 +28301,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getAgentActivityList(): LINEPROXYREQUEST__Anonymous_e__Union__GetAgentActivityList_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentActivityList_e__Struct>(p)
             return ptr.read()
         }
@@ -20229,9 +28311,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getAgentActivityList(val: LINEPROXYREQUEST__Anonymous_e__Union__GetAgentActivityList_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentActivityList_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20241,9 +28322,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getAgentGroupList(): LINEPROXYREQUEST__Anonymous_e__Union__GetAgentGroupList_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentGroupList_e__Struct>(p)
             return ptr.read()
         }
@@ -20252,9 +28332,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getAgentGroupList(val: LINEPROXYREQUEST__Anonymous_e__Union__GetAgentGroupList_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentGroupList_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20264,9 +28343,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func createAgent(): LINEPROXYREQUEST__Anonymous_e__Union__CreateAgent_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__CreateAgent_e__Struct>(p)
             return ptr.read()
         }
@@ -20275,9 +28353,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_createAgent(val: LINEPROXYREQUEST__Anonymous_e__Union__CreateAgent_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__CreateAgent_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20287,9 +28364,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func setAgentStateEx(): LINEPROXYREQUEST__Anonymous_e__Union__SetAgentStateEx_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentStateEx_e__Struct>(p)
             return ptr.read()
         }
@@ -20298,9 +28374,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_setAgentStateEx(val: LINEPROXYREQUEST__Anonymous_e__Union__SetAgentStateEx_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentStateEx_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20310,9 +28385,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func setAgentMeasurementPeriod(): LINEPROXYREQUEST__Anonymous_e__Union__SetAgentMeasurementPeriod_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentMeasurementPeriod_e__Struct>(p)
             return ptr.read()
         }
@@ -20321,9 +28395,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_setAgentMeasurementPeriod(val: LINEPROXYREQUEST__Anonymous_e__Union__SetAgentMeasurementPeriod_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentMeasurementPeriod_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20333,9 +28406,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getAgentInfo(): LINEPROXYREQUEST__Anonymous_e__Union__GetAgentInfo_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentInfo_e__Struct>(p)
             return ptr.read()
         }
@@ -20344,9 +28416,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getAgentInfo(val: LINEPROXYREQUEST__Anonymous_e__Union__GetAgentInfo_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentInfo_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20356,9 +28427,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func createAgentSession(): LINEPROXYREQUEST__Anonymous_e__Union__CreateAgentSession_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__CreateAgentSession_e__Struct>(p)
             return ptr.read()
         }
@@ -20367,9 +28437,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_createAgentSession(val: LINEPROXYREQUEST__Anonymous_e__Union__CreateAgentSession_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__CreateAgentSession_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20379,9 +28448,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getAgentSessionList(): LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionList_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionList_e__Struct>(p)
             return ptr.read()
         }
@@ -20390,9 +28458,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getAgentSessionList(val: LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionList_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionList_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20402,9 +28469,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getAgentSessionInfo(): LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionInfo_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionInfo_e__Struct>(p)
             return ptr.read()
         }
@@ -20413,9 +28479,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getAgentSessionInfo(val: LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionInfo_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionInfo_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20425,9 +28490,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func setAgentSessionState(): LINEPROXYREQUEST__Anonymous_e__Union__SetAgentSessionState_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentSessionState_e__Struct>(p)
             return ptr.read()
         }
@@ -20436,9 +28500,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_setAgentSessionState(val: LINEPROXYREQUEST__Anonymous_e__Union__SetAgentSessionState_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetAgentSessionState_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20448,9 +28511,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getQueueList(): LINEPROXYREQUEST__Anonymous_e__Union__GetQueueList_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetQueueList_e__Struct>(p)
             return ptr.read()
         }
@@ -20459,9 +28521,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getQueueList(val: LINEPROXYREQUEST__Anonymous_e__Union__GetQueueList_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetQueueList_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20471,9 +28532,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func setQueueMeasurementPeriod(): LINEPROXYREQUEST__Anonymous_e__Union__SetQueueMeasurementPeriod_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetQueueMeasurementPeriod_e__Struct>(p)
             return ptr.read()
         }
@@ -20482,9 +28542,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_setQueueMeasurementPeriod(val: LINEPROXYREQUEST__Anonymous_e__Union__SetQueueMeasurementPeriod_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__SetQueueMeasurementPeriod_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20494,9 +28553,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getQueueInfo(): LINEPROXYREQUEST__Anonymous_e__Union__GetQueueInfo_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetQueueInfo_e__Struct>(p)
             return ptr.read()
         }
@@ -20505,9 +28563,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getQueueInfo(val: LINEPROXYREQUEST__Anonymous_e__Union__GetQueueInfo_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetQueueInfo_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20517,9 +28574,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public func getGroupList(): LINEPROXYREQUEST__Anonymous_e__Union__GetGroupList_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetGroupList_e__Struct>(p)
             return ptr.read()
         }
@@ -20528,9 +28584,8 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
     public mut func set_getGroupList(val: LINEPROXYREQUEST__Anonymous_e__Union__GetGroupList_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LINEPROXYREQUEST__Anonymous_e__Union__GetGroupList_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -20540,185 +28595,790 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union {
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__SetAgentGroup_e__Struct {
-    public var dwAddressID: UInt32 = 0
-    public var GroupList: LINEAGENTGROUPLIST = LINEAGENTGROUPLIST()
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `GroupList`: type `LINEAGENTGROUPLIST` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__SetAgentState_e__Struct {
-    public var dwAddressID: UInt32 = 0
-    public var dwAgentState: UInt32 = 0
-    public var dwNextAgentState: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwAgentState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNextAgentState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwNextAgentState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__SetAgentActivity_e__Struct {
-    public var dwAddressID: UInt32 = 0
-    public var dwActivityID: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwActivityID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwActivityID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__GetAgentCaps_e__Struct {
-    public var dwAddressID: UInt32 = 0
-    public var AgentCaps: LINEAGENTCAPS = LINEAGENTCAPS()
+    public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0u8)
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `AgentCaps`: type `LINEAGENTCAPS` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__GetAgentStatus_e__Struct {
-    public var dwAddressID: UInt32 = 0
-    public var AgentStatus: LINEAGENTSTATUS = LINEAGENTSTATUS()
+    public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0u8)
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `AgentStatus`: type `LINEAGENTSTATUS` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__AgentSpecific_e__Struct {
-    public var dwAddressID: UInt32 = 0
-    public var dwAgentExtensionIDIndex: UInt32 = 0
-    public var dwSize: UInt32 = 0
-    public var Params: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $13> = VArray<UInt8, $13>(repeat: 0u8)
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentExtensionIDIndex(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwAgentExtensionIDIndex(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Params`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__GetAgentActivityList_e__Struct {
-    public var dwAddressID: UInt32 = 0
-    public var ActivityList: LINEAGENTACTIVITYLIST = LINEAGENTACTIVITYLIST()
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ActivityList`: type `LINEAGENTACTIVITYLIST` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__GetAgentGroupList_e__Struct {
-    public var dwAddressID: UInt32 = 0
-    public var GroupList: LINEAGENTGROUPLIST = LINEAGENTGROUPLIST()
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    public func dwAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `GroupList`: type `LINEAGENTGROUPLIST` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__CreateAgent_e__Struct {
-    public var hAgent: UInt32 = 0
-    public var dwAgentIDSize: UInt32 = 0
-    public var dwAgentIDOffset: UInt32 = 0
-    public var dwAgentPINSize: UInt32 = 0
-    public var dwAgentPINOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    public func hAgent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentIDSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwAgentIDSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentIDOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwAgentIDOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentPINSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwAgentPINSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentPINOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwAgentPINOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__SetAgentStateEx_e__Struct {
-    public var hAgent: UInt32 = 0
-    public var dwAgentState: UInt32 = 0
-    public var dwNextAgentState: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func hAgent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwAgentState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNextAgentState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwNextAgentState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__SetAgentMeasurementPeriod_e__Struct {
-    public var hAgent: UInt32 = 0
-    public var dwMeasurementPeriod: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func hAgent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMeasurementPeriod(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwMeasurementPeriod(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__GetAgentInfo_e__Struct {
-    public var hAgent: UInt32 = 0
-    public var AgentInfo: LINEAGENTINFO = LINEAGENTINFO()
+    public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0u8)
+
+    public func hAgent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `AgentInfo`: type `LINEAGENTINFO` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__CreateAgentSession_e__Struct {
-    public var hAgentSession: UInt32 = 0
-    public var dwAgentPINSize: UInt32 = 0
-    public var dwAgentPINOffset: UInt32 = 0
-    public var hAgent: UInt32 = 0
-    public var GroupID: GUID = GUID()
-    public var dwWorkingAddressID: UInt32 = 0
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    public func hAgentSession(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgentSession(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentPINSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwAgentPINSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentPINOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwAgentPINOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func hAgent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_hAgent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `GroupID`: layout unknown; skipped
+
+    public func dwWorkingAddressID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwWorkingAddressID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionList_e__Struct {
-    public var hAgent: UInt32 = 0
-    public var SessionList: LINEAGENTSESSIONLIST = LINEAGENTSESSIONLIST()
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    public func hAgent(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgent(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `SessionList`: type `LINEAGENTSESSIONLIST` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__GetAgentSessionInfo_e__Struct {
-    public var hAgentSession: UInt32 = 0
-    public var SessionInfo: LINEAGENTSESSIONINFO = LINEAGENTSESSIONINFO()
+    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0u8)
+
+    public func hAgentSession(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgentSession(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `SessionInfo`: type `LINEAGENTSESSIONINFO` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__SetAgentSessionState_e__Struct {
-    public var hAgentSession: UInt32 = 0
-    public var dwAgentSessionState: UInt32 = 0
-    public var dwNextAgentSessionState: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func hAgentSession(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hAgentSession(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAgentSessionState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwAgentSessionState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNextAgentSessionState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwNextAgentSessionState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__GetQueueList_e__Struct {
-    public var GroupID: GUID = GUID()
-    public var QueueList: LINEQUEUELIST = LINEQUEUELIST()
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    // packed field `GroupID`: layout unknown; skipped
+
+    // packed field `QueueList`: type `LINEQUEUELIST` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__SetQueueMeasurementPeriod_e__Struct {
-    public var dwQueueID: UInt32 = 0
-    public var dwMeasurementPeriod: UInt32 = 0
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+
+    public func dwQueueID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwQueueID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMeasurementPeriod(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwMeasurementPeriod(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUEST__Anonymous_e__Union__GetQueueInfo_e__Struct {
-    public var dwQueueID: UInt32 = 0
-    public var QueueInfo: LINEQUEUEINFO = LINEQUEUEINFO()
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0u8)
+
+    public func dwQueueID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwQueueID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `QueueInfo`: type `LINEQUEUEINFO` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -20730,58 +29390,506 @@ public struct LINEPROXYREQUEST__Anonymous_e__Union__GetGroupList_e__Struct {
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEPROXYREQUESTLIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumEntries: UInt32 = 0
-    public var dwListSize: UInt32 = 0
-    public var dwListOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEQUEUEENTRY {
-    public var dwQueueID: UInt32 = 0
-    public var dwNameSize: UInt32 = 0
-    public var dwNameOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func dwQueueID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwQueueID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEQUEUEINFO {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwMeasurementPeriod: UInt32 = 0
-    public var dwTotalCallsQueued: UInt32 = 0
-    public var dwCurrentCallsQueued: UInt32 = 0
-    public var dwTotalCallsAbandoned: UInt32 = 0
-    public var dwTotalCallsFlowedIn: UInt32 = 0
-    public var dwTotalCallsFlowedOut: UInt32 = 0
-    public var dwLongestEverWaitTime: UInt32 = 0
-    public var dwCurrentLongestWaitTime: UInt32 = 0
-    public var dwAverageWaitTime: UInt32 = 0
-    public var dwFinalDisposition: UInt32 = 0
+    public var _raw: VArray<UInt8, $52> = VArray<UInt8, $52>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMeasurementPeriod(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwMeasurementPeriod(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalCallsQueued(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwTotalCallsQueued(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCurrentCallsQueued(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwCurrentCallsQueued(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalCallsAbandoned(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwTotalCallsAbandoned(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalCallsFlowedIn(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwTotalCallsFlowedIn(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTotalCallsFlowedOut(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwTotalCallsFlowedOut(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLongestEverWaitTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwLongestEverWaitTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCurrentLongestWaitTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwCurrentLongestWaitTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAverageWaitTime(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwAverageWaitTime(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFinalDisposition(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwFinalDisposition(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEQUEUELIST {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumEntries: UInt32 = 0
-    public var dwListSize: UInt32 = 0
-    public var dwListOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumEntries(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumEntries(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -20796,92 +29904,560 @@ public struct LINEREQMAKECALL {
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEREQMAKECALLW {
-    public var szDestAddress: VArray<UInt16, $80> = VArray<UInt16, $80>(repeat: 0)
-    public var szAppName: VArray<UInt16, $40> = VArray<UInt16, $40>(repeat: 0)
-    public var szCalledParty: VArray<UInt16, $40> = VArray<UInt16, $40>(repeat: 0)
-    public var szComment: VArray<UInt16, $80> = VArray<UInt16, $80>(repeat: 0)
+    public var _raw: VArray<UInt8, $480> = VArray<UInt8, $480>(repeat: 0u8)
+
+    // packed field `szDestAddress`: type `VArray<UInt16, $80>` not supported by polyfill; skipped
+
+    // packed field `szAppName`: type `VArray<UInt16, $40>` not supported by polyfill; skipped
+
+    // packed field `szCalledParty`: type `VArray<UInt16, $40>` not supported by polyfill; skipped
+
+    // packed field `szComment`: type `VArray<UInt16, $80>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEREQMEDIACALL {
-    public var hWnd: CPointer<Unit> = CPointer<Unit>()
-    public var wRequestID: UIntNative = 0
-    public var szDeviceClass: VArray<Win32_Foundation.CHAR, $40> = VArray<Win32_Foundation.CHAR, $40>(repeat: 0)
-    public var ucDeviceID: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-    public var dwSize: UInt32 = 0
-    public var dwSecure: UInt32 = 0
-    public var szDestAddress: VArray<Win32_Foundation.CHAR, $80> = VArray<Win32_Foundation.CHAR, $80>(repeat: 0)
-    public var szAppName: VArray<Win32_Foundation.CHAR, $40> = VArray<Win32_Foundation.CHAR, $40>(repeat: 0)
-    public var szCalledParty: VArray<Win32_Foundation.CHAR, $40> = VArray<Win32_Foundation.CHAR, $40>(repeat: 0)
-    public var szComment: VArray<Win32_Foundation.CHAR, $80> = VArray<Win32_Foundation.CHAR, $80>(repeat: 0)
+    public var _raw: VArray<UInt8, $344> = VArray<UInt8, $344>(repeat: 0u8)
+
+    // packed field `hWnd`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    // packed field `wRequestID`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `szDeviceClass`: type `VArray<Win32_Foundation.CHAR, $40>` not supported by polyfill; skipped
+
+    // packed field `ucDeviceID`: type `VArray<UInt8, $40>` not supported by polyfill; skipped
+
+    public func dwSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 96)
+        }
+    }
+
+    public mut func set_dwSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 96, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSecure(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 100)
+        }
+    }
+
+    public mut func set_dwSecure(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 100, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `szDestAddress`: type `VArray<Win32_Foundation.CHAR, $80>` not supported by polyfill; skipped
+
+    // packed field `szAppName`: type `VArray<Win32_Foundation.CHAR, $40>` not supported by polyfill; skipped
+
+    // packed field `szCalledParty`: type `VArray<Win32_Foundation.CHAR, $40>` not supported by polyfill; skipped
+
+    // packed field `szComment`: type `VArray<Win32_Foundation.CHAR, $80>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINEREQMEDIACALLW {
-    public var hWnd: CPointer<Unit> = CPointer<Unit>()
-    public var wRequestID: UIntNative = 0
-    public var szDeviceClass: VArray<UInt16, $40> = VArray<UInt16, $40>(repeat: 0)
-    public var ucDeviceID: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-    public var dwSize: UInt32 = 0
-    public var dwSecure: UInt32 = 0
-    public var szDestAddress: VArray<UInt16, $80> = VArray<UInt16, $80>(repeat: 0)
-    public var szAppName: VArray<UInt16, $40> = VArray<UInt16, $40>(repeat: 0)
-    public var szCalledParty: VArray<UInt16, $40> = VArray<UInt16, $40>(repeat: 0)
-    public var szComment: VArray<UInt16, $80> = VArray<UInt16, $80>(repeat: 0)
+    public var _raw: VArray<UInt8, $624> = VArray<UInt8, $624>(repeat: 0u8)
+
+    // packed field `hWnd`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    // packed field `wRequestID`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `szDeviceClass`: type `VArray<UInt16, $40>` not supported by polyfill; skipped
+
+    // packed field `ucDeviceID`: type `VArray<UInt8, $40>` not supported by polyfill; skipped
+
+    public func dwSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 136)
+        }
+    }
+
+    public mut func set_dwSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 136, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSecure(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 140)
+        }
+    }
+
+    public mut func set_dwSecure(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 140, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `szDestAddress`: type `VArray<UInt16, $80>` not supported by polyfill; skipped
+
+    // packed field `szAppName`: type `VArray<UInt16, $40>` not supported by polyfill; skipped
+
+    // packed field `szCalledParty`: type `VArray<UInt16, $40>` not supported by polyfill; skipped
+
+    // packed field `szComment`: type `VArray<UInt16, $80>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINETERMCAPS {
-    public var dwTermDev: UInt32 = 0
-    public var dwTermModes: UInt32 = 0
-    public var dwTermSharing: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func dwTermDev(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTermDev(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTermModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwTermModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTermSharing(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwTermSharing(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINETRANSLATECAPS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwNumLocations: UInt32 = 0
-    public var dwLocationListSize: UInt32 = 0
-    public var dwLocationListOffset: UInt32 = 0
-    public var dwCurrentLocationID: UInt32 = 0
-    public var dwNumCards: UInt32 = 0
-    public var dwCardListSize: UInt32 = 0
-    public var dwCardListOffset: UInt32 = 0
-    public var dwCurrentPreferredCardID: UInt32 = 0
+    public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumLocations(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwNumLocations(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLocationListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwLocationListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLocationListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwLocationListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCurrentLocationID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwCurrentLocationID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumCards(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwNumCards(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCardListSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwCardListSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCardListOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwCardListOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCurrentPreferredCardID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwCurrentPreferredCardID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct LINETRANSLATEOUTPUT {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwDialableStringSize: UInt32 = 0
-    public var dwDialableStringOffset: UInt32 = 0
-    public var dwDisplayableStringSize: UInt32 = 0
-    public var dwDisplayableStringOffset: UInt32 = 0
-    public var dwCurrentCountry: UInt32 = 0
-    public var dwDestCountry: UInt32 = 0
-    public var dwTranslateResults: UInt32 = 0
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDialableStringSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwDialableStringSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDialableStringOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwDialableStringOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayableStringSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwDisplayableStringSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayableStringOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwDisplayableStringOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwCurrentCountry(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwCurrentCountry(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDestCountry(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwDestCountry(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwTranslateResults(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwTranslateResults(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -21056,14 +30632,13 @@ public struct MSP_EVENT_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MSP_EVENT_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func msp_ADDRESS_EVENT_INFO(): MSP_EVENT_INFO__Anonymous_e__Union__MSP_ADDRESS_EVENT_INFO_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_ADDRESS_EVENT_INFO_e__Struct>(p)
             return ptr.read()
         }
@@ -21072,9 +30647,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public mut func set_msp_ADDRESS_EVENT_INFO(val: MSP_EVENT_INFO__Anonymous_e__Union__MSP_ADDRESS_EVENT_INFO_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_ADDRESS_EVENT_INFO_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21084,9 +30658,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public func msp_CALL_EVENT_INFO(): MSP_EVENT_INFO__Anonymous_e__Union__MSP_CALL_EVENT_INFO_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_CALL_EVENT_INFO_e__Struct>(p)
             return ptr.read()
         }
@@ -21095,9 +30668,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public mut func set_msp_CALL_EVENT_INFO(val: MSP_EVENT_INFO__Anonymous_e__Union__MSP_CALL_EVENT_INFO_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_CALL_EVENT_INFO_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21107,9 +30679,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public func msp_TSP_DATA(): MSP_EVENT_INFO__Anonymous_e__Union__MSP_TSP_DATA_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_TSP_DATA_e__Struct>(p)
             return ptr.read()
         }
@@ -21118,9 +30689,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public mut func set_msp_TSP_DATA(val: MSP_EVENT_INFO__Anonymous_e__Union__MSP_TSP_DATA_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_TSP_DATA_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21130,9 +30700,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public func msp_PRIVATE_EVENT_INFO(): MSP_EVENT_INFO__Anonymous_e__Union__MSP_PRIVATE_EVENT_INFO_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_PRIVATE_EVENT_INFO_e__Struct>(p)
             return ptr.read()
         }
@@ -21141,9 +30710,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public mut func set_msp_PRIVATE_EVENT_INFO(val: MSP_EVENT_INFO__Anonymous_e__Union__MSP_PRIVATE_EVENT_INFO_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_PRIVATE_EVENT_INFO_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21153,9 +30721,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public func msp_FILE_TERMINAL_EVENT_INFO(): MSP_EVENT_INFO__Anonymous_e__Union__MSP_FILE_TERMINAL_EVENT_INFO_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_FILE_TERMINAL_EVENT_INFO_e__Struct>(p)
             return ptr.read()
         }
@@ -21164,9 +30731,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public mut func set_msp_FILE_TERMINAL_EVENT_INFO(val: MSP_EVENT_INFO__Anonymous_e__Union__MSP_FILE_TERMINAL_EVENT_INFO_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_FILE_TERMINAL_EVENT_INFO_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21176,9 +30742,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public func msp_ASR_TERMINAL_EVENT_INFO(): MSP_EVENT_INFO__Anonymous_e__Union__MSP_ASR_TERMINAL_EVENT_INFO_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_ASR_TERMINAL_EVENT_INFO_e__Struct>(p)
             return ptr.read()
         }
@@ -21187,9 +30752,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public mut func set_msp_ASR_TERMINAL_EVENT_INFO(val: MSP_EVENT_INFO__Anonymous_e__Union__MSP_ASR_TERMINAL_EVENT_INFO_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_ASR_TERMINAL_EVENT_INFO_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21199,9 +30763,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public func msp_TTS_TERMINAL_EVENT_INFO(): MSP_EVENT_INFO__Anonymous_e__Union__MSP_TTS_TERMINAL_EVENT_INFO_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_TTS_TERMINAL_EVENT_INFO_e__Struct>(p)
             return ptr.read()
         }
@@ -21210,9 +30773,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public mut func set_msp_TTS_TERMINAL_EVENT_INFO(val: MSP_EVENT_INFO__Anonymous_e__Union__MSP_TTS_TERMINAL_EVENT_INFO_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_TTS_TERMINAL_EVENT_INFO_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21222,9 +30784,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public func msp_TONE_TERMINAL_EVENT_INFO(): MSP_EVENT_INFO__Anonymous_e__Union__MSP_TONE_TERMINAL_EVENT_INFO_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_TONE_TERMINAL_EVENT_INFO_e__Struct>(p)
             return ptr.read()
         }
@@ -21233,9 +30794,8 @@ public struct MSP_EVENT_INFO__Anonymous_e__Union {
     public mut func set_msp_TONE_TERMINAL_EVENT_INFO(val: MSP_EVENT_INFO__Anonymous_e__Union__MSP_TONE_TERMINAL_EVENT_INFO_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MSP_EVENT_INFO__Anonymous_e__Union__MSP_TONE_TERMINAL_EVENT_INFO_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21335,14 +30895,13 @@ public struct NSID {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NSID__address_e__Union {
-    public var _raw: VArray<UInt32, $18> = VArray<UInt32, $18>(repeat: 0)
+    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
 
     public func alias(): ADDRALIAS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ADDRALIAS>(p)
             return ptr.read()
         }
@@ -21351,9 +30910,8 @@ public struct NSID__address_e__Union {
     public mut func set_alias(val: ADDRALIAS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<ADDRALIAS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21363,9 +30921,8 @@ public struct NSID__address_e__Union {
     public func rgchInterNet(): VArray<Win32_Foundation.CHAR, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Win32_Foundation.CHAR, $1>>(p)
             return ptr.read()
         }
@@ -21374,9 +30931,8 @@ public struct NSID__address_e__Union {
     public mut func set_rgchInterNet(val: VArray<Win32_Foundation.CHAR, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<Win32_Foundation.CHAR, $1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21386,19 +30942,179 @@ public struct NSID__address_e__Union {
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct PHONEBUTTONINFO {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwButtonMode: UInt32 = 0
-    public var dwButtonFunction: UInt32 = 0
-    public var dwButtonTextSize: UInt32 = 0
-    public var dwButtonTextOffset: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
-    public var dwButtonState: UInt32 = 0
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwButtonMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwButtonMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwButtonFunction(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwButtonFunction(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwButtonTextSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwButtonTextSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwButtonTextOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwButtonTextOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwButtonState(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwButtonState(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -21406,55 +31122,776 @@ public struct PHONEBUTTONINFO {
 public type PHONECALLBACK = CFunc<(UInt32, UInt32, UIntNative, UIntNative, UIntNative, UIntNative) -> Unit>
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct PHONECAPS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwProviderInfoSize: UInt32 = 0
-    public var dwProviderInfoOffset: UInt32 = 0
-    public var dwPhoneInfoSize: UInt32 = 0
-    public var dwPhoneInfoOffset: UInt32 = 0
-    public var dwPermanentPhoneID: UInt32 = 0
-    public var dwPhoneNameSize: UInt32 = 0
-    public var dwPhoneNameOffset: UInt32 = 0
-    public var dwStringFormat: UInt32 = 0
-    public var dwPhoneStates: UInt32 = 0
-    public var dwHookSwitchDevs: UInt32 = 0
-    public var dwHandsetHookSwitchModes: UInt32 = 0
-    public var dwSpeakerHookSwitchModes: UInt32 = 0
-    public var dwHeadsetHookSwitchModes: UInt32 = 0
-    public var dwVolumeFlags: UInt32 = 0
-    public var dwGainFlags: UInt32 = 0
-    public var dwDisplayNumRows: UInt32 = 0
-    public var dwDisplayNumColumns: UInt32 = 0
-    public var dwNumRingModes: UInt32 = 0
-    public var dwNumButtonLamps: UInt32 = 0
-    public var dwButtonModesSize: UInt32 = 0
-    public var dwButtonModesOffset: UInt32 = 0
-    public var dwButtonFunctionsSize: UInt32 = 0
-    public var dwButtonFunctionsOffset: UInt32 = 0
-    public var dwLampModesSize: UInt32 = 0
-    public var dwLampModesOffset: UInt32 = 0
-    public var dwNumSetData: UInt32 = 0
-    public var dwSetDataSize: UInt32 = 0
-    public var dwSetDataOffset: UInt32 = 0
-    public var dwNumGetData: UInt32 = 0
-    public var dwGetDataSize: UInt32 = 0
-    public var dwGetDataOffset: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
-    public var dwDeviceClassesSize: UInt32 = 0
-    public var dwDeviceClassesOffset: UInt32 = 0
-    public var dwPhoneFeatures: UInt32 = 0
-    public var dwSettableHandsetHookSwitchModes: UInt32 = 0
-    public var dwSettableSpeakerHookSwitchModes: UInt32 = 0
-    public var dwSettableHeadsetHookSwitchModes: UInt32 = 0
-    public var dwMonitoredHandsetHookSwitchModes: UInt32 = 0
-    public var dwMonitoredSpeakerHookSwitchModes: UInt32 = 0
-    public var dwMonitoredHeadsetHookSwitchModes: UInt32 = 0
-    public var PermanentPhoneGuid: GUID = GUID()
+    public var _raw: VArray<UInt8, $180> = VArray<UInt8, $180>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwProviderInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwProviderInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwProviderInfoOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwProviderInfoOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPhoneInfoSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwPhoneInfoSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPhoneInfoOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwPhoneInfoOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPermanentPhoneID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwPermanentPhoneID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPhoneNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwPhoneNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPhoneNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwPhoneNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwStringFormat(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwStringFormat(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPhoneStates(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwPhoneStates(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHookSwitchDevs(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwHookSwitchDevs(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHandsetHookSwitchModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwHandsetHookSwitchModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSpeakerHookSwitchModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwSpeakerHookSwitchModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHeadsetHookSwitchModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_dwHeadsetHookSwitchModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwVolumeFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 64)
+        }
+    }
+
+    public mut func set_dwVolumeFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGainFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 68)
+        }
+    }
+
+    public mut func set_dwGainFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 68, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayNumRows(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 72)
+        }
+    }
+
+    public mut func set_dwDisplayNumRows(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 72, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayNumColumns(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 76)
+        }
+    }
+
+    public mut func set_dwDisplayNumColumns(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 76, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumRingModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 80)
+        }
+    }
+
+    public mut func set_dwNumRingModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumButtonLamps(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 84)
+        }
+    }
+
+    public mut func set_dwNumButtonLamps(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 84, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwButtonModesSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 88)
+        }
+    }
+
+    public mut func set_dwButtonModesSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 88, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwButtonModesOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 92)
+        }
+    }
+
+    public mut func set_dwButtonModesOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 92, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwButtonFunctionsSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 96)
+        }
+    }
+
+    public mut func set_dwButtonFunctionsSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 96, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwButtonFunctionsOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 100)
+        }
+    }
+
+    public mut func set_dwButtonFunctionsOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 100, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLampModesSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 104)
+        }
+    }
+
+    public mut func set_dwLampModesSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 104, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLampModesOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 108)
+        }
+    }
+
+    public mut func set_dwLampModesOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 108, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumSetData(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 112)
+        }
+    }
+
+    public mut func set_dwNumSetData(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 112, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSetDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 116)
+        }
+    }
+
+    public mut func set_dwSetDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 116, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSetDataOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 120)
+        }
+    }
+
+    public mut func set_dwSetDataOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 120, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumGetData(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 124)
+        }
+    }
+
+    public mut func set_dwNumGetData(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 124, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGetDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 128)
+        }
+    }
+
+    public mut func set_dwGetDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 128, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwGetDataOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 132)
+        }
+    }
+
+    public mut func set_dwGetDataOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 132, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 136)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 136, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 140)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 140, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceClassesSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 144)
+        }
+    }
+
+    public mut func set_dwDeviceClassesSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 144, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDeviceClassesOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 148)
+        }
+    }
+
+    public mut func set_dwDeviceClassesOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 148, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPhoneFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 152)
+        }
+    }
+
+    public mut func set_dwPhoneFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 152, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSettableHandsetHookSwitchModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 156)
+        }
+    }
+
+    public mut func set_dwSettableHandsetHookSwitchModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 156, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSettableSpeakerHookSwitchModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 160)
+        }
+    }
+
+    public mut func set_dwSettableSpeakerHookSwitchModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 160, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSettableHeadsetHookSwitchModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 164)
+        }
+    }
+
+    public mut func set_dwSettableHeadsetHookSwitchModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 164, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMonitoredHandsetHookSwitchModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 168)
+        }
+    }
+
+    public mut func set_dwMonitoredHandsetHookSwitchModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 168, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMonitoredSpeakerHookSwitchModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 172)
+        }
+    }
+
+    public mut func set_dwMonitoredSpeakerHookSwitchModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 172, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMonitoredHeadsetHookSwitchModes(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 176)
+        }
+    }
+
+    public mut func set_dwMonitoredHeadsetHookSwitchModes(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 176, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `PermanentPhoneGuid`: layout unknown; skipped
     public init() {}
 }
 
@@ -21558,31 +31995,175 @@ public let PCS_PROVIDERINFO: PHONECAPS_STRING = PHONECAPS_STRING(2)
 public type PHONEEVENT = CFunc<(HTAPIPHONE, UInt32, UIntNative, UIntNative, UIntNative) -> Unit>
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct PHONEEXTENSIONID {
-    public var dwExtensionID0: UInt32 = 0
-    public var dwExtensionID1: UInt32 = 0
-    public var dwExtensionID2: UInt32 = 0
-    public var dwExtensionID3: UInt32 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func dwExtensionID0(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwExtensionID0(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwExtensionID1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwExtensionID1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwExtensionID2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwExtensionID2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwExtensionID3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwExtensionID3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct PHONEINITIALIZEEXPARAMS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwOptions: UInt32 = 0
-    public var Handles: PHONEINITIALIZEEXPARAMS__Handles_e__Union = PHONEINITIALIZEEXPARAMS__Handles_e__Union()
-    public var dwCompletionKey: UInt32 = 0
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwOptions(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwOptions(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Handles`: type `PHONEINITIALIZEEXPARAMS__Handles_e__Union` not supported by polyfill; skipped
+
+    public func dwCompletionKey(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwCompletionKey(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PHONEINITIALIZEEXPARAMS__Handles_e__Union {
@@ -21591,9 +32172,8 @@ public struct PHONEINITIALIZEEXPARAMS__Handles_e__Union {
     public func hEvent(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -21602,9 +32182,8 @@ public struct PHONEINITIALIZEEXPARAMS__Handles_e__Union {
     public mut func set_hEvent(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21614,9 +32193,8 @@ public struct PHONEINITIALIZEEXPARAMS__Handles_e__Union {
     public func hCompletionPort(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -21625,9 +32203,8 @@ public struct PHONEINITIALIZEEXPARAMS__Handles_e__Union {
     public mut func set_hCompletionPort(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -21637,48 +32214,500 @@ public struct PHONEINITIALIZEEXPARAMS__Handles_e__Union {
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct PHONEMESSAGE {
-    public var hDevice: UInt32 = 0
-    public var dwMessageID: UInt32 = 0
-    public var dwCallbackInstance: UIntNative = 0
-    public var dwParam1: UIntNative = 0
-    public var dwParam2: UIntNative = 0
-    public var dwParam3: UIntNative = 0
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
+
+    public func hDevice(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_hDevice(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwMessageID(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwMessageID(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `dwCallbackInstance`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `dwParam1`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `dwParam2`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `dwParam3`: type `UIntNative` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct PHONESTATUS {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwStatusFlags: UInt32 = 0
-    public var dwNumOwners: UInt32 = 0
-    public var dwNumMonitors: UInt32 = 0
-    public var dwRingMode: UInt32 = 0
-    public var dwRingVolume: UInt32 = 0
-    public var dwHandsetHookSwitchMode: UInt32 = 0
-    public var dwHandsetVolume: UInt32 = 0
-    public var dwHandsetGain: UInt32 = 0
-    public var dwSpeakerHookSwitchMode: UInt32 = 0
-    public var dwSpeakerVolume: UInt32 = 0
-    public var dwSpeakerGain: UInt32 = 0
-    public var dwHeadsetHookSwitchMode: UInt32 = 0
-    public var dwHeadsetVolume: UInt32 = 0
-    public var dwHeadsetGain: UInt32 = 0
-    public var dwDisplaySize: UInt32 = 0
-    public var dwDisplayOffset: UInt32 = 0
-    public var dwLampModesSize: UInt32 = 0
-    public var dwLampModesOffset: UInt32 = 0
-    public var dwOwnerNameSize: UInt32 = 0
-    public var dwOwnerNameOffset: UInt32 = 0
-    public var dwDevSpecificSize: UInt32 = 0
-    public var dwDevSpecificOffset: UInt32 = 0
-    public var dwPhoneFeatures: UInt32 = 0
+    public var _raw: VArray<UInt8, $104> = VArray<UInt8, $104>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwStatusFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwStatusFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumOwners(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwNumOwners(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumMonitors(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwNumMonitors(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRingMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwRingMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwRingVolume(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwRingVolume(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHandsetHookSwitchMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwHandsetHookSwitchMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHandsetVolume(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwHandsetVolume(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHandsetGain(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_dwHandsetGain(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSpeakerHookSwitchMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwSpeakerHookSwitchMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSpeakerVolume(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwSpeakerVolume(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwSpeakerGain(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_dwSpeakerGain(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHeadsetHookSwitchMode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 56)
+        }
+    }
+
+    public mut func set_dwHeadsetHookSwitchMode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 56, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHeadsetVolume(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_dwHeadsetVolume(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHeadsetGain(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 64)
+        }
+    }
+
+    public mut func set_dwHeadsetGain(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 64, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplaySize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 68)
+        }
+    }
+
+    public mut func set_dwDisplaySize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 68, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDisplayOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 72)
+        }
+    }
+
+    public mut func set_dwDisplayOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 72, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLampModesSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 76)
+        }
+    }
+
+    public mut func set_dwLampModesSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 76, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLampModesOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 80)
+        }
+    }
+
+    public mut func set_dwLampModesOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 80, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwOwnerNameSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 84)
+        }
+    }
+
+    public mut func set_dwOwnerNameSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 84, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwOwnerNameOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 88)
+        }
+    }
+
+    public mut func set_dwOwnerNameOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 88, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 92)
+        }
+    }
+
+    public mut func set_dwDevSpecificSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 92, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDevSpecificOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 96)
+        }
+    }
+
+    public mut func set_dwDevSpecificOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 96, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwPhoneFeatures(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 100)
+        }
+    }
+
+    public mut func set_dwPhoneFeatures(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 100, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -22246,14 +33275,94 @@ public let QSL_IF_AVAILABLE: QOS_SERVICE_LEVEL = QOS_SERVICE_LEVEL(2)
 public let QSL_BEST_EFFORT: QOS_SERVICE_LEVEL = QOS_SERVICE_LEVEL(3)
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct RENDDATA {
-    public var atyp: UInt16 = 0
-    public var ulPosition: UInt32 = 0
-    public var dxWidth: UInt16 = 0
-    public var dyHeight: UInt16 = 0
-    public var dwFlags: UInt32 = 0
+    public var _raw: VArray<UInt8, $14> = VArray<UInt8, $14>(repeat: 0u8)
+
+    public func atyp(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_atyp(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulPosition(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 2)
+        }
+    }
+
+    public mut func set_ulPosition(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dxWidth(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 6)
+        }
+    }
+
+    public mut func set_dxWidth(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dyHeight(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 8)
+        }
+    }
+
+    public mut func set_dyHeight(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 10)
+        }
+    }
+
+    public mut func set_dwFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 10, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -22728,15 +33837,111 @@ public struct TUISPICREATEDIALOGINSTANCEPARAMS {
 public type TUISPIDLLCALLBACK = CFunc<(UIntNative, UInt32, CPointer<Unit>, UInt32) -> Int32>
 
 @When[Windows_Win32_Devices_Tapi == "on"]
-// packed(1)
 @C
 public struct VARSTRING {
-    public var dwTotalSize: UInt32 = 0
-    public var dwNeededSize: UInt32 = 0
-    public var dwUsedSize: UInt32 = 0
-    public var dwStringFormat: UInt32 = 0
-    public var dwStringSize: UInt32 = 0
-    public var dwStringOffset: UInt32 = 0
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func dwTotalSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTotalSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNeededSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwNeededSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwUsedSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwUsedSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwStringFormat(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwStringFormat(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwStringSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwStringSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwStringOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwStringOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 

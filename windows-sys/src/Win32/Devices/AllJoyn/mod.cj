@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.AllJoyn
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.Foundation.*

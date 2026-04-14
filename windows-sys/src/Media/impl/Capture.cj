@@ -3,6 +3,7 @@ package windows_sys.Media.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Graphics.DirectX.Direct3D11 as Graphics_DirectX_Direct3D11
 import windows_sys.Graphics.Imaging as Graphics_Imaging

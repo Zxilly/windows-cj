@@ -3,6 +3,7 @@ package windows_sys.Wdk.Storage.FileSystem.Minifilters
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Wdk.impl as Wdk_impl
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
@@ -29,14 +30,13 @@ public struct FLT_CALLBACK_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FLT_CALLBACK_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func anonymous(): FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -45,9 +45,8 @@ public struct FLT_CALLBACK_DATA__Anonymous_e__Union {
     public mut func set_anonymous(val: FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_CALLBACK_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -57,9 +56,8 @@ public struct FLT_CALLBACK_DATA__Anonymous_e__Union {
     public func filterContext(): VArray<CPointer<Unit>, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<CPointer<Unit>, $4>>(p)
             return ptr.read()
         }
@@ -68,9 +66,8 @@ public struct FLT_CALLBACK_DATA__Anonymous_e__Union {
     public mut func set_filterContext(val: VArray<CPointer<Unit>, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<CPointer<Unit>, $4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -197,14 +194,13 @@ public struct FLT_OPERATION_REGISTRATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FLT_PARAMETERS {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func create(): FLT_PARAMETERS__Create_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Create_e__Struct>(p)
             return ptr.read()
         }
@@ -213,9 +209,8 @@ public struct FLT_PARAMETERS {
     public mut func set_create(val: FLT_PARAMETERS__Create_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Create_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -225,9 +220,8 @@ public struct FLT_PARAMETERS {
     public func createPipe(): FLT_PARAMETERS__CreatePipe_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__CreatePipe_e__Struct>(p)
             return ptr.read()
         }
@@ -236,9 +230,8 @@ public struct FLT_PARAMETERS {
     public mut func set_createPipe(val: FLT_PARAMETERS__CreatePipe_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__CreatePipe_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -248,9 +241,8 @@ public struct FLT_PARAMETERS {
     public func createMailslot(): FLT_PARAMETERS__CreateMailslot_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__CreateMailslot_e__Struct>(p)
             return ptr.read()
         }
@@ -259,9 +251,8 @@ public struct FLT_PARAMETERS {
     public mut func set_createMailslot(val: FLT_PARAMETERS__CreateMailslot_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__CreateMailslot_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -271,9 +262,8 @@ public struct FLT_PARAMETERS {
     public func read(): FLT_PARAMETERS__Read_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Read_e__Struct>(p)
             return ptr.read()
         }
@@ -282,9 +272,8 @@ public struct FLT_PARAMETERS {
     public mut func set_read(val: FLT_PARAMETERS__Read_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Read_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -294,9 +283,8 @@ public struct FLT_PARAMETERS {
     public func write(): FLT_PARAMETERS__Write_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Write_e__Struct>(p)
             return ptr.read()
         }
@@ -305,9 +293,8 @@ public struct FLT_PARAMETERS {
     public mut func set_write(val: FLT_PARAMETERS__Write_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Write_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -317,9 +304,8 @@ public struct FLT_PARAMETERS {
     public func queryFileInformation(): FLT_PARAMETERS__QueryFileInformation_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryFileInformation_e__Struct>(p)
             return ptr.read()
         }
@@ -328,9 +314,8 @@ public struct FLT_PARAMETERS {
     public mut func set_queryFileInformation(val: FLT_PARAMETERS__QueryFileInformation_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryFileInformation_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -340,9 +325,8 @@ public struct FLT_PARAMETERS {
     public func setFileInformation(): FLT_PARAMETERS__SetFileInformation_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct>(p)
             return ptr.read()
         }
@@ -351,9 +335,8 @@ public struct FLT_PARAMETERS {
     public mut func set_setFileInformation(val: FLT_PARAMETERS__SetFileInformation_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -363,9 +346,8 @@ public struct FLT_PARAMETERS {
     public func queryEa(): FLT_PARAMETERS__QueryEa_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryEa_e__Struct>(p)
             return ptr.read()
         }
@@ -374,9 +356,8 @@ public struct FLT_PARAMETERS {
     public mut func set_queryEa(val: FLT_PARAMETERS__QueryEa_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryEa_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -386,9 +367,8 @@ public struct FLT_PARAMETERS {
     public func setEa(): FLT_PARAMETERS__SetEa_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetEa_e__Struct>(p)
             return ptr.read()
         }
@@ -397,9 +377,8 @@ public struct FLT_PARAMETERS {
     public mut func set_setEa(val: FLT_PARAMETERS__SetEa_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetEa_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -409,9 +388,8 @@ public struct FLT_PARAMETERS {
     public func queryVolumeInformation(): FLT_PARAMETERS__QueryVolumeInformation_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryVolumeInformation_e__Struct>(p)
             return ptr.read()
         }
@@ -420,9 +398,8 @@ public struct FLT_PARAMETERS {
     public mut func set_queryVolumeInformation(val: FLT_PARAMETERS__QueryVolumeInformation_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryVolumeInformation_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -432,9 +409,8 @@ public struct FLT_PARAMETERS {
     public func setVolumeInformation(): FLT_PARAMETERS__SetVolumeInformation_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetVolumeInformation_e__Struct>(p)
             return ptr.read()
         }
@@ -443,9 +419,8 @@ public struct FLT_PARAMETERS {
     public mut func set_setVolumeInformation(val: FLT_PARAMETERS__SetVolumeInformation_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetVolumeInformation_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -455,9 +430,8 @@ public struct FLT_PARAMETERS {
     public func directoryControl(): FLT_PARAMETERS__DirectoryControl_e__Union {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union>(p)
             return ptr.read()
         }
@@ -466,9 +440,8 @@ public struct FLT_PARAMETERS {
     public mut func set_directoryControl(val: FLT_PARAMETERS__DirectoryControl_e__Union): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -478,9 +451,8 @@ public struct FLT_PARAMETERS {
     public func fileSystemControl(): FLT_PARAMETERS__FileSystemControl_e__Union {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union>(p)
             return ptr.read()
         }
@@ -489,9 +461,8 @@ public struct FLT_PARAMETERS {
     public mut func set_fileSystemControl(val: FLT_PARAMETERS__FileSystemControl_e__Union): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -501,9 +472,8 @@ public struct FLT_PARAMETERS {
     public func deviceIoControl(): FLT_PARAMETERS__DeviceIoControl_e__Union {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union>(p)
             return ptr.read()
         }
@@ -512,9 +482,8 @@ public struct FLT_PARAMETERS {
     public mut func set_deviceIoControl(val: FLT_PARAMETERS__DeviceIoControl_e__Union): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -524,9 +493,8 @@ public struct FLT_PARAMETERS {
     public func lockControl(): FLT_PARAMETERS__LockControl_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__LockControl_e__Struct>(p)
             return ptr.read()
         }
@@ -535,9 +503,8 @@ public struct FLT_PARAMETERS {
     public mut func set_lockControl(val: FLT_PARAMETERS__LockControl_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__LockControl_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -547,9 +514,8 @@ public struct FLT_PARAMETERS {
     public func querySecurity(): FLT_PARAMETERS__QuerySecurity_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QuerySecurity_e__Struct>(p)
             return ptr.read()
         }
@@ -558,9 +524,8 @@ public struct FLT_PARAMETERS {
     public mut func set_querySecurity(val: FLT_PARAMETERS__QuerySecurity_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QuerySecurity_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -570,9 +535,8 @@ public struct FLT_PARAMETERS {
     public func setSecurity(): FLT_PARAMETERS__SetSecurity_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetSecurity_e__Struct>(p)
             return ptr.read()
         }
@@ -581,9 +545,8 @@ public struct FLT_PARAMETERS {
     public mut func set_setSecurity(val: FLT_PARAMETERS__SetSecurity_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetSecurity_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -593,9 +556,8 @@ public struct FLT_PARAMETERS {
     public func wmi(): FLT_PARAMETERS__WMI_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__WMI_e__Struct>(p)
             return ptr.read()
         }
@@ -604,9 +566,8 @@ public struct FLT_PARAMETERS {
     public mut func set_wmi(val: FLT_PARAMETERS__WMI_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__WMI_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -616,9 +577,8 @@ public struct FLT_PARAMETERS {
     public func queryQuota(): FLT_PARAMETERS__QueryQuota_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryQuota_e__Struct>(p)
             return ptr.read()
         }
@@ -627,9 +587,8 @@ public struct FLT_PARAMETERS {
     public mut func set_queryQuota(val: FLT_PARAMETERS__QueryQuota_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryQuota_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -639,9 +598,8 @@ public struct FLT_PARAMETERS {
     public func setQuota(): FLT_PARAMETERS__SetQuota_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetQuota_e__Struct>(p)
             return ptr.read()
         }
@@ -650,9 +608,8 @@ public struct FLT_PARAMETERS {
     public mut func set_setQuota(val: FLT_PARAMETERS__SetQuota_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetQuota_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -662,9 +619,8 @@ public struct FLT_PARAMETERS {
     public func pnp(): FLT_PARAMETERS__Pnp_e__Union {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union>(p)
             return ptr.read()
         }
@@ -673,9 +629,8 @@ public struct FLT_PARAMETERS {
     public mut func set_pnp(val: FLT_PARAMETERS__Pnp_e__Union): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -685,9 +640,8 @@ public struct FLT_PARAMETERS {
     public func acquireForSectionSynchronization(): FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct>(p)
             return ptr.read()
         }
@@ -696,9 +650,8 @@ public struct FLT_PARAMETERS {
     public mut func set_acquireForSectionSynchronization(val: FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__AcquireForSectionSynchronization_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -708,9 +661,8 @@ public struct FLT_PARAMETERS {
     public func acquireForModifiedPageWriter(): FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct>(p)
             return ptr.read()
         }
@@ -719,9 +671,8 @@ public struct FLT_PARAMETERS {
     public mut func set_acquireForModifiedPageWriter(val: FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__AcquireForModifiedPageWriter_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -731,9 +682,8 @@ public struct FLT_PARAMETERS {
     public func releaseForModifiedPageWriter(): FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct>(p)
             return ptr.read()
         }
@@ -742,9 +692,8 @@ public struct FLT_PARAMETERS {
     public mut func set_releaseForModifiedPageWriter(val: FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__ReleaseForModifiedPageWriter_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -754,9 +703,8 @@ public struct FLT_PARAMETERS {
     public func queryOpen(): FLT_PARAMETERS__QueryOpen_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryOpen_e__Struct>(p)
             return ptr.read()
         }
@@ -765,9 +713,8 @@ public struct FLT_PARAMETERS {
     public mut func set_queryOpen(val: FLT_PARAMETERS__QueryOpen_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__QueryOpen_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -777,9 +724,8 @@ public struct FLT_PARAMETERS {
     public func fastIoCheckIfPossible(): FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct>(p)
             return ptr.read()
         }
@@ -788,9 +734,8 @@ public struct FLT_PARAMETERS {
     public mut func set_fastIoCheckIfPossible(val: FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -800,9 +745,8 @@ public struct FLT_PARAMETERS {
     public func networkQueryOpen(): FLT_PARAMETERS__NetworkQueryOpen_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__NetworkQueryOpen_e__Struct>(p)
             return ptr.read()
         }
@@ -811,9 +755,8 @@ public struct FLT_PARAMETERS {
     public mut func set_networkQueryOpen(val: FLT_PARAMETERS__NetworkQueryOpen_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__NetworkQueryOpen_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -823,9 +766,8 @@ public struct FLT_PARAMETERS {
     public func mdlRead(): FLT_PARAMETERS__MdlRead_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__MdlRead_e__Struct>(p)
             return ptr.read()
         }
@@ -834,9 +776,8 @@ public struct FLT_PARAMETERS {
     public mut func set_mdlRead(val: FLT_PARAMETERS__MdlRead_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__MdlRead_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -846,9 +787,8 @@ public struct FLT_PARAMETERS {
     public func mdlReadComplete(): FLT_PARAMETERS__MdlReadComplete_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__MdlReadComplete_e__Struct>(p)
             return ptr.read()
         }
@@ -857,9 +797,8 @@ public struct FLT_PARAMETERS {
     public mut func set_mdlReadComplete(val: FLT_PARAMETERS__MdlReadComplete_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__MdlReadComplete_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -869,9 +808,8 @@ public struct FLT_PARAMETERS {
     public func prepareMdlWrite(): FLT_PARAMETERS__PrepareMdlWrite_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__PrepareMdlWrite_e__Struct>(p)
             return ptr.read()
         }
@@ -880,9 +818,8 @@ public struct FLT_PARAMETERS {
     public mut func set_prepareMdlWrite(val: FLT_PARAMETERS__PrepareMdlWrite_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__PrepareMdlWrite_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -892,9 +829,8 @@ public struct FLT_PARAMETERS {
     public func mdlWriteComplete(): FLT_PARAMETERS__MdlWriteComplete_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__MdlWriteComplete_e__Struct>(p)
             return ptr.read()
         }
@@ -903,9 +839,8 @@ public struct FLT_PARAMETERS {
     public mut func set_mdlWriteComplete(val: FLT_PARAMETERS__MdlWriteComplete_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__MdlWriteComplete_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -915,9 +850,8 @@ public struct FLT_PARAMETERS {
     public func mountVolume(): FLT_PARAMETERS__MountVolume_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__MountVolume_e__Struct>(p)
             return ptr.read()
         }
@@ -926,9 +860,8 @@ public struct FLT_PARAMETERS {
     public mut func set_mountVolume(val: FLT_PARAMETERS__MountVolume_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__MountVolume_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -938,9 +871,8 @@ public struct FLT_PARAMETERS {
     public func others(): FLT_PARAMETERS__Others_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Others_e__Struct>(p)
             return ptr.read()
         }
@@ -949,9 +881,8 @@ public struct FLT_PARAMETERS {
     public mut func set_others(val: FLT_PARAMETERS__Others_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Others_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -961,16 +892,98 @@ public struct FLT_PARAMETERS {
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// packed(4)
 @C
 public struct FLT_PARAMETERS__Create_e__Struct {
-    public var SecurityContext: CPointer<Wdk_impl.IO_SECURITY_CONTEXT> = CPointer<Wdk_impl.IO_SECURITY_CONTEXT>()
-    public var Options: UInt32 = 0
-    public var FileAttributes: UInt16 = 0
-    public var ShareAccess: UInt16 = 0
-    public var EaLength: UInt32 = 0
-    public var EaBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var AllocationSize: Int64 = 0
+    public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
+
+    // packed field `SecurityContext`: type `CPointer<Wdk_impl.IO_SECURITY_CONTEXT>` not supported by polyfill; skipped
+
+    public func options(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_options(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func fileAttributes(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 12)
+        }
+    }
+
+    public mut func set_fileAttributes(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func shareAccess(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 14)
+        }
+    }
+
+    public mut func set_shareAccess(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func eaLength(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_eaLength(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `EaBuffer`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    public func allocationSize(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 28)
+        }
+    }
+
+    public mut func set_allocationSize(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 28, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -997,26 +1010,126 @@ public struct FLT_PARAMETERS__CreateMailslot_e__Struct {
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// packed(4)
 @C
 public struct FLT_PARAMETERS__Read_e__Struct {
-    public var Length: UInt32 = 0
-    public var Key: UInt32 = 0
-    public var ByteOffset: Int64 = 0
-    public var ReadBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    public func length(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_length(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func key(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_key(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func byteOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 8)
+        }
+    }
+
+    public mut func set_byteOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ReadBuffer`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    // packed field `MdlAddress`: type `CPointer<Wdk_impl.MDL>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// packed(4)
 @C
 public struct FLT_PARAMETERS__Write_e__Struct {
-    public var Length: UInt32 = 0
-    public var Key: UInt32 = 0
-    public var ByteOffset: Int64 = 0
-    public var WriteBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var MdlAddress: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    public func length(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_length(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func key(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_key(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func byteOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 8)
+        }
+    }
+
+    public mut func set_byteOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `WriteBuffer`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    // packed field `MdlAddress`: type `CPointer<Wdk_impl.MDL>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -1044,14 +1157,13 @@ public struct FLT_PARAMETERS__SetFileInformation_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func anonymous(): FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -1060,9 +1172,8 @@ public struct FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union {
     public mut func set_anonymous(val: FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1072,22 +1183,16 @@ public struct FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union {
     public func clusterCount(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_clusterCount(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1095,9 +1200,8 @@ public struct FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union {
     public func deleteHandle(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -1106,9 +1210,8 @@ public struct FLT_PARAMETERS__SetFileInformation_e__Struct__Anonymous_e__Union {
     public mut func set_deleteHandle(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1168,14 +1271,13 @@ public struct FLT_PARAMETERS__SetVolumeInformation_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FLT_PARAMETERS__DirectoryControl_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func queryDirectory(): FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct>(p)
             return ptr.read()
         }
@@ -1184,9 +1286,8 @@ public struct FLT_PARAMETERS__DirectoryControl_e__Union {
     public mut func set_queryDirectory(val: FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__QueryDirectory_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1196,9 +1297,8 @@ public struct FLT_PARAMETERS__DirectoryControl_e__Union {
     public func notifyDirectory(): FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct>(p)
             return ptr.read()
         }
@@ -1207,9 +1307,8 @@ public struct FLT_PARAMETERS__DirectoryControl_e__Union {
     public mut func set_notifyDirectory(val: FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectory_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1219,9 +1318,8 @@ public struct FLT_PARAMETERS__DirectoryControl_e__Union {
     public func notifyDirectoryEx(): FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct>(p)
             return ptr.read()
         }
@@ -1230,9 +1328,8 @@ public struct FLT_PARAMETERS__DirectoryControl_e__Union {
     public mut func set_notifyDirectoryEx(val: FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1281,14 +1378,13 @@ public struct FLT_PARAMETERS__DirectoryControl_e__Union__NotifyDirectoryEx_e__St
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FLT_PARAMETERS__FileSystemControl_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func verifyVolume(): FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct>(p)
             return ptr.read()
         }
@@ -1297,9 +1393,8 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union {
     public mut func set_verifyVolume(val: FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__VerifyVolume_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1309,9 +1404,8 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union {
     public func common(): FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct>(p)
             return ptr.read()
         }
@@ -1320,9 +1414,8 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union {
     public mut func set_common(val: FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Common_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1332,9 +1425,8 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union {
     public func neither(): FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct>(p)
             return ptr.read()
         }
@@ -1343,9 +1435,8 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union {
     public mut func set_neither(val: FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Neither_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1355,9 +1446,8 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union {
     public func buffered(): FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct>(p)
             return ptr.read()
         }
@@ -1366,9 +1456,8 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union {
     public mut func set_buffered(val: FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Buffered_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1378,9 +1467,8 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union {
     public func direct(): FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct>(p)
             return ptr.read()
         }
@@ -1389,9 +1477,8 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union {
     public mut func set_direct(val: FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1455,14 +1542,13 @@ public struct FLT_PARAMETERS__FileSystemControl_e__Union__Direct_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func common(): FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct>(p)
             return ptr.read()
         }
@@ -1471,9 +1557,8 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
     public mut func set_common(val: FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Common_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1483,9 +1568,8 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
     public func neither(): FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct>(p)
             return ptr.read()
         }
@@ -1494,9 +1578,8 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
     public mut func set_neither(val: FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Neither_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1506,9 +1589,8 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
     public func buffered(): FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct>(p)
             return ptr.read()
         }
@@ -1517,9 +1599,8 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
     public mut func set_buffered(val: FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Buffered_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1529,9 +1610,8 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
     public func direct(): FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct>(p)
             return ptr.read()
         }
@@ -1540,9 +1620,8 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
     public mut func set_direct(val: FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__Direct_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1552,9 +1631,8 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
     public func fastIo(): FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct>(p)
             return ptr.read()
         }
@@ -1563,9 +1641,8 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union {
     public mut func set_fastIo(val: FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1629,15 +1706,51 @@ public struct FLT_PARAMETERS__DeviceIoControl_e__Union__FastIo_e__Struct {
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// packed(4)
 @C
 public struct FLT_PARAMETERS__LockControl_e__Struct {
-    public var Length: CPointer<Int64> = CPointer<Int64>()
-    public var Key: UInt32 = 0
-    public var ByteOffset: Int64 = 0
-    public var ProcessId: Wdk_impl.PEPROCESS = CPointer<Unit>()
-    public var FailImmediately: Win32_Foundation.BOOLEAN = 0
-    public var ExclusiveLock: Win32_Foundation.BOOLEAN = 0
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    // packed field `Length`: type `CPointer<Int64>` not supported by polyfill; skipped
+
+    public func key(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_key(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func byteOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 12)
+        }
+    }
+
+    public mut func set_byteOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ProcessId`: type `Wdk_impl.PEPROCESS` not supported by polyfill; skipped
+
+    // packed field `FailImmediately`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
+
+    // packed field `ExclusiveLock`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -1694,14 +1807,13 @@ public struct FLT_PARAMETERS__SetQuota_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FLT_PARAMETERS__Pnp_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func startDevice(): FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct>(p)
             return ptr.read()
         }
@@ -1710,9 +1822,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_startDevice(val: FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__StartDevice_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1722,9 +1833,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public func queryDeviceRelations(): FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct>(p)
             return ptr.read()
         }
@@ -1733,9 +1843,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_queryDeviceRelations(val: FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceRelations_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1745,9 +1854,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public func queryInterface(): FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct>(p)
             return ptr.read()
         }
@@ -1756,9 +1864,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_queryInterface(val: FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryInterface_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1768,9 +1875,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public func deviceCapabilities(): FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct>(p)
             return ptr.read()
         }
@@ -1779,9 +1885,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_deviceCapabilities(val: FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__DeviceCapabilities_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1791,9 +1896,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public func filterResourceRequirements(): FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct>(p)
             return ptr.read()
         }
@@ -1802,9 +1906,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_filterResourceRequirements(val: FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__FilterResourceRequirements_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1814,9 +1917,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public func readWriteConfig(): FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct>(p)
             return ptr.read()
         }
@@ -1825,9 +1927,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_readWriteConfig(val: FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__ReadWriteConfig_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1837,9 +1938,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public func setLock(): FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct>(p)
             return ptr.read()
         }
@@ -1848,9 +1948,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_setLock(val: FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__SetLock_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1860,9 +1959,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public func queryId(): FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct>(p)
             return ptr.read()
         }
@@ -1871,9 +1969,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_queryId(val: FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryId_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1883,9 +1980,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public func queryDeviceText(): FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct>(p)
             return ptr.read()
         }
@@ -1894,9 +1990,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_queryDeviceText(val: FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__QueryDeviceText_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1906,9 +2001,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public func usageNotification(): FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct>(p)
             return ptr.read()
         }
@@ -1917,9 +2011,8 @@ public struct FLT_PARAMETERS__Pnp_e__Union {
     public mut func set_usageNotification(val: FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_PARAMETERS__Pnp_e__Union__UsageNotification_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2046,13 +2139,62 @@ public struct FLT_PARAMETERS__QueryOpen_e__Struct {
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// packed(4)
 @C
 public struct FLT_PARAMETERS__FastIoCheckIfPossible_e__Struct {
-    public var FileOffset: Int64 = 0
-    public var Length: UInt32 = 0
-    public var LockKey: UInt32 = 0
-    public var CheckForReadOperation: Win32_Foundation.BOOLEAN = 0
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    public func fileOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 0)
+        }
+    }
+
+    public mut func set_fileOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func length(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_length(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func lockKey(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_lockKey(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `CheckForReadOperation`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -2065,13 +2207,62 @@ public struct FLT_PARAMETERS__NetworkQueryOpen_e__Struct {
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// packed(4)
 @C
 public struct FLT_PARAMETERS__MdlRead_e__Struct {
-    public var FileOffset: Int64 = 0
-    public var Length: UInt32 = 0
-    public var Key: UInt32 = 0
-    public var MdlChain: CPointer<CPointer<Wdk_impl.MDL>> = CPointer<CPointer<Wdk_impl.MDL>>()
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func fileOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 0)
+        }
+    }
+
+    public mut func set_fileOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func length(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_length(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func key(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_key(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `MdlChain`: type `CPointer<CPointer<Wdk_impl.MDL>>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -2083,22 +2274,88 @@ public struct FLT_PARAMETERS__MdlReadComplete_e__Struct {
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// packed(4)
 @C
 public struct FLT_PARAMETERS__PrepareMdlWrite_e__Struct {
-    public var FileOffset: Int64 = 0
-    public var Length: UInt32 = 0
-    public var Key: UInt32 = 0
-    public var MdlChain: CPointer<CPointer<Wdk_impl.MDL>> = CPointer<CPointer<Wdk_impl.MDL>>()
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    public func fileOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 0)
+        }
+    }
+
+    public mut func set_fileOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func length(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_length(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func key(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_key(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `MdlChain`: type `CPointer<CPointer<Wdk_impl.MDL>>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// packed(4)
 @C
 public struct FLT_PARAMETERS__MdlWriteComplete_e__Struct {
-    public var FileOffset: Int64 = 0
-    public var MdlChain: CPointer<Wdk_impl.MDL> = CPointer<Wdk_impl.MDL>()
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func fileOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 0)
+        }
+    }
+
+    public mut func set_fileOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `MdlChain`: type `CPointer<Wdk_impl.MDL>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -2110,15 +2367,36 @@ public struct FLT_PARAMETERS__MountVolume_e__Struct {
 }
 
 @When[Windows_Wdk_Storage_FileSystem_Minifilters == "on"]
-// packed(4)
 @C
 public struct FLT_PARAMETERS__Others_e__Struct {
-    public var Argument1: CPointer<Unit> = CPointer<Unit>()
-    public var Argument2: CPointer<Unit> = CPointer<Unit>()
-    public var Argument3: CPointer<Unit> = CPointer<Unit>()
-    public var Argument4: CPointer<Unit> = CPointer<Unit>()
-    public var Argument5: CPointer<Unit> = CPointer<Unit>()
-    public var Argument6: Int64 = 0
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0u8)
+
+    // packed field `Argument1`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    // packed field `Argument2`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    // packed field `Argument3`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    // packed field `Argument4`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    // packed field `Argument5`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    public func argument6(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 40)
+        }
+    }
+
+    public mut func set_argument6(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 40, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -2289,14 +2567,13 @@ public struct FLT_TAG_DATA_BUFFER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct FLT_TAG_DATA_BUFFER__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func symbolicLinkReparseBuffer(): FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct>(p)
             return ptr.read()
         }
@@ -2305,9 +2582,8 @@ public struct FLT_TAG_DATA_BUFFER__Anonymous_e__Union {
     public mut func set_symbolicLinkReparseBuffer(val: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__SymbolicLinkReparseBuffer_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2317,9 +2593,8 @@ public struct FLT_TAG_DATA_BUFFER__Anonymous_e__Union {
     public func mountPointReparseBuffer(): FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct>(p)
             return ptr.read()
         }
@@ -2328,9 +2603,8 @@ public struct FLT_TAG_DATA_BUFFER__Anonymous_e__Union {
     public mut func set_mountPointReparseBuffer(val: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__MountPointReparseBuffer_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2340,9 +2614,8 @@ public struct FLT_TAG_DATA_BUFFER__Anonymous_e__Union {
     public func genericReparseBuffer(): FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct>(p)
             return ptr.read()
         }
@@ -2351,9 +2624,8 @@ public struct FLT_TAG_DATA_BUFFER__Anonymous_e__Union {
     public mut func set_genericReparseBuffer(val: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericReparseBuffer_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2363,9 +2635,8 @@ public struct FLT_TAG_DATA_BUFFER__Anonymous_e__Union {
     public func genericGUIDReparseBuffer(): FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct>(p)
             return ptr.read()
         }
@@ -2374,9 +2645,8 @@ public struct FLT_TAG_DATA_BUFFER__Anonymous_e__Union {
     public mut func set_genericGUIDReparseBuffer(val: FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<FLT_TAG_DATA_BUFFER__Anonymous_e__Union__GenericGUIDReparseBuffer_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

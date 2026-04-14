@@ -3,6 +3,7 @@ package windows_sys.Win32.Security.Authentication.Identity
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.Security.Credentials as Win32_Security_Credentials
@@ -2179,14 +2180,13 @@ public struct LSA_FOREST_TRUST_RECORD {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct LSA_FOREST_TRUST_RECORD__ForestTrustData_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func topLevelName(): LSA_UNICODE_STRING {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_UNICODE_STRING>(p)
             return ptr.read()
         }
@@ -2195,9 +2195,8 @@ public struct LSA_FOREST_TRUST_RECORD__ForestTrustData_e__Union {
     public mut func set_topLevelName(val: LSA_UNICODE_STRING): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_UNICODE_STRING>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2207,9 +2206,8 @@ public struct LSA_FOREST_TRUST_RECORD__ForestTrustData_e__Union {
     public func domainInfo(): LSA_FOREST_TRUST_DOMAIN_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_DOMAIN_INFO>(p)
             return ptr.read()
         }
@@ -2218,9 +2216,8 @@ public struct LSA_FOREST_TRUST_RECORD__ForestTrustData_e__Union {
     public mut func set_domainInfo(val: LSA_FOREST_TRUST_DOMAIN_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_DOMAIN_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2230,9 +2227,8 @@ public struct LSA_FOREST_TRUST_RECORD__ForestTrustData_e__Union {
     public func data(): LSA_FOREST_TRUST_BINARY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_BINARY_DATA>(p)
             return ptr.read()
         }
@@ -2241,9 +2237,8 @@ public struct LSA_FOREST_TRUST_RECORD__ForestTrustData_e__Union {
     public mut func set_data(val: LSA_FOREST_TRUST_BINARY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_BINARY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2266,14 +2261,13 @@ public struct LSA_FOREST_TRUST_RECORD2 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct LSA_FOREST_TRUST_RECORD2__ForestTrustData_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func topLevelName(): LSA_UNICODE_STRING {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_UNICODE_STRING>(p)
             return ptr.read()
         }
@@ -2282,9 +2276,8 @@ public struct LSA_FOREST_TRUST_RECORD2__ForestTrustData_e__Union {
     public mut func set_topLevelName(val: LSA_UNICODE_STRING): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_UNICODE_STRING>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2294,9 +2287,8 @@ public struct LSA_FOREST_TRUST_RECORD2__ForestTrustData_e__Union {
     public func domainInfo(): LSA_FOREST_TRUST_DOMAIN_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_DOMAIN_INFO>(p)
             return ptr.read()
         }
@@ -2305,9 +2297,8 @@ public struct LSA_FOREST_TRUST_RECORD2__ForestTrustData_e__Union {
     public mut func set_domainInfo(val: LSA_FOREST_TRUST_DOMAIN_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_DOMAIN_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2317,9 +2308,8 @@ public struct LSA_FOREST_TRUST_RECORD2__ForestTrustData_e__Union {
     public func binaryData(): LSA_FOREST_TRUST_BINARY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_BINARY_DATA>(p)
             return ptr.read()
         }
@@ -2328,9 +2318,8 @@ public struct LSA_FOREST_TRUST_RECORD2__ForestTrustData_e__Union {
     public mut func set_binaryData(val: LSA_FOREST_TRUST_BINARY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_BINARY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2340,9 +2329,8 @@ public struct LSA_FOREST_TRUST_RECORD2__ForestTrustData_e__Union {
     public func scannerInfo(): LSA_FOREST_TRUST_SCANNER_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_SCANNER_INFO>(p)
             return ptr.read()
         }
@@ -2351,9 +2339,8 @@ public struct LSA_FOREST_TRUST_RECORD2__ForestTrustData_e__Union {
     public mut func set_scannerInfo(val: LSA_FOREST_TRUST_SCANNER_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<LSA_FOREST_TRUST_SCANNER_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3085,15 +3072,66 @@ public let MsV1_0ProvisionTbal: MSV1_0_PROTOCOL_MESSAGE_TYPE = MSV1_0_PROTOCOL_M
 public let MsV1_0DeleteTbalSecrets: MSV1_0_PROTOCOL_MESSAGE_TYPE = MSV1_0_PROTOCOL_MESSAGE_TYPE(24)
 
 @When[Windows_Win32_Security_Authentication_Identity == "on"]
-// packed(1)
 @C
 public struct MSV1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL {
-    public var Version: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var CredentialKey: MSV1_0_CREDENTIAL_KEY = MSV1_0_CREDENTIAL_KEY()
-    public var CredentialKeyType: MSV1_0_CREDENTIAL_KEY_TYPE = MSV1_0_CREDENTIAL_KEY_TYPE()
-    public var EncryptedCredsSize: UInt32 = 0
-    public var EncryptedCreds: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $37> = VArray<UInt8, $37>(repeat: 0u8)
+
+    public func version(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_version(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func flags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_flags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `CredentialKey`: type `MSV1_0_CREDENTIAL_KEY` not supported by polyfill; skipped
+
+    // packed field `CredentialKeyType`: type `MSV1_0_CREDENTIAL_KEY_TYPE` not supported by polyfill; skipped
+
+    public func encryptedCredsSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_encryptedCredsSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `EncryptedCreds`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -5003,14 +5041,13 @@ public struct SECPKG_EXTENDED_INFORMATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0)
 
     public func gssInfo(): SECPKG_GSS_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_GSS_INFO>(p)
             return ptr.read()
         }
@@ -5019,9 +5056,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public mut func set_gssInfo(val: SECPKG_GSS_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_GSS_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5031,9 +5067,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public func contextThunks(): SECPKG_CONTEXT_THUNKS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_CONTEXT_THUNKS>(p)
             return ptr.read()
         }
@@ -5042,9 +5077,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public mut func set_contextThunks(val: SECPKG_CONTEXT_THUNKS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_CONTEXT_THUNKS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5054,9 +5088,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public func mutualAuthLevel(): SECPKG_MUTUAL_AUTH_LEVEL {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_MUTUAL_AUTH_LEVEL>(p)
             return ptr.read()
         }
@@ -5065,9 +5098,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public mut func set_mutualAuthLevel(val: SECPKG_MUTUAL_AUTH_LEVEL): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_MUTUAL_AUTH_LEVEL>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5077,9 +5109,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public func wowClientDll(): SECPKG_WOW_CLIENT_DLL {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_WOW_CLIENT_DLL>(p)
             return ptr.read()
         }
@@ -5088,9 +5119,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public mut func set_wowClientDll(val: SECPKG_WOW_CLIENT_DLL): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_WOW_CLIENT_DLL>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5100,9 +5130,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public func extraOids(): SECPKG_EXTRA_OIDS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_EXTRA_OIDS>(p)
             return ptr.read()
         }
@@ -5111,9 +5140,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public mut func set_extraOids(val: SECPKG_EXTRA_OIDS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_EXTRA_OIDS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5123,9 +5151,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public func nego2Info(): SECPKG_NEGO2_INFO {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_NEGO2_INFO>(p)
             return ptr.read()
         }
@@ -5134,9 +5161,8 @@ public struct SECPKG_EXTENDED_INFORMATION__Info_e__Union {
     public mut func set_nego2Info(val: SECPKG_NEGO2_INFO): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SECPKG_NEGO2_INFO>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6122,14 +6148,13 @@ public struct SEC_WINNT_AUTH_IDENTITY_EXW {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SEC_WINNT_AUTH_IDENTITY_INFO {
-    public var _raw: VArray<UInt64, $9> = VArray<UInt64, $9>(repeat: 0)
+    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
 
     public func authIdExw(): SEC_WINNT_AUTH_IDENTITY_EXW {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SEC_WINNT_AUTH_IDENTITY_EXW>(p)
             return ptr.read()
         }
@@ -6138,9 +6163,8 @@ public struct SEC_WINNT_AUTH_IDENTITY_INFO {
     public mut func set_authIdExw(val: SEC_WINNT_AUTH_IDENTITY_EXW): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SEC_WINNT_AUTH_IDENTITY_EXW>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6150,9 +6174,8 @@ public struct SEC_WINNT_AUTH_IDENTITY_INFO {
     public func authIdExa(): SEC_WINNT_AUTH_IDENTITY_EXA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SEC_WINNT_AUTH_IDENTITY_EXA>(p)
             return ptr.read()
         }
@@ -6161,9 +6184,8 @@ public struct SEC_WINNT_AUTH_IDENTITY_INFO {
     public mut func set_authIdExa(val: SEC_WINNT_AUTH_IDENTITY_EXA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SEC_WINNT_AUTH_IDENTITY_EXA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6173,9 +6195,8 @@ public struct SEC_WINNT_AUTH_IDENTITY_INFO {
     public func authId_a(): Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_A {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_A>(p)
             return ptr.read()
         }
@@ -6184,9 +6205,8 @@ public struct SEC_WINNT_AUTH_IDENTITY_INFO {
     public mut func set_authId_a(val: Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_A): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_A>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6196,9 +6216,8 @@ public struct SEC_WINNT_AUTH_IDENTITY_INFO {
     public func authId_w(): Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_W {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_W>(p)
             return ptr.read()
         }
@@ -6207,9 +6226,8 @@ public struct SEC_WINNT_AUTH_IDENTITY_INFO {
     public mut func set_authId_w(val: Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_W): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_W>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6219,9 +6237,8 @@ public struct SEC_WINNT_AUTH_IDENTITY_INFO {
     public func authIdEx2(): SEC_WINNT_AUTH_IDENTITY_EX2 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SEC_WINNT_AUTH_IDENTITY_EX2>(p)
             return ptr.read()
         }
@@ -6230,9 +6247,8 @@ public struct SEC_WINNT_AUTH_IDENTITY_INFO {
     public mut func set_authIdEx2(val: SEC_WINNT_AUTH_IDENTITY_EX2): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SEC_WINNT_AUTH_IDENTITY_EX2>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8159,42 +8175,285 @@ public struct TRUSTED_POSIX_OFFSET_INFO {
 }
 
 @When[Windows_Win32_Security_Authentication_Identity == "on"]
-// packed(4)
 @C
 public struct USER_ALL_INFORMATION {
-    public var LastLogon: Int64 = 0
-    public var LastLogoff: Int64 = 0
-    public var PasswordLastSet: Int64 = 0
-    public var AccountExpires: Int64 = 0
-    public var PasswordCanChange: Int64 = 0
-    public var PasswordMustChange: Int64 = 0
-    public var UserName: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var FullName: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var HomeDirectory: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var HomeDirectoryDrive: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var ScriptPath: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var ProfilePath: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var AdminComment: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var WorkStations: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var UserComment: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var Parameters: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var LmPassword: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var NtPassword: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var PrivateData: LSA_UNICODE_STRING = LSA_UNICODE_STRING()
-    public var SecurityDescriptor: SR_SECURITY_DESCRIPTOR = SR_SECURITY_DESCRIPTOR()
-    public var UserId: UInt32 = 0
-    public var PrimaryGroupId: UInt32 = 0
-    public var UserAccountControl: UInt32 = 0
-    public var WhichFields: UInt32 = 0
-    public var LogonHours: LOGON_HOURS = LOGON_HOURS()
-    public var BadPasswordCount: UInt16 = 0
-    public var LogonCount: UInt16 = 0
-    public var CountryCode: UInt16 = 0
-    public var CodePage: UInt16 = 0
-    public var LmPasswordPresent: Win32_Foundation.BOOLEAN = 0
-    public var NtPasswordPresent: Win32_Foundation.BOOLEAN = 0
-    public var PasswordExpired: Win32_Foundation.BOOLEAN = 0
-    public var PrivateDataSensitive: Win32_Foundation.BOOLEAN = 0
+    public var _raw: VArray<UInt8, $316> = VArray<UInt8, $316>(repeat: 0u8)
+
+    public func lastLogon(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 0)
+        }
+    }
+
+    public mut func set_lastLogon(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func lastLogoff(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 8)
+        }
+    }
+
+    public mut func set_lastLogoff(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func passwordLastSet(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 16)
+        }
+    }
+
+    public mut func set_passwordLastSet(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func accountExpires(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 24)
+        }
+    }
+
+    public mut func set_accountExpires(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func passwordCanChange(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 32)
+        }
+    }
+
+    public mut func set_passwordCanChange(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func passwordMustChange(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 40)
+        }
+    }
+
+    public mut func set_passwordMustChange(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `UserName`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `FullName`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `HomeDirectory`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `HomeDirectoryDrive`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `ScriptPath`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `ProfilePath`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `AdminComment`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `WorkStations`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `UserComment`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `Parameters`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `LmPassword`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `NtPassword`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `PrivateData`: type `LSA_UNICODE_STRING` not supported by polyfill; skipped
+
+    // packed field `SecurityDescriptor`: type `SR_SECURITY_DESCRIPTOR` not supported by polyfill; skipped
+
+    public func userId(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 272)
+        }
+    }
+
+    public mut func set_userId(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 272, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func primaryGroupId(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 276)
+        }
+    }
+
+    public mut func set_primaryGroupId(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 276, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func userAccountControl(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 280)
+        }
+    }
+
+    public mut func set_userAccountControl(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 280, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func whichFields(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 284)
+        }
+    }
+
+    public mut func set_whichFields(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 284, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LogonHours`: type `LOGON_HOURS` not supported by polyfill; skipped
+
+    public func badPasswordCount(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 304)
+        }
+    }
+
+    public mut func set_badPasswordCount(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 304, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func logonCount(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 306)
+        }
+    }
+
+    public mut func set_logonCount(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 306, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func countryCode(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 308)
+        }
+    }
+
+    public mut func set_countryCode(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 308, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func codePage(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 310)
+        }
+    }
+
+    public mut func set_codePage(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 310, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `LmPasswordPresent`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
+
+    // packed field `NtPasswordPresent`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
+
+    // packed field `PasswordExpired`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
+
+    // packed field `PrivateDataSensitive`: type `Win32_Foundation.BOOLEAN` not supported by polyfill; skipped
     public init() {}
 }
 

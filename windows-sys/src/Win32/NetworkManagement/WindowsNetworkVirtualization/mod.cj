@@ -3,6 +3,7 @@ package windows_sys.Win32.NetworkManagement.WindowsNetworkVirtualization
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.IO as Win32_System_IO
 import windows_sys.Win32.impl as Win32_impl
@@ -64,14 +65,13 @@ public struct WNV_IP_ADDRESS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WNV_IP_ADDRESS__IP_e__Union {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func v4(): Win32_impl.IN_ADDR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.IN_ADDR>(p)
             return ptr.read()
         }
@@ -80,9 +80,8 @@ public struct WNV_IP_ADDRESS__IP_e__Union {
     public mut func set_v4(val: Win32_impl.IN_ADDR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.IN_ADDR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -92,9 +91,8 @@ public struct WNV_IP_ADDRESS__IP_e__Union {
     public func v6(): Win32_impl.IN6_ADDR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.IN6_ADDR>(p)
             return ptr.read()
         }
@@ -103,9 +101,8 @@ public struct WNV_IP_ADDRESS__IP_e__Union {
     public mut func set_v6(val: Win32_impl.IN6_ADDR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.IN6_ADDR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -115,9 +112,8 @@ public struct WNV_IP_ADDRESS__IP_e__Union {
     public func addr(): VArray<UInt8, $16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             return ptr.read()
         }
@@ -126,9 +122,8 @@ public struct WNV_IP_ADDRESS__IP_e__Union {
     public mut func set_addr(val: VArray<UInt8, $16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -190,14 +185,13 @@ public struct WNV_OBJECT_CHANGE_PARAM {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WNV_OBJECT_CHANGE_PARAM__ObjectParam_e__Union {
-    public var _raw: VArray<UInt32, $13> = VArray<UInt32, $13>(repeat: 0)
+    public var _raw: VArray<UInt8, $52> = VArray<UInt8, $52>(repeat: 0)
 
     public func providerAddressChange(): WNV_PROVIDER_ADDRESS_CHANGE_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WNV_PROVIDER_ADDRESS_CHANGE_PARAM>(p)
             return ptr.read()
         }
@@ -206,9 +200,8 @@ public struct WNV_OBJECT_CHANGE_PARAM__ObjectParam_e__Union {
     public mut func set_providerAddressChange(val: WNV_PROVIDER_ADDRESS_CHANGE_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WNV_PROVIDER_ADDRESS_CHANGE_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -218,9 +211,8 @@ public struct WNV_OBJECT_CHANGE_PARAM__ObjectParam_e__Union {
     public func customerAddressChange(): WNV_CUSTOMER_ADDRESS_CHANGE_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WNV_CUSTOMER_ADDRESS_CHANGE_PARAM>(p)
             return ptr.read()
         }
@@ -229,9 +221,8 @@ public struct WNV_OBJECT_CHANGE_PARAM__ObjectParam_e__Union {
     public mut func set_customerAddressChange(val: WNV_CUSTOMER_ADDRESS_CHANGE_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WNV_CUSTOMER_ADDRESS_CHANGE_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage

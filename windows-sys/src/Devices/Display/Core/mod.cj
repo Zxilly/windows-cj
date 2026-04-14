@@ -3,6 +3,7 @@ package windows_sys.Devices.Display.Core
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Devices.Display as Devices_Display
 import windows_sys.Foundation.Numerics as Foundation_Numerics
 import windows_sys.Foundation.impl as Foundation_impl

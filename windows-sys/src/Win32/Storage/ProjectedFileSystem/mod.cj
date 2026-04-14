@@ -3,6 +3,7 @@ package windows_sys.Win32.Storage.ProjectedFileSystem
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -78,14 +79,13 @@ public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func notification(): PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct>(p)
             return ptr.read()
         }
@@ -94,9 +94,8 @@ public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union {
     public mut func set_notification(val: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Notification_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -106,9 +105,8 @@ public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union {
     public func enumeration(): PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct>(p)
             return ptr.read()
         }
@@ -117,9 +115,8 @@ public struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union {
     public mut func set_enumeration(val: PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS__Anonymous_e__Union__Enumeration_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -186,14 +183,13 @@ public struct PRJ_EXTENDED_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PRJ_EXTENDED_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func symlink(): PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct>(p)
             return ptr.read()
         }
@@ -202,9 +198,8 @@ public struct PRJ_EXTENDED_INFO__Anonymous_e__Union {
     public mut func set_symlink(val: PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_EXTENDED_INFO__Anonymous_e__Union__Symlink_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -385,14 +380,13 @@ public struct PRJ_NOTIFICATION_MAPPING {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PRJ_NOTIFICATION_PARAMETERS {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func postCreate(): PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct>(p)
             return ptr.read()
         }
@@ -401,9 +395,8 @@ public struct PRJ_NOTIFICATION_PARAMETERS {
     public mut func set_postCreate(val: PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__PostCreate_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -413,9 +406,8 @@ public struct PRJ_NOTIFICATION_PARAMETERS {
     public func fileRenamed(): PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct>(p)
             return ptr.read()
         }
@@ -424,9 +416,8 @@ public struct PRJ_NOTIFICATION_PARAMETERS {
     public mut func set_fileRenamed(val: PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileRenamed_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -436,9 +427,8 @@ public struct PRJ_NOTIFICATION_PARAMETERS {
     public func fileDeletedOnHandleClose(): PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct>(p)
             return ptr.read()
         }
@@ -447,9 +437,8 @@ public struct PRJ_NOTIFICATION_PARAMETERS {
     public mut func set_fileDeletedOnHandleClose(val: PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRJ_NOTIFICATION_PARAMETERS__FileDeletedOnHandleClose_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

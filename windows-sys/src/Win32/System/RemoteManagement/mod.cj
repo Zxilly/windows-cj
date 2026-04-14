@@ -3,6 +3,7 @@ package windows_sys.Win32.System.RemoteManagement
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -1873,14 +1874,13 @@ public struct WSMAN_AUTHENTICATION_CREDENTIALS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WSMAN_AUTHENTICATION_CREDENTIALS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func userAccount(): WSMAN_USERNAME_PASSWORD_CREDS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_USERNAME_PASSWORD_CREDS>(p)
             return ptr.read()
         }
@@ -1889,9 +1889,8 @@ public struct WSMAN_AUTHENTICATION_CREDENTIALS__Anonymous_e__Union {
     public mut func set_userAccount(val: WSMAN_USERNAME_PASSWORD_CREDS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_USERNAME_PASSWORD_CREDS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1901,9 +1900,8 @@ public struct WSMAN_AUTHENTICATION_CREDENTIALS__Anonymous_e__Union {
     public func certificateThumbprint(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -1912,9 +1910,8 @@ public struct WSMAN_AUTHENTICATION_CREDENTIALS__Anonymous_e__Union {
     public mut func set_certificateThumbprint(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1980,14 +1977,13 @@ public struct WSMAN_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WSMAN_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func text(): WSMAN_DATA_TEXT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_DATA_TEXT>(p)
             return ptr.read()
         }
@@ -1996,9 +1992,8 @@ public struct WSMAN_DATA__Anonymous_e__Union {
     public mut func set_text(val: WSMAN_DATA_TEXT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_DATA_TEXT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2008,9 +2003,8 @@ public struct WSMAN_DATA__Anonymous_e__Union {
     public func binaryData(): WSMAN_DATA_BINARY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_DATA_BINARY>(p)
             return ptr.read()
         }
@@ -2019,9 +2013,8 @@ public struct WSMAN_DATA__Anonymous_e__Union {
     public mut func set_binaryData(val: WSMAN_DATA_BINARY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_DATA_BINARY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2031,22 +2024,16 @@ public struct WSMAN_DATA__Anonymous_e__Union {
     public func number(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_number(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2253,14 +2240,13 @@ public struct WSMAN_RECEIVE_DATA_RESULT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WSMAN_RESPONSE_DATA {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func receiveData(): WSMAN_RECEIVE_DATA_RESULT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_RECEIVE_DATA_RESULT>(p)
             return ptr.read()
         }
@@ -2269,9 +2255,8 @@ public struct WSMAN_RESPONSE_DATA {
     public mut func set_receiveData(val: WSMAN_RECEIVE_DATA_RESULT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_RECEIVE_DATA_RESULT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2281,9 +2266,8 @@ public struct WSMAN_RESPONSE_DATA {
     public func connectData(): WSMAN_CONNECT_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_CONNECT_DATA>(p)
             return ptr.read()
         }
@@ -2292,9 +2276,8 @@ public struct WSMAN_RESPONSE_DATA {
     public mut func set_connectData(val: WSMAN_CONNECT_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_CONNECT_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2304,9 +2287,8 @@ public struct WSMAN_RESPONSE_DATA {
     public func createData(): WSMAN_CREATE_SHELL_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_CREATE_SHELL_DATA>(p)
             return ptr.read()
         }
@@ -2315,9 +2297,8 @@ public struct WSMAN_RESPONSE_DATA {
     public mut func set_createData(val: WSMAN_CREATE_SHELL_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WSMAN_CREATE_SHELL_DATA>(p)
             ptr.write(val)
             _raw = rawStorage

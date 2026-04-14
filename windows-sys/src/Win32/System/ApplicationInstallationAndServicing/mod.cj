@@ -3,6 +3,7 @@ package windows_sys.Win32.System.ApplicationInstallationAndServicing
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.Registry as Win32_System_Registry
 import windows_sys.Win32.System.WindowsProgramming as Win32_System_WindowsProgramming
@@ -528,14 +529,13 @@ public struct DELTA_INPUT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DELTA_INPUT__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func lpcStart(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -544,9 +544,8 @@ public struct DELTA_INPUT__Anonymous_e__Union {
     public mut func set_lpcStart(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -556,9 +555,8 @@ public struct DELTA_INPUT__Anonymous_e__Union {
     public func lpStart(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -567,9 +565,8 @@ public struct DELTA_INPUT__Anonymous_e__Union {
     public mut func set_lpStart(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8396,14 +8393,13 @@ public struct PATCH_OLD_FILE_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PATCH_OLD_FILE_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func oldFileNameA(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -8412,9 +8408,8 @@ public struct PATCH_OLD_FILE_INFO__Anonymous_e__Union {
     public mut func set_oldFileNameA(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8424,9 +8419,8 @@ public struct PATCH_OLD_FILE_INFO__Anonymous_e__Union {
     public func oldFileNameW(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -8435,9 +8429,8 @@ public struct PATCH_OLD_FILE_INFO__Anonymous_e__Union {
     public mut func set_oldFileNameW(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8447,9 +8440,8 @@ public struct PATCH_OLD_FILE_INFO__Anonymous_e__Union {
     public func oldFileHandle(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -8458,9 +8450,8 @@ public struct PATCH_OLD_FILE_INFO__Anonymous_e__Union {
     public mut func set_oldFileHandle(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8938,27 +8929,21 @@ public struct PM_ENUM_FILTER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PM_ENUM_FILTER__FilterParameter_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func dummy(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_dummy(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -8966,9 +8951,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func genre(): PM_APP_GENRE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_APP_GENRE>(p)
             return ptr.read()
         }
@@ -8977,9 +8961,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_genre(val: PM_APP_GENRE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_APP_GENRE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8989,9 +8972,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func appHubType(): PM_APPLICATION_HUBTYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_APPLICATION_HUBTYPE>(p)
             return ptr.read()
         }
@@ -9000,9 +8982,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_appHubType(val: PM_APPLICATION_HUBTYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_APPLICATION_HUBTYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9012,9 +8993,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func hubType(): PM_TILE_HUBTYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_TILE_HUBTYPE>(p)
             return ptr.read()
         }
@@ -9023,9 +9003,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_hubType(val: PM_TILE_HUBTYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_TILE_HUBTYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9035,9 +9014,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func tasktype(): PM_TASK_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_TASK_TYPE>(p)
             return ptr.read()
         }
@@ -9046,9 +9024,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_tasktype(val: PM_TASK_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_TASK_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9058,9 +9035,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func taskProductID(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -9069,9 +9045,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_taskProductID(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9081,9 +9056,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func tileProductID(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -9092,9 +9066,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_tileProductID(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9104,9 +9077,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func appTaskType(): PM_APPTASKTYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_APPTASKTYPE>(p)
             return ptr.read()
         }
@@ -9115,9 +9087,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_appTaskType(val: PM_APPTASKTYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_APPTASKTYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9127,9 +9098,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func consumer(): PM_EXTENSIONCONSUMER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_EXTENSIONCONSUMER>(p)
             return ptr.read()
         }
@@ -9138,9 +9108,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_consumer(val: PM_EXTENSIONCONSUMER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_EXTENSIONCONSUMER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9150,9 +9119,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func bsaTask(): PM_BSATASKID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_BSATASKID>(p)
             return ptr.read()
         }
@@ -9161,9 +9129,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_bsaTask(val: PM_BSATASKID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_BSATASKID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9173,9 +9140,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func bsaProductID(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -9184,9 +9150,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_bsaProductID(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9196,9 +9161,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func bwTask(): PM_BWTASKID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_BWTASKID>(p)
             return ptr.read()
         }
@@ -9207,9 +9171,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_bwTask(val: PM_BWTASKID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PM_BWTASKID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9219,9 +9182,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func protocolName(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -9230,9 +9192,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_protocolName(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9242,9 +9203,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func fileType(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -9253,9 +9213,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_fileType(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9265,9 +9224,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func contentType(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -9276,9 +9234,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_contentType(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9288,9 +9245,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func appSupportedFileExtPID(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -9299,9 +9255,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_appSupportedFileExtPID(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9311,9 +9266,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public func shareTargetFileType(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -9322,9 +9276,8 @@ public struct PM_ENUM_FILTER__FilterParameter_e__Union {
     public mut func set_shareTargetFileType(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage

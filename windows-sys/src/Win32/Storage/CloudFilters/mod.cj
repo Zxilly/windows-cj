@@ -3,6 +3,7 @@ package windows_sys.Win32.Storage.CloudFilters
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.CorrelationVector as Win32_System_CorrelationVector
 import windows_sys.Win32.System.IO as Win32_System_IO
@@ -444,14 +445,13 @@ public struct CF_CALLBACK_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $7> = VArray<UInt64, $7>(repeat: 0)
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0)
 
     public func cancel(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct>(p)
             return ptr.read()
         }
@@ -460,9 +460,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_cancel(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -472,9 +471,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func fetchData(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct>(p)
             return ptr.read()
         }
@@ -483,9 +481,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_fetchData(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchData_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -495,9 +492,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func validateData(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct>(p)
             return ptr.read()
         }
@@ -506,9 +502,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_validateData(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__ValidateData_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -518,9 +513,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func fetchPlaceholders(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct>(p)
             return ptr.read()
         }
@@ -529,9 +523,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_fetchPlaceholders(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__FetchPlaceholders_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -541,9 +534,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func openCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct>(p)
             return ptr.read()
         }
@@ -552,9 +544,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_openCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__OpenCompletion_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -564,9 +555,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func closeCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct>(p)
             return ptr.read()
         }
@@ -575,9 +565,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_closeCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__CloseCompletion_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -587,9 +576,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func dehydrate(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct>(p)
             return ptr.read()
         }
@@ -598,9 +586,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_dehydrate(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Dehydrate_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -610,9 +597,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func dehydrateCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct>(p)
             return ptr.read()
         }
@@ -621,9 +607,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_dehydrateCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DehydrateCompletion_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -633,9 +618,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func delete(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct>(p)
             return ptr.read()
         }
@@ -644,9 +628,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_delete(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Delete_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -656,9 +639,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func deleteCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct>(p)
             return ptr.read()
         }
@@ -667,9 +649,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_deleteCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__DeleteCompletion_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -679,9 +660,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func rename(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct>(p)
             return ptr.read()
         }
@@ -690,9 +670,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_rename(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Rename_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -702,9 +681,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public func renameCompletion(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct>(p)
             return ptr.read()
         }
@@ -713,9 +691,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union {
     public mut func set_renameCompletion(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__RenameCompletion_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -736,14 +713,13 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func fetchData(): CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct>(p)
             return ptr.read()
         }
@@ -752,9 +728,8 @@ public struct CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anon
     public mut func set_fetchData(val: CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_CALLBACK_PARAMETERS__Anonymous_e__Union__Cancel_e__Struct__Anonymous_e__Union__FetchData_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1725,14 +1700,13 @@ public struct CF_OPERATION_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func transferData(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct>(p)
             return ptr.read()
         }
@@ -1741,9 +1715,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public mut func set_transferData(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferData_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1753,9 +1726,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public func retrieveData(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct>(p)
             return ptr.read()
         }
@@ -1764,9 +1736,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public mut func set_retrieveData(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RetrieveData_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1776,9 +1747,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public func ackData(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct>(p)
             return ptr.read()
         }
@@ -1787,9 +1757,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public mut func set_ackData(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckData_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1799,9 +1768,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public func restartHydration(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct>(p)
             return ptr.read()
         }
@@ -1810,9 +1778,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public mut func set_restartHydration(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__RestartHydration_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1822,9 +1789,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public func transferPlaceholders(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct>(p)
             return ptr.read()
         }
@@ -1833,9 +1799,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public mut func set_transferPlaceholders(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__TransferPlaceholders_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1845,9 +1810,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public func ackDehydrate(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct>(p)
             return ptr.read()
         }
@@ -1856,9 +1820,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public mut func set_ackDehydrate(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDehydrate_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1868,9 +1831,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public func ackRename(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct>(p)
             return ptr.read()
         }
@@ -1879,9 +1841,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public mut func set_ackRename(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckRename_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1891,9 +1852,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public func ackDelete(): CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct>(p)
             return ptr.read()
         }
@@ -1902,9 +1862,8 @@ public struct CF_OPERATION_PARAMETERS__Anonymous_e__Union {
     public mut func set_ackDelete(val: CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CF_OPERATION_PARAMETERS__Anonymous_e__Union__AckDelete_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

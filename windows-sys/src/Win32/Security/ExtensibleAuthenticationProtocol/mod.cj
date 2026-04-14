@@ -3,6 +3,7 @@ package windows_sys.Win32.Security.ExtensibleAuthenticationProtocol
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -817,14 +818,13 @@ public let emptPropVendorSpecific: EAP_METHOD_PROPERTY_TYPE = EAP_METHOD_PROPERT
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct EAP_METHOD_PROPERTY_VALUE {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func empvBool(): EAP_METHOD_PROPERTY_VALUE_BOOL {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EAP_METHOD_PROPERTY_VALUE_BOOL>(p)
             return ptr.read()
         }
@@ -833,9 +833,8 @@ public struct EAP_METHOD_PROPERTY_VALUE {
     public mut func set_empvBool(val: EAP_METHOD_PROPERTY_VALUE_BOOL): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EAP_METHOD_PROPERTY_VALUE_BOOL>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -845,9 +844,8 @@ public struct EAP_METHOD_PROPERTY_VALUE {
     public func empvDword(): EAP_METHOD_PROPERTY_VALUE_DWORD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EAP_METHOD_PROPERTY_VALUE_DWORD>(p)
             return ptr.read()
         }
@@ -856,9 +854,8 @@ public struct EAP_METHOD_PROPERTY_VALUE {
     public mut func set_empvDword(val: EAP_METHOD_PROPERTY_VALUE_DWORD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EAP_METHOD_PROPERTY_VALUE_DWORD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -868,9 +865,8 @@ public struct EAP_METHOD_PROPERTY_VALUE {
     public func empvString(): EAP_METHOD_PROPERTY_VALUE_STRING {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EAP_METHOD_PROPERTY_VALUE_STRING>(p)
             return ptr.read()
         }
@@ -879,9 +875,8 @@ public struct EAP_METHOD_PROPERTY_VALUE {
     public mut func set_empvString(val: EAP_METHOD_PROPERTY_VALUE_STRING): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EAP_METHOD_PROPERTY_VALUE_STRING>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -984,14 +979,13 @@ public struct EAP_TYPE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct EAP_UI_DATA_FORMAT {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func credData(): CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>>(p)
             return ptr.read()
         }
@@ -1000,9 +994,8 @@ public struct EAP_UI_DATA_FORMAT {
     public mut func set_credData(val: CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1012,9 +1005,8 @@ public struct EAP_UI_DATA_FORMAT {
     public func credExpiryData(): CPointer<EAP_CRED_EXPIRY_REQ> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EAP_CRED_EXPIRY_REQ>>(p)
             return ptr.read()
         }
@@ -1023,9 +1015,8 @@ public struct EAP_UI_DATA_FORMAT {
     public mut func set_credExpiryData(val: CPointer<EAP_CRED_EXPIRY_REQ>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EAP_CRED_EXPIRY_REQ>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1035,9 +1026,8 @@ public struct EAP_UI_DATA_FORMAT {
     public func credLogonData(): CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>>(p)
             return ptr.read()
         }
@@ -1046,9 +1036,8 @@ public struct EAP_UI_DATA_FORMAT {
     public mut func set_credLogonData(val: CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EAP_CONFIG_INPUT_FIELD_ARRAY>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1148,14 +1137,13 @@ public let EAP_SIM_CREDENTIAL: EapCredentialType = EapCredentialType(4)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct EapCredentialTypeData {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func username_password(): EapUsernamePasswordCredential {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EapUsernamePasswordCredential>(p)
             return ptr.read()
         }
@@ -1164,9 +1152,8 @@ public struct EapCredentialTypeData {
     public mut func set_username_password(val: EapUsernamePasswordCredential): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EapUsernamePasswordCredential>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1176,9 +1163,8 @@ public struct EapCredentialTypeData {
     public func certificate(): EapCertificateCredential {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EapCertificateCredential>(p)
             return ptr.read()
         }
@@ -1187,9 +1173,8 @@ public struct EapCredentialTypeData {
     public mut func set_certificate(val: EapCertificateCredential): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EapCertificateCredential>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1199,9 +1184,8 @@ public struct EapCredentialTypeData {
     public func sim(): EapSimCredential {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EapSimCredential>(p)
             return ptr.read()
         }
@@ -1210,9 +1194,8 @@ public struct EapCredentialTypeData {
     public mut func set_sim(val: EapSimCredential): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<EapSimCredential>(p)
             ptr.write(val)
             _raw = rawStorage

@@ -3,6 +3,7 @@ package windows_sys.Win32.System.ProcessStatus
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -140,14 +141,13 @@ public struct PROCESS_MEMORY_COUNTERS_EX2 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PSAPI_WORKING_SET_BLOCK {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func flags(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -156,9 +156,8 @@ public struct PSAPI_WORKING_SET_BLOCK {
     public mut func set_flags(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -168,9 +167,8 @@ public struct PSAPI_WORKING_SET_BLOCK {
     public func anonymous(): PSAPI_WORKING_SET_BLOCK__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSAPI_WORKING_SET_BLOCK__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -179,9 +177,8 @@ public struct PSAPI_WORKING_SET_BLOCK {
     public mut func set_anonymous(val: PSAPI_WORKING_SET_BLOCK__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSAPI_WORKING_SET_BLOCK__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -201,14 +198,13 @@ public struct PSAPI_WORKING_SET_BLOCK__Anonymous_e__Struct {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PSAPI_WORKING_SET_EX_BLOCK {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func flags(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -217,9 +213,8 @@ public struct PSAPI_WORKING_SET_EX_BLOCK {
     public mut func set_flags(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -229,9 +224,8 @@ public struct PSAPI_WORKING_SET_EX_BLOCK {
     public func anonymous(): PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union>(p)
             return ptr.read()
         }
@@ -240,9 +234,8 @@ public struct PSAPI_WORKING_SET_EX_BLOCK {
     public mut func set_anonymous(val: PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -255,14 +248,13 @@ public struct PSAPI_WORKING_SET_EX_BLOCK {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func anonymous(): PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -271,9 +263,8 @@ public struct PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union {
     public mut func set_anonymous(val: PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -283,9 +274,8 @@ public struct PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union {
     public func invalid(): PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union__Invalid_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union__Invalid_e__Struct>(p)
             return ptr.read()
         }
@@ -294,9 +284,8 @@ public struct PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union {
     public mut func set_invalid(val: PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union__Invalid_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSAPI_WORKING_SET_EX_BLOCK__Anonymous_e__Union__Invalid_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

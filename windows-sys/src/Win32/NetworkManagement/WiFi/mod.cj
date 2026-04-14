@@ -3,6 +3,7 @@ package windows_sys.Win32.NetworkManagement.WiFi
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.NetworkManagement.Ndis as Win32_NetworkManagement_Ndis
 import windows_sys.Win32.Security.ExtensibleAuthenticationProtocol as Win32_Security_ExtensibleAuthenticationProtocol
@@ -1484,27 +1485,21 @@ public struct DOT11_BSS_ENTRY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO {
-    public var _raw: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
 
     public func uChCenterFrequency(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_uChCenterFrequency(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1512,9 +1507,8 @@ public struct DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO {
     public func fhss(): DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO__FHSS_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO__FHSS_e__Struct>(p)
             return ptr.read()
         }
@@ -1523,9 +1517,8 @@ public struct DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO {
     public mut func set_fhss(val: DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO__FHSS_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO__FHSS_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2975,14 +2968,13 @@ public struct DOT11_PHY_ATTRIBUTES {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DOT11_PHY_ATTRIBUTES__PhySpecificAttributes_e__Union {
-    public var _raw: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
 
     public func hrdsssAttributes(): DOT11_HRDSSS_PHY_ATTRIBUTES {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_HRDSSS_PHY_ATTRIBUTES>(p)
             return ptr.read()
         }
@@ -2991,9 +2983,8 @@ public struct DOT11_PHY_ATTRIBUTES__PhySpecificAttributes_e__Union {
     public mut func set_hrdsssAttributes(val: DOT11_HRDSSS_PHY_ATTRIBUTES): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_HRDSSS_PHY_ATTRIBUTES>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3003,9 +2994,8 @@ public struct DOT11_PHY_ATTRIBUTES__PhySpecificAttributes_e__Union {
     public func ofdmAttributes(): DOT11_OFDM_PHY_ATTRIBUTES {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_OFDM_PHY_ATTRIBUTES>(p)
             return ptr.read()
         }
@@ -3014,9 +3004,8 @@ public struct DOT11_PHY_ATTRIBUTES__PhySpecificAttributes_e__Union {
     public mut func set_ofdmAttributes(val: DOT11_OFDM_PHY_ATTRIBUTES): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_OFDM_PHY_ATTRIBUTES>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3026,9 +3015,8 @@ public struct DOT11_PHY_ATTRIBUTES__PhySpecificAttributes_e__Union {
     public func erpAttributes(): DOT11_ERP_PHY_ATTRIBUTES {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_ERP_PHY_ATTRIBUTES>(p)
             return ptr.read()
         }
@@ -3037,9 +3025,8 @@ public struct DOT11_PHY_ATTRIBUTES__PhySpecificAttributes_e__Union {
     public mut func set_erpAttributes(val: DOT11_ERP_PHY_ATTRIBUTES): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_ERP_PHY_ATTRIBUTES>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3085,27 +3072,21 @@ public struct DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func ulChannel(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_ulChannel(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3113,22 +3094,16 @@ public struct DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS__Anonymous_e__Union {
     public func ulFrequency(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_ulFrequency(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3654,14 +3629,13 @@ public struct DOT11_RECV_SENSITIVITY_LIST {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DOT11_RECV_SENSITIVITY_LIST__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dot11PhyType(): DOT11_PHY_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_PHY_TYPE>(p)
             return ptr.read()
         }
@@ -3670,9 +3644,8 @@ public struct DOT11_RECV_SENSITIVITY_LIST__Anonymous_e__Union {
     public mut func set_dot11PhyType(val: DOT11_PHY_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DOT11_PHY_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3682,22 +3655,16 @@ public struct DOT11_RECV_SENSITIVITY_LIST__Anonymous_e__Union {
     public func uPhyId(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_uPhyId(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3856,12 +3823,30 @@ public let dot11_scan_type_auto: DOT11_SCAN_TYPE = DOT11_SCAN_TYPE(3)
 public let dot11_scan_type_forced: DOT11_SCAN_TYPE = DOT11_SCAN_TYPE(-2147483648)
 
 @When[Windows_Win32_NetworkManagement_WiFi == "on"]
-// packed(1)
 @C
 public struct DOT11_SECURITY_PACKET_HEADER {
-    public var PeerMac: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-    public var usEtherType: UInt16 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $9> = VArray<UInt8, $9>(repeat: 0u8)
+
+    // packed field `PeerMac`: type `VArray<UInt8, $6>` not supported by polyfill; skipped
+
+    public func usEtherType(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 6)
+        }
+    }
+
+    public mut func set_usEtherType(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Data`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 

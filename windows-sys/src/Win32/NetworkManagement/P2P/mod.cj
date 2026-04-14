@@ -3,6 +3,7 @@ package windows_sys.Win32.NetworkManagement.P2P
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.IO as Win32_System_IO
 import windows_sys.Win32.impl as Win32_impl
@@ -109,14 +110,13 @@ public struct DRT_EVENT_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DRT_EVENT_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func leafsetKeyChange(): DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct>(p)
             return ptr.read()
         }
@@ -125,9 +125,8 @@ public struct DRT_EVENT_DATA__Anonymous_e__Union {
     public mut func set_leafsetKeyChange(val: DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -137,9 +136,8 @@ public struct DRT_EVENT_DATA__Anonymous_e__Union {
     public func registrationStateChange(): DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct>(p)
             return ptr.read()
         }
@@ -148,9 +146,8 @@ public struct DRT_EVENT_DATA__Anonymous_e__Union {
     public mut func set_registrationStateChange(val: DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -160,9 +157,8 @@ public struct DRT_EVENT_DATA__Anonymous_e__Union {
     public func statusChange(): DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct>(p)
             return ptr.read()
         }
@@ -171,9 +167,8 @@ public struct DRT_EVENT_DATA__Anonymous_e__Union {
     public mut func set_statusChange(val: DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -696,14 +691,13 @@ public struct PEER_COLLAB_EVENT_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func watchListChangedData(): PEER_EVENT_WATCHLIST_CHANGED_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_WATCHLIST_CHANGED_DATA>(p)
             return ptr.read()
         }
@@ -712,9 +706,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public mut func set_watchListChangedData(val: PEER_EVENT_WATCHLIST_CHANGED_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_WATCHLIST_CHANGED_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -724,9 +717,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public func presenceChangedData(): PEER_EVENT_PRESENCE_CHANGED_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_PRESENCE_CHANGED_DATA>(p)
             return ptr.read()
         }
@@ -735,9 +727,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public mut func set_presenceChangedData(val: PEER_EVENT_PRESENCE_CHANGED_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_PRESENCE_CHANGED_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -747,9 +738,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public func applicationChangedData(): PEER_EVENT_APPLICATION_CHANGED_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_APPLICATION_CHANGED_DATA>(p)
             return ptr.read()
         }
@@ -758,9 +748,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public mut func set_applicationChangedData(val: PEER_EVENT_APPLICATION_CHANGED_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_APPLICATION_CHANGED_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -770,9 +759,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public func objectChangedData(): PEER_EVENT_OBJECT_CHANGED_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_OBJECT_CHANGED_DATA>(p)
             return ptr.read()
         }
@@ -781,9 +769,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public mut func set_objectChangedData(val: PEER_EVENT_OBJECT_CHANGED_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_OBJECT_CHANGED_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -793,9 +780,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public func endpointChangedData(): PEER_EVENT_ENDPOINT_CHANGED_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_ENDPOINT_CHANGED_DATA>(p)
             return ptr.read()
         }
@@ -804,9 +790,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public mut func set_endpointChangedData(val: PEER_EVENT_ENDPOINT_CHANGED_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_ENDPOINT_CHANGED_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -816,9 +801,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public func peopleNearMeChangedData(): PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA>(p)
             return ptr.read()
         }
@@ -827,9 +811,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public mut func set_peopleNearMeChangedData(val: PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -839,9 +822,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public func requestStatusChangedData(): PEER_EVENT_REQUEST_STATUS_CHANGED_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_REQUEST_STATUS_CHANGED_DATA>(p)
             return ptr.read()
         }
@@ -850,9 +832,8 @@ public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
     public mut func set_requestStatusChangedData(val: PEER_EVENT_REQUEST_STATUS_CHANGED_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_REQUEST_STATUS_CHANGED_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1164,14 +1145,13 @@ public struct PEER_GRAPH_EVENT_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func dwStatus(): PEER_GRAPH_STATUS_FLAGS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_GRAPH_STATUS_FLAGS>(p)
             return ptr.read()
         }
@@ -1180,9 +1160,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public mut func set_dwStatus(val: PEER_GRAPH_STATUS_FLAGS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_GRAPH_STATUS_FLAGS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1192,9 +1171,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public func incomingData(): PEER_EVENT_INCOMING_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
             return ptr.read()
         }
@@ -1203,9 +1181,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public mut func set_incomingData(val: PEER_EVENT_INCOMING_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1215,9 +1192,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public func recordChangeData(): PEER_EVENT_RECORD_CHANGE_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
             return ptr.read()
         }
@@ -1226,9 +1202,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public mut func set_recordChangeData(val: PEER_EVENT_RECORD_CHANGE_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1238,9 +1213,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public func connectionChangeData(): PEER_EVENT_CONNECTION_CHANGE_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
             return ptr.read()
         }
@@ -1249,9 +1223,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public mut func set_connectionChangeData(val: PEER_EVENT_CONNECTION_CHANGE_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1261,9 +1234,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public func nodeChangeData(): PEER_EVENT_NODE_CHANGE_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_NODE_CHANGE_DATA>(p)
             return ptr.read()
         }
@@ -1272,9 +1244,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public mut func set_nodeChangeData(val: PEER_EVENT_NODE_CHANGE_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_NODE_CHANGE_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1284,9 +1255,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public func synchronizedData(): PEER_EVENT_SYNCHRONIZED_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_SYNCHRONIZED_DATA>(p)
             return ptr.read()
         }
@@ -1295,9 +1265,8 @@ public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
     public mut func set_synchronizedData(val: PEER_EVENT_SYNCHRONIZED_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_SYNCHRONIZED_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1500,14 +1469,13 @@ public struct PEER_GROUP_EVENT_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func dwStatus(): PEER_GROUP_STATUS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_GROUP_STATUS>(p)
             return ptr.read()
         }
@@ -1516,9 +1484,8 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public mut func set_dwStatus(val: PEER_GROUP_STATUS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_GROUP_STATUS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1528,9 +1495,8 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public func incomingData(): PEER_EVENT_INCOMING_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
             return ptr.read()
         }
@@ -1539,9 +1505,8 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public mut func set_incomingData(val: PEER_EVENT_INCOMING_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1551,9 +1516,8 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public func recordChangeData(): PEER_EVENT_RECORD_CHANGE_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
             return ptr.read()
         }
@@ -1562,9 +1526,8 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public mut func set_recordChangeData(val: PEER_EVENT_RECORD_CHANGE_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1574,9 +1537,8 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public func connectionChangeData(): PEER_EVENT_CONNECTION_CHANGE_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
             return ptr.read()
         }
@@ -1585,9 +1547,8 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public mut func set_connectionChangeData(val: PEER_EVENT_CONNECTION_CHANGE_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1597,9 +1558,8 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public func memberChangeData(): PEER_EVENT_MEMBER_CHANGE_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_MEMBER_CHANGE_DATA>(p)
             return ptr.read()
         }
@@ -1608,9 +1568,8 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public mut func set_memberChangeData(val: PEER_EVENT_MEMBER_CHANGE_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PEER_EVENT_MEMBER_CHANGE_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1620,22 +1579,16 @@ public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
     public func hrConnectionFailedReason(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_hrConnectionFailedReason(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2329,14 +2282,13 @@ public struct PNRPINFO_V2 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PNRPINFO_V2__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func blobPayload(): Win32_impl.BLOB {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.BLOB>(p)
             return ptr.read()
         }
@@ -2345,9 +2297,8 @@ public struct PNRPINFO_V2__Anonymous_e__Union {
     public mut func set_blobPayload(val: Win32_impl.BLOB): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.BLOB>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2357,9 +2308,8 @@ public struct PNRPINFO_V2__Anonymous_e__Union {
     public func pwszPayload(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -2368,9 +2318,8 @@ public struct PNRPINFO_V2__Anonymous_e__Union {
     public mut func set_pwszPayload(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage

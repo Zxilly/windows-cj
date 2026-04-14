@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.Dvd
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -53,14 +54,13 @@ public struct AACS_READ_BINDING_NONCE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct AACS_READ_BINDING_NONCE__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func handle(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -69,9 +69,8 @@ public struct AACS_READ_BINDING_NONCE__Anonymous_e__Union {
     public mut func set_handle(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -81,22 +80,16 @@ public struct AACS_READ_BINDING_NONCE__Anonymous_e__Union {
     public func forceStructureLengthToMatch64bit(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_forceStructureLengthToMatch64bit(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -218,12 +211,60 @@ public struct DVD_BD_SPARE_AREA_INFORMATION {
 }
 
 @When[Windows_Win32_Devices_Dvd == "on"]
-// packed(1)
 @C
 public struct DVD_COPYRIGHT_DESCRIPTOR {
-    public var CopyrightProtectionType: UInt8 = 0
-    public var RegionManagementInformation: UInt8 = 0
-    public var Reserved: UInt16 = 0
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+
+    public func copyrightProtectionType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_copyrightProtectionType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func regionManagementInformation(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_regionManagementInformation(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_reserved(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -244,9 +285,8 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union {
     public func dvdrom(): DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__Dvdrom_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__Dvdrom_e__Struct>(p)
             return ptr.read()
         }
@@ -255,9 +295,8 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_dvdrom(val: DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__Dvdrom_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__Dvdrom_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -267,9 +306,8 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union {
     public func dvdRecordable_Version1(): DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__DvdRecordable_Version1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__DvdRecordable_Version1_e__Struct>(p)
             return ptr.read()
         }
@@ -278,9 +316,8 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_dvdRecordable_Version1(val: DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__DvdRecordable_Version1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__DvdRecordable_Version1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -290,9 +327,8 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union {
     public func dvdram(): DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__Dvdram_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__Dvdram_e__Struct>(p)
             return ptr.read()
         }
@@ -301,9 +337,8 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_dvdram(val: DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__Dvdram_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__Dvdram_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -313,9 +348,8 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union {
     public func dvdRecordable(): DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__DvdRecordable_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__DvdRecordable_e__Struct>(p)
             return ptr.read()
         }
@@ -324,9 +358,8 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_dvdRecordable(val: DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__DvdRecordable_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__DvdRecordable_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -336,22 +369,16 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union {
     public func cpr_MAI(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_cpr_MAI(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -387,20 +414,70 @@ public struct DVD_COPYRIGHT_MANAGEMENT_DESCRIPTOR__Anonymous_e__Union__DvdRecord
 }
 
 @When[Windows_Win32_Devices_Dvd == "on"]
-// packed(1)
 @C
 public struct DVD_COPY_PROTECT_KEY {
-    public var KeyLength: UInt32 = 0
-    public var SessionId: UInt32 = 0
-    public var KeyType: DVD_KEY_TYPE = DVD_KEY_TYPE()
-    public var KeyFlags: UInt32 = 0
-    public var Parameters: DVD_COPY_PROTECT_KEY__Parameters_e__Union = DVD_COPY_PROTECT_KEY__Parameters_e__Union()
-    public var KeyData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $25> = VArray<UInt8, $25>(repeat: 0u8)
+
+    public func keyLength(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_keyLength(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func sessionId(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_sessionId(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `KeyType`: type `DVD_KEY_TYPE` not supported by polyfill; skipped
+
+    public func keyFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_keyFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Parameters`: type `DVD_COPY_PROTECT_KEY__Parameters_e__Union` not supported by polyfill; skipped
+
+    // packed field `KeyData`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Dvd == "on"]
-// packed(1)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DVD_COPY_PROTECT_KEY__Parameters_e__Union {
@@ -409,9 +486,8 @@ public struct DVD_COPY_PROTECT_KEY__Parameters_e__Union {
     public func fileHandle(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -420,9 +496,8 @@ public struct DVD_COPY_PROTECT_KEY__Parameters_e__Union {
     public mut func set_fileHandle(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -432,22 +507,16 @@ public struct DVD_COPY_PROTECT_KEY__Parameters_e__Union {
     public func titleOffset(): Int64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt64(base, 0)
         }
     }
 
     public mut func set_titleOffset(val: Int64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -455,12 +524,30 @@ public struct DVD_COPY_PROTECT_KEY__Parameters_e__Union {
 }
 
 @When[Windows_Win32_Devices_Dvd == "on"]
-// packed(1)
 @C
 public struct DVD_DESCRIPTOR_HEADER {
-    public var Length: UInt16 = 0
-    public var Reserved: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $5> = VArray<UInt8, $5>(repeat: 0u8)
+
+    public func length(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_length(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Reserved`: type `VArray<UInt8, $2>` not supported by polyfill; skipped
+
+    // packed field `Data`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -482,9 +569,8 @@ public struct DVD_DISC_CONTROL_BLOCK_HEADER__ProhibitedActions_e__Union {
     public func anonymous(): DVD_DISC_CONTROL_BLOCK_HEADER__ProhibitedActions_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_DISC_CONTROL_BLOCK_HEADER__ProhibitedActions_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -493,9 +579,8 @@ public struct DVD_DISC_CONTROL_BLOCK_HEADER__ProhibitedActions_e__Union {
     public mut func set_anonymous(val: DVD_DISC_CONTROL_BLOCK_HEADER__ProhibitedActions_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_DISC_CONTROL_BLOCK_HEADER__ProhibitedActions_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -505,9 +590,8 @@ public struct DVD_DISC_CONTROL_BLOCK_HEADER__ProhibitedActions_e__Union {
     public func asByte(): VArray<UInt8, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $4>>(p)
             return ptr.read()
         }
@@ -516,9 +600,8 @@ public struct DVD_DISC_CONTROL_BLOCK_HEADER__ProhibitedActions_e__Union {
     public mut func set_asByte(val: VArray<UInt8, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -595,9 +678,8 @@ public struct DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT__WriteProtectActions_e__Union
     public func anonymous(): DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT__WriteProtectActions_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT__WriteProtectActions_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -606,9 +688,8 @@ public struct DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT__WriteProtectActions_e__Union
     public mut func set_anonymous(val: DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT__WriteProtectActions_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT__WriteProtectActions_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -618,9 +699,8 @@ public struct DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT__WriteProtectActions_e__Union
     public func asByte(): VArray<UInt8, $4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $4>>(p)
             return ptr.read()
         }
@@ -629,9 +709,8 @@ public struct DVD_DISC_CONTROL_BLOCK_WRITE_INHIBIT__WriteProtectActions_e__Union
     public mut func set_asByte(val: VArray<UInt8, $4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -752,17 +831,145 @@ public let DvdDiskKey: DVD_KEY_TYPE = DVD_KEY_TYPE(128)
 public let DvdInvalidateAGID: DVD_KEY_TYPE = DVD_KEY_TYPE(63)
 
 @When[Windows_Win32_Devices_Dvd == "on"]
-// packed(1)
 @C
 public struct DVD_LAYER_DESCRIPTOR {
-    public var _bitfield1: UInt8 = 0
-    public var _bitfield2: UInt8 = 0
-    public var _bitfield3: UInt8 = 0
-    public var _bitfield4: UInt8 = 0
-    public var StartingDataSector: UInt32 = 0
-    public var EndDataSector: UInt32 = 0
-    public var EndLayerZeroSector: UInt32 = 0
-    public var _bitfield5: UInt8 = 0
+    public var _raw: VArray<UInt8, $17> = VArray<UInt8, $17>(repeat: 0u8)
+
+    public func _bitfield1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set__bitfield1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func _bitfield2(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set__bitfield2(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func _bitfield3(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 2)
+        }
+    }
+
+    public mut func set__bitfield3(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func _bitfield4(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 3)
+        }
+    }
+
+    public mut func set__bitfield4(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 3, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func startingDataSector(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_startingDataSector(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func endDataSector(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_endDataSector(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func endLayerZeroSector(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_endLayerZeroSector(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func _bitfield5(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 16)
+        }
+    }
+
+    public mut func set__bitfield5(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -843,13 +1050,62 @@ public struct DVD_RAM_SPARE_AREA_INFORMATION {
 }
 
 @When[Windows_Win32_Devices_Dvd == "on"]
-// packed(1)
 @C
 public struct DVD_READ_STRUCTURE {
-    public var BlockByteOffset: Int64 = 0
-    public var Format: DVD_STRUCTURE_FORMAT = DVD_STRUCTURE_FORMAT()
-    public var SessionId: UInt32 = 0
-    public var LayerNumber: UInt8 = 0
+    public var _raw: VArray<UInt8, $17> = VArray<UInt8, $17>(repeat: 0u8)
+
+    public func blockByteOffset(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 0)
+        }
+    }
+
+    public mut func set_blockByteOffset(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Format`: type `DVD_STRUCTURE_FORMAT` not supported by polyfill; skipped
+
+    public func sessionId(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_sessionId(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func layerNumber(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 16)
+        }
+    }
+
+    public mut func set_layerNumber(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -967,11 +1223,43 @@ public struct HD_DVD_R_MEDIUM_STATUS {
 }
 
 @When[Windows_Win32_Devices_Dvd == "on"]
-// packed(1)
 @C
 public struct STORAGE_SET_READ_AHEAD {
-    public var TriggerAddress: Int64 = 0
-    public var TargetAddress: Int64 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func triggerAddress(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 0)
+        }
+    }
+
+    public mut func set_triggerAddress(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func targetAddress(): Int64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt64(base, 8)
+        }
+    }
+
+    public mut func set_targetAddress(val: Int64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt64(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 

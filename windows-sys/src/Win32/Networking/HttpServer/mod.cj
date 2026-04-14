@@ -3,6 +3,7 @@ package windows_sys.Win32.Networking.HttpServer
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Security as Win32_Security
 import windows_sys.Win32.System.IO as Win32_System_IO
@@ -274,14 +275,13 @@ public struct HTTP_DATA_CHUNK {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func fromMemory(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct>(p)
             return ptr.read()
         }
@@ -290,9 +290,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public mut func set_fromMemory(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -302,9 +301,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public func fromFileHandle(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct>(p)
             return ptr.read()
         }
@@ -313,9 +311,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public mut func set_fromFileHandle(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -325,9 +322,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public func fromFragmentCache(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct>(p)
             return ptr.read()
         }
@@ -336,9 +332,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public mut func set_fromFragmentCache(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -348,9 +343,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public func fromFragmentCacheEx(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct>(p)
             return ptr.read()
         }
@@ -359,9 +353,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public mut func set_fromFragmentCacheEx(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -371,9 +364,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public func trailers(): HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct>(p)
             return ptr.read()
         }
@@ -382,9 +374,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public mut func set_trailers(val: HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -394,9 +385,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public func fromWinHttpFastForwarding(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct>(p)
             return ptr.read()
         }
@@ -405,9 +395,8 @@ public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
     public mut func set_fromWinHttpFastForwarding(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2275,14 +2264,13 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func http2WindowSizeParam(): HTTP2_WINDOW_SIZE_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP2_WINDOW_SIZE_PARAM>(p)
             return ptr.read()
         }
@@ -2291,9 +2279,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public mut func set_http2WindowSizeParam(val: HTTP2_WINDOW_SIZE_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP2_WINDOW_SIZE_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2303,9 +2290,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public func http2SettingsLimitsParam(): HTTP2_SETTINGS_LIMITS_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP2_SETTINGS_LIMITS_PARAM>(p)
             return ptr.read()
         }
@@ -2314,9 +2300,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public mut func set_http2SettingsLimitsParam(val: HTTP2_SETTINGS_LIMITS_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP2_SETTINGS_LIMITS_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2326,9 +2311,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public func httpPerformanceParam(): HTTP_PERFORMANCE_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_PERFORMANCE_PARAM>(p)
             return ptr.read()
         }
@@ -2337,9 +2321,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public mut func set_httpPerformanceParam(val: HTTP_PERFORMANCE_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_PERFORMANCE_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2349,9 +2332,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public func httpTlsRestrictionsParam(): HTTP_TLS_RESTRICTIONS_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_TLS_RESTRICTIONS_PARAM>(p)
             return ptr.read()
         }
@@ -2360,9 +2342,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public mut func set_httpTlsRestrictionsParam(val: HTTP_TLS_RESTRICTIONS_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_TLS_RESTRICTIONS_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2372,9 +2353,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public func httpErrorHeadersParam(): HTTP_ERROR_HEADERS_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_ERROR_HEADERS_PARAM>(p)
             return ptr.read()
         }
@@ -2383,9 +2363,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public mut func set_httpErrorHeadersParam(val: HTTP_ERROR_HEADERS_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_ERROR_HEADERS_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2395,9 +2374,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public func httpTlsSessionTicketKeysParam(): HTTP_TLS_SESSION_TICKET_KEYS_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_TLS_SESSION_TICKET_KEYS_PARAM>(p)
             return ptr.read()
         }
@@ -2406,9 +2384,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public mut func set_httpTlsSessionTicketKeysParam(val: HTTP_TLS_SESSION_TICKET_KEYS_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_TLS_SESSION_TICKET_KEYS_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2418,9 +2395,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public func httpCertConfigParam(): HTTP_CERT_CONFIG_PARAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_CERT_CONFIG_PARAM>(p)
             return ptr.read()
         }
@@ -2429,9 +2405,8 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
     public mut func set_httpCertConfigParam(val: HTTP_CERT_CONFIG_PARAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<HTTP_CERT_CONFIG_PARAM>(p)
             ptr.write(val)
             _raw = rawStorage

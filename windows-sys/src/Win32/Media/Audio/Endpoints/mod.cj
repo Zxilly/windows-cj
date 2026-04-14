@@ -3,6 +3,7 @@ package windows_sys.Win32.Media.Audio.Endpoints
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Media.Audio.Apo as Win32_Media_Audio_Apo
 import windows_sys.Win32.Media.KernelStreaming as Win32_Media_KernelStreaming

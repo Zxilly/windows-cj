@@ -3,6 +3,7 @@ package windows_sys.Wdk.NetworkManagement.WindowsFilteringPlatform
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.NetworkManagement.WindowsFilteringPlatform as Win32_NetworkManagement_WindowsFilteringPlatform
 import windows_sys.Win32.Security as Win32_Security

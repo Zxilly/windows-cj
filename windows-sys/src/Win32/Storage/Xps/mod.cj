@@ -3,6 +3,7 @@ package windows_sys.Win32.Storage.Xps
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.Security as Win32_Security
@@ -11748,14 +11749,13 @@ public struct XPS_COLOR {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct XPS_COLOR_XPS_COLOR_VALUE {
-    public var _raw: VArray<UInt32, $10> = VArray<UInt32, $10>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func srgb(): XPS_COLOR_XPS_COLOR_VALUE__sRGB_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<XPS_COLOR_XPS_COLOR_VALUE__sRGB_e__Struct>(p)
             return ptr.read()
         }
@@ -11764,9 +11764,8 @@ public struct XPS_COLOR_XPS_COLOR_VALUE {
     public mut func set_srgb(val: XPS_COLOR_XPS_COLOR_VALUE__sRGB_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<XPS_COLOR_XPS_COLOR_VALUE__sRGB_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11776,9 +11775,8 @@ public struct XPS_COLOR_XPS_COLOR_VALUE {
     public func scRGB(): XPS_COLOR_XPS_COLOR_VALUE__scRGB_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<XPS_COLOR_XPS_COLOR_VALUE__scRGB_e__Struct>(p)
             return ptr.read()
         }
@@ -11787,9 +11785,8 @@ public struct XPS_COLOR_XPS_COLOR_VALUE {
     public mut func set_scRGB(val: XPS_COLOR_XPS_COLOR_VALUE__scRGB_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<XPS_COLOR_XPS_COLOR_VALUE__scRGB_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11799,9 +11796,8 @@ public struct XPS_COLOR_XPS_COLOR_VALUE {
     public func context(): XPS_COLOR_XPS_COLOR_VALUE__context_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<XPS_COLOR_XPS_COLOR_VALUE__context_e__Struct>(p)
             return ptr.read()
         }
@@ -11810,9 +11806,8 @@ public struct XPS_COLOR_XPS_COLOR_VALUE {
     public mut func set_context(val: XPS_COLOR_XPS_COLOR_VALUE__context_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<XPS_COLOR_XPS_COLOR_VALUE__context_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

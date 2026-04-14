@@ -3,6 +3,7 @@ package windows_sys.Win32.UI.InteractionContext
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -343,14 +344,13 @@ public struct INTERACTION_CONTEXT_OUTPUT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INTERACTION_CONTEXT_OUTPUT__arguments_e__Union {
-    public var _raw: VArray<UInt32, $15> = VArray<UInt32, $15>(repeat: 0)
+    public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0)
 
     public func manipulation(): INTERACTION_ARGUMENTS_MANIPULATION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_MANIPULATION>(p)
             return ptr.read()
         }
@@ -359,9 +359,8 @@ public struct INTERACTION_CONTEXT_OUTPUT__arguments_e__Union {
     public mut func set_manipulation(val: INTERACTION_ARGUMENTS_MANIPULATION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_MANIPULATION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -371,9 +370,8 @@ public struct INTERACTION_CONTEXT_OUTPUT__arguments_e__Union {
     public func tap(): INTERACTION_ARGUMENTS_TAP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_TAP>(p)
             return ptr.read()
         }
@@ -382,9 +380,8 @@ public struct INTERACTION_CONTEXT_OUTPUT__arguments_e__Union {
     public mut func set_tap(val: INTERACTION_ARGUMENTS_TAP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_TAP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -394,9 +391,8 @@ public struct INTERACTION_CONTEXT_OUTPUT__arguments_e__Union {
     public func crossSlide(): INTERACTION_ARGUMENTS_CROSS_SLIDE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_CROSS_SLIDE>(p)
             return ptr.read()
         }
@@ -405,9 +401,8 @@ public struct INTERACTION_CONTEXT_OUTPUT__arguments_e__Union {
     public mut func set_crossSlide(val: INTERACTION_ARGUMENTS_CROSS_SLIDE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_CROSS_SLIDE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -434,14 +429,13 @@ public struct INTERACTION_CONTEXT_OUTPUT2 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct INTERACTION_CONTEXT_OUTPUT2__arguments_e__Union {
-    public var _raw: VArray<UInt32, $15> = VArray<UInt32, $15>(repeat: 0)
+    public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0)
 
     public func manipulation(): INTERACTION_ARGUMENTS_MANIPULATION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_MANIPULATION>(p)
             return ptr.read()
         }
@@ -450,9 +444,8 @@ public struct INTERACTION_CONTEXT_OUTPUT2__arguments_e__Union {
     public mut func set_manipulation(val: INTERACTION_ARGUMENTS_MANIPULATION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_MANIPULATION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -462,9 +455,8 @@ public struct INTERACTION_CONTEXT_OUTPUT2__arguments_e__Union {
     public func tap(): INTERACTION_ARGUMENTS_TAP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_TAP>(p)
             return ptr.read()
         }
@@ -473,9 +465,8 @@ public struct INTERACTION_CONTEXT_OUTPUT2__arguments_e__Union {
     public mut func set_tap(val: INTERACTION_ARGUMENTS_TAP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_TAP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -485,9 +476,8 @@ public struct INTERACTION_CONTEXT_OUTPUT2__arguments_e__Union {
     public func crossSlide(): INTERACTION_ARGUMENTS_CROSS_SLIDE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_CROSS_SLIDE>(p)
             return ptr.read()
         }
@@ -496,9 +486,8 @@ public struct INTERACTION_CONTEXT_OUTPUT2__arguments_e__Union {
     public mut func set_crossSlide(val: INTERACTION_ARGUMENTS_CROSS_SLIDE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<INTERACTION_ARGUMENTS_CROSS_SLIDE>(p)
             ptr.write(val)
             _raw = rawStorage

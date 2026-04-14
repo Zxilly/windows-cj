@@ -3,6 +3,7 @@ package windows_sys.Win32.System.Performance
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -7062,14 +7063,13 @@ public struct PDH_COUNTER_INFO_A {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PDH_COUNTER_INFO_A__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func dataItemPath(): PDH_DATA_ITEM_PATH_ELEMENTS_A {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_DATA_ITEM_PATH_ELEMENTS_A>(p)
             return ptr.read()
         }
@@ -7078,9 +7078,8 @@ public struct PDH_COUNTER_INFO_A__Anonymous_e__Union {
     public mut func set_dataItemPath(val: PDH_DATA_ITEM_PATH_ELEMENTS_A): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_DATA_ITEM_PATH_ELEMENTS_A>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7090,9 +7089,8 @@ public struct PDH_COUNTER_INFO_A__Anonymous_e__Union {
     public func counterPath(): PDH_COUNTER_PATH_ELEMENTS_A {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_COUNTER_PATH_ELEMENTS_A>(p)
             return ptr.read()
         }
@@ -7101,9 +7099,8 @@ public struct PDH_COUNTER_INFO_A__Anonymous_e__Union {
     public mut func set_counterPath(val: PDH_COUNTER_PATH_ELEMENTS_A): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_COUNTER_PATH_ELEMENTS_A>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7113,9 +7110,8 @@ public struct PDH_COUNTER_INFO_A__Anonymous_e__Union {
     public func anonymous(): PDH_COUNTER_INFO_A__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_COUNTER_INFO_A__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7124,9 +7120,8 @@ public struct PDH_COUNTER_INFO_A__Anonymous_e__Union {
     public mut func set_anonymous(val: PDH_COUNTER_INFO_A__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_COUNTER_INFO_A__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7169,14 +7164,13 @@ public struct PDH_COUNTER_INFO_W {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PDH_COUNTER_INFO_W__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func dataItemPath(): PDH_DATA_ITEM_PATH_ELEMENTS_W {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_DATA_ITEM_PATH_ELEMENTS_W>(p)
             return ptr.read()
         }
@@ -7185,9 +7179,8 @@ public struct PDH_COUNTER_INFO_W__Anonymous_e__Union {
     public mut func set_dataItemPath(val: PDH_DATA_ITEM_PATH_ELEMENTS_W): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_DATA_ITEM_PATH_ELEMENTS_W>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7197,9 +7190,8 @@ public struct PDH_COUNTER_INFO_W__Anonymous_e__Union {
     public func counterPath(): PDH_COUNTER_PATH_ELEMENTS_W {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_COUNTER_PATH_ELEMENTS_W>(p)
             return ptr.read()
         }
@@ -7208,9 +7200,8 @@ public struct PDH_COUNTER_INFO_W__Anonymous_e__Union {
     public mut func set_counterPath(val: PDH_COUNTER_PATH_ELEMENTS_W): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_COUNTER_PATH_ELEMENTS_W>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7220,9 +7211,8 @@ public struct PDH_COUNTER_INFO_W__Anonymous_e__Union {
     public func anonymous(): PDH_COUNTER_INFO_W__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_COUNTER_INFO_W__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -7231,9 +7221,8 @@ public struct PDH_COUNTER_INFO_W__Anonymous_e__Union {
     public mut func set_anonymous(val: PDH_COUNTER_INFO_W__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_COUNTER_INFO_W__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7363,27 +7352,21 @@ public struct PDH_FMT_COUNTERVALUE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PDH_FMT_COUNTERVALUE__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func longValue(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_longValue(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7391,22 +7374,16 @@ public struct PDH_FMT_COUNTERVALUE__Anonymous_e__Union {
     public func doubleValue(): Float64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadFloat64(base, 0)
         }
     }
 
     public mut func set_doubleValue(val: Float64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteFloat64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7414,22 +7391,16 @@ public struct PDH_FMT_COUNTERVALUE__Anonymous_e__Union {
     public func largeValue(): Int64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt64(base, 0)
         }
     }
 
     public mut func set_largeValue(val: Int64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7437,9 +7408,8 @@ public struct PDH_FMT_COUNTERVALUE__Anonymous_e__Union {
     public func ansiStringValue(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -7448,9 +7418,8 @@ public struct PDH_FMT_COUNTERVALUE__Anonymous_e__Union {
     public mut func set_ansiStringValue(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7460,9 +7429,8 @@ public struct PDH_FMT_COUNTERVALUE__Anonymous_e__Union {
     public func wideStringValue(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -7471,9 +7439,8 @@ public struct PDH_FMT_COUNTERVALUE__Anonymous_e__Union {
     public mut func set_wideStringValue(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7554,14 +7521,13 @@ public struct PDH_LOG_SERVICE_QUERY_INFO_A {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func anonymous1(): PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union__Anonymous1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union__Anonymous1_e__Struct>(p)
             return ptr.read()
         }
@@ -7570,9 +7536,8 @@ public struct PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union {
     public mut func set_anonymous1(val: PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union__Anonymous1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union__Anonymous1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7582,9 +7547,8 @@ public struct PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union {
     public func anonymous2(): PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union__Anonymous2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             return ptr.read()
         }
@@ -7593,9 +7557,8 @@ public struct PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union {
     public mut func set_anonymous2(val: PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union__Anonymous2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_LOG_SERVICE_QUERY_INFO_A__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7653,14 +7616,13 @@ public struct PDH_LOG_SERVICE_QUERY_INFO_W {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func anonymous1(): PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union__Anonymous1_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union__Anonymous1_e__Struct>(p)
             return ptr.read()
         }
@@ -7669,9 +7631,8 @@ public struct PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union {
     public mut func set_anonymous1(val: PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union__Anonymous1_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union__Anonymous1_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7681,9 +7642,8 @@ public struct PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union {
     public func anonymous2(): PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union__Anonymous2_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             return ptr.read()
         }
@@ -7692,9 +7652,8 @@ public struct PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union {
     public mut func set_anonymous2(val: PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union__Anonymous2_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PDH_LOG_SERVICE_QUERY_INFO_W__Anonymous_e__Union__Anonymous2_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

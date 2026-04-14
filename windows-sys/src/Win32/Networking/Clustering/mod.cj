@@ -3,6 +3,7 @@ package windows_sys.Win32.Networking.Clustering
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.Security as Win32_Security
@@ -655,14 +656,13 @@ public struct CLRES_FUNCTION_TABLE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CLRES_FUNCTION_TABLE__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $14> = VArray<UInt64, $14>(repeat: 0)
+    public var _raw: VArray<UInt8, $112> = VArray<UInt8, $112>(repeat: 0)
 
     public func v1Functions(): CLRES_V1_FUNCTIONS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLRES_V1_FUNCTIONS>(p)
             return ptr.read()
         }
@@ -671,9 +671,8 @@ public struct CLRES_FUNCTION_TABLE__Anonymous_e__Union {
     public mut func set_v1Functions(val: CLRES_V1_FUNCTIONS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLRES_V1_FUNCTIONS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -683,9 +682,8 @@ public struct CLRES_FUNCTION_TABLE__Anonymous_e__Union {
     public func v2Functions(): CLRES_V2_FUNCTIONS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLRES_V2_FUNCTIONS>(p)
             return ptr.read()
         }
@@ -694,9 +692,8 @@ public struct CLRES_FUNCTION_TABLE__Anonymous_e__Union {
     public mut func set_v2Functions(val: CLRES_V2_FUNCTIONS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLRES_V2_FUNCTIONS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -706,9 +703,8 @@ public struct CLRES_FUNCTION_TABLE__Anonymous_e__Union {
     public func v3Functions(): CLRES_V3_FUNCTIONS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLRES_V3_FUNCTIONS>(p)
             return ptr.read()
         }
@@ -717,9 +713,8 @@ public struct CLRES_FUNCTION_TABLE__Anonymous_e__Union {
     public mut func set_v3Functions(val: CLRES_V3_FUNCTIONS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLRES_V3_FUNCTIONS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -729,9 +724,8 @@ public struct CLRES_FUNCTION_TABLE__Anonymous_e__Union {
     public func v4Functions(): CLRES_V4_FUNCTIONS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLRES_V4_FUNCTIONS>(p)
             return ptr.read()
         }
@@ -740,9 +734,8 @@ public struct CLRES_FUNCTION_TABLE__Anonymous_e__Union {
     public mut func set_v4Functions(val: CLRES_V4_FUNCTIONS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLRES_V4_FUNCTIONS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2135,14 +2128,13 @@ public struct CLUSPROP_BINARY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CLUSPROP_BUFFER_HELPER {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pb(): CPointer<UInt8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             return ptr.read()
         }
@@ -2151,9 +2143,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pb(val: CPointer<UInt8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2163,9 +2154,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pw(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -2174,9 +2164,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pw(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2186,9 +2175,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pdw(): CPointer<UInt32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt32>>(p)
             return ptr.read()
         }
@@ -2197,9 +2185,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pdw(val: CPointer<UInt32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2209,9 +2196,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pl(): CPointer<Int32> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int32>>(p)
             return ptr.read()
         }
@@ -2220,9 +2206,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pl(val: CPointer<Int32>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int32>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2232,9 +2217,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func psz(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -2243,9 +2227,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_psz(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2255,9 +2238,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pList(): CPointer<CLUSPROP_LIST> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_LIST>>(p)
             return ptr.read()
         }
@@ -2266,9 +2248,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pList(val: CPointer<CLUSPROP_LIST>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_LIST>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2278,9 +2259,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pSyntax(): CPointer<CLUSPROP_SYNTAX> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SYNTAX>>(p)
             return ptr.read()
         }
@@ -2289,9 +2269,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pSyntax(val: CPointer<CLUSPROP_SYNTAX>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SYNTAX>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2301,9 +2280,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pName(): CPointer<CLUSPROP_SZ> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SZ>>(p)
             return ptr.read()
         }
@@ -2312,9 +2290,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pName(val: CPointer<CLUSPROP_SZ>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SZ>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2324,9 +2301,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pValue(): CPointer<CLUSPROP_VALUE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_VALUE>>(p)
             return ptr.read()
         }
@@ -2335,9 +2311,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pValue(val: CPointer<CLUSPROP_VALUE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_VALUE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2347,9 +2322,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pBinaryValue(): CPointer<CLUSPROP_BINARY> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_BINARY>>(p)
             return ptr.read()
         }
@@ -2358,9 +2332,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pBinaryValue(val: CPointer<CLUSPROP_BINARY>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_BINARY>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2370,9 +2343,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pWordValue(): CPointer<CLUSPROP_WORD> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_WORD>>(p)
             return ptr.read()
         }
@@ -2381,9 +2353,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pWordValue(val: CPointer<CLUSPROP_WORD>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_WORD>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2393,9 +2364,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pDwordValue(): CPointer<CLUSPROP_DWORD> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_DWORD>>(p)
             return ptr.read()
         }
@@ -2404,9 +2374,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pDwordValue(val: CPointer<CLUSPROP_DWORD>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_DWORD>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2416,9 +2385,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pLongValue(): CPointer<CLUSPROP_LONG> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_LONG>>(p)
             return ptr.read()
         }
@@ -2427,9 +2395,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pLongValue(val: CPointer<CLUSPROP_LONG>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_LONG>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2439,9 +2406,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func puLargeIntegerValue(): CPointer<CLUSPROP_ULARGE_INTEGER> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_ULARGE_INTEGER>>(p)
             return ptr.read()
         }
@@ -2450,9 +2416,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_puLargeIntegerValue(val: CPointer<CLUSPROP_ULARGE_INTEGER>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_ULARGE_INTEGER>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2462,9 +2427,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pLargeIntegerValue(): CPointer<CLUSPROP_LARGE_INTEGER> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_LARGE_INTEGER>>(p)
             return ptr.read()
         }
@@ -2473,9 +2437,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pLargeIntegerValue(val: CPointer<CLUSPROP_LARGE_INTEGER>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_LARGE_INTEGER>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2485,9 +2448,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pStringValue(): CPointer<CLUSPROP_SZ> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SZ>>(p)
             return ptr.read()
         }
@@ -2496,9 +2458,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pStringValue(val: CPointer<CLUSPROP_SZ>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SZ>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2508,9 +2469,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pMultiSzValue(): CPointer<CLUSPROP_SZ> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SZ>>(p)
             return ptr.read()
         }
@@ -2519,9 +2479,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pMultiSzValue(val: CPointer<CLUSPROP_SZ>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SZ>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2531,9 +2490,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pSecurityDescriptor(): CPointer<CLUSPROP_SECURITY_DESCRIPTOR> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SECURITY_DESCRIPTOR>>(p)
             return ptr.read()
         }
@@ -2542,9 +2500,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pSecurityDescriptor(val: CPointer<CLUSPROP_SECURITY_DESCRIPTOR>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SECURITY_DESCRIPTOR>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2554,9 +2511,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pResourceClassValue(): CPointer<CLUSPROP_RESOURCE_CLASS> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_RESOURCE_CLASS>>(p)
             return ptr.read()
         }
@@ -2565,9 +2521,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pResourceClassValue(val: CPointer<CLUSPROP_RESOURCE_CLASS>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_RESOURCE_CLASS>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2577,9 +2532,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pResourceClassInfoValue(): CPointer<CLUSPROP_RESOURCE_CLASS_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_RESOURCE_CLASS_INFO>>(p)
             return ptr.read()
         }
@@ -2588,9 +2542,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pResourceClassInfoValue(val: CPointer<CLUSPROP_RESOURCE_CLASS_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_RESOURCE_CLASS_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2600,9 +2553,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pDiskSignatureValue(): CPointer<CLUSPROP_DWORD> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_DWORD>>(p)
             return ptr.read()
         }
@@ -2611,9 +2563,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pDiskSignatureValue(val: CPointer<CLUSPROP_DWORD>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_DWORD>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2623,9 +2574,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pScsiAddressValue(): CPointer<CLUSPROP_SCSI_ADDRESS> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SCSI_ADDRESS>>(p)
             return ptr.read()
         }
@@ -2634,9 +2584,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pScsiAddressValue(val: CPointer<CLUSPROP_SCSI_ADDRESS>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_SCSI_ADDRESS>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2646,9 +2595,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pDiskNumberValue(): CPointer<CLUSPROP_DWORD> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_DWORD>>(p)
             return ptr.read()
         }
@@ -2657,9 +2605,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pDiskNumberValue(val: CPointer<CLUSPROP_DWORD>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_DWORD>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2669,9 +2616,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pPartitionInfoValue(): CPointer<CLUSPROP_PARTITION_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_PARTITION_INFO>>(p)
             return ptr.read()
         }
@@ -2680,9 +2626,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pPartitionInfoValue(val: CPointer<CLUSPROP_PARTITION_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_PARTITION_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2692,9 +2637,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pRequiredDependencyValue(): CPointer<CLUSPROP_REQUIRED_DEPENDENCY> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_REQUIRED_DEPENDENCY>>(p)
             return ptr.read()
         }
@@ -2703,9 +2647,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pRequiredDependencyValue(val: CPointer<CLUSPROP_REQUIRED_DEPENDENCY>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_REQUIRED_DEPENDENCY>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2715,9 +2658,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pPartitionInfoValueEx(): CPointer<CLUSPROP_PARTITION_INFO_EX> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_PARTITION_INFO_EX>>(p)
             return ptr.read()
         }
@@ -2726,9 +2668,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pPartitionInfoValueEx(val: CPointer<CLUSPROP_PARTITION_INFO_EX>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_PARTITION_INFO_EX>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2738,9 +2679,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pPartitionInfoValueEx2(): CPointer<CLUSPROP_PARTITION_INFO_EX2> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_PARTITION_INFO_EX2>>(p)
             return ptr.read()
         }
@@ -2749,9 +2689,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pPartitionInfoValueEx2(val: CPointer<CLUSPROP_PARTITION_INFO_EX2>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_PARTITION_INFO_EX2>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2761,9 +2700,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public func pFileTimeValue(): CPointer<CLUSPROP_FILETIME> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_FILETIME>>(p)
             return ptr.read()
         }
@@ -2772,9 +2710,8 @@ public struct CLUSPROP_BUFFER_HELPER {
     public mut func set_pFileTimeValue(val: CPointer<CLUSPROP_FILETIME>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<CLUSPROP_FILETIME>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2930,14 +2867,13 @@ public let CLUSPROP_PIFLAG_UNKNOWN: CLUSPROP_PIFLAGS = CLUSPROP_PIFLAGS(-2147483
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CLUSPROP_REQUIRED_DEPENDENCY {
-    public var _raw: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
 
     public func value(): CLUSPROP_VALUE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSPROP_VALUE>(p)
             return ptr.read()
         }
@@ -2946,9 +2882,8 @@ public struct CLUSPROP_REQUIRED_DEPENDENCY {
     public mut func set_value(val: CLUSPROP_VALUE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSPROP_VALUE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2958,9 +2893,8 @@ public struct CLUSPROP_REQUIRED_DEPENDENCY {
     public func resClass(): CLUSPROP_RESOURCE_CLASS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSPROP_RESOURCE_CLASS>(p)
             return ptr.read()
         }
@@ -2969,9 +2903,8 @@ public struct CLUSPROP_REQUIRED_DEPENDENCY {
     public mut func set_resClass(val: CLUSPROP_RESOURCE_CLASS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSPROP_RESOURCE_CLASS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2981,9 +2914,8 @@ public struct CLUSPROP_REQUIRED_DEPENDENCY {
     public func resTypeName(): CLUSPROP_SZ {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSPROP_SZ>(p)
             return ptr.read()
         }
@@ -2992,9 +2924,8 @@ public struct CLUSPROP_REQUIRED_DEPENDENCY {
     public mut func set_resTypeName(val: CLUSPROP_SZ): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSPROP_SZ>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3039,14 +2970,13 @@ public struct CLUSPROP_SECURITY_DESCRIPTOR {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CLUSPROP_SECURITY_DESCRIPTOR__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
 
     public func sd(): Win32_Security.SECURITY_DESCRIPTOR_RELATIVE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Security.SECURITY_DESCRIPTOR_RELATIVE>(p)
             return ptr.read()
         }
@@ -3055,9 +2985,8 @@ public struct CLUSPROP_SECURITY_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_sd(val: Win32_Security.SECURITY_DESCRIPTOR_RELATIVE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Security.SECURITY_DESCRIPTOR_RELATIVE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3067,9 +2996,8 @@ public struct CLUSPROP_SECURITY_DESCRIPTOR__Anonymous_e__Union {
     public func rgbSecurityDescriptor(): VArray<UInt8, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $1>>(p)
             return ptr.read()
         }
@@ -3078,9 +3006,8 @@ public struct CLUSPROP_SECURITY_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_rgbSecurityDescriptor(val: VArray<UInt8, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3093,27 +3020,21 @@ public struct CLUSPROP_SECURITY_DESCRIPTOR__Anonymous_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CLUSPROP_SYNTAX {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dw(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dw(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3121,9 +3042,8 @@ public struct CLUSPROP_SYNTAX {
     public func anonymous(): CLUSPROP_SYNTAX__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSPROP_SYNTAX__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -3132,9 +3052,8 @@ public struct CLUSPROP_SYNTAX {
     public mut func set_anonymous(val: CLUSPROP_SYNTAX__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSPROP_SYNTAX__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5866,27 +5785,21 @@ public struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $65> = VArray<UInt64, $65>(repeat: 0)
+    public var _raw: VArray<UInt8, $520> = VArray<UInt8, $520>(repeat: 0)
 
     public func volumeOffset(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_volumeOffset(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5894,9 +5807,8 @@ public struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME__Anonymous_e__Union {
     public func volumeId(): VArray<UInt16, $260> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $260>>(p)
             return ptr.read()
         }
@@ -5905,9 +5817,8 @@ public struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME__Anonymous_e__Union {
     public mut func set_volumeId(val: VArray<UInt16, $260>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $260>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5917,9 +5828,8 @@ public struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME__Anonymous_e__Union {
     public func volumeName(): VArray<UInt16, $260> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $260>>(p)
             return ptr.read()
         }
@@ -5928,9 +5838,8 @@ public struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME__Anonymous_e__Union {
     public mut func set_volumeName(val: VArray<UInt16, $260>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $260>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5940,9 +5849,8 @@ public struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME__Anonymous_e__Union {
     public func volumeGuid(): VArray<UInt16, $50> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $50>>(p)
             return ptr.read()
         }
@@ -5951,9 +5859,8 @@ public struct CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME__Anonymous_e__Union {
     public mut func set_volumeGuid(val: VArray<UInt16, $50>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $50>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6566,14 +6473,13 @@ public struct CLUS_RESOURCE_CLASS_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func anonymous(): CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6582,9 +6488,8 @@ public struct CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union {
     public mut func set_anonymous(val: CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6594,22 +6499,16 @@ public struct CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union {
     public func li(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_li(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6628,27 +6527,21 @@ public struct CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union__Anonymous_e__Struct 
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dw(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dw(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -6656,9 +6549,8 @@ public struct CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union__Anonymous_e__Struct_
     public func rc(): CLUSTER_RESOURCE_CLASS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSTER_RESOURCE_CLASS>(p)
             return ptr.read()
         }
@@ -6667,9 +6559,8 @@ public struct CLUS_RESOURCE_CLASS_INFO__Anonymous_e__Union__Anonymous_e__Struct_
     public mut func set_rc(val: CLUSTER_RESOURCE_CLASS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUSTER_RESOURCE_CLASS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6761,14 +6652,13 @@ public struct CLUS_SCSI_ADDRESS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CLUS_SCSI_ADDRESS__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): CLUS_SCSI_ADDRESS__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUS_SCSI_ADDRESS__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -6777,9 +6667,8 @@ public struct CLUS_SCSI_ADDRESS__Anonymous_e__Union {
     public mut func set_anonymous(val: CLUS_SCSI_ADDRESS__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CLUS_SCSI_ADDRESS__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6789,22 +6678,16 @@ public struct CLUS_SCSI_ADDRESS__Anonymous_e__Union {
     public func dw(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dw(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17652,14 +17535,13 @@ public struct RESUTIL_PROPERTY_ITEM {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func defaultPtr(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -17668,9 +17550,8 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public mut func set_defaultPtr(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17680,22 +17561,16 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public func default(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_default(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17703,9 +17578,8 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public func lpDefault(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -17714,9 +17588,8 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public mut func set_lpDefault(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17726,9 +17599,8 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public func largeIntData(): CPointer<RESUTIL_LARGEINT_DATA> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<RESUTIL_LARGEINT_DATA>>(p)
             return ptr.read()
         }
@@ -17737,9 +17609,8 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public mut func set_largeIntData(val: CPointer<RESUTIL_LARGEINT_DATA>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<RESUTIL_LARGEINT_DATA>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17749,9 +17620,8 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public func uLargeIntData(): CPointer<RESUTIL_ULARGEINT_DATA> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<RESUTIL_ULARGEINT_DATA>>(p)
             return ptr.read()
         }
@@ -17760,9 +17630,8 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public mut func set_uLargeIntData(val: CPointer<RESUTIL_ULARGEINT_DATA>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<RESUTIL_ULARGEINT_DATA>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17772,9 +17641,8 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public func fileTimeData(): CPointer<RESUTIL_FILETIME_DATA> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<RESUTIL_FILETIME_DATA>>(p)
             return ptr.read()
         }
@@ -17783,9 +17651,8 @@ public struct RESUTIL_PROPERTY_ITEM__Anonymous_e__Union {
     public mut func set_fileTimeData(val: CPointer<RESUTIL_FILETIME_DATA>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<RESUTIL_FILETIME_DATA>>(p)
             ptr.write(val)
             _raw = rawStorage

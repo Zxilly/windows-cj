@@ -3,6 +3,7 @@ package windows_sys.Win32.Graphics.Printing
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Devices.Communication as Win32_Devices_Communication
 import windows_sys.Win32.Devices.Display as Win32_Devices_Display
 import windows_sys.Win32.Foundation as Win32_Foundation
@@ -107,27 +108,21 @@ public struct BIDI_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct BIDI_DATA__u_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func bData(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_bData(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -135,22 +130,16 @@ public struct BIDI_DATA__u_e__Union {
     public func iData(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_iData(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -158,9 +147,8 @@ public struct BIDI_DATA__u_e__Union {
     public func sData(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -169,9 +157,8 @@ public struct BIDI_DATA__u_e__Union {
     public mut func set_sData(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -181,22 +168,16 @@ public struct BIDI_DATA__u_e__Union {
     public func fData(): Float32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadFloat32(base, 0)
         }
     }
 
     public mut func set_fData(val: Float32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteFloat32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -204,9 +185,8 @@ public struct BIDI_DATA__u_e__Union {
     public func biData(): BINARY_CONTAINER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BINARY_CONTAINER>(p)
             return ptr.read()
         }
@@ -215,9 +195,8 @@ public struct BIDI_DATA__u_e__Union {
     public mut func set_biData(val: BINARY_CONTAINER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BINARY_CONTAINER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -347,14 +326,13 @@ public struct BranchOfficeJobData {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct BranchOfficeJobData__JobInfo_e__Union {
-    public var _raw: VArray<UInt64, $11> = VArray<UInt64, $11>(repeat: 0)
+    public var _raw: VArray<UInt8, $88> = VArray<UInt8, $88>(repeat: 0)
 
     public func logJobPrinted(): BranchOfficeJobDataPrinted {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeJobDataPrinted>(p)
             return ptr.read()
         }
@@ -363,9 +341,8 @@ public struct BranchOfficeJobData__JobInfo_e__Union {
     public mut func set_logJobPrinted(val: BranchOfficeJobDataPrinted): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeJobDataPrinted>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -375,9 +352,8 @@ public struct BranchOfficeJobData__JobInfo_e__Union {
     public func logJobRendered(): BranchOfficeJobDataRendered {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeJobDataRendered>(p)
             return ptr.read()
         }
@@ -386,9 +362,8 @@ public struct BranchOfficeJobData__JobInfo_e__Union {
     public mut func set_logJobRendered(val: BranchOfficeJobDataRendered): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeJobDataRendered>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -398,9 +373,8 @@ public struct BranchOfficeJobData__JobInfo_e__Union {
     public func logJobError(): BranchOfficeJobDataError {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeJobDataError>(p)
             return ptr.read()
         }
@@ -409,9 +383,8 @@ public struct BranchOfficeJobData__JobInfo_e__Union {
     public mut func set_logJobError(val: BranchOfficeJobDataError): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeJobDataError>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -421,9 +394,8 @@ public struct BranchOfficeJobData__JobInfo_e__Union {
     public func logPipelineFailed(): BranchOfficeJobDataPipelineFailed {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeJobDataPipelineFailed>(p)
             return ptr.read()
         }
@@ -432,9 +404,8 @@ public struct BranchOfficeJobData__JobInfo_e__Union {
     public mut func set_logPipelineFailed(val: BranchOfficeJobDataPipelineFailed): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeJobDataPipelineFailed>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -444,9 +415,8 @@ public struct BranchOfficeJobData__JobInfo_e__Union {
     public func logOfflineFileFull(): BranchOfficeLogOfflineFileFull {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeLogOfflineFileFull>(p)
             return ptr.read()
         }
@@ -455,9 +425,8 @@ public struct BranchOfficeJobData__JobInfo_e__Union {
     public mut func set_logOfflineFileFull(val: BranchOfficeLogOfflineFileFull): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<BranchOfficeLogOfflineFileFull>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -605,27 +574,21 @@ public struct CPSUICBPARAM {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CPSUICBPARAM__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func oldSel(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_oldSel(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -633,9 +596,8 @@ public struct CPSUICBPARAM__Anonymous_e__Union {
     public func pOldSel(): CPointer<Int8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int8>>(p)
             return ptr.read()
         }
@@ -644,9 +606,8 @@ public struct CPSUICBPARAM__Anonymous_e__Union {
     public mut func set_pOldSel(val: CPointer<Int8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -746,27 +707,21 @@ public struct DLGPAGE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DLGPAGE__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func dlgTemplateID(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_dlgTemplateID(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -774,9 +729,8 @@ public struct DLGPAGE__Anonymous_e__Union {
     public func hDlgTemplate(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -785,9 +739,8 @@ public struct DLGPAGE__Anonymous_e__Union {
     public mut func set_hDlgTemplate(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1426,7 +1379,7 @@ public struct EXTPUSH {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct EXTPUSH__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
     public init() {}
 }
 
@@ -1434,27 +1387,21 @@ public struct EXTPUSH__Anonymous1_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct EXTPUSH__Anonymous2_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func dlgTemplateID(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_dlgTemplateID(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1462,9 +1409,8 @@ public struct EXTPUSH__Anonymous2_e__Union {
     public func hDlgTemplate(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -1473,9 +1419,8 @@ public struct EXTPUSH__Anonymous2_e__Union {
     public mut func set_hDlgTemplate(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15230,21 +15175,86 @@ public struct MONITOR_INFO_2W {
 }
 
 @When[Windows_Win32_Graphics_Printing == "on"]
-// packed(1)
 @C
 public struct MXDC_ESCAPE_HEADER_T {
-    public var cbInput: UInt32 = 0
-    public var cbOutput: UInt32 = 0
-    public var opCode: UInt32 = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func cbInput(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_cbInput(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cbOutput(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_cbOutput(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func opCode(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_opCode(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Printing == "on"]
-// packed(1)
 @C
 public struct MXDC_GET_FILENAME_DATA_T {
-    public var cbOutput: UInt32 = 0
-    public var wszData: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0u8)
+
+    public func cbOutput(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_cbOutput(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `wszData`: type `VArray<UInt16, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -15308,47 +15318,87 @@ public let MXDC_LANDSCAPE_ROTATE_NONE: MXDC_LANDSCAPE_ROTATION_ENUMS = MXDC_LAND
 public let MXDC_LANDSCAPE_ROTATE_COUNTERCLOCKWISE_270_DEGREES: MXDC_LANDSCAPE_ROTATION_ENUMS = MXDC_LANDSCAPE_ROTATION_ENUMS(-90)
 
 @When[Windows_Win32_Graphics_Printing == "on"]
-// packed(1)
 @C
 public struct MXDC_PRINTTICKET_DATA_T {
-    public var dwDataSize: UInt32 = 0
-    public var bData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $5> = VArray<UInt8, $5>(repeat: 0u8)
+
+    public func dwDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `bData`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Printing == "on"]
-// packed(1)
 @C
 public struct MXDC_PRINTTICKET_ESCAPE_T {
-    public var mxdcEscape: MXDC_ESCAPE_HEADER_T = MXDC_ESCAPE_HEADER_T()
-    public var printTicketData: MXDC_PRINTTICKET_DATA_T = MXDC_PRINTTICKET_DATA_T()
+    public var _raw: VArray<UInt8, $17> = VArray<UInt8, $17>(repeat: 0u8)
+
+    // packed field `mxdcEscape`: type `MXDC_ESCAPE_HEADER_T` not supported by polyfill; skipped
+
+    // packed field `printTicketData`: type `MXDC_PRINTTICKET_DATA_T` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Printing == "on"]
-// packed(1)
 @C
 public struct MXDC_S0PAGE_DATA_T {
-    public var dwSize: UInt32 = 0
-    public var bData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $5> = VArray<UInt8, $5>(repeat: 0u8)
+
+    public func dwSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `bData`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Printing == "on"]
-// packed(1)
 @C
 public struct MXDC_S0PAGE_PASSTHROUGH_ESCAPE_T {
-    public var mxdcEscape: MXDC_ESCAPE_HEADER_T = MXDC_ESCAPE_HEADER_T()
-    public var xpsS0PageData: MXDC_S0PAGE_DATA_T = MXDC_S0PAGE_DATA_T()
+    public var _raw: VArray<UInt8, $17> = VArray<UInt8, $17>(repeat: 0u8)
+
+    // packed field `mxdcEscape`: type `MXDC_ESCAPE_HEADER_T` not supported by polyfill; skipped
+
+    // packed field `xpsS0PageData`: type `MXDC_S0PAGE_DATA_T` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Graphics_Printing == "on"]
-// packed(1)
 @C
 public struct MXDC_S0PAGE_RESOURCE_ESCAPE_T {
-    public var mxdcEscape: MXDC_ESCAPE_HEADER_T = MXDC_ESCAPE_HEADER_T()
-    public var xpsS0PageResourcePassthrough: MXDC_XPS_S0PAGE_RESOURCE_T = MXDC_XPS_S0PAGE_RESOURCE_T()
+    public var _raw: VArray<UInt8, $285> = VArray<UInt8, $285>(repeat: 0u8)
+
+    // packed field `mxdcEscape`: type `MXDC_ESCAPE_HEADER_T` not supported by polyfill; skipped
+
+    // packed field `xpsS0PageResourcePassthrough`: type `MXDC_XPS_S0PAGE_RESOURCE_T` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -15402,14 +15452,64 @@ public let MXDC_RESOURCE_PNG_THUMBNAIL: MXDC_S0_PAGE_ENUMS = MXDC_S0_PAGE_ENUMS(
 public let MXDC_RESOURCE_MAX: MXDC_S0_PAGE_ENUMS = MXDC_S0_PAGE_ENUMS(9)
 
 @When[Windows_Win32_Graphics_Printing == "on"]
-// packed(1)
 @C
 public struct MXDC_XPS_S0PAGE_RESOURCE_T {
-    public var dwSize: UInt32 = 0
-    public var dwResourceType: UInt32 = 0
-    public var szUri: VArray<UInt8, $260> = VArray<UInt8, $260>(repeat: 0)
-    public var dwDataSize: UInt32 = 0
-    public var bData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $273> = VArray<UInt8, $273>(repeat: 0u8)
+
+    public func dwSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwResourceType(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwResourceType(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `szUri`: type `VArray<UInt8, $260>` not supported by polyfill; skipped
+
+    public func dwDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 268)
+        }
+    }
+
+    public mut func set_dwDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 268, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `bData`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -15623,27 +15723,21 @@ public struct OPTITEM {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct OPTITEM__Anonymous1_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func sel(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_sel(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -15651,9 +15745,8 @@ public struct OPTITEM__Anonymous1_e__Union {
     public func pSel(): CPointer<Int8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int8>>(p)
             return ptr.read()
         }
@@ -15662,9 +15755,8 @@ public struct OPTITEM__Anonymous1_e__Union {
     public mut func set_pSel(val: CPointer<Int8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Int8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15677,14 +15769,13 @@ public struct OPTITEM__Anonymous1_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct OPTITEM__Anonymous2_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pExtChkBox(): CPointer<EXTCHKBOX> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EXTCHKBOX>>(p)
             return ptr.read()
         }
@@ -15693,9 +15784,8 @@ public struct OPTITEM__Anonymous2_e__Union {
     public mut func set_pExtChkBox(val: CPointer<EXTCHKBOX>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EXTCHKBOX>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -15705,9 +15795,8 @@ public struct OPTITEM__Anonymous2_e__Union {
     public func pExtPush(): CPointer<EXTPUSH> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EXTPUSH>>(p)
             return ptr.read()
         }
@@ -15716,9 +15805,8 @@ public struct OPTITEM__Anonymous2_e__Union {
     public mut func set_pExtPush(val: CPointer<EXTPUSH>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<EXTPUSH>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16354,14 +16442,13 @@ public struct PRINTER_NOTIFY_INFO_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func adwData(): VArray<UInt32, $2> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $2>>(p)
             return ptr.read()
         }
@@ -16370,9 +16457,8 @@ public struct PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union {
     public mut func set_adwData(val: VArray<UInt32, $2>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt32, $2>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16382,9 +16468,8 @@ public struct PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union {
     public func data(): PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct>(p)
             return ptr.read()
         }
@@ -16393,9 +16478,8 @@ public struct PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union {
     public mut func set_data(val: PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PRINTER_NOTIFY_INFO_DATA__NotifyData_e__Union__Data_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16813,14 +16897,13 @@ public struct PROPSHEETUI_INFO_HEADER {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PROPSHEETUI_INFO_HEADER__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func hIcon(): Win32_impl.HICON {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.HICON>(p)
             return ptr.read()
         }
@@ -16829,9 +16912,8 @@ public struct PROPSHEETUI_INFO_HEADER__Anonymous_e__Union {
     public mut func set_hIcon(val: Win32_impl.HICON): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_impl.HICON>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -16841,9 +16923,8 @@ public struct PROPSHEETUI_INFO_HEADER__Anonymous_e__Union {
     public func iconID(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -16852,9 +16933,8 @@ public struct PROPSHEETUI_INFO_HEADER__Anonymous_e__Union {
     public mut func set_iconID(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17178,27 +17258,21 @@ public struct PrintPropertyValue {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PrintPropertyValue__value_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func propertyByte(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_propertyByte(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17206,9 +17280,8 @@ public struct PrintPropertyValue__value_e__Union {
     public func propertyString(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -17217,9 +17290,8 @@ public struct PrintPropertyValue__value_e__Union {
     public mut func set_propertyString(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17229,22 +17301,16 @@ public struct PrintPropertyValue__value_e__Union {
     public func propertyInt32(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_propertyInt32(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17252,22 +17318,16 @@ public struct PrintPropertyValue__value_e__Union {
     public func propertyInt64(): Int64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt64(base, 0)
         }
     }
 
     public mut func set_propertyInt64(val: Int64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17275,9 +17335,8 @@ public struct PrintPropertyValue__value_e__Union {
     public func propertyBlob(): PrintPropertyValue__value_e__Union__propertyBlob_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PrintPropertyValue__value_e__Union__propertyBlob_e__Struct>(p)
             return ptr.read()
         }
@@ -17286,9 +17345,8 @@ public struct PrintPropertyValue__value_e__Union {
     public mut func set_propertyBlob(val: PrintPropertyValue__value_e__Union__propertyBlob_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PrintPropertyValue__value_e__Union__propertyBlob_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17544,27 +17602,21 @@ public struct TRANSDATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct TRANSDATA__uCode_e__Union {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func sCode(): Int16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt16(base, 0)
         }
     }
 
     public mut func set_sCode(val: Int16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17572,22 +17624,16 @@ public struct TRANSDATA__uCode_e__Union {
     public func ubCode(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_ubCode(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17595,9 +17641,8 @@ public struct TRANSDATA__uCode_e__Union {
     public func ubPairs(): VArray<UInt8, $2> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $2>>(p)
             return ptr.read()
         }
@@ -17606,9 +17651,8 @@ public struct TRANSDATA__uCode_e__Union {
     public mut func set_ubPairs(val: VArray<UInt8, $2>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $2>>(p)
             ptr.write(val)
             _raw = rawStorage

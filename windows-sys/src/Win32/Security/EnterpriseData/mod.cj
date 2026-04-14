@@ -3,6 +3,7 @@ package windows_sys.Win32.Security.EnterpriseData
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Storage.Packaging.Appx as Win32_Storage_Packaging_Appx
 import windows_sys.Win32.System.WinRT as Win32_System_WinRT

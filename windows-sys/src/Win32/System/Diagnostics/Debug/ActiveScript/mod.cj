@@ -3,6 +3,7 @@ package windows_sys.Win32.System.Diagnostics.Debug.ActiveScript
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -17536,14 +17537,13 @@ public struct PROFILER_HEAP_OBJECT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PROFILER_HEAP_OBJECT__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func objectId(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -17552,9 +17552,8 @@ public struct PROFILER_HEAP_OBJECT__Anonymous_e__Union {
     public mut func set_objectId(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17564,9 +17563,8 @@ public struct PROFILER_HEAP_OBJECT__Anonymous_e__Union {
     public func externalObjectAddress(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -17575,9 +17573,8 @@ public struct PROFILER_HEAP_OBJECT__Anonymous_e__Union {
     public mut func set_externalObjectAddress(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17670,14 +17667,13 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func prototype(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -17686,9 +17682,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_prototype(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17698,9 +17693,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func functionName(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -17709,9 +17703,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_functionName(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17721,22 +17714,16 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func elementAttributesSize(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_elementAttributesSize(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17744,22 +17731,16 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func elementTextChildrenSize(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_elementTextChildrenSize(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -17767,9 +17748,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func scopeList(): CPointer<PROFILER_HEAP_OBJECT_SCOPE_LIST> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_SCOPE_LIST>>(p)
             return ptr.read()
         }
@@ -17778,9 +17758,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_scopeList(val: CPointer<PROFILER_HEAP_OBJECT_SCOPE_LIST>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_SCOPE_LIST>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17790,9 +17769,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func internalProperty(): CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP>>(p)
             return ptr.read()
         }
@@ -17801,9 +17779,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_internalProperty(val: CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17813,9 +17790,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func namePropertyList(): CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             return ptr.read()
         }
@@ -17824,9 +17800,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_namePropertyList(val: CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17836,9 +17811,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func indexPropertyList(): CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             return ptr.read()
         }
@@ -17847,9 +17821,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_indexPropertyList(val: CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17859,9 +17832,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func relationshipList(): CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             return ptr.read()
         }
@@ -17870,9 +17842,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_relationshipList(val: CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17882,9 +17853,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func eventList(): CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             return ptr.read()
         }
@@ -17893,9 +17863,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_eventList(val: CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17905,9 +17874,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func weakMapCollectionList(): CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             return ptr.read()
         }
@@ -17916,9 +17884,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_weakMapCollectionList(val: CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17928,9 +17895,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func mapCollectionList(): CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             return ptr.read()
         }
@@ -17939,9 +17905,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_mapCollectionList(val: CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -17951,9 +17916,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public func setCollectionList(): CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             return ptr.read()
         }
@@ -17962,9 +17926,8 @@ public struct PROFILER_HEAP_OBJECT_OPTIONAL_INFO__Anonymous_e__Union {
     public mut func set_setCollectionList(val: CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -18047,27 +18010,21 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func numberValue(): Float64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadFloat64(base, 0)
         }
     }
 
     public mut func set_numberValue(val: Float64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteFloat64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -18075,9 +18032,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public func stringValue(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -18086,9 +18042,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public mut func set_stringValue(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -18098,9 +18053,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public func bstrValue(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -18109,9 +18063,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public mut func set_bstrValue(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -18121,9 +18074,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public func objectId(): UIntNative {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             return ptr.read()
         }
@@ -18132,9 +18084,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public mut func set_objectId(val: UIntNative): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<UIntNative>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -18144,9 +18095,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public func externalObjectAddress(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -18155,9 +18105,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public mut func set_externalObjectAddress(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -18167,9 +18116,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public func subString(): CPointer<PROFILER_PROPERTY_TYPE_SUBSTRING_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_PROPERTY_TYPE_SUBSTRING_INFO>>(p)
             return ptr.read()
         }
@@ -18178,9 +18126,8 @@ public struct PROFILER_HEAP_OBJECT_RELATIONSHIP__Anonymous_e__Union {
     public mut func set_subString(val: CPointer<PROFILER_PROPERTY_TYPE_SUBSTRING_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<PROFILER_PROPERTY_TYPE_SUBSTRING_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage

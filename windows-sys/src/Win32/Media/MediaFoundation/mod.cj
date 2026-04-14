@@ -3,6 +3,7 @@ package windows_sys.Win32.Media.MediaFoundation
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Devices.Properties as Win32_Devices_Properties
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Direct3D12 as Win32_Graphics_Direct3D12
@@ -140,21 +141,101 @@ public struct AM_MEDIA_TYPE {
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct ASF_FLAT_PICTURE {
-    public var bPictureType: UInt8 = 0
-    public var dwDataLen: UInt32 = 0
+    public var _raw: VArray<UInt8, $5> = VArray<UInt8, $5>(repeat: 0u8)
+
+    public func bPictureType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_bPictureType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDataLen(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 1)
+        }
+    }
+
+    public mut func set_dwDataLen(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 1, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct ASF_FLAT_SYNCHRONISED_LYRICS {
-    public var bTimeStampFormat: UInt8 = 0
-    public var bContentType: UInt8 = 0
-    public var dwLyricsLen: UInt32 = 0
+    public var _raw: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0u8)
+
+    public func bTimeStampFormat(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_bTimeStampFormat(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bContentType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_bContentType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwLyricsLen(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 2)
+        }
+    }
+
+    public mut func set_dwLyricsLen(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 2, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -5425,14 +5506,13 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ph264Config(): CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264>>(p)
             return ptr.read()
         }
@@ -5441,9 +5521,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION__Anonymous_e__Union {
     public mut func set_ph264Config(val: CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_H264>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5453,9 +5532,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION__Anonymous_e__Union {
     public func phevcConfig(): CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC>>(p)
             return ptr.read()
         }
@@ -5464,9 +5542,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION__Anonymous_e__Union {
     public mut func set_phevcConfig(val: CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5476,9 +5553,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION__Anonymous_e__Union {
     public func pav1Config(): CPointer<D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION>>(p)
             return ptr.read()
         }
@@ -5487,9 +5563,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION__Anonymous_e__Union {
     public mut func set_pav1Config(val: CPointer<D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5854,14 +5929,13 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ph264Support(): CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264>>(p)
             return ptr.read()
         }
@@ -5870,9 +5944,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT__Anonymous_e__Unio
     public mut func set_ph264Support(val: CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_H264>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5882,9 +5955,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT__Anonymous_e__Unio
     public func phevcSupport(): CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC>>(p)
             return ptr.read()
         }
@@ -5893,9 +5965,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT__Anonymous_e__Unio
     public mut func set_phevcSupport(val: CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5905,9 +5976,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT__Anonymous_e__Unio
     public func phevcSupport1(): CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC1>>(p)
             return ptr.read()
         }
@@ -5916,9 +5986,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT__Anonymous_e__Unio
     public mut func set_phevcSupport1(val: CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5928,9 +5997,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT__Anonymous_e__Unio
     public func pav1Support(): CPointer<D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION_SUPPORT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION_SUPPORT>>(p)
             return ptr.read()
         }
@@ -5939,9 +6007,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT__Anonymous_e__Unio
     public mut func set_pav1Support(val: CPointer<D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION_SUPPORT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_CODEC_CONFIGURATION_SUPPORT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6238,14 +6305,13 @@ public struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ph264Support(): CPointer<D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264>>(p)
             return ptr.read()
         }
@@ -6254,9 +6320,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT__Anonymous_e__Un
     public mut func set_ph264Support(val: CPointer<D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_H264>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6266,9 +6331,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT__Anonymous_e__Un
     public func phevcSupport(): CPointer<D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC>>(p)
             return ptr.read()
         }
@@ -6277,9 +6341,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT__Anonymous_e__Un
     public mut func set_phevcSupport(val: CPointer<D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_HEVC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6289,9 +6352,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT__Anonymous_e__Un
     public func pav1Support(): CPointer<D3D12_VIDEO_ENCODER_CODEC_AV1_PICTURE_CONTROL_SUPPORT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_AV1_PICTURE_CONTROL_SUPPORT>>(p)
             return ptr.read()
         }
@@ -6300,9 +6362,8 @@ public struct D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT__Anonymous_e__Un
     public mut func set_pav1Support(val: CPointer<D3D12_VIDEO_ENCODER_CODEC_AV1_PICTURE_CONTROL_SUPPORT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_CODEC_AV1_PICTURE_CONTROL_SUPPORT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6353,14 +6414,13 @@ public struct D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $7> = VArray<UInt64, $7>(repeat: 0)
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0)
 
     public func frameOutputBuffer(): D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM>(p)
             return ptr.read()
         }
@@ -6369,9 +6429,8 @@ public struct D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1__Anonymous_e__Union {
     public mut func set_frameOutputBuffer(val: D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6381,9 +6440,8 @@ public struct D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1__Anonymous_e__Union {
     public func subregionOutputBuffers(): D3D12_VIDEO_ENCODER_SUBREGION_COMPRESSED_BITSTREAM {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_SUBREGION_COMPRESSED_BITSTREAM>(p)
             return ptr.read()
         }
@@ -6392,9 +6450,8 @@ public struct D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1__Anonymous_e__Union {
     public mut func set_subregionOutputBuffers(val: D3D12_VIDEO_ENCODER_SUBREGION_COMPRESSED_BITSTREAM): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_SUBREGION_COMPRESSED_BITSTREAM>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6464,14 +6521,13 @@ public struct D3D12_VIDEO_ENCODER_DIRTY_REGIONS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_DIRTY_REGIONS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pOpaqueLayoutBuffer(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -6480,9 +6536,8 @@ public struct D3D12_VIDEO_ENCODER_DIRTY_REGIONS__Anonymous_e__Union {
     public mut func set_pOpaqueLayoutBuffer(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6492,9 +6547,8 @@ public struct D3D12_VIDEO_ENCODER_DIRTY_REGIONS__Anonymous_e__Union {
     public func pcpuBuffer(): CPointer<D3D12_VIDEO_ENCODER_DIRTY_RECT_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_DIRTY_RECT_INFO>>(p)
             return ptr.read()
         }
@@ -6503,9 +6557,8 @@ public struct D3D12_VIDEO_ENCODER_DIRTY_REGIONS__Anonymous_e__Union {
     public mut func set_pcpuBuffer(val: CPointer<D3D12_VIDEO_ENCODER_DIRTY_RECT_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_DIRTY_RECT_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6868,14 +6921,13 @@ public struct D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pOpaqueLayoutBuffer(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -6884,9 +6936,8 @@ public struct D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS__Anonymous_e__Union {
     public mut func set_pOpaqueLayoutBuffer(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6896,9 +6947,8 @@ public struct D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS__Anonymous_e__Union {
     public func pcpuBuffer(): CPointer<D3D12_VIDEO_ENCODER_MOVEREGION_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_MOVEREGION_INFO>>(p)
             return ptr.read()
         }
@@ -6907,9 +6957,8 @@ public struct D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS__Anonymous_e__Union {
     public mut func set_pcpuBuffer(val: CPointer<D3D12_VIDEO_ENCODER_MOVEREGION_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_MOVEREGION_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -6930,14 +6979,13 @@ public struct D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pav1Support(): CPointer<D3D12_VIDEO_ENCODER_AV1_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT>>(p)
             return ptr.read()
         }
@@ -6946,9 +6994,8 @@ public struct D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT__Anonymo
     public mut func set_pav1Support(val: CPointer<D3D12_VIDEO_ENCODER_AV1_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7158,14 +7205,13 @@ public struct D3D12_VIDEO_ENCODER_INPUT_MAP_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_INPUT_MAP_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $9> = VArray<UInt64, $9>(repeat: 0)
+    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
 
     public func quantization(): D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_QUANTIZATION_MATRIX {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_QUANTIZATION_MATRIX>(p)
             return ptr.read()
         }
@@ -7174,9 +7220,8 @@ public struct D3D12_VIDEO_ENCODER_INPUT_MAP_DATA__Anonymous_e__Union {
     public mut func set_quantization(val: D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_QUANTIZATION_MATRIX): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_QUANTIZATION_MATRIX>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7186,9 +7231,8 @@ public struct D3D12_VIDEO_ENCODER_INPUT_MAP_DATA__Anonymous_e__Union {
     public func dirtyRegions(): D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_DIRTY_REGIONS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_DIRTY_REGIONS>(p)
             return ptr.read()
         }
@@ -7197,9 +7241,8 @@ public struct D3D12_VIDEO_ENCODER_INPUT_MAP_DATA__Anonymous_e__Union {
     public mut func set_dirtyRegions(val: D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_DIRTY_REGIONS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_DIRTY_REGIONS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7209,9 +7252,8 @@ public struct D3D12_VIDEO_ENCODER_INPUT_MAP_DATA__Anonymous_e__Union {
     public func motionVectors(): D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_MOTION_VECTORS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_MOTION_VECTORS>(p)
             return ptr.read()
         }
@@ -7220,9 +7262,8 @@ public struct D3D12_VIDEO_ENCODER_INPUT_MAP_DATA__Anonymous_e__Union {
     public mut func set_motionVectors(val: D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_MOTION_VECTORS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_MOTION_VECTORS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7511,14 +7552,13 @@ public struct D3D12_VIDEO_ENCODER_LEVEL_SETTING {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_LEVEL_SETTING__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ph264LevelSetting(): CPointer<D3D12_VIDEO_ENCODER_LEVELS_H264> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_LEVELS_H264>>(p)
             return ptr.read()
         }
@@ -7527,9 +7567,8 @@ public struct D3D12_VIDEO_ENCODER_LEVEL_SETTING__Anonymous_e__Union {
     public mut func set_ph264LevelSetting(val: CPointer<D3D12_VIDEO_ENCODER_LEVELS_H264>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_LEVELS_H264>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7539,9 +7578,8 @@ public struct D3D12_VIDEO_ENCODER_LEVEL_SETTING__Anonymous_e__Union {
     public func phevcLevelSetting(): CPointer<D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC>>(p)
             return ptr.read()
         }
@@ -7550,9 +7588,8 @@ public struct D3D12_VIDEO_ENCODER_LEVEL_SETTING__Anonymous_e__Union {
     public mut func set_phevcLevelSetting(val: CPointer<D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_LEVEL_TIER_CONSTRAINTS_HEVC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7562,9 +7599,8 @@ public struct D3D12_VIDEO_ENCODER_LEVEL_SETTING__Anonymous_e__Union {
     public func pav1LevelSetting(): CPointer<D3D12_VIDEO_ENCODER_AV1_LEVEL_TIER_CONSTRAINTS> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_LEVEL_TIER_CONSTRAINTS>>(p)
             return ptr.read()
         }
@@ -7573,9 +7609,8 @@ public struct D3D12_VIDEO_ENCODER_LEVEL_SETTING__Anonymous_e__Union {
     public mut func set_pav1LevelSetting(val: CPointer<D3D12_VIDEO_ENCODER_AV1_LEVEL_TIER_CONSTRAINTS>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_LEVEL_TIER_CONSTRAINTS>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7811,14 +7846,13 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ph264PicData(): CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264>>(p)
             return ptr.read()
         }
@@ -7827,9 +7861,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA__Anonymous_e__Union
     public mut func set_ph264PicData(val: CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7839,9 +7872,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA__Anonymous_e__Union
     public func phevcPicData(): CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC>>(p)
             return ptr.read()
         }
@@ -7850,9 +7882,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA__Anonymous_e__Union
     public mut func set_phevcPicData(val: CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7862,9 +7893,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA__Anonymous_e__Union
     public func phevcPicData1(): CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC1>>(p)
             return ptr.read()
         }
@@ -7873,9 +7903,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA__Anonymous_e__Union
     public mut func set_phevcPicData1(val: CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7885,9 +7914,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA__Anonymous_e__Union
     public func pav1PicData(): CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA>>(p)
             return ptr.read()
         }
@@ -7896,9 +7924,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA__Anonymous_e__Union
     public mut func set_pav1PicData(val: CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7919,14 +7946,13 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ph264PicData(): CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264>>(p)
             return ptr.read()
         }
@@ -7935,9 +7961,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1__Anonymous_e__Unio
     public mut func set_ph264PicData(val: CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_H264>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7947,9 +7972,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1__Anonymous_e__Unio
     public func phevcPicData(): CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC2> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC2>>(p)
             return ptr.read()
         }
@@ -7958,9 +7982,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1__Anonymous_e__Unio
     public mut func set_phevcPicData(val: CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC2>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_HEVC2>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -7970,9 +7993,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1__Anonymous_e__Unio
     public func pav1PicData(): CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA>>(p)
             return ptr.read()
         }
@@ -7981,9 +8003,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1__Anonymous_e__Unio
     public mut func set_pav1PicData(val: CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_CODEC_DATA>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8299,14 +8320,13 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pSlicesPartition_H264(): CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES>>(p)
             return ptr.read()
         }
@@ -8315,9 +8335,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA__Anonym
     public mut func set_pSlicesPartition_H264(val: CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8327,9 +8346,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA__Anonym
     public func pSlicesPartition_HEVC(): CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES>>(p)
             return ptr.read()
         }
@@ -8338,9 +8356,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA__Anonym
     public mut func set_pSlicesPartition_HEVC(val: CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8350,9 +8367,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA__Anonym
     public func pTilesPartition_AV1(): CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_TILES> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_TILES>>(p)
             return ptr.read()
         }
@@ -8361,9 +8377,8 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA__Anonym
     public mut func set_pTilesPartition_AV1(val: CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_TILES>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_TILES>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8383,27 +8398,21 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES 
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func maxBytesPerSlice(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_maxBytesPerSlice(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -8411,22 +8420,16 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_
     public func numberOfCodingUnitsPerSlice(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_numberOfCodingUnitsPerSlice(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -8434,22 +8437,16 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_
     public func numberOfRowsPerSlice(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_numberOfRowsPerSlice(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -8457,22 +8454,16 @@ public struct D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_
     public func numberOfSlicesPerFrame(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_numberOfSlicesPerFrame(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -8507,14 +8498,13 @@ public struct D3D12_VIDEO_ENCODER_PROFILE_DESC {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_PROFILE_DESC__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ph264Profile(): CPointer<D3D12_VIDEO_ENCODER_PROFILE_H264> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PROFILE_H264>>(p)
             return ptr.read()
         }
@@ -8523,9 +8513,8 @@ public struct D3D12_VIDEO_ENCODER_PROFILE_DESC__Anonymous_e__Union {
     public mut func set_ph264Profile(val: CPointer<D3D12_VIDEO_ENCODER_PROFILE_H264>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PROFILE_H264>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8535,9 +8524,8 @@ public struct D3D12_VIDEO_ENCODER_PROFILE_DESC__Anonymous_e__Union {
     public func phevcProfile(): CPointer<D3D12_VIDEO_ENCODER_PROFILE_HEVC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PROFILE_HEVC>>(p)
             return ptr.read()
         }
@@ -8546,9 +8534,8 @@ public struct D3D12_VIDEO_ENCODER_PROFILE_DESC__Anonymous_e__Union {
     public mut func set_phevcProfile(val: CPointer<D3D12_VIDEO_ENCODER_PROFILE_HEVC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_PROFILE_HEVC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8558,9 +8545,8 @@ public struct D3D12_VIDEO_ENCODER_PROFILE_DESC__Anonymous_e__Union {
     public func pav1Profile(): CPointer<D3D12_VIDEO_ENCODER_AV1_PROFILE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_PROFILE>>(p)
             return ptr.read()
         }
@@ -8569,9 +8555,8 @@ public struct D3D12_VIDEO_ENCODER_PROFILE_DESC__Anonymous_e__Union {
     public mut func set_pav1Profile(val: CPointer<D3D12_VIDEO_ENCODER_AV1_PROFILE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_PROFILE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8725,14 +8710,13 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func pConfiguration_CQP(): CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP>>(p)
             return ptr.read()
         }
@@ -8741,9 +8725,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public mut func set_pConfiguration_CQP(val: CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8753,9 +8736,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public func pConfiguration_CBR(): CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR>>(p)
             return ptr.read()
         }
@@ -8764,9 +8746,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public mut func set_pConfiguration_CBR(val: CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8776,9 +8757,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public func pConfiguration_VBR(): CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR>>(p)
             return ptr.read()
         }
@@ -8787,9 +8767,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public mut func set_pConfiguration_VBR(val: CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8799,9 +8778,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public func pConfiguration_QVBR(): CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR>>(p)
             return ptr.read()
         }
@@ -8810,9 +8788,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public mut func set_pConfiguration_QVBR(val: CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8822,9 +8799,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public func pConfiguration_CQP1(): CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP1>>(p)
             return ptr.read()
         }
@@ -8833,9 +8809,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public mut func set_pConfiguration_CQP1(val: CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CQP1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8845,9 +8820,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public func pConfiguration_CBR1(): CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR1>>(p)
             return ptr.read()
         }
@@ -8856,9 +8830,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public mut func set_pConfiguration_CBR1(val: CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8868,9 +8841,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public func pConfiguration_VBR1(): CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR1>>(p)
             return ptr.read()
         }
@@ -8879,9 +8851,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public mut func set_pConfiguration_VBR1(val: CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_VBR1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8891,9 +8862,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public func pConfiguration_QVBR1(): CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR1>>(p)
             return ptr.read()
         }
@@ -8902,9 +8872,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public mut func set_pConfiguration_QVBR1(val: CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_QVBR1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -8914,9 +8883,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public func pConfiguration_AbsoluteQPMap(): CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_ABSOLUTE_QP_MAP> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_ABSOLUTE_QP_MAP>>(p)
             return ptr.read()
         }
@@ -8925,9 +8893,8 @@ public struct D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS__Anonymous_e
     public mut func set_pConfiguration_AbsoluteQPMap(val: CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_ABSOLUTE_QP_MAP>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_RATE_CONTROL_ABSOLUTE_QP_MAP>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9341,14 +9308,13 @@ public struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ph264GroupOfPictures(): CPointer<D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264>>(p)
             return ptr.read()
         }
@@ -9357,9 +9323,8 @@ public struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE__Anonymous_e__Union {
     public mut func set_ph264GroupOfPictures(val: CPointer<D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_H264>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9369,9 +9334,8 @@ public struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE__Anonymous_e__Union {
     public func phevcGroupOfPictures(): CPointer<D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC>>(p)
             return ptr.read()
         }
@@ -9380,9 +9344,8 @@ public struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE__Anonymous_e__Union {
     public mut func set_phevcGroupOfPictures(val: CPointer<D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_HEVC>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -9392,9 +9355,8 @@ public struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE__Anonymous_e__Union {
     public func pav1SequenceStructure(): CPointer<D3D12_VIDEO_ENCODER_AV1_SEQUENCE_STRUCTURE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_SEQUENCE_STRUCTURE>>(p)
             return ptr.read()
         }
@@ -9403,9 +9365,8 @@ public struct D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE__Anonymous_e__Union {
     public mut func set_pav1SequenceStructure(val: CPointer<D3D12_VIDEO_ENCODER_AV1_SEQUENCE_STRUCTURE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<D3D12_VIDEO_ENCODER_AV1_SEQUENCE_STRUCTURE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11091,14 +11052,13 @@ public struct DXVA2_ExtendedFormat {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DXVA2_ExtendedFormat__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): DXVA2_ExtendedFormat__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVA2_ExtendedFormat__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -11107,9 +11067,8 @@ public struct DXVA2_ExtendedFormat__Anonymous_e__Union {
     public mut func set_anonymous(val: DXVA2_ExtendedFormat__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVA2_ExtendedFormat__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11119,22 +11078,16 @@ public struct DXVA2_ExtendedFormat__Anonymous_e__Union {
     public func value(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_value(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -11223,14 +11176,13 @@ public struct DXVA2_Fixed32 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DXVA2_Fixed32__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): DXVA2_Fixed32__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVA2_Fixed32__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -11239,9 +11191,8 @@ public struct DXVA2_Fixed32__Anonymous_e__Union {
     public mut func set_anonymous(val: DXVA2_Fixed32__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVA2_Fixed32__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -11251,22 +11202,16 @@ public struct DXVA2_Fixed32__Anonymous_e__Union {
     public func ll(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_ll(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12158,14 +12103,13 @@ public struct DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12174,9 +12118,8 @@ public struct DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA__Anonymous_e__Union {
     public mut func set_anonymous(val: DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12186,22 +12129,16 @@ public struct DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA__Anonymous_e__Union {
     public func value(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_value(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -12236,14 +12173,13 @@ public struct DXVAHD_BLT_STATE_TARGET_RECT_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DXVAHD_COLOR {
-    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func rgb(): DXVAHD_COLOR_RGBA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVAHD_COLOR_RGBA>(p)
             return ptr.read()
         }
@@ -12252,9 +12188,8 @@ public struct DXVAHD_COLOR {
     public mut func set_rgb(val: DXVAHD_COLOR_RGBA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVAHD_COLOR_RGBA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12264,9 +12199,8 @@ public struct DXVAHD_COLOR {
     public func yCbCr(): DXVAHD_COLOR_YCbCrA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVAHD_COLOR_YCbCrA>(p)
             return ptr.read()
         }
@@ -12275,9 +12209,8 @@ public struct DXVAHD_COLOR {
     public mut func set_yCbCr(val: DXVAHD_COLOR_YCbCrA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVAHD_COLOR_YCbCrA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12866,14 +12799,13 @@ public struct DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func anonymous(): DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -12882,9 +12814,8 @@ public struct DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA__Anonymous_e__Union {
     public mut func set_anonymous(val: DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -12894,22 +12825,16 @@ public struct DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA__Anonymous_e__Union {
     public func value(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_value(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -13053,19 +12978,179 @@ public struct DXVA_AYUVsample2 {
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct DXVA_BufferDescription {
-    public var dwTypeIndex: UInt32 = 0
-    public var dwBufferIndex: UInt32 = 0
-    public var dwDataOffset: UInt32 = 0
-    public var dwDataSize: UInt32 = 0
-    public var dwFirstMBaddress: UInt32 = 0
-    public var dwNumMBsInBuffer: UInt32 = 0
-    public var dwWidth: UInt32 = 0
-    public var dwHeight: UInt32 = 0
-    public var dwStride: UInt32 = 0
-    public var dwReservedBits: UInt32 = 0
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
+
+    public func dwTypeIndex(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwTypeIndex(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwBufferIndex(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwBufferIndex(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDataOffset(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwDataOffset(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwDataSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_dwDataSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwFirstMBaddress(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_dwFirstMBaddress(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNumMBsInBuffer(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_dwNumMBsInBuffer(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwWidth(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_dwWidth(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwHeight(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_dwHeight(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwStride(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_dwStride(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwReservedBits(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_dwReservedBits(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -13108,26 +13193,238 @@ public struct DXVA_COPPStatusOutput {
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct DXVA_ConfigPictureDecode {
-    public var dwFunction: UInt32 = 0
-    public var dwReservedBits: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
-    public var guidConfigBitstreamEncryption: GUID = GUID()
-    public var guidConfigMBcontrolEncryption: GUID = GUID()
-    public var guidConfigResidDiffEncryption: GUID = GUID()
-    public var bConfigBitstreamRaw: UInt8 = 0
-    public var bConfigMBcontrolRasterOrder: UInt8 = 0
-    public var bConfigResidDiffHost: UInt8 = 0
-    public var bConfigSpatialResid8: UInt8 = 0
-    public var bConfigResid8Subtraction: UInt8 = 0
-    public var bConfigSpatialHost8or9Clipping: UInt8 = 0
-    public var bConfigSpatialResidInterleaved: UInt8 = 0
-    public var bConfigIntraResidUnsigned: UInt8 = 0
-    public var bConfigResidDiffAccelerator: UInt8 = 0
-    public var bConfigHostInverseScan: UInt8 = 0
-    public var bConfigSpecificIDCT: UInt8 = 0
-    public var bConfig4GroupedCoefs: UInt8 = 0
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    public func dwFunction(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwFunction(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `dwReservedBits`: type `VArray<UInt32, $3>` not supported by polyfill; skipped
+
+    // packed field `guidConfigBitstreamEncryption`: layout unknown; skipped
+
+    // packed field `guidConfigMBcontrolEncryption`: layout unknown; skipped
+
+    // packed field `guidConfigResidDiffEncryption`: layout unknown; skipped
+
+    public func bConfigBitstreamRaw(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 16)
+        }
+    }
+
+    public mut func set_bConfigBitstreamRaw(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigMBcontrolRasterOrder(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 17)
+        }
+    }
+
+    public mut func set_bConfigMBcontrolRasterOrder(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 17, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigResidDiffHost(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 18)
+        }
+    }
+
+    public mut func set_bConfigResidDiffHost(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 18, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigSpatialResid8(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 19)
+        }
+    }
+
+    public mut func set_bConfigSpatialResid8(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 19, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigResid8Subtraction(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 20)
+        }
+    }
+
+    public mut func set_bConfigResid8Subtraction(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigSpatialHost8or9Clipping(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 21)
+        }
+    }
+
+    public mut func set_bConfigSpatialHost8or9Clipping(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 21, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigSpatialResidInterleaved(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 22)
+        }
+    }
+
+    public mut func set_bConfigSpatialResidInterleaved(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 22, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigIntraResidUnsigned(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 23)
+        }
+    }
+
+    public mut func set_bConfigIntraResidUnsigned(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 23, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigResidDiffAccelerator(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 24)
+        }
+    }
+
+    public mut func set_bConfigResidDiffAccelerator(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigHostInverseScan(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 25)
+        }
+    }
+
+    public mut func set_bConfigHostInverseScan(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 25, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfigSpecificIDCT(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 26)
+        }
+    }
+
+    public mut func set_bConfigSpecificIDCT(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 26, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bConfig4GroupedCoefs(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 27)
+        }
+    }
+
+    public mut func set_bConfig4GroupedCoefs(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 27, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -13346,45 +13643,621 @@ public let DXVA_NominalRange_16_235: DXVA_NominalRange = DXVA_NominalRange(2)
 public let DXVA_NominalRange_48_208: DXVA_NominalRange = DXVA_NominalRange(3)
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct DXVA_PictureParameters {
-    public var wDecodedPictureIndex: UInt16 = 0
-    public var wDeblockedPictureIndex: UInt16 = 0
-    public var wForwardRefPictureIndex: UInt16 = 0
-    public var wBackwardRefPictureIndex: UInt16 = 0
-    public var wPicWidthInMBminus1: UInt16 = 0
-    public var wPicHeightInMBminus1: UInt16 = 0
-    public var bMacroblockWidthMinus1: UInt8 = 0
-    public var bMacroblockHeightMinus1: UInt8 = 0
-    public var bBlockWidthMinus1: UInt8 = 0
-    public var bBlockHeightMinus1: UInt8 = 0
-    public var bBPPminus1: UInt8 = 0
-    public var bPicStructure: UInt8 = 0
-    public var bSecondField: UInt8 = 0
-    public var bPicIntra: UInt8 = 0
-    public var bPicBackwardPrediction: UInt8 = 0
-    public var bBidirectionalAveragingMode: UInt8 = 0
-    public var bMVprecisionAndChromaRelation: UInt8 = 0
-    public var bChromaFormat: UInt8 = 0
-    public var bPicScanFixed: UInt8 = 0
-    public var bPicScanMethod: UInt8 = 0
-    public var bPicReadbackRequests: UInt8 = 0
-    public var bRcontrol: UInt8 = 0
-    public var bPicSpatialResid8: UInt8 = 0
-    public var bPicOverflowBlocks: UInt8 = 0
-    public var bPicExtrapolation: UInt8 = 0
-    public var bPicDeblocked: UInt8 = 0
-    public var bPicDeblockConfined: UInt8 = 0
-    public var bPic4MVallowed: UInt8 = 0
-    public var bPicOBMC: UInt8 = 0
-    public var bPicBinPB: UInt8 = 0
-    public var bMV_RPS: UInt8 = 0
-    public var bReservedBits: UInt8 = 0
-    public var wBitstreamFcodes: UInt16 = 0
-    public var wBitstreamPCEelements: UInt16 = 0
-    public var bBitstreamConcealmentNeed: UInt8 = 0
-    public var bBitstreamConcealmentMethod: UInt8 = 0
+    public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0u8)
+
+    public func wDecodedPictureIndex(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 0)
+        }
+    }
+
+    public mut func set_wDecodedPictureIndex(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wDeblockedPictureIndex(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 2)
+        }
+    }
+
+    public mut func set_wDeblockedPictureIndex(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wForwardRefPictureIndex(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 4)
+        }
+    }
+
+    public mut func set_wForwardRefPictureIndex(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wBackwardRefPictureIndex(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 6)
+        }
+    }
+
+    public mut func set_wBackwardRefPictureIndex(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 6, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wPicWidthInMBminus1(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 8)
+        }
+    }
+
+    public mut func set_wPicWidthInMBminus1(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wPicHeightInMBminus1(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 10)
+        }
+    }
+
+    public mut func set_wPicHeightInMBminus1(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 10, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bMacroblockWidthMinus1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 12)
+        }
+    }
+
+    public mut func set_bMacroblockWidthMinus1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bMacroblockHeightMinus1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 13)
+        }
+    }
+
+    public mut func set_bMacroblockHeightMinus1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 13, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bBlockWidthMinus1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 14)
+        }
+    }
+
+    public mut func set_bBlockWidthMinus1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 14, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bBlockHeightMinus1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 15)
+        }
+    }
+
+    public mut func set_bBlockHeightMinus1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 15, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bbpPminus1(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 16)
+        }
+    }
+
+    public mut func set_bbpPminus1(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicStructure(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 17)
+        }
+    }
+
+    public mut func set_bPicStructure(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 17, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bSecondField(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 18)
+        }
+    }
+
+    public mut func set_bSecondField(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 18, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicIntra(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 19)
+        }
+    }
+
+    public mut func set_bPicIntra(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 19, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicBackwardPrediction(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 20)
+        }
+    }
+
+    public mut func set_bPicBackwardPrediction(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bBidirectionalAveragingMode(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 21)
+        }
+    }
+
+    public mut func set_bBidirectionalAveragingMode(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 21, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bmVprecisionAndChromaRelation(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 22)
+        }
+    }
+
+    public mut func set_bmVprecisionAndChromaRelation(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 22, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bChromaFormat(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 23)
+        }
+    }
+
+    public mut func set_bChromaFormat(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 23, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicScanFixed(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 24)
+        }
+    }
+
+    public mut func set_bPicScanFixed(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicScanMethod(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 25)
+        }
+    }
+
+    public mut func set_bPicScanMethod(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 25, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicReadbackRequests(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 26)
+        }
+    }
+
+    public mut func set_bPicReadbackRequests(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 26, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bRcontrol(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 27)
+        }
+    }
+
+    public mut func set_bRcontrol(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 27, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicSpatialResid8(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 28)
+        }
+    }
+
+    public mut func set_bPicSpatialResid8(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicOverflowBlocks(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 29)
+        }
+    }
+
+    public mut func set_bPicOverflowBlocks(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 29, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicExtrapolation(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 30)
+        }
+    }
+
+    public mut func set_bPicExtrapolation(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 30, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicDeblocked(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 31)
+        }
+    }
+
+    public mut func set_bPicDeblocked(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 31, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicDeblockConfined(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 32)
+        }
+    }
+
+    public mut func set_bPicDeblockConfined(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPic4MVallowed(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 33)
+        }
+    }
+
+    public mut func set_bPic4MVallowed(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 33, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicOBMC(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 34)
+        }
+    }
+
+    public mut func set_bPicOBMC(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 34, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bPicBinPB(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 35)
+        }
+    }
+
+    public mut func set_bPicBinPB(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 35, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bmv_RPS(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 36)
+        }
+    }
+
+    public mut func set_bmv_RPS(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bReservedBits(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 37)
+        }
+    }
+
+    public mut func set_bReservedBits(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 37, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wBitstreamFcodes(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 38)
+        }
+    }
+
+    public mut func set_wBitstreamFcodes(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 38, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wBitstreamPCEelements(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 40)
+        }
+    }
+
+    public mut func set_wBitstreamPCEelements(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bBitstreamConcealmentNeed(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 42)
+        }
+    }
+
+    public mut func set_bBitstreamConcealmentNeed(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 42, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func bBitstreamConcealmentMethod(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 43)
+        }
+    }
+
+    public mut func set_bBitstreamConcealmentMethod(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 43, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -68187,9 +69060,8 @@ public struct MFPaletteEntry {
     public func argb(): MFARGB {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MFARGB>(p)
             return ptr.read()
         }
@@ -68198,9 +69070,8 @@ public struct MFPaletteEntry {
     public mut func set_argb(val: MFARGB): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MFARGB>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -68210,9 +69081,8 @@ public struct MFPaletteEntry {
     public func ayCbCr(): MFAYUVSample {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MFAYUVSample>(p)
             return ptr.read()
         }
@@ -68221,9 +69091,8 @@ public struct MFPaletteEntry {
     public mut func set_ayCbCr(val: MFAYUVSample): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<MFAYUVSample>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -68757,27 +69626,21 @@ public struct MFTOPONODE_ATTRIBUTE_UPDATE {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MFTOPONODE_ATTRIBUTE_UPDATE__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func u32(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_u32(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -68785,22 +69648,16 @@ public struct MFTOPONODE_ATTRIBUTE_UPDATE__Anonymous_e__Union {
     public func u64(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_u64(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -68808,22 +69665,16 @@ public struct MFTOPONODE_ATTRIBUTE_UPDATE__Anonymous_e__Union {
     public func d(): Float64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadFloat64(base, 0)
         }
     }
 
     public mut func set_d(val: Float64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteFloat64(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -69227,14 +70078,13 @@ public struct MFVideoAlphaBitmap {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct MFVideoAlphaBitmap__bitmap_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func hdc(): Win32_Graphics_Gdi.HDC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Graphics_Gdi.HDC>(p)
             return ptr.read()
         }
@@ -69243,9 +70093,8 @@ public struct MFVideoAlphaBitmap__bitmap_e__Union {
     public mut func set_hdc(val: Win32_Graphics_Gdi.HDC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Graphics_Gdi.HDC>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -69255,9 +70104,8 @@ public struct MFVideoAlphaBitmap__bitmap_e__Union {
     public func pdds(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -69266,9 +70114,8 @@ public struct MFVideoAlphaBitmap__bitmap_e__Union {
     public mut func set_pdds(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -73490,22 +74337,185 @@ public struct MULawCodecWrapper {
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_ACP_AND_CGMSA_SIGNALING {
-    public var rnRandomNumber: OPM_RANDOM_NUMBER = OPM_RANDOM_NUMBER()
-    public var ulStatusFlags: UInt32 = 0
-    public var ulAvailableTVProtectionStandards: UInt32 = 0
-    public var ulActiveTVProtectionStandard: UInt32 = 0
-    public var ulReserved: UInt32 = 0
-    public var ulAspectRatioValidMask1: UInt32 = 0
-    public var ulAspectRatioData1: UInt32 = 0
-    public var ulAspectRatioValidMask2: UInt32 = 0
-    public var ulAspectRatioData2: UInt32 = 0
-    public var ulAspectRatioValidMask3: UInt32 = 0
-    public var ulAspectRatioData3: UInt32 = 0
-    public var ulReserved2: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
-    public var ulReserved3: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $88> = VArray<UInt8, $88>(repeat: 0u8)
+
+    // packed field `rnRandomNumber`: type `OPM_RANDOM_NUMBER` not supported by polyfill; skipped
+
+    public func ulStatusFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_ulStatusFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAvailableTVProtectionStandards(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_ulAvailableTVProtectionStandards(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulActiveTVProtectionStandard(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_ulActiveTVProtectionStandard(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulReserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_ulReserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioValidMask1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_ulAspectRatioValidMask1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioData1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_ulAspectRatioData1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioValidMask2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_ulAspectRatioValidMask2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioData2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_ulAspectRatioData2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioValidMask3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_ulAspectRatioValidMask3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioData3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 52)
+        }
+    }
+
+    public mut func set_ulAspectRatioData3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 52, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ulReserved2`: type `VArray<UInt32, $4>` not supported by polyfill; skipped
+
+    // packed field `ulReserved3`: type `VArray<UInt32, $4>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -73541,17 +74551,100 @@ public let OPM_ACP_LEVEL_TWO: OPM_ACP_PROTECTION_LEVEL = OPM_ACP_PROTECTION_LEVE
 public let OPM_ACP_LEVEL_THREE: OPM_ACP_PROTECTION_LEVEL = OPM_ACP_PROTECTION_LEVEL(3)
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_ACTUAL_OUTPUT_FORMAT {
-    public var rnRandomNumber: OPM_RANDOM_NUMBER = OPM_RANDOM_NUMBER()
-    public var ulStatusFlags: UInt32 = 0
-    public var ulDisplayWidth: UInt32 = 0
-    public var ulDisplayHeight: UInt32 = 0
-    public var dsfSampleInterleaveFormat: DXVA2_SampleFormat = DXVA2_SampleFormat()
-    public var d3dFormat: Win32_Graphics_Direct3D9.D3DFORMAT = Win32_Graphics_Direct3D9.D3DFORMAT()
-    public var ulFrequencyNumerator: UInt32 = 0
-    public var ulFrequencyDenominator: UInt32 = 0
+    public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0u8)
+
+    // packed field `rnRandomNumber`: type `OPM_RANDOM_NUMBER` not supported by polyfill; skipped
+
+    public func ulStatusFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_ulStatusFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulDisplayWidth(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_ulDisplayWidth(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulDisplayHeight(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_ulDisplayHeight(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `dsfSampleInterleaveFormat`: type `DXVA2_SampleFormat` not supported by polyfill; skipped
+
+    // packed field `d3dFormat`: type `Win32_Graphics_Direct3D9.D3DFORMAT` not supported by polyfill; skipped
+
+    public func ulFrequencyNumerator(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_ulFrequencyNumerator(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulFrequencyDenominator(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 40)
+        }
+    }
+
+    public mut func set_ulFrequencyDenominator(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 40, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -73648,28 +74741,100 @@ public let OPM_CGMSA_COPY_NEVER: OPM_CGMSA = OPM_CGMSA(4)
 public let OPM_CGMSA_REDISTRIBUTION_CONTROL_REQUIRED: OPM_CGMSA = OPM_CGMSA(8)
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_CONFIGURE_PARAMETERS {
-    public var omac: OPM_OMAC = OPM_OMAC()
-    public var guidSetting: GUID = GUID()
-    public var ulSequenceNumber: UInt32 = 0
-    public var cbParametersSize: UInt32 = 0
-    public var abParameters: VArray<UInt8, $4056> = VArray<UInt8, $4056>(repeat: 0)
+    public var _raw: VArray<UInt8, $4080> = VArray<UInt8, $4080>(repeat: 0u8)
+
+    // packed field `omac`: type `OPM_OMAC` not supported by polyfill; skipped
+
+    // packed field `guidSetting`: layout unknown; skipped
+
+    public func ulSequenceNumber(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_ulSequenceNumber(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cbParametersSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_cbParametersSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `abParameters`: type `VArray<UInt8, $4056>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_CONNECTED_HDCP_DEVICE_INFORMATION {
-    public var rnRandomNumber: OPM_RANDOM_NUMBER = OPM_RANDOM_NUMBER()
-    public var ulStatusFlags: UInt32 = 0
-    public var ulHDCPFlags: UInt32 = 0
-    public var ksvB: OPM_HDCP_KEY_SELECTION_VECTOR = OPM_HDCP_KEY_SELECTION_VECTOR()
-    public var Reserved: VArray<UInt8, $11> = VArray<UInt8, $11>(repeat: 0)
-    public var Reserved2: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var Reserved3: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0u8)
+
+    // packed field `rnRandomNumber`: type `OPM_RANDOM_NUMBER` not supported by polyfill; skipped
+
+    public func ulStatusFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_ulStatusFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulHDCPFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_ulHDCPFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ksvB`: type `OPM_HDCP_KEY_SELECTION_VECTOR` not supported by polyfill; skipped
+
+    // packed field `Reserved`: type `VArray<UInt8, $11>` not supported by polyfill; skipped
+
+    // packed field `Reserved2`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
+
+    // packed field `Reserved3`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -73750,14 +74915,49 @@ public let OPM_CONNECTOR_TYPE_TRANSPORT_AGNOSTIC_DIGITAL_MODE_B: OPM_CONNECTOR_T
 public let OPM_COPP_COMPATIBLE_CONNECTOR_TYPE_INTERNAL: OPM_CONNECTOR_TYPE = OPM_CONNECTOR_TYPE(-2147483648)
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS {
-    public var rnRandomNumber: OPM_RANDOM_NUMBER = OPM_RANDOM_NUMBER()
-    public var guidInformation: GUID = GUID()
-    public var ulSequenceNumber: UInt32 = 0
-    public var cbParametersSize: UInt32 = 0
-    public var abParameters: VArray<UInt8, $4056> = VArray<UInt8, $4056>(repeat: 0)
+    public var _raw: VArray<UInt8, $4080> = VArray<UInt8, $4080>(repeat: 0u8)
+
+    // packed field `rnRandomNumber`: type `OPM_RANDOM_NUMBER` not supported by polyfill; skipped
+
+    // packed field `guidInformation`: layout unknown; skipped
+
+    public func ulSequenceNumber(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_ulSequenceNumber(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cbParametersSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_cbParametersSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `abParameters`: type `VArray<UInt8, $4056>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -73819,33 +75019,103 @@ public struct OPM_ENCRYPTED_INITIALIZATION_PARAMETERS {
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_GET_CODEC_INFO_INFORMATION {
-    public var rnRandomNumber: OPM_RANDOM_NUMBER = OPM_RANDOM_NUMBER()
-    public var Merit: UInt32 = 0
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    // packed field `rnRandomNumber`: type `OPM_RANDOM_NUMBER` not supported by polyfill; skipped
+
+    public func merit(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_merit(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_GET_CODEC_INFO_PARAMETERS {
-    public var cbVerifier: UInt32 = 0
-    public var Verifier: VArray<UInt8, $4052> = VArray<UInt8, $4052>(repeat: 0)
+    public var _raw: VArray<UInt8, $4056> = VArray<UInt8, $4056>(repeat: 0u8)
+
+    public func cbVerifier(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_cbVerifier(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `Verifier`: type `VArray<UInt8, $4052>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_GET_INFO_PARAMETERS {
-    public var omac: OPM_OMAC = OPM_OMAC()
-    public var rnRandomNumber: OPM_RANDOM_NUMBER = OPM_RANDOM_NUMBER()
-    public var guidInformation: GUID = GUID()
-    public var ulSequenceNumber: UInt32 = 0
-    public var cbParametersSize: UInt32 = 0
-    public var abParameters: VArray<UInt8, $4056> = VArray<UInt8, $4056>(repeat: 0)
+    public var _raw: VArray<UInt8, $4096> = VArray<UInt8, $4096>(repeat: 0u8)
+
+    // packed field `omac`: type `OPM_OMAC` not supported by polyfill; skipped
+
+    // packed field `rnRandomNumber`: type `OPM_RANDOM_NUMBER` not supported by polyfill; skipped
+
+    // packed field `guidInformation`: layout unknown; skipped
+
+    public func ulSequenceNumber(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 32)
+        }
+    }
+
+    public mut func set_ulSequenceNumber(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cbParametersSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 36)
+        }
+    }
+
+    public mut func set_cbParametersSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `abParameters`: type `VArray<UInt8, $4056>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -74046,12 +75316,45 @@ public let OPM_OUTPUT_HARDWARE_PROTECTION_NOT_SUPPORTED: OPM_OUTPUT_HARDWARE_PRO
 public let OPM_OUTPUT_HARDWARE_PROTECTION_SUPPORTED: OPM_OUTPUT_HARDWARE_PROTECTION = OPM_OUTPUT_HARDWARE_PROTECTION(1)
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_OUTPUT_ID_DATA {
-    public var rnRandomNumber: OPM_RANDOM_NUMBER = OPM_RANDOM_NUMBER()
-    public var ulStatusFlags: UInt32 = 0
-    public var OutputId: UInt64 = 0
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    // packed field `rnRandomNumber`: type `OPM_RANDOM_NUMBER` not supported by polyfill; skipped
+
+    public func ulStatusFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_ulStatusFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func outputId(): UInt64 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt64(base, 20)
+        }
+    }
+
+    public mut func set_outputId(val: UInt64): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt64(base, 20, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -74176,60 +75479,353 @@ public struct OPM_RANDOM_NUMBER {
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_REQUESTED_INFORMATION {
-    public var omac: OPM_OMAC = OPM_OMAC()
-    public var cbRequestedInformationSize: UInt32 = 0
-    public var abRequestedInformation: VArray<UInt8, $4076> = VArray<UInt8, $4076>(repeat: 0)
+    public var _raw: VArray<UInt8, $4096> = VArray<UInt8, $4096>(repeat: 0u8)
+
+    // packed field `omac`: type `OPM_OMAC` not supported by polyfill; skipped
+
+    public func cbRequestedInformationSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_cbRequestedInformationSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `abRequestedInformation`: type `VArray<UInt8, $4076>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS {
-    public var ulNewTVProtectionStandard: UInt32 = 0
-    public var ulAspectRatioChangeMask1: UInt32 = 0
-    public var ulAspectRatioData1: UInt32 = 0
-    public var ulAspectRatioChangeMask2: UInt32 = 0
-    public var ulAspectRatioData2: UInt32 = 0
-    public var ulAspectRatioChangeMask3: UInt32 = 0
-    public var ulAspectRatioData3: UInt32 = 0
-    public var ulReserved: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
-    public var ulReserved2: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
-    public var ulReserved3: UInt32 = 0
+    public var _raw: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
+
+    public func ulNewTVProtectionStandard(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_ulNewTVProtectionStandard(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioChangeMask1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_ulAspectRatioChangeMask1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioData1(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_ulAspectRatioData1(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioChangeMask2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_ulAspectRatioChangeMask2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioData2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_ulAspectRatioData2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioChangeMask3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_ulAspectRatioChangeMask3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulAspectRatioData3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_ulAspectRatioData3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `ulReserved`: type `VArray<UInt32, $4>` not supported by polyfill; skipped
+
+    // packed field `ulReserved2`: type `VArray<UInt32, $4>` not supported by polyfill; skipped
+
+    public func ulReserved3(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 60)
+        }
+    }
+
+    public mut func set_ulReserved3(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 60, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_SET_HDCP_SRM_PARAMETERS {
-    public var ulSRMVersion: UInt32 = 0
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+
+    public func ulSRMVersion(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_ulSRMVersion(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_SET_PROTECTION_LEVEL_PARAMETERS {
-    public var ulProtectionType: UInt32 = 0
-    public var ulProtectionLevel: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public var Reserved2: UInt32 = 0
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    public func ulProtectionType(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_ulProtectionType(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulProtectionLevel(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_ulProtectionLevel(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_reserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func reserved2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 12)
+        }
+    }
+
+    public mut func set_reserved2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Media_MediaFoundation == "on"]
-// packed(1)
 @C
 public struct OPM_STANDARD_INFORMATION {
-    public var rnRandomNumber: OPM_RANDOM_NUMBER = OPM_RANDOM_NUMBER()
-    public var ulStatusFlags: UInt32 = 0
-    public var ulInformation: UInt32 = 0
-    public var ulReserved: UInt32 = 0
-    public var ulReserved2: UInt32 = 0
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    // packed field `rnRandomNumber`: type `OPM_RANDOM_NUMBER` not supported by polyfill; skipped
+
+    public func ulStatusFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 16)
+        }
+    }
+
+    public mut func set_ulStatusFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 16, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulInformation(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 20)
+        }
+    }
+
+    public mut func set_ulInformation(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulReserved(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_ulReserved(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ulReserved2(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 28)
+        }
+    }
+
+    public mut func set_ulReserved2(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -74638,27 +76234,21 @@ public struct VIDEOINFOHEADER2 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct VIDEOINFOHEADER2__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dwControlFlags(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwControlFlags(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -74666,22 +76256,16 @@ public struct VIDEOINFOHEADER2__Anonymous_e__Union {
     public func dwReserved1(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwReserved1(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }

@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.ImageAcquisition
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
 import windows_sys.Win32.impl as Win32_impl
@@ -4864,27 +4865,21 @@ public struct WIAS_CHANGED_VALUE_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WIAS_CHANGED_VALUE_INFO__Old_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func lVal(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_lVal(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4892,22 +4887,16 @@ public struct WIAS_CHANGED_VALUE_INFO__Old_e__Union {
     public func fltVal(): Float32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadFloat32(base, 0)
         }
     }
 
     public mut func set_fltVal(val: Float32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteFloat32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4915,9 +4904,8 @@ public struct WIAS_CHANGED_VALUE_INFO__Old_e__Union {
     public func bstrVal(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -4926,9 +4914,8 @@ public struct WIAS_CHANGED_VALUE_INFO__Old_e__Union {
     public mut func set_bstrVal(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4938,9 +4925,8 @@ public struct WIAS_CHANGED_VALUE_INFO__Old_e__Union {
     public func guidVal(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -4949,9 +4935,8 @@ public struct WIAS_CHANGED_VALUE_INFO__Old_e__Union {
     public mut func set_guidVal(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4964,27 +4949,21 @@ public struct WIAS_CHANGED_VALUE_INFO__Old_e__Union {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WIAS_CHANGED_VALUE_INFO__Current_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func lVal(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_lVal(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -4992,22 +4971,16 @@ public struct WIAS_CHANGED_VALUE_INFO__Current_e__Union {
     public func fltVal(): Float32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadFloat32(base, 0)
         }
     }
 
     public mut func set_fltVal(val: Float32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Float32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteFloat32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -5015,9 +4988,8 @@ public struct WIAS_CHANGED_VALUE_INFO__Current_e__Union {
     public func bstrVal(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -5026,9 +4998,8 @@ public struct WIAS_CHANGED_VALUE_INFO__Current_e__Union {
     public mut func set_bstrVal(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5038,9 +5009,8 @@ public struct WIAS_CHANGED_VALUE_INFO__Current_e__Union {
     public func guidVal(): GUID {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             return ptr.read()
         }
@@ -5049,9 +5019,8 @@ public struct WIAS_CHANGED_VALUE_INFO__Current_e__Union {
     public mut func set_guidVal(val: GUID): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GUID>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5298,14 +5267,13 @@ public struct WIA_PROPERTY_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func range(): WIA_PROPERTY_INFO__ValidVal_e__Union__Range_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__Range_e__Struct>(p)
             return ptr.read()
         }
@@ -5314,9 +5282,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public mut func set_range(val: WIA_PROPERTY_INFO__ValidVal_e__Union__Range_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__Range_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5326,9 +5293,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public func rangeFloat(): WIA_PROPERTY_INFO__ValidVal_e__Union__RangeFloat_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__RangeFloat_e__Struct>(p)
             return ptr.read()
         }
@@ -5337,9 +5303,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public mut func set_rangeFloat(val: WIA_PROPERTY_INFO__ValidVal_e__Union__RangeFloat_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__RangeFloat_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5349,9 +5314,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public func list(): WIA_PROPERTY_INFO__ValidVal_e__Union__List_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__List_e__Struct>(p)
             return ptr.read()
         }
@@ -5360,9 +5324,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public mut func set_list(val: WIA_PROPERTY_INFO__ValidVal_e__Union__List_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__List_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5372,9 +5335,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public func listFloat(): WIA_PROPERTY_INFO__ValidVal_e__Union__ListFloat_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__ListFloat_e__Struct>(p)
             return ptr.read()
         }
@@ -5383,9 +5345,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public mut func set_listFloat(val: WIA_PROPERTY_INFO__ValidVal_e__Union__ListFloat_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__ListFloat_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5395,9 +5356,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public func listGuid(): WIA_PROPERTY_INFO__ValidVal_e__Union__ListGuid_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__ListGuid_e__Struct>(p)
             return ptr.read()
         }
@@ -5406,9 +5366,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public mut func set_listGuid(val: WIA_PROPERTY_INFO__ValidVal_e__Union__ListGuid_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__ListGuid_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5418,9 +5377,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public func listBStr(): WIA_PROPERTY_INFO__ValidVal_e__Union__ListBStr_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__ListBStr_e__Struct>(p)
             return ptr.read()
         }
@@ -5429,9 +5387,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public mut func set_listBStr(val: WIA_PROPERTY_INFO__ValidVal_e__Union__ListBStr_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__ListBStr_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5441,9 +5398,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public func flag(): WIA_PROPERTY_INFO__ValidVal_e__Union__Flag_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__Flag_e__Struct>(p)
             return ptr.read()
         }
@@ -5452,9 +5408,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public mut func set_flag(val: WIA_PROPERTY_INFO__ValidVal_e__Union__Flag_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__Flag_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -5464,9 +5419,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public func none(): WIA_PROPERTY_INFO__ValidVal_e__Union__None_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__None_e__Struct>(p)
             return ptr.read()
         }
@@ -5475,9 +5429,8 @@ public struct WIA_PROPERTY_INFO__ValidVal_e__Union {
     public mut func set_none(val: WIA_PROPERTY_INFO__ValidVal_e__Union__None_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<WIA_PROPERTY_INFO__ValidVal_e__Union__None_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

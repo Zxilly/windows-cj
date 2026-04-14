@@ -3,6 +3,7 @@ package windows_sys.Win32.Storage.Vss
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Storage.VirtualDiskService as Win32_Storage_VirtualDiskService
 import windows_sys.Win32.impl as Win32_impl
@@ -4296,14 +4297,13 @@ public let VSS_MGMT_OBJECT_DIFF_AREA: VSS_MGMT_OBJECT_TYPE = VSS_MGMT_OBJECT_TYP
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct VSS_MGMT_OBJECT_UNION {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func vol(): VSS_VOLUME_PROP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_VOLUME_PROP>(p)
             return ptr.read()
         }
@@ -4312,9 +4312,8 @@ public struct VSS_MGMT_OBJECT_UNION {
     public mut func set_vol(val: VSS_VOLUME_PROP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_VOLUME_PROP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4324,9 +4323,8 @@ public struct VSS_MGMT_OBJECT_UNION {
     public func diffVol(): VSS_DIFF_VOLUME_PROP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_DIFF_VOLUME_PROP>(p)
             return ptr.read()
         }
@@ -4335,9 +4333,8 @@ public struct VSS_MGMT_OBJECT_UNION {
     public mut func set_diffVol(val: VSS_DIFF_VOLUME_PROP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_DIFF_VOLUME_PROP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4347,9 +4344,8 @@ public struct VSS_MGMT_OBJECT_UNION {
     public func diffArea(): VSS_DIFF_AREA_PROP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_DIFF_AREA_PROP>(p)
             return ptr.read()
         }
@@ -4358,9 +4354,8 @@ public struct VSS_MGMT_OBJECT_UNION {
     public mut func set_diffArea(val: VSS_DIFF_AREA_PROP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_DIFF_AREA_PROP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4418,14 +4413,13 @@ public let VSS_OBJECT_TYPE_COUNT: VSS_OBJECT_TYPE = VSS_OBJECT_TYPE(5)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct VSS_OBJECT_UNION {
-    public var _raw: VArray<UInt64, $10> = VArray<UInt64, $10>(repeat: 0)
+    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
 
     public func snap(): VSS_SNAPSHOT_PROP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_SNAPSHOT_PROP>(p)
             return ptr.read()
         }
@@ -4434,9 +4428,8 @@ public struct VSS_OBJECT_UNION {
     public mut func set_snap(val: VSS_SNAPSHOT_PROP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_SNAPSHOT_PROP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -4446,9 +4439,8 @@ public struct VSS_OBJECT_UNION {
     public func prov(): VSS_PROVIDER_PROP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_PROVIDER_PROP>(p)
             return ptr.read()
         }
@@ -4457,9 +4449,8 @@ public struct VSS_OBJECT_UNION {
     public mut func set_prov(val: VSS_PROVIDER_PROP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VSS_PROVIDER_PROP>(p)
             ptr.write(val)
             _raw = rawStorage

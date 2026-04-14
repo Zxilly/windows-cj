@@ -3,6 +3,7 @@ package windows_sys.Win32.Media.Audio.Apo
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Media.impl as Win32_Media_impl
 import windows_sys.Win32.impl as Win32_impl
@@ -231,14 +232,13 @@ public struct APO_NOTIFICATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct APO_NOTIFICATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func audioEndpointVolumeChange(): AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION>(p)
             return ptr.read()
         }
@@ -247,9 +247,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public mut func set_audioEndpointVolumeChange(val: AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -259,9 +258,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public func audioEndpointPropertyChange(): AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION>(p)
             return ptr.read()
         }
@@ -270,9 +268,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public mut func set_audioEndpointPropertyChange(val: AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -282,9 +279,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public func audioSystemEffectsPropertyChange(): AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION>(p)
             return ptr.read()
         }
@@ -293,9 +289,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public mut func set_audioSystemEffectsPropertyChange(val: AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -305,9 +300,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public func audioEndpointVolumeChange2(): AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2>(p)
             return ptr.read()
         }
@@ -316,9 +310,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public mut func set_audioEndpointVolumeChange2(val: AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -328,9 +321,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public func deviceOrientation(): DEVICE_ORIENTATION_TYPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DEVICE_ORIENTATION_TYPE>(p)
             return ptr.read()
         }
@@ -339,9 +331,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public mut func set_deviceOrientation(val: DEVICE_ORIENTATION_TYPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DEVICE_ORIENTATION_TYPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -351,9 +342,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public func audioMicrophoneBoostChange(): AUDIO_MICROPHONE_BOOST_NOTIFICATION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_MICROPHONE_BOOST_NOTIFICATION>(p)
             return ptr.read()
         }
@@ -362,9 +352,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public mut func set_audioMicrophoneBoostChange(val: AUDIO_MICROPHONE_BOOST_NOTIFICATION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_MICROPHONE_BOOST_NOTIFICATION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -374,9 +363,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public func audioEnvironmentChange(): AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION>(p)
             return ptr.read()
         }
@@ -385,9 +373,8 @@ public struct APO_NOTIFICATION__Anonymous_e__Union {
     public mut func set_audioEnvironmentChange(val: AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -408,14 +395,13 @@ public struct APO_NOTIFICATION_DESCRIPTOR {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct APO_NOTIFICATION_DESCRIPTOR__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func audioEndpointVolume(): AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR>(p)
             return ptr.read()
         }
@@ -424,9 +410,8 @@ public struct APO_NOTIFICATION_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_audioEndpointVolume(val: AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -436,9 +421,8 @@ public struct APO_NOTIFICATION_DESCRIPTOR__Anonymous_e__Union {
     public func audioEndpointPropertyChange(): AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR>(p)
             return ptr.read()
         }
@@ -447,9 +431,8 @@ public struct APO_NOTIFICATION_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_audioEndpointPropertyChange(val: AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -459,9 +442,8 @@ public struct APO_NOTIFICATION_DESCRIPTOR__Anonymous_e__Union {
     public func audioSystemEffectsPropertyChange(): AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR>(p)
             return ptr.read()
         }
@@ -470,9 +452,8 @@ public struct APO_NOTIFICATION_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_audioSystemEffectsPropertyChange(val: AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -482,9 +463,8 @@ public struct APO_NOTIFICATION_DESCRIPTOR__Anonymous_e__Union {
     public func audioMicrophoneBoost(): AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR>(p)
             return ptr.read()
         }
@@ -493,9 +473,8 @@ public struct APO_NOTIFICATION_DESCRIPTOR__Anonymous_e__Union {
     public mut func set_audioMicrophoneBoost(val: AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR>(p)
             ptr.write(val)
             _raw = rawStorage

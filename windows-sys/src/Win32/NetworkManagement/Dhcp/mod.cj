@@ -3,6 +3,7 @@ package windows_sys.Win32.NetworkManagement.Dhcp
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -344,27 +345,21 @@ public struct DHCP_ATTRIB {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_ATTRIB__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dhcpAttribBool(): Int32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadInt32(base, 0)
         }
     }
 
     public mut func set_dhcpAttribBool(val: Int32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<Int32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -372,22 +367,16 @@ public struct DHCP_ATTRIB__Anonymous_e__Union {
     public func dhcpAttribUlong(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dhcpAttribUlong(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1100,27 +1089,21 @@ public struct DHCP_OPTION_DATA_ELEMENT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func byteOption(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_byteOption(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1128,22 +1111,16 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public func wordOption(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_wordOption(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1151,22 +1128,16 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public func dWordOption(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dWordOption(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1174,9 +1145,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public func dWordDWordOption(): DWORD_DWORD {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DWORD_DWORD>(p)
             return ptr.read()
         }
@@ -1185,9 +1155,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public mut func set_dWordDWordOption(val: DWORD_DWORD): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DWORD_DWORD>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1197,22 +1166,16 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public func ipAddressOption(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_ipAddressOption(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1220,9 +1183,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public func stringDataOption(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -1231,9 +1193,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public mut func set_stringDataOption(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1243,9 +1204,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public func binaryDataOption(): DHCP_BINARY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             return ptr.read()
         }
@@ -1254,9 +1214,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public mut func set_binaryDataOption(val: DHCP_BINARY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1266,9 +1225,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public func encapsulatedDataOption(): DHCP_BINARY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             return ptr.read()
         }
@@ -1277,9 +1235,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public mut func set_encapsulatedDataOption(val: DHCP_BINARY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1289,9 +1246,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public func ipv6AddressDataOption(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -1300,9 +1256,8 @@ public struct DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION {
     public mut func set_ipv6AddressDataOption(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1377,14 +1332,13 @@ public struct DHCP_OPTION_SCOPE_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func defaultScopeInfo(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -1393,9 +1347,8 @@ public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
     public mut func set_defaultScopeInfo(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1405,9 +1358,8 @@ public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
     public func globalScopeInfo(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -1416,9 +1368,8 @@ public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
     public mut func set_globalScopeInfo(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1428,22 +1379,16 @@ public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
     public func subnetScopeInfo(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_subnetScopeInfo(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1451,9 +1396,8 @@ public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
     public func reservedScopeInfo(): DHCP_RESERVED_SCOPE {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_RESERVED_SCOPE>(p)
             return ptr.read()
         }
@@ -1462,9 +1406,8 @@ public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
     public mut func set_reservedScopeInfo(val: DHCP_RESERVED_SCOPE): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_RESERVED_SCOPE>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1474,9 +1417,8 @@ public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
     public func mScopeInfo(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -1485,9 +1427,8 @@ public struct DHCP_OPTION_SCOPE_INFO__DHCP_OPTION_SCOPE_UNION {
     public mut func set_mScopeInfo(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1508,14 +1449,13 @@ public struct DHCP_OPTION_SCOPE_INFO6 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 {
-    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
 
     public func defaultScopeInfo(): CPointer<Unit> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             return ptr.read()
         }
@@ -1524,9 +1464,8 @@ public struct DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 {
     public mut func set_defaultScopeInfo(val: CPointer<Unit>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<Unit>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1536,9 +1475,8 @@ public struct DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 {
     public func subnetScopeInfo(): DHCP_IPV6_ADDRESS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
             return ptr.read()
         }
@@ -1547,9 +1485,8 @@ public struct DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 {
     public mut func set_subnetScopeInfo(val: DHCP_IPV6_ADDRESS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1559,9 +1496,8 @@ public struct DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 {
     public func reservedScopeInfo(): DHCP_RESERVED_SCOPE6 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_RESERVED_SCOPE6>(p)
             return ptr.read()
         }
@@ -1570,9 +1506,8 @@ public struct DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 {
     public mut func set_reservedScopeInfo(val: DHCP_RESERVED_SCOPE6): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_RESERVED_SCOPE6>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1946,27 +1881,21 @@ public struct DHCP_PROPERTY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func byteValue(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_byteValue(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1974,22 +1903,16 @@ public struct DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION {
     public func wordValue(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_wordValue(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1997,22 +1920,16 @@ public struct DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION {
     public func dWordValue(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dWordValue(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2020,9 +1937,8 @@ public struct DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION {
     public func stringValue(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -2031,9 +1947,8 @@ public struct DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION {
     public mut func set_stringValue(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2043,9 +1958,8 @@ public struct DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION {
     public func binaryValue(): DHCP_BINARY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             return ptr.read()
         }
@@ -2054,9 +1968,8 @@ public struct DHCP_PROPERTY__DHCP_PROPERTY_VALUE_UNION {
     public mut func set_binaryValue(val: DHCP_BINARY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2209,27 +2122,21 @@ public struct DHCP_SEARCH_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func clientIpAddress(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_clientIpAddress(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2237,9 +2144,8 @@ public struct DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION {
     public func clientHardwareAddress(): DHCP_BINARY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             return ptr.read()
         }
@@ -2248,9 +2154,8 @@ public struct DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION {
     public mut func set_clientHardwareAddress(val: DHCP_BINARY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2260,9 +2165,8 @@ public struct DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION {
     public func clientName(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -2271,9 +2175,8 @@ public struct DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION {
     public mut func set_clientName(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2350,14 +2253,13 @@ public struct DHCP_SEARCH_INFO_V6 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_SEARCH_INFO_V6__DHCP_CLIENT_SEARCH_UNION_V6 {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func clientIpAddress(): DHCP_IPV6_ADDRESS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
             return ptr.read()
         }
@@ -2366,9 +2268,8 @@ public struct DHCP_SEARCH_INFO_V6__DHCP_CLIENT_SEARCH_UNION_V6 {
     public mut func set_clientIpAddress(val: DHCP_IPV6_ADDRESS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_IPV6_ADDRESS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2378,9 +2279,8 @@ public struct DHCP_SEARCH_INFO_V6__DHCP_CLIENT_SEARCH_UNION_V6 {
     public func clientDUID(): DHCP_BINARY_DATA {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             return ptr.read()
         }
@@ -2389,9 +2289,8 @@ public struct DHCP_SEARCH_INFO_V6__DHCP_CLIENT_SEARCH_UNION_V6 {
     public mut func set_clientDUID(val: DHCP_BINARY_DATA): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<DHCP_BINARY_DATA>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2401,9 +2300,8 @@ public struct DHCP_SEARCH_INFO_V6__DHCP_CLIENT_SEARCH_UNION_V6 {
     public func clientName(): CPointer<UInt16> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             return ptr.read()
         }
@@ -2412,9 +2310,8 @@ public struct DHCP_SEARCH_INFO_V6__DHCP_CLIENT_SEARCH_UNION_V6 {
     public mut func set_clientName(val: CPointer<UInt16>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<UInt16>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2545,14 +2442,13 @@ public struct DHCP_SUBNET_ELEMENT_DATA {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ipRange(): CPointer<DHCP_IP_RANGE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             return ptr.read()
         }
@@ -2561,9 +2457,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
     public mut func set_ipRange(val: CPointer<DHCP_IP_RANGE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2573,9 +2468,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
     public func secondaryHost(): CPointer<DHCP_HOST_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
             return ptr.read()
         }
@@ -2584,9 +2478,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
     public mut func set_secondaryHost(val: CPointer<DHCP_HOST_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2596,9 +2489,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
     public func reservedIp(): CPointer<DHCP_IP_RESERVATION> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RESERVATION>>(p)
             return ptr.read()
         }
@@ -2607,9 +2499,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
     public mut func set_reservedIp(val: CPointer<DHCP_IP_RESERVATION>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RESERVATION>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2619,9 +2510,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
     public func excludeIpRange(): CPointer<DHCP_IP_RANGE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             return ptr.read()
         }
@@ -2630,9 +2520,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
     public mut func set_excludeIpRange(val: CPointer<DHCP_IP_RANGE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2642,9 +2531,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
     public func ipUsedCluster(): CPointer<DHCP_IP_CLUSTER> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
             return ptr.read()
         }
@@ -2653,9 +2541,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION {
     public mut func set_ipUsedCluster(val: CPointer<DHCP_IP_CLUSTER>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2676,14 +2563,13 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ipRange(): CPointer<DHCP_IP_RANGE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             return ptr.read()
         }
@@ -2692,9 +2578,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
     public mut func set_ipRange(val: CPointer<DHCP_IP_RANGE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2704,9 +2589,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
     public func secondaryHost(): CPointer<DHCP_HOST_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
             return ptr.read()
         }
@@ -2715,9 +2599,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
     public mut func set_secondaryHost(val: CPointer<DHCP_HOST_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2727,9 +2610,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
     public func reservedIp(): CPointer<DHCP_IP_RESERVATION_V4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
             return ptr.read()
         }
@@ -2738,9 +2620,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
     public mut func set_reservedIp(val: CPointer<DHCP_IP_RESERVATION_V4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2750,9 +2631,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
     public func excludeIpRange(): CPointer<DHCP_IP_RANGE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             return ptr.read()
         }
@@ -2761,9 +2641,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
     public mut func set_excludeIpRange(val: CPointer<DHCP_IP_RANGE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2773,9 +2652,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
     public func ipUsedCluster(): CPointer<DHCP_IP_CLUSTER> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
             return ptr.read()
         }
@@ -2784,9 +2662,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 {
     public mut func set_ipUsedCluster(val: CPointer<DHCP_IP_CLUSTER>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2807,14 +2684,13 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ipRange(): CPointer<DHCP_BOOTP_IP_RANGE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_BOOTP_IP_RANGE>>(p)
             return ptr.read()
         }
@@ -2823,9 +2699,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
     public mut func set_ipRange(val: CPointer<DHCP_BOOTP_IP_RANGE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_BOOTP_IP_RANGE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2835,9 +2710,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
     public func secondaryHost(): CPointer<DHCP_HOST_INFO> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
             return ptr.read()
         }
@@ -2846,9 +2720,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
     public mut func set_secondaryHost(val: CPointer<DHCP_HOST_INFO>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_HOST_INFO>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2858,9 +2731,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
     public func reservedIp(): CPointer<DHCP_IP_RESERVATION_V4> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
             return ptr.read()
         }
@@ -2869,9 +2741,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
     public mut func set_reservedIp(val: CPointer<DHCP_IP_RESERVATION_V4>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V4>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2881,9 +2752,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
     public func excludeIpRange(): CPointer<DHCP_IP_RANGE> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             return ptr.read()
         }
@@ -2892,9 +2762,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
     public mut func set_excludeIpRange(val: CPointer<DHCP_IP_RANGE>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2904,9 +2773,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
     public func ipUsedCluster(): CPointer<DHCP_IP_CLUSTER> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
             return ptr.read()
         }
@@ -2915,9 +2783,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V5__DHCP_SUBNET_ELEMENT_UNION_V5 {
     public mut func set_ipUsedCluster(val: CPointer<DHCP_IP_CLUSTER>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_CLUSTER>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2938,14 +2805,13 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V6 {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func ipRange(): CPointer<DHCP_IP_RANGE_V6> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
             return ptr.read()
         }
@@ -2954,9 +2820,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 {
     public mut func set_ipRange(val: CPointer<DHCP_IP_RANGE_V6>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2966,9 +2831,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 {
     public func reservedIp(): CPointer<DHCP_IP_RESERVATION_V6> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V6>>(p)
             return ptr.read()
         }
@@ -2977,9 +2841,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 {
     public mut func set_reservedIp(val: CPointer<DHCP_IP_RESERVATION_V6>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RESERVATION_V6>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2989,9 +2852,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 {
     public func excludeIpRange(): CPointer<DHCP_IP_RANGE_V6> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
             return ptr.read()
         }
@@ -3000,9 +2862,8 @@ public struct DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 {
     public mut func set_excludeIpRange(val: CPointer<DHCP_IP_RANGE_V6>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CPointer<DHCP_IP_RANGE_V6>>(p)
             ptr.write(val)
             _raw = rawStorage

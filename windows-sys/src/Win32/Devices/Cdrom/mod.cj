@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices.Cdrom
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -373,14 +374,13 @@ public struct CDROM_TOC_CD_TEXT_DATA_BLOCK {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CDROM_TOC_CD_TEXT_DATA_BLOCK__Anonymous_e__Union {
-    public var _raw: VArray<UInt16, $6> = VArray<UInt16, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
 
     public func text(): VArray<UInt8, $12> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $12>>(p)
             return ptr.read()
         }
@@ -389,9 +389,8 @@ public struct CDROM_TOC_CD_TEXT_DATA_BLOCK__Anonymous_e__Union {
     public mut func set_text(val: VArray<UInt8, $12>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $12>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -401,9 +400,8 @@ public struct CDROM_TOC_CD_TEXT_DATA_BLOCK__Anonymous_e__Union {
     public func wText(): VArray<UInt16, $6> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $6>>(p)
             return ptr.read()
         }
@@ -412,9 +410,8 @@ public struct CDROM_TOC_CD_TEXT_DATA_BLOCK__Anonymous_e__Union {
     public mut func set_wText(val: VArray<UInt16, $6>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt16, $6>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -601,9 +598,8 @@ public struct SUB_Q_CHANNEL_DATA {
     public func currentPosition(): SUB_Q_CURRENT_POSITION {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SUB_Q_CURRENT_POSITION>(p)
             return ptr.read()
         }
@@ -612,9 +608,8 @@ public struct SUB_Q_CHANNEL_DATA {
     public mut func set_currentPosition(val: SUB_Q_CURRENT_POSITION): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SUB_Q_CURRENT_POSITION>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -624,9 +619,8 @@ public struct SUB_Q_CHANNEL_DATA {
     public func mediaCatalog(): SUB_Q_MEDIA_CATALOG_NUMBER {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SUB_Q_MEDIA_CATALOG_NUMBER>(p)
             return ptr.read()
         }
@@ -635,9 +629,8 @@ public struct SUB_Q_CHANNEL_DATA {
     public mut func set_mediaCatalog(val: SUB_Q_MEDIA_CATALOG_NUMBER): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SUB_Q_MEDIA_CATALOG_NUMBER>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -647,9 +640,8 @@ public struct SUB_Q_CHANNEL_DATA {
     public func trackIsrc(): SUB_Q_TRACK_ISRC {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SUB_Q_TRACK_ISRC>(p)
             return ptr.read()
         }
@@ -658,9 +650,8 @@ public struct SUB_Q_CHANNEL_DATA {
     public mut func set_trackIsrc(val: SUB_Q_TRACK_ISRC): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SUB_Q_TRACK_ISRC>(p)
             ptr.write(val)
             _raw = rawStorage

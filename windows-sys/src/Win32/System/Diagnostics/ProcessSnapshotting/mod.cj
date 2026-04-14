@@ -3,6 +3,7 @@ package windows_sys.Win32.System.Diagnostics.ProcessSnapshotting
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.Memory as Win32_System_Memory
 import windows_sys.Win32.impl as Win32_impl
@@ -206,14 +207,13 @@ public struct PSS_HANDLE_ENTRY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
-    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
     public func process(): PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Process_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Process_e__Struct>(p)
             return ptr.read()
         }
@@ -222,9 +222,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public mut func set_process(val: PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Process_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Process_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -234,9 +233,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public func thread(): PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Thread_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Thread_e__Struct>(p)
             return ptr.read()
         }
@@ -245,9 +243,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public mut func set_thread(val: PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Thread_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Thread_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -257,9 +254,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public func mutant(): PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Mutant_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Mutant_e__Struct>(p)
             return ptr.read()
         }
@@ -268,9 +264,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public mut func set_mutant(val: PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Mutant_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Mutant_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -280,9 +275,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public func event(): PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Event_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Event_e__Struct>(p)
             return ptr.read()
         }
@@ -291,9 +285,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public mut func set_event(val: PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Event_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Event_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -303,9 +296,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public func section(): PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Section_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Section_e__Struct>(p)
             return ptr.read()
         }
@@ -314,9 +306,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public mut func set_section(val: PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Section_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Section_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -326,9 +317,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public func semaphore(): PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Semaphore_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Semaphore_e__Struct>(p)
             return ptr.read()
         }
@@ -337,9 +327,8 @@ public struct PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union {
     public mut func set_semaphore(val: PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Semaphore_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PSS_HANDLE_ENTRY__TypeSpecificInformation_e__Union__Semaphore_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

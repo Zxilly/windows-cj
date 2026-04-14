@@ -3,6 +3,7 @@ package windows_sys.Win32.Devices
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -20,14 +21,13 @@ public struct IEEE1394_API_REQUEST {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IEEE1394_API_REQUEST__u_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func addVirtualDevice(): IEEE1394_VDEV_PNP_REQUEST {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
             return ptr.read()
         }
@@ -36,9 +36,8 @@ public struct IEEE1394_API_REQUEST__u_e__Union {
     public mut func set_addVirtualDevice(val: IEEE1394_VDEV_PNP_REQUEST): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -48,9 +47,8 @@ public struct IEEE1394_API_REQUEST__u_e__Union {
     public func removeVirtualDevice(): IEEE1394_VDEV_PNP_REQUEST {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
             return ptr.read()
         }
@@ -59,9 +57,8 @@ public struct IEEE1394_API_REQUEST__u_e__Union {
     public mut func set_removeVirtualDevice(val: IEEE1394_VDEV_PNP_REQUEST): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
             ptr.write(val)
             _raw = rawStorage

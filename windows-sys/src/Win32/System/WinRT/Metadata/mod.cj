@@ -3,6 +3,7 @@ package windows_sys.Win32.System.WinRT.Metadata
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.WinRT as Win32_System_WinRT
@@ -86,12 +87,60 @@ public struct COR_FIELD_OFFSET {
 }
 
 @When[Windows_Win32_System_WinRT_Metadata == "on"]
-// packed(1)
 @C
 public struct COR_NATIVE_LINK {
-    public var m_linkType: UInt8 = 0
-    public var m_flags: UInt8 = 0
-    public var m_entryPoint: UInt32 = 0
+    public var _raw: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0u8)
+
+    public func m_linkType(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 0)
+        }
+    }
+
+    public mut func set_m_linkType(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func m_flags(): UInt8 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt8(base, 1)
+        }
+    }
+
+    public mut func set_m_flags(val: UInt8): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt8(base, 1, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func m_entryPoint(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 2)
+        }
+    }
+
+    public mut func set_m_entryPoint(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 2, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -174,27 +223,21 @@ public let sdExecute: CeeSectionAttr = CeeSectionAttr(1610612768)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CeeSectionRelocExtra {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func highAdj(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_highAdj(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -2998,14 +3041,13 @@ public class IHostFilter <: ComInterface & Resource {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IMAGE_COR_ILMETHOD {
-    public var _raw: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
 
     public func tiny(): IMAGE_COR_ILMETHOD_TINY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IMAGE_COR_ILMETHOD_TINY>(p)
             return ptr.read()
         }
@@ -3014,9 +3056,8 @@ public struct IMAGE_COR_ILMETHOD {
     public mut func set_tiny(val: IMAGE_COR_ILMETHOD_TINY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IMAGE_COR_ILMETHOD_TINY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3026,9 +3067,8 @@ public struct IMAGE_COR_ILMETHOD {
     public func fat(): IMAGE_COR_ILMETHOD_FAT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IMAGE_COR_ILMETHOD_FAT>(p)
             return ptr.read()
         }
@@ -3037,9 +3077,8 @@ public struct IMAGE_COR_ILMETHOD {
     public mut func set_fat(val: IMAGE_COR_ILMETHOD_FAT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IMAGE_COR_ILMETHOD_FAT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3061,14 +3100,13 @@ public struct IMAGE_COR_ILMETHOD_FAT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IMAGE_COR_ILMETHOD_SECT_EH {
-    public var _raw: VArray<UInt32, $7> = VArray<UInt32, $7>(repeat: 0)
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0)
 
     public func small(): IMAGE_COR_ILMETHOD_SECT_EH_SMALL {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IMAGE_COR_ILMETHOD_SECT_EH_SMALL>(p)
             return ptr.read()
         }
@@ -3077,9 +3115,8 @@ public struct IMAGE_COR_ILMETHOD_SECT_EH {
     public mut func set_small(val: IMAGE_COR_ILMETHOD_SECT_EH_SMALL): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IMAGE_COR_ILMETHOD_SECT_EH_SMALL>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3089,9 +3126,8 @@ public struct IMAGE_COR_ILMETHOD_SECT_EH {
     public func fat(): IMAGE_COR_ILMETHOD_SECT_EH_FAT {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IMAGE_COR_ILMETHOD_SECT_EH_FAT>(p)
             return ptr.read()
         }
@@ -3100,9 +3136,8 @@ public struct IMAGE_COR_ILMETHOD_SECT_EH {
     public mut func set_fat(val: IMAGE_COR_ILMETHOD_SECT_EH_FAT): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IMAGE_COR_ILMETHOD_SECT_EH_FAT>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -3127,27 +3162,21 @@ public struct IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func classToken(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_classToken(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3155,22 +3184,16 @@ public struct IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT__Anonymous_e__Union {
     public func filterOffset(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_filterOffset(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3190,27 +3213,21 @@ public struct IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func classToken(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_classToken(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -3218,22 +3235,16 @@ public struct IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL__Anonymous_e__Union {
     public func filterOffset(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_filterOffset(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }

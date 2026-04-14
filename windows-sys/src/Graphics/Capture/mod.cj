@@ -3,6 +3,7 @@ package windows_sys.Graphics.Capture
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Graphics as Graphics
 import windows_sys.Graphics.DirectX as Graphics_DirectX

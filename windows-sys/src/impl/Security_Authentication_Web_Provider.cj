@@ -3,6 +3,7 @@ package windows_sys.impl
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Security.Authentication.Web as Security_Authentication_Web
 import windows_sys.Win32.Foundation as Win32_Foundation

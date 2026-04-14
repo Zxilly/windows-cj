@@ -3,6 +3,7 @@ package windows_sys.Win32.Storage.IscsiDisc
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.System.Ioctl as Win32_System_Ioctl
 import windows_sys.Win32.Foundation.*
@@ -276,14 +277,13 @@ public struct IKE_AUTHENTICATION_INFORMATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct IKE_AUTHENTICATION_INFORMATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
 
     public func psKey(): IKE_AUTHENTICATION_PRESHARED_KEY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IKE_AUTHENTICATION_PRESHARED_KEY>(p)
             return ptr.read()
         }
@@ -292,9 +292,8 @@ public struct IKE_AUTHENTICATION_INFORMATION__Anonymous_e__Union {
     public mut func set_psKey(val: IKE_AUTHENTICATION_PRESHARED_KEY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<IKE_AUTHENTICATION_PRESHARED_KEY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -979,9 +978,8 @@ public struct NV_SEP_CACHE_PARAMETER__Flags_e__Union {
     public func cacheFlags(): NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct>(p)
             return ptr.read()
         }
@@ -990,9 +988,8 @@ public struct NV_SEP_CACHE_PARAMETER__Flags_e__Union {
     public mut func set_cacheFlags(val: NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NV_SEP_CACHE_PARAMETER__Flags_e__Union__CacheFlags_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1002,22 +999,16 @@ public struct NV_SEP_CACHE_PARAMETER__Flags_e__Union {
     public func cacheFlagsSet(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_cacheFlagsSet(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1440,14 +1431,13 @@ public struct STORAGE_FIRMWARE_SLOT_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct STORAGE_FIRMWARE_SLOT_INFO__Revision_e__Union {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func info(): VArray<UInt8, $8> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $8>>(p)
             return ptr.read()
         }
@@ -1456,9 +1446,8 @@ public struct STORAGE_FIRMWARE_SLOT_INFO__Revision_e__Union {
     public mut func set_info(val: VArray<UInt8, $8>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt8, $8>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1468,22 +1457,16 @@ public struct STORAGE_FIRMWARE_SLOT_INFO__Revision_e__Union {
     public func asUlonglong(): UInt64 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt64(base, 0)
         }
     }
 
     public mut func set_asUlonglong(val: UInt64): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt64>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt64(base, 0, val)
             _raw = rawStorage
         }
     }

@@ -3,6 +3,7 @@ package windows_sys.UI.Xaml.Markup
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.UI.Xaml.Interop as UI_Xaml_Interop
 import windows_sys.UI.Xaml.impl as UI_Xaml_impl

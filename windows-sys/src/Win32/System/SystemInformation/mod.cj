@@ -3,6 +3,7 @@ package windows_sys.Win32.System.SystemInformation
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Foundation.*
 
@@ -36,14 +37,13 @@ public struct CACHE_RELATIONSHIP {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CACHE_RELATIONSHIP__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func groupMask(): GROUP_AFFINITY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GROUP_AFFINITY>(p)
             return ptr.read()
         }
@@ -52,9 +52,8 @@ public struct CACHE_RELATIONSHIP__Anonymous_e__Union {
     public mut func set_groupMask(val: GROUP_AFFINITY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GROUP_AFFINITY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -64,9 +63,8 @@ public struct CACHE_RELATIONSHIP__Anonymous_e__Union {
     public func groupMasks(): VArray<GROUP_AFFINITY, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
             return ptr.read()
         }
@@ -75,9 +73,8 @@ public struct CACHE_RELATIONSHIP__Anonymous_e__Union {
     public mut func set_groupMasks(val: VArray<GROUP_AFFINITY, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -761,14 +758,13 @@ public struct NUMA_NODE_RELATIONSHIP {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct NUMA_NODE_RELATIONSHIP__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func groupMask(): GROUP_AFFINITY {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GROUP_AFFINITY>(p)
             return ptr.read()
         }
@@ -777,9 +773,8 @@ public struct NUMA_NODE_RELATIONSHIP__Anonymous_e__Union {
     public mut func set_groupMask(val: GROUP_AFFINITY): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GROUP_AFFINITY>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -789,9 +784,8 @@ public struct NUMA_NODE_RELATIONSHIP__Anonymous_e__Union {
     public func groupMasks(): VArray<GROUP_AFFINITY, $1> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
             return ptr.read()
         }
@@ -800,9 +794,8 @@ public struct NUMA_NODE_RELATIONSHIP__Anonymous_e__Union {
     public mut func set_groupMasks(val: VArray<GROUP_AFFINITY, $1>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1661,14 +1654,13 @@ public struct SYSTEM_CPU_SET_INFORMATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
 
     public func cpuSet(): SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct>(p)
             return ptr.read()
         }
@@ -1677,9 +1669,8 @@ public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union {
     public mut func set_cpuSet(val: SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1713,22 +1704,16 @@ public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__
     public func allFlags(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_allFlags(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1736,9 +1721,8 @@ public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__
     public func anonymous(): SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -1747,9 +1731,8 @@ public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__
     public mut func set_anonymous(val: SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt8>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1769,27 +1752,21 @@ public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous2_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func reserved(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_reserved(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1797,22 +1774,16 @@ public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__
     public func schedulingClass(): UInt8 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt8(base, 0)
         }
     }
 
     public mut func set_schedulingClass(val: UInt8): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt8>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt8(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1839,27 +1810,21 @@ public struct SYSTEM_INFO {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SYSTEM_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dwOemId(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwOemId(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -1867,9 +1832,8 @@ public struct SYSTEM_INFO__Anonymous_e__Union {
     public func anonymous(): SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
             return ptr.read()
         }
@@ -1878,9 +1842,8 @@ public struct SYSTEM_INFO__Anonymous_e__Union {
     public mut func set_anonymous(val: SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1910,14 +1873,13 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
 
     public func processorCore(): SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct>(p)
             return ptr.read()
         }
@@ -1926,9 +1888,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
     public mut func set_processorCore(val: SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1938,9 +1899,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
     public func numaNode(): SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct>(p)
             return ptr.read()
         }
@@ -1949,9 +1909,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
     public mut func set_numaNode(val: SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1961,9 +1920,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
     public func cache(): CACHE_DESCRIPTOR {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CACHE_DESCRIPTOR>(p)
             return ptr.read()
         }
@@ -1972,9 +1930,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
     public mut func set_cache(val: CACHE_DESCRIPTOR): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CACHE_DESCRIPTOR>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -1984,9 +1941,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
     public func reserved(): VArray<UInt64, $2> {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt64, $2>>(p)
             return ptr.read()
         }
@@ -1995,9 +1951,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
     public mut func set_reserved(val: VArray<UInt64, $2>): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VArray<UInt64, $2>>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2033,14 +1988,13 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
-    public var _raw: VArray<UInt64, $9> = VArray<UInt64, $9>(repeat: 0)
+    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
 
     public func processor(): PROCESSOR_RELATIONSHIP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PROCESSOR_RELATIONSHIP>(p)
             return ptr.read()
         }
@@ -2049,9 +2003,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
     public mut func set_processor(val: PROCESSOR_RELATIONSHIP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<PROCESSOR_RELATIONSHIP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2061,9 +2014,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
     public func numaNode(): NUMA_NODE_RELATIONSHIP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NUMA_NODE_RELATIONSHIP>(p)
             return ptr.read()
         }
@@ -2072,9 +2024,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
     public mut func set_numaNode(val: NUMA_NODE_RELATIONSHIP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<NUMA_NODE_RELATIONSHIP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2084,9 +2035,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
     public func cache(): CACHE_RELATIONSHIP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CACHE_RELATIONSHIP>(p)
             return ptr.read()
         }
@@ -2095,9 +2045,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
     public mut func set_cache(val: CACHE_RELATIONSHIP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CACHE_RELATIONSHIP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -2107,9 +2056,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
     public func group(): GROUP_RELATIONSHIP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GROUP_RELATIONSHIP>(p)
             return ptr.read()
         }
@@ -2118,9 +2066,8 @@ public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
     public mut func set_group(val: GROUP_RELATIONSHIP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<GROUP_RELATIONSHIP>(p)
             ptr.write(val)
             _raw = rawStorage

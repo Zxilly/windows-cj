@@ -3,6 +3,7 @@ package windows_sys.ApplicationModel.Payments.Provider
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.ApplicationModel.Payments as ApplicationModel_Payments
 import windows_sys.Foundation.impl as Foundation_impl
 import windows_sys.Win32.Foundation as Win32_Foundation

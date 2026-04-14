@@ -3,6 +3,7 @@ package windows_sys.Win32.System.VirtualDosMachines
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.impl as Win32_impl
 import windows_sys.Win32.Foundation.*
@@ -12,22 +13,200 @@ import windows_sys.Win32.Foundation.*
 public type DEBUGEVENTPROC = CFunc<(CPointer<Win32_impl.DEBUG_EVENT>, CPointer<Unit>) -> UInt32>
 
 @When[Windows_Win32_System_VirtualDosMachines == "on"]
-// packed(4)
 @C
 public struct GLOBALENTRY {
-    public var dwSize: UInt32 = 0
-    public var dwAddress: UInt32 = 0
-    public var dwBlockSize: UInt32 = 0
-    public var hBlock: CPointer<Unit> = CPointer<Unit>()
-    public var wcLock: UInt16 = 0
-    public var wcPageLock: UInt16 = 0
-    public var wFlags: UInt16 = 0
-    public var wHeapPresent: Int32 = 0
-    public var hOwner: CPointer<Unit> = CPointer<Unit>()
-    public var wType: UInt16 = 0
-    public var wData: UInt16 = 0
-    public var dwNext: UInt32 = 0
-    public var dwNextAlt: UInt32 = 0
+    public var _raw: VArray<UInt8, $52> = VArray<UInt8, $52>(repeat: 0u8)
+
+    public func dwSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwAddress(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 4)
+        }
+    }
+
+    public mut func set_dwAddress(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwBlockSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwBlockSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `hBlock`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    public func wcLock(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 20)
+        }
+    }
+
+    public mut func set_wcLock(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 20, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wcPageLock(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 22)
+        }
+    }
+
+    public mut func set_wcPageLock(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 22, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wFlags(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 24)
+        }
+    }
+
+    public mut func set_wFlags(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wHeapPresent(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 28)
+        }
+    }
+
+    public mut func set_wHeapPresent(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `hOwner`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    public func wType(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 40)
+        }
+    }
+
+    public mut func set_wType(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 40, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func wData(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 42)
+        }
+    }
+
+    public mut func set_wData(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 42, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNext(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 44)
+        }
+    }
+
+    public mut func set_dwNext(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 44, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dwNextAlt(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 48)
+        }
+    }
+
+    public mut func set_dwNextAlt(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 48, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -42,15 +221,66 @@ public struct IMAGE_NOTE {
 }
 
 @When[Windows_Win32_System_VirtualDosMachines == "on"]
-// packed(4)
 @C
 public struct MODULEENTRY {
-    public var dwSize: UInt32 = 0
-    public var szModule: VArray<Win32_Foundation.CHAR, $10> = VArray<Win32_Foundation.CHAR, $10>(repeat: 0)
-    public var hModule: CPointer<Unit> = CPointer<Unit>()
-    public var wcUsage: UInt16 = 0
-    public var szExePath: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var wNext: UInt16 = 0
+    public var _raw: VArray<UInt8, $284> = VArray<UInt8, $284>(repeat: 0u8)
+
+    public func dwSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_dwSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `szModule`: type `VArray<Win32_Foundation.CHAR, $10>` not supported by polyfill; skipped
+
+    // packed field `hModule`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    public func wcUsage(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 24)
+        }
+    }
+
+    public mut func set_wcUsage(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `szExePath`: type `VArray<Win32_Foundation.CHAR, $256>` not supported by polyfill; skipped
+
+    public func wNext(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 282)
+        }
+    }
+
+    public mut func set_wNext(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 282, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -213,14 +443,13 @@ public struct VDMLDT_ENTRY {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct VDMLDT_ENTRY__HighWord_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func bytes(): VDMLDT_ENTRY__HighWord_e__Union__Bytes_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VDMLDT_ENTRY__HighWord_e__Union__Bytes_e__Struct>(p)
             return ptr.read()
         }
@@ -229,9 +458,8 @@ public struct VDMLDT_ENTRY__HighWord_e__Union {
     public mut func set_bytes(val: VDMLDT_ENTRY__HighWord_e__Union__Bytes_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VDMLDT_ENTRY__HighWord_e__Union__Bytes_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -241,9 +469,8 @@ public struct VDMLDT_ENTRY__HighWord_e__Union {
     public func bits(): VDMLDT_ENTRY__HighWord_e__Union__Bits_e__Struct {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VDMLDT_ENTRY__HighWord_e__Union__Bits_e__Struct>(p)
             return ptr.read()
         }
@@ -252,9 +479,8 @@ public struct VDMLDT_ENTRY__HighWord_e__Union {
     public mut func set_bits(val: VDMLDT_ENTRY__HighWord_e__Union__Bits_e__Struct): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<VDMLDT_ENTRY__HighWord_e__Union__Bits_e__Struct>(p)
             ptr.write(val)
             _raw = rawStorage

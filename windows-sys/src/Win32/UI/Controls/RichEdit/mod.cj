@@ -3,6 +3,7 @@ package windows_sys.Win32.UI.Controls.RichEdit
 
 import windows_interface.*
 import windows_result.*
+import windows_polyfill.*
 import windows_sys.Win32.Foundation as Win32_Foundation
 import windows_sys.Win32.Graphics.Direct2D as Win32_Graphics_Direct2D
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
@@ -64,14 +65,13 @@ public let CARET_ROTATE90: CARET_FLAGS = CARET_FLAGS(128)
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CARET_INFO {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
 
     public func hbitmap(): Win32_Graphics_Gdi.HBITMAP {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Graphics_Gdi.HBITMAP>(p)
             return ptr.read()
         }
@@ -80,9 +80,8 @@ public struct CARET_INFO {
     public mut func set_hbitmap(val: Win32_Graphics_Gdi.HBITMAP): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<Win32_Graphics_Gdi.HBITMAP>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -92,9 +91,8 @@ public struct CARET_INFO {
     public func caretFlags(): CARET_FLAGS {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CARET_FLAGS>(p)
             return ptr.read()
         }
@@ -103,9 +101,8 @@ public struct CARET_INFO {
     public mut func set_caretFlags(val: CARET_FLAGS): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt64>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            let p = base
             let ptr = CPointer<CARET_FLAGS>(p)
             ptr.write(val)
             _raw = rawStorage
@@ -445,27 +442,21 @@ public struct CHARFORMAT2A {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CHARFORMAT2A__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dwReserved(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwReserved(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -473,22 +464,16 @@ public struct CHARFORMAT2A__Anonymous_e__Union {
     public func dwCookie(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwCookie(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -517,27 +502,21 @@ public struct CHARFORMAT2W {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct CHARFORMAT2W__Anonymous_e__Union {
-    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
     public func dwReserved(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwReserved(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -545,22 +524,16 @@ public struct CHARFORMAT2W__Anonymous_e__Union {
     public func dwCookie(): UInt32 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt32(base, 0)
         }
     }
 
     public mut func set_dwCookie(val: UInt32): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt32>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt32>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt32(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -606,11 +579,28 @@ public struct CHARRANGE {
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct CLIPBOARDFORMAT {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var cf: UInt16 = 0
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    public func cf(): UInt16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt16(base, 24)
+        }
+    }
+
+    public mut func set_cf(val: UInt16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt16(base, 24, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
@@ -624,12 +614,30 @@ public struct COMPCOLOR {
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct EDITSTREAM {
-    public var dwCookie: UIntNative = 0
-    public var dwError: UInt32 = 0
-    public var pfnCallback: EDITSTREAMCALLBACK = { _, _, _, _ => 0 }
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    // packed field `dwCookie`: type `UIntNative` not supported by polyfill; skipped
+
+    public func dwError(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwError(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pfnCallback`: type `EDITSTREAMCALLBACK` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -640,21 +648,26 @@ public type EDITSTREAMCALLBACK = CFunc<(UIntNative, CPointer<UInt8>, Int32, CPoi
 public type EDITWORDBREAKPROCEX = CFunc<(CPointer<UInt8>, Int32, UInt8, Int32) -> Int32>
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct ENCORRECTTEXT {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var chrg: CHARRANGE = CHARRANGE()
-    public var seltyp: RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE = RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE()
+    public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
+
+    // packed field `seltyp`: type `RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct ENDCOMPOSITIONNOTIFY {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var dwCode: ENDCOMPOSITIONNOTIFY_CODE = ENDCOMPOSITIONNOTIFY_CODE()
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    // packed field `dwCode`: type `ENDCOMPOSITIONNOTIFY_CODE` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -684,140 +697,367 @@ public let ECN_ENDCOMPOSITION: ENDCOMPOSITIONNOTIFY_CODE = ENDCOMPOSITIONNOTIFY_
 public let ECN_NEWTEXT: ENDCOMPOSITIONNOTIFY_CODE = ENDCOMPOSITIONNOTIFY_CODE(2)
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct ENDROPFILES {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var hDrop: CPointer<Unit> = CPointer<Unit>()
-    public var cp: Int32 = 0
-    public var fProtected: Int32 = 0
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    // packed field `hDrop`: type `CPointer<Unit>` not supported by polyfill; skipped
+
+    public func cp(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 32)
+        }
+    }
+
+    public mut func set_cp(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func fProtected(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 36)
+        }
+    }
+
+    public mut func set_fProtected(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 36, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct ENLINK {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var msg: UInt32 = 0
-    public var wParam: UIntNative = 0
-    public var lParam: IntNative = 0
-    public var chrg: CHARRANGE = CHARRANGE()
+    public var _raw: VArray<UInt8, $52> = VArray<UInt8, $52>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    public func msg(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_msg(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `wParam`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `lParam`: type `IntNative` not supported by polyfill; skipped
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct ENLOWFIRTF {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var szControl: CPointer<UInt8> = CPointer<UInt8>()
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    // packed field `szControl`: type `CPointer<UInt8>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct ENOLEOPFAILED {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var iob: Int32 = 0
-    public var lOper: Int32 = 0
-    public var hr: Int32 = 0
+    public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    public func iob(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 24)
+        }
+    }
+
+    public mut func set_iob(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func lOper(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 28)
+        }
+    }
+
+    public mut func set_lOper(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func hr(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 32)
+        }
+    }
+
+    public mut func set_hr(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 32, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct ENPROTECTED {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var msg: UInt32 = 0
-    public var wParam: UIntNative = 0
-    public var lParam: IntNative = 0
-    public var chrg: CHARRANGE = CHARRANGE()
+    public var _raw: VArray<UInt8, $52> = VArray<UInt8, $52>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    public func msg(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_msg(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `wParam`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `lParam`: type `IntNative` not supported by polyfill; skipped
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct ENSAVECLIPBOARD {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var cObjectCount: Int32 = 0
-    public var cch: Int32 = 0
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    public func cObjectCount(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 24)
+        }
+    }
+
+    public mut func set_cObjectCount(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func cch(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 28)
+        }
+    }
+
+    public mut func set_cch(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 28, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct FINDTEXTA {
-    public var chrg: CHARRANGE = CHARRANGE()
-    public var lpstrText: CPointer<UInt8> = CPointer<UInt8>()
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
+
+    // packed field `lpstrText`: type `CPointer<UInt8>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct FINDTEXTEXA {
-    public var chrg: CHARRANGE = CHARRANGE()
-    public var lpstrText: CPointer<UInt8> = CPointer<UInt8>()
-    public var chrgText: CHARRANGE = CHARRANGE()
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
+
+    // packed field `lpstrText`: type `CPointer<UInt8>` not supported by polyfill; skipped
+
+    // packed field `chrgText`: type `CHARRANGE` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct FINDTEXTEXW {
-    public var chrg: CHARRANGE = CHARRANGE()
-    public var lpstrText: CPointer<UInt16> = CPointer<UInt16>()
-    public var chrgText: CHARRANGE = CHARRANGE()
+    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
+
+    // packed field `lpstrText`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `chrgText`: type `CHARRANGE` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct FINDTEXTW {
-    public var chrg: CHARRANGE = CHARRANGE()
-    public var lpstrText: CPointer<UInt16> = CPointer<UInt16>()
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
+
+    // packed field `lpstrText`: type `CPointer<UInt16>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct FORMATRANGE {
-    public var hdc: Win32_Graphics_Gdi.HDC = CPointer<Unit>()
-    public var hdcTarget: Win32_Graphics_Gdi.HDC = CPointer<Unit>()
-    public var rc: Win32_Foundation.RECT = Win32_Foundation.RECT()
-    public var rcPage: Win32_Foundation.RECT = Win32_Foundation.RECT()
-    public var chrg: CHARRANGE = CHARRANGE()
+    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0u8)
+
+    // packed field `hdc`: type `Win32_Graphics_Gdi.HDC` not supported by polyfill; skipped
+
+    // packed field `hdcTarget`: type `Win32_Graphics_Gdi.HDC` not supported by polyfill; skipped
+
+    // packed field `rc`: type `Win32_Foundation.RECT` not supported by polyfill; skipped
+
+    // packed field `rcPage`: type `Win32_Foundation.RECT` not supported by polyfill; skipped
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct GETCONTEXTMENUEX {
-    public var chrg: CHARRANGE = CHARRANGE()
-    public var dwFlags: UInt32 = 0
-    public var pt: Win32_Foundation.POINT = Win32_Foundation.POINT()
-    public var pvReserved: CPointer<Unit> = CPointer<Unit>()
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
+
+    public func dwFlags(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_dwFlags(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pt`: type `Win32_Foundation.POINT` not supported by polyfill; skipped
+
+    // packed field `pvReserved`: type `CPointer<Unit>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct GETTEXTEX {
-    public var cb: UInt32 = 0
-    public var flags: GETTEXTEX_FLAGS = GETTEXTEX_FLAGS()
-    public var codepage: UInt32 = 0
-    public var lpDefaultChar: CPointer<UInt8> = CPointer<UInt8>()
-    public var lpUsedDefChar: CPointer<Int32> = CPointer<Int32>()
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    public func cb(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_cb(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `flags`: type `GETTEXTEX_FLAGS` not supported by polyfill; skipped
+
+    public func codepage(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 8)
+        }
+    }
+
+    public mut func set_codepage(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `lpDefaultChar`: type `CPointer<UInt8>` not supported by polyfill; skipped
+
+    // packed field `lpUsedDefChar`: type `CPointer<Int32>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -915,21 +1155,71 @@ public let GTL_NUMCHARS: GETTEXTLENGTHEX_FLAGS = GETTEXTLENGTHEX_FLAGS(8)
 public let GTL_NUMBYTES: GETTEXTLENGTHEX_FLAGS = GETTEXTLENGTHEX_FLAGS(16)
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on"]
-// packed(4)
 @C
 public struct GROUPTYPINGCHANGE {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var fGroupTyping: Int32 = 0
+    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    public func fGroupTyping(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 24)
+        }
+    }
+
+    public mut func set_fGroupTyping(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct HYPHENATEINFO {
-    public var cbSize: Int16 = 0
-    public var dxHyphenateZone: Int16 = 0
-    public var pfnHyphenate: IntNative = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func cbSize(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 0)
+        }
+    }
+
+    public mut func set_cbSize(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func dxHyphenateZone(): Int16 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt16(base, 2)
+        }
+    }
+
+    public mut func set_dxHyphenateZone(val: Int16): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt16(base, 2, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pfnHyphenate`: type `IntNative` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -7454,23 +7744,60 @@ public let MLOOP: MANCODE = MANCODE(11)
 public let MOPENA: MANCODE = MANCODE(12)
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct MSGFILTER {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var msg: UInt32 = 0
-    public var wParam: UIntNative = 0
-    public var lParam: IntNative = 0
+    public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    public func msg(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 24)
+        }
+    }
+
+    public mut func set_msg(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `wParam`: type `UIntNative` not supported by polyfill; skipped
+
+    // packed field `lParam`: type `IntNative` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct OBJECTPOSITIONS {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var cObjectCount: Int32 = 0
-    public var pcpPositions: CPointer<Int32> = CPointer<Int32>()
+    public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    public func cObjectCount(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 24)
+        }
+    }
+
+    public mut func set_cObjectCount(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 24, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pcpPositions`: type `CPointer<Int32>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -7606,27 +7933,21 @@ public struct PARAFORMAT {
 // WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
 public struct PARAFORMAT__Anonymous_e__Union {
-    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
 
     public func wReserved(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_wReserved(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -7634,22 +7955,16 @@ public struct PARAFORMAT__Anonymous_e__Union {
     public func wEffects(): UInt16 {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            return ptr.read()
+            let base = CPointer<UInt8>(inout rawStorage)
+            return unionReadUInt16(base, 0)
         }
     }
 
     public mut func set_wEffects(val: UInt16): Unit {
         unsafe {
             var rawStorage = _raw
-            let storage = CPointer<UInt16>(inout rawStorage)
-            let raw = CPointer<UInt8>(storage)
-            let p = raw
-            let ptr = CPointer<UInt16>(p)
-            ptr.write(val)
+            let base = CPointer<UInt8>(inout rawStorage)
+            unionWriteUInt16(base, 0, val)
             _raw = rawStorage
         }
     }
@@ -8065,11 +8380,28 @@ public type PCreateTextServices = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointe
 public type PShutdownTextServices = CFunc<(CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct PUNCTUATION {
-    public var iSize: UInt32 = 0
-    public var szPunctuation: CPointer<UInt8> = CPointer<UInt8>()
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    public func iSize(): UInt32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadUInt32(base, 0)
+        }
+    }
+
+    public mut func set_iSize(val: UInt32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteUInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `szPunctuation`: type `CPointer<UInt8>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -8180,33 +8512,103 @@ public let REO_USEASBACKGROUND: REOBJECT_FLAGS = REOBJECT_FLAGS(1024)
 public let REO_WRAPTEXTAROUND: REOBJECT_FLAGS = REOBJECT_FLAGS(512)
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct REPASTESPECIAL {
-    public var dwAspect: Win32_impl.DVASPECT = Win32_impl.DVASPECT()
-    public var dwParam: UIntNative = 0
+    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
+
+    // packed field `dwAspect`: type `Win32_impl.DVASPECT` not supported by polyfill; skipped
+
+    // packed field `dwParam`: type `UIntNative` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct REQRESIZE {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var rc: Win32_Foundation.RECT = Win32_Foundation.RECT()
+    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    // packed field `rc`: type `Win32_Foundation.RECT` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct RICHEDIT_IMAGE_PARAMETERS {
-    public var xWidth: Int32 = 0
-    public var yHeight: Int32 = 0
-    public var Ascent: Int32 = 0
-    public var Type: Int32 = 0
-    public var pwszAlternateText: CPointer<UInt16> = CPointer<UInt16>()
-    public var pIStream: CPointer<Unit> = CPointer<Unit>()
+    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+
+    public func xWidth(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 0)
+        }
+    }
+
+    public mut func set_xWidth(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 0, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func yHeight(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 4)
+        }
+    }
+
+    public mut func set_yHeight(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 4, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func ascent(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 8)
+        }
+    }
+
+    public mut func set_ascent(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 8, val)
+            _raw = rawStorage
+        }
+    }
+
+    public func type_(): Int32 {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            return packedReadInt32(base, 12)
+        }
+    }
+
+    public mut func set_type_(val: Int32): Unit {
+        unsafe {
+            var rawStorage = _raw
+            let base = CPointer<UInt8>(inout rawStorage)
+            packedWriteInt32(base, 12, val)
+            _raw = rawStorage
+        }
+    }
+
+    // packed field `pwszAlternateText`: type `CPointer<UInt16>` not supported by polyfill; skipped
+
+    // packed field `pIStream`: type `CPointer<Unit>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -8310,12 +8712,15 @@ public let REO_GETOBJ_NO_INTERFACES: RICH_EDIT_GET_OBJECT_FLAGS = RICH_EDIT_GET_
 public let REO_GETOBJ_ALL_INTERFACES: RICH_EDIT_GET_OBJECT_FLAGS = RICH_EDIT_GET_OBJECT_FLAGS(7)
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct SELCHANGE {
-    public var nmhdr: Win32_impl.NMHDR = Win32_impl.NMHDR()
-    public var chrg: CHARRANGE = CHARRANGE()
-    public var seltyp: RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE = RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE()
+    public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
+
+    // packed field `nmhdr`: type `Win32_impl.NMHDR` not supported by polyfill; skipped
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
+
+    // packed field `seltyp`: type `RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -8401,20 +8806,24 @@ public let TM_SINGLECODEPAGE: TEXTMODE = TEXTMODE(16)
 public let TM_MULTICODEPAGE: TEXTMODE = TEXTMODE(32)
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct TEXTRANGEA {
-    public var chrg: CHARRANGE = CHARRANGE()
-    public var lpstrText: CPointer<UInt8> = CPointer<UInt8>()
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
+
+    // packed field `lpstrText`: type `CPointer<UInt8>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_UI_Controls_RichEdit == "on" && (arch == "x86_64" || arch == "aarch64")]
-// packed(4)
 @C
 public struct TEXTRANGEW {
-    public var chrg: CHARRANGE = CHARRANGE()
-    public var lpstrText: CPointer<UInt16> = CPointer<UInt16>()
+    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+
+    // packed field `chrg`: type `CHARRANGE` not supported by polyfill; skipped
+
+    // packed field `lpstrText`: type `CPointer<UInt16>` not supported by polyfill; skipped
     public init() {}
 }
 
