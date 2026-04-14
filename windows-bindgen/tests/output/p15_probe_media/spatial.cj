@@ -26,7 +26,7 @@ public class ISpatialCoordinateSystem <: InterfaceWrapperBase & ComInterface & R
         ISpatialCoordinateSystem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISpatialCoordinateSystem {
+    public static func viewOf(raw: CPointer<Unit>): ISpatialCoordinateSystem {
         ISpatialCoordinateSystem(raw)
     }
 
@@ -96,7 +96,7 @@ public class SpatialCoordinateSystem <: InterfaceWrapperBase & ComInterface & wi
         SpatialCoordinateSystem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SpatialCoordinateSystem {
+    public static func viewOf(raw: CPointer<Unit>): SpatialCoordinateSystem {
         SpatialCoordinateSystem(raw)
     }
 

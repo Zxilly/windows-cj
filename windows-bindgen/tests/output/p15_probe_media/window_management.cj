@@ -18,7 +18,7 @@ public class DisplayRegion <: InterfaceWrapperBase & ComInterface & windows_inte
         DisplayRegion(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DisplayRegion {
+    public static func viewOf(raw: CPointer<Unit>): DisplayRegion {
         DisplayRegion(raw)
     }
 
@@ -120,7 +120,7 @@ public class IDisplayRegion <: InterfaceWrapperBase & ComInterface & RuntimeName
         IDisplayRegion(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDisplayRegion {
+    public static func viewOf(raw: CPointer<Unit>): IDisplayRegion {
         IDisplayRegion(raw)
     }
 
@@ -248,7 +248,7 @@ public class IWindowingEnvironment <: InterfaceWrapperBase & ComInterface & Runt
         IWindowingEnvironment(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWindowingEnvironment {
+    public static func viewOf(raw: CPointer<Unit>): IWindowingEnvironment {
         IWindowingEnvironment(raw)
     }
 
@@ -355,7 +355,7 @@ public class IWindowingEnvironmentChangedEventArgs <: InterfaceWrapperBase & Com
         IWindowingEnvironmentChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWindowingEnvironmentChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IWindowingEnvironmentChangedEventArgs {
         IWindowingEnvironmentChangedEventArgs(raw)
     }
 
@@ -417,7 +417,7 @@ public class WindowingEnvironment <: InterfaceWrapperBase & ComInterface & windo
         WindowingEnvironment(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): WindowingEnvironment {
+    public static func viewOf(raw: CPointer<Unit>): WindowingEnvironment {
         WindowingEnvironment(raw)
     }
 
@@ -509,7 +509,7 @@ public class WindowingEnvironmentChangedEventArgs <: InterfaceWrapperBase & ComI
         WindowingEnvironmentChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): WindowingEnvironmentChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): WindowingEnvironmentChangedEventArgs {
         WindowingEnvironmentChangedEventArgs(raw)
     }
 

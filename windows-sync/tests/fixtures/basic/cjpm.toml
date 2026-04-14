@@ -8,5 +8,4 @@ compile-option = "--cfg ./windows-cj"
   cjc-version = "1.1.0"
 
 [windows-cj]
-features = ["feat_user32"]
-
+features = ["USER32"]

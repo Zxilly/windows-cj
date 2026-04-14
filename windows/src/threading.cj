@@ -2,7 +2,9 @@ package windows
 
 import windows_core.*
 import windows_result.Win32Exception
-import windows_sys.*
+import windows_sys.win32.foundation.*
+import windows_sys.win32.security.*
+import windows_sys.win32.system.threading.*
 
 func threadingWithWideString<R>(s: String, action: (CPointer<UInt16>) -> R): R {
     let ws = CWideString(s)
@@ -87,7 +89,7 @@ public func releaseMutex(mutex: HANDLE): Unit {
 
 // waitForSingleObject — waits for a single object to be signaled.
 // Returns WAIT_OBJECT_0 if signaled, WAIT_TIMEOUT if timeout, or throws on error.
-public func waitForSingleObject(handle: HANDLE, milliseconds: UInt32): UInt32 {
+public func waitForSingleObject(handle: HANDLE, milliseconds: UInt32): WAIT_EVENT {
     let result = ffiWaitForSingleObject(handle, milliseconds)
     if (result == WAIT_FAILED) {
         throw Win32Exception(ffiGetLastError())
@@ -102,11 +104,11 @@ public func waitForMultipleObjects(
     handles: Array<HANDLE>,
     waitAll: Bool,
     milliseconds: UInt32
-): UInt32 {
+): WAIT_EVENT {
     let bWaitAll: Int32 = if (waitAll) { 1 } else { 0 }
     let count = UInt32(handles.size)
     let rawData = unsafe { acquireArrayRawData(handles) }
-    let result: UInt32
+    let result: WAIT_EVENT
     try {
         result = ffiWaitForMultipleObjects(count, rawData.pointer, bWaitAll, milliseconds)
     } finally {

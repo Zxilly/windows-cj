@@ -1,3 +1,2 @@
-feat_kernel32 = "on"
-feat_user32 = "on"
-
+KERNEL32 = "on"
+USER32 = "on"

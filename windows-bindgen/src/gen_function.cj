@@ -212,14 +212,44 @@ func shouldEmitSysFnPtrAliases(): Bool {
 }
 
 func foreignMethodName(index: TypeIndex, fileIdx: Int64, methodRow: Int64): String {
+    let methodName = sanitizeIdentifier(index.methodDefName(fileIdx, methodRow))
     match (index.methodDefImplMap(fileIdx, methodRow)) {
         case Some((_, importName, _)) =>
             if (!importName.isEmpty()) {
-                return importName
+                if (isLegalForeignSymbolIdentifier(importName)) {
+                    return importName
+                }
+                eprintln("warning: unsupported import entry point `${importName}` for `${index.methodDefName(fileIdx, methodRow)}`; falling back to method name")
+                return methodName
             }
         case None => ()
     }
-    return index.methodDefName(fileIdx, methodRow)
+    return methodName
+}
+
+func isLegalForeignSymbolIdentifier(name: String): Bool {
+    let arr = name.toArray()
+    if (arr.isEmpty()) {
+        return false
+    }
+
+    let first = arr[0]
+    if (!((first >= b'a' && first <= b'z') || (first >= b'A' && first <= b'Z') || first == b'_')) {
+        return false
+    }
+
+    var i: Int64 = 1
+    while (i < Int64(arr.size)) {
+        let ch = arr[i]
+        if (!((ch >= b'a' && ch <= b'z') ||
+              (ch >= b'A' && ch <= b'Z') ||
+              (ch >= b'0' && ch <= b'9') ||
+              ch == b'_')) {
+            return false
+        }
+        i += 1
+    }
+    return true
 }
 
 func methodHasVarArgs(sig: MethodSignature): Bool {
@@ -268,50 +298,6 @@ func methodParamDecls(paramNames: ArrayList<String>, sig: MethodSignature, inclu
         params.add("...")
     }
     return params
-}
-
-// Sanitize a parameter name to be a valid Cangjie identifier
-public func sanitizeIdentifier(name: String): String {
-    let keywords = [
-        "as", "abstract", "break",
-        "Bool", "case", "catch",
-        "class", "const", "continue",
-        "Rune", "do", "else",
-        "enum", "extend", "for",
-        "func", "false", "finally",
-        "foreign", "Float16", "Float32",
-        "Float64", "if", "in",
-        "is", "init", "import",
-        "interface", "Int8", "Int16",
-        "Int32", "Int64", "IntNative",
-        "let", "mut", "main",
-        "macro", "match", "Nothing",
-        "open", "operator", "override",
-        "prop", "public", "package",
-        "private", "protected", "quote",
-        "redef", "return", "spawn",
-        "super", "static", "struct",
-        "synchronized", "try", "this",
-        "true", "type", "throw",
-        "This", "unsafe", "Unit",
-        "UInt8", "UInt16", "UInt32",
-        "UInt64", "UIntNative", "var",
-        "VArray", "where", "while"
-    ]
-    for (kw in keywords) {
-        if (name == kw) {
-            return "${name}_"
-        }
-    }
-    // Ensure starts with a letter or underscore
-    let arr = name.toArray()
-    if (arr.size > 0) {
-        let first = arr[0]
-        if (!((first >= b'a' && first <= b'z') || (first >= b'A' && first <= b'Z') || first == b'_')) {
-            return "_${name}"
-        }
-    }
-    return name
 }
 
 // Join strings with separator

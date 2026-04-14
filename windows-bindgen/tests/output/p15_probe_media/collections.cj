@@ -92,7 +92,7 @@ public class IIterable<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IIterable<T>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IIterable<T> {
+    public static func viewOf(raw: CPointer<Unit>): IIterable<T> {
         IIterable<T>(raw)
     }
 
@@ -268,7 +268,7 @@ public class IIterator<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IIterator<T>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IIterator<T> {
+    public static func viewOf(raw: CPointer<Unit>): IIterator<T> {
         IIterator<T>(raw)
     }
 
@@ -430,7 +430,7 @@ public class IKeyValuePair<K, V> <: InterfaceWrapperBase & ComInterface & Runtim
         IKeyValuePair<K, V>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IKeyValuePair<K, V> {
+    public static func viewOf(raw: CPointer<Unit>): IKeyValuePair<K, V> {
         IKeyValuePair<K, V>(raw)
     }
 
@@ -676,7 +676,7 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         IMap<K, V>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMap<K, V> {
+    public static func viewOf(raw: CPointer<Unit>): IMap<K, V> {
         IMap<K, V>(raw)
     }
 
@@ -869,7 +869,7 @@ public class IMapChangedEventArgs<K> <: InterfaceWrapperBase & ComInterface & Ru
         IMapChangedEventArgs<K>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMapChangedEventArgs<K> {
+    public static func viewOf(raw: CPointer<Unit>): IMapChangedEventArgs<K> {
         IMapChangedEventArgs<K>(raw)
     }
 
@@ -1054,7 +1054,7 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
         IMapView<K, V>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMapView<K, V> {
+    public static func viewOf(raw: CPointer<Unit>): IMapView<K, V> {
         IMapView<K, V>(raw)
     }
 
@@ -1226,7 +1226,7 @@ public class IObservableMap<K, V> <: InterfaceWrapperBase & ComInterface & Runti
         IObservableMap<K, V>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IObservableMap<K, V> {
+    public static func viewOf(raw: CPointer<Unit>): IObservableMap<K, V> {
         IObservableMap<K, V>(raw)
     }
 
@@ -1386,7 +1386,7 @@ public class IObservableVector<T> <: InterfaceWrapperBase & ComInterface & Runti
         IObservableVector<T>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IObservableVector<T> {
+    public static func viewOf(raw: CPointer<Unit>): IObservableVector<T> {
         IObservableVector<T>(raw)
     }
 
@@ -1510,7 +1510,7 @@ public class IPropertySet <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IPropertySet(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPropertySet {
+    public static func viewOf(raw: CPointer<Unit>): IPropertySet {
         IPropertySet(raw)
     }
 
@@ -1825,7 +1825,7 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         IVector<T>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVector<T> {
+    public static func viewOf(raw: CPointer<Unit>): IVector<T> {
         IVector<T>(raw)
     }
 
@@ -2046,7 +2046,7 @@ public class IVectorChangedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
         IVectorChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVectorChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IVectorChangedEventArgs {
         IVectorChangedEventArgs(raw)
     }
 
@@ -2230,7 +2230,7 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
         IVectorView<T>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVectorView<T> {
+    public static func viewOf(raw: CPointer<Unit>): IVectorView<T> {
         IVectorView<T>(raw)
     }
 
@@ -2347,7 +2347,7 @@ public class MapChangedEventHandler<K, V> <: InterfaceWrapperBase & ComInterface
         MapChangedEventHandler<K, V>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MapChangedEventHandler<K, V> {
+    public static func viewOf(raw: CPointer<Unit>): MapChangedEventHandler<K, V> {
         MapChangedEventHandler<K, V>(raw)
     }
 
@@ -2457,7 +2457,7 @@ public class ValueSet <: InterfaceWrapperBase & ComInterface & windows_interface
         ValueSet(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ValueSet {
+    public static func viewOf(raw: CPointer<Unit>): ValueSet {
         ValueSet(raw)
     }
 
@@ -2584,7 +2584,7 @@ public class VectorChangedEventHandler<T> <: InterfaceWrapperBase & ComInterface
         VectorChangedEventHandler<T>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VectorChangedEventHandler<T> {
+    public static func viewOf(raw: CPointer<Unit>): VectorChangedEventHandler<T> {
         VectorChangedEventHandler<T>(raw)
     }
 
@@ -2675,7 +2675,7 @@ func buildVectorChangedEventHandlerBoxVtbl(): VectorChangedEventHandlerVtbl {
 func VectorChangedEventHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<VectorChangedEventHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(arg0, IVectorChangedEventArgs.fromRawBorrowed(arg1))
+            invoker.Invoke(arg0, IVectorChangedEventArgs.viewOf(arg1))
             return S_OK.value
         case None =>
             return E_NOTIMPL.value

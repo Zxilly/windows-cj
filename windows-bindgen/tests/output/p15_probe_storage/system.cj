@@ -31,7 +31,7 @@ public class IUser <: InterfaceWrapperBase & ComInterface & RuntimeName & window
         IUser(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUser {
+    public static func viewOf(raw: CPointer<Unit>): IUser {
         IUser(raw)
     }
 
@@ -149,7 +149,7 @@ public class IUser2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windo
         IUser2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUser2 {
+    public static func viewOf(raw: CPointer<Unit>): IUser2 {
         IUser2(raw)
     }
 
@@ -227,7 +227,7 @@ public class IUserAuthenticationStatusChangeDeferral <: InterfaceWrapperBase & C
         IUserAuthenticationStatusChangeDeferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUserAuthenticationStatusChangeDeferral {
+    public static func viewOf(raw: CPointer<Unit>): IUserAuthenticationStatusChangeDeferral {
         IUserAuthenticationStatusChangeDeferral(raw)
     }
 
@@ -306,7 +306,7 @@ public class IUserAuthenticationStatusChangingEventArgs <: InterfaceWrapperBase 
         IUserAuthenticationStatusChangingEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUserAuthenticationStatusChangingEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IUserAuthenticationStatusChangingEventArgs {
         IUserAuthenticationStatusChangingEventArgs(raw)
     }
 
@@ -408,7 +408,7 @@ public class IUserChangedEventArgs <: InterfaceWrapperBase & ComInterface & Runt
         IUserChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUserChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IUserChangedEventArgs {
         IUserChangedEventArgs(raw)
     }
 
@@ -486,7 +486,7 @@ public class IUserChangedEventArgs2 <: InterfaceWrapperBase & ComInterface & Run
         IUserChangedEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUserChangedEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): IUserChangedEventArgs2 {
         IUserChangedEventArgs2(raw)
     }
 
@@ -580,7 +580,7 @@ public class IUserWatcher <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IUserWatcher(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUserWatcher {
+    public static func viewOf(raw: CPointer<Unit>): IUserWatcher {
         IUserWatcher(raw)
     }
 
@@ -760,7 +760,7 @@ public class User <: InterfaceWrapperBase & ComInterface & windows_interface.Run
         User(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): User {
+    public static func viewOf(raw: CPointer<Unit>): User {
         User(raw)
     }
 
@@ -951,7 +951,7 @@ public class UserAuthenticationStatusChangeDeferral <: InterfaceWrapperBase & Co
         UserAuthenticationStatusChangeDeferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): UserAuthenticationStatusChangeDeferral {
+    public static func viewOf(raw: CPointer<Unit>): UserAuthenticationStatusChangeDeferral {
         UserAuthenticationStatusChangeDeferral(raw)
     }
 
@@ -1015,7 +1015,7 @@ public class UserAuthenticationStatusChangingEventArgs <: InterfaceWrapperBase &
         UserAuthenticationStatusChangingEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): UserAuthenticationStatusChangingEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): UserAuthenticationStatusChangingEventArgs {
         UserAuthenticationStatusChangingEventArgs(raw)
     }
 
@@ -1091,7 +1091,7 @@ public class UserChangedEventArgs <: InterfaceWrapperBase & ComInterface & windo
         UserChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): UserChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): UserChangedEventArgs {
         UserChangedEventArgs(raw)
     }
 
@@ -1204,7 +1204,7 @@ public class UserWatcher <: InterfaceWrapperBase & ComInterface & windows_interf
         UserWatcher(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): UserWatcher {
+    public static func viewOf(raw: CPointer<Unit>): UserWatcher {
         UserWatcher(raw)
     }
 

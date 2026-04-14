@@ -18,7 +18,7 @@ public class CastingSource <: InterfaceWrapperBase & ComInterface & windows_inte
         CastingSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CastingSource {
+    public static func viewOf(raw: CPointer<Unit>): CastingSource {
         CastingSource(raw)
     }
 
@@ -95,7 +95,7 @@ public class ICastingSource <: InterfaceWrapperBase & ComInterface & RuntimeName
         ICastingSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICastingSource {
+    public static func viewOf(raw: CPointer<Unit>): ICastingSource {
         ICastingSource(raw)
     }
 

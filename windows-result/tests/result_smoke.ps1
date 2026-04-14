@@ -1,8 +1,9 @@
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $false
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-result"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
+$packagePath = ($packageRoot -replace '\\', '/')
 $outputRoot = Join-Path $packageRoot "tests/output/result_smoke"
 $bindingsSourcePath = Join-Path $packageRoot "src/bindings.cj"
 $comSourcePath = Join-Path $packageRoot "src/com.cj"
@@ -29,7 +30,7 @@ function Write-TestPackage([string]$Root, [string]$Name, [string]$MainSource) {
   compile-option = "-loleaut32 -lwindowsapp"
 
 [dependencies]
-  windows_result = { path = "../../../../" }
+  windows_result = { path = "$packagePath" }
 "@
 
     Set-Content -Path (Join-Path $Root "cjpm.toml") -Value $manifest -NoNewline
@@ -164,7 +165,7 @@ main(): Unit {
     let _ = GUID.zeroed()
     let _ = BasicString()
     let _ = HeapString()
-    let _ = ComPtr<IUnknown>(CPointer<IUnknown>())
+    let _ = ComHandle<IUnknown>(CPointer<IUnknown>())
     let _ = IUnknownVtbl()
     let _ = WindowsException(WinError.fromHRESULT(E_FAIL))
 }

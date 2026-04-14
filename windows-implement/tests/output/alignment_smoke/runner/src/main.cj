@@ -376,7 +376,7 @@ func expectOuterImplBinding(): Unit {
     expect(finalCount == 0u32, "outer-binding test object should release cleanly")
 }
 
-func expectScopedInterfaceAsImplFallback(): Unit {
+func expectInterfaceResourceAsImplFallback(): Unit {
     let descriptor = AbiReferenceDescriptor<DemoCallbackView>(
         "DemoCallback",
         { raw => DemoCallbackView(raw) },
@@ -385,7 +385,7 @@ func expectScopedInterfaceAsImplFallback(): Unit {
     let vtblHandle = unsafe { acquireArrayRawData(Array<DemoCallbackVtbl>(1, { _ => DemoCallbackVtbl() })) }
     let target = DemoCallbackTarget()
     let scoped = unsafe {
-        createScopedInterfaceFromTarget(
+        createInterfaceResourceFromTarget(
             descriptor,
             target,
             CPointer<Unit>(vtblHandle.pointer)
@@ -405,7 +405,7 @@ func expectScopedInterfaceAsImplFallback(): Unit {
 
     match (unsafe { asImplFromRaw<DemoCallback_Impl>(raw) }) {
         case Some(_) =>
-            fail("closing a target-backed ScopedInterface should remove the raw-to-target lookup")
+            fail("closing a target-backed InterfaceResource should remove the raw-to-target lookup")
         case None => ()
     }
 
@@ -785,9 +785,9 @@ func expectDescriptorCodegen(): Unit {
             )
         )
     )
-    expect(nonComRendered.contains("ScopedInterface"), "non-COM descriptor codegen should route construction through ScopedInterface")
+    expect(nonComRendered.contains("InterfaceResource"), "non-COM descriptor codegen should route construction through InterfaceResource")
     expect(nonComRendered.contains("public static func new<"), "non-COM descriptor codegen should emit a static new(this) wrapper")
-    expect(nonComRendered.contains("createScopedInterfaceFromTarget"), "non-COM descriptor codegen should allocate target-backed scoped interfaces instead of placeholder raw views")
+    expect(nonComRendered.contains("createInterfaceResourceFromTarget"), "non-COM descriptor codegen should allocate target-backed scoped interfaces instead of placeholder raw views")
     expect(nonComRendered.contains("public static let VTABLE_HANDLE"), "non-COM descriptor codegen should materialize a static vtable allocation")
 
     let descriptor = InterfaceDescriptor<IUnknown>(
@@ -1101,7 +1101,7 @@ main(_args: Array<String>) {
     expectOuterSlotLayoutAndAsImplOffset()
     expectAsImpl()
     expectOuterImplBinding()
-    expectScopedInterfaceAsImplFallback()
+    expectInterfaceResourceAsImplFallback()
     expectStaticComObject()
     expectWeakReferences()
     expectAgileQueries()

@@ -18,7 +18,7 @@ public class AttributedNetworkUsage <: InterfaceWrapperBase & ComInterface & win
         AttributedNetworkUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AttributedNetworkUsage {
+    public static func viewOf(raw: CPointer<Unit>): AttributedNetworkUsage {
         AttributedNetworkUsage(raw)
     }
 
@@ -98,7 +98,7 @@ public class ConnectionCost <: InterfaceWrapperBase & ComInterface & windows_int
         ConnectionCost(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ConnectionCost {
+    public static func viewOf(raw: CPointer<Unit>): ConnectionCost {
         ConnectionCost(raw)
     }
 
@@ -174,7 +174,7 @@ public class ConnectionProfile <: InterfaceWrapperBase & ComInterface & windows_
         ConnectionProfile(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ConnectionProfile {
+    public static func viewOf(raw: CPointer<Unit>): ConnectionProfile {
         ConnectionProfile(raw)
     }
 
@@ -294,7 +294,7 @@ public class ConnectivityInterval <: InterfaceWrapperBase & ComInterface & windo
         ConnectivityInterval(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ConnectivityInterval {
+    public static func viewOf(raw: CPointer<Unit>): ConnectivityInterval {
         ConnectivityInterval(raw)
     }
 
@@ -362,7 +362,7 @@ public class DataPlanStatus <: InterfaceWrapperBase & ComInterface & windows_int
         DataPlanStatus(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DataPlanStatus {
+    public static func viewOf(raw: CPointer<Unit>): DataPlanStatus {
         DataPlanStatus(raw)
     }
 
@@ -446,7 +446,7 @@ public class DataPlanUsage <: InterfaceWrapperBase & ComInterface & windows_inte
         DataPlanUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DataPlanUsage {
+    public static func viewOf(raw: CPointer<Unit>): DataPlanUsage {
         DataPlanUsage(raw)
     }
 
@@ -514,7 +514,7 @@ public class DataUsage <: InterfaceWrapperBase & ComInterface & windows_interfac
         DataUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DataUsage {
+    public static func viewOf(raw: CPointer<Unit>): DataUsage {
         DataUsage(raw)
     }
 
@@ -664,7 +664,7 @@ public class IAttributedNetworkUsage <: InterfaceWrapperBase & ComInterface & Ru
         IAttributedNetworkUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAttributedNetworkUsage {
+    public static func viewOf(raw: CPointer<Unit>): IAttributedNetworkUsage {
         IAttributedNetworkUsage(raw)
     }
 
@@ -777,7 +777,7 @@ public class IConnectionCost <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IConnectionCost(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IConnectionCost {
+    public static func viewOf(raw: CPointer<Unit>): IConnectionCost {
         IConnectionCost(raw)
     }
 
@@ -879,7 +879,7 @@ public class IConnectionCost2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IConnectionCost2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IConnectionCost2 {
+    public static func viewOf(raw: CPointer<Unit>): IConnectionCost2 {
         IConnectionCost2(raw)
     }
 
@@ -965,7 +965,7 @@ public class IConnectionProfile <: InterfaceWrapperBase & ComInterface & Runtime
         IConnectionProfile(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IConnectionProfile {
+    public static func viewOf(raw: CPointer<Unit>): IConnectionProfile {
         IConnectionProfile(raw)
     }
 
@@ -1115,7 +1115,7 @@ public class IConnectionProfile2 <: InterfaceWrapperBase & ComInterface & Runtim
         IConnectionProfile2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IConnectionProfile2 {
+    public static func viewOf(raw: CPointer<Unit>): IConnectionProfile2 {
         IConnectionProfile2(raw)
     }
 
@@ -1257,7 +1257,7 @@ public class IConnectionProfile3 <: InterfaceWrapperBase & ComInterface & Runtim
         IConnectionProfile3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IConnectionProfile3 {
+    public static func viewOf(raw: CPointer<Unit>): IConnectionProfile3 {
         IConnectionProfile3(raw)
     }
 
@@ -1335,7 +1335,7 @@ public class IConnectionProfile4 <: InterfaceWrapperBase & ComInterface & Runtim
         IConnectionProfile4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IConnectionProfile4 {
+    public static func viewOf(raw: CPointer<Unit>): IConnectionProfile4 {
         IConnectionProfile4(raw)
     }
 
@@ -1414,7 +1414,7 @@ public class IConnectionProfile5 <: InterfaceWrapperBase & ComInterface & Runtim
         IConnectionProfile5(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IConnectionProfile5 {
+    public static func viewOf(raw: CPointer<Unit>): IConnectionProfile5 {
         IConnectionProfile5(raw)
     }
 
@@ -1500,7 +1500,7 @@ public class IConnectionProfile6 <: InterfaceWrapperBase & ComInterface & Runtim
         IConnectionProfile6(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IConnectionProfile6 {
+    public static func viewOf(raw: CPointer<Unit>): IConnectionProfile6 {
         IConnectionProfile6(raw)
     }
 
@@ -1579,7 +1579,7 @@ public class IConnectivityInterval <: InterfaceWrapperBase & ComInterface & Runt
         IConnectivityInterval(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IConnectivityInterval {
+    public static func viewOf(raw: CPointer<Unit>): IConnectivityInterval {
         IConnectivityInterval(raw)
     }
 
@@ -1670,7 +1670,7 @@ public class IDataPlanStatus <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IDataPlanStatus(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDataPlanStatus {
+    public static func viewOf(raw: CPointer<Unit>): IDataPlanStatus {
         IDataPlanStatus(raw)
     }
 
@@ -1789,7 +1789,7 @@ public class IDataPlanUsage <: InterfaceWrapperBase & ComInterface & RuntimeName
         IDataPlanUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDataPlanUsage {
+    public static func viewOf(raw: CPointer<Unit>): IDataPlanUsage {
         IDataPlanUsage(raw)
     }
 
@@ -1876,7 +1876,7 @@ public class IDataUsage <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         IDataUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDataUsage {
+    public static func viewOf(raw: CPointer<Unit>): IDataUsage {
         IDataUsage(raw)
     }
 
@@ -1963,7 +1963,7 @@ public class IIPInformation <: InterfaceWrapperBase & ComInterface & RuntimeName
         IIPInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IIPInformation {
+    public static func viewOf(raw: CPointer<Unit>): IIPInformation {
         IIPInformation(raw)
     }
 
@@ -2054,7 +2054,7 @@ public class INetworkAdapter <: InterfaceWrapperBase & ComInterface & RuntimeNam
         INetworkAdapter(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): INetworkAdapter {
+    public static func viewOf(raw: CPointer<Unit>): INetworkAdapter {
         INetworkAdapter(raw)
     }
 
@@ -2173,7 +2173,7 @@ public class INetworkItem <: InterfaceWrapperBase & ComInterface & RuntimeName &
         INetworkItem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): INetworkItem {
+    public static func viewOf(raw: CPointer<Unit>): INetworkItem {
         INetworkItem(raw)
     }
 
@@ -2260,7 +2260,7 @@ public class INetworkSecuritySettings <: InterfaceWrapperBase & ComInterface & R
         INetworkSecuritySettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): INetworkSecuritySettings {
+    public static func viewOf(raw: CPointer<Unit>): INetworkSecuritySettings {
         INetworkSecuritySettings(raw)
     }
 
@@ -2348,7 +2348,7 @@ public class INetworkUsage <: InterfaceWrapperBase & ComInterface & RuntimeName 
         INetworkUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): INetworkUsage {
+    public static func viewOf(raw: CPointer<Unit>): INetworkUsage {
         INetworkUsage(raw)
     }
 
@@ -2434,7 +2434,7 @@ public class IPInformation <: InterfaceWrapperBase & ComInterface & windows_inte
         IPInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPInformation {
+    public static func viewOf(raw: CPointer<Unit>): IPInformation {
         IPInformation(raw)
     }
 
@@ -2512,7 +2512,7 @@ public class IProviderNetworkUsage <: InterfaceWrapperBase & ComInterface & Runt
         IProviderNetworkUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IProviderNetworkUsage {
+    public static func viewOf(raw: CPointer<Unit>): IProviderNetworkUsage {
         IProviderNetworkUsage(raw)
     }
 
@@ -2606,7 +2606,7 @@ public class IWlanConnectionProfileDetails <: InterfaceWrapperBase & ComInterfac
         IWlanConnectionProfileDetails(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWlanConnectionProfileDetails {
+    public static func viewOf(raw: CPointer<Unit>): IWlanConnectionProfileDetails {
         IWlanConnectionProfileDetails(raw)
     }
 
@@ -2687,7 +2687,7 @@ public class IWwanConnectionProfileDetails <: InterfaceWrapperBase & ComInterfac
         IWwanConnectionProfileDetails(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWwanConnectionProfileDetails {
+    public static func viewOf(raw: CPointer<Unit>): IWwanConnectionProfileDetails {
         IWwanConnectionProfileDetails(raw)
     }
 
@@ -2790,7 +2790,7 @@ public class IWwanConnectionProfileDetails2 <: InterfaceWrapperBase & ComInterfa
         IWwanConnectionProfileDetails2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWwanConnectionProfileDetails2 {
+    public static func viewOf(raw: CPointer<Unit>): IWwanConnectionProfileDetails2 {
         IWwanConnectionProfileDetails2(raw)
     }
 
@@ -2868,7 +2868,7 @@ public class NetworkAdapter <: InterfaceWrapperBase & ComInterface & windows_int
         NetworkAdapter(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): NetworkAdapter {
+    public static func viewOf(raw: CPointer<Unit>): NetworkAdapter {
         NetworkAdapter(raw)
     }
 
@@ -3067,7 +3067,7 @@ public class NetworkItem <: InterfaceWrapperBase & ComInterface & windows_interf
         NetworkItem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): NetworkItem {
+    public static func viewOf(raw: CPointer<Unit>): NetworkItem {
         NetworkItem(raw)
     }
 
@@ -3135,7 +3135,7 @@ public class NetworkSecuritySettings <: InterfaceWrapperBase & ComInterface & wi
         NetworkSecuritySettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): NetworkSecuritySettings {
+    public static func viewOf(raw: CPointer<Unit>): NetworkSecuritySettings {
         NetworkSecuritySettings(raw)
     }
 
@@ -3240,7 +3240,7 @@ public class NetworkUsage <: InterfaceWrapperBase & ComInterface & windows_inter
         NetworkUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): NetworkUsage {
+    public static func viewOf(raw: CPointer<Unit>): NetworkUsage {
         NetworkUsage(raw)
     }
 
@@ -3320,7 +3320,7 @@ public class ProviderNetworkUsage <: InterfaceWrapperBase & ComInterface & windo
         ProviderNetworkUsage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ProviderNetworkUsage {
+    public static func viewOf(raw: CPointer<Unit>): ProviderNetworkUsage {
         ProviderNetworkUsage(raw)
     }
 
@@ -3452,7 +3452,7 @@ public class WlanConnectionProfileDetails <: InterfaceWrapperBase & ComInterface
         WlanConnectionProfileDetails(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): WlanConnectionProfileDetails {
+    public static func viewOf(raw: CPointer<Unit>): WlanConnectionProfileDetails {
         WlanConnectionProfileDetails(raw)
     }
 
@@ -3516,7 +3516,7 @@ public class WwanConnectionProfileDetails <: InterfaceWrapperBase & ComInterface
         WwanConnectionProfileDetails(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): WwanConnectionProfileDetails {
+    public static func viewOf(raw: CPointer<Unit>): WwanConnectionProfileDetails {
         WwanConnectionProfileDetails(raw)
     }
 

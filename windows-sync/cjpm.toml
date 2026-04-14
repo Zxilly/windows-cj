@@ -8,5 +8,4 @@
 [target]
   [target.x86_64-w64-mingw32]
     [target.x86_64-w64-mingw32.bin-dependencies]
-      path-option = ["C:/Users/12009/.cjv/toolchains/nightly-1.1.0-alpha.20260404010029/modules/windows_x86_64_cjnative/std"]
-
+      path-option = ["C:/Users/Admin/.cjv/toolchains/nightly-1.1.0-alpha.20260330010029/modules/windows_x86_64_cjnative/std"]

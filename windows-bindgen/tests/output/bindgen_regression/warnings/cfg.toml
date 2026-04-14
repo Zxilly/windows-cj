@@ -2,4 +2,4 @@
 # Conditional compilation variables
 # Features enabled for the generated projection.
 
-feat_windows_storage = "on"
+Windows_Storage = "on"

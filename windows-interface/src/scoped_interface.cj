@@ -1,15 +1,15 @@
 package windows_interface
 
-import std.collection.{HashMap, ArrayList}
+import std.collection.{ArrayList, HashMap}
 import std.sync.Mutex
 
-var scopedInterfaceRegistryMutex = Mutex()
-var scopedInterfaceRegistry = HashMap<UIntNative, Object>()
-var scopedInterfaceTargetIdentityMutex = Mutex()
-var scopedInterfaceTargetIdentities = ArrayList<ScopedTargetIdentityEntry>()
-var nextScopedInterfaceTargetIdentity: UIntNative = UIntNative(1)
+var interfaceTargetRegistryMutex = Mutex()
+var interfaceTargetRegistry = HashMap<UIntNative, Object>()
+var interfaceTargetIdentityMutex = Mutex()
+var interfaceTargetIdentities = ArrayList<InterfaceTargetIdentityEntry>()
+var nextInterfaceTargetIdentity: UIntNative = UIntNative(1)
 
-class ScopedTargetIdentityEntry {
+class InterfaceTargetIdentityEntry {
     public let key: UIntNative
     public let target: Object
     public var refCount: Int64
@@ -21,25 +21,25 @@ class ScopedTargetIdentityEntry {
     }
 }
 
-func scopedInterfaceRegistryInsert(raw: CPointer<Unit>, target: Object): Unit {
-    synchronized(scopedInterfaceRegistryMutex) {
-        scopedInterfaceRegistry.add(raw.toUIntNative(), target)
+func interfaceTargetRegistryInsert(raw: CPointer<Unit>, target: Object): Unit {
+    synchronized(interfaceTargetRegistryMutex) {
+        interfaceTargetRegistry.add(raw.toUIntNative(), target)
     }
 }
 
-func scopedInterfaceRegistryRemove(raw: CPointer<Unit>): Unit {
-    synchronized(scopedInterfaceRegistryMutex) {
-        scopedInterfaceRegistry.remove(raw.toUIntNative())
+func interfaceTargetRegistryRemove(raw: CPointer<Unit>): Unit {
+    synchronized(interfaceTargetRegistryMutex) {
+        interfaceTargetRegistry.remove(raw.toUIntNative())
     }
 }
 
-public func lookupScopedInterfaceTarget<T>(raw: CPointer<Unit>): Option<T> {
+public func lookupInterfaceTarget<T>(raw: CPointer<Unit>): Option<T> {
     if (raw.isNull()) {
         return None
     }
     let key = raw.toUIntNative()
-    let entry = synchronized(scopedInterfaceRegistryMutex) {
-        scopedInterfaceRegistry.get(key)
+    let entry = synchronized(interfaceTargetRegistryMutex) {
+        interfaceTargetRegistry.get(key)
     }
     match (entry) {
         case Some(value) =>
@@ -51,11 +51,11 @@ public func lookupScopedInterfaceTarget<T>(raw: CPointer<Unit>): Option<T> {
     }
 }
 
-func acquireScopedTargetIdentity(target: Object): UIntNative {
-    synchronized(scopedInterfaceTargetIdentityMutex) {
+func acquireInterfaceTargetIdentity(target: Object): UIntNative {
+    synchronized(interfaceTargetIdentityMutex) {
         var index: Int64 = 0
-        while (index < scopedInterfaceTargetIdentities.size) {
-            let entry = scopedInterfaceTargetIdentities[index]
+        while (index < interfaceTargetIdentities.size) {
+            let entry = interfaceTargetIdentities[index]
             if (refEq(entry.target, target)) {
                 entry.refCount += 1
                 return entry.key
@@ -63,22 +63,22 @@ func acquireScopedTargetIdentity(target: Object): UIntNative {
             index += 1
         }
 
-        let key = nextScopedInterfaceTargetIdentity
-        nextScopedInterfaceTargetIdentity += UIntNative(1)
-        scopedInterfaceTargetIdentities.add(ScopedTargetIdentityEntry(key, target))
+        let key = nextInterfaceTargetIdentity
+        nextInterfaceTargetIdentity += UIntNative(1)
+        interfaceTargetIdentities.add(InterfaceTargetIdentityEntry(key, target))
         key
     }
 }
 
-func releaseScopedTargetIdentity(key: UIntNative): Unit {
-    synchronized(scopedInterfaceTargetIdentityMutex) {
+func releaseInterfaceTargetIdentity(key: UIntNative): Unit {
+    synchronized(interfaceTargetIdentityMutex) {
         var index: Int64 = 0
-        while (index < scopedInterfaceTargetIdentities.size) {
-            let entry = scopedInterfaceTargetIdentities[index]
+        while (index < interfaceTargetIdentities.size) {
+            let entry = interfaceTargetIdentities[index]
             if (entry.key == key) {
                 entry.refCount -= 1
                 if (entry.refCount <= 0) {
-                    scopedInterfaceTargetIdentities.remove(at: index)
+                    interfaceTargetIdentities.remove(at: index)
                 }
                 return
             }
@@ -87,9 +87,9 @@ func releaseScopedTargetIdentity(key: UIntNative): Unit {
     }
 }
 
-public struct ScopedHeap {
+public struct InterfaceSlotInfo {
     public var vtable: UIntNative = UIntNative(0)
-    public var this_: UIntNative = UIntNative(0)
+    public var instanceRaw: UIntNative = UIntNative(0)
 
     public init() {}
 
@@ -100,24 +100,24 @@ public struct ScopedHeap {
         unsafe {
             let vtablePtr = CPointer<CPointer<Unit>>(raw).read()
             vtable = vtablePtr.toUIntNative()
-            this_ = raw.toUIntNative()
+            instanceRaw = raw.toUIntNative()
         }
     }
 
-    public mut prop this_ptr: UIntNative {
+    public mut prop instancePtr: UIntNative {
         get() {
-            this_
+            instanceRaw
         }
         set(value) {
-            this_ = value
+            instanceRaw = value
         }
     }
 }
 
-class ScopedInterfaceState<T> {
+class InterfaceResourceState<T> {
     public let descriptor: AbiReferenceDescriptorBase<T>
     public var raw: CPointer<Unit> = CPointer<Unit>()
-    public var heap: ScopedHeap = ScopedHeap()
+    public var slotInfo: InterfaceSlotInfo = InterfaceSlotInfo()
     public var closed: Bool = false
     public let releaseOnClose: Bool
     public let onClose: Option<() -> Unit>
@@ -127,7 +127,7 @@ class ScopedInterfaceState<T> {
         descriptor: AbiReferenceDescriptorBase<T>,
         addRef!: Bool = false,
         releaseOnClose!: Bool = true,
-        heapThisPtr!: Option<UIntNative> = None,
+        heapInstancePtr!: Option<UIntNative> = None,
         onClose!: Option<() -> Unit> = None
     ) {
         this.descriptor = descriptor
@@ -138,33 +138,33 @@ class ScopedInterfaceState<T> {
                 descriptor.addRefPointer(raw)
             }
             this.raw = raw
-            this.heap = ScopedHeap(raw)
-            match (heapThisPtr) {
+            this.slotInfo = InterfaceSlotInfo(raw)
+            match (heapInstancePtr) {
                 case Some(value) =>
-                    this.heap.this_ptr = value
+                    this.slotInfo.instancePtr = value
                 case None => ()
             }
         }
     }
 }
 
-public struct ScopedInterface<T> <: Resource {
-    private let state: ScopedInterfaceState<T>
+public struct InterfaceResource<T> <: Resource {
+    private let state: InterfaceResourceState<T>
 
     public init(
         raw: CPointer<Unit>,
         descriptor: AbiReferenceDescriptorBase<T>,
         addRef!: Bool = false,
         releaseOnClose!: Bool = true,
-        heapThisPtr!: Option<UIntNative> = None,
+        heapInstancePtr!: Option<UIntNative> = None,
         onClose!: Option<() -> Unit> = None
     ) {
-        state = ScopedInterfaceState<T>(
+        state = InterfaceResourceState<T>(
             raw,
             descriptor,
             addRef: addRef,
             releaseOnClose: releaseOnClose,
-            heapThisPtr: heapThisPtr,
+            heapInstancePtr: heapInstancePtr,
             onClose: onClose
         )
     }
@@ -172,16 +172,16 @@ public struct ScopedInterface<T> <: Resource {
     public static func new<U>(
         value: U,
         descriptor: AbiReferenceDescriptorBase<U>
-    ): ScopedInterface<U> where U <: ComInterface {
-        ScopedInterface<U>(value.asRaw(), descriptor, addRef: true)
+    ): InterfaceResource<U> where U <: ComInterface {
+        InterfaceResource<U>(value.asRaw(), descriptor, addRef: true)
     }
 
     public func isClosed(): Bool {
         state.closed || state.raw.isNull()
     }
 
-    public func heap(): ScopedHeap {
-        state.heap
+    public func slotInfo(): InterfaceSlotInfo {
+        state.slotInfo
     }
 
     public func asRaw(): CPointer<Unit> {
@@ -194,9 +194,9 @@ public struct ScopedInterface<T> <: Resource {
     public func value(): T {
         let raw = asRaw()
         if (raw.isNull()) {
-            throw IllegalStateException("ScopedInterface is closed")
+            throw IllegalStateException("InterfaceResource is closed")
         }
-        state.descriptor.wrapBorrowed(raw)
+        state.descriptor.viewOf(raw)
     }
 
     public func close(): Unit {
@@ -207,7 +207,7 @@ public struct ScopedInterface<T> <: Resource {
             state.descriptor.releasePointer(state.raw)
         }
         state.raw = CPointer<Unit>()
-        state.heap = ScopedHeap()
+        state.slotInfo = InterfaceSlotInfo()
         state.closed = true
         match (state.onClose) {
             case Some(callback) => callback()
@@ -216,32 +216,32 @@ public struct ScopedInterface<T> <: Resource {
     }
 }
 
-public unsafe func createScopedInterface<T>(
+public unsafe func createInterfaceResource<T>(
     descriptor: AbiReferenceDescriptorBase<T>,
     raw: CPointer<Unit>,
     addRef!: Bool = false
-): ScopedInterface<T> {
-    ScopedInterface<T>(raw, descriptor, addRef: addRef)
+): InterfaceResource<T> {
+    InterfaceResource<T>(raw, descriptor, addRef: addRef)
 }
 
-public unsafe func createScopedInterfaceFromTarget<T, U>(
+public unsafe func createInterfaceResourceFromTarget<T, U>(
     descriptor: AbiReferenceDescriptorBase<T>,
     target: U,
     vtablePtr: CPointer<Unit>
-): ScopedInterface<T> where U <: Object {
+): InterfaceResource<T> where U <: Object {
     let slots = Array<CPointer<Unit>>(1, { _ => vtablePtr })
     let handle = acquireArrayRawData(slots)
     let raw = CPointer<Unit>(handle.pointer)
-    let targetIdentity = acquireScopedTargetIdentity(target)
-    scopedInterfaceRegistryInsert(raw, target)
-    ScopedInterface<T>(
+    let targetIdentity = acquireInterfaceTargetIdentity(target)
+    interfaceTargetRegistryInsert(raw, target)
+    InterfaceResource<T>(
         raw,
         descriptor,
         releaseOnClose: false,
-        heapThisPtr: Some(targetIdentity),
+        heapInstancePtr: Some(targetIdentity),
         onClose: Some({ =>
-            scopedInterfaceRegistryRemove(raw)
-            releaseScopedTargetIdentity(targetIdentity)
+            interfaceTargetRegistryRemove(raw)
+            releaseInterfaceTargetIdentity(targetIdentity)
             unsafe { releaseArrayRawData(handle) }
         })
     )

@@ -18,7 +18,7 @@ public class AudioStateMonitor <: InterfaceWrapperBase & ComInterface & windows_
         AudioStateMonitor(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AudioStateMonitor {
+    public static func viewOf(raw: CPointer<Unit>): AudioStateMonitor {
         AudioStateMonitor(raw)
     }
 
@@ -148,7 +148,7 @@ public class IAudioStateMonitor <: InterfaceWrapperBase & ComInterface & Runtime
         IAudioStateMonitor(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioStateMonitor {
+    public static func viewOf(raw: CPointer<Unit>): IAudioStateMonitor {
         IAudioStateMonitor(raw)
     }
 

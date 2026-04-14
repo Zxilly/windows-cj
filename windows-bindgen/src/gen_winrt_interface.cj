@@ -82,15 +82,19 @@ public func generateWinrtInterface(
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
     w.writeBlock("public class ${name}${genericDecl} <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider${genericWhere}", { =>
-        w.writeLine("public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {")
-        w.writeLine("    super(raw, ownsReference: ownsReference)")
+        w.writeLine("public init(raw: CPointer<Unit>) {")
+        w.writeLine("    super(raw)")
         w.writeLine("}")
         w.writeBlankLine()
-        w.writeLine("public static func fromRaw(raw: CPointer<Unit>): ${typeName} {")
-        w.writeLine("    ${typeName}(raw, ownsReference: true)")
+        w.writeLine("private init(raw: CPointer<Unit>, takeOwnership!: Bool) {")
+        w.writeLine("    super(raw, takeOwnership: takeOwnership)")
         w.writeLine("}")
         w.writeBlankLine()
-        w.writeLine("public static func fromRawBorrowed(raw: CPointer<Unit>): ${typeName} {")
+        w.writeLine("public static func fromAbiTake(raw: CPointer<Unit>): ${typeName} {")
+        w.writeLine("    ${typeName}(raw, takeOwnership: true)")
+        w.writeLine("}")
+        w.writeBlankLine()
+        w.writeLine("public static func viewOf(raw: CPointer<Unit>): ${typeName} {")
         w.writeLine("    ${typeName}(raw)")
         w.writeLine("}")
         w.writeBlankLine()
@@ -117,7 +121,7 @@ public func generateWinrtInterface(
         w.writeLine("}")
         w.writeBlankLine()
         w.writeLine("public func asIInspectable(): IInspectable {")
-        w.writeLine("    IInspectable(asRaw())")
+        w.writeLine("    IInspectable.viewOf(asRaw())")
         w.writeLine("}")
         for (ancestor in ancestors) {
             let ancestorProjection = typeNameToProjectionCj(index, ancestor)
@@ -127,7 +131,7 @@ public func generateWinrtInterface(
             }
             w.writeBlankLine()
             w.writeLine("public func as${ancestorLeaf}(): ${ancestorProjection} {")
-            w.writeLine("    ${ancestorProjection}(asRaw())")
+            w.writeLine("    ${ancestorProjection}.viewOf(asRaw())")
             w.writeLine("}")
         }
         w.writeBlankLine()
@@ -320,7 +324,13 @@ func winrtImplMethodDeclaration(
         } else {
             "param${i}"
         }
-        params.add("${paramName}: ${highLevelType(index, sig.paramTypes[i])}")
+        let publicType = highLevelType(index, sig.paramTypes[i])
+        let paramType = if (highLevelArgumentExpr(index, sig.paramTypes[i], "value") != "value") {
+            "InParam<${publicType}>"
+        } else {
+            publicType
+        }
+        params.add("${paramName}: ${paramType}")
         i += 1
     }
 
@@ -376,7 +386,7 @@ func writeWinrtImplThunkAssignment(
     methodName: String
 ): Unit {
     let abiParams = ArrayList<String>()
-    abiParams.add("this_")
+    abiParams.add("instanceRaw")
     var i: Int64 = 0
     while (i < Int64(sig.paramTypes.size)) {
         abiParams.add("arg${i}")
@@ -395,7 +405,7 @@ func writeWinrtImplThunkAssignment(
         w.dedent()
         w.writeLine("}")
     }
-    w.writeLine("match (unsafe { asImplFromRaw<Identity>(this_) }) {")
+    w.writeLine("match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {")
     w.indent()
     w.writeLine("case Some(impl) =>")
     w.indent()
@@ -413,7 +423,6 @@ func writeWinrtImplThunkAssignment(
             w.dedent()
             w.writeLine("} else {")
             w.indent()
-            w.writeLine("value.addRef()")
             w.writeLine("unsafe { result__.write(raw) }")
             w.writeLine("S_OK.value")
             w.dedent()
@@ -470,7 +479,7 @@ func winrtMethodHasReferenceReturn(index: TypeIndex, ty: MetadataType): Bool {
     match (ty) {
         case MetadataType.MdObject => true
         case MetadataType.ClassName(_) => true
-        case MetadataType.ValueName(tn) => isReferenceProjectionType(index, tn)
+        case MetadataType.ValueName(tn) => !tn.generics.isEmpty() || isReferenceProjectionType(index, tn)
         case _ => false
     }
 }
@@ -486,9 +495,9 @@ func writeWinrtDescriptorMethod(
     match (baseInterface) {
         case Some(baseType) =>
             let baseProjection = typeNameToProjectionCj(index, baseType)
-            w.writeLine("    var descriptor = InterfaceDescriptor<${typeName}>(\"${name}\", ${typeName}.iid(), ${baseProjection}.descriptor(), { raw => ${typeName}(raw, ownsReference: true) }, { raw => ${typeName}(raw) })")
+            w.writeLine("    var descriptor = InterfaceDescriptor<${typeName}>(\"${name}\", ${typeName}.iid(), ${baseProjection}.descriptor(), { raw => ${typeName}.fromAbiTake(raw) }, { raw => ${typeName}.viewOf(raw) })")
         case None =>
-            w.writeLine("    var descriptor = InterfaceDescriptor<${typeName}>(\"${name}\", ${typeName}.iid(), IInspectable.descriptor(), { raw => ${typeName}(raw, ownsReference: true) }, { raw => ${typeName}(raw) })")
+            w.writeLine("    var descriptor = InterfaceDescriptor<${typeName}>(\"${name}\", ${typeName}.iid(), IInspectable.descriptor(), { raw => ${typeName}.fromAbiTake(raw) }, { raw => ${typeName}.viewOf(raw) })")
     }
     w.writeLine("    descriptor.runtimeTypeContract = Some(${typeName}.runtimeType())")
     w.writeLine("    return descriptor")
@@ -586,12 +595,12 @@ func methodSchemaArrayLiteral(
             let publicType = highLevelType(index, sig.paramTypes[paramIndex])
             let abiType = highLevelAbiType(index, sig.paramTypes[paramIndex])
             let bridgeKind = if (highLevelArgumentExpr(index, sig.paramTypes[paramIndex], "value") != "value") {
-                "InterfaceParameterBridgeKind.Ref"
+                "InterfaceParameterBridgeKind.InParam"
             } else {
                 "InterfaceParameterBridgeKind.Value"
             }
-            let callerType = if (bridgeKind == "InterfaceParameterBridgeKind.Ref") {
-                "Ref<${escapeString(publicType)}>"
+            let callerType = if (bridgeKind == "InterfaceParameterBridgeKind.InParam") {
+                "InParam<${escapeString(publicType)}>"
             } else {
                 escapeString(publicType)
             }
@@ -605,7 +614,7 @@ func methodSchemaArrayLiteral(
         }
         if (highLevelHasResult(sig)) {
             parameters.add(
-                "InterfaceParameterSchema(\"result\", \"${escapeString("CPointer<${highLevelAbiType(index, sig.returnType)}>")}\", \"${escapeString("OutRef<${highLevelType(index, sig.returnType)}>")}\", InterfaceParameterBridgeKind.OutRef)"
+                "InterfaceParameterSchema(\"result\", \"${escapeString("CPointer<${highLevelAbiType(index, sig.returnType)}>")}\", \"${escapeString("OutSlot<${highLevelType(index, sig.returnType)}>")}\", InterfaceParameterBridgeKind.OutSlot)"
             )
         }
         let literal = "InterfaceMethodSchema(\"${methodNames[methodRow]}\", ${slot}, [${joinStrings(parameters, ", ")}], \"Int32\")"
@@ -868,7 +877,7 @@ func writeIIteratorIteratorAdapter(w: CodeWriter, itemType: String): Unit {
         w.writeLine("private let source_: IIterator<${itemType}>")
         w.writeBlankLine()
         w.writeLine("public init(raw: CPointer<Unit>) {")
-        w.writeLine("    this.source_ = IIterator<${itemType}>.fromRawBorrowed(raw)")
+        w.writeLine("    this.source_ = IIterator<${itemType}>.viewOf(raw)")
         w.writeLine("}")
         w.writeBlankLine()
         w.writeLine("public func next(): Option<${itemType}> {")

@@ -18,7 +18,7 @@ public class DepthMediaFrameFormat <: InterfaceWrapperBase & ComInterface & wind
         DepthMediaFrameFormat(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DepthMediaFrameFormat {
+    public static func viewOf(raw: CPointer<Unit>): DepthMediaFrameFormat {
         DepthMediaFrameFormat(raw)
     }
 
@@ -95,7 +95,7 @@ public class IDepthMediaFrameFormat <: InterfaceWrapperBase & ComInterface & Run
         IDepthMediaFrameFormat(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDepthMediaFrameFormat {
+    public static func viewOf(raw: CPointer<Unit>): IDepthMediaFrameFormat {
         IDepthMediaFrameFormat(raw)
     }
 
@@ -185,7 +185,7 @@ public class IMediaFrameFormat <: InterfaceWrapperBase & ComInterface & RuntimeN
         IMediaFrameFormat(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameFormat {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameFormat {
         IMediaFrameFormat(raw)
     }
 
@@ -295,7 +295,7 @@ public class IMediaFrameFormat2 <: InterfaceWrapperBase & ComInterface & Runtime
         IMediaFrameFormat2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameFormat2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameFormat2 {
         IMediaFrameFormat2(raw)
     }
 
@@ -380,7 +380,7 @@ public class IMediaFrameSource <: InterfaceWrapperBase & ComInterface & RuntimeN
         IMediaFrameSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSource {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSource {
         IMediaFrameSource(raw)
     }
 
@@ -514,7 +514,7 @@ public class IMediaFrameSourceController <: InterfaceWrapperBase & ComInterface 
         IMediaFrameSourceController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSourceController {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSourceController {
         IMediaFrameSourceController(raw)
     }
 
@@ -609,7 +609,7 @@ public class IMediaFrameSourceController2 <: InterfaceWrapperBase & ComInterface
         IMediaFrameSourceController2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSourceController2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSourceController2 {
         IMediaFrameSourceController2(raw)
     }
 
@@ -695,7 +695,7 @@ public class IMediaFrameSourceController3 <: InterfaceWrapperBase & ComInterface
         IMediaFrameSourceController3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSourceController3 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSourceController3 {
         IMediaFrameSourceController3(raw)
     }
 
@@ -774,7 +774,7 @@ public class IMediaFrameSourceGetPropertyResult <: InterfaceWrapperBase & ComInt
         IMediaFrameSourceGetPropertyResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSourceGetPropertyResult {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSourceGetPropertyResult {
         IMediaFrameSourceGetPropertyResult(raw)
     }
 
@@ -862,7 +862,7 @@ public class IMediaFrameSourceGroup <: InterfaceWrapperBase & ComInterface & Run
         IMediaFrameSourceGroup(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSourceGroup {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSourceGroup {
         IMediaFrameSourceGroup(raw)
     }
 
@@ -962,7 +962,7 @@ public class IMediaFrameSourceInfo <: InterfaceWrapperBase & ComInterface & Runt
         IMediaFrameSourceInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSourceInfo {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSourceInfo {
         IMediaFrameSourceInfo(raw)
     }
 
@@ -1089,7 +1089,7 @@ public class IMediaFrameSourceInfo2 <: InterfaceWrapperBase & ComInterface & Run
         IMediaFrameSourceInfo2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSourceInfo2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSourceInfo2 {
         IMediaFrameSourceInfo2(raw)
     }
 
@@ -1175,7 +1175,7 @@ public class IMediaFrameSourceInfo3 <: InterfaceWrapperBase & ComInterface & Run
         IMediaFrameSourceInfo3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSourceInfo3 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSourceInfo3 {
         IMediaFrameSourceInfo3(raw)
     }
 
@@ -1253,7 +1253,7 @@ public class IMediaFrameSourceInfo4 <: InterfaceWrapperBase & ComInterface & Run
         IMediaFrameSourceInfo4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaFrameSourceInfo4 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaFrameSourceInfo4 {
         IMediaFrameSourceInfo4(raw)
     }
 
@@ -1334,7 +1334,7 @@ public class IVideoMediaFrameFormat <: InterfaceWrapperBase & ComInterface & Run
         IVideoMediaFrameFormat(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoMediaFrameFormat {
+    public static func viewOf(raw: CPointer<Unit>): IVideoMediaFrameFormat {
         IVideoMediaFrameFormat(raw)
     }
 
@@ -1428,7 +1428,7 @@ public class MediaFrameFormat <: InterfaceWrapperBase & ComInterface & windows_i
         MediaFrameFormat(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaFrameFormat {
+    public static func viewOf(raw: CPointer<Unit>): MediaFrameFormat {
         MediaFrameFormat(raw)
     }
 
@@ -1508,7 +1508,7 @@ public class MediaFrameSource <: InterfaceWrapperBase & ComInterface & windows_i
         MediaFrameSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaFrameSource {
+    public static func viewOf(raw: CPointer<Unit>): MediaFrameSource {
         MediaFrameSource(raw)
     }
 
@@ -1600,7 +1600,7 @@ public class MediaFrameSourceController <: InterfaceWrapperBase & ComInterface &
         MediaFrameSourceController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaFrameSourceController {
+    public static func viewOf(raw: CPointer<Unit>): MediaFrameSourceController {
         MediaFrameSourceController(raw)
     }
 
@@ -1672,7 +1672,7 @@ public class MediaFrameSourceGetPropertyResult <: InterfaceWrapperBase & ComInte
         MediaFrameSourceGetPropertyResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaFrameSourceGetPropertyResult {
+    public static func viewOf(raw: CPointer<Unit>): MediaFrameSourceGetPropertyResult {
         MediaFrameSourceGetPropertyResult(raw)
     }
 
@@ -1766,7 +1766,7 @@ public class MediaFrameSourceGroup <: InterfaceWrapperBase & ComInterface & wind
         MediaFrameSourceGroup(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaFrameSourceGroup {
+    public static func viewOf(raw: CPointer<Unit>): MediaFrameSourceGroup {
         MediaFrameSourceGroup(raw)
     }
 
@@ -1856,7 +1856,7 @@ public class MediaFrameSourceInfo <: InterfaceWrapperBase & ComInterface & windo
         MediaFrameSourceInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaFrameSourceInfo {
+    public static func viewOf(raw: CPointer<Unit>): MediaFrameSourceInfo {
         MediaFrameSourceInfo(raw)
     }
 
@@ -1997,7 +1997,7 @@ public class VideoMediaFrameFormat <: InterfaceWrapperBase & ComInterface & wind
         VideoMediaFrameFormat(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VideoMediaFrameFormat {
+    public static func viewOf(raw: CPointer<Unit>): VideoMediaFrameFormat {
         VideoMediaFrameFormat(raw)
     }
 

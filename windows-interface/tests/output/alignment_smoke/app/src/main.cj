@@ -304,15 +304,15 @@ func expectParamWrappers(raw: CPointer<Unit>): Unit {
     }
 }
 
-func expectScopedInterface(raw: CPointer<Unit>): Unit {
-    let scopedInspectable = unsafe { createScopedInterface(IInspectable.descriptor(), raw) }
-    expect(samePointer(scopedInspectable.asRaw(), raw), "ScopedInterface should expose the wrapped raw pointer")
-    expect(!scopedInspectable.isClosed(), "ScopedInterface should begin in the open state")
+func expectInterfaceResource(raw: CPointer<Unit>): Unit {
+    let scopedInspectable = unsafe { createInterfaceResource(IInspectable.descriptor(), raw) }
+    expect(samePointer(scopedInspectable.asRaw(), raw), "InterfaceResource should expose the wrapped raw pointer")
+    expect(!scopedInspectable.isClosed(), "InterfaceResource should begin in the open state")
     scopedInspectable.close()
-    expect(scopedInspectable.isClosed(), "ScopedInterface.close should mark the wrapper as closed")
+    expect(scopedInspectable.isClosed(), "InterfaceResource.close should mark the wrapper as closed")
 }
 
-func expectTargetBackedScopedInterface(): Unit {
+func expectTargetBackedInterfaceResource(): Unit {
     let descriptor = AbiReferenceDescriptor<DemoCallbackView>(
         "DemoCallback",
         { raw => DemoCallbackView(raw) },
@@ -328,7 +328,7 @@ func expectTargetBackedScopedInterface(): Unit {
 
     let firstVtblHandle = unsafe { acquireArrayRawData(Array<DemoCallbackVtbl>(1, { _ => DemoCallbackVtbl() })) }
     let firstScoped = unsafe {
-        createScopedInterfaceFromTarget(
+        createInterfaceResourceFromTarget(
             descriptor,
             target,
             CPointer<Unit>(firstVtblHandle.pointer)
@@ -338,7 +338,7 @@ func expectTargetBackedScopedInterface(): Unit {
 
     let secondVtblHandle = unsafe { acquireArrayRawData(Array<DemoCallbackVtbl>(1, { _ => DemoCallbackVtbl() })) }
     let secondScoped = unsafe {
-        createScopedInterfaceFromTarget(
+        createInterfaceResourceFromTarget(
             descriptor,
             target,
             CPointer<Unit>(secondVtblHandle.pointer)
@@ -346,40 +346,40 @@ func expectTargetBackedScopedInterface(): Unit {
     }
     let secondRaw = secondScoped.asRaw()
 
-    expect(firstRaw.isNotNull(), "target-backed ScopedInterface should allocate a live raw view")
-    expect(secondRaw.isNotNull(), "target-backed ScopedInterface should allocate an independent raw view per scope")
-    expect(firstScoped.heap().vtable == CPointer<Unit>(firstVtblHandle.pointer).toUIntNative(), "target-backed ScopedInterface should retain the supplied static vtable pointer")
-    expect(samePointer(firstScoped.value().asAbiPointer(), firstRaw), "target-backed ScopedInterface.value should wrap the allocated raw view")
-    expect(firstScoped.heap().this_ptr == secondScoped.heap().this_ptr, "target-backed ScopedInterface should record the target identity rather than the synthetic raw slot")
-    expect(firstScoped.heap().this_ptr != firstRaw.toUIntNative(), "target-backed ScopedInterface should not record the synthetic raw slot as the target identity")
+    expect(firstRaw.isNotNull(), "target-backed InterfaceResource should allocate a live raw view")
+    expect(secondRaw.isNotNull(), "target-backed InterfaceResource should allocate an independent raw view per scope")
+    expect(firstScoped.slotInfo().vtable == CPointer<Unit>(firstVtblHandle.pointer).toUIntNative(), "target-backed InterfaceResource should retain the supplied static vtable pointer")
+    expect(samePointer(firstScoped.value().asAbiPointer(), firstRaw), "target-backed InterfaceResource.value should wrap the allocated raw view")
+    expect(firstScoped.slotInfo().this_ptr == secondScoped.slotInfo().this_ptr, "target-backed InterfaceResource should record the target identity rather than the synthetic raw slot")
+    expect(firstScoped.slotInfo().this_ptr != firstRaw.toUIntNative(), "target-backed InterfaceResource should not record the synthetic raw slot as the target identity")
 
-    match (lookupScopedInterfaceTarget<DemoCallbackTarget>(firstRaw)) {
+    match (lookupInterfaceTarget<DemoCallbackTarget>(firstRaw)) {
         case Some(resolved) =>
             resolved.lastValue = 17i32
-            expect(target.lastValue == 17i32, "target-backed ScopedInterface should register the original target object")
+            expect(target.lastValue == 17i32, "target-backed InterfaceResource should register the original target object")
         case None =>
-            throw Exception("target-backed ScopedInterface should register its target for raw lookup")
+            throw Exception("target-backed InterfaceResource should register its target for raw lookup")
     }
 
     firstScoped.close()
-    expect(firstScoped.isClosed(), "target-backed ScopedInterface.close should close the allocated raw view")
-    expect(targetBackedReleaseCalls == 0u32, "target-backed ScopedInterface.close should not dispatch through Release")
-    match (lookupScopedInterfaceTarget<DemoCallbackTarget>(firstRaw)) {
+    expect(firstScoped.isClosed(), "target-backed InterfaceResource.close should close the allocated raw view")
+    expect(targetBackedReleaseCalls == 0u32, "target-backed InterfaceResource.close should not dispatch through Release")
+    match (lookupInterfaceTarget<DemoCallbackTarget>(firstRaw)) {
         case Some(_) =>
-            throw Exception("target-backed ScopedInterface.close should remove the raw-to-target registry entry")
+            throw Exception("target-backed InterfaceResource.close should remove the raw-to-target registry entry")
         case None => ()
     }
-    match (lookupScopedInterfaceTarget<DemoCallbackTarget>(secondRaw)) {
+    match (lookupInterfaceTarget<DemoCallbackTarget>(secondRaw)) {
         case Some(_) => ()
         case None =>
-            throw Exception("closing one target-backed ScopedInterface should not invalidate sibling raw views")
+            throw Exception("closing one target-backed InterfaceResource should not invalidate sibling raw views")
     }
 
     secondScoped.close()
-    expect(targetBackedReleaseCalls == 0u32, "target-backed ScopedInterface siblings should also bypass Release when closed")
-    match (lookupScopedInterfaceTarget<DemoCallbackTarget>(secondRaw)) {
+    expect(targetBackedReleaseCalls == 0u32, "target-backed InterfaceResource siblings should also bypass Release when closed")
+    match (lookupInterfaceTarget<DemoCallbackTarget>(secondRaw)) {
         case Some(_) =>
-            throw Exception("closing the final target-backed ScopedInterface should remove its raw-to-target registry entry")
+            throw Exception("closing the final target-backed InterfaceResource should remove its raw-to-target registry entry")
         case None => ()
     }
 }
@@ -409,7 +409,7 @@ main(_args: Array<String>) {
     expectDescriptorChains(raw)
     expectParameterSchemaMetadata()
     expectParamWrappers(raw)
-    expectScopedInterface(raw)
-    expectTargetBackedScopedInterface()
+    expectInterfaceResource(raw)
+    expectTargetBackedInterfaceResource()
     expectRuntimeNames()
 }

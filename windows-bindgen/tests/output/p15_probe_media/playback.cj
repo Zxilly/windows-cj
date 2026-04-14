@@ -42,7 +42,7 @@ public class BackgroundMediaPlayer <: InterfaceWrapperBase & ComInterface & wind
         BackgroundMediaPlayer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BackgroundMediaPlayer {
+    public static func viewOf(raw: CPointer<Unit>): BackgroundMediaPlayer {
         BackgroundMediaPlayer(raw)
     }
 
@@ -152,7 +152,7 @@ public class CurrentMediaPlaybackItemChangedEventArgs <: InterfaceWrapperBase & 
         CurrentMediaPlaybackItemChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CurrentMediaPlaybackItemChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): CurrentMediaPlaybackItemChangedEventArgs {
         CurrentMediaPlaybackItemChangedEventArgs(raw)
     }
 
@@ -259,7 +259,7 @@ public class IBackgroundMediaPlayerStatics <: InterfaceWrapperBase & ComInterfac
         IBackgroundMediaPlayerStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBackgroundMediaPlayerStatics {
+    public static func viewOf(raw: CPointer<Unit>): IBackgroundMediaPlayerStatics {
         IBackgroundMediaPlayerStatics(raw)
     }
 
@@ -392,7 +392,7 @@ public class ICurrentMediaPlaybackItemChangedEventArgs <: InterfaceWrapperBase &
         ICurrentMediaPlaybackItemChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICurrentMediaPlaybackItemChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ICurrentMediaPlaybackItemChangedEventArgs {
         ICurrentMediaPlaybackItemChangedEventArgs(raw)
     }
 
@@ -478,7 +478,7 @@ public class ICurrentMediaPlaybackItemChangedEventArgs2 <: InterfaceWrapperBase 
         ICurrentMediaPlaybackItemChangedEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICurrentMediaPlaybackItemChangedEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): ICurrentMediaPlaybackItemChangedEventArgs2 {
         ICurrentMediaPlaybackItemChangedEventArgs2(raw)
     }
 
@@ -570,7 +570,7 @@ public class IMediaBreak <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IMediaBreak(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaBreak {
+    public static func viewOf(raw: CPointer<Unit>): IMediaBreak {
         IMediaBreak(raw)
     }
 
@@ -686,7 +686,7 @@ public class IMediaBreakEndedEventArgs <: InterfaceWrapperBase & ComInterface & 
         IMediaBreakEndedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaBreakEndedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaBreakEndedEventArgs {
         IMediaBreakEndedEventArgs(raw)
     }
 
@@ -765,7 +765,7 @@ public class IMediaBreakFactory <: InterfaceWrapperBase & ComInterface & Runtime
         IMediaBreakFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaBreakFactory {
+    public static func viewOf(raw: CPointer<Unit>): IMediaBreakFactory {
         IMediaBreakFactory(raw)
     }
 
@@ -862,7 +862,7 @@ public class IMediaBreakManager <: InterfaceWrapperBase & ComInterface & Runtime
         IMediaBreakManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaBreakManager {
+    public static func viewOf(raw: CPointer<Unit>): IMediaBreakManager {
         IMediaBreakManager(raw)
     }
 
@@ -1025,7 +1025,7 @@ public class IMediaBreakSchedule <: InterfaceWrapperBase & ComInterface & Runtim
         IMediaBreakSchedule(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaBreakSchedule {
+    public static func viewOf(raw: CPointer<Unit>): IMediaBreakSchedule {
         IMediaBreakSchedule(raw)
     }
 
@@ -1167,7 +1167,7 @@ public class IMediaBreakSeekedOverEventArgs <: InterfaceWrapperBase & ComInterfa
         IMediaBreakSeekedOverEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaBreakSeekedOverEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaBreakSeekedOverEventArgs {
         IMediaBreakSeekedOverEventArgs(raw)
     }
 
@@ -1261,7 +1261,7 @@ public class IMediaBreakSkippedEventArgs <: InterfaceWrapperBase & ComInterface 
         IMediaBreakSkippedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaBreakSkippedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaBreakSkippedEventArgs {
         IMediaBreakSkippedEventArgs(raw)
     }
 
@@ -1339,7 +1339,7 @@ public class IMediaBreakStartedEventArgs <: InterfaceWrapperBase & ComInterface 
         IMediaBreakStartedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaBreakStartedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaBreakStartedEventArgs {
         IMediaBreakStartedEventArgs(raw)
     }
 
@@ -1437,7 +1437,7 @@ public struct IMediaEnginePlaybackSourceVtbl {
         vtbl.SetPlaybackSource = { this_, arg0 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.SetPlaybackSource(IMediaPlaybackSource.fromRawBorrowed(arg0))) {
+                    match (impl.SetPlaybackSource(IMediaPlaybackSource.viewOf(arg0))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -1474,7 +1474,7 @@ public class IMediaEnginePlaybackSource <: InterfaceWrapperBase & ComInterface &
         IMediaEnginePlaybackSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaEnginePlaybackSource {
+    public static func viewOf(raw: CPointer<Unit>): IMediaEnginePlaybackSource {
         IMediaEnginePlaybackSource(raw)
     }
 
@@ -1564,7 +1564,7 @@ public class IMediaItemDisplayProperties <: InterfaceWrapperBase & ComInterface 
         IMediaItemDisplayProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaItemDisplayProperties {
+    public static func viewOf(raw: CPointer<Unit>): IMediaItemDisplayProperties {
         IMediaItemDisplayProperties(raw)
     }
 
@@ -1716,7 +1716,7 @@ public class IMediaPlaybackCommandManager <: InterfaceWrapperBase & ComInterface
         IMediaPlaybackCommandManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManager {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManager {
         IMediaPlaybackCommandManager(raw)
     }
 
@@ -2031,7 +2031,7 @@ public class IMediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs <: Inte
         IMediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs {
         IMediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs(raw)
     }
 
@@ -2136,7 +2136,7 @@ public class IMediaPlaybackCommandManagerCommandBehavior <: InterfaceWrapperBase
         IMediaPlaybackCommandManagerCommandBehavior(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerCommandBehavior {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerCommandBehavior {
         IMediaPlaybackCommandManagerCommandBehavior(raw)
     }
 
@@ -2252,7 +2252,7 @@ public class IMediaPlaybackCommandManagerFastForwardReceivedEventArgs <: Interfa
         IMediaPlaybackCommandManagerFastForwardReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerFastForwardReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerFastForwardReceivedEventArgs {
         IMediaPlaybackCommandManagerFastForwardReceivedEventArgs(raw)
     }
 
@@ -2346,7 +2346,7 @@ public class IMediaPlaybackCommandManagerNextReceivedEventArgs <: InterfaceWrapp
         IMediaPlaybackCommandManagerNextReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerNextReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerNextReceivedEventArgs {
         IMediaPlaybackCommandManagerNextReceivedEventArgs(raw)
     }
 
@@ -2440,7 +2440,7 @@ public class IMediaPlaybackCommandManagerPauseReceivedEventArgs <: InterfaceWrap
         IMediaPlaybackCommandManagerPauseReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerPauseReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerPauseReceivedEventArgs {
         IMediaPlaybackCommandManagerPauseReceivedEventArgs(raw)
     }
 
@@ -2534,7 +2534,7 @@ public class IMediaPlaybackCommandManagerPlayReceivedEventArgs <: InterfaceWrapp
         IMediaPlaybackCommandManagerPlayReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerPlayReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerPlayReceivedEventArgs {
         IMediaPlaybackCommandManagerPlayReceivedEventArgs(raw)
     }
 
@@ -2629,7 +2629,7 @@ public class IMediaPlaybackCommandManagerPositionReceivedEventArgs <: InterfaceW
         IMediaPlaybackCommandManagerPositionReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerPositionReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerPositionReceivedEventArgs {
         IMediaPlaybackCommandManagerPositionReceivedEventArgs(raw)
     }
 
@@ -2731,7 +2731,7 @@ public class IMediaPlaybackCommandManagerPreviousReceivedEventArgs <: InterfaceW
         IMediaPlaybackCommandManagerPreviousReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerPreviousReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerPreviousReceivedEventArgs {
         IMediaPlaybackCommandManagerPreviousReceivedEventArgs(raw)
     }
 
@@ -2826,7 +2826,7 @@ public class IMediaPlaybackCommandManagerRateReceivedEventArgs <: InterfaceWrapp
         IMediaPlaybackCommandManagerRateReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerRateReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerRateReceivedEventArgs {
         IMediaPlaybackCommandManagerRateReceivedEventArgs(raw)
     }
 
@@ -2928,7 +2928,7 @@ public class IMediaPlaybackCommandManagerRewindReceivedEventArgs <: InterfaceWra
         IMediaPlaybackCommandManagerRewindReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerRewindReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerRewindReceivedEventArgs {
         IMediaPlaybackCommandManagerRewindReceivedEventArgs(raw)
     }
 
@@ -3023,7 +3023,7 @@ public class IMediaPlaybackCommandManagerShuffleReceivedEventArgs <: InterfaceWr
         IMediaPlaybackCommandManagerShuffleReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackCommandManagerShuffleReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackCommandManagerShuffleReceivedEventArgs {
         IMediaPlaybackCommandManagerShuffleReceivedEventArgs(raw)
     }
 
@@ -3132,7 +3132,7 @@ public class IMediaPlaybackItem <: InterfaceWrapperBase & ComInterface & Runtime
         IMediaPlaybackItem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackItem {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackItem {
         IMediaPlaybackItem(raw)
     }
 
@@ -3291,7 +3291,7 @@ public class IMediaPlaybackItem2 <: InterfaceWrapperBase & ComInterface & Runtim
         IMediaPlaybackItem2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackItem2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackItem2 {
         IMediaPlaybackItem2(raw)
     }
 
@@ -3430,7 +3430,7 @@ public class IMediaPlaybackItem3 <: InterfaceWrapperBase & ComInterface & Runtim
         IMediaPlaybackItem3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackItem3 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackItem3 {
         IMediaPlaybackItem3(raw)
     }
 
@@ -3554,7 +3554,7 @@ public class IMediaPlaybackItemError <: InterfaceWrapperBase & ComInterface & Ru
         IMediaPlaybackItemError(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackItemError {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackItemError {
         IMediaPlaybackItemError(raw)
     }
 
@@ -3640,7 +3640,7 @@ public class IMediaPlaybackItemFactory <: InterfaceWrapperBase & ComInterface & 
         IMediaPlaybackItemFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackItemFactory {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackItemFactory {
         IMediaPlaybackItemFactory(raw)
     }
 
@@ -3719,7 +3719,7 @@ public class IMediaPlaybackItemFactory2 <: InterfaceWrapperBase & ComInterface &
         IMediaPlaybackItemFactory2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackItemFactory2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackItemFactory2 {
         IMediaPlaybackItemFactory2(raw)
     }
 
@@ -3815,7 +3815,7 @@ public class IMediaPlaybackItemFailedEventArgs <: InterfaceWrapperBase & ComInte
         IMediaPlaybackItemFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackItemFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackItemFailedEventArgs {
         IMediaPlaybackItemFailedEventArgs(raw)
     }
 
@@ -3901,7 +3901,7 @@ public class IMediaPlaybackItemOpenedEventArgs <: InterfaceWrapperBase & ComInte
         IMediaPlaybackItemOpenedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackItemOpenedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackItemOpenedEventArgs {
         IMediaPlaybackItemOpenedEventArgs(raw)
     }
 
@@ -3979,7 +3979,7 @@ public class IMediaPlaybackItemStatics <: InterfaceWrapperBase & ComInterface & 
         IMediaPlaybackItemStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackItemStatics {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackItemStatics {
         IMediaPlaybackItemStatics(raw)
     }
 
@@ -4072,7 +4072,7 @@ public class IMediaPlaybackList <: InterfaceWrapperBase & ComInterface & Runtime
         IMediaPlaybackList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackList {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackList {
         IMediaPlaybackList(raw)
     }
 
@@ -4274,7 +4274,7 @@ public class IMediaPlaybackList2 <: InterfaceWrapperBase & ComInterface & Runtim
         IMediaPlaybackList2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackList2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackList2 {
         IMediaPlaybackList2(raw)
     }
 
@@ -4400,7 +4400,7 @@ public class IMediaPlaybackList3 <: InterfaceWrapperBase & ComInterface & Runtim
         IMediaPlaybackList3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackList3 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackList3 {
         IMediaPlaybackList3(raw)
     }
 
@@ -4538,7 +4538,7 @@ public class IMediaPlaybackSession <: InterfaceWrapperBase & ComInterface & Runt
         IMediaPlaybackSession(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackSession {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackSession {
         IMediaPlaybackSession(raw)
     }
 
@@ -4898,7 +4898,7 @@ public class IMediaPlaybackSession2 <: InterfaceWrapperBase & ComInterface & Run
         IMediaPlaybackSession2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackSession2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackSession2 {
         IMediaPlaybackSession2(raw)
     }
 
@@ -5080,7 +5080,7 @@ public class IMediaPlaybackSession3 <: InterfaceWrapperBase & ComInterface & Run
         IMediaPlaybackSession3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackSession3 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackSession3 {
         IMediaPlaybackSession3(raw)
     }
 
@@ -5172,7 +5172,7 @@ public class IMediaPlaybackSessionBufferingStartedEventArgs <: InterfaceWrapperB
         IMediaPlaybackSessionBufferingStartedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackSessionBufferingStartedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackSessionBufferingStartedEventArgs {
         IMediaPlaybackSessionBufferingStartedEventArgs(raw)
     }
 
@@ -5250,7 +5250,7 @@ public class IMediaPlaybackSessionOutputDegradationPolicyState <: InterfaceWrapp
         IMediaPlaybackSessionOutputDegradationPolicyState(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackSessionOutputDegradationPolicyState {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackSessionOutputDegradationPolicyState {
         IMediaPlaybackSessionOutputDegradationPolicyState(raw)
     }
 
@@ -5345,7 +5345,7 @@ public class IMediaPlaybackSource <: InterfaceWrapperBase & ComInterface & Runti
         IMediaPlaybackSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackSource {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackSource {
         IMediaPlaybackSource(raw)
     }
 
@@ -5424,7 +5424,7 @@ public class IMediaPlaybackSphericalVideoProjection <: InterfaceWrapperBase & Co
         IMediaPlaybackSphericalVideoProjection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackSphericalVideoProjection {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackSphericalVideoProjection {
         IMediaPlaybackSphericalVideoProjection(raw)
     }
 
@@ -5567,7 +5567,7 @@ public class IMediaPlaybackTimedMetadataTrackList <: InterfaceWrapperBase & ComI
         IMediaPlaybackTimedMetadataTrackList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlaybackTimedMetadataTrackList {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlaybackTimedMetadataTrackList {
         IMediaPlaybackTimedMetadataTrackList(raw)
     }
 
@@ -5706,7 +5706,7 @@ public class IMediaPlayer <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IMediaPlayer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayer {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayer {
         IMediaPlayer(raw)
     }
 
@@ -6078,7 +6078,7 @@ public class IMediaPlayer2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IMediaPlayer2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayer2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayer2 {
         IMediaPlayer2(raw)
     }
 
@@ -6205,7 +6205,7 @@ public class IMediaPlayer3 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IMediaPlayer3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayer3 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayer3 {
         IMediaPlayer3(raw)
     }
 
@@ -6432,7 +6432,7 @@ public class IMediaPlayer4 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IMediaPlayer4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayer4 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayer4 {
         IMediaPlayer4(raw)
     }
 
@@ -6522,7 +6522,7 @@ public class IMediaPlayer5 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IMediaPlayer5(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayer5 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayer5 {
         IMediaPlayer5(raw)
     }
 
@@ -6641,7 +6641,7 @@ public class IMediaPlayer6 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IMediaPlayer6(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayer6 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayer6 {
         IMediaPlayer6(raw)
     }
 
@@ -6741,7 +6741,7 @@ public class IMediaPlayer7 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IMediaPlayer7(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayer7 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayer7 {
         IMediaPlayer7(raw)
     }
 
@@ -6819,7 +6819,7 @@ public class IMediaPlayerDataReceivedEventArgs <: InterfaceWrapperBase & ComInte
         IMediaPlayerDataReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayerDataReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayerDataReceivedEventArgs {
         IMediaPlayerDataReceivedEventArgs(raw)
     }
 
@@ -6898,7 +6898,7 @@ public class IMediaPlayerEffects <: InterfaceWrapperBase & ComInterface & Runtim
         IMediaPlayerEffects(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayerEffects {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayerEffects {
         IMediaPlayerEffects(raw)
     }
 
@@ -6980,7 +6980,7 @@ public class IMediaPlayerEffects2 <: InterfaceWrapperBase & ComInterface & Runti
         IMediaPlayerEffects2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayerEffects2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayerEffects2 {
         IMediaPlayerEffects2(raw)
     }
 
@@ -7058,7 +7058,7 @@ public class IMediaPlayerFailedEventArgs <: InterfaceWrapperBase & ComInterface 
         IMediaPlayerFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayerFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayerFailedEventArgs {
         IMediaPlayerFailedEventArgs(raw)
     }
 
@@ -7152,7 +7152,7 @@ public class IMediaPlayerRateChangedEventArgs <: InterfaceWrapperBase & ComInter
         IMediaPlayerRateChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayerRateChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayerRateChangedEventArgs {
         IMediaPlayerRateChangedEventArgs(raw)
     }
 
@@ -7234,7 +7234,7 @@ public class IMediaPlayerSource <: InterfaceWrapperBase & ComInterface & Runtime
         IMediaPlayerSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayerSource {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayerSource {
         IMediaPlayerSource(raw)
     }
 
@@ -7337,7 +7337,7 @@ public class IMediaPlayerSource2 <: InterfaceWrapperBase & ComInterface & Runtim
         IMediaPlayerSource2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayerSource2 {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayerSource2 {
         IMediaPlayerSource2(raw)
     }
 
@@ -7423,7 +7423,7 @@ public class IMediaPlayerSurface <: InterfaceWrapperBase & ComInterface & Runtim
         IMediaPlayerSurface(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaPlayerSurface {
+    public static func viewOf(raw: CPointer<Unit>): IMediaPlayerSurface {
         IMediaPlayerSurface(raw)
     }
 
@@ -7519,7 +7519,7 @@ public class IPlaybackMediaMarker <: InterfaceWrapperBase & ComInterface & Runti
         IPlaybackMediaMarker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPlaybackMediaMarker {
+    public static func viewOf(raw: CPointer<Unit>): IPlaybackMediaMarker {
         IPlaybackMediaMarker(raw)
     }
 
@@ -7614,7 +7614,7 @@ public class IPlaybackMediaMarkerFactory <: InterfaceWrapperBase & ComInterface 
         IPlaybackMediaMarkerFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPlaybackMediaMarkerFactory {
+    public static func viewOf(raw: CPointer<Unit>): IPlaybackMediaMarkerFactory {
         IPlaybackMediaMarkerFactory(raw)
     }
 
@@ -7700,7 +7700,7 @@ public class IPlaybackMediaMarkerReachedEventArgs <: InterfaceWrapperBase & ComI
         IPlaybackMediaMarkerReachedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPlaybackMediaMarkerReachedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IPlaybackMediaMarkerReachedEventArgs {
         IPlaybackMediaMarkerReachedEventArgs(raw)
     }
 
@@ -7780,7 +7780,7 @@ public class IPlaybackMediaMarkerSequence <: InterfaceWrapperBase & ComInterface
         IPlaybackMediaMarkerSequence(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPlaybackMediaMarkerSequence {
+    public static func viewOf(raw: CPointer<Unit>): IPlaybackMediaMarkerSequence {
         IPlaybackMediaMarkerSequence(raw)
     }
 
@@ -7881,7 +7881,7 @@ public class ITimedMetadataPresentationModeChangedEventArgs <: InterfaceWrapperB
         ITimedMetadataPresentationModeChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ITimedMetadataPresentationModeChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ITimedMetadataPresentationModeChangedEventArgs {
         ITimedMetadataPresentationModeChangedEventArgs(raw)
     }
 
@@ -7967,7 +7967,7 @@ public class MediaBreak <: InterfaceWrapperBase & ComInterface & windows_interfa
         MediaBreak(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaBreak {
+    public static func viewOf(raw: CPointer<Unit>): MediaBreak {
         MediaBreak(raw)
     }
 
@@ -8063,7 +8063,7 @@ public class MediaBreakEndedEventArgs <: InterfaceWrapperBase & ComInterface & w
         MediaBreakEndedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaBreakEndedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaBreakEndedEventArgs {
         MediaBreakEndedEventArgs(raw)
     }
 
@@ -8149,7 +8149,7 @@ public class MediaBreakManager <: InterfaceWrapperBase & ComInterface & windows_
         MediaBreakManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaBreakManager {
+    public static func viewOf(raw: CPointer<Unit>): MediaBreakManager {
         MediaBreakManager(raw)
     }
 
@@ -8257,7 +8257,7 @@ public class MediaBreakSchedule <: InterfaceWrapperBase & ComInterface & windows
         MediaBreakSchedule(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaBreakSchedule {
+    public static func viewOf(raw: CPointer<Unit>): MediaBreakSchedule {
         MediaBreakSchedule(raw)
     }
 
@@ -8357,7 +8357,7 @@ public class MediaBreakSeekedOverEventArgs <: InterfaceWrapperBase & ComInterfac
         MediaBreakSeekedOverEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaBreakSeekedOverEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaBreakSeekedOverEventArgs {
         MediaBreakSeekedOverEventArgs(raw)
     }
 
@@ -8429,7 +8429,7 @@ public class MediaBreakSkippedEventArgs <: InterfaceWrapperBase & ComInterface &
         MediaBreakSkippedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaBreakSkippedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaBreakSkippedEventArgs {
         MediaBreakSkippedEventArgs(raw)
     }
 
@@ -8493,7 +8493,7 @@ public class MediaBreakStartedEventArgs <: InterfaceWrapperBase & ComInterface &
         MediaBreakStartedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaBreakStartedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaBreakStartedEventArgs {
         MediaBreakStartedEventArgs(raw)
     }
 
@@ -8580,7 +8580,7 @@ public class MediaItemDisplayProperties <: InterfaceWrapperBase & ComInterface &
         MediaItemDisplayProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaItemDisplayProperties {
+    public static func viewOf(raw: CPointer<Unit>): MediaItemDisplayProperties {
         MediaItemDisplayProperties(raw)
     }
 
@@ -8668,7 +8668,7 @@ public class MediaPlaybackAudioTrackList <: InterfaceWrapperBase & ComInterface 
         MediaPlaybackAudioTrackList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackAudioTrackList {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackAudioTrackList {
         MediaPlaybackAudioTrackList(raw)
     }
 
@@ -8772,7 +8772,7 @@ public class MediaPlaybackCommandManager <: InterfaceWrapperBase & ComInterface 
         MediaPlaybackCommandManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManager {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManager {
         MediaPlaybackCommandManager(raw)
     }
 
@@ -8964,7 +8964,7 @@ public class MediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs <: Inter
         MediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs {
         MediaPlaybackCommandManagerAutoRepeatModeReceivedEventArgs(raw)
     }
 
@@ -9040,7 +9040,7 @@ public class MediaPlaybackCommandManagerCommandBehavior <: InterfaceWrapperBase 
         MediaPlaybackCommandManagerCommandBehavior(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerCommandBehavior {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerCommandBehavior {
         MediaPlaybackCommandManagerCommandBehavior(raw)
     }
 
@@ -9124,7 +9124,7 @@ public class MediaPlaybackCommandManagerFastForwardReceivedEventArgs <: Interfac
         MediaPlaybackCommandManagerFastForwardReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerFastForwardReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerFastForwardReceivedEventArgs {
         MediaPlaybackCommandManagerFastForwardReceivedEventArgs(raw)
     }
 
@@ -9196,7 +9196,7 @@ public class MediaPlaybackCommandManagerNextReceivedEventArgs <: InterfaceWrappe
         MediaPlaybackCommandManagerNextReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerNextReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerNextReceivedEventArgs {
         MediaPlaybackCommandManagerNextReceivedEventArgs(raw)
     }
 
@@ -9268,7 +9268,7 @@ public class MediaPlaybackCommandManagerPauseReceivedEventArgs <: InterfaceWrapp
         MediaPlaybackCommandManagerPauseReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerPauseReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerPauseReceivedEventArgs {
         MediaPlaybackCommandManagerPauseReceivedEventArgs(raw)
     }
 
@@ -9340,7 +9340,7 @@ public class MediaPlaybackCommandManagerPlayReceivedEventArgs <: InterfaceWrappe
         MediaPlaybackCommandManagerPlayReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerPlayReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerPlayReceivedEventArgs {
         MediaPlaybackCommandManagerPlayReceivedEventArgs(raw)
     }
 
@@ -9412,7 +9412,7 @@ public class MediaPlaybackCommandManagerPositionReceivedEventArgs <: InterfaceWr
         MediaPlaybackCommandManagerPositionReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerPositionReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerPositionReceivedEventArgs {
         MediaPlaybackCommandManagerPositionReceivedEventArgs(raw)
     }
 
@@ -9488,7 +9488,7 @@ public class MediaPlaybackCommandManagerPreviousReceivedEventArgs <: InterfaceWr
         MediaPlaybackCommandManagerPreviousReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerPreviousReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerPreviousReceivedEventArgs {
         MediaPlaybackCommandManagerPreviousReceivedEventArgs(raw)
     }
 
@@ -9560,7 +9560,7 @@ public class MediaPlaybackCommandManagerRateReceivedEventArgs <: InterfaceWrappe
         MediaPlaybackCommandManagerRateReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerRateReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerRateReceivedEventArgs {
         MediaPlaybackCommandManagerRateReceivedEventArgs(raw)
     }
 
@@ -9636,7 +9636,7 @@ public class MediaPlaybackCommandManagerRewindReceivedEventArgs <: InterfaceWrap
         MediaPlaybackCommandManagerRewindReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerRewindReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerRewindReceivedEventArgs {
         MediaPlaybackCommandManagerRewindReceivedEventArgs(raw)
     }
 
@@ -9708,7 +9708,7 @@ public class MediaPlaybackCommandManagerShuffleReceivedEventArgs <: InterfaceWra
         MediaPlaybackCommandManagerShuffleReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackCommandManagerShuffleReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackCommandManagerShuffleReceivedEventArgs {
         MediaPlaybackCommandManagerShuffleReceivedEventArgs(raw)
     }
 
@@ -9784,7 +9784,7 @@ public class MediaPlaybackItem <: InterfaceWrapperBase & ComInterface & windows_
         MediaPlaybackItem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackItem {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackItem {
         MediaPlaybackItem(raw)
     }
 
@@ -9936,7 +9936,7 @@ public class MediaPlaybackItemError <: InterfaceWrapperBase & ComInterface & win
         MediaPlaybackItemError(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackItemError {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackItemError {
         MediaPlaybackItemError(raw)
     }
 
@@ -10030,7 +10030,7 @@ public class MediaPlaybackItemFailedEventArgs <: InterfaceWrapperBase & ComInter
         MediaPlaybackItemFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackItemFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackItemFailedEventArgs {
         MediaPlaybackItemFailedEventArgs(raw)
     }
 
@@ -10098,7 +10098,7 @@ public class MediaPlaybackItemOpenedEventArgs <: InterfaceWrapperBase & ComInter
         MediaPlaybackItemOpenedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackItemOpenedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackItemOpenedEventArgs {
         MediaPlaybackItemOpenedEventArgs(raw)
     }
 
@@ -10162,7 +10162,7 @@ public class MediaPlaybackList <: InterfaceWrapperBase & ComInterface & windows_
         MediaPlaybackList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackList {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackList {
         MediaPlaybackList(raw)
     }
 
@@ -10296,7 +10296,7 @@ public class MediaPlaybackSession <: InterfaceWrapperBase & ComInterface & windo
         MediaPlaybackSession(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackSession {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackSession {
         MediaPlaybackSession(raw)
     }
 
@@ -10508,7 +10508,7 @@ public class MediaPlaybackSessionBufferingStartedEventArgs <: InterfaceWrapperBa
         MediaPlaybackSessionBufferingStartedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackSessionBufferingStartedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackSessionBufferingStartedEventArgs {
         MediaPlaybackSessionBufferingStartedEventArgs(raw)
     }
 
@@ -10572,7 +10572,7 @@ public class MediaPlaybackSessionOutputDegradationPolicyState <: InterfaceWrappe
         MediaPlaybackSessionOutputDegradationPolicyState(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackSessionOutputDegradationPolicyState {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackSessionOutputDegradationPolicyState {
         MediaPlaybackSessionOutputDegradationPolicyState(raw)
     }
 
@@ -10663,7 +10663,7 @@ public class MediaPlaybackSphericalVideoProjection <: InterfaceWrapperBase & Com
         MediaPlaybackSphericalVideoProjection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackSphericalVideoProjection {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackSphericalVideoProjection {
         MediaPlaybackSphericalVideoProjection(raw)
     }
 
@@ -10788,7 +10788,7 @@ public class MediaPlaybackTimedMetadataTrackList <: InterfaceWrapperBase & ComIn
         MediaPlaybackTimedMetadataTrackList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackTimedMetadataTrackList {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackTimedMetadataTrackList {
         MediaPlaybackTimedMetadataTrackList(raw)
     }
 
@@ -10872,7 +10872,7 @@ public class MediaPlaybackVideoTrackList <: InterfaceWrapperBase & ComInterface 
         MediaPlaybackVideoTrackList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlaybackVideoTrackList {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlaybackVideoTrackList {
         MediaPlaybackVideoTrackList(raw)
     }
 
@@ -10976,7 +10976,7 @@ public class MediaPlayer <: InterfaceWrapperBase & ComInterface & windows_interf
         MediaPlayer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlayer {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlayer {
         MediaPlayer(raw)
     }
 
@@ -11271,7 +11271,7 @@ public class MediaPlayerDataReceivedEventArgs <: InterfaceWrapperBase & ComInter
         MediaPlayerDataReceivedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlayerDataReceivedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlayerDataReceivedEventArgs {
         MediaPlayerDataReceivedEventArgs(raw)
     }
 
@@ -11360,7 +11360,7 @@ public class MediaPlayerFailedEventArgs <: InterfaceWrapperBase & ComInterface &
         MediaPlayerFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlayerFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlayerFailedEventArgs {
         MediaPlayerFailedEventArgs(raw)
     }
 
@@ -11432,7 +11432,7 @@ public class MediaPlayerRateChangedEventArgs <: InterfaceWrapperBase & ComInterf
         MediaPlayerRateChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlayerRateChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlayerRateChangedEventArgs {
         MediaPlayerRateChangedEventArgs(raw)
     }
 
@@ -11522,7 +11522,7 @@ public class MediaPlayerSurface <: InterfaceWrapperBase & ComInterface & windows
         MediaPlayerSurface(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPlayerSurface {
+    public static func viewOf(raw: CPointer<Unit>): MediaPlayerSurface {
         MediaPlayerSurface(raw)
     }
 
@@ -11602,7 +11602,7 @@ public class PlaybackMediaMarker <: InterfaceWrapperBase & ComInterface & window
         PlaybackMediaMarker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PlaybackMediaMarker {
+    public static func viewOf(raw: CPointer<Unit>): PlaybackMediaMarker {
         PlaybackMediaMarker(raw)
     }
 
@@ -11686,7 +11686,7 @@ public class PlaybackMediaMarkerReachedEventArgs <: InterfaceWrapperBase & ComIn
         PlaybackMediaMarkerReachedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PlaybackMediaMarkerReachedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): PlaybackMediaMarkerReachedEventArgs {
         PlaybackMediaMarkerReachedEventArgs(raw)
     }
 
@@ -11750,7 +11750,7 @@ public class PlaybackMediaMarkerSequence <: InterfaceWrapperBase & ComInterface 
         PlaybackMediaMarkerSequence(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PlaybackMediaMarkerSequence {
+    public static func viewOf(raw: CPointer<Unit>): PlaybackMediaMarkerSequence {
         PlaybackMediaMarkerSequence(raw)
     }
 
@@ -11874,7 +11874,7 @@ public class TimedMetadataPresentationModeChangedEventArgs <: InterfaceWrapperBa
         TimedMetadataPresentationModeChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): TimedMetadataPresentationModeChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): TimedMetadataPresentationModeChangedEventArgs {
         TimedMetadataPresentationModeChangedEventArgs(raw)
     }
 

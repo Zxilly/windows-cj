@@ -18,7 +18,7 @@ public class FileExtensionVector <: InterfaceWrapperBase & ComInterface & window
         FileExtensionVector(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileExtensionVector {
+    public static func viewOf(raw: CPointer<Unit>): FileExtensionVector {
         FileExtensionVector(raw)
     }
 
@@ -134,7 +134,7 @@ public class FileOpenPicker <: InterfaceWrapperBase & ComInterface & windows_int
         FileOpenPicker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileOpenPicker {
+    public static func viewOf(raw: CPointer<Unit>): FileOpenPicker {
         FileOpenPicker(raw)
     }
 
@@ -256,7 +256,7 @@ public class FilePickerFileTypesOrderedMap <: InterfaceWrapperBase & ComInterfac
         FilePickerFileTypesOrderedMap(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FilePickerFileTypesOrderedMap {
+    public static func viewOf(raw: CPointer<Unit>): FilePickerFileTypesOrderedMap {
         FilePickerFileTypesOrderedMap(raw)
     }
 
@@ -352,7 +352,7 @@ public class FilePickerSelectedFilesArray <: InterfaceWrapperBase & ComInterface
         FilePickerSelectedFilesArray(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FilePickerSelectedFilesArray {
+    public static func viewOf(raw: CPointer<Unit>): FilePickerSelectedFilesArray {
         FilePickerSelectedFilesArray(raw)
     }
 
@@ -436,7 +436,7 @@ public class FileSavePicker <: InterfaceWrapperBase & ComInterface & windows_int
         FileSavePicker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileSavePicker {
+    public static func viewOf(raw: CPointer<Unit>): FileSavePicker {
         FileSavePicker(raw)
     }
 
@@ -564,7 +564,7 @@ public class FolderPicker <: InterfaceWrapperBase & ComInterface & windows_inter
         FolderPicker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FolderPicker {
+    public static func viewOf(raw: CPointer<Unit>): FolderPicker {
         FolderPicker(raw)
     }
 
@@ -694,7 +694,7 @@ public class IFileOpenPicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IFileOpenPicker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileOpenPicker {
+    public static func viewOf(raw: CPointer<Unit>): IFileOpenPicker {
         IFileOpenPicker(raw)
     }
 
@@ -846,7 +846,7 @@ public class IFileOpenPicker2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IFileOpenPicker2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileOpenPicker2 {
+    public static func viewOf(raw: CPointer<Unit>): IFileOpenPicker2 {
         IFileOpenPicker2(raw)
     }
 
@@ -936,7 +936,7 @@ public class IFileOpenPicker3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IFileOpenPicker3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileOpenPicker3 {
+    public static func viewOf(raw: CPointer<Unit>): IFileOpenPicker3 {
         IFileOpenPicker3(raw)
     }
 
@@ -1014,7 +1014,7 @@ public class IFileOpenPickerStatics <: InterfaceWrapperBase & ComInterface & Run
         IFileOpenPickerStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileOpenPickerStatics {
+    public static func viewOf(raw: CPointer<Unit>): IFileOpenPickerStatics {
         IFileOpenPickerStatics(raw)
     }
 
@@ -1092,7 +1092,7 @@ public class IFileOpenPickerStatics2 <: InterfaceWrapperBase & ComInterface & Ru
         IFileOpenPickerStatics2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileOpenPickerStatics2 {
+    public static func viewOf(raw: CPointer<Unit>): IFileOpenPickerStatics2 {
         IFileOpenPickerStatics2(raw)
     }
 
@@ -1170,7 +1170,7 @@ public class IFileOpenPickerWithOperationId <: InterfaceWrapperBase & ComInterfa
         IFileOpenPickerWithOperationId(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileOpenPickerWithOperationId {
+    public static func viewOf(raw: CPointer<Unit>): IFileOpenPickerWithOperationId {
         IFileOpenPickerWithOperationId(raw)
     }
 
@@ -1261,7 +1261,7 @@ public class IFileSavePicker <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IFileSavePicker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileSavePicker {
+    public static func viewOf(raw: CPointer<Unit>): IFileSavePicker {
         IFileSavePicker(raw)
     }
 
@@ -1432,7 +1432,7 @@ public class IFileSavePicker2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IFileSavePicker2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileSavePicker2 {
+    public static func viewOf(raw: CPointer<Unit>): IFileSavePicker2 {
         IFileSavePicker2(raw)
     }
 
@@ -1517,7 +1517,7 @@ public class IFileSavePicker3 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IFileSavePicker3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileSavePicker3 {
+    public static func viewOf(raw: CPointer<Unit>): IFileSavePicker3 {
         IFileSavePicker3(raw)
     }
 
@@ -1601,7 +1601,7 @@ public class IFileSavePicker4 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IFileSavePicker4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileSavePicker4 {
+    public static func viewOf(raw: CPointer<Unit>): IFileSavePicker4 {
         IFileSavePicker4(raw)
     }
 
@@ -1679,7 +1679,7 @@ public class IFileSavePickerStatics <: InterfaceWrapperBase & ComInterface & Run
         IFileSavePickerStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileSavePickerStatics {
+    public static func viewOf(raw: CPointer<Unit>): IFileSavePickerStatics {
         IFileSavePickerStatics(raw)
     }
 
@@ -1766,7 +1766,7 @@ public class IFolderPicker <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IFolderPicker(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFolderPicker {
+    public static func viewOf(raw: CPointer<Unit>): IFolderPicker {
         IFolderPicker(raw)
     }
 
@@ -1909,7 +1909,7 @@ public class IFolderPicker2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         IFolderPicker2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFolderPicker2 {
+    public static func viewOf(raw: CPointer<Unit>): IFolderPicker2 {
         IFolderPicker2(raw)
     }
 
@@ -1993,7 +1993,7 @@ public class IFolderPicker3 <: InterfaceWrapperBase & ComInterface & RuntimeName
         IFolderPicker3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFolderPicker3 {
+    public static func viewOf(raw: CPointer<Unit>): IFolderPicker3 {
         IFolderPicker3(raw)
     }
 
@@ -2071,7 +2071,7 @@ public class IFolderPickerStatics <: InterfaceWrapperBase & ComInterface & Runti
         IFolderPickerStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFolderPickerStatics {
+    public static func viewOf(raw: CPointer<Unit>): IFolderPickerStatics {
         IFolderPickerStatics(raw)
     }
 

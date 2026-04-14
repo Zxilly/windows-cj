@@ -61,9 +61,10 @@ class OutParamState<T> {
     }
 }
 
-// OutParam<T> 在仓颉侧保存 ABI 输出结果。
-public struct OutParam<T> {
+// OutSlot<T> 表示一个真正的 ABI 输出槽位，负责管理临时缓冲与结果接管。
+public class OutSlot<T> <: Resource {
     private let state: OutParamState<T>
+    private var closed: Bool = false
 
     public init() {
         state = OutParamState<T>()
@@ -73,79 +74,57 @@ public struct OutParam<T> {
         state = OutParamState<T>(value)
     }
 
-    public func borrow(): OutRef<T> {
-        OutRef<T>(state)
+    public func isNull(): Bool {
+        closed
     }
 
     public func get(): ?T {
+        if (closed) {
+            return None
+        }
         state.value
     }
 
-    public func set(v: T): Unit {
-        state.value = Some(v)
+    public func borrowMut<A>(): CPointer<A> where A <: CType {
+        if (closed) {
+            return nullAbiValue<CPointer<A>>()
+        }
+        state.borrowMut<A>()
+    }
+
+    public func write(value: T): Unit {
+        if (closed) {
+            throw IllegalStateException("OutSlot is closed")
+        }
+        state.value = Some(value)
     }
 
     public func clear(): Unit {
+        if (closed) {
+            return
+        }
         state.clearValue()
     }
 
     public func take(): ?T {
+        if (closed) {
+            return None
+        }
         let current = state.value
         state.value = None
         current
     }
-}
 
-// OutRef<T> 表示一个真正的 ABI 输出槽位。
-public struct OutRef<T> {
-    private let state: ?OutParamState<T>
-
-    init() {
-        state = None
-    }
-
-    init(state: OutParamState<T>) {
-        this.state = Some(state)
-    }
-
-    public static func none(): OutRef<T> {
-        OutRef<T>()
-    }
-
-    public func isNull(): Bool {
-        match (state) {
-            case Some(_) => false
-            case None => true
-        }
-    }
-
-    public func get(): ?T {
-        match (state) {
-            case Some(target) => target.value
-            case None => Option<T>.None
-        }
-    }
-
-    public func borrowMut<A>(): CPointer<A> where A <: CType {
-        if (let Some(target) <- state) {
-            return target.borrowMut<A>()
-        }
-        nullAbiValue<CPointer<A>>()
-    }
-
-    public func write(value: T): Unit {
-        if (let Some(target) <- state) {
-            target.value = Some(value)
+    public func close(): Unit {
+        if (closed) {
             return
         }
-        throw IllegalStateException("OutRef target is null")
+        state.clearValue()
+        state.closeSlot()
+        closed = true
     }
 
-    public func clear(): Unit {
-        if (let Some(target) <- state) {
-            target.clearValue()
-            return
-        }
-        throw IllegalStateException("OutRef target is null")
+    ~init() {
+        close()
     }
 }

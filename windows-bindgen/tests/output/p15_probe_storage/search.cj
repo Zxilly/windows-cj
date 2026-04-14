@@ -77,7 +77,7 @@ public class ContentIndexer <: InterfaceWrapperBase & ComInterface & windows_int
         ContentIndexer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ContentIndexer {
+    public static func viewOf(raw: CPointer<Unit>): ContentIndexer {
         ContentIndexer(raw)
     }
 
@@ -177,7 +177,7 @@ public class ContentIndexerQuery <: InterfaceWrapperBase & ComInterface & window
         ContentIndexerQuery(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ContentIndexerQuery {
+    public static func viewOf(raw: CPointer<Unit>): ContentIndexerQuery {
         ContentIndexerQuery(raw)
     }
 
@@ -320,7 +320,7 @@ public class IContentIndexer <: InterfaceWrapperBase & ComInterface & RuntimeNam
         IContentIndexer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IContentIndexer {
+    public static func viewOf(raw: CPointer<Unit>): IContentIndexer {
         IContentIndexer(raw)
     }
 
@@ -451,7 +451,7 @@ public class IContentIndexerQuery <: InterfaceWrapperBase & ComInterface & Runti
         IContentIndexerQuery(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IContentIndexerQuery {
+    public static func viewOf(raw: CPointer<Unit>): IContentIndexerQuery {
         IContentIndexerQuery(raw)
     }
 
@@ -571,7 +571,7 @@ public class IContentIndexerQueryOperations <: InterfaceWrapperBase & ComInterfa
         IContentIndexerQueryOperations(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IContentIndexerQueryOperations {
+    public static func viewOf(raw: CPointer<Unit>): IContentIndexerQueryOperations {
         IContentIndexerQueryOperations(raw)
     }
 
@@ -666,7 +666,7 @@ public class IContentIndexerStatics <: InterfaceWrapperBase & ComInterface & Run
         IContentIndexerStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IContentIndexerStatics {
+    public static func viewOf(raw: CPointer<Unit>): IContentIndexerStatics {
         IContentIndexerStatics(raw)
     }
 
@@ -830,7 +830,7 @@ public struct IIndexableContentVtbl {
         vtbl.SetStream = { this_, arg0 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.SetStream(windows.storage.streams.IRandomAccessStream.fromRawBorrowed(arg0))) {
+                    match (impl.SetStream(windows.storage.streams.IRandomAccessStream.viewOf(arg0))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -902,7 +902,7 @@ public class IIndexableContent <: InterfaceWrapperBase & ComInterface & RuntimeN
         IIndexableContent(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IIndexableContent {
+    public static func viewOf(raw: CPointer<Unit>): IIndexableContent {
         IIndexableContent(raw)
     }
 
@@ -1039,7 +1039,7 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IQueryOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IQueryOptions {
+    public static func viewOf(raw: CPointer<Unit>): IQueryOptions {
         IQueryOptions(raw)
     }
 
@@ -1238,7 +1238,7 @@ public class IQueryOptionsFactory <: InterfaceWrapperBase & ComInterface & Runti
         IQueryOptionsFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IQueryOptionsFactory {
+    public static func viewOf(raw: CPointer<Unit>): IQueryOptionsFactory {
         IQueryOptionsFactory(raw)
     }
 
@@ -1324,7 +1324,7 @@ public class IQueryOptionsWithProviderFilter <: InterfaceWrapperBase & ComInterf
         IQueryOptionsWithProviderFilter(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IQueryOptionsWithProviderFilter {
+    public static func viewOf(raw: CPointer<Unit>): IQueryOptionsWithProviderFilter {
         IQueryOptionsWithProviderFilter(raw)
     }
 
@@ -1403,7 +1403,7 @@ public class IStorageFileQueryResult <: InterfaceWrapperBase & ComInterface & Ru
         IStorageFileQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileQueryResult {
         IStorageFileQueryResult(raw)
     }
 
@@ -1498,7 +1498,7 @@ public class IStorageFileQueryResult2 <: InterfaceWrapperBase & ComInterface & R
         IStorageFileQueryResult2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileQueryResult2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileQueryResult2 {
         IStorageFileQueryResult2(raw)
     }
 
@@ -1669,7 +1669,7 @@ public struct IStorageFolderQueryOperationsVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CreateFileQueryWithOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.CreateFileQueryWithOptions(QueryOptions.viewOf(arg0))) {
                         case Result<StorageFileQueryResult>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -1738,7 +1738,7 @@ public struct IStorageFolderQueryOperationsVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CreateFolderQueryWithOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.CreateFolderQueryWithOptions(QueryOptions.viewOf(arg0))) {
                         case Result<StorageFolderQueryResult>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -1784,7 +1784,7 @@ public struct IStorageFolderQueryOperationsVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CreateItemQueryWithOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.CreateItemQueryWithOptions(QueryOptions.viewOf(arg0))) {
                         case Result<StorageItemQueryResult>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -1922,7 +1922,7 @@ public struct IStorageFolderQueryOperationsVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.AreQueryOptionsSupported(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.AreQueryOptionsSupported(QueryOptions.viewOf(arg0))) {
                         case Result<Bool>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -2009,7 +2009,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         IStorageFolderQueryOperations(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderQueryOperations {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderQueryOperations {
         IStorageFolderQueryOperations(raw)
     }
 
@@ -2216,7 +2216,7 @@ public class IStorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & 
         IStorageFolderQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderQueryResult {
         IStorageFolderQueryResult(raw)
     }
 
@@ -2312,7 +2312,7 @@ public class IStorageItemQueryResult <: InterfaceWrapperBase & ComInterface & Ru
         IStorageItemQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemQueryResult {
         IStorageItemQueryResult(raw)
     }
 
@@ -2408,7 +2408,7 @@ public class IStorageLibraryChangeTrackerTriggerDetails <: InterfaceWrapperBase 
         IStorageLibraryChangeTrackerTriggerDetails(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryChangeTrackerTriggerDetails {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryChangeTrackerTriggerDetails {
         IStorageLibraryChangeTrackerTriggerDetails(raw)
     }
 
@@ -2495,7 +2495,7 @@ public class IStorageLibraryContentChangedTriggerDetails <: InterfaceWrapperBase
         IStorageLibraryContentChangedTriggerDetails(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageLibraryContentChangedTriggerDetails {
+    public static func viewOf(raw: CPointer<Unit>): IStorageLibraryContentChangedTriggerDetails {
         IStorageLibraryContentChangedTriggerDetails(raw)
     }
 
@@ -2694,7 +2694,7 @@ public struct IStorageQueryResultBaseVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.FindStartIndexAsync(IInspectable.fromRawBorrowed(arg0))) {
+                    match (impl.FindStartIndexAsync(IInspectable.viewOf(arg0))) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -2737,7 +2737,7 @@ public struct IStorageQueryResultBaseVtbl {
         vtbl.ApplyNewQueryOptions = { this_, arg0 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.ApplyNewQueryOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.ApplyNewQueryOptions(QueryOptions.viewOf(arg0))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -2781,7 +2781,7 @@ public class IStorageQueryResultBase <: InterfaceWrapperBase & ComInterface & Ru
         IStorageQueryResultBase(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageQueryResultBase {
+    public static func viewOf(raw: CPointer<Unit>): IStorageQueryResultBase {
         IStorageQueryResultBase(raw)
     }
 
@@ -2920,7 +2920,7 @@ public class IValueAndLanguage <: InterfaceWrapperBase & ComInterface & RuntimeN
         IValueAndLanguage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IValueAndLanguage {
+    public static func viewOf(raw: CPointer<Unit>): IValueAndLanguage {
         IValueAndLanguage(raw)
     }
 
@@ -3010,7 +3010,7 @@ public class IndexableContent <: InterfaceWrapperBase & ComInterface & windows_i
         IndexableContent(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IndexableContent {
+    public static func viewOf(raw: CPointer<Unit>): IndexableContent {
         IndexableContent(raw)
     }
 
@@ -3152,7 +3152,7 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
         QueryOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): QueryOptions {
+    public static func viewOf(raw: CPointer<Unit>): QueryOptions {
         QueryOptions(raw)
     }
 
@@ -3310,7 +3310,7 @@ public class SortEntryVector <: InterfaceWrapperBase & ComInterface & windows_in
         SortEntryVector(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SortEntryVector {
+    public static func viewOf(raw: CPointer<Unit>): SortEntryVector {
         SortEntryVector(raw)
     }
 
@@ -3422,7 +3422,7 @@ public class StorageFileQueryResult <: InterfaceWrapperBase & ComInterface & win
         StorageFileQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFileQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageFileQueryResult {
         StorageFileQueryResult(raw)
     }
 
@@ -3526,7 +3526,7 @@ public class StorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & w
         StorageFolderQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFolderQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageFolderQueryResult {
         StorageFolderQueryResult(raw)
     }
 
@@ -3630,7 +3630,7 @@ public class StorageItemQueryResult <: InterfaceWrapperBase & ComInterface & win
         StorageItemQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageItemQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageItemQueryResult {
         StorageItemQueryResult(raw)
     }
 
@@ -3734,7 +3734,7 @@ public class StorageLibraryChangeTrackerTriggerDetails <: InterfaceWrapperBase &
         StorageLibraryChangeTrackerTriggerDetails(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryChangeTrackerTriggerDetails {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryChangeTrackerTriggerDetails {
         StorageLibraryChangeTrackerTriggerDetails(raw)
     }
 
@@ -3798,7 +3798,7 @@ public class StorageLibraryContentChangedTriggerDetails <: InterfaceWrapperBase 
         StorageLibraryContentChangedTriggerDetails(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageLibraryContentChangedTriggerDetails {
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryContentChangedTriggerDetails {
         StorageLibraryContentChangedTriggerDetails(raw)
     }
 
@@ -3862,7 +3862,7 @@ public class ValueAndLanguage <: InterfaceWrapperBase & ComInterface & windows_i
         ValueAndLanguage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ValueAndLanguage {
+    public static func viewOf(raw: CPointer<Unit>): ValueAndLanguage {
         ValueAndLanguage(raw)
     }
 

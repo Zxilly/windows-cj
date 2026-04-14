@@ -127,31 +127,7 @@ func defaultCallbackLiteral(sig: MethodSignature): String {
     if (returnType == "Unit") {
         return "{ ${params} => () }"
     }
-    if (returnType == "Bool") {
-        return "{ ${params} => false }"
-    }
-    if (returnType == "Int32") {
-        return "{ ${params} => 0 }"
-    }
-    if (returnType == "UInt32") {
-        return "{ ${params} => 0u32 }"
-    }
-    if (returnType == "IntNative") {
-        return "{ ${params} => 0 }"
-    }
-    if (returnType == "UIntNative") {
-        return "{ ${params} => 0 }"
-    }
-    if (returnType == "Int64") {
-        return "{ ${params} => 0i64 }"
-    }
-    if (returnType == "UInt64") {
-        return "{ ${params} => 0u64 }"
-    }
-    if (returnType.startsWith("CPointer")) {
-        return "{ ${params} => ${returnType}() }"
-    }
-    return "{ ${params} => ${returnType}() }"
+    return "{ ${params} => ${cppDefaultValue(sig.returnType)} }"
 }
 
 func wrapCppPointer(inner: MetadataType, depth: Int64): String {

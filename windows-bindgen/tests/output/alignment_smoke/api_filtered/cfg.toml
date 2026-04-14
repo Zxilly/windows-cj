@@ -2,11 +2,12 @@
 # Conditional compilation variables
 # Features enabled for the generated projection.
 
-feat_oleacc = "on"
-feat_uiautomationcore = "on"
-feat_user32 = "on"
-feat_windows_win32_foundation = "on"
-feat_windows_win32_system_com = "on"
-feat_windows_win32_system_variant = "on"
-feat_windows_win32_ui_accessibility = "on"
-feat_windows_win32_ui_windows_and_messaging = "on"
+OLEACC = "on"
+UIAutomationCore = "on"
+USER32 = "on"
+Windows_Win32_Foundation = "on"
+Windows_Win32_System_Com = "on"
+Windows_Win32_System_Ole = "on"
+Windows_Win32_System_Variant = "on"
+Windows_Win32_UI_Accessibility = "on"
+Windows_Win32_UI_WindowsAndMessaging = "on"

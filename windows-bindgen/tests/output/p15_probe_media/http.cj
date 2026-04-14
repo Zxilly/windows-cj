@@ -18,7 +18,7 @@ public class HttpClient <: InterfaceWrapperBase & ComInterface & windows_interfa
         HttpClient(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpClient {
+    public static func viewOf(raw: CPointer<Unit>): HttpClient {
         HttpClient(raw)
     }
 
@@ -172,7 +172,7 @@ public class HttpGetBufferResult <: InterfaceWrapperBase & ComInterface & window
         HttpGetBufferResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpGetBufferResult {
+    public static func viewOf(raw: CPointer<Unit>): HttpGetBufferResult {
         HttpGetBufferResult(raw)
     }
 
@@ -268,7 +268,7 @@ public class HttpGetInputStreamResult <: InterfaceWrapperBase & ComInterface & w
         HttpGetInputStreamResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpGetInputStreamResult {
+    public static func viewOf(raw: CPointer<Unit>): HttpGetInputStreamResult {
         HttpGetInputStreamResult(raw)
     }
 
@@ -364,7 +364,7 @@ public class HttpGetStringResult <: InterfaceWrapperBase & ComInterface & window
         HttpGetStringResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpGetStringResult {
+    public static func viewOf(raw: CPointer<Unit>): HttpGetStringResult {
         HttpGetStringResult(raw)
     }
 
@@ -460,7 +460,7 @@ public class HttpMethod <: InterfaceWrapperBase & ComInterface & windows_interfa
         HttpMethod(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpMethod {
+    public static func viewOf(raw: CPointer<Unit>): HttpMethod {
         HttpMethod(raw)
     }
 
@@ -622,7 +622,7 @@ public class HttpRequestMessage <: InterfaceWrapperBase & ComInterface & windows
         HttpRequestMessage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpRequestMessage {
+    public static func viewOf(raw: CPointer<Unit>): HttpRequestMessage {
         HttpRequestMessage(raw)
     }
 
@@ -746,7 +746,7 @@ public class HttpRequestResult <: InterfaceWrapperBase & ComInterface & windows_
         HttpRequestResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpRequestResult {
+    public static func viewOf(raw: CPointer<Unit>): HttpRequestResult {
         HttpRequestResult(raw)
     }
 
@@ -838,7 +838,7 @@ public class HttpResponseMessage <: InterfaceWrapperBase & ComInterface & window
         HttpResponseMessage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpResponseMessage {
+    public static func viewOf(raw: CPointer<Unit>): HttpResponseMessage {
         HttpResponseMessage(raw)
     }
 
@@ -1087,7 +1087,7 @@ public class HttpTransportInformation <: InterfaceWrapperBase & ComInterface & w
         HttpTransportInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpTransportInformation {
+    public static func viewOf(raw: CPointer<Unit>): HttpTransportInformation {
         HttpTransportInformation(raw)
     }
 
@@ -1213,7 +1213,7 @@ public class IHttpClient <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IHttpClient(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpClient {
+    public static func viewOf(raw: CPointer<Unit>): IHttpClient {
         IHttpClient(raw)
     }
 
@@ -1380,7 +1380,7 @@ public class IHttpClient2 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IHttpClient2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpClient2 {
+    public static func viewOf(raw: CPointer<Unit>): IHttpClient2 {
         IHttpClient2(raw)
     }
 
@@ -1531,7 +1531,7 @@ public class IHttpClient3 <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IHttpClient3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpClient3 {
+    public static func viewOf(raw: CPointer<Unit>): IHttpClient3 {
         IHttpClient3(raw)
     }
 
@@ -1752,7 +1752,7 @@ public struct IHttpContentVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.WriteToStreamAsync(windows.storage.streams.IOutputStream.fromRawBorrowed(arg0))) {
+                    match (impl.WriteToStreamAsync(windows.storage.streams.IOutputStream.viewOf(arg0))) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -1806,7 +1806,7 @@ public class IHttpContent <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IHttpContent(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpContent {
+    public static func viewOf(raw: CPointer<Unit>): IHttpContent {
         IHttpContent(raw)
     }
 
@@ -1945,7 +1945,7 @@ public class IHttpGetBufferResult <: InterfaceWrapperBase & ComInterface & Runti
         IHttpGetBufferResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpGetBufferResult {
+    public static func viewOf(raw: CPointer<Unit>): IHttpGetBufferResult {
         IHttpGetBufferResult(raw)
     }
 
@@ -2059,7 +2059,7 @@ public class IHttpGetInputStreamResult <: InterfaceWrapperBase & ComInterface & 
         IHttpGetInputStreamResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpGetInputStreamResult {
+    public static func viewOf(raw: CPointer<Unit>): IHttpGetInputStreamResult {
         IHttpGetInputStreamResult(raw)
     }
 
@@ -2173,7 +2173,7 @@ public class IHttpGetStringResult <: InterfaceWrapperBase & ComInterface & Runti
         IHttpGetStringResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpGetStringResult {
+    public static func viewOf(raw: CPointer<Unit>): IHttpGetStringResult {
         IHttpGetStringResult(raw)
     }
 
@@ -2283,7 +2283,7 @@ public class IHttpMethod <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IHttpMethod(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpMethod {
+    public static func viewOf(raw: CPointer<Unit>): IHttpMethod {
         IHttpMethod(raw)
     }
 
@@ -2369,7 +2369,7 @@ public class IHttpRequestMessage <: InterfaceWrapperBase & ComInterface & Runtim
         IHttpRequestMessage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpRequestMessage {
+    public static func viewOf(raw: CPointer<Unit>): IHttpRequestMessage {
         IHttpRequestMessage(raw)
     }
 
@@ -2506,7 +2506,7 @@ public class IHttpRequestMessage2 <: InterfaceWrapperBase & ComInterface & Runti
         IHttpRequestMessage2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpRequestMessage2 {
+    public static func viewOf(raw: CPointer<Unit>): IHttpRequestMessage2 {
         IHttpRequestMessage2(raw)
     }
 
@@ -2593,7 +2593,7 @@ public class IHttpRequestResult <: InterfaceWrapperBase & ComInterface & Runtime
         IHttpRequestResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpRequestResult {
+    public static func viewOf(raw: CPointer<Unit>): IHttpRequestResult {
         IHttpRequestResult(raw)
     }
 
@@ -2709,7 +2709,7 @@ public class IHttpResponseMessage <: InterfaceWrapperBase & ComInterface & Runti
         IHttpResponseMessage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpResponseMessage {
+    public static func viewOf(raw: CPointer<Unit>): IHttpResponseMessage {
         IHttpResponseMessage(raw)
     }
 
@@ -2890,7 +2890,7 @@ public class IHttpTransportInformation <: InterfaceWrapperBase & ComInterface & 
         IHttpTransportInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpTransportInformation {
+    public static func viewOf(raw: CPointer<Unit>): IHttpTransportInformation {
         IHttpTransportInformation(raw)
     }
 

@@ -187,6 +187,25 @@ func enqueueType(
 func collectTypeDependencies(index: TypeIndex, fileIdx: Int64, row: Int64): ArrayList<TypeName> {
     let result = ArrayList<TypeName>()
     let seen = HashMap<TypeName, Bool>()
+    let visitedTypeDefs = HashMap<String, Bool>()
+    collectTypeDefDependencies(index, fileIdx, row, result, seen, visitedTypeDefs)
+    sortTypeNames(result)
+    return result
+}
+
+func collectTypeDefDependencies(
+    index: TypeIndex,
+    fileIdx: Int64,
+    row: Int64,
+    result: ArrayList<TypeName>,
+    seen: HashMap<TypeName, Bool>,
+    visitedTypeDefs: HashMap<String, Bool>
+): Unit {
+    let visitKey = "${fileIdx}:${row}"
+    if (visitedTypeDefs.contains(visitKey)) {
+        return
+    }
+    visitedTypeDefs[visitKey] = true
 
     collectExtendsDependency(index, fileIdx, row, result, seen)
     collectInterfaceDependencies(index, fileIdx, row, result, seen)
@@ -214,8 +233,10 @@ func collectTypeDependencies(index: TypeIndex, fileIdx: Int64, row: Int64): Arra
         methodRow += 1
     }
 
-    sortTypeNames(result)
-    return result
+    let nestedRows = index.getNested(fileIdx, row)
+    for (nestedRow in nestedRows) {
+        collectTypeDefDependencies(index, fileIdx, nestedRow, result, seen, visitedTypeDefs)
+    }
 }
 
 func collectFactoryInterfaceDependencies(

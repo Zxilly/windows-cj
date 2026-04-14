@@ -18,7 +18,7 @@ public class AudioEncodingProperties <: InterfaceWrapperBase & ComInterface & wi
         AudioEncodingProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AudioEncodingProperties {
+    public static func viewOf(raw: CPointer<Unit>): AudioEncodingProperties {
         AudioEncodingProperties(raw)
     }
 
@@ -193,7 +193,7 @@ public class IAudioEncodingProperties <: InterfaceWrapperBase & ComInterface & R
         IAudioEncodingProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioEncodingProperties {
+    public static func viewOf(raw: CPointer<Unit>): IAudioEncodingProperties {
         IAudioEncodingProperties(raw)
     }
 
@@ -328,7 +328,7 @@ public class IAudioEncodingProperties2 <: InterfaceWrapperBase & ComInterface & 
         IAudioEncodingProperties2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioEncodingProperties2 {
+    public static func viewOf(raw: CPointer<Unit>): IAudioEncodingProperties2 {
         IAudioEncodingProperties2(raw)
     }
 
@@ -406,7 +406,7 @@ public class IAudioEncodingProperties3 <: InterfaceWrapperBase & ComInterface & 
         IAudioEncodingProperties3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioEncodingProperties3 {
+    public static func viewOf(raw: CPointer<Unit>): IAudioEncodingProperties3 {
         IAudioEncodingProperties3(raw)
     }
 
@@ -485,7 +485,7 @@ public class IAudioEncodingPropertiesWithFormatUserData <: InterfaceWrapperBase 
         IAudioEncodingPropertiesWithFormatUserData(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioEncodingPropertiesWithFormatUserData {
+    public static func viewOf(raw: CPointer<Unit>): IAudioEncodingPropertiesWithFormatUserData {
         IAudioEncodingPropertiesWithFormatUserData(raw)
     }
 
@@ -662,7 +662,7 @@ public class IMediaEncodingProperties <: InterfaceWrapperBase & ComInterface & R
         IMediaEncodingProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaEncodingProperties {
+    public static func viewOf(raw: CPointer<Unit>): IMediaEncodingProperties {
         IMediaEncodingProperties(raw)
     }
 
@@ -765,7 +765,7 @@ public class IMediaRatio <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IMediaRatio(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaRatio {
+    public static func viewOf(raw: CPointer<Unit>): IMediaRatio {
         IMediaRatio(raw)
     }
 
@@ -870,7 +870,7 @@ public class IVideoEncodingProperties <: InterfaceWrapperBase & ComInterface & R
         IVideoEncodingProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoEncodingProperties {
+    public static func viewOf(raw: CPointer<Unit>): IVideoEncodingProperties {
         IVideoEncodingProperties(raw)
     }
 
@@ -1010,7 +1010,7 @@ public class IVideoEncodingProperties2 <: InterfaceWrapperBase & ComInterface & 
         IVideoEncodingProperties2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoEncodingProperties2 {
+    public static func viewOf(raw: CPointer<Unit>): IVideoEncodingProperties2 {
         IVideoEncodingProperties2(raw)
     }
 
@@ -1106,7 +1106,7 @@ public class IVideoEncodingProperties3 <: InterfaceWrapperBase & ComInterface & 
         IVideoEncodingProperties3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoEncodingProperties3 {
+    public static func viewOf(raw: CPointer<Unit>): IVideoEncodingProperties3 {
         IVideoEncodingProperties3(raw)
     }
 
@@ -1184,7 +1184,7 @@ public class IVideoEncodingProperties4 <: InterfaceWrapperBase & ComInterface & 
         IVideoEncodingProperties4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoEncodingProperties4 {
+    public static func viewOf(raw: CPointer<Unit>): IVideoEncodingProperties4 {
         IVideoEncodingProperties4(raw)
     }
 
@@ -1262,7 +1262,7 @@ public class IVideoEncodingProperties5 <: InterfaceWrapperBase & ComInterface & 
         IVideoEncodingProperties5(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoEncodingProperties5 {
+    public static func viewOf(raw: CPointer<Unit>): IVideoEncodingProperties5 {
         IVideoEncodingProperties5(raw)
     }
 
@@ -1355,7 +1355,7 @@ public class MediaPropertySet <: InterfaceWrapperBase & ComInterface & windows_i
         MediaPropertySet(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaPropertySet {
+    public static func viewOf(raw: CPointer<Unit>): MediaPropertySet {
         MediaPropertySet(raw)
     }
 
@@ -1457,7 +1457,7 @@ public class MediaRatio <: InterfaceWrapperBase & ComInterface & windows_interfa
         MediaRatio(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaRatio {
+    public static func viewOf(raw: CPointer<Unit>): MediaRatio {
         MediaRatio(raw)
     }
 
@@ -1625,7 +1625,7 @@ public class VideoEncodingProperties <: InterfaceWrapperBase & ComInterface & wi
         VideoEncodingProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VideoEncodingProperties {
+    public static func viewOf(raw: CPointer<Unit>): VideoEncodingProperties {
         VideoEncodingProperties(raw)
     }
 

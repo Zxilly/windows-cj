@@ -147,7 +147,7 @@ public class IQueryOptions <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IQueryOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IQueryOptions {
+    public static func viewOf(raw: CPointer<Unit>): IQueryOptions {
         IQueryOptions(raw)
     }
 
@@ -345,7 +345,7 @@ public class IQueryOptionsWithProviderFilter <: InterfaceWrapperBase & ComInterf
         IQueryOptionsWithProviderFilter(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IQueryOptionsWithProviderFilter {
+    public static func viewOf(raw: CPointer<Unit>): IQueryOptionsWithProviderFilter {
         IQueryOptionsWithProviderFilter(raw)
     }
 
@@ -424,7 +424,7 @@ public class IStorageFileQueryResult <: InterfaceWrapperBase & ComInterface & Ru
         IStorageFileQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileQueryResult {
         IStorageFileQueryResult(raw)
     }
 
@@ -519,7 +519,7 @@ public class IStorageFileQueryResult2 <: InterfaceWrapperBase & ComInterface & R
         IStorageFileQueryResult2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFileQueryResult2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFileQueryResult2 {
         IStorageFileQueryResult2(raw)
     }
 
@@ -690,7 +690,7 @@ public struct IStorageFolderQueryOperationsVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CreateFileQueryWithOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.CreateFileQueryWithOptions(QueryOptions.viewOf(arg0))) {
                         case Result<StorageFileQueryResult>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -759,7 +759,7 @@ public struct IStorageFolderQueryOperationsVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CreateFolderQueryWithOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.CreateFolderQueryWithOptions(QueryOptions.viewOf(arg0))) {
                         case Result<StorageFolderQueryResult>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -805,7 +805,7 @@ public struct IStorageFolderQueryOperationsVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CreateItemQueryWithOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.CreateItemQueryWithOptions(QueryOptions.viewOf(arg0))) {
                         case Result<StorageItemQueryResult>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -943,7 +943,7 @@ public struct IStorageFolderQueryOperationsVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.AreQueryOptionsSupported(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.AreQueryOptionsSupported(QueryOptions.viewOf(arg0))) {
                         case Result<Bool>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -1030,7 +1030,7 @@ public class IStorageFolderQueryOperations <: InterfaceWrapperBase & ComInterfac
         IStorageFolderQueryOperations(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderQueryOperations {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderQueryOperations {
         IStorageFolderQueryOperations(raw)
     }
 
@@ -1237,7 +1237,7 @@ public class IStorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & 
         IStorageFolderQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageFolderQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageFolderQueryResult {
         IStorageFolderQueryResult(raw)
     }
 
@@ -1333,7 +1333,7 @@ public class IStorageItemQueryResult <: InterfaceWrapperBase & ComInterface & Ru
         IStorageItemQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemQueryResult {
         IStorageItemQueryResult(raw)
     }
 
@@ -1541,7 +1541,7 @@ public struct IStorageQueryResultBaseVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.FindStartIndexAsync(IInspectable.fromRawBorrowed(arg0))) {
+                    match (impl.FindStartIndexAsync(IInspectable.viewOf(arg0))) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -1584,7 +1584,7 @@ public struct IStorageQueryResultBaseVtbl {
         vtbl.ApplyNewQueryOptions = { this_, arg0 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.ApplyNewQueryOptions(QueryOptions.fromRawBorrowed(arg0))) {
+                    match (impl.ApplyNewQueryOptions(QueryOptions.viewOf(arg0))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -1628,7 +1628,7 @@ public class IStorageQueryResultBase <: InterfaceWrapperBase & ComInterface & Ru
         IStorageQueryResultBase(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageQueryResultBase {
+    public static func viewOf(raw: CPointer<Unit>): IStorageQueryResultBase {
         IStorageQueryResultBase(raw)
     }
 
@@ -1804,7 +1804,7 @@ public class QueryOptions <: InterfaceWrapperBase & ComInterface & windows_inter
         QueryOptions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): QueryOptions {
+    public static func viewOf(raw: CPointer<Unit>): QueryOptions {
         QueryOptions(raw)
     }
 
@@ -1962,7 +1962,7 @@ public class StorageFileQueryResult <: InterfaceWrapperBase & ComInterface & win
         StorageFileQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFileQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageFileQueryResult {
         StorageFileQueryResult(raw)
     }
 
@@ -2066,7 +2066,7 @@ public class StorageFolderQueryResult <: InterfaceWrapperBase & ComInterface & w
         StorageFolderQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageFolderQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageFolderQueryResult {
         StorageFolderQueryResult(raw)
     }
 
@@ -2170,7 +2170,7 @@ public class StorageItemQueryResult <: InterfaceWrapperBase & ComInterface & win
         StorageItemQueryResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageItemQueryResult {
+    public static func viewOf(raw: CPointer<Unit>): StorageItemQueryResult {
         StorageItemQueryResult(raw)
     }
 

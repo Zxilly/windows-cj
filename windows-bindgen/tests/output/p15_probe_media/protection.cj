@@ -18,7 +18,7 @@ public class ComponentLoadFailedEventArgs <: InterfaceWrapperBase & ComInterface
         ComponentLoadFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ComponentLoadFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ComponentLoadFailedEventArgs {
         ComponentLoadFailedEventArgs(raw)
     }
 
@@ -95,7 +95,7 @@ public class ComponentLoadFailedEventHandler <: InterfaceWrapperBase & ComInterf
         ComponentLoadFailedEventHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ComponentLoadFailedEventHandler {
+    public static func viewOf(raw: CPointer<Unit>): ComponentLoadFailedEventHandler {
         ComponentLoadFailedEventHandler(raw)
     }
 
@@ -181,7 +181,7 @@ func buildComponentLoadFailedEventHandlerBoxVtbl(): ComponentLoadFailedEventHand
 func ComponentLoadFailedEventHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<ComponentLoadFailedEventHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(MediaProtectionManager.fromRawBorrowed(arg0), ComponentLoadFailedEventArgs.fromRawBorrowed(arg1))
+            invoker.Invoke(MediaProtectionManager.viewOf(arg0), ComponentLoadFailedEventArgs.viewOf(arg1))
             return S_OK.value
         case None =>
             return E_NOTIMPL.value
@@ -207,7 +207,7 @@ public class IComponentLoadFailedEventArgs <: InterfaceWrapperBase & ComInterfac
         IComponentLoadFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IComponentLoadFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IComponentLoadFailedEventArgs {
         IComponentLoadFailedEventArgs(raw)
     }
 
@@ -299,7 +299,7 @@ public class IMediaProtectionManager <: InterfaceWrapperBase & ComInterface & Ru
         IMediaProtectionManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaProtectionManager {
+    public static func viewOf(raw: CPointer<Unit>): IMediaProtectionManager {
         IMediaProtectionManager(raw)
     }
 
@@ -419,7 +419,7 @@ public class IMediaProtectionServiceCompletion <: InterfaceWrapperBase & ComInte
         IMediaProtectionServiceCompletion(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaProtectionServiceCompletion {
+    public static func viewOf(raw: CPointer<Unit>): IMediaProtectionServiceCompletion {
         IMediaProtectionServiceCompletion(raw)
     }
 
@@ -550,7 +550,7 @@ public class IMediaProtectionServiceRequest <: InterfaceWrapperBase & ComInterfa
         IMediaProtectionServiceRequest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaProtectionServiceRequest {
+    public static func viewOf(raw: CPointer<Unit>): IMediaProtectionServiceRequest {
         IMediaProtectionServiceRequest(raw)
     }
 
@@ -636,7 +636,7 @@ public class IRevocationAndRenewalInformation <: InterfaceWrapperBase & ComInter
         IRevocationAndRenewalInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRevocationAndRenewalInformation {
+    public static func viewOf(raw: CPointer<Unit>): IRevocationAndRenewalInformation {
         IRevocationAndRenewalInformation(raw)
     }
 
@@ -718,7 +718,7 @@ public class IRevocationAndRenewalItem <: InterfaceWrapperBase & ComInterface & 
         IRevocationAndRenewalItem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRevocationAndRenewalItem {
+    public static func viewOf(raw: CPointer<Unit>): IRevocationAndRenewalItem {
         IRevocationAndRenewalItem(raw)
     }
 
@@ -829,7 +829,7 @@ public class IServiceRequestedEventArgs <: InterfaceWrapperBase & ComInterface &
         IServiceRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IServiceRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IServiceRequestedEventArgs {
         IServiceRequestedEventArgs(raw)
     }
 
@@ -915,7 +915,7 @@ public class IServiceRequestedEventArgs2 <: InterfaceWrapperBase & ComInterface 
         IServiceRequestedEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IServiceRequestedEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): IServiceRequestedEventArgs2 {
         IServiceRequestedEventArgs2(raw)
     }
 
@@ -985,7 +985,7 @@ public class MediaProtectionManager <: InterfaceWrapperBase & ComInterface & win
         MediaProtectionManager(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaProtectionManager {
+    public static func viewOf(raw: CPointer<Unit>): MediaProtectionManager {
         MediaProtectionManager(raw)
     }
 
@@ -1079,7 +1079,7 @@ public class MediaProtectionServiceCompletion <: InterfaceWrapperBase & ComInter
         MediaProtectionServiceCompletion(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaProtectionServiceCompletion {
+    public static func viewOf(raw: CPointer<Unit>): MediaProtectionServiceCompletion {
         MediaProtectionServiceCompletion(raw)
     }
 
@@ -1152,7 +1152,7 @@ public class RebootNeededEventHandler <: InterfaceWrapperBase & ComInterface & w
         RebootNeededEventHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RebootNeededEventHandler {
+    public static func viewOf(raw: CPointer<Unit>): RebootNeededEventHandler {
         RebootNeededEventHandler(raw)
     }
 
@@ -1238,7 +1238,7 @@ func buildRebootNeededEventHandlerBoxVtbl(): RebootNeededEventHandlerVtbl {
 func RebootNeededEventHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<RebootNeededEventHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(MediaProtectionManager.fromRawBorrowed(arg0))
+            invoker.Invoke(MediaProtectionManager.viewOf(arg0))
             return S_OK.value
         case None =>
             return E_NOTIMPL.value
@@ -1255,7 +1255,7 @@ public class RevocationAndRenewalInformation <: InterfaceWrapperBase & ComInterf
         RevocationAndRenewalInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RevocationAndRenewalInformation {
+    public static func viewOf(raw: CPointer<Unit>): RevocationAndRenewalInformation {
         RevocationAndRenewalInformation(raw)
     }
 
@@ -1319,7 +1319,7 @@ public class RevocationAndRenewalItem <: InterfaceWrapperBase & ComInterface & w
         RevocationAndRenewalItem(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RevocationAndRenewalItem {
+    public static func viewOf(raw: CPointer<Unit>): RevocationAndRenewalItem {
         RevocationAndRenewalItem(raw)
     }
 
@@ -1448,7 +1448,7 @@ public class ServiceRequestedEventArgs <: InterfaceWrapperBase & ComInterface & 
         ServiceRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ServiceRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ServiceRequestedEventArgs {
         ServiceRequestedEventArgs(raw)
     }
 
@@ -1525,7 +1525,7 @@ public class ServiceRequestedEventHandler <: InterfaceWrapperBase & ComInterface
         ServiceRequestedEventHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ServiceRequestedEventHandler {
+    public static func viewOf(raw: CPointer<Unit>): ServiceRequestedEventHandler {
         ServiceRequestedEventHandler(raw)
     }
 
@@ -1611,7 +1611,7 @@ func buildServiceRequestedEventHandlerBoxVtbl(): ServiceRequestedEventHandlerVtb
 func ServiceRequestedEventHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<ServiceRequestedEventHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(MediaProtectionManager.fromRawBorrowed(arg0), ServiceRequestedEventArgs.fromRawBorrowed(arg1))
+            invoker.Invoke(MediaProtectionManager.viewOf(arg0), ServiceRequestedEventArgs.viewOf(arg1))
             return S_OK.value
         case None =>
             return E_NOTIMPL.value

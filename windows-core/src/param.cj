@@ -18,8 +18,8 @@ public struct ParamValue<T> <: Param<T> {
         value
     }
 
-    public func borrow(): Ref<T> {
-        Ref<T>(value)
+    public func borrow(): InParam<T> {
+        InParam<T>(value)
     }
 }
 

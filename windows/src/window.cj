@@ -4,7 +4,8 @@ import std.collection.HashMap
 import std.sync.Mutex
 import windows_core.*
 import windows_result.Win32Exception
-import windows_sys.*
+import windows_sys.win32.foundation.*
+import windows_sys.win32.ui.windows_and_messaging.*
 
 func windowWithWideString<R>(s: String, action: (CPointer<UInt16>) -> R): R {
     let ws = CWideString(s)
@@ -39,10 +40,10 @@ func registerWindowClassWithName(
 
 // createWindowEx — creates a window, throwing if the returned HWND is null.
 public func createWindowEx(
-    exStyle: UInt32,
+    exStyle: WINDOW_EX_STYLE,
     className: CPointer<UInt16>,
     windowName: String,
-    style: UInt32,
+    style: WINDOW_STYLE,
     x: Int32,
     y: Int32,
     width: Int32,
@@ -69,7 +70,7 @@ public func createWindowEx(
 }
 
 // showWindow — sets the specified window's show state.
-public func showWindow(hwnd: HWND, cmdShow: Int32): Bool {
+public func showWindow(hwnd: HWND, cmdShow: SHOW_WINDOW_CMD): Bool {
     let result = ffiShowWindow(hwnd, cmdShow)
     result != 0
 }
@@ -154,10 +155,10 @@ public func registerWindowClass(
 
 // createWindowWithHandler — creates a window and registers its WndProc handler.
 public func createWindowWithHandler(
-    exStyle: UInt32,
+    exStyle: WINDOW_EX_STYLE,
     className: String,
     windowName: String,
-    style: UInt32,
+    style: WINDOW_STYLE,
     x: Int32,
     y: Int32,
     width: Int32,
@@ -268,5 +269,5 @@ public func killTimerWithHandler(hwnd: HWND, idEvent: UIntNative): Unit {
 }
 
 public func postQuitMessage(exitCode: Int32): Unit {
-    user32PostQuitMessage(exitCode)
+    ffiPostQuitMessage(exitCode)
 }

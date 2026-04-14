@@ -122,13 +122,13 @@ func captureThreadErrorInfoPointer(): CPointer<IErrorInfo> {
 
 @When[os == "Windows"]
 struct ErrorInfo {
-    private let ptr: Option<ComPtr<IErrorInfo>>
+    private let ptr: Option<ComHandle<IErrorInfo>>
 
     init() {
         this.ptr = None
     }
 
-    init(ptr: Option<ComPtr<IErrorInfo>>) {
+    init(ptr: Option<ComHandle<IErrorInfo>>) {
         this.ptr = ptr
     }
 
@@ -141,14 +141,14 @@ struct ErrorInfo {
         if (raw.isNull()) {
             return ErrorInfo.empty()
         }
-        ErrorInfo(Some(ComPtr<IErrorInfo>.attach(raw)))
+        ErrorInfo(Some(ComHandle<IErrorInfo>.fromAbiTake(raw)))
     }
 
     static func fromRaw(ptr: CPointer<IErrorInfo>, addRef!: Bool = false): ErrorInfo {
         if (ptr.isNull()) {
             return ErrorInfo.empty()
         }
-        ErrorInfo(Some(ComPtr<IErrorInfo>(ptr, addRef: addRef)))
+        ErrorInfo(Some(ComHandle<IErrorInfo>(ptr, addRef: addRef)))
     }
 
     func intoThread(): Unit {
@@ -289,14 +289,6 @@ public struct Error <: ToString & Hashable & Comparable<Error> {
         Error(code, ErrorInfo.fromThread())
     }
 
-    public static func from_hresult(code: HRESULT): Error {
-        Error(code)
-    }
-
-    public static func from_hresult_with_info(code: HRESULT): Error {
-        Error.fromHRESULTWithInfo(code)
-    }
-
     public static func fromWin32(code: UInt32): Error {
         Error.from(WIN32_ERROR(code))
     }
@@ -313,12 +305,8 @@ public struct Error <: ToString & Hashable & Comparable<Error> {
         hresult
     }
 
-    public func as_ptr(): CPointer<Unit> {
-        info.asPtr()
-    }
-
     public func asPtr(): CPointer<Unit> {
-        as_ptr()
+        info.asPtr()
     }
 
     public func intoThread(): Unit {

@@ -18,7 +18,7 @@ public class AcceleratorKeyEventArgs <: InterfaceWrapperBase & ComInterface & wi
         AcceleratorKeyEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AcceleratorKeyEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): AcceleratorKeyEventArgs {
         AcceleratorKeyEventArgs(raw)
     }
 
@@ -131,7 +131,7 @@ public class CoreDispatcher <: InterfaceWrapperBase & ComInterface & windows_int
         CoreDispatcher(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CoreDispatcher {
+    public static func viewOf(raw: CPointer<Unit>): CoreDispatcher {
         CoreDispatcher(raw)
     }
 
@@ -288,7 +288,7 @@ public class DispatchedHandler <: InterfaceWrapperBase & ComInterface & windows_
         DispatchedHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DispatchedHandler {
+    public static func viewOf(raw: CPointer<Unit>): DispatchedHandler {
         DispatchedHandler(raw)
     }
 
@@ -401,7 +401,7 @@ public class IAcceleratorKeyEventArgs <: InterfaceWrapperBase & ComInterface & R
         IAcceleratorKeyEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAcceleratorKeyEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IAcceleratorKeyEventArgs {
         IAcceleratorKeyEventArgs(raw)
     }
 
@@ -504,7 +504,7 @@ public class IAcceleratorKeyEventArgs2 <: InterfaceWrapperBase & ComInterface & 
         IAcceleratorKeyEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAcceleratorKeyEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): IAcceleratorKeyEventArgs2 {
         IAcceleratorKeyEventArgs2(raw)
     }
 
@@ -642,7 +642,7 @@ public class ICoreAcceleratorKeys <: InterfaceWrapperBase & ComInterface & Runti
         ICoreAcceleratorKeys(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICoreAcceleratorKeys {
+    public static func viewOf(raw: CPointer<Unit>): ICoreAcceleratorKeys {
         ICoreAcceleratorKeys(raw)
     }
 
@@ -729,7 +729,7 @@ public class ICoreDispatcher <: InterfaceWrapperBase & ComInterface & RuntimeNam
         ICoreDispatcher(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICoreDispatcher {
+    public static func viewOf(raw: CPointer<Unit>): ICoreDispatcher {
         ICoreDispatcher(raw)
     }
 
@@ -839,7 +839,7 @@ public class ICoreDispatcher2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         ICoreDispatcher2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICoreDispatcher2 {
+    public static func viewOf(raw: CPointer<Unit>): ICoreDispatcher2 {
         ICoreDispatcher2(raw)
     }
 
@@ -929,7 +929,7 @@ public class ICoreDispatcherWithTaskPriority <: InterfaceWrapperBase & ComInterf
         ICoreDispatcherWithTaskPriority(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICoreDispatcherWithTaskPriority {
+    public static func viewOf(raw: CPointer<Unit>): ICoreDispatcherWithTaskPriority {
         ICoreDispatcherWithTaskPriority(raw)
     }
 
@@ -1086,7 +1086,7 @@ public class ICoreWindowEventArgs <: InterfaceWrapperBase & ComInterface & Runti
         ICoreWindowEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICoreWindowEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ICoreWindowEventArgs {
         ICoreWindowEventArgs(raw)
     }
 
@@ -1170,7 +1170,7 @@ public class IIdleDispatchedHandlerArgs <: InterfaceWrapperBase & ComInterface &
         IIdleDispatchedHandlerArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IIdleDispatchedHandlerArgs {
+    public static func viewOf(raw: CPointer<Unit>): IIdleDispatchedHandlerArgs {
         IIdleDispatchedHandlerArgs(raw)
     }
 
@@ -1249,7 +1249,7 @@ public class IdleDispatchedHandler <: InterfaceWrapperBase & ComInterface & wind
         IdleDispatchedHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IdleDispatchedHandler {
+    public static func viewOf(raw: CPointer<Unit>): IdleDispatchedHandler {
         IdleDispatchedHandler(raw)
     }
 
@@ -1335,7 +1335,7 @@ func buildIdleDispatchedHandlerBoxVtbl(): IdleDispatchedHandlerVtbl {
 func IdleDispatchedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<IdleDispatchedHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(IdleDispatchedHandlerArgs.fromRawBorrowed(arg0))
+            invoker.Invoke(IdleDispatchedHandlerArgs.viewOf(arg0))
             return S_OK.value
         case None =>
             return E_NOTIMPL.value
@@ -1352,7 +1352,7 @@ public class IdleDispatchedHandlerArgs <: InterfaceWrapperBase & ComInterface & 
         IdleDispatchedHandlerArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IdleDispatchedHandlerArgs {
+    public static func viewOf(raw: CPointer<Unit>): IdleDispatchedHandlerArgs {
         IdleDispatchedHandlerArgs(raw)
     }
 

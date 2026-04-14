@@ -65,7 +65,7 @@ public class AccessListEntryView <: InterfaceWrapperBase & ComInterface & window
         AccessListEntryView(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AccessListEntryView {
+    public static func viewOf(raw: CPointer<Unit>): AccessListEntryView {
         AccessListEntryView(raw)
     }
 
@@ -153,7 +153,7 @@ public class IItemRemovedEventArgs <: InterfaceWrapperBase & ComInterface & Runt
         IItemRemovedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IItemRemovedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IItemRemovedEventArgs {
         IItemRemovedEventArgs(raw)
     }
 
@@ -232,7 +232,7 @@ public class IStorageApplicationPermissionsStatics <: InterfaceWrapperBase & Com
         IStorageApplicationPermissionsStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageApplicationPermissionsStatics {
+    public static func viewOf(raw: CPointer<Unit>): IStorageApplicationPermissionsStatics {
         IStorageApplicationPermissionsStatics(raw)
     }
 
@@ -319,7 +319,7 @@ public class IStorageApplicationPermissionsStatics2 <: InterfaceWrapperBase & Co
         IStorageApplicationPermissionsStatics2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageApplicationPermissionsStatics2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageApplicationPermissionsStatics2 {
         IStorageApplicationPermissionsStatics2(raw)
     }
 
@@ -419,7 +419,7 @@ public struct IStorageItemAccessListVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.AddOverloadDefaultMetadata(windows.storage.IStorageItem.fromRawBorrowed(arg0))) {
+                    match (impl.AddOverloadDefaultMetadata(windows.storage.IStorageItem.viewOf(arg0))) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -436,7 +436,7 @@ public struct IStorageItemAccessListVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.Add(windows.storage.IStorageItem.fromRawBorrowed(arg0), arg1)) {
+                    match (impl.Add(windows.storage.IStorageItem.viewOf(arg0), arg1)) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -450,7 +450,7 @@ public struct IStorageItemAccessListVtbl {
         vtbl.AddOrReplaceOverloadDefaultMetadata = { this_, arg0, arg1 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.AddOrReplaceOverloadDefaultMetadata(arg0, windows.storage.IStorageItem.fromRawBorrowed(arg1))) {
+                    match (impl.AddOrReplaceOverloadDefaultMetadata(arg0, windows.storage.IStorageItem.viewOf(arg1))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -463,7 +463,7 @@ public struct IStorageItemAccessListVtbl {
         vtbl.AddOrReplace = { this_, arg0, arg1, arg2 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.AddOrReplace(arg0, windows.storage.IStorageItem.fromRawBorrowed(arg1), arg2)) {
+                    match (impl.AddOrReplace(arg0, windows.storage.IStorageItem.viewOf(arg1), arg2)) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -660,7 +660,7 @@ public struct IStorageItemAccessListVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.CheckAccess(windows.storage.IStorageItem.fromRawBorrowed(arg0))) {
+                    match (impl.CheckAccess(windows.storage.IStorageItem.viewOf(arg0))) {
                         case Result<Bool>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -752,7 +752,7 @@ public class IStorageItemAccessList <: InterfaceWrapperBase & ComInterface & Run
         IStorageItemAccessList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemAccessList {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemAccessList {
         IStorageItemAccessList(raw)
     }
 
@@ -943,7 +943,7 @@ public class IStorageItemMostRecentlyUsedList <: InterfaceWrapperBase & ComInter
         IStorageItemMostRecentlyUsedList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemMostRecentlyUsedList {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemMostRecentlyUsedList {
         IStorageItemMostRecentlyUsedList(raw)
     }
 
@@ -1037,7 +1037,7 @@ public class IStorageItemMostRecentlyUsedList2 <: InterfaceWrapperBase & ComInte
         IStorageItemMostRecentlyUsedList2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemMostRecentlyUsedList2 {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemMostRecentlyUsedList2 {
         IStorageItemMostRecentlyUsedList2(raw)
     }
 
@@ -1126,7 +1126,7 @@ public class ItemRemovedEventArgs <: InterfaceWrapperBase & ComInterface & windo
         ItemRemovedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ItemRemovedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ItemRemovedEventArgs {
         ItemRemovedEventArgs(raw)
     }
 
@@ -1208,7 +1208,7 @@ public class StorageApplicationPermissions <: InterfaceWrapperBase & ComInterfac
         StorageApplicationPermissions(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageApplicationPermissions {
+    public static func viewOf(raw: CPointer<Unit>): StorageApplicationPermissions {
         StorageApplicationPermissions(raw)
     }
 
@@ -1279,7 +1279,7 @@ public class StorageItemAccessList <: InterfaceWrapperBase & ComInterface & wind
         StorageItemAccessList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageItemAccessList {
+    public static func viewOf(raw: CPointer<Unit>): StorageItemAccessList {
         StorageItemAccessList(raw)
     }
 
@@ -1399,7 +1399,7 @@ public class StorageItemMostRecentlyUsedList <: InterfaceWrapperBase & ComInterf
         StorageItemMostRecentlyUsedList(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageItemMostRecentlyUsedList {
+    public static func viewOf(raw: CPointer<Unit>): StorageItemMostRecentlyUsedList {
         StorageItemMostRecentlyUsedList(raw)
     }
 

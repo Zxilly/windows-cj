@@ -14,7 +14,7 @@ public func generateEnum(
     row: Int64,
     namespace: String
 ): Unit {
-    let name = trimTick(index.typeDefName(fileIdx, row))
+    let name = escapeSourceIdentifier(trimTick(index.typeDefName(fileIdx, row)))
     let (fStart, fEnd) = index.typeDefFields(fileIdx, row)
     let underlyingType = resolveUnderlyingType(index, fileIdx, row)
 
@@ -73,14 +73,14 @@ public func generateEnum(
     while (ci < fEnd) {
         let fieldFlags = index.fieldFlags(fileIdx, ci)
         if (fieldFlags.contains(FieldAttributes.Literal)) {
-            let constName = index.fieldName(fileIdx, ci)
+            let constName = projectedConstantName(index, index.fieldName(fileIdx, ci), namespace)
             match (readFieldConstantLiteral(index, fileIdx, ci)) {
                 case Some((_, constValue)) =>
                     let rawValue = stripTypeSuffix(constValue)
                     let fieldTags = itemAvailabilityTags(TABLE_FIELD, fileIdx, ci)
                     w.writeBlankLine()
                     writeAvailabilityForTags(w, feature, mergeEnumCfgTags(typeTags, fieldTags))
-                    w.writeLine("public let ${constName}: ${name} = ${name}(${rawValue})")
+                    w.writeLine("public let ${escapeSourceIdentifier(constName)}: ${name} = ${name}(${rawValue})")
                 case None => ()
             }
         }

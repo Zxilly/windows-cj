@@ -18,7 +18,7 @@ public class AdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & window
         AdaptiveMediaSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSource {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSource {
         AdaptiveMediaSource(raw)
     }
 
@@ -224,7 +224,7 @@ public class AdaptiveMediaSourceAdvancedSettings <: InterfaceWrapperBase & ComIn
         AdaptiveMediaSourceAdvancedSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceAdvancedSettings {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceAdvancedSettings {
         AdaptiveMediaSourceAdvancedSettings(raw)
     }
 
@@ -308,7 +308,7 @@ public class AdaptiveMediaSourceCorrelatedTimes <: InterfaceWrapperBase & ComInt
         AdaptiveMediaSourceCorrelatedTimes(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceCorrelatedTimes {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceCorrelatedTimes {
         AdaptiveMediaSourceCorrelatedTimes(raw)
     }
 
@@ -380,7 +380,7 @@ public class AdaptiveMediaSourceCreationResult <: InterfaceWrapperBase & ComInte
         AdaptiveMediaSourceCreationResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceCreationResult {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceCreationResult {
         AdaptiveMediaSourceCreationResult(raw)
     }
 
@@ -479,7 +479,7 @@ public class AdaptiveMediaSourceDiagnosticAvailableEventArgs <: InterfaceWrapper
         AdaptiveMediaSourceDiagnosticAvailableEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceDiagnosticAvailableEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceDiagnosticAvailableEventArgs {
         AdaptiveMediaSourceDiagnosticAvailableEventArgs(raw)
     }
 
@@ -604,7 +604,7 @@ public class AdaptiveMediaSourceDiagnostics <: InterfaceWrapperBase & ComInterfa
         AdaptiveMediaSourceDiagnostics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceDiagnostics {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceDiagnostics {
         AdaptiveMediaSourceDiagnostics(raw)
     }
 
@@ -672,7 +672,7 @@ public class AdaptiveMediaSourceDownloadBitrateChangedEventArgs <: InterfaceWrap
         AdaptiveMediaSourceDownloadBitrateChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadBitrateChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadBitrateChangedEventArgs {
         AdaptiveMediaSourceDownloadBitrateChangedEventArgs(raw)
     }
 
@@ -767,7 +767,7 @@ public class AdaptiveMediaSourceDownloadCompletedEventArgs <: InterfaceWrapperBa
         AdaptiveMediaSourceDownloadCompletedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadCompletedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadCompletedEventArgs {
         AdaptiveMediaSourceDownloadCompletedEventArgs(raw)
     }
 
@@ -847,7 +847,7 @@ public class AdaptiveMediaSourceDownloadFailedEventArgs <: InterfaceWrapperBase 
         AdaptiveMediaSourceDownloadFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadFailedEventArgs {
         AdaptiveMediaSourceDownloadFailedEventArgs(raw)
     }
 
@@ -927,7 +927,7 @@ public class AdaptiveMediaSourceDownloadRequestedDeferral <: InterfaceWrapperBas
         AdaptiveMediaSourceDownloadRequestedDeferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadRequestedDeferral {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadRequestedDeferral {
         AdaptiveMediaSourceDownloadRequestedDeferral(raw)
     }
 
@@ -991,7 +991,7 @@ public class AdaptiveMediaSourceDownloadRequestedEventArgs <: InterfaceWrapperBa
         AdaptiveMediaSourceDownloadRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadRequestedEventArgs {
         AdaptiveMediaSourceDownloadRequestedEventArgs(raw)
     }
 
@@ -1075,7 +1075,7 @@ public class AdaptiveMediaSourceDownloadResult <: InterfaceWrapperBase & ComInte
         AdaptiveMediaSourceDownloadResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadResult {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadResult {
         AdaptiveMediaSourceDownloadResult(raw)
     }
 
@@ -1175,7 +1175,7 @@ public class AdaptiveMediaSourceDownloadStatistics <: InterfaceWrapperBase & Com
         AdaptiveMediaSourceDownloadStatistics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadStatistics {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourceDownloadStatistics {
         AdaptiveMediaSourceDownloadStatistics(raw)
     }
 
@@ -1251,7 +1251,7 @@ public class AdaptiveMediaSourcePlaybackBitrateChangedEventArgs <: InterfaceWrap
         AdaptiveMediaSourcePlaybackBitrateChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdaptiveMediaSourcePlaybackBitrateChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveMediaSourcePlaybackBitrateChangedEventArgs {
         AdaptiveMediaSourcePlaybackBitrateChangedEventArgs(raw)
     }
 
@@ -1382,7 +1382,7 @@ public class IAdaptiveMediaSource <: InterfaceWrapperBase & ComInterface & Runti
         IAdaptiveMediaSource(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSource {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSource {
         IAdaptiveMediaSource(raw)
     }
 
@@ -1649,7 +1649,7 @@ public class IAdaptiveMediaSource2 <: InterfaceWrapperBase & ComInterface & Runt
         IAdaptiveMediaSource2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSource2 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSource2 {
         IAdaptiveMediaSource2(raw)
     }
 
@@ -1732,7 +1732,7 @@ public class IAdaptiveMediaSource3 <: InterfaceWrapperBase & ComInterface & Runt
         IAdaptiveMediaSource3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSource3 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSource3 {
         IAdaptiveMediaSource3(raw)
     }
 
@@ -1853,7 +1853,7 @@ public class IAdaptiveMediaSourceAdvancedSettings <: InterfaceWrapperBase & ComI
         IAdaptiveMediaSourceAdvancedSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceAdvancedSettings {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceAdvancedSettings {
         IAdaptiveMediaSourceAdvancedSettings(raw)
     }
 
@@ -1967,7 +1967,7 @@ public class IAdaptiveMediaSourceCorrelatedTimes <: InterfaceWrapperBase & ComIn
         IAdaptiveMediaSourceCorrelatedTimes(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceCorrelatedTimes {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceCorrelatedTimes {
         IAdaptiveMediaSourceCorrelatedTimes(raw)
     }
 
@@ -2063,7 +2063,7 @@ public class IAdaptiveMediaSourceCreationResult <: InterfaceWrapperBase & ComInt
         IAdaptiveMediaSourceCreationResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceCreationResult {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceCreationResult {
         IAdaptiveMediaSourceCreationResult(raw)
     }
 
@@ -2157,7 +2157,7 @@ public class IAdaptiveMediaSourceCreationResult2 <: InterfaceWrapperBase & ComIn
         IAdaptiveMediaSourceCreationResult2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceCreationResult2 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceCreationResult2 {
         IAdaptiveMediaSourceCreationResult2(raw)
     }
 
@@ -2243,7 +2243,7 @@ public class IAdaptiveMediaSourceDiagnosticAvailableEventArgs <: InterfaceWrappe
         IAdaptiveMediaSourceDiagnosticAvailableEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDiagnosticAvailableEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDiagnosticAvailableEventArgs {
         IAdaptiveMediaSourceDiagnosticAvailableEventArgs(raw)
     }
 
@@ -2385,7 +2385,7 @@ public class IAdaptiveMediaSourceDiagnosticAvailableEventArgs2 <: InterfaceWrapp
         IAdaptiveMediaSourceDiagnosticAvailableEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDiagnosticAvailableEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDiagnosticAvailableEventArgs2 {
         IAdaptiveMediaSourceDiagnosticAvailableEventArgs2(raw)
     }
 
@@ -2464,7 +2464,7 @@ public class IAdaptiveMediaSourceDiagnosticAvailableEventArgs3 <: InterfaceWrapp
         IAdaptiveMediaSourceDiagnosticAvailableEventArgs3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDiagnosticAvailableEventArgs3 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDiagnosticAvailableEventArgs3 {
         IAdaptiveMediaSourceDiagnosticAvailableEventArgs3(raw)
     }
 
@@ -2551,7 +2551,7 @@ public class IAdaptiveMediaSourceDiagnostics <: InterfaceWrapperBase & ComInterf
         IAdaptiveMediaSourceDiagnostics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDiagnostics {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDiagnostics {
         IAdaptiveMediaSourceDiagnostics(raw)
     }
 
@@ -2636,7 +2636,7 @@ public class IAdaptiveMediaSourceDownloadBitrateChangedEventArgs <: InterfaceWra
         IAdaptiveMediaSourceDownloadBitrateChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadBitrateChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadBitrateChangedEventArgs {
         IAdaptiveMediaSourceDownloadBitrateChangedEventArgs(raw)
     }
 
@@ -2722,7 +2722,7 @@ public class IAdaptiveMediaSourceDownloadBitrateChangedEventArgs2 <: InterfaceWr
         IAdaptiveMediaSourceDownloadBitrateChangedEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadBitrateChangedEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadBitrateChangedEventArgs2 {
         IAdaptiveMediaSourceDownloadBitrateChangedEventArgs2(raw)
     }
 
@@ -2804,7 +2804,7 @@ public class IAdaptiveMediaSourceDownloadCompletedEventArgs <: InterfaceWrapperB
         IAdaptiveMediaSourceDownloadCompletedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadCompletedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadCompletedEventArgs {
         IAdaptiveMediaSourceDownloadCompletedEventArgs(raw)
     }
 
@@ -2916,7 +2916,7 @@ public class IAdaptiveMediaSourceDownloadCompletedEventArgs2 <: InterfaceWrapper
         IAdaptiveMediaSourceDownloadCompletedEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadCompletedEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadCompletedEventArgs2 {
         IAdaptiveMediaSourceDownloadCompletedEventArgs2(raw)
     }
 
@@ -3011,7 +3011,7 @@ public class IAdaptiveMediaSourceDownloadCompletedEventArgs3 <: InterfaceWrapper
         IAdaptiveMediaSourceDownloadCompletedEventArgs3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadCompletedEventArgs3 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadCompletedEventArgs3 {
         IAdaptiveMediaSourceDownloadCompletedEventArgs3(raw)
     }
 
@@ -3101,7 +3101,7 @@ public class IAdaptiveMediaSourceDownloadFailedEventArgs <: InterfaceWrapperBase
         IAdaptiveMediaSourceDownloadFailedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadFailedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadFailedEventArgs {
         IAdaptiveMediaSourceDownloadFailedEventArgs(raw)
     }
 
@@ -3214,7 +3214,7 @@ public class IAdaptiveMediaSourceDownloadFailedEventArgs2 <: InterfaceWrapperBas
         IAdaptiveMediaSourceDownloadFailedEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadFailedEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadFailedEventArgs2 {
         IAdaptiveMediaSourceDownloadFailedEventArgs2(raw)
     }
 
@@ -3317,7 +3317,7 @@ public class IAdaptiveMediaSourceDownloadFailedEventArgs3 <: InterfaceWrapperBas
         IAdaptiveMediaSourceDownloadFailedEventArgs3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadFailedEventArgs3 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadFailedEventArgs3 {
         IAdaptiveMediaSourceDownloadFailedEventArgs3(raw)
     }
 
@@ -3403,7 +3403,7 @@ public class IAdaptiveMediaSourceDownloadRequestedDeferral <: InterfaceWrapperBa
         IAdaptiveMediaSourceDownloadRequestedDeferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadRequestedDeferral {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadRequestedDeferral {
         IAdaptiveMediaSourceDownloadRequestedDeferral(raw)
     }
 
@@ -3484,7 +3484,7 @@ public class IAdaptiveMediaSourceDownloadRequestedEventArgs <: InterfaceWrapperB
         IAdaptiveMediaSourceDownloadRequestedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadRequestedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadRequestedEventArgs {
         IAdaptiveMediaSourceDownloadRequestedEventArgs(raw)
     }
 
@@ -3603,7 +3603,7 @@ public class IAdaptiveMediaSourceDownloadRequestedEventArgs2 <: InterfaceWrapper
         IAdaptiveMediaSourceDownloadRequestedEventArgs2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadRequestedEventArgs2 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadRequestedEventArgs2 {
         IAdaptiveMediaSourceDownloadRequestedEventArgs2(raw)
     }
 
@@ -3690,7 +3690,7 @@ public class IAdaptiveMediaSourceDownloadRequestedEventArgs3 <: InterfaceWrapper
         IAdaptiveMediaSourceDownloadRequestedEventArgs3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadRequestedEventArgs3 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadRequestedEventArgs3 {
         IAdaptiveMediaSourceDownloadRequestedEventArgs3(raw)
     }
 
@@ -3785,7 +3785,7 @@ public class IAdaptiveMediaSourceDownloadResult <: InterfaceWrapperBase & ComInt
         IAdaptiveMediaSourceDownloadResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadResult {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadResult {
         IAdaptiveMediaSourceDownloadResult(raw)
     }
 
@@ -3928,7 +3928,7 @@ public class IAdaptiveMediaSourceDownloadResult2 <: InterfaceWrapperBase & ComIn
         IAdaptiveMediaSourceDownloadResult2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadResult2 {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadResult2 {
         IAdaptiveMediaSourceDownloadResult2(raw)
     }
 
@@ -4029,7 +4029,7 @@ public class IAdaptiveMediaSourceDownloadStatistics <: InterfaceWrapperBase & Co
         IAdaptiveMediaSourceDownloadStatistics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadStatistics {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourceDownloadStatistics {
         IAdaptiveMediaSourceDownloadStatistics(raw)
     }
 
@@ -4133,7 +4133,7 @@ public class IAdaptiveMediaSourcePlaybackBitrateChangedEventArgs <: InterfaceWra
         IAdaptiveMediaSourcePlaybackBitrateChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdaptiveMediaSourcePlaybackBitrateChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): IAdaptiveMediaSourcePlaybackBitrateChangedEventArgs {
         IAdaptiveMediaSourcePlaybackBitrateChangedEventArgs(raw)
     }
 

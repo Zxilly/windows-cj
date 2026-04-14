@@ -18,7 +18,7 @@ public class FileInformation <: InterfaceWrapperBase & ComInterface & windows_in
         FileInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileInformation {
+    public static func viewOf(raw: CPointer<Unit>): FileInformation {
         FileInformation(raw)
     }
 
@@ -298,7 +298,7 @@ public class FileInformationFactory <: InterfaceWrapperBase & ComInterface & win
         FileInformationFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileInformationFactory {
+    public static func viewOf(raw: CPointer<Unit>): FileInformationFactory {
         FileInformationFactory(raw)
     }
 
@@ -418,7 +418,7 @@ public class FolderInformation <: InterfaceWrapperBase & ComInterface & windows_
         FolderInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FolderInformation {
+    public static func viewOf(raw: CPointer<Unit>): FolderInformation {
         FolderInformation(raw)
     }
 
@@ -750,7 +750,7 @@ public class IFileInformationFactory <: InterfaceWrapperBase & ComInterface & Ru
         IFileInformationFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileInformationFactory {
+    public static func viewOf(raw: CPointer<Unit>): IFileInformationFactory {
         IFileInformationFactory(raw)
     }
 
@@ -895,7 +895,7 @@ public class IFileInformationFactoryFactory <: InterfaceWrapperBase & ComInterfa
         IFileInformationFactoryFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileInformationFactoryFactory {
+    public static func viewOf(raw: CPointer<Unit>): IFileInformationFactoryFactory {
         IFileInformationFactoryFactory(raw)
     }
 
@@ -1232,7 +1232,7 @@ public class IStorageItemInformation <: InterfaceWrapperBase & ComInterface & Ru
         IStorageItemInformation(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemInformation {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemInformation {
         IStorageItemInformation(raw)
     }
 

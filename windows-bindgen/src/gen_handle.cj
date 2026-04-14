@@ -1,6 +1,5 @@
 package windows_bindgen
 
-import std.collection.*
 import windows_metadata.*
 
 // Generate handle type aliases

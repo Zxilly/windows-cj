@@ -19,25 +19,37 @@ public struct IWeakReferenceSourceVtbl {
 let IID_IWEAKREFERENCE = GUID.fromValues(0x00000037u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
 let IID_IWEAKREFERENCESOURCE = GUID.fromValues(0x00000038u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
 
-func wrapIWeakReferenceOwned(raw: CPointer<Unit>): IWeakReference {
-    IWeakReference(raw, ownsReference: true)
+func takeIWeakReferenceFromAbi(raw: CPointer<Unit>): IWeakReference {
+    IWeakReference.fromAbiTake(raw)
 }
 
-func wrapIWeakReferenceBorrowed(raw: CPointer<Unit>): IWeakReference {
-    IWeakReference(raw)
+func viewIWeakReference(raw: CPointer<Unit>): IWeakReference {
+    IWeakReference.viewOf(raw)
 }
 
-func wrapIWeakReferenceSourceOwned(raw: CPointer<Unit>): IWeakReferenceSource {
-    IWeakReferenceSource(raw, ownsReference: true)
+func takeIWeakReferenceSourceFromAbi(raw: CPointer<Unit>): IWeakReferenceSource {
+    IWeakReferenceSource.fromAbiTake(raw)
 }
 
-func wrapIWeakReferenceSourceBorrowed(raw: CPointer<Unit>): IWeakReferenceSource {
-    IWeakReferenceSource(raw)
+func viewIWeakReferenceSource(raw: CPointer<Unit>): IWeakReferenceSource {
+    IWeakReferenceSource.viewOf(raw)
 }
 
 public class IWeakReference <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IWeakReference {
+        IWeakReference(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IWeakReference {
+        IWeakReference(raw)
     }
 
     public static func iid(): GUID {
@@ -45,7 +57,7 @@ public class IWeakReference <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWeakReference> {
-        InterfaceDescriptor<IWeakReference>("IWeakReference", IID_IWEAKREFERENCE, wrapIWeakReferenceOwned, wrapIWeakReferenceBorrowed)
+        InterfaceDescriptor<IWeakReference>("IWeakReference", IID_IWEAKREFERENCE, takeIWeakReferenceFromAbi, viewIWeakReference)
     }
 
     public unsafe func vtbl(): IWeakReferenceVtbl {
@@ -67,7 +79,7 @@ public class IWeakReference <: InterfaceWrapperBase & ComInterface {
         if (raw.isNull()) {
             return Result<T>.Err(WinError(E_POINTER))
         }
-        Result<T>.Ok(descriptor.wrapOwned(raw))
+        Result<T>.Ok(descriptor.takeFromAbi(raw))
     }
 }
 
@@ -77,7 +89,7 @@ public interface IWeakReference_Impl {
 
 @C
 func weakReferenceResolveThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     riid: CPointer<GUID>,
     objectreference: CPointer<CPointer<Unit>>
 ): Int32 {
@@ -91,7 +103,7 @@ func weakReferenceResolveThunk(
         }
     }
 
-    match (lookupComInnerImpl<IWeakReference_Impl>(this_)) {
+    match (lookupComInnerImpl<IWeakReference_Impl>(instanceRaw)) {
         case Some(value) =>
             match (value.Resolve(riid, objectreference)) {
                 case Result<Unit>.Ok(_) => S_OK.value
@@ -114,8 +126,20 @@ public func matchesIWeakReferenceVtbl(iid: GUID): Bool {
 }
 
 public class IWeakReferenceSource <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IWeakReferenceSource {
+        IWeakReferenceSource(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IWeakReferenceSource {
+        IWeakReferenceSource(raw)
     }
 
     public static func iid(): GUID {
@@ -123,7 +147,7 @@ public class IWeakReferenceSource <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWeakReferenceSource> {
-        InterfaceDescriptor<IWeakReferenceSource>("IWeakReferenceSource", IID_IWEAKREFERENCESOURCE, wrapIWeakReferenceSourceOwned, wrapIWeakReferenceSourceBorrowed)
+        InterfaceDescriptor<IWeakReferenceSource>("IWeakReferenceSource", IID_IWEAKREFERENCESOURCE, takeIWeakReferenceSourceFromAbi, viewIWeakReferenceSource)
     }
 
     public unsafe func vtbl(): IWeakReferenceSourceVtbl {
@@ -144,7 +168,7 @@ public class IWeakReferenceSource <: InterfaceWrapperBase & ComInterface {
         if (raw.isNull()) {
             return Result<IWeakReference>.Err(WinError(E_POINTER))
         }
-        Result<IWeakReference>.Ok(IWeakReference(raw, ownsReference: true))
+        Result<IWeakReference>.Ok(IWeakReference.fromAbiTake(raw))
     }
 }
 
@@ -154,7 +178,7 @@ public interface IWeakReferenceSource_Impl {
 
 @C
 func weakReferenceSourceGetWeakReferenceThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     weakreference: CPointer<CPointer<Unit>>
 ): Int32 {
     unsafe {
@@ -164,18 +188,16 @@ func weakReferenceSourceGetWeakReferenceThunk(
         weakreference.write(CPointer<Unit>())
     }
 
-    match (lookupComInnerImpl<IWeakReferenceSource_Impl>(this_)) {
+    match (lookupComInnerImpl<IWeakReferenceSource_Impl>(instanceRaw)) {
         case Some(value) =>
             match (value.GetWeakReference()) {
                 case Result<IWeakReference>.Ok(reference) =>
-                    let raw = reference.asRaw()
+                    let raw = reference.intoAbi()
                     if (raw.isNull()) {
                         reference.close()
                         return E_POINTER.value
                     }
-                    reference.addRef()
                     unsafe { weakreference.write(raw) }
-                    reference.close()
                     S_OK.value
                 case Result<IWeakReference>.Err(error) =>
                     error.code().value

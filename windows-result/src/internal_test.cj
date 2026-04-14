@@ -226,7 +226,7 @@ func fakeGetReference(
 @When[test]
 func publishAndClearThreadError(infoPtr: CPointer<IErrorInfo>): Unit {
     let error = errorFromRawForTesting(E_FAIL, infoPtr)
-    require(fakeErrorInfoRefCount == 1u32, "test setup should start with exactly one owned COM reference")
+    require(fakeErrorInfoRefCount == 1u32, "test setup should start with exactly one retained COM reference")
     error.intoThread()
     let _ = setErrorInfoAbi(0u32, CPointer<Unit>())
 }
@@ -235,7 +235,7 @@ func publishAndClearThreadError(infoPtr: CPointer<IErrorInfo>): Unit {
 @Test
 class WindowsResultInternalTests {
     @TestCase
-    public func comptrEqualityUsesCanonicalIUnknownIdentity(): Unit {
+    public func comHandleEqualityUsesCanonicalIUnknownIdentity(): Unit {
         resetIdentityState()
 
         var vtbl = IUnknownVtbl()
@@ -253,16 +253,16 @@ class WindowsResultInternalTests {
         fakeIdentityCanonicalPtr = CPointer<Unit>(primaryPtr)
         fakeIdentityRefCount = 0u32
 
-        let left = ComPtr<FakeIdentityInterface>(primaryPtr, addRef: true)
-        let right = ComPtr<FakeIdentityInterface>(secondaryPtr, addRef: true)
+        let left = ComHandle<FakeIdentityInterface>(primaryPtr, addRef: true)
+        let right = ComHandle<FakeIdentityInterface>(secondaryPtr, addRef: true)
 
         try {
             require(
                 left.asRaw().toUIntNative() != right.asRaw().toUIntNative(),
                 "test setup should use different raw interface pointers"
             )
-            require(left == right, "ComPtr equality should compare canonical IUnknown identity")
-            require(fakeIdentityQueryCalls == 2u32, "ComPtr equality should query IID_IUnknown on both sides")
+            require(left == right, "ComHandle equality should compare canonical IUnknown identity")
+            require(fakeIdentityQueryCalls == 2u32, "ComHandle equality should query IID_IUnknown on both sides")
         } finally {
             right.close()
             left.close()
@@ -304,7 +304,7 @@ class WindowsResultInternalTests {
         threadError.intoThread()
 
         let captured = errorFromHRESULT(E_FAIL)
-        require(captured.as_ptr().isNotNull(), "errorFromHRESULT should keep thread IErrorInfo")
+        require(captured.asPtr().isNotNull(), "errorFromHRESULT should keep thread IErrorInfo")
         require(captured.message() == "thread HRESULT failure", "errorFromHRESULT should recover thread error text")
     }
 
@@ -315,7 +315,7 @@ class WindowsResultInternalTests {
         threadError.intoThread()
 
         let captured = errorFromWin32(code)
-        require(captured.as_ptr().isNotNull(), "errorFromWin32 should keep thread IErrorInfo")
+        require(captured.asPtr().isNotNull(), "errorFromWin32 should keep thread IErrorInfo")
         require(captured.message() == "thread Win32 failure", "errorFromWin32 should recover thread error text")
     }
 
@@ -362,7 +362,7 @@ class WindowsResultSlimErrorTests {
     public func newIgnoresCustomMessageWhenSlimErrorsEnabled(): Unit {
         require(slimErrorsEnabledForTesting(), "slim test should compile against the slim_errors branch")
         let error = errorNewForTesting(E_FAIL, "custom failure")
-        require(error.as_ptr().isNull(), "slim errors should not capture IErrorInfo")
+        require(error.asPtr().isNull(), "slim errors should not capture IErrorInfo")
         require(
             error.message() == E_FAIL.message(),
             "slim errors should fall back to HRESULT.message() instead of storing custom text"

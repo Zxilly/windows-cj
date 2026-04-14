@@ -22,17 +22,21 @@ public struct IMarshalVtbl {
     public init() {}
 }
 
-func wrapIMarshalOwned(raw: CPointer<Unit>): IMarshal {
-    IMarshal(raw, ownsReference: true)
+func takeIMarshalFromAbi(raw: CPointer<Unit>): IMarshal {
+    IMarshal.fromAbiTake(raw)
 }
 
-func wrapIMarshalBorrowed(raw: CPointer<Unit>): IMarshal {
-    IMarshal(raw)
+func viewIMarshal(raw: CPointer<Unit>): IMarshal {
+    IMarshal.viewOf(raw)
 }
 
 public class IMarshal <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
     public static func iid(): GUID {
@@ -40,7 +44,7 @@ public class IMarshal <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IMarshal> {
-        InterfaceDescriptor<IMarshal>("IMarshal", IMarshal.iid(), wrapIMarshalOwned, wrapIMarshalBorrowed)
+        InterfaceDescriptor<IMarshal>("IMarshal", IMarshal.iid(), takeIMarshalFromAbi, viewIMarshal)
     }
 
     public unsafe func vtbl(): IMarshalVtbl {
@@ -49,11 +53,11 @@ public class IMarshal <: InterfaceWrapperBase & ComInterface {
 }
 
 extend IMarshal {
-    public static func fromRaw(raw: CPointer<Unit>): IMarshal {
-        IMarshal(raw, ownsReference: true)
+    public static func fromAbiTake(raw: CPointer<Unit>): IMarshal {
+        IMarshal(raw, takeOwnership: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMarshal {
+    public static func viewOf(raw: CPointer<Unit>): IMarshal {
         IMarshal(raw)
     }
 }
@@ -99,18 +103,18 @@ class AggregatedMarshalerState {
         rawPointer
     }
 
-    public func queryInterface(iid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    public func queryInterface(iid: CPointer<GUID>, resultSlot: CPointer<CPointer<Unit>>): Int32 {
         unsafe {
-            if (ppvObject.isNull()) {
+            if (resultSlot.isNull()) {
                 return E_POINTER.value
             }
-            ppvObject.write(CPointer<Unit>())
+            resultSlot.write(CPointer<Unit>())
             if (iid.isNull()) {
                 return E_POINTER.value
             }
             if (iid.read() == IMarshal.iid()) {
                 addRef()
-                ppvObject.write(rawPointer)
+                resultSlot.write(rawPointer)
                 return S_OK.value
             }
 
@@ -119,7 +123,7 @@ class AggregatedMarshalerState {
                 return E_POINTER.value
             }
             let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(outerRaw).read()
-            vtblPtr.read().QueryInterface(outerRaw, iid, ppvObject)
+            vtblPtr.read().QueryInterface(outerRaw, iid, resultSlot)
         }
     }
 
@@ -220,11 +224,11 @@ class AggregatedMarshalerState {
     }
 }
 
-func lookupAggregatedMarshaler(this_: CPointer<Unit>): Option<AggregatedMarshalerState> {
-    if (this_.isNull()) {
+func lookupAggregatedMarshaler(instanceRaw: CPointer<Unit>): Option<AggregatedMarshalerState> {
+    if (instanceRaw.isNull()) {
         return None
     }
-    match (comRegistryLookup(this_.toUIntNative())) {
+    match (comRegistryLookup(instanceRaw.toUIntNative())) {
         case Some(obj) =>
             match (obj) {
                 case state: AggregatedMarshalerState => Some(state)
@@ -237,16 +241,16 @@ func lookupAggregatedMarshaler(this_: CPointer<Unit>): Option<AggregatedMarshale
 
 @C
 func aggregatedMarshalerQueryInterfaceThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     iid: CPointer<GUID>,
-    ppvObject: CPointer<CPointer<Unit>>
+    resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
-    match (lookupAggregatedMarshaler(this_)) {
-        case Some(state) => state.queryInterface(iid, ppvObject)
+    match (lookupAggregatedMarshaler(instanceRaw)) {
+        case Some(state) => state.queryInterface(iid, resultSlot)
         case None =>
             unsafe {
-                if (ppvObject.isNotNull()) {
-                    ppvObject.write(CPointer<Unit>())
+                if (resultSlot.isNotNull()) {
+                    resultSlot.write(CPointer<Unit>())
                 }
             }
             E_NOINTERFACE.value
@@ -254,16 +258,16 @@ func aggregatedMarshalerQueryInterfaceThunk(
 }
 
 @C
-func aggregatedMarshalerAddRefThunk(this_: CPointer<Unit>): UInt32 {
-    match (lookupAggregatedMarshaler(this_)) {
+func aggregatedMarshalerAddRefThunk(instanceRaw: CPointer<Unit>): UInt32 {
+    match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.addRef()
         case None => 0u32
     }
 }
 
 @C
-func aggregatedMarshalerReleaseThunk(this_: CPointer<Unit>): UInt32 {
-    match (lookupAggregatedMarshaler(this_)) {
+func aggregatedMarshalerReleaseThunk(instanceRaw: CPointer<Unit>): UInt32 {
+    match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.release()
         case None => 0u32
     }
@@ -271,7 +275,7 @@ func aggregatedMarshalerReleaseThunk(this_: CPointer<Unit>): UInt32 {
 
 @C
 func aggregatedMarshalerGetUnmarshalClassThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     riid: CPointer<GUID>,
     pv: CPointer<Unit>,
     dwdestcontext: UInt32,
@@ -279,7 +283,7 @@ func aggregatedMarshalerGetUnmarshalClassThunk(
     mshlflags: UInt32,
     pcid: CPointer<GUID>
 ): Int32 {
-    match (lookupAggregatedMarshaler(this_)) {
+    match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.getUnmarshalClass(riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid)
         case None => E_NOINTERFACE.value
     }
@@ -287,7 +291,7 @@ func aggregatedMarshalerGetUnmarshalClassThunk(
 
 @C
 func aggregatedMarshalerGetMarshalSizeMaxThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     riid: CPointer<GUID>,
     pv: CPointer<Unit>,
     dwdestcontext: UInt32,
@@ -295,7 +299,7 @@ func aggregatedMarshalerGetMarshalSizeMaxThunk(
     mshlflags: UInt32,
     psize: CPointer<UInt32>
 ): Int32 {
-    match (lookupAggregatedMarshaler(this_)) {
+    match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.getMarshalSizeMax(riid, pv, dwdestcontext, pvdestcontext, mshlflags, psize)
         case None => E_NOINTERFACE.value
     }
@@ -303,7 +307,7 @@ func aggregatedMarshalerGetMarshalSizeMaxThunk(
 
 @C
 func aggregatedMarshalerMarshalInterfaceThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     pstm: CPointer<Unit>,
     riid: CPointer<GUID>,
     pv: CPointer<Unit>,
@@ -311,7 +315,7 @@ func aggregatedMarshalerMarshalInterfaceThunk(
     pvdestcontext: CPointer<Unit>,
     mshlflags: UInt32
 ): Int32 {
-    match (lookupAggregatedMarshaler(this_)) {
+    match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.marshalInterface(pstm, riid, pv, dwdestcontext, pvdestcontext, mshlflags)
         case None => E_NOINTERFACE.value
     }
@@ -319,12 +323,12 @@ func aggregatedMarshalerMarshalInterfaceThunk(
 
 @C
 func aggregatedMarshalerUnmarshalInterfaceThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     pstm: CPointer<Unit>,
     riid: CPointer<GUID>,
     ppv: CPointer<CPointer<Unit>>
 ): Int32 {
-    match (lookupAggregatedMarshaler(this_)) {
+    match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.unmarshalInterface(pstm, riid, ppv)
         case None => E_NOINTERFACE.value
     }
@@ -332,10 +336,10 @@ func aggregatedMarshalerUnmarshalInterfaceThunk(
 
 @C
 func aggregatedMarshalerReleaseMarshalDataThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     pstm: CPointer<Unit>
 ): Int32 {
-    match (lookupAggregatedMarshaler(this_)) {
+    match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.releaseMarshalData(pstm)
         case None => E_NOINTERFACE.value
     }
@@ -343,10 +347,10 @@ func aggregatedMarshalerReleaseMarshalDataThunk(
 
 @C
 func aggregatedMarshalerDisconnectObjectThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     dwreserved: UInt32
 ): Int32 {
-    match (lookupAggregatedMarshaler(this_)) {
+    match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.disconnectObject(dwreserved)
         case None => E_NOINTERFACE.value
     }
@@ -372,7 +376,7 @@ func cloneIUnknownOwned(value: IUnknown): Result<IUnknown> {
         return Result<IUnknown>.Err(WinError(E_POINTER))
     }
     value.addRef()
-    Result<IUnknown>.Ok(IUnknown(raw, ownsReference: true))
+    Result<IUnknown>.Ok(IUnknown.fromAbiTake(raw))
 }
 
 func createInnerMarshaler(): Result<IMarshal> {
@@ -392,7 +396,7 @@ func createInnerMarshaler(): Result<IMarshal> {
         return Result<IMarshal>.Err(WinError(E_POINTER))
     }
 
-    let marshalerUnknown = IUnknown(marshalerRaw, ownsReference: true)
+    let marshalerUnknown = IUnknown.fromAbiTake(marshalerRaw)
     match (unsafe { queryInterfaceAs(marshalerRaw, IMarshal.descriptor()) }) {
         case Some(value) =>
             marshalerUnknown.close()
@@ -413,7 +417,7 @@ public class Marshaler {
     public func asInterface(): IMarshal {
         let raw = inner.asRaw()
         inner.addRef()
-        IMarshal(raw, ownsReference: true)
+        IMarshal.fromAbiTake(raw)
     }
 }
 
@@ -423,7 +427,7 @@ public func createMarshaler(outer: IUnknown): Result<IMarshal> {
             match (createInnerMarshaler()) {
                 case Result<IMarshal>.Ok(innerMarshaler) =>
                     let state = AggregatedMarshalerState(clonedOuter, innerMarshaler)
-                    Result<IMarshal>.Ok(IMarshal(state.raw(), ownsReference: true))
+                    Result<IMarshal>.Ok(IMarshal.fromAbiTake(state.raw()))
                 case Result<IMarshal>.Err(error) =>
                     clonedOuter.close()
                     Result<IMarshal>.Err(error)

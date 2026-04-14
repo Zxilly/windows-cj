@@ -23,7 +23,7 @@ public func generateConstants(
             while (fi < fEnd) {
                 let fieldFlags = index.fieldFlags(fileIdx, fi)
                 if (fieldFlags.contains(FieldAttributes.Literal) && fieldFlags.contains(FieldAttributes.Static)) {
-                    let constName = index.fieldName(fileIdx, fi)
+                    let constName = projectedConstantName(index, index.fieldName(fileIdx, fi), namespace)
                     let fieldType = index.fieldType(fileIdx, fi)
                     let mergedTags = mergeConstantCfgTags(typeTags, itemAvailabilityTags(TABLE_FIELD, fileIdx, fi))
 
@@ -34,7 +34,7 @@ public func generateConstants(
                                 w.writeBlankLine()
                             }
                             writeAvailabilityForTags(w, feature, mergedTags)
-                            w.writeLine("public let ${constName}: GUID = GUID(${guidLiteral})")
+                                    w.writeLine("public let ${escapeSourceIdentifier(constName)}: GUID = GUID(${guidLiteral})")
                             fi += 1
                             continue
                         case None => ()
@@ -50,7 +50,7 @@ public func generateConstants(
                             match (formatConstantValueLiteral(index, constValue, fieldType, constType)) {
                                 case Some(cjValue) =>
                                     writeAvailabilityForTags(w, feature, mergedTags)
-                                    w.writeLine("public let ${constName}: ${cjType} = ${cjValue}")
+                                    w.writeLine("public let ${escapeSourceIdentifier(constName)}: ${cjType} = ${cjValue}")
                                 case None =>
                                     eprintln("warning: skipping unsupported constant `${namespace}.${constName}`")
                             }
@@ -61,6 +61,13 @@ public func generateConstants(
             }
         case _ => ()
     }
+}
+
+public func projectedConstantName(index: TypeIndex, rawName: String, namespace: String): String {
+    if (!index.contains(namespace, trimTick(rawName))) {
+        return rawName
+    }
+    return "${rawName}_CONST"
 }
 
 func mergeConstantCfgTags(first: ArrayList<String>, second: ArrayList<String>): ArrayList<String> {
@@ -209,6 +216,6 @@ public func generateGuidConstant(
     // This would require parsing GuidAttribute blob values
     // Implemented as helper for COM interface IID generation
     if (guidAttr.size >= 11) {
-        w.writeLine("public let ${name}: GUID = GUID(${guidAttr[0]}, ${UInt16(guidAttr[1])}, ${UInt16(guidAttr[2])}, ${UInt8(guidAttr[3])}, ${UInt8(guidAttr[4])}, ${UInt8(guidAttr[5])}, ${UInt8(guidAttr[6])}, ${UInt8(guidAttr[7])}, ${UInt8(guidAttr[8])}, ${UInt8(guidAttr[9])}, ${UInt8(guidAttr[10])})")
+        w.writeLine("public let ${escapeSourceIdentifier(name)}: GUID = GUID(${guidAttr[0]}, ${UInt16(guidAttr[1])}, ${UInt16(guidAttr[2])}, ${UInt8(guidAttr[3])}, ${UInt8(guidAttr[4])}, ${UInt8(guidAttr[5])}, ${UInt8(guidAttr[6])}, ${UInt8(guidAttr[7])}, ${UInt8(guidAttr[8])}, ${UInt8(guidAttr[9])}, ${UInt8(guidAttr[10])})")
     }
 }

@@ -18,7 +18,7 @@ public class AdvancedPhotoCaptureSettings <: InterfaceWrapperBase & ComInterface
         AdvancedPhotoCaptureSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdvancedPhotoCaptureSettings {
+    public static func viewOf(raw: CPointer<Unit>): AdvancedPhotoCaptureSettings {
         AdvancedPhotoCaptureSettings(raw)
     }
 
@@ -92,7 +92,7 @@ public class AdvancedPhotoControl <: InterfaceWrapperBase & ComInterface & windo
         AdvancedPhotoControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AdvancedPhotoControl {
+    public static func viewOf(raw: CPointer<Unit>): AdvancedPhotoControl {
         AdvancedPhotoControl(raw)
     }
 
@@ -192,7 +192,7 @@ public class AudioDeviceController <: InterfaceWrapperBase & ComInterface & wind
         AudioDeviceController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AudioDeviceController {
+    public static func viewOf(raw: CPointer<Unit>): AudioDeviceController {
         AudioDeviceController(raw)
     }
 
@@ -325,7 +325,7 @@ public class CameraOcclusionInfo <: InterfaceWrapperBase & ComInterface & window
         CameraOcclusionInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CameraOcclusionInfo {
+    public static func viewOf(raw: CPointer<Unit>): CameraOcclusionInfo {
         CameraOcclusionInfo(raw)
     }
 
@@ -423,7 +423,7 @@ public class CameraOcclusionState <: InterfaceWrapperBase & ComInterface & windo
         CameraOcclusionState(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CameraOcclusionState {
+    public static func viewOf(raw: CPointer<Unit>): CameraOcclusionState {
         CameraOcclusionState(raw)
     }
 
@@ -491,7 +491,7 @@ public class CameraOcclusionStateChangedEventArgs <: InterfaceWrapperBase & ComI
         CameraOcclusionStateChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): CameraOcclusionStateChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): CameraOcclusionStateChangedEventArgs {
         CameraOcclusionStateChangedEventArgs(raw)
     }
 
@@ -639,7 +639,7 @@ public class DigitalWindowBounds <: InterfaceWrapperBase & ComInterface & window
         DigitalWindowBounds(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DigitalWindowBounds {
+    public static func viewOf(raw: CPointer<Unit>): DigitalWindowBounds {
         DigitalWindowBounds(raw)
     }
 
@@ -729,7 +729,7 @@ public class DigitalWindowCapability <: InterfaceWrapperBase & ComInterface & wi
         DigitalWindowCapability(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DigitalWindowCapability {
+    public static func viewOf(raw: CPointer<Unit>): DigitalWindowCapability {
         DigitalWindowCapability(raw)
     }
 
@@ -813,7 +813,7 @@ public class DigitalWindowControl <: InterfaceWrapperBase & ComInterface & windo
         DigitalWindowControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DigitalWindowControl {
+    public static func viewOf(raw: CPointer<Unit>): DigitalWindowControl {
         DigitalWindowControl(raw)
     }
 
@@ -928,7 +928,7 @@ public class ExposureCompensationControl <: InterfaceWrapperBase & ComInterface 
         ExposureCompensationControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ExposureCompensationControl {
+    public static func viewOf(raw: CPointer<Unit>): ExposureCompensationControl {
         ExposureCompensationControl(raw)
     }
 
@@ -1008,7 +1008,7 @@ public class ExposureControl <: InterfaceWrapperBase & ComInterface & windows_in
         ExposureControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ExposureControl {
+    public static func viewOf(raw: CPointer<Unit>): ExposureControl {
         ExposureControl(raw)
     }
 
@@ -1096,7 +1096,7 @@ public class ExposurePriorityVideoControl <: InterfaceWrapperBase & ComInterface
         ExposurePriorityVideoControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ExposurePriorityVideoControl {
+    public static func viewOf(raw: CPointer<Unit>): ExposurePriorityVideoControl {
         ExposurePriorityVideoControl(raw)
     }
 
@@ -1168,7 +1168,7 @@ public class FlashControl <: InterfaceWrapperBase & ComInterface & windows_inter
         FlashControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FlashControl {
+    public static func viewOf(raw: CPointer<Unit>): FlashControl {
         FlashControl(raw)
     }
 
@@ -1268,7 +1268,7 @@ public class FocusControl <: InterfaceWrapperBase & ComInterface & windows_inter
         FocusControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FocusControl {
+    public static func viewOf(raw: CPointer<Unit>): FocusControl {
         FocusControl(raw)
     }
 
@@ -1418,7 +1418,7 @@ public class FocusSettings <: InterfaceWrapperBase & ComInterface & windows_inte
         FocusSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FocusSettings {
+    public static func viewOf(raw: CPointer<Unit>): FocusSettings {
         FocusSettings(raw)
     }
 
@@ -1532,7 +1532,7 @@ public class HdrVideoControl <: InterfaceWrapperBase & ComInterface & windows_in
         HdrVideoControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HdrVideoControl {
+    public static func viewOf(raw: CPointer<Unit>): HdrVideoControl {
         HdrVideoControl(raw)
     }
 
@@ -1640,7 +1640,7 @@ public class IAdvancedPhotoCaptureSettings <: InterfaceWrapperBase & ComInterfac
         IAdvancedPhotoCaptureSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedPhotoCaptureSettings {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedPhotoCaptureSettings {
         IAdvancedPhotoCaptureSettings(raw)
     }
 
@@ -1727,7 +1727,7 @@ public class IAdvancedPhotoControl <: InterfaceWrapperBase & ComInterface & Runt
         IAdvancedPhotoControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedPhotoControl {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedPhotoControl {
         IAdvancedPhotoControl(raw)
     }
 
@@ -1828,7 +1828,7 @@ public class IAdvancedVideoCaptureDeviceController <: InterfaceWrapperBase & Com
         IAdvancedVideoCaptureDeviceController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController {
         IAdvancedVideoCaptureDeviceController(raw)
     }
 
@@ -1912,7 +1912,7 @@ public class IAdvancedVideoCaptureDeviceController10 <: InterfaceWrapperBase & C
         IAdvancedVideoCaptureDeviceController10(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController10 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController10 {
         IAdvancedVideoCaptureDeviceController10(raw)
     }
 
@@ -1990,7 +1990,7 @@ public class IAdvancedVideoCaptureDeviceController11 <: InterfaceWrapperBase & C
         IAdvancedVideoCaptureDeviceController11(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController11 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController11 {
         IAdvancedVideoCaptureDeviceController11(raw)
     }
 
@@ -2080,7 +2080,7 @@ public class IAdvancedVideoCaptureDeviceController2 <: InterfaceWrapperBase & Co
         IAdvancedVideoCaptureDeviceController2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController2 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController2 {
         IAdvancedVideoCaptureDeviceController2(raw)
     }
 
@@ -2254,7 +2254,7 @@ public class IAdvancedVideoCaptureDeviceController3 <: InterfaceWrapperBase & Co
         IAdvancedVideoCaptureDeviceController3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController3 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController3 {
         IAdvancedVideoCaptureDeviceController3(raw)
     }
 
@@ -2353,7 +2353,7 @@ public class IAdvancedVideoCaptureDeviceController4 <: InterfaceWrapperBase & Co
         IAdvancedVideoCaptureDeviceController4(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController4 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController4 {
         IAdvancedVideoCaptureDeviceController4(raw)
     }
 
@@ -2473,7 +2473,7 @@ public class IAdvancedVideoCaptureDeviceController5 <: InterfaceWrapperBase & Co
         IAdvancedVideoCaptureDeviceController5(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController5 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController5 {
         IAdvancedVideoCaptureDeviceController5(raw)
     }
 
@@ -2583,7 +2583,7 @@ public class IAdvancedVideoCaptureDeviceController6 <: InterfaceWrapperBase & Co
         IAdvancedVideoCaptureDeviceController6(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController6 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController6 {
         IAdvancedVideoCaptureDeviceController6(raw)
     }
 
@@ -2661,7 +2661,7 @@ public class IAdvancedVideoCaptureDeviceController7 <: InterfaceWrapperBase & Co
         IAdvancedVideoCaptureDeviceController7(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController7 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController7 {
         IAdvancedVideoCaptureDeviceController7(raw)
     }
 
@@ -2739,7 +2739,7 @@ public class IAdvancedVideoCaptureDeviceController8 <: InterfaceWrapperBase & Co
         IAdvancedVideoCaptureDeviceController8(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController8 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController8 {
         IAdvancedVideoCaptureDeviceController8(raw)
     }
 
@@ -2817,7 +2817,7 @@ public class IAdvancedVideoCaptureDeviceController9 <: InterfaceWrapperBase & Co
         IAdvancedVideoCaptureDeviceController9(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController9 {
+    public static func viewOf(raw: CPointer<Unit>): IAdvancedVideoCaptureDeviceController9 {
         IAdvancedVideoCaptureDeviceController9(raw)
     }
 
@@ -2898,7 +2898,7 @@ public class IAudioDeviceController <: InterfaceWrapperBase & ComInterface & Run
         IAudioDeviceController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioDeviceController {
+    public static func viewOf(raw: CPointer<Unit>): IAudioDeviceController {
         IAudioDeviceController(raw)
     }
 
@@ -3005,7 +3005,7 @@ public class IAudioDeviceController2 <: InterfaceWrapperBase & ComInterface & Ru
         IAudioDeviceController2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAudioDeviceController2 {
+    public static func viewOf(raw: CPointer<Unit>): IAudioDeviceController2 {
         IAudioDeviceController2(raw)
     }
 
@@ -3086,7 +3086,7 @@ public class ICameraOcclusionInfo <: InterfaceWrapperBase & ComInterface & Runti
         ICameraOcclusionInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICameraOcclusionInfo {
+    public static func viewOf(raw: CPointer<Unit>): ICameraOcclusionInfo {
         ICameraOcclusionInfo(raw)
     }
 
@@ -3187,7 +3187,7 @@ public class ICameraOcclusionState <: InterfaceWrapperBase & ComInterface & Runt
         ICameraOcclusionState(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICameraOcclusionState {
+    public static func viewOf(raw: CPointer<Unit>): ICameraOcclusionState {
         ICameraOcclusionState(raw)
     }
 
@@ -3273,7 +3273,7 @@ public class ICameraOcclusionStateChangedEventArgs <: InterfaceWrapperBase & Com
         ICameraOcclusionStateChangedEventArgs(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ICameraOcclusionStateChangedEventArgs {
+    public static func viewOf(raw: CPointer<Unit>): ICameraOcclusionStateChangedEventArgs {
         ICameraOcclusionStateChangedEventArgs(raw)
     }
 
@@ -3356,7 +3356,7 @@ public class IDigitalWindowBounds <: InterfaceWrapperBase & ComInterface & Runti
         IDigitalWindowBounds(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDigitalWindowBounds {
+    public static func viewOf(raw: CPointer<Unit>): IDigitalWindowBounds {
         IDigitalWindowBounds(raw)
     }
 
@@ -3473,7 +3473,7 @@ public class IDigitalWindowCapability <: InterfaceWrapperBase & ComInterface & R
         IDigitalWindowCapability(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDigitalWindowCapability {
+    public static func viewOf(raw: CPointer<Unit>): IDigitalWindowCapability {
         IDigitalWindowCapability(raw)
     }
 
@@ -3598,7 +3598,7 @@ public class IDigitalWindowControl <: InterfaceWrapperBase & ComInterface & Runt
         IDigitalWindowControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDigitalWindowControl {
+    public static func viewOf(raw: CPointer<Unit>): IDigitalWindowControl {
         IDigitalWindowControl(raw)
     }
 
@@ -3733,7 +3733,7 @@ public class IExposureCompensationControl <: InterfaceWrapperBase & ComInterface
         IExposureCompensationControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IExposureCompensationControl {
+    public static func viewOf(raw: CPointer<Unit>): IExposureCompensationControl {
         IExposureCompensationControl(raw)
     }
 
@@ -3858,7 +3858,7 @@ public class IExposureControl <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IExposureControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IExposureControl {
+    public static func viewOf(raw: CPointer<Unit>): IExposureControl {
         IExposureControl(raw)
     }
 
@@ -3994,7 +3994,7 @@ public class IExposurePriorityVideoControl <: InterfaceWrapperBase & ComInterfac
         IExposurePriorityVideoControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IExposurePriorityVideoControl {
+    public static func viewOf(raw: CPointer<Unit>): IExposurePriorityVideoControl {
         IExposurePriorityVideoControl(raw)
     }
 
@@ -4096,7 +4096,7 @@ public class IFlashControl <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IFlashControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFlashControl {
+    public static func viewOf(raw: CPointer<Unit>): IFlashControl {
         IFlashControl(raw)
     }
 
@@ -4248,7 +4248,7 @@ public class IFlashControl2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         IFlashControl2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFlashControl2 {
+    public static func viewOf(raw: CPointer<Unit>): IFlashControl2 {
         IFlashControl2(raw)
     }
 
@@ -4350,7 +4350,7 @@ public class IFocusControl <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IFocusControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFocusControl {
+    public static func viewOf(raw: CPointer<Unit>): IFocusControl {
         IFocusControl(raw)
     }
 
@@ -4517,7 +4517,7 @@ public class IFocusControl2 <: InterfaceWrapperBase & ComInterface & RuntimeName
         IFocusControl2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFocusControl2 {
+    public static func viewOf(raw: CPointer<Unit>): IFocusControl2 {
         IFocusControl2(raw)
     }
 
@@ -4676,7 +4676,7 @@ public class IFocusSettings <: InterfaceWrapperBase & ComInterface & RuntimeName
         IFocusSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFocusSettings {
+    public static func viewOf(raw: CPointer<Unit>): IFocusSettings {
         IFocusSettings(raw)
     }
 
@@ -4833,7 +4833,7 @@ public class IHdrVideoControl <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IHdrVideoControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHdrVideoControl {
+    public static func viewOf(raw: CPointer<Unit>): IHdrVideoControl {
         IHdrVideoControl(raw)
     }
 
@@ -4941,7 +4941,7 @@ public class IInfraredTorchControl <: InterfaceWrapperBase & ComInterface & Runt
         IInfraredTorchControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IInfraredTorchControl {
+    public static func viewOf(raw: CPointer<Unit>): IInfraredTorchControl {
         IInfraredTorchControl(raw)
     }
 
@@ -5082,7 +5082,7 @@ public class IIsoSpeedControl <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IIsoSpeedControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IIsoSpeedControl {
+    public static func viewOf(raw: CPointer<Unit>): IIsoSpeedControl {
         IIsoSpeedControl(raw)
     }
 
@@ -5190,7 +5190,7 @@ public class IIsoSpeedControl2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         IIsoSpeedControl2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IIsoSpeedControl2 {
+    public static func viewOf(raw: CPointer<Unit>): IIsoSpeedControl2 {
         IIsoSpeedControl2(raw)
     }
 
@@ -5324,7 +5324,7 @@ public class ILowLagPhotoControl <: InterfaceWrapperBase & ComInterface & Runtim
         ILowLagPhotoControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILowLagPhotoControl {
+    public static func viewOf(raw: CPointer<Unit>): ILowLagPhotoControl {
         ILowLagPhotoControl(raw)
     }
 
@@ -5475,7 +5475,7 @@ public class ILowLagPhotoSequenceControl <: InterfaceWrapperBase & ComInterface 
         ILowLagPhotoSequenceControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILowLagPhotoSequenceControl {
+    public static func viewOf(raw: CPointer<Unit>): ILowLagPhotoSequenceControl {
         ILowLagPhotoSequenceControl(raw)
     }
 
@@ -5667,7 +5667,7 @@ public class IMediaDeviceControl <: InterfaceWrapperBase & ComInterface & Runtim
         IMediaDeviceControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaDeviceControl {
+    public static func viewOf(raw: CPointer<Unit>): IMediaDeviceControl {
         IMediaDeviceControl(raw)
     }
 
@@ -5782,7 +5782,7 @@ public class IMediaDeviceControlCapabilities <: InterfaceWrapperBase & ComInterf
         IMediaDeviceControlCapabilities(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaDeviceControlCapabilities {
+    public static func viewOf(raw: CPointer<Unit>): IMediaDeviceControlCapabilities {
         IMediaDeviceControlCapabilities(raw)
     }
 
@@ -5947,7 +5947,7 @@ public struct IMediaDeviceControllerVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.SetMediaStreamPropertiesAsync(arg0, windows.media.media_properties.IMediaEncodingProperties.fromRawBorrowed(arg1))) {
+                    match (impl.SetMediaStreamPropertiesAsync(arg0, windows.media.media_properties.IMediaEncodingProperties.viewOf(arg1))) {
                         case Result<windows.foundation.IAsyncAction>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -5992,7 +5992,7 @@ public class IMediaDeviceController <: InterfaceWrapperBase & ComInterface & Run
         IMediaDeviceController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMediaDeviceController {
+    public static func viewOf(raw: CPointer<Unit>): IMediaDeviceController {
         IMediaDeviceController(raw)
     }
 
@@ -6089,7 +6089,7 @@ public class IOpticalImageStabilizationControl <: InterfaceWrapperBase & ComInte
         IOpticalImageStabilizationControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IOpticalImageStabilizationControl {
+    public static func viewOf(raw: CPointer<Unit>): IOpticalImageStabilizationControl {
         IOpticalImageStabilizationControl(raw)
     }
 
@@ -6191,7 +6191,7 @@ public class IPanelBasedOptimizationControl <: InterfaceWrapperBase & ComInterfa
         IPanelBasedOptimizationControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPanelBasedOptimizationControl {
+    public static func viewOf(raw: CPointer<Unit>): IPanelBasedOptimizationControl {
         IPanelBasedOptimizationControl(raw)
     }
 
@@ -6287,7 +6287,7 @@ public class IPhotoConfirmationControl <: InterfaceWrapperBase & ComInterface & 
         IPhotoConfirmationControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPhotoConfirmationControl {
+    public static func viewOf(raw: CPointer<Unit>): IPhotoConfirmationControl {
         IPhotoConfirmationControl(raw)
     }
 
@@ -6400,7 +6400,7 @@ public class IRegionOfInterest <: InterfaceWrapperBase & ComInterface & RuntimeN
         IRegionOfInterest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRegionOfInterest {
+    public static func viewOf(raw: CPointer<Unit>): IRegionOfInterest {
         IRegionOfInterest(raw)
     }
 
@@ -6531,7 +6531,7 @@ public class IRegionOfInterest2 <: InterfaceWrapperBase & ComInterface & Runtime
         IRegionOfInterest2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRegionOfInterest2 {
+    public static func viewOf(raw: CPointer<Unit>): IRegionOfInterest2 {
         IRegionOfInterest2(raw)
     }
 
@@ -6649,7 +6649,7 @@ public class IRegionsOfInterestControl <: InterfaceWrapperBase & ComInterface & 
         IRegionsOfInterestControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRegionsOfInterestControl {
+    public static func viewOf(raw: CPointer<Unit>): IRegionsOfInterestControl {
         IRegionsOfInterestControl(raw)
     }
 
@@ -6777,7 +6777,7 @@ public class ISceneModeControl <: InterfaceWrapperBase & ComInterface & RuntimeN
         ISceneModeControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ISceneModeControl {
+    public static func viewOf(raw: CPointer<Unit>): ISceneModeControl {
         ISceneModeControl(raw)
     }
 
@@ -6876,7 +6876,7 @@ public class ITorchControl <: InterfaceWrapperBase & ComInterface & RuntimeName 
         ITorchControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ITorchControl {
+    public static func viewOf(raw: CPointer<Unit>): ITorchControl {
         ITorchControl(raw)
     }
 
@@ -7002,7 +7002,7 @@ public class IVideoDeviceController <: InterfaceWrapperBase & ComInterface & Run
         IVideoDeviceController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoDeviceController {
+    public static func viewOf(raw: CPointer<Unit>): IVideoDeviceController {
         IVideoDeviceController(raw)
     }
 
@@ -7186,7 +7186,7 @@ public class IVideoDeviceControllerGetDevicePropertyResult <: InterfaceWrapperBa
         IVideoDeviceControllerGetDevicePropertyResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoDeviceControllerGetDevicePropertyResult {
+    public static func viewOf(raw: CPointer<Unit>): IVideoDeviceControllerGetDevicePropertyResult {
         IVideoDeviceControllerGetDevicePropertyResult(raw)
     }
 
@@ -7275,7 +7275,7 @@ public class IVideoTemporalDenoisingControl <: InterfaceWrapperBase & ComInterfa
         IVideoTemporalDenoisingControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoTemporalDenoisingControl {
+    public static func viewOf(raw: CPointer<Unit>): IVideoTemporalDenoisingControl {
         IVideoTemporalDenoisingControl(raw)
     }
 
@@ -7382,7 +7382,7 @@ public class IWhiteBalanceControl <: InterfaceWrapperBase & ComInterface & Runti
         IWhiteBalanceControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWhiteBalanceControl {
+    public static func viewOf(raw: CPointer<Unit>): IWhiteBalanceControl {
         IWhiteBalanceControl(raw)
     }
 
@@ -7521,7 +7521,7 @@ public class IZoomControl <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IZoomControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IZoomControl {
+    public static func viewOf(raw: CPointer<Unit>): IZoomControl {
         IZoomControl(raw)
     }
 
@@ -7639,7 +7639,7 @@ public class IZoomControl2 <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IZoomControl2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IZoomControl2 {
+    public static func viewOf(raw: CPointer<Unit>): IZoomControl2 {
         IZoomControl2(raw)
     }
 
@@ -7734,7 +7734,7 @@ public class IZoomSettings <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IZoomSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IZoomSettings {
+    public static func viewOf(raw: CPointer<Unit>): IZoomSettings {
         IZoomSettings(raw)
     }
 
@@ -7824,7 +7824,7 @@ public class InfraredTorchControl <: InterfaceWrapperBase & ComInterface & windo
         InfraredTorchControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): InfraredTorchControl {
+    public static func viewOf(raw: CPointer<Unit>): InfraredTorchControl {
         InfraredTorchControl(raw)
     }
 
@@ -7943,7 +7943,7 @@ public class IsoSpeedControl <: InterfaceWrapperBase & ComInterface & windows_in
         IsoSpeedControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IsoSpeedControl {
+    public static func viewOf(raw: CPointer<Unit>): IsoSpeedControl {
         IsoSpeedControl(raw)
     }
 
@@ -8047,7 +8047,7 @@ public class LowLagPhotoControl <: InterfaceWrapperBase & ComInterface & windows
         LowLagPhotoControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LowLagPhotoControl {
+    public static func viewOf(raw: CPointer<Unit>): LowLagPhotoControl {
         LowLagPhotoControl(raw)
     }
 
@@ -8139,7 +8139,7 @@ public class LowLagPhotoSequenceControl <: InterfaceWrapperBase & ComInterface &
         LowLagPhotoSequenceControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LowLagPhotoSequenceControl {
+    public static func viewOf(raw: CPointer<Unit>): LowLagPhotoSequenceControl {
         LowLagPhotoSequenceControl(raw)
     }
 
@@ -8334,7 +8334,7 @@ public class MediaDeviceControl <: InterfaceWrapperBase & ComInterface & windows
         MediaDeviceControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaDeviceControl {
+    public static func viewOf(raw: CPointer<Unit>): MediaDeviceControl {
         MediaDeviceControl(raw)
     }
 
@@ -8410,7 +8410,7 @@ public class MediaDeviceControlCapabilities <: InterfaceWrapperBase & ComInterfa
         MediaDeviceControlCapabilities(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MediaDeviceControlCapabilities {
+    public static func viewOf(raw: CPointer<Unit>): MediaDeviceControlCapabilities {
         MediaDeviceControlCapabilities(raw)
     }
 
@@ -8490,7 +8490,7 @@ public class OpticalImageStabilizationControl <: InterfaceWrapperBase & ComInter
         OpticalImageStabilizationControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): OpticalImageStabilizationControl {
+    public static func viewOf(raw: CPointer<Unit>): OpticalImageStabilizationControl {
         OpticalImageStabilizationControl(raw)
     }
 
@@ -8589,7 +8589,7 @@ public class PanelBasedOptimizationControl <: InterfaceWrapperBase & ComInterfac
         PanelBasedOptimizationControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PanelBasedOptimizationControl {
+    public static func viewOf(raw: CPointer<Unit>): PanelBasedOptimizationControl {
         PanelBasedOptimizationControl(raw)
     }
 
@@ -8661,7 +8661,7 @@ public class PhotoConfirmationControl <: InterfaceWrapperBase & ComInterface & w
         PhotoConfirmationControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PhotoConfirmationControl {
+    public static func viewOf(raw: CPointer<Unit>): PhotoConfirmationControl {
         PhotoConfirmationControl(raw)
     }
 
@@ -8737,7 +8737,7 @@ public class RegionOfInterest <: InterfaceWrapperBase & ComInterface & windows_i
         RegionOfInterest(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RegionOfInterest {
+    public static func viewOf(raw: CPointer<Unit>): RegionOfInterest {
         RegionOfInterest(raw)
     }
 
@@ -8857,7 +8857,7 @@ public class RegionsOfInterestControl <: InterfaceWrapperBase & ComInterface & w
         RegionsOfInterestControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RegionsOfInterestControl {
+    public static func viewOf(raw: CPointer<Unit>): RegionsOfInterestControl {
         RegionsOfInterestControl(raw)
     }
 
@@ -8941,7 +8941,7 @@ public class SceneModeControl <: InterfaceWrapperBase & ComInterface & windows_i
         SceneModeControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): SceneModeControl {
+    public static func viewOf(raw: CPointer<Unit>): SceneModeControl {
         SceneModeControl(raw)
     }
 
@@ -9009,7 +9009,7 @@ public class TorchControl <: InterfaceWrapperBase & ComInterface & windows_inter
         TorchControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): TorchControl {
+    public static func viewOf(raw: CPointer<Unit>): TorchControl {
         TorchControl(raw)
     }
 
@@ -9089,7 +9089,7 @@ public class VideoDeviceController <: InterfaceWrapperBase & ComInterface & wind
         VideoDeviceController(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VideoDeviceController {
+    public static func viewOf(raw: CPointer<Unit>): VideoDeviceController {
         VideoDeviceController(raw)
     }
 
@@ -9213,7 +9213,7 @@ public class VideoDeviceControllerGetDevicePropertyResult <: InterfaceWrapperBas
         VideoDeviceControllerGetDevicePropertyResult(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VideoDeviceControllerGetDevicePropertyResult {
+    public static func viewOf(raw: CPointer<Unit>): VideoDeviceControllerGetDevicePropertyResult {
         VideoDeviceControllerGetDevicePropertyResult(raw)
     }
 
@@ -9334,7 +9334,7 @@ public class VideoTemporalDenoisingControl <: InterfaceWrapperBase & ComInterfac
         VideoTemporalDenoisingControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VideoTemporalDenoisingControl {
+    public static func viewOf(raw: CPointer<Unit>): VideoTemporalDenoisingControl {
         VideoTemporalDenoisingControl(raw)
     }
 
@@ -9433,7 +9433,7 @@ public class WhiteBalanceControl <: InterfaceWrapperBase & ComInterface & window
         WhiteBalanceControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): WhiteBalanceControl {
+    public static func viewOf(raw: CPointer<Unit>): WhiteBalanceControl {
         WhiteBalanceControl(raw)
     }
 
@@ -9521,7 +9521,7 @@ public class ZoomControl <: InterfaceWrapperBase & ComInterface & windows_interf
         ZoomControl(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ZoomControl {
+    public static func viewOf(raw: CPointer<Unit>): ZoomControl {
         ZoomControl(raw)
     }
 
@@ -9601,7 +9601,7 @@ public class ZoomSettings <: InterfaceWrapperBase & ComInterface & windows_inter
         ZoomSettings(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ZoomSettings {
+    public static func viewOf(raw: CPointer<Unit>): ZoomSettings {
         ZoomSettings(raw)
     }
 

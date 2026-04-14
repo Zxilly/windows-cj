@@ -18,7 +18,7 @@ public class Buffer <: InterfaceWrapperBase & ComInterface & windows_interface.R
         Buffer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Buffer {
+    public static func viewOf(raw: CPointer<Unit>): Buffer {
         Buffer(raw)
     }
 
@@ -130,7 +130,7 @@ public class DataReader <: InterfaceWrapperBase & ComInterface & windows_interfa
         DataReader(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DataReader {
+    public static func viewOf(raw: CPointer<Unit>): DataReader {
         DataReader(raw)
     }
 
@@ -317,7 +317,7 @@ public class DataWriter <: InterfaceWrapperBase & ComInterface & windows_interfa
         DataWriter(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DataWriter {
+    public static func viewOf(raw: CPointer<Unit>): DataWriter {
         DataWriter(raw)
     }
 
@@ -508,7 +508,7 @@ public class FileInputStream <: InterfaceWrapperBase & ComInterface & windows_in
         FileInputStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileInputStream {
+    public static func viewOf(raw: CPointer<Unit>): FileInputStream {
         FileInputStream(raw)
     }
 
@@ -605,7 +605,7 @@ public class FileOutputStream <: InterfaceWrapperBase & ComInterface & windows_i
         FileOutputStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileOutputStream {
+    public static func viewOf(raw: CPointer<Unit>): FileOutputStream {
         FileOutputStream(raw)
     }
 
@@ -681,7 +681,7 @@ public class FileRandomAccessStream <: InterfaceWrapperBase & ComInterface & win
         FileRandomAccessStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileRandomAccessStream {
+    public static func viewOf(raw: CPointer<Unit>): FileRandomAccessStream {
         FileRandomAccessStream(raw)
     }
 
@@ -931,7 +931,7 @@ public class IBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName & wind
         IBuffer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBuffer {
+    public static func viewOf(raw: CPointer<Unit>): IBuffer {
         IBuffer(raw)
     }
 
@@ -1023,7 +1023,7 @@ public class IBufferFactory <: InterfaceWrapperBase & ComInterface & RuntimeName
         IBufferFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBufferFactory {
+    public static func viewOf(raw: CPointer<Unit>): IBufferFactory {
         IBufferFactory(raw)
     }
 
@@ -1102,7 +1102,7 @@ public class IBufferStatics <: InterfaceWrapperBase & ComInterface & RuntimeName
         IBufferStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBufferStatics {
+    public static func viewOf(raw: CPointer<Unit>): IBufferStatics {
         IBufferStatics(raw)
     }
 
@@ -1224,7 +1224,7 @@ public class IContentTypeProvider <: InterfaceWrapperBase & ComInterface & Runti
         IContentTypeProvider(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IContentTypeProvider {
+    public static func viewOf(raw: CPointer<Unit>): IContentTypeProvider {
         IContentTypeProvider(raw)
     }
 
@@ -1821,7 +1821,7 @@ public class IDataReader <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IDataReader(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDataReader {
+    public static func viewOf(raw: CPointer<Unit>): IDataReader {
         IDataReader(raw)
     }
 
@@ -2091,7 +2091,7 @@ public class IDataReaderFactory <: InterfaceWrapperBase & ComInterface & Runtime
         IDataReaderFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDataReaderFactory {
+    public static func viewOf(raw: CPointer<Unit>): IDataReaderFactory {
         IDataReaderFactory(raw)
     }
 
@@ -2169,7 +2169,7 @@ public class IDataReaderStatics <: InterfaceWrapperBase & ComInterface & Runtime
         IDataReaderStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDataReaderStatics {
+    public static func viewOf(raw: CPointer<Unit>): IDataReaderStatics {
         IDataReaderStatics(raw)
     }
 
@@ -2372,7 +2372,7 @@ public struct IDataWriterVtbl {
         vtbl.WriteBuffer = { this_, arg0 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.WriteBuffer(IBuffer.fromRawBorrowed(arg0))) {
+                    match (impl.WriteBuffer(IBuffer.viewOf(arg0))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -2385,7 +2385,7 @@ public struct IDataWriterVtbl {
         vtbl.WriteBufferRange = { this_, arg0, arg1, arg2 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.WriteBufferRange(IBuffer.fromRawBorrowed(arg0), arg1, arg2)) {
+                    match (impl.WriteBufferRange(IBuffer.viewOf(arg0), arg1, arg2)) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -2729,7 +2729,7 @@ public class IDataWriter <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IDataWriter(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDataWriter {
+    public static func viewOf(raw: CPointer<Unit>): IDataWriter {
         IDataWriter(raw)
     }
 
@@ -2979,7 +2979,7 @@ public class IDataWriterFactory <: InterfaceWrapperBase & ComInterface & Runtime
         IDataWriterFactory(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDataWriterFactory {
+    public static func viewOf(raw: CPointer<Unit>): IDataWriterFactory {
         IDataWriterFactory(raw)
     }
 
@@ -3064,7 +3064,7 @@ public class IFileRandomAccessStreamStatics <: InterfaceWrapperBase & ComInterfa
         IFileRandomAccessStreamStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileRandomAccessStreamStatics {
+    public static func viewOf(raw: CPointer<Unit>): IFileRandomAccessStreamStatics {
         IFileRandomAccessStreamStatics(raw)
     }
 
@@ -3197,7 +3197,7 @@ public struct IInputStreamVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.ReadAsync(IBuffer.fromRawBorrowed(arg0), arg1, arg2)) {
+                    match (impl.ReadAsync(IBuffer.viewOf(arg0), arg1, arg2)) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -3245,7 +3245,7 @@ public class IInputStream <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IInputStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IInputStream {
+    public static func viewOf(raw: CPointer<Unit>): IInputStream {
         IInputStream(raw)
     }
 
@@ -3374,7 +3374,7 @@ public class IInputStreamReference <: InterfaceWrapperBase & ComInterface & Runt
         IInputStreamReference(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IInputStreamReference {
+    public static func viewOf(raw: CPointer<Unit>): IInputStreamReference {
         IInputStreamReference(raw)
     }
 
@@ -3452,7 +3452,7 @@ public struct IOutputStreamVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.WriteAsync(IBuffer.fromRawBorrowed(arg0))) {
+                    match (impl.WriteAsync(IBuffer.viewOf(arg0))) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -3524,7 +3524,7 @@ public class IOutputStream <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IOutputStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IOutputStream {
+    public static func viewOf(raw: CPointer<Unit>): IOutputStream {
         IOutputStream(raw)
     }
 
@@ -3619,7 +3619,7 @@ public struct IPropertySetSerializerVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.Serialize(windows.foundation.collections.IPropertySet.fromRawBorrowed(arg0))) {
+                    match (impl.Serialize(windows.foundation.collections.IPropertySet.viewOf(arg0))) {
                         case Result<IBuffer>.Ok(value) =>
                             let raw = value.asRaw()
                             if (raw.isNull()) {
@@ -3639,7 +3639,7 @@ public struct IPropertySetSerializerVtbl {
         vtbl.Deserialize = { this_, arg0, arg1 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.Deserialize(windows.foundation.collections.IPropertySet.fromRawBorrowed(arg0), IBuffer.fromRawBorrowed(arg1))) {
+                    match (impl.Deserialize(windows.foundation.collections.IPropertySet.viewOf(arg0), IBuffer.viewOf(arg1))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -3676,7 +3676,7 @@ public class IPropertySetSerializer <: InterfaceWrapperBase & ComInterface & Run
         IPropertySetSerializer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPropertySetSerializer {
+    public static func viewOf(raw: CPointer<Unit>): IPropertySetSerializer {
         IPropertySetSerializer(raw)
     }
 
@@ -3963,7 +3963,7 @@ public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & Runtim
         IRandomAccessStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStream {
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStream {
         IRandomAccessStream(raw)
     }
 
@@ -4160,7 +4160,7 @@ public class IRandomAccessStreamReference <: InterfaceWrapperBase & ComInterface
         IRandomAccessStreamReference(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStreamReference {
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStreamReference {
         IRandomAccessStreamReference(raw)
     }
 
@@ -4240,7 +4240,7 @@ public class IRandomAccessStreamReferenceStatics <: InterfaceWrapperBase & ComIn
         IRandomAccessStreamReferenceStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStreamReferenceStatics {
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStreamReferenceStatics {
         IRandomAccessStreamReferenceStatics(raw)
     }
 
@@ -4336,7 +4336,7 @@ public class IRandomAccessStreamStatics <: InterfaceWrapperBase & ComInterface &
         IRandomAccessStreamStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStreamStatics {
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStreamStatics {
         IRandomAccessStreamStatics(raw)
     }
 
@@ -4452,7 +4452,7 @@ public class IRandomAccessStreamWithContentType <: InterfaceWrapperBase & ComInt
         IRandomAccessStreamWithContentType(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStreamWithContentType {
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStreamWithContentType {
         IRandomAccessStreamWithContentType(raw)
     }
 
@@ -4539,7 +4539,7 @@ public class InMemoryRandomAccessStream <: InterfaceWrapperBase & ComInterface &
         InMemoryRandomAccessStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): InMemoryRandomAccessStream {
+    public static func viewOf(raw: CPointer<Unit>): InMemoryRandomAccessStream {
         InMemoryRandomAccessStream(raw)
     }
 
@@ -4706,7 +4706,7 @@ public class InputStreamOverStream <: InterfaceWrapperBase & ComInterface & wind
         InputStreamOverStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): InputStreamOverStream {
+    public static func viewOf(raw: CPointer<Unit>): InputStreamOverStream {
         InputStreamOverStream(raw)
     }
 
@@ -4778,7 +4778,7 @@ public class OutputStreamOverStream <: InterfaceWrapperBase & ComInterface & win
         OutputStreamOverStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): OutputStreamOverStream {
+    public static func viewOf(raw: CPointer<Unit>): OutputStreamOverStream {
         OutputStreamOverStream(raw)
     }
 
@@ -4854,7 +4854,7 @@ public class RandomAccessStream <: InterfaceWrapperBase & ComInterface & windows
         RandomAccessStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RandomAccessStream {
+    public static func viewOf(raw: CPointer<Unit>): RandomAccessStream {
         RandomAccessStream(raw)
     }
 
@@ -4923,7 +4923,7 @@ public class RandomAccessStreamOverStream <: InterfaceWrapperBase & ComInterface
         RandomAccessStreamOverStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RandomAccessStreamOverStream {
+    public static func viewOf(raw: CPointer<Unit>): RandomAccessStreamOverStream {
         RandomAccessStreamOverStream(raw)
     }
 
@@ -5047,7 +5047,7 @@ public class RandomAccessStreamReference <: InterfaceWrapperBase & ComInterface 
         RandomAccessStreamReference(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RandomAccessStreamReference {
+    public static func viewOf(raw: CPointer<Unit>): RandomAccessStreamReference {
         RandomAccessStreamReference(raw)
     }
 

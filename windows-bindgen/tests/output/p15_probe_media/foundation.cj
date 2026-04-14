@@ -27,7 +27,7 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
         AsyncActionCompletedHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncActionCompletedHandler {
+    public static func viewOf(raw: CPointer<Unit>): AsyncActionCompletedHandler {
         AsyncActionCompletedHandler(raw)
     }
 
@@ -113,7 +113,7 @@ func buildAsyncActionCompletedHandlerBoxVtbl(): AsyncActionCompletedHandlerVtbl 
 func AsyncActionCompletedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatus): Int32 {
     match (unsafe { asImplFromRaw<AsyncActionCompletedHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(IAsyncAction.fromRawBorrowed(arg0), arg1)
+            invoker.Invoke(IAsyncAction.viewOf(arg0), arg1)
             return S_OK.value
         case None =>
             return E_NOTIMPL.value
@@ -139,7 +139,7 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
         AsyncOperationCompletedHandler<TResult>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncOperationCompletedHandler<TResult> {
+    public static func viewOf(raw: CPointer<Unit>): AsyncOperationCompletedHandler<TResult> {
         AsyncOperationCompletedHandler<TResult>(raw)
     }
 
@@ -256,7 +256,7 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
         AsyncOperationProgressHandler<TResult, TProgress>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncOperationProgressHandler<TResult, TProgress> {
+    public static func viewOf(raw: CPointer<Unit>): AsyncOperationProgressHandler<TResult, TProgress> {
         AsyncOperationProgressHandler<TResult, TProgress>(raw)
     }
 
@@ -375,7 +375,7 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
         AsyncOperationWithProgressCompletedHandler<TResult, TProgress>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
+    public static func viewOf(raw: CPointer<Unit>): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
         AsyncOperationWithProgressCompletedHandler<TResult, TProgress>(raw)
     }
 
@@ -516,7 +516,7 @@ public class Deferral <: InterfaceWrapperBase & ComInterface & windows_interface
         Deferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Deferral {
+    public static func viewOf(raw: CPointer<Unit>): Deferral {
         Deferral(raw)
     }
 
@@ -603,7 +603,7 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
         DeferralCompletedHandler(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeferralCompletedHandler {
+    public static func viewOf(raw: CPointer<Unit>): DeferralCompletedHandler {
         DeferralCompletedHandler(raw)
     }
 
@@ -715,7 +715,7 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
         EventHandler<T>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): EventHandler<T> {
+    public static func viewOf(raw: CPointer<Unit>): EventHandler<T> {
         EventHandler<T>(raw)
     }
 
@@ -806,7 +806,7 @@ func buildEventHandlerBoxVtbl(): EventHandlerVtbl {
 func EventHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
     match (unsafe { asImplFromRaw<EventHandlerInvoker>(this_) }) {
         case Some(invoker) =>
-            invoker.Invoke(IInspectable.fromRawBorrowed(arg0), arg1)
+            invoker.Invoke(IInspectable.viewOf(arg0), arg1)
             return S_OK.value
         case None =>
             return E_NOTIMPL.value
@@ -835,7 +835,7 @@ public struct IAsyncActionVtbl {
         vtbl.SetCompleted = { this_, arg0 =>
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.SetCompleted(AsyncActionCompletedHandler.fromRawBorrowed(arg0))) {
+                    match (impl.SetCompleted(AsyncActionCompletedHandler.viewOf(arg0))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -914,7 +914,7 @@ public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IAsyncAction(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncAction {
+    public static func viewOf(raw: CPointer<Unit>): IAsyncAction {
         IAsyncAction(raw)
     }
 
@@ -1117,7 +1117,7 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         IAsyncInfo(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncInfo {
+    public static func viewOf(raw: CPointer<Unit>): IAsyncInfo {
         IAsyncInfo(raw)
     }
 
@@ -1304,7 +1304,7 @@ public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & R
         IAsyncOperation<TResult>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncOperation<TResult> {
+    public static func viewOf(raw: CPointer<Unit>): IAsyncOperation<TResult> {
         IAsyncOperation<TResult>(raw)
     }
 
@@ -1531,7 +1531,7 @@ public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapper
         IAsyncOperationWithProgress<TResult, TProgress>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncOperationWithProgress<TResult, TProgress> {
+    public static func viewOf(raw: CPointer<Unit>): IAsyncOperationWithProgress<TResult, TProgress> {
         IAsyncOperationWithProgress<TResult, TProgress>(raw)
     }
 
@@ -1685,7 +1685,7 @@ public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         IClosable(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IClosable {
+    public static func viewOf(raw: CPointer<Unit>): IClosable {
         IClosable(raw)
     }
 
@@ -1761,7 +1761,7 @@ public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         IDeferral(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeferral {
+    public static func viewOf(raw: CPointer<Unit>): IDeferral {
         IDeferral(raw)
     }
 
@@ -1893,7 +1893,7 @@ public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IMemoryBuffer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMemoryBuffer {
+    public static func viewOf(raw: CPointer<Unit>): IMemoryBuffer {
         IMemoryBuffer(raw)
     }
 
@@ -2055,7 +2055,7 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
         IMemoryBufferReference(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMemoryBufferReference {
+    public static func viewOf(raw: CPointer<Unit>): IMemoryBufferReference {
         IMemoryBufferReference(raw)
     }
 
@@ -2838,7 +2838,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
         IPropertyValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPropertyValue {
+    public static func viewOf(raw: CPointer<Unit>): IPropertyValue {
         IPropertyValue(raw)
     }
 
@@ -3223,7 +3223,7 @@ public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IReference<T>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IReference<T> {
+    public static func viewOf(raw: CPointer<Unit>): IReference<T> {
         IReference<T>(raw)
     }
 
@@ -3351,7 +3351,7 @@ public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IStringable(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStringable {
+    public static func viewOf(raw: CPointer<Unit>): IStringable {
         IStringable(raw)
     }
 
@@ -3445,7 +3445,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IUriRuntimeClass(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUriRuntimeClass {
+    public static func viewOf(raw: CPointer<Unit>): IUriRuntimeClass {
         IUriRuntimeClass(raw)
     }
 
@@ -3652,7 +3652,7 @@ public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & 
         IUriRuntimeClassWithAbsoluteCanonicalUri(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUriRuntimeClassWithAbsoluteCanonicalUri {
+    public static func viewOf(raw: CPointer<Unit>): IUriRuntimeClassWithAbsoluteCanonicalUri {
         IUriRuntimeClassWithAbsoluteCanonicalUri(raw)
     }
 
@@ -3793,7 +3793,7 @@ public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & Ru
         IWwwFormUrlDecoderEntry(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWwwFormUrlDecoderEntry {
+    public static func viewOf(raw: CPointer<Unit>): IWwwFormUrlDecoderEntry {
         IWwwFormUrlDecoderEntry(raw)
     }
 
@@ -3879,7 +3879,7 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
         IWwwFormUrlDecoderRuntimeClass(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClass {
+    public static func viewOf(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClass {
         IWwwFormUrlDecoderRuntimeClass(raw)
     }
 
@@ -3962,7 +3962,7 @@ public class MemoryBuffer <: InterfaceWrapperBase & ComInterface & windows_inter
         MemoryBuffer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MemoryBuffer {
+    public static func viewOf(raw: CPointer<Unit>): MemoryBuffer {
         MemoryBuffer(raw)
     }
 
@@ -4143,7 +4143,7 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
         TypedEventHandler<TSender, TResult>(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): TypedEventHandler<TSender, TResult> {
+    public static func viewOf(raw: CPointer<Unit>): TypedEventHandler<TSender, TResult> {
         TypedEventHandler<TSender, TResult>(raw)
     }
 
@@ -4253,7 +4253,7 @@ public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.Runt
         Uri(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Uri {
+    public static func viewOf(raw: CPointer<Unit>): Uri {
         Uri(raw)
     }
 
@@ -4413,7 +4413,7 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
         WwwFormUrlDecoder(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): WwwFormUrlDecoder {
+    public static func viewOf(raw: CPointer<Unit>): WwwFormUrlDecoder {
         WwwFormUrlDecoder(raw)
     }
 

@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-sync"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
 $fixtureRoot = Join-Path $packageRoot "tests/fixtures/basic"
 $missingCfgFixtureRoot = Join-Path $packageRoot "tests/fixtures/missing_cfg"
 $workspaceRoot = Join-Path $env:TEMP ("windows-sync-smoke-" + [guid]::NewGuid().ToString())
@@ -23,7 +23,7 @@ members = ["windows-sync"]
 compile-option = "--cfg ./windows-cj"
 
 [windows-cj]
-features = ["feat_user32"]
+features = ["USER32"]
 '@ | Set-Content -NoNewline (Join-Path $workspaceRoot "cjpm.toml")
 Copy-Item (Join-Path $fixtureRoot "features.toml") (Join-Path $generatedRoot "features.toml")
 Copy-Item (Join-Path $fixtureRoot "link-options.toml") (Join-Path $generatedRoot "link-options.toml")
@@ -135,7 +135,7 @@ members = ["windows-sync"]
 compile-option = "--cfg ./windows-cj"
 
 [windows-cj]
-features = ["feat_user32"]
+features = ["USER32"]
 '@ | Set-Content -NoNewline (Join-Path $catalogWorkspaceRoot "cjpm.toml")
 Copy-Item (Join-Path $fixtureRoot "features.toml") (Join-Path $catalogGeneratedRoot "features.toml")
 Copy-Item (Join-Path $fixtureRoot "link-options.toml") (Join-Path $catalogGeneratedRoot "link-options.toml")
@@ -185,7 +185,7 @@ members = ["windows-sync"]
 compile-option = "--cfg ./windows-cj"
 
 [windows-cj]
-features = ["feat_user32"]
+features = ["USER32"]
 '@ | Set-Content -NoNewline (Join-Path $explicitWorkspaceRoot "cjpm.toml")
 Copy-Item (Join-Path $fixtureRoot "features.toml") (Join-Path $explicitCatalogRoot "features.toml")
 Copy-Item (Join-Path $fixtureRoot "link-options.toml") (Join-Path $explicitCatalogRoot "link-options.toml")
@@ -234,7 +234,7 @@ members = ["windows-sync"]
 compile-option = "--cfg ./windows-cj"
 
 [windows-cj]
-features = ["feat_user32"]
+features = ["USER32"]
 '@ | Set-Content -NoNewline (Join-Path $missingCatalogWorkspaceRoot "cjpm.toml")
 Copy-Item (Join-Path $fixtureRoot "features.toml") (Join-Path $missingCatalogRoot "features.toml")
 
@@ -307,7 +307,7 @@ members = ["windows-sync"]
 compile-option = "--cfg ./windows-cj"
 
 [windows-cj]
-features = ["feat_user32"]
+features = ["USER32"]
 '@ | Set-Content -NoNewline (Join-Path $workspaceRoot "cjpm.toml")
 Copy-Item (Join-Path $missingCfgFixtureRoot "features.toml") (Join-Path $generatedRoot "features.toml")
 Copy-Item (Join-Path $missingCfgFixtureRoot "link-options.toml") (Join-Path $generatedRoot "link-options.toml")
@@ -331,7 +331,7 @@ finally {
 if (($missingCfgOutput | Out-String) -notmatch 'An exception has occurred:') {
     throw "missing-cfg failure did not surface as an exception"
 }
-if (($missingCfgOutput | Out-String) -notmatch 'Exception: Feature feat_user32 missing cfg') {
+if (($missingCfgOutput | Out-String) -notmatch 'Exception: Feature USER32 missing cfg') {
     throw "missing-cfg failure message did not mention the missing cfg contract"
 }
 

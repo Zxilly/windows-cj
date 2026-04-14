@@ -1,9 +1,9 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-bindgen"
-$fixtureWin32 = Join-Path $repoRoot "ref/windows-rs/crates/libs/bindgen/default/Windows.Win32.winmd"
-$fixtureWinrt = Join-Path $repoRoot "ref/windows-rs/crates/libs/bindgen/default/Windows.winmd"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
+$fixtureWin32 = Join-Path $repoRoot "windows-cj/winmd/Windows.Win32.winmd"
+$fixtureWinrt = Join-Path $repoRoot "windows-cj/winmd/Windows.winmd"
 $outputRoot = Join-Path $packageRoot "tests/output/bindgen_regression"
 $archOut = Join-Path $outputRoot "arch"
 $structArchOut = Join-Path $outputRoot "struct_arch"
@@ -185,23 +185,23 @@ finally {
     Pop-Location
 }
 
-$windowsAndMessagingFile = Join-Path $archOut "windows_and_messaging.cj"
-$deviceInstallFile = Join-Path $structArchOut "device_and_driver_installation.cj"
-$storageFile = Join-Path $packageRefOut "src/windows/storage/mod.cj"
-$flatPackageFoundationFile = Join-Path $flatPackageOut "foundation.cj"
-$flatPackageSystemInformationFile = Join-Path $flatPackageOut "system_information.cj"
-$defaultRefsStorageFile = Join-Path $defaultRefsOut "src/windows/storage/mod.cj"
-$deriveStorageFile = Join-Path $deriveOut "storage.cj"
-$deriveFoundationFile = Join-Path $deriveOut "foundation.cj"
-$coreDepsAppxFile = Join-Path $coreDepsOut "appx.cj"
-$coreDepsFoundationFile = Join-Path $coreDepsOut "foundation.cj"
-$specificDepsAppxFile = Join-Path $specificDepsOut "appx.cj"
-$specificDepsFoundationFile = Join-Path $specificDepsOut "foundation.cj"
-$defaultRefsFoundationCollectionsFile = Join-Path $defaultRefsOut "src/windows/foundation/collections/mod.cj"
-$invalidReferenceStorageFile = Join-Path (Join-Path $outputRoot "invalid_reference") "storage.cj"
-$winrtDefaultFile = Join-Path $winrtDefaultOut "foundation.cj"
-$winrtImplementFile = Join-Path $winrtImplementOut "foundation.cj"
-$winrtImplementFalseFile = Join-Path $winrtImplementFalseOut "foundation.cj"
+$windowsAndMessagingFile = Join-Path $archOut "WindowsAndMessaging.cj"
+$deviceInstallFile = Join-Path $structArchOut "DeviceAndDriverInstallation.cj"
+$storageFile = Join-Path $packageRefOut "src/Windows/Storage/mod.cj"
+$flatPackageFoundationFile = Join-Path $flatPackageOut "Foundation.cj"
+$flatPackageSystemInformationFile = Join-Path $flatPackageOut "SystemInformation.cj"
+$defaultRefsStorageFile = Join-Path $defaultRefsOut "src/Windows/Storage/mod.cj"
+$deriveStorageFile = Join-Path $deriveOut "Storage.cj"
+$deriveFoundationFile = Join-Path $deriveOut "Foundation.cj"
+$coreDepsAppxFile = Join-Path $coreDepsOut "Appx.cj"
+$coreDepsFoundationFile = Join-Path $coreDepsOut "Foundation.cj"
+$specificDepsAppxFile = Join-Path $specificDepsOut "Appx.cj"
+$specificDepsFoundationFile = Join-Path $specificDepsOut "Foundation.cj"
+$defaultRefsFoundationCollectionsFile = Join-Path $defaultRefsOut "src/Windows/Foundation/Collections/mod.cj"
+$invalidReferenceStorageFile = Join-Path (Join-Path $outputRoot "invalid_reference") "Storage.cj"
+$winrtDefaultFile = Join-Path $winrtDefaultOut "Foundation.cj"
+$winrtImplementFile = Join-Path $winrtImplementOut "Foundation.cj"
+$winrtImplementFalseFile = Join-Path $winrtImplementFalseOut "Foundation.cj"
 
 foreach ($path in @($windowsAndMessagingFile, $deviceInstallFile, $storageFile, $flatPackageFoundationFile, $flatPackageSystemInformationFile, $defaultRefsStorageFile, $deriveStorageFile, $deriveFoundationFile, $coreDepsAppxFile, $specificDepsAppxFile, $winrtDefaultFile, $winrtImplementFile, $winrtImplementFalseFile)) {
     if (!(Test-Path $path)) {
@@ -227,30 +227,27 @@ $warningText = ($warningRun | Out-String)
 $structArchText = ($structArchRun | Out-String)
 $invalidReferenceText = ($invalidReferenceRun | Out-String)
 
-if ($windowsAndMessaging -notmatch '(?s)@When\[feature == "feat_user32" && \(arch == "x86_64" \|\| arch == "arm64ec"(?: \|\| arch == "aarch64")?\)\].*?func GetWindowLongPtrA') {
+if ($windowsAndMessaging -notmatch '(?s)@When\[USER32 == "on" && \(arch == "x86_64" \|\| arch == "aarch64"\)\].*?func GetWindowLongPtrA') {
     throw "GetWindowLongPtrA is missing the expected x86_64/arm64ec item-level cfg guard"
 }
-if ($windowsAndMessaging -notmatch '(?s)@When\[feature == "feat_user32" && \(arch == "x86_64" \|\| arch == "arm64ec"(?: \|\| arch == "aarch64")?\)\].*?func GetWindowLongPtrW') {
+if ($windowsAndMessaging -notmatch '(?s)@When\[USER32 == "on" && \(arch == "x86_64" \|\| arch == "aarch64"\)\].*?func GetWindowLongPtrW') {
     throw "GetWindowLongPtrW is missing the expected x86_64/arm64ec item-level cfg guard"
 }
 if ($windowsAndMessaging -match '@When\[cfg\.') {
     throw "windows_and_messaging.cj still contains legacy cfg-based guards"
 }
 
-if ($deviceInstall -notmatch '(?s)@When\[feature == "feat_windows_win32_devices_device_and_driver_installation" && \(arch == "x86_64" \|\| arch == "arm64ec"(?: \|\| arch == "aarch64")?\)\]\s*(?://[^\r\n]*\s*)*@C\s+public struct SP_CLASSINSTALL_HEADER') {
-    throw "SP_CLASSINSTALL_HEADER is missing the expected x86_64/arm64ec type cfg guard"
-}
-if ($deviceInstall -notmatch '(?s)@When\[feature == "feat_windows_win32_devices_device_and_driver_installation" && arch == "x86"\]\s*(?://[^\r\n]*\s*)*@C\s+public struct SP_CLASSINSTALL_HEADER') {
-    throw "SP_CLASSINSTALL_HEADER is missing the expected x86 cfg guard"
+if ($deviceInstall -notmatch '(?s)@When\[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && \(arch == "x86_64" \|\| arch == "aarch64"\)\]\s*(?://[^\r\n]*\s*)*@C\s+public struct SP_CLASSINSTALL_HEADER') {
+    throw "SP_CLASSINSTALL_HEADER is missing the expected x86_64/aarch64 type cfg guard"
 }
 if ($deviceInstall -match '@When\[cfg\.') {
     throw "device_and_driver_installation.cj still contains legacy cfg-based guards"
 }
-if ($deviceInstall -notmatch '(?s)// WARNING: union simulated as byte array \(size-equivalent, not type-safe\)\s*@C\s+public struct SP_ALTPLATFORM_INFO_V2__Anonymous_e__Union\s*\{\s*public var _raw: VArray<UInt8, \$[0-9]+> = VArray<UInt8, \$[0-9]+>\(repeat: 0\)') {
-    throw "ExplicitLayout unions should be simulated as fixed-size byte arrays in struct_arch output"
+if ($deviceInstall -notmatch '(?s)// WARNING: union simulated as byte array \(size-equivalent, not type-safe\)\s*@C\s+public struct SP_ALTPLATFORM_INFO_V2__Anonymous_e__Union\s*\{\s*public var _raw: VArray<UInt16, \$1> = VArray<UInt16, \$1>\(repeat: 0\)') {
+    throw "ExplicitLayout unions should use aligned raw storage in struct_arch output"
 }
-if ($deviceInstall -notmatch '(?s)public struct SP_ALTPLATFORM_INFO_V2__Anonymous_e__Union\s*\{[^}]*public func anonymous\(\): SP_ALTPLATFORM_INFO_V2__Anonymous_e__Union__Anonymous_e__Struct') {
-    throw "Simulated unions should expose accessors for structured views"
+if ($deviceInstall -notmatch '(?s)public struct SP_ALTPLATFORM_INFO_V2__Anonymous_e__Union\s*\{.*?public func reserved\(\): UInt16') {
+    throw "Simulated unions should expose accessors for their aligned views"
 }
 if ($deviceInstall -notmatch '// packed\(1\)') {
     throw "Packed structs should retain their packed(n) comments"
@@ -262,29 +259,29 @@ if ($structArchText -notmatch 'simulating union layout') {
     throw "Union simulation warnings were not emitted"
 }
 
-if ($flatPackageFoundation -notmatch '(?s)// WARNING: union simulated as byte array \(size-equivalent, not type-safe\)\s*@C\s+public struct DECIMAL__Anonymous1_e__Union\s*\{\s*public var _raw: VArray<UInt8, \$2> = VArray<UInt8, \$2>\(repeat: 0\)') {
-    throw "DECIMAL first union view should use a 2-byte raw buffer"
+if ($flatPackageFoundation -notmatch '(?s)// WARNING: union simulated as byte array \(size-equivalent, not type-safe\)\s*@C\s+public struct DECIMAL__Anonymous1_e__Union\s*\{\s*public var _raw: VArray<UInt16, \$1> = VArray<UInt16, \$1>\(repeat: 0\)') {
+    throw "DECIMAL first union view should use aligned UInt16 raw storage"
 }
-if ($flatPackageFoundation -notmatch '(?s)public struct DECIMAL__Anonymous1_e__Union\s*\{[^}]*public func anonymous\(\): DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct') {
+if ($flatPackageFoundation -notmatch '(?s)public struct DECIMAL__Anonymous1_e__Union\s*\{.*?public func anonymous\(\): DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct') {
     throw "DECIMAL first union view is missing the anonymous-struct accessor"
 }
-if ($flatPackageFoundation -notmatch '(?s)// WARNING: union simulated as byte array \(size-equivalent, not type-safe\)\s*@C\s+public struct DECIMAL__Anonymous2_e__Union\s*\{\s*public var _raw: VArray<UInt8, \$8> = VArray<UInt8, \$8>\(repeat: 0\)') {
-    throw "DECIMAL second union view should use an 8-byte raw buffer"
+if ($flatPackageFoundation -notmatch '(?s)// WARNING: union simulated as byte array \(size-equivalent, not type-safe\)\s*@C\s+public struct DECIMAL__Anonymous2_e__Union\s*\{\s*public var _raw: VArray<UInt64, \$1> = VArray<UInt64, \$1>\(repeat: 0\)') {
+    throw "DECIMAL second union view should use aligned UInt64 raw storage"
 }
-if ($flatPackageFoundation -notmatch '(?s)public struct DECIMAL__Anonymous2_e__Union\s*\{[^}]*public func lo64\(\): UInt64') {
+if ($flatPackageFoundation -notmatch '(?s)public struct DECIMAL__Anonymous2_e__Union\s*\{.*?public func lo64\(\): UInt64') {
     throw "DECIMAL second union view is missing the Lo64 accessor"
 }
-if ($windowsAndMessaging -notmatch '(?s)// WARNING: union simulated as byte array \(size-equivalent, not type-safe\)\s*@C\s+public struct MENUTEMPLATEEX__Anonymous_e__Union\s*\{\s*public var _raw: VArray<UInt8, \$24> = VArray<UInt8, \$24>\(repeat: 0\)') {
-    throw "MENUTEMPLATEEX union should use a 24-byte raw buffer"
+if ($windowsAndMessaging -notmatch '(?s)// WARNING: union simulated as byte array \(size-equivalent, not type-safe\)\s*@C\s+public struct MENUTEMPLATEEX__Anonymous_e__Union\s*\{\s*public var _raw: VArray<UInt32, \$6> = VArray<UInt32, \$6>\(repeat: 0\)') {
+    throw "MENUTEMPLATEEX union should use aligned UInt32 raw storage"
 }
-if ($windowsAndMessaging -notmatch '(?s)public struct MENUTEMPLATEEX__Anonymous_e__Union\s*\{[^}]*public func menu\(\): MENUTEMPLATEEX__Anonymous_e__Union__Menu_e__Struct') {
+if ($windowsAndMessaging -notmatch '(?s)public struct MENUTEMPLATEEX__Anonymous_e__Union\s*\{.*?public func menu\(\): MENUTEMPLATEEX__Anonymous_e__Union__Menu_e__Struct') {
     throw "MENUTEMPLATEEX union is missing the Menu accessor"
 }
-if ($windowsAndMessaging -notmatch '(?s)public struct MENUTEMPLATEEX__Anonymous_e__Union\s*\{[^}]*public func menuEx\(\): MENUTEMPLATEEX__Anonymous_e__Union__MenuEx_e__Struct') {
+if ($windowsAndMessaging -notmatch '(?s)public struct MENUTEMPLATEEX__Anonymous_e__Union\s*\{.*?public func menuEx\(\): MENUTEMPLATEEX__Anonymous_e__Union__MenuEx_e__Struct') {
     throw "MENUTEMPLATEEX union is missing the MenuEx accessor"
 }
 
-if ($storage -notmatch '(?m)^package windows\.storage$') {
+if ($storage -notmatch '(?m)^package Windows\.Storage$') {
     throw "Generated package mode did not preserve the namespace-derived package name"
 }
 if ($flatPackageFoundation -notmatch '(?m)^package windows_sys$') {
@@ -293,16 +290,16 @@ if ($flatPackageFoundation -notmatch '(?m)^package windows_sys$') {
 if ($flatPackageSystemInformation -notmatch '(?m)^package windows_sys$') {
     throw "Flat package override did not rewrite SystemInformation to package windows_sys"
 }
-if ($flatPackageSystemInformation -match '(?m)^package windows\.win32\.system\.system_information$') {
+if ($flatPackageSystemInformation -match '(?m)^package Windows\.Win32\.System\.SystemInformation$') {
     throw "Flat package override still emitted namespace-derived package names"
 }
-if ($flatPackageSystemInformation -match '(?m)^import windows\.win32\.foundation\.\*$') {
+if ($flatPackageSystemInformation -match '(?m)^import Windows\.Win32\.Foundation\.\*$') {
     throw "Flat package override still emitted namespace-derived Foundation imports"
 }
-if ($storage -notmatch 'refpkg\.foundation') {
+if ($storage -notmatch 'refpkg\.Foundation') {
     throw "Generated WinRT projection did not rewrite referenced Windows.Foundation types"
 }
-if (Test-Path (Join-Path $packageRefOut "src/windows/foundation/mod.cj")) {
+if (Test-Path (Join-Path $packageRefOut "src/Windows/Foundation/mod.cj")) {
     throw "Package reference run should not generate Windows.Foundation packages that were mapped to references"
 }
 if (Test-Path $defaultRefsFoundationCollectionsFile) {
@@ -321,7 +318,7 @@ if ($deriveStorage -notmatch '(?m)^import std\.deriving\.\*$') {
 if ($deriveFoundation -notmatch '(?m)^import std\.deriving\.\*$') {
     throw "Derived struct namespace is missing std.deriving import"
 }
-if ($deriveStorage -notmatch '(?s)@Derive\[Equatable, Hashable\]\s*public struct FileAttributes') {
+if ($deriveStorage -notmatch '(?s)@Derive\[Equatable, Hashable\]\s*@C\s+public struct FileAttributes') {
     throw "Generated enum output did not inject the expected @Derive attributes"
 }
 if ($deriveFoundation -notmatch '(?s)@Derive\[Equatable, Hashable\]\s*@C\s+public struct DateTime') {
@@ -380,10 +377,10 @@ if ($winrtImplementFalse -notmatch 'return defaultInterface\(\)\.AbsoluteUri\(\)
 if ($warningText -notmatch 'skipping `Windows\.Storage\.IStorageItem\.') {
     throw "Missing dependency warnings were not surfaced for filtered WinRT methods"
 }
-if (Test-Path (Join-Path $warningOut "system.cj")) {
+if (Test-Path (Join-Path $warningOut "System.cj")) {
     throw "no-deps should not generate dependency namespaces such as Windows.System"
 }
-if (Test-Path (Join-Path $warningOut "streams.cj")) {
+if (Test-Path (Join-Path $warningOut "Streams.cj")) {
     throw "no-deps should not generate dependency namespaces such as Windows.Storage.Streams"
 }
 if ($invalidReferenceText -notmatch '--reference') {

@@ -1,22 +1,27 @@
-package windows.foundation.metadata
+package Windows.Foundation.Metadata
 
 import std.collection.*
 import windows_core.*
 import windows_interface.*
-import windows.win32.foundation.*
+import Windows.Win32.Foundation as Win32_Foundation
+import Windows.Win32.Foundation.*
 
 
-@When[feature == "feat_windows_foundation_metadata"]
+@When[Windows_Foundation_Metadata == "on"]
 public class ApiInformation <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ApiInformation {
-        ApiInformation(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ApiInformation {
+    public static func fromAbiTake(raw: CPointer<Unit>): ApiInformation {
+        ApiInformation(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApiInformation {
         ApiInformation(raw)
     }
 
@@ -29,7 +34,7 @@ public class ApiInformation <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     public static func descriptor(): InterfaceDescriptor<ApiInformation> {
-        return InterfaceDescriptor<ApiInformation>("ApiInformation", GUID(), [IInspectable.iid(), IUnknown.iid()], { raw => ApiInformation(raw, ownsReference: true) }, { raw => ApiInformation(raw) })
+        return InterfaceDescriptor<ApiInformation>("ApiInformation", GUID(), [IInspectable.iid(), IUnknown.iid()], { raw => ApiInformation.fromAbiTake(raw) }, { raw => ApiInformation.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -53,7 +58,7 @@ public class ApiInformation <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public static unsafe func IsTypePresent(typeName: CPointer<UInt16>): Bool {
@@ -117,30 +122,16 @@ public class ApiInformation <: InterfaceWrapperBase & ComInterface & windows_int
     }
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
+@When[Windows_Foundation_Metadata == "on"]
+@C
 public struct AttributeTargets {
-    public let value: UInt32
+    public var value: UInt32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: UInt32) {
         this.value = value
     }
-    public static let All = AttributeTargets(value: 4294967295)
-    public static let Delegate = AttributeTargets(value: 1)
-    public static let Enum = AttributeTargets(value: 2)
-    public static let Event = AttributeTargets(value: 4)
-    public static let Field = AttributeTargets(value: 8)
-    public static let Interface = AttributeTargets(value: 16)
-    public static let Method = AttributeTargets(value: 64)
-    public static let Parameter = AttributeTargets(value: 128)
-    public static let Property = AttributeTargets(value: 256)
-    public static let RuntimeClass = AttributeTargets(value: 512)
-    public static let Struct = AttributeTargets(value: 1024)
-    public static let InterfaceImpl = AttributeTargets(value: 2048)
-    public static let ApiContract = AttributeTargets(value: 8192)
 
     public operator func ==(other: AttributeTargets): Bool {
         return this.value == other.value
@@ -154,29 +145,65 @@ public struct AttributeTargets {
     }
 
     public operator func |(other: AttributeTargets): AttributeTargets {
-        return AttributeTargets(value: this.value | other.value)
+        return AttributeTargets(this.value | other.value)
     }
     public operator func &(other: AttributeTargets): AttributeTargets {
-        return AttributeTargets(value: this.value & other.value)
+        return AttributeTargets(this.value & other.value)
     }
-    public operator func ~(): AttributeTargets {
-        return AttributeTargets(value: ~this.value)
+    public operator func !(): AttributeTargets {
+        return AttributeTargets(!this.value)
     }
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
-public struct CompositionType {
-    public let value: Int32
+@When[Windows_Foundation_Metadata == "on"]
+public let All: AttributeTargets = AttributeTargets(4294967295)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Metadata == "on"]
+public let Delegate: AttributeTargets = AttributeTargets(1)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Enum: AttributeTargets = AttributeTargets(2)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Event: AttributeTargets = AttributeTargets(4)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Field: AttributeTargets = AttributeTargets(8)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Interface: AttributeTargets = AttributeTargets(16)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Method: AttributeTargets = AttributeTargets(64)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Parameter: AttributeTargets = AttributeTargets(128)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Property: AttributeTargets = AttributeTargets(256)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let RuntimeClass: AttributeTargets = AttributeTargets(512)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Struct: AttributeTargets = AttributeTargets(1024)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let InterfaceImpl: AttributeTargets = AttributeTargets(2048)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let ApiContract: AttributeTargets = AttributeTargets(8192)
+
+@When[Windows_Foundation_Metadata == "on"]
+@C
+public struct CompositionType {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Protected = CompositionType(value: 1)
-    public static let Public = CompositionType(value: 2)
 
     public operator func ==(other: CompositionType): Bool {
         return this.value == other.value
@@ -186,19 +213,22 @@ public struct CompositionType {
     }
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
-public struct DeprecationType {
-    public let value: Int32
+@When[Windows_Foundation_Metadata == "on"]
+public let Protected: CompositionType = CompositionType(1)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Metadata == "on"]
+public let Public: CompositionType = CompositionType(2)
+
+@When[Windows_Foundation_Metadata == "on"]
+@C
+public struct DeprecationType {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Deprecate = DeprecationType(value: 0)
-    public static let Remove = DeprecationType(value: 1)
 
     public operator func ==(other: DeprecationType): Bool {
         return this.value == other.value
@@ -208,21 +238,22 @@ public struct DeprecationType {
     }
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
-public struct FeatureStage {
-    public let value: Int32
+@When[Windows_Foundation_Metadata == "on"]
+public let Deprecate: DeprecationType = DeprecationType(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Metadata == "on"]
+public let Remove: DeprecationType = DeprecationType(1)
+
+@When[Windows_Foundation_Metadata == "on"]
+@C
+public struct FeatureStage {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let AlwaysDisabled = FeatureStage(value: 0)
-    public static let DisabledByDefault = FeatureStage(value: 1)
-    public static let EnabledByDefault = FeatureStage(value: 2)
-    public static let AlwaysEnabled = FeatureStage(value: 3)
 
     public operator func ==(other: FeatureStage): Bool {
         return this.value == other.value
@@ -232,20 +263,28 @@ public struct FeatureStage {
     }
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
-public struct GCPressureAmount {
-    public let value: Int32
+@When[Windows_Foundation_Metadata == "on"]
+public let AlwaysDisabled: FeatureStage = FeatureStage(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Metadata == "on"]
+public let DisabledByDefault: FeatureStage = FeatureStage(1)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let EnabledByDefault: FeatureStage = FeatureStage(2)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let AlwaysEnabled: FeatureStage = FeatureStage(3)
+
+@When[Windows_Foundation_Metadata == "on"]
+@C
+public struct GCPressureAmount {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Low = GCPressureAmount(value: 0)
-    public static let Medium = GCPressureAmount(value: 1)
-    public static let High = GCPressureAmount(value: 2)
 
     public operator func ==(other: GCPressureAmount): Bool {
         return this.value == other.value
@@ -255,7 +294,16 @@ public struct GCPressureAmount {
     }
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
+@When[Windows_Foundation_Metadata == "on"]
+public let Low: GCPressureAmount = GCPressureAmount(0)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Medium: GCPressureAmount = GCPressureAmount(1)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let High: GCPressureAmount = GCPressureAmount(2)
+
+@When[Windows_Foundation_Metadata == "on"]
 @C
 public struct IApiInformationStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -272,17 +320,21 @@ public struct IApiInformationStaticsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
+@When[Windows_Foundation_Metadata == "on"]
 public class IApiInformationStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IApiInformationStatics {
-        IApiInformationStatics(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IApiInformationStatics {
+    public static func fromAbiTake(raw: CPointer<Unit>): IApiInformationStatics {
+        IApiInformationStatics(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IApiInformationStatics {
         IApiInformationStatics(raw)
     }
 
@@ -298,13 +350,13 @@ public class IApiInformationStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<IApiInformationStatics> {
-        var descriptor = InterfaceDescriptor<IApiInformationStatics>("IApiInformationStatics", IApiInformationStatics.iid(), IInspectable.descriptor(), { raw => IApiInformationStatics(raw, ownsReference: true) }, { raw => IApiInformationStatics(raw) })
+        var descriptor = InterfaceDescriptor<IApiInformationStatics>("IApiInformationStatics", IApiInformationStatics.iid(), IInspectable.descriptor(), { raw => IApiInformationStatics.fromAbiTake(raw) }, { raw => IApiInformationStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IApiInformationStatics.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IApiInformationStatics", IApiInformationStatics.iid(), IInspectable.descriptorSchema(), "IApiInformationStaticsVtbl", "IApiInformationStatics", "IApiInformationStatics_Impl", [InterfaceMethodSchema("IsTypePresent", 6, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsMethodPresent", 7, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("methodName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsMethodPresentWithArity", 8, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("methodName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("inputParameterCount", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsEventPresent", 9, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsPropertyPresent", 10, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("propertyName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsReadOnlyPropertyPresent", 11, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("propertyName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsWriteablePropertyPresent", 12, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("propertyName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsEnumNamedValuePresent", 13, [InterfaceParameterSchema("enumTypeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("valueName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsApiContractPresentByMajor", 14, [InterfaceParameterSchema("contractName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("majorVersion", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsApiContractPresentByMajorAndMinor", 15, [InterfaceParameterSchema("contractName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("majorVersion", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("minorVersion", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IApiInformationStatics", IApiInformationStatics.iid(), IInspectable.descriptorSchema(), "IApiInformationStaticsVtbl", "IApiInformationStatics", "IApiInformationStatics_Impl", [InterfaceMethodSchema("IsTypePresent", 6, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsMethodPresent", 7, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("methodName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsMethodPresentWithArity", 8, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("methodName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("inputParameterCount", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEventPresent", 9, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsPropertyPresent", 10, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("propertyName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsReadOnlyPropertyPresent", 11, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("propertyName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsWriteablePropertyPresent", 12, [InterfaceParameterSchema("typeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("propertyName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEnumNamedValuePresent", 13, [InterfaceParameterSchema("enumTypeName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("valueName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsApiContractPresentByMajor", 14, [InterfaceParameterSchema("contractName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("majorVersion", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsApiContractPresentByMajorAndMinor", 15, [InterfaceParameterSchema("contractName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("majorVersion", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("minorVersion", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IApiInformationStatics.runtimeType())
         return schema
     }
@@ -326,7 +378,7 @@ public class IApiInformationStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IApiInformationStaticsVtbl {
@@ -414,21 +466,16 @@ public class IApiInformationStatics <: InterfaceWrapperBase & ComInterface & Run
     }
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
+@When[Windows_Foundation_Metadata == "on"]
+@C
 public struct MarshalingType {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let None = MarshalingType(value: 1)
-    public static let Agile = MarshalingType(value: 2)
-    public static let Standard = MarshalingType(value: 3)
-    public static let InvalidMarshaling = MarshalingType(value: 0)
 
     public operator func ==(other: MarshalingType): Bool {
         return this.value == other.value
@@ -438,19 +485,28 @@ public struct MarshalingType {
     }
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
-public struct Platform {
-    public let value: Int32
+@When[Windows_Foundation_Metadata == "on"]
+public let None: MarshalingType = MarshalingType(1)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Metadata == "on"]
+public let Agile: MarshalingType = MarshalingType(2)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Standard: MarshalingType = MarshalingType(3)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let InvalidMarshaling: MarshalingType = MarshalingType(0)
+
+@When[Windows_Foundation_Metadata == "on"]
+@C
+public struct Platform {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Windows = Platform(value: 0)
-    public static let WindowsPhone = Platform(value: 1)
 
     public operator func ==(other: Platform): Bool {
         return this.value == other.value
@@ -460,21 +516,22 @@ public struct Platform {
     }
 }
 
-@When[feature == "feat_windows_foundation_metadata"]
-public struct ThreadingModel {
-    public let value: Int32
+@When[Windows_Foundation_Metadata == "on"]
+public let Windows: Platform = Platform(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Metadata == "on"]
+public let WindowsPhone: Platform = Platform(1)
+
+@When[Windows_Foundation_Metadata == "on"]
+@C
+public struct ThreadingModel {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let STA = ThreadingModel(value: 1)
-    public static let MTA = ThreadingModel(value: 2)
-    public static let Both = ThreadingModel(value: 3)
-    public static let InvalidThreading = ThreadingModel(value: 0)
 
     public operator func ==(other: ThreadingModel): Bool {
         return this.value == other.value
@@ -483,3 +540,15 @@ public struct ThreadingModel {
         return this.value != other.value
     }
 }
+
+@When[Windows_Foundation_Metadata == "on"]
+public let STA: ThreadingModel = ThreadingModel(1)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let MTA: ThreadingModel = ThreadingModel(2)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let Both: ThreadingModel = ThreadingModel(3)
+
+@When[Windows_Foundation_Metadata == "on"]
+public let InvalidThreading: ThreadingModel = ThreadingModel(0)

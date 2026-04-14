@@ -2,7 +2,6 @@ package windows_bindgen
 
 import std.collection.*
 import std.sync.*
-import windows_metadata.*
 
 // Collect feature metadata from namespaces/modules and generate manifest files.
 
@@ -169,14 +168,18 @@ func joinStringsLocal(list: ArrayList<String>, sep: String): String {
 func moduleLinkName(moduleName: String): String {
     let baseName = stripDllExtension(moduleName)
     let arr = baseName.toArray()
-    var result = Array<Byte>(arr.size, {i =>
-        let ch = arr[i]
-        if (ch >= b'A' && ch <= b'Z') {
-            ch - b'A' + b'a'
-        } else {
-            ch
+    var result = Array<Byte>(
+        arr.size,
+        {
+            i =>
+                let ch = arr[i]
+                if (ch >= b'A' && ch <= b'Z') {
+                    ch - b'A' + b'a'
+                } else {
+                    ch
+                }
         }
-    })
+    )
     return String.fromUtf8(result)
 }
 

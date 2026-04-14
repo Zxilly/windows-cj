@@ -29,7 +29,7 @@ public class ILanguage <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         ILanguage(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILanguage {
+    public static func viewOf(raw: CPointer<Unit>): ILanguage {
         ILanguage(raw)
     }
 
@@ -131,7 +131,7 @@ public class ILanguage2 <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         ILanguage2(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILanguage2 {
+    public static func viewOf(raw: CPointer<Unit>): ILanguage2 {
         ILanguage2(raw)
     }
 
@@ -209,7 +209,7 @@ public class ILanguage3 <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         ILanguage3(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILanguage3 {
+    public static func viewOf(raw: CPointer<Unit>): ILanguage3 {
         ILanguage3(raw)
     }
 
@@ -287,7 +287,7 @@ public class ILanguageExtensionSubtags <: InterfaceWrapperBase & ComInterface & 
         ILanguageExtensionSubtags(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILanguageExtensionSubtags {
+    public static func viewOf(raw: CPointer<Unit>): ILanguageExtensionSubtags {
         ILanguageExtensionSubtags(raw)
     }
 
@@ -357,7 +357,7 @@ public class Language <: InterfaceWrapperBase & ComInterface & windows_interface
         Language(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Language {
+    public static func viewOf(raw: CPointer<Unit>): Language {
         Language(raw)
     }
 

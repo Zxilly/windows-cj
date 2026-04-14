@@ -18,7 +18,7 @@ public class HttpCacheDirectiveHeaderValueCollection <: InterfaceWrapperBase & C
         HttpCacheDirectiveHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpCacheDirectiveHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpCacheDirectiveHeaderValueCollection {
         HttpCacheDirectiveHeaderValueCollection(raw)
     }
 
@@ -186,7 +186,7 @@ public class HttpChallengeHeaderValue <: InterfaceWrapperBase & ComInterface & w
         HttpChallengeHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpChallengeHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpChallengeHeaderValue {
         HttpChallengeHeaderValue(raw)
     }
 
@@ -290,7 +290,7 @@ public class HttpChallengeHeaderValueCollection <: InterfaceWrapperBase & ComInt
         HttpChallengeHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpChallengeHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpChallengeHeaderValueCollection {
         HttpChallengeHeaderValueCollection(raw)
     }
 
@@ -426,7 +426,7 @@ public class HttpConnectionOptionHeaderValue <: InterfaceWrapperBase & ComInterf
         HttpConnectionOptionHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpConnectionOptionHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpConnectionOptionHeaderValue {
         HttpConnectionOptionHeaderValue(raw)
     }
 
@@ -516,7 +516,7 @@ public class HttpConnectionOptionHeaderValueCollection <: InterfaceWrapperBase &
         HttpConnectionOptionHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpConnectionOptionHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpConnectionOptionHeaderValueCollection {
         HttpConnectionOptionHeaderValueCollection(raw)
     }
 
@@ -652,7 +652,7 @@ public class HttpContentCodingHeaderValue <: InterfaceWrapperBase & ComInterface
         HttpContentCodingHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpContentCodingHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpContentCodingHeaderValue {
         HttpContentCodingHeaderValue(raw)
     }
 
@@ -742,7 +742,7 @@ public class HttpContentCodingHeaderValueCollection <: InterfaceWrapperBase & Co
         HttpContentCodingHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpContentCodingHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpContentCodingHeaderValueCollection {
         HttpContentCodingHeaderValueCollection(raw)
     }
 
@@ -878,7 +878,7 @@ public class HttpContentCodingWithQualityHeaderValue <: InterfaceWrapperBase & C
         HttpContentCodingWithQualityHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpContentCodingWithQualityHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpContentCodingWithQualityHeaderValue {
         HttpContentCodingWithQualityHeaderValue(raw)
     }
 
@@ -978,7 +978,7 @@ public class HttpContentCodingWithQualityHeaderValueCollection <: InterfaceWrapp
         HttpContentCodingWithQualityHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpContentCodingWithQualityHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpContentCodingWithQualityHeaderValueCollection {
         HttpContentCodingWithQualityHeaderValueCollection(raw)
     }
 
@@ -1114,7 +1114,7 @@ public class HttpContentDispositionHeaderValue <: InterfaceWrapperBase & ComInte
         HttpContentDispositionHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpContentDispositionHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpContentDispositionHeaderValue {
         HttpContentDispositionHeaderValue(raw)
     }
 
@@ -1244,7 +1244,7 @@ public class HttpContentHeaderCollection <: InterfaceWrapperBase & ComInterface 
         HttpContentHeaderCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpContentHeaderCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpContentHeaderCollection {
         HttpContentHeaderCollection(raw)
     }
 
@@ -1438,7 +1438,7 @@ public class HttpContentRangeHeaderValue <: InterfaceWrapperBase & ComInterface 
         HttpContentRangeHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpContentRangeHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpContentRangeHeaderValue {
         HttpContentRangeHeaderValue(raw)
     }
 
@@ -1556,7 +1556,7 @@ public class HttpCookiePairHeaderValue <: InterfaceWrapperBase & ComInterface & 
         HttpCookiePairHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpCookiePairHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpCookiePairHeaderValue {
         HttpCookiePairHeaderValue(raw)
     }
 
@@ -1660,7 +1660,7 @@ public class HttpCookiePairHeaderValueCollection <: InterfaceWrapperBase & ComIn
         HttpCookiePairHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpCookiePairHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpCookiePairHeaderValueCollection {
         HttpCookiePairHeaderValueCollection(raw)
     }
 
@@ -1796,7 +1796,7 @@ public class HttpCredentialsHeaderValue <: InterfaceWrapperBase & ComInterface &
         HttpCredentialsHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpCredentialsHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpCredentialsHeaderValue {
         HttpCredentialsHeaderValue(raw)
     }
 
@@ -1900,7 +1900,7 @@ public class HttpDateOrDeltaHeaderValue <: InterfaceWrapperBase & ComInterface &
         HttpDateOrDeltaHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpDateOrDeltaHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpDateOrDeltaHeaderValue {
         HttpDateOrDeltaHeaderValue(raw)
     }
 
@@ -1988,7 +1988,7 @@ public class HttpExpectationHeaderValue <: InterfaceWrapperBase & ComInterface &
         HttpExpectationHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpExpectationHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpExpectationHeaderValue {
         HttpExpectationHeaderValue(raw)
     }
 
@@ -2096,7 +2096,7 @@ public class HttpExpectationHeaderValueCollection <: InterfaceWrapperBase & ComI
         HttpExpectationHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpExpectationHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpExpectationHeaderValueCollection {
         HttpExpectationHeaderValueCollection(raw)
     }
 
@@ -2232,7 +2232,7 @@ public class HttpLanguageHeaderValueCollection <: InterfaceWrapperBase & ComInte
         HttpLanguageHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpLanguageHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpLanguageHeaderValueCollection {
         HttpLanguageHeaderValueCollection(raw)
     }
 
@@ -2368,7 +2368,7 @@ public class HttpLanguageRangeWithQualityHeaderValue <: InterfaceWrapperBase & C
         HttpLanguageRangeWithQualityHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpLanguageRangeWithQualityHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpLanguageRangeWithQualityHeaderValue {
         HttpLanguageRangeWithQualityHeaderValue(raw)
     }
 
@@ -2468,7 +2468,7 @@ public class HttpLanguageRangeWithQualityHeaderValueCollection <: InterfaceWrapp
         HttpLanguageRangeWithQualityHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpLanguageRangeWithQualityHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpLanguageRangeWithQualityHeaderValueCollection {
         HttpLanguageRangeWithQualityHeaderValueCollection(raw)
     }
 
@@ -2604,7 +2604,7 @@ public class HttpMediaTypeHeaderValue <: InterfaceWrapperBase & ComInterface & w
         HttpMediaTypeHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpMediaTypeHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpMediaTypeHeaderValue {
         HttpMediaTypeHeaderValue(raw)
     }
 
@@ -2710,7 +2710,7 @@ public class HttpMediaTypeWithQualityHeaderValue <: InterfaceWrapperBase & ComIn
         HttpMediaTypeWithQualityHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpMediaTypeWithQualityHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpMediaTypeWithQualityHeaderValue {
         HttpMediaTypeWithQualityHeaderValue(raw)
     }
 
@@ -2830,7 +2830,7 @@ public class HttpMediaTypeWithQualityHeaderValueCollection <: InterfaceWrapperBa
         HttpMediaTypeWithQualityHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpMediaTypeWithQualityHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpMediaTypeWithQualityHeaderValueCollection {
         HttpMediaTypeWithQualityHeaderValueCollection(raw)
     }
 
@@ -2966,7 +2966,7 @@ public class HttpMethodHeaderValueCollection <: InterfaceWrapperBase & ComInterf
         HttpMethodHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpMethodHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpMethodHeaderValueCollection {
         HttpMethodHeaderValueCollection(raw)
     }
 
@@ -3102,7 +3102,7 @@ public class HttpNameValueHeaderValue <: InterfaceWrapperBase & ComInterface & w
         HttpNameValueHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpNameValueHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpNameValueHeaderValue {
         HttpNameValueHeaderValue(raw)
     }
 
@@ -3206,7 +3206,7 @@ public class HttpProductHeaderValue <: InterfaceWrapperBase & ComInterface & win
         HttpProductHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpProductHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpProductHeaderValue {
         HttpProductHeaderValue(raw)
     }
 
@@ -3306,7 +3306,7 @@ public class HttpProductInfoHeaderValue <: InterfaceWrapperBase & ComInterface &
         HttpProductInfoHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpProductInfoHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpProductInfoHeaderValue {
         HttpProductInfoHeaderValue(raw)
     }
 
@@ -3406,7 +3406,7 @@ public class HttpProductInfoHeaderValueCollection <: InterfaceWrapperBase & ComI
         HttpProductInfoHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpProductInfoHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpProductInfoHeaderValueCollection {
         HttpProductInfoHeaderValueCollection(raw)
     }
 
@@ -3542,7 +3542,7 @@ public class HttpRequestHeaderCollection <: InterfaceWrapperBase & ComInterface 
         HttpRequestHeaderCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpRequestHeaderCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpRequestHeaderCollection {
         HttpRequestHeaderCollection(raw)
     }
 
@@ -3766,7 +3766,7 @@ public class HttpResponseHeaderCollection <: InterfaceWrapperBase & ComInterface
         HttpResponseHeaderCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpResponseHeaderCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpResponseHeaderCollection {
         HttpResponseHeaderCollection(raw)
     }
 
@@ -3938,7 +3938,7 @@ public class HttpTransferCodingHeaderValue <: InterfaceWrapperBase & ComInterfac
         HttpTransferCodingHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpTransferCodingHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): HttpTransferCodingHeaderValue {
         HttpTransferCodingHeaderValue(raw)
     }
 
@@ -4032,7 +4032,7 @@ public class HttpTransferCodingHeaderValueCollection <: InterfaceWrapperBase & C
         HttpTransferCodingHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HttpTransferCodingHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): HttpTransferCodingHeaderValueCollection {
         HttpTransferCodingHeaderValueCollection(raw)
     }
 
@@ -4185,7 +4185,7 @@ public class IHttpCacheDirectiveHeaderValueCollection <: InterfaceWrapperBase & 
         IHttpCacheDirectiveHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpCacheDirectiveHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpCacheDirectiveHeaderValueCollection {
         IHttpCacheDirectiveHeaderValueCollection(raw)
     }
 
@@ -4327,7 +4327,7 @@ public class IHttpChallengeHeaderValue <: InterfaceWrapperBase & ComInterface & 
         IHttpChallengeHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpChallengeHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpChallengeHeaderValue {
         IHttpChallengeHeaderValue(raw)
     }
 
@@ -4422,7 +4422,7 @@ public class IHttpChallengeHeaderValueCollection <: InterfaceWrapperBase & ComIn
         IHttpChallengeHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpChallengeHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpChallengeHeaderValueCollection {
         IHttpChallengeHeaderValueCollection(raw)
     }
 
@@ -4506,7 +4506,7 @@ public class IHttpConnectionOptionHeaderValue <: InterfaceWrapperBase & ComInter
         IHttpConnectionOptionHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpConnectionOptionHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpConnectionOptionHeaderValue {
         IHttpConnectionOptionHeaderValue(raw)
     }
 
@@ -4585,7 +4585,7 @@ public class IHttpConnectionOptionHeaderValueCollection <: InterfaceWrapperBase 
         IHttpConnectionOptionHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpConnectionOptionHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpConnectionOptionHeaderValueCollection {
         IHttpConnectionOptionHeaderValueCollection(raw)
     }
 
@@ -4669,7 +4669,7 @@ public class IHttpContentCodingHeaderValue <: InterfaceWrapperBase & ComInterfac
         IHttpContentCodingHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpContentCodingHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpContentCodingHeaderValue {
         IHttpContentCodingHeaderValue(raw)
     }
 
@@ -4748,7 +4748,7 @@ public class IHttpContentCodingHeaderValueCollection <: InterfaceWrapperBase & C
         IHttpContentCodingHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpContentCodingHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpContentCodingHeaderValueCollection {
         IHttpContentCodingHeaderValueCollection(raw)
     }
 
@@ -4833,7 +4833,7 @@ public class IHttpContentCodingWithQualityHeaderValue <: InterfaceWrapperBase & 
         IHttpContentCodingWithQualityHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpContentCodingWithQualityHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpContentCodingWithQualityHeaderValue {
         IHttpContentCodingWithQualityHeaderValue(raw)
     }
 
@@ -4920,7 +4920,7 @@ public class IHttpContentCodingWithQualityHeaderValueCollection <: InterfaceWrap
         IHttpContentCodingWithQualityHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpContentCodingWithQualityHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpContentCodingWithQualityHeaderValueCollection {
         IHttpContentCodingWithQualityHeaderValueCollection(raw)
     }
 
@@ -5014,7 +5014,7 @@ public class IHttpContentDispositionHeaderValue <: InterfaceWrapperBase & ComInt
         IHttpContentDispositionHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpContentDispositionHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpContentDispositionHeaderValue {
         IHttpContentDispositionHeaderValue(raw)
     }
 
@@ -5181,7 +5181,7 @@ public class IHttpContentHeaderCollection <: InterfaceWrapperBase & ComInterface
         IHttpContentHeaderCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpContentHeaderCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpContentHeaderCollection {
         IHttpContentHeaderCollection(raw)
     }
 
@@ -5397,7 +5397,7 @@ public class IHttpContentRangeHeaderValue <: InterfaceWrapperBase & ComInterface
         IHttpContentRangeHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpContentRangeHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpContentRangeHeaderValue {
         IHttpContentRangeHeaderValue(raw)
     }
 
@@ -5507,7 +5507,7 @@ public class IHttpCookiePairHeaderValue <: InterfaceWrapperBase & ComInterface &
         IHttpCookiePairHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpCookiePairHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpCookiePairHeaderValue {
         IHttpCookiePairHeaderValue(raw)
     }
 
@@ -5600,7 +5600,7 @@ public class IHttpCookiePairHeaderValueCollection <: InterfaceWrapperBase & ComI
         IHttpCookiePairHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpCookiePairHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpCookiePairHeaderValueCollection {
         IHttpCookiePairHeaderValueCollection(raw)
     }
 
@@ -5686,7 +5686,7 @@ public class IHttpCredentialsHeaderValue <: InterfaceWrapperBase & ComInterface 
         IHttpCredentialsHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpCredentialsHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpCredentialsHeaderValue {
         IHttpCredentialsHeaderValue(raw)
     }
 
@@ -5781,7 +5781,7 @@ public class IHttpDateOrDeltaHeaderValue <: InterfaceWrapperBase & ComInterface 
         IHttpDateOrDeltaHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpDateOrDeltaHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpDateOrDeltaHeaderValue {
         IHttpDateOrDeltaHeaderValue(raw)
     }
 
@@ -5870,7 +5870,7 @@ public class IHttpExpectationHeaderValue <: InterfaceWrapperBase & ComInterface 
         IHttpExpectationHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpExpectationHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpExpectationHeaderValue {
         IHttpExpectationHeaderValue(raw)
     }
 
@@ -5971,7 +5971,7 @@ public class IHttpExpectationHeaderValueCollection <: InterfaceWrapperBase & Com
         IHttpExpectationHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpExpectationHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpExpectationHeaderValueCollection {
         IHttpExpectationHeaderValueCollection(raw)
     }
 
@@ -6056,7 +6056,7 @@ public class IHttpLanguageHeaderValueCollection <: InterfaceWrapperBase & ComInt
         IHttpLanguageHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpLanguageHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpLanguageHeaderValueCollection {
         IHttpLanguageHeaderValueCollection(raw)
     }
 
@@ -6141,7 +6141,7 @@ public class IHttpLanguageRangeWithQualityHeaderValue <: InterfaceWrapperBase & 
         IHttpLanguageRangeWithQualityHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpLanguageRangeWithQualityHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpLanguageRangeWithQualityHeaderValue {
         IHttpLanguageRangeWithQualityHeaderValue(raw)
     }
 
@@ -6228,7 +6228,7 @@ public class IHttpLanguageRangeWithQualityHeaderValueCollection <: InterfaceWrap
         IHttpLanguageRangeWithQualityHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpLanguageRangeWithQualityHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpLanguageRangeWithQualityHeaderValueCollection {
         IHttpLanguageRangeWithQualityHeaderValueCollection(raw)
     }
 
@@ -6316,7 +6316,7 @@ public class IHttpMediaTypeHeaderValue <: InterfaceWrapperBase & ComInterface & 
         IHttpMediaTypeHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpMediaTypeHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpMediaTypeHeaderValue {
         IHttpMediaTypeHeaderValue(raw)
     }
 
@@ -6428,7 +6428,7 @@ public class IHttpMediaTypeWithQualityHeaderValue <: InterfaceWrapperBase & ComI
         IHttpMediaTypeWithQualityHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpMediaTypeWithQualityHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpMediaTypeWithQualityHeaderValue {
         IHttpMediaTypeWithQualityHeaderValue(raw)
     }
 
@@ -6549,7 +6549,7 @@ public class IHttpMediaTypeWithQualityHeaderValueCollection <: InterfaceWrapperB
         IHttpMediaTypeWithQualityHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpMediaTypeWithQualityHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpMediaTypeWithQualityHeaderValueCollection {
         IHttpMediaTypeWithQualityHeaderValueCollection(raw)
     }
 
@@ -6634,7 +6634,7 @@ public class IHttpMethodHeaderValueCollection <: InterfaceWrapperBase & ComInter
         IHttpMethodHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpMethodHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpMethodHeaderValueCollection {
         IHttpMethodHeaderValueCollection(raw)
     }
 
@@ -6720,7 +6720,7 @@ public class IHttpNameValueHeaderValue <: InterfaceWrapperBase & ComInterface & 
         IHttpNameValueHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpNameValueHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpNameValueHeaderValue {
         IHttpNameValueHeaderValue(raw)
     }
 
@@ -6813,7 +6813,7 @@ public class IHttpProductHeaderValue <: InterfaceWrapperBase & ComInterface & Ru
         IHttpProductHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpProductHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpProductHeaderValue {
         IHttpProductHeaderValue(raw)
     }
 
@@ -6900,7 +6900,7 @@ public class IHttpProductInfoHeaderValue <: InterfaceWrapperBase & ComInterface 
         IHttpProductInfoHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpProductInfoHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpProductInfoHeaderValue {
         IHttpProductInfoHeaderValue(raw)
     }
 
@@ -6987,7 +6987,7 @@ public class IHttpProductInfoHeaderValueCollection <: InterfaceWrapperBase & Com
         IHttpProductInfoHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpProductInfoHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpProductInfoHeaderValueCollection {
         IHttpProductInfoHeaderValueCollection(raw)
     }
 
@@ -7099,7 +7099,7 @@ public class IHttpRequestHeaderCollection <: InterfaceWrapperBase & ComInterface
         IHttpRequestHeaderCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpRequestHeaderCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpRequestHeaderCollection {
         IHttpRequestHeaderCollection(raw)
     }
 
@@ -7396,7 +7396,7 @@ public class IHttpResponseHeaderCollection <: InterfaceWrapperBase & ComInterfac
         IHttpResponseHeaderCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpResponseHeaderCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpResponseHeaderCollection {
         IHttpResponseHeaderCollection(raw)
     }
 
@@ -7585,7 +7585,7 @@ public class IHttpTransferCodingHeaderValue <: InterfaceWrapperBase & ComInterfa
         IHttpTransferCodingHeaderValue(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpTransferCodingHeaderValue {
+    public static func viewOf(raw: CPointer<Unit>): IHttpTransferCodingHeaderValue {
         IHttpTransferCodingHeaderValue(raw)
     }
 
@@ -7672,7 +7672,7 @@ public class IHttpTransferCodingHeaderValueCollection <: InterfaceWrapperBase & 
         IHttpTransferCodingHeaderValueCollection(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpTransferCodingHeaderValueCollection {
+    public static func viewOf(raw: CPointer<Unit>): IHttpTransferCodingHeaderValueCollection {
         IHttpTransferCodingHeaderValueCollection(raw)
     }
 

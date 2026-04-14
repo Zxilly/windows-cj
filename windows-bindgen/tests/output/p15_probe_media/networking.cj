@@ -18,7 +18,7 @@ public class HostName <: InterfaceWrapperBase & ComInterface & windows_interface
         HostName(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): HostName {
+    public static func viewOf(raw: CPointer<Unit>): HostName {
         HostName(raw)
     }
 
@@ -159,7 +159,7 @@ public class IHostName <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
         IHostName(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHostName {
+    public static func viewOf(raw: CPointer<Unit>): IHostName {
         IHostName(raw)
     }
 

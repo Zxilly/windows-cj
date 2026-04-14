@@ -47,8 +47,8 @@ public struct PSTR <: Equatable<PSTR> {
 
     /// Snapshot the bytes pointed to by this string.
     ///
-    /// Rust exposes a borrowed byte slice here. Cangjie does not provide an
-    /// equivalent lifetime-tracked slice for this FFI pointer, so this returns
+    /// Cangjie does not provide a call-bound byte slice view for this FFI
+    /// pointer, so this returns
     /// the same copied snapshot as `toArray()`.
     public unsafe func asBytes(): Array<UInt8> {
         toArray()
@@ -77,7 +77,7 @@ public struct PSTR <: Equatable<PSTR> {
         StringDisplay(toStringLossy())
     }
 
-    // Equatable<PSTR> — pointer identity equality (matches Rust PartialEq).
+    // Equatable<PSTR> — pointer identity equality.
     public operator func ==(other: PSTR): Bool {
         Value.toUIntNative() == other.Value.toUIntNative()
     }

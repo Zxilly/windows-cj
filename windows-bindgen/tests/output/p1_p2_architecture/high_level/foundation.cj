@@ -1,12 +1,14 @@
-package windows.foundation
+package Windows.Foundation
 
 import std.collection.*
 import windows_core.*
 import windows_interface.*
-import windows.win32.foundation.*
+import Windows.Foundation.Collections as Foundation_Collections
+import Windows.Win32.Foundation as Win32_Foundation
+import Windows.Win32.Foundation.*
 
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct AsyncActionCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -15,17 +17,21 @@ public struct AsyncActionCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): AsyncActionCompletedHandler {
-        AsyncActionCompletedHandler(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncActionCompletedHandler {
+    public static func fromAbiTake(raw: CPointer<Unit>): AsyncActionCompletedHandler {
+        AsyncActionCompletedHandler(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AsyncActionCompletedHandler {
         AsyncActionCompletedHandler(raw)
     }
 
@@ -34,7 +40,7 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncActionCompletedHandler> {
-        return InterfaceDescriptor<AsyncActionCompletedHandler>("AsyncActionCompletedHandler", AsyncActionCompletedHandler.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncActionCompletedHandler(raw, ownsReference: true) }, { raw => AsyncActionCompletedHandler(raw) })
+        return InterfaceDescriptor<AsyncActionCompletedHandler>("AsyncActionCompletedHandler", AsyncActionCompletedHandler.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncActionCompletedHandler.fromAbiTake(raw) }, { raw => AsyncActionCompletedHandler.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -50,7 +56,7 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): AsyncActionCompletedHandlerVtbl {
@@ -69,7 +75,7 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (IAsyncAction, AsyncStatus) -> Unit): AsyncActionCompletedHandler {
+    public static func new(invoke: (InParam<IAsyncAction>, AsyncStatus) -> Unit): AsyncActionCompletedHandler {
         let box = AsyncActionCompletedHandlerBox(invoke)
         let object = ComObject<AsyncActionCompletedHandlerBox>.new(box, [AsyncActionCompletedHandler.descriptorSchema()], [box.vtblPtr()])
         return object.intoInterface(AsyncActionCompletedHandler.descriptor())
@@ -77,16 +83,16 @@ public class AsyncActionCompletedHandler <: InterfaceWrapperBase & ComInterface 
 }
 
 private open class AsyncActionCompletedHandlerInvoker {
-    public open func Invoke(asyncInfo: IAsyncAction, asyncStatus: AsyncStatus): Unit {
+    public open func Invoke(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus): Unit {
         ()
     }
 }
 
 private class AsyncActionCompletedHandlerBox <: AsyncActionCompletedHandlerInvoker {
-    public let invoke_: (IAsyncAction, AsyncStatus) -> Unit
+    public let invoke_: (InParam<IAsyncAction>, AsyncStatus) -> Unit
     private let vtblHandle: CPointerHandle<AsyncActionCompletedHandlerVtbl>
 
-    public init(invoke: (IAsyncAction, AsyncStatus) -> Unit) {
+    public init(invoke: (InParam<IAsyncAction>, AsyncStatus) -> Unit) {
         this.invoke_ = invoke
         this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncActionCompletedHandlerVtbl>(1, { _ => buildAsyncActionCompletedHandlerBoxVtbl() })) }
     }
@@ -95,7 +101,7 @@ private class AsyncActionCompletedHandlerBox <: AsyncActionCompletedHandlerInvok
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: IAsyncAction, asyncStatus: AsyncStatus): Unit {
+    public override func Invoke(asyncInfo: InParam<IAsyncAction>, asyncStatus: AsyncStatus): Unit {
         invoke_(asyncInfo, asyncStatus)
     }
 }
@@ -103,22 +109,19 @@ private class AsyncActionCompletedHandlerBox <: AsyncActionCompletedHandlerInvok
 func buildAsyncActionCompletedHandlerBoxVtbl(): AsyncActionCompletedHandlerVtbl {
     var vtbl = AsyncActionCompletedHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = AsyncActionCompletedHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatus =>
+        match (unsafe { asImplFromRaw<AsyncActionCompletedHandlerInvoker>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke(InParam<IAsyncAction>(IAsyncAction.viewOf(arg0)), arg1)
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
-@C
-func AsyncActionCompletedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatus): Int32 {
-    match (unsafe { asImplFromRaw<AsyncActionCompletedHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke(IAsyncAction.fromRawBorrowed(arg0), arg1)
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct AsyncActionProgressHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -127,17 +130,21 @@ public struct AsyncActionProgressHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType where TProgress <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): AsyncActionProgressHandler<TProgress> {
-        AsyncActionProgressHandler<TProgress>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncActionProgressHandler<TProgress> {
+    public static func fromAbiTake(raw: CPointer<Unit>): AsyncActionProgressHandler<TProgress> {
+        AsyncActionProgressHandler<TProgress>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AsyncActionProgressHandler<TProgress> {
         AsyncActionProgressHandler<TProgress>(raw)
     }
 
@@ -146,7 +153,7 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncActionProgressHandler<TProgress>> {
-        return InterfaceDescriptor<AsyncActionProgressHandler<TProgress>>("AsyncActionProgressHandler", AsyncActionProgressHandler<TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncActionProgressHandler<TProgress>(raw, ownsReference: true) }, { raw => AsyncActionProgressHandler<TProgress>(raw) })
+        return InterfaceDescriptor<AsyncActionProgressHandler<TProgress>>("AsyncActionProgressHandler", AsyncActionProgressHandler<TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncActionProgressHandler<TProgress>.fromAbiTake(raw) }, { raw => AsyncActionProgressHandler<TProgress>.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -167,7 +174,7 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): AsyncActionProgressHandlerVtbl {
@@ -180,62 +187,59 @@ public class AsyncActionProgressHandler<TProgress> <: InterfaceWrapperBase & Com
         HRESULT(hr).ok()
     }
 
-    public unsafe func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
+    public unsafe func Invoke(asyncInfo: IAsyncActionWithProgress<TProgress>, progressInfo: TProgress): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), asyncInfo, progressInfo)
+        let hr = v.Invoke(asRaw(), asyncInfo.asRaw(), progressInfo)
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): AsyncActionProgressHandler<TProgress> {
-        let box = AsyncActionProgressHandlerBox(invoke)
-        let object = ComObject<AsyncActionProgressHandlerBox>.new(box, [AsyncActionProgressHandler<TProgress>.descriptorSchema()], [box.vtblPtr()])
+    public static func new(invoke: (InParam<IAsyncActionWithProgress<TProgress>>, TProgress) -> Unit): AsyncActionProgressHandler<TProgress> {
+        let box = AsyncActionProgressHandlerBox<TProgress>(invoke)
+        let object = ComObject<AsyncActionProgressHandlerBox<TProgress>>.new(box, [AsyncActionProgressHandler<TProgress>.descriptorSchema()], [box.vtblPtr()])
         return object.intoInterface(AsyncActionProgressHandler<TProgress>.descriptor())
     }
 }
 
-private open class AsyncActionProgressHandlerInvoker {
-    public open func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
+private open class AsyncActionProgressHandlerInvoker<TProgress> where TProgress <: windows_core.RuntimeType {
+    public open func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, progressInfo: TProgress): Unit {
         ()
     }
 }
 
-private class AsyncActionProgressHandlerBox <: AsyncActionProgressHandlerInvoker {
-    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+private class AsyncActionProgressHandlerBox<TProgress> <: AsyncActionProgressHandlerInvoker<TProgress> where TProgress <: windows_core.RuntimeType {
+    public let invoke_: (InParam<IAsyncActionWithProgress<TProgress>>, TProgress) -> Unit
     private let vtblHandle: CPointerHandle<AsyncActionProgressHandlerVtbl>
 
-    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+    public init(invoke: (InParam<IAsyncActionWithProgress<TProgress>>, TProgress) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncActionProgressHandlerVtbl>(1, { _ => buildAsyncActionProgressHandlerBoxVtbl() })) }
+        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncActionProgressHandlerVtbl>(1, { _ => buildAsyncActionProgressHandlerBoxVtbl<TProgress>() })) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
+    public override func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, progressInfo: TProgress): Unit {
         invoke_(asyncInfo, progressInfo)
     }
 }
 
-func buildAsyncActionProgressHandlerBoxVtbl(): AsyncActionProgressHandlerVtbl {
+func buildAsyncActionProgressHandlerBoxVtbl<TProgress>(): AsyncActionProgressHandlerVtbl where TProgress <: windows_core.RuntimeType {
     var vtbl = AsyncActionProgressHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = AsyncActionProgressHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
+        match (unsafe { asImplFromRaw<AsyncActionProgressHandlerInvoker<TProgress>>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke(InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0)), arg1)
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
-@C
-func AsyncActionProgressHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-    match (unsafe { asImplFromRaw<AsyncActionProgressHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke(arg0, arg1)
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct AsyncActionWithProgressCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -244,17 +248,21 @@ public struct AsyncActionWithProgressCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType where TProgress <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): AsyncActionWithProgressCompletedHandler<TProgress> {
-        AsyncActionWithProgressCompletedHandler<TProgress>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncActionWithProgressCompletedHandler<TProgress> {
+    public static func fromAbiTake(raw: CPointer<Unit>): AsyncActionWithProgressCompletedHandler<TProgress> {
+        AsyncActionWithProgressCompletedHandler<TProgress>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AsyncActionWithProgressCompletedHandler<TProgress> {
         AsyncActionWithProgressCompletedHandler<TProgress>(raw)
     }
 
@@ -263,7 +271,7 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncActionWithProgressCompletedHandler<TProgress>> {
-        return InterfaceDescriptor<AsyncActionWithProgressCompletedHandler<TProgress>>("AsyncActionWithProgressCompletedHandler", AsyncActionWithProgressCompletedHandler<TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncActionWithProgressCompletedHandler<TProgress>(raw, ownsReference: true) }, { raw => AsyncActionWithProgressCompletedHandler<TProgress>(raw) })
+        return InterfaceDescriptor<AsyncActionWithProgressCompletedHandler<TProgress>>("AsyncActionWithProgressCompletedHandler", AsyncActionWithProgressCompletedHandler<TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncActionWithProgressCompletedHandler<TProgress>.fromAbiTake(raw) }, { raw => AsyncActionWithProgressCompletedHandler<TProgress>.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -284,7 +292,7 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): AsyncActionWithProgressCompletedHandlerVtbl {
@@ -297,62 +305,59 @@ public class AsyncActionWithProgressCompletedHandler<TProgress> <: InterfaceWrap
         HRESULT(hr).ok()
     }
 
-    public unsafe func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: AsyncStatus): Unit {
+    public unsafe func Invoke(asyncInfo: IAsyncActionWithProgress<TProgress>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), asyncInfo, asyncStatus)
+        let hr = v.Invoke(asRaw(), asyncInfo.asRaw(), asyncStatus)
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (CPointer<Unit>, AsyncStatus) -> Unit): AsyncActionWithProgressCompletedHandler<TProgress> {
-        let box = AsyncActionWithProgressCompletedHandlerBox(invoke)
-        let object = ComObject<AsyncActionWithProgressCompletedHandlerBox>.new(box, [AsyncActionWithProgressCompletedHandler<TProgress>.descriptorSchema()], [box.vtblPtr()])
+    public static func new(invoke: (InParam<IAsyncActionWithProgress<TProgress>>, AsyncStatus) -> Unit): AsyncActionWithProgressCompletedHandler<TProgress> {
+        let box = AsyncActionWithProgressCompletedHandlerBox<TProgress>(invoke)
+        let object = ComObject<AsyncActionWithProgressCompletedHandlerBox<TProgress>>.new(box, [AsyncActionWithProgressCompletedHandler<TProgress>.descriptorSchema()], [box.vtblPtr()])
         return object.intoInterface(AsyncActionWithProgressCompletedHandler<TProgress>.descriptor())
     }
 }
 
-private open class AsyncActionWithProgressCompletedHandlerInvoker {
-    public open func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: AsyncStatus): Unit {
+private open class AsyncActionWithProgressCompletedHandlerInvoker<TProgress> where TProgress <: windows_core.RuntimeType {
+    public open func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, asyncStatus: AsyncStatus): Unit {
         ()
     }
 }
 
-private class AsyncActionWithProgressCompletedHandlerBox <: AsyncActionWithProgressCompletedHandlerInvoker {
-    public let invoke_: (CPointer<Unit>, AsyncStatus) -> Unit
+private class AsyncActionWithProgressCompletedHandlerBox<TProgress> <: AsyncActionWithProgressCompletedHandlerInvoker<TProgress> where TProgress <: windows_core.RuntimeType {
+    public let invoke_: (InParam<IAsyncActionWithProgress<TProgress>>, AsyncStatus) -> Unit
     private let vtblHandle: CPointerHandle<AsyncActionWithProgressCompletedHandlerVtbl>
 
-    public init(invoke: (CPointer<Unit>, AsyncStatus) -> Unit) {
+    public init(invoke: (InParam<IAsyncActionWithProgress<TProgress>>, AsyncStatus) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncActionWithProgressCompletedHandlerVtbl>(1, { _ => buildAsyncActionWithProgressCompletedHandlerBoxVtbl() })) }
+        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncActionWithProgressCompletedHandlerVtbl>(1, { _ => buildAsyncActionWithProgressCompletedHandlerBoxVtbl<TProgress>() })) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: AsyncStatus): Unit {
+    public override func Invoke(asyncInfo: InParam<IAsyncActionWithProgress<TProgress>>, asyncStatus: AsyncStatus): Unit {
         invoke_(asyncInfo, asyncStatus)
     }
 }
 
-func buildAsyncActionWithProgressCompletedHandlerBoxVtbl(): AsyncActionWithProgressCompletedHandlerVtbl {
+func buildAsyncActionWithProgressCompletedHandlerBoxVtbl<TProgress>(): AsyncActionWithProgressCompletedHandlerVtbl where TProgress <: windows_core.RuntimeType {
     var vtbl = AsyncActionWithProgressCompletedHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = AsyncActionWithProgressCompletedHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatus =>
+        match (unsafe { asImplFromRaw<AsyncActionWithProgressCompletedHandlerInvoker<TProgress>>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke(InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0)), arg1)
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
-@C
-func AsyncActionWithProgressCompletedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatus): Int32 {
-    match (unsafe { asImplFromRaw<AsyncActionWithProgressCompletedHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke(arg0, arg1)
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct AsyncOperationCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -361,17 +366,21 @@ public struct AsyncOperationCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType where TResult <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): AsyncOperationCompletedHandler<TResult> {
-        AsyncOperationCompletedHandler<TResult>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncOperationCompletedHandler<TResult> {
+    public static func fromAbiTake(raw: CPointer<Unit>): AsyncOperationCompletedHandler<TResult> {
+        AsyncOperationCompletedHandler<TResult>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AsyncOperationCompletedHandler<TResult> {
         AsyncOperationCompletedHandler<TResult>(raw)
     }
 
@@ -380,7 +389,7 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncOperationCompletedHandler<TResult>> {
-        return InterfaceDescriptor<AsyncOperationCompletedHandler<TResult>>("AsyncOperationCompletedHandler", AsyncOperationCompletedHandler<TResult>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncOperationCompletedHandler<TResult>(raw, ownsReference: true) }, { raw => AsyncOperationCompletedHandler<TResult>(raw) })
+        return InterfaceDescriptor<AsyncOperationCompletedHandler<TResult>>("AsyncOperationCompletedHandler", AsyncOperationCompletedHandler<TResult>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncOperationCompletedHandler<TResult>.fromAbiTake(raw) }, { raw => AsyncOperationCompletedHandler<TResult>.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -401,7 +410,7 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): AsyncOperationCompletedHandlerVtbl {
@@ -414,62 +423,59 @@ public class AsyncOperationCompletedHandler<TResult> <: InterfaceWrapperBase & C
         HRESULT(hr).ok()
     }
 
-    public unsafe func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: AsyncStatus): Unit {
+    public unsafe func Invoke(asyncInfo: IAsyncOperation<TResult>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), asyncInfo, asyncStatus)
+        let hr = v.Invoke(asRaw(), asyncInfo.asRaw(), asyncStatus)
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (CPointer<Unit>, AsyncStatus) -> Unit): AsyncOperationCompletedHandler<TResult> {
-        let box = AsyncOperationCompletedHandlerBox(invoke)
-        let object = ComObject<AsyncOperationCompletedHandlerBox>.new(box, [AsyncOperationCompletedHandler<TResult>.descriptorSchema()], [box.vtblPtr()])
+    public static func new(invoke: (InParam<IAsyncOperation<TResult>>, AsyncStatus) -> Unit): AsyncOperationCompletedHandler<TResult> {
+        let box = AsyncOperationCompletedHandlerBox<TResult>(invoke)
+        let object = ComObject<AsyncOperationCompletedHandlerBox<TResult>>.new(box, [AsyncOperationCompletedHandler<TResult>.descriptorSchema()], [box.vtblPtr()])
         return object.intoInterface(AsyncOperationCompletedHandler<TResult>.descriptor())
     }
 }
 
-private open class AsyncOperationCompletedHandlerInvoker {
-    public open func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: AsyncStatus): Unit {
+private open class AsyncOperationCompletedHandlerInvoker<TResult> where TResult <: windows_core.RuntimeType {
+    public open func Invoke(asyncInfo: InParam<IAsyncOperation<TResult>>, asyncStatus: AsyncStatus): Unit {
         ()
     }
 }
 
-private class AsyncOperationCompletedHandlerBox <: AsyncOperationCompletedHandlerInvoker {
-    public let invoke_: (CPointer<Unit>, AsyncStatus) -> Unit
+private class AsyncOperationCompletedHandlerBox<TResult> <: AsyncOperationCompletedHandlerInvoker<TResult> where TResult <: windows_core.RuntimeType {
+    public let invoke_: (InParam<IAsyncOperation<TResult>>, AsyncStatus) -> Unit
     private let vtblHandle: CPointerHandle<AsyncOperationCompletedHandlerVtbl>
 
-    public init(invoke: (CPointer<Unit>, AsyncStatus) -> Unit) {
+    public init(invoke: (InParam<IAsyncOperation<TResult>>, AsyncStatus) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncOperationCompletedHandlerVtbl>(1, { _ => buildAsyncOperationCompletedHandlerBoxVtbl() })) }
+        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncOperationCompletedHandlerVtbl>(1, { _ => buildAsyncOperationCompletedHandlerBoxVtbl<TResult>() })) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: AsyncStatus): Unit {
+    public override func Invoke(asyncInfo: InParam<IAsyncOperation<TResult>>, asyncStatus: AsyncStatus): Unit {
         invoke_(asyncInfo, asyncStatus)
     }
 }
 
-func buildAsyncOperationCompletedHandlerBoxVtbl(): AsyncOperationCompletedHandlerVtbl {
+func buildAsyncOperationCompletedHandlerBoxVtbl<TResult>(): AsyncOperationCompletedHandlerVtbl where TResult <: windows_core.RuntimeType {
     var vtbl = AsyncOperationCompletedHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = AsyncOperationCompletedHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatus =>
+        match (unsafe { asImplFromRaw<AsyncOperationCompletedHandlerInvoker<TResult>>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke(InParam<IAsyncOperation<TResult>>(IAsyncOperation<TResult>.viewOf(arg0)), arg1)
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
-@C
-func AsyncOperationCompletedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatus): Int32 {
-    match (unsafe { asImplFromRaw<AsyncOperationCompletedHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke(arg0, arg1)
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct AsyncOperationProgressHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -478,17 +484,21 @@ public struct AsyncOperationProgressHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): AsyncOperationProgressHandler<TResult, TProgress> {
-        AsyncOperationProgressHandler<TResult, TProgress>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncOperationProgressHandler<TResult, TProgress> {
+    public static func fromAbiTake(raw: CPointer<Unit>): AsyncOperationProgressHandler<TResult, TProgress> {
+        AsyncOperationProgressHandler<TResult, TProgress>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AsyncOperationProgressHandler<TResult, TProgress> {
         AsyncOperationProgressHandler<TResult, TProgress>(raw)
     }
 
@@ -497,7 +507,7 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncOperationProgressHandler<TResult, TProgress>> {
-        return InterfaceDescriptor<AsyncOperationProgressHandler<TResult, TProgress>>("AsyncOperationProgressHandler", AsyncOperationProgressHandler<TResult, TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncOperationProgressHandler<TResult, TProgress>(raw, ownsReference: true) }, { raw => AsyncOperationProgressHandler<TResult, TProgress>(raw) })
+        return InterfaceDescriptor<AsyncOperationProgressHandler<TResult, TProgress>>("AsyncOperationProgressHandler", AsyncOperationProgressHandler<TResult, TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncOperationProgressHandler<TResult, TProgress>.fromAbiTake(raw) }, { raw => AsyncOperationProgressHandler<TResult, TProgress>.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -520,7 +530,7 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): AsyncOperationProgressHandlerVtbl {
@@ -533,62 +543,59 @@ public class AsyncOperationProgressHandler<TResult, TProgress> <: InterfaceWrapp
         HRESULT(hr).ok()
     }
 
-    public unsafe func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
+    public unsafe func Invoke(asyncInfo: IAsyncOperationWithProgress<TResult, TProgress>, progressInfo: TProgress): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), asyncInfo, progressInfo)
+        let hr = v.Invoke(asRaw(), asyncInfo.asRaw(), progressInfo)
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): AsyncOperationProgressHandler<TResult, TProgress> {
-        let box = AsyncOperationProgressHandlerBox(invoke)
-        let object = ComObject<AsyncOperationProgressHandlerBox>.new(box, [AsyncOperationProgressHandler<TResult, TProgress>.descriptorSchema()], [box.vtblPtr()])
+    public static func new(invoke: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, TProgress) -> Unit): AsyncOperationProgressHandler<TResult, TProgress> {
+        let box = AsyncOperationProgressHandlerBox<TResult, TProgress>(invoke)
+        let object = ComObject<AsyncOperationProgressHandlerBox<TResult, TProgress>>.new(box, [AsyncOperationProgressHandler<TResult, TProgress>.descriptorSchema()], [box.vtblPtr()])
         return object.intoInterface(AsyncOperationProgressHandler<TResult, TProgress>.descriptor())
     }
 }
 
-private open class AsyncOperationProgressHandlerInvoker {
-    public open func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
+private open class AsyncOperationProgressHandlerInvoker<TResult, TProgress> where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
+    public open func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, progressInfo: TProgress): Unit {
         ()
     }
 }
 
-private class AsyncOperationProgressHandlerBox <: AsyncOperationProgressHandlerInvoker {
-    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+private class AsyncOperationProgressHandlerBox<TResult, TProgress> <: AsyncOperationProgressHandlerInvoker<TResult, TProgress> where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
+    public let invoke_: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, TProgress) -> Unit
     private let vtblHandle: CPointerHandle<AsyncOperationProgressHandlerVtbl>
 
-    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+    public init(invoke: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, TProgress) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncOperationProgressHandlerVtbl>(1, { _ => buildAsyncOperationProgressHandlerBoxVtbl() })) }
+        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncOperationProgressHandlerVtbl>(1, { _ => buildAsyncOperationProgressHandlerBoxVtbl<TResult, TProgress>() })) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
+    public override func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, progressInfo: TProgress): Unit {
         invoke_(asyncInfo, progressInfo)
     }
 }
 
-func buildAsyncOperationProgressHandlerBoxVtbl(): AsyncOperationProgressHandlerVtbl {
+func buildAsyncOperationProgressHandlerBoxVtbl<TResult, TProgress>(): AsyncOperationProgressHandlerVtbl where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
     var vtbl = AsyncOperationProgressHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = AsyncOperationProgressHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
+        match (unsafe { asImplFromRaw<AsyncOperationProgressHandlerInvoker<TResult, TProgress>>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke(InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0)), arg1)
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
-@C
-func AsyncOperationProgressHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-    match (unsafe { asImplFromRaw<AsyncOperationProgressHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke(arg0, arg1)
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct AsyncOperationWithProgressCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -597,17 +604,21 @@ public struct AsyncOperationWithProgressCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
-        AsyncOperationWithProgressCompletedHandler<TResult, TProgress>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
+    public static func fromAbiTake(raw: CPointer<Unit>): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
+        AsyncOperationWithProgressCompletedHandler<TResult, TProgress>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
         AsyncOperationWithProgressCompletedHandler<TResult, TProgress>(raw)
     }
 
@@ -616,7 +627,7 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>> {
-        return InterfaceDescriptor<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>("AsyncOperationWithProgressCompletedHandler", AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncOperationWithProgressCompletedHandler<TResult, TProgress>(raw, ownsReference: true) }, { raw => AsyncOperationWithProgressCompletedHandler<TResult, TProgress>(raw) })
+        return InterfaceDescriptor<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>("AsyncOperationWithProgressCompletedHandler", AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.fromAbiTake(raw) }, { raw => AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -639,7 +650,7 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): AsyncOperationWithProgressCompletedHandlerVtbl {
@@ -652,76 +663,68 @@ public class AsyncOperationWithProgressCompletedHandler<TResult, TProgress> <: I
         HRESULT(hr).ok()
     }
 
-    public unsafe func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: AsyncStatus): Unit {
+    public unsafe func Invoke(asyncInfo: IAsyncOperationWithProgress<TResult, TProgress>, asyncStatus: AsyncStatus): Unit {
         let v = vtbl()
-        let hr = v.Invoke(asRaw(), asyncInfo, asyncStatus)
+        let hr = v.Invoke(asRaw(), asyncInfo.asRaw(), asyncStatus)
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (CPointer<Unit>, AsyncStatus) -> Unit): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
-        let box = AsyncOperationWithProgressCompletedHandlerBox(invoke)
-        let object = ComObject<AsyncOperationWithProgressCompletedHandlerBox>.new(box, [AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.descriptorSchema()], [box.vtblPtr()])
+    public static func new(invoke: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, AsyncStatus) -> Unit): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
+        let box = AsyncOperationWithProgressCompletedHandlerBox<TResult, TProgress>(invoke)
+        let object = ComObject<AsyncOperationWithProgressCompletedHandlerBox<TResult, TProgress>>.new(box, [AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.descriptorSchema()], [box.vtblPtr()])
         return object.intoInterface(AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.descriptor())
     }
 }
 
-private open class AsyncOperationWithProgressCompletedHandlerInvoker {
-    public open func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: AsyncStatus): Unit {
+private open class AsyncOperationWithProgressCompletedHandlerInvoker<TResult, TProgress> where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
+    public open func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, asyncStatus: AsyncStatus): Unit {
         ()
     }
 }
 
-private class AsyncOperationWithProgressCompletedHandlerBox <: AsyncOperationWithProgressCompletedHandlerInvoker {
-    public let invoke_: (CPointer<Unit>, AsyncStatus) -> Unit
+private class AsyncOperationWithProgressCompletedHandlerBox<TResult, TProgress> <: AsyncOperationWithProgressCompletedHandlerInvoker<TResult, TProgress> where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
+    public let invoke_: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, AsyncStatus) -> Unit
     private let vtblHandle: CPointerHandle<AsyncOperationWithProgressCompletedHandlerVtbl>
 
-    public init(invoke: (CPointer<Unit>, AsyncStatus) -> Unit) {
+    public init(invoke: (InParam<IAsyncOperationWithProgress<TResult, TProgress>>, AsyncStatus) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncOperationWithProgressCompletedHandlerVtbl>(1, { _ => buildAsyncOperationWithProgressCompletedHandlerBoxVtbl() })) }
+        this.vtblHandle = unsafe { acquireArrayRawData(Array<AsyncOperationWithProgressCompletedHandlerVtbl>(1, { _ => buildAsyncOperationWithProgressCompletedHandlerBoxVtbl<TResult, TProgress>() })) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: AsyncStatus): Unit {
+    public override func Invoke(asyncInfo: InParam<IAsyncOperationWithProgress<TResult, TProgress>>, asyncStatus: AsyncStatus): Unit {
         invoke_(asyncInfo, asyncStatus)
     }
 }
 
-func buildAsyncOperationWithProgressCompletedHandlerBoxVtbl(): AsyncOperationWithProgressCompletedHandlerVtbl {
+func buildAsyncOperationWithProgressCompletedHandlerBoxVtbl<TResult, TProgress>(): AsyncOperationWithProgressCompletedHandlerVtbl where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
     var vtbl = AsyncOperationWithProgressCompletedHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = AsyncOperationWithProgressCompletedHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatus =>
+        match (unsafe { asImplFromRaw<AsyncOperationWithProgressCompletedHandlerInvoker<TResult, TProgress>>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke(InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0)), arg1)
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
+@When[Windows_Foundation == "on"]
 @C
-func AsyncOperationWithProgressCompletedHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: AsyncStatus): Int32 {
-    match (unsafe { asImplFromRaw<AsyncOperationWithProgressCompletedHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke(arg0, arg1)
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_foundation"]
 public struct AsyncStatus {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Canceled = AsyncStatus(value: 2)
-    public static let Completed = AsyncStatus(value: 1)
-    public static let Error = AsyncStatus(value: 3)
-    public static let Started = AsyncStatus(value: 0)
 
     public operator func ==(other: AsyncStatus): Bool {
         return this.value == other.value
@@ -731,24 +734,40 @@ public struct AsyncStatus {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
+public let Canceled: AsyncStatus = AsyncStatus(2)
+
+@When[Windows_Foundation == "on"]
+public let Completed: AsyncStatus = AsyncStatus(1)
+
+@When[Windows_Foundation == "on"]
+public let Error: AsyncStatus = AsyncStatus(3)
+
+@When[Windows_Foundation == "on"]
+public let Started: AsyncStatus = AsyncStatus(0)
+
+@When[Windows_Foundation == "on"]
 @C
 public struct DateTime {
     public var UniversalTime: Int64 = 0
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class Deferral <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): Deferral {
-        Deferral(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Deferral {
+    public static func fromAbiTake(raw: CPointer<Unit>): Deferral {
+        Deferral(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Deferral {
         Deferral(raw)
     }
 
@@ -762,11 +781,11 @@ public class Deferral <: InterfaceWrapperBase & ComInterface & windows_interface
 
     public static func descriptor(): InterfaceDescriptor<Deferral> {
         let ancestors = [IDeferral.iid(), IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<Deferral>("Deferral", IDeferral.iid(), ancestors, { raw => Deferral(raw, ownsReference: true) }, { raw => Deferral(raw) })
+        return InterfaceDescriptor<Deferral>("Deferral", IDeferral.iid(), ancestors, { raw => Deferral.fromAbiTake(raw) }, { raw => Deferral.viewOf(raw) })
     }
 
     public func defaultInterface(): IDeferral {
-        IDeferral(asRaw())
+        IDeferral.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -790,7 +809,7 @@ public class Deferral <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIDeferral(): IDeferral {
@@ -816,7 +835,7 @@ public class Deferral <: InterfaceWrapperBase & ComInterface & windows_interface
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct DeferralCompletedHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -825,17 +844,21 @@ public struct DeferralCompletedHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): DeferralCompletedHandler {
-        DeferralCompletedHandler(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DeferralCompletedHandler {
+    public static func fromAbiTake(raw: CPointer<Unit>): DeferralCompletedHandler {
+        DeferralCompletedHandler(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DeferralCompletedHandler {
         DeferralCompletedHandler(raw)
     }
 
@@ -844,7 +867,7 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
     }
 
     public static func descriptor(): InterfaceDescriptor<DeferralCompletedHandler> {
-        return InterfaceDescriptor<DeferralCompletedHandler>("DeferralCompletedHandler", DeferralCompletedHandler.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => DeferralCompletedHandler(raw, ownsReference: true) }, { raw => DeferralCompletedHandler(raw) })
+        return InterfaceDescriptor<DeferralCompletedHandler>("DeferralCompletedHandler", DeferralCompletedHandler.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => DeferralCompletedHandler.fromAbiTake(raw) }, { raw => DeferralCompletedHandler.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -860,7 +883,7 @@ public class DeferralCompletedHandler <: InterfaceWrapperBase & ComInterface & w
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): DeferralCompletedHandlerVtbl {
@@ -913,22 +936,19 @@ private class DeferralCompletedHandlerBox <: DeferralCompletedHandlerInvoker {
 func buildDeferralCompletedHandlerBoxVtbl(): DeferralCompletedHandlerVtbl {
     var vtbl = DeferralCompletedHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = DeferralCompletedHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit> =>
+        match (unsafe { asImplFromRaw<DeferralCompletedHandlerInvoker>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke()
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
-@C
-func DeferralCompletedHandlerInvokeThunk(this_: CPointer<Unit>): Int32 {
-    match (unsafe { asImplFromRaw<DeferralCompletedHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke()
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct EventHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -937,17 +957,21 @@ public struct EventHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType where T <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): EventHandler<T> {
-        EventHandler<T>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): EventHandler<T> {
+    public static func fromAbiTake(raw: CPointer<Unit>): EventHandler<T> {
+        EventHandler<T>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): EventHandler<T> {
         EventHandler<T>(raw)
     }
 
@@ -956,7 +980,7 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public static func descriptor(): InterfaceDescriptor<EventHandler<T>> {
-        return InterfaceDescriptor<EventHandler<T>>("EventHandler", EventHandler<T>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => EventHandler<T>(raw, ownsReference: true) }, { raw => EventHandler<T>(raw) })
+        return InterfaceDescriptor<EventHandler<T>>("EventHandler", EventHandler<T>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => EventHandler<T>.fromAbiTake(raw) }, { raw => EventHandler<T>.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -977,7 +1001,7 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): EventHandlerVtbl {
@@ -990,81 +1014,82 @@ public class EventHandler<T> <: InterfaceWrapperBase & ComInterface & windows_in
         HRESULT(hr).ok()
     }
 
-    public unsafe func Invoke(sender: IInspectable, args: CPointer<Unit>): Unit {
+    public unsafe func Invoke(sender: IInspectable, args: T): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), sender.asRaw(), args)
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (IInspectable, CPointer<Unit>) -> Unit): EventHandler<T> {
-        let box = EventHandlerBox(invoke)
-        let object = ComObject<EventHandlerBox>.new(box, [EventHandler<T>.descriptorSchema()], [box.vtblPtr()])
+    public static func new(invoke: (InParam<IInspectable>, T) -> Unit): EventHandler<T> {
+        let box = EventHandlerBox<T>(invoke)
+        let object = ComObject<EventHandlerBox<T>>.new(box, [EventHandler<T>.descriptorSchema()], [box.vtblPtr()])
         return object.intoInterface(EventHandler<T>.descriptor())
     }
 }
 
-private open class EventHandlerInvoker {
-    public open func Invoke(sender: IInspectable, args: CPointer<Unit>): Unit {
+private open class EventHandlerInvoker<T> where T <: windows_core.RuntimeType {
+    public open func Invoke(sender: InParam<IInspectable>, args: T): Unit {
         ()
     }
 }
 
-private class EventHandlerBox <: EventHandlerInvoker {
-    public let invoke_: (IInspectable, CPointer<Unit>) -> Unit
+private class EventHandlerBox<T> <: EventHandlerInvoker<T> where T <: windows_core.RuntimeType {
+    public let invoke_: (InParam<IInspectable>, T) -> Unit
     private let vtblHandle: CPointerHandle<EventHandlerVtbl>
 
-    public init(invoke: (IInspectable, CPointer<Unit>) -> Unit) {
+    public init(invoke: (InParam<IInspectable>, T) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<EventHandlerVtbl>(1, { _ => buildEventHandlerBoxVtbl() })) }
+        this.vtblHandle = unsafe { acquireArrayRawData(Array<EventHandlerVtbl>(1, { _ => buildEventHandlerBoxVtbl<T>() })) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: IInspectable, args: CPointer<Unit>): Unit {
+    public override func Invoke(sender: InParam<IInspectable>, args: T): Unit {
         invoke_(sender, args)
     }
 }
 
-func buildEventHandlerBoxVtbl(): EventHandlerVtbl {
+func buildEventHandlerBoxVtbl<T>(): EventHandlerVtbl where T <: windows_core.RuntimeType {
     var vtbl = EventHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = EventHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
+        match (unsafe { asImplFromRaw<EventHandlerInvoker<T>>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke(InParam<IInspectable>(IInspectable.viewOf(arg0)), arg1)
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
-@C
-func EventHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-    match (unsafe { asImplFromRaw<EventHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke(IInspectable.fromRawBorrowed(arg0), arg1)
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public type EventRegistrationToken = CPointer<Unit>
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct FoundationContract {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class GuidHelper <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): GuidHelper {
-        GuidHelper(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): GuidHelper {
+    public static func fromAbiTake(raw: CPointer<Unit>): GuidHelper {
+        GuidHelper(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GuidHelper {
         GuidHelper(raw)
     }
 
@@ -1077,7 +1102,7 @@ public class GuidHelper <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     public static func descriptor(): InterfaceDescriptor<GuidHelper> {
-        return InterfaceDescriptor<GuidHelper>("GuidHelper", GUID(), [IInspectable.iid(), IUnknown.iid()], { raw => GuidHelper(raw, ownsReference: true) }, { raw => GuidHelper(raw) })
+        return InterfaceDescriptor<GuidHelper>("GuidHelper", GUID(), [IInspectable.iid(), IUnknown.iid()], { raw => GuidHelper.fromAbiTake(raw) }, { raw => GuidHelper.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -1101,7 +1126,7 @@ public class GuidHelper <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public static unsafe func CreateNewGuid(): GUID {
@@ -1123,10 +1148,10 @@ public class GuidHelper <: InterfaceWrapperBase & ComInterface & windows_interfa
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public type HResult = Int32
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncActionVtbl {
     public var base_: IAsyncInfoVtbl = IAsyncInfoVtbl()
@@ -1139,10 +1164,10 @@ public struct IAsyncActionVtbl {
         let _ = offset
         var vtbl = IAsyncActionVtbl()
         vtbl.base_ = IAsyncInfoVtbl.new<Identity>(offset: offset)
-        vtbl.SetCompleted = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.SetCompleted = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.SetCompleted(AsyncActionCompletedHandler.fromRawBorrowed(arg0))) {
+                    match (impl.SetCompleted(InParam<AsyncActionCompletedHandler>(AsyncActionCompletedHandler.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -1152,19 +1177,18 @@ public struct IAsyncActionVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Completed = { this_, result__ =>
+        vtbl.Completed = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Completed()) {
                         case Result<AsyncActionCompletedHandler>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -1175,8 +1199,8 @@ public struct IAsyncActionVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetResults = { this_ =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetResults = { instanceRaw =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetResults()) {
                         case Result<Unit>.Ok(_) =>
@@ -1204,24 +1228,28 @@ public struct IAsyncActionVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IAsyncAction_Impl <: IAsyncInfo_Impl {
-    public func SetCompleted(handler: AsyncActionCompletedHandler): windows_core.Result<Unit>
+    public func SetCompleted(handler: InParam<AsyncActionCompletedHandler>): windows_core.Result<Unit>
     public func Completed(): windows_core.Result<AsyncActionCompletedHandler>
     public func GetResults(): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IAsyncAction {
-        IAsyncAction(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncAction {
+    public static func fromAbiTake(raw: CPointer<Unit>): IAsyncAction {
+        IAsyncAction(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAsyncAction {
         IAsyncAction(raw)
     }
 
@@ -1242,13 +1270,13 @@ public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncAction> {
-        var descriptor = InterfaceDescriptor<IAsyncAction>("IAsyncAction", IAsyncAction.iid(), IAsyncInfo.descriptor(), { raw => IAsyncAction(raw, ownsReference: true) }, { raw => IAsyncAction(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncAction>("IAsyncAction", IAsyncAction.iid(), IAsyncInfo.descriptor(), { raw => IAsyncAction.fromAbiTake(raw) }, { raw => IAsyncAction.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncAction.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAsyncAction", IAsyncAction.iid(), IAsyncInfo.descriptorSchema(), "IAsyncActionVtbl", "IAsyncAction", "IAsyncAction_Impl", [InterfaceMethodSchema("SetCompleted", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "Ref<AsyncActionCompletedHandler>", InterfaceParameterBridgeKind.Ref)], "Int32"), InterfaceMethodSchema("Completed", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<AsyncActionCompletedHandler>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetResults", 13, [], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAsyncAction", IAsyncAction.iid(), IAsyncInfo.descriptorSchema(), "IAsyncActionVtbl", "IAsyncAction", "IAsyncAction_Impl", [InterfaceMethodSchema("SetCompleted", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<AsyncActionCompletedHandler>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Completed", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AsyncActionCompletedHandler>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetResults", 13, [], "Int32")])
         schema.runtimeTypeContract = Some(IAsyncAction.runtimeType())
         return schema
     }
@@ -1270,11 +1298,11 @@ public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIAsyncInfo(): IAsyncInfo {
-        IAsyncInfo(asRaw())
+        IAsyncInfo.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IAsyncActionVtbl {
@@ -1292,7 +1320,7 @@ public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName &
         var result = CPointer<Unit>()
         let hr = v.Completed(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return AsyncActionCompletedHandler.fromRaw(result)
+        return AsyncActionCompletedHandler.fromAbiTake(result)
     }
 
     public unsafe func GetResults(): Unit {
@@ -1302,7 +1330,7 @@ public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncActionWithProgressVtbl {
     public var base_: IAsyncInfoVtbl = IAsyncInfoVtbl()
@@ -1317,10 +1345,10 @@ public struct IAsyncActionWithProgressVtbl {
         let _ = offset
         var vtbl = IAsyncActionWithProgressVtbl()
         vtbl.base_ = IAsyncInfoVtbl.new<Identity>(offset: offset)
-        vtbl.SetProgress = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.SetProgress = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.SetProgress(arg0)) {
+                    match (impl.SetProgress(InParam<AsyncActionProgressHandler<TProgress>>(AsyncActionProgressHandler<TProgress>.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -1330,33 +1358,32 @@ public struct IAsyncActionWithProgressVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Progress = { this_, result__ =>
+        vtbl.Progress = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Progress()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<AsyncActionProgressHandler<TProgress>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<AsyncActionProgressHandler<TProgress>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SetCompleted = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.SetCompleted = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.SetCompleted(arg0)) {
+                    match (impl.SetCompleted(InParam<AsyncActionWithProgressCompletedHandler<TProgress>>(AsyncActionWithProgressCompletedHandler<TProgress>.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -1366,31 +1393,30 @@ public struct IAsyncActionWithProgressVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Completed = { this_, result__ =>
+        vtbl.Completed = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Completed()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<AsyncActionWithProgressCompletedHandler<TProgress>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<AsyncActionWithProgressCompletedHandler<TProgress>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetResults = { this_ =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetResults = { instanceRaw =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetResults()) {
                         case Result<Unit>.Ok(_) =>
@@ -1418,26 +1444,30 @@ public struct IAsyncActionWithProgressVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IAsyncActionWithProgress_Impl<TProgress> <: IAsyncInfo_Impl where TProgress <: windows_core.RuntimeType {
-    public func SetProgress(handler: CPointer<Unit>): windows_core.Result<Unit>
-    public func Progress(): windows_core.Result<CPointer<Unit>>
-    public func SetCompleted(handler: CPointer<Unit>): windows_core.Result<Unit>
-    public func Completed(): windows_core.Result<CPointer<Unit>>
+    public func SetProgress(handler: InParam<AsyncActionProgressHandler<TProgress>>): windows_core.Result<Unit>
+    public func Progress(): windows_core.Result<AsyncActionProgressHandler<TProgress>>
+    public func SetCompleted(handler: InParam<AsyncActionWithProgressCompletedHandler<TProgress>>): windows_core.Result<Unit>
+    public func Completed(): windows_core.Result<AsyncActionWithProgressCompletedHandler<TProgress>>
     public func GetResults(): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IAsyncActionWithProgress<TProgress> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TProgress <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IAsyncActionWithProgress<TProgress> {
-        IAsyncActionWithProgress<TProgress>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncActionWithProgress<TProgress> {
+    public static func fromAbiTake(raw: CPointer<Unit>): IAsyncActionWithProgress<TProgress> {
+        IAsyncActionWithProgress<TProgress>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAsyncActionWithProgress<TProgress> {
         IAsyncActionWithProgress<TProgress>(raw)
     }
 
@@ -1458,13 +1488,13 @@ public class IAsyncActionWithProgress<TProgress> <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncActionWithProgress<TProgress>> {
-        var descriptor = InterfaceDescriptor<IAsyncActionWithProgress<TProgress>>("IAsyncActionWithProgress", IAsyncActionWithProgress<TProgress>.iid(), IAsyncInfo.descriptor(), { raw => IAsyncActionWithProgress<TProgress>(raw, ownsReference: true) }, { raw => IAsyncActionWithProgress<TProgress>(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncActionWithProgress<TProgress>>("IAsyncActionWithProgress", IAsyncActionWithProgress<TProgress>.iid(), IAsyncInfo.descriptor(), { raw => IAsyncActionWithProgress<TProgress>.fromAbiTake(raw) }, { raw => IAsyncActionWithProgress<TProgress>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncActionWithProgress<TProgress>.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAsyncActionWithProgress", IAsyncActionWithProgress<TProgress>.iid(), IAsyncInfo.descriptorSchema(), "IAsyncActionWithProgressVtbl", "IAsyncActionWithProgress", "IAsyncActionWithProgress_Impl", [InterfaceMethodSchema("SetProgress", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Progress", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetCompleted", 13, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Completed", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetResults", 15, [], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAsyncActionWithProgress", IAsyncActionWithProgress<TProgress>.iid(), IAsyncInfo.descriptorSchema(), "IAsyncActionWithProgressVtbl", "IAsyncActionWithProgress", "IAsyncActionWithProgress_Impl", [InterfaceMethodSchema("SetProgress", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<AsyncActionProgressHandler<TProgress>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Progress", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AsyncActionProgressHandler<TProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCompleted", 13, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<AsyncActionWithProgressCompletedHandler<TProgress>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Completed", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AsyncActionWithProgressCompletedHandler<TProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetResults", 15, [], "Int32")])
         schema.runtimeTypeContract = Some(IAsyncActionWithProgress<TProgress>.runtimeType())
         return schema
     }
@@ -1491,43 +1521,43 @@ public class IAsyncActionWithProgress<TProgress> <: InterfaceWrapperBase & ComIn
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIAsyncInfo(): IAsyncInfo {
-        IAsyncInfo(asRaw())
+        IAsyncInfo.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IAsyncActionWithProgressVtbl {
         readVtbl<IAsyncActionWithProgressVtbl>(IAsyncActionWithProgressVtbl())
     }
 
-    public unsafe func SetProgress(handler: CPointer<Unit>): Unit {
+    public unsafe func SetProgress(handler: AsyncActionProgressHandler<TProgress>): Unit {
         let v = vtbl()
-        let hr = v.SetProgress(asRaw(), handler)
+        let hr = v.SetProgress(asRaw(), handler.asRaw())
         HRESULT(hr).ok()
     }
 
-    public unsafe func Progress(): CPointer<Unit> {
+    public unsafe func Progress(): AsyncActionProgressHandler<TProgress> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Progress(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return AsyncActionProgressHandler<TProgress>.fromAbiTake(result)
     }
 
-    public unsafe func SetCompleted(handler: CPointer<Unit>): Unit {
+    public unsafe func SetCompleted(handler: AsyncActionWithProgressCompletedHandler<TProgress>): Unit {
         let v = vtbl()
-        let hr = v.SetCompleted(asRaw(), handler)
+        let hr = v.SetCompleted(asRaw(), handler.asRaw())
         HRESULT(hr).ok()
     }
 
-    public unsafe func Completed(): CPointer<Unit> {
+    public unsafe func Completed(): AsyncActionWithProgressCompletedHandler<TProgress> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Completed(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return AsyncActionWithProgressCompletedHandler<TProgress>.fromAbiTake(result)
     }
 
     public unsafe func GetResults(): Unit {
@@ -1537,7 +1567,7 @@ public class IAsyncActionWithProgress<TProgress> <: InterfaceWrapperBase & ComIn
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1552,11 +1582,11 @@ public struct IAsyncInfoVtbl {
         let _ = offset
         var vtbl = IAsyncInfoVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.Id = { this_, result__ =>
+        vtbl.Id = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Id()) {
                         case Result<UInt32>.Ok(value) =>
@@ -1569,11 +1599,11 @@ public struct IAsyncInfoVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Status = { this_, result__ =>
+        vtbl.Status = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Status()) {
                         case Result<AsyncStatus>.Ok(value) =>
@@ -1586,11 +1616,11 @@ public struct IAsyncInfoVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.ErrorCode = { this_, result__ =>
+        vtbl.ErrorCode = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.ErrorCode()) {
                         case Result<HResult>.Ok(value) =>
@@ -1603,8 +1633,8 @@ public struct IAsyncInfoVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Cancel = { this_ =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.Cancel = { instanceRaw =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Cancel()) {
                         case Result<Unit>.Ok(_) =>
@@ -1616,8 +1646,8 @@ public struct IAsyncInfoVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Close = { this_ =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.Close = { instanceRaw =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Close()) {
                         case Result<Unit>.Ok(_) =>
@@ -1640,7 +1670,7 @@ public struct IAsyncInfoVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IAsyncInfo_Impl {
     public func Id(): windows_core.Result<UInt32>
     public func Status(): windows_core.Result<AsyncStatus>
@@ -1649,17 +1679,21 @@ public interface IAsyncInfo_Impl {
     public func Close(): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IAsyncInfo {
-        IAsyncInfo(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncInfo {
+    public static func fromAbiTake(raw: CPointer<Unit>): IAsyncInfo {
+        IAsyncInfo(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAsyncInfo {
         IAsyncInfo(raw)
     }
 
@@ -1675,13 +1709,13 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncInfo> {
-        var descriptor = InterfaceDescriptor<IAsyncInfo>("IAsyncInfo", IAsyncInfo.iid(), IInspectable.descriptor(), { raw => IAsyncInfo(raw, ownsReference: true) }, { raw => IAsyncInfo(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncInfo>("IAsyncInfo", IAsyncInfo.iid(), IInspectable.descriptor(), { raw => IAsyncInfo.fromAbiTake(raw) }, { raw => IAsyncInfo.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncInfo.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAsyncInfo", IAsyncInfo.iid(), IInspectable.descriptorSchema(), "IAsyncInfoVtbl", "IAsyncInfo", "IAsyncInfo_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Status", 7, [InterfaceParameterSchema("result", "CPointer<AsyncStatus>", "OutRef<AsyncStatus>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("ErrorCode", 8, [InterfaceParameterSchema("result", "CPointer<HResult>", "OutRef<HResult>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Cancel", 9, [], "Int32"), InterfaceMethodSchema("Close", 10, [], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAsyncInfo", IAsyncInfo.iid(), IInspectable.descriptorSchema(), "IAsyncInfoVtbl", "IAsyncInfo", "IAsyncInfo_Impl", [InterfaceMethodSchema("Id", 6, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Status", 7, [InterfaceParameterSchema("result", "CPointer<AsyncStatus>", "OutSlot<AsyncStatus>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("ErrorCode", 8, [InterfaceParameterSchema("result", "CPointer<HResult>", "OutSlot<HResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Cancel", 9, [], "Int32"), InterfaceMethodSchema("Close", 10, [], "Int32")])
         schema.runtimeTypeContract = Some(IAsyncInfo.runtimeType())
         return schema
     }
@@ -1703,7 +1737,7 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IAsyncInfoVtbl {
@@ -1747,7 +1781,7 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncOperationVtbl {
     public var base_: IAsyncInfoVtbl = IAsyncInfoVtbl()
@@ -1760,10 +1794,10 @@ public struct IAsyncOperationVtbl {
         let _ = offset
         var vtbl = IAsyncOperationVtbl()
         vtbl.base_ = IAsyncInfoVtbl.new<Identity>(offset: offset)
-        vtbl.SetCompleted = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.SetCompleted = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.SetCompleted(arg0)) {
+                    match (impl.SetCompleted(InParam<AsyncOperationCompletedHandler<TResult>>(AsyncOperationCompletedHandler<TResult>.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -1773,40 +1807,39 @@ public struct IAsyncOperationVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Completed = { this_, result__ =>
+        vtbl.Completed = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Completed()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<AsyncOperationCompletedHandler<TResult>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<AsyncOperationCompletedHandler<TResult>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetResults = { this_, result__ =>
+        vtbl.GetResults = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetResults()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
+                        case Result<TResult>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<TResult>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -1829,24 +1862,28 @@ public struct IAsyncOperationVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IAsyncOperation_Impl<TResult> <: IAsyncInfo_Impl where TResult <: windows_core.RuntimeType {
-    public func SetCompleted(handler: CPointer<Unit>): windows_core.Result<Unit>
-    public func Completed(): windows_core.Result<CPointer<Unit>>
-    public func GetResults(): windows_core.Result<CPointer<Unit>>
+    public func SetCompleted(handler: InParam<AsyncOperationCompletedHandler<TResult>>): windows_core.Result<Unit>
+    public func Completed(): windows_core.Result<AsyncOperationCompletedHandler<TResult>>
+    public func GetResults(): windows_core.Result<TResult>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TResult <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IAsyncOperation<TResult> {
-        IAsyncOperation<TResult>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncOperation<TResult> {
+    public static func fromAbiTake(raw: CPointer<Unit>): IAsyncOperation<TResult> {
+        IAsyncOperation<TResult>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAsyncOperation<TResult> {
         IAsyncOperation<TResult>(raw)
     }
 
@@ -1867,13 +1904,13 @@ public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncOperation<TResult>> {
-        var descriptor = InterfaceDescriptor<IAsyncOperation<TResult>>("IAsyncOperation", IAsyncOperation<TResult>.iid(), IAsyncInfo.descriptor(), { raw => IAsyncOperation<TResult>(raw, ownsReference: true) }, { raw => IAsyncOperation<TResult>(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncOperation<TResult>>("IAsyncOperation", IAsyncOperation<TResult>.iid(), IAsyncInfo.descriptor(), { raw => IAsyncOperation<TResult>.fromAbiTake(raw) }, { raw => IAsyncOperation<TResult>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncOperation<TResult>.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAsyncOperation", IAsyncOperation<TResult>.iid(), IAsyncInfo.descriptorSchema(), "IAsyncOperationVtbl", "IAsyncOperation", "IAsyncOperation_Impl", [InterfaceMethodSchema("SetCompleted", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Completed", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetResults", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAsyncOperation", IAsyncOperation<TResult>.iid(), IAsyncInfo.descriptorSchema(), "IAsyncOperationVtbl", "IAsyncOperation", "IAsyncOperation_Impl", [InterfaceMethodSchema("SetCompleted", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<AsyncOperationCompletedHandler<TResult>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Completed", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AsyncOperationCompletedHandler<TResult>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetResults", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAsyncOperation<TResult>.runtimeType())
         return schema
     }
@@ -1900,32 +1937,32 @@ public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & R
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIAsyncInfo(): IAsyncInfo {
-        IAsyncInfo(asRaw())
+        IAsyncInfo.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IAsyncOperationVtbl {
         readVtbl<IAsyncOperationVtbl>(IAsyncOperationVtbl())
     }
 
-    public unsafe func SetCompleted(handler: CPointer<Unit>): Unit {
+    public unsafe func SetCompleted(handler: AsyncOperationCompletedHandler<TResult>): Unit {
         let v = vtbl()
-        let hr = v.SetCompleted(asRaw(), handler)
+        let hr = v.SetCompleted(asRaw(), handler.asRaw())
         HRESULT(hr).ok()
     }
 
-    public unsafe func Completed(): CPointer<Unit> {
+    public unsafe func Completed(): AsyncOperationCompletedHandler<TResult> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Completed(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return AsyncOperationCompletedHandler<TResult>.fromAbiTake(result)
     }
 
-    public unsafe func GetResults(): CPointer<Unit> {
+    public unsafe func GetResults(): TResult {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetResults(asRaw(), CPointer<CPointer<Unit>>(inout result))
@@ -1934,7 +1971,7 @@ public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & R
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IAsyncOperationWithProgressVtbl {
     public var base_: IAsyncInfoVtbl = IAsyncInfoVtbl()
@@ -1949,10 +1986,10 @@ public struct IAsyncOperationWithProgressVtbl {
         let _ = offset
         var vtbl = IAsyncOperationWithProgressVtbl()
         vtbl.base_ = IAsyncInfoVtbl.new<Identity>(offset: offset)
-        vtbl.SetProgress = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.SetProgress = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.SetProgress(arg0)) {
+                    match (impl.SetProgress(InParam<AsyncOperationProgressHandler<TResult, TProgress>>(AsyncOperationProgressHandler<TResult, TProgress>.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -1962,33 +1999,32 @@ public struct IAsyncOperationWithProgressVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Progress = { this_, result__ =>
+        vtbl.Progress = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Progress()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<AsyncOperationProgressHandler<TResult, TProgress>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<AsyncOperationProgressHandler<TResult, TProgress>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SetCompleted = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.SetCompleted = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.SetCompleted(arg0)) {
+                    match (impl.SetCompleted(InParam<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>(AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -1998,40 +2034,39 @@ public struct IAsyncOperationWithProgressVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Completed = { this_, result__ =>
+        vtbl.Completed = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Completed()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetResults = { this_, result__ =>
+        vtbl.GetResults = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetResults()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
+                        case Result<TResult>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<TResult>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -2054,26 +2089,30 @@ public struct IAsyncOperationWithProgressVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IAsyncOperationWithProgress_Impl<TResult, TProgress> <: IAsyncInfo_Impl where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
-    public func SetProgress(handler: CPointer<Unit>): windows_core.Result<Unit>
-    public func Progress(): windows_core.Result<CPointer<Unit>>
-    public func SetCompleted(handler: CPointer<Unit>): windows_core.Result<Unit>
-    public func Completed(): windows_core.Result<CPointer<Unit>>
-    public func GetResults(): windows_core.Result<CPointer<Unit>>
+    public func SetProgress(handler: InParam<AsyncOperationProgressHandler<TResult, TProgress>>): windows_core.Result<Unit>
+    public func Progress(): windows_core.Result<AsyncOperationProgressHandler<TResult, TProgress>>
+    public func SetCompleted(handler: InParam<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>): windows_core.Result<Unit>
+    public func Completed(): windows_core.Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>
+    public func GetResults(): windows_core.Result<TResult>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where TResult <: windows_core.RuntimeType, TProgress <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IAsyncOperationWithProgress<TResult, TProgress> {
-        IAsyncOperationWithProgress<TResult, TProgress>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncOperationWithProgress<TResult, TProgress> {
+    public static func fromAbiTake(raw: CPointer<Unit>): IAsyncOperationWithProgress<TResult, TProgress> {
+        IAsyncOperationWithProgress<TResult, TProgress>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAsyncOperationWithProgress<TResult, TProgress> {
         IAsyncOperationWithProgress<TResult, TProgress>(raw)
     }
 
@@ -2094,13 +2133,13 @@ public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapper
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncOperationWithProgress<TResult, TProgress>> {
-        var descriptor = InterfaceDescriptor<IAsyncOperationWithProgress<TResult, TProgress>>("IAsyncOperationWithProgress", IAsyncOperationWithProgress<TResult, TProgress>.iid(), IAsyncInfo.descriptor(), { raw => IAsyncOperationWithProgress<TResult, TProgress>(raw, ownsReference: true) }, { raw => IAsyncOperationWithProgress<TResult, TProgress>(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncOperationWithProgress<TResult, TProgress>>("IAsyncOperationWithProgress", IAsyncOperationWithProgress<TResult, TProgress>.iid(), IAsyncInfo.descriptor(), { raw => IAsyncOperationWithProgress<TResult, TProgress>.fromAbiTake(raw) }, { raw => IAsyncOperationWithProgress<TResult, TProgress>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncOperationWithProgress<TResult, TProgress>.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAsyncOperationWithProgress", IAsyncOperationWithProgress<TResult, TProgress>.iid(), IAsyncInfo.descriptorSchema(), "IAsyncOperationWithProgressVtbl", "IAsyncOperationWithProgress", "IAsyncOperationWithProgress_Impl", [InterfaceMethodSchema("SetProgress", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Progress", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetCompleted", 13, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Completed", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetResults", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAsyncOperationWithProgress", IAsyncOperationWithProgress<TResult, TProgress>.iid(), IAsyncInfo.descriptorSchema(), "IAsyncOperationWithProgressVtbl", "IAsyncOperationWithProgress", "IAsyncOperationWithProgress_Impl", [InterfaceMethodSchema("SetProgress", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<AsyncOperationProgressHandler<TResult, TProgress>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Progress", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AsyncOperationProgressHandler<TResult, TProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetCompleted", 13, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("Completed", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetResults", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TResult>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IAsyncOperationWithProgress<TResult, TProgress>.runtimeType())
         return schema
     }
@@ -2129,46 +2168,46 @@ public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapper
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIAsyncInfo(): IAsyncInfo {
-        IAsyncInfo(asRaw())
+        IAsyncInfo.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IAsyncOperationWithProgressVtbl {
         readVtbl<IAsyncOperationWithProgressVtbl>(IAsyncOperationWithProgressVtbl())
     }
 
-    public unsafe func SetProgress(handler: CPointer<Unit>): Unit {
+    public unsafe func SetProgress(handler: AsyncOperationProgressHandler<TResult, TProgress>): Unit {
         let v = vtbl()
-        let hr = v.SetProgress(asRaw(), handler)
+        let hr = v.SetProgress(asRaw(), handler.asRaw())
         HRESULT(hr).ok()
     }
 
-    public unsafe func Progress(): CPointer<Unit> {
+    public unsafe func Progress(): AsyncOperationProgressHandler<TResult, TProgress> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Progress(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return AsyncOperationProgressHandler<TResult, TProgress>.fromAbiTake(result)
     }
 
-    public unsafe func SetCompleted(handler: CPointer<Unit>): Unit {
+    public unsafe func SetCompleted(handler: AsyncOperationWithProgressCompletedHandler<TResult, TProgress>): Unit {
         let v = vtbl()
-        let hr = v.SetCompleted(asRaw(), handler)
+        let hr = v.SetCompleted(asRaw(), handler.asRaw())
         HRESULT(hr).ok()
     }
 
-    public unsafe func Completed(): CPointer<Unit> {
+    public unsafe func Completed(): AsyncOperationWithProgressCompletedHandler<TResult, TProgress> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Completed(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.fromAbiTake(result)
     }
 
-    public unsafe func GetResults(): CPointer<Unit> {
+    public unsafe func GetResults(): TResult {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.GetResults(asRaw(), CPointer<CPointer<Unit>>(inout result))
@@ -2177,7 +2216,7 @@ public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapper
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IClosableVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2188,8 +2227,8 @@ public struct IClosableVtbl {
         let _ = offset
         var vtbl = IClosableVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.Close = { this_ =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.Close = { instanceRaw =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Close()) {
                         case Result<Unit>.Ok(_) =>
@@ -2212,22 +2251,26 @@ public struct IClosableVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IClosable_Impl {
     public func Close(): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IClosable {
-        IClosable(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IClosable {
+    public static func fromAbiTake(raw: CPointer<Unit>): IClosable {
+        IClosable(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IClosable {
         IClosable(raw)
     }
 
@@ -2243,7 +2286,7 @@ public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public static func descriptor(): InterfaceDescriptor<IClosable> {
-        var descriptor = InterfaceDescriptor<IClosable>("IClosable", IClosable.iid(), IInspectable.descriptor(), { raw => IClosable(raw, ownsReference: true) }, { raw => IClosable(raw) })
+        var descriptor = InterfaceDescriptor<IClosable>("IClosable", IClosable.iid(), IInspectable.descriptor(), { raw => IClosable.fromAbiTake(raw) }, { raw => IClosable.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IClosable.runtimeType())
         return descriptor
     }
@@ -2271,7 +2314,7 @@ public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IClosableVtbl {
@@ -2285,7 +2328,7 @@ public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IDeferralVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -2293,17 +2336,21 @@ public struct IDeferralVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IDeferral {
-        IDeferral(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeferral {
+    public static func fromAbiTake(raw: CPointer<Unit>): IDeferral {
+        IDeferral(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IDeferral {
         IDeferral(raw)
     }
 
@@ -2324,7 +2371,7 @@ public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public static func descriptor(): InterfaceDescriptor<IDeferral> {
-        var descriptor = InterfaceDescriptor<IDeferral>("IDeferral", IDeferral.iid(), IClosable.descriptor(), { raw => IDeferral(raw, ownsReference: true) }, { raw => IDeferral(raw) })
+        var descriptor = InterfaceDescriptor<IDeferral>("IDeferral", IDeferral.iid(), IClosable.descriptor(), { raw => IDeferral.fromAbiTake(raw) }, { raw => IDeferral.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IDeferral.runtimeType())
         return descriptor
     }
@@ -2352,11 +2399,11 @@ public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIClosable(): IClosable {
-        IClosable(asRaw())
+        IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IDeferralVtbl {
@@ -2370,7 +2417,7 @@ public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IDeferralFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2378,17 +2425,21 @@ public struct IDeferralFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IDeferralFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IDeferralFactory {
-        IDeferralFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDeferralFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): IDeferralFactory {
+        IDeferralFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IDeferralFactory {
         IDeferralFactory(raw)
     }
 
@@ -2404,13 +2455,13 @@ public class IDeferralFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<IDeferralFactory> {
-        var descriptor = InterfaceDescriptor<IDeferralFactory>("IDeferralFactory", IDeferralFactory.iid(), IInspectable.descriptor(), { raw => IDeferralFactory(raw, ownsReference: true) }, { raw => IDeferralFactory(raw) })
+        var descriptor = InterfaceDescriptor<IDeferralFactory>("IDeferralFactory", IDeferralFactory.iid(), IInspectable.descriptor(), { raw => IDeferralFactory.fromAbiTake(raw) }, { raw => IDeferralFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IDeferralFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IDeferralFactory", IDeferralFactory.iid(), IInspectable.descriptorSchema(), "IDeferralFactoryVtbl", "IDeferralFactory", "IDeferralFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "Ref<DeferralCompletedHandler>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<Deferral>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IDeferralFactory", IDeferralFactory.iid(), IInspectable.descriptorSchema(), "IDeferralFactoryVtbl", "IDeferralFactory", "IDeferralFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<DeferralCompletedHandler>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Deferral>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IDeferralFactory.runtimeType())
         return schema
     }
@@ -2432,7 +2483,7 @@ public class IDeferralFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IDeferralFactoryVtbl {
@@ -2444,11 +2495,11 @@ public class IDeferralFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
         var result = CPointer<Unit>()
         let hr = v.Create(asRaw(), handler.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return Deferral.fromRaw(result)
+        return Deferral.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IGetActivationFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2459,19 +2510,18 @@ public struct IGetActivationFactoryVtbl {
         let _ = offset
         var vtbl = IGetActivationFactoryVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.GetActivationFactory = { this_, arg0, result__ =>
+        vtbl.GetActivationFactory = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetActivationFactory(arg0)) {
                         case Result<IInspectable>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -2493,22 +2543,26 @@ public struct IGetActivationFactoryVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IGetActivationFactory_Impl {
     public func GetActivationFactory(activatableClassId: CPointer<UInt16>): windows_core.Result<IInspectable>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IGetActivationFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IGetActivationFactory {
-        IGetActivationFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGetActivationFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): IGetActivationFactory {
+        IGetActivationFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IGetActivationFactory {
         IGetActivationFactory(raw)
     }
 
@@ -2524,13 +2578,13 @@ public class IGetActivationFactory <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptor(): InterfaceDescriptor<IGetActivationFactory> {
-        var descriptor = InterfaceDescriptor<IGetActivationFactory>("IGetActivationFactory", IGetActivationFactory.iid(), IInspectable.descriptor(), { raw => IGetActivationFactory(raw, ownsReference: true) }, { raw => IGetActivationFactory(raw) })
+        var descriptor = InterfaceDescriptor<IGetActivationFactory>("IGetActivationFactory", IGetActivationFactory.iid(), IInspectable.descriptor(), { raw => IGetActivationFactory.fromAbiTake(raw) }, { raw => IGetActivationFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IGetActivationFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGetActivationFactory", IGetActivationFactory.iid(), IInspectable.descriptorSchema(), "IGetActivationFactoryVtbl", "IGetActivationFactory", "IGetActivationFactory_Impl", [InterfaceMethodSchema("GetActivationFactory", 6, [InterfaceParameterSchema("activatableClassId", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGetActivationFactory", IGetActivationFactory.iid(), IInspectable.descriptorSchema(), "IGetActivationFactoryVtbl", "IGetActivationFactory", "IGetActivationFactory_Impl", [InterfaceMethodSchema("GetActivationFactory", 6, [InterfaceParameterSchema("activatableClassId", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGetActivationFactory.runtimeType())
         return schema
     }
@@ -2552,7 +2606,7 @@ public class IGetActivationFactory <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IGetActivationFactoryVtbl {
@@ -2564,11 +2618,11 @@ public class IGetActivationFactory <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.GetActivationFactory(asRaw(), activatableClassId, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IGuidHelperStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2578,17 +2632,21 @@ public struct IGuidHelperStaticsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IGuidHelperStatics {
-        IGuidHelperStatics(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGuidHelperStatics {
+    public static func fromAbiTake(raw: CPointer<Unit>): IGuidHelperStatics {
+        IGuidHelperStatics(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IGuidHelperStatics {
         IGuidHelperStatics(raw)
     }
 
@@ -2604,13 +2662,13 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptor(): InterfaceDescriptor<IGuidHelperStatics> {
-        var descriptor = InterfaceDescriptor<IGuidHelperStatics>("IGuidHelperStatics", IGuidHelperStatics.iid(), IInspectable.descriptor(), { raw => IGuidHelperStatics(raw, ownsReference: true) }, { raw => IGuidHelperStatics(raw) })
+        var descriptor = InterfaceDescriptor<IGuidHelperStatics>("IGuidHelperStatics", IGuidHelperStatics.iid(), IInspectable.descriptor(), { raw => IGuidHelperStatics.fromAbiTake(raw) }, { raw => IGuidHelperStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IGuidHelperStatics.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IGuidHelperStatics", IGuidHelperStatics.iid(), IInspectable.descriptorSchema(), "IGuidHelperStaticsVtbl", "IGuidHelperStatics", "IGuidHelperStatics_Impl", [InterfaceMethodSchema("CreateNewGuid", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutRef<GUID>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Empty", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutRef<GUID>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Equals", 8, [InterfaceParameterSchema("target", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IGuidHelperStatics", IGuidHelperStatics.iid(), IInspectable.descriptorSchema(), "IGuidHelperStaticsVtbl", "IGuidHelperStatics", "IGuidHelperStatics_Impl", [InterfaceMethodSchema("CreateNewGuid", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GUID>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Empty", 7, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GUID>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Equals", 8, [InterfaceParameterSchema("target", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IGuidHelperStatics.runtimeType())
         return schema
     }
@@ -2632,7 +2690,7 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IGuidHelperStaticsVtbl {
@@ -2664,7 +2722,7 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IMemoryBufferVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -2675,19 +2733,18 @@ public struct IMemoryBufferVtbl {
         let _ = offset
         var vtbl = IMemoryBufferVtbl()
         vtbl.base_ = IClosableVtbl.new<Identity>(offset: offset)
-        vtbl.CreateReference = { this_, result__ =>
+        vtbl.CreateReference = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CreateReference()) {
                         case Result<IMemoryBufferReference>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -2714,22 +2771,26 @@ public struct IMemoryBufferVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IMemoryBuffer_Impl <: IClosable_Impl {
     public func CreateReference(): windows_core.Result<IMemoryBufferReference>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IMemoryBuffer {
-        IMemoryBuffer(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMemoryBuffer {
+    public static func fromAbiTake(raw: CPointer<Unit>): IMemoryBuffer {
+        IMemoryBuffer(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IMemoryBuffer {
         IMemoryBuffer(raw)
     }
 
@@ -2750,13 +2811,13 @@ public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IMemoryBuffer> {
-        var descriptor = InterfaceDescriptor<IMemoryBuffer>("IMemoryBuffer", IMemoryBuffer.iid(), IClosable.descriptor(), { raw => IMemoryBuffer(raw, ownsReference: true) }, { raw => IMemoryBuffer(raw) })
+        var descriptor = InterfaceDescriptor<IMemoryBuffer>("IMemoryBuffer", IMemoryBuffer.iid(), IClosable.descriptor(), { raw => IMemoryBuffer.fromAbiTake(raw) }, { raw => IMemoryBuffer.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMemoryBuffer.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMemoryBuffer", IMemoryBuffer.iid(), IClosable.descriptorSchema(), "IMemoryBufferVtbl", "IMemoryBuffer", "IMemoryBuffer_Impl", [InterfaceMethodSchema("CreateReference", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IMemoryBufferReference>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMemoryBuffer", IMemoryBuffer.iid(), IClosable.descriptorSchema(), "IMemoryBufferVtbl", "IMemoryBuffer", "IMemoryBuffer_Impl", [InterfaceMethodSchema("CreateReference", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IMemoryBufferReference>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMemoryBuffer.runtimeType())
         return schema
     }
@@ -2778,11 +2839,11 @@ public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIClosable(): IClosable {
-        IClosable(asRaw())
+        IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IMemoryBufferVtbl {
@@ -2794,11 +2855,11 @@ public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName 
         var result = CPointer<Unit>()
         let hr = v.CreateReference(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IMemoryBufferReference.fromRaw(result)
+        return IMemoryBufferReference.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IMemoryBufferFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2806,17 +2867,21 @@ public struct IMemoryBufferFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IMemoryBufferFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IMemoryBufferFactory {
-        IMemoryBufferFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMemoryBufferFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): IMemoryBufferFactory {
+        IMemoryBufferFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IMemoryBufferFactory {
         IMemoryBufferFactory(raw)
     }
 
@@ -2832,13 +2897,13 @@ public class IMemoryBufferFactory <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptor(): InterfaceDescriptor<IMemoryBufferFactory> {
-        var descriptor = InterfaceDescriptor<IMemoryBufferFactory>("IMemoryBufferFactory", IMemoryBufferFactory.iid(), IInspectable.descriptor(), { raw => IMemoryBufferFactory(raw, ownsReference: true) }, { raw => IMemoryBufferFactory(raw) })
+        var descriptor = InterfaceDescriptor<IMemoryBufferFactory>("IMemoryBufferFactory", IMemoryBufferFactory.iid(), IInspectable.descriptor(), { raw => IMemoryBufferFactory.fromAbiTake(raw) }, { raw => IMemoryBufferFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMemoryBufferFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMemoryBufferFactory", IMemoryBufferFactory.iid(), IInspectable.descriptorSchema(), "IMemoryBufferFactoryVtbl", "IMemoryBufferFactory", "IMemoryBufferFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("capacity", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<MemoryBuffer>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMemoryBufferFactory", IMemoryBufferFactory.iid(), IInspectable.descriptorSchema(), "IMemoryBufferFactoryVtbl", "IMemoryBufferFactory", "IMemoryBufferFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("capacity", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<MemoryBuffer>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IMemoryBufferFactory.runtimeType())
         return schema
     }
@@ -2860,7 +2925,7 @@ public class IMemoryBufferFactory <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IMemoryBufferFactoryVtbl {
@@ -2872,11 +2937,11 @@ public class IMemoryBufferFactory <: InterfaceWrapperBase & ComInterface & Runti
         var result = CPointer<Unit>()
         let hr = v.Create(asRaw(), capacity, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return MemoryBuffer.fromRaw(result)
+        return MemoryBuffer.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IMemoryBufferReferenceVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -2889,11 +2954,11 @@ public struct IMemoryBufferReferenceVtbl {
         let _ = offset
         var vtbl = IMemoryBufferReferenceVtbl()
         vtbl.base_ = IClosableVtbl.new<Identity>(offset: offset)
-        vtbl.Capacity = { this_, result__ =>
+        vtbl.Capacity = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Capacity()) {
                         case Result<UInt32>.Ok(value) =>
@@ -2906,13 +2971,13 @@ public struct IMemoryBufferReferenceVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Closed = { this_, arg0, result__ =>
+        vtbl.Closed = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.Closed(arg0)) {
+                    match (impl.Closed(InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>(TypedEventHandler<IMemoryBufferReference, IInspectable>.viewOf(arg0)))) {
                         case Result<EventRegistrationToken>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
@@ -2923,8 +2988,8 @@ public struct IMemoryBufferReferenceVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.RemoveClosed = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.RemoveClosed = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.RemoveClosed(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -2952,24 +3017,28 @@ public struct IMemoryBufferReferenceVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IMemoryBufferReference_Impl <: IClosable_Impl {
     public func Capacity(): windows_core.Result<UInt32>
-    public func Closed(handler: CPointer<Unit>): windows_core.Result<EventRegistrationToken>
+    public func Closed(handler: InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>): windows_core.Result<EventRegistrationToken>
     public func RemoveClosed(cookie: EventRegistrationToken): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IMemoryBufferReference {
-        IMemoryBufferReference(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMemoryBufferReference {
+    public static func fromAbiTake(raw: CPointer<Unit>): IMemoryBufferReference {
+        IMemoryBufferReference(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IMemoryBufferReference {
         IMemoryBufferReference(raw)
     }
 
@@ -2990,13 +3059,13 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<IMemoryBufferReference> {
-        var descriptor = InterfaceDescriptor<IMemoryBufferReference>("IMemoryBufferReference", IMemoryBufferReference.iid(), IClosable.descriptor(), { raw => IMemoryBufferReference(raw, ownsReference: true) }, { raw => IMemoryBufferReference(raw) })
+        var descriptor = InterfaceDescriptor<IMemoryBufferReference>("IMemoryBufferReference", IMemoryBufferReference.iid(), IClosable.descriptor(), { raw => IMemoryBufferReference.fromAbiTake(raw) }, { raw => IMemoryBufferReference.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMemoryBufferReference.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IMemoryBufferReference", IMemoryBufferReference.iid(), IClosable.descriptorSchema(), "IMemoryBufferReferenceVtbl", "IMemoryBufferReference", "IMemoryBufferReference_Impl", [InterfaceMethodSchema("Capacity", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Closed", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<EventRegistrationToken>", "OutRef<EventRegistrationToken>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("RemoveClosed", 9, [InterfaceParameterSchema("cookie", "EventRegistrationToken", "EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IMemoryBufferReference", IMemoryBufferReference.iid(), IClosable.descriptorSchema(), "IMemoryBufferReferenceVtbl", "IMemoryBufferReference", "IMemoryBufferReference_Impl", [InterfaceMethodSchema("Capacity", 7, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Closed", 8, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<EventRegistrationToken>", "OutSlot<EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveClosed", 9, [InterfaceParameterSchema("cookie", "EventRegistrationToken", "EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IMemoryBufferReference.runtimeType())
         return schema
     }
@@ -3018,11 +3087,11 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIClosable(): IClosable {
-        IClosable(asRaw())
+        IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IMemoryBufferReferenceVtbl {
@@ -3037,10 +3106,10 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
         return result
     }
 
-    public unsafe func Closed(handler: CPointer<Unit>): EventRegistrationToken {
+    public unsafe func Closed(handler: TypedEventHandler<IMemoryBufferReference, IInspectable>): EventRegistrationToken {
         let v = vtbl()
         var result = EventRegistrationToken()
-        let hr = v.Closed(asRaw(), handler, CPointer<EventRegistrationToken>(inout result))
+        let hr = v.Closed(asRaw(), handler.asRaw(), CPointer<EventRegistrationToken>(inout result))
         HRESULT(hr).ok()
         return result
     }
@@ -3052,7 +3121,7 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IPropertyValueVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3101,11 +3170,11 @@ public struct IPropertyValueVtbl {
         let _ = offset
         var vtbl = IPropertyValueVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.Type = { this_, result__ =>
+        vtbl.Type = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Type()) {
                         case Result<PropertyType>.Ok(value) =>
@@ -3118,11 +3187,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.IsNumericScalar = { this_, result__ =>
+        vtbl.IsNumericScalar = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.IsNumericScalar()) {
                         case Result<Bool>.Ok(value) =>
@@ -3135,11 +3204,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetUInt8 = { this_, result__ =>
+        vtbl.GetUInt8 = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetUInt8()) {
                         case Result<UInt8>.Ok(value) =>
@@ -3152,11 +3221,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetInt16 = { this_, result__ =>
+        vtbl.GetInt16 = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetInt16()) {
                         case Result<Int16>.Ok(value) =>
@@ -3169,11 +3238,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetUInt16 = { this_, result__ =>
+        vtbl.GetUInt16 = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetUInt16()) {
                         case Result<UInt16>.Ok(value) =>
@@ -3186,11 +3255,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetInt32 = { this_, result__ =>
+        vtbl.GetInt32 = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetInt32()) {
                         case Result<Int32>.Ok(value) =>
@@ -3203,11 +3272,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetUInt32 = { this_, result__ =>
+        vtbl.GetUInt32 = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetUInt32()) {
                         case Result<UInt32>.Ok(value) =>
@@ -3220,11 +3289,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetInt64 = { this_, result__ =>
+        vtbl.GetInt64 = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetInt64()) {
                         case Result<Int64>.Ok(value) =>
@@ -3237,11 +3306,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetUInt64 = { this_, result__ =>
+        vtbl.GetUInt64 = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetUInt64()) {
                         case Result<UInt64>.Ok(value) =>
@@ -3254,11 +3323,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetSingle = { this_, result__ =>
+        vtbl.GetSingle = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetSingle()) {
                         case Result<Float32>.Ok(value) =>
@@ -3271,11 +3340,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetDouble = { this_, result__ =>
+        vtbl.GetDouble = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetDouble()) {
                         case Result<Float64>.Ok(value) =>
@@ -3288,11 +3357,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetChar16 = { this_, result__ =>
+        vtbl.GetChar16 = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetChar16()) {
                         case Result<UInt16>.Ok(value) =>
@@ -3305,11 +3374,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetBoolean = { this_, result__ =>
+        vtbl.GetBoolean = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetBoolean()) {
                         case Result<Bool>.Ok(value) =>
@@ -3322,11 +3391,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetString = { this_, result__ =>
+        vtbl.GetString = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetString()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -3339,11 +3408,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetGuid = { this_, result__ =>
+        vtbl.GetGuid = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetGuid()) {
                         case Result<GUID>.Ok(value) =>
@@ -3356,11 +3425,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetDateTime = { this_, result__ =>
+        vtbl.GetDateTime = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetDateTime()) {
                         case Result<DateTime>.Ok(value) =>
@@ -3373,11 +3442,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetTimeSpan = { this_, result__ =>
+        vtbl.GetTimeSpan = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetTimeSpan()) {
                         case Result<TimeSpan>.Ok(value) =>
@@ -3390,11 +3459,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetPoint = { this_, result__ =>
+        vtbl.GetPoint = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetPoint()) {
                         case Result<Point>.Ok(value) =>
@@ -3407,11 +3476,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetSize = { this_, result__ =>
+        vtbl.GetSize = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetSize()) {
                         case Result<Size>.Ok(value) =>
@@ -3424,11 +3493,11 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetRect = { this_, result__ =>
+        vtbl.GetRect = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetRect()) {
                         case Result<Rect>.Ok(value) =>
@@ -3441,8 +3510,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetUInt8Array = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetUInt8Array = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetUInt8Array(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3454,8 +3523,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetInt16Array = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetInt16Array = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetInt16Array(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3467,8 +3536,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetUInt16Array = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetUInt16Array = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetUInt16Array(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3480,8 +3549,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetInt32Array = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetInt32Array = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetInt32Array(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3493,8 +3562,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetUInt32Array = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetUInt32Array = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetUInt32Array(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3506,8 +3575,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetInt64Array = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetInt64Array = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetInt64Array(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3519,8 +3588,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetUInt64Array = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetUInt64Array = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetUInt64Array(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3532,8 +3601,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetSingleArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetSingleArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetSingleArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3545,8 +3614,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetDoubleArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetDoubleArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetDoubleArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3558,8 +3627,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetChar16Array = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetChar16Array = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetChar16Array(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3571,8 +3640,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetBooleanArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetBooleanArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetBooleanArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3584,8 +3653,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetStringArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetStringArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetStringArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3597,8 +3666,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetInspectableArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetInspectableArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetInspectableArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3610,8 +3679,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetGuidArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetGuidArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetGuidArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3623,8 +3692,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetDateTimeArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetDateTimeArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetDateTimeArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3636,8 +3705,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetTimeSpanArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetTimeSpanArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetTimeSpanArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3649,8 +3718,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetPointArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetPointArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetPointArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3662,8 +3731,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetSizeArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetSizeArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetSizeArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3675,8 +3744,8 @@ public struct IPropertyValueVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetRectArray = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.GetRectArray = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetRectArray(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3699,7 +3768,7 @@ public struct IPropertyValueVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IPropertyValue_Impl {
     public func Type(): windows_core.Result<PropertyType>
     public func IsNumericScalar(): windows_core.Result<Bool>
@@ -3742,17 +3811,21 @@ public interface IPropertyValue_Impl {
     public func GetRectArray(value: CPointer<CPointer<Rect>>): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IPropertyValue {
-        IPropertyValue(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPropertyValue {
+    public static func fromAbiTake(raw: CPointer<Unit>): IPropertyValue {
+        IPropertyValue(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IPropertyValue {
         IPropertyValue(raw)
     }
 
@@ -3768,13 +3841,13 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptor(): InterfaceDescriptor<IPropertyValue> {
-        var descriptor = InterfaceDescriptor<IPropertyValue>("IPropertyValue", IPropertyValue.iid(), IInspectable.descriptor(), { raw => IPropertyValue(raw, ownsReference: true) }, { raw => IPropertyValue(raw) })
+        var descriptor = InterfaceDescriptor<IPropertyValue>("IPropertyValue", IPropertyValue.iid(), IInspectable.descriptor(), { raw => IPropertyValue.fromAbiTake(raw) }, { raw => IPropertyValue.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPropertyValue.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPropertyValue", IPropertyValue.iid(), IInspectable.descriptorSchema(), "IPropertyValueVtbl", "IPropertyValue", "IPropertyValue_Impl", [InterfaceMethodSchema("Type", 6, [InterfaceParameterSchema("result", "CPointer<PropertyType>", "OutRef<PropertyType>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsNumericScalar", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetUInt8", 8, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutRef<UInt8>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetInt16", 9, [InterfaceParameterSchema("result", "CPointer<Int16>", "OutRef<Int16>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetUInt16", 10, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutRef<UInt16>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetInt32", 11, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutRef<Int32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetUInt32", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutRef<UInt32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetInt64", 13, [InterfaceParameterSchema("result", "CPointer<Int64>", "OutRef<Int64>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetUInt64", 14, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutRef<UInt64>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetSingle", 15, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutRef<Float32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetDouble", 16, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutRef<Float64>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetChar16", 17, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutRef<UInt16>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetBoolean", 18, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetString", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetGuid", 20, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutRef<GUID>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetDateTime", 21, [InterfaceParameterSchema("result", "CPointer<DateTime>", "OutRef<DateTime>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetTimeSpan", 22, [InterfaceParameterSchema("result", "CPointer<TimeSpan>", "OutRef<TimeSpan>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetPoint", 23, [InterfaceParameterSchema("result", "CPointer<Point>", "OutRef<Point>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetSize", 24, [InterfaceParameterSchema("result", "CPointer<Size>", "OutRef<Size>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetRect", 25, [InterfaceParameterSchema("result", "CPointer<Rect>", "OutRef<Rect>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("GetUInt8Array", 26, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt8>>", "CPointer<CPointer<UInt8>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInt16Array", 27, [InterfaceParameterSchema("value", "CPointer<CPointer<Int16>>", "CPointer<CPointer<Int16>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetUInt16Array", 28, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInt32Array", 29, [InterfaceParameterSchema("value", "CPointer<CPointer<Int32>>", "CPointer<CPointer<Int32>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetUInt32Array", 30, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt32>>", "CPointer<CPointer<UInt32>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInt64Array", 31, [InterfaceParameterSchema("value", "CPointer<CPointer<Int64>>", "CPointer<CPointer<Int64>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetUInt64Array", 32, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt64>>", "CPointer<CPointer<UInt64>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetSingleArray", 33, [InterfaceParameterSchema("value", "CPointer<CPointer<Float32>>", "CPointer<CPointer<Float32>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetDoubleArray", 34, [InterfaceParameterSchema("value", "CPointer<CPointer<Float64>>", "CPointer<CPointer<Float64>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetChar16Array", 35, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetBooleanArray", 36, [InterfaceParameterSchema("value", "CPointer<CPointer<Bool>>", "CPointer<CPointer<Bool>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetStringArray", 37, [InterfaceParameterSchema("value", "CPointer<CPointer<CPointer<UInt16>>>", "CPointer<CPointer<CPointer<UInt16>>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInspectableArray", 38, [InterfaceParameterSchema("value", "CPointer<CPointer<CPointer<Unit>>>", "CPointer<CPointer<CPointer<Unit>>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetGuidArray", 39, [InterfaceParameterSchema("value", "CPointer<CPointer<GUID>>", "CPointer<CPointer<GUID>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetDateTimeArray", 40, [InterfaceParameterSchema("value", "CPointer<CPointer<DateTime>>", "CPointer<CPointer<DateTime>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetTimeSpanArray", 41, [InterfaceParameterSchema("value", "CPointer<CPointer<TimeSpan>>", "CPointer<CPointer<TimeSpan>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetPointArray", 42, [InterfaceParameterSchema("value", "CPointer<CPointer<Point>>", "CPointer<CPointer<Point>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetSizeArray", 43, [InterfaceParameterSchema("value", "CPointer<CPointer<Size>>", "CPointer<CPointer<Size>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetRectArray", 44, [InterfaceParameterSchema("value", "CPointer<CPointer<Rect>>", "CPointer<CPointer<Rect>>", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPropertyValue", IPropertyValue.iid(), IInspectable.descriptorSchema(), "IPropertyValueVtbl", "IPropertyValue", "IPropertyValue_Impl", [InterfaceMethodSchema("Type", 6, [InterfaceParameterSchema("result", "CPointer<PropertyType>", "OutSlot<PropertyType>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsNumericScalar", 7, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetUInt8", 8, [InterfaceParameterSchema("result", "CPointer<UInt8>", "OutSlot<UInt8>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetInt16", 9, [InterfaceParameterSchema("result", "CPointer<Int16>", "OutSlot<Int16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetUInt16", 10, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetInt32", 11, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetUInt32", 12, [InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetInt64", 13, [InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetUInt64", 14, [InterfaceParameterSchema("result", "CPointer<UInt64>", "OutSlot<UInt64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSingle", 15, [InterfaceParameterSchema("result", "CPointer<Float32>", "OutSlot<Float32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDouble", 16, [InterfaceParameterSchema("result", "CPointer<Float64>", "OutSlot<Float64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetChar16", 17, [InterfaceParameterSchema("result", "CPointer<UInt16>", "OutSlot<UInt16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetBoolean", 18, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetString", 19, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetGuid", 20, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GUID>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetDateTime", 21, [InterfaceParameterSchema("result", "CPointer<DateTime>", "OutSlot<DateTime>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetTimeSpan", 22, [InterfaceParameterSchema("result", "CPointer<TimeSpan>", "OutSlot<TimeSpan>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetPoint", 23, [InterfaceParameterSchema("result", "CPointer<Point>", "OutSlot<Point>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetSize", 24, [InterfaceParameterSchema("result", "CPointer<Size>", "OutSlot<Size>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetRect", 25, [InterfaceParameterSchema("result", "CPointer<Rect>", "OutSlot<Rect>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("GetUInt8Array", 26, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt8>>", "CPointer<CPointer<UInt8>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInt16Array", 27, [InterfaceParameterSchema("value", "CPointer<CPointer<Int16>>", "CPointer<CPointer<Int16>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetUInt16Array", 28, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInt32Array", 29, [InterfaceParameterSchema("value", "CPointer<CPointer<Int32>>", "CPointer<CPointer<Int32>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetUInt32Array", 30, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt32>>", "CPointer<CPointer<UInt32>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInt64Array", 31, [InterfaceParameterSchema("value", "CPointer<CPointer<Int64>>", "CPointer<CPointer<Int64>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetUInt64Array", 32, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt64>>", "CPointer<CPointer<UInt64>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetSingleArray", 33, [InterfaceParameterSchema("value", "CPointer<CPointer<Float32>>", "CPointer<CPointer<Float32>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetDoubleArray", 34, [InterfaceParameterSchema("value", "CPointer<CPointer<Float64>>", "CPointer<CPointer<Float64>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetChar16Array", 35, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetBooleanArray", 36, [InterfaceParameterSchema("value", "CPointer<CPointer<Bool>>", "CPointer<CPointer<Bool>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetStringArray", 37, [InterfaceParameterSchema("value", "CPointer<CPointer<CPointer<UInt16>>>", "CPointer<CPointer<CPointer<UInt16>>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetInspectableArray", 38, [InterfaceParameterSchema("value", "CPointer<CPointer<CPointer<Unit>>>", "CPointer<CPointer<CPointer<Unit>>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetGuidArray", 39, [InterfaceParameterSchema("value", "CPointer<CPointer<GUID>>", "CPointer<CPointer<GUID>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetDateTimeArray", 40, [InterfaceParameterSchema("value", "CPointer<CPointer<DateTime>>", "CPointer<CPointer<DateTime>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetTimeSpanArray", 41, [InterfaceParameterSchema("value", "CPointer<CPointer<TimeSpan>>", "CPointer<CPointer<TimeSpan>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetPointArray", 42, [InterfaceParameterSchema("value", "CPointer<CPointer<Point>>", "CPointer<CPointer<Point>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetSizeArray", 43, [InterfaceParameterSchema("value", "CPointer<CPointer<Size>>", "CPointer<CPointer<Size>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetRectArray", 44, [InterfaceParameterSchema("value", "CPointer<CPointer<Rect>>", "CPointer<CPointer<Rect>>", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IPropertyValue.runtimeType())
         return schema
     }
@@ -3796,7 +3869,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IPropertyValueVtbl {
@@ -4078,7 +4151,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IPropertyValueStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -4102,39 +4175,43 @@ public struct IPropertyValueStaticsVtbl {
     public var CreatePoint: CFunc<(CPointer<Unit>, Point, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateSize: CFunc<(CPointer<Unit>, Size, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var CreateRect: CFunc<(CPointer<Unit>, Rect, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt8Array: CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateInt16Array: CFunc<(CPointer<Unit>, CPointer<Int16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt16Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateInt32Array: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt32Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateInt64Array: CFunc<(CPointer<Unit>, CPointer<Int64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt64Array: CFunc<(CPointer<Unit>, CPointer<UInt64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateSingleArray: CFunc<(CPointer<Unit>, CPointer<Float32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateDoubleArray: CFunc<(CPointer<Unit>, CPointer<Float64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateChar16Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateBooleanArray: CFunc<(CPointer<Unit>, CPointer<Bool>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateStringArray: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateInspectableArray: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateGuidArray: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateDateTimeArray: CFunc<(CPointer<Unit>, CPointer<DateTime>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateTimeSpanArray: CFunc<(CPointer<Unit>, CPointer<TimeSpan>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreatePointArray: CFunc<(CPointer<Unit>, CPointer<Point>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateSizeArray: CFunc<(CPointer<Unit>, CPointer<Size>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateRectArray: CFunc<(CPointer<Unit>, CPointer<Rect>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var CreateUInt8Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateInt16Array: CFunc<(CPointer<Unit>, UInt32, CPointer<Int16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateUInt16Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateInt32Array: CFunc<(CPointer<Unit>, UInt32, CPointer<Int32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateUInt32Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateInt64Array: CFunc<(CPointer<Unit>, UInt32, CPointer<Int64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateUInt64Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateSingleArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Float32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateDoubleArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Float64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateChar16Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateBooleanArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Bool>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateStringArray: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateInspectableArray: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateGuidArray: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateDateTimeArray: CFunc<(CPointer<Unit>, UInt32, CPointer<DateTime>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateTimeSpanArray: CFunc<(CPointer<Unit>, UInt32, CPointer<TimeSpan>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreatePointArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Point>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateSizeArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Size>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateRectArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Rect>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IPropertyValueStatics {
-        IPropertyValueStatics(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPropertyValueStatics {
+    public static func fromAbiTake(raw: CPointer<Unit>): IPropertyValueStatics {
+        IPropertyValueStatics(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IPropertyValueStatics {
         IPropertyValueStatics(raw)
     }
 
@@ -4150,13 +4227,13 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptor(): InterfaceDescriptor<IPropertyValueStatics> {
-        var descriptor = InterfaceDescriptor<IPropertyValueStatics>("IPropertyValueStatics", IPropertyValueStatics.iid(), IInspectable.descriptor(), { raw => IPropertyValueStatics(raw, ownsReference: true) }, { raw => IPropertyValueStatics(raw) })
+        var descriptor = InterfaceDescriptor<IPropertyValueStatics>("IPropertyValueStatics", IPropertyValueStatics.iid(), IInspectable.descriptor(), { raw => IPropertyValueStatics.fromAbiTake(raw) }, { raw => IPropertyValueStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPropertyValueStatics.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IPropertyValueStatics", IPropertyValueStatics.iid(), IInspectable.descriptorSchema(), "IPropertyValueStaticsVtbl", "IPropertyValueStatics", "IPropertyValueStatics_Impl", [InterfaceMethodSchema("CreateEmpty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateUInt8", 7, [InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateInt16", 8, [InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateUInt16", 9, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateInt32", 10, [InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateUInt32", 11, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateInt64", 12, [InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateUInt64", 13, [InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateSingle", 14, [InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateDouble", 15, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateChar16", 16, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateBoolean", 17, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateString", 18, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateInspectable", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "Ref<IInspectable>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateGuid", 20, [InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateDateTime", 21, [InterfaceParameterSchema("value", "DateTime", "DateTime", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateTimeSpan", 22, [InterfaceParameterSchema("value", "TimeSpan", "TimeSpan", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreatePoint", 23, [InterfaceParameterSchema("value", "Point", "Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateSize", 24, [InterfaceParameterSchema("value", "Size", "Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateRect", 25, [InterfaceParameterSchema("value", "Rect", "Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateUInt8Array", 26, [InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateInt16Array", 27, [InterfaceParameterSchema("value", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateUInt16Array", 28, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateInt32Array", 29, [InterfaceParameterSchema("value", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateUInt32Array", 30, [InterfaceParameterSchema("value", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateInt64Array", 31, [InterfaceParameterSchema("value", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateUInt64Array", 32, [InterfaceParameterSchema("value", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateSingleArray", 33, [InterfaceParameterSchema("value", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateDoubleArray", 34, [InterfaceParameterSchema("value", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateChar16Array", 35, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateBooleanArray", 36, [InterfaceParameterSchema("value", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateStringArray", 37, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateInspectableArray", 38, [InterfaceParameterSchema("value", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateGuidArray", 39, [InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateDateTimeArray", 40, [InterfaceParameterSchema("value", "CPointer<DateTime>", "CPointer<DateTime>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateTimeSpanArray", 41, [InterfaceParameterSchema("value", "CPointer<TimeSpan>", "CPointer<TimeSpan>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreatePointArray", 42, [InterfaceParameterSchema("value", "CPointer<Point>", "CPointer<Point>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateSizeArray", 43, [InterfaceParameterSchema("value", "CPointer<Size>", "CPointer<Size>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateRectArray", 44, [InterfaceParameterSchema("value", "CPointer<Rect>", "CPointer<Rect>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<IInspectable>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IPropertyValueStatics", IPropertyValueStatics.iid(), IInspectable.descriptorSchema(), "IPropertyValueStaticsVtbl", "IPropertyValueStatics", "IPropertyValueStatics_Impl", [InterfaceMethodSchema("CreateEmpty", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUInt8", 7, [InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateInt16", 8, [InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUInt16", 9, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateInt32", 10, [InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUInt32", 11, [InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateInt64", 12, [InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUInt64", 13, [InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateSingle", 14, [InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateDouble", 15, [InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateChar16", 16, [InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateBoolean", 17, [InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateString", 18, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateInspectable", 19, [InterfaceParameterSchema("value", "CPointer<Unit>", "InParam<IInspectable>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateGuid", 20, [InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateDateTime", 21, [InterfaceParameterSchema("value", "DateTime", "DateTime", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateTimeSpan", 22, [InterfaceParameterSchema("value", "TimeSpan", "TimeSpan", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreatePoint", 23, [InterfaceParameterSchema("value", "Point", "Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateSize", 24, [InterfaceParameterSchema("value", "Size", "Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateRect", 25, [InterfaceParameterSchema("value", "Rect", "Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUInt8Array", 26, [InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateInt16Array", 27, [InterfaceParameterSchema("value", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUInt16Array", 28, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateInt32Array", 29, [InterfaceParameterSchema("value", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUInt32Array", 30, [InterfaceParameterSchema("value", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateInt64Array", 31, [InterfaceParameterSchema("value", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateUInt64Array", 32, [InterfaceParameterSchema("value", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateSingleArray", 33, [InterfaceParameterSchema("value", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateDoubleArray", 34, [InterfaceParameterSchema("value", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateChar16Array", 35, [InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateBooleanArray", 36, [InterfaceParameterSchema("value", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateStringArray", 37, [InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateInspectableArray", 38, [InterfaceParameterSchema("value", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateGuidArray", 39, [InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateDateTimeArray", 40, [InterfaceParameterSchema("value", "CPointer<DateTime>", "CPointer<DateTime>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateTimeSpanArray", 41, [InterfaceParameterSchema("value", "CPointer<TimeSpan>", "CPointer<TimeSpan>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreatePointArray", 42, [InterfaceParameterSchema("value", "CPointer<Point>", "CPointer<Point>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateSizeArray", 43, [InterfaceParameterSchema("value", "CPointer<Size>", "CPointer<Size>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateRectArray", 44, [InterfaceParameterSchema("value", "CPointer<Rect>", "CPointer<Rect>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<IInspectable>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IPropertyValueStatics.runtimeType())
         return schema
     }
@@ -4178,7 +4255,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IPropertyValueStaticsVtbl {
@@ -4190,7 +4267,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateEmpty(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateUInt8(value: UInt8): IInspectable {
@@ -4198,7 +4275,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateUInt8(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateInt16(value: Int16): IInspectable {
@@ -4206,7 +4283,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateInt16(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateUInt16(value: UInt16): IInspectable {
@@ -4214,7 +4291,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateUInt16(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateInt32(value: Int32): IInspectable {
@@ -4222,7 +4299,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateInt32(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateUInt32(value: UInt32): IInspectable {
@@ -4230,7 +4307,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateUInt32(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateInt64(value: Int64): IInspectable {
@@ -4238,7 +4315,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateInt64(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateUInt64(value: UInt64): IInspectable {
@@ -4246,7 +4323,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateUInt64(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateSingle(value: Float32): IInspectable {
@@ -4254,7 +4331,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateSingle(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateDouble(value: Float64): IInspectable {
@@ -4262,7 +4339,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateDouble(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateChar16(value: UInt16): IInspectable {
@@ -4270,7 +4347,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateChar16(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateBoolean(value: Bool): IInspectable {
@@ -4278,7 +4355,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateBoolean(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateString(value: CPointer<UInt16>): IInspectable {
@@ -4286,7 +4363,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateString(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateInspectable(value: IInspectable): IInspectable {
@@ -4294,7 +4371,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateInspectable(asRaw(), value.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateGuid(value: GUID): IInspectable {
@@ -4302,7 +4379,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateGuid(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateDateTime(value: DateTime): IInspectable {
@@ -4310,7 +4387,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateDateTime(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateTimeSpan(value: TimeSpan): IInspectable {
@@ -4318,7 +4395,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateTimeSpan(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreatePoint(value: Point): IInspectable {
@@ -4326,7 +4403,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreatePoint(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateSize(value: Size): IInspectable {
@@ -4334,7 +4411,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateSize(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateRect(value: Rect): IInspectable {
@@ -4342,7 +4419,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateRect(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateUInt8Array(value: CPointer<UInt8>): IInspectable {
@@ -4350,7 +4427,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateUInt8Array(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateInt16Array(value: CPointer<Int16>): IInspectable {
@@ -4358,7 +4435,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateInt16Array(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateUInt16Array(value: CPointer<UInt16>): IInspectable {
@@ -4366,7 +4443,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateUInt16Array(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateInt32Array(value: CPointer<Int32>): IInspectable {
@@ -4374,7 +4451,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateInt32Array(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateUInt32Array(value: CPointer<UInt32>): IInspectable {
@@ -4382,7 +4459,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateUInt32Array(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateInt64Array(value: CPointer<Int64>): IInspectable {
@@ -4390,7 +4467,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateInt64Array(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateUInt64Array(value: CPointer<UInt64>): IInspectable {
@@ -4398,7 +4475,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateUInt64Array(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateSingleArray(value: CPointer<Float32>): IInspectable {
@@ -4406,7 +4483,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateSingleArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateDoubleArray(value: CPointer<Float64>): IInspectable {
@@ -4414,7 +4491,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateDoubleArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateChar16Array(value: CPointer<UInt16>): IInspectable {
@@ -4422,7 +4499,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateChar16Array(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateBooleanArray(value: CPointer<Bool>): IInspectable {
@@ -4430,7 +4507,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateBooleanArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateStringArray(value: CPointer<CPointer<UInt16>>): IInspectable {
@@ -4438,7 +4515,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateStringArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateInspectableArray(value: CPointer<CPointer<Unit>>): IInspectable {
@@ -4446,7 +4523,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateInspectableArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateGuidArray(value: CPointer<GUID>): IInspectable {
@@ -4454,7 +4531,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateGuidArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateDateTimeArray(value: CPointer<DateTime>): IInspectable {
@@ -4462,7 +4539,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateDateTimeArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateTimeSpanArray(value: CPointer<TimeSpan>): IInspectable {
@@ -4470,7 +4547,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateTimeSpanArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreatePointArray(value: CPointer<Point>): IInspectable {
@@ -4478,7 +4555,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreatePointArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateSizeArray(value: CPointer<Size>): IInspectable {
@@ -4486,7 +4563,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateSizeArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 
     public unsafe func CreateRectArray(value: CPointer<Rect>): IInspectable {
@@ -4494,11 +4571,11 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
         var result = CPointer<Unit>()
         let hr = v.CreateRectArray(asRaw(), value, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return IInspectable.fromRaw(result)
+        return IInspectable.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IReferenceVtbl {
     public var base_: IPropertyValueVtbl = IPropertyValueVtbl()
@@ -4509,17 +4586,17 @@ public struct IReferenceVtbl {
         let _ = offset
         var vtbl = IReferenceVtbl()
         vtbl.base_ = IPropertyValueVtbl.new<Identity>(offset: offset)
-        vtbl.Value = { this_, result__ =>
+        vtbl.Value = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Value()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
+                        case Result<T>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<T>.Err(error) =>
                             error.code().value
                     }
                 case None =>
@@ -4542,22 +4619,26 @@ public struct IReferenceVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IReference_Impl<T> <: IPropertyValue_Impl where T <: windows_core.RuntimeType {
-    public func Value(): windows_core.Result<CPointer<Unit>>
+    public func Value(): windows_core.Result<T>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IReference<T> {
-        IReference<T>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IReference<T> {
+    public static func fromAbiTake(raw: CPointer<Unit>): IReference<T> {
+        IReference<T>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IReference<T> {
         IReference<T>(raw)
     }
 
@@ -4578,13 +4659,13 @@ public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IReference<T>> {
-        var descriptor = InterfaceDescriptor<IReference<T>>("IReference", IReference<T>.iid(), IPropertyValue.descriptor(), { raw => IReference<T>(raw, ownsReference: true) }, { raw => IReference<T>(raw) })
+        var descriptor = InterfaceDescriptor<IReference<T>>("IReference", IReference<T>.iid(), IPropertyValue.descriptor(), { raw => IReference<T>.fromAbiTake(raw) }, { raw => IReference<T>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IReference<T>.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IReference", IReference<T>.iid(), IPropertyValue.descriptorSchema(), "IReferenceVtbl", "IReference", "IReference_Impl", [InterfaceMethodSchema("Value", 45, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IReference", IReference<T>.iid(), IPropertyValue.descriptorSchema(), "IReferenceVtbl", "IReference", "IReference_Impl", [InterfaceMethodSchema("Value", 45, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<T>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IReference<T>.runtimeType())
         return schema
     }
@@ -4611,18 +4692,18 @@ public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIPropertyValue(): IPropertyValue {
-        IPropertyValue(asRaw())
+        IPropertyValue.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IReferenceVtbl {
         readVtbl<IReferenceVtbl>(IReferenceVtbl())
     }
 
-    public unsafe func Value(): CPointer<Unit> {
+    public unsafe func Value(): T {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.Value(asRaw(), CPointer<CPointer<Unit>>(inout result))
@@ -4631,22 +4712,22 @@ public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IReferenceArrayVtbl {
     public var base_: IPropertyValueVtbl = IPropertyValueVtbl()
-    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<T>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 
     public static func new<Identity, T>(offset!: Int64 = 0): IReferenceArrayVtbl where Identity <: IReferenceArray_Impl<T>, T <: windows_core.RuntimeType {
         let _ = offset
         var vtbl = IReferenceArrayVtbl()
         vtbl.base_ = IPropertyValueVtbl.new<Identity>(offset: offset)
-        vtbl.Value = { this_, result__ =>
+        vtbl.Value = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Value()) {
                         case Result<CPointer<T>>.Ok(value) =>
@@ -4675,22 +4756,26 @@ public struct IReferenceArrayVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IReferenceArray_Impl<T> <: IPropertyValue_Impl where T <: windows_core.RuntimeType {
     public func Value(): windows_core.Result<CPointer<T>>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider where T <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IReferenceArray<T> {
-        IReferenceArray<T>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IReferenceArray<T> {
+    public static func fromAbiTake(raw: CPointer<Unit>): IReferenceArray<T> {
+        IReferenceArray<T>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IReferenceArray<T> {
         IReferenceArray<T>(raw)
     }
 
@@ -4711,13 +4796,13 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptor(): InterfaceDescriptor<IReferenceArray<T>> {
-        var descriptor = InterfaceDescriptor<IReferenceArray<T>>("IReferenceArray", IReferenceArray<T>.iid(), IPropertyValue.descriptor(), { raw => IReferenceArray<T>(raw, ownsReference: true) }, { raw => IReferenceArray<T>(raw) })
+        var descriptor = InterfaceDescriptor<IReferenceArray<T>>("IReferenceArray", IReferenceArray<T>.iid(), IPropertyValue.descriptor(), { raw => IReferenceArray<T>.fromAbiTake(raw) }, { raw => IReferenceArray<T>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IReferenceArray<T>.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IReferenceArray", IReferenceArray<T>.iid(), IPropertyValue.descriptorSchema(), "IReferenceArrayVtbl", "IReferenceArray", "IReferenceArray_Impl", [InterfaceMethodSchema("Value", 45, [InterfaceParameterSchema("result", "CPointer<CPointer<T>>", "OutRef<CPointer<T>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IReferenceArray", IReferenceArray<T>.iid(), IPropertyValue.descriptorSchema(), "IReferenceArrayVtbl", "IReferenceArray", "IReferenceArray_Impl", [InterfaceMethodSchema("Value", 45, [InterfaceParameterSchema("result", "CPointer<CPointer<T>>", "OutSlot<CPointer<T>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IReferenceArray<T>.runtimeType())
         return schema
     }
@@ -4744,11 +4829,11 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIPropertyValue(): IPropertyValue {
-        IPropertyValue(asRaw())
+        IPropertyValue.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IReferenceArrayVtbl {
@@ -4764,7 +4849,7 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IStringableVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -4775,11 +4860,11 @@ public struct IStringableVtbl {
         let _ = offset
         var vtbl = IStringableVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.ToString = { this_, result__ =>
+        vtbl.ToString = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.ToString()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -4803,22 +4888,26 @@ public struct IStringableVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IStringable_Impl {
     public func ToString(): windows_core.Result<CPointer<UInt16>>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IStringable {
-        IStringable(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStringable {
+    public static func fromAbiTake(raw: CPointer<Unit>): IStringable {
+        IStringable(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IStringable {
         IStringable(raw)
     }
 
@@ -4834,13 +4923,13 @@ public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     public static func descriptor(): InterfaceDescriptor<IStringable> {
-        var descriptor = InterfaceDescriptor<IStringable>("IStringable", IStringable.iid(), IInspectable.descriptor(), { raw => IStringable(raw, ownsReference: true) }, { raw => IStringable(raw) })
+        var descriptor = InterfaceDescriptor<IStringable>("IStringable", IStringable.iid(), IInspectable.descriptor(), { raw => IStringable.fromAbiTake(raw) }, { raw => IStringable.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStringable.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IStringable", IStringable.iid(), IInspectable.descriptorSchema(), "IStringableVtbl", "IStringable", "IStringable_Impl", [InterfaceMethodSchema("ToString", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IStringable", IStringable.iid(), IInspectable.descriptorSchema(), "IStringableVtbl", "IStringable", "IStringable_Impl", [InterfaceMethodSchema("ToString", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IStringable.runtimeType())
         return schema
     }
@@ -4862,7 +4951,7 @@ public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IStringableVtbl {
@@ -4878,7 +4967,7 @@ public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IUriEscapeStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -4887,17 +4976,21 @@ public struct IUriEscapeStaticsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IUriEscapeStatics {
-        IUriEscapeStatics(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUriEscapeStatics {
+    public static func fromAbiTake(raw: CPointer<Unit>): IUriEscapeStatics {
+        IUriEscapeStatics(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IUriEscapeStatics {
         IUriEscapeStatics(raw)
     }
 
@@ -4913,13 +5006,13 @@ public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptor(): InterfaceDescriptor<IUriEscapeStatics> {
-        var descriptor = InterfaceDescriptor<IUriEscapeStatics>("IUriEscapeStatics", IUriEscapeStatics.iid(), IInspectable.descriptor(), { raw => IUriEscapeStatics(raw, ownsReference: true) }, { raw => IUriEscapeStatics(raw) })
+        var descriptor = InterfaceDescriptor<IUriEscapeStatics>("IUriEscapeStatics", IUriEscapeStatics.iid(), IInspectable.descriptor(), { raw => IUriEscapeStatics.fromAbiTake(raw) }, { raw => IUriEscapeStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IUriEscapeStatics.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUriEscapeStatics", IUriEscapeStatics.iid(), IInspectable.descriptorSchema(), "IUriEscapeStaticsVtbl", "IUriEscapeStatics", "IUriEscapeStatics_Impl", [InterfaceMethodSchema("UnescapeComponent", 6, [InterfaceParameterSchema("toUnescape", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("EscapeComponent", 7, [InterfaceParameterSchema("toEscape", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUriEscapeStatics", IUriEscapeStatics.iid(), IInspectable.descriptorSchema(), "IUriEscapeStaticsVtbl", "IUriEscapeStatics", "IUriEscapeStatics_Impl", [InterfaceMethodSchema("UnescapeComponent", 6, [InterfaceParameterSchema("toUnescape", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("EscapeComponent", 7, [InterfaceParameterSchema("toEscape", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUriEscapeStatics.runtimeType())
         return schema
     }
@@ -4941,7 +5034,7 @@ public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IUriEscapeStaticsVtbl {
@@ -4965,7 +5058,7 @@ public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IUriRuntimeClassVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -4989,17 +5082,21 @@ public struct IUriRuntimeClassVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IUriRuntimeClass {
-        IUriRuntimeClass(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUriRuntimeClass {
+    public static func fromAbiTake(raw: CPointer<Unit>): IUriRuntimeClass {
+        IUriRuntimeClass(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IUriRuntimeClass {
         IUriRuntimeClass(raw)
     }
 
@@ -5015,13 +5112,13 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<IUriRuntimeClass> {
-        var descriptor = InterfaceDescriptor<IUriRuntimeClass>("IUriRuntimeClass", IUriRuntimeClass.iid(), IInspectable.descriptor(), { raw => IUriRuntimeClass(raw, ownsReference: true) }, { raw => IUriRuntimeClass(raw) })
+        var descriptor = InterfaceDescriptor<IUriRuntimeClass>("IUriRuntimeClass", IUriRuntimeClass.iid(), IInspectable.descriptor(), { raw => IUriRuntimeClass.fromAbiTake(raw) }, { raw => IUriRuntimeClass.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IUriRuntimeClass.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUriRuntimeClass", IUriRuntimeClass.iid(), IInspectable.descriptorSchema(), "IUriRuntimeClassVtbl", "IUriRuntimeClass", "IUriRuntimeClass_Impl", [InterfaceMethodSchema("AbsoluteUri", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DisplayUri", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Domain", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Extension", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Fragment", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Host", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Password", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Path", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Query", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("QueryParsed", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<WwwFormUrlDecoder>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("RawUri", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SchemeName", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("UserName", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Port", 19, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutRef<Int32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Suspicious", 20, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Equals", 21, [InterfaceParameterSchema("pUri", "CPointer<Unit>", "Ref<Uri>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CombineUri", 22, [InterfaceParameterSchema("relativeUri", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<Uri>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUriRuntimeClass", IUriRuntimeClass.iid(), IInspectable.descriptorSchema(), "IUriRuntimeClassVtbl", "IUriRuntimeClass", "IUriRuntimeClass_Impl", [InterfaceMethodSchema("AbsoluteUri", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayUri", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Domain", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Extension", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Fragment", 10, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Host", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Password", 12, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Path", 13, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Query", 14, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("QueryParsed", 15, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WwwFormUrlDecoder>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RawUri", 16, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SchemeName", 17, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("UserName", 18, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Port", 19, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Suspicious", 20, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Equals", 21, [InterfaceParameterSchema("pUri", "CPointer<Unit>", "InParam<Uri>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CombineUri", 22, [InterfaceParameterSchema("relativeUri", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUriRuntimeClass.runtimeType())
         return schema
     }
@@ -5043,7 +5140,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IUriRuntimeClassVtbl {
@@ -5127,7 +5224,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         var result = CPointer<Unit>()
         let hr = v.QueryParsed(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return WwwFormUrlDecoder.fromRaw(result)
+        return WwwFormUrlDecoder.fromAbiTake(result)
     }
 
     public unsafe func RawUri(): CPointer<UInt16> {
@@ -5183,11 +5280,11 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
         var result = CPointer<Unit>()
         let hr = v.CombineUri(asRaw(), relativeUri, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return Uri.fromRaw(result)
+        return Uri.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IUriRuntimeClassFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -5196,17 +5293,21 @@ public struct IUriRuntimeClassFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IUriRuntimeClassFactory {
-        IUriRuntimeClassFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUriRuntimeClassFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): IUriRuntimeClassFactory {
+        IUriRuntimeClassFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IUriRuntimeClassFactory {
         IUriRuntimeClassFactory(raw)
     }
 
@@ -5222,13 +5323,13 @@ public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IUriRuntimeClassFactory> {
-        var descriptor = InterfaceDescriptor<IUriRuntimeClassFactory>("IUriRuntimeClassFactory", IUriRuntimeClassFactory.iid(), IInspectable.descriptor(), { raw => IUriRuntimeClassFactory(raw, ownsReference: true) }, { raw => IUriRuntimeClassFactory(raw) })
+        var descriptor = InterfaceDescriptor<IUriRuntimeClassFactory>("IUriRuntimeClassFactory", IUriRuntimeClassFactory.iid(), IInspectable.descriptor(), { raw => IUriRuntimeClassFactory.fromAbiTake(raw) }, { raw => IUriRuntimeClassFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IUriRuntimeClassFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUriRuntimeClassFactory", IUriRuntimeClassFactory.iid(), IInspectable.descriptorSchema(), "IUriRuntimeClassFactoryVtbl", "IUriRuntimeClassFactory", "IUriRuntimeClassFactory_Impl", [InterfaceMethodSchema("CreateUri", 6, [InterfaceParameterSchema("uri", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<Uri>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateWithRelativeUri", 7, [InterfaceParameterSchema("baseUri", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("relativeUri", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<Uri>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUriRuntimeClassFactory", IUriRuntimeClassFactory.iid(), IInspectable.descriptorSchema(), "IUriRuntimeClassFactoryVtbl", "IUriRuntimeClassFactory", "IUriRuntimeClassFactory_Impl", [InterfaceMethodSchema("CreateUri", 6, [InterfaceParameterSchema("uri", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithRelativeUri", 7, [InterfaceParameterSchema("baseUri", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("relativeUri", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUriRuntimeClassFactory.runtimeType())
         return schema
     }
@@ -5250,7 +5351,7 @@ public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IUriRuntimeClassFactoryVtbl {
@@ -5262,7 +5363,7 @@ public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & Ru
         var result = CPointer<Unit>()
         let hr = v.CreateUri(asRaw(), uri, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return Uri.fromRaw(result)
+        return Uri.fromAbiTake(result)
     }
 
     public unsafe func CreateWithRelativeUri(baseUri: CPointer<UInt16>, relativeUri: CPointer<UInt16>): Uri {
@@ -5270,11 +5371,11 @@ public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & Ru
         var result = CPointer<Unit>()
         let hr = v.CreateWithRelativeUri(asRaw(), baseUri, relativeUri, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return Uri.fromRaw(result)
+        return Uri.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IUriRuntimeClassWithAbsoluteCanonicalUriVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -5283,17 +5384,21 @@ public struct IUriRuntimeClassWithAbsoluteCanonicalUriVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IUriRuntimeClassWithAbsoluteCanonicalUri {
-        IUriRuntimeClassWithAbsoluteCanonicalUri(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IUriRuntimeClassWithAbsoluteCanonicalUri {
+    public static func fromAbiTake(raw: CPointer<Unit>): IUriRuntimeClassWithAbsoluteCanonicalUri {
+        IUriRuntimeClassWithAbsoluteCanonicalUri(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IUriRuntimeClassWithAbsoluteCanonicalUri {
         IUriRuntimeClassWithAbsoluteCanonicalUri(raw)
     }
 
@@ -5309,13 +5414,13 @@ public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<IUriRuntimeClassWithAbsoluteCanonicalUri> {
-        var descriptor = InterfaceDescriptor<IUriRuntimeClassWithAbsoluteCanonicalUri>("IUriRuntimeClassWithAbsoluteCanonicalUri", IUriRuntimeClassWithAbsoluteCanonicalUri.iid(), IInspectable.descriptor(), { raw => IUriRuntimeClassWithAbsoluteCanonicalUri(raw, ownsReference: true) }, { raw => IUriRuntimeClassWithAbsoluteCanonicalUri(raw) })
+        var descriptor = InterfaceDescriptor<IUriRuntimeClassWithAbsoluteCanonicalUri>("IUriRuntimeClassWithAbsoluteCanonicalUri", IUriRuntimeClassWithAbsoluteCanonicalUri.iid(), IInspectable.descriptor(), { raw => IUriRuntimeClassWithAbsoluteCanonicalUri.fromAbiTake(raw) }, { raw => IUriRuntimeClassWithAbsoluteCanonicalUri.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IUriRuntimeClassWithAbsoluteCanonicalUri.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IUriRuntimeClassWithAbsoluteCanonicalUri", IUriRuntimeClassWithAbsoluteCanonicalUri.iid(), IInspectable.descriptorSchema(), "IUriRuntimeClassWithAbsoluteCanonicalUriVtbl", "IUriRuntimeClassWithAbsoluteCanonicalUri", "IUriRuntimeClassWithAbsoluteCanonicalUri_Impl", [InterfaceMethodSchema("AbsoluteCanonicalUri", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("DisplayIri", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IUriRuntimeClassWithAbsoluteCanonicalUri", IUriRuntimeClassWithAbsoluteCanonicalUri.iid(), IInspectable.descriptorSchema(), "IUriRuntimeClassWithAbsoluteCanonicalUriVtbl", "IUriRuntimeClassWithAbsoluteCanonicalUri", "IUriRuntimeClassWithAbsoluteCanonicalUri_Impl", [InterfaceMethodSchema("AbsoluteCanonicalUri", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("DisplayIri", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IUriRuntimeClassWithAbsoluteCanonicalUri.runtimeType())
         return schema
     }
@@ -5337,7 +5442,7 @@ public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IUriRuntimeClassWithAbsoluteCanonicalUriVtbl {
@@ -5361,7 +5466,7 @@ public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & 
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IWwwFormUrlDecoderEntryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -5373,11 +5478,11 @@ public struct IWwwFormUrlDecoderEntryVtbl {
         let _ = offset
         var vtbl = IWwwFormUrlDecoderEntryVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.Name = { this_, result__ =>
+        vtbl.Name = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Name()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -5390,11 +5495,11 @@ public struct IWwwFormUrlDecoderEntryVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Value = { this_, result__ =>
+        vtbl.Value = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Value()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -5418,23 +5523,27 @@ public struct IWwwFormUrlDecoderEntryVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public interface IWwwFormUrlDecoderEntry_Impl {
     public func Name(): windows_core.Result<CPointer<UInt16>>
     public func Value(): windows_core.Result<CPointer<UInt16>>
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IWwwFormUrlDecoderEntry {
-        IWwwFormUrlDecoderEntry(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWwwFormUrlDecoderEntry {
+    public static func fromAbiTake(raw: CPointer<Unit>): IWwwFormUrlDecoderEntry {
+        IWwwFormUrlDecoderEntry(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IWwwFormUrlDecoderEntry {
         IWwwFormUrlDecoderEntry(raw)
     }
 
@@ -5450,13 +5559,13 @@ public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IWwwFormUrlDecoderEntry> {
-        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderEntry>("IWwwFormUrlDecoderEntry", IWwwFormUrlDecoderEntry.iid(), IInspectable.descriptor(), { raw => IWwwFormUrlDecoderEntry(raw, ownsReference: true) }, { raw => IWwwFormUrlDecoderEntry(raw) })
+        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderEntry>("IWwwFormUrlDecoderEntry", IWwwFormUrlDecoderEntry.iid(), IInspectable.descriptor(), { raw => IWwwFormUrlDecoderEntry.fromAbiTake(raw) }, { raw => IWwwFormUrlDecoderEntry.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IWwwFormUrlDecoderEntry.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWwwFormUrlDecoderEntry", IWwwFormUrlDecoderEntry.iid(), IInspectable.descriptorSchema(), "IWwwFormUrlDecoderEntryVtbl", "IWwwFormUrlDecoderEntry", "IWwwFormUrlDecoderEntry_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Value", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWwwFormUrlDecoderEntry", IWwwFormUrlDecoderEntry.iid(), IInspectable.descriptorSchema(), "IWwwFormUrlDecoderEntryVtbl", "IWwwFormUrlDecoderEntry", "IWwwFormUrlDecoderEntry_Impl", [InterfaceMethodSchema("Name", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Value", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWwwFormUrlDecoderEntry.runtimeType())
         return schema
     }
@@ -5478,7 +5587,7 @@ public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IWwwFormUrlDecoderEntryVtbl {
@@ -5502,7 +5611,7 @@ public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & Ru
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IWwwFormUrlDecoderRuntimeClassVtbl {
     public var base_: IIterableVtbl = IIterableVtbl()
@@ -5510,17 +5619,21 @@ public struct IWwwFormUrlDecoderRuntimeClassVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClass {
-        IWwwFormUrlDecoderRuntimeClass(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClass {
+    public static func fromAbiTake(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClass {
+        IWwwFormUrlDecoderRuntimeClass(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClass {
         IWwwFormUrlDecoderRuntimeClass(raw)
     }
 
@@ -5532,7 +5645,7 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
         if (iid == IWwwFormUrlDecoderRuntimeClass.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.collections.IIterable<IWwwFormUrlDecoderEntry>.iid(), windows.foundation.collections.IVectorView<IWwwFormUrlDecoderEntry>.iid(), windows.foundation.collections.IIterable<T0>.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation_Collections.IIterable<IWwwFormUrlDecoderEntry>.iid(), Foundation_Collections.IVectorView<IWwwFormUrlDecoderEntry>.iid(), Foundation_Collections.IIterable<T0>.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -5541,13 +5654,13 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClass> {
-        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClass>("IWwwFormUrlDecoderRuntimeClass", IWwwFormUrlDecoderRuntimeClass.iid(), windows.foundation.collections.IIterable<IWwwFormUrlDecoderEntry>.descriptor(), { raw => IWwwFormUrlDecoderRuntimeClass(raw, ownsReference: true) }, { raw => IWwwFormUrlDecoderRuntimeClass(raw) })
+        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClass>("IWwwFormUrlDecoderRuntimeClass", IWwwFormUrlDecoderRuntimeClass.iid(), Foundation_Collections.IIterable<IWwwFormUrlDecoderEntry>.descriptor(), { raw => IWwwFormUrlDecoderRuntimeClass.fromAbiTake(raw) }, { raw => IWwwFormUrlDecoderRuntimeClass.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IWwwFormUrlDecoderRuntimeClass.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWwwFormUrlDecoderRuntimeClass", IWwwFormUrlDecoderRuntimeClass.iid(), windows.foundation.collections.IIterable<IWwwFormUrlDecoderEntry>.descriptorSchema(), "IWwwFormUrlDecoderRuntimeClassVtbl", "IWwwFormUrlDecoderRuntimeClass", "IWwwFormUrlDecoderRuntimeClass_Impl", [InterfaceMethodSchema("GetFirstValueByName", 7, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWwwFormUrlDecoderRuntimeClass", IWwwFormUrlDecoderRuntimeClass.iid(), Foundation_Collections.IIterable<IWwwFormUrlDecoderEntry>.descriptorSchema(), "IWwwFormUrlDecoderRuntimeClassVtbl", "IWwwFormUrlDecoderRuntimeClass", "IWwwFormUrlDecoderRuntimeClass_Impl", [InterfaceMethodSchema("GetFirstValueByName", 7, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWwwFormUrlDecoderRuntimeClass.runtimeType())
         return schema
     }
@@ -5569,19 +5682,19 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIIterable(): windows.foundation.collections.IIterable<IWwwFormUrlDecoderEntry> {
-        windows.foundation.collections.IIterable<IWwwFormUrlDecoderEntry>(asRaw())
+    public func asIIterable(): Foundation_Collections.IIterable<IWwwFormUrlDecoderEntry> {
+        Foundation_Collections.IIterable<IWwwFormUrlDecoderEntry>.viewOf(asRaw())
     }
 
-    public func asIVectorView(): windows.foundation.collections.IVectorView<IWwwFormUrlDecoderEntry> {
-        windows.foundation.collections.IVectorView<IWwwFormUrlDecoderEntry>(asRaw())
+    public func asIVectorView(): Foundation_Collections.IVectorView<IWwwFormUrlDecoderEntry> {
+        Foundation_Collections.IVectorView<IWwwFormUrlDecoderEntry>.viewOf(asRaw())
     }
 
-    public func asIIterable(): windows.foundation.collections.IIterable<T0> {
-        windows.foundation.collections.IIterable<T0>(asRaw())
+    public func asIIterable(): Foundation_Collections.IIterable<T0> {
+        Foundation_Collections.IIterable<T0>.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IWwwFormUrlDecoderRuntimeClassVtbl {
@@ -5605,7 +5718,7 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct IWwwFormUrlDecoderRuntimeClassFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -5613,17 +5726,21 @@ public struct IWwwFormUrlDecoderRuntimeClassFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClassFactory {
-        IWwwFormUrlDecoderRuntimeClassFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClassFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClassFactory {
+        IWwwFormUrlDecoderRuntimeClassFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IWwwFormUrlDecoderRuntimeClassFactory {
         IWwwFormUrlDecoderRuntimeClassFactory(raw)
     }
 
@@ -5639,13 +5756,13 @@ public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClassFactory> {
-        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClassFactory>("IWwwFormUrlDecoderRuntimeClassFactory", IWwwFormUrlDecoderRuntimeClassFactory.iid(), IInspectable.descriptor(), { raw => IWwwFormUrlDecoderRuntimeClassFactory(raw, ownsReference: true) }, { raw => IWwwFormUrlDecoderRuntimeClassFactory(raw) })
+        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClassFactory>("IWwwFormUrlDecoderRuntimeClassFactory", IWwwFormUrlDecoderRuntimeClassFactory.iid(), IInspectable.descriptor(), { raw => IWwwFormUrlDecoderRuntimeClassFactory.fromAbiTake(raw) }, { raw => IWwwFormUrlDecoderRuntimeClassFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IWwwFormUrlDecoderRuntimeClassFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IWwwFormUrlDecoderRuntimeClassFactory", IWwwFormUrlDecoderRuntimeClassFactory.iid(), IInspectable.descriptorSchema(), "IWwwFormUrlDecoderRuntimeClassFactoryVtbl", "IWwwFormUrlDecoderRuntimeClassFactory", "IWwwFormUrlDecoderRuntimeClassFactory_Impl", [InterfaceMethodSchema("CreateWwwFormUrlDecoder", 6, [InterfaceParameterSchema("query", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<WwwFormUrlDecoder>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IWwwFormUrlDecoderRuntimeClassFactory", IWwwFormUrlDecoderRuntimeClassFactory.iid(), IInspectable.descriptorSchema(), "IWwwFormUrlDecoderRuntimeClassFactoryVtbl", "IWwwFormUrlDecoderRuntimeClassFactory", "IWwwFormUrlDecoderRuntimeClassFactory_Impl", [InterfaceMethodSchema("CreateWwwFormUrlDecoder", 6, [InterfaceParameterSchema("query", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<WwwFormUrlDecoder>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IWwwFormUrlDecoderRuntimeClassFactory.runtimeType())
         return schema
     }
@@ -5667,7 +5784,7 @@ public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & Com
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IWwwFormUrlDecoderRuntimeClassFactoryVtbl {
@@ -5679,21 +5796,25 @@ public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & Com
         var result = CPointer<Unit>()
         let hr = v.CreateWwwFormUrlDecoder(asRaw(), query, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return WwwFormUrlDecoder.fromRaw(result)
+        return WwwFormUrlDecoder.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class MemoryBuffer <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): MemoryBuffer {
-        MemoryBuffer(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MemoryBuffer {
+    public static func fromAbiTake(raw: CPointer<Unit>): MemoryBuffer {
+        MemoryBuffer(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MemoryBuffer {
         MemoryBuffer(raw)
     }
 
@@ -5707,11 +5828,11 @@ public class MemoryBuffer <: InterfaceWrapperBase & ComInterface & windows_inter
 
     public static func descriptor(): InterfaceDescriptor<MemoryBuffer> {
         let ancestors = [IMemoryBuffer.iid(), IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<MemoryBuffer>("MemoryBuffer", IMemoryBuffer.iid(), ancestors, { raw => MemoryBuffer(raw, ownsReference: true) }, { raw => MemoryBuffer(raw) })
+        return InterfaceDescriptor<MemoryBuffer>("MemoryBuffer", IMemoryBuffer.iid(), ancestors, { raw => MemoryBuffer.fromAbiTake(raw) }, { raw => MemoryBuffer.viewOf(raw) })
     }
 
     public func defaultInterface(): IMemoryBuffer {
-        IMemoryBuffer(asRaw())
+        IMemoryBuffer.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -5735,7 +5856,7 @@ public class MemoryBuffer <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIMemoryBuffer(): IMemoryBuffer {
@@ -5761,7 +5882,7 @@ public class MemoryBuffer <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct Point {
     public var X: Float32 = 0.0
@@ -5769,58 +5890,16 @@ public struct Point {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
+@C
 public struct PropertyType {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Empty = PropertyType(value: 0)
-    public static let UInt8 = PropertyType(value: 1)
-    public static let Int16 = PropertyType(value: 2)
-    public static let UInt16 = PropertyType(value: 3)
-    public static let Int32 = PropertyType(value: 4)
-    public static let UInt32 = PropertyType(value: 5)
-    public static let Int64 = PropertyType(value: 6)
-    public static let UInt64 = PropertyType(value: 7)
-    public static let Single = PropertyType(value: 8)
-    public static let Double = PropertyType(value: 9)
-    public static let Char16 = PropertyType(value: 10)
-    public static let Boolean = PropertyType(value: 11)
-    public static let String = PropertyType(value: 12)
-    public static let Inspectable = PropertyType(value: 13)
-    public static let DateTime = PropertyType(value: 14)
-    public static let TimeSpan = PropertyType(value: 15)
-    public static let Guid = PropertyType(value: 16)
-    public static let Point = PropertyType(value: 17)
-    public static let Size = PropertyType(value: 18)
-    public static let Rect = PropertyType(value: 19)
-    public static let OtherType = PropertyType(value: 20)
-    public static let UInt8Array = PropertyType(value: 1025)
-    public static let Int16Array = PropertyType(value: 1026)
-    public static let UInt16Array = PropertyType(value: 1027)
-    public static let Int32Array = PropertyType(value: 1028)
-    public static let UInt32Array = PropertyType(value: 1029)
-    public static let Int64Array = PropertyType(value: 1030)
-    public static let UInt64Array = PropertyType(value: 1031)
-    public static let SingleArray = PropertyType(value: 1032)
-    public static let DoubleArray = PropertyType(value: 1033)
-    public static let Char16Array = PropertyType(value: 1034)
-    public static let BooleanArray = PropertyType(value: 1035)
-    public static let StringArray = PropertyType(value: 1036)
-    public static let InspectableArray = PropertyType(value: 1037)
-    public static let DateTimeArray = PropertyType(value: 1038)
-    public static let TimeSpanArray = PropertyType(value: 1039)
-    public static let GuidArray = PropertyType(value: 1040)
-    public static let PointArray = PropertyType(value: 1041)
-    public static let SizeArray = PropertyType(value: 1042)
-    public static let RectArray = PropertyType(value: 1043)
-    public static let OtherTypeArray = PropertyType(value: 1044)
 
     public operator func ==(other: PropertyType): Bool {
         return this.value == other.value
@@ -5830,17 +5909,144 @@ public struct PropertyType {
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
+public let Empty: PropertyType = PropertyType(0)
+
+@When[Windows_Foundation == "on"]
+public let `UInt8`: PropertyType = PropertyType(1)
+
+@When[Windows_Foundation == "on"]
+public let `Int16`: PropertyType = PropertyType(2)
+
+@When[Windows_Foundation == "on"]
+public let `UInt16`: PropertyType = PropertyType(3)
+
+@When[Windows_Foundation == "on"]
+public let `Int32`: PropertyType = PropertyType(4)
+
+@When[Windows_Foundation == "on"]
+public let `UInt32`: PropertyType = PropertyType(5)
+
+@When[Windows_Foundation == "on"]
+public let `Int64`: PropertyType = PropertyType(6)
+
+@When[Windows_Foundation == "on"]
+public let `UInt64`: PropertyType = PropertyType(7)
+
+@When[Windows_Foundation == "on"]
+public let Single: PropertyType = PropertyType(8)
+
+@When[Windows_Foundation == "on"]
+public let Double: PropertyType = PropertyType(9)
+
+@When[Windows_Foundation == "on"]
+public let Char16: PropertyType = PropertyType(10)
+
+@When[Windows_Foundation == "on"]
+public let Boolean: PropertyType = PropertyType(11)
+
+@When[Windows_Foundation == "on"]
+public let String: PropertyType = PropertyType(12)
+
+@When[Windows_Foundation == "on"]
+public let Inspectable: PropertyType = PropertyType(13)
+
+@When[Windows_Foundation == "on"]
+public let DateTime_CONST: PropertyType = PropertyType(14)
+
+@When[Windows_Foundation == "on"]
+public let TimeSpan_CONST: PropertyType = PropertyType(15)
+
+@When[Windows_Foundation == "on"]
+public let Guid: PropertyType = PropertyType(16)
+
+@When[Windows_Foundation == "on"]
+public let Point_CONST: PropertyType = PropertyType(17)
+
+@When[Windows_Foundation == "on"]
+public let Size_CONST: PropertyType = PropertyType(18)
+
+@When[Windows_Foundation == "on"]
+public let Rect_CONST: PropertyType = PropertyType(19)
+
+@When[Windows_Foundation == "on"]
+public let OtherType: PropertyType = PropertyType(20)
+
+@When[Windows_Foundation == "on"]
+public let UInt8Array: PropertyType = PropertyType(1025)
+
+@When[Windows_Foundation == "on"]
+public let Int16Array: PropertyType = PropertyType(1026)
+
+@When[Windows_Foundation == "on"]
+public let UInt16Array: PropertyType = PropertyType(1027)
+
+@When[Windows_Foundation == "on"]
+public let Int32Array: PropertyType = PropertyType(1028)
+
+@When[Windows_Foundation == "on"]
+public let UInt32Array: PropertyType = PropertyType(1029)
+
+@When[Windows_Foundation == "on"]
+public let Int64Array: PropertyType = PropertyType(1030)
+
+@When[Windows_Foundation == "on"]
+public let UInt64Array: PropertyType = PropertyType(1031)
+
+@When[Windows_Foundation == "on"]
+public let SingleArray: PropertyType = PropertyType(1032)
+
+@When[Windows_Foundation == "on"]
+public let DoubleArray: PropertyType = PropertyType(1033)
+
+@When[Windows_Foundation == "on"]
+public let Char16Array: PropertyType = PropertyType(1034)
+
+@When[Windows_Foundation == "on"]
+public let BooleanArray: PropertyType = PropertyType(1035)
+
+@When[Windows_Foundation == "on"]
+public let StringArray: PropertyType = PropertyType(1036)
+
+@When[Windows_Foundation == "on"]
+public let InspectableArray: PropertyType = PropertyType(1037)
+
+@When[Windows_Foundation == "on"]
+public let DateTimeArray: PropertyType = PropertyType(1038)
+
+@When[Windows_Foundation == "on"]
+public let TimeSpanArray: PropertyType = PropertyType(1039)
+
+@When[Windows_Foundation == "on"]
+public let GuidArray: PropertyType = PropertyType(1040)
+
+@When[Windows_Foundation == "on"]
+public let PointArray: PropertyType = PropertyType(1041)
+
+@When[Windows_Foundation == "on"]
+public let SizeArray: PropertyType = PropertyType(1042)
+
+@When[Windows_Foundation == "on"]
+public let RectArray: PropertyType = PropertyType(1043)
+
+@When[Windows_Foundation == "on"]
+public let OtherTypeArray: PropertyType = PropertyType(1044)
+
+@When[Windows_Foundation == "on"]
 public class PropertyValue <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): PropertyValue {
-        PropertyValue(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PropertyValue {
+    public static func fromAbiTake(raw: CPointer<Unit>): PropertyValue {
+        PropertyValue(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PropertyValue {
         PropertyValue(raw)
     }
 
@@ -5853,7 +6059,7 @@ public class PropertyValue <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     public static func descriptor(): InterfaceDescriptor<PropertyValue> {
-        return InterfaceDescriptor<PropertyValue>("PropertyValue", GUID(), [IInspectable.iid(), IUnknown.iid()], { raw => PropertyValue(raw, ownsReference: true) }, { raw => PropertyValue(raw) })
+        return InterfaceDescriptor<PropertyValue>("PropertyValue", GUID(), [IInspectable.iid(), IUnknown.iid()], { raw => PropertyValue.fromAbiTake(raw) }, { raw => PropertyValue.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -5877,7 +6083,7 @@ public class PropertyValue <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public static unsafe func CreateEmpty(): IInspectable {
@@ -6115,7 +6321,7 @@ public class PropertyValue <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct Rect {
     public var X: Float32 = 0.0
@@ -6125,7 +6331,7 @@ public struct Rect {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct Size {
     public var Width: Float32 = 0.0
@@ -6133,14 +6339,14 @@ public struct Size {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct TimeSpan {
     public var Duration: Int64 = 0
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct TypedEventHandlerVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -6149,17 +6355,21 @@ public struct TypedEventHandlerVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType where TSender <: windows_core.RuntimeType, TResult <: windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): TypedEventHandler<TSender, TResult> {
-        TypedEventHandler<TSender, TResult>(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): TypedEventHandler<TSender, TResult> {
+    public static func fromAbiTake(raw: CPointer<Unit>): TypedEventHandler<TSender, TResult> {
+        TypedEventHandler<TSender, TResult>(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TypedEventHandler<TSender, TResult> {
         TypedEventHandler<TSender, TResult>(raw)
     }
 
@@ -6168,7 +6378,7 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<TypedEventHandler<TSender, TResult>> {
-        return InterfaceDescriptor<TypedEventHandler<TSender, TResult>>("TypedEventHandler", TypedEventHandler<TSender, TResult>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => TypedEventHandler<TSender, TResult>(raw, ownsReference: true) }, { raw => TypedEventHandler<TSender, TResult>(raw) })
+        return InterfaceDescriptor<TypedEventHandler<TSender, TResult>>("TypedEventHandler", TypedEventHandler<TSender, TResult>.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => TypedEventHandler<TSender, TResult>.fromAbiTake(raw) }, { raw => TypedEventHandler<TSender, TResult>.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -6191,7 +6401,7 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): TypedEventHandlerVtbl {
@@ -6204,78 +6414,79 @@ public class TypedEventHandler<TSender, TResult> <: InterfaceWrapperBase & ComIn
         HRESULT(hr).ok()
     }
 
-    public unsafe func Invoke(sender: CPointer<Unit>, args: CPointer<Unit>): Unit {
+    public unsafe func Invoke(sender: TSender, args: TResult): Unit {
         let v = vtbl()
         let hr = v.Invoke(asRaw(), sender, args)
         HRESULT(hr).ok()
     }
 
-    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): TypedEventHandler<TSender, TResult> {
-        let box = TypedEventHandlerBox(invoke)
-        let object = ComObject<TypedEventHandlerBox>.new(box, [TypedEventHandler<TSender, TResult>.descriptorSchema()], [box.vtblPtr()])
+    public static func new(invoke: (TSender, TResult) -> Unit): TypedEventHandler<TSender, TResult> {
+        let box = TypedEventHandlerBox<TSender, TResult>(invoke)
+        let object = ComObject<TypedEventHandlerBox<TSender, TResult>>.new(box, [TypedEventHandler<TSender, TResult>.descriptorSchema()], [box.vtblPtr()])
         return object.intoInterface(TypedEventHandler<TSender, TResult>.descriptor())
     }
 }
 
-private open class TypedEventHandlerInvoker {
-    public open func Invoke(sender: CPointer<Unit>, args: CPointer<Unit>): Unit {
+private open class TypedEventHandlerInvoker<TSender, TResult> where TSender <: windows_core.RuntimeType, TResult <: windows_core.RuntimeType {
+    public open func Invoke(sender: TSender, args: TResult): Unit {
         ()
     }
 }
 
-private class TypedEventHandlerBox <: TypedEventHandlerInvoker {
-    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+private class TypedEventHandlerBox<TSender, TResult> <: TypedEventHandlerInvoker<TSender, TResult> where TSender <: windows_core.RuntimeType, TResult <: windows_core.RuntimeType {
+    public let invoke_: (TSender, TResult) -> Unit
     private let vtblHandle: CPointerHandle<TypedEventHandlerVtbl>
 
-    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+    public init(invoke: (TSender, TResult) -> Unit) {
         this.invoke_ = invoke
-        this.vtblHandle = unsafe { acquireArrayRawData(Array<TypedEventHandlerVtbl>(1, { _ => buildTypedEventHandlerBoxVtbl() })) }
+        this.vtblHandle = unsafe { acquireArrayRawData(Array<TypedEventHandlerVtbl>(1, { _ => buildTypedEventHandlerBoxVtbl<TSender, TResult>() })) }
     }
 
     public func vtblPtr(): CPointer<Unit> {
         CPointer<Unit>(vtblHandle.pointer)
     }
 
-    public override func Invoke(sender: CPointer<Unit>, args: CPointer<Unit>): Unit {
+    public override func Invoke(sender: TSender, args: TResult): Unit {
         invoke_(sender, args)
     }
 }
 
-func buildTypedEventHandlerBoxVtbl(): TypedEventHandlerVtbl {
+func buildTypedEventHandlerBoxVtbl<TSender, TResult>(): TypedEventHandlerVtbl where TSender <: windows_core.RuntimeType, TResult <: windows_core.RuntimeType {
     var vtbl = TypedEventHandlerVtbl()
     vtbl.base_ = buildIInspectableVtbl()
-    vtbl.Invoke = TypedEventHandlerInvokeThunk
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit> =>
+        match (unsafe { asImplFromRaw<TypedEventHandlerInvoker<TSender, TResult>>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.Invoke(arg0, arg1)
+                return S_OK.value
+            case None =>
+                return E_NOTIMPL.value
+        }
+    }
     return vtbl
 }
 
-@C
-func TypedEventHandlerInvokeThunk(this_: CPointer<Unit>, arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-    match (unsafe { asImplFromRaw<TypedEventHandlerInvoker>(this_) }) {
-        case Some(invoker) =>
-            invoker.Invoke(arg0, arg1)
-            return S_OK.value
-        case None =>
-            return E_NOTIMPL.value
-    }
-}
-
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 @C
 public struct UniversalApiContract {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): Uri {
-        Uri(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): Uri {
+    public static func fromAbiTake(raw: CPointer<Unit>): Uri {
+        Uri(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Uri {
         Uri(raw)
     }
 
@@ -6289,11 +6500,11 @@ public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.Runt
 
     public static func descriptor(): InterfaceDescriptor<Uri> {
         let ancestors = [IUriRuntimeClass.iid(), IStringable.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<Uri>("Uri", IUriRuntimeClass.iid(), ancestors, { raw => Uri(raw, ownsReference: true) }, { raw => Uri(raw) })
+        return InterfaceDescriptor<Uri>("Uri", IUriRuntimeClass.iid(), ancestors, { raw => Uri.fromAbiTake(raw) }, { raw => Uri.viewOf(raw) })
     }
 
     public func defaultInterface(): IUriRuntimeClass {
-        IUriRuntimeClass(asRaw())
+        IUriRuntimeClass.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -6317,7 +6528,7 @@ public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.Runt
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIUriRuntimeClass(): IUriRuntimeClass {
@@ -6425,17 +6636,21 @@ public class Uri <: InterfaceWrapperBase & ComInterface & windows_interface.Runt
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): WwwFormUrlDecoder {
-        WwwFormUrlDecoder(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): WwwFormUrlDecoder {
+    public static func fromAbiTake(raw: CPointer<Unit>): WwwFormUrlDecoder {
+        WwwFormUrlDecoder(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WwwFormUrlDecoder {
         WwwFormUrlDecoder(raw)
     }
 
@@ -6448,12 +6663,12 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     public static func descriptor(): InterfaceDescriptor<WwwFormUrlDecoder> {
-        let ancestors = [IWwwFormUrlDecoderRuntimeClass.iid(), windows.foundation.collections.IIterable<IWwwFormUrlDecoderEntry>.iid(), windows.foundation.collections.IVectorView<IWwwFormUrlDecoderEntry>.iid(), windows.foundation.collections.IIterable<T0>.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WwwFormUrlDecoder>("WwwFormUrlDecoder", IWwwFormUrlDecoderRuntimeClass.iid(), ancestors, { raw => WwwFormUrlDecoder(raw, ownsReference: true) }, { raw => WwwFormUrlDecoder(raw) })
+        let ancestors = [IWwwFormUrlDecoderRuntimeClass.iid(), Foundation_Collections.IIterable<IWwwFormUrlDecoderEntry>.iid(), Foundation_Collections.IVectorView<IWwwFormUrlDecoderEntry>.iid(), Foundation_Collections.IIterable<T0>.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<WwwFormUrlDecoder>("WwwFormUrlDecoder", IWwwFormUrlDecoderRuntimeClass.iid(), ancestors, { raw => WwwFormUrlDecoder.fromAbiTake(raw) }, { raw => WwwFormUrlDecoder.viewOf(raw) })
     }
 
     public func defaultInterface(): IWwwFormUrlDecoderRuntimeClass {
-        IWwwFormUrlDecoderRuntimeClass(asRaw())
+        IWwwFormUrlDecoderRuntimeClass.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -6477,23 +6692,23 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIWwwFormUrlDecoderRuntimeClass(): IWwwFormUrlDecoderRuntimeClass {
         IWwwFormUrlDecoderRuntimeClass(asRaw())
     }
 
-    public func asIIterable(): windows.foundation.collections.IIterable<IWwwFormUrlDecoderEntry> {
-        windows.foundation.collections.IIterable<IWwwFormUrlDecoderEntry>(asRaw())
+    public func asIIterable(): Foundation_Collections.IIterable<IWwwFormUrlDecoderEntry> {
+        Foundation_Collections.IIterable<IWwwFormUrlDecoderEntry>(asRaw())
     }
 
-    public func asIVectorView(): windows.foundation.collections.IVectorView<IWwwFormUrlDecoderEntry> {
-        windows.foundation.collections.IVectorView<IWwwFormUrlDecoderEntry>(asRaw())
+    public func asIVectorView(): Foundation_Collections.IVectorView<IWwwFormUrlDecoderEntry> {
+        Foundation_Collections.IVectorView<IWwwFormUrlDecoderEntry>(asRaw())
     }
 
-    public func asIIterable(): windows.foundation.collections.IIterable<T0> {
-        windows.foundation.collections.IIterable<T0>(asRaw())
+    public func asIIterable(): Foundation_Collections.IIterable<T0> {
+        Foundation_Collections.IIterable<T0>(asRaw())
     }
 
     public func intoIterator(): Iterator<IWwwFormUrlDecoderEntry> {
@@ -6514,11 +6729,11 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
         return defaultInterface().GetFirstValueByName(phstrValue)
     }
 
-    public unsafe func First(): CPointer<Unit> {
+    public unsafe func First(): Foundation_Collections.IIterator<T> {
         return asIIterable().First()
     }
 
-    public unsafe func GetAt(index: UInt32): CPointer<Unit> {
+    public unsafe func GetAt(index: UInt32): T {
         return asIVectorView().GetAt(index)
     }
 
@@ -6526,7 +6741,7 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
         return asIVectorView().Size()
     }
 
-    public unsafe func IndexOf(value: CPointer<Unit>, index: CPointer<UInt32>): Bool {
+    public unsafe func IndexOf(value: T, index: CPointer<UInt32>): Bool {
         return asIVectorView().IndexOf(value, index)
     }
 
@@ -6535,17 +6750,21 @@ public class WwwFormUrlDecoder <: InterfaceWrapperBase & ComInterface & windows_
     }
 }
 
-@When[feature == "feat_windows_foundation"]
+@When[Windows_Foundation == "on"]
 public class WwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): WwwFormUrlDecoderEntry {
-        WwwFormUrlDecoderEntry(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): WwwFormUrlDecoderEntry {
+    public static func fromAbiTake(raw: CPointer<Unit>): WwwFormUrlDecoderEntry {
+        WwwFormUrlDecoderEntry(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WwwFormUrlDecoderEntry {
         WwwFormUrlDecoderEntry(raw)
     }
 
@@ -6559,11 +6778,11 @@ public class WwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & win
 
     public static func descriptor(): InterfaceDescriptor<WwwFormUrlDecoderEntry> {
         let ancestors = [IWwwFormUrlDecoderEntry.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<WwwFormUrlDecoderEntry>("WwwFormUrlDecoderEntry", IWwwFormUrlDecoderEntry.iid(), ancestors, { raw => WwwFormUrlDecoderEntry(raw, ownsReference: true) }, { raw => WwwFormUrlDecoderEntry(raw) })
+        return InterfaceDescriptor<WwwFormUrlDecoderEntry>("WwwFormUrlDecoderEntry", IWwwFormUrlDecoderEntry.iid(), ancestors, { raw => WwwFormUrlDecoderEntry.fromAbiTake(raw) }, { raw => WwwFormUrlDecoderEntry.viewOf(raw) })
     }
 
     public func defaultInterface(): IWwwFormUrlDecoderEntry {
-        IWwwFormUrlDecoderEntry(asRaw())
+        IWwwFormUrlDecoderEntry.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -6587,7 +6806,7 @@ public class WwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & win
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIWwwFormUrlDecoderEntry(): IWwwFormUrlDecoderEntry {

@@ -4,25 +4,25 @@ import windows_implement.ComObjectBase
 import windows_implement.{ImplementationAccess, comRegistryLookup, rootRegistryKeyFromRaw}
 
 public interface IUnknownImpl <: ComObjectBase {
-    func get_impl<T>(): Option<T>
-    func get_impl_mut<T>(): Option<T>
-    func into_inner<T>(): Option<T>
-    func QueryInterface(iid: GUID, ppvObject: CPointer<CPointer<Unit>>): Int32
+    func getImpl<T>(): Option<T>
+    func getImplMut<T>(): Option<T>
+    func intoInner<T>(): Option<T>
+    func QueryInterface(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32
     func AddRef(): UInt32
     func Release(): UInt32
-    func is_reference_count_one(): Bool
+    func isReferenceCountOne(): Bool
     func GetTrustLevel(value: CPointer<Int32>): Int32
-    func as_interface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I>
-    func to_interface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I>
-    func to_object<T>(): ComObject<T>
+    func asInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I>
+    func toInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I>
+    func toObject<T>(): ComObject<T>
 }
 
 extend<T> ComObjectRuntime<T> <: IUnknownImpl {
-    public func get_impl<U>(): Option<U> {
+    public func getImpl<U>(): Option<U> {
         getImplAs<U>()
     }
 
-    public func get_impl_mut<U>(): Option<U> {
+    public func getImplMut<U>(): Option<U> {
         match (getMut()) {
             case Some(value) =>
                 match (value as U) {
@@ -34,7 +34,7 @@ extend<T> ComObjectRuntime<T> <: IUnknownImpl {
         }
     }
 
-    public func into_inner<U>(): Option<U> {
+    public func intoInner<U>(): Option<U> {
         match (takeInner()) {
             case Some(value) =>
                 match (value as U) {
@@ -46,8 +46,8 @@ extend<T> ComObjectRuntime<T> <: IUnknownImpl {
         }
     }
 
-    public func QueryInterface(iid: GUID, ppvObject: CPointer<CPointer<Unit>>): Int32 {
-        queryInterfaceBase(identityPointer(), iid, ppvObject)
+    public func QueryInterface(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        queryInterfaceBase(identityPointer(), iid, resultSlot)
     }
 
     public func AddRef(): UInt32 {
@@ -58,7 +58,7 @@ extend<T> ComObjectRuntime<T> <: IUnknownImpl {
         releaseBase(identityPointer().toUIntNative())
     }
 
-    public func is_reference_count_one(): Bool {
+    public func isReferenceCountOne(): Bool {
         isReferenceCountOne()
     }
 
@@ -66,36 +66,36 @@ extend<T> ComObjectRuntime<T> <: IUnknownImpl {
         getTrustLevelBase(value)
     }
 
-    public func as_interface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I> {
+    public func asInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I> {
         match (unsafe { queryInterfaceRaw(identityPointer(), descriptor.iid) }) {
             case Some(raw) =>
-                let borrowed = descriptor.wrapBorrowed(raw)
+                let view = descriptor.viewOf(raw)
                 descriptor.releasePointer(raw)
-                borrowed
+                view
             case None =>
-                throw Exception("IUnknownImpl.as_interface: requested interface is not implemented")
+                throw Exception("IUnknownImpl.asInterface: requested interface is not implemented")
         }
     }
 
-    public func to_interface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I> {
+    public func toInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I> {
         match (unsafe { queryInterfaceRaw(identityPointer(), descriptor.iid) }) {
             case Some(raw) =>
-                descriptor.wrapOwned(raw)
+                descriptor.takeFromAbi(raw)
             case None =>
-                throw Exception("IUnknownImpl.to_interface: requested interface is not implemented")
+                throw Exception("IUnknownImpl.toInterface: requested interface is not implemented")
         }
     }
 
-    public func to_object<U>(): ComObject<U> {
+    public func toObject<U>(): ComObject<U> {
         let raw = identityPointer()
         if (raw.isNull()) {
-            throw Exception("IUnknownImpl.to_object requires a live COM identity")
+            throw Exception("IUnknownImpl.toObject requires a live COM identity")
         }
         match (ComObject<U>.castFromRaw(raw)) {
             case Some(value) =>
                 value
             case None =>
-                throw Exception("IUnknownImpl.to_object: requested implementation type does not match")
+                throw Exception("IUnknownImpl.toObject: requested implementation type does not match")
         }
     }
 }
@@ -104,11 +104,11 @@ public func newIUnknownVtbl<T>(offset!: Int64 = 0): IUnknownVtbl where T <: IUnk
     buildIUnknownVtbl(offset: offset)
 }
 
-func lookupComImpl<T>(this_: CPointer<Unit>): Option<T> {
-    if (this_.isNull()) {
+func lookupComImpl<T>(instanceRaw: CPointer<Unit>): Option<T> {
+    if (instanceRaw.isNull()) {
         return None
     }
-    let lookupKey = unsafe { rootRegistryKeyFromRaw(this_) }
+    let lookupKey = unsafe { rootRegistryKeyFromRaw(instanceRaw) }
     match (comRegistryLookup(lookupKey)) {
         case Some(obj) =>
             match (obj) {
@@ -120,11 +120,11 @@ func lookupComImpl<T>(this_: CPointer<Unit>): Option<T> {
     }
 }
 
-func lookupComInnerImpl<T>(this_: CPointer<Unit>): Option<T> {
-    if (this_.isNull()) {
+func lookupComInnerImpl<T>(instanceRaw: CPointer<Unit>): Option<T> {
+    if (instanceRaw.isNull()) {
         return None
     }
-    let lookupKey = unsafe { rootRegistryKeyFromRaw(this_) }
+    let lookupKey = unsafe { rootRegistryKeyFromRaw(instanceRaw) }
     match (comRegistryLookup(lookupKey)) {
         case Some(obj) =>
             match (obj) {

@@ -96,7 +96,7 @@ public class IBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName & wind
         IBuffer(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBuffer {
+    public static func viewOf(raw: CPointer<Unit>): IBuffer {
         IBuffer(raw)
     }
 
@@ -224,7 +224,7 @@ public class IContentTypeProvider <: InterfaceWrapperBase & ComInterface & Runti
         IContentTypeProvider(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IContentTypeProvider {
+    public static func viewOf(raw: CPointer<Unit>): IContentTypeProvider {
         IContentTypeProvider(raw)
     }
 
@@ -301,7 +301,7 @@ public struct IInputStreamVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.ReadAsync(IBuffer.fromRawBorrowed(arg0), arg1, arg2)) {
+                    match (impl.ReadAsync(IBuffer.viewOf(arg0), arg1, arg2)) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -349,7 +349,7 @@ public class IInputStream <: InterfaceWrapperBase & ComInterface & RuntimeName &
         IInputStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IInputStream {
+    public static func viewOf(raw: CPointer<Unit>): IInputStream {
         IInputStream(raw)
     }
 
@@ -478,7 +478,7 @@ public class IInputStreamReference <: InterfaceWrapperBase & ComInterface & Runt
         IInputStreamReference(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IInputStreamReference {
+    public static func viewOf(raw: CPointer<Unit>): IInputStreamReference {
         IInputStreamReference(raw)
     }
 
@@ -556,7 +556,7 @@ public struct IOutputStreamVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.WriteAsync(IBuffer.fromRawBorrowed(arg0))) {
+                    match (impl.WriteAsync(IBuffer.viewOf(arg0))) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -628,7 +628,7 @@ public class IOutputStream <: InterfaceWrapperBase & ComInterface & RuntimeName 
         IOutputStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IOutputStream {
+    public static func viewOf(raw: CPointer<Unit>): IOutputStream {
         IOutputStream(raw)
     }
 
@@ -926,7 +926,7 @@ public class IRandomAccessStream <: InterfaceWrapperBase & ComInterface & Runtim
         IRandomAccessStream(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStream {
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStream {
         IRandomAccessStream(raw)
     }
 
@@ -1123,7 +1123,7 @@ public class IRandomAccessStreamReference <: InterfaceWrapperBase & ComInterface
         IRandomAccessStreamReference(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStreamReference {
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStreamReference {
         IRandomAccessStreamReference(raw)
     }
 
@@ -1223,7 +1223,7 @@ public class IRandomAccessStreamWithContentType <: InterfaceWrapperBase & ComInt
         IRandomAccessStreamWithContentType(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IRandomAccessStreamWithContentType {
+    public static func viewOf(raw: CPointer<Unit>): IRandomAccessStreamWithContentType {
         IRandomAccessStreamWithContentType(raw)
     }
 

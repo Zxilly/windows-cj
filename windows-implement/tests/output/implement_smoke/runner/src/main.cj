@@ -16,7 +16,7 @@ public class DemoImpl {
 @C
 public struct DemoGeneratedVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var ReadValue: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ReadValue: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL }
     public init() {}
 }
 
@@ -25,15 +25,19 @@ public interface DemoGenerated_Impl {
 }
 
 public class DemoGenerated <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): DemoGenerated {
-        DemoGenerated(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DemoGenerated {
+    public static func fromAbiTake(raw: CPointer<Unit>): DemoGenerated {
+        DemoGenerated(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DemoGenerated {
         DemoGenerated(raw)
     }
 
@@ -65,7 +69,7 @@ public class DemoGenerated <: InterfaceWrapperBase & ComInterface {
             InterfaceMethodSchema(
                 "ReadValue",
                 6,
-                [InterfaceParameterSchema("result", "CPointer<Int32>", "OutRef<Int32>", InterfaceParameterBridgeKind.OutRef)],
+                [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)],
                 "Int32"
             )
         ]
@@ -73,8 +77,8 @@ public class DemoGenerated <: InterfaceWrapperBase & ComInterface {
             "DemoGenerated",
             DemoGenerated.iid(),
             IInspectable.descriptor(),
-            { raw => DemoGenerated(raw, ownsReference: true) },
-            { raw => DemoGenerated(raw) }
+            { raw => DemoGenerated.fromAbiTake(raw) },
+            { raw => DemoGenerated.viewOf(raw) }
         )
         descriptor.methods = methods
         descriptor
@@ -85,14 +89,16 @@ public class DemoGenerated <: InterfaceWrapperBase & ComInterface {
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func ReadValue(): Int32 {
         let v = vtbl()
         var result = 0i32
         let hr = v.ReadValue(asRaw(), CPointer<Int32>(inout result))
-        HRESULT(hr).ok()
+        if (hr != S_OK) {
+            throw SmokeFailure("generated ReadValue should return S_OK")
+        }
         result
     }
 }
@@ -110,14 +116,14 @@ public func DemoGeneratedReadValueThunk(
     result__: CPointer<Int32>
 ): Int32 {
     if (result__.isNull()) {
-        return E_POINTER.value
+        return E_POINTER
     }
     match (unsafe { asImplFromRaw<DemoGenerated_Impl>(this_, slotOffset: 1) }) {
         case Some(impl) =>
             unsafe { result__.write(impl.readValue()) }
-            S_OK.value
+            S_OK
         case None =>
-            E_NOINTERFACE.value
+            E_NOINTERFACE
     }
 }
 
@@ -231,7 +237,7 @@ func expectUnsupportedQuery(raw: CPointer<Unit>): Unit {
             fail("unsupported QueryInterface should not produce a raw pointer")
         case None => ()
     }
-    let missingDescriptor = InterfaceDescriptor<IUnknown>("MissingIUnknown", missingIid, { ptr => IUnknown(ptr, ownsReference: true) }, { ptr => IUnknown(ptr) })
+    let missingDescriptor = InterfaceDescriptor<IUnknown>("MissingIUnknown", missingIid, { ptr => IUnknown.fromAbiTake(ptr) }, { ptr => IUnknown.viewOf(ptr) })
     match (unsafe { unknown.query(missingDescriptor) }) {
         case Some(_) =>
             fail("unsupported descriptor-based query should not wrap a pointer")
@@ -381,15 +387,15 @@ func expectMultipleInterfaceSlots(): Unit {
         "IAlpha",
         alphaIid,
         [IID_IINSPECTABLE, IID_IUNKNOWN],
-        { ptr => IUnknown(ptr, ownsReference: true) },
-        { ptr => IUnknown(ptr) }
+        { ptr => IUnknown.fromAbiTake(ptr) },
+        { ptr => IUnknown.viewOf(ptr) }
     )
     let betaDescriptor = InterfaceDescriptor<IUnknown>(
         "IBeta",
         betaIid,
         [IID_IINSPECTABLE, IID_IUNKNOWN],
-        { ptr => IUnknown(ptr, ownsReference: true) },
-        { ptr => IUnknown(ptr) }
+        { ptr => IUnknown.fromAbiTake(ptr) },
+        { ptr => IUnknown.viewOf(ptr) }
     )
     let descriptors = Array<InterfaceDescriptor<IUnknown>>(2, { index =>
         if (index == 0) {

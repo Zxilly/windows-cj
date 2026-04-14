@@ -18,7 +18,7 @@ public class BasicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         BasicProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): BasicProperties {
+    public static func viewOf(raw: CPointer<Unit>): BasicProperties {
         BasicProperties(raw)
     }
 
@@ -102,7 +102,7 @@ public class DocumentProperties <: InterfaceWrapperBase & ComInterface & windows
         DocumentProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DocumentProperties {
+    public static func viewOf(raw: CPointer<Unit>): DocumentProperties {
         DocumentProperties(raw)
     }
 
@@ -198,7 +198,7 @@ public class GeotagHelper <: InterfaceWrapperBase & ComInterface & windows_inter
         GeotagHelper(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): GeotagHelper {
+    public static func viewOf(raw: CPointer<Unit>): GeotagHelper {
         GeotagHelper(raw)
     }
 
@@ -277,7 +277,7 @@ public class IBasicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IBasicProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IBasicProperties {
+    public static func viewOf(raw: CPointer<Unit>): IBasicProperties {
         IBasicProperties(raw)
     }
 
@@ -376,7 +376,7 @@ public class IDocumentProperties <: InterfaceWrapperBase & ComInterface & Runtim
         IDocumentProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IDocumentProperties {
+    public static func viewOf(raw: CPointer<Unit>): IDocumentProperties {
         IDocumentProperties(raw)
     }
 
@@ -501,7 +501,7 @@ public class IGeotagHelperStatics <: InterfaceWrapperBase & ComInterface & Runti
         IGeotagHelperStatics(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IGeotagHelperStatics {
+    public static func viewOf(raw: CPointer<Unit>): IGeotagHelperStatics {
         IGeotagHelperStatics(raw)
     }
 
@@ -611,7 +611,7 @@ public class IImageProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IImageProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IImageProperties {
+    public static func viewOf(raw: CPointer<Unit>): IImageProperties {
         IImageProperties(raw)
     }
 
@@ -840,7 +840,7 @@ public class IMusicProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IMusicProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IMusicProperties {
+    public static func viewOf(raw: CPointer<Unit>): IMusicProperties {
         IMusicProperties(raw)
     }
 
@@ -1104,7 +1104,7 @@ public class IStorageItemContentProperties <: InterfaceWrapperBase & ComInterfac
         IStorageItemContentProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemContentProperties {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemContentProperties {
         IStorageItemContentProperties(raw)
     }
 
@@ -1307,7 +1307,7 @@ public class IStorageItemExtraProperties <: InterfaceWrapperBase & ComInterface 
         IStorageItemExtraProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IStorageItemExtraProperties {
+    public static func viewOf(raw: CPointer<Unit>): IStorageItemExtraProperties {
         IStorageItemExtraProperties(raw)
     }
 
@@ -1404,7 +1404,7 @@ public class IThumbnailProperties <: InterfaceWrapperBase & ComInterface & Runti
         IThumbnailProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IThumbnailProperties {
+    public static func viewOf(raw: CPointer<Unit>): IThumbnailProperties {
         IThumbnailProperties(raw)
     }
 
@@ -1526,7 +1526,7 @@ public class IVideoProperties <: InterfaceWrapperBase & ComInterface & RuntimeNa
         IVideoProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IVideoProperties {
+    public static func viewOf(raw: CPointer<Unit>): IVideoProperties {
         IVideoProperties(raw)
     }
 
@@ -1755,7 +1755,7 @@ public class ImageProperties <: InterfaceWrapperBase & ComInterface & windows_in
         ImageProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ImageProperties {
+    public static func viewOf(raw: CPointer<Unit>): ImageProperties {
         ImageProperties(raw)
     }
 
@@ -1895,7 +1895,7 @@ public class MusicProperties <: InterfaceWrapperBase & ComInterface & windows_in
         MusicProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): MusicProperties {
+    public static func viewOf(raw: CPointer<Unit>): MusicProperties {
         MusicProperties(raw)
     }
 
@@ -2136,7 +2136,7 @@ public class StorageItemContentProperties <: InterfaceWrapperBase & ComInterface
         StorageItemContentProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageItemContentProperties {
+    public static func viewOf(raw: CPointer<Unit>): StorageItemContentProperties {
         StorageItemContentProperties(raw)
     }
 
@@ -2224,7 +2224,7 @@ public class StorageItemThumbnail <: InterfaceWrapperBase & ComInterface & windo
         StorageItemThumbnail(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): StorageItemThumbnail {
+    public static func viewOf(raw: CPointer<Unit>): StorageItemThumbnail {
         StorageItemThumbnail(raw)
     }
 
@@ -2466,7 +2466,7 @@ public class VideoProperties <: InterfaceWrapperBase & ComInterface & windows_in
         VideoProperties(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): VideoProperties {
+    public static func viewOf(raw: CPointer<Unit>): VideoProperties {
         VideoProperties(raw)
     }
 

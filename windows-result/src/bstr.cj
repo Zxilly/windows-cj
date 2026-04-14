@@ -34,7 +34,7 @@ class BasicString <: Resource & ToString & Equatable<BasicString> {
         BasicString(ptr, ptr.isNotNull())
     }
 
-    public static func fromBorrowedRaw(ptr: CPointer<UInt16>): BasicString {
+    public static func fromRawView(ptr: CPointer<UInt16>): BasicString {
         BasicString(ptr, false)
     }
 
@@ -63,10 +63,6 @@ class BasicString <: Resource & ToString & Equatable<BasicString> {
 
     public func asWide(): Array<UInt16> {
         toWideArray()
-    }
-
-    public func as_wide(): Array<UInt16> {
-        asWide()
     }
 
     public func decode(): String {

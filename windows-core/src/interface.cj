@@ -2,8 +2,8 @@ package windows_core
 
 public interface Interface<T> <: InterfaceType & Type<T, CPointer<Unit>, Option<T>> where T <: ComInterface {
     static func descriptor(): InterfaceDescriptor<T>
-    static func fromRaw(raw: CPointer<Unit>): T
-    static func fromRawBorrowed(raw: CPointer<Unit>): T
+    static func fromAbiTake(raw: CPointer<Unit>): T
+    static func viewOf(raw: CPointer<Unit>): T
 
     static func IID(): GUID {
         descriptor().iid
@@ -22,29 +22,29 @@ public interface Interface<T> <: InterfaceType & Type<T, CPointer<Unit>, Option<
     }
 
     static func assumeInitRef(abi: CPointer<Unit>): T {
-        fromRawBorrowed(abi)
+        viewOf(abi)
     }
 
-    static func from_abi(abi: CPointer<Unit>): Result<T> {
+    static func fromAbi(abi: CPointer<Unit>): Result<T> {
         if (abi.isNull()) {
             return Result<T>.Err(WinError(E_POINTER))
         }
-        Result<T>.Ok(fromRaw(abi))
+        Result<T>.Ok(fromAbiTake(abi))
     }
 
-    static func from_default(defaultValue: Option<T>): Result<T> {
+    static func fromDefault(defaultValue: Option<T>): Result<T> {
         match (defaultValue) {
             case Some(value) =>
                 match (value as InterfaceWrapperBase) {
                     case Some(wrapper) =>
                         let raw = wrapper.asRaw()
-                        if (raw.isNull()) {
-                            return Result<T>.Err(WinError(E_POINTER))
-                        }
-                        wrapper.addRef()
-                        Result<T>.Ok(fromRaw(raw))
-                    case None =>
-                        Result<T>.Ok(value)
+                    if (raw.isNull()) {
+                        return Result<T>.Err(WinError(E_POINTER))
+                    }
+                    let retained = wrapper.retainRaw()
+                    Result<T>.Ok(fromAbiTake(retained))
+                case None =>
+                    Result<T>.Ok(value)
                 }
             case None =>
                 Result<T>.Err(WinError(E_POINTER))
@@ -79,13 +79,14 @@ public struct InterfaceRef<T> where T <: ComInterface & Interface<T> {
     }
 
     public func value(): T {
-        T.fromRawBorrowed(raw_)
+        T.viewOf(raw_)
     }
 
-    public func toOwned(): T {
-        comPtrAddRefRaw(raw_)
-        T.fromRaw(raw_)
+    public func retain(): T {
+        interfaceHandleAddRefRaw(raw_)
+        T.fromAbiTake(raw_)
     }
+
 }
 
 extend IUnknown <: Interface<IUnknown> {}
@@ -93,11 +94,11 @@ extend IUnknown <: Interface<IUnknown> {}
 extend IInspectable <: Interface<IInspectable> {}
 
 extend IAgileObject {
-    public static func fromRaw(raw: CPointer<Unit>): IAgileObject {
-        IAgileObject(raw, ownsReference: true)
+    public static func fromAbiTake(raw: CPointer<Unit>): IAgileObject {
+        IAgileObject(raw, takeOwnership: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAgileObject {
+    public static func viewOf(raw: CPointer<Unit>): IAgileObject {
         IAgileObject(raw)
     }
 }
@@ -105,11 +106,11 @@ extend IAgileObject {
 extend IAgileObject <: Interface<IAgileObject> {}
 
 extend IAgileReference {
-    public static func fromRaw(raw: CPointer<Unit>): IAgileReference {
-        IAgileReference(raw, ownsReference: true)
+    public static func fromAbiTake(raw: CPointer<Unit>): IAgileReference {
+        IAgileReference(raw, takeOwnership: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAgileReference {
+    public static func viewOf(raw: CPointer<Unit>): IAgileReference {
         IAgileReference(raw)
     }
 }
@@ -117,11 +118,11 @@ extend IAgileReference {
 extend IAgileReference <: Interface<IAgileReference> {}
 
 extend IWeakReference {
-    public static func fromRaw(raw: CPointer<Unit>): IWeakReference {
-        IWeakReference(raw, ownsReference: true)
+    public static func fromAbiTake(raw: CPointer<Unit>): IWeakReference {
+        IWeakReference(raw, takeOwnership: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWeakReference {
+    public static func viewOf(raw: CPointer<Unit>): IWeakReference {
         IWeakReference(raw)
     }
 }
@@ -129,11 +130,11 @@ extend IWeakReference {
 extend IWeakReference <: Interface<IWeakReference> {}
 
 extend IWeakReferenceSource {
-    public static func fromRaw(raw: CPointer<Unit>): IWeakReferenceSource {
-        IWeakReferenceSource(raw, ownsReference: true)
+    public static func fromAbiTake(raw: CPointer<Unit>): IWeakReferenceSource {
+        IWeakReferenceSource(raw, takeOwnership: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IWeakReferenceSource {
+    public static func viewOf(raw: CPointer<Unit>): IWeakReferenceSource {
         IWeakReferenceSource(raw)
     }
 }
@@ -149,22 +150,22 @@ public unsafe func cast<T, U>(
         return Result<U>.Err(WinError(E_POINTER))
     }
     if (descriptor.matches(T.IID())) {
-        return Result<U>.Ok(descriptor.wrapBorrowed(raw))
+        return Result<U>.Ok(descriptor.viewOf(raw))
     }
     match (queryInterfaceRaw(raw, descriptor.iid)) {
         case Some(resolved) =>
-            Result<U>.Ok(descriptor.wrapOwned(resolved))
+            Result<U>.Ok(descriptor.takeFromAbi(resolved))
         case None =>
             Result<U>.Err(WinError(E_NOINTERFACE))
     }
 }
 
-public unsafe func cast_to_any<T, U>(value: T): Option<U> where T <: ComInterface & Interface<T> {
+public unsafe func castToAny<T, U>(value: T): Option<U> where T <: ComInterface & Interface<T> {
     asImpl<U>(value)
 }
 
-public unsafe func cast_object<T, U>(value: T): Result<ComObject<U>> where T <: ComInterface & Interface<T> {
-    match (ComObject<U>.cast_from(value)) {
+public unsafe func castObject<T, U>(value: T): Result<ComObject<U>> where T <: ComInterface & Interface<T> {
+    match (ComObject<U>.castFrom(value)) {
         case Some(object) =>
             Result<ComObject<U>>.Ok(object)
         case None =>
@@ -172,6 +173,6 @@ public unsafe func cast_object<T, U>(value: T): Result<ComObject<U>> where T <: 
     }
 }
 
-public func to_ref<T>(value: T): InterfaceRef<T> where T <: ComInterface & Interface<T> {
+public func toRef<T>(value: T): InterfaceRef<T> where T <: ComInterface & Interface<T> {
     InterfaceRef<T>.fromInterface(value)
 }

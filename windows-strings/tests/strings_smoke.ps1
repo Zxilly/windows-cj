@@ -1,7 +1,8 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-strings"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
+$stringsPath = ($packageRoot -replace '\\', '/')
 $workspaceRoot = Join-Path $env:TEMP ("windows-strings-smoke-" + [guid]::NewGuid().ToString())
 $runnerRoot = Join-Path $workspaceRoot "runner"
 $srcRoot = Join-Path $runnerRoot "src"
@@ -20,7 +21,7 @@ New-Item -ItemType Directory -Force $srcRoot | Out-Null
   cjc-version = "1.1.0"
 
 [dependencies]
-  windows_strings = { path = "E:/Project/CS_Project/2026/ling/windows-cj/windows-strings" }
+  windows_strings = { path = "$stringsPath" }
 '@ | Set-Content -NoNewline (Join-Path $runnerRoot "cjpm.toml")
 
 @'
@@ -237,7 +238,7 @@ func runBstrAttachAbiCase(): Unit {
     let raw = sysAllocStringLenRaw(units)
     expect(!raw.isNull(), "SysAllocStringLen should allocate embedded-NUL payload")
     let value = unsafe { BSTR.unsafeAttach(raw) }
-    expect(value.isOwned(), "attach should take ownership of ABI BSTR")
+    expect(value.ownsStorage(), "attach should manage ABI BSTR storage")
     expect(value.length() == 4, "attach length mismatch")
     expect(value.byteLength() == 8u32, "attach byte length mismatch")
     expectWideUnits(value.toWideArray(), units, "attach wide units mismatch")
@@ -274,12 +275,12 @@ func runHStringBuilderChecks(): Unit {
     expect(sealed.toStringLossy() == "Hi", "HStringBuilder sealed toStringLossy mismatch")
 }
 
-func runHStringFactoryOwnershipCase(): Unit {
+func runHStringFactoryManagedCase(): Unit {
     let factoryText = String.fromUtf8([0x46u8, 0x61u8, 0x63u8, 0x74u8, 0x6Fu8, 0x72u8, 0x79u8, 0xE4u8, 0xB8u8, 0xADu8])
     let hFactory = hStringFactory(factoryText)
     let factoryValue = hFactory.value()
     expect(factoryValue.get() == factoryText, "hStringFactory value mismatch")
-    expect(!factoryValue.isReferenceBacked(), "hStringFactory value should own its allocation")
+    expect(!factoryValue.isReferenceBacked(), "hStringFactory value should manage its allocation")
     factoryValue.close()
     expect(factoryValue.isClosed(), "hStringFactory value should close cleanly")
 }
@@ -287,19 +288,19 @@ func runHStringFactoryOwnershipCase(): Unit {
 func runBstrCloseIdempotentCase(): Unit {
     let baseline = debugObservedSysFreeStringCount()
     let value = BSTR("GC")
-    expect(value.isOwned(), "BSTR close fixture should own storage")
+    expect(value.ownsStorage(), "BSTR close fixture should manage storage")
     value.close()
     value.close()
-    expect(debugObservedSysFreeStringCount() == baseline + 1, "BSTR close should free owned storage at most once")
+    expect(debugObservedSysFreeStringCount() == baseline + 1, "BSTR close should free managed storage at most once")
 }
 
 func runHStringCloseIdempotentCase(): Unit {
     let baseline = debugObservedHStringFreeCount()
     let value = HString("GC")
-    expect(!value.isReferenceBacked(), "HString close fixture should own storage")
+    expect(!value.isReferenceBacked(), "HString close fixture should manage storage")
     value.close()
     value.close()
-    expect(debugObservedHStringFreeCount() == baseline + 1, "HString close should free owned storage at most once")
+    expect(debugObservedHStringFreeCount() == baseline + 1, "HString close should free managed storage at most once")
 }
 
 func runHStringBuilderCloseIdempotentCase(): Unit {
@@ -308,7 +309,7 @@ func runHStringBuilderCloseIdempotentCase(): Unit {
     expect(builder.length() == 4, "HStringBuilder close fixture length mismatch")
     builder.close()
     builder.close()
-    expect(debugObservedHStringFreeCount() == baseline + 1, "HStringBuilder close should free owned storage at most once")
+    expect(debugObservedHStringFreeCount() == baseline + 1, "HStringBuilder close should free managed storage at most once")
 }
 
 func runUtf16TrailingHighSurrogateCase(): Unit {
@@ -398,25 +399,25 @@ func runMainChecks(): Unit {
 
     let wideFactory = wideStringFactory("Factory")
     expect(wideFactory.length() == 7, "wideStringFactory length mismatch")
-    let wideFactoryRoundtrip = wideFactory.withPtr { borrowed: PCWSTR =>
-        unsafe { borrowed.toString() }
+    let wideFactoryRoundtrip = wideFactory.withPtr { pointerView: PCWSTR =>
+        unsafe { pointerView.toString() }
     }
     expectSomeString(wideFactoryRoundtrip, "Factory", "wideStringFactory pointer decode mismatch")
 
     let narrowText = String.fromUtf8([0x46u8, 0x61u8, 0x63u8, 0x74u8, 0x6Fu8, 0x72u8, 0x79u8, 0xE4u8, 0xB8u8, 0xADu8])
     let narrowFactory = narrowStringFactory(narrowText)
     expect(narrowFactory.length() == 10, "narrowStringFactory byte length mismatch")
-    let narrowFactoryRoundtrip = narrowFactory.withPtr { borrowed: PCSTR =>
+    let narrowFactoryRoundtrip = narrowFactory.withPtr { pointerView: PCSTR =>
         unsafe {
-            expectAnsiUnits(borrowed.asBytes(), [0x46u8, 0x61u8, 0x63u8, 0x74u8, 0x6Fu8, 0x72u8, 0x79u8, 0xE4u8, 0xB8u8, 0xADu8], "narrowStringFactory bytes mismatch")
-            borrowed.toString()
+            expectAnsiUnits(pointerView.asBytes(), [0x46u8, 0x61u8, 0x63u8, 0x74u8, 0x6Fu8, 0x72u8, 0x79u8, 0xE4u8, 0xB8u8, 0xADu8], "narrowStringFactory bytes mismatch")
+            pointerView.toString()
         }
     }
     expectSomeString(narrowFactoryRoundtrip, narrowText, "narrowStringFactory pointer decode mismatch")
 
     let narrowLiteral = pcstrLiteral("Literal")
-    let narrowLiteralRoundtrip = narrowLiteral.withPtr { borrowed: PCSTR =>
-        unsafe { borrowed.toString() }
+    let narrowLiteralRoundtrip = narrowLiteral.withPtr { pointerView: PCSTR =>
+        unsafe { pointerView.toString() }
     }
     expectSomeString(narrowLiteralRoundtrip, "Literal", "pcstrLiteral helper mismatch")
 
@@ -429,19 +430,19 @@ func runMainChecks(): Unit {
     expect("${hstring.display()}" == sample, "HString display mismatch")
     expect(!hstring.isClosed(), "HString should start open")
     expect(hstring.length() == 3, "HString length mismatch")
-    expect(!hstring.isReferenceBacked(), "owned HString should not report reference-backed")
+    expect(!hstring.isReferenceBacked(), "managed HString should not report reference-backed")
     expect(requireComparable(HString("A"), HString("B")) == Ordering.LT, "HString compare mismatch")
     expect(HString("A") < HString("B"), "HString ordering operator mismatch")
     expect(requireHashable(HString("Hash")) == requireHashable(HString("Hash")), "HString hashCode should be stable")
-    expect(windowsGetStringLenRaw(hstring.asRaw()) == 3u32, "WindowsGetStringLen should read owned HString")
+    expect(windowsGetStringLenRaw(hstring.asRaw()) == 3u32, "WindowsGetStringLen should read managed HString")
     var hstringRawLength = 0u32
     let hstringRawPtr = windowsGetStringRawBufferRaw(hstring.asRaw(), CPointer<UInt32>(inout hstringRawLength))
-    expect(hstringRawLength == 3u32, "WindowsGetStringRawBuffer should report owned HString length")
+    expect(hstringRawLength == 3u32, "WindowsGetStringRawBuffer should report managed HString length")
     unsafe {
-        expect((hstringRawPtr + 0).read() == 0x0041u16, "owned HString raw ptr[0] mismatch")
-        expect((hstringRawPtr + 1).read() == 0x4E2Du16, "owned HString raw ptr[1] mismatch")
-        expect((hstringRawPtr + 2).read() == 0x0042u16, "owned HString raw ptr[2] mismatch")
-        expect((hstringRawPtr + 3).read() == 0u16, "owned HString raw terminator mismatch")
+        expect((hstringRawPtr + 0).read() == 0x0041u16, "managed HString raw ptr[0] mismatch")
+        expect((hstringRawPtr + 1).read() == 0x4E2Du16, "managed HString raw ptr[1] mismatch")
+        expect((hstringRawPtr + 2).read() == 0x0042u16, "managed HString raw ptr[2] mismatch")
+        expect((hstringRawPtr + 3).read() == 0u16, "managed HString raw terminator mismatch")
     }
     expect(hStringLiteral(sample).get() == sample, "HString literal helper mismatch")
     hstring.close()
@@ -475,11 +476,11 @@ func runMainChecks(): Unit {
     let factoryValue = hFactory.value()
     expect(factoryValue.get() == factoryText, "hStringFactory value mismatch")
     expect("${factoryValue.display()}" == factoryText, "hStringFactory display mismatch")
-    expect(!factoryValue.isReferenceBacked(), "hStringFactory value should own its allocation")
+    expect(!factoryValue.isReferenceBacked(), "hStringFactory value should manage its allocation")
     expectWideUnits(factoryValue.toWideArray(), [0x0046u16, 0x0061u16, 0x0063u16, 0x0074u16, 0x006Fu16, 0x0072u16, 0x0079u16, 0x4E2Du16], "hStringFactory asSlice mismatch")
-    expect(windowsGetStringLenRaw(factoryValue.asRaw()) == 8u32, "WindowsGetStringLen should read factory-owned HString")
-    hFactory.withPtr { borrowed: PCWSTR =>
-        expect(unsafe { borrowed.toHString().get() } == factoryText, "hStringFactory borrowed pointer mismatch")
+    expect(windowsGetStringLenRaw(factoryValue.asRaw()) == 8u32, "WindowsGetStringLen should read factory-managed HString")
+    hFactory.withPtr { pointerView: PCWSTR =>
+        expect(unsafe { pointerView.toHString().get() } == factoryText, "hStringFactory pointer view mismatch")
     }
 
     let invalidHString = HString.fromWide([0xD800u16, 0x0041u16])
@@ -494,26 +495,26 @@ func runMainChecks(): Unit {
     expect("${bstrSample.display()}" == bstrText, "BSTR display mismatch")
     expect(bstrSample == bstrText, "BSTR == String mismatch")
     expectWideUnits(bstrSample.toWideArray(), [0x0042u16, 0x4E2Du16], "BSTR asSlice mismatch")
-    expect(bstrSample.isOwned(), "BSTR constructed value should own storage")
+    expect(bstrSample.ownsStorage(), "BSTR constructed value should manage storage")
     expect(sysStringLenRaw(bstrSample.asPtr()) == 2u32, "SysStringLen should read constructed BSTR")
     expect(sysStringByteLenRaw(bstrSample.asPtr()) == 4u32, "SysStringByteLen should read constructed BSTR")
     let bstrRaw = bstrSample.intoRaw()
     expect(!bstrRaw.isNull(), "BSTR intoRaw returned null")
     expect(sysStringLenRaw(bstrRaw) == 2u32, "SysStringLen should read intoRaw BSTR")
-    let ownedFromRaw = unsafe { BSTR.unsafeFromRaw(bstrRaw) }
-    expect(ownedFromRaw.isOwned(), "BSTR.fromRaw should take ownership")
-    expect(ownedFromRaw.length() == 2, "Owned BSTR length mismatch")
-    expect(ownedFromRaw.get() == bstrText, "Owned BSTR get mismatch")
-    ownedFromRaw.close()
-    expect(ownedFromRaw.isClosed(), "Owned BSTR close mismatch")
+    let managedFromRaw = unsafe { BSTR.unsafeFromRaw(bstrRaw) }
+    expect(managedFromRaw.ownsStorage(), "BSTR.fromRaw should take storage management")
+    expect(managedFromRaw.length() == 2, "Managed BSTR length mismatch")
+    expect(managedFromRaw.get() == bstrText, "Managed BSTR get mismatch")
+    managedFromRaw.close()
+    expect(managedFromRaw.isClosed(), "Managed BSTR close mismatch")
 
-    let borrowedRaw = sysAllocStringLenRaw([0x0042u16, 0x4E2Du16])
-    expect(!borrowedRaw.isNull(), "SysAllocStringLen should allocate borrowed BSTR payload")
-    let borrowedBstr = unsafe { BSTR.unsafeFromBorrowedRaw(borrowedRaw) }
-    expect(!borrowedBstr.isOwned(), "BSTR.fromBorrowedRaw should not own storage")
-    expect(borrowedBstr.length() == 2, "Borrowed BSTR length mismatch")
-    expect(borrowedBstr.get() == bstrText, "Borrowed BSTR get mismatch")
-    sysFreeStringRaw(borrowedRaw)
+    let viewRaw = sysAllocStringLenRaw([0x0042u16, 0x4E2Du16])
+    expect(!viewRaw.isNull(), "SysAllocStringLen should allocate BSTR view payload")
+    let viewBstr = unsafe { BSTR.unsafeFromRawView(viewRaw) }
+    expect(!viewBstr.ownsStorage(), "BSTR.fromRawView should not manage storage")
+    expect(viewBstr.length() == 2, "View BSTR length mismatch")
+    expect(viewBstr.get() == bstrText, "View BSTR get mismatch")
+    sysFreeStringRaw(viewRaw)
 
     let emptyBstr = BSTR("")
     expect(emptyBstr.isEmpty(), "Empty BSTR should report empty")
@@ -635,8 +636,8 @@ main(args: Array<String>) {
             runBstrAttachAbiCase()
             return
         }
-        if (args[0] == "hstring-factory-owned") {
-            runHStringFactoryOwnershipCase()
+        if (args[0] == "hstring-factory-managed") {
+            runHStringFactoryManagedCase()
             return
         }
         if (args[0] == "bstr-close-idempotent") {
@@ -685,9 +686,9 @@ try {
     if ($LASTEXITCODE -ne 0) {
         throw "cjpm run bstr-attach-abi failed with exit code $LASTEXITCODE"
     }
-    cjpm run -- hstring-factory-owned | Out-Host
+    cjpm run -- hstring-factory-managed | Out-Host
     if ($LASTEXITCODE -ne 0) {
-        throw "cjpm run hstring-factory-owned failed with exit code $LASTEXITCODE"
+        throw "cjpm run hstring-factory-managed failed with exit code $LASTEXITCODE"
     }
     cjpm run -- bstr-close-idempotent | Out-Host
     if ($LASTEXITCODE -ne 0) {

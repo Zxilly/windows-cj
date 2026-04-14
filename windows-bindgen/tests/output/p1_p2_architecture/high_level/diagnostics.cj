@@ -1,22 +1,29 @@
-package windows.foundation.diagnostics
+package Windows.Foundation.Diagnostics
 
 import std.collection.*
 import windows_core.*
 import windows_interface.*
-import windows.win32.foundation.*
+import Windows.Foundation as Foundation
+import Windows.Storage as Storage
+import Windows.Win32.Foundation as Win32_Foundation
+import Windows.Win32.Foundation.*
 
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class AsyncCausalityTracer <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): AsyncCausalityTracer {
-        AsyncCausalityTracer(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): AsyncCausalityTracer {
+    public static func fromAbiTake(raw: CPointer<Unit>): AsyncCausalityTracer {
+        AsyncCausalityTracer(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AsyncCausalityTracer {
         AsyncCausalityTracer(raw)
     }
 
@@ -29,7 +36,7 @@ public class AsyncCausalityTracer <: InterfaceWrapperBase & ComInterface & windo
     }
 
     public static func descriptor(): InterfaceDescriptor<AsyncCausalityTracer> {
-        return InterfaceDescriptor<AsyncCausalityTracer>("AsyncCausalityTracer", GUID(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncCausalityTracer(raw, ownsReference: true) }, { raw => AsyncCausalityTracer(raw) })
+        return InterfaceDescriptor<AsyncCausalityTracer>("AsyncCausalityTracer", GUID(), [IInspectable.iid(), IUnknown.iid()], { raw => AsyncCausalityTracer.fromAbiTake(raw) }, { raw => AsyncCausalityTracer.viewOf(raw) })
     }
 
     public static func abiType(): String {
@@ -53,7 +60,7 @@ public class AsyncCausalityTracer <: InterfaceWrapperBase & ComInterface & windo
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public static unsafe func TraceOperationCreation(traceLevel: CausalityTraceLevel, source: CausalitySource, platformId: GUID, operationId: UInt64, operationName: CPointer<UInt16>, relatedContext: UInt64): Unit {
@@ -63,7 +70,7 @@ public class AsyncCausalityTracer <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    public static unsafe func TraceOperationCompletion(traceLevel: CausalityTraceLevel, source: CausalitySource, platformId: GUID, operationId: UInt64, status: windows.foundation.AsyncStatus): Unit {
+    public static unsafe func TraceOperationCompletion(traceLevel: CausalityTraceLevel, source: CausalitySource, platformId: GUID, operationId: UInt64, status: Foundation.AsyncStatus): Unit {
         try (factory = windows_interface.getActivationFactoryByName<IAsyncCausalityTracerStatics>(AsyncCausalityTracer.runtimeName(), IAsyncCausalityTracerStatics.descriptor()).unwrap()) {
             factory.TraceOperationCompletion(traceLevel, source, platformId, operationId, status)
             return ()
@@ -91,13 +98,13 @@ public class AsyncCausalityTracer <: InterfaceWrapperBase & ComInterface & windo
         }
     }
 
-    public static unsafe func TracingStatusChanged(handler: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public static unsafe func TracingStatusChanged(handler: Foundation.EventHandler<TracingStatusChangedEventArgs>): Foundation.EventRegistrationToken {
         try (factory = windows_interface.getActivationFactoryByName<IAsyncCausalityTracerStatics>(AsyncCausalityTracer.runtimeName(), IAsyncCausalityTracerStatics.descriptor()).unwrap()) {
             return factory.TracingStatusChanged(handler)
         }
     }
 
-    public static unsafe func RemoveTracingStatusChanged(cookie: windows.foundation.EventRegistrationToken): Unit {
+    public static unsafe func RemoveTracingStatusChanged(cookie: Foundation.EventRegistrationToken): Unit {
         try (factory = windows_interface.getActivationFactoryByName<IAsyncCausalityTracerStatics>(AsyncCausalityTracer.runtimeName(), IAsyncCausalityTracerStatics.descriptor()).unwrap()) {
             factory.RemoveTracingStatusChanged(cookie)
             return ()
@@ -105,22 +112,16 @@ public class AsyncCausalityTracer <: InterfaceWrapperBase & ComInterface & windo
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
+@C
 public struct CausalityRelation {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let AssignDelegate = CausalityRelation(value: 0)
-    public static let Join = CausalityRelation(value: 1)
-    public static let Choice = CausalityRelation(value: 2)
-    public static let Cancel = CausalityRelation(value: 3)
-    public static let Error = CausalityRelation(value: 4)
 
     public operator func ==(other: CausalityRelation): Bool {
         return this.value == other.value
@@ -130,20 +131,31 @@ public struct CausalityRelation {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
-public struct CausalitySource {
-    public let value: Int32
+@When[Windows_Foundation_Diagnostics == "on"]
+public let AssignDelegate: CausalityRelation = CausalityRelation(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Join: CausalityRelation = CausalityRelation(1)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Choice: CausalityRelation = CausalityRelation(2)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Cancel: CausalityRelation = CausalityRelation(3)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Error: CausalityRelation = CausalityRelation(4)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+@C
+public struct CausalitySource {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Application = CausalitySource(value: 0)
-    public static let Library = CausalitySource(value: 1)
-    public static let System = CausalitySource(value: 2)
 
     public operator func ==(other: CausalitySource): Bool {
         return this.value == other.value
@@ -153,20 +165,25 @@ public struct CausalitySource {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
-public struct CausalitySynchronousWork {
-    public let value: Int32
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Application: CausalitySource = CausalitySource(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Library: CausalitySource = CausalitySource(1)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let System: CausalitySource = CausalitySource(2)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+@C
+public struct CausalitySynchronousWork {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let CompletionNotification = CausalitySynchronousWork(value: 0)
-    public static let ProgressNotification = CausalitySynchronousWork(value: 1)
-    public static let Execution = CausalitySynchronousWork(value: 2)
 
     public operator func ==(other: CausalitySynchronousWork): Bool {
         return this.value == other.value
@@ -176,20 +193,25 @@ public struct CausalitySynchronousWork {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
-public struct CausalityTraceLevel {
-    public let value: Int32
+@When[Windows_Foundation_Diagnostics == "on"]
+public let CompletionNotification: CausalitySynchronousWork = CausalitySynchronousWork(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Diagnostics == "on"]
+public let ProgressNotification: CausalitySynchronousWork = CausalitySynchronousWork(1)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Execution: CausalitySynchronousWork = CausalitySynchronousWork(2)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+@C
+public struct CausalityTraceLevel {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Required = CausalityTraceLevel(value: 0)
-    public static let Important = CausalityTraceLevel(value: 1)
-    public static let Verbose = CausalityTraceLevel(value: 2)
 
     public operator func ==(other: CausalityTraceLevel): Bool {
         return this.value == other.value
@@ -199,17 +221,30 @@ public struct CausalityTraceLevel {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Required: CausalityTraceLevel = CausalityTraceLevel(0)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Important: CausalityTraceLevel = CausalityTraceLevel(1)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Verbose: CausalityTraceLevel = CausalityTraceLevel(2)
+
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ErrorDetails <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ErrorDetails {
-        ErrorDetails(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ErrorDetails {
+    public static func fromAbiTake(raw: CPointer<Unit>): ErrorDetails {
+        ErrorDetails(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ErrorDetails {
         ErrorDetails(raw)
     }
 
@@ -223,11 +258,11 @@ public class ErrorDetails <: InterfaceWrapperBase & ComInterface & windows_inter
 
     public static func descriptor(): InterfaceDescriptor<ErrorDetails> {
         let ancestors = [IErrorDetails.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<ErrorDetails>("ErrorDetails", IErrorDetails.iid(), ancestors, { raw => ErrorDetails(raw, ownsReference: true) }, { raw => ErrorDetails(raw) })
+        return InterfaceDescriptor<ErrorDetails>("ErrorDetails", IErrorDetails.iid(), ancestors, { raw => ErrorDetails.fromAbiTake(raw) }, { raw => ErrorDetails.viewOf(raw) })
     }
 
     public func defaultInterface(): IErrorDetails {
-        IErrorDetails(asRaw())
+        IErrorDetails.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -251,14 +286,14 @@ public class ErrorDetails <: InterfaceWrapperBase & ComInterface & windows_inter
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIErrorDetails(): IErrorDetails {
         IErrorDetails(asRaw())
     }
 
-    public static unsafe func CreateFromHResultAsync(errorCode: Int32): CPointer<Unit> {
+    public static unsafe func CreateFromHResultAsync(errorCode: Int32): Foundation.IAsyncOperation<ErrorDetails> {
         try (factory = windows_interface.getActivationFactoryByName<IErrorDetailsStatics>(ErrorDetails.runtimeName(), IErrorDetailsStatics.descriptor()).unwrap()) {
             return factory.CreateFromHResultAsync(errorCode)
         }
@@ -272,27 +307,21 @@ public class ErrorDetails <: InterfaceWrapperBase & ComInterface & windows_inter
         return defaultInterface().LongDescription()
     }
 
-    public unsafe func HelpUri(): windows.foundation.Uri {
+    public unsafe func HelpUri(): Foundation.Uri {
         return defaultInterface().HelpUri()
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
+@C
 public struct ErrorOptions {
-    public let value: UInt32
+    public var value: UInt32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: UInt32) {
         this.value = value
     }
-    public static let None = ErrorOptions(value: 0)
-    public static let SuppressExceptions = ErrorOptions(value: 1)
-    public static let ForceExceptions = ErrorOptions(value: 2)
-    public static let UseSetErrorInfo = ErrorOptions(value: 4)
-    public static let SuppressSetErrorInfo = ErrorOptions(value: 8)
 
     public operator func ==(other: ErrorOptions): Bool {
         return this.value == other.value
@@ -306,27 +335,46 @@ public struct ErrorOptions {
     }
 
     public operator func |(other: ErrorOptions): ErrorOptions {
-        return ErrorOptions(value: this.value | other.value)
+        return ErrorOptions(this.value | other.value)
     }
     public operator func &(other: ErrorOptions): ErrorOptions {
-        return ErrorOptions(value: this.value & other.value)
+        return ErrorOptions(this.value & other.value)
     }
-    public operator func ~(): ErrorOptions {
-        return ErrorOptions(value: ~this.value)
+    public operator func !(): ErrorOptions {
+        return ErrorOptions(!this.value)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
+public let None: ErrorOptions = ErrorOptions(0)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let SuppressExceptions: ErrorOptions = ErrorOptions(1)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let ForceExceptions: ErrorOptions = ErrorOptions(2)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let UseSetErrorInfo: ErrorOptions = ErrorOptions(4)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let SuppressSetErrorInfo: ErrorOptions = ErrorOptions(8)
+
+@When[Windows_Foundation_Diagnostics == "on"]
 public class FileLoggingSession <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): FileLoggingSession {
-        FileLoggingSession(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): FileLoggingSession {
+    public static func fromAbiTake(raw: CPointer<Unit>): FileLoggingSession {
+        FileLoggingSession(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FileLoggingSession {
         FileLoggingSession(raw)
     }
 
@@ -339,12 +387,12 @@ public class FileLoggingSession <: InterfaceWrapperBase & ComInterface & windows
     }
 
     public static func descriptor(): InterfaceDescriptor<FileLoggingSession> {
-        let ancestors = [IFileLoggingSession.iid(), windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<FileLoggingSession>("FileLoggingSession", IFileLoggingSession.iid(), ancestors, { raw => FileLoggingSession(raw, ownsReference: true) }, { raw => FileLoggingSession(raw) })
+        let ancestors = [IFileLoggingSession.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<FileLoggingSession>("FileLoggingSession", IFileLoggingSession.iid(), ancestors, { raw => FileLoggingSession.fromAbiTake(raw) }, { raw => FileLoggingSession.viewOf(raw) })
     }
 
     public func defaultInterface(): IFileLoggingSession {
-        IFileLoggingSession(asRaw())
+        IFileLoggingSession.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -368,15 +416,15 @@ public class FileLoggingSession <: InterfaceWrapperBase & ComInterface & windows
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIFileLoggingSession(): IFileLoggingSession {
         IFileLoggingSession(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable(asRaw())
     }
 
     public static unsafe func Create(name: CPointer<UInt16>): FileLoggingSession {
@@ -401,15 +449,15 @@ public class FileLoggingSession <: InterfaceWrapperBase & ComInterface & windows
         defaultInterface().RemoveLoggingChannel(loggingChannel)
     }
 
-    public unsafe func CloseAndSaveToFileAsync(): CPointer<Unit> {
+    public unsafe func CloseAndSaveToFileAsync(): Foundation.IAsyncOperation<Storage.StorageFile> {
         return defaultInterface().CloseAndSaveToFileAsync()
     }
 
-    public unsafe func LogFileGenerated(token: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func LogFileGenerated(token: Foundation.TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>): Foundation.EventRegistrationToken {
         return defaultInterface().LogFileGenerated(token)
     }
 
-    public unsafe func RemoveLogFileGenerated(token: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveLogFileGenerated(token: Foundation.EventRegistrationToken): Unit {
         defaultInterface().RemoveLogFileGenerated(token)
     }
 
@@ -418,31 +466,35 @@ public class FileLoggingSession <: InterfaceWrapperBase & ComInterface & windows
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct IAsyncCausalityTracerStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var TraceOperationCreation: CFunc<(CPointer<Unit>, CausalityTraceLevel, CausalitySource, GUID, UInt64, CPointer<UInt16>, UInt64) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    public var TraceOperationCompletion: CFunc<(CPointer<Unit>, CausalityTraceLevel, CausalitySource, GUID, UInt64, windows.foundation.AsyncStatus) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var TraceOperationCompletion: CFunc<(CPointer<Unit>, CausalityTraceLevel, CausalitySource, GUID, UInt64, Foundation.AsyncStatus) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var TraceOperationRelation: CFunc<(CPointer<Unit>, CausalityTraceLevel, CausalitySource, GUID, UInt64, CausalityRelation) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var TraceSynchronousWorkStart: CFunc<(CPointer<Unit>, CausalityTraceLevel, CausalitySource, GUID, UInt64, CausalitySynchronousWork) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var TraceSynchronousWorkCompletion: CFunc<(CPointer<Unit>, CausalityTraceLevel, CausalitySource, CausalitySynchronousWork) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var TracingStatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows.foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var RemoveTracingStatusChanged: CFunc<(CPointer<Unit>, windows.foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var TracingStatusChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var RemoveTracingStatusChanged: CFunc<(CPointer<Unit>, Foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class IAsyncCausalityTracerStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IAsyncCausalityTracerStatics {
-        IAsyncCausalityTracerStatics(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IAsyncCausalityTracerStatics {
+    public static func fromAbiTake(raw: CPointer<Unit>): IAsyncCausalityTracerStatics {
+        IAsyncCausalityTracerStatics(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAsyncCausalityTracerStatics {
         IAsyncCausalityTracerStatics(raw)
     }
 
@@ -458,13 +510,13 @@ public class IAsyncCausalityTracerStatics <: InterfaceWrapperBase & ComInterface
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncCausalityTracerStatics> {
-        var descriptor = InterfaceDescriptor<IAsyncCausalityTracerStatics>("IAsyncCausalityTracerStatics", IAsyncCausalityTracerStatics.iid(), IInspectable.descriptor(), { raw => IAsyncCausalityTracerStatics(raw, ownsReference: true) }, { raw => IAsyncCausalityTracerStatics(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncCausalityTracerStatics>("IAsyncCausalityTracerStatics", IAsyncCausalityTracerStatics.iid(), IInspectable.descriptor(), { raw => IAsyncCausalityTracerStatics.fromAbiTake(raw) }, { raw => IAsyncCausalityTracerStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncCausalityTracerStatics.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IAsyncCausalityTracerStatics", IAsyncCausalityTracerStatics.iid(), IInspectable.descriptorSchema(), "IAsyncCausalityTracerStaticsVtbl", "IAsyncCausalityTracerStatics", "IAsyncCausalityTracerStatics_Impl", [InterfaceMethodSchema("TraceOperationCreation", 6, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("platformId", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationId", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("relatedContext", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TraceOperationCompletion", 7, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("platformId", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationId", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("status", "windows.foundation.AsyncStatus", "windows.foundation.AsyncStatus", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TraceOperationRelation", 8, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("platformId", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationId", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("relation", "CausalityRelation", "CausalityRelation", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TraceSynchronousWorkStart", 9, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("platformId", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationId", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("work", "CausalitySynchronousWork", "CausalitySynchronousWork", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TraceSynchronousWorkCompletion", 10, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("work", "CausalitySynchronousWork", "CausalitySynchronousWork", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TracingStatusChanged", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows.foundation.EventRegistrationToken>", "OutRef<windows.foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("RemoveTracingStatusChanged", 12, [InterfaceParameterSchema("cookie", "windows.foundation.EventRegistrationToken", "windows.foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IAsyncCausalityTracerStatics", IAsyncCausalityTracerStatics.iid(), IInspectable.descriptorSchema(), "IAsyncCausalityTracerStaticsVtbl", "IAsyncCausalityTracerStatics", "IAsyncCausalityTracerStatics_Impl", [InterfaceMethodSchema("TraceOperationCreation", 6, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("platformId", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationId", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("relatedContext", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TraceOperationCompletion", 7, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("platformId", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationId", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("status", "Foundation.AsyncStatus", "Foundation.AsyncStatus", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TraceOperationRelation", 8, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("platformId", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationId", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("relation", "CausalityRelation", "CausalityRelation", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TraceSynchronousWorkStart", 9, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("platformId", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("operationId", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("work", "CausalitySynchronousWork", "CausalitySynchronousWork", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TraceSynchronousWorkCompletion", 10, [InterfaceParameterSchema("traceLevel", "CausalityTraceLevel", "CausalityTraceLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("source", "CausalitySource", "CausalitySource", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("work", "CausalitySynchronousWork", "CausalitySynchronousWork", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("TracingStatusChanged", 11, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.EventHandler<TracingStatusChangedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Foundation.EventRegistrationToken>", "OutSlot<Foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveTracingStatusChanged", 12, [InterfaceParameterSchema("cookie", "Foundation.EventRegistrationToken", "Foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IAsyncCausalityTracerStatics.runtimeType())
         return schema
     }
@@ -486,7 +538,7 @@ public class IAsyncCausalityTracerStatics <: InterfaceWrapperBase & ComInterface
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IAsyncCausalityTracerStaticsVtbl {
@@ -499,7 +551,7 @@ public class IAsyncCausalityTracerStatics <: InterfaceWrapperBase & ComInterface
         HRESULT(hr).ok()
     }
 
-    public unsafe func TraceOperationCompletion(traceLevel: CausalityTraceLevel, source: CausalitySource, platformId: GUID, operationId: UInt64, status: windows.foundation.AsyncStatus): Unit {
+    public unsafe func TraceOperationCompletion(traceLevel: CausalityTraceLevel, source: CausalitySource, platformId: GUID, operationId: UInt64, status: Foundation.AsyncStatus): Unit {
         let v = vtbl()
         let hr = v.TraceOperationCompletion(asRaw(), traceLevel, source, platformId, operationId, status)
         HRESULT(hr).ok()
@@ -523,22 +575,22 @@ public class IAsyncCausalityTracerStatics <: InterfaceWrapperBase & ComInterface
         HRESULT(hr).ok()
     }
 
-    public unsafe func TracingStatusChanged(handler: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func TracingStatusChanged(handler: Foundation.EventHandler<TracingStatusChangedEventArgs>): Foundation.EventRegistrationToken {
         let v = vtbl()
-        var result = windows.foundation.EventRegistrationToken()
-        let hr = v.TracingStatusChanged(asRaw(), handler, CPointer<windows.foundation.EventRegistrationToken>(inout result))
+        var result = Foundation.EventRegistrationToken()
+        let hr = v.TracingStatusChanged(asRaw(), handler.asRaw(), CPointer<Foundation.EventRegistrationToken>(inout result))
         HRESULT(hr).ok()
         return result
     }
 
-    public unsafe func RemoveTracingStatusChanged(cookie: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveTracingStatusChanged(cookie: Foundation.EventRegistrationToken): Unit {
         let v = vtbl()
         let hr = v.RemoveTracingStatusChanged(asRaw(), cookie)
         HRESULT(hr).ok()
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct IErrorDetailsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -548,17 +600,21 @@ public struct IErrorDetailsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class IErrorDetails <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IErrorDetails {
-        IErrorDetails(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IErrorDetails {
+    public static func fromAbiTake(raw: CPointer<Unit>): IErrorDetails {
+        IErrorDetails(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IErrorDetails {
         IErrorDetails(raw)
     }
 
@@ -574,13 +630,13 @@ public class IErrorDetails <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IErrorDetails> {
-        var descriptor = InterfaceDescriptor<IErrorDetails>("IErrorDetails", IErrorDetails.iid(), IInspectable.descriptor(), { raw => IErrorDetails(raw, ownsReference: true) }, { raw => IErrorDetails(raw) })
+        var descriptor = InterfaceDescriptor<IErrorDetails>("IErrorDetails", IErrorDetails.iid(), IInspectable.descriptor(), { raw => IErrorDetails.fromAbiTake(raw) }, { raw => IErrorDetails.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IErrorDetails.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IErrorDetails", IErrorDetails.iid(), IInspectable.descriptorSchema(), "IErrorDetailsVtbl", "IErrorDetails", "IErrorDetails_Impl", [InterfaceMethodSchema("Description", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("LongDescription", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("HelpUri", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.foundation.Uri>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IErrorDetails", IErrorDetails.iid(), IInspectable.descriptorSchema(), "IErrorDetailsVtbl", "IErrorDetails", "IErrorDetails_Impl", [InterfaceMethodSchema("Description", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LongDescription", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("HelpUri", 8, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.Uri>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IErrorDetails.runtimeType())
         return schema
     }
@@ -602,7 +658,7 @@ public class IErrorDetails <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IErrorDetailsVtbl {
@@ -625,16 +681,16 @@ public class IErrorDetails <: InterfaceWrapperBase & ComInterface & RuntimeName 
         return result
     }
 
-    public unsafe func HelpUri(): windows.foundation.Uri {
+    public unsafe func HelpUri(): Foundation.Uri {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.HelpUri(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.foundation.Uri.fromRaw(result)
+        return Foundation.Uri.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct IErrorDetailsStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -642,17 +698,21 @@ public struct IErrorDetailsStaticsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class IErrorDetailsStatics <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IErrorDetailsStatics {
-        IErrorDetailsStatics(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IErrorDetailsStatics {
+    public static func fromAbiTake(raw: CPointer<Unit>): IErrorDetailsStatics {
+        IErrorDetailsStatics(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IErrorDetailsStatics {
         IErrorDetailsStatics(raw)
     }
 
@@ -668,13 +728,13 @@ public class IErrorDetailsStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptor(): InterfaceDescriptor<IErrorDetailsStatics> {
-        var descriptor = InterfaceDescriptor<IErrorDetailsStatics>("IErrorDetailsStatics", IErrorDetailsStatics.iid(), IInspectable.descriptor(), { raw => IErrorDetailsStatics(raw, ownsReference: true) }, { raw => IErrorDetailsStatics(raw) })
+        var descriptor = InterfaceDescriptor<IErrorDetailsStatics>("IErrorDetailsStatics", IErrorDetailsStatics.iid(), IInspectable.descriptor(), { raw => IErrorDetailsStatics.fromAbiTake(raw) }, { raw => IErrorDetailsStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IErrorDetailsStatics.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IErrorDetailsStatics", IErrorDetailsStatics.iid(), IInspectable.descriptorSchema(), "IErrorDetailsStaticsVtbl", "IErrorDetailsStatics", "IErrorDetailsStatics_Impl", [InterfaceMethodSchema("CreateFromHResultAsync", 6, [InterfaceParameterSchema("errorCode", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IErrorDetailsStatics", IErrorDetailsStatics.iid(), IInspectable.descriptorSchema(), "IErrorDetailsStaticsVtbl", "IErrorDetailsStatics", "IErrorDetailsStatics_Impl", [InterfaceMethodSchema("CreateFromHResultAsync", 6, [InterfaceParameterSchema("errorCode", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<ErrorDetails>>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IErrorDetailsStatics.runtimeType())
         return schema
     }
@@ -696,23 +756,23 @@ public class IErrorDetailsStatics <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IErrorDetailsStaticsVtbl {
         readVtbl<IErrorDetailsStaticsVtbl>(IErrorDetailsStaticsVtbl())
     }
 
-    public unsafe func CreateFromHResultAsync(errorCode: Int32): CPointer<Unit> {
+    public unsafe func CreateFromHResultAsync(errorCode: Int32): Foundation.IAsyncOperation<ErrorDetails> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CreateFromHResultAsync(asRaw(), errorCode, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<ErrorDetails>.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct IErrorReportingSettingsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -724,8 +784,8 @@ public struct IErrorReportingSettingsVtbl {
         let _ = offset
         var vtbl = IErrorReportingSettingsVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.SetErrorOptions = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.SetErrorOptions = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.SetErrorOptions(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -737,11 +797,11 @@ public struct IErrorReportingSettingsVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.GetErrorOptions = { this_, result__ =>
+        vtbl.GetErrorOptions = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.GetErrorOptions()) {
                         case Result<ErrorOptions>.Ok(value) =>
@@ -765,23 +825,27 @@ public struct IErrorReportingSettingsVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public interface IErrorReportingSettings_Impl {
     public func SetErrorOptions(value: ErrorOptions): windows_core.Result<Unit>
     public func GetErrorOptions(): windows_core.Result<ErrorOptions>
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class IErrorReportingSettings <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IErrorReportingSettings {
-        IErrorReportingSettings(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IErrorReportingSettings {
+    public static func fromAbiTake(raw: CPointer<Unit>): IErrorReportingSettings {
+        IErrorReportingSettings(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IErrorReportingSettings {
         IErrorReportingSettings(raw)
     }
 
@@ -797,13 +861,13 @@ public class IErrorReportingSettings <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IErrorReportingSettings> {
-        var descriptor = InterfaceDescriptor<IErrorReportingSettings>("IErrorReportingSettings", IErrorReportingSettings.iid(), IInspectable.descriptor(), { raw => IErrorReportingSettings(raw, ownsReference: true) }, { raw => IErrorReportingSettings(raw) })
+        var descriptor = InterfaceDescriptor<IErrorReportingSettings>("IErrorReportingSettings", IErrorReportingSettings.iid(), IInspectable.descriptor(), { raw => IErrorReportingSettings.fromAbiTake(raw) }, { raw => IErrorReportingSettings.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IErrorReportingSettings.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IErrorReportingSettings", IErrorReportingSettings.iid(), IInspectable.descriptorSchema(), "IErrorReportingSettingsVtbl", "IErrorReportingSettings", "IErrorReportingSettings_Impl", [InterfaceMethodSchema("SetErrorOptions", 6, [InterfaceParameterSchema("value", "ErrorOptions", "ErrorOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetErrorOptions", 7, [InterfaceParameterSchema("result", "CPointer<ErrorOptions>", "OutRef<ErrorOptions>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IErrorReportingSettings", IErrorReportingSettings.iid(), IInspectable.descriptorSchema(), "IErrorReportingSettingsVtbl", "IErrorReportingSettings", "IErrorReportingSettings_Impl", [InterfaceMethodSchema("SetErrorOptions", 6, [InterfaceParameterSchema("value", "ErrorOptions", "ErrorOptions", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("GetErrorOptions", 7, [InterfaceParameterSchema("result", "CPointer<ErrorOptions>", "OutSlot<ErrorOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IErrorReportingSettings.runtimeType())
         return schema
     }
@@ -825,7 +889,7 @@ public class IErrorReportingSettings <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IErrorReportingSettingsVtbl {
@@ -847,7 +911,7 @@ public class IErrorReportingSettings <: InterfaceWrapperBase & ComInterface & Ru
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct IFileLoggingSessionVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -856,19 +920,19 @@ public struct IFileLoggingSessionVtbl {
     public var AddLoggingChannelWithLevel: CFunc<(CPointer<Unit>, CPointer<Unit>, LoggingLevel) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveLoggingChannel: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var CloseAndSaveToFileAsync: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var LogFileGenerated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows.foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var RemoveLogFileGenerated: CFunc<(CPointer<Unit>, windows.foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var LogFileGenerated: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var RemoveLogFileGenerated: CFunc<(CPointer<Unit>, Foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
     public static func new<Identity>(offset!: Int64 = 0): IFileLoggingSessionVtbl where Identity <: IFileLoggingSession_Impl {
         let _ = offset
         var vtbl = IFileLoggingSessionVtbl()
         vtbl.base_ = IClosableVtbl.new<Identity>(offset: offset)
-        vtbl.Name = { this_, result__ =>
+        vtbl.Name = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Name()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -881,10 +945,10 @@ public struct IFileLoggingSessionVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.AddLoggingChannel = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.AddLoggingChannel = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.AddLoggingChannel(ILoggingChannel.fromRawBorrowed(arg0))) {
+                    match (impl.AddLoggingChannel(InParam<ILoggingChannel>(ILoggingChannel.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -894,10 +958,10 @@ public struct IFileLoggingSessionVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.AddLoggingChannelWithLevel = { this_, arg0, arg1 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.AddLoggingChannelWithLevel = { instanceRaw, arg0, arg1 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.AddLoggingChannelWithLevel(ILoggingChannel.fromRawBorrowed(arg0), arg1)) {
+                    match (impl.AddLoggingChannelWithLevel(InParam<ILoggingChannel>(ILoggingChannel.viewOf(arg0)), arg1)) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -907,10 +971,10 @@ public struct IFileLoggingSessionVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.RemoveLoggingChannel = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.RemoveLoggingChannel = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.RemoveLoggingChannel(ILoggingChannel.fromRawBorrowed(arg0))) {
+                    match (impl.RemoveLoggingChannel(InParam<ILoggingChannel>(ILoggingChannel.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -920,48 +984,47 @@ public struct IFileLoggingSessionVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.CloseAndSaveToFileAsync = { this_, result__ =>
+        vtbl.CloseAndSaveToFileAsync = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.CloseAndSaveToFileAsync()) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                        case Result<Foundation.IAsyncOperation<Storage.StorageFile>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage.StorageFile>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LogFileGenerated = { this_, arg0, result__ =>
+        vtbl.LogFileGenerated = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.LogFileGenerated(arg0)) {
-                        case Result<windows.foundation.EventRegistrationToken>.Ok(value) =>
+                    match (impl.LogFileGenerated(InParam<Foundation.TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>>(Foundation.TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>.viewOf(arg0)))) {
+                        case Result<Foundation.EventRegistrationToken>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
-                        case Result<windows.foundation.EventRegistrationToken>.Err(error) =>
+                        case Result<Foundation.EventRegistrationToken>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.RemoveLogFileGenerated = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.RemoveLogFileGenerated = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.RemoveLogFileGenerated(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -980,7 +1043,7 @@ public struct IFileLoggingSessionVtbl {
         if (iid == IFileLoggingSession.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -989,28 +1052,32 @@ public struct IFileLoggingSessionVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public interface IFileLoggingSession_Impl <: IClosable_Impl {
     public func Name(): windows_core.Result<CPointer<UInt16>>
-    public func AddLoggingChannel(loggingChannel: ILoggingChannel): windows_core.Result<Unit>
-    public func AddLoggingChannelWithLevel(loggingChannel: ILoggingChannel, maxLevel: LoggingLevel): windows_core.Result<Unit>
-    public func RemoveLoggingChannel(loggingChannel: ILoggingChannel): windows_core.Result<Unit>
-    public func CloseAndSaveToFileAsync(): windows_core.Result<CPointer<Unit>>
-    public func LogFileGenerated(handler: CPointer<Unit>): windows_core.Result<windows.foundation.EventRegistrationToken>
-    public func RemoveLogFileGenerated(token: windows.foundation.EventRegistrationToken): windows_core.Result<Unit>
+    public func AddLoggingChannel(loggingChannel: InParam<ILoggingChannel>): windows_core.Result<Unit>
+    public func AddLoggingChannelWithLevel(loggingChannel: InParam<ILoggingChannel>, maxLevel: LoggingLevel): windows_core.Result<Unit>
+    public func RemoveLoggingChannel(loggingChannel: InParam<ILoggingChannel>): windows_core.Result<Unit>
+    public func CloseAndSaveToFileAsync(): windows_core.Result<Foundation.IAsyncOperation<Storage.StorageFile>>
+    public func LogFileGenerated(handler: InParam<Foundation.TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>>): windows_core.Result<Foundation.EventRegistrationToken>
+    public func RemoveLogFileGenerated(token: Foundation.EventRegistrationToken): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class IFileLoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IFileLoggingSession {
-        IFileLoggingSession(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileLoggingSession {
+    public static func fromAbiTake(raw: CPointer<Unit>): IFileLoggingSession {
+        IFileLoggingSession(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IFileLoggingSession {
         IFileLoggingSession(raw)
     }
 
@@ -1022,7 +1089,7 @@ public class IFileLoggingSession <: InterfaceWrapperBase & ComInterface & Runtim
         if (iid == IFileLoggingSession.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -1031,13 +1098,13 @@ public class IFileLoggingSession <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptor(): InterfaceDescriptor<IFileLoggingSession> {
-        var descriptor = InterfaceDescriptor<IFileLoggingSession>("IFileLoggingSession", IFileLoggingSession.iid(), windows.foundation.IClosable.descriptor(), { raw => IFileLoggingSession(raw, ownsReference: true) }, { raw => IFileLoggingSession(raw) })
+        var descriptor = InterfaceDescriptor<IFileLoggingSession>("IFileLoggingSession", IFileLoggingSession.iid(), Foundation.IClosable.descriptor(), { raw => IFileLoggingSession.fromAbiTake(raw) }, { raw => IFileLoggingSession.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IFileLoggingSession.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileLoggingSession", IFileLoggingSession.iid(), windows.foundation.IClosable.descriptorSchema(), "IFileLoggingSessionVtbl", "IFileLoggingSession", "IFileLoggingSession_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("AddLoggingChannel", 8, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "Ref<ILoggingChannel>", InterfaceParameterBridgeKind.Ref)], "Int32"), InterfaceMethodSchema("AddLoggingChannelWithLevel", 9, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "Ref<ILoggingChannel>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("maxLevel", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemoveLoggingChannel", 10, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "Ref<ILoggingChannel>", InterfaceParameterBridgeKind.Ref)], "Int32"), InterfaceMethodSchema("CloseAndSaveToFileAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("LogFileGenerated", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows.foundation.EventRegistrationToken>", "OutRef<windows.foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("RemoveLogFileGenerated", 13, [InterfaceParameterSchema("token", "windows.foundation.EventRegistrationToken", "windows.foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileLoggingSession", IFileLoggingSession.iid(), Foundation.IClosable.descriptorSchema(), "IFileLoggingSessionVtbl", "IFileLoggingSession", "IFileLoggingSession_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddLoggingChannel", 8, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddLoggingChannelWithLevel", 9, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxLevel", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemoveLoggingChannel", 10, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("CloseAndSaveToFileAsync", 11, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LogFileGenerated", 12, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Foundation.EventRegistrationToken>", "OutSlot<Foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLogFileGenerated", 13, [InterfaceParameterSchema("token", "Foundation.EventRegistrationToken", "Foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(IFileLoggingSession.runtimeType())
         return schema
     }
@@ -1059,11 +1126,11 @@ public class IFileLoggingSession <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IFileLoggingSessionVtbl {
@@ -1096,30 +1163,30 @@ public class IFileLoggingSession <: InterfaceWrapperBase & ComInterface & Runtim
         HRESULT(hr).ok()
     }
 
-    public unsafe func CloseAndSaveToFileAsync(): CPointer<Unit> {
+    public unsafe func CloseAndSaveToFileAsync(): Foundation.IAsyncOperation<Storage.StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.CloseAndSaveToFileAsync(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage.StorageFile>.fromAbiTake(result)
     }
 
-    public unsafe func LogFileGenerated(handler: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func LogFileGenerated(handler: Foundation.TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>): Foundation.EventRegistrationToken {
         let v = vtbl()
-        var result = windows.foundation.EventRegistrationToken()
-        let hr = v.LogFileGenerated(asRaw(), handler, CPointer<windows.foundation.EventRegistrationToken>(inout result))
+        var result = Foundation.EventRegistrationToken()
+        let hr = v.LogFileGenerated(asRaw(), handler.asRaw(), CPointer<Foundation.EventRegistrationToken>(inout result))
         HRESULT(hr).ok()
         return result
     }
 
-    public unsafe func RemoveLogFileGenerated(token: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveLogFileGenerated(token: Foundation.EventRegistrationToken): Unit {
         let v = vtbl()
         let hr = v.RemoveLogFileGenerated(asRaw(), token)
         HRESULT(hr).ok()
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct IFileLoggingSessionFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1127,17 +1194,21 @@ public struct IFileLoggingSessionFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class IFileLoggingSessionFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): IFileLoggingSessionFactory {
-        IFileLoggingSessionFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IFileLoggingSessionFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): IFileLoggingSessionFactory {
+        IFileLoggingSessionFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IFileLoggingSessionFactory {
         IFileLoggingSessionFactory(raw)
     }
 
@@ -1153,13 +1224,13 @@ public class IFileLoggingSessionFactory <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptor(): InterfaceDescriptor<IFileLoggingSessionFactory> {
-        var descriptor = InterfaceDescriptor<IFileLoggingSessionFactory>("IFileLoggingSessionFactory", IFileLoggingSessionFactory.iid(), IInspectable.descriptor(), { raw => IFileLoggingSessionFactory(raw, ownsReference: true) }, { raw => IFileLoggingSessionFactory(raw) })
+        var descriptor = InterfaceDescriptor<IFileLoggingSessionFactory>("IFileLoggingSessionFactory", IFileLoggingSessionFactory.iid(), IInspectable.descriptor(), { raw => IFileLoggingSessionFactory.fromAbiTake(raw) }, { raw => IFileLoggingSessionFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IFileLoggingSessionFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("IFileLoggingSessionFactory", IFileLoggingSessionFactory.iid(), IInspectable.descriptorSchema(), "IFileLoggingSessionFactoryVtbl", "IFileLoggingSessionFactory", "IFileLoggingSessionFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<FileLoggingSession>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("IFileLoggingSessionFactory", IFileLoggingSessionFactory.iid(), IInspectable.descriptorSchema(), "IFileLoggingSessionFactoryVtbl", "IFileLoggingSessionFactory", "IFileLoggingSessionFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<FileLoggingSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(IFileLoggingSessionFactory.runtimeType())
         return schema
     }
@@ -1181,7 +1252,7 @@ public class IFileLoggingSessionFactory <: InterfaceWrapperBase & ComInterface &
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): IFileLoggingSessionFactoryVtbl {
@@ -1193,11 +1264,11 @@ public class IFileLoggingSessionFactory <: InterfaceWrapperBase & ComInterface &
         var result = CPointer<Unit>()
         let hr = v.Create(asRaw(), name, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return FileLoggingSession.fromRaw(result)
+        return FileLoggingSession.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILogFileGeneratedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1205,17 +1276,21 @@ public struct ILogFileGeneratedEventArgsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILogFileGeneratedEventArgs {
-        ILogFileGeneratedEventArgs(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILogFileGeneratedEventArgs {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILogFileGeneratedEventArgs {
+        ILogFileGeneratedEventArgs(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILogFileGeneratedEventArgs {
         ILogFileGeneratedEventArgs(raw)
     }
 
@@ -1231,13 +1306,13 @@ public class ILogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public static func descriptor(): InterfaceDescriptor<ILogFileGeneratedEventArgs> {
-        var descriptor = InterfaceDescriptor<ILogFileGeneratedEventArgs>("ILogFileGeneratedEventArgs", ILogFileGeneratedEventArgs.iid(), IInspectable.descriptor(), { raw => ILogFileGeneratedEventArgs(raw, ownsReference: true) }, { raw => ILogFileGeneratedEventArgs(raw) })
+        var descriptor = InterfaceDescriptor<ILogFileGeneratedEventArgs>("ILogFileGeneratedEventArgs", ILogFileGeneratedEventArgs.iid(), IInspectable.descriptor(), { raw => ILogFileGeneratedEventArgs.fromAbiTake(raw) }, { raw => ILogFileGeneratedEventArgs.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILogFileGeneratedEventArgs.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILogFileGeneratedEventArgs", ILogFileGeneratedEventArgs.iid(), IInspectable.descriptorSchema(), "ILogFileGeneratedEventArgsVtbl", "ILogFileGeneratedEventArgs", "ILogFileGeneratedEventArgs_Impl", [InterfaceMethodSchema("File", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<windows.storage.StorageFile>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILogFileGeneratedEventArgs", ILogFileGeneratedEventArgs.iid(), IInspectable.descriptorSchema(), "ILogFileGeneratedEventArgsVtbl", "ILogFileGeneratedEventArgs", "ILogFileGeneratedEventArgs_Impl", [InterfaceMethodSchema("File", 6, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Storage.StorageFile>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILogFileGeneratedEventArgs.runtimeType())
         return schema
     }
@@ -1259,23 +1334,23 @@ public class ILogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface &
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILogFileGeneratedEventArgsVtbl {
         readVtbl<ILogFileGeneratedEventArgsVtbl>(ILogFileGeneratedEventArgsVtbl())
     }
 
-    public unsafe func File(): windows.storage.StorageFile {
+    public unsafe func File(): Storage.StorageFile {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.File(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return windows.storage.StorageFile.fromRaw(result)
+        return Storage.StorageFile.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingActivityVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -1284,17 +1359,21 @@ public struct ILoggingActivityVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingActivity <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingActivity {
-        ILoggingActivity(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingActivity {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingActivity {
+        ILoggingActivity(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingActivity {
         ILoggingActivity(raw)
     }
 
@@ -1306,7 +1385,7 @@ public class ILoggingActivity <: InterfaceWrapperBase & ComInterface & RuntimeNa
         if (iid == ILoggingActivity.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -1315,13 +1394,13 @@ public class ILoggingActivity <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingActivity> {
-        var descriptor = InterfaceDescriptor<ILoggingActivity>("ILoggingActivity", ILoggingActivity.iid(), windows.foundation.IClosable.descriptor(), { raw => ILoggingActivity(raw, ownsReference: true) }, { raw => ILoggingActivity(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingActivity>("ILoggingActivity", ILoggingActivity.iid(), Foundation.IClosable.descriptor(), { raw => ILoggingActivity.fromAbiTake(raw) }, { raw => ILoggingActivity.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingActivity.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingActivity", ILoggingActivity.iid(), windows.foundation.IClosable.descriptorSchema(), "ILoggingActivityVtbl", "ILoggingActivity", "ILoggingActivity_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Id", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutRef<GUID>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingActivity", ILoggingActivity.iid(), Foundation.IClosable.descriptorSchema(), "ILoggingActivityVtbl", "ILoggingActivity", "ILoggingActivity_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Id", 8, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GUID>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingActivity.runtimeType())
         return schema
     }
@@ -1343,11 +1422,11 @@ public class ILoggingActivity <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingActivityVtbl {
@@ -1371,7 +1450,7 @@ public class ILoggingActivity <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingActivity2Vtbl {
     public var base_: ILoggingActivityVtbl = ILoggingActivityVtbl()
@@ -1382,17 +1461,21 @@ public struct ILoggingActivity2Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingActivity2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingActivity2 {
-        ILoggingActivity2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingActivity2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingActivity2 {
+        ILoggingActivity2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingActivity2 {
         ILoggingActivity2(raw)
     }
 
@@ -1404,7 +1487,7 @@ public class ILoggingActivity2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         if (iid == ILoggingActivity2.iid()) {
             return true
         }
-        for (ancestor in [ILoggingActivity.iid(), windows.foundation.IClosable.iid(), ILoggingTarget.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [ILoggingActivity.iid(), Foundation.IClosable.iid(), ILoggingTarget.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -1413,13 +1496,13 @@ public class ILoggingActivity2 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingActivity2> {
-        var descriptor = InterfaceDescriptor<ILoggingActivity2>("ILoggingActivity2", ILoggingActivity2.iid(), ILoggingActivity.descriptor(), { raw => ILoggingActivity2(raw, ownsReference: true) }, { raw => ILoggingActivity2(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingActivity2>("ILoggingActivity2", ILoggingActivity2.iid(), ILoggingActivity.descriptor(), { raw => ILoggingActivity2.fromAbiTake(raw) }, { raw => ILoggingActivity2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingActivity2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingActivity2", ILoggingActivity2.iid(), ILoggingActivity.descriptorSchema(), "ILoggingActivity2Vtbl", "ILoggingActivity2", "ILoggingActivity2_Impl", [InterfaceMethodSchema("Channel", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingChannel>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("StopActivity", 10, [InterfaceParameterSchema("stopEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StopActivityWithFields", 11, [InterfaceParameterSchema("stopEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "Ref<LoggingFields>", InterfaceParameterBridgeKind.Ref)], "Int32"), InterfaceMethodSchema("StopActivityWithFieldsAndOptions", 12, [InterfaceParameterSchema("stopEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "Ref<LoggingFields>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("options", "CPointer<Unit>", "Ref<LoggingOptions>", InterfaceParameterBridgeKind.Ref)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingActivity2", ILoggingActivity2.iid(), ILoggingActivity.descriptorSchema(), "ILoggingActivity2Vtbl", "ILoggingActivity2", "ILoggingActivity2_Impl", [InterfaceMethodSchema("Channel", 9, [InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingChannel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StopActivity", 10, [InterfaceParameterSchema("stopEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("StopActivityWithFields", 11, [InterfaceParameterSchema("stopEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "InParam<LoggingFields>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StopActivityWithFieldsAndOptions", 12, [InterfaceParameterSchema("stopEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "InParam<LoggingFields>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<LoggingOptions>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingActivity2.runtimeType())
         return schema
     }
@@ -1441,19 +1524,19 @@ public class ILoggingActivity2 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asILoggingActivity(): ILoggingActivity {
-        ILoggingActivity(asRaw())
+        ILoggingActivity.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public func asILoggingTarget(): ILoggingTarget {
-        ILoggingTarget(asRaw())
+        ILoggingTarget.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingActivity2Vtbl {
@@ -1465,7 +1548,7 @@ public class ILoggingActivity2 <: InterfaceWrapperBase & ComInterface & RuntimeN
         var result = CPointer<Unit>()
         let hr = v.Channel(asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingChannel.fromRaw(result)
+        return LoggingChannel.fromAbiTake(result)
     }
 
     public unsafe func StopActivity(stopEventName: CPointer<UInt16>): Unit {
@@ -1487,7 +1570,7 @@ public class ILoggingActivity2 <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingActivityFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1496,17 +1579,21 @@ public struct ILoggingActivityFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingActivityFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingActivityFactory {
-        ILoggingActivityFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingActivityFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingActivityFactory {
+        ILoggingActivityFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingActivityFactory {
         ILoggingActivityFactory(raw)
     }
 
@@ -1522,13 +1609,13 @@ public class ILoggingActivityFactory <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingActivityFactory> {
-        var descriptor = InterfaceDescriptor<ILoggingActivityFactory>("ILoggingActivityFactory", ILoggingActivityFactory.iid(), IInspectable.descriptor(), { raw => ILoggingActivityFactory(raw, ownsReference: true) }, { raw => ILoggingActivityFactory(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingActivityFactory>("ILoggingActivityFactory", ILoggingActivityFactory.iid(), IInspectable.descriptor(), { raw => ILoggingActivityFactory.fromAbiTake(raw) }, { raw => ILoggingActivityFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingActivityFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingActivityFactory", ILoggingActivityFactory.iid(), IInspectable.descriptorSchema(), "ILoggingActivityFactoryVtbl", "ILoggingActivityFactory", "ILoggingActivityFactory_Impl", [InterfaceMethodSchema("CreateLoggingActivity", 6, [InterfaceParameterSchema("activityName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "Ref<ILoggingChannel>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingActivity>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateLoggingActivityWithLevel", 7, [InterfaceParameterSchema("activityName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "Ref<ILoggingChannel>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingActivity>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingActivityFactory", ILoggingActivityFactory.iid(), IInspectable.descriptorSchema(), "ILoggingActivityFactoryVtbl", "ILoggingActivityFactory", "ILoggingActivityFactory_Impl", [InterfaceMethodSchema("CreateLoggingActivity", 6, [InterfaceParameterSchema("activityName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingActivity>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateLoggingActivityWithLevel", 7, [InterfaceParameterSchema("activityName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingActivity>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingActivityFactory.runtimeType())
         return schema
     }
@@ -1550,7 +1637,7 @@ public class ILoggingActivityFactory <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingActivityFactoryVtbl {
@@ -1562,7 +1649,7 @@ public class ILoggingActivityFactory <: InterfaceWrapperBase & ComInterface & Ru
         var result = CPointer<Unit>()
         let hr = v.CreateLoggingActivity(asRaw(), activityName, loggingChannel.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingActivity.fromRaw(result)
+        return LoggingActivity.fromAbiTake(result)
     }
 
     public unsafe func CreateLoggingActivityWithLevel(activityName: CPointer<UInt16>, loggingChannel: ILoggingChannel, level: LoggingLevel): LoggingActivity {
@@ -1570,11 +1657,11 @@ public class ILoggingActivityFactory <: InterfaceWrapperBase & ComInterface & Ru
         var result = CPointer<Unit>()
         let hr = v.CreateLoggingActivityWithLevel(asRaw(), activityName, loggingChannel.asRaw(), level, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingActivity.fromRaw(result)
+        return LoggingActivity.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingChannelVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -1585,19 +1672,19 @@ public struct ILoggingChannelVtbl {
     public var LogMessageWithLevel: CFunc<(CPointer<Unit>, CPointer<UInt16>, LoggingLevel) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var LogValuePair: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var LogValuePairWithLevel: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, LoggingLevel) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var LoggingEnabled: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<windows.foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var RemoveLoggingEnabled: CFunc<(CPointer<Unit>, windows.foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var LoggingEnabled: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Foundation.EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var RemoveLoggingEnabled: CFunc<(CPointer<Unit>, Foundation.EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
     public static func new<Identity>(offset!: Int64 = 0): ILoggingChannelVtbl where Identity <: ILoggingChannel_Impl {
         let _ = offset
         var vtbl = ILoggingChannelVtbl()
         vtbl.base_ = IClosableVtbl.new<Identity>(offset: offset)
-        vtbl.Name = { this_, result__ =>
+        vtbl.Name = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Name()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -1610,11 +1697,11 @@ public struct ILoggingChannelVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Enabled = { this_, result__ =>
+        vtbl.Enabled = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Enabled()) {
                         case Result<Bool>.Ok(value) =>
@@ -1627,11 +1714,11 @@ public struct ILoggingChannelVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.Level = { this_, result__ =>
+        vtbl.Level = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Level()) {
                         case Result<LoggingLevel>.Ok(value) =>
@@ -1644,8 +1731,8 @@ public struct ILoggingChannelVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LogMessage = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.LogMessage = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.LogMessage(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -1657,8 +1744,8 @@ public struct ILoggingChannelVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LogMessageWithLevel = { this_, arg0, arg1 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.LogMessageWithLevel = { instanceRaw, arg0, arg1 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.LogMessageWithLevel(arg0, arg1)) {
                         case Result<Unit>.Ok(_) =>
@@ -1670,8 +1757,8 @@ public struct ILoggingChannelVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LogValuePair = { this_, arg0, arg1 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.LogValuePair = { instanceRaw, arg0, arg1 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.LogValuePair(arg0, arg1)) {
                         case Result<Unit>.Ok(_) =>
@@ -1683,8 +1770,8 @@ public struct ILoggingChannelVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LogValuePairWithLevel = { this_, arg0, arg1, arg2 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.LogValuePairWithLevel = { instanceRaw, arg0, arg1, arg2 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.LogValuePairWithLevel(arg0, arg1, arg2)) {
                         case Result<Unit>.Ok(_) =>
@@ -1696,25 +1783,25 @@ public struct ILoggingChannelVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LoggingEnabled = { this_, arg0, result__ =>
+        vtbl.LoggingEnabled = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.LoggingEnabled(arg0)) {
-                        case Result<windows.foundation.EventRegistrationToken>.Ok(value) =>
+                    match (impl.LoggingEnabled(InParam<Foundation.TypedEventHandler<ILoggingChannel, IInspectable>>(Foundation.TypedEventHandler<ILoggingChannel, IInspectable>.viewOf(arg0)))) {
+                        case Result<Foundation.EventRegistrationToken>.Ok(value) =>
                             unsafe { result__.write(value) }
                             S_OK.value
-                        case Result<windows.foundation.EventRegistrationToken>.Err(error) =>
+                        case Result<Foundation.EventRegistrationToken>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.RemoveLoggingEnabled = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.RemoveLoggingEnabled = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.RemoveLoggingEnabled(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -1733,7 +1820,7 @@ public struct ILoggingChannelVtbl {
         if (iid == ILoggingChannel.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -1742,7 +1829,7 @@ public struct ILoggingChannelVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public interface ILoggingChannel_Impl <: IClosable_Impl {
     public func Name(): windows_core.Result<CPointer<UInt16>>
     public func Enabled(): windows_core.Result<Bool>
@@ -1751,21 +1838,25 @@ public interface ILoggingChannel_Impl <: IClosable_Impl {
     public func LogMessageWithLevel(eventString: CPointer<UInt16>, level: LoggingLevel): windows_core.Result<Unit>
     public func LogValuePair(value1: CPointer<UInt16>, value2: Int32): windows_core.Result<Unit>
     public func LogValuePairWithLevel(value1: CPointer<UInt16>, value2: Int32, level: LoggingLevel): windows_core.Result<Unit>
-    public func LoggingEnabled(handler: CPointer<Unit>): windows_core.Result<windows.foundation.EventRegistrationToken>
-    public func RemoveLoggingEnabled(token: windows.foundation.EventRegistrationToken): windows_core.Result<Unit>
+    public func LoggingEnabled(handler: InParam<Foundation.TypedEventHandler<ILoggingChannel, IInspectable>>): windows_core.Result<Foundation.EventRegistrationToken>
+    public func RemoveLoggingEnabled(token: Foundation.EventRegistrationToken): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingChannel <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingChannel {
-        ILoggingChannel(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingChannel {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingChannel {
+        ILoggingChannel(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingChannel {
         ILoggingChannel(raw)
     }
 
@@ -1777,7 +1868,7 @@ public class ILoggingChannel <: InterfaceWrapperBase & ComInterface & RuntimeNam
         if (iid == ILoggingChannel.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -1786,13 +1877,13 @@ public class ILoggingChannel <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingChannel> {
-        var descriptor = InterfaceDescriptor<ILoggingChannel>("ILoggingChannel", ILoggingChannel.iid(), windows.foundation.IClosable.descriptor(), { raw => ILoggingChannel(raw, ownsReference: true) }, { raw => ILoggingChannel(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingChannel>("ILoggingChannel", ILoggingChannel.iid(), Foundation.IClosable.descriptor(), { raw => ILoggingChannel.fromAbiTake(raw) }, { raw => ILoggingChannel.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingChannel.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingChannel", ILoggingChannel.iid(), windows.foundation.IClosable.descriptorSchema(), "ILoggingChannelVtbl", "ILoggingChannel", "ILoggingChannel_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Enabled", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("Level", 9, [InterfaceParameterSchema("result", "CPointer<LoggingLevel>", "OutRef<LoggingLevel>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("LogMessage", 10, [InterfaceParameterSchema("eventString", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogMessageWithLevel", 11, [InterfaceParameterSchema("eventString", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogValuePair", 12, [InterfaceParameterSchema("value1", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value2", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogValuePairWithLevel", 13, [InterfaceParameterSchema("value1", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value2", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LoggingEnabled", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<windows.foundation.EventRegistrationToken>", "OutRef<windows.foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("RemoveLoggingEnabled", 15, [InterfaceParameterSchema("token", "windows.foundation.EventRegistrationToken", "windows.foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingChannel", ILoggingChannel.iid(), Foundation.IClosable.descriptorSchema(), "ILoggingChannelVtbl", "ILoggingChannel", "ILoggingChannel_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Enabled", 8, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("Level", 9, [InterfaceParameterSchema("result", "CPointer<LoggingLevel>", "OutSlot<LoggingLevel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LogMessage", 10, [InterfaceParameterSchema("eventString", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogMessageWithLevel", 11, [InterfaceParameterSchema("eventString", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogValuePair", 12, [InterfaceParameterSchema("value1", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value2", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogValuePairWithLevel", 13, [InterfaceParameterSchema("value1", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value2", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LoggingEnabled", 14, [InterfaceParameterSchema("handler", "CPointer<Unit>", "InParam<Foundation.TypedEventHandler<ILoggingChannel, IInspectable>>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<Foundation.EventRegistrationToken>", "OutSlot<Foundation.EventRegistrationToken>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("RemoveLoggingEnabled", 15, [InterfaceParameterSchema("token", "Foundation.EventRegistrationToken", "Foundation.EventRegistrationToken", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingChannel.runtimeType())
         return schema
     }
@@ -1814,11 +1905,11 @@ public class ILoggingChannel <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingChannelVtbl {
@@ -1873,22 +1964,22 @@ public class ILoggingChannel <: InterfaceWrapperBase & ComInterface & RuntimeNam
         HRESULT(hr).ok()
     }
 
-    public unsafe func LoggingEnabled(handler: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func LoggingEnabled(handler: Foundation.TypedEventHandler<ILoggingChannel, IInspectable>): Foundation.EventRegistrationToken {
         let v = vtbl()
-        var result = windows.foundation.EventRegistrationToken()
-        let hr = v.LoggingEnabled(asRaw(), handler, CPointer<windows.foundation.EventRegistrationToken>(inout result))
+        var result = Foundation.EventRegistrationToken()
+        let hr = v.LoggingEnabled(asRaw(), handler.asRaw(), CPointer<Foundation.EventRegistrationToken>(inout result))
         HRESULT(hr).ok()
         return result
     }
 
-    public unsafe func RemoveLoggingEnabled(token: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveLoggingEnabled(token: Foundation.EventRegistrationToken): Unit {
         let v = vtbl()
         let hr = v.RemoveLoggingEnabled(asRaw(), token)
         HRESULT(hr).ok()
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingChannel2Vtbl {
     public var base_: ILoggingChannelVtbl = ILoggingChannelVtbl()
@@ -1896,17 +1987,21 @@ public struct ILoggingChannel2Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingChannel2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingChannel2 {
-        ILoggingChannel2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingChannel2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingChannel2 {
+        ILoggingChannel2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingChannel2 {
         ILoggingChannel2(raw)
     }
 
@@ -1918,7 +2013,7 @@ public class ILoggingChannel2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
         if (iid == ILoggingChannel2.iid()) {
             return true
         }
-        for (ancestor in [ILoggingChannel.iid(), windows.foundation.IClosable.iid(), ILoggingTarget.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [ILoggingChannel.iid(), Foundation.IClosable.iid(), ILoggingTarget.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -1927,13 +2022,13 @@ public class ILoggingChannel2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingChannel2> {
-        var descriptor = InterfaceDescriptor<ILoggingChannel2>("ILoggingChannel2", ILoggingChannel2.iid(), ILoggingChannel.descriptor(), { raw => ILoggingChannel2(raw, ownsReference: true) }, { raw => ILoggingChannel2(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingChannel2>("ILoggingChannel2", ILoggingChannel2.iid(), ILoggingChannel.descriptor(), { raw => ILoggingChannel2.fromAbiTake(raw) }, { raw => ILoggingChannel2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingChannel2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingChannel2", ILoggingChannel2.iid(), ILoggingChannel.descriptorSchema(), "ILoggingChannel2Vtbl", "ILoggingChannel2", "ILoggingChannel2_Impl", [InterfaceMethodSchema("Id", 16, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutRef<GUID>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingChannel2", ILoggingChannel2.iid(), ILoggingChannel.descriptorSchema(), "ILoggingChannel2Vtbl", "ILoggingChannel2", "ILoggingChannel2_Impl", [InterfaceMethodSchema("Id", 16, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GUID>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingChannel2.runtimeType())
         return schema
     }
@@ -1955,19 +2050,19 @@ public class ILoggingChannel2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asILoggingChannel(): ILoggingChannel {
-        ILoggingChannel(asRaw())
+        ILoggingChannel.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public func asILoggingTarget(): ILoggingTarget {
-        ILoggingTarget(asRaw())
+        ILoggingTarget.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingChannel2Vtbl {
@@ -1983,7 +2078,7 @@ public class ILoggingChannel2 <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingChannelFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -1991,17 +2086,21 @@ public struct ILoggingChannelFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingChannelFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingChannelFactory {
-        ILoggingChannelFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingChannelFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingChannelFactory {
+        ILoggingChannelFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingChannelFactory {
         ILoggingChannelFactory(raw)
     }
 
@@ -2017,13 +2116,13 @@ public class ILoggingChannelFactory <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingChannelFactory> {
-        var descriptor = InterfaceDescriptor<ILoggingChannelFactory>("ILoggingChannelFactory", ILoggingChannelFactory.iid(), IInspectable.descriptor(), { raw => ILoggingChannelFactory(raw, ownsReference: true) }, { raw => ILoggingChannelFactory(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingChannelFactory>("ILoggingChannelFactory", ILoggingChannelFactory.iid(), IInspectable.descriptor(), { raw => ILoggingChannelFactory.fromAbiTake(raw) }, { raw => ILoggingChannelFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingChannelFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingChannelFactory", ILoggingChannelFactory.iid(), IInspectable.descriptorSchema(), "ILoggingChannelFactoryVtbl", "ILoggingChannelFactory", "ILoggingChannelFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingChannel>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingChannelFactory", ILoggingChannelFactory.iid(), IInspectable.descriptorSchema(), "ILoggingChannelFactoryVtbl", "ILoggingChannelFactory", "ILoggingChannelFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingChannel>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingChannelFactory.runtimeType())
         return schema
     }
@@ -2045,7 +2144,7 @@ public class ILoggingChannelFactory <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingChannelFactoryVtbl {
@@ -2057,11 +2156,11 @@ public class ILoggingChannelFactory <: InterfaceWrapperBase & ComInterface & Run
         var result = CPointer<Unit>()
         let hr = v.Create(asRaw(), name, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingChannel.fromRaw(result)
+        return LoggingChannel.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingChannelFactory2Vtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2070,17 +2169,21 @@ public struct ILoggingChannelFactory2Vtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingChannelFactory2 <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingChannelFactory2 {
-        ILoggingChannelFactory2(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingChannelFactory2 {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingChannelFactory2 {
+        ILoggingChannelFactory2(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingChannelFactory2 {
         ILoggingChannelFactory2(raw)
     }
 
@@ -2096,13 +2199,13 @@ public class ILoggingChannelFactory2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingChannelFactory2> {
-        var descriptor = InterfaceDescriptor<ILoggingChannelFactory2>("ILoggingChannelFactory2", ILoggingChannelFactory2.iid(), IInspectable.descriptor(), { raw => ILoggingChannelFactory2(raw, ownsReference: true) }, { raw => ILoggingChannelFactory2(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingChannelFactory2>("ILoggingChannelFactory2", ILoggingChannelFactory2.iid(), IInspectable.descriptor(), { raw => ILoggingChannelFactory2.fromAbiTake(raw) }, { raw => ILoggingChannelFactory2.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingChannelFactory2.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingChannelFactory2", ILoggingChannelFactory2.iid(), IInspectable.descriptorSchema(), "ILoggingChannelFactory2Vtbl", "ILoggingChannelFactory2", "ILoggingChannelFactory2_Impl", [InterfaceMethodSchema("CreateWithOptions", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "Ref<LoggingChannelOptions>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingChannel>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("CreateWithOptionsAndId", 7, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "Ref<LoggingChannelOptions>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("id", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingChannel>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingChannelFactory2", ILoggingChannelFactory2.iid(), IInspectable.descriptorSchema(), "ILoggingChannelFactory2Vtbl", "ILoggingChannelFactory2", "ILoggingChannelFactory2_Impl", [InterfaceMethodSchema("CreateWithOptions", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<LoggingChannelOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingChannel>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("CreateWithOptionsAndId", 7, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<LoggingChannelOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("id", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingChannel>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingChannelFactory2.runtimeType())
         return schema
     }
@@ -2124,7 +2227,7 @@ public class ILoggingChannelFactory2 <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingChannelFactory2Vtbl {
@@ -2136,7 +2239,7 @@ public class ILoggingChannelFactory2 <: InterfaceWrapperBase & ComInterface & Ru
         var result = CPointer<Unit>()
         let hr = v.CreateWithOptions(asRaw(), name, options.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingChannel.fromRaw(result)
+        return LoggingChannel.fromAbiTake(result)
     }
 
     public unsafe func CreateWithOptionsAndId(name: CPointer<UInt16>, options: LoggingChannelOptions, id: GUID): LoggingChannel {
@@ -2144,11 +2247,11 @@ public class ILoggingChannelFactory2 <: InterfaceWrapperBase & ComInterface & Ru
         var result = CPointer<Unit>()
         let hr = v.CreateWithOptionsAndId(asRaw(), name, options.asRaw(), id, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingChannel.fromRaw(result)
+        return LoggingChannel.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingChannelOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2157,17 +2260,21 @@ public struct ILoggingChannelOptionsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingChannelOptions <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingChannelOptions {
-        ILoggingChannelOptions(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingChannelOptions {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingChannelOptions {
+        ILoggingChannelOptions(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingChannelOptions {
         ILoggingChannelOptions(raw)
     }
 
@@ -2183,13 +2290,13 @@ public class ILoggingChannelOptions <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingChannelOptions> {
-        var descriptor = InterfaceDescriptor<ILoggingChannelOptions>("ILoggingChannelOptions", ILoggingChannelOptions.iid(), IInspectable.descriptor(), { raw => ILoggingChannelOptions(raw, ownsReference: true) }, { raw => ILoggingChannelOptions(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingChannelOptions>("ILoggingChannelOptions", ILoggingChannelOptions.iid(), IInspectable.descriptor(), { raw => ILoggingChannelOptions.fromAbiTake(raw) }, { raw => ILoggingChannelOptions.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingChannelOptions.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingChannelOptions", ILoggingChannelOptions.iid(), IInspectable.descriptorSchema(), "ILoggingChannelOptionsVtbl", "ILoggingChannelOptions", "ILoggingChannelOptions_Impl", [InterfaceMethodSchema("Group", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutRef<GUID>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetGroup", 7, [InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingChannelOptions", ILoggingChannelOptions.iid(), IInspectable.descriptorSchema(), "ILoggingChannelOptionsVtbl", "ILoggingChannelOptions", "ILoggingChannelOptions_Impl", [InterfaceMethodSchema("Group", 6, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GUID>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetGroup", 7, [InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingChannelOptions.runtimeType())
         return schema
     }
@@ -2211,7 +2318,7 @@ public class ILoggingChannelOptions <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingChannelOptionsVtbl {
@@ -2233,7 +2340,7 @@ public class ILoggingChannelOptions <: InterfaceWrapperBase & ComInterface & Run
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingChannelOptionsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2241,17 +2348,21 @@ public struct ILoggingChannelOptionsFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingChannelOptionsFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingChannelOptionsFactory {
-        ILoggingChannelOptionsFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingChannelOptionsFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingChannelOptionsFactory {
+        ILoggingChannelOptionsFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingChannelOptionsFactory {
         ILoggingChannelOptionsFactory(raw)
     }
 
@@ -2267,13 +2378,13 @@ public class ILoggingChannelOptionsFactory <: InterfaceWrapperBase & ComInterfac
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingChannelOptionsFactory> {
-        var descriptor = InterfaceDescriptor<ILoggingChannelOptionsFactory>("ILoggingChannelOptionsFactory", ILoggingChannelOptionsFactory.iid(), IInspectable.descriptor(), { raw => ILoggingChannelOptionsFactory(raw, ownsReference: true) }, { raw => ILoggingChannelOptionsFactory(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingChannelOptionsFactory>("ILoggingChannelOptionsFactory", ILoggingChannelOptionsFactory.iid(), IInspectable.descriptor(), { raw => ILoggingChannelOptionsFactory.fromAbiTake(raw) }, { raw => ILoggingChannelOptionsFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingChannelOptionsFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingChannelOptionsFactory", ILoggingChannelOptionsFactory.iid(), IInspectable.descriptorSchema(), "ILoggingChannelOptionsFactoryVtbl", "ILoggingChannelOptionsFactory", "ILoggingChannelOptionsFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("group", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingChannelOptions>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingChannelOptionsFactory", ILoggingChannelOptionsFactory.iid(), IInspectable.descriptorSchema(), "ILoggingChannelOptionsFactoryVtbl", "ILoggingChannelOptionsFactory", "ILoggingChannelOptionsFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("group", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingChannelOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingChannelOptionsFactory.runtimeType())
         return schema
     }
@@ -2295,7 +2406,7 @@ public class ILoggingChannelOptionsFactory <: InterfaceWrapperBase & ComInterfac
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingChannelOptionsFactoryVtbl {
@@ -2307,11 +2418,11 @@ public class ILoggingChannelOptionsFactory <: InterfaceWrapperBase & ComInterfac
         var result = CPointer<Unit>()
         let hr = v.Create(asRaw(), group, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingChannelOptions.fromRaw(result)
+        return LoggingChannelOptions.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingFieldsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -2325,125 +2436,129 @@ public struct ILoggingFieldsVtbl {
     public var AddUInt8: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt8) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddUInt8WithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt8, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddUInt8WithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt8, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddUInt8Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt8>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddUInt8ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt8>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddUInt8ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt8>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt8Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt8>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt8ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt8>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt8ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt8>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddInt16: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddInt16WithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddInt16WithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int16, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddInt16Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddInt16ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddInt16ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int16>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddInt16Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Int16>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddInt16ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Int16>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddInt16ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Int16>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddUInt16: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt16) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddUInt16WithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt16, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddUInt16WithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt16, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddUInt16Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddUInt16ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddUInt16ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt16Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt16>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt16ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt16>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt16ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt16>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddInt32: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddInt32WithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddInt32WithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddInt32Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddInt32ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddInt32ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int32>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddInt32Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Int32>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddInt32ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Int32>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddInt32ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Int32>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddUInt32: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddUInt32WithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddUInt32WithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddUInt32Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddUInt32ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddUInt32ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt32Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt32ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt32>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt32ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt32>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddInt64: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int64) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddInt64WithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int64, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddInt64WithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int64, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddInt64Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int64>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddInt64ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int64>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddInt64ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Int64>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddInt64Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Int64>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddInt64ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Int64>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddInt64ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Int64>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddUInt64: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt64) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddUInt64WithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt64, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddUInt64WithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt64, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddUInt64Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt64>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddUInt64ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt64>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddUInt64ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt64>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt64Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt64>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt64ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt64>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddUInt64ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt64>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddSingle: CFunc<(CPointer<Unit>, CPointer<UInt16>, Float32) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddSingleWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Float32, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddSingleWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Float32, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddSingleArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Float32>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddSingleArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Float32>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddSingleArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Float32>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddSingleArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Float32>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddSingleArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Float32>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddSingleArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Float32>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddDouble: CFunc<(CPointer<Unit>, CPointer<UInt16>, Float64) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddDoubleWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Float64, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddDoubleWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Float64, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddDoubleArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Float64>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddDoubleArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Float64>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddDoubleArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Float64>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddDoubleArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Float64>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddDoubleArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Float64>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddDoubleArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Float64>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddChar16: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt16) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddChar16WithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt16, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddChar16WithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt16, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddChar16Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddChar16ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddChar16ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddChar16Array: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt16>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddChar16ArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt16>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddChar16ArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<UInt16>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddBoolean: CFunc<(CPointer<Unit>, CPointer<UInt16>, Bool) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddBooleanWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Bool, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddBooleanWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Bool, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddBooleanArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddBooleanArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Bool>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddBooleanArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Bool>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddBooleanArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddBooleanArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Bool>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddBooleanArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Bool>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddString: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddStringWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddStringWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddStringArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddStringArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddStringArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<CPointer<UInt16>>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddStringArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddStringArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<CPointer<UInt16>>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddStringArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<CPointer<UInt16>>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public var AddGuid: CFunc<(CPointer<Unit>, CPointer<UInt16>, GUID) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var AddGuidWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, GUID, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
     public var AddGuidWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, GUID, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddGuidArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<GUID>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddGuidArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<GUID>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddGuidArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<GUID>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddDateTime: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.DateTime) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddDateTimeWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.DateTime, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddDateTimeWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.DateTime, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddDateTimeArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.DateTime>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddDateTimeArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.DateTime>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddDateTimeArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.DateTime>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddTimeSpan: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.TimeSpan) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddTimeSpanWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.TimeSpan, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddTimeSpanWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.TimeSpan, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddTimeSpanArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.TimeSpan>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddTimeSpanArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.TimeSpan>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddTimeSpanArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.TimeSpan>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddPoint: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.Point) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddPointWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.Point, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddPointWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.Point, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddPointArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.Point>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddPointArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.Point>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddPointArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.Point>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddSize: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.Size) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddSizeWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.Size, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddSizeWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.Size, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddSizeArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.Size>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddSizeArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.Size>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddSizeArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.Size>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddRect: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.Rect) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddRectWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.Rect, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddRectWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, windows.foundation.Rect, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    public var AddRectArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.Rect>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var AddRectArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.Rect>, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var AddRectArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<windows.foundation.Rect>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddGuidArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<GUID>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddGuidArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<GUID>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddGuidArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<GUID>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddDateTime: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.DateTime) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var AddDateTimeWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.DateTime, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddDateTimeWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.DateTime, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddDateTimeArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.DateTime>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddDateTimeArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.DateTime>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddDateTimeArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.DateTime>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddTimeSpan: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.TimeSpan) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var AddTimeSpanWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.TimeSpan, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddTimeSpanWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.TimeSpan, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddTimeSpanArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.TimeSpan>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddTimeSpanArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.TimeSpan>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddTimeSpanArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.TimeSpan>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddPoint: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.Point) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var AddPointWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.Point, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddPointWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.Point, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddPointArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.Point>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddPointArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.Point>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddPointArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.Point>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddSize: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.Size) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var AddSizeWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.Size, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddSizeWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.Size, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddSizeArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.Size>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddSizeArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.Size>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddSizeArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.Size>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddRect: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.Rect) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var AddRectWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.Rect, LoggingFieldFormat) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddRectWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, Foundation.Rect, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddRectArray: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.Rect>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var AddRectArrayWithFormat: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.Rect>, LoggingFieldFormat) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var AddRectArrayWithFormatAndTags: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Foundation.Rect>, LoggingFieldFormat, Int32) -> Int32> = { _, _, _, _, _, _ => E_NOTIMPL.value }
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingFields <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingFields {
-        ILoggingFields(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingFields {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingFields {
+        ILoggingFields(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingFields {
         ILoggingFields(raw)
     }
 
@@ -2459,13 +2574,13 @@ public class ILoggingFields <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingFields> {
-        var descriptor = InterfaceDescriptor<ILoggingFields>("ILoggingFields", ILoggingFields.iid(), IInspectable.descriptor(), { raw => ILoggingFields(raw, ownsReference: true) }, { raw => ILoggingFields(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingFields>("ILoggingFields", ILoggingFields.iid(), IInspectable.descriptor(), { raw => ILoggingFields.fromAbiTake(raw) }, { raw => ILoggingFields.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingFields.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingFields", ILoggingFields.iid(), IInspectable.descriptorSchema(), "ILoggingFieldsVtbl", "ILoggingFields", "ILoggingFields_Impl", [InterfaceMethodSchema("Clear", 6, [], "Int32"), InterfaceMethodSchema("BeginStruct", 7, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("BeginStructWithTags", 8, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("EndStruct", 9, [], "Int32"), InterfaceMethodSchema("AddEmpty", 10, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddEmptyWithFormat", 11, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddEmptyWithFormatAndTags", 12, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8", 13, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8WithFormat", 14, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8WithFormatAndTags", 15, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8Array", 16, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8ArrayWithFormat", 17, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8ArrayWithFormatAndTags", 18, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16", 19, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16WithFormat", 20, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16WithFormatAndTags", 21, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16Array", 22, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16ArrayWithFormat", 23, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16ArrayWithFormatAndTags", 24, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16", 25, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16WithFormat", 26, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16WithFormatAndTags", 27, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16Array", 28, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16ArrayWithFormat", 29, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16ArrayWithFormatAndTags", 30, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32", 31, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32WithFormat", 32, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32WithFormatAndTags", 33, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32Array", 34, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32ArrayWithFormat", 35, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32ArrayWithFormatAndTags", 36, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32", 37, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32WithFormat", 38, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32WithFormatAndTags", 39, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32Array", 40, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32ArrayWithFormat", 41, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32ArrayWithFormatAndTags", 42, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64", 43, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64WithFormat", 44, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64WithFormatAndTags", 45, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64Array", 46, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64ArrayWithFormat", 47, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64ArrayWithFormatAndTags", 48, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64", 49, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64WithFormat", 50, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64WithFormatAndTags", 51, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64Array", 52, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64ArrayWithFormat", 53, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64ArrayWithFormatAndTags", 54, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingle", 55, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleWithFormat", 56, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleWithFormatAndTags", 57, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleArray", 58, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleArrayWithFormat", 59, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleArrayWithFormatAndTags", 60, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDouble", 61, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleWithFormat", 62, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleWithFormatAndTags", 63, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleArray", 64, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleArrayWithFormat", 65, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleArrayWithFormatAndTags", 66, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16", 67, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16WithFormat", 68, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16WithFormatAndTags", 69, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16Array", 70, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16ArrayWithFormat", 71, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16ArrayWithFormatAndTags", 72, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBoolean", 73, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanWithFormat", 74, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanWithFormatAndTags", 75, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanArray", 76, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanArrayWithFormat", 77, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanArrayWithFormatAndTags", 78, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddString", 79, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringWithFormat", 80, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringWithFormatAndTags", 81, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringArray", 82, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringArrayWithFormat", 83, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringArrayWithFormatAndTags", 84, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuid", 85, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidWithFormat", 86, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidWithFormatAndTags", 87, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidArray", 88, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidArrayWithFormat", 89, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidArrayWithFormatAndTags", 90, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTime", 91, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.DateTime", "windows.foundation.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeWithFormat", 92, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.DateTime", "windows.foundation.DateTime", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeWithFormatAndTags", 93, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.DateTime", "windows.foundation.DateTime", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeArray", 94, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.DateTime>", "CPointer<windows.foundation.DateTime>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeArrayWithFormat", 95, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.DateTime>", "CPointer<windows.foundation.DateTime>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeArrayWithFormatAndTags", 96, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.DateTime>", "CPointer<windows.foundation.DateTime>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpan", 97, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.TimeSpan", "windows.foundation.TimeSpan", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanWithFormat", 98, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.TimeSpan", "windows.foundation.TimeSpan", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanWithFormatAndTags", 99, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.TimeSpan", "windows.foundation.TimeSpan", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanArray", 100, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.TimeSpan>", "CPointer<windows.foundation.TimeSpan>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanArrayWithFormat", 101, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.TimeSpan>", "CPointer<windows.foundation.TimeSpan>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanArrayWithFormatAndTags", 102, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.TimeSpan>", "CPointer<windows.foundation.TimeSpan>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPoint", 103, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.Point", "windows.foundation.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointWithFormat", 104, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.Point", "windows.foundation.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointWithFormatAndTags", 105, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.Point", "windows.foundation.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointArray", 106, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.Point>", "CPointer<windows.foundation.Point>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointArrayWithFormat", 107, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.Point>", "CPointer<windows.foundation.Point>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointArrayWithFormatAndTags", 108, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.Point>", "CPointer<windows.foundation.Point>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSize", 109, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.Size", "windows.foundation.Size", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeWithFormat", 110, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.Size", "windows.foundation.Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeWithFormatAndTags", 111, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.Size", "windows.foundation.Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeArray", 112, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.Size>", "CPointer<windows.foundation.Size>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeArrayWithFormat", 113, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.Size>", "CPointer<windows.foundation.Size>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeArrayWithFormatAndTags", 114, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.Size>", "CPointer<windows.foundation.Size>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRect", 115, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.Rect", "windows.foundation.Rect", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectWithFormat", 116, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.Rect", "windows.foundation.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectWithFormatAndTags", 117, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "windows.foundation.Rect", "windows.foundation.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectArray", 118, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.Rect>", "CPointer<windows.foundation.Rect>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectArrayWithFormat", 119, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.Rect>", "CPointer<windows.foundation.Rect>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectArrayWithFormatAndTags", 120, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<windows.foundation.Rect>", "CPointer<windows.foundation.Rect>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingFields", ILoggingFields.iid(), IInspectable.descriptorSchema(), "ILoggingFieldsVtbl", "ILoggingFields", "ILoggingFields_Impl", [InterfaceMethodSchema("Clear", 6, [], "Int32"), InterfaceMethodSchema("BeginStruct", 7, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("BeginStructWithTags", 8, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("EndStruct", 9, [], "Int32"), InterfaceMethodSchema("AddEmpty", 10, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddEmptyWithFormat", 11, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddEmptyWithFormatAndTags", 12, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8", 13, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8WithFormat", 14, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8WithFormatAndTags", 15, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt8", "UInt8", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8Array", 16, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8ArrayWithFormat", 17, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt8ArrayWithFormatAndTags", 18, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt8>", "CPointer<UInt8>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16", 19, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16WithFormat", 20, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16WithFormatAndTags", 21, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16Array", 22, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16ArrayWithFormat", 23, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt16ArrayWithFormatAndTags", 24, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int16>", "CPointer<Int16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16", 25, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16WithFormat", 26, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16WithFormatAndTags", 27, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16Array", 28, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16ArrayWithFormat", 29, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt16ArrayWithFormatAndTags", 30, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32", 31, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32WithFormat", 32, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32WithFormatAndTags", 33, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32Array", 34, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32ArrayWithFormat", 35, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt32ArrayWithFormatAndTags", 36, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int32>", "CPointer<Int32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32", 37, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32WithFormat", 38, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32WithFormatAndTags", 39, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32Array", 40, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32ArrayWithFormat", 41, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt32ArrayWithFormatAndTags", 42, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt32>", "CPointer<UInt32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64", 43, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64WithFormat", 44, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64WithFormatAndTags", 45, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64Array", 46, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64ArrayWithFormat", 47, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddInt64ArrayWithFormatAndTags", 48, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Int64>", "CPointer<Int64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64", 49, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64WithFormat", 50, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64WithFormatAndTags", 51, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt64", "UInt64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64Array", 52, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64ArrayWithFormat", 53, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddUInt64ArrayWithFormatAndTags", 54, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt64>", "CPointer<UInt64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingle", 55, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleWithFormat", 56, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleWithFormatAndTags", 57, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float32", "Float32", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleArray", 58, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleArrayWithFormat", 59, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSingleArrayWithFormatAndTags", 60, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float32>", "CPointer<Float32>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDouble", 61, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleWithFormat", 62, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleWithFormatAndTags", 63, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Float64", "Float64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleArray", 64, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleArrayWithFormat", 65, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDoubleArrayWithFormatAndTags", 66, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Float64>", "CPointer<Float64>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16", 67, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16WithFormat", 68, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16WithFormatAndTags", 69, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "UInt16", "UInt16", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16Array", 70, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16ArrayWithFormat", 71, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddChar16ArrayWithFormatAndTags", 72, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBoolean", 73, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanWithFormat", 74, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanWithFormatAndTags", 75, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Bool", "Bool", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanArray", 76, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanArrayWithFormat", 77, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddBooleanArrayWithFormatAndTags", 78, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Bool>", "CPointer<Bool>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddString", 79, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringWithFormat", 80, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringWithFormatAndTags", 81, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringArray", 82, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringArrayWithFormat", 83, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddStringArrayWithFormatAndTags", 84, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<CPointer<UInt16>>", "CPointer<CPointer<UInt16>>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuid", 85, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidWithFormat", 86, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidWithFormatAndTags", 87, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidArray", 88, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidArrayWithFormat", 89, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddGuidArrayWithFormatAndTags", 90, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<GUID>", "CPointer<GUID>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTime", 91, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.DateTime", "Foundation.DateTime", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeWithFormat", 92, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.DateTime", "Foundation.DateTime", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeWithFormatAndTags", 93, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.DateTime", "Foundation.DateTime", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeArray", 94, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.DateTime>", "CPointer<Foundation.DateTime>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeArrayWithFormat", 95, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.DateTime>", "CPointer<Foundation.DateTime>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddDateTimeArrayWithFormatAndTags", 96, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.DateTime>", "CPointer<Foundation.DateTime>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpan", 97, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.TimeSpan", "Foundation.TimeSpan", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanWithFormat", 98, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.TimeSpan", "Foundation.TimeSpan", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanWithFormatAndTags", 99, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.TimeSpan", "Foundation.TimeSpan", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanArray", 100, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.TimeSpan>", "CPointer<Foundation.TimeSpan>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanArrayWithFormat", 101, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.TimeSpan>", "CPointer<Foundation.TimeSpan>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddTimeSpanArrayWithFormatAndTags", 102, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.TimeSpan>", "CPointer<Foundation.TimeSpan>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPoint", 103, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.Point", "Foundation.Point", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointWithFormat", 104, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.Point", "Foundation.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointWithFormatAndTags", 105, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.Point", "Foundation.Point", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointArray", 106, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.Point>", "CPointer<Foundation.Point>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointArrayWithFormat", 107, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.Point>", "CPointer<Foundation.Point>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddPointArrayWithFormatAndTags", 108, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.Point>", "CPointer<Foundation.Point>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSize", 109, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.Size", "Foundation.Size", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeWithFormat", 110, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.Size", "Foundation.Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeWithFormatAndTags", 111, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.Size", "Foundation.Size", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeArray", 112, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.Size>", "CPointer<Foundation.Size>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeArrayWithFormat", 113, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.Size>", "CPointer<Foundation.Size>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddSizeArrayWithFormatAndTags", 114, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.Size>", "CPointer<Foundation.Size>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRect", 115, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.Rect", "Foundation.Rect", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectWithFormat", 116, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.Rect", "Foundation.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectWithFormatAndTags", 117, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "Foundation.Rect", "Foundation.Rect", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectArray", 118, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.Rect>", "CPointer<Foundation.Rect>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectArrayWithFormat", 119, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.Rect>", "CPointer<Foundation.Rect>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("AddRectArrayWithFormatAndTags", 120, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("value", "CPointer<Foundation.Rect>", "CPointer<Foundation.Rect>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("format", "LoggingFieldFormat", "LoggingFieldFormat", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("tags", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingFields.runtimeType())
         return schema
     }
@@ -2487,7 +2602,7 @@ public class ILoggingFields <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingFieldsVtbl {
@@ -3004,188 +3119,188 @@ public class ILoggingFields <: InterfaceWrapperBase & ComInterface & RuntimeName
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddDateTime(name: CPointer<UInt16>, value: windows.foundation.DateTime): Unit {
+    public unsafe func AddDateTime(name: CPointer<UInt16>, value: Foundation.DateTime): Unit {
         let v = vtbl()
         let hr = v.AddDateTime(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddDateTimeWithFormat(name: CPointer<UInt16>, value: windows.foundation.DateTime, format: LoggingFieldFormat): Unit {
+    public unsafe func AddDateTimeWithFormat(name: CPointer<UInt16>, value: Foundation.DateTime, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddDateTimeWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddDateTimeWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.DateTime, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddDateTimeWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.DateTime, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddDateTimeWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddDateTimeArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.DateTime>): Unit {
+    public unsafe func AddDateTimeArray(name: CPointer<UInt16>, value: CPointer<Foundation.DateTime>): Unit {
         let v = vtbl()
         let hr = v.AddDateTimeArray(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddDateTimeArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.DateTime>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddDateTimeArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.DateTime>, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddDateTimeArrayWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddDateTimeArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.DateTime>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddDateTimeArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.DateTime>, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddDateTimeArrayWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddTimeSpan(name: CPointer<UInt16>, value: windows.foundation.TimeSpan): Unit {
+    public unsafe func AddTimeSpan(name: CPointer<UInt16>, value: Foundation.TimeSpan): Unit {
         let v = vtbl()
         let hr = v.AddTimeSpan(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddTimeSpanWithFormat(name: CPointer<UInt16>, value: windows.foundation.TimeSpan, format: LoggingFieldFormat): Unit {
+    public unsafe func AddTimeSpanWithFormat(name: CPointer<UInt16>, value: Foundation.TimeSpan, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddTimeSpanWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddTimeSpanWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.TimeSpan, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddTimeSpanWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.TimeSpan, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddTimeSpanWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddTimeSpanArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.TimeSpan>): Unit {
+    public unsafe func AddTimeSpanArray(name: CPointer<UInt16>, value: CPointer<Foundation.TimeSpan>): Unit {
         let v = vtbl()
         let hr = v.AddTimeSpanArray(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddTimeSpanArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.TimeSpan>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddTimeSpanArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.TimeSpan>, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddTimeSpanArrayWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddTimeSpanArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.TimeSpan>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddTimeSpanArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.TimeSpan>, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddTimeSpanArrayWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddPoint(name: CPointer<UInt16>, value: windows.foundation.Point): Unit {
+    public unsafe func AddPoint(name: CPointer<UInt16>, value: Foundation.Point): Unit {
         let v = vtbl()
         let hr = v.AddPoint(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddPointWithFormat(name: CPointer<UInt16>, value: windows.foundation.Point, format: LoggingFieldFormat): Unit {
+    public unsafe func AddPointWithFormat(name: CPointer<UInt16>, value: Foundation.Point, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddPointWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddPointWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.Point, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddPointWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.Point, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddPointWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddPointArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.Point>): Unit {
+    public unsafe func AddPointArray(name: CPointer<UInt16>, value: CPointer<Foundation.Point>): Unit {
         let v = vtbl()
         let hr = v.AddPointArray(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddPointArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.Point>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddPointArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.Point>, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddPointArrayWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddPointArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.Point>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddPointArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.Point>, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddPointArrayWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddSize(name: CPointer<UInt16>, value: windows.foundation.Size): Unit {
+    public unsafe func AddSize(name: CPointer<UInt16>, value: Foundation.Size): Unit {
         let v = vtbl()
         let hr = v.AddSize(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddSizeWithFormat(name: CPointer<UInt16>, value: windows.foundation.Size, format: LoggingFieldFormat): Unit {
+    public unsafe func AddSizeWithFormat(name: CPointer<UInt16>, value: Foundation.Size, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddSizeWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddSizeWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.Size, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddSizeWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.Size, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddSizeWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddSizeArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.Size>): Unit {
+    public unsafe func AddSizeArray(name: CPointer<UInt16>, value: CPointer<Foundation.Size>): Unit {
         let v = vtbl()
         let hr = v.AddSizeArray(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddSizeArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.Size>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddSizeArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.Size>, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddSizeArrayWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddSizeArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.Size>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddSizeArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.Size>, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddSizeArrayWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddRect(name: CPointer<UInt16>, value: windows.foundation.Rect): Unit {
+    public unsafe func AddRect(name: CPointer<UInt16>, value: Foundation.Rect): Unit {
         let v = vtbl()
         let hr = v.AddRect(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddRectWithFormat(name: CPointer<UInt16>, value: windows.foundation.Rect, format: LoggingFieldFormat): Unit {
+    public unsafe func AddRectWithFormat(name: CPointer<UInt16>, value: Foundation.Rect, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddRectWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddRectWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.Rect, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddRectWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.Rect, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddRectWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddRectArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.Rect>): Unit {
+    public unsafe func AddRectArray(name: CPointer<UInt16>, value: CPointer<Foundation.Rect>): Unit {
         let v = vtbl()
         let hr = v.AddRectArray(asRaw(), name, value)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddRectArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.Rect>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddRectArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.Rect>, format: LoggingFieldFormat): Unit {
         let v = vtbl()
         let hr = v.AddRectArrayWithFormat(asRaw(), name, value, format)
         HRESULT(hr).ok()
     }
 
-    public unsafe func AddRectArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.Rect>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddRectArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.Rect>, format: LoggingFieldFormat, tags: Int32): Unit {
         let v = vtbl()
         let hr = v.AddRectArrayWithFormatAndTags(asRaw(), name, value, format, tags)
         HRESULT(hr).ok()
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingOptionsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3204,17 +3319,21 @@ public struct ILoggingOptionsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingOptions <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingOptions {
-        ILoggingOptions(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingOptions {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingOptions {
+        ILoggingOptions(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingOptions {
         ILoggingOptions(raw)
     }
 
@@ -3230,13 +3349,13 @@ public class ILoggingOptions <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingOptions> {
-        var descriptor = InterfaceDescriptor<ILoggingOptions>("ILoggingOptions", ILoggingOptions.iid(), IInspectable.descriptor(), { raw => ILoggingOptions(raw, ownsReference: true) }, { raw => ILoggingOptions(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingOptions>("ILoggingOptions", ILoggingOptions.iid(), IInspectable.descriptor(), { raw => ILoggingOptions.fromAbiTake(raw) }, { raw => ILoggingOptions.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingOptions.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingOptions", ILoggingOptions.iid(), IInspectable.descriptorSchema(), "ILoggingOptionsVtbl", "ILoggingOptions", "ILoggingOptions_Impl", [InterfaceMethodSchema("Keywords", 6, [InterfaceParameterSchema("result", "CPointer<Int64>", "OutRef<Int64>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetKeywords", 7, [InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Tags", 8, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutRef<Int32>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetTags", 9, [InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Task", 10, [InterfaceParameterSchema("result", "CPointer<Int16>", "OutRef<Int16>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetTask", 11, [InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Opcode", 12, [InterfaceParameterSchema("result", "CPointer<LoggingOpcode>", "OutRef<LoggingOpcode>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetOpcode", 13, [InterfaceParameterSchema("value", "LoggingOpcode", "LoggingOpcode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ActivityId", 14, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutRef<GUID>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetActivityId", 15, [InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RelatedActivityId", 16, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutRef<GUID>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SetRelatedActivityId", 17, [InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingOptions", ILoggingOptions.iid(), IInspectable.descriptorSchema(), "ILoggingOptionsVtbl", "ILoggingOptions", "ILoggingOptions_Impl", [InterfaceMethodSchema("Keywords", 6, [InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetKeywords", 7, [InterfaceParameterSchema("value", "Int64", "Int64", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Tags", 8, [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTags", 9, [InterfaceParameterSchema("value", "Int32", "Int32", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Task", 10, [InterfaceParameterSchema("result", "CPointer<Int16>", "OutSlot<Int16>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetTask", 11, [InterfaceParameterSchema("value", "Int16", "Int16", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("Opcode", 12, [InterfaceParameterSchema("result", "CPointer<LoggingOpcode>", "OutSlot<LoggingOpcode>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetOpcode", 13, [InterfaceParameterSchema("value", "LoggingOpcode", "LoggingOpcode", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("ActivityId", 14, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GUID>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetActivityId", 15, [InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RelatedActivityId", 16, [InterfaceParameterSchema("result", "CPointer<GUID>", "OutSlot<GUID>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SetRelatedActivityId", 17, [InterfaceParameterSchema("value", "GUID", "GUID", InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingOptions.runtimeType())
         return schema
     }
@@ -3258,7 +3377,7 @@ public class ILoggingOptions <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingOptionsVtbl {
@@ -3350,7 +3469,7 @@ public class ILoggingOptions <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingOptionsFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3358,17 +3477,21 @@ public struct ILoggingOptionsFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingOptionsFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingOptionsFactory {
-        ILoggingOptionsFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingOptionsFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingOptionsFactory {
+        ILoggingOptionsFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingOptionsFactory {
         ILoggingOptionsFactory(raw)
     }
 
@@ -3384,13 +3507,13 @@ public class ILoggingOptionsFactory <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingOptionsFactory> {
-        var descriptor = InterfaceDescriptor<ILoggingOptionsFactory>("ILoggingOptionsFactory", ILoggingOptionsFactory.iid(), IInspectable.descriptor(), { raw => ILoggingOptionsFactory(raw, ownsReference: true) }, { raw => ILoggingOptionsFactory(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingOptionsFactory>("ILoggingOptionsFactory", ILoggingOptionsFactory.iid(), IInspectable.descriptor(), { raw => ILoggingOptionsFactory.fromAbiTake(raw) }, { raw => ILoggingOptionsFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingOptionsFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingOptionsFactory", ILoggingOptionsFactory.iid(), IInspectable.descriptorSchema(), "ILoggingOptionsFactoryVtbl", "ILoggingOptionsFactory", "ILoggingOptionsFactory_Impl", [InterfaceMethodSchema("CreateWithKeywords", 6, [InterfaceParameterSchema("keywords", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingOptions>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingOptionsFactory", ILoggingOptionsFactory.iid(), IInspectable.descriptorSchema(), "ILoggingOptionsFactoryVtbl", "ILoggingOptionsFactory", "ILoggingOptionsFactory_Impl", [InterfaceMethodSchema("CreateWithKeywords", 6, [InterfaceParameterSchema("keywords", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingOptions>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingOptionsFactory.runtimeType())
         return schema
     }
@@ -3412,7 +3535,7 @@ public class ILoggingOptionsFactory <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingOptionsFactoryVtbl {
@@ -3424,11 +3547,11 @@ public class ILoggingOptionsFactory <: InterfaceWrapperBase & ComInterface & Run
         var result = CPointer<Unit>()
         let hr = v.CreateWithKeywords(asRaw(), keywords, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingOptions.fromRaw(result)
+        return LoggingOptions.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingSessionVtbl {
     public var base_: IClosableVtbl = IClosableVtbl()
@@ -3443,11 +3566,11 @@ public struct ILoggingSessionVtbl {
         let _ = offset
         var vtbl = ILoggingSessionVtbl()
         vtbl.base_ = IClosableVtbl.new<Identity>(offset: offset)
-        vtbl.Name = { this_, result__ =>
+        vtbl.Name = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.Name()) {
                         case Result<CPointer<UInt16>>.Ok(value) =>
@@ -3460,33 +3583,32 @@ public struct ILoggingSessionVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.SaveToFileAsync = { this_, arg0, arg1, result__ =>
+        vtbl.SaveToFileAsync = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.SaveToFileAsync(windows.storage.IStorageFolder.fromRawBorrowed(arg0), arg1)) {
-                        case Result<CPointer<Unit>>.Ok(value) =>
-                            let raw = value
+                    match (impl.SaveToFileAsync(InParam<Storage.IStorageFolder>(Storage.IStorageFolder.viewOf(arg0)), arg1)) {
+                        case Result<Foundation.IAsyncOperation<Storage.StorageFile>>.Ok(value) =>
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
-                        case Result<CPointer<Unit>>.Err(error) =>
+                        case Result<Foundation.IAsyncOperation<Storage.StorageFile>>.Err(error) =>
                             error.code().value
                     }
                 case None =>
                     E_NOINTERFACE.value
             }
         }
-        vtbl.AddLoggingChannel = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.AddLoggingChannel = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.AddLoggingChannel(ILoggingChannel.fromRawBorrowed(arg0))) {
+                    match (impl.AddLoggingChannel(InParam<ILoggingChannel>(ILoggingChannel.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -3496,10 +3618,10 @@ public struct ILoggingSessionVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.AddLoggingChannelWithLevel = { this_, arg0, arg1 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.AddLoggingChannelWithLevel = { instanceRaw, arg0, arg1 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.AddLoggingChannelWithLevel(ILoggingChannel.fromRawBorrowed(arg0), arg1)) {
+                    match (impl.AddLoggingChannelWithLevel(InParam<ILoggingChannel>(ILoggingChannel.viewOf(arg0)), arg1)) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -3509,10 +3631,10 @@ public struct ILoggingSessionVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.RemoveLoggingChannel = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.RemoveLoggingChannel = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.RemoveLoggingChannel(ILoggingChannel.fromRawBorrowed(arg0))) {
+                    match (impl.RemoveLoggingChannel(InParam<ILoggingChannel>(ILoggingChannel.viewOf(arg0)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -3529,7 +3651,7 @@ public struct ILoggingSessionVtbl {
         if (iid == ILoggingSession.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -3538,26 +3660,30 @@ public struct ILoggingSessionVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public interface ILoggingSession_Impl <: IClosable_Impl {
     public func Name(): windows_core.Result<CPointer<UInt16>>
-    public func SaveToFileAsync(folder: windows.storage.IStorageFolder, fileName: CPointer<UInt16>): windows_core.Result<CPointer<Unit>>
-    public func AddLoggingChannel(loggingChannel: ILoggingChannel): windows_core.Result<Unit>
-    public func AddLoggingChannelWithLevel(loggingChannel: ILoggingChannel, maxLevel: LoggingLevel): windows_core.Result<Unit>
-    public func RemoveLoggingChannel(loggingChannel: ILoggingChannel): windows_core.Result<Unit>
+    public func SaveToFileAsync(folder: InParam<Storage.IStorageFolder>, fileName: CPointer<UInt16>): windows_core.Result<Foundation.IAsyncOperation<Storage.StorageFile>>
+    public func AddLoggingChannel(loggingChannel: InParam<ILoggingChannel>): windows_core.Result<Unit>
+    public func AddLoggingChannelWithLevel(loggingChannel: InParam<ILoggingChannel>, maxLevel: LoggingLevel): windows_core.Result<Unit>
+    public func RemoveLoggingChannel(loggingChannel: InParam<ILoggingChannel>): windows_core.Result<Unit>
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingSession {
-        ILoggingSession(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingSession {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingSession {
+        ILoggingSession(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingSession {
         ILoggingSession(raw)
     }
 
@@ -3569,7 +3695,7 @@ public class ILoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeNam
         if (iid == ILoggingSession.iid()) {
             return true
         }
-        for (ancestor in [windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
+        for (ancestor in [Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]) {
             if (ancestor == iid) {
                 return true
             }
@@ -3578,13 +3704,13 @@ public class ILoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingSession> {
-        var descriptor = InterfaceDescriptor<ILoggingSession>("ILoggingSession", ILoggingSession.iid(), windows.foundation.IClosable.descriptor(), { raw => ILoggingSession(raw, ownsReference: true) }, { raw => ILoggingSession(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingSession>("ILoggingSession", ILoggingSession.iid(), Foundation.IClosable.descriptor(), { raw => ILoggingSession.fromAbiTake(raw) }, { raw => ILoggingSession.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingSession.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingSession", ILoggingSession.iid(), windows.foundation.IClosable.descriptorSchema(), "ILoggingSessionVtbl", "ILoggingSession", "ILoggingSession_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutRef<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("SaveToFileAsync", 8, [InterfaceParameterSchema("folder", "CPointer<Unit>", "Ref<windows.storage.IStorageFolder>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("fileName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<CPointer<Unit>>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("AddLoggingChannel", 9, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "Ref<ILoggingChannel>", InterfaceParameterBridgeKind.Ref)], "Int32"), InterfaceMethodSchema("AddLoggingChannelWithLevel", 10, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "Ref<ILoggingChannel>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("maxLevel", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemoveLoggingChannel", 11, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "Ref<ILoggingChannel>", InterfaceParameterBridgeKind.Ref)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingSession", ILoggingSession.iid(), Foundation.IClosable.descriptorSchema(), "ILoggingSessionVtbl", "ILoggingSession", "ILoggingSession_Impl", [InterfaceMethodSchema("Name", 7, [InterfaceParameterSchema("result", "CPointer<CPointer<UInt16>>", "OutSlot<CPointer<UInt16>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("SaveToFileAsync", 8, [InterfaceParameterSchema("folder", "CPointer<Unit>", "InParam<Storage.IStorageFolder>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("fileName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Foundation.IAsyncOperation<Storage.StorageFile>>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("AddLoggingChannel", 9, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("AddLoggingChannelWithLevel", 10, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("maxLevel", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("RemoveLoggingChannel", 11, [InterfaceParameterSchema("loggingChannel", "CPointer<Unit>", "InParam<ILoggingChannel>", InterfaceParameterBridgeKind.InParam)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingSession.runtimeType())
         return schema
     }
@@ -3606,11 +3732,11 @@ public class ILoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingSessionVtbl {
@@ -3625,12 +3751,12 @@ public class ILoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeNam
         return result
     }
 
-    public unsafe func SaveToFileAsync(folder: windows.storage.IStorageFolder, fileName: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func SaveToFileAsync(folder: Storage.IStorageFolder, fileName: CPointer<UInt16>): Foundation.IAsyncOperation<Storage.StorageFile> {
         let v = vtbl()
         var result = CPointer<Unit>()
         let hr = v.SaveToFileAsync(asRaw(), folder.asRaw(), fileName, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return result
+        return Foundation.IAsyncOperation<Storage.StorageFile>.fromAbiTake(result)
     }
 
     public unsafe func AddLoggingChannel(loggingChannel: ILoggingChannel): Unit {
@@ -3652,7 +3778,7 @@ public class ILoggingSession <: InterfaceWrapperBase & ComInterface & RuntimeNam
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingSessionFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3660,17 +3786,21 @@ public struct ILoggingSessionFactoryVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingSessionFactory <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingSessionFactory {
-        ILoggingSessionFactory(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingSessionFactory {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingSessionFactory {
+        ILoggingSessionFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingSessionFactory {
         ILoggingSessionFactory(raw)
     }
 
@@ -3686,13 +3816,13 @@ public class ILoggingSessionFactory <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingSessionFactory> {
-        var descriptor = InterfaceDescriptor<ILoggingSessionFactory>("ILoggingSessionFactory", ILoggingSessionFactory.iid(), IInspectable.descriptor(), { raw => ILoggingSessionFactory(raw, ownsReference: true) }, { raw => ILoggingSessionFactory(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingSessionFactory>("ILoggingSessionFactory", ILoggingSessionFactory.iid(), IInspectable.descriptor(), { raw => ILoggingSessionFactory.fromAbiTake(raw) }, { raw => ILoggingSessionFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingSessionFactory.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingSessionFactory", ILoggingSessionFactory.iid(), IInspectable.descriptorSchema(), "ILoggingSessionFactoryVtbl", "ILoggingSessionFactory", "ILoggingSessionFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingSession>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingSessionFactory", ILoggingSessionFactory.iid(), IInspectable.descriptorSchema(), "ILoggingSessionFactoryVtbl", "ILoggingSessionFactory", "ILoggingSessionFactory_Impl", [InterfaceMethodSchema("Create", 6, [InterfaceParameterSchema("name", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingSession>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingSessionFactory.runtimeType())
         return schema
     }
@@ -3714,7 +3844,7 @@ public class ILoggingSessionFactory <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingSessionFactoryVtbl {
@@ -3726,11 +3856,11 @@ public class ILoggingSessionFactory <: InterfaceWrapperBase & ComInterface & Run
         var result = CPointer<Unit>()
         let hr = v.Create(asRaw(), name, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingSession.fromRaw(result)
+        return LoggingSession.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ILoggingTargetVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -3751,11 +3881,11 @@ public struct ILoggingTargetVtbl {
         let _ = offset
         var vtbl = ILoggingTargetVtbl()
         vtbl.base_ = buildIInspectableVtbl()
-        vtbl.IsEnabled = { this_, result__ =>
+        vtbl.IsEnabled = { instanceRaw, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.IsEnabled()) {
                         case Result<Bool>.Ok(value) =>
@@ -3768,11 +3898,11 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.IsEnabledWithLevel = { this_, arg0, result__ =>
+        vtbl.IsEnabledWithLevel = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.IsEnabledWithLevel(arg0)) {
                         case Result<Bool>.Ok(value) =>
@@ -3785,11 +3915,11 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.IsEnabledWithLevelAndKeywords = { this_, arg0, arg1, result__ =>
+        vtbl.IsEnabledWithLevelAndKeywords = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.IsEnabledWithLevelAndKeywords(arg0, arg1)) {
                         case Result<Bool>.Ok(value) =>
@@ -3802,8 +3932,8 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LogEvent = { this_, arg0 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.LogEvent = { instanceRaw, arg0 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.LogEvent(arg0)) {
                         case Result<Unit>.Ok(_) =>
@@ -3815,10 +3945,10 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LogEventWithFields = { this_, arg0, arg1 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.LogEventWithFields = { instanceRaw, arg0, arg1 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.LogEventWithFields(arg0, LoggingFields.fromRawBorrowed(arg1))) {
+                    match (impl.LogEventWithFields(arg0, InParam<LoggingFields>(LoggingFields.viewOf(arg1)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -3828,10 +3958,10 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LogEventWithFieldsAndLevel = { this_, arg0, arg1, arg2 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.LogEventWithFieldsAndLevel = { instanceRaw, arg0, arg1, arg2 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.LogEventWithFieldsAndLevel(arg0, LoggingFields.fromRawBorrowed(arg1), arg2)) {
+                    match (impl.LogEventWithFieldsAndLevel(arg0, InParam<LoggingFields>(LoggingFields.viewOf(arg1)), arg2)) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -3841,10 +3971,10 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.LogEventWithFieldsAndOptions = { this_, arg0, arg1, arg2, arg3 =>
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+        vtbl.LogEventWithFieldsAndOptions = { instanceRaw, arg0, arg1, arg2, arg3 =>
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.LogEventWithFieldsAndOptions(arg0, LoggingFields.fromRawBorrowed(arg1), arg2, LoggingOptions.fromRawBorrowed(arg3))) {
+                    match (impl.LogEventWithFieldsAndOptions(arg0, InParam<LoggingFields>(LoggingFields.viewOf(arg1)), arg2, InParam<LoggingOptions>(LoggingOptions.viewOf(arg3)))) {
                         case Result<Unit>.Ok(_) =>
                             S_OK.value
                         case Result<Unit>.Err(error) =>
@@ -3854,19 +3984,18 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.StartActivity = { this_, arg0, result__ =>
+        vtbl.StartActivity = { instanceRaw, arg0, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
                     match (impl.StartActivity(arg0)) {
                         case Result<LoggingActivity>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -3877,19 +4006,18 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.StartActivityWithFields = { this_, arg0, arg1, result__ =>
+        vtbl.StartActivityWithFields = { instanceRaw, arg0, arg1, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.StartActivityWithFields(arg0, LoggingFields.fromRawBorrowed(arg1))) {
+                    match (impl.StartActivityWithFields(arg0, InParam<LoggingFields>(LoggingFields.viewOf(arg1)))) {
                         case Result<LoggingActivity>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -3900,19 +4028,18 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.StartActivityWithFieldsAndLevel = { this_, arg0, arg1, arg2, result__ =>
+        vtbl.StartActivityWithFieldsAndLevel = { instanceRaw, arg0, arg1, arg2, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.StartActivityWithFieldsAndLevel(arg0, LoggingFields.fromRawBorrowed(arg1), arg2)) {
+                    match (impl.StartActivityWithFieldsAndLevel(arg0, InParam<LoggingFields>(LoggingFields.viewOf(arg1)), arg2)) {
                         case Result<LoggingActivity>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -3923,19 +4050,18 @@ public struct ILoggingTargetVtbl {
                     E_NOINTERFACE.value
             }
         }
-        vtbl.StartActivityWithFieldsAndOptions = { this_, arg0, arg1, arg2, arg3, result__ =>
+        vtbl.StartActivityWithFieldsAndOptions = { instanceRaw, arg0, arg1, arg2, arg3, result__ =>
             if (result__.isNull()) {
                 return E_POINTER.value
             }
-            match (unsafe { asImplFromRaw<Identity>(this_) }) {
+            match (unsafe { asImplFromRaw<Identity>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.StartActivityWithFieldsAndOptions(arg0, LoggingFields.fromRawBorrowed(arg1), arg2, LoggingOptions.fromRawBorrowed(arg3))) {
+                    match (impl.StartActivityWithFieldsAndOptions(arg0, InParam<LoggingFields>(LoggingFields.viewOf(arg1)), arg2, InParam<LoggingOptions>(LoggingOptions.viewOf(arg3)))) {
                         case Result<LoggingActivity>.Ok(value) =>
-                            let raw = value.asRaw()
+                            let raw = value.intoAbi()
                             if (raw.isNull()) {
                                 E_POINTER.value
                             } else {
-                                value.addRef()
                                 unsafe { result__.write(raw) }
                                 S_OK.value
                             }
@@ -3957,32 +4083,36 @@ public struct ILoggingTargetVtbl {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public interface ILoggingTarget_Impl {
     public func IsEnabled(): windows_core.Result<Bool>
     public func IsEnabledWithLevel(level: LoggingLevel): windows_core.Result<Bool>
     public func IsEnabledWithLevelAndKeywords(level: LoggingLevel, keywords: Int64): windows_core.Result<Bool>
     public func LogEvent(eventName: CPointer<UInt16>): windows_core.Result<Unit>
-    public func LogEventWithFields(eventName: CPointer<UInt16>, fields: LoggingFields): windows_core.Result<Unit>
-    public func LogEventWithFieldsAndLevel(eventName: CPointer<UInt16>, fields: LoggingFields, level: LoggingLevel): windows_core.Result<Unit>
-    public func LogEventWithFieldsAndOptions(eventName: CPointer<UInt16>, fields: LoggingFields, level: LoggingLevel, options: LoggingOptions): windows_core.Result<Unit>
+    public func LogEventWithFields(eventName: CPointer<UInt16>, fields: InParam<LoggingFields>): windows_core.Result<Unit>
+    public func LogEventWithFieldsAndLevel(eventName: CPointer<UInt16>, fields: InParam<LoggingFields>, level: LoggingLevel): windows_core.Result<Unit>
+    public func LogEventWithFieldsAndOptions(eventName: CPointer<UInt16>, fields: InParam<LoggingFields>, level: LoggingLevel, options: InParam<LoggingOptions>): windows_core.Result<Unit>
     public func StartActivity(startEventName: CPointer<UInt16>): windows_core.Result<LoggingActivity>
-    public func StartActivityWithFields(startEventName: CPointer<UInt16>, fields: LoggingFields): windows_core.Result<LoggingActivity>
-    public func StartActivityWithFieldsAndLevel(startEventName: CPointer<UInt16>, fields: LoggingFields, level: LoggingLevel): windows_core.Result<LoggingActivity>
-    public func StartActivityWithFieldsAndOptions(startEventName: CPointer<UInt16>, fields: LoggingFields, level: LoggingLevel, options: LoggingOptions): windows_core.Result<LoggingActivity>
+    public func StartActivityWithFields(startEventName: CPointer<UInt16>, fields: InParam<LoggingFields>): windows_core.Result<LoggingActivity>
+    public func StartActivityWithFieldsAndLevel(startEventName: CPointer<UInt16>, fields: InParam<LoggingFields>, level: LoggingLevel): windows_core.Result<LoggingActivity>
+    public func StartActivityWithFieldsAndOptions(startEventName: CPointer<UInt16>, fields: InParam<LoggingFields>, level: LoggingLevel, options: InParam<LoggingOptions>): windows_core.Result<LoggingActivity>
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ILoggingTarget <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ILoggingTarget {
-        ILoggingTarget(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ILoggingTarget {
+    public static func fromAbiTake(raw: CPointer<Unit>): ILoggingTarget {
+        ILoggingTarget(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ILoggingTarget {
         ILoggingTarget(raw)
     }
 
@@ -3998,13 +4128,13 @@ public class ILoggingTarget <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptor(): InterfaceDescriptor<ILoggingTarget> {
-        var descriptor = InterfaceDescriptor<ILoggingTarget>("ILoggingTarget", ILoggingTarget.iid(), IInspectable.descriptor(), { raw => ILoggingTarget(raw, ownsReference: true) }, { raw => ILoggingTarget(raw) })
+        var descriptor = InterfaceDescriptor<ILoggingTarget>("ILoggingTarget", ILoggingTarget.iid(), IInspectable.descriptor(), { raw => ILoggingTarget.fromAbiTake(raw) }, { raw => ILoggingTarget.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ILoggingTarget.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ILoggingTarget", ILoggingTarget.iid(), IInspectable.descriptorSchema(), "ILoggingTargetVtbl", "ILoggingTarget", "ILoggingTarget_Impl", [InterfaceMethodSchema("IsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsEnabledWithLevel", 7, [InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("IsEnabledWithLevelAndKeywords", 8, [InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("keywords", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("LogEvent", 9, [InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogEventWithFields", 10, [InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "Ref<LoggingFields>", InterfaceParameterBridgeKind.Ref)], "Int32"), InterfaceMethodSchema("LogEventWithFieldsAndLevel", 11, [InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "Ref<LoggingFields>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogEventWithFieldsAndOptions", 12, [InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "Ref<LoggingFields>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "Ref<LoggingOptions>", InterfaceParameterBridgeKind.Ref)], "Int32"), InterfaceMethodSchema("StartActivity", 13, [InterfaceParameterSchema("startEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingActivity>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("StartActivityWithFields", 14, [InterfaceParameterSchema("startEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "Ref<LoggingFields>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingActivity>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("StartActivityWithFieldsAndLevel", 15, [InterfaceParameterSchema("startEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "Ref<LoggingFields>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingActivity>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("StartActivityWithFieldsAndOptions", 16, [InterfaceParameterSchema("startEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "Ref<LoggingFields>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "Ref<LoggingOptions>", InterfaceParameterBridgeKind.Ref), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutRef<LoggingActivity>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ILoggingTarget", ILoggingTarget.iid(), IInspectable.descriptorSchema(), "ILoggingTargetVtbl", "ILoggingTarget", "ILoggingTarget_Impl", [InterfaceMethodSchema("IsEnabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEnabledWithLevel", 7, [InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("IsEnabledWithLevelAndKeywords", 8, [InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("keywords", "Int64", "Int64", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("LogEvent", 9, [InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogEventWithFields", 10, [InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "InParam<LoggingFields>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("LogEventWithFieldsAndLevel", 11, [InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "InParam<LoggingFields>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value)], "Int32"), InterfaceMethodSchema("LogEventWithFieldsAndOptions", 12, [InterfaceParameterSchema("eventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "InParam<LoggingFields>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<LoggingOptions>", InterfaceParameterBridgeKind.InParam)], "Int32"), InterfaceMethodSchema("StartActivity", 13, [InterfaceParameterSchema("startEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingActivity>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartActivityWithFields", 14, [InterfaceParameterSchema("startEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "InParam<LoggingFields>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingActivity>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartActivityWithFieldsAndLevel", 15, [InterfaceParameterSchema("startEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "InParam<LoggingFields>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingActivity>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("StartActivityWithFieldsAndOptions", 16, [InterfaceParameterSchema("startEventName", "CPointer<UInt16>", "CPointer<UInt16>", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("fields", "CPointer<Unit>", "InParam<LoggingFields>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("level", "LoggingLevel", "LoggingLevel", InterfaceParameterBridgeKind.Value), InterfaceParameterSchema("options", "CPointer<Unit>", "InParam<LoggingOptions>", InterfaceParameterBridgeKind.InParam), InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<LoggingActivity>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ILoggingTarget.runtimeType())
         return schema
     }
@@ -4026,7 +4156,7 @@ public class ILoggingTarget <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ILoggingTargetVtbl {
@@ -4086,7 +4216,7 @@ public class ILoggingTarget <: InterfaceWrapperBase & ComInterface & RuntimeName
         var result = CPointer<Unit>()
         let hr = v.StartActivity(asRaw(), startEventName, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingActivity.fromRaw(result)
+        return LoggingActivity.fromAbiTake(result)
     }
 
     public unsafe func StartActivityWithFields(startEventName: CPointer<UInt16>, fields: LoggingFields): LoggingActivity {
@@ -4094,7 +4224,7 @@ public class ILoggingTarget <: InterfaceWrapperBase & ComInterface & RuntimeName
         var result = CPointer<Unit>()
         let hr = v.StartActivityWithFields(asRaw(), startEventName, fields.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingActivity.fromRaw(result)
+        return LoggingActivity.fromAbiTake(result)
     }
 
     public unsafe func StartActivityWithFieldsAndLevel(startEventName: CPointer<UInt16>, fields: LoggingFields, level: LoggingLevel): LoggingActivity {
@@ -4102,7 +4232,7 @@ public class ILoggingTarget <: InterfaceWrapperBase & ComInterface & RuntimeName
         var result = CPointer<Unit>()
         let hr = v.StartActivityWithFieldsAndLevel(asRaw(), startEventName, fields.asRaw(), level, CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingActivity.fromRaw(result)
+        return LoggingActivity.fromAbiTake(result)
     }
 
     public unsafe func StartActivityWithFieldsAndOptions(startEventName: CPointer<UInt16>, fields: LoggingFields, level: LoggingLevel, options: LoggingOptions): LoggingActivity {
@@ -4110,11 +4240,11 @@ public class ILoggingTarget <: InterfaceWrapperBase & ComInterface & RuntimeName
         var result = CPointer<Unit>()
         let hr = v.StartActivityWithFieldsAndOptions(asRaw(), startEventName, fields.asRaw(), level, options.asRaw(), CPointer<CPointer<Unit>>(inout result))
         HRESULT(hr).ok()
-        return LoggingActivity.fromRaw(result)
+        return LoggingActivity.fromAbiTake(result)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 @C
 public struct ITracingStatusChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
@@ -4123,17 +4253,21 @@ public struct ITracingStatusChangedEventArgsVtbl {
     public init() {}
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class ITracingStatusChangedEventArgs <: InterfaceWrapperBase & ComInterface & RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): ITracingStatusChangedEventArgs {
-        ITracingStatusChangedEventArgs(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): ITracingStatusChangedEventArgs {
+    public static func fromAbiTake(raw: CPointer<Unit>): ITracingStatusChangedEventArgs {
+        ITracingStatusChangedEventArgs(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ITracingStatusChangedEventArgs {
         ITracingStatusChangedEventArgs(raw)
     }
 
@@ -4149,13 +4283,13 @@ public class ITracingStatusChangedEventArgs <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<ITracingStatusChangedEventArgs> {
-        var descriptor = InterfaceDescriptor<ITracingStatusChangedEventArgs>("ITracingStatusChangedEventArgs", ITracingStatusChangedEventArgs.iid(), IInspectable.descriptor(), { raw => ITracingStatusChangedEventArgs(raw, ownsReference: true) }, { raw => ITracingStatusChangedEventArgs(raw) })
+        var descriptor = InterfaceDescriptor<ITracingStatusChangedEventArgs>("ITracingStatusChangedEventArgs", ITracingStatusChangedEventArgs.iid(), IInspectable.descriptor(), { raw => ITracingStatusChangedEventArgs.fromAbiTake(raw) }, { raw => ITracingStatusChangedEventArgs.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(ITracingStatusChangedEventArgs.runtimeType())
         return descriptor
     }
 
     public static func descriptorSchema(): InterfaceDescriptorSchema {
-        var schema = InterfaceDescriptorSchema("ITracingStatusChangedEventArgs", ITracingStatusChangedEventArgs.iid(), IInspectable.descriptorSchema(), "ITracingStatusChangedEventArgsVtbl", "ITracingStatusChangedEventArgs", "ITracingStatusChangedEventArgs_Impl", [InterfaceMethodSchema("Enabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutRef<Bool>", InterfaceParameterBridgeKind.OutRef)], "Int32"), InterfaceMethodSchema("TraceLevel", 7, [InterfaceParameterSchema("result", "CPointer<CausalityTraceLevel>", "OutRef<CausalityTraceLevel>", InterfaceParameterBridgeKind.OutRef)], "Int32")])
+        var schema = InterfaceDescriptorSchema("ITracingStatusChangedEventArgs", ITracingStatusChangedEventArgs.iid(), IInspectable.descriptorSchema(), "ITracingStatusChangedEventArgsVtbl", "ITracingStatusChangedEventArgs", "ITracingStatusChangedEventArgs_Impl", [InterfaceMethodSchema("Enabled", 6, [InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", InterfaceParameterBridgeKind.OutSlot)], "Int32"), InterfaceMethodSchema("TraceLevel", 7, [InterfaceParameterSchema("result", "CPointer<CausalityTraceLevel>", "OutSlot<CausalityTraceLevel>", InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(ITracingStatusChangedEventArgs.runtimeType())
         return schema
     }
@@ -4177,7 +4311,7 @@ public class ITracingStatusChangedEventArgs <: InterfaceWrapperBase & ComInterfa
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func vtbl(): ITracingStatusChangedEventArgsVtbl {
@@ -4201,17 +4335,21 @@ public class ITracingStatusChangedEventArgs <: InterfaceWrapperBase & ComInterfa
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class LogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): LogFileGeneratedEventArgs {
-        LogFileGeneratedEventArgs(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LogFileGeneratedEventArgs {
+    public static func fromAbiTake(raw: CPointer<Unit>): LogFileGeneratedEventArgs {
+        LogFileGeneratedEventArgs(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LogFileGeneratedEventArgs {
         LogFileGeneratedEventArgs(raw)
     }
 
@@ -4225,11 +4363,11 @@ public class LogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface & 
 
     public static func descriptor(): InterfaceDescriptor<LogFileGeneratedEventArgs> {
         let ancestors = [ILogFileGeneratedEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<LogFileGeneratedEventArgs>("LogFileGeneratedEventArgs", ILogFileGeneratedEventArgs.iid(), ancestors, { raw => LogFileGeneratedEventArgs(raw, ownsReference: true) }, { raw => LogFileGeneratedEventArgs(raw) })
+        return InterfaceDescriptor<LogFileGeneratedEventArgs>("LogFileGeneratedEventArgs", ILogFileGeneratedEventArgs.iid(), ancestors, { raw => LogFileGeneratedEventArgs.fromAbiTake(raw) }, { raw => LogFileGeneratedEventArgs.viewOf(raw) })
     }
 
     public func defaultInterface(): ILogFileGeneratedEventArgs {
-        ILogFileGeneratedEventArgs(asRaw())
+        ILogFileGeneratedEventArgs.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4253,29 +4391,33 @@ public class LogFileGeneratedEventArgs <: InterfaceWrapperBase & ComInterface & 
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asILogFileGeneratedEventArgs(): ILogFileGeneratedEventArgs {
         ILogFileGeneratedEventArgs(asRaw())
     }
 
-    public unsafe func File(): windows.storage.StorageFile {
+    public unsafe func File(): Storage.StorageFile {
         return defaultInterface().File()
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class LoggingActivity <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): LoggingActivity {
-        LoggingActivity(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LoggingActivity {
+    public static func fromAbiTake(raw: CPointer<Unit>): LoggingActivity {
+        LoggingActivity(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LoggingActivity {
         LoggingActivity(raw)
     }
 
@@ -4288,12 +4430,12 @@ public class LoggingActivity <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public static func descriptor(): InterfaceDescriptor<LoggingActivity> {
-        let ancestors = [ILoggingActivity.iid(), windows.foundation.IClosable.iid(), ILoggingTarget.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<LoggingActivity>("LoggingActivity", ILoggingActivity.iid(), ancestors, { raw => LoggingActivity(raw, ownsReference: true) }, { raw => LoggingActivity(raw) })
+        let ancestors = [ILoggingActivity.iid(), Foundation.IClosable.iid(), ILoggingTarget.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<LoggingActivity>("LoggingActivity", ILoggingActivity.iid(), ancestors, { raw => LoggingActivity.fromAbiTake(raw) }, { raw => LoggingActivity.viewOf(raw) })
     }
 
     public func defaultInterface(): ILoggingActivity {
-        ILoggingActivity(asRaw())
+        ILoggingActivity.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4317,15 +4459,15 @@ public class LoggingActivity <: InterfaceWrapperBase & ComInterface & windows_in
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asILoggingActivity(): ILoggingActivity {
         ILoggingActivity(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable(asRaw())
     }
 
     public func asILoggingTarget(): ILoggingTarget {
@@ -4401,17 +4543,21 @@ public class LoggingActivity <: InterfaceWrapperBase & ComInterface & windows_in
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class LoggingChannel <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): LoggingChannel {
-        LoggingChannel(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LoggingChannel {
+    public static func fromAbiTake(raw: CPointer<Unit>): LoggingChannel {
+        LoggingChannel(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LoggingChannel {
         LoggingChannel(raw)
     }
 
@@ -4424,12 +4570,12 @@ public class LoggingChannel <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     public static func descriptor(): InterfaceDescriptor<LoggingChannel> {
-        let ancestors = [ILoggingChannel.iid(), windows.foundation.IClosable.iid(), ILoggingTarget.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<LoggingChannel>("LoggingChannel", ILoggingChannel.iid(), ancestors, { raw => LoggingChannel(raw, ownsReference: true) }, { raw => LoggingChannel(raw) })
+        let ancestors = [ILoggingChannel.iid(), Foundation.IClosable.iid(), ILoggingTarget.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<LoggingChannel>("LoggingChannel", ILoggingChannel.iid(), ancestors, { raw => LoggingChannel.fromAbiTake(raw) }, { raw => LoggingChannel.viewOf(raw) })
     }
 
     public func defaultInterface(): ILoggingChannel {
-        ILoggingChannel(asRaw())
+        ILoggingChannel.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4453,15 +4599,15 @@ public class LoggingChannel <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asILoggingChannel(): ILoggingChannel {
         ILoggingChannel(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable(asRaw())
     }
 
     public func asILoggingTarget(): ILoggingTarget {
@@ -4514,11 +4660,11 @@ public class LoggingChannel <: InterfaceWrapperBase & ComInterface & windows_int
         defaultInterface().LogValuePairWithLevel(value1, value2, level)
     }
 
-    public unsafe func LoggingEnabled(token: CPointer<Unit>): windows.foundation.EventRegistrationToken {
+    public unsafe func LoggingEnabled(token: Foundation.TypedEventHandler<ILoggingChannel, IInspectable>): Foundation.EventRegistrationToken {
         return defaultInterface().LoggingEnabled(token)
     }
 
-    public unsafe func RemoveLoggingEnabled(token: windows.foundation.EventRegistrationToken): Unit {
+    public unsafe func RemoveLoggingEnabled(token: Foundation.EventRegistrationToken): Unit {
         defaultInterface().RemoveLoggingEnabled(token)
     }
 
@@ -4571,17 +4717,21 @@ public class LoggingChannel <: InterfaceWrapperBase & ComInterface & windows_int
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class LoggingChannelOptions <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): LoggingChannelOptions {
-        LoggingChannelOptions(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LoggingChannelOptions {
+    public static func fromAbiTake(raw: CPointer<Unit>): LoggingChannelOptions {
+        LoggingChannelOptions(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LoggingChannelOptions {
         LoggingChannelOptions(raw)
     }
 
@@ -4595,11 +4745,11 @@ public class LoggingChannelOptions <: InterfaceWrapperBase & ComInterface & wind
 
     public static func descriptor(): InterfaceDescriptor<LoggingChannelOptions> {
         let ancestors = [ILoggingChannelOptions.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<LoggingChannelOptions>("LoggingChannelOptions", ILoggingChannelOptions.iid(), ancestors, { raw => LoggingChannelOptions(raw, ownsReference: true) }, { raw => LoggingChannelOptions(raw) })
+        return InterfaceDescriptor<LoggingChannelOptions>("LoggingChannelOptions", ILoggingChannelOptions.iid(), ancestors, { raw => LoggingChannelOptions.fromAbiTake(raw) }, { raw => LoggingChannelOptions.viewOf(raw) })
     }
 
     public func defaultInterface(): ILoggingChannelOptions {
-        ILoggingChannelOptions(asRaw())
+        ILoggingChannelOptions.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4629,7 +4779,7 @@ public class LoggingChannelOptions <: InterfaceWrapperBase & ComInterface & wind
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asILoggingChannelOptions(): ILoggingChannelOptions {
@@ -4651,36 +4801,16 @@ public class LoggingChannelOptions <: InterfaceWrapperBase & ComInterface & wind
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
+@C
 public struct LoggingFieldFormat {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Default = LoggingFieldFormat(value: 0)
-    public static let Hidden = LoggingFieldFormat(value: 1)
-    public static let String = LoggingFieldFormat(value: 2)
-    public static let Boolean = LoggingFieldFormat(value: 3)
-    public static let Hexadecimal = LoggingFieldFormat(value: 4)
-    public static let ProcessId = LoggingFieldFormat(value: 5)
-    public static let ThreadId = LoggingFieldFormat(value: 6)
-    public static let Port = LoggingFieldFormat(value: 7)
-    public static let Ipv4Address = LoggingFieldFormat(value: 8)
-    public static let Ipv6Address = LoggingFieldFormat(value: 9)
-    public static let SocketAddress = LoggingFieldFormat(value: 10)
-    public static let Xml = LoggingFieldFormat(value: 11)
-    public static let Json = LoggingFieldFormat(value: 12)
-    public static let Win32Error = LoggingFieldFormat(value: 13)
-    public static let NTStatus = LoggingFieldFormat(value: 14)
-    public static let HResult = LoggingFieldFormat(value: 15)
-    public static let FileTime = LoggingFieldFormat(value: 16)
-    public static let Signed = LoggingFieldFormat(value: 17)
-    public static let Unsigned = LoggingFieldFormat(value: 18)
 
     public operator func ==(other: LoggingFieldFormat): Bool {
         return this.value == other.value
@@ -4690,17 +4820,78 @@ public struct LoggingFieldFormat {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Default: LoggingFieldFormat = LoggingFieldFormat(0)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Hidden: LoggingFieldFormat = LoggingFieldFormat(1)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let String: LoggingFieldFormat = LoggingFieldFormat(2)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Boolean: LoggingFieldFormat = LoggingFieldFormat(3)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Hexadecimal: LoggingFieldFormat = LoggingFieldFormat(4)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let ProcessId: LoggingFieldFormat = LoggingFieldFormat(5)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let ThreadId: LoggingFieldFormat = LoggingFieldFormat(6)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Port: LoggingFieldFormat = LoggingFieldFormat(7)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Ipv4Address: LoggingFieldFormat = LoggingFieldFormat(8)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Ipv6Address: LoggingFieldFormat = LoggingFieldFormat(9)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let SocketAddress: LoggingFieldFormat = LoggingFieldFormat(10)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Xml: LoggingFieldFormat = LoggingFieldFormat(11)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Json: LoggingFieldFormat = LoggingFieldFormat(12)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Win32Error: LoggingFieldFormat = LoggingFieldFormat(13)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let NTStatus: LoggingFieldFormat = LoggingFieldFormat(14)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let HResult: LoggingFieldFormat = LoggingFieldFormat(15)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let FileTime: LoggingFieldFormat = LoggingFieldFormat(16)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Signed: LoggingFieldFormat = LoggingFieldFormat(17)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Unsigned: LoggingFieldFormat = LoggingFieldFormat(18)
+
+@When[Windows_Foundation_Diagnostics == "on"]
 public class LoggingFields <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): LoggingFields {
-        LoggingFields(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LoggingFields {
+    public static func fromAbiTake(raw: CPointer<Unit>): LoggingFields {
+        LoggingFields(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LoggingFields {
         LoggingFields(raw)
     }
 
@@ -4714,11 +4905,11 @@ public class LoggingFields <: InterfaceWrapperBase & ComInterface & windows_inte
 
     public static func descriptor(): InterfaceDescriptor<LoggingFields> {
         let ancestors = [ILoggingFields.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<LoggingFields>("LoggingFields", ILoggingFields.iid(), ancestors, { raw => LoggingFields(raw, ownsReference: true) }, { raw => LoggingFields(raw) })
+        return InterfaceDescriptor<LoggingFields>("LoggingFields", ILoggingFields.iid(), ancestors, { raw => LoggingFields.fromAbiTake(raw) }, { raw => LoggingFields.viewOf(raw) })
     }
 
     public func defaultInterface(): ILoggingFields {
-        ILoggingFields(asRaw())
+        ILoggingFields.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -4748,7 +4939,7 @@ public class LoggingFields <: InterfaceWrapperBase & ComInterface & windows_inte
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asILoggingFields(): ILoggingFields {
@@ -5095,143 +5286,137 @@ public class LoggingFields <: InterfaceWrapperBase & ComInterface & windows_inte
         defaultInterface().AddGuidArrayWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddDateTime(name: CPointer<UInt16>, value: windows.foundation.DateTime): Unit {
+    public unsafe func AddDateTime(name: CPointer<UInt16>, value: Foundation.DateTime): Unit {
         defaultInterface().AddDateTime(name, value)
     }
 
-    public unsafe func AddDateTimeWithFormat(name: CPointer<UInt16>, value: windows.foundation.DateTime, format: LoggingFieldFormat): Unit {
+    public unsafe func AddDateTimeWithFormat(name: CPointer<UInt16>, value: Foundation.DateTime, format: LoggingFieldFormat): Unit {
         defaultInterface().AddDateTimeWithFormat(name, value, format)
     }
 
-    public unsafe func AddDateTimeWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.DateTime, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddDateTimeWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.DateTime, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddDateTimeWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddDateTimeArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.DateTime>): Unit {
+    public unsafe func AddDateTimeArray(name: CPointer<UInt16>, value: CPointer<Foundation.DateTime>): Unit {
         defaultInterface().AddDateTimeArray(name, value)
     }
 
-    public unsafe func AddDateTimeArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.DateTime>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddDateTimeArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.DateTime>, format: LoggingFieldFormat): Unit {
         defaultInterface().AddDateTimeArrayWithFormat(name, value, format)
     }
 
-    public unsafe func AddDateTimeArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.DateTime>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddDateTimeArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.DateTime>, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddDateTimeArrayWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddTimeSpan(name: CPointer<UInt16>, value: windows.foundation.TimeSpan): Unit {
+    public unsafe func AddTimeSpan(name: CPointer<UInt16>, value: Foundation.TimeSpan): Unit {
         defaultInterface().AddTimeSpan(name, value)
     }
 
-    public unsafe func AddTimeSpanWithFormat(name: CPointer<UInt16>, value: windows.foundation.TimeSpan, format: LoggingFieldFormat): Unit {
+    public unsafe func AddTimeSpanWithFormat(name: CPointer<UInt16>, value: Foundation.TimeSpan, format: LoggingFieldFormat): Unit {
         defaultInterface().AddTimeSpanWithFormat(name, value, format)
     }
 
-    public unsafe func AddTimeSpanWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.TimeSpan, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddTimeSpanWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.TimeSpan, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddTimeSpanWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddTimeSpanArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.TimeSpan>): Unit {
+    public unsafe func AddTimeSpanArray(name: CPointer<UInt16>, value: CPointer<Foundation.TimeSpan>): Unit {
         defaultInterface().AddTimeSpanArray(name, value)
     }
 
-    public unsafe func AddTimeSpanArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.TimeSpan>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddTimeSpanArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.TimeSpan>, format: LoggingFieldFormat): Unit {
         defaultInterface().AddTimeSpanArrayWithFormat(name, value, format)
     }
 
-    public unsafe func AddTimeSpanArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.TimeSpan>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddTimeSpanArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.TimeSpan>, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddTimeSpanArrayWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddPoint(name: CPointer<UInt16>, value: windows.foundation.Point): Unit {
+    public unsafe func AddPoint(name: CPointer<UInt16>, value: Foundation.Point): Unit {
         defaultInterface().AddPoint(name, value)
     }
 
-    public unsafe func AddPointWithFormat(name: CPointer<UInt16>, value: windows.foundation.Point, format: LoggingFieldFormat): Unit {
+    public unsafe func AddPointWithFormat(name: CPointer<UInt16>, value: Foundation.Point, format: LoggingFieldFormat): Unit {
         defaultInterface().AddPointWithFormat(name, value, format)
     }
 
-    public unsafe func AddPointWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.Point, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddPointWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.Point, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddPointWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddPointArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.Point>): Unit {
+    public unsafe func AddPointArray(name: CPointer<UInt16>, value: CPointer<Foundation.Point>): Unit {
         defaultInterface().AddPointArray(name, value)
     }
 
-    public unsafe func AddPointArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.Point>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddPointArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.Point>, format: LoggingFieldFormat): Unit {
         defaultInterface().AddPointArrayWithFormat(name, value, format)
     }
 
-    public unsafe func AddPointArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.Point>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddPointArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.Point>, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddPointArrayWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddSize(name: CPointer<UInt16>, value: windows.foundation.Size): Unit {
+    public unsafe func AddSize(name: CPointer<UInt16>, value: Foundation.Size): Unit {
         defaultInterface().AddSize(name, value)
     }
 
-    public unsafe func AddSizeWithFormat(name: CPointer<UInt16>, value: windows.foundation.Size, format: LoggingFieldFormat): Unit {
+    public unsafe func AddSizeWithFormat(name: CPointer<UInt16>, value: Foundation.Size, format: LoggingFieldFormat): Unit {
         defaultInterface().AddSizeWithFormat(name, value, format)
     }
 
-    public unsafe func AddSizeWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.Size, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddSizeWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.Size, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddSizeWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddSizeArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.Size>): Unit {
+    public unsafe func AddSizeArray(name: CPointer<UInt16>, value: CPointer<Foundation.Size>): Unit {
         defaultInterface().AddSizeArray(name, value)
     }
 
-    public unsafe func AddSizeArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.Size>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddSizeArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.Size>, format: LoggingFieldFormat): Unit {
         defaultInterface().AddSizeArrayWithFormat(name, value, format)
     }
 
-    public unsafe func AddSizeArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.Size>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddSizeArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.Size>, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddSizeArrayWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddRect(name: CPointer<UInt16>, value: windows.foundation.Rect): Unit {
+    public unsafe func AddRect(name: CPointer<UInt16>, value: Foundation.Rect): Unit {
         defaultInterface().AddRect(name, value)
     }
 
-    public unsafe func AddRectWithFormat(name: CPointer<UInt16>, value: windows.foundation.Rect, format: LoggingFieldFormat): Unit {
+    public unsafe func AddRectWithFormat(name: CPointer<UInt16>, value: Foundation.Rect, format: LoggingFieldFormat): Unit {
         defaultInterface().AddRectWithFormat(name, value, format)
     }
 
-    public unsafe func AddRectWithFormatAndTags(name: CPointer<UInt16>, value: windows.foundation.Rect, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddRectWithFormatAndTags(name: CPointer<UInt16>, value: Foundation.Rect, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddRectWithFormatAndTags(name, value, format, tags)
     }
 
-    public unsafe func AddRectArray(name: CPointer<UInt16>, value: CPointer<windows.foundation.Rect>): Unit {
+    public unsafe func AddRectArray(name: CPointer<UInt16>, value: CPointer<Foundation.Rect>): Unit {
         defaultInterface().AddRectArray(name, value)
     }
 
-    public unsafe func AddRectArrayWithFormat(name: CPointer<UInt16>, value: CPointer<windows.foundation.Rect>, format: LoggingFieldFormat): Unit {
+    public unsafe func AddRectArrayWithFormat(name: CPointer<UInt16>, value: CPointer<Foundation.Rect>, format: LoggingFieldFormat): Unit {
         defaultInterface().AddRectArrayWithFormat(name, value, format)
     }
 
-    public unsafe func AddRectArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<windows.foundation.Rect>, format: LoggingFieldFormat, tags: Int32): Unit {
+    public unsafe func AddRectArrayWithFormatAndTags(name: CPointer<UInt16>, value: CPointer<Foundation.Rect>, format: LoggingFieldFormat, tags: Int32): Unit {
         defaultInterface().AddRectArrayWithFormatAndTags(name, value, format, tags)
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
+@C
 public struct LoggingLevel {
-    public let value: Int32
+    public var value: Int32 = 0
 
-    public init() {
-        this.value = 0
-    }
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Verbose = LoggingLevel(value: 0)
-    public static let Information = LoggingLevel(value: 1)
-    public static let Warning = LoggingLevel(value: 2)
-    public static let Error = LoggingLevel(value: 3)
-    public static let Critical = LoggingLevel(value: 4)
 
     public operator func ==(other: LoggingLevel): Bool {
         return this.value == other.value
@@ -5241,24 +5426,31 @@ public struct LoggingLevel {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
-public struct LoggingOpcode {
-    public let value: Int32
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Verbose: LoggingLevel = LoggingLevel(0)
 
-    public init() {
-        this.value = 0
-    }
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Information: LoggingLevel = LoggingLevel(1)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Warning: LoggingLevel = LoggingLevel(2)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Error: LoggingLevel = LoggingLevel(3)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Critical: LoggingLevel = LoggingLevel(4)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+@C
+public struct LoggingOpcode {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value
     }
-    public static let Info = LoggingOpcode(value: 0)
-    public static let Start = LoggingOpcode(value: 1)
-    public static let Stop = LoggingOpcode(value: 2)
-    public static let Reply = LoggingOpcode(value: 6)
-    public static let Resume = LoggingOpcode(value: 7)
-    public static let Suspend = LoggingOpcode(value: 8)
-    public static let Send = LoggingOpcode(value: 9)
 
     public operator func ==(other: LoggingOpcode): Bool {
         return this.value == other.value
@@ -5268,17 +5460,42 @@ public struct LoggingOpcode {
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Info: LoggingOpcode = LoggingOpcode(0)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Start: LoggingOpcode = LoggingOpcode(1)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Stop: LoggingOpcode = LoggingOpcode(2)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Reply: LoggingOpcode = LoggingOpcode(6)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Resume: LoggingOpcode = LoggingOpcode(7)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Suspend: LoggingOpcode = LoggingOpcode(8)
+
+@When[Windows_Foundation_Diagnostics == "on"]
+public let Send: LoggingOpcode = LoggingOpcode(9)
+
+@When[Windows_Foundation_Diagnostics == "on"]
 public class LoggingOptions <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): LoggingOptions {
-        LoggingOptions(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LoggingOptions {
+    public static func fromAbiTake(raw: CPointer<Unit>): LoggingOptions {
+        LoggingOptions(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LoggingOptions {
         LoggingOptions(raw)
     }
 
@@ -5292,11 +5509,11 @@ public class LoggingOptions <: InterfaceWrapperBase & ComInterface & windows_int
 
     public static func descriptor(): InterfaceDescriptor<LoggingOptions> {
         let ancestors = [ILoggingOptions.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<LoggingOptions>("LoggingOptions", ILoggingOptions.iid(), ancestors, { raw => LoggingOptions(raw, ownsReference: true) }, { raw => LoggingOptions(raw) })
+        return InterfaceDescriptor<LoggingOptions>("LoggingOptions", ILoggingOptions.iid(), ancestors, { raw => LoggingOptions.fromAbiTake(raw) }, { raw => LoggingOptions.viewOf(raw) })
     }
 
     public func defaultInterface(): ILoggingOptions {
-        ILoggingOptions(asRaw())
+        ILoggingOptions.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -5326,7 +5543,7 @@ public class LoggingOptions <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asILoggingOptions(): ILoggingOptions {
@@ -5388,17 +5605,21 @@ public class LoggingOptions <: InterfaceWrapperBase & ComInterface & windows_int
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class LoggingSession <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): LoggingSession {
-        LoggingSession(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): LoggingSession {
+    public static func fromAbiTake(raw: CPointer<Unit>): LoggingSession {
+        LoggingSession(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LoggingSession {
         LoggingSession(raw)
     }
 
@@ -5411,12 +5632,12 @@ public class LoggingSession <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     public static func descriptor(): InterfaceDescriptor<LoggingSession> {
-        let ancestors = [ILoggingSession.iid(), windows.foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<LoggingSession>("LoggingSession", ILoggingSession.iid(), ancestors, { raw => LoggingSession(raw, ownsReference: true) }, { raw => LoggingSession(raw) })
+        let ancestors = [ILoggingSession.iid(), Foundation.IClosable.iid(), IInspectable.iid(), IUnknown.iid()]
+        return InterfaceDescriptor<LoggingSession>("LoggingSession", ILoggingSession.iid(), ancestors, { raw => LoggingSession.fromAbiTake(raw) }, { raw => LoggingSession.viewOf(raw) })
     }
 
     public func defaultInterface(): ILoggingSession {
-        ILoggingSession(asRaw())
+        ILoggingSession.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -5440,15 +5661,15 @@ public class LoggingSession <: InterfaceWrapperBase & ComInterface & windows_int
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asILoggingSession(): ILoggingSession {
         ILoggingSession(asRaw())
     }
 
-    public func asIClosable(): windows.foundation.IClosable {
-        windows.foundation.IClosable(asRaw())
+    public func asIClosable(): Foundation.IClosable {
+        Foundation.IClosable(asRaw())
     }
 
     public static unsafe func Create(name: CPointer<UInt16>): LoggingSession {
@@ -5461,7 +5682,7 @@ public class LoggingSession <: InterfaceWrapperBase & ComInterface & windows_int
         return defaultInterface().Name()
     }
 
-    public unsafe func SaveToFileAsync(operation: windows.storage.IStorageFolder, folder: CPointer<UInt16>): CPointer<Unit> {
+    public unsafe func SaveToFileAsync(operation: Storage.IStorageFolder, folder: CPointer<UInt16>): Foundation.IAsyncOperation<Storage.StorageFile> {
         return defaultInterface().SaveToFileAsync(operation, folder)
     }
 
@@ -5482,17 +5703,21 @@ public class LoggingSession <: InterfaceWrapperBase & ComInterface & windows_int
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class RuntimeBrokerErrorSettings <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): RuntimeBrokerErrorSettings {
-        RuntimeBrokerErrorSettings(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): RuntimeBrokerErrorSettings {
+    public static func fromAbiTake(raw: CPointer<Unit>): RuntimeBrokerErrorSettings {
+        RuntimeBrokerErrorSettings(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RuntimeBrokerErrorSettings {
         RuntimeBrokerErrorSettings(raw)
     }
 
@@ -5506,11 +5731,11 @@ public class RuntimeBrokerErrorSettings <: InterfaceWrapperBase & ComInterface &
 
     public static func descriptor(): InterfaceDescriptor<RuntimeBrokerErrorSettings> {
         let ancestors = [IErrorReportingSettings.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<RuntimeBrokerErrorSettings>("RuntimeBrokerErrorSettings", IErrorReportingSettings.iid(), ancestors, { raw => RuntimeBrokerErrorSettings(raw, ownsReference: true) }, { raw => RuntimeBrokerErrorSettings(raw) })
+        return InterfaceDescriptor<RuntimeBrokerErrorSettings>("RuntimeBrokerErrorSettings", IErrorReportingSettings.iid(), ancestors, { raw => RuntimeBrokerErrorSettings.fromAbiTake(raw) }, { raw => RuntimeBrokerErrorSettings.viewOf(raw) })
     }
 
     public func defaultInterface(): IErrorReportingSettings {
-        IErrorReportingSettings(asRaw())
+        IErrorReportingSettings.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -5540,7 +5765,7 @@ public class RuntimeBrokerErrorSettings <: InterfaceWrapperBase & ComInterface &
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asIErrorReportingSettings(): IErrorReportingSettings {
@@ -5556,17 +5781,21 @@ public class RuntimeBrokerErrorSettings <: InterfaceWrapperBase & ComInterface &
     }
 }
 
-@When[feature == "feat_windows_foundation_diagnostics"]
+@When[Windows_Foundation_Diagnostics == "on"]
 public class TracingStatusChangedEventArgs <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): TracingStatusChangedEventArgs {
-        TracingStatusChangedEventArgs(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): TracingStatusChangedEventArgs {
+    public static func fromAbiTake(raw: CPointer<Unit>): TracingStatusChangedEventArgs {
+        TracingStatusChangedEventArgs(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TracingStatusChangedEventArgs {
         TracingStatusChangedEventArgs(raw)
     }
 
@@ -5580,11 +5809,11 @@ public class TracingStatusChangedEventArgs <: InterfaceWrapperBase & ComInterfac
 
     public static func descriptor(): InterfaceDescriptor<TracingStatusChangedEventArgs> {
         let ancestors = [ITracingStatusChangedEventArgs.iid(), IInspectable.iid(), IUnknown.iid()]
-        return InterfaceDescriptor<TracingStatusChangedEventArgs>("TracingStatusChangedEventArgs", ITracingStatusChangedEventArgs.iid(), ancestors, { raw => TracingStatusChangedEventArgs(raw, ownsReference: true) }, { raw => TracingStatusChangedEventArgs(raw) })
+        return InterfaceDescriptor<TracingStatusChangedEventArgs>("TracingStatusChangedEventArgs", ITracingStatusChangedEventArgs.iid(), ancestors, { raw => TracingStatusChangedEventArgs.fromAbiTake(raw) }, { raw => TracingStatusChangedEventArgs.viewOf(raw) })
     }
 
     public func defaultInterface(): ITracingStatusChangedEventArgs {
-        ITracingStatusChangedEventArgs(asRaw())
+        ITracingStatusChangedEventArgs.viewOf(asRaw())
     }
 
     public static func abiType(): String {
@@ -5608,7 +5837,7 @@ public class TracingStatusChangedEventArgs <: InterfaceWrapperBase & ComInterfac
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public func asITracingStatusChangedEventArgs(): ITracingStatusChangedEventArgs {

@@ -1,10 +1,12 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$packageRoot = Join-Path $repoRoot "windows-cj/windows-implement"
+$packageRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent (Split-Path -Parent $packageRoot)
 $workspaceRoot = Join-Path $packageRoot "tests/output/implement_smoke"
 $runnerRoot = Join-Path $workspaceRoot "runner"
 $srcRoot = Join-Path $runnerRoot "src"
+$packagePath = ($packageRoot -replace '\\', '/')
+$interfacePath = ((Join-Path $repoRoot 'windows-cj/windows-interface') -replace '\\', '/')
 
 if (Test-Path $workspaceRoot) {
     Remove-Item -Recurse -Force $workspaceRoot
@@ -18,10 +20,11 @@ $manifest = @"
   description = "Smoke test for windows_implement"
   output-type = "executable"
   cjc-version = "1.1.0"
+  compile-option = "-loleaut32 -lwindowsapp"
 
 [dependencies]
-  windows_implement = { path = "E:/Project/CS_Project/2026/ling/windows-cj/windows-implement" }
-  windows_interface = { path = "E:/Project/CS_Project/2026/ling/windows-cj/windows-interface" }
+  windows_implement = { path = "$packagePath" }
+  windows_interface = { path = "$interfacePath" }
 "@
 
 $main = @"
@@ -43,7 +46,7 @@ public class DemoImpl {
 @C
 public struct DemoGeneratedVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var ReadValue: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ReadValue: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL }
     public init() {}
 }
 
@@ -52,15 +55,19 @@ public interface DemoGenerated_Impl {
 }
 
 public class DemoGenerated <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
     }
 
-    public static func fromRaw(raw: CPointer<Unit>): DemoGenerated {
-        DemoGenerated(raw, ownsReference: true)
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): DemoGenerated {
+    public static func fromAbiTake(raw: CPointer<Unit>): DemoGenerated {
+        DemoGenerated(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DemoGenerated {
         DemoGenerated(raw)
     }
 
@@ -92,7 +99,7 @@ public class DemoGenerated <: InterfaceWrapperBase & ComInterface {
             InterfaceMethodSchema(
                 "ReadValue",
                 6,
-                [InterfaceParameterSchema("result", "CPointer<Int32>", "OutRef<Int32>", InterfaceParameterBridgeKind.OutRef)],
+                [InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", InterfaceParameterBridgeKind.OutSlot)],
                 "Int32"
             )
         ]
@@ -100,8 +107,8 @@ public class DemoGenerated <: InterfaceWrapperBase & ComInterface {
             "DemoGenerated",
             DemoGenerated.iid(),
             IInspectable.descriptor(),
-            { raw => DemoGenerated(raw, ownsReference: true) },
-            { raw => DemoGenerated(raw) }
+            { raw => DemoGenerated.fromAbiTake(raw) },
+            { raw => DemoGenerated.viewOf(raw) }
         )
         descriptor.methods = methods
         descriptor
@@ -112,14 +119,16 @@ public class DemoGenerated <: InterfaceWrapperBase & ComInterface {
     }
 
     public func asIInspectable(): IInspectable {
-        IInspectable(asRaw())
+        IInspectable.viewOf(asRaw())
     }
 
     public unsafe func ReadValue(): Int32 {
         let v = vtbl()
         var result = 0i32
         let hr = v.ReadValue(asRaw(), CPointer<Int32>(inout result))
-        HRESULT(hr).ok()
+        if (hr != S_OK) {
+            throw SmokeFailure("generated ReadValue should return S_OK")
+        }
         result
     }
 }
@@ -133,18 +142,18 @@ func buildDemoGeneratedVtbl(): DemoGeneratedVtbl {
 
 @C
 public func DemoGeneratedReadValueThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     result__: CPointer<Int32>
 ): Int32 {
     if (result__.isNull()) {
-        return E_POINTER.value
+        return E_POINTER
     }
-    match (unsafe { asImplFromRaw<DemoGenerated_Impl>(this_, slotOffset: 1) }) {
+    match (unsafe { asImplFromRaw<DemoGenerated_Impl>(instanceRaw, slotOffset: 1) }) {
         case Some(impl) =>
             unsafe { result__.write(impl.readValue()) }
-            S_OK.value
+            S_OK
         case None =>
-            E_NOINTERFACE.value
+            E_NOINTERFACE
     }
 }
 
@@ -186,7 +195,7 @@ func expectInspectableDefaults(raw: CPointer<Unit>): Unit {
             }
             let unknownView = inspectable.asIUnknown()
             if (!samePointer(unknownView.asRaw(), raw)) {
-                fail("borrowed IUnknown upcast should preserve the identity pointer")
+                fail("view IUnknown upcast should preserve the identity pointer")
             }
             var trustLevel = -1i32
             let trustHr = unsafe { inspectable.getTrustLevel(CPointer<Int32>(inout trustLevel)) }
@@ -214,24 +223,24 @@ func expectInspectableDefaults(raw: CPointer<Unit>): Unit {
                 fail("default IInspectable GetRuntimeClassName should return S_OK with a null HSTRING")
             }
             unknownView.close()
-            let borrowedCloseProbe = IUnknown(raw)
-            let afterBorrowedClose = borrowedCloseProbe.addRef()
-            if (afterBorrowedClose != 3u32) {
-                fail("borrowed upcast close should not consume the QueryInterface reference")
+            let viewCloseProbe = IUnknown(raw)
+            let afterViewClose = viewCloseProbe.addRef()
+            if (afterViewClose != 3u32) {
+                fail("view upcast close should not consume the QueryInterface reference")
             }
-            let resetBorrowedClose = borrowedCloseProbe.release()
-            if (resetBorrowedClose != 2u32) {
-                fail("borrowed upcast probe should restore the reference count to the owned-query state")
+            let resetViewClose = viewCloseProbe.release()
+            if (resetViewClose != 2u32) {
+                fail("view upcast probe should restore the reference count to the retained-query state")
             }
             inspectable.close()
-            let ownedCloseProbe = IUnknown(raw)
-            let afterOwnedClose = ownedCloseProbe.addRef()
-            if (afterOwnedClose != 2u32) {
+            let retainedCloseProbe = IUnknown(raw)
+            let afterRetainedClose = retainedCloseProbe.addRef()
+            if (afterRetainedClose != 2u32) {
                 fail("closing the typed query wrapper should release the QueryInterface reference exactly once")
             }
-            let resetOwnedClose = ownedCloseProbe.release()
-            if (resetOwnedClose != 1u32) {
-                fail("owned query close probe should restore the steady-state reference count")
+            let resetRetainedClose = retainedCloseProbe.release()
+            if (resetRetainedClose != 1u32) {
+                fail("retained query close probe should restore the steady-state reference count")
             }
         case None =>
             fail("descriptor-based query should succeed for IInspectable")
@@ -258,7 +267,7 @@ func expectUnsupportedQuery(raw: CPointer<Unit>): Unit {
             fail("unsupported QueryInterface should not produce a raw pointer")
         case None => ()
     }
-    let missingDescriptor = InterfaceDescriptor<IUnknown>("MissingIUnknown", missingIid, { ptr => IUnknown(ptr, ownsReference: true) }, { ptr => IUnknown(ptr) })
+    let missingDescriptor = InterfaceDescriptor<IUnknown>("MissingIUnknown", missingIid, { ptr => IUnknown.fromAbiTake(ptr) }, { ptr => IUnknown.viewOf(ptr) })
     match (unsafe { unknown.query(missingDescriptor) }) {
         case Some(_) =>
             fail("unsupported descriptor-based query should not wrap a pointer")
@@ -276,7 +285,7 @@ func expectNullPointerErrors(raw: CPointer<Unit>): Unit {
         )
     }
     if (nullResultHr != E_POINTER) {
-        fail("QueryInterface should return E_POINTER when ppvObject is null")
+        fail("QueryInterface should return E_POINTER when the result slot is null")
     }
 
     var nullIidResult = raw
@@ -408,15 +417,15 @@ func expectMultipleInterfaceSlots(): Unit {
         "IAlpha",
         alphaIid,
         [IID_IINSPECTABLE, IID_IUNKNOWN],
-        { ptr => IUnknown(ptr, ownsReference: true) },
-        { ptr => IUnknown(ptr) }
+        { ptr => IUnknown.fromAbiTake(ptr) },
+        { ptr => IUnknown.viewOf(ptr) }
     )
     let betaDescriptor = InterfaceDescriptor<IUnknown>(
         "IBeta",
         betaIid,
         [IID_IINSPECTABLE, IID_IUNKNOWN],
-        { ptr => IUnknown(ptr, ownsReference: true) },
-        { ptr => IUnknown(ptr) }
+        { ptr => IUnknown.fromAbiTake(ptr) },
+        { ptr => IUnknown.viewOf(ptr) }
     )
     let descriptors = Array<InterfaceDescriptor<IUnknown>>(2, { index =>
         if (index == 0) {

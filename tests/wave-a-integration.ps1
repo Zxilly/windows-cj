@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
-$repoRoot = "E:/Project/CS_Project/2026/ling"
-$workspaceRoot = Join-Path $repoRoot "windows-cj"
+$workspaceRoot = Split-Path -Parent $PSScriptRoot
+$repoRoot = Split-Path -Parent $workspaceRoot
 $manifestPath = Join-Path $workspaceRoot "cjpm.toml"
 $outputRoot = Join-Path $workspaceRoot "tests/output/wave-a"
 $generatedRoot = Join-Path $outputRoot "generated"
@@ -37,7 +37,7 @@ members = []
 compile-option = "--cfg ./windows-cj"
 
 [windows-cj]
-features = ["feat_windows_win32_foundation"]
+features = ["Windows_Win32_Foundation"]
 '@ | Set-Content -NoNewline (Join-Path $integrationWorkspaceRoot "cjpm.toml")
 
 $bindgenDir = Join-Path $workspaceRoot "windows-bindgen"
@@ -69,16 +69,16 @@ if (!(Test-Path $linkToml)) {
 $featuresContent = Get-Content -Raw $featuresToml
 $linkContent = Get-Content -Raw $linkToml
 
-if ($featuresContent -notmatch '\[features\.feat_windows_win32_foundation\]') {
+if ($featuresContent -notmatch '\[features\.Windows_Win32_Foundation\]') {
     throw "bindgen features.toml is missing the Windows.Win32.Foundation namespace feature block"
 }
-if ($featuresContent -notmatch 'cfg = "feat_windows_win32_foundation"') {
+if ($featuresContent -notmatch 'cfg = "Windows_Win32_Foundation"') {
     throw "bindgen features.toml is missing the Foundation cfg entry"
 }
-if ($featuresContent -notmatch 'deps = \["feat_api_ms_win_core_handle_l1_1_0", "feat_kernel32", "feat_ntdll", "feat_oleaut32", "feat_user32"\]') {
+if ($featuresContent -notmatch 'deps = \["API_MS_WIN_CORE_HANDLE_L1_1_0", "KERNEL32", "NTDLL", "OLEAUT32", "USER32"\]') {
     throw "bindgen features.toml is missing the expected Foundation dependency closure"
 }
-if ($linkContent -notmatch '\[features\.feat_kernel32\]') {
+if ($linkContent -notmatch '\[features\.KERNEL32\]') {
     throw "bindgen link-options.toml is missing the kernel32 feature block"
 }
 if ($linkContent -notmatch 'link = \["-lkernel32"\]') {
@@ -99,12 +99,12 @@ if (!(Test-Path $integrationCfgPath)) {
 }
 
 $expectedCfg = @'
-feat_api_ms_win_core_handle_l1_1_0 = "on"
-feat_kernel32 = "on"
-feat_ntdll = "on"
-feat_oleaut32 = "on"
-feat_user32 = "on"
-feat_windows_win32_foundation = "on"
+API_MS_WIN_CORE_HANDLE_L1_1_0 = "on"
+KERNEL32 = "on"
+NTDLL = "on"
+OLEAUT32 = "on"
+USER32 = "on"
+Windows_Win32_Foundation = "on"
 '@
 
 $cfgContent = Get-Content -Raw $integrationCfgPath

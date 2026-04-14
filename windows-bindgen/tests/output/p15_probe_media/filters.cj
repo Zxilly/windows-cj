@@ -25,7 +25,7 @@ public struct IHttpFilterVtbl {
             }
             match (unsafe { asImplFromRaw<Identity>(this_) }) {
                 case Some(impl) =>
-                    match (impl.SendRequestAsync(windows.web.http.HttpRequestMessage.fromRawBorrowed(arg0))) {
+                    match (impl.SendRequestAsync(windows.web.http.HttpRequestMessage.viewOf(arg0))) {
                         case Result<CPointer<Unit>>.Ok(value) =>
                             let raw = value
                             if (raw.isNull()) {
@@ -73,7 +73,7 @@ public class IHttpFilter <: InterfaceWrapperBase & ComInterface & RuntimeName & 
         IHttpFilter(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IHttpFilter {
+    public static func viewOf(raw: CPointer<Unit>): IHttpFilter {
         IHttpFilter(raw)
     }
 

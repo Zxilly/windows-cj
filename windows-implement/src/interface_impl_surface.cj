@@ -16,7 +16,7 @@ public let E_NOTIMPL: Int32 = -2147467263i32
 public interface ComObjectBase {
     func addRefBase(): UInt32
     func releaseBase(identityKey: UIntNative): UInt32
-    func queryInterfaceBase(raw: CPointer<Unit>, iid: GUID, ppvObject: CPointer<CPointer<Unit>>): Int32
+    func queryInterfaceBase(raw: CPointer<Unit>, iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32
 }
 
 public interface IInspectableBase {
@@ -223,30 +223,30 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
         UInt32(count)
     }
 
-    public func queryInterfaceBase(_: CPointer<Unit>, iid: GUID, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    public func queryInterfaceBase(_: CPointer<Unit>, iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {
         if (iid == IID_IUNKNOWN) {
-            return writeInterfacePointer(0, ppvObject)
+            return writeInterfacePointer(0, resultSlot)
         }
         if (iid == IID_IINSPECTABLE && containsIid(IID_IINSPECTABLE)) {
-            return writeInterfacePointer(0, ppvObject)
+            return writeInterfacePointer(0, resultSlot)
         }
         if (iid == IID_IAGILEOBJECT && agileEnabled) {
-            return writeInterfacePointer(0, ppvObject)
+            return writeInterfacePointer(0, resultSlot)
         }
         if (iid == IID_IWEAKREFERENCESOURCE && containsIid(IID_IINSPECTABLE)) {
-            return weakRefCount.writeWeakReferenceSource(ppvObject)
+            return weakRefCount.writeWeakReferenceSource(resultSlot)
         }
         if (iid == IID_IMARSHAL && agileEnabled) {
-            return weakRefCount.writeObjectMarshaler(ppvObject)
+            return weakRefCount.writeObjectMarshaler(resultSlot)
         }
         for (descriptor in resolvedDescriptors) {
             if (descriptor.matchesNonIdentity(iid)) {
-                return writeInterfacePointer(descriptor.slotIndex, ppvObject)
+                return writeInterfacePointer(descriptor.slotIndex, resultSlot)
             }
         }
 
-        if (ppvObject.isNotNull()) {
-            unsafe { ppvObject.write(CPointer<Unit>()) }
+        if (resultSlot.isNotNull()) {
+            unsafe { resultSlot.write(CPointer<Unit>()) }
         }
         E_NOINTERFACE
     }
@@ -290,20 +290,20 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
         agileEnabled
     }
 
-    public func weakReferenceQueryInterface(iid: GUID, ppvObject: CPointer<CPointer<Unit>>): Int32 {
-        queryInterfaceBase(identityPointer(), iid, ppvObject)
+    public func weakReferenceQueryInterface(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        queryInterfaceBase(identityPointer(), iid, resultSlot)
     }
 
-    private func writeInterfacePointer(slotIndex: Int64, ppvObject: CPointer<CPointer<Unit>>): Int32 {
-        if (ppvObject.isNull()) {
+    private func writeInterfacePointer(slotIndex: Int64, resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        if (resultSlot.isNull()) {
             return E_POINTER
         }
         if (slotIndex < 0 || slotIndex >= interfacePointers.size) {
-            unsafe { ppvObject.write(CPointer<Unit>()) }
+            unsafe { resultSlot.write(CPointer<Unit>()) }
             return E_NOINTERFACE
         }
         addRefBase()
-        unsafe { ppvObject.write(interfacePointers[slotIndex]) }
+        unsafe { resultSlot.write(interfacePointers[slotIndex]) }
         S_OK
     }
 
@@ -512,8 +512,8 @@ func applyRuntimeTypeFromDescriptors<T, I>(
 
 public class ComObject<T> {
     private var slotHandle: Option<CPointerHandle<CPointer<Unit>>> = None
-    private var ownedUnknownVtblHandle: Option<CPointerHandle<IUnknownVtbl>> = None
-    private var ownedInspectableVtblHandle: Option<CPointerHandle<IInspectableVtbl>> = None
+    private var identityUnknownVtblHandle: Option<CPointerHandle<IUnknownVtbl>> = None
+    private var identityInspectableVtblHandle: Option<CPointerHandle<IInspectableVtbl>> = None
     private var rawView: CPointer<Unit> = CPointer<Unit>()
     public let runtime: ComObjectRuntime<T>
 
@@ -715,31 +715,31 @@ public class ComObject<T> {
         this
     }
 
-    private func ensureOwnedIUnknownVtblPtr(): CPointer<Unit> {
-        match (ownedUnknownVtblHandle) {
+    private func ensureIdentityIUnknownVtblPtr(): CPointer<Unit> {
+        match (identityUnknownVtblHandle) {
             case Some(handle) => return CPointer<Unit>(handle.pointer)
             case None => ()
         }
         let handle = unsafe { acquireArrayRawData(Array<IUnknownVtbl>(1, { _ => buildIUnknownVtbl() })) }
-        ownedUnknownVtblHandle = Some(handle)
+        identityUnknownVtblHandle = Some(handle)
         CPointer<Unit>(handle.pointer)
     }
 
-    private func ensureOwnedIInspectableVtblPtr(): CPointer<Unit> {
-        match (ownedInspectableVtblHandle) {
+    private func ensureIdentityIInspectableVtblPtr(): CPointer<Unit> {
+        match (identityInspectableVtblHandle) {
             case Some(handle) => return CPointer<Unit>(handle.pointer)
             case None => ()
         }
         let handle = unsafe { acquireArrayRawData(Array<IInspectableVtbl>(1, { _ => buildIInspectableVtbl() })) }
-        ownedInspectableVtblHandle = Some(handle)
+        identityInspectableVtblHandle = Some(handle)
         CPointer<Unit>(handle.pointer)
     }
 
     private func defaultIdentityVtblPtr(supportedIids: Array<GUID>): CPointer<Unit> {
         if (shouldUseInspectableIdentity(supportedIids)) {
-            return ensureOwnedIInspectableVtblPtr()
+            return ensureIdentityIInspectableVtblPtr()
         }
-        ensureOwnedIUnknownVtblPtr()
+        ensureIdentityIUnknownVtblPtr()
     }
 
     private func attachRuntime(
@@ -750,7 +750,7 @@ public class ComObject<T> {
         let slotCount = customSlotCount(resolvedDescriptors)
         var fallbackCustomVtbl = CPointer<Unit>()
         if (slotCount > 0 && hasMissingCustomVtbl(slotCount, explicitCustomVtbls)) {
-            fallbackCustomVtbl = ensureOwnedIUnknownVtblPtr()
+            fallbackCustomVtbl = ensureIdentityIUnknownVtblPtr()
         }
 
         let customVtables = defaultCustomVtblArray(slotCount, explicitCustomVtbls, fallbackCustomVtbl)
@@ -774,16 +774,16 @@ public class ComObject<T> {
         runtime.attach(Array<UIntNative>(rawPointers.size, { index => rawPointers[index].toUIntNative() }))
 
         let finalSlotHandle = slotHandle
-        let finalOwnedUnknownVtblHandle = ownedUnknownVtblHandle
-        let finalOwnedInspectableVtblHandle = ownedInspectableVtblHandle
+        let finalIdentityUnknownVtblHandle = identityUnknownVtblHandle
+        let finalIdentityInspectableVtblHandle = identityInspectableVtblHandle
 
         runtime.setOnDestroy({ =>
-            match (finalOwnedInspectableVtblHandle) {
+            match (finalIdentityInspectableVtblHandle) {
                 case Some(vtblHandle) =>
                     unsafe { releaseArrayRawData(vtblHandle) }
                 case None => ()
             }
-            match (finalOwnedUnknownVtblHandle) {
+            match (finalIdentityUnknownVtblHandle) {
                 case Some(vtblHandle) =>
                     unsafe { releaseArrayRawData(vtblHandle) }
                 case None => ()
@@ -814,8 +814,8 @@ public class ComObject<T> {
         runtime.releaseBase(asRaw().toUIntNative())
     }
 
-    public func queryInterfaceBase(iid: GUID, ppvObject: CPointer<CPointer<Unit>>): Int32 {
-        runtime.queryInterfaceBase(asRaw(), iid, ppvObject)
+    public func queryInterfaceBase(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        runtime.queryInterfaceBase(asRaw(), iid, resultSlot)
     }
 
     public unsafe func cast<I>(descriptor: InterfaceDescriptor<I>): Option<I> where I <: ComInterface {
@@ -853,9 +853,9 @@ public class ComObject<T> {
         match (unsafe { cast(descriptor) }) {
             case Some(value) =>
                 let raw = value.asRaw()
-                let borrowed = descriptor.wrapBorrowed(raw)
+                let view = descriptor.viewOf(raw)
                 IUnknown(raw).release()
-                borrowed
+                view
             case None =>
                 throw Exception("ComObject.asInterface: requested interface is not implemented")
         }
@@ -869,8 +869,8 @@ public class ComObject<T> {
     }
 
     public func intoInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface {
-        let borrowed = asInterface(descriptor)
-        descriptor.wrapOwned(borrowed.asRaw())
+        let view = asInterface(descriptor)
+        descriptor.takeFromAbi(view.asRaw())
     }
 }
 

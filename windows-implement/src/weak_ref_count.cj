@@ -22,25 +22,37 @@ public struct IWeakReferenceSourceVtbl {
 public let IID_IWEAKREFERENCE = GUID.fromValues(0x00000037u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
 public let IID_IWEAKREFERENCESOURCE = GUID.fromValues(0x00000038u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
 
-func wrapIWeakReferenceOwned(raw: CPointer<Unit>): IWeakReference {
-    IWeakReference(raw, ownsReference: true)
+func takeIWeakReferenceFromAbi(raw: CPointer<Unit>): IWeakReference {
+    IWeakReference.fromAbiTake(raw)
 }
 
-func wrapIWeakReferenceBorrowed(raw: CPointer<Unit>): IWeakReference {
-    IWeakReference(raw)
+func viewIWeakReference(raw: CPointer<Unit>): IWeakReference {
+    IWeakReference.viewOf(raw)
 }
 
-func wrapIWeakReferenceSourceOwned(raw: CPointer<Unit>): IWeakReferenceSource {
-    IWeakReferenceSource(raw, ownsReference: true)
+func takeIWeakReferenceSourceFromAbi(raw: CPointer<Unit>): IWeakReferenceSource {
+    IWeakReferenceSource.fromAbiTake(raw)
 }
 
-func wrapIWeakReferenceSourceBorrowed(raw: CPointer<Unit>): IWeakReferenceSource {
-    IWeakReferenceSource(raw)
+func viewIWeakReferenceSource(raw: CPointer<Unit>): IWeakReferenceSource {
+    IWeakReferenceSource.viewOf(raw)
 }
 
 public class IWeakReference <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IWeakReference {
+        IWeakReference(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IWeakReference {
+        IWeakReference(raw)
     }
 
     public static func iid(): GUID {
@@ -48,7 +60,7 @@ public class IWeakReference <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWeakReference> {
-        InterfaceDescriptor<IWeakReference>("IWeakReference", IID_IWEAKREFERENCE, wrapIWeakReferenceOwned, wrapIWeakReferenceBorrowed)
+        InterfaceDescriptor<IWeakReference>("IWeakReference", IID_IWEAKREFERENCE, takeIWeakReferenceFromAbi, viewIWeakReference)
     }
 
     public unsafe func vtbl(): IWeakReferenceVtbl {
@@ -67,13 +79,25 @@ public class IWeakReference <: InterfaceWrapperBase & ComInterface {
         if (hr != S_OK || raw.isNull()) {
             return None
         }
-        Some(descriptor.wrapOwned(raw))
+        Some(descriptor.takeFromAbi(raw))
     }
 }
 
 public class IWeakReferenceSource <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>, ownsReference!: Bool = false) {
-        super(raw, ownsReference: ownsReference)
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        super(raw, takeOwnership: takeOwnership)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IWeakReferenceSource {
+        IWeakReferenceSource(raw, takeOwnership: true)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IWeakReferenceSource {
+        IWeakReferenceSource(raw)
     }
 
     public static func iid(): GUID {
@@ -81,7 +105,7 @@ public class IWeakReferenceSource <: InterfaceWrapperBase & ComInterface {
     }
 
     public static func descriptor(): InterfaceDescriptor<IWeakReferenceSource> {
-        InterfaceDescriptor<IWeakReferenceSource>("IWeakReferenceSource", IID_IWEAKREFERENCESOURCE, wrapIWeakReferenceSourceOwned, wrapIWeakReferenceSourceBorrowed)
+        InterfaceDescriptor<IWeakReferenceSource>("IWeakReferenceSource", IID_IWEAKREFERENCESOURCE, takeIWeakReferenceSourceFromAbi, viewIWeakReferenceSource)
     }
 
     public unsafe func vtbl(): IWeakReferenceSourceVtbl {
@@ -99,14 +123,14 @@ public class IWeakReferenceSource <: InterfaceWrapperBase & ComInterface {
         if (hr != S_OK || raw.isNull()) {
             return None
         }
-        Some(IWeakReference(raw, ownsReference: true))
+        Some(IWeakReference.fromAbiTake(raw))
     }
 }
 
 public interface WeakReferenceOwner {
     func weakReferenceIdentity(): CPointer<Unit>
     func weakReferenceIsAgileEnabled(): Bool
-    func weakReferenceQueryInterface(iid: GUID, ppvObject: CPointer<CPointer<Unit>>): Int32
+    func weakReferenceQueryInterface(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32
 }
 
 class WeakReferenceTearOff {
@@ -178,65 +202,65 @@ class WeakReferenceTearOff {
         CPointer<Unit>(unsafe { slotHandle.pointer + 1 })
     }
 
-    public func writeStrongReference(ppvObject: CPointer<CPointer<Unit>>): Int32 {
-        if (ppvObject.isNull()) {
+    public func writeStrongReference(resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        if (resultSlot.isNull()) {
             return E_POINTER
         }
         if (ownerRaw.isNull() || !alive) {
-            unsafe { ppvObject.write(CPointer<Unit>()) }
+            unsafe { resultSlot.write(CPointer<Unit>()) }
             return E_NOINTERFACE
         }
         addRefOwner()
-        unsafe { ppvObject.write(strongRaw()) }
+        unsafe { resultSlot.write(strongRaw()) }
         S_OK
     }
 
-    public func writeWeakReference(ppvObject: CPointer<CPointer<Unit>>): Int32 {
-        if (ppvObject.isNull()) {
+    public func writeWeakReference(resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        if (resultSlot.isNull()) {
             return E_POINTER
         }
         addWeakRef()
-        unsafe { ppvObject.write(weakRaw()) }
+        unsafe { resultSlot.write(weakRaw()) }
         S_OK
     }
 
-    public func queryStrong(iidPtr: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    public func queryStrong(iidPtr: CPointer<GUID>, resultSlot: CPointer<CPointer<Unit>>): Int32 {
         unsafe {
-            if (ppvObject.isNull()) {
+            if (resultSlot.isNull()) {
                 return E_POINTER
             }
             if (iidPtr.isNull()) {
-                ppvObject.write(CPointer<Unit>())
+                resultSlot.write(CPointer<Unit>())
                 return E_POINTER
             }
             let iid = iidPtr.read()
             if (iid == IID_IWEAKREFERENCESOURCE) {
-                return writeStrongReference(ppvObject)
+                return writeStrongReference(resultSlot)
             }
-            queryOwner(iid, ppvObject)
+            queryOwner(iid, resultSlot)
         }
     }
 
-    public func queryWeak(iidPtr: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    public func queryWeak(iidPtr: CPointer<GUID>, resultSlot: CPointer<CPointer<Unit>>): Int32 {
         unsafe {
-            if (ppvObject.isNull()) {
+            if (resultSlot.isNull()) {
                 return E_POINTER
             }
             if (iidPtr.isNull()) {
-                ppvObject.write(CPointer<Unit>())
+                resultSlot.write(CPointer<Unit>())
                 return E_POINTER
             }
 
             let iid = iidPtr.read()
             if (iid == IID_IWEAKREFERENCE || iid == IID_IUNKNOWN || iid == IID_IAGILEOBJECT) {
-                return writeWeakReference(ppvObject)
+                return writeWeakReference(resultSlot)
             }
 
             if (iid == IID_IMARSHAL && ownerRaw.isNotNull()) {
-                return cloneWeakMarshaler(ppvObject)
+                return cloneWeakMarshaler(resultSlot)
             }
 
-            ppvObject.write(CPointer<Unit>())
+            resultSlot.write(CPointer<Unit>())
             E_NOINTERFACE
         }
     }
@@ -258,20 +282,20 @@ class WeakReferenceTearOff {
         remaining
     }
 
-    public func resolve(iidPtr: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    public func resolve(iidPtr: CPointer<GUID>, resultSlot: CPointer<CPointer<Unit>>): Int32 {
         unsafe {
-            if (ppvObject.isNull()) {
+            if (resultSlot.isNull()) {
                 return E_POINTER
             }
             if (iidPtr.isNull()) {
-                ppvObject.write(CPointer<Unit>())
+                resultSlot.write(CPointer<Unit>())
                 return E_POINTER
             }
             if (ownerRaw.isNull() || !alive) {
-                ppvObject.write(CPointer<Unit>())
+                resultSlot.write(CPointer<Unit>())
                 return S_OK
             }
-            queryOwner(iidPtr.read(), ppvObject)
+            queryOwner(iidPtr.read(), resultSlot)
         }
     }
 
@@ -304,24 +328,24 @@ class WeakReferenceTearOff {
         }
     }
 
-    private func queryOwner(iid: GUID, ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    private func queryOwner(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {
         if (ownerRaw.isNull() || !alive) {
-            unsafe { ppvObject.write(CPointer<Unit>()) }
+            unsafe { resultSlot.write(CPointer<Unit>()) }
             return E_NOINTERFACE
         }
         var iidCopy = iid
         unsafe {
             let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(ownerRaw).read()
-            vtblPtr.read().QueryInterface(ownerRaw, CPointer<GUID>(inout iidCopy), ppvObject)
+            vtblPtr.read().QueryInterface(ownerRaw, CPointer<GUID>(inout iidCopy), resultSlot)
         }
     }
 
-    private func cloneWeakMarshaler(ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    private func cloneWeakMarshaler(resultSlot: CPointer<CPointer<Unit>>): Int32 {
         match (ensureWeakMarshaler()) {
             case Some(marshaler) =>
-                cloneMarshaler(marshaler, ppvObject)
+                cloneMarshaler(marshaler, resultSlot)
             case None =>
-                unsafe { ppvObject.write(CPointer<Unit>()) }
+                unsafe { resultSlot.write(CPointer<Unit>()) }
                 E_NOINTERFACE
         }
     }
@@ -368,11 +392,11 @@ class WeakReferenceTearOff {
     }
 }
 
-func lookupWeakReferenceTearOff(this_: CPointer<Unit>): Option<WeakReferenceTearOff> {
-    if (this_.isNull()) {
+func lookupWeakReferenceTearOff(instanceRaw: CPointer<Unit>): Option<WeakReferenceTearOff> {
+    if (instanceRaw.isNull()) {
         return None
     }
-    let lookupKey = unsafe { rootRegistryKeyFromRaw(this_) }
+    let lookupKey = unsafe { rootRegistryKeyFromRaw(instanceRaw) }
     match (comRegistryLookup(lookupKey)) {
         case Some(obj) =>
             match (obj) {
@@ -386,16 +410,16 @@ func lookupWeakReferenceTearOff(this_: CPointer<Unit>): Option<WeakReferenceTear
 
 @C
 public func weakReferenceSourceQueryInterfaceThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     iid: CPointer<GUID>,
-    ppvObject: CPointer<CPointer<Unit>>
+    resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
-    match (lookupWeakReferenceTearOff(this_)) {
-        case Some(tearOff) => tearOff.queryStrong(iid, ppvObject)
+    match (lookupWeakReferenceTearOff(instanceRaw)) {
+        case Some(tearOff) => tearOff.queryStrong(iid, resultSlot)
         case None =>
             unsafe {
-                if (ppvObject.isNotNull()) {
-                    ppvObject.write(CPointer<Unit>())
+                if (resultSlot.isNotNull()) {
+                    resultSlot.write(CPointer<Unit>())
                 }
             }
             E_NOINTERFACE
@@ -403,16 +427,16 @@ public func weakReferenceSourceQueryInterfaceThunk(
 }
 
 @C
-public func weakReferenceSourceAddRefThunk(this_: CPointer<Unit>): UInt32 {
-    match (lookupWeakReferenceTearOff(this_)) {
+public func weakReferenceSourceAddRefThunk(instanceRaw: CPointer<Unit>): UInt32 {
+    match (lookupWeakReferenceTearOff(instanceRaw)) {
         case Some(tearOff) => tearOff.addRefOwner()
         case None => 0u32
     }
 }
 
 @C
-public func weakReferenceSourceReleaseThunk(this_: CPointer<Unit>): UInt32 {
-    match (lookupWeakReferenceTearOff(this_)) {
+public func weakReferenceSourceReleaseThunk(instanceRaw: CPointer<Unit>): UInt32 {
+    match (lookupWeakReferenceTearOff(instanceRaw)) {
         case Some(tearOff) => tearOff.releaseOwner()
         case None => 0u32
     }
@@ -420,15 +444,15 @@ public func weakReferenceSourceReleaseThunk(this_: CPointer<Unit>): UInt32 {
 
 @C
 public func weakReferenceSourceGetWeakReferenceThunk(
-    this_: CPointer<Unit>,
-    ppvObject: CPointer<CPointer<Unit>>
+    instanceRaw: CPointer<Unit>,
+    resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
-    match (lookupWeakReferenceTearOff(this_)) {
-        case Some(tearOff) => tearOff.writeWeakReference(ppvObject)
+    match (lookupWeakReferenceTearOff(instanceRaw)) {
+        case Some(tearOff) => tearOff.writeWeakReference(resultSlot)
         case None =>
             unsafe {
-                if (ppvObject.isNotNull()) {
-                    ppvObject.write(CPointer<Unit>())
+                if (resultSlot.isNotNull()) {
+                    resultSlot.write(CPointer<Unit>())
                 }
             }
             E_NOINTERFACE
@@ -437,16 +461,16 @@ public func weakReferenceSourceGetWeakReferenceThunk(
 
 @C
 public func weakReferenceQueryInterfaceThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     iid: CPointer<GUID>,
-    ppvObject: CPointer<CPointer<Unit>>
+    resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
-    match (lookupWeakReferenceTearOff(this_)) {
-        case Some(tearOff) => tearOff.queryWeak(iid, ppvObject)
+    match (lookupWeakReferenceTearOff(instanceRaw)) {
+        case Some(tearOff) => tearOff.queryWeak(iid, resultSlot)
         case None =>
             unsafe {
-                if (ppvObject.isNotNull()) {
-                    ppvObject.write(CPointer<Unit>())
+                if (resultSlot.isNotNull()) {
+                    resultSlot.write(CPointer<Unit>())
                 }
             }
             E_NOINTERFACE
@@ -454,16 +478,16 @@ public func weakReferenceQueryInterfaceThunk(
 }
 
 @C
-public func weakReferenceAddRefThunk(this_: CPointer<Unit>): UInt32 {
-    match (lookupWeakReferenceTearOff(this_)) {
+public func weakReferenceAddRefThunk(instanceRaw: CPointer<Unit>): UInt32 {
+    match (lookupWeakReferenceTearOff(instanceRaw)) {
         case Some(tearOff) => tearOff.addWeakRef()
         case None => 0u32
     }
 }
 
 @C
-public func weakReferenceReleaseThunk(this_: CPointer<Unit>): UInt32 {
-    match (lookupWeakReferenceTearOff(this_)) {
+public func weakReferenceReleaseThunk(instanceRaw: CPointer<Unit>): UInt32 {
+    match (lookupWeakReferenceTearOff(instanceRaw)) {
         case Some(tearOff) => tearOff.releaseWeakRef()
         case None => 0u32
     }
@@ -471,16 +495,16 @@ public func weakReferenceReleaseThunk(this_: CPointer<Unit>): UInt32 {
 
 @C
 public func weakReferenceResolveThunk(
-    this_: CPointer<Unit>,
+    instanceRaw: CPointer<Unit>,
     iid: CPointer<GUID>,
-    ppvObject: CPointer<CPointer<Unit>>
+    resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
-    match (lookupWeakReferenceTearOff(this_)) {
-        case Some(tearOff) => tearOff.resolve(iid, ppvObject)
+    match (lookupWeakReferenceTearOff(instanceRaw)) {
+        case Some(tearOff) => tearOff.resolve(iid, resultSlot)
         case None =>
             unsafe {
-                if (ppvObject.isNotNull()) {
-                    ppvObject.write(CPointer<Unit>())
+                if (resultSlot.isNotNull()) {
+                    resultSlot.write(CPointer<Unit>())
                 }
             }
             E_NOINTERFACE
@@ -541,24 +565,24 @@ public class WeakRefCount {
         }
     }
 
-    public func writeWeakReferenceSource(ppvObject: CPointer<CPointer<Unit>>): Int32 {
+    public func writeWeakReferenceSource(resultSlot: CPointer<CPointer<Unit>>): Int32 {
         let value = ensureTearOff()
-        value.writeStrongReference(ppvObject)
+        value.writeStrongReference(resultSlot)
     }
 
-    public func writeObjectMarshaler(ppvObject: CPointer<CPointer<Unit>>): Int32 {
-        if (ppvObject.isNull()) {
+    public func writeObjectMarshaler(resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        if (resultSlot.isNull()) {
             return E_POINTER
         }
         if (raw.isNull()) {
-            unsafe { ppvObject.write(CPointer<Unit>()) }
+            unsafe { resultSlot.write(CPointer<Unit>()) }
             return E_NOINTERFACE
         }
         match (ensureObjectMarshaler()) {
             case Some(marshaler) =>
-                cloneMarshaler(marshaler, ppvObject)
+                cloneMarshaler(marshaler, resultSlot)
             case None =>
-                unsafe { ppvObject.write(CPointer<Unit>()) }
+                unsafe { resultSlot.write(CPointer<Unit>()) }
                 E_NOINTERFACE
         }
     }

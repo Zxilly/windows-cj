@@ -33,7 +33,7 @@ public class IPasswordCredential <: InterfaceWrapperBase & ComInterface & Runtim
         IPasswordCredential(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): IPasswordCredential {
+    public static func viewOf(raw: CPointer<Unit>): IPasswordCredential {
         IPasswordCredential(raw)
     }
 
@@ -151,7 +151,7 @@ public class PasswordCredential <: InterfaceWrapperBase & ComInterface & windows
         PasswordCredential(raw, ownsReference: true)
     }
 
-    public static func fromRawBorrowed(raw: CPointer<Unit>): PasswordCredential {
+    public static func viewOf(raw: CPointer<Unit>): PasswordCredential {
         PasswordCredential(raw)
     }
 
