@@ -2,7 +2,11 @@
 package windows_sys.UI.Xaml.Media.Imaging
 
 public import windows_sys.UI.Xaml.impl.BitmapCreateOptions
+public import windows_sys.UI.Xaml.impl.BitmapCreateOptions_IgnoreImageCache
+public import windows_sys.UI.Xaml.impl.BitmapCreateOptions_None
 public import windows_sys.UI.Xaml.impl.DecodePixelType
+public import windows_sys.UI.Xaml.impl.DecodePixelType_Logical
+public import windows_sys.UI.Xaml.impl.DecodePixelType_Physical
 public import windows_sys.UI.Xaml.impl.DownloadProgressEventHandler
 public import windows_sys.UI.Xaml.impl.IBitmapImage
 public import windows_sys.UI.Xaml.impl.IBitmapImage2
@@ -60,13 +64,9 @@ public import windows_sys.UI.Xaml.impl.IXamlRenderingBackgroundTaskFactoryVtbl
 public import windows_sys.UI.Xaml.impl.IXamlRenderingBackgroundTaskOverrides
 public import windows_sys.UI.Xaml.impl.IXamlRenderingBackgroundTaskOverridesVtbl
 public import windows_sys.UI.Xaml.impl.IXamlRenderingBackgroundTaskVtbl
-public import windows_sys.UI.Xaml.impl.IgnoreImageCache
-public import windows_sys.UI.Xaml.impl.InvalidFormat
-public import windows_sys.UI.Xaml.impl.Logical
-public import windows_sys.UI.Xaml.impl.NetworkError
-public import windows_sys.UI.Xaml.impl.None
-public import windows_sys.UI.Xaml.impl.Other
-public import windows_sys.UI.Xaml.impl.Physical
-public import windows_sys.UI.Xaml.impl.Success
 public import windows_sys.UI.Xaml.impl.SvgImageSourceLoadStatus
+public import windows_sys.UI.Xaml.impl.SvgImageSourceLoadStatus_InvalidFormat
+public import windows_sys.UI.Xaml.impl.SvgImageSourceLoadStatus_NetworkError
+public import windows_sys.UI.Xaml.impl.SvgImageSourceLoadStatus_Other
+public import windows_sys.UI.Xaml.impl.SvgImageSourceLoadStatus_Success
 

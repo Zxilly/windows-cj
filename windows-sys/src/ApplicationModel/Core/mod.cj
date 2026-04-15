@@ -2,6 +2,10 @@
 package windows_sys.ApplicationModel.Core
 
 public import windows_sys.impl.AppRestartFailureReason
+public import windows_sys.impl.AppRestartFailureReason_InvalidUser
+public import windows_sys.impl.AppRestartFailureReason_NotInForeground
+public import windows_sys.impl.AppRestartFailureReason_Other
+public import windows_sys.impl.AppRestartFailureReason_RestartPending
 public import windows_sys.impl.IAppListEntry
 public import windows_sys.impl.IAppListEntry2
 public import windows_sys.impl.IAppListEntry2Vtbl
@@ -50,8 +54,4 @@ public import windows_sys.impl.IUnhandledError
 public import windows_sys.impl.IUnhandledErrorDetectedEventArgs
 public import windows_sys.impl.IUnhandledErrorDetectedEventArgsVtbl
 public import windows_sys.impl.IUnhandledErrorVtbl
-public import windows_sys.impl.InvalidUser
-public import windows_sys.impl.NotInForeground
-public import windows_sys.impl.Other
-public import windows_sys.impl.RestartPending
 

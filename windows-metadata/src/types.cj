@@ -273,6 +273,17 @@ public class MethodSignature {
     public init() {}
 }
 
+// Array length/size metadata attached to a parameter via winmd attributes.
+//   HintFixed(n)          — NativeArrayInfoAttribute with CountConst=n
+//   HintRelativeLen(i)    — NativeArrayInfoAttribute with CountParamIndex=i
+//   HintRelativeBytes(i)  — MemorySizeAttribute with BytesParamIndex=i
+public enum ParamArrayHint {
+    | HintNone
+    | HintFixed(Int32)
+    | HintRelativeLen(Int16)
+    | HintRelativeBytes(Int16)
+}
+
 // TypeCategory classifies a TypeDef
 public enum TypeCategory {
     | Interface

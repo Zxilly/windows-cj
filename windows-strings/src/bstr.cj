@@ -181,20 +181,20 @@ func closeBstrState(
 /// BSTR owns an optional length-prefixed UTF-16 allocation.
 public class BSTR <: Resource & Equatable<BSTR> & ToString {
     private var ptr: CPointer<UInt16> = CPointer<UInt16>()
-    private var ownsStorage: Bool = false
+    private var storageOwned: Bool = false
     private var closed: Bool = false
-    
+
     public init() {}
 
     public init(s: String) {
         let units = encodeUtf16Units(s)
         ptr = allocateBstr(units)
-        ownsStorage = ptr.isNotNull()
+        storageOwned = ptr.isNotNull()
     }
 
     init(ptr: CPointer<UInt16>, ownsStorage: Bool) {
         this.ptr = ptr
-        this.ownsStorage = ownsStorage
+        this.storageOwned = ownsStorage
     }
 
     func currentLength(): Int64 {
@@ -273,7 +273,7 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
     }
 
     public func ownsStorage(): Bool {
-        ownsStorage && !closed
+        storageOwned && !closed
     }
 
     public func asPtr(): CPointer<UInt16> {
@@ -306,7 +306,7 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
     /// After this call the BSTR instance is invalidated.
     public func intoRaw(): CPointer<UInt16> {
         let raw = asPtr()
-        ownsStorage = false
+        storageOwned = false
         ptr = CPointer<UInt16>()
         closed = true
         raw
@@ -317,9 +317,9 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
     }
 
     ~init() {
-        let (nextPtr, nextOwnsStorage, nextClosed) = closeBstrState(ptr, ownsStorage, closed)
+        let (nextPtr, nextOwnsStorage, nextClosed) = closeBstrState(ptr, storageOwned, closed)
         ptr = nextPtr
-        ownsStorage = nextOwnsStorage
+        storageOwned = nextOwnsStorage
         closed = nextClosed
     }
 
@@ -328,9 +328,9 @@ public class BSTR <: Resource & Equatable<BSTR> & ToString {
     }
 
     public func close(): Unit {
-        let (nextPtr, nextOwnsStorage, nextClosed) = closeBstrState(ptr, ownsStorage, closed)
+        let (nextPtr, nextOwnsStorage, nextClosed) = closeBstrState(ptr, storageOwned, closed)
         ptr = nextPtr
-        ownsStorage = nextOwnsStorage
+        storageOwned = nextOwnsStorage
         closed = nextClosed
     }
 

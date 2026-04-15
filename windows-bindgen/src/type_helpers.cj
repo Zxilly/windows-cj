@@ -57,6 +57,7 @@ func resolveTypeName(tn: TypeName): String {
     // Well-known types from System namespace
     if (ns == "System") {
         if (name == "Guid") {
+            useSupportSymbol("windows_interface", "GUID")
             return "GUID"
         }
         if (name == "Void") {
@@ -771,7 +772,7 @@ func qualifiedRuntimeName(tn: TypeName): String {
 
 func projectedTypePath(namespace: String, name: String): String {
     if (namespace.isEmpty()) {
-        return name
+        return escapeSourceIdentifier(name)
     }
 
     match (bindgenContext()) {
@@ -781,10 +782,10 @@ func projectedTypePath(namespace: String, name: String): String {
                 if (current.isEmpty() || current == namespace || context
                     .config
                     .sharesGeneratedPackage(current, namespace)) {
-                    return name
+                    return escapeSourceIdentifier(name)
                 }
 
-                return "${packageTypeQualifier(context.config, namespace)}.${name}"
+                return "${packageTypeQualifier(context.config, namespace)}.${escapeSourceIdentifier(name)}"
             }
 
             if (context.references.containsType(namespace, name)) {
@@ -792,11 +793,11 @@ func projectedTypePath(namespace: String, name: String): String {
             }
 
             if (current.isEmpty() || current == namespace || context.config.sharesGeneratedPackage(current, namespace)) {
-                return name
+                return escapeSourceIdentifier(name)
             }
 
-            return "${packageTypeQualifier(context.config, namespace)}.${name}"
-        case None => return name
+            return "${packageTypeQualifier(context.config, namespace)}.${escapeSourceIdentifier(name)}"
+        case None => return escapeSourceIdentifier(name)
     }
 }
 

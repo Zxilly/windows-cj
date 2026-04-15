@@ -2,9 +2,10 @@
 package windows_sys.UI.Xaml.Data
 
 public import windows_sys.UI.Xaml.impl.BindingMode
+public import windows_sys.UI.Xaml.impl.BindingMode_OneTime
+public import windows_sys.UI.Xaml.impl.BindingMode_OneWay
+public import windows_sys.UI.Xaml.impl.BindingMode_TwoWay
 public import windows_sys.UI.Xaml.impl.CurrentChangingEventHandler
-public import windows_sys.UI.Xaml.impl.Default
-public import windows_sys.UI.Xaml.impl.Explicit
 public import windows_sys.UI.Xaml.impl.IBinding
 public import windows_sys.UI.Xaml.impl.IBinding2
 public import windows_sys.UI.Xaml.impl.IBinding2Vtbl
@@ -68,15 +69,14 @@ public import windows_sys.UI.Xaml.impl.ISupportIncrementalLoadingVtbl
 public import windows_sys.UI.Xaml.impl.IValueConverter
 public import windows_sys.UI.Xaml.impl.IValueConverterVtbl
 public import windows_sys.UI.Xaml.impl.LoadMoreItemsResult
-public import windows_sys.UI.Xaml.impl.LostFocus
-public import windows_sys.UI.Xaml.impl.None
-public import windows_sys.UI.Xaml.impl.OneTime
-public import windows_sys.UI.Xaml.impl.OneWay
-public import windows_sys.UI.Xaml.impl.PropertyChanged
 public import windows_sys.UI.Xaml.impl.PropertyChangedEventHandler
 public import windows_sys.UI.Xaml.impl.RelativeSourceMode
-public import windows_sys.UI.Xaml.impl.Self
-public import windows_sys.UI.Xaml.impl.TemplatedParent
-public import windows_sys.UI.Xaml.impl.TwoWay
+public import windows_sys.UI.Xaml.impl.RelativeSourceMode_None
+public import windows_sys.UI.Xaml.impl.RelativeSourceMode_Self
+public import windows_sys.UI.Xaml.impl.RelativeSourceMode_TemplatedParent
 public import windows_sys.UI.Xaml.impl.UpdateSourceTrigger
+public import windows_sys.UI.Xaml.impl.UpdateSourceTrigger_Default
+public import windows_sys.UI.Xaml.impl.UpdateSourceTrigger_Explicit
+public import windows_sys.UI.Xaml.impl.UpdateSourceTrigger_LostFocus
+public import windows_sys.UI.Xaml.impl.UpdateSourceTrigger_PropertyChanged
 

@@ -25,6 +25,17 @@ public func generateWinrtDelegate(
     let genericsArray = winmdBuildGenericArray(index, fileIdx, winmdRowGenericStart(index, fileIdx, row), winmdRowGenericEnd(index, fileIdx, row))
     let typeTags = typeAvailabilityTags(namespace, name, fileIdx, row, arches)
 
+    useSupportSymbol("windows_interface", "ComInterface")
+    useSupportSymbol("windows_interface", "InterfaceWrapperBase")
+    useSupportSymbol("windows_interface", "RuntimeName")
+    useSupportSymbol("windows_interface", "RuntimeType")
+    useSupportSymbol("windows_interface", "RuntimeTypeContract")
+    useSupportSymbol("windows_interface", "InterfaceDescriptor")
+    useSupportSymbol("windows_interface", "GUID")
+    useSupportSymbol("windows_interface", "IUnknownVtbl")
+    useSupportSymbol("windows_core", "RuntimeType")
+    useSupportSymbol("windows_polyfill", "HRESULT")
+
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
     w.writeLine("@C")

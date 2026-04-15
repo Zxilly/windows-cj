@@ -224,13 +224,15 @@ func sortFilterRules(values: ArrayList<FilterRule>): Unit {
 }
 
 func filterRuleLess(lhs: FilterRule, rhs: FilterRule): Bool {
+    // Exclude rules take priority over includes regardless of pattern length, so
+    // an `--exclude Windows.Foo` strips a previously-included `Windows.Foo.Bar`.
+    if (lhs.include != rhs.include) {
+        return !lhs.include && rhs.include
+    }
     let lhsLen = Int64(lhs.raw.toArray().size)
     let rhsLen = Int64(rhs.raw.toArray().size)
     if (lhsLen != rhsLen) {
         return lhsLen > rhsLen
-    }
-    if (lhs.include != rhs.include) {
-        return !lhs.include && rhs.include
     }
     return lhs.raw < rhs.raw
 }

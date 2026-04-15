@@ -211,27 +211,31 @@ func writeNamespacePrelude(
         case GenerationMode.HighLevel => w.writeLine("import std.collection.*")
         case GenerationMode.Sys => ()
     }
-    match (mode) {
-        case GenerationMode.HighLevel =>
-            w.writeLine("import windows_core.*")
-            w.writeLine("import windows_interface.*")
-            w.writeLine("import windows_polyfill.*")
-        case GenerationMode.Sys =>
-            w.writeLine("import windows_interface.*")
-            w.writeLine("import windows_result.*")
-            w.writeLine("import windows_polyfill.*")
+    for (pkg in supportPackagesForMode(mode)) {
+        let used = supportSymbolsFor(namespace, pkg)
+        if (!used.isEmpty()) {
+            w.writeLine("import ${pkg}.{${joinStrings(used, ", ")}}")
+        }
     }
     for (packageImport in packageImports) {
         w.writeLine("import ${packageImport} as ${importedPackageQualifier(packageImport)}")
     }
-    let foundationPkg = config.packageNameForNamespace("Windows.Win32.Foundation")
-    if (pkgName != foundationPkg) {
-        if (!containsPackageImport(packageImports, foundationPkg)) {
-            w.writeLine("import ${foundationPkg} as ${importedPackageQualifier(foundationPkg)}")
-        }
-        w.writeLine("import ${foundationPkg}.*")
-    }
     w.writeBlankLine()
+}
+
+func supportPackagesForMode(mode: GenerationMode): ArrayList<String> {
+    let result = ArrayList<String>()
+    match (mode) {
+        case GenerationMode.HighLevel =>
+            result.add("windows_core")
+            result.add("windows_interface")
+            result.add("windows_polyfill")
+        case GenerationMode.Sys =>
+            result.add("windows_interface")
+            result.add("windows_result")
+            result.add("windows_polyfill")
+    }
+    return result
 }
 
 func generateNamespaceProjection(
@@ -593,6 +597,13 @@ func collectCppInterfaceExports(
         return
     }
 
+    if (skipForSysGeneric(index, fileIdx, row)) {
+        return
+    }
+    if (isUnsupportedOnlyArchitecture(index.arches(TABLE_TYPE_DEF, fileIdx, row))) {
+        return
+    }
+
     let name = trimTick(index.typeDefName(fileIdx, row))
     addExportName(exports, "${name}Vtbl")
     addExportName(exports, name)
@@ -607,6 +618,9 @@ func collectHandleExports(
     if (!isHandleType(index, fileIdx, row)) {
         return
     }
+    if (isUnsupportedOnlyArchitecture(index.arches(TABLE_TYPE_DEF, fileIdx, row))) {
+        return
+    }
     addExportName(exports, trimTick(index.typeDefName(fileIdx, row)))
 }
 
@@ -619,6 +633,9 @@ func collectStructExports(
     exports: ArrayList<String>
 ): Unit {
     if (isHandleType(index, fileIdx, row)) {
+        return
+    }
+    if (isUnsupportedOnlyArchitecture(index.arches(TABLE_TYPE_DEF, fileIdx, row))) {
         return
     }
     let structSignature = buildStructSignature(index, fileIdx, row, name)
@@ -638,10 +655,24 @@ func collectStructExports(
         fieldRow += 1
     }
 
+    let parentArches = index.arches(TABLE_TYPE_DEF, fileIdx, row)
     let nestedRows = index.getNested(fileIdx, row)
     for (innerRow in nestedRows) {
         match (index.typeDefCategory(fileIdx, innerRow)) {
             case Struct =>
+                // Nested structs are reachable only through the parent's accessor
+                // methods, and may carry per-arch gates that the facade `public
+                // import` cannot conditionalise. Compute the EFFECTIVE arches —
+                // inherited from the parent when the nested row carries none —
+                // and skip exporting if it would not be visible on every arch.
+                let inherited = inheritArches(index.arches(TABLE_TYPE_DEF, fileIdx, innerRow), parentArches)
+                if (isUnsupportedOnlyArchitecture(inherited)) {
+                    continue
+                }
+                let mask = parseInt64OrZero(inherited)
+                if (mask > 0 && mask != 7 && mask != 6) {
+                    continue
+                }
                 let nestedName = "${name}_${nestedLeafName(index.typeDefName(fileIdx, innerRow))}"
                 collectStructExports(index, fileIdx, innerRow, namespace, nestedName, exports)
             case _ => ()
@@ -656,14 +687,15 @@ func collectEnumExports(
     namespace: String,
     exports: ArrayList<String>
 ): Unit {
-    let name = trimTick(index.typeDefName(fileIdx, row))
-    addExportName(exports, name)
+    let rawEnumName = trimTick(index.typeDefName(fileIdx, row))
+    addExportName(exports, rawEnumName)
     let (fStart, fEnd) = index.typeDefFields(fileIdx, row)
     var fieldRow = fStart
     while (fieldRow < fEnd) {
         let fieldFlags = index.fieldFlags(fileIdx, fieldRow)
         if (fieldFlags.contains(FieldAttributes.Literal)) {
-            addExportName(exports, projectedConstantName(index, index.fieldName(fileIdx, fieldRow), namespace))
+            let qualifiedName = "${rawEnumName}_${index.fieldName(fileIdx, fieldRow)}"
+            addExportName(exports, projectedConstantName(index, qualifiedName, namespace))
         }
         fieldRow += 1
     }
@@ -678,6 +710,12 @@ func collectDelegateExports(
 ): Unit {
     let name = trimTick(index.typeDefName(fileIdx, row))
     if (!shouldEmitDelegateRow(index, namespace, name, fileIdx, row)) {
+        return
+    }
+    if (skipForSysGeneric(index, fileIdx, row)) {
+        return
+    }
+    if (isUnsupportedOnlyArchitecture(index.arches(TABLE_TYPE_DEF, fileIdx, row))) {
         return
     }
     if (mergedDelegateAliasType(index, namespace, name, fileIdx, row).isEmpty()) {

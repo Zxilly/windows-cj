@@ -2,7 +2,13 @@
 package windows_sys.Globalization
 
 public import windows_sys.impl.DayOfWeek
-public import windows_sys.impl.Friday
+public import windows_sys.impl.DayOfWeek_Friday
+public import windows_sys.impl.DayOfWeek_Monday
+public import windows_sys.impl.DayOfWeek_Saturday
+public import windows_sys.impl.DayOfWeek_Sunday
+public import windows_sys.impl.DayOfWeek_Thursday
+public import windows_sys.impl.DayOfWeek_Tuesday
+public import windows_sys.impl.DayOfWeek_Wednesday
 public import windows_sys.impl.GlobalizationJapanesePhoneticAnalyzerContract
 public import windows_sys.impl.IApplicationLanguagesStatics
 public import windows_sys.impl.IApplicationLanguagesStatics2
@@ -65,14 +71,8 @@ public import windows_sys.impl.INumeralSystemIdentifiersStaticsVtbl
 public import windows_sys.impl.ITimeZoneOnCalendar
 public import windows_sys.impl.ITimeZoneOnCalendarVtbl
 public import windows_sys.impl.LanguageLayoutDirection
-public import windows_sys.impl.Ltr
-public import windows_sys.impl.Monday
-public import windows_sys.impl.Rtl
-public import windows_sys.impl.Saturday
-public import windows_sys.impl.Sunday
-public import windows_sys.impl.Thursday
-public import windows_sys.impl.TtbLtr
-public import windows_sys.impl.TtbRtl
-public import windows_sys.impl.Tuesday
-public import windows_sys.impl.Wednesday
+public import windows_sys.impl.LanguageLayoutDirection_Ltr
+public import windows_sys.impl.LanguageLayoutDirection_Rtl
+public import windows_sys.impl.LanguageLayoutDirection_TtbLtr
+public import windows_sys.impl.LanguageLayoutDirection_TtbRtl
 

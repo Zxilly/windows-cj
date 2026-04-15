@@ -14,7 +14,8 @@ public func generateEnum(
     row: Int64,
     namespace: String
 ): Unit {
-    let name = escapeSourceIdentifier(trimTick(index.typeDefName(fileIdx, row)))
+    let rawName = trimTick(index.typeDefName(fileIdx, row))
+    let name = escapeSourceIdentifier(rawName)
     let (fStart, fEnd) = index.typeDefFields(fileIdx, row)
     let underlyingType = resolveUnderlyingType(index, fileIdx, row)
 
@@ -73,7 +74,13 @@ public func generateEnum(
     while (ci < fEnd) {
         let fieldFlags = index.fieldFlags(fileIdx, ci)
         if (fieldFlags.contains(FieldAttributes.Literal)) {
-            let constName = projectedConstantName(index, index.fieldName(fileIdx, ci), namespace)
+            let variantName = index.fieldName(fileIdx, ci)
+            // Namespace enum variants under the enum type to avoid name collisions
+            // between independent enums that share common variant labels (None,
+            // Default, Success, Error, Canceled, etc.). Use the unescaped enum
+            // name as prefix so sanitizeIdentifier does not double-escape.
+            let qualifiedName = "${rawName}_${variantName}"
+            let constName = projectedConstantName(index, qualifiedName, namespace)
             match (readFieldConstantLiteral(index, fileIdx, ci)) {
                 case Some((_, constValue)) =>
                     let rawValue = stripTypeSuffix(constValue)

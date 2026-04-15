@@ -66,3 +66,19 @@ public func hrResultValue<T>(hr: HRESULT, value: T): T {
     hrResultVoid(hr)
     return value
 }
+
+// E_NOINTERFACE (0x80004002) — QueryInterface returns this when the requested
+// interface is not implemented. Treat as "not found" rather than an error.
+public let E_NOINTERFACE: HRESULT = -2147467262i32
+
+// hrQueryOptional bridges QueryInterface results: returns None on E_NOINTERFACE,
+// throws on any other failure, returns Some(value) on success.
+public func hrQueryOptional<T>(hr: HRESULT, value: T): Option<T> {
+    if (hr == E_NOINTERFACE) {
+        return None<T>
+    }
+    if (hrFailed(hr)) {
+        throw HResultException(hr)
+    }
+    return Some(value)
+}

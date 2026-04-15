@@ -30,6 +30,11 @@ public func generateFunctions(
             while (mi < mEnd) {
                 let flags = index.methodDefFlags(fileIdx, mi)
                 if (flags.contains(MethodAttributes.Static) && flags.contains(MethodAttributes.Public)) {
+                    let methodArches = index.arches(TABLE_METHOD_DEF, fileIdx, mi)
+                    if (isUnsupportedOnlyArchitecture(methodArches)) {
+                        mi += 1
+                        continue
+                    }
                     match (index.methodDefImplMap(fileIdx, mi)) {
                         case Some((pinvoke, _, moduleName)) =>
                             let missing = missingMethodDependencies(index, fileIdx, mi, Array<MetadataType>(0, {_ => MetadataType.Void}))
@@ -39,7 +44,10 @@ public func generateFunctions(
                                 continue
                             }
                             let cc = callingConventionAnnotation(pinvoke)
-                            let condition = availabilityCondition(moduleToFeature(moduleName), itemAvailabilityTags(TABLE_METHOD_DEF, fileIdx, mi))
+                            let methodTags = mergeMethodAvailabilityTags(
+                                itemAvailabilityTags(TABLE_METHOD_DEF, fileIdx, mi),
+                                architectureCfgTags(index.arches(TABLE_METHOD_DEF, fileIdx, mi)))
+                            let condition = availabilityCondition(moduleToFeature(moduleName), methodTags)
                             let key = functionGroupKey(moduleName, cc, condition)
                             if (!groups.contains(key)) {
                                 groups[key] = ArrayList<Int64>()
@@ -130,6 +138,8 @@ func writeForeignFunc(
         w.writeLine("@FastNative")
     }
 
+    writeArrayHintAnnotations(w, index, fileIdx, methodRow, sig)
+    writePInvokeHints(w, index, fileIdx, methodRow)
     let paramNames = methodParamNames(index, fileIdx, methodRow, sig)
     let params = methodParamDecls(paramNames, sig, true)
     let returnType = cppType(sig.returnType)
@@ -139,6 +149,94 @@ func writeForeignFunc(
         w.writeLine("func ${foreignName}(${paramStr}): Unit")
     } else {
         w.writeLine("func ${foreignName}(${paramStr}): ${returnType}")
+    }
+}
+
+// Emit doc comments that surface per-param metadata which the sys-layer
+// signature alone cannot express: array length hints, Optional/Reserved
+// markers. High-level wrappers can use the same sources later.
+func writeArrayHintAnnotations(
+    w: CodeWriter,
+    index: TypeIndex,
+    fileIdx: Int64,
+    methodRow: Int64,
+    sig: MethodSignature
+): Unit {
+    let (pStart, pEnd) = index.methodDefParams(fileIdx, methodRow)
+    var paramRow = pStart
+    while (paramRow < pEnd) {
+        let seq = Int64(index.paramSequence(fileIdx, paramRow))
+        if (seq > 0) {
+            let paramName = index.paramName(fileIdx, paramRow)
+            let paramLabel = if (paramName.isEmpty()) { "arg${seq}" } else { paramName }
+            let hints = ArrayList<String>()
+            match (index.paramArrayHint(fileIdx, paramRow)) {
+                case HintNone => ()
+                case hint => hints.add(formatArrayHint(hint))
+            }
+            if (index.paramIsOptional(fileIdx, paramRow)) {
+                hints.add("optional")
+            }
+            if (index.paramIsReserved(fileIdx, paramRow)) {
+                hints.add("reserved")
+            }
+            if (!hints.isEmpty()) {
+                w.writeLine("// param-hint: ${paramLabel} ${joinStrings(hints, " ")}")
+            }
+        }
+        paramRow += 1
+    }
+}
+
+// Surface PInvoke metadata that the foreign-func declaration alone drops
+// (SetLastError requires GetLastError immediately after the call; toolchain
+// limitations may hide calling conventions). Comment-only — read by reviewers
+// or future high-level wrappers.
+func writePInvokeHints(w: CodeWriter, index: TypeIndex, fileIdx: Int64, methodRow: Int64): Unit {
+    match (index.methodDefImplMap(fileIdx, methodRow)) {
+        case Some((flags, _, _)) =>
+            let parts = ArrayList<String>()
+            if (flags.contains(PInvokeAttributes.SupportsLastError)) {
+                parts.add("SetLastError")
+            }
+            if (flags.contains(PInvokeAttributes.CallConvCdecl)) {
+                parts.add("cc=cdecl")
+            } else if (flags.contains(PInvokeAttributes.CallConvFastcall)) {
+                parts.add("cc=fastcall")
+            }
+            if (!parts.isEmpty()) {
+                w.writeLine("// pinvoke-hint: ${joinStrings(parts, " ")}")
+            }
+        case None => ()
+    }
+}
+
+func mergeMethodAvailabilityTags(first: ArrayList<String>, second: ArrayList<String>): ArrayList<String> {
+    let result = ArrayList<String>()
+    for (v in first) {
+        result.add(v)
+    }
+    for (v in second) {
+        var seen = false
+        for (existing in result) {
+            if (existing == v) {
+                seen = true
+                break
+            }
+        }
+        if (!seen) {
+            result.add(v)
+        }
+    }
+    return result
+}
+
+func formatArrayHint(hint: ParamArrayHint): String {
+    match (hint) {
+        case HintFixed(n) => "fixed=${n}"
+        case HintRelativeLen(i) => "len=param[${i}]"
+        case HintRelativeBytes(i) => "bytes=param[${i}]"
+        case HintNone => ""
     }
 }
 
@@ -209,6 +307,37 @@ func shouldEmitSysFnPtrAliases(): Bool {
         case Some(context) => context.config.sysFnPtrs
         case None => false
     }
+}
+
+public func isSysOnlyMode(): Bool {
+    match (bindgenContext()) {
+        case Some(context) => context.config.generateSys && !context.config.generateHighLevel
+        case None => false
+    }
+}
+
+// Sys mode cannot project WinRT generic parameters; filter generic types out
+// of generation and export lists to keep the sys layer compilable.
+public func skipForSysGeneric(index: TypeIndex, fileIdx: Int64, row: Int64): Bool {
+    if (!isSysOnlyMode()) {
+        return false
+    }
+    let (gStart, gEnd) = index.typeDefGenericParams(fileIdx, row)
+    return gStart < gEnd
+}
+
+public func typeDefIsGeneric(index: TypeIndex, fileIdx: Int64, row: Int64): Bool {
+    let (gStart, gEnd) = index.typeDefGenericParams(fileIdx, row)
+    return gStart < gEnd
+}
+
+public func isTypeNameGeneric(index: TypeIndex, namespace: String, name: String): Bool {
+    let candidates = index.get(namespace, name)
+    if (candidates.isEmpty()) {
+        return false
+    }
+    let (fi, ri) = candidates[0]
+    return typeDefIsGeneric(index, fi, ri)
 }
 
 func foreignMethodName(index: TypeIndex, fileIdx: Int64, methodRow: Int64): String {

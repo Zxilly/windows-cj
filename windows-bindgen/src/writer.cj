@@ -291,7 +291,14 @@ public func availabilityCondition(feature: String, tags: ArrayList<String>): Str
         for (tag in uniqueTags) {
             options.add(availabilityTagCondition(tag))
         }
-        conditions.add("(${joinStrings(options, " || ")})")
+        // Cangjie's @When rejects a top-level parenthesized expression, so only
+        // wrap the OR group when it will be combined with other && terms.
+        let orGroup = joinStrings(options, " || ")
+        if (conditions.isEmpty()) {
+            conditions.add(orGroup)
+        } else {
+            conditions.add("(${orGroup})")
+        }
     }
 
     if (conditions.isEmpty()) {
