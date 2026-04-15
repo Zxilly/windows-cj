@@ -31,6 +31,26 @@ public func generateWinrtInterface(
     let (mStart, mEnd) = index.typeDefMethods(fileIdx, row)
     let genericsArray = winmdBuildGenericArray(index, fileIdx, winmdRowGenericStart(index, fileIdx, row), winmdRowGenericEnd(index, fileIdx, row))
 
+    // Register support symbols this file emits so the prelude can compute a
+    // precise per-symbol import list rather than wildcard imports.
+    useSupportSymbol("windows_interface", "ComInterface")
+    useSupportSymbol("windows_interface", "RuntimeName")
+    useSupportSymbol("windows_interface", "RuntimeType")
+    useSupportSymbol("windows_interface", "RuntimeTypeContract")
+    useSupportSymbol("windows_interface", "InterfaceWrapperBase")
+    useSupportSymbol("windows_interface", "InterfaceDescriptor")
+    useSupportSymbol("windows_interface", "InterfaceDescriptorSchema")
+    useSupportSymbol("windows_interface", "InterfaceMethodSchema")
+    useSupportSymbol("windows_interface", "InterfaceParameterSchema")
+    useSupportSymbol("windows_interface", "InterfaceParameterBridgeKind")
+    useSupportSymbol("windows_interface", "DescriptorSchemaProvider")
+    useSupportSymbol("windows_interface", "GUID")
+    useSupportSymbol("windows_interface", "IInspectable")
+    useSupportSymbol("windows_interface", "IInspectableVtbl")
+    useSupportSymbol("windows_interface", "IUnknownVtbl")
+    useSupportSymbol("windows_core", "RuntimeType")
+    useSupportSymbol("windows_polyfill", "HRESULT")
+
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
     w.writeLine("@C")

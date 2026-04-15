@@ -717,6 +717,46 @@ public class TypeIndex {
         return findAttribute(table, fileIdx, row, attrName).isSome()
     }
 
+    // True when the parameter carries the ECMA `Optional` flag — high-level
+    // wrappers translate these into `Option<T>` to mirror the WinRT/Win32
+    // contract that nullable arguments may be omitted.
+    public func paramIsOptional(fileIdx: Int64, paramRow: Int64): Bool {
+        return paramFlags(fileIdx, paramRow).contains(ParamAttributes.Optional)
+    }
+
+    // True when the parameter carries the `ReservedAttribute` — callers must
+    // pass null/zero. High-level wrappers omit such parameters from the surface.
+    public func paramIsReserved(fileIdx: Int64, paramRow: Int64): Bool {
+        return findAttribute(TABLE_METHOD_PARAM, fileIdx, paramRow, "ReservedAttribute").isSome()
+    }
+
+    // Inspect NativeArrayInfoAttribute / MemorySizeAttribute on a parameter row.
+    // Returns HintNone when neither attribute is present.
+    public func paramArrayHint(fileIdx: Int64, paramRow: Int64): ParamArrayHint {
+        match (findAttribute(TABLE_METHOD_PARAM, fileIdx, paramRow, "NativeArrayInfoAttribute")) {
+            case Some(attrRow) =>
+                for ((_, value) in attributeValues(fileIdx, attrRow)) {
+                    match (value) {
+                        case MetadataValue.ValI16(v) => return ParamArrayHint.HintRelativeLen(v)
+                        case MetadataValue.ValI32(v) => return ParamArrayHint.HintFixed(v)
+                        case _ => ()
+                    }
+                }
+            case None => ()
+        }
+        match (findAttribute(TABLE_METHOD_PARAM, fileIdx, paramRow, "MemorySizeAttribute")) {
+            case Some(attrRow) =>
+                for ((_, value) in attributeValues(fileIdx, attrRow)) {
+                    match (value) {
+                        case MetadataValue.ValI16(v) => return ParamArrayHint.HintRelativeBytes(v)
+                        case _ => ()
+                    }
+                }
+            case None => ()
+        }
+        return ParamArrayHint.HintNone
+    }
+
     public func arches(table: Int64, fileIdx: Int64, row: Int64): String {
         match (findAttribute(table, fileIdx, row, "SupportedArchitectureAttribute")) {
             case Some(attrRow) =>

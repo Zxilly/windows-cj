@@ -52,7 +52,11 @@ public func missingMethodDependencies(
                 if (dependencyName.namespace.isEmpty() || dependencyName.namespace == "System") {
                     continue
                 }
-                if (context.typeMap.containsType(dependencyName) || context.references.containsType(dependencyName.namespace, trimTick(dependencyName.name))) {
+                if (context.references.containsType(dependencyName.namespace, trimTick(dependencyName.name))) {
+                    continue
+                }
+                if (context.typeMap.containsType(dependencyName) &&
+                    hasEmittableEntry(index, dependencyName)) {
                     continue
                 }
                 if (!containsTypeName(missing, dependencyName)) {
@@ -64,6 +68,22 @@ public func missingMethodDependencies(
 
     sortTypeNames(missing)
     return missing
+}
+
+// A type is emittable when at least one of its winmd rows targets a supported
+// architecture. Types with all rows marked unsupported are silently filtered at
+// emit time and must not be considered as satisfied dependencies.
+func hasEmittableEntry(index: TypeIndex, typeName: TypeName): Bool {
+    let candidates = index.get(typeName.namespace, trimTick(typeName.name))
+    if (candidates.isEmpty()) {
+        return false
+    }
+    for ((fi, ri) in candidates) {
+        if (!isUnsupportedOnlyArchitecture(index.arches(TABLE_TYPE_DEF, fi, ri))) {
+            return true
+        }
+    }
+    return false
 }
 
 public func warnMissingMethodDependencies(

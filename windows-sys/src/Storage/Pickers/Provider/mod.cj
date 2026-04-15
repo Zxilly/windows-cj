@@ -2,9 +2,13 @@
 package windows_sys.Storage.Pickers.Provider
 
 public import windows_sys.impl.AddFileResult
-public import windows_sys.impl.Added
-public import windows_sys.impl.AlreadyAdded
+public import windows_sys.impl.AddFileResult_Added
+public import windows_sys.impl.AddFileResult_AlreadyAdded
+public import windows_sys.impl.AddFileResult_NotAllowed
+public import windows_sys.impl.AddFileResult_Unavailable
 public import windows_sys.impl.FileSelectionMode
+public import windows_sys.impl.FileSelectionMode_Multiple
+public import windows_sys.impl.FileSelectionMode_Single
 public import windows_sys.impl.IFileOpenPickerUI
 public import windows_sys.impl.IFileOpenPickerUIVtbl
 public import windows_sys.impl.IFileRemovedEventArgs
@@ -23,10 +27,8 @@ public import windows_sys.impl.ITargetFileRequestDeferralVtbl
 public import windows_sys.impl.ITargetFileRequestVtbl
 public import windows_sys.impl.ITargetFileRequestedEventArgs
 public import windows_sys.impl.ITargetFileRequestedEventArgsVtbl
-public import windows_sys.impl.Multiple
-public import windows_sys.impl.NotAllowed
 public import windows_sys.impl.SetFileNameResult
-public import windows_sys.impl.Single
-public import windows_sys.impl.Succeeded
-public import windows_sys.impl.Unavailable
+public import windows_sys.impl.SetFileNameResult_NotAllowed
+public import windows_sys.impl.SetFileNameResult_Succeeded
+public import windows_sys.impl.SetFileNameResult_Unavailable
 

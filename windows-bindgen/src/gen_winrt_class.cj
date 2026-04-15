@@ -30,6 +30,19 @@ public func generateWinrtClass(
     let agile = isAgileType(index, fileIdx, row)
     let hasDefaultConstructor = hasDefaultActivatableConstructor(index, fileIdx, row)
 
+    useSupportSymbol("windows_interface", "ComInterface")
+    useSupportSymbol("windows_interface", "InterfaceWrapperBase")
+    useSupportSymbol("windows_interface", "RuntimeName")
+    useSupportSymbol("windows_interface", "RuntimeType")
+    useSupportSymbol("windows_interface", "RuntimeTypeContract")
+    useSupportSymbol("windows_interface", "InterfaceDescriptor")
+    useSupportSymbol("windows_interface", "GUID")
+    useSupportSymbol("windows_interface", "IActivationFactory")
+    useSupportSymbol("windows_interface", "IInspectable")
+    useSupportSymbol("windows_core", "RuntimeType")
+    useSupportSymbol("windows_polyfill", "FactoryCache")
+    useSupportSymbol("windows_polyfill", "HRESULT")
+
     match (defaultInterface) {
         case Some(defaultType) =>
             if (genericParams.isEmpty() && isAsyncInterfaceType(defaultType)) {

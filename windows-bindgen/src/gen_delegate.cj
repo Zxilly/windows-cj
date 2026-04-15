@@ -17,6 +17,10 @@ public func generateDelegate(
         return
     }
 
+    if (skipForSysGeneric(index, fileIdx, row)) {
+        return
+    }
+
     let mergedType = mergedDelegateAliasType(index, namespace, name, fileIdx, row)
     if (mergedType.isEmpty()) {
         return

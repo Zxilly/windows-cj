@@ -21,6 +21,10 @@ public func generateComInterface(
         return
     }
 
+    if (skipForSysGeneric(index, fileIdx, row)) {
+        return
+    }
+
     let feature = namespaceToFeature(namespace)
     let isWinRT = flags.contains(TypeAttributes.WindowsRuntime) || winmdExtendsIInspectable(index, fileIdx, row)
     let (mStart, mEnd) = index.typeDefMethods(fileIdx, row)
@@ -43,48 +47,58 @@ public func generateComInterface(
         }
     }
 
+    // Evaluate base interface substitution once (used by vtbl struct and descriptor).
+    let baseSubstitution = resolveBaseVtblSubstitution(index, baseInterface, isWinRT)
+
+    // Record the support-package symbols this interface emits so the prelude
+    // can produce a precise import list instead of a wildcard.
+    useSupportSymbol("windows_interface", "ComInterface")
+    useSupportSymbol("windows_interface", "GUID")
+    useSupportSymbol("windows_interface", "InterfaceDescriptor")
+    useSupportSymbol("windows_interface", "IUnknownVtbl")
+    useSupportSymbol("windows_interface", "queryInterfaceAs")
+    if (isWinRT) {
+        useSupportSymbol("windows_interface", "IInspectableVtbl")
+    }
+    if (baseSubstitution.vtblType == "IInspectableVtbl") {
+        useSupportSymbol("windows_interface", "IInspectableVtbl")
+    } else if (baseSubstitution.vtblType == "IUnknownVtbl") {
+        useSupportSymbol("windows_interface", "IUnknownVtbl")
+    }
+    if (isWinRT && !isSysOnlyMode()) {
+        useSupportSymbol("windows_interface", "RuntimeType")
+        useSupportSymbol("windows_core", "RuntimeType")
+        useSupportSymbol("windows_interface", "RuntimeTypeContract")
+    }
+
     // --- Generate Vtable @C struct ---
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
     w.writeLine("@C")
     w.writeBlock("public struct ${vtblName}", {=>
-        // Base vtable field
         if (name != "IUnknown") {
-            match (baseInterface) {
-                case Some(baseType) =>
-                    let baseName = trimTick(baseType.name)
-                    let baseTypePath = projectedTypePath(baseType.namespace, baseName)
-                    if (baseName == "IInspectable") {
-                        w.writeLine("public var base_: IInspectableVtbl = IInspectableVtbl()")
-                    } else {
-                        w.writeLine("public var base_: ${baseTypePath}Vtbl = ${baseTypePath}Vtbl()")
-                    }
-                case None =>
-                    if (isWinRT) {
-                        w.writeLine("public var base_: IInspectableVtbl = IInspectableVtbl()")
-                    } else {
-                        w.writeLine("public var base_: IUnknownVtbl = IUnknownVtbl()")
-                    }
-            }
+            w.writeLine("public var base_: ${baseSubstitution.vtblType} = ${baseSubstitution.vtblType}()")
         }
 
-        // Method slots
         var mi = mStart
         while (mi < mEnd) {
-            let methodName = methodNames[mi]
+            let rawMethodName = methodNames[mi]
             let sig = index.methodDefSignature(fileIdx, mi, genericsArray)
             let missing = missingMethodDependencies(index, fileIdx, mi, genericsArray)
             let methodTags = itemAvailabilityTags(TABLE_METHOD_DEF, fileIdx, mi)
             if (!methodTags.isEmpty()) {
                 writeAvailabilityForTags(w, "", methodTags)
             }
+            // Rename when the vtable slot identifier would shadow any type
+            // referenced in its signature (return type OR param types).
+            let returnType = cppType(sig.returnType)
+            let methodName = disambiguateMethodName(rawMethodName, methodSignatureText(sig, returnType))
             if (!missing.isEmpty()) {
                 warnMissingMethodDependencies(index, fileIdx, mi, missing)
                 // Degrade to opaque function-pointer slot; avoids unresolvable type references
                 w.writeLine("public var ${methodName}: CPointer<Unit> = CPointer<Unit>.null")
             } else {
-                let vtblEntry = generateVtblEntry(sig)
-                w.writeLine("public var ${methodName}: ${vtblEntry} = ${vtblEntryDefault(sig)}")
+                w.writeLine("public var ${methodName}: ${vtblSlotType(sig, returnType)} = ${vtblSlotDefault(sig)}")
             }
             mi += 1
         }
@@ -106,7 +120,7 @@ public func generateComInterface(
     // --- Generate interface class ---
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
-    let implInterfaces = if (isWinRT) {
+    let implInterfaces = if (isWinRT && !isSysOnlyMode()) {
         "ComInterface & Resource & windows_interface.RuntimeType & windows_core.RuntimeType"
     } else {
         "ComInterface & Resource"
@@ -139,7 +153,7 @@ public func generateComInterface(
         // static iid() - try to extract from GuidAttribute
         writeIidMethod(w, index, fileIdx, row, name)
 
-        if (isWinRT) {
+        if (isWinRT && !isSysOnlyMode()) {
             w.writeBlankLine()
             w.writeLine("public static func abiType(): String {")
             w.writeLine("    \"CPointer<Unit>\"")
@@ -155,11 +169,10 @@ public func generateComInterface(
         }
 
         w.writeBlankLine()
-        match (baseInterface) {
-            case Some(baseType) =>
-                let baseTypePath = projectedTypePath(baseType.namespace, trimTick(baseType.name))
+        match (baseSubstitution.parentIidExpr) {
+            case Some(parentIid) =>
                 w.writeLine("public static func descriptor(): InterfaceDescriptor<${name}> {")
-                w.writeLine("    return InterfaceDescriptor<${name}>(\"${name}\", ${name}.iid(), ${baseTypePath}.iid(), take${name}FromAbi, view${name})")
+                w.writeLine("    return InterfaceDescriptor<${name}>(\"${name}\", ${name}.iid(), ${parentIid}, take${name}FromAbi, view${name})")
                 w.writeLine("}")
             case None =>
                 w.writeLine("public static func descriptor(): InterfaceDescriptor<${name}> {")
@@ -320,25 +333,49 @@ func extendsIInspectable(index: TypeIndex, fileIdx: Int64, row: Int64): Bool {
     return false
 }
 
-// Generate a CFunc type signature for a vtable entry
-func generateVtblEntry(sig: MethodSignature): String {
-    var params = ArrayList<String>()
-    // First param is always the this pointer
-    params.add("CPointer<Unit>")
+struct BaseVtblSubstitution {
+    BaseVtblSubstitution(
+        public let vtblType: String,
+        public let parentIidExpr: Option<String>
+    ) {}
+}
 
+// In sys mode the generic parent interface / vtable is filtered out, so fall back
+// to IInspectableVtbl and omit the parent IID from the descriptor.
+func resolveBaseVtblSubstitution(
+    index: TypeIndex,
+    baseInterface: Option<TypeName>,
+    isWinRT: Bool
+): BaseVtblSubstitution {
+    match (baseInterface) {
+        case Some(baseType) =>
+            let baseLeaf = trimTick(baseType.name)
+            if (baseLeaf == "IInspectable" ||
+                (isSysOnlyMode() && isTypeNameGeneric(index, baseType.namespace, baseLeaf))) {
+                return BaseVtblSubstitution("IInspectableVtbl", None<String>)
+            }
+            let baseTypePath = projectedTypePath(baseType.namespace, baseLeaf)
+            return BaseVtblSubstitution("${baseTypePath}Vtbl", Some<String>("${baseTypePath}.iid()"))
+        case None =>
+            if (isWinRT) {
+                return BaseVtblSubstitution("IInspectableVtbl", None<String>)
+            }
+            return BaseVtblSubstitution("IUnknownVtbl", None<String>)
+    }
+}
+
+func vtblSlotType(sig: MethodSignature, returnType: String): String {
+    var params = ArrayList<String>()
+    params.add("CPointer<Unit>")
     var pi: Int64 = 0
     while (pi < Int64(sig.paramTypes.size)) {
         params.add(cppType(sig.paramTypes[pi]))
         pi += 1
     }
-
-    let returnType = cppType(sig.returnType)
-    let paramStr = joinStrings(params, ", ")
-    return "CFunc<(${paramStr}) -> ${returnType}>"
+    return "CFunc<(${joinStrings(params, ", ")}) -> ${returnType}>"
 }
 
-// Generate default value for a vtable CFunc entry
-func vtblEntryDefault(sig: MethodSignature): String {
+func vtblSlotDefault(sig: MethodSignature): String {
     var paramNames = ArrayList<String>()
     paramNames.add("_")
     var pi: Int64 = 0
@@ -346,25 +383,7 @@ func vtblEntryDefault(sig: MethodSignature): String {
         paramNames.add("_")
         pi += 1
     }
-    let paramStr = joinStrings(paramNames, ", ")
-    let returnType = cppType(sig.returnType)
-    // COM methods almost always return HRESULT (Int32); E_NOTIMPL = 0x80004001
-    if (returnType == "Int32") {
-        return "{ ${paramStr} => -2147467263i32 }"  // E_NOTIMPL
-    } else if (returnType == "UInt32") {
-        return "{ ${paramStr} => 0u32 }"
-    } else if (returnType == "Unit") {
-        return "{ ${paramStr} => () }"
-    } else if (returnType == "Int64") {
-        return "{ ${paramStr} => 0i64 }"
-    } else if (returnType == "UInt64") {
-        return "{ ${paramStr} => 0u64 }"
-    } else if (returnType.startsWith("CPointer")) {
-        return "{ ${paramStr} => ${returnType}() }"
-    } else {
-        // For any other return type fall back to Unit — vtable entries are called through unsafe code
-        return "{ ${paramStr} => () }"
-    }
+    return "{ ${joinStrings(paramNames, ", ")} => ${cppDefaultValue(sig.returnType)} }"
 }
 
 // Write the static iid() method by extracting GuidAttribute
@@ -441,24 +460,120 @@ func writeWrapperMethod(
     let paramStr = joinStrings(params, ", ")
     let argStr = joinStrings(argNames, ", ")
 
+    let wrapperName = disambiguateMethodName(methodName, methodSignatureText(sig, returnType))
+
     if (returnType == "Unit") {
-        w.writeLine("public unsafe func ${methodName}(${paramStr}): Unit {")
-        w.writeLine("    let v = vtbl()")
-        w.writeLine("    let liveRaw = asRaw()")
+        w.writeLine("public unsafe func ${wrapperName}(${paramStr}): Unit {")
+        w.writeLine("    let __vt = vtbl()")
+        w.writeLine("    let __liveRaw = asRaw()")
         if (argStr.isEmpty()) {
-            w.writeLine("    v.${methodName}(liveRaw)")
+            w.writeLine("    __vt.${wrapperName}(__liveRaw)")
         } else {
-            w.writeLine("    v.${methodName}(liveRaw, ${argStr})")
+            w.writeLine("    __vt.${wrapperName}(__liveRaw, ${argStr})")
         }
     } else {
-        w.writeLine("public unsafe func ${methodName}(${paramStr}): ${returnType} {")
-        w.writeLine("    let v = vtbl()")
-        w.writeLine("    let liveRaw = asRaw()")
+        w.writeLine("public unsafe func ${wrapperName}(${paramStr}): ${returnType} {")
+        w.writeLine("    let __vt = vtbl()")
+        w.writeLine("    let __liveRaw = asRaw()")
         if (argStr.isEmpty()) {
-            w.writeLine("    return v.${methodName}(liveRaw)")
+            w.writeLine("    return __vt.${wrapperName}(__liveRaw)")
         } else {
-            w.writeLine("    return v.${methodName}(liveRaw, ${argStr})")
+            w.writeLine("    return __vt.${wrapperName}(__liveRaw, ${argStr})")
         }
     }
     w.writeLine("}")
+}
+
+// Concatenate every type referenced in a MethodSignature into a single string
+// so identifier-shadowing checks can scan the whole surface in one pass.
+func methodSignatureText(sig: MethodSignature, returnType: String): String {
+    let parts = ArrayList<String>()
+    parts.add(returnType)
+    var pi: Int64 = 0
+    while (pi < Int64(sig.paramTypes.size)) {
+        parts.add(cppType(sig.paramTypes[pi]))
+        pi += 1
+    }
+    return joinStrings(parts, " ")
+}
+
+// Names of types referenced from every emitted COM class (iid, descriptor,
+// runtimeType bodies). A method whose identifier equals one of these would
+// shadow the imported type even when its own signature doesn't mention it.
+let alwaysShadowingNames_: HashSet<String> = HashSet<String>([
+    "GUID",
+    "InterfaceDescriptor",
+    "RuntimeTypeContract",
+    "ComInterface",
+    "Resource",
+    "InterfaceWrapperBase",
+    "IInspectable",
+    "IUnknown",
+    "IInspectableVtbl",
+    "IUnknownVtbl",
+    // COM class members emitted unconditionally by gen_com.cj.
+    "close",
+    "isClosed",
+    "asRaw",
+    "addRef",
+    "release",
+    "vtbl",
+    "iid",
+    "descriptor",
+    "fromAbiTake",
+    "viewOf",
+    "query"
+])
+
+// Rename when the method identifier shadows a type referenced anywhere in its
+// own signature (return type or parameter types) or matches an always-imported
+// type name that the surrounding class body references.
+func disambiguateMethodName(methodName: String, signatureText: String): String {
+    if (alwaysShadowingNames_.contains(methodName)) {
+        return "get_${methodName}"
+    }
+    if (methodName == signatureText || signatureContainsTypeReference(signatureText, methodName)) {
+        return "get_${methodName}"
+    }
+    return methodName
+}
+
+func signatureContainsTypeReference(signature: String, name: String): Bool {
+    let sigBytes = signature.toArray()
+    let nameBytes = name.toArray()
+    let n = Int64(sigBytes.size)
+    let m = Int64(nameBytes.size)
+    if (m == 0 || m > n) {
+        return false
+    }
+    var i: Int64 = 0
+    while (i + m <= n) {
+        var matches = true
+        var j: Int64 = 0
+        while (j < m) {
+            if (sigBytes[i + j] != nameBytes[j]) {
+                matches = false
+                break
+            }
+            j += 1
+        }
+        if (matches) {
+            let beforeOk = i == 0 || !isIdentifierChar(sigBytes[i - 1])
+            let afterIdx = i + m
+            let afterOk = afterIdx >= n || !isIdentifierChar(sigBytes[afterIdx])
+            if (beforeOk && afterOk) {
+                return true
+            }
+        }
+        i += 1
+    }
+    return false
+}
+
+func isIdentifierChar(b: Byte): Bool {
+    if (b == b'_') { return true }
+    if (b >= b'a' && b <= b'z') { return true }
+    if (b >= b'A' && b <= b'Z') { return true }
+    if (b >= b'0' && b <= b'9') { return true }
+    return false
 }

@@ -34,7 +34,8 @@ public func generateConstants(
                                 w.writeBlankLine()
                             }
                             writeAvailabilityForTags(w, feature, mergedTags)
-                                    w.writeLine("public let ${escapeSourceIdentifier(constName)}: GUID = GUID(${guidLiteral})")
+                            useSupportSymbol("windows_interface", "GUID")
+                            w.writeLine("public let ${escapeSourceIdentifier(constName)}: GUID = GUID(${guidLiteral})")
                             fi += 1
                             continue
                         case None => ()
@@ -50,6 +51,9 @@ public func generateConstants(
                             match (formatConstantValueLiteral(index, constValue, fieldType, constType)) {
                                 case Some(cjValue) =>
                                     writeAvailabilityForTags(w, feature, mergedTags)
+                                    if (cjType == "GUID") {
+                                        useSupportSymbol("windows_interface", "GUID")
+                                    }
                                     w.writeLine("public let ${escapeSourceIdentifier(constName)}: ${cjType} = ${cjValue}")
                                 case None =>
                                     eprintln("warning: skipping unsupported constant `${namespace}.${constName}`")

@@ -5,10 +5,32 @@ import windows_metadata.*
 
 var typeLayoutCache_: HashMap<String, (UInt32, UInt32)> = HashMap<String, (UInt32, UInt32)>()
 var missingTypeLayoutCache_: HashMap<String, Bool> = HashMap<String, Bool>()
+var structEmissionRegistry_: HashMap<String, HashSet<String>> = HashMap<String, HashSet<String>>()
 
 public func resetStructLayoutCaches(): Unit {
     typeLayoutCache_ = HashMap<String, (UInt32, UInt32)>()
     missingTypeLayoutCache_ = HashMap<String, Bool>()
+    structEmissionRegistry_ = HashMap<String, HashSet<String>>()
+}
+
+// Append an underscore when a struct field's identifier would shadow a type
+// referenced in its own type expression. Cangjie can't disambiguate the
+// member from the type when both share a name (e.g. `var GUID: GUID = GUID()`).
+func disambiguateFieldName(rawFieldName: String, fieldType: String): String {
+    if (rawFieldName == fieldType) {
+        return "${rawFieldName}_"
+    }
+    return rawFieldName
+}
+
+// Returns true if this is the first emission of (namespace, key); false on
+// duplicate (caller should skip). Used to suppress redundant nested struct
+// definitions that arise from sibling outer rows in winmd.
+func recordStructEmission(namespace: String, key: String): Bool {
+    if (!structEmissionRegistry_.contains(namespace)) {
+        structEmissionRegistry_[namespace] = HashSet<String>()
+    }
+    return structEmissionRegistry_[namespace].add(key)
 }
 
 // Generate @C struct definition
@@ -19,7 +41,7 @@ public func generateStruct(
     row: Int64,
     namespace: String
 ): Unit {
-    generateStructNamed(w, index, fileIdx, row, namespace, trimTick(index.typeDefName(fileIdx, row)))
+    generateStructNamed(w, index, fileIdx, row, namespace, trimTick(index.typeDefName(fileIdx, row)), "")
 }
 
 func generateStructNamed(
@@ -28,12 +50,14 @@ func generateStructNamed(
     fileIdx: Int64,
     row: Int64,
     namespace: String,
-    name: String
+    name: String,
+    parentArches: String
 ): Unit {
     let flags = index.typeDefFlags(fileIdx, row)
     let (fStart, fEnd) = index.typeDefFields(fileIdx, row)
     let fullName = qualifiedTypeName(namespace, name)
-    let arches = index.arches(TABLE_TYPE_DEF, fileIdx, row)
+    let ownArches = index.arches(TABLE_TYPE_DEF, fileIdx, row)
+    let arches = inheritArches(ownArches, parentArches)
 
     // Skip handle types (generated separately as type aliases)
     if (isHandleType(index, fileIdx, row)) {
@@ -51,11 +75,20 @@ func generateStructNamed(
         return
     }
 
+    // Outer dedup catches single-row duplicates, but the per-arch sibling walk
+    // we do below for nested types can revisit the same (namespace, name, arch)
+    // pair when winmd carries redundant outer entries. Track emissions per
+    // namespace to filter those.
+    let emissionKey = "${name}/${arches}/${structSignature}"
+    if (!recordStructEmission(namespace, emissionKey)) {
+        return
+    }
+
     w.writeBlankLine()
 
     // Add feature guard based on the outer namespace, including nested helper types
     let feature = namespaceToFeature(namespace)
-    let typeTags = mergedStructTypeAvailabilityTags(index, namespace, name, fileIdx, row, structSignature)
+    let typeTags = mergedStructTypeAvailabilityTags(index, namespace, name, fileIdx, row, structSignature, parentArches)
     writeAvailabilityForTags(w, feature, typeTags)
 
     // Packing annotation and packed-struct dispatch
@@ -104,10 +137,11 @@ func generateStructNamed(
                     continue
                 }
 
-                let fieldName = sanitizeIdentifier(index.fieldName(fileIdx, fi))
+                let rawFieldName = sanitizeIdentifier(index.fieldName(fileIdx, fi))
                 let fieldType = resolveNestedType(index.fieldType(fileIdx, fi), nestedNames)
                 let cjType = cppType(fieldType)
                 let defaultVal = cppDefaultValue(fieldType)
+                let fieldName = disambiguateFieldName(rawFieldName, cjType)
                 let fieldTags = itemAvailabilityTags(TABLE_FIELD, fileIdx, fi)
 
                 if (!fieldTags.isEmpty()) {
@@ -140,14 +174,52 @@ func generateStructNamed(
         ki += 1
     }
 
-    // Generate nested types with flattened names (OuterName_InnerName).
+    // Walk nested rows from each unique (signature, arches) outer combination
+    // so per-arch nested structs survive outer deduplication. Union signatures
+    // collapse arch variants into a single key, so include arches in the dedup
+    // to keep both arches' nested types reachable.
+    let visitedKeys = HashSet<String>()
+    visitedKeys.add("${structSignature}/${arches}")
+    emitOuterNestedTypes(w, index, fileIdx, row, namespace, name, arches)
+    match (bindgenContext()) {
+        case Some(context) =>
+            let entries = context.typeMap.entriesForType(namespace, name)
+            for (entry in entries) {
+                if (entry.fileIdx == fileIdx && entry.row == row) {
+                    continue
+                }
+                let entryArches = inheritArches(index.arches(TABLE_TYPE_DEF, entry.fileIdx, entry.row), parentArches)
+                if (isUnsupportedOnlyArchitecture(entryArches)) {
+                    continue
+                }
+                let entrySignature = buildStructSignature(index, entry.fileIdx, entry.row, name)
+                let entryKey = "${entrySignature}/${entryArches}"
+                if (visitedKeys.contains(entryKey)) {
+                    continue
+                }
+                visitedKeys.add(entryKey)
+                emitOuterNestedTypes(w, index, entry.fileIdx, entry.row, namespace, name, entryArches)
+            }
+        case None => ()
+    }
+}
+
+func emitOuterNestedTypes(
+    w: CodeWriter,
+    index: TypeIndex,
+    fileIdx: Int64,
+    row: Int64,
+    namespace: String,
+    outerName: String,
+    parentArches: String
+): Unit {
     let nestedRows = index.getNested(fileIdx, row)
     for (innerRow in nestedRows) {
         let innerCategory = index.typeDefCategory(fileIdx, innerRow)
         let innerLeaf = nestedLeafName(index.typeDefName(fileIdx, innerRow))
-        let nestedName = "${name}_${innerLeaf}"
+        let nestedName = "${outerName}_${innerLeaf}"
         match (innerCategory) {
-            case Struct => generateStructNamed(w, index, fileIdx, innerRow, namespace, nestedName)
+            case Struct => generateStructNamed(w, index, fileIdx, innerRow, namespace, nestedName, parentArches)
             case Enum => ()
             case _ => ()
         }
@@ -186,14 +258,15 @@ func mergedStructTypeAvailabilityTags(
     name: String,
     fileIdx: Int64,
     row: Int64,
-    structSignature: String
+    structSignature: String,
+    parentArches: String
 ): ArrayList<String> {
     let result = ArrayList<String>()
     match (bindgenContext()) {
         case Some(context) =>
             let entries = context.typeMap.entriesForType(namespace, name)
             for (entry in entries) {
-                let entryArches = index.arches(TABLE_TYPE_DEF, entry.fileIdx, entry.row)
+                let entryArches = inheritArches(index.arches(TABLE_TYPE_DEF, entry.fileIdx, entry.row), parentArches)
                 if (isUnsupportedOnlyArchitecture(entryArches)) {
                     continue
                 }
@@ -218,9 +291,24 @@ func mergedStructTypeAvailabilityTags(
     }
 
     if (result.isEmpty()) {
-        return typeAvailabilityTags(namespace, trimTick(index.typeDefName(fileIdx, row)), fileIdx, row, index.arches(TABLE_TYPE_DEF, fileIdx, row))
+        let effectiveArches = inheritArches(index.arches(TABLE_TYPE_DEF, fileIdx, row), parentArches)
+        return typeAvailabilityTags(namespace, trimTick(index.typeDefName(fileIdx, row)), fileIdx, row, effectiveArches)
     }
     return result
+}
+
+// Propagate parent's architecture constraint to a nested type that has none of its own.
+// If both have constraints, take the intersection. Empty/0/7 mask means "all architectures".
+func inheritArches(ownArches: String, parentArches: String): String {
+    let ownMask = parseInt64OrZero(ownArches)
+    let parentMask = parseInt64OrZero(parentArches)
+    let ownEffective = if (ownMask <= 0) { 7 } else { ownMask }
+    let parentEffective = if (parentMask <= 0) { 7 } else { parentMask }
+    let combined = ownEffective & parentEffective
+    if (combined == 7) {
+        return ""
+    }
+    return combined.toString()
 }
 
 func buildStructSignature(index: TypeIndex, fileIdx: Int64, row: Int64, name: String): String {
@@ -761,22 +849,94 @@ func writeUnionStructBody(
 
         match (index.fieldLayout(fileIdx, fi)) {
             case Some(offset) =>
-                let fieldType = resolveNestedType(index.fieldType(fileIdx, fi), nestedNames)
+                let rawFieldType = index.fieldType(fileIdx, fi)
+                let fieldType = resolveNestedType(rawFieldType, nestedNames)
                 let fieldCjType = cppType(fieldType)
                 if (canEmitUnionAccessor(fieldType, fieldCjType) && offset < unionSize) {
                     w.writeBlankLine()
-                    let fieldTags = itemAvailabilityTags(TABLE_FIELD, fileIdx, fi)
-                    if (!fieldTags.isEmpty()) {
-                        writeAvailabilityForTags(w, "", fieldTags)
-                    }
+                    let fieldTags = mergeAccessorCfgTags(
+                        itemAvailabilityTags(TABLE_FIELD, fileIdx, fi),
+                        nestedFieldArchTags(index, fileIdx, row, rawFieldType))
                     let accessorName = uniqueUnionAccessorName(accessorCounts, index.fieldName(fileIdx, fi))
-                    writeUnionAccessor(w, accessorName, fieldCjType, offset, unionRawElemType)
+                    writeUnionAccessor(w, accessorName, fieldCjType, offset, unionRawElemType, fieldTags)
                 }
             case None => ()
         }
 
         fi += 1
     }
+}
+
+// Resolve a union accessor's arch tag. The field type may reference a
+// `nested` typedef under the same parent (winmd `NestedClass` table); look it
+// up by inner name and inherit the parent's arch when the nested type
+// itself carries no SupportedArchitecture attribute.
+func nestedFieldArchTags(
+    index: TypeIndex,
+    parentFileIdx: Int64,
+    parentRow: Int64,
+    rawFieldType: MetadataType
+): ArrayList<String> {
+    let typeName = match (rawFieldType) {
+        case ValueName(tn) => tn
+        case ClassName(tn) => tn
+        case Union(tn) => tn
+        case Packed(inner, _) => return nestedFieldArchTags(index, parentFileIdx, parentRow, inner)
+        case _ => return ArrayList<String>()
+    }
+    let leaf = trimTick(typeName.name)
+    if (typeName.namespace.isEmpty()) {
+        for (innerRow in index.getNested(parentFileIdx, parentRow)) {
+            if (nestedLeafName(index.typeDefName(parentFileIdx, innerRow)) == leaf) {
+                let inherited = inheritArches(
+                    index.arches(TABLE_TYPE_DEF, parentFileIdx, innerRow),
+                    index.arches(TABLE_TYPE_DEF, parentFileIdx, parentRow))
+                return architectureCfgTags(inherited)
+            }
+        }
+        return ArrayList<String>()
+    }
+    return unionFieldTypeArchTags(index, rawFieldType)
+}
+
+// When a union slot points at a nested struct that is arch-gated, propagate
+// the arch tag onto the accessor itself; otherwise the accessor body would
+// reference a type that the current arch did not emit.
+func unionFieldTypeArchTags(index: TypeIndex, fieldType: MetadataType): ArrayList<String> {
+    let result = ArrayList<String>()
+    let typeName = match (fieldType) {
+        case ValueName(tn) => tn
+        case ClassName(tn) => tn
+        case Union(tn) => tn
+        case Packed(inner, _) => return unionFieldTypeArchTags(index, inner)
+        case _ => return result
+    }
+    let candidates = index.get(typeName.namespace, trimTick(typeName.name))
+    if (candidates.isEmpty()) {
+        return result
+    }
+    let (fi, ri) = candidates[0]
+    return architectureCfgTags(index.arches(TABLE_TYPE_DEF, fi, ri))
+}
+
+func mergeAccessorCfgTags(first: ArrayList<String>, second: ArrayList<String>): ArrayList<String> {
+    let result = ArrayList<String>()
+    for (value in first) {
+        result.add(value)
+    }
+    for (value in second) {
+        var seen = false
+        for (existing in result) {
+            if (existing == value) {
+                seen = true
+                break
+            }
+        }
+        if (!seen) {
+            result.add(value)
+        }
+    }
+    return result
 }
 
 func canEmitUnionAccessor(fieldType: MetadataType, fieldCjType: String): Bool {
@@ -914,8 +1074,12 @@ func writeUnionAccessorGeneric(
     w: CodeWriter,
     accessorName: String,
     fieldCjType: String,
-    offset: UInt32
+    offset: UInt32,
+    fieldTags: ArrayList<String>
 ): Unit {
+    if (!fieldTags.isEmpty()) {
+        writeAvailabilityForTags(w, "", fieldTags)
+    }
     w.writeBlock("public func ${accessorName}(): ${fieldCjType}", {=>
         w.writeLine("unsafe {")
         w.indent()
@@ -932,6 +1096,9 @@ func writeUnionAccessorGeneric(
         w.writeLine("}")
     })
     w.writeBlankLine()
+    if (!fieldTags.isEmpty()) {
+        writeAvailabilityForTags(w, "", fieldTags)
+    }
     w.writeBlock("public mut func set_${accessorName}(val: ${fieldCjType}): Unit", {=>
         w.writeLine("unsafe {")
         w.indent()
@@ -955,17 +1122,23 @@ func writeUnionAccessor(
     accessorName: String,
     fieldCjType: String,
     offset: UInt32,
-    unionRawElemType: String  // now always "UInt8", kept for signature compatibility
+    unionRawElemType: String,  // now always "UInt8", kept for signature compatibility
+    fieldTags: ArrayList<String>
 ): Unit {
     let polyfillFn = polyfillUnionAccessorName(fieldCjType)
     if (polyfillFn.isEmpty()) {
         // Fallback to generic pointer-cast for non-primitive types (nested struct, etc.)
-        writeUnionAccessorGeneric(w, accessorName, fieldCjType, offset)
+        writeUnionAccessorGeneric(w, accessorName, fieldCjType, offset, fieldTags)
         return
     }
 
     // Primitive types: use polyfill helpers
     let writeFn = polyfillWriteFnName(polyfillFn)
+    useSupportSymbol("windows_polyfill", polyfillFn)
+    useSupportSymbol("windows_polyfill", writeFn)
+    if (!fieldTags.isEmpty()) {
+        writeAvailabilityForTags(w, "", fieldTags)
+    }
     w.writeBlock("public func ${accessorName}(): ${fieldCjType}", {=>
         w.writeLine("unsafe {")
         w.indent()
@@ -976,6 +1149,9 @@ func writeUnionAccessor(
         w.writeLine("}")
     })
     w.writeBlankLine()
+    if (!fieldTags.isEmpty()) {
+        writeAvailabilityForTags(w, "", fieldTags)
+    }
     w.writeBlock("public mut func set_${accessorName}(val: ${fieldCjType}): Unit", {=>
         w.writeLine("unsafe {")
         w.indent()
@@ -1045,6 +1221,8 @@ func writePackedStructBody(
                     eprintln("warning: packed struct `${fullName}` field `${index.fieldName(fileIdx, fi)}` type `${fieldCjType}` not in polyfill; skipped")
                 } else {
                     let writeFn = polyfillWriteFnName(polyfillFn)
+                    useSupportSymbol("windows_polyfill", polyfillFn)
+                    useSupportSymbol("windows_polyfill", writeFn)
                     let accessorName = sanitizeIdentifier(lowerCamelIdentifier(sanitizeIdentifier(index.fieldName(fileIdx, fi))))
                     w.writeBlankLine()
                     if (!fieldTags.isEmpty()) {

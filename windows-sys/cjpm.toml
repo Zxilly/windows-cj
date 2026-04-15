@@ -4,7 +4,7 @@
   description = "Raw FFI bindings to Windows APIs for Cangjie"
   output-type = "static"
   cjc-version = "1.1.0"
-  compile-option = "--cfg ."
+  compile-option = "--cfg . -Woff unused --profile-compile-memory"
 
 [dependencies]
   windows_result = { path = "../windows-result" }
