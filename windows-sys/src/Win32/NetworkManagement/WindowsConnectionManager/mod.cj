@@ -2,6 +2,8 @@
 package windows_sys.Win32.NetworkManagement.WindowsConnectionManager
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -26,16 +28,6 @@ public struct NET_INTERFACE_CONTEXT_TABLE {
 public type ONDEMAND_NOTIFICATION_CALLBACK = CFunc<(CPointer<Unit>) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
-@C
-public struct WCM_BILLING_CYCLE_INFO {
-    public var StartDate: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var Duration: WCM_TIME_INTERVAL = WCM_TIME_INTERVAL()
-    public var Reset: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
-@C
 public struct WCM_CONNECTION_COST {
     public var value: Int32 = 0
 
@@ -78,15 +70,6 @@ public let WCM_CONNECTION_COST_WCM_CONNECTION_COST_ROAMING: WCM_CONNECTION_COST 
 public let WCM_CONNECTION_COST_WCM_CONNECTION_COST_APPROACHINGDATALIMIT: WCM_CONNECTION_COST = WCM_CONNECTION_COST(524288)
 
 @When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
-@C
-public struct WCM_CONNECTION_COST_DATA {
-    public var ConnectionCost: UInt32 = 0
-    public var CostSource: WCM_CONNECTION_COST_SOURCE = WCM_CONNECTION_COST_SOURCE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
-@C
 public struct WCM_CONNECTION_COST_SOURCE {
     public var value: Int32 = 0
 
@@ -117,20 +100,6 @@ public let WCM_CONNECTION_COST_SOURCE_WCM_CONNECTION_COST_SOURCE_USER: WCM_CONNE
 public let WCM_CONNECTION_COST_SOURCE_WCM_CONNECTION_COST_SOURCE_OPERATOR: WCM_CONNECTION_COST_SOURCE = WCM_CONNECTION_COST_SOURCE(3)
 
 @When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
-@C
-public struct WCM_DATAPLAN_STATUS {
-    public var UsageData: WCM_USAGE_DATA = WCM_USAGE_DATA()
-    public var DataLimitInMegabytes: UInt32 = 0
-    public var InboundBandwidthInKbps: UInt32 = 0
-    public var OutboundBandwidthInKbps: UInt32 = 0
-    public var BillingCycle: WCM_BILLING_CYCLE_INFO = WCM_BILLING_CYCLE_INFO()
-    public var MaxTransferSizeInMegabytes: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
-@C
 public struct WCM_MEDIA_TYPE {
     public var value: Int32 = 0
 
@@ -179,7 +148,7 @@ public struct WCM_POLICY_VALUE {
 public struct WCM_PROFILE_INFO {
     public var strProfileName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
     public var AdapterGUID: GUID = GUID()
-    public var Media: WCM_MEDIA_TYPE = WCM_MEDIA_TYPE()
+    public var Media: Int32 = 0
     public init() {}
 }
 
@@ -192,7 +161,6 @@ public struct WCM_PROFILE_INFO_LIST {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
-@C
 public struct WCM_PROPERTY {
     public var value: Int32 = 0
 
@@ -252,6 +220,36 @@ public struct WCM_USAGE_DATA {
     public init() {}
 }
 
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
+@C
+public struct WCM_BILLING_CYCLE_INFO {
+    public var StartDate: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var Duration: WCM_TIME_INTERVAL = WCM_TIME_INTERVAL()
+    public var Reset: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
+@C
+public struct WCM_CONNECTION_COST_DATA {
+    public var ConnectionCost: UInt32 = 0
+    public var CostSource: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]
+@C
+public struct WCM_DATAPLAN_STATUS {
+    public var UsageData: WCM_USAGE_DATA = WCM_USAGE_DATA()
+    public var DataLimitInMegabytes: UInt32 = 0
+    public var InboundBandwidthInKbps: UInt32 = 0
+    public var OutboundBandwidthInKbps: UInt32 = 0
+    public var BillingCycle: WCM_BILLING_CYCLE_INFO = WCM_BILLING_CYCLE_INFO()
+    public var MaxTransferSizeInMegabytes: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public init() {}
+}
+
 @When[ONDEMANDCONNROUTEHELPER == "on"]
 foreign {
     func FreeInterfaceContextTable(InterfaceContextTable: CPointer<NET_INTERFACE_CONTEXT_TABLE>): Unit
@@ -273,14 +271,14 @@ foreign {
     // param-hint: pInterface optional
     // param-hint: strProfileName optional
     // param-hint: pReserved optional reserved
-    func WcmQueryProperty(pInterface: CPointer<GUID>, strProfileName: CPointer<UInt16>, Property: WCM_PROPERTY, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<UInt8>>): UInt32
+    func WcmQueryProperty(pInterface: CPointer<GUID>, strProfileName: CPointer<UInt16>, Property: Int32, pReserved: CPointer<Unit>, pdwDataSize: CPointer<UInt32>, ppData: CPointer<CPointer<UInt8>>): UInt32
     // param-hint: pReserved optional reserved
     func WcmSetProfileList(pProfileList: CPointer<WCM_PROFILE_INFO_LIST>, dwPosition: UInt32, fIgnoreUnknownProfiles: Int32, pReserved: CPointer<Unit>): UInt32
     // param-hint: pInterface optional
     // param-hint: strProfileName optional
     // param-hint: pReserved optional reserved
     // param-hint: pbData len=param[4] optional
-    func WcmSetProperty(pInterface: CPointer<GUID>, strProfileName: CPointer<UInt16>, Property: WCM_PROPERTY, pReserved: CPointer<Unit>, dwDataSize: UInt32, pbData: CPointer<UInt8>): UInt32
+    func WcmSetProperty(pInterface: CPointer<GUID>, strProfileName: CPointer<UInt16>, Property: Int32, pReserved: CPointer<Unit>, dwDataSize: UInt32, pbData: CPointer<UInt8>): UInt32
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsConnectionManager == "on"]

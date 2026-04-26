@@ -4,7 +4,6 @@ package windows_sys.Win32.Foundation.Metadata
 
 
 @When[Windows_Win32_Foundation_Metadata == "on"]
-@C
 public struct Architecture {
     public var value: Int32 = 0
 

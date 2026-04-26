@@ -2,11 +2,10 @@ package windows
 
 import windows_core.*
 import windows_result.Win32Exception
-import windows_sys.win32.foundation.*
-import windows_sys.win32.security.*
-import windows_sys.win32.storage.file_system.*
-import windows_sys.win32.system.library_loader.*
-import windows_sys.win32.ui.windows_and_messaging.*
+import windows_sys.Win32.Foundation.*
+import windows_sys.Win32.Security.*
+import windows_sys.Win32.Storage.FileSystem.*
+import windows_sys.Win32.UI.WindowsAndMessaging.*
 
 // =============================================================================
 // Win32 Foundation — high-level safe wrappers
@@ -40,15 +39,18 @@ public func createFile(
     creationDisposition: FILE_CREATION_DISPOSITION,
     flagsAndAttributes: FILE_FLAGS_AND_ATTRIBUTES
 ): HANDLE {
+    let rawShareMode = shareMode.value
+    let rawCreationDisposition = creationDisposition.value
+    let rawFlagsAndAttributes = flagsAndAttributes.value
     let handle = withWideString(path) { p: CPointer<UInt16> =>
         unsafe {
             ffiCreateFileW(
                 p,
                 desiredAccess,
-                shareMode,
+                FILE_SHARE_MODE(rawShareMode),
                 CPointer<SECURITY_ATTRIBUTES>(),
-                creationDisposition,
-                flagsAndAttributes,
+                FILE_CREATION_DISPOSITION(rawCreationDisposition),
+                FILE_FLAGS_AND_ATTRIBUTES(rawFlagsAndAttributes),
                 CPointer<Unit>()
             )
         }
@@ -87,15 +89,18 @@ public func tryCreateFile(
     creationDisposition: FILE_CREATION_DISPOSITION,
     flagsAndAttributes: FILE_FLAGS_AND_ATTRIBUTES
 ): Option<HANDLE> {
+    let rawShareMode = shareMode.value
+    let rawCreationDisposition = creationDisposition.value
+    let rawFlagsAndAttributes = flagsAndAttributes.value
     let handle = withWideString(path) { p: CPointer<UInt16> =>
         unsafe {
             ffiCreateFileW(
                 p,
                 desiredAccess,
-                shareMode,
+                FILE_SHARE_MODE(rawShareMode),
                 CPointer<SECURITY_ATTRIBUTES>(),
-                creationDisposition,
-                flagsAndAttributes,
+                FILE_CREATION_DISPOSITION(rawCreationDisposition),
+                FILE_FLAGS_AND_ATTRIBUTES(rawFlagsAndAttributes),
                 CPointer<Unit>()
             )
         }
@@ -119,10 +124,11 @@ public func messageBox(
     caption: String,
     boxType: MESSAGEBOX_STYLE
 ): MESSAGEBOX_RESULT {
+    let rawBoxType = boxType.value
     let result = withWideString(text) { pText: CPointer<UInt16> =>
         withWideString(caption) { pCaption: CPointer<UInt16> =>
             unsafe {
-                ffiMessageBoxW(owner, pText, pCaption, boxType)
+                ffiMessageBoxW(owner, pText, pCaption, MESSAGEBOX_STYLE(rawBoxType))
             }
         }
     }

@@ -2,11 +2,12 @@
 package windows_sys.Win32.System.HostComputeNetwork
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
 @When[Windows_Win32_System_HostComputeNetwork == "on"]
-@C
 public struct HCN_NOTIFICATIONS {
     public var value: Int32 = 0
 
@@ -73,7 +74,6 @@ public let HCN_NOTIFICATIONS_HcnNotificationFlagsReserved: HCN_NOTIFICATIONS = H
 public type HCN_NOTIFICATION_CALLBACK = CFunc<(UInt32, CPointer<Unit>, Int32, CPointer<UInt16>) -> Unit>
 
 @When[Windows_Win32_System_HostComputeNetwork == "on"]
-@C
 public struct HCN_PORT_ACCESS {
     public var value: Int32 = 0
 
@@ -98,7 +98,6 @@ public let HCN_PORT_ACCESS_HCN_PORT_ACCESS_EXCLUSIVE: HCN_PORT_ACCESS = HCN_PORT
 public let HCN_PORT_ACCESS_HCN_PORT_ACCESS_SHARED: HCN_PORT_ACCESS = HCN_PORT_ACCESS(2)
 
 @When[Windows_Win32_System_HostComputeNetwork == "on"]
-@C
 public struct HCN_PORT_PROTOCOL {
     public var value: Int32 = 0
 
@@ -130,7 +129,7 @@ public let HCN_PORT_PROTOCOL_HCN_PORT_PROTOCOL_BOTH: HCN_PORT_PROTOCOL = HCN_POR
 public struct HCN_PORT_RANGE_ENTRY {
     public var OwningPartitionId: GUID = GUID()
     public var TargetPartitionId: GUID = GUID()
-    public var Protocol: HCN_PORT_PROTOCOL = HCN_PORT_PROTOCOL()
+    public var Protocol: Int32 = 0
     public var Priority: UInt64 = 0
     public var ReservationType: UInt32 = 0
     public var SharingFlags: UInt32 = 0
@@ -220,7 +219,7 @@ foreign {
     func HcnRegisterGuestNetworkServiceCallback(GuestNetworkService: CPointer<Unit>, Callback: HCN_NOTIFICATION_CALLBACK, Context: CPointer<Unit>, CallbackHandle: CPointer<CPointer<Unit>>): Int32
     func HcnRegisterServiceCallback(Callback: HCN_NOTIFICATION_CALLBACK, Context: CPointer<Unit>, CallbackHandle: CPointer<CPointer<Unit>>): Int32
     func HcnReleaseGuestNetworkServicePortReservationHandle(PortReservationHandle: CPointer<Unit>): Int32
-    func HcnReserveGuestNetworkServicePort(GuestNetworkService: CPointer<Unit>, Protocol: HCN_PORT_PROTOCOL, Access: HCN_PORT_ACCESS, Port: UInt16, PortReservationHandle: CPointer<CPointer<Unit>>): Int32
+    func HcnReserveGuestNetworkServicePort(GuestNetworkService: CPointer<Unit>, Protocol: Int32, Access: Int32, Port: UInt16, PortReservationHandle: CPointer<CPointer<Unit>>): Int32
     func HcnReserveGuestNetworkServicePortRange(GuestNetworkService: CPointer<Unit>, PortCount: UInt16, PortRangeReservation: CPointer<HCN_PORT_RANGE_RESERVATION>, PortReservationHandle: CPointer<CPointer<Unit>>): Int32
     func HcnUnregisterGuestNetworkServiceCallback(CallbackHandle: CPointer<Unit>): Int32
     func HcnUnregisterServiceCallback(CallbackHandle: CPointer<Unit>): Int32

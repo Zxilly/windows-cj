@@ -2,10 +2,14 @@
 package windows_sys.Win32.System.Hypervisor
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt32, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_HostComputeSystem == "on"]
 import windows_sys.Win32.System.HostComputeSystem as Win32_System_HostComputeSystem
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
 
 @When[Windows_Win32_System_Hypervisor == "on"]
@@ -30,67 +34,71 @@ public struct GPA_MEMORY_CHUNK {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct GUEST_OS_INFO {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop closedSource: GUEST_OS_INFO__ClosedSource_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUEST_OS_INFO__ClosedSource_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUEST_OS_INFO__ClosedSource_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func closedSource(): GUEST_OS_INFO__ClosedSource_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUEST_OS_INFO__ClosedSource_e__Struct>(p)
-            return ptr.read()
+    public mut prop openSource: GUEST_OS_INFO__OpenSource_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUEST_OS_INFO__OpenSource_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_closedSource(val: GUEST_OS_INFO__ClosedSource_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUEST_OS_INFO__ClosedSource_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func openSource(): GUEST_OS_INFO__OpenSource_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUEST_OS_INFO__OpenSource_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_openSource(val: GUEST_OS_INFO__OpenSource_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUEST_OS_INFO__OpenSource_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUEST_OS_INFO__OpenSource_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -111,7 +119,6 @@ public struct GUEST_OS_INFO__OpenSource_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct GUEST_OS_MICROSOFT_IDS {
     public var value: Int32 = 0
 
@@ -148,7 +155,6 @@ public let GUEST_OS_MICROSOFT_IDS_GuestOsMicrosoftWindowsNT: GUEST_OS_MICROSOFT_
 public let GUEST_OS_MICROSOFT_IDS_GuestOsMicrosoftWindowsCE: GUEST_OS_MICROSOFT_IDS = GUEST_OS_MICROSOFT_IDS(5)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct GUEST_OS_OPENSOURCE_IDS {
     public var value: Int32 = 0
 
@@ -182,7 +188,6 @@ public let GUEST_OS_OPENSOURCE_IDS_GuestOsOpenSourceXen: GUEST_OS_OPENSOURCE_IDS
 public let GUEST_OS_OPENSOURCE_IDS_GuestOsOpenSourceIllumos: GUEST_OS_OPENSOURCE_IDS = GUEST_OS_OPENSOURCE_IDS(4)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct GUEST_OS_VENDOR {
     public var value: Int32 = 0
 
@@ -216,7 +221,6 @@ public let GUEST_OS_VENDOR_GuestOsVendorLANCOM: GUEST_OS_VENDOR = GUEST_OS_VENDO
 public type GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK = CFunc<(CPointer<UInt8>) -> Unit>
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct HDV_DEVICE_HOST_FLAGS {
     public var value: Int32 = 0
 
@@ -255,7 +259,6 @@ public let HDV_DEVICE_HOST_FLAGS_HdvDeviceHostFlagNone: HDV_DEVICE_HOST_FLAGS = 
 public let HDV_DEVICE_HOST_FLAGS_HdvDeviceHostFlagInitializeComSecurity: HDV_DEVICE_HOST_FLAGS = HDV_DEVICE_HOST_FLAGS(1)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct HDV_DEVICE_TYPE {
     public var value: Int32 = 0
 
@@ -280,7 +283,6 @@ public let HDV_DEVICE_TYPE_HdvDeviceTypeUndefined: HDV_DEVICE_TYPE = HDV_DEVICE_
 public let HDV_DEVICE_TYPE_HdvDeviceTypePCI: HDV_DEVICE_TYPE = HDV_DEVICE_TYPE(1)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct HDV_DOORBELL_FLAGS {
     public var value: Int32 = 0
 
@@ -317,7 +319,6 @@ public let HDV_DOORBELL_FLAGS_HDV_DOORBELL_FLAG_TRIGGER_SIZE_QWORD: HDV_DOORBELL
 public let HDV_DOORBELL_FLAGS_HDV_DOORBELL_FLAG_TRIGGER_ANY_VALUE: HDV_DOORBELL_FLAGS = HDV_DOORBELL_FLAGS(-2147483648)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct HDV_MMIO_MAPPING_FLAGS {
     public var value: Int32 = 0
 
@@ -359,7 +360,6 @@ public let HDV_MMIO_MAPPING_FLAGS_HdvMmioMappingFlagWriteable: HDV_MMIO_MAPPING_
 public let HDV_MMIO_MAPPING_FLAGS_HdvMmioMappingFlagExecutable: HDV_MMIO_MAPPING_FLAGS = HDV_MMIO_MAPPING_FLAGS(2)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct HDV_PCI_BAR_SELECTOR {
     public var value: Int32 = 0
 
@@ -396,27 +396,7 @@ public let HDV_PCI_BAR_SELECTOR_HDV_PCI_BAR4: HDV_PCI_BAR_SELECTOR = HDV_PCI_BAR
 public let HDV_PCI_BAR_SELECTOR_HDV_PCI_BAR5: HDV_PCI_BAR_SELECTOR = HDV_PCI_BAR_SELECTOR(5)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-public type HDV_PCI_DEVICE_GET_DETAILS = CFunc<(CPointer<Unit>, CPointer<HDV_PCI_PNP_ID>, UInt32, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_System_Hypervisor == "on"]
 public type HDV_PCI_DEVICE_INITIALIZE = CFunc<(CPointer<Unit>) -> Int32>
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct HDV_PCI_DEVICE_INTERFACE {
-    public var Version: HDV_PCI_INTERFACE_VERSION = HDV_PCI_INTERFACE_VERSION()
-    public var Initialize: HDV_PCI_DEVICE_INITIALIZE = { _ => 0 }
-    public var Teardown: HDV_PCI_DEVICE_TEARDOWN = { _ => () }
-    public var SetConfiguration: HDV_PCI_DEVICE_SET_CONFIGURATION = { _, _, _ => 0 }
-    public var GetDetails: HDV_PCI_DEVICE_GET_DETAILS = { _, _, _, _ => 0 }
-    public var Start: HDV_PCI_DEVICE_START = { _ => 0 }
-    public var Stop: HDV_PCI_DEVICE_STOP = { _ => () }
-    public var ReadConfigSpace: HDV_PCI_READ_CONFIG_SPACE = { _, _, _ => 0 }
-    public var WriteConfigSpace: HDV_PCI_WRITE_CONFIG_SPACE = { _, _, _ => 0 }
-    public var ReadInterceptedMemory: HDV_PCI_READ_INTERCEPTED_MEMORY = { _, _, _, _, _ => 0 }
-    public var WriteInterceptedMemory: HDV_PCI_WRITE_INTERCEPTED_MEMORY = { _, _, _, _, _ => 0 }
-    public init() {}
-}
 
 @When[Windows_Win32_System_Hypervisor == "on"]
 public type HDV_PCI_DEVICE_SET_CONFIGURATION = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>) -> Int32>
@@ -431,7 +411,6 @@ public type HDV_PCI_DEVICE_STOP = CFunc<(CPointer<Unit>) -> Unit>
 public type HDV_PCI_DEVICE_TEARDOWN = CFunc<(CPointer<Unit>) -> Unit>
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct HDV_PCI_INTERFACE_VERSION {
     public var value: Int32 = 0
 
@@ -473,13 +452,13 @@ public struct HDV_PCI_PNP_ID {
 public type HDV_PCI_READ_CONFIG_SPACE = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-public type HDV_PCI_READ_INTERCEPTED_MEMORY = CFunc<(CPointer<Unit>, HDV_PCI_BAR_SELECTOR, UInt64, UInt64, CPointer<UInt8>) -> Int32>
+public type HDV_PCI_READ_INTERCEPTED_MEMORY = CFunc<(CPointer<Unit>, Int32, UInt64, UInt64, CPointer<UInt8>) -> Int32>
 
 @When[Windows_Win32_System_Hypervisor == "on"]
 public type HDV_PCI_WRITE_CONFIG_SPACE = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-public type HDV_PCI_WRITE_INTERCEPTED_MEMORY = CFunc<(CPointer<Unit>, HDV_PCI_BAR_SELECTOR, UInt64, UInt64, CPointer<UInt8>) -> Int32>
+public type HDV_PCI_WRITE_INTERCEPTED_MEMORY = CFunc<(CPointer<Unit>, Int32, UInt64, UInt64, CPointer<UInt8>) -> Int32>
 
 @When[Windows_Win32_System_Hypervisor == "on"]
 @C
@@ -500,7 +479,6 @@ public struct MODULE_INFO {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct PAGING_MODE {
     public var value: Int32 = 0
 
@@ -537,7 +515,6 @@ public let PAGING_MODE_Paging_Long: PAGING_MODE = PAGING_MODE(4)
 public let PAGING_MODE_Paging_Armv8: PAGING_MODE = PAGING_MODE(5)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct REGISTER_ID {
     public var value: Int32 = 0
 
@@ -1032,10 +1009,10 @@ public let REGISTER_ID_ARM64_RegisterCntvCtlEl0: REGISTER_ID = REGISTER_ID(157)
 @When[Windows_Win32_System_Hypervisor == "on"]
 public let REGISTER_ID_ARM64_RegisterMax: REGISTER_ID = REGISTER_ID(158)
 
-@When[Windows_Win32_System_Hypervisor == "on"]
+@When[Windows_Win32_System_Hypervisor == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct SOCKADDR_HV {
-    public var Family: Win32_impl.ADDRESS_FAMILY = Win32_impl.ADDRESS_FAMILY()
+    public var Family: UInt16 = 0
     public var Reserved: UInt16 = 0
     public var VmId: GUID = GUID()
     public var ServiceId: GUID = GUID()
@@ -1043,7 +1020,6 @@ public struct SOCKADDR_HV {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct VIRTUAL_PROCESSOR_ARCH {
     public var value: Int32 = 0
 
@@ -1074,118 +1050,125 @@ public let VIRTUAL_PROCESSOR_ARCH_Arch_x64: VIRTUAL_PROCESSOR_ARCH = VIRTUAL_PRO
 public let VIRTUAL_PROCESSOR_ARCH_Arch_Armv8: VIRTUAL_PROCESSOR_ARCH = VIRTUAL_PROCESSOR_ARCH(3)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct VIRTUAL_PROCESSOR_REGISTER {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func reg64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop reg64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_reg64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop reg32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func reg32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop reg16: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_reg32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop reg8: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func reg16(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
+    public mut prop reg128: VIRTUAL_PROCESSOR_REGISTER__Reg128_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__Reg128_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__Reg128_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_reg16(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop x64: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func reg8(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_reg8(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reg128(): VIRTUAL_PROCESSOR_REGISTER__Reg128_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__Reg128_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reg128(val: VIRTUAL_PROCESSOR_REGISTER__Reg128_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__Reg128_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func x64(): VIRTUAL_PROCESSOR_REGISTER__X64_e__Union {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_x64(val: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1200,92 +1183,97 @@ public struct VIRTUAL_PROCESSOR_REGISTER__Reg128_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct VIRTUAL_PROCESSOR_REGISTER__X64_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func segment(): VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct>(p)
-            return ptr.read()
+    public mut prop segment: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_segment(val: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop table: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Table_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Table_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Table_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func table(): VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Table_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Table_e__Struct>(p)
-            return ptr.read()
+    public mut prop fpControlStatus: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_table(val: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Table_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Table_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop xmmControlStatus: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func fpControlStatus(): VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fpControlStatus(val: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func xmmControlStatus(): VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_xmmControlStatus(val: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1302,46 +1290,49 @@ public struct VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
 
-    public func attributes(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
+    public mut prop attributes: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_attributes(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__Segment_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1375,46 +1366,49 @@ public struct VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struc
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func lastFpRip(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop lastFpRip: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_lastFpRip(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__FpControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1438,46 +1432,49 @@ public struct VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Stru
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func lastFpRdp(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop lastFpRdp: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_lastFpRdp(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1492,7 +1489,6 @@ public struct VIRTUAL_PROCESSOR_REGISTER__X64_e__Union__XmmControlStatus_e__Stru
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct VIRTUAL_PROCESSOR_VENDOR {
     public var value: Int32 = 0
 
@@ -1534,90 +1530,6 @@ public struct VM_GENCOUNTER {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_ACCESS_GPA_CONTROLS {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func anonymous(): WHV_ACCESS_GPA_CONTROLS__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_ACCESS_GPA_CONTROLS__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: WHV_ACCESS_GPA_CONTROLS__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_ACCESS_GPA_CONTROLS__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_ACCESS_GPA_CONTROLS__Anonymous_e__Struct {
-    public var CacheType: WHV_CACHE_TYPE = WHV_CACHE_TYPE()
-    public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_ADVISE_GPA_RANGE {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func populate(): WHV_ADVISE_GPA_RANGE_POPULATE {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_populate(val: WHV_ADVISE_GPA_RANGE_POPULATE): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_ADVISE_GPA_RANGE_CODE {
     public var value: Int32 = 0
 
@@ -1645,54 +1557,49 @@ public let WHV_ADVISE_GPA_RANGE_CODE_WHvAdviseGpaRangeCodePin: WHV_ADVISE_GPA_RA
 public let WHV_ADVISE_GPA_RANGE_CODE_WHvAdviseGpaRangeCodeUnpin: WHV_ADVISE_GPA_RANGE_CODE = WHV_ADVISE_GPA_RANGE_CODE(2)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_ADVISE_GPA_RANGE_POPULATE {
-    public var Flags: WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS = WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS()
-    public var AccessType: WHV_MEMORY_ACCESS_TYPE = WHV_MEMORY_ACCESS_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func asUINT32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop asUINT32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_asUINT32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1706,7 +1613,6 @@ public struct WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_ALLOCATE_VPCI_RESOURCE_FLAGS {
     public var value: Int32 = 0
 
@@ -1745,7 +1651,6 @@ public let WHV_ALLOCATE_VPCI_RESOURCE_FLAGS_WHvAllocateVpciResourceFlagNone: WHV
 public let WHV_ALLOCATE_VPCI_RESOURCE_FLAGS_WHvAllocateVpciResourceFlagAllowDirectP2P: WHV_ALLOCATE_VPCI_RESOURCE_FLAGS = WHV_ALLOCATE_VPCI_RESOURCE_FLAGS(1)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_CACHE_TYPE {
     public var value: Int32 = 0
 
@@ -1776,352 +1681,6 @@ public let WHV_CACHE_TYPE_WHvCacheTypeWriteThrough: WHV_CACHE_TYPE = WHV_CACHE_T
 public let WHV_CACHE_TYPE_WHvCacheTypeWriteBack: WHV_CACHE_TYPE = WHV_CACHE_TYPE(6)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_CAPABILITY {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
-
-    public func hypervisorPresent(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_hypervisorPresent(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func features(): WHV_CAPABILITY_FEATURES {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_CAPABILITY_FEATURES>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_features(val: WHV_CAPABILITY_FEATURES): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_CAPABILITY_FEATURES>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func extendedVmExits(): WHV_EXTENDED_VM_EXITS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_EXTENDED_VM_EXITS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_extendedVmExits(val: WHV_EXTENDED_VM_EXITS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_EXTENDED_VM_EXITS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorVendor(): WHV_PROCESSOR_VENDOR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_VENDOR>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorVendor(val: WHV_PROCESSOR_VENDOR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_VENDOR>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorFeatures(): WHV_PROCESSOR_FEATURES {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorFeatures(val: WHV_PROCESSOR_FEATURES): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func syntheticProcessorFeaturesBanks(): WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_syntheticProcessorFeaturesBanks(val: WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorXsaveFeatures(): WHV_PROCESSOR_XSAVE_FEATURES {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorXsaveFeatures(val: WHV_PROCESSOR_XSAVE_FEATURES): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorClFlushSize(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_processorClFlushSize(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func exceptionExitBitmap(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_exceptionExitBitmap(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func x64MsrExitBitmap(): WHV_X64_MSR_EXIT_BITMAP {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_x64MsrExitBitmap(val: WHV_X64_MSR_EXIT_BITMAP): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorClockFrequency(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_processorClockFrequency(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func interruptClockFrequency(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_interruptClockFrequency(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorFeaturesBanks(): WHV_PROCESSOR_FEATURES_BANKS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorFeaturesBanks(val: WHV_PROCESSOR_FEATURES_BANKS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func gpaRangePopulateFlags(): WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_gpaRangePopulateFlags(val: WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorFrequencyCap(): WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorFrequencyCap(val: WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorPerfmonFeatures(): WHV_PROCESSOR_PERFMON_FEATURES {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorPerfmonFeatures(val: WHV_PROCESSOR_PERFMON_FEATURES): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func schedulerFeatures(): WHV_SCHEDULER_FEATURES {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SCHEDULER_FEATURES>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_schedulerFeatures(val: WHV_SCHEDULER_FEATURES): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SCHEDULER_FEATURES>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_CAPABILITY_CODE {
     public var value: Int32 = 0
 
@@ -2191,46 +1750,49 @@ public let WHV_CAPABILITY_CODE_WHvCapabilityCodeSyntheticProcessorFeaturesBanks:
 public let WHV_CAPABILITY_CODE_WHvCapabilityCodeProcessorPerfmonFeatures: WHV_CAPABILITY_CODE = WHV_CAPABILITY_CODE(4105)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_CAPABILITY_FEATURES {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_CAPABILITY_FEATURES__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_CAPABILITY_FEATURES__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_CAPABILITY_FEATURES__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_CAPABILITY_FEATURES__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_CAPABILITY_FEATURES__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_CAPABILITY_FEATURES__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_CAPABILITY_FEATURES__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2265,7 +1827,6 @@ public struct WHV_CPUID_OUTPUT {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_CREATE_VPCI_DEVICE_FLAGS {
     public var value: Int32 = 0
 
@@ -2318,22 +1879,6 @@ public struct WHV_DOORBELL_MATCH_DATA {
 
 @When[Windows_Win32_System_Hypervisor == "on"]
 @C
-public struct WHV_EMULATOR_CALLBACKS {
-    public var Size: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public var WHvEmulatorIoPortCallback: WHV_EMULATOR_IO_PORT_CALLBACK = { _, _ => 0 }
-    public var WHvEmulatorMemoryCallback: WHV_EMULATOR_MEMORY_CALLBACK = { _, _ => 0 }
-    public var WHvEmulatorGetVirtualProcessorRegisters: WHV_EMULATOR_GET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = { _, _, _, _ => 0 }
-    public var WHvEmulatorSetVirtualProcessorRegisters: WHV_EMULATOR_SET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = { _, _, _, _ => 0 }
-    public var WHvEmulatorTranslateGvaPage: WHV_EMULATOR_TRANSLATE_GVA_PAGE_CALLBACK = { _, _, _, _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-public type WHV_EMULATOR_GET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WHV_REGISTER_NAME>, UInt32, CPointer<WHV_REGISTER_VALUE>) -> Int32>
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_EMULATOR_IO_ACCESS_INFO {
     public var Direction: UInt8 = 0
     public var Port: UInt16 = 0
@@ -2359,49 +1904,49 @@ public struct WHV_EMULATOR_MEMORY_ACCESS_INFO {
 public type WHV_EMULATOR_MEMORY_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WHV_EMULATOR_MEMORY_ACCESS_INFO>) -> Int32>
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-public type WHV_EMULATOR_SET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WHV_REGISTER_NAME>, UInt32, CPointer<WHV_REGISTER_VALUE>) -> Int32>
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_EMULATOR_STATUS {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func anonymous(): WHV_EMULATOR_STATUS__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_EMULATOR_STATUS__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_EMULATOR_STATUS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_EMULATOR_STATUS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_EMULATOR_STATUS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_EMULATOR_STATUS__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_EMULATOR_STATUS__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func asUINT32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_asUINT32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2415,10 +1960,6 @@ public struct WHV_EMULATOR_STATUS__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-public type WHV_EMULATOR_TRANSLATE_GVA_PAGE_CALLBACK = CFunc<(CPointer<Unit>, UInt64, WHV_TRANSLATE_GVA_FLAGS, CPointer<WHV_TRANSLATE_GVA_RESULT_CODE>, CPointer<UInt64>) -> Int32>
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_EXCEPTION_TYPE {
     public var value: Int32 = 0
 
@@ -2488,46 +2029,49 @@ public let WHV_EXCEPTION_TYPE_WHvX64ExceptionTypeMachineCheckAbort: WHV_EXCEPTIO
 public let WHV_EXCEPTION_TYPE_WHvX64ExceptionTypeSimdFloatingPointFault: WHV_EXCEPTION_TYPE = WHV_EXCEPTION_TYPE(19)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_EXTENDED_VM_EXITS {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_EXTENDED_VM_EXITS__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_EXTENDED_VM_EXITS__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_EXTENDED_VM_EXITS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_EXTENDED_VM_EXITS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_EXTENDED_VM_EXITS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_EXTENDED_VM_EXITS__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_EXTENDED_VM_EXITS__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2541,62 +2085,49 @@ public struct WHV_EXTENDED_VM_EXITS__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_HYPERCALL_CONTEXT {
-    public var Rax: UInt64 = 0
-    public var Rbx: UInt64 = 0
-    public var Rcx: UInt64 = 0
-    public var Rdx: UInt64 = 0
-    public var R8: UInt64 = 0
-    public var Rsi: UInt64 = 0
-    public var Rdi: UInt64 = 0
-    public var Reserved0: UInt64 = 0
-    public var XmmRegisters: VArray<WHV_UINT128, $6> = VArray<WHV_UINT128, $6>(repeat: WHV_UINT128())
-    public var Reserved1: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_INTERNAL_ACTIVITY_REGISTER {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_INTERNAL_ACTIVITY_REGISTER__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_INTERNAL_ACTIVITY_REGISTER__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_INTERNAL_ACTIVITY_REGISTER__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_INTERNAL_ACTIVITY_REGISTER__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_INTERNAL_ACTIVITY_REGISTER__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_INTERNAL_ACTIVITY_REGISTER__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_INTERNAL_ACTIVITY_REGISTER__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2619,7 +2150,6 @@ public struct WHV_INTERRUPT_CONTROL {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_INTERRUPT_DESTINATION_MODE {
     public var value: Int32 = 0
 
@@ -2644,7 +2174,6 @@ public let WHV_INTERRUPT_DESTINATION_MODE_WHvX64InterruptDestinationModePhysical
 public let WHV_INTERRUPT_DESTINATION_MODE_WHvX64InterruptDestinationModeLogical: WHV_INTERRUPT_DESTINATION_MODE = WHV_INTERRUPT_DESTINATION_MODE(1)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_INTERRUPT_TRIGGER_MODE {
     public var value: Int32 = 0
 
@@ -2669,7 +2198,6 @@ public let WHV_INTERRUPT_TRIGGER_MODE_WHvX64InterruptTriggerModeEdge: WHV_INTERR
 public let WHV_INTERRUPT_TRIGGER_MODE_WHvX64InterruptTriggerModeLevel: WHV_INTERRUPT_TRIGGER_MODE = WHV_INTERRUPT_TRIGGER_MODE(1)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_INTERRUPT_TYPE {
     public var value: Int32 = 0
 
@@ -2706,7 +2234,6 @@ public let WHV_INTERRUPT_TYPE_WHvX64InterruptTypeSipi: WHV_INTERRUPT_TYPE = WHV_
 public let WHV_INTERRUPT_TYPE_WHvX64InterruptTypeLocalInt1: WHV_INTERRUPT_TYPE = WHV_INTERRUPT_TYPE(9)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_MAP_GPA_RANGE_FLAGS {
     public var value: Int32 = 0
 
@@ -2754,58 +2281,49 @@ public let WHV_MAP_GPA_RANGE_FLAGS_WHvMapGpaRangeFlagExecute: WHV_MAP_GPA_RANGE_
 public let WHV_MAP_GPA_RANGE_FLAGS_WHvMapGpaRangeFlagTrackDirtyPages: WHV_MAP_GPA_RANGE_FLAGS = WHV_MAP_GPA_RANGE_FLAGS(8)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_MEMORY_ACCESS_CONTEXT {
-    public var InstructionByteCount: UInt8 = 0
-    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var InstructionBytes: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var AccessInfo: WHV_MEMORY_ACCESS_INFO = WHV_MEMORY_ACCESS_INFO()
-    public var Gpa: UInt64 = 0
-    public var Gva: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_MEMORY_ACCESS_INFO {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func anonymous(): WHV_MEMORY_ACCESS_INFO__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_MEMORY_ACCESS_INFO__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_MEMORY_ACCESS_INFO__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_MEMORY_ACCESS_INFO__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_MEMORY_ACCESS_INFO__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_MEMORY_ACCESS_INFO__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_MEMORY_ACCESS_INFO__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func asUINT32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_asUINT32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2819,7 +2337,6 @@ public struct WHV_MEMORY_ACCESS_INFO__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_MEMORY_ACCESS_TYPE {
     public var value: Int32 = 0
 
@@ -2855,7 +2372,6 @@ public struct WHV_MEMORY_RANGE_ENTRY {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_MSR_ACTION {
     public var value: Int32 = 0
 
@@ -2893,73 +2409,6 @@ public struct WHV_MSR_ACTION_ENTRY {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_NOTIFICATION_PORT_PARAMETERS {
-    public var NotificationPortType: WHV_NOTIFICATION_PORT_TYPE = WHV_NOTIFICATION_PORT_TYPE()
-    public var Reserved: UInt32 = 0
-    public var Anonymous: WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union = WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
-
-    public func doorbell(): WHV_DOORBELL_MATCH_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_DOORBELL_MATCH_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_doorbell(val: WHV_DOORBELL_MATCH_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_DOORBELL_MATCH_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func event(): WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union__Event_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union__Event_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_event(val: WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union__Event_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union__Event_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union__Event_e__Struct {
-    public var ConnectionId: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_NOTIFICATION_PORT_PROPERTY_CODE {
     public var value: Int32 = 0
 
@@ -2984,7 +2433,6 @@ public let WHV_NOTIFICATION_PORT_PROPERTY_CODE_WHvNotificationPortPropertyPrefer
 public let WHV_NOTIFICATION_PORT_PROPERTY_CODE_WHvNotificationPortPropertyPreferredTargetDuration: WHV_NOTIFICATION_PORT_PROPERTY_CODE = WHV_NOTIFICATION_PORT_PROPERTY_CODE(5)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_NOTIFICATION_PORT_TYPE {
     public var value: Int32 = 0
 
@@ -3009,7 +2457,6 @@ public let WHV_NOTIFICATION_PORT_TYPE_WHvNotificationPortTypeEvent: WHV_NOTIFICA
 public let WHV_NOTIFICATION_PORT_TYPE_WHvNotificationPortTypeDoorbell: WHV_NOTIFICATION_PORT_TYPE = WHV_NOTIFICATION_PORT_TYPE(4)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_PARTITION_COUNTER_SET {
     public var value: Int32 = 0
 
@@ -3043,577 +2490,6 @@ public struct WHV_PARTITION_MEMORY_COUNTERS {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_PARTITION_PROPERTY {
-    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
-
-    public func extendedVmExits(): WHV_EXTENDED_VM_EXITS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_EXTENDED_VM_EXITS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_extendedVmExits(val: WHV_EXTENDED_VM_EXITS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_EXTENDED_VM_EXITS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorFeatures(): WHV_PROCESSOR_FEATURES {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorFeatures(val: WHV_PROCESSOR_FEATURES): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func syntheticProcessorFeaturesBanks(): WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_syntheticProcessorFeaturesBanks(val: WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorXsaveFeatures(): WHV_PROCESSOR_XSAVE_FEATURES {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorXsaveFeatures(val: WHV_PROCESSOR_XSAVE_FEATURES): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorClFlushSize(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_processorClFlushSize(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorCount(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_processorCount(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cpuidExitList(): VArray<UInt32, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cpuidExitList(val: VArray<UInt32, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cpuidResultList(): VArray<WHV_X64_CPUID_RESULT, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<WHV_X64_CPUID_RESULT, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cpuidResultList(val: VArray<WHV_X64_CPUID_RESULT, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<WHV_X64_CPUID_RESULT, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cpuidResultList2(): VArray<WHV_X64_CPUID_RESULT2, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<WHV_X64_CPUID_RESULT2, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cpuidResultList2(val: VArray<WHV_X64_CPUID_RESULT2, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<WHV_X64_CPUID_RESULT2, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func msrActionList(): VArray<WHV_MSR_ACTION_ENTRY, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<WHV_MSR_ACTION_ENTRY, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_msrActionList(val: VArray<WHV_MSR_ACTION_ENTRY, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<WHV_MSR_ACTION_ENTRY, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func unimplementedMsrAction(): WHV_MSR_ACTION {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_MSR_ACTION>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_unimplementedMsrAction(val: WHV_MSR_ACTION): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_MSR_ACTION>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func exceptionExitBitmap(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_exceptionExitBitmap(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localApicEmulationMode(): WHV_X64_LOCAL_APIC_EMULATION_MODE {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_LOCAL_APIC_EMULATION_MODE>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localApicEmulationMode(val: WHV_X64_LOCAL_APIC_EMULATION_MODE): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_LOCAL_APIC_EMULATION_MODE>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func separateSecurityDomain(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_separateSecurityDomain(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func nestedVirtualization(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_nestedVirtualization(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func x64MsrExitBitmap(): WHV_X64_MSR_EXIT_BITMAP {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_x64MsrExitBitmap(val: WHV_X64_MSR_EXIT_BITMAP): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorClockFrequency(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_processorClockFrequency(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func interruptClockFrequency(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_interruptClockFrequency(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func apicRemoteRead(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_apicRemoteRead(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorFeaturesBanks(): WHV_PROCESSOR_FEATURES_BANKS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorFeaturesBanks(val: WHV_PROCESSOR_FEATURES_BANKS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func referenceTime(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_referenceTime(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func primaryNumaNode(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_primaryNumaNode(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cpuReserve(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_cpuReserve(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cpuCap(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_cpuCap(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cpuWeight(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_cpuWeight(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cpuGroupId(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_cpuGroupId(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorFrequencyCap(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_processorFrequencyCap(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func allowDeviceAssignment(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_allowDeviceAssignment(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func processorPerfmonFeatures(): WHV_PROCESSOR_PERFMON_FEATURES {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorPerfmonFeatures(val: WHV_PROCESSOR_PERFMON_FEATURES): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func disableSmt(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_disableSmt(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_PARTITION_PROPERTY_CODE {
     public var value: Int32 = 0
 
@@ -3733,7 +2609,6 @@ public struct WHV_PROCESSOR_APIC_COUNTERS {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_PROCESSOR_COUNTER_SET {
     public var value: Int32 = 0
 
@@ -3776,46 +2651,49 @@ public struct WHV_PROCESSOR_EVENT_COUNTERS {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_PROCESSOR_FEATURES {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_PROCESSOR_FEATURES__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_PROCESSOR_FEATURES__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_PROCESSOR_FEATURES__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -3829,46 +2707,49 @@ public struct WHV_PROCESSOR_FEATURES__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_PROCESSOR_FEATURES1 {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_PROCESSOR_FEATURES1__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES1__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_PROCESSOR_FEATURES1__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES1__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES1__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_PROCESSOR_FEATURES1__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES1__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -3891,50 +2772,53 @@ public struct WHV_PROCESSOR_FEATURES_BANKS {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func anonymous(): WHV_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: VArray<UInt64, $2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt64, $2>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func asUINT64(): VArray<UInt64, $2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt64, $2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_asUINT64(val: VArray<UInt64, $2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt64, $2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt64, $2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -3977,46 +2861,49 @@ public struct WHV_PROCESSOR_INTERCEPT_COUNTERS {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_PROCESSOR_PERFMON_FEATURES {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_PROCESSOR_PERFMON_FEATURES__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_PROCESSOR_PERFMON_FEATURES__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_PROCESSOR_PERFMON_FEATURES__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -4050,7 +2937,6 @@ public struct WHV_PROCESSOR_SYNTHETIC_FEATURES_COUNTERS {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_PROCESSOR_VENDOR {
     public var value: Int32 = 0
 
@@ -4078,46 +2964,49 @@ public let WHV_PROCESSOR_VENDOR_WHvProcessorVendorIntel: WHV_PROCESSOR_VENDOR = 
 public let WHV_PROCESSOR_VENDOR_WHvProcessorVendorHygon: WHV_PROCESSOR_VENDOR = WHV_PROCESSOR_VENDOR(2)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_PROCESSOR_XSAVE_FEATURES {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_PROCESSOR_XSAVE_FEATURES__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_PROCESSOR_XSAVE_FEATURES__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_PROCESSOR_XSAVE_FEATURES__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -4131,7 +3020,6 @@ public struct WHV_PROCESSOR_XSAVE_FEATURES__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_REGISTER_NAME {
     public var value: Int32 = 0
 
@@ -4828,363 +3716,6 @@ public let WHV_REGISTER_NAME_WHvRegisterInternalActivityState: WHV_REGISTER_NAME
 public let WHV_REGISTER_NAME_WHvX64RegisterPendingDebugException: WHV_REGISTER_NAME = WHV_REGISTER_NAME(-2147483642)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_REGISTER_VALUE {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func reg128(): WHV_UINT128 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reg128(val: WHV_UINT128): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reg64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_reg64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reg32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_reg32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reg16(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_reg16(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reg8(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_reg8(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fp(): WHV_X64_FP_REGISTER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_REGISTER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fp(val: WHV_X64_FP_REGISTER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_REGISTER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fpControlStatus(): WHV_X64_FP_CONTROL_STATUS_REGISTER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fpControlStatus(val: WHV_X64_FP_CONTROL_STATUS_REGISTER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func xmmControlStatus(): WHV_X64_XMM_CONTROL_STATUS_REGISTER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_xmmControlStatus(val: WHV_X64_XMM_CONTROL_STATUS_REGISTER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func segment(): WHV_X64_SEGMENT_REGISTER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_SEGMENT_REGISTER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_segment(val: WHV_X64_SEGMENT_REGISTER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_SEGMENT_REGISTER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func table(): WHV_X64_TABLE_REGISTER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_TABLE_REGISTER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_table(val: WHV_X64_TABLE_REGISTER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_TABLE_REGISTER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func interruptState(): WHV_X64_INTERRUPT_STATE_REGISTER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_INTERRUPT_STATE_REGISTER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_interruptState(val: WHV_X64_INTERRUPT_STATE_REGISTER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_INTERRUPT_STATE_REGISTER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pendingInterruption(): WHV_X64_PENDING_INTERRUPTION_REGISTER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_INTERRUPTION_REGISTER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pendingInterruption(val: WHV_X64_PENDING_INTERRUPTION_REGISTER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_INTERRUPTION_REGISTER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deliverabilityNotifications(): WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deliverabilityNotifications(val: WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func exceptionEvent(): WHV_X64_PENDING_EXCEPTION_EVENT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_EXCEPTION_EVENT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_exceptionEvent(val: WHV_X64_PENDING_EXCEPTION_EVENT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_EXCEPTION_EVENT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func extIntEvent(): WHV_X64_PENDING_EXT_INT_EVENT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_EXT_INT_EVENT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_extIntEvent(val: WHV_X64_PENDING_EXT_INT_EVENT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_EXT_INT_EVENT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func internalActivity(): WHV_INTERNAL_ACTIVITY_REGISTER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_INTERNAL_ACTIVITY_REGISTER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_internalActivity(val: WHV_INTERNAL_ACTIVITY_REGISTER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_INTERNAL_ACTIVITY_REGISTER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pendingDebugException(): WHV_X64_PENDING_DEBUG_EXCEPTION {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_DEBUG_EXCEPTION>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pendingDebugException(val: WHV_X64_PENDING_DEBUG_EXCEPTION): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_DEBUG_EXCEPTION>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_RUN_VP_CANCELED_CONTEXT {
-    public var CancelReason: WHV_RUN_VP_CANCEL_REASON = WHV_RUN_VP_CANCEL_REASON()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_RUN_VP_CANCEL_REASON {
     public var value: Int32 = 0
 
@@ -5206,340 +3737,6 @@ public struct WHV_RUN_VP_CANCEL_REASON {
 public let WHV_RUN_VP_CANCEL_REASON_WHvRunVpCancelReasonUser: WHV_RUN_VP_CANCEL_REASON = WHV_RUN_VP_CANCEL_REASON(0)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_RUN_VP_EXIT_CONTEXT {
-    public var ExitReason: WHV_RUN_VP_EXIT_REASON = WHV_RUN_VP_EXIT_REASON()
-    public var Reserved: UInt32 = 0
-    public var VpContext: WHV_VP_EXIT_CONTEXT = WHV_VP_EXIT_CONTEXT()
-    public var Anonymous: WHV_RUN_VP_EXIT_CONTEXT__Anonymous_e__Union = WHV_RUN_VP_EXIT_CONTEXT__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_RUN_VP_EXIT_CONTEXT__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $176> = VArray<UInt8, $176>(repeat: 0)
-
-    public func memoryAccess(): WHV_MEMORY_ACCESS_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_MEMORY_ACCESS_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_memoryAccess(val: WHV_MEMORY_ACCESS_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_MEMORY_ACCESS_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ioPortAccess(): WHV_X64_IO_PORT_ACCESS_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_IO_PORT_ACCESS_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ioPortAccess(val: WHV_X64_IO_PORT_ACCESS_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_IO_PORT_ACCESS_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func msrAccess(): WHV_X64_MSR_ACCESS_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_ACCESS_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_msrAccess(val: WHV_X64_MSR_ACCESS_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_ACCESS_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cpuidAccess(): WHV_X64_CPUID_ACCESS_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_CPUID_ACCESS_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cpuidAccess(val: WHV_X64_CPUID_ACCESS_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_CPUID_ACCESS_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func vpException(): WHV_VP_EXCEPTION_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_VP_EXCEPTION_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_vpException(val: WHV_VP_EXCEPTION_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_VP_EXCEPTION_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func interruptWindow(): WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_interruptWindow(val: WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func unsupportedFeature(): WHV_X64_UNSUPPORTED_FEATURE_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_UNSUPPORTED_FEATURE_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_unsupportedFeature(val: WHV_X64_UNSUPPORTED_FEATURE_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_UNSUPPORTED_FEATURE_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cancelReason(): WHV_RUN_VP_CANCELED_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_RUN_VP_CANCELED_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cancelReason(val: WHV_RUN_VP_CANCELED_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_RUN_VP_CANCELED_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func apicEoi(): WHV_X64_APIC_EOI_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_APIC_EOI_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_apicEoi(val: WHV_X64_APIC_EOI_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_APIC_EOI_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func readTsc(): WHV_X64_RDTSC_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_RDTSC_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_readTsc(val: WHV_X64_RDTSC_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_RDTSC_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func apicSmi(): WHV_X64_APIC_SMI_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_APIC_SMI_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_apicSmi(val: WHV_X64_APIC_SMI_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_APIC_SMI_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func hypercall(): WHV_HYPERCALL_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_HYPERCALL_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_hypercall(val: WHV_HYPERCALL_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_HYPERCALL_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func apicInitSipi(): WHV_X64_APIC_INIT_SIPI_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_APIC_INIT_SIPI_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_apicInitSipi(val: WHV_X64_APIC_INIT_SIPI_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_APIC_INIT_SIPI_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func apicWrite(): WHV_X64_APIC_WRITE_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_APIC_WRITE_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_apicWrite(val: WHV_X64_APIC_WRITE_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_APIC_WRITE_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func synicSintDeliverable(): WHV_SYNIC_SINT_DELIVERABLE_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNIC_SINT_DELIVERABLE_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_synicSintDeliverable(val: WHV_SYNIC_SINT_DELIVERABLE_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNIC_SINT_DELIVERABLE_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_RUN_VP_EXIT_REASON {
     public var value: Int32 = 0
 
@@ -5615,46 +3812,49 @@ public let WHV_RUN_VP_EXIT_REASON_WHvRunVpExitReasonX64ApicWriteTrap: WHV_RUN_VP
 public let WHV_RUN_VP_EXIT_REASON_WHvRunVpExitReasonCanceled: WHV_RUN_VP_EXIT_REASON = WHV_RUN_VP_EXIT_REASON(8193)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_SCHEDULER_FEATURES {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_SCHEDULER_FEATURES__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SCHEDULER_FEATURES__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_SCHEDULER_FEATURES__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SCHEDULER_FEATURES__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SCHEDULER_FEATURES__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_SCHEDULER_FEATURES__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SCHEDULER_FEATURES__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -5697,46 +3897,49 @@ public struct WHV_SYNIC_SINT_DELIVERABLE_CONTEXT {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_SYNTHETIC_PROCESSOR_FEATURES {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_SYNTHETIC_PROCESSOR_FEATURES__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_SYNTHETIC_PROCESSOR_FEATURES__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_SYNTHETIC_PROCESSOR_FEATURES__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -5759,50 +3962,53 @@ public struct WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: VArray<UInt64, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt64, $1>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func asUINT64(): VArray<UInt64, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt64, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_asUINT64(val: VArray<UInt64, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt64, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt64, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -5816,7 +4022,6 @@ public struct WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS__Anonymous_e__Union__Anonym
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_TRANSLATE_GVA_FLAGS {
     public var value: Int32 = 0
 
@@ -5873,15 +4078,6 @@ public let WHV_TRANSLATE_GVA_FLAGS_WHvTranslateGvaFlagEnforceSmap: WHV_TRANSLATE
 public let WHV_TRANSLATE_GVA_FLAGS_WHvTranslateGvaFlagOverrideSmap: WHV_TRANSLATE_GVA_FLAGS = WHV_TRANSLATE_GVA_FLAGS(512)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_TRANSLATE_GVA_RESULT {
-    public var ResultCode: WHV_TRANSLATE_GVA_RESULT_CODE = WHV_TRANSLATE_GVA_RESULT_CODE()
-    public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_TRANSLATE_GVA_RESULT_CODE {
     public var value: Int32 = 0
 
@@ -5927,97 +4123,6 @@ public let WHV_TRANSLATE_GVA_RESULT_CODE_WHvTranslateGvaResultGpaIllegalOverlayA
 public let WHV_TRANSLATE_GVA_RESULT_CODE_WHvTranslateGvaResultIntercept: WHV_TRANSLATE_GVA_RESULT_CODE = WHV_TRANSLATE_GVA_RESULT_CODE(8)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_TRIGGER_PARAMETERS {
-    public var TriggerType: WHV_TRIGGER_TYPE = WHV_TRIGGER_TYPE()
-    public var Reserved: UInt32 = 0
-    public var Anonymous: WHV_TRIGGER_PARAMETERS__Anonymous_e__Union = WHV_TRIGGER_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_TRIGGER_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
-
-    public func interrupt(): WHV_INTERRUPT_CONTROL {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_INTERRUPT_CONTROL>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_interrupt(val: WHV_INTERRUPT_CONTROL): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_INTERRUPT_CONTROL>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func synicEvent(): WHV_SYNIC_EVENT_PARAMETERS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNIC_EVENT_PARAMETERS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_synicEvent(val: WHV_SYNIC_EVENT_PARAMETERS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_SYNIC_EVENT_PARAMETERS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deviceInterrupt(): WHV_TRIGGER_PARAMETERS__Anonymous_e__Union__DeviceInterrupt_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_TRIGGER_PARAMETERS__Anonymous_e__Union__DeviceInterrupt_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deviceInterrupt(val: WHV_TRIGGER_PARAMETERS__Anonymous_e__Union__DeviceInterrupt_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_TRIGGER_PARAMETERS__Anonymous_e__Union__DeviceInterrupt_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_TRIGGER_PARAMETERS__Anonymous_e__Union__DeviceInterrupt_e__Struct {
-    public var LogicalDeviceId: UInt64 = 0
-    public var MsiAddress: UInt64 = 0
-    public var MsiData: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_TRIGGER_TYPE {
     public var value: Int32 = 0
 
@@ -6045,50 +4150,53 @@ public let WHV_TRIGGER_TYPE_WHvTriggerTypeSynicEvent: WHV_TRIGGER_TYPE = WHV_TRI
 public let WHV_TRIGGER_TYPE_WHvTriggerTypeDeviceInterrupt: WHV_TRIGGER_TYPE = WHV_TRIGGER_TYPE(2)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_UINT128 {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func anonymous(): WHV_UINT128__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_UINT128__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_UINT128__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop dword: VArray<UInt32, $4> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $4>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func dword(): VArray<UInt32, $4> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $4>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dword(val: VArray<UInt32, $4>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt32, $4>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $4>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -6103,58 +4211,6 @@ public struct WHV_UINT128__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_VIRTUAL_PROCESSOR_PROPERTY {
-    public var PropertyCode: WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE = WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE()
-    public var Reserved: UInt32 = 0
-    public var Anonymous: WHV_VIRTUAL_PROCESSOR_PROPERTY__Anonymous_e__Union = WHV_VIRTUAL_PROCESSOR_PROPERTY__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_VIRTUAL_PROCESSOR_PROPERTY__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func numaNode(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_numaNode(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func padding(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_padding(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE {
     public var value: Int32 = 0
 
@@ -6176,7 +4232,6 @@ public struct WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE {
 public let WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE_WHvVirtualProcessorPropertyCodeNumaNode: WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE = WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE(0)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_VIRTUAL_PROCESSOR_STATE_TYPE {
     public var value: Int32 = 0
 
@@ -6210,41 +4265,6 @@ public let WHV_VIRTUAL_PROCESSOR_STATE_TYPE_WHvVirtualProcessorStateTypeInterrup
 public let WHV_VIRTUAL_PROCESSOR_STATE_TYPE_WHvVirtualProcessorStateTypeXsaveState: WHV_VIRTUAL_PROCESSOR_STATE_TYPE = WHV_VIRTUAL_PROCESSOR_STATE_TYPE(4097)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_VPCI_DEVICE_NOTIFICATION {
-    public var NotificationType: WHV_VPCI_DEVICE_NOTIFICATION_TYPE = WHV_VPCI_DEVICE_NOTIFICATION_TYPE()
-    public var Reserved1: UInt32 = 0
-    public var Anonymous: WHV_VPCI_DEVICE_NOTIFICATION__Anonymous_e__Union = WHV_VPCI_DEVICE_NOTIFICATION__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WHV_VPCI_DEVICE_NOTIFICATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func reserved2(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_reserved2(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_VPCI_DEVICE_NOTIFICATION_TYPE {
     public var value: Int32 = 0
 
@@ -6272,7 +4292,6 @@ public let WHV_VPCI_DEVICE_NOTIFICATION_TYPE_WHvVpciDeviceNotificationMmioRemapp
 public let WHV_VPCI_DEVICE_NOTIFICATION_TYPE_WHvVpciDeviceNotificationSurpriseRemoval: WHV_VPCI_DEVICE_NOTIFICATION_TYPE = WHV_VPCI_DEVICE_NOTIFICATION_TYPE(2)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_VPCI_DEVICE_PROPERTY_CODE {
     public var value: Int32 = 0
 
@@ -6300,16 +4319,6 @@ public let WHV_VPCI_DEVICE_PROPERTY_CODE_WHvVpciDevicePropertyCodeHardwareIDs: W
 public let WHV_VPCI_DEVICE_PROPERTY_CODE_WHvVpciDevicePropertyCodeProbedBARs: WHV_VPCI_DEVICE_PROPERTY_CODE = WHV_VPCI_DEVICE_PROPERTY_CODE(2)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_VPCI_DEVICE_REGISTER {
-    public var Location: WHV_VPCI_DEVICE_REGISTER_SPACE = WHV_VPCI_DEVICE_REGISTER_SPACE()
-    public var SizeInBytes: UInt32 = 0
-    public var OffsetInBytes: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_VPCI_DEVICE_REGISTER_SPACE {
     public var value: Int32 = 0
 
@@ -6363,17 +4372,6 @@ public struct WHV_VPCI_HARDWARE_IDS {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_VPCI_INTERRUPT_TARGET {
-    public var Vector: UInt32 = 0
-    public var Flags: WHV_VPCI_INTERRUPT_TARGET_FLAGS = WHV_VPCI_INTERRUPT_TARGET_FLAGS()
-    public var ProcessorCount: UInt32 = 0
-    public var Processors: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_VPCI_INTERRUPT_TARGET_FLAGS {
     public var value: Int32 = 0
 
@@ -6412,18 +4410,6 @@ public let WHV_VPCI_INTERRUPT_TARGET_FLAGS_WHvVpciInterruptTargetFlagNone: WHV_V
 public let WHV_VPCI_INTERRUPT_TARGET_FLAGS_WHvVpciInterruptTargetFlagMulticast: WHV_VPCI_INTERRUPT_TARGET_FLAGS = WHV_VPCI_INTERRUPT_TARGET_FLAGS(1)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_VPCI_MMIO_MAPPING {
-    public var Location: WHV_VPCI_DEVICE_REGISTER_SPACE = WHV_VPCI_DEVICE_REGISTER_SPACE()
-    public var Flags: WHV_VPCI_MMIO_RANGE_FLAGS = WHV_VPCI_MMIO_RANGE_FLAGS()
-    public var SizeInBytes: UInt64 = 0
-    public var OffsetInBytes: UInt64 = 0
-    public var VirtualAddress: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_VPCI_MMIO_RANGE_FLAGS {
     public var value: Int32 = 0
 
@@ -6469,60 +4455,49 @@ public struct WHV_VPCI_PROBED_BARS {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_VP_EXCEPTION_CONTEXT {
-    public var InstructionByteCount: UInt8 = 0
-    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var InstructionBytes: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var ExceptionInfo: WHV_VP_EXCEPTION_INFO = WHV_VP_EXCEPTION_INFO()
-    public var ExceptionType: UInt8 = 0
-    public var Reserved2: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var ErrorCode: UInt32 = 0
-    public var ExceptionParameter: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_VP_EXCEPTION_INFO {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func anonymous(): WHV_VP_EXCEPTION_INFO__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_VP_EXCEPTION_INFO__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_VP_EXCEPTION_INFO__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_VP_EXCEPTION_INFO__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_VP_EXCEPTION_INFO__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_VP_EXCEPTION_INFO__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_VP_EXCEPTION_INFO__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func asUINT32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_asUINT32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -6532,19 +4507,6 @@ public struct WHV_VP_EXCEPTION_INFO {
 @C
 public struct WHV_VP_EXCEPTION_INFO__Anonymous_e__Struct {
     public var _bitfield: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_VP_EXIT_CONTEXT {
-    public var ExecutionState: WHV_X64_VP_EXECUTION_STATE = WHV_X64_VP_EXECUTION_STATE()
-    public var _bitfield: UInt8 = 0
-    public var Reserved: UInt8 = 0
-    public var Reserved2: UInt32 = 0
-    public var Cs: WHV_X64_SEGMENT_REGISTER = WHV_X64_SEGMENT_REGISTER()
-    public var Rip: UInt64 = 0
-    public var Rflags: UInt64 = 0
     public init() {}
 }
 
@@ -6570,16 +4532,6 @@ public struct WHV_X64_APIC_SMI_CONTEXT {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_X64_APIC_WRITE_CONTEXT {
-    public var Type: WHV_X64_APIC_WRITE_TYPE = WHV_X64_APIC_WRITE_TYPE()
-    public var Reserved: UInt32 = 0
-    public var WriteValue: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_X64_APIC_WRITE_TYPE {
     public var value: Int32 = 0
 
@@ -6639,19 +4591,6 @@ public struct WHV_X64_CPUID_RESULT {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_X64_CPUID_RESULT2 {
-    public var Function: UInt32 = 0
-    public var Index: UInt32 = 0
-    public var VpIndex: UInt32 = 0
-    public var Flags: WHV_X64_CPUID_RESULT2_FLAGS = WHV_X64_CPUID_RESULT2_FLAGS()
-    public var Output: WHV_CPUID_OUTPUT = WHV_CPUID_OUTPUT()
-    public var Mask: WHV_CPUID_OUTPUT = WHV_CPUID_OUTPUT()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_X64_CPUID_RESULT2_FLAGS {
     public var value: Int32 = 0
 
@@ -6690,46 +4629,49 @@ public let WHV_X64_CPUID_RESULT2_FLAGS_WHvX64CpuidResult2FlagSubleafSpecific: WH
 public let WHV_X64_CPUID_RESULT2_FLAGS_WHvX64CpuidResult2FlagVpSpecific: WHV_X64_CPUID_RESULT2_FLAGS = WHV_X64_CPUID_RESULT2_FLAGS(2)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -6743,50 +4685,53 @@ public struct WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER__Anonymous_e__Struct
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_FP_CONTROL_STATUS_REGISTER {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func anonymous(): WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT128: WHV_UINT128 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func asUINT128(): WHV_UINT128 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_asUINT128(val: WHV_UINT128): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -6805,46 +4750,49 @@ public struct WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func lastFpRip(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop lastFpRip: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_lastFpRip(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -6860,50 +4808,53 @@ public struct WHV_X64_FP_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_FP_REGISTER {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func anonymous(): WHV_X64_FP_REGISTER__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_REGISTER__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_FP_REGISTER__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_REGISTER__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_REGISTER__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_FP_REGISTER__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_FP_REGISTER__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT128: WHV_UINT128 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func asUINT128(): WHV_UINT128 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_asUINT128(val: WHV_UINT128): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -6918,53 +4869,49 @@ public struct WHV_X64_FP_REGISTER__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT {
-    public var DeliverableType: WHV_X64_PENDING_INTERRUPTION_TYPE = WHV_X64_PENDING_INTERRUPTION_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_INTERRUPT_STATE_REGISTER {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_X64_INTERRUPT_STATE_REGISTER__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_INTERRUPT_STATE_REGISTER__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_INTERRUPT_STATE_REGISTER__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_INTERRUPT_STATE_REGISTER__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_INTERRUPT_STATE_REGISTER__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_INTERRUPT_STATE_REGISTER__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_INTERRUPT_STATE_REGISTER__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -6978,64 +4925,49 @@ public struct WHV_X64_INTERRUPT_STATE_REGISTER__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_X64_IO_PORT_ACCESS_CONTEXT {
-    public var InstructionByteCount: UInt8 = 0
-    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var InstructionBytes: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var AccessInfo: WHV_X64_IO_PORT_ACCESS_INFO = WHV_X64_IO_PORT_ACCESS_INFO()
-    public var PortNumber: UInt16 = 0
-    public var Reserved2: VArray<UInt16, $3> = VArray<UInt16, $3>(repeat: 0)
-    public var Rax: UInt64 = 0
-    public var Rcx: UInt64 = 0
-    public var Rsi: UInt64 = 0
-    public var Rdi: UInt64 = 0
-    public var Ds: WHV_X64_SEGMENT_REGISTER = WHV_X64_SEGMENT_REGISTER()
-    public var Es: WHV_X64_SEGMENT_REGISTER = WHV_X64_SEGMENT_REGISTER()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_IO_PORT_ACCESS_INFO {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func anonymous(): WHV_X64_IO_PORT_ACCESS_INFO__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_IO_PORT_ACCESS_INFO__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_IO_PORT_ACCESS_INFO__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_IO_PORT_ACCESS_INFO__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_IO_PORT_ACCESS_INFO__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_IO_PORT_ACCESS_INFO__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_IO_PORT_ACCESS_INFO__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func asUINT32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_asUINT32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7049,7 +4981,6 @@ public struct WHV_X64_IO_PORT_ACCESS_INFO__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_X64_LOCAL_APIC_EMULATION_MODE {
     public var value: Int32 = 0
 
@@ -7077,56 +5008,49 @@ public let WHV_X64_LOCAL_APIC_EMULATION_MODE_WHvX64LocalApicEmulationModeXApic: 
 public let WHV_X64_LOCAL_APIC_EMULATION_MODE_WHvX64LocalApicEmulationModeX2Apic: WHV_X64_LOCAL_APIC_EMULATION_MODE = WHV_X64_LOCAL_APIC_EMULATION_MODE(2)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_X64_MSR_ACCESS_CONTEXT {
-    public var AccessInfo: WHV_X64_MSR_ACCESS_INFO = WHV_X64_MSR_ACCESS_INFO()
-    public var MsrNumber: UInt32 = 0
-    public var Rax: UInt64 = 0
-    public var Rdx: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_MSR_ACCESS_INFO {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func anonymous(): WHV_X64_MSR_ACCESS_INFO__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_ACCESS_INFO__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_MSR_ACCESS_INFO__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_ACCESS_INFO__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_ACCESS_INFO__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_MSR_ACCESS_INFO__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_ACCESS_INFO__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func asUINT32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_asUINT32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7140,46 +5064,49 @@ public struct WHV_X64_MSR_ACCESS_INFO__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_MSR_EXIT_BITMAP {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: WHV_X64_MSR_EXIT_BITMAP__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): WHV_X64_MSR_EXIT_BITMAP__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: WHV_X64_MSR_EXIT_BITMAP__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7193,46 +5120,49 @@ public struct WHV_X64_MSR_EXIT_BITMAP__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_PENDING_DEBUG_EXCEPTION {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: WHV_X64_PENDING_DEBUG_EXCEPTION__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_DEBUG_EXCEPTION__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): WHV_X64_PENDING_DEBUG_EXCEPTION__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_DEBUG_EXCEPTION__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: WHV_X64_PENDING_DEBUG_EXCEPTION__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_DEBUG_EXCEPTION__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_DEBUG_EXCEPTION__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7246,7 +5176,6 @@ public struct WHV_X64_PENDING_DEBUG_EXCEPTION__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_X64_PENDING_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -7271,50 +5200,53 @@ public let WHV_X64_PENDING_EVENT_TYPE_WHvX64PendingEventException: WHV_X64_PENDI
 public let WHV_X64_PENDING_EVENT_TYPE_WHvX64PendingEventExtInt: WHV_X64_PENDING_EVENT_TYPE = WHV_X64_PENDING_EVENT_TYPE(5)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_PENDING_EXCEPTION_EVENT {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func anonymous(): WHV_X64_PENDING_EXCEPTION_EVENT__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_EXCEPTION_EVENT__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_PENDING_EXCEPTION_EVENT__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_EXCEPTION_EVENT__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_EXCEPTION_EVENT__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_PENDING_EXCEPTION_EVENT__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_EXCEPTION_EVENT__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT128: WHV_UINT128 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func asUINT128(): WHV_UINT128 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_asUINT128(val: WHV_UINT128): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7330,50 +5262,53 @@ public struct WHV_X64_PENDING_EXCEPTION_EVENT__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_PENDING_EXT_INT_EVENT {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func anonymous(): WHV_X64_PENDING_EXT_INT_EVENT__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_EXT_INT_EVENT__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_PENDING_EXT_INT_EVENT__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_EXT_INT_EVENT__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_EXT_INT_EVENT__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_PENDING_EXT_INT_EVENT__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_EXT_INT_EVENT__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT128: WHV_UINT128 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func asUINT128(): WHV_UINT128 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_asUINT128(val: WHV_UINT128): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7388,46 +5323,49 @@ public struct WHV_X64_PENDING_EXT_INT_EVENT__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_PENDING_INTERRUPTION_REGISTER {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_X64_PENDING_INTERRUPTION_REGISTER__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_INTERRUPTION_REGISTER__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_PENDING_INTERRUPTION_REGISTER__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_INTERRUPTION_REGISTER__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_INTERRUPTION_REGISTER__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_PENDING_INTERRUPTION_REGISTER__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_PENDING_INTERRUPTION_REGISTER__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7442,7 +5380,6 @@ public struct WHV_X64_PENDING_INTERRUPTION_REGISTER__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_X64_PENDING_INTERRUPTION_TYPE {
     public var value: Int32 = 0
 
@@ -7470,57 +5407,49 @@ public let WHV_X64_PENDING_INTERRUPTION_TYPE_WHvX64PendingNmi: WHV_X64_PENDING_I
 public let WHV_X64_PENDING_INTERRUPTION_TYPE_WHvX64PendingException: WHV_X64_PENDING_INTERRUPTION_TYPE = WHV_X64_PENDING_INTERRUPTION_TYPE(3)
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
-public struct WHV_X64_RDTSC_CONTEXT {
-    public var TscAux: UInt64 = 0
-    public var VirtualOffset: UInt64 = 0
-    public var Tsc: UInt64 = 0
-    public var ReferenceTime: UInt64 = 0
-    public var RdtscInfo: WHV_X64_RDTSC_INFO = WHV_X64_RDTSC_INFO()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_RDTSC_INFO {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): WHV_X64_RDTSC_INFO__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_RDTSC_INFO__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_RDTSC_INFO__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_RDTSC_INFO__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_RDTSC_INFO__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_RDTSC_INFO__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_RDTSC_INFO__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUINT64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUINT64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7544,46 +5473,49 @@ public struct WHV_X64_SEGMENT_REGISTER {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_SEGMENT_REGISTER__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
 
-    public func anonymous(): WHV_X64_SEGMENT_REGISTER__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_SEGMENT_REGISTER__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_SEGMENT_REGISTER__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_SEGMENT_REGISTER__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_SEGMENT_REGISTER__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_SEGMENT_REGISTER__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_SEGMENT_REGISTER__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop attributes: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
         }
-    }
-
-    public func attributes(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_attributes(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7606,7 +5538,6 @@ public struct WHV_X64_TABLE_REGISTER {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-@C
 public struct WHV_X64_UNSUPPORTED_FEATURE_CODE {
     public var value: Int32 = 0
 
@@ -7633,53 +5564,56 @@ public let WHV_X64_UNSUPPORTED_FEATURE_CODE_WHvUnsupportedFeatureTaskSwitchTss: 
 @When[Windows_Win32_System_Hypervisor == "on"]
 @C
 public struct WHV_X64_UNSUPPORTED_FEATURE_CONTEXT {
-    public var FeatureCode: WHV_X64_UNSUPPORTED_FEATURE_CODE = WHV_X64_UNSUPPORTED_FEATURE_CODE()
+    public var FeatureCode: Int32 = 0
     public var Reserved: UInt32 = 0
     public var FeatureParameter: UInt64 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_VP_EXECUTION_STATE {
-    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
 
-    public func anonymous(): WHV_X64_VP_EXECUTION_STATE__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_VP_EXECUTION_STATE__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_VP_EXECUTION_STATE__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_VP_EXECUTION_STATE__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_VP_EXECUTION_STATE__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_VP_EXECUTION_STATE__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_VP_EXECUTION_STATE__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT16: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
         }
-    }
-
-    public func asUINT16(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_asUINT16(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7693,50 +5627,53 @@ public struct WHV_X64_VP_EXECUTION_STATE__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_XMM_CONTROL_STATUS_REGISTER {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func anonymous(): WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUINT128: WHV_UINT128 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func asUINT128(): WHV_UINT128 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_asUINT128(val: WHV_UINT128): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_UINT128>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7752,46 +5689,49 @@ public struct WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func lastFpRdp(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop lastFpRdp: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_lastFpRdp(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7806,6 +5746,2232 @@ public struct WHV_X64_XMM_CONTROL_STATUS_REGISTER__Anonymous_e__Struct__Anonymou
     public init() {}
 }
 
+@When[Windows_Win32_System_Hypervisor == "on"]
+public type HDV_PCI_DEVICE_GET_DETAILS = CFunc<(CPointer<Unit>, CPointer<HDV_PCI_PNP_ID>, UInt32, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct HDV_PCI_DEVICE_INTERFACE {
+    public var Version: Int32 = 0
+    public var Initialize: HDV_PCI_DEVICE_INITIALIZE = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Teardown: HDV_PCI_DEVICE_TEARDOWN = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var SetConfiguration: HDV_PCI_DEVICE_SET_CONFIGURATION = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>) -> Int32>(CPointer<Unit>())
+    public var GetDetails: HDV_PCI_DEVICE_GET_DETAILS = CFunc<(CPointer<Unit>, CPointer<HDV_PCI_PNP_ID>, UInt32, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var Start: HDV_PCI_DEVICE_START = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Stop: HDV_PCI_DEVICE_STOP = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var ReadConfigSpace: HDV_PCI_READ_CONFIG_SPACE = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var WriteConfigSpace: HDV_PCI_WRITE_CONFIG_SPACE = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var ReadInterceptedMemory: HDV_PCI_READ_INTERCEPTED_MEMORY = CFunc<(CPointer<Unit>, Int32, UInt64, UInt64, CPointer<UInt8>) -> Int32>(CPointer<Unit>())
+    public var WriteInterceptedMemory: HDV_PCI_WRITE_INTERCEPTED_MEMORY = CFunc<(CPointer<Unit>, Int32, UInt64, UInt64, CPointer<UInt8>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_ACCESS_GPA_CONTROLS {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop asUINT64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop anonymous: WHV_ACCESS_GPA_CONTROLS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_ACCESS_GPA_CONTROLS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_ACCESS_GPA_CONTROLS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_ACCESS_GPA_CONTROLS__Anonymous_e__Struct {
+    public var CacheType: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_ADVISE_GPA_RANGE_POPULATE {
+    public var Flags: WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS = WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS()
+    public var AccessType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_CAPABILITY {
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+
+    public mut prop hypervisorPresent: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop features: WHV_CAPABILITY_FEATURES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_CAPABILITY_FEATURES>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_CAPABILITY_FEATURES>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop extendedVmExits: WHV_EXTENDED_VM_EXITS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_EXTENDED_VM_EXITS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_EXTENDED_VM_EXITS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorVendor: WHV_PROCESSOR_VENDOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return WHV_PROCESSOR_VENDOR(unionReadInt32(base, 0))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val.value)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorFeatures: WHV_PROCESSOR_FEATURES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop syntheticProcessorFeaturesBanks: WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorXsaveFeatures: WHV_PROCESSOR_XSAVE_FEATURES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorClFlushSize: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop exceptionExitBitmap: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop x64MsrExitBitmap: WHV_X64_MSR_EXIT_BITMAP {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorClockFrequency: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop interruptClockFrequency: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorFeaturesBanks: WHV_PROCESSOR_FEATURES_BANKS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop gpaRangePopulateFlags: WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorFrequencyCap: WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_CAPABILITY_PROCESSOR_FREQUENCY_CAP>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorPerfmonFeatures: WHV_PROCESSOR_PERFMON_FEATURES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop schedulerFeatures: WHV_SCHEDULER_FEATURES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SCHEDULER_FEATURES>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SCHEDULER_FEATURES>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+public type WHV_EMULATOR_TRANSLATE_GVA_PAGE_CALLBACK = CFunc<(CPointer<Unit>, UInt64, Int32, CPointer<Int32>, CPointer<UInt64>) -> Int32>
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_HYPERCALL_CONTEXT {
+    public var Rax: UInt64 = 0
+    public var Rbx: UInt64 = 0
+    public var Rcx: UInt64 = 0
+    public var Rdx: UInt64 = 0
+    public var R8: UInt64 = 0
+    public var Rsi: UInt64 = 0
+    public var Rdi: UInt64 = 0
+    public var Reserved0: UInt64 = 0
+    public var XmmRegisters: VArray<WHV_UINT128, $6> = VArray<WHV_UINT128, $6>(repeat: WHV_UINT128())
+    public var Reserved1: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_MEMORY_ACCESS_CONTEXT {
+    public var InstructionByteCount: UInt8 = 0
+    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public var InstructionBytes: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var AccessInfo: WHV_MEMORY_ACCESS_INFO = WHV_MEMORY_ACCESS_INFO()
+    public var Gpa: UInt64 = 0
+    public var Gva: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_NOTIFICATION_PORT_PARAMETERS {
+    public var NotificationPortType: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public var Anonymous: WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union = WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+
+    public mut prop doorbell: WHV_DOORBELL_MATCH_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_DOORBELL_MATCH_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_DOORBELL_MATCH_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop event: WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union__Event_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union__Event_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union__Event_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_NOTIFICATION_PORT_PARAMETERS__Anonymous_e__Union__Event_e__Struct {
+    public var ConnectionId: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_REGISTER_VALUE {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop reg128: WHV_UINT128 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_UINT128>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reg64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reg32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reg16: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reg8: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fp: WHV_X64_FP_REGISTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_REGISTER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_REGISTER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fpControlStatus: WHV_X64_FP_CONTROL_STATUS_REGISTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_FP_CONTROL_STATUS_REGISTER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop xmmControlStatus: WHV_X64_XMM_CONTROL_STATUS_REGISTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_XMM_CONTROL_STATUS_REGISTER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop segment: WHV_X64_SEGMENT_REGISTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_SEGMENT_REGISTER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_SEGMENT_REGISTER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop table: WHV_X64_TABLE_REGISTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_TABLE_REGISTER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_TABLE_REGISTER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop interruptState: WHV_X64_INTERRUPT_STATE_REGISTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_INTERRUPT_STATE_REGISTER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_INTERRUPT_STATE_REGISTER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pendingInterruption: WHV_X64_PENDING_INTERRUPTION_REGISTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_INTERRUPTION_REGISTER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_INTERRUPTION_REGISTER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop deliverabilityNotifications: WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop exceptionEvent: WHV_X64_PENDING_EXCEPTION_EVENT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_EXCEPTION_EVENT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_EXCEPTION_EVENT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop extIntEvent: WHV_X64_PENDING_EXT_INT_EVENT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_EXT_INT_EVENT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_EXT_INT_EVENT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop internalActivity: WHV_INTERNAL_ACTIVITY_REGISTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_INTERNAL_ACTIVITY_REGISTER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_INTERNAL_ACTIVITY_REGISTER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pendingDebugException: WHV_X64_PENDING_DEBUG_EXCEPTION {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_DEBUG_EXCEPTION>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_PENDING_DEBUG_EXCEPTION>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_RUN_VP_CANCELED_CONTEXT {
+    public var CancelReason: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_TRANSLATE_GVA_RESULT {
+    public var ResultCode: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_TRIGGER_PARAMETERS {
+    public var TriggerType: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public var Anonymous: WHV_TRIGGER_PARAMETERS__Anonymous_e__Union = WHV_TRIGGER_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_TRIGGER_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+
+    public mut prop interrupt: WHV_INTERRUPT_CONTROL {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_INTERRUPT_CONTROL>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_INTERRUPT_CONTROL>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop synicEvent: WHV_SYNIC_EVENT_PARAMETERS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNIC_EVENT_PARAMETERS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNIC_EVENT_PARAMETERS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop deviceInterrupt: WHV_TRIGGER_PARAMETERS__Anonymous_e__Union__DeviceInterrupt_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_TRIGGER_PARAMETERS__Anonymous_e__Union__DeviceInterrupt_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_TRIGGER_PARAMETERS__Anonymous_e__Union__DeviceInterrupt_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_TRIGGER_PARAMETERS__Anonymous_e__Union__DeviceInterrupt_e__Struct {
+    public var LogicalDeviceId: UInt64 = 0
+    public var MsiAddress: UInt64 = 0
+    public var MsiData: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_VIRTUAL_PROCESSOR_PROPERTY {
+    public var PropertyCode: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public var Anonymous: WHV_VIRTUAL_PROCESSOR_PROPERTY__Anonymous_e__Union = WHV_VIRTUAL_PROCESSOR_PROPERTY__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_VIRTUAL_PROCESSOR_PROPERTY__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop numaNode: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop padding: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_VPCI_DEVICE_NOTIFICATION {
+    public var NotificationType: Int32 = 0
+    public var Reserved1: UInt32 = 0
+    public var Anonymous: WHV_VPCI_DEVICE_NOTIFICATION__Anonymous_e__Union = WHV_VPCI_DEVICE_NOTIFICATION__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_VPCI_DEVICE_NOTIFICATION__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop reserved2: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_VPCI_DEVICE_REGISTER {
+    public var Location: Int32 = 0
+    public var SizeInBytes: UInt32 = 0
+    public var OffsetInBytes: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_VPCI_INTERRUPT_TARGET {
+    public var Vector: UInt32 = 0
+    public var Flags: Int32 = 0
+    public var ProcessorCount: UInt32 = 0
+    public var Processors: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_VPCI_MMIO_MAPPING {
+    public var Location: Int32 = 0
+    public var Flags: Int32 = 0
+    public var SizeInBytes: UInt64 = 0
+    public var OffsetInBytes: UInt64 = 0
+    public var VirtualAddress: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_VP_EXCEPTION_CONTEXT {
+    public var InstructionByteCount: UInt8 = 0
+    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public var InstructionBytes: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var ExceptionInfo: WHV_VP_EXCEPTION_INFO = WHV_VP_EXCEPTION_INFO()
+    public var ExceptionType: UInt8 = 0
+    public var Reserved2: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public var ErrorCode: UInt32 = 0
+    public var ExceptionParameter: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_VP_EXIT_CONTEXT {
+    public var ExecutionState: WHV_X64_VP_EXECUTION_STATE = WHV_X64_VP_EXECUTION_STATE()
+    public var _bitfield: UInt8 = 0
+    public var Reserved: UInt8 = 0
+    public var Reserved2: UInt32 = 0
+    public var Cs: WHV_X64_SEGMENT_REGISTER = WHV_X64_SEGMENT_REGISTER()
+    public var Rip: UInt64 = 0
+    public var Rflags: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_X64_APIC_WRITE_CONTEXT {
+    public var Type: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public var WriteValue: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_X64_CPUID_RESULT2 {
+    public var Function: UInt32 = 0
+    public var Index: UInt32 = 0
+    public var VpIndex: UInt32 = 0
+    public var Flags: Int32 = 0
+    public var Output: WHV_CPUID_OUTPUT = WHV_CPUID_OUTPUT()
+    public var Mask: WHV_CPUID_OUTPUT = WHV_CPUID_OUTPUT()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT {
+    public var DeliverableType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_X64_IO_PORT_ACCESS_CONTEXT {
+    public var InstructionByteCount: UInt8 = 0
+    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public var InstructionBytes: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var AccessInfo: WHV_X64_IO_PORT_ACCESS_INFO = WHV_X64_IO_PORT_ACCESS_INFO()
+    public var PortNumber: UInt16 = 0
+    public var Reserved2: VArray<UInt16, $3> = VArray<UInt16, $3>(repeat: 0)
+    public var Rax: UInt64 = 0
+    public var Rcx: UInt64 = 0
+    public var Rsi: UInt64 = 0
+    public var Rdi: UInt64 = 0
+    public var Ds: WHV_X64_SEGMENT_REGISTER = WHV_X64_SEGMENT_REGISTER()
+    public var Es: WHV_X64_SEGMENT_REGISTER = WHV_X64_SEGMENT_REGISTER()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_X64_MSR_ACCESS_CONTEXT {
+    public var AccessInfo: WHV_X64_MSR_ACCESS_INFO = WHV_X64_MSR_ACCESS_INFO()
+    public var MsrNumber: UInt32 = 0
+    public var Rax: UInt64 = 0
+    public var Rdx: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_X64_RDTSC_CONTEXT {
+    public var TscAux: UInt64 = 0
+    public var VirtualOffset: UInt64 = 0
+    public var Tsc: UInt64 = 0
+    public var ReferenceTime: UInt64 = 0
+    public var RdtscInfo: WHV_X64_RDTSC_INFO = WHV_X64_RDTSC_INFO()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_ADVISE_GPA_RANGE {
+    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+
+    public mut prop populate: WHV_ADVISE_GPA_RANGE_POPULATE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_ADVISE_GPA_RANGE_POPULATE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+public type WHV_EMULATOR_GET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Int32>, UInt32, CPointer<WHV_REGISTER_VALUE>) -> Int32>
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+public type WHV_EMULATOR_SET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Int32>, UInt32, CPointer<WHV_REGISTER_VALUE>) -> Int32>
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_PARTITION_PROPERTY {
+    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+
+    public mut prop extendedVmExits: WHV_EXTENDED_VM_EXITS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_EXTENDED_VM_EXITS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_EXTENDED_VM_EXITS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorFeatures: WHV_PROCESSOR_FEATURES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop syntheticProcessorFeaturesBanks: WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorXsaveFeatures: WHV_PROCESSOR_XSAVE_FEATURES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_XSAVE_FEATURES>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorClFlushSize: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorCount: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cpuidExitList: VArray<UInt32, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt32, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cpuidResultList: VArray<WHV_X64_CPUID_RESULT, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<WHV_X64_CPUID_RESULT, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<WHV_X64_CPUID_RESULT, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cpuidResultList2: VArray<WHV_X64_CPUID_RESULT2, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<WHV_X64_CPUID_RESULT2, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<WHV_X64_CPUID_RESULT2, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop msrActionList: VArray<WHV_MSR_ACTION_ENTRY, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<WHV_MSR_ACTION_ENTRY, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<WHV_MSR_ACTION_ENTRY, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop unimplementedMsrAction: WHV_MSR_ACTION {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return WHV_MSR_ACTION(unionReadInt32(base, 0))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val.value)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop exceptionExitBitmap: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localApicEmulationMode: WHV_X64_LOCAL_APIC_EMULATION_MODE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return WHV_X64_LOCAL_APIC_EMULATION_MODE(unionReadInt32(base, 0))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val.value)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop separateSecurityDomain: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop nestedVirtualization: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop x64MsrExitBitmap: WHV_X64_MSR_EXIT_BITMAP {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_EXIT_BITMAP>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorClockFrequency: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop interruptClockFrequency: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop apicRemoteRead: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorFeaturesBanks: WHV_PROCESSOR_FEATURES_BANKS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_FEATURES_BANKS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop referenceTime: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop primaryNumaNode: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cpuReserve: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cpuCap: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cpuWeight: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cpuGroupId: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorFrequencyCap: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop allowDeviceAssignment: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop processorPerfmonFeatures: WHV_PROCESSOR_PERFMON_FEATURES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_PROCESSOR_PERFMON_FEATURES>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop disableSmt: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_RUN_VP_EXIT_CONTEXT {
+    public var ExitReason: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public var VpContext: WHV_VP_EXIT_CONTEXT = WHV_VP_EXIT_CONTEXT()
+    public var Anonymous: WHV_RUN_VP_EXIT_CONTEXT__Anonymous_e__Union = WHV_RUN_VP_EXIT_CONTEXT__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WHV_RUN_VP_EXIT_CONTEXT__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $22> = VArray<UInt64, $22>(repeat: 0)
+
+    public mut prop memoryAccess: WHV_MEMORY_ACCESS_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_MEMORY_ACCESS_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_MEMORY_ACCESS_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ioPortAccess: WHV_X64_IO_PORT_ACCESS_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_IO_PORT_ACCESS_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_IO_PORT_ACCESS_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop msrAccess: WHV_X64_MSR_ACCESS_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_ACCESS_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_MSR_ACCESS_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cpuidAccess: WHV_X64_CPUID_ACCESS_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_CPUID_ACCESS_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_CPUID_ACCESS_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop vpException: WHV_VP_EXCEPTION_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_VP_EXCEPTION_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_VP_EXCEPTION_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop interruptWindow: WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop unsupportedFeature: WHV_X64_UNSUPPORTED_FEATURE_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_UNSUPPORTED_FEATURE_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_UNSUPPORTED_FEATURE_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cancelReason: WHV_RUN_VP_CANCELED_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_RUN_VP_CANCELED_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_RUN_VP_CANCELED_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop apicEoi: WHV_X64_APIC_EOI_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_APIC_EOI_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_APIC_EOI_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop readTsc: WHV_X64_RDTSC_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_RDTSC_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_RDTSC_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop apicSmi: WHV_X64_APIC_SMI_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_APIC_SMI_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_APIC_SMI_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop hypercall: WHV_HYPERCALL_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_HYPERCALL_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_HYPERCALL_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop apicInitSipi: WHV_X64_APIC_INIT_SIPI_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_APIC_INIT_SIPI_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_APIC_INIT_SIPI_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop apicWrite: WHV_X64_APIC_WRITE_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_APIC_WRITE_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_X64_APIC_WRITE_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop synicSintDeliverable: WHV_SYNIC_SINT_DELIVERABLE_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNIC_SINT_DELIVERABLE_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHV_SYNIC_SINT_DELIVERABLE_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Hypervisor == "on"]
+@C
+public struct WHV_EMULATOR_CALLBACKS {
+    public var Size: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public var WHvEmulatorIoPortCallback: WHV_EMULATOR_IO_PORT_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WHV_EMULATOR_IO_ACCESS_INFO>) -> Int32>(CPointer<Unit>())
+    public var WHvEmulatorMemoryCallback: WHV_EMULATOR_MEMORY_CALLBACK = CFunc<(CPointer<Unit>, CPointer<WHV_EMULATOR_MEMORY_ACCESS_INFO>) -> Int32>(CPointer<Unit>())
+    public var WHvEmulatorGetVirtualProcessorRegisters: WHV_EMULATOR_GET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Int32>, UInt32, CPointer<WHV_REGISTER_VALUE>) -> Int32>(CPointer<Unit>())
+    public var WHvEmulatorSetVirtualProcessorRegisters: WHV_EMULATOR_SET_VIRTUAL_PROCESSOR_REGISTERS_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Int32>, UInt32, CPointer<WHV_REGISTER_VALUE>) -> Int32>(CPointer<Unit>())
+    public var WHvEmulatorTranslateGvaPage: WHV_EMULATOR_TRANSLATE_GVA_PAGE_CALLBACK = CFunc<(CPointer<Unit>, UInt64, Int32, CPointer<Int32>, CPointer<UInt64>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
 @When[VMSAVEDSTATEDUMPPROVIDER == "on"]
 foreign {
     func ApplyGuestMemoryFix(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualAddress: UInt64, fixBuffer: CPointer<Unit>, fixBufferSize: UInt32): Int32
@@ -7813,12 +7979,12 @@ foreign {
     func CallStackUnwind(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, imageInfo: CPointer<MODULE_INFO>, imageInfoCount: UInt32, frameCount: UInt32, callStack: CPointer<CPointer<UInt16>>): Int32
     func FindSavedStateSymbolFieldInType(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, typeName: CPointer<UInt8>, fieldName: CPointer<UInt16>, offset: CPointer<UInt32>, found: CPointer<Int32>): Int32
     func ForceActiveVirtualTrustLevel(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualTrustLevel: UInt8): Int32
-    func ForceArchitecture(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, architecture: VIRTUAL_PROCESSOR_ARCH): Int32
+    func ForceArchitecture(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, architecture: Int32): Int32
     // param-hint: oldMode optional
     func ForceNestedHostMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, hostMode: Int32, oldMode: CPointer<Int32>): Int32
-    func ForcePagingMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, pagingMode: PAGING_MODE): Int32
+    func ForcePagingMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, pagingMode: Int32): Int32
     func GetActiveVirtualTrustLevel(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualTrustLevel: CPointer<UInt8>): Int32
-    func GetArchitecture(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, architecture: CPointer<VIRTUAL_PROCESSOR_ARCH>): Int32
+    func GetArchitecture(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, architecture: CPointer<Int32>): Int32
     func GetEnabledVirtualTrustLevels(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, virtualTrustLevels: CPointer<UInt32>): Int32
     func GetGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle: CPointer<Unit>, virtualTrustLevels: CPointer<UInt32>): Int32
     func GetGuestOsInfo(vmSavedStateDumpHandle: CPointer<Unit>, virtualTrustLevel: UInt8, guestOsInfo: CPointer<GUEST_OS_INFO>): Int32
@@ -7826,7 +7992,7 @@ foreign {
     func GetGuestRawSavedMemorySize(vmSavedStateDumpHandle: CPointer<Unit>, guestRawSavedMemorySize: CPointer<UInt64>): Int32
     func GetMemoryBlockCacheLimit(vmSavedStateDumpHandle: CPointer<Unit>, memoryBlockCacheLimit: CPointer<UInt64>): Int32
     func GetNestedVirtualizationMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, enabled: CPointer<Int32>): Int32
-    func GetPagingMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, pagingMode: CPointer<PAGING_MODE>): Int32
+    func GetPagingMode(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, pagingMode: CPointer<Int32>): Int32
     func GetRegisterValue(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, registerId: UInt32, registerValue: CPointer<VIRTUAL_PROCESSOR_REGISTER>): Int32
     func GetSavedStateSymbolFieldInfo(vmSavedStateDumpHandle: CPointer<Unit>, vpId: UInt32, typeName: CPointer<UInt8>, typeFieldInfoMap: CPointer<CPointer<UInt16>>): Int32
     func GetSavedStateSymbolProviderHandle(vmSavedStateDumpHandle: CPointer<Unit>): CPointer<Unit>
@@ -7875,10 +8041,10 @@ foreign {
     func WHvAcceptPartitionMigration(MigrationHandle: CPointer<Unit>, Partition: CPointer<WHV_PARTITION_HANDLE>): Int32
     // param-hint: GpaRanges len=param[2]
     // param-hint: AdviceBuffer bytes=param[5]
-    func WHvAdviseGpaRange(Partition: WHV_PARTITION_HANDLE, GpaRanges: CPointer<WHV_MEMORY_RANGE_ENTRY>, GpaRangesCount: UInt32, Advice: WHV_ADVISE_GPA_RANGE_CODE, AdviceBuffer: CPointer<Unit>, AdviceBufferSizeInBytes: UInt32): Int32
+    func WHvAdviseGpaRange(Partition: WHV_PARTITION_HANDLE, GpaRanges: CPointer<WHV_MEMORY_RANGE_ENTRY>, GpaRangesCount: UInt32, Advice: Int32, AdviceBuffer: CPointer<Unit>, AdviceBufferSizeInBytes: UInt32): Int32
     // param-hint: ProviderId optional
     // param-hint: ResourceDescriptor len=param[3] optional
-    func WHvAllocateVpciResource(ProviderId: CPointer<GUID>, Flags: WHV_ALLOCATE_VPCI_RESOURCE_FLAGS, ResourceDescriptor: CPointer<Unit>, ResourceDescriptorSizeInBytes: UInt32, VpciResource: CPointer<CPointer<Unit>>): Int32
+    func WHvAllocateVpciResource(ProviderId: CPointer<GUID>, Flags: Int32, ResourceDescriptor: CPointer<Unit>, ResourceDescriptorSizeInBytes: UInt32, VpciResource: CPointer<CPointer<Unit>>): Int32
     func WHvCancelPartitionMigration(Partition: WHV_PARTITION_HANDLE): Int32
     func WHvCancelRunVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Flags: UInt32): Int32
     func WHvCompletePartitionMigration(Partition: WHV_PARTITION_HANDLE): Int32
@@ -7889,7 +8055,7 @@ foreign {
     // param-hint: Properties len=param[3]
     func WHvCreateVirtualProcessor2(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Properties: CPointer<WHV_VIRTUAL_PROCESSOR_PROPERTY>, PropertyCount: UInt32): Int32
     // param-hint: NotificationEventHandle optional
-    func WHvCreateVpciDevice(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, VpciResource: CPointer<Unit>, Flags: WHV_CREATE_VPCI_DEVICE_FLAGS, NotificationEventHandle: CPointer<Unit>): Int32
+    func WHvCreateVpciDevice(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, VpciResource: CPointer<Unit>, Flags: Int32, NotificationEventHandle: CPointer<Unit>): Int32
     func WHvDeleteNotificationPort(Partition: WHV_PARTITION_HANDLE, PortHandle: CPointer<Unit>): Int32
     func WHvDeletePartition(Partition: WHV_PARTITION_HANDLE): Int32
     func WHvDeleteTrigger(Partition: WHV_PARTITION_HANDLE, TriggerHandle: CPointer<Unit>): Int32
@@ -7897,18 +8063,18 @@ foreign {
     func WHvDeleteVpciDevice(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64): Int32
     // param-hint: CapabilityBuffer bytes=param[2]
     // param-hint: WrittenSizeInBytes optional
-    func WHvGetCapability(CapabilityCode: WHV_CAPABILITY_CODE, CapabilityBuffer: CPointer<Unit>, CapabilityBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32
+    func WHvGetCapability(CapabilityCode: Int32, CapabilityBuffer: CPointer<Unit>, CapabilityBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32
     // param-hint: TargetVps len=param[4]
-    func WHvGetInterruptTargetVpSet(Partition: WHV_PARTITION_HANDLE, Destination: UInt64, DestinationMode: WHV_INTERRUPT_DESTINATION_MODE, TargetVps: CPointer<UInt32>, VpCount: UInt32, TargetVpCount: CPointer<UInt32>): Int32
+    func WHvGetInterruptTargetVpSet(Partition: WHV_PARTITION_HANDLE, Destination: UInt64, DestinationMode: Int32, TargetVps: CPointer<UInt32>, VpCount: UInt32, TargetVpCount: CPointer<UInt32>): Int32
     // param-hint: Buffer bytes=param[3]
     // param-hint: BytesWritten optional
-    func WHvGetPartitionCounters(Partition: WHV_PARTITION_HANDLE, CounterSet: WHV_PARTITION_COUNTER_SET, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
+    func WHvGetPartitionCounters(Partition: WHV_PARTITION_HANDLE, CounterSet: Int32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
     // param-hint: PropertyBuffer bytes=param[3]
     // param-hint: WrittenSizeInBytes optional
-    func WHvGetPartitionProperty(Partition: WHV_PARTITION_HANDLE, PropertyCode: WHV_PARTITION_PROPERTY_CODE, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32
+    func WHvGetPartitionProperty(Partition: WHV_PARTITION_HANDLE, PropertyCode: Int32, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32
     // param-hint: Buffer bytes=param[4]
     // param-hint: BytesWritten optional
-    func WHvGetVirtualProcessorCounters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, CounterSet: WHV_PROCESSOR_COUNTER_SET, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
+    func WHvGetVirtualProcessorCounters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, CounterSet: Int32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
     func WHvGetVirtualProcessorCpuidOutput(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Eax: UInt32, Ecx: UInt32, CpuidOutput: CPointer<WHV_CPUID_OUTPUT>): Int32
     // param-hint: State bytes=param[3]
     // param-hint: WrittenSize optional
@@ -7918,10 +8084,10 @@ foreign {
     func WHvGetVirtualProcessorInterruptControllerState2(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32, WrittenSize: CPointer<UInt32>): Int32
     // param-hint: RegisterNames len=param[3]
     // param-hint: RegisterValues len=param[3]
-    func WHvGetVirtualProcessorRegisters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, RegisterNames: CPointer<WHV_REGISTER_NAME>, RegisterCount: UInt32, RegisterValues: CPointer<WHV_REGISTER_VALUE>): Int32
+    func WHvGetVirtualProcessorRegisters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, RegisterNames: CPointer<Int32>, RegisterCount: UInt32, RegisterValues: CPointer<WHV_REGISTER_VALUE>): Int32
     // param-hint: Buffer bytes=param[4]
     // param-hint: BytesWritten optional
-    func WHvGetVirtualProcessorState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, StateType: WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
+    func WHvGetVirtualProcessorState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, StateType: Int32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
     // param-hint: Buffer bytes=param[3]
     func WHvGetVirtualProcessorXsaveState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32, BytesWritten: CPointer<UInt32>): Int32
     // param-hint: Target bytes=param[5]
@@ -7931,9 +8097,9 @@ foreign {
     func WHvGetVpciDeviceNotification(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Notification: CPointer<WHV_VPCI_DEVICE_NOTIFICATION>, NotificationSizeInBytes: UInt32): Int32
     // param-hint: PropertyBuffer bytes=param[4]
     // param-hint: WrittenSizeInBytes optional
-    func WHvGetVpciDeviceProperty(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PropertyCode: WHV_VPCI_DEVICE_PROPERTY_CODE, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32
-    func WHvMapGpaRange(Partition: WHV_PARTITION_HANDLE, SourceAddress: CPointer<Unit>, GuestAddress: UInt64, SizeInBytes: UInt64, Flags: WHV_MAP_GPA_RANGE_FLAGS): Int32
-    func WHvMapGpaRange2(Partition: WHV_PARTITION_HANDLE, Process: CPointer<Unit>, SourceAddress: CPointer<Unit>, GuestAddress: UInt64, SizeInBytes: UInt64, Flags: WHV_MAP_GPA_RANGE_FLAGS): Int32
+    func WHvGetVpciDeviceProperty(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PropertyCode: Int32, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32, WrittenSizeInBytes: CPointer<UInt32>): Int32
+    func WHvMapGpaRange(Partition: WHV_PARTITION_HANDLE, SourceAddress: CPointer<Unit>, GuestAddress: UInt64, SizeInBytes: UInt64, Flags: Int32): Int32
+    func WHvMapGpaRange2(Partition: WHV_PARTITION_HANDLE, Process: CPointer<Unit>, SourceAddress: CPointer<Unit>, GuestAddress: UInt64, SizeInBytes: UInt64, Flags: Int32): Int32
     func WHvMapVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Index: UInt32, MessageCount: UInt32, Target: CPointer<WHV_VPCI_INTERRUPT_TARGET>, MsiAddress: CPointer<UInt64>, MsiData: CPointer<UInt32>): Int32
     func WHvMapVpciDeviceMmioRanges(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, MappingCount: CPointer<UInt32>, Mappings: CPointer<CPointer<WHV_VPCI_MMIO_MAPPING>>): Int32
     // param-hint: Message bytes=param[4]
@@ -7951,27 +8117,26 @@ foreign {
     func WHvRetargetVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, MsiAddress: UInt64, MsiData: UInt32, Target: CPointer<WHV_VPCI_INTERRUPT_TARGET>): Int32
     // param-hint: ExitContext bytes=param[3]
     func WHvRunVirtualProcessor(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, ExitContext: CPointer<Unit>, ExitContextSizeInBytes: UInt32): Int32
-    func WHvSetNotificationPortProperty(Partition: WHV_PARTITION_HANDLE, PortHandle: CPointer<Unit>, PropertyCode: WHV_NOTIFICATION_PORT_PROPERTY_CODE, PropertyValue: UInt64): Int32
+    func WHvSetNotificationPortProperty(Partition: WHV_PARTITION_HANDLE, PortHandle: CPointer<Unit>, PropertyCode: Int32, PropertyValue: UInt64): Int32
     // param-hint: PropertyBuffer bytes=param[3]
-    func WHvSetPartitionProperty(Partition: WHV_PARTITION_HANDLE, PropertyCode: WHV_PARTITION_PROPERTY_CODE, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32): Int32
+    func WHvSetPartitionProperty(Partition: WHV_PARTITION_HANDLE, PropertyCode: Int32, PropertyBuffer: CPointer<Unit>, PropertyBufferSizeInBytes: UInt32): Int32
     // param-hint: State bytes=param[3]
     func WHvSetVirtualProcessorInterruptControllerState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32): Int32
     // param-hint: State bytes=param[3]
     func WHvSetVirtualProcessorInterruptControllerState2(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, State: CPointer<Unit>, StateSize: UInt32): Int32
     // param-hint: RegisterNames len=param[3]
     // param-hint: RegisterValues len=param[3]
-    func WHvSetVirtualProcessorRegisters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, RegisterNames: CPointer<WHV_REGISTER_NAME>, RegisterCount: UInt32, RegisterValues: CPointer<WHV_REGISTER_VALUE>): Int32
+    func WHvSetVirtualProcessorRegisters(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, RegisterNames: CPointer<Int32>, RegisterCount: UInt32, RegisterValues: CPointer<WHV_REGISTER_VALUE>): Int32
     // param-hint: Buffer bytes=param[4]
-    func WHvSetVirtualProcessorState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, StateType: WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32): Int32
+    func WHvSetVirtualProcessorState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, StateType: Int32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32): Int32
     // param-hint: Buffer bytes=param[3]
     func WHvSetVirtualProcessorXsaveState(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Buffer: CPointer<Unit>, BufferSizeInBytes: UInt32): Int32
-    func WHvSetVpciDevicePowerState(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PowerState: Win32_impl.DEVICE_POWER_STATE): Int32
     func WHvSetupPartition(Partition: WHV_PARTITION_HANDLE): Int32
     // param-hint: NewlySignaled optional
     func WHvSignalVirtualProcessorSynicEvent(Partition: WHV_PARTITION_HANDLE, SynicEvent: WHV_SYNIC_EVENT_PARAMETERS, NewlySignaled: CPointer<Int32>): Int32
     func WHvStartPartitionMigration(Partition: WHV_PARTITION_HANDLE, MigrationHandle: CPointer<CPointer<Unit>>): Int32
     func WHvSuspendPartitionTime(Partition: WHV_PARTITION_HANDLE): Int32
-    func WHvTranslateGva(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Gva: UInt64, TranslateFlags: WHV_TRANSLATE_GVA_FLAGS, TranslationResult: CPointer<WHV_TRANSLATE_GVA_RESULT>, Gpa: CPointer<UInt64>): Int32
+    func WHvTranslateGva(Partition: WHV_PARTITION_HANDLE, VpIndex: UInt32, Gva: UInt64, TranslateFlags: Int32, TranslationResult: CPointer<WHV_TRANSLATE_GVA_RESULT>, Gpa: CPointer<UInt64>): Int32
     func WHvUnmapGpaRange(Partition: WHV_PARTITION_HANDLE, GuestAddress: UInt64, SizeInBytes: UInt64): Int32
     func WHvUnmapVpciDeviceInterrupt(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Index: UInt32): Int32
     func WHvUnmapVpciDeviceMmioRanges(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64): Int32
@@ -7982,24 +8147,33 @@ foreign {
     func WHvWriteVpciDeviceRegister(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, Register: CPointer<WHV_VPCI_DEVICE_REGISTER>, Data: CPointer<Unit>): Int32
 }
 
+@When[WINHVPLATFORM == "on" && Windows_Win32_System_Power == "on"]
+foreign {
+    func WHvSetVpciDevicePowerState(Partition: WHV_PARTITION_HANDLE, LogicalDeviceId: UInt64, PowerState: Int32): Int32
+}
+
 @When[VMDEVICEHOST == "on"]
 foreign {
     // param-hint: deviceContext optional
-    func HdvCreateDeviceInstance(deviceHostHandle: CPointer<Unit>, deviceType: HDV_DEVICE_TYPE, deviceClassId: CPointer<GUID>, deviceInstanceId: CPointer<GUID>, deviceInterface: CPointer<Unit>, deviceContext: CPointer<Unit>, deviceHandle: CPointer<CPointer<Unit>>): Int32
+    func HdvCreateDeviceInstance(deviceHostHandle: CPointer<Unit>, deviceType: Int32, deviceClassId: CPointer<GUID>, deviceInstanceId: CPointer<GUID>, deviceInterface: CPointer<Unit>, deviceContext: CPointer<Unit>, deviceHandle: CPointer<CPointer<Unit>>): Int32
     func HdvCreateGuestMemoryAperture(requestor: CPointer<Unit>, guestPhysicalAddress: UInt64, byteCount: UInt32, writeProtected: Int32, mappedAddress: CPointer<CPointer<Unit>>): Int32
-    func HdvCreateSectionBackedMmioRange(requestor: CPointer<Unit>, barIndex: HDV_PCI_BAR_SELECTOR, offsetInPages: UInt64, lengthInPages: UInt64, MappingFlags: HDV_MMIO_MAPPING_FLAGS, sectionHandle: CPointer<Unit>, sectionOffsetInPages: UInt64): Int32
+    func HdvCreateSectionBackedMmioRange(requestor: CPointer<Unit>, barIndex: Int32, offsetInPages: UInt64, lengthInPages: UInt64, MappingFlags: Int32, sectionHandle: CPointer<Unit>, sectionOffsetInPages: UInt64): Int32
     func HdvDeliverGuestInterrupt(requestor: CPointer<Unit>, msiAddress: UInt64, msiData: UInt32): Int32
     func HdvDestroyGuestMemoryAperture(requestor: CPointer<Unit>, mappedAddress: CPointer<Unit>): Int32
-    func HdvDestroySectionBackedMmioRange(requestor: CPointer<Unit>, barIndex: HDV_PCI_BAR_SELECTOR, offsetInPages: UInt64): Int32
-    func HdvInitializeDeviceHost(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, deviceHostHandle: CPointer<CPointer<Unit>>): Int32
-    func HdvInitializeDeviceHostEx(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, flags: HDV_DEVICE_HOST_FLAGS, deviceHostHandle: CPointer<CPointer<Unit>>): Int32
+    func HdvDestroySectionBackedMmioRange(requestor: CPointer<Unit>, barIndex: Int32, offsetInPages: UInt64): Int32
     // param-hint: buffer len=param[2]
     func HdvReadGuestMemory(requestor: CPointer<Unit>, guestPhysicalAddress: UInt64, byteCount: UInt32, buffer: CPointer<UInt8>): Int32
-    func HdvRegisterDoorbell(requestor: CPointer<Unit>, BarIndex: HDV_PCI_BAR_SELECTOR, BarOffset: UInt64, TriggerValue: UInt64, Flags: UInt64, DoorbellEvent: CPointer<Unit>): Int32
+    func HdvRegisterDoorbell(requestor: CPointer<Unit>, BarIndex: Int32, BarOffset: UInt64, TriggerValue: UInt64, Flags: UInt64, DoorbellEvent: CPointer<Unit>): Int32
     func HdvTeardownDeviceHost(deviceHostHandle: CPointer<Unit>): Int32
-    func HdvUnregisterDoorbell(requestor: CPointer<Unit>, BarIndex: HDV_PCI_BAR_SELECTOR, BarOffset: UInt64, TriggerValue: UInt64, Flags: UInt64): Int32
+    func HdvUnregisterDoorbell(requestor: CPointer<Unit>, BarIndex: Int32, BarOffset: UInt64, TriggerValue: UInt64, Flags: UInt64): Int32
     // param-hint: buffer len=param[2]
     func HdvWriteGuestMemory(requestor: CPointer<Unit>, guestPhysicalAddress: UInt64, byteCount: UInt32, buffer: CPointer<UInt8>): Int32
+}
+
+@When[VMDEVICEHOST == "on" && Windows_Win32_System_HostComputeSystem == "on"]
+foreign {
+    func HdvInitializeDeviceHost(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, deviceHostHandle: CPointer<CPointer<Unit>>): Int32
+    func HdvInitializeDeviceHostEx(computeSystem: Win32_System_HostComputeSystem.HCS_SYSTEM, flags: Int32, deviceHostHandle: CPointer<CPointer<Unit>>): Int32
 }
 
 @When[Windows_Win32_System_Hypervisor == "on"]

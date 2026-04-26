@@ -2,9 +2,9 @@ package windows
 
 import windows_core.*
 import windows_result.Win32Exception
-import windows_sys.win32.foundation.*
-import windows_sys.win32.security.*
-import windows_sys.win32.system.threading.*
+import windows_sys.Win32.Foundation.*
+import windows_sys.Win32.Security.*
+import windows_sys.Win32.System.Threading.*
 
 func threadingWithWideString<R>(s: String, action: (CPointer<UInt16>) -> R): R {
     let ws = CWideString(s)
@@ -126,6 +126,7 @@ public func sleepMs(milliseconds: UInt32): Unit {
 }
 
 // CriticalSectionGuard — RAII wrapper for Win32 CRITICAL_SECTION.
+@When[Windows_Win32_System_Kernel == "on"]
 public class CriticalSectionGuard <: Resource {
     private var cs: CPointer<CRITICAL_SECTION>
     private var closed: Bool = false

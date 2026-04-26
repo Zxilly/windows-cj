@@ -2,10 +2,14 @@
 package windows_sys.Win32.Networking.HttpServer
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
+@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
@@ -32,7 +36,6 @@ public struct HTTPAPI_VERSION {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_503_RESPONSE_VERBOSITY {
     public var value: Int32 = 0
 
@@ -60,7 +63,6 @@ public let HTTP_503_RESPONSE_VERBOSITY_Http503ResponseVerbosityLimited: HTTP_503
 public let HTTP_503_RESPONSE_VERBOSITY_Http503ResponseVerbosityFull: HTTP_503_RESPONSE_VERBOSITY = HTTP_503_RESPONSE_VERBOSITY(2)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_AUTHENTICATION_HARDENING_LEVELS {
     public var value: Int32 = 0
 
@@ -88,7 +90,6 @@ public let HTTP_AUTHENTICATION_HARDENING_LEVELS_HttpAuthenticationHardeningMediu
 public let HTTP_AUTHENTICATION_HARDENING_LEVELS_HttpAuthenticationHardeningStrict: HTTP_AUTHENTICATION_HARDENING_LEVELS = HTTP_AUTHENTICATION_HARDENING_LEVELS(2)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_AUTH_STATUS {
     public var value: Int32 = 0
 
@@ -117,22 +118,6 @@ public let HTTP_AUTH_STATUS_HttpAuthStatusFailure: HTTP_AUTH_STATUS = HTTP_AUTH_
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
-public struct HTTP_BANDWIDTH_LIMIT_INFO {
-    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
-    public var MaxBandwidth: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_BINDING_INFO {
-    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
-    public var RequestQueueHandle: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_BYTE_RANGE {
     public var StartingOffset: UInt64 = 0
     public var Length: UInt64 = 0
@@ -140,15 +125,6 @@ public struct HTTP_BYTE_RANGE {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_CACHE_POLICY {
-    public var Policy: HTTP_CACHE_POLICY_TYPE = HTTP_CACHE_POLICY_TYPE()
-    public var SecondsToLive: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_CACHE_POLICY_TYPE {
     public var value: Int32 = 0
 
@@ -196,24 +172,6 @@ public struct HTTP_CERT_CONFIG_PARAM {
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
-public struct HTTP_CHANNEL_BIND_INFO {
-    public var Hardening: HTTP_AUTHENTICATION_HARDENING_LEVELS = HTTP_AUTHENTICATION_HARDENING_LEVELS()
-    public var Flags: UInt32 = 0
-    public var ServiceNames: CPointer<CPointer<HTTP_SERVICE_BINDING_BASE>> = CPointer<CPointer<HTTP_SERVICE_BINDING_BASE>>()
-    public var NumberOfServiceNames: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_CONNECTION_LIMIT_INFO {
-    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
-    public var MaxConnections: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_COOKED_URL {
     public var FullUrlLength: UInt16 = 0
     public var HostLength: UInt16 = 0
@@ -227,7 +185,6 @@ public struct HTTP_COOKED_URL {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID {
     public var value: Int32 = 0
 
@@ -254,203 +211,13 @@ public let HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID_CreateRequestQueueMax: HTTP_CRE
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
 public struct HTTP_CREATE_REQUEST_QUEUE_PROPERTY_INFO {
-    public var PropertyId: HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID = HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID()
+    public var PropertyId: Int32 = 0
     public var PropertyInfoLength: UInt32 = 0
     public var PropertyInfo: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_DATA_CHUNK {
-    public var DataChunkType: HTTP_DATA_CHUNK_TYPE = HTTP_DATA_CHUNK_TYPE()
-    public var Anonymous: HTTP_DATA_CHUNK__Anonymous_e__Union = HTTP_DATA_CHUNK__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
-
-    public func fromMemory(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fromMemory(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fromFileHandle(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fromFileHandle(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fromFragmentCache(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fromFragmentCache(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fromFragmentCacheEx(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fromFragmentCacheEx(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func trailers(): HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_trailers(val: HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fromWinHttpFastForwarding(): HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fromWinHttpFastForwarding(val: HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct {
-    public var pBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var BufferLength: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct {
-    public var ByteRange: HTTP_BYTE_RANGE = HTTP_BYTE_RANGE()
-    public var FileHandle: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct {
-    public var FragmentNameLength: UInt16 = 0
-    public var pFragmentName: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct {
-    public var ByteRange: HTTP_BYTE_RANGE = HTTP_BYTE_RANGE()
-    public var pFragmentName: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct {
-    public var TrailerCount: UInt16 = 0
-    public var pTrailers: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct {
-    public var WhFastForwardingData: HTTP_WINHTTP_FAST_FORWARDING_DATA = HTTP_WINHTTP_FAST_FORWARDING_DATA()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_DATA_CHUNK_TYPE {
     public var value: Int32 = 0
 
@@ -490,7 +257,6 @@ public let HTTP_DATA_CHUNK_TYPE_HttpDataChunkFromWinHttpFastForwarding: HTTP_DAT
 public let HTTP_DATA_CHUNK_TYPE_HttpDataChunkMaximum: HTTP_DATA_CHUNK_TYPE = HTTP_DATA_CHUNK_TYPE(6)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_DELEGATE_REQUEST_PROPERTY_ID {
     public var value: Int32 = 0
 
@@ -517,14 +283,13 @@ public let HTTP_DELEGATE_REQUEST_PROPERTY_ID_DelegateRequestDelegateUrlProperty:
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
 public struct HTTP_DELEGATE_REQUEST_PROPERTY_INFO {
-    public var PropertyId: HTTP_DELEGATE_REQUEST_PROPERTY_ID = HTTP_DELEGATE_REQUEST_PROPERTY_ID()
+    public var PropertyId: Int32 = 0
     public var PropertyInfoLength: UInt32 = 0
     public var PropertyInfo: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_ENABLED_STATE {
     public var value: Int32 = 0
 
@@ -549,24 +314,6 @@ public let HTTP_ENABLED_STATE_HttpEnabledStateActive: HTTP_ENABLED_STATE = HTTP_
 public let HTTP_ENABLED_STATE_HttpEnabledStateInactive: HTTP_ENABLED_STATE = HTTP_ENABLED_STATE(1)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_ERROR_HEADERS_PARAM {
-    public var StatusCode: UInt16 = 0
-    public var HeaderCount: UInt16 = 0
-    public var Headers: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_FAST_FORWARD_INFO {
-    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
-    public var EnableFastForwarding: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_FEATURE_ID {
     public var value: Int32 = 0
 
@@ -645,17 +392,6 @@ public let HTTP_FEATURE_ID_HttpFeatureLast: HTTP_FEATURE_ID = HTTP_FEATURE_ID(18
 public let HTTP_FEATURE_ID_HttpFeaturemax: HTTP_FEATURE_ID = HTTP_FEATURE_ID(-1)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_FLOWRATE_INFO {
-    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
-    public var MaxBandwidth: UInt32 = 0
-    public var MaxPeakBandwidth: UInt32 = 0
-    public var BurstSize: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_HEADER_ID {
     public var value: Int32 = 0
 
@@ -836,7 +572,6 @@ public let HTTP_HEADER_ID_HttpHeaderResponseMaximum: HTTP_HEADER_ID = HTTP_HEADE
 public let HTTP_HEADER_ID_HttpHeaderMaximum: HTTP_HEADER_ID = HTTP_HEADER_ID(41)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_INITIALIZE {
     public var value: UInt32 = 0
 
@@ -883,35 +618,6 @@ public struct HTTP_KNOWN_HEADER {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_LISTEN_ENDPOINT_INFO {
-    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
-    public var EnableSharing: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_LOGGING_INFO {
-    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
-    public var LoggingFlags: UInt32 = 0
-    public var SoftwareName: CPointer<UInt16> = CPointer<UInt16>()
-    public var SoftwareNameLength: UInt16 = 0
-    public var DirectoryNameLength: UInt16 = 0
-    public var DirectoryName: CPointer<UInt16> = CPointer<UInt16>()
-    public var Format: HTTP_LOGGING_TYPE = HTTP_LOGGING_TYPE()
-    public var Fields: UInt32 = 0
-    public var pExtFields: CPointer<Unit> = CPointer<Unit>()
-    public var NumOfExtFields: UInt16 = 0
-    public var MaxRecordSize: UInt16 = 0
-    public var RolloverType: HTTP_LOGGING_ROLLOVER_TYPE = HTTP_LOGGING_ROLLOVER_TYPE()
-    public var RolloverSize: UInt32 = 0
-    public var pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_LOGGING_ROLLOVER_TYPE {
     public var value: Int32 = 0
 
@@ -945,7 +651,6 @@ public let HTTP_LOGGING_ROLLOVER_TYPE_HttpLoggingRolloverMonthly: HTTP_LOGGING_R
 public let HTTP_LOGGING_ROLLOVER_TYPE_HttpLoggingRolloverHourly: HTTP_LOGGING_ROLLOVER_TYPE = HTTP_LOGGING_ROLLOVER_TYPE(4)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_LOGGING_TYPE {
     public var value: Int32 = 0
 
@@ -976,14 +681,6 @@ public let HTTP_LOGGING_TYPE_HttpLoggingTypeNCSA: HTTP_LOGGING_TYPE = HTTP_LOGGI
 public let HTTP_LOGGING_TYPE_HttpLoggingTypeRaw: HTTP_LOGGING_TYPE = HTTP_LOGGING_TYPE(3)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_LOG_DATA {
-    public var Type: HTTP_LOG_DATA_TYPE = HTTP_LOG_DATA_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_LOG_DATA_TYPE {
     public var value: Int32 = 0
 
@@ -1006,44 +703,8 @@ public let HTTP_LOG_DATA_TYPE_HttpLogDataTypeFields: HTTP_LOG_DATA_TYPE = HTTP_L
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
-public struct HTTP_LOG_FIELDS_DATA {
-    public var Base: HTTP_LOG_DATA = HTTP_LOG_DATA()
-    public var UserNameLength: UInt16 = 0
-    public var UriStemLength: UInt16 = 0
-    public var ClientIpLength: UInt16 = 0
-    public var ServerNameLength: UInt16 = 0
-    public var ServiceNameLength: UInt16 = 0
-    public var ServerIpLength: UInt16 = 0
-    public var MethodLength: UInt16 = 0
-    public var UriQueryLength: UInt16 = 0
-    public var HostLength: UInt16 = 0
-    public var UserAgentLength: UInt16 = 0
-    public var CookieLength: UInt16 = 0
-    public var ReferrerLength: UInt16 = 0
-    public var UserName: CPointer<UInt16> = CPointer<UInt16>()
-    public var UriStem: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientIp: CPointer<UInt8> = CPointer<UInt8>()
-    public var ServerName: CPointer<UInt8> = CPointer<UInt8>()
-    public var ServiceName: CPointer<UInt8> = CPointer<UInt8>()
-    public var ServerIp: CPointer<UInt8> = CPointer<UInt8>()
-    public var Method: CPointer<UInt8> = CPointer<UInt8>()
-    public var UriQuery: CPointer<UInt8> = CPointer<UInt8>()
-    public var Host: CPointer<UInt8> = CPointer<UInt8>()
-    public var UserAgent: CPointer<UInt8> = CPointer<UInt8>()
-    public var Cookie: CPointer<UInt8> = CPointer<UInt8>()
-    public var Referrer: CPointer<UInt8> = CPointer<UInt8>()
-    public var ServerPort: UInt16 = 0
-    public var ProtocolStatus: UInt16 = 0
-    public var Win32Status: UInt32 = 0
-    public var MethodNum: HTTP_VERB = HTTP_VERB()
-    public var SubStatus: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_MULTIPLE_KNOWN_HEADERS {
-    public var HeaderId: HTTP_HEADER_ID = HTTP_HEADER_ID()
+    public var HeaderId: Int32 = 0
     public var Flags: UInt32 = 0
     public var KnownHeaderCount: UInt16 = 0
     public var KnownHeaders: CPointer<HTTP_KNOWN_HEADER> = CPointer<HTTP_KNOWN_HEADER>()
@@ -1051,16 +712,6 @@ public struct HTTP_MULTIPLE_KNOWN_HEADERS {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_PERFORMANCE_PARAM {
-    public var Type: HTTP_PERFORMANCE_PARAM_TYPE = HTTP_PERFORMANCE_PARAM_TYPE()
-    public var BufferSize: UInt32 = 0
-    public var Buffer: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_PERFORMANCE_PARAM_TYPE {
     public var value: Int32 = 0
 
@@ -1107,15 +758,6 @@ public struct HTTP_PROPERTY_FLAGS {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_PROTECTION_LEVEL_INFO {
-    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
-    public var Level: HTTP_PROTECTION_LEVEL_TYPE = HTTP_PROTECTION_LEVEL_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_PROTECTION_LEVEL_TYPE {
     public var value: Int32 = 0
 
@@ -1143,15 +785,6 @@ public let HTTP_PROTECTION_LEVEL_TYPE_HttpProtectionLevelEdgeRestricted: HTTP_PR
 public let HTTP_PROTECTION_LEVEL_TYPE_HttpProtectionLevelRestricted: HTTP_PROTECTION_LEVEL_TYPE = HTTP_PROTECTION_LEVEL_TYPE(2)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_QOS_SETTING_INFO {
-    public var QosType: HTTP_QOS_SETTING_TYPE = HTTP_QOS_SETTING_TYPE()
-    public var QosSetting: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_QOS_SETTING_TYPE {
     public var value: Int32 = 0
 
@@ -1194,33 +827,6 @@ public struct HTTP_QUERY_REQUEST_QUALIFIER_TCP {
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
-public struct HTTP_QUIC_API_TIMINGS {
-    public var ConnectionTimings: HTTP_QUIC_CONNECTION_API_TIMINGS = HTTP_QUIC_CONNECTION_API_TIMINGS()
-    public var StreamTimings: HTTP_QUIC_STREAM_API_TIMINGS = HTTP_QUIC_STREAM_API_TIMINGS()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_QUIC_CONNECTION_API_TIMINGS {
-    public var OpenTime: UInt64 = 0
-    public var CloseTime: UInt64 = 0
-    public var StartTime: UInt64 = 0
-    public var ShutdownTime: UInt64 = 0
-    public var SecConfigCreateTime: UInt64 = 0
-    public var SecConfigDeleteTime: UInt64 = 0
-    public var GetParamCount: UInt64 = 0
-    public var GetParamSum: UInt64 = 0
-    public var SetParamCount: UInt64 = 0
-    public var SetParamSum: UInt64 = 0
-    public var SetCallbackHandlerCount: UInt64 = 0
-    public var SetCallbackHandlerSum: UInt64 = 0
-    public var ControlStreamTimings: HTTP_QUIC_STREAM_API_TIMINGS = HTTP_QUIC_STREAM_API_TIMINGS()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_QUIC_STREAM_API_TIMINGS {
     public var OpenCount: UInt64 = 0
     public var OpenSum: UInt64 = 0
@@ -1258,7 +864,6 @@ public struct HTTP_QUIC_STREAM_REQUEST_STATS {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_RECEIVE_HTTP_REQUEST_FLAGS {
     public var value: UInt32 = 0
 
@@ -1283,26 +888,6 @@ public let HTTP_RECEIVE_HTTP_REQUEST_FLAGS_HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY: 
 public let HTTP_RECEIVE_HTTP_REQUEST_FLAGS_HTTP_RECEIVE_REQUEST_FLAG_FLUSH_BODY: HTTP_RECEIVE_HTTP_REQUEST_FLAGS = HTTP_RECEIVE_HTTP_REQUEST_FLAGS(2)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_REQUEST_AUTH_INFO {
-    public var AuthStatus: HTTP_AUTH_STATUS = HTTP_AUTH_STATUS()
-    public var SecStatus: Int32 = 0
-    public var Flags: UInt32 = 0
-    public var AuthType: HTTP_REQUEST_AUTH_TYPE = HTTP_REQUEST_AUTH_TYPE()
-    public var AccessToken: CPointer<Unit> = CPointer<Unit>()
-    public var ContextAttributes: UInt32 = 0
-    public var PackedContextLength: UInt32 = 0
-    public var PackedContextType: UInt32 = 0
-    public var PackedContext: CPointer<Unit> = CPointer<Unit>()
-    public var MutualAuthDataLength: UInt32 = 0
-    public var pMutualAuthData: CPointer<UInt8> = CPointer<UInt8>()
-    public var PackageNameLength: UInt16 = 0
-    public var pPackageName: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_REQUEST_AUTH_TYPE {
     public var value: Int32 = 0
 
@@ -1340,38 +925,8 @@ public let HTTP_REQUEST_AUTH_TYPE_HttpRequestAuthTypeKerberos: HTTP_REQUEST_AUTH
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
-public struct HTTP_REQUEST_CHANNEL_BIND_STATUS {
-    public var ServiceName: CPointer<HTTP_SERVICE_BINDING_BASE> = CPointer<HTTP_SERVICE_BINDING_BASE>()
-    public var ChannelToken: CPointer<UInt8> = CPointer<UInt8>()
-    public var ChannelTokenSize: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_REQUEST_DSCP_INFO {
     public var DscpTag: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_REQUEST_HEADERS {
-    public var UnknownHeaderCount: UInt16 = 0
-    public var pUnknownHeaders: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
-    public var TrailerCount: UInt16 = 0
-    public var pTrailers: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
-    public var KnownHeaders: VArray<HTTP_KNOWN_HEADER, $41> = VArray<HTTP_KNOWN_HEADER, $41>(repeat: HTTP_KNOWN_HEADER())
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_REQUEST_INFO {
-    public var InfoType: HTTP_REQUEST_INFO_TYPE = HTTP_REQUEST_INFO_TYPE()
-    public var InfoLength: UInt32 = 0
-    public var pInfo: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
@@ -1384,7 +939,6 @@ public struct HTTP_REQUEST_INFO_PROPERTY_INFO {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_REQUEST_INFO_TYPE {
     public var value: Int32 = 0
 
@@ -1455,7 +1009,6 @@ public struct HTTP_REQUEST_INITIAL_PACKET_TTL_INFO {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_REQUEST_PROPERTY {
     public var value: Int32 = 0
 
@@ -1547,7 +1100,6 @@ public struct HTTP_REQUEST_SIZING_INFO {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_REQUEST_SIZING_TYPE {
     public var value: Int32 = 0
 
@@ -1592,7 +1144,6 @@ public struct HTTP_REQUEST_TIMING_INFO {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_REQUEST_TIMING_TYPE {
     public var value: Int32 = 0
 
@@ -1722,60 +1273,6 @@ public struct HTTP_REQUEST_TRANSPORT_IDLE_CONNECTION_TIMEOUT_INFO {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_REQUEST_V1 {
-    public var Flags: UInt32 = 0
-    public var ConnectionId: UInt64 = 0
-    public var RequestId: UInt64 = 0
-    public var UrlContext: UInt64 = 0
-    public var Version: HTTP_VERSION = HTTP_VERSION()
-    public var Verb: HTTP_VERB = HTTP_VERB()
-    public var UnknownVerbLength: UInt16 = 0
-    public var RawUrlLength: UInt16 = 0
-    public var pUnknownVerb: CPointer<UInt8> = CPointer<UInt8>()
-    public var pRawUrl: CPointer<UInt8> = CPointer<UInt8>()
-    public var CookedUrl: HTTP_COOKED_URL = HTTP_COOKED_URL()
-    public var Address: HTTP_TRANSPORT_ADDRESS = HTTP_TRANSPORT_ADDRESS()
-    public var Headers: HTTP_REQUEST_HEADERS = HTTP_REQUEST_HEADERS()
-    public var BytesReceived: UInt64 = 0
-    public var EntityChunkCount: UInt16 = 0
-    public var pEntityChunks: CPointer<HTTP_DATA_CHUNK> = CPointer<HTTP_DATA_CHUNK>()
-    public var RawConnectionId: UInt64 = 0
-    public var pSslInfo: CPointer<HTTP_SSL_INFO> = CPointer<HTTP_SSL_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_REQUEST_V2 {
-    public var Base: HTTP_REQUEST_V1 = HTTP_REQUEST_V1()
-    public var RequestInfoCount: UInt16 = 0
-    public var pRequestInfo: CPointer<HTTP_REQUEST_INFO> = CPointer<HTTP_REQUEST_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_RESPONSE_HEADERS {
-    public var UnknownHeaderCount: UInt16 = 0
-    public var pUnknownHeaders: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
-    public var TrailerCount: UInt16 = 0
-    public var pTrailers: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
-    public var KnownHeaders: VArray<HTTP_KNOWN_HEADER, $30> = VArray<HTTP_KNOWN_HEADER, $30>(repeat: HTTP_KNOWN_HEADER())
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_RESPONSE_INFO {
-    public var Type: HTTP_RESPONSE_INFO_TYPE = HTTP_RESPONSE_INFO_TYPE()
-    public var Length: UInt32 = 0
-    public var pInfo: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_RESPONSE_INFO_TYPE {
     public var value: Int32 = 0
 
@@ -1806,30 +1303,6 @@ public let HTTP_RESPONSE_INFO_TYPE_HttpResponseInfoTypeQoSProperty: HTTP_RESPONS
 public let HTTP_RESPONSE_INFO_TYPE_HttpResponseInfoTypeChannelBind: HTTP_RESPONSE_INFO_TYPE = HTTP_RESPONSE_INFO_TYPE(3)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_RESPONSE_V1 {
-    public var Flags: UInt32 = 0
-    public var Version: HTTP_VERSION = HTTP_VERSION()
-    public var StatusCode: UInt16 = 0
-    public var ReasonLength: UInt16 = 0
-    public var pReason: CPointer<UInt8> = CPointer<UInt8>()
-    public var Headers: HTTP_RESPONSE_HEADERS = HTTP_RESPONSE_HEADERS()
-    public var EntityChunkCount: UInt16 = 0
-    public var pEntityChunks: CPointer<HTTP_DATA_CHUNK> = CPointer<HTTP_DATA_CHUNK>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_RESPONSE_V2 {
-    public var Base: HTTP_RESPONSE_V1 = HTTP_RESPONSE_V1()
-    public var ResponseInfoCount: UInt16 = 0
-    public var pResponseInfo: CPointer<HTTP_RESPONSE_INFO> = CPointer<HTTP_RESPONSE_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_SCHEME {
     public var value: Int32 = 0
 
@@ -1879,9 +1352,9 @@ public struct HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS {
 public struct HTTP_SERVER_AUTHENTICATION_INFO {
     public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
     public var AuthSchemes: UInt32 = 0
-    public var ReceiveMutualAuth: Win32_Foundation.BOOLEAN = 0
-    public var ReceiveContextHandle: Win32_Foundation.BOOLEAN = 0
-    public var DisableNTLMCredentialCaching: Win32_Foundation.BOOLEAN = 0
+    public var ReceiveMutualAuth: UInt8 = 0
+    public var ReceiveContextHandle: UInt8 = 0
+    public var DisableNTLMCredentialCaching: UInt8 = 0
     public var ExFlags: UInt8 = 0
     public var DigestParams: HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS = HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS()
     public var BasicParams: HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS = HTTP_SERVER_AUTHENTICATION_BASIC_PARAMS()
@@ -1889,7 +1362,6 @@ public struct HTTP_SERVER_AUTHENTICATION_INFO {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_SERVER_PROPERTY {
     public var value: Int32 = 0
 
@@ -1953,23 +1425,6 @@ public let HTTP_SERVER_PROPERTY_HttpServerFastForwardingProperty: HTTP_SERVER_PR
 public let HTTP_SERVER_PROPERTY_HttpServerRequestInfoProperty: HTTP_SERVER_PROPERTY = HTTP_SERVER_PROPERTY(19)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_BINDING_A {
-    public var Base: HTTP_SERVICE_BINDING_BASE = HTTP_SERVICE_BINDING_BASE()
-    public var Buffer: CPointer<UInt8> = CPointer<UInt8>()
-    public var BufferSize: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_BINDING_BASE {
-    public var Type: HTTP_SERVICE_BINDING_TYPE = HTTP_SERVICE_BINDING_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_SERVICE_BINDING_TYPE {
     public var value: Int32 = 0
 
@@ -1997,16 +1452,6 @@ public let HTTP_SERVICE_BINDING_TYPE_HttpServiceBindingTypeW: HTTP_SERVICE_BINDI
 public let HTTP_SERVICE_BINDING_TYPE_HttpServiceBindingTypeA: HTTP_SERVICE_BINDING_TYPE = HTTP_SERVICE_BINDING_TYPE(2)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_BINDING_W {
-    public var Base: HTTP_SERVICE_BINDING_BASE = HTTP_SERVICE_BINDING_BASE()
-    public var Buffer: CPointer<UInt16> = CPointer<UInt16>()
-    public var BufferSize: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_SERVICE_CONFIG_CACHE_KEY {
     public var value: Int32 = 0
 
@@ -2033,13 +1478,12 @@ public let HTTP_SERVICE_CONFIG_CACHE_KEY_CacheRangeChunkSize: HTTP_SERVICE_CONFI
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_CACHE_SET {
-    public var KeyDesc: HTTP_SERVICE_CONFIG_CACHE_KEY = HTTP_SERVICE_CONFIG_CACHE_KEY()
+    public var KeyDesc: Int32 = 0
     public var ParamDesc: UInt32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_SERVICE_CONFIG_ID {
     public var value: Int32 = 0
 
@@ -2099,24 +1543,23 @@ public let HTTP_SERVICE_CONFIG_ID_HttpServiceConfigSslScopedCcsCertInfoEx: HTTP_
 @When[Windows_Win32_Networking_HttpServer == "on"]
 public let HTTP_SERVICE_CONFIG_ID_HttpServiceConfigMax: HTTP_SERVICE_CONFIG_ID = HTTP_SERVICE_CONFIG_ID(13)
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM {
     public var AddrLength: UInt16 = 0
-    public var pAddress: CPointer<Win32_impl.SOCKADDR> = CPointer<Win32_impl.SOCKADDR>()
+    public var pAddress: CPointer<Win32__impl_l1.SOCKADDR> = CPointer<Win32__impl_l1.SOCKADDR>()
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY {
     public var AddrCount: UInt32 = 0
-    public var AddrList: VArray<Win32_impl.SOCKADDR_STORAGE, $1> = VArray<Win32_impl.SOCKADDR_STORAGE, $1>(repeat: Win32_impl.SOCKADDR_STORAGE())
+    public var AddrList: VArray<Win32__impl_l1.SOCKADDR_STORAGE, $1> = VArray<Win32__impl_l1.SOCKADDR_STORAGE, $1>(repeat: Win32__impl_l1.SOCKADDR_STORAGE())
     public init() {}
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_SERVICE_CONFIG_QUERY_TYPE {
     public var value: Int32 = 0
 
@@ -2144,7 +1587,6 @@ public let HTTP_SERVICE_CONFIG_QUERY_TYPE_HttpServiceConfigQueryNext: HTTP_SERVI
 public let HTTP_SERVICE_CONFIG_QUERY_TYPE_HttpServiceConfigQueryMax: HTTP_SERVICE_CONFIG_QUERY_TYPE = HTTP_SERVICE_CONFIG_QUERY_TYPE(2)
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_SERVICE_CONFIG_SETTING_KEY {
     public var value: Int32 = 0
 
@@ -2171,64 +1613,38 @@ public let HTTP_SERVICE_CONFIG_SETTING_KEY_HttpTlsThrottle: HTTP_SERVICE_CONFIG_
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SETTING_SET {
-    public var KeyDesc: HTTP_SERVICE_CONFIG_SETTING_KEY = HTTP_SERVICE_CONFIG_SETTING_KEY()
+    public var KeyDesc: Int32 = 0
     public var ParamDesc: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_CCS_KEY {
-    public var LocalAddress: Win32_impl.SOCKADDR_STORAGE = Win32_impl.SOCKADDR_STORAGE()
+    public var LocalAddress: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_CCS_QUERY {
-    public var QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE = HTTP_SERVICE_CONFIG_QUERY_TYPE()
+    public var QueryDesc: Int32 = 0
     public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY = HTTP_SERVICE_CONFIG_SSL_CCS_KEY()
     public var dwToken: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_CONFIG_SSL_CCS_QUERY_EX {
-    public var QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE = HTTP_SERVICE_CONFIG_QUERY_TYPE()
-    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY = HTTP_SERVICE_CONFIG_SSL_CCS_KEY()
-    public var dwToken: UInt32 = 0
-    public var ParamType: HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE = HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_CONFIG_SSL_CCS_SET {
-    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY = HTTP_SERVICE_CONFIG_SSL_CCS_KEY()
-    public var ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM = HTTP_SERVICE_CONFIG_SSL_PARAM()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_CONFIG_SSL_CCS_SET_EX {
-    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY = HTTP_SERVICE_CONFIG_SSL_CCS_KEY()
-    public var ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM_EX = HTTP_SERVICE_CONFIG_SSL_PARAM_EX()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_KEY {
-    public var pIpPort: CPointer<Win32_impl.SOCKADDR> = CPointer<Win32_impl.SOCKADDR>()
+    public var pIpPort: CPointer<Win32__impl_l1.SOCKADDR> = CPointer<Win32__impl_l1.SOCKADDR>()
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_KEY_EX {
-    public var IpPort: Win32_impl.SOCKADDR_STORAGE = Win32_impl.SOCKADDR_STORAGE()
+    public var IpPort: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
     public init() {}
 }
 
@@ -2248,190 +1664,16 @@ public struct HTTP_SERVICE_CONFIG_SSL_PARAM {
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX {
-    public var ParamType: HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE = HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE()
-    public var Flags: UInt64 = 0
-    public var Anonymous: HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union = HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func http2WindowSizeParam(): HTTP2_WINDOW_SIZE_PARAM {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP2_WINDOW_SIZE_PARAM>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_http2WindowSizeParam(val: HTTP2_WINDOW_SIZE_PARAM): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP2_WINDOW_SIZE_PARAM>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func http2SettingsLimitsParam(): HTTP2_SETTINGS_LIMITS_PARAM {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP2_SETTINGS_LIMITS_PARAM>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_http2SettingsLimitsParam(val: HTTP2_SETTINGS_LIMITS_PARAM): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP2_SETTINGS_LIMITS_PARAM>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func httpPerformanceParam(): HTTP_PERFORMANCE_PARAM {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_PERFORMANCE_PARAM>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpPerformanceParam(val: HTTP_PERFORMANCE_PARAM): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_PERFORMANCE_PARAM>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func httpTlsRestrictionsParam(): HTTP_TLS_RESTRICTIONS_PARAM {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_TLS_RESTRICTIONS_PARAM>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpTlsRestrictionsParam(val: HTTP_TLS_RESTRICTIONS_PARAM): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_TLS_RESTRICTIONS_PARAM>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func httpErrorHeadersParam(): HTTP_ERROR_HEADERS_PARAM {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_ERROR_HEADERS_PARAM>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpErrorHeadersParam(val: HTTP_ERROR_HEADERS_PARAM): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_ERROR_HEADERS_PARAM>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func httpTlsSessionTicketKeysParam(): HTTP_TLS_SESSION_TICKET_KEYS_PARAM {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_TLS_SESSION_TICKET_KEYS_PARAM>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpTlsSessionTicketKeysParam(val: HTTP_TLS_SESSION_TICKET_KEYS_PARAM): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_TLS_SESSION_TICKET_KEYS_PARAM>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func httpCertConfigParam(): HTTP_CERT_CONFIG_PARAM {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_CERT_CONFIG_PARAM>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpCertConfigParam(val: HTTP_CERT_CONFIG_PARAM): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<HTTP_CERT_CONFIG_PARAM>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_QUERY {
-    public var QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE = HTTP_SERVICE_CONFIG_QUERY_TYPE()
+    public var QueryDesc: Int32 = 0
     public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_KEY = HTTP_SERVICE_CONFIG_SSL_KEY()
     public var dwToken: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_CONFIG_SSL_QUERY_EX {
-    public var QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE = HTTP_SERVICE_CONFIG_QUERY_TYPE()
-    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_KEY_EX = HTTP_SERVICE_CONFIG_SSL_KEY_EX()
-    public var dwToken: UInt32 = 0
-    public var ParamType: HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE = HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_SET {
     public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_KEY = HTTP_SERVICE_CONFIG_SSL_KEY()
@@ -2439,42 +1681,24 @@ public struct HTTP_SERVICE_CONFIG_SSL_SET {
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_CONFIG_SSL_SET_EX {
-    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_KEY_EX = HTTP_SERVICE_CONFIG_SSL_KEY_EX()
-    public var ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM_EX = HTTP_SERVICE_CONFIG_SSL_PARAM_EX()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_SNI_KEY {
-    public var IpPort: Win32_impl.SOCKADDR_STORAGE = Win32_impl.SOCKADDR_STORAGE()
+    public var IpPort: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
     public var Host: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_SNI_QUERY {
-    public var QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE = HTTP_SERVICE_CONFIG_QUERY_TYPE()
+    public var QueryDesc: Int32 = 0
     public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY = HTTP_SERVICE_CONFIG_SSL_SNI_KEY()
     public var dwToken: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_CONFIG_SSL_SNI_QUERY_EX {
-    public var QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE = HTTP_SERVICE_CONFIG_QUERY_TYPE()
-    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY = HTTP_SERVICE_CONFIG_SSL_SNI_KEY()
-    public var dwToken: UInt32 = 0
-    public var ParamType: HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE = HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_SSL_SNI_SET {
     public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY = HTTP_SERVICE_CONFIG_SSL_SNI_KEY()
@@ -2483,15 +1707,6 @@ public struct HTTP_SERVICE_CONFIG_SSL_SNI_SET {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
-public struct HTTP_SERVICE_CONFIG_SSL_SNI_SET_EX {
-    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY = HTTP_SERVICE_CONFIG_SSL_SNI_KEY()
-    public var ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM_EX = HTTP_SERVICE_CONFIG_SSL_PARAM_EX()
-    public init() {}
-}
-
-@When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_SERVICE_CONFIG_TIMEOUT_KEY {
     public var value: Int32 = 0
 
@@ -2518,7 +1733,7 @@ public let HTTP_SERVICE_CONFIG_TIMEOUT_KEY_HeaderWaitTimeout: HTTP_SERVICE_CONFI
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_TIMEOUT_SET {
-    public var KeyDesc: HTTP_SERVICE_CONFIG_TIMEOUT_KEY = HTTP_SERVICE_CONFIG_TIMEOUT_KEY()
+    public var KeyDesc: Int32 = 0
     public var ParamDesc: UInt16 = 0
     public init() {}
 }
@@ -2540,7 +1755,7 @@ public struct HTTP_SERVICE_CONFIG_URLACL_PARAM {
 @When[Windows_Win32_Networking_HttpServer == "on"]
 @C
 public struct HTTP_SERVICE_CONFIG_URLACL_QUERY {
-    public var QueryDesc: HTTP_SERVICE_CONFIG_QUERY_TYPE = HTTP_SERVICE_CONFIG_QUERY_TYPE()
+    public var QueryDesc: Int32 = 0
     public var KeyDesc: HTTP_SERVICE_CONFIG_URLACL_KEY = HTTP_SERVICE_CONFIG_URLACL_KEY()
     public var dwToken: UInt32 = 0
     public init() {}
@@ -2561,7 +1776,7 @@ public struct HTTP_SSL_CLIENT_CERT_INFO {
     public var CertEncodedSize: UInt32 = 0
     public var pCertEncoded: CPointer<UInt8> = CPointer<UInt8>()
     public var Token: CPointer<Unit> = CPointer<Unit>()
-    public var CertDeniedByMapper: Win32_Foundation.BOOLEAN = 0
+    public var CertDeniedByMapper: UInt8 = 0
     public init() {}
 }
 
@@ -2593,7 +1808,6 @@ public struct HTTP_SSL_PROTOCOL_INFO {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE {
     public var value: Int32 = 0
 
@@ -2639,7 +1853,7 @@ public let HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE_ExParamTypeMax: HTTP_SSL_SERVIC
 @C
 public struct HTTP_STATE_INFO {
     public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
-    public var State: HTTP_ENABLED_STATE = HTTP_ENABLED_STATE()
+    public var State: Int32 = 0
     public init() {}
 }
 
@@ -2672,11 +1886,11 @@ public struct HTTP_TLS_SESSION_TICKET_KEYS_PARAM {
     public init() {}
 }
 
-@When[Windows_Win32_Networking_HttpServer == "on"]
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct HTTP_TRANSPORT_ADDRESS {
-    public var pRemoteAddress: CPointer<Win32_impl.SOCKADDR> = CPointer<Win32_impl.SOCKADDR>()
-    public var pLocalAddress: CPointer<Win32_impl.SOCKADDR> = CPointer<Win32_impl.SOCKADDR>()
+    public var pRemoteAddress: CPointer<Win32__impl_l1.SOCKADDR> = CPointer<Win32__impl_l1.SOCKADDR>()
+    public var pLocalAddress: CPointer<Win32__impl_l1.SOCKADDR> = CPointer<Win32__impl_l1.SOCKADDR>()
     public init() {}
 }
 
@@ -2691,7 +1905,6 @@ public struct HTTP_UNKNOWN_HEADER {
 }
 
 @When[Windows_Win32_Networking_HttpServer == "on"]
-@C
 public struct HTTP_VERB {
     public var value: Int32 = 0
 
@@ -2805,69 +2018,870 @@ public struct HTTP_WSK_API_TIMINGS {
     public init() {}
 }
 
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_BANDWIDTH_LIMIT_INFO {
+    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
+    public var MaxBandwidth: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_BINDING_INFO {
+    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
+    public var RequestQueueHandle: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_CACHE_POLICY {
+    public var Policy: Int32 = 0
+    public var SecondsToLive: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_CONNECTION_LIMIT_INFO {
+    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
+    public var MaxConnections: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_DATA_CHUNK {
+    public var DataChunkType: Int32 = 0
+    public var Anonymous: HTTP_DATA_CHUNK__Anonymous_e__Union = HTTP_DATA_CHUNK__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct HTTP_DATA_CHUNK__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+
+    public mut prop fromMemory: HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fromFileHandle: HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fromFragmentCache: HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fromFragmentCacheEx: HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop trailers: HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fromWinHttpFastForwarding: HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromMemory_e__Struct {
+    public var pBuffer: CPointer<Unit> = CPointer<Unit>()
+    public var BufferLength: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromFileHandle_e__Struct {
+    public var ByteRange: HTTP_BYTE_RANGE = HTTP_BYTE_RANGE()
+    public var FileHandle: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCache_e__Struct {
+    public var FragmentNameLength: UInt16 = 0
+    public var pFragmentName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromFragmentCacheEx_e__Struct {
+    public var ByteRange: HTTP_BYTE_RANGE = HTTP_BYTE_RANGE()
+    public var pFragmentName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_DATA_CHUNK__Anonymous_e__Union__Trailers_e__Struct {
+    public var TrailerCount: UInt16 = 0
+    public var pTrailers: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_DATA_CHUNK__Anonymous_e__Union__FromWinHttpFastForwarding_e__Struct {
+    public var WhFastForwardingData: HTTP_WINHTTP_FAST_FORWARDING_DATA = HTTP_WINHTTP_FAST_FORWARDING_DATA()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_ERROR_HEADERS_PARAM {
+    public var StatusCode: UInt16 = 0
+    public var HeaderCount: UInt16 = 0
+    public var Headers: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_FAST_FORWARD_INFO {
+    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
+    public var EnableFastForwarding: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_FLOWRATE_INFO {
+    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
+    public var MaxBandwidth: UInt32 = 0
+    public var MaxPeakBandwidth: UInt32 = 0
+    public var BurstSize: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_LISTEN_ENDPOINT_INFO {
+    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
+    public var EnableSharing: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Security == "on"]
+@C
+public struct HTTP_LOGGING_INFO {
+    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
+    public var LoggingFlags: UInt32 = 0
+    public var SoftwareName: CPointer<UInt16> = CPointer<UInt16>()
+    public var SoftwareNameLength: UInt16 = 0
+    public var DirectoryNameLength: UInt16 = 0
+    public var DirectoryName: CPointer<UInt16> = CPointer<UInt16>()
+    public var Format: Int32 = 0
+    public var Fields: UInt32 = 0
+    public var pExtFields: CPointer<Unit> = CPointer<Unit>()
+    public var NumOfExtFields: UInt16 = 0
+    public var MaxRecordSize: UInt16 = 0
+    public var RolloverType: Int32 = 0
+    public var RolloverSize: UInt32 = 0
+    public var pSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_LOG_DATA {
+    public var Type: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_LOG_FIELDS_DATA {
+    public var Base: HTTP_LOG_DATA = HTTP_LOG_DATA()
+    public var UserNameLength: UInt16 = 0
+    public var UriStemLength: UInt16 = 0
+    public var ClientIpLength: UInt16 = 0
+    public var ServerNameLength: UInt16 = 0
+    public var ServiceNameLength: UInt16 = 0
+    public var ServerIpLength: UInt16 = 0
+    public var MethodLength: UInt16 = 0
+    public var UriQueryLength: UInt16 = 0
+    public var HostLength: UInt16 = 0
+    public var UserAgentLength: UInt16 = 0
+    public var CookieLength: UInt16 = 0
+    public var ReferrerLength: UInt16 = 0
+    public var UserName: CPointer<UInt16> = CPointer<UInt16>()
+    public var UriStem: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientIp: CPointer<UInt8> = CPointer<UInt8>()
+    public var ServerName: CPointer<UInt8> = CPointer<UInt8>()
+    public var ServiceName: CPointer<UInt8> = CPointer<UInt8>()
+    public var ServerIp: CPointer<UInt8> = CPointer<UInt8>()
+    public var Method: CPointer<UInt8> = CPointer<UInt8>()
+    public var UriQuery: CPointer<UInt8> = CPointer<UInt8>()
+    public var Host: CPointer<UInt8> = CPointer<UInt8>()
+    public var UserAgent: CPointer<UInt8> = CPointer<UInt8>()
+    public var Cookie: CPointer<UInt8> = CPointer<UInt8>()
+    public var Referrer: CPointer<UInt8> = CPointer<UInt8>()
+    public var ServerPort: UInt16 = 0
+    public var ProtocolStatus: UInt16 = 0
+    public var Win32Status: UInt32 = 0
+    public var MethodNum: Int32 = 0
+    public var SubStatus: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_PERFORMANCE_PARAM {
+    public var Type: Int32 = 0
+    public var BufferSize: UInt32 = 0
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_PROTECTION_LEVEL_INFO {
+    public var Flags: HTTP_PROPERTY_FLAGS = HTTP_PROPERTY_FLAGS()
+    public var Level: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_QOS_SETTING_INFO {
+    public var QosType: Int32 = 0
+    public var QosSetting: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_QUIC_CONNECTION_API_TIMINGS {
+    public var OpenTime: UInt64 = 0
+    public var CloseTime: UInt64 = 0
+    public var StartTime: UInt64 = 0
+    public var ShutdownTime: UInt64 = 0
+    public var SecConfigCreateTime: UInt64 = 0
+    public var SecConfigDeleteTime: UInt64 = 0
+    public var GetParamCount: UInt64 = 0
+    public var GetParamSum: UInt64 = 0
+    public var SetParamCount: UInt64 = 0
+    public var SetParamSum: UInt64 = 0
+    public var SetCallbackHandlerCount: UInt64 = 0
+    public var SetCallbackHandlerSum: UInt64 = 0
+    public var ControlStreamTimings: HTTP_QUIC_STREAM_API_TIMINGS = HTTP_QUIC_STREAM_API_TIMINGS()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_REQUEST_AUTH_INFO {
+    public var AuthStatus: Int32 = 0
+    public var SecStatus: Int32 = 0
+    public var Flags: UInt32 = 0
+    public var AuthType: Int32 = 0
+    public var AccessToken: CPointer<Unit> = CPointer<Unit>()
+    public var ContextAttributes: UInt32 = 0
+    public var PackedContextLength: UInt32 = 0
+    public var PackedContextType: UInt32 = 0
+    public var PackedContext: CPointer<Unit> = CPointer<Unit>()
+    public var MutualAuthDataLength: UInt32 = 0
+    public var pMutualAuthData: CPointer<UInt8> = CPointer<UInt8>()
+    public var PackageNameLength: UInt16 = 0
+    public var pPackageName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_REQUEST_HEADERS {
+    public var UnknownHeaderCount: UInt16 = 0
+    public var pUnknownHeaders: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
+    public var TrailerCount: UInt16 = 0
+    public var pTrailers: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
+    public var KnownHeaders: VArray<HTTP_KNOWN_HEADER, $41> = VArray<HTTP_KNOWN_HEADER, $41>(repeat: HTTP_KNOWN_HEADER())
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_REQUEST_INFO {
+    public var InfoType: Int32 = 0
+    public var InfoLength: UInt32 = 0
+    public var pInfo: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct HTTP_REQUEST_V1 {
+    public var Flags: UInt32 = 0
+    public var ConnectionId: UInt64 = 0
+    public var RequestId: UInt64 = 0
+    public var UrlContext: UInt64 = 0
+    public var Version: HTTP_VERSION = HTTP_VERSION()
+    public var Verb: Int32 = 0
+    public var UnknownVerbLength: UInt16 = 0
+    public var RawUrlLength: UInt16 = 0
+    public var pUnknownVerb: CPointer<UInt8> = CPointer<UInt8>()
+    public var pRawUrl: CPointer<UInt8> = CPointer<UInt8>()
+    public var CookedUrl: HTTP_COOKED_URL = HTTP_COOKED_URL()
+    public var Address: HTTP_TRANSPORT_ADDRESS = HTTP_TRANSPORT_ADDRESS()
+    public var Headers: HTTP_REQUEST_HEADERS = HTTP_REQUEST_HEADERS()
+    public var BytesReceived: UInt64 = 0
+    public var EntityChunkCount: UInt16 = 0
+    public var pEntityChunks: CPointer<HTTP_DATA_CHUNK> = CPointer<HTTP_DATA_CHUNK>()
+    public var RawConnectionId: UInt64 = 0
+    public var pSslInfo: CPointer<HTTP_SSL_INFO> = CPointer<HTTP_SSL_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct HTTP_REQUEST_V2 {
+    public var Base: HTTP_REQUEST_V1 = HTTP_REQUEST_V1()
+    public var RequestInfoCount: UInt16 = 0
+    public var pRequestInfo: CPointer<HTTP_REQUEST_INFO> = CPointer<HTTP_REQUEST_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_RESPONSE_HEADERS {
+    public var UnknownHeaderCount: UInt16 = 0
+    public var pUnknownHeaders: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
+    public var TrailerCount: UInt16 = 0
+    public var pTrailers: CPointer<HTTP_UNKNOWN_HEADER> = CPointer<HTTP_UNKNOWN_HEADER>()
+    public var KnownHeaders: VArray<HTTP_KNOWN_HEADER, $30> = VArray<HTTP_KNOWN_HEADER, $30>(repeat: HTTP_KNOWN_HEADER())
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_RESPONSE_INFO {
+    public var Type: Int32 = 0
+    public var Length: UInt32 = 0
+    public var pInfo: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_RESPONSE_V1 {
+    public var Flags: UInt32 = 0
+    public var Version: HTTP_VERSION = HTTP_VERSION()
+    public var StatusCode: UInt16 = 0
+    public var ReasonLength: UInt16 = 0
+    public var pReason: CPointer<UInt8> = CPointer<UInt8>()
+    public var Headers: HTTP_RESPONSE_HEADERS = HTTP_RESPONSE_HEADERS()
+    public var EntityChunkCount: UInt16 = 0
+    public var pEntityChunks: CPointer<HTTP_DATA_CHUNK> = CPointer<HTTP_DATA_CHUNK>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_RESPONSE_V2 {
+    public var Base: HTTP_RESPONSE_V1 = HTTP_RESPONSE_V1()
+    public var ResponseInfoCount: UInt16 = 0
+    public var pResponseInfo: CPointer<HTTP_RESPONSE_INFO> = CPointer<HTTP_RESPONSE_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_SERVICE_BINDING_BASE {
+    public var Type: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_SERVICE_BINDING_W {
+    public var Base: HTTP_SERVICE_BINDING_BASE = HTTP_SERVICE_BINDING_BASE()
+    public var Buffer: CPointer<UInt16> = CPointer<UInt16>()
+    public var BufferSize: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct HTTP_SERVICE_CONFIG_SSL_CCS_QUERY_EX {
+    public var QueryDesc: Int32 = 0
+    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY = HTTP_SERVICE_CONFIG_SSL_CCS_KEY()
+    public var dwToken: UInt32 = 0
+    public var ParamType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct HTTP_SERVICE_CONFIG_SSL_CCS_SET {
+    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY = HTTP_SERVICE_CONFIG_SSL_CCS_KEY()
+    public var ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM = HTTP_SERVICE_CONFIG_SSL_PARAM()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX {
+    public var ParamType: Int32 = 0
+    public var Flags: UInt64 = 0
+    public var Anonymous: HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union = HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop http2WindowSizeParam: HTTP2_WINDOW_SIZE_PARAM {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP2_WINDOW_SIZE_PARAM>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP2_WINDOW_SIZE_PARAM>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop http2SettingsLimitsParam: HTTP2_SETTINGS_LIMITS_PARAM {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP2_SETTINGS_LIMITS_PARAM>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP2_SETTINGS_LIMITS_PARAM>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop httpPerformanceParam: HTTP_PERFORMANCE_PARAM {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_PERFORMANCE_PARAM>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_PERFORMANCE_PARAM>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop httpTlsRestrictionsParam: HTTP_TLS_RESTRICTIONS_PARAM {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_TLS_RESTRICTIONS_PARAM>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_TLS_RESTRICTIONS_PARAM>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop httpErrorHeadersParam: HTTP_ERROR_HEADERS_PARAM {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_ERROR_HEADERS_PARAM>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_ERROR_HEADERS_PARAM>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop httpTlsSessionTicketKeysParam: HTTP_TLS_SESSION_TICKET_KEYS_PARAM {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_TLS_SESSION_TICKET_KEYS_PARAM>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_TLS_SESSION_TICKET_KEYS_PARAM>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop httpCertConfigParam: HTTP_CERT_CONFIG_PARAM {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_CERT_CONFIG_PARAM>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<HTTP_CERT_CONFIG_PARAM>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct HTTP_SERVICE_CONFIG_SSL_QUERY_EX {
+    public var QueryDesc: Int32 = 0
+    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_KEY_EX = HTTP_SERVICE_CONFIG_SSL_KEY_EX()
+    public var dwToken: UInt32 = 0
+    public var ParamType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct HTTP_SERVICE_CONFIG_SSL_SET_EX {
+    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_KEY_EX = HTTP_SERVICE_CONFIG_SSL_KEY_EX()
+    public var ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM_EX = HTTP_SERVICE_CONFIG_SSL_PARAM_EX()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct HTTP_SERVICE_CONFIG_SSL_SNI_QUERY_EX {
+    public var QueryDesc: Int32 = 0
+    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY = HTTP_SERVICE_CONFIG_SSL_SNI_KEY()
+    public var dwToken: UInt32 = 0
+    public var ParamType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct HTTP_SERVICE_CONFIG_SSL_SNI_SET_EX {
+    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_SNI_KEY = HTTP_SERVICE_CONFIG_SSL_SNI_KEY()
+    public var ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM_EX = HTTP_SERVICE_CONFIG_SSL_PARAM_EX()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_CHANNEL_BIND_INFO {
+    public var Hardening: Int32 = 0
+    public var Flags: UInt32 = 0
+    public var ServiceNames: CPointer<CPointer<HTTP_SERVICE_BINDING_BASE>> = CPointer<CPointer<HTTP_SERVICE_BINDING_BASE>>()
+    public var NumberOfServiceNames: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_QUIC_API_TIMINGS {
+    public var ConnectionTimings: HTTP_QUIC_CONNECTION_API_TIMINGS = HTTP_QUIC_CONNECTION_API_TIMINGS()
+    public var StreamTimings: HTTP_QUIC_STREAM_API_TIMINGS = HTTP_QUIC_STREAM_API_TIMINGS()
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_REQUEST_CHANNEL_BIND_STATUS {
+    public var ServiceName: CPointer<HTTP_SERVICE_BINDING_BASE> = CPointer<HTTP_SERVICE_BINDING_BASE>()
+    public var ChannelToken: CPointer<UInt8> = CPointer<UInt8>()
+    public var ChannelTokenSize: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on"]
+@C
+public struct HTTP_SERVICE_BINDING_A {
+    public var Base: HTTP_SERVICE_BINDING_BASE = HTTP_SERVICE_BINDING_BASE()
+    public var Buffer: CPointer<UInt8> = CPointer<UInt8>()
+    public var BufferSize: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Networking_HttpServer == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct HTTP_SERVICE_CONFIG_SSL_CCS_SET_EX {
+    public var KeyDesc: HTTP_SERVICE_CONFIG_SSL_CCS_KEY = HTTP_SERVICE_CONFIG_SSL_CCS_KEY()
+    public var ParamDesc: HTTP_SERVICE_CONFIG_SSL_PARAM_EX = HTTP_SERVICE_CONFIG_SSL_PARAM_EX()
+    public init() {}
+}
+
 @When[HTTPAPI == "on"]
 foreign {
-    // param-hint: Overlapped optional
-    func HttpAddFragmentToCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, DataChunk: CPointer<HTTP_DATA_CHUNK>, CachePolicy: CPointer<HTTP_CACHE_POLICY>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: Reserved optional reserved
     func HttpAddUrl(RequestQueueHandle: CPointer<Unit>, FullyQualifiedUrl: CPointer<UInt16>, Reserved: CPointer<Unit>): UInt32
     // param-hint: Reserved optional reserved
     func HttpAddUrlToUrlGroup(UrlGroupId: UInt64, pFullyQualifiedUrl: CPointer<UInt16>, UrlContext: UInt64, Reserved: UInt32): UInt32
-    // param-hint: Overlapped optional
-    func HttpCancelHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     func HttpCloseRequestQueue(RequestQueueHandle: HTTP_REQUEST_QUEUE_HANDLE): UInt32
     func HttpCloseServerSession(ServerSessionId: UInt64): UInt32
     func HttpCloseUrlGroup(UrlGroupId: UInt64): UInt32
     // param-hint: Reserved optional reserved
     func HttpCreateHttpHandle(RequestQueueHandle: CPointer<CPointer<Unit>>, Reserved: UInt32): UInt32
-    // param-hint: Name optional
-    // param-hint: SecurityAttributes optional
-    // param-hint: Flags optional
-    func HttpCreateRequestQueue(Version: HTTPAPI_VERSION, Name: CPointer<UInt16>, SecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, Flags: UInt32, RequestQueueHandle: CPointer<HTTP_REQUEST_QUEUE_HANDLE>): UInt32
     // param-hint: Reserved optional reserved
     func HttpCreateServerSession(Version: HTTPAPI_VERSION, ServerSessionId: CPointer<UInt64>, Reserved: UInt32): UInt32
     // param-hint: Reserved optional reserved
     func HttpCreateUrlGroup(ServerSessionId: UInt64, pUrlGroupId: CPointer<UInt64>, Reserved: UInt32): UInt32
     // param-hint: Query optional
     // param-hint: Headers optional
-    func HttpDeclarePush(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Verb: HTTP_VERB, Path: CPointer<UInt16>, Query: CPointer<UInt8>, Headers: CPointer<HTTP_REQUEST_HEADERS>): UInt32
+    func HttpDeclarePush(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Verb: Int32, Path: CPointer<UInt16>, Query: CPointer<UInt8>, Headers: CPointer<HTTP_REQUEST_HEADERS>): UInt32
     func HttpDelegateRequestEx(RequestQueueHandle: CPointer<Unit>, DelegateQueueHandle: CPointer<Unit>, RequestId: UInt64, DelegateUrlGroupId: UInt64, PropertyInfoSetSize: UInt32, PropertyInfoSet: CPointer<HTTP_DELEGATE_REQUEST_PROPERTY_INFO>): UInt32
-    // param-hint: ServiceHandle optional reserved
-    // param-hint: pConfigInformation bytes=param[3]
-    // param-hint: pOverlapped optional reserved
-    func HttpDeleteServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_ID, pConfigInformation: CPointer<Unit>, ConfigInformationLength: UInt32, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     func HttpFindUrlGroupId(FullyQualifiedUrl: CPointer<UInt16>, RequestQueueHandle: CPointer<Unit>, UrlGroupId: CPointer<UInt64>): UInt32
-    // param-hint: Overlapped optional
-    func HttpFlushResponseCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     func HttpGetExtension(Version: HTTPAPI_VERSION, Extension: UInt32, Buffer: CPointer<Unit>, BufferSize: UInt32): UInt32
     // param-hint: pReserved optional reserved
-    func HttpInitialize(Version: HTTPAPI_VERSION, Flags: HTTP_INITIALIZE, pReserved: CPointer<Unit>): UInt32
-    func HttpIsFeatureSupported(FeatureId: HTTP_FEATURE_ID): Int32
+    func HttpInitialize(Version: HTTPAPI_VERSION, Flags: UInt32, pReserved: CPointer<Unit>): UInt32
+    func HttpIsFeatureSupported(FeatureId: Int32): Int32
     // param-hint: Reserved optional reserved
     // param-hint: Flags optional reserved
     func HttpPrepareUrl(Reserved: CPointer<Unit>, Flags: UInt32, Url: CPointer<UInt16>, PreparedUrl: CPointer<CPointer<UInt16>>): UInt32
-    // param-hint: Qualifier bytes=param[4] optional
-    // param-hint: Output bytes=param[6] optional
-    // param-hint: BytesReturned optional
-    // param-hint: Overlapped optional
-    func HttpQueryRequestProperty(RequestQueueHandle: CPointer<Unit>, Id: UInt64, PropertyId: HTTP_REQUEST_PROPERTY, Qualifier: CPointer<Unit>, QualifierSize: UInt32, Output: CPointer<Unit>, OutputBufferSize: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: PropertyInformation bytes=param[3] optional
     // param-hint: Reserved1 optional reserved
     // param-hint: ReturnLength optional
     // param-hint: Reserved2 optional reserved
-    func HttpQueryRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: HTTP_SERVER_PROPERTY, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, ReturnLength: CPointer<UInt32>, Reserved2: CPointer<Unit>): UInt32
+    func HttpQueryRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: Int32, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, ReturnLength: CPointer<UInt32>, Reserved2: CPointer<Unit>): UInt32
     // param-hint: PropertyInformation bytes=param[3] optional
     // param-hint: ReturnLength optional
-    func HttpQueryServerSessionProperty(ServerSessionId: UInt64, Property: HTTP_SERVER_PROPERTY, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32
+    func HttpQueryServerSessionProperty(ServerSessionId: UInt64, Property: Int32, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32
+    // param-hint: PropertyInformation bytes=param[3] optional
+    // param-hint: ReturnLength optional
+    func HttpQueryUrlGroupProperty(UrlGroupId: UInt64, Property: Int32, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32
+    func HttpRemoveUrl(RequestQueueHandle: CPointer<Unit>, FullyQualifiedUrl: CPointer<UInt16>): UInt32
+    func HttpRemoveUrlFromUrlGroup(UrlGroupId: UInt64, pFullyQualifiedUrl: CPointer<UInt16>, Flags: UInt32): UInt32
+    // param-hint: PropertyInformation bytes=param[3]
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    func HttpSetRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: Int32, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): UInt32
+    // param-hint: PropertyInformation bytes=param[3]
+    func HttpSetServerSessionProperty(ServerSessionId: UInt64, Property: Int32, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32
+    // param-hint: PropertyInformation bytes=param[3]
+    func HttpSetUrlGroupProperty(UrlGroupId: UInt64, Property: Int32, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32
+    func HttpShutdownRequestQueue(RequestQueueHandle: CPointer<Unit>): UInt32
+    // param-hint: pReserved optional reserved
+    func HttpTerminate(Flags: UInt32, pReserved: CPointer<Unit>): UInt32
+}
+
+@When[HTTPAPI == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_IO == "on")]
+foreign {
+    // param-hint: RequestBuffer bytes=param[4]
+    // param-hint: BytesReturned optional
+    // param-hint: Overlapped optional
+    func HttpReceiveHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: UInt32, RequestBuffer: CPointer<HTTP_REQUEST_V2>, RequestBufferLength: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
+@When[HTTPAPI == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: Name optional
+    // param-hint: SecurityAttributes optional
+    // param-hint: Flags optional
+    func HttpCreateRequestQueue(Version: HTTPAPI_VERSION, Name: CPointer<UInt16>, SecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, Flags: UInt32, RequestQueueHandle: CPointer<HTTP_REQUEST_QUEUE_HANDLE>): UInt32
+}
+
+@When[HTTPAPI == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Overlapped optional
+    func HttpAddFragmentToCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, DataChunk: CPointer<HTTP_DATA_CHUNK>, CachePolicy: CPointer<HTTP_CACHE_POLICY>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: Overlapped optional
+    func HttpCancelHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: ServiceHandle optional reserved
+    // param-hint: pConfigInformation bytes=param[3]
+    // param-hint: pOverlapped optional reserved
+    func HttpDeleteServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: Int32, pConfigInformation: CPointer<Unit>, ConfigInformationLength: UInt32, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: Overlapped optional
+    func HttpFlushResponseCache(RequestQueueHandle: CPointer<Unit>, UrlPrefix: CPointer<UInt16>, Flags: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: Qualifier bytes=param[4] optional
+    // param-hint: Output bytes=param[6] optional
+    // param-hint: BytesReturned optional
+    // param-hint: Overlapped optional
+    func HttpQueryRequestProperty(RequestQueueHandle: CPointer<Unit>, Id: UInt64, PropertyId: Int32, Qualifier: CPointer<Unit>, QualifierSize: UInt32, Output: CPointer<Unit>, OutputBufferSize: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: ServiceHandle optional reserved
     // param-hint: pInput bytes=param[3] optional
     // param-hint: pOutput bytes=param[5] optional
     // param-hint: pReturnLength optional
     // param-hint: pOverlapped optional reserved
-    func HttpQueryServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_ID, pInput: CPointer<Unit>, InputLength: UInt32, pOutput: CPointer<Unit>, OutputLength: UInt32, pReturnLength: CPointer<UInt32>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: PropertyInformation bytes=param[3] optional
-    // param-hint: ReturnLength optional
-    func HttpQueryUrlGroupProperty(UrlGroupId: UInt64, Property: HTTP_SERVER_PROPERTY, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, ReturnLength: CPointer<UInt32>): UInt32
+    func HttpQueryServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: Int32, pInput: CPointer<Unit>, InputLength: UInt32, pOutput: CPointer<Unit>, OutputLength: UInt32, pReturnLength: CPointer<UInt32>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: ByteRange optional
     // param-hint: Buffer bytes=param[4]
     // param-hint: BytesRead optional
@@ -2877,16 +2891,10 @@ foreign {
     // param-hint: BytesReceived optional
     // param-hint: Overlapped optional
     func HttpReceiveClientCertificate(RequestQueueHandle: CPointer<Unit>, ConnectionId: UInt64, Flags: UInt32, SslClientCertInfo: CPointer<HTTP_SSL_CLIENT_CERT_INFO>, SslClientCertInfoSize: UInt32, BytesReceived: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: RequestBuffer bytes=param[4]
-    // param-hint: BytesReturned optional
-    // param-hint: Overlapped optional
-    func HttpReceiveHttpRequest(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: HTTP_RECEIVE_HTTP_REQUEST_FLAGS, RequestBuffer: CPointer<HTTP_REQUEST_V2>, RequestBufferLength: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: EntityBuffer bytes=param[4]
     // param-hint: BytesReturned optional
     // param-hint: Overlapped optional
     func HttpReceiveRequestEntityBody(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: UInt32, EntityBuffer: CPointer<Unit>, EntityBufferLength: UInt32, BytesReturned: CPointer<UInt32>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    func HttpRemoveUrl(RequestQueueHandle: CPointer<Unit>, FullyQualifiedUrl: CPointer<UInt16>): UInt32
-    func HttpRemoveUrlFromUrlGroup(UrlGroupId: UInt64, pFullyQualifiedUrl: CPointer<UInt16>, Flags: UInt32): UInt32
     // param-hint: CachePolicy optional
     // param-hint: BytesSent optional
     // param-hint: Reserved1 optional reserved
@@ -2903,26 +2911,15 @@ foreign {
     // param-hint: LogData optional
     func HttpSendResponseEntityBody(RequestQueueHandle: CPointer<Unit>, RequestId: UInt64, Flags: UInt32, EntityChunkCount: UInt16, EntityChunks: CPointer<HTTP_DATA_CHUNK>, BytesSent: CPointer<UInt32>, Reserved1: CPointer<Unit>, Reserved2: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>, LogData: CPointer<HTTP_LOG_DATA>): UInt32
     // param-hint: Input bytes=param[4] optional
-    func HttpSetRequestProperty(RequestQueueHandle: CPointer<Unit>, Id: UInt64, PropertyId: HTTP_REQUEST_PROPERTY, Input: CPointer<Unit>, InputPropertySize: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: PropertyInformation bytes=param[3]
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    func HttpSetRequestQueueProperty(RequestQueueHandle: CPointer<Unit>, Property: HTTP_SERVER_PROPERTY, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32, Reserved1: UInt32, Reserved2: CPointer<Unit>): UInt32
-    // param-hint: PropertyInformation bytes=param[3]
-    func HttpSetServerSessionProperty(ServerSessionId: UInt64, Property: HTTP_SERVER_PROPERTY, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32
+    func HttpSetRequestProperty(RequestQueueHandle: CPointer<Unit>, Id: UInt64, PropertyId: Int32, Input: CPointer<Unit>, InputPropertySize: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: ServiceHandle optional reserved
     // param-hint: pConfigInformation bytes=param[3]
     // param-hint: pOverlapped optional reserved
-    func HttpSetServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_ID, pConfigInformation: CPointer<Unit>, ConfigInformationLength: UInt32, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: PropertyInformation bytes=param[3]
-    func HttpSetUrlGroupProperty(UrlGroupId: UInt64, Property: HTTP_SERVER_PROPERTY, PropertyInformation: CPointer<Unit>, PropertyInformationLength: UInt32): UInt32
-    func HttpShutdownRequestQueue(RequestQueueHandle: CPointer<Unit>): UInt32
-    // param-hint: pReserved optional reserved
-    func HttpTerminate(Flags: HTTP_INITIALIZE, pReserved: CPointer<Unit>): UInt32
+    func HttpSetServiceConfiguration(ServiceHandle: CPointer<Unit>, ConfigId: Int32, pConfigInformation: CPointer<Unit>, ConfigInformationLength: UInt32, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: Handle optional reserved
     // param-hint: ConfigInfo bytes=param[3]
     // param-hint: Overlapped optional reserved
-    func HttpUpdateServiceConfiguration(Handle: CPointer<Unit>, ConfigId: HTTP_SERVICE_CONFIG_ID, ConfigInfo: CPointer<Unit>, ConfigInfoLength: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    func HttpUpdateServiceConfiguration(Handle: CPointer<Unit>, ConfigId: Int32, ConfigInfo: CPointer<Unit>, ConfigInfoLength: UInt32, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: Overlapped optional
     func HttpWaitForDemandStart(RequestQueueHandle: CPointer<Unit>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: Overlapped optional

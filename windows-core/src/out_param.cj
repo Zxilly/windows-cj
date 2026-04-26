@@ -30,6 +30,13 @@ class OutParamState<T> {
         clearSlot()
     }
 
+    public func readSlot<A>(): ?A where A <: CType {
+        if (slot.isNull()) {
+            return None
+        }
+        Some(unsafe { CPointer<A>(slot).read() })
+    }
+
     public func closeSlot(): Unit {
         if (slot.isNull()) {
             return
@@ -78,6 +85,10 @@ public class OutSlot<T> <: Resource {
         closed
     }
 
+    public func isClosed(): Bool {
+        closed
+    }
+
     public func get(): ?T {
         if (closed) {
             return None
@@ -115,6 +126,13 @@ public class OutSlot<T> <: Resource {
         current
     }
 
+    public func takeAbi<A>(): ?A where A <: CType {
+        if (closed) {
+            return None
+        }
+        state.readSlot<A>()
+    }
+
     public func close(): Unit {
         if (closed) {
             return
@@ -122,9 +140,5 @@ public class OutSlot<T> <: Resource {
         state.clearValue()
         state.closeSlot()
         closed = true
-    }
-
-    ~init() {
-        close()
     }
 }

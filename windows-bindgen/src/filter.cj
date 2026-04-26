@@ -91,6 +91,10 @@ public class BindgenFilter {
 
         return false
     }
+
+    public func hasExplicitIncludes(): Bool {
+        return hasIncludes
+    }
 }
 
 func parseFilterRules(index: TypeIndex, raw: String, include: Bool): ArrayList<FilterRule> {

@@ -8,7 +8,7 @@ func nullAbiValue<A>(): A where A <: CType {
     }
 }
 
-func projectAbiValue<T, A>(value: T): A where A <: CType {
+public func projectAbiValue<T, A>(value: T): A where A <: CType {
     match (value) {
         case hstring: HString =>
             match (hstring.asRaw() as A) {

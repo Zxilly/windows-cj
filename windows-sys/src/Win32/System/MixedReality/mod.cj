@@ -2,6 +2,7 @@
 package windows_sys.Win32.System.MixedReality
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 
 
 @When[Windows_Win32_System_MixedReality == "on"]

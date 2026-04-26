@@ -2,14 +2,18 @@
 package windows_sys.Win32.NetworkManagement.WindowsFilteringPlatform
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadFloat32, unionReadInt16, unionReadInt32, unionReadInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteFloat32, unionWriteInt16, unionWriteInt32, unionWriteInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
+@When[Windows_Win32_System_Rpc == "on"]
 import windows_sys.Win32.System.Rpc as Win32_System_Rpc
 
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct DL_ADDRESS_TYPE {
     public var value: Int32 = 0
 
@@ -37,22 +41,6 @@ public let DL_ADDRESS_TYPE_DlMulticast: DL_ADDRESS_TYPE = DL_ADDRESS_TYPE(1)
 public let DL_ADDRESS_TYPE_DlBroadcast: DL_ADDRESS_TYPE = DL_ADDRESS_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_ACTION0 {
-    public var type_: FWP_ACTION_TYPE = FWP_ACTION_TYPE()
-    public var Anonymous: FWPM_ACTION0__Anonymous_e__Union = FWPM_ACTION0__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union size unavailable; placeholder only
-@C
-public struct FWPM_ACTION0__Anonymous_e__Union {
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_APPC_NETWORK_CAPABILITY_TYPE {
     public var value: Int32 = 0
 
@@ -80,31 +68,6 @@ public let FWPM_APPC_NETWORK_CAPABILITY_TYPE_FWPM_APPC_NETWORK_CAPABILITY_INTERN
 public let FWPM_APPC_NETWORK_CAPABILITY_TYPE_FWPM_APPC_NETWORK_CAPABILITY_INTERNET_PRIVATE_NETWORK: FWPM_APPC_NETWORK_CAPABILITY_TYPE = FWPM_APPC_NETWORK_CAPABILITY_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_CALLOUT0 {
-    public var calloutKey: GUID = GUID()
-    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
-    public var flags: UInt32 = 0
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var applicableLayer: GUID = GUID()
-    public var calloutId: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_CALLOUT_CHANGE0 {
-    public var changeType: FWPM_CHANGE_TYPE = FWPM_CHANGE_TYPE()
-    public var calloutKey: GUID = GUID()
-    public var calloutId: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type FWPM_CALLOUT_CHANGE_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWPM_CALLOUT_CHANGE0>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public type FWPM_CALLOUT_ENUM_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
@@ -125,7 +88,6 @@ public struct FWPM_CALLOUT_SUBSCRIPTION0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_CHANGE_TYPE {
     public var value: Int32 = 0
 
@@ -153,137 +115,6 @@ public let FWPM_CHANGE_TYPE_FWPM_CHANGE_DELETE: FWPM_CHANGE_TYPE = FWPM_CHANGE_T
 public let FWPM_CHANGE_TYPE_FWPM_CHANGE_TYPE_MAX: FWPM_CHANGE_TYPE = FWPM_CHANGE_TYPE(3)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_CLASSIFY_OPTION0 {
-    public var type_: FWP_CLASSIFY_OPTION_TYPE = FWP_CLASSIFY_OPTION_TYPE()
-    public var value: FWP_VALUE0 = FWP_VALUE0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_CLASSIFY_OPTIONS0 {
-    public var numOptions: UInt32 = 0
-    public var options: CPointer<FWPM_CLASSIFY_OPTION0> = CPointer<FWPM_CLASSIFY_OPTION0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_CONNECTION0 {
-    public var connectionId: UInt64 = 0
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous1: FWPM_CONNECTION0__Anonymous1_e__Union = FWPM_CONNECTION0__Anonymous1_e__Union()
-    public var Anonymous2: FWPM_CONNECTION0__Anonymous2_e__Union = FWPM_CONNECTION0__Anonymous2_e__Union()
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var ipsecTrafficModeType: IPSEC_TRAFFIC_TYPE = IPSEC_TRAFFIC_TYPE()
-    public var keyModuleType: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE()
-    public var mmCrypto: IKEEXT_PROPOSAL0 = IKEEXT_PROPOSAL0()
-    public var mmPeer: IKEEXT_CREDENTIAL2 = IKEEXT_CREDENTIAL2()
-    public var emPeer: IKEEXT_CREDENTIAL2 = IKEEXT_CREDENTIAL2()
-    public var bytesTransferredIn: UInt64 = 0
-    public var bytesTransferredOut: UInt64 = 0
-    public var bytesTransferredTotal: UInt64 = 0
-    public var startSysTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_CONNECTION0__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_CONNECTION0__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type FWPM_CONNECTION_CALLBACK0 = CFunc<(CPointer<Unit>, FWPM_CONNECTION_EVENT_TYPE, CPointer<FWPM_CONNECTION0>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public type FWPM_CONNECTION_ENUM_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
@@ -295,7 +126,6 @@ public struct FWPM_CONNECTION_ENUM_TEMPLATE0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_CONNECTION_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -346,7 +176,6 @@ public type FWPM_DYNAMIC_KEYWORD_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<Uni
 public type FWPM_ENGINE_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_ENGINE_OPTION {
     public var value: Int32 = 0
 
@@ -386,16 +215,6 @@ public let FWPM_ENGINE_OPTION_FWPM_ENGINE_TXN_WATCHDOG_TIMEOUT_IN_MSEC: FWPM_ENG
 public let FWPM_ENGINE_OPTION_FWPM_ENGINE_OPTION_MAX: FWPM_ENGINE_OPTION = FWPM_ENGINE_OPTION(6)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_FIELD0 {
-    public var fieldKey: CPointer<GUID> = CPointer<GUID>()
-    public var type_: FWPM_FIELD_TYPE = FWPM_FIELD_TYPE()
-    public var dataType: FWP_DATA_TYPE = FWP_DATA_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_FIELD_TYPE {
     public var value: Int32 = 0
 
@@ -427,75 +246,8 @@ public let FWPM_FIELD_TYPE_FWPM_FIELD_TYPE_MAX: FWPM_FIELD_TYPE = FWPM_FIELD_TYP
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct FWPM_FILTER0 {
-    public var filterKey: GUID = GUID()
-    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
-    public var flags: FWPM_FILTER_FLAGS = FWPM_FILTER_FLAGS()
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var layerKey: GUID = GUID()
-    public var subLayerKey: GUID = GUID()
-    public var weight: FWP_VALUE0 = FWP_VALUE0()
-    public var numFilterConditions: UInt32 = 0
-    public var filterCondition: CPointer<FWPM_FILTER_CONDITION0> = CPointer<FWPM_FILTER_CONDITION0>()
-    public var action: FWPM_ACTION0 = FWPM_ACTION0()
-    public var Anonymous: FWPM_FILTER0__Anonymous_e__Union = FWPM_FILTER0__Anonymous_e__Union()
-    public var reserved: CPointer<GUID> = CPointer<GUID>()
-    public var filterId: UInt64 = 0
-    public var effectiveWeight: FWP_VALUE0 = FWP_VALUE0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_FILTER0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func rawContext(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_rawContext(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func providerContextKey(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_providerContextKey(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_FILTER_CHANGE0 {
-    public var changeType: FWPM_CHANGE_TYPE = FWPM_CHANGE_TYPE()
+    public var changeType: Int32 = 0
     public var filterKey: GUID = GUID()
     public var filterId: UInt64 = 0
     public init() {}
@@ -505,34 +257,9 @@ public struct FWPM_FILTER_CHANGE0 {
 public type FWPM_FILTER_CHANGE_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWPM_FILTER_CHANGE0>) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_FILTER_CONDITION0 {
-    public var fieldKey: GUID = GUID()
-    public var matchType: FWP_MATCH_TYPE = FWP_MATCH_TYPE()
-    public var conditionValue: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public type FWPM_FILTER_ENUM_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_FILTER_ENUM_TEMPLATE0 {
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var layerKey: GUID = GUID()
-    public var enumType: FWP_FILTER_ENUM_TYPE = FWP_FILTER_ENUM_TYPE()
-    public var flags: UInt32 = 0
-    public var providerContextTemplate: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0> = CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0>()
-    public var numFilterConditions: UInt32 = 0
-    public var filterCondition: CPointer<FWPM_FILTER_CONDITION0> = CPointer<FWPM_FILTER_CONDITION0>()
-    public var actionMask: UInt32 = 0
-    public var calloutKey: CPointer<GUID> = CPointer<GUID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_FILTER_FLAGS {
     public var value: UInt32 = 0
 
@@ -589,28 +316,6 @@ public let FWPM_FILTER_FLAGS_FWPM_FILTER_FLAG_DISABLED: FWPM_FILTER_FLAGS = FWPM
 public let FWPM_FILTER_FLAGS_FWPM_FILTER_FLAG_INDEXED: FWPM_FILTER_FLAGS = FWPM_FILTER_FLAGS(64)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_FILTER_SUBSCRIPTION0 {
-    public var enumTemplate: CPointer<FWPM_FILTER_ENUM_TEMPLATE0> = CPointer<FWPM_FILTER_ENUM_TEMPLATE0>()
-    public var flags: UInt32 = 0
-    public var sessionKey: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_LAYER0 {
-    public var layerKey: GUID = GUID()
-    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
-    public var flags: UInt32 = 0
-    public var numFields: UInt32 = 0
-    public var field: CPointer<FWPM_FIELD0> = CPointer<FWPM_FIELD0>()
-    public var defaultSubLayerKey: GUID = GUID()
-    public var layerId: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public type FWPM_LAYER_ENUM_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
@@ -646,1254 +351,8 @@ public struct FWPM_LAYER_STATISTICS1 {
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct FWPM_NETWORK_CONNECTION_POLICY_SETTING0 {
-    public var type_: FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE = FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE()
-    public var value: FWP_VALUE0 = FWP_VALUE0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0 {
-    public var numSettings: UInt32 = 0
-    public var settings: CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTING0> = CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTING0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT0 {
-    public var header: FWPM_NET_EVENT_HEADER0 = FWPM_NET_EVENT_HEADER0()
-    public var type_: FWPM_NET_EVENT_TYPE = FWPM_NET_EVENT_TYPE()
-    public var Anonymous: FWPM_NET_EVENT0__Anonymous_e__Union = FWPM_NET_EVENT0__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ikeMmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeEmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeEmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDrop(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDrop(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipsecDrop(): CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipsecDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func idpDrop(): CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_idpDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT1 {
-    public var header: FWPM_NET_EVENT_HEADER1 = FWPM_NET_EVENT_HEADER1()
-    public var type_: FWPM_NET_EVENT_TYPE = FWPM_NET_EVENT_TYPE()
-    public var Anonymous: FWPM_NET_EVENT1__Anonymous_e__Union = FWPM_NET_EVENT1__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT1__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ikeMmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeEmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeEmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDrop(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDrop(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipsecDrop(): CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipsecDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func idpDrop(): CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_idpDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT2 {
-    public var header: FWPM_NET_EVENT_HEADER2 = FWPM_NET_EVENT_HEADER2()
-    public var type_: FWPM_NET_EVENT_TYPE = FWPM_NET_EVENT_TYPE()
-    public var Anonymous: FWPM_NET_EVENT2__Anonymous_e__Union = FWPM_NET_EVENT2__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT2__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ikeMmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeEmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeEmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDrop(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDrop(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipsecDrop(): CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipsecDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func idpDrop(): CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_idpDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyAllow(): CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyAllow(val: CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func capabilityDrop(): CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_capabilityDrop(val: CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func capabilityAllow(): CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_capabilityAllow(val: CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDropMac(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDropMac(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT3 {
-    public var header: FWPM_NET_EVENT_HEADER3 = FWPM_NET_EVENT_HEADER3()
-    public var type_: FWPM_NET_EVENT_TYPE = FWPM_NET_EVENT_TYPE()
-    public var Anonymous: FWPM_NET_EVENT3__Anonymous_e__Union = FWPM_NET_EVENT3__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT3__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ikeMmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeEmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeEmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDrop(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDrop(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipsecDrop(): CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipsecDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func idpDrop(): CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_idpDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyAllow(): CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyAllow(val: CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func capabilityDrop(): CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_capabilityDrop(val: CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func capabilityAllow(): CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_capabilityAllow(val: CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDropMac(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDropMac(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT4 {
-    public var header: FWPM_NET_EVENT_HEADER3 = FWPM_NET_EVENT_HEADER3()
-    public var type_: FWPM_NET_EVENT_TYPE = FWPM_NET_EVENT_TYPE()
-    public var Anonymous: FWPM_NET_EVENT4__Anonymous_e__Union = FWPM_NET_EVENT4__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT4__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ikeMmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeEmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeEmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDrop(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDrop(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipsecDrop(): CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipsecDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func idpDrop(): CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_idpDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyAllow(): CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyAllow(val: CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func capabilityDrop(): CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_capabilityDrop(val: CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func capabilityAllow(): CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_capabilityAllow(val: CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDropMac(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDropMac(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT5 {
-    public var header: FWPM_NET_EVENT_HEADER3 = FWPM_NET_EVENT_HEADER3()
-    public var type_: FWPM_NET_EVENT_TYPE = FWPM_NET_EVENT_TYPE()
-    public var Anonymous: FWPM_NET_EVENT5__Anonymous_e__Union = FWPM_NET_EVENT5__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT5__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ikeMmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeEmFailure(): CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeEmFailure(val: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDrop(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDrop(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ipsecDrop(): CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ipsecDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func idpDrop(): CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_idpDrop(val: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyAllow(): CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyAllow(val: CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func capabilityDrop(): CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_capabilityDrop(val: CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func capabilityAllow(): CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_capabilityAllow(val: CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyDropMac(): CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyDropMac(val: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func lpmPacketArrival(): CPointer<FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_lpmPacketArrival(val: CPointer<FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type FWPM_NET_EVENT_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT1>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type FWPM_NET_EVENT_CALLBACK1 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT2>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type FWPM_NET_EVENT_CALLBACK2 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT3>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type FWPM_NET_EVENT_CALLBACK3 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT4>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type FWPM_NET_EVENT_CALLBACK4 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT5>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_NET_EVENT_CAPABILITY_ALLOW0 {
-    public var networkCapabilityId: FWPM_APPC_NETWORK_CAPABILITY_TYPE = FWPM_APPC_NETWORK_CAPABILITY_TYPE()
+    public var networkCapabilityId: Int32 = 0
     public var filterId: UInt64 = 0
     public var isLoopback: Int32 = 0
     public init() {}
@@ -1902,7 +361,7 @@ public struct FWPM_NET_EVENT_CAPABILITY_ALLOW0 {
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
 public struct FWPM_NET_EVENT_CAPABILITY_DROP0 {
-    public var networkCapabilityId: FWPM_APPC_NETWORK_CAPABILITY_TYPE = FWPM_APPC_NETWORK_CAPABILITY_TYPE()
+    public var networkCapabilityId: Int32 = 0
     public var filterId: UInt64 = 0
     public var isLoopback: Int32 = 0
     public init() {}
@@ -1943,943 +402,7 @@ public struct FWPM_NET_EVENT_CLASSIFY_DROP1 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_CLASSIFY_DROP2 {
-    public var filterId: UInt64 = 0
-    public var layerId: UInt16 = 0
-    public var reauthReason: UInt32 = 0
-    public var originalProfile: UInt32 = 0
-    public var currentProfile: UInt32 = 0
-    public var msFwpDirection: UInt32 = 0
-    public var isLoopback: Int32 = 0
-    public var vSwitchId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var vSwitchSourcePort: UInt32 = 0
-    public var vSwitchDestinationPort: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_CLASSIFY_DROP_MAC0 {
-    public var localMacAddr: FWP_BYTE_ARRAY6 = FWP_BYTE_ARRAY6()
-    public var remoteMacAddr: FWP_BYTE_ARRAY6 = FWP_BYTE_ARRAY6()
-    public var mediaType: UInt32 = 0
-    public var ifType: UInt32 = 0
-    public var etherType: UInt16 = 0
-    public var ndisPortNumber: UInt32 = 0
-    public var reserved: UInt32 = 0
-    public var vlanTag: UInt16 = 0
-    public var ifLuid: UInt64 = 0
-    public var filterId: UInt64 = 0
-    public var layerId: UInt16 = 0
-    public var reauthReason: UInt32 = 0
-    public var originalProfile: UInt32 = 0
-    public var currentProfile: UInt32 = 0
-    public var msFwpDirection: UInt32 = 0
-    public var isLoopback: Int32 = 0
-    public var vSwitchId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var vSwitchSourcePort: UInt32 = 0
-    public var vSwitchDestinationPort: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public type FWPM_NET_EVENT_ENUM_HANDLE = CPointer<Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_ENUM_TEMPLATE0 {
-    public var startTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var endTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var numFilterConditions: UInt32 = 0
-    public var filterCondition: CPointer<FWPM_FILTER_CONDITION0> = CPointer<FWPM_FILTER_CONDITION0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_HEADER0 {
-    public var timeStamp: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var flags: UInt32 = 0
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var ipProtocol: UInt8 = 0
-    public var Anonymous1: FWPM_NET_EVENT_HEADER0__Anonymous1_e__Union = FWPM_NET_EVENT_HEADER0__Anonymous1_e__Union()
-    public var Anonymous2: FWPM_NET_EVENT_HEADER0__Anonymous2_e__Union = FWPM_NET_EVENT_HEADER0__Anonymous2_e__Union()
-    public var localPort: UInt16 = 0
-    public var remotePort: UInt16 = 0
-    public var scopeId: UInt32 = 0
-    public var appId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var userId: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER0__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localAddrV4(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localAddrV4(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localAddrV6(): FWP_BYTE_ARRAY16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localAddrV6(val: FWP_BYTE_ARRAY16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER0__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteAddrV4(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteAddrV4(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteAddrV6(): FWP_BYTE_ARRAY16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteAddrV6(val: FWP_BYTE_ARRAY16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_HEADER1 {
-    public var timeStamp: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var flags: UInt32 = 0
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var ipProtocol: UInt8 = 0
-    public var Anonymous1: FWPM_NET_EVENT_HEADER1__Anonymous1_e__Union = FWPM_NET_EVENT_HEADER1__Anonymous1_e__Union()
-    public var Anonymous2: FWPM_NET_EVENT_HEADER1__Anonymous2_e__Union = FWPM_NET_EVENT_HEADER1__Anonymous2_e__Union()
-    public var localPort: UInt16 = 0
-    public var remotePort: UInt16 = 0
-    public var scopeId: UInt32 = 0
-    public var appId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var userId: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
-    public var Anonymous3: FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union = FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER1__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localAddrV4(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localAddrV4(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localAddrV6(): FWP_BYTE_ARRAY16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localAddrV6(val: FWP_BYTE_ARRAY16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER1__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteAddrV4(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteAddrV4(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteAddrV6(): FWP_BYTE_ARRAY16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteAddrV6(val: FWP_BYTE_ARRAY16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union {
-    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0)
-
-    public func anonymous(): FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct {
-    public var reserved1: FWP_AF = FWP_AF()
-    public var Anonymous: FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union = FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
-
-    public func anonymous(): FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
-    public var reserved2: FWP_BYTE_ARRAY6 = FWP_BYTE_ARRAY6()
-    public var reserved3: FWP_BYTE_ARRAY6 = FWP_BYTE_ARRAY6()
-    public var reserved4: UInt32 = 0
-    public var reserved5: UInt32 = 0
-    public var reserved6: UInt16 = 0
-    public var reserved7: UInt32 = 0
-    public var reserved8: UInt32 = 0
-    public var reserved9: UInt16 = 0
-    public var reserved10: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_HEADER2 {
-    public var timeStamp: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var flags: UInt32 = 0
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var ipProtocol: UInt8 = 0
-    public var Anonymous1: FWPM_NET_EVENT_HEADER2__Anonymous1_e__Union = FWPM_NET_EVENT_HEADER2__Anonymous1_e__Union()
-    public var Anonymous2: FWPM_NET_EVENT_HEADER2__Anonymous2_e__Union = FWPM_NET_EVENT_HEADER2__Anonymous2_e__Union()
-    public var localPort: UInt16 = 0
-    public var remotePort: UInt16 = 0
-    public var scopeId: UInt32 = 0
-    public var appId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var userId: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
-    public var addressFamily: FWP_AF = FWP_AF()
-    public var packageSid: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER2__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localAddrV4(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localAddrV4(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localAddrV6(): FWP_BYTE_ARRAY16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localAddrV6(val: FWP_BYTE_ARRAY16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER2__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteAddrV4(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteAddrV4(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteAddrV6(): FWP_BYTE_ARRAY16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteAddrV6(val: FWP_BYTE_ARRAY16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_HEADER3 {
-    public var timeStamp: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var flags: UInt32 = 0
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var ipProtocol: UInt8 = 0
-    public var Anonymous1: FWPM_NET_EVENT_HEADER3__Anonymous1_e__Union = FWPM_NET_EVENT_HEADER3__Anonymous1_e__Union()
-    public var Anonymous2: FWPM_NET_EVENT_HEADER3__Anonymous2_e__Union = FWPM_NET_EVENT_HEADER3__Anonymous2_e__Union()
-    public var localPort: UInt16 = 0
-    public var remotePort: UInt16 = 0
-    public var scopeId: UInt32 = 0
-    public var appId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var userId: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
-    public var addressFamily: FWP_AF = FWP_AF()
-    public var packageSid: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
-    public var enterpriseId: CPointer<UInt16> = CPointer<UInt16>()
-    public var policyFlags: UInt64 = 0
-    public var effectiveName: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER3__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localAddrV4(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localAddrV4(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localAddrV6(): FWP_BYTE_ARRAY16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localAddrV6(val: FWP_BYTE_ARRAY16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_HEADER3__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteAddrV4(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteAddrV4(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteAddrV6(): FWP_BYTE_ARRAY16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteAddrV6(val: FWP_BYTE_ARRAY16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_IKEEXT_EM_FAILURE0 {
-    public var failureErrorCode: UInt32 = 0
-    public var failurePoint: IPSEC_FAILURE_POINT = IPSEC_FAILURE_POINT()
-    public var flags: UInt32 = 0
-    public var emState: IKEEXT_EM_SA_STATE = IKEEXT_EM_SA_STATE()
-    public var saRole: IKEEXT_SA_ROLE = IKEEXT_SA_ROLE()
-    public var emAuthMethod: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-    public var mmId: UInt64 = 0
-    public var qmFilterId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_IKEEXT_EM_FAILURE1 {
-    public var failureErrorCode: UInt32 = 0
-    public var failurePoint: IPSEC_FAILURE_POINT = IPSEC_FAILURE_POINT()
-    public var flags: UInt32 = 0
-    public var emState: IKEEXT_EM_SA_STATE = IKEEXT_EM_SA_STATE()
-    public var saRole: IKEEXT_SA_ROLE = IKEEXT_SA_ROLE()
-    public var emAuthMethod: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-    public var mmId: UInt64 = 0
-    public var qmFilterId: UInt64 = 0
-    public var localPrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
-    public var remotePrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
-    public var numLocalPrincipalGroupSids: UInt32 = 0
-    public var localPrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public var numRemotePrincipalGroupSids: UInt32 = 0
-    public var remotePrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public var saTrafficType: IPSEC_TRAFFIC_TYPE = IPSEC_TRAFFIC_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE0 {
-    public var failureErrorCode: UInt32 = 0
-    public var failurePoint: IPSEC_FAILURE_POINT = IPSEC_FAILURE_POINT()
-    public var flags: UInt32 = 0
-    public var keyingModuleType: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE()
-    public var mmState: IKEEXT_MM_SA_STATE = IKEEXT_MM_SA_STATE()
-    public var saRole: IKEEXT_SA_ROLE = IKEEXT_SA_ROLE()
-    public var mmAuthMethod: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-    public var mmId: UInt64 = 0
-    public var mmFilterId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE1 {
-    public var failureErrorCode: UInt32 = 0
-    public var failurePoint: IPSEC_FAILURE_POINT = IPSEC_FAILURE_POINT()
-    public var flags: UInt32 = 0
-    public var keyingModuleType: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE()
-    public var mmState: IKEEXT_MM_SA_STATE = IKEEXT_MM_SA_STATE()
-    public var saRole: IKEEXT_SA_ROLE = IKEEXT_SA_ROLE()
-    public var mmAuthMethod: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-    public var mmId: UInt64 = 0
-    public var mmFilterId: UInt64 = 0
-    public var localPrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
-    public var remotePrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
-    public var numLocalPrincipalGroupSids: UInt32 = 0
-    public var localPrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public var numRemotePrincipalGroupSids: UInt32 = 0
-    public var remotePrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE2 {
-    public var failureErrorCode: UInt32 = 0
-    public var failurePoint: IPSEC_FAILURE_POINT = IPSEC_FAILURE_POINT()
-    public var flags: UInt32 = 0
-    public var keyingModuleType: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE()
-    public var mmState: IKEEXT_MM_SA_STATE = IKEEXT_MM_SA_STATE()
-    public var saRole: IKEEXT_SA_ROLE = IKEEXT_SA_ROLE()
-    public var mmAuthMethod: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-    public var mmId: UInt64 = 0
-    public var mmFilterId: UInt64 = 0
-    public var localPrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
-    public var remotePrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
-    public var numLocalPrincipalGroupSids: UInt32 = 0
-    public var localPrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public var numRemotePrincipalGroupSids: UInt32 = 0
-    public var remotePrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public var providerContextKey: CPointer<GUID> = CPointer<GUID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE0 {
-    public var failureErrorCode: UInt32 = 0
-    public var failurePoint: IPSEC_FAILURE_POINT = IPSEC_FAILURE_POINT()
-    public var keyingModuleType: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE()
-    public var qmState: IKEEXT_QM_SA_STATE = IKEEXT_QM_SA_STATE()
-    public var saRole: IKEEXT_SA_ROLE = IKEEXT_SA_ROLE()
-    public var saTrafficType: IPSEC_TRAFFIC_TYPE = IPSEC_TRAFFIC_TYPE()
-    public var Anonymous1: FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous1_e__Union = FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous1_e__Union()
-    public var Anonymous2: FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous2_e__Union = FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous2_e__Union()
-    public var qmFilterId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localSubNet(): FWP_CONDITION_VALUE0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localSubNet(val: FWP_CONDITION_VALUE0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteSubNet(): FWP_CONDITION_VALUE0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteSubNet(val: FWP_CONDITION_VALUE0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE1 {
-    public var failureErrorCode: UInt32 = 0
-    public var failurePoint: IPSEC_FAILURE_POINT = IPSEC_FAILURE_POINT()
-    public var keyingModuleType: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE()
-    public var qmState: IKEEXT_QM_SA_STATE = IKEEXT_QM_SA_STATE()
-    public var saRole: IKEEXT_SA_ROLE = IKEEXT_SA_ROLE()
-    public var saTrafficType: IPSEC_TRAFFIC_TYPE = IPSEC_TRAFFIC_TYPE()
-    public var Anonymous1: FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous1_e__Union = FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous1_e__Union()
-    public var Anonymous2: FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous2_e__Union = FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous2_e__Union()
-    public var qmFilterId: UInt64 = 0
-    public var mmSaLuid: UInt64 = 0
-    public var mmProviderContextKey: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localSubNet(): FWP_CONDITION_VALUE0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localSubNet(val: FWP_CONDITION_VALUE0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteSubNet(): FWP_CONDITION_VALUE0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteSubNet(val: FWP_CONDITION_VALUE0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_IPSEC_DOSP_DROP0 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous1: FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous1_e__Union = FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous1_e__Union()
-    public var Anonymous2: FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous2_e__Union = FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous2_e__Union()
-    public var failureStatus: Int32 = 0
-    public var direction: FWP_DIRECTION = FWP_DIRECTION()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func publicHostV4Addr(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_publicHostV4Addr(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func publicHostV6Addr(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_publicHostV6Addr(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func internalHostV4Addr(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_internalHostV4Addr(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func internalHostV6Addr(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_internalHostV6Addr(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_IPSEC_KERNEL_DROP0 {
-    public var failureStatus: Int32 = 0
-    public var direction: FWP_DIRECTION = FWP_DIRECTION()
-    public var spi: UInt32 = 0
-    public var filterId: UInt64 = 0
-    public var layerId: UInt16 = 0
-    public init() {}
-}
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
@@ -2889,16 +412,6 @@ public struct FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_NET_EVENT_SUBSCRIPTION0 {
-    public var enumTemplate: CPointer<FWPM_NET_EVENT_ENUM_TEMPLATE0> = CPointer<FWPM_NET_EVENT_ENUM_TEMPLATE0>()
-    public var flags: UInt32 = 0
-    public var sessionKey: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_NET_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -2954,19 +467,8 @@ public let FWPM_NET_EVENT_TYPE_FWPM_NET_EVENT_TYPE_MAX: FWPM_NET_EVENT_TYPE = FW
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct FWPM_PROVIDER0 {
-    public var providerKey: GUID = GUID()
-    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
-    public var flags: UInt32 = 0
-    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var serviceName: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_PROVIDER_CHANGE0 {
-    public var changeType: FWPM_CHANGE_TYPE = FWPM_CHANGE_TYPE()
+    public var changeType: Int32 = 0
     public var providerKey: GUID = GUID()
     public init() {}
 }
@@ -2976,1104 +478,8 @@ public type FWPM_PROVIDER_CHANGE_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWP
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct FWPM_PROVIDER_CONTEXT0 {
-    public var providerContextKey: GUID = GUID()
-    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
-    public var flags: UInt32 = 0
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var type_: FWPM_PROVIDER_CONTEXT_TYPE = FWPM_PROVIDER_CONTEXT_TYPE()
-    public var Anonymous: FWPM_PROVIDER_CONTEXT0__Anonymous_e__Union = FWPM_PROVIDER_CONTEXT0__Anonymous_e__Union()
-    public var providerContextId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_PROVIDER_CONTEXT0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func keyingPolicy(): CPointer<IPSEC_KEYING_POLICY0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_keyingPolicy(val: CPointer<IPSEC_KEYING_POLICY0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authipQmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authipQmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authipQmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authipQmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeMmPolicy(): CPointer<IKEEXT_POLICY0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmPolicy(val: CPointer<IKEEXT_POLICY0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authIpMmPolicy(): CPointer<IKEEXT_POLICY0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authIpMmPolicy(val: CPointer<IKEEXT_POLICY0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dataBuffer(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dataBuffer(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyOptions(): CPointer<FWPM_CLASSIFY_OPTIONS0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyOptions(val: CPointer<FWPM_CLASSIFY_OPTIONS0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_PROVIDER_CONTEXT1 {
-    public var providerContextKey: GUID = GUID()
-    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
-    public var flags: UInt32 = 0
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var type_: FWPM_PROVIDER_CONTEXT_TYPE = FWPM_PROVIDER_CONTEXT_TYPE()
-    public var Anonymous: FWPM_PROVIDER_CONTEXT1__Anonymous_e__Union = FWPM_PROVIDER_CONTEXT1__Anonymous_e__Union()
-    public var providerContextId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_PROVIDER_CONTEXT1__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func keyingPolicy(): CPointer<IPSEC_KEYING_POLICY0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_keyingPolicy(val: CPointer<IPSEC_KEYING_POLICY0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authipQmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authipQmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authipQmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authipQmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeMmPolicy(): CPointer<IKEEXT_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmPolicy(val: CPointer<IKEEXT_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authIpMmPolicy(): CPointer<IKEEXT_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authIpMmPolicy(val: CPointer<IKEEXT_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dataBuffer(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dataBuffer(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyOptions(): CPointer<FWPM_CLASSIFY_OPTIONS0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyOptions(val: CPointer<FWPM_CLASSIFY_OPTIONS0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeV2QmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeV2QmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeV2MmPolicy(): CPointer<IKEEXT_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeV2MmPolicy(val: CPointer<IKEEXT_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func idpOptions(): CPointer<IPSEC_DOSP_OPTIONS0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_idpOptions(val: CPointer<IPSEC_DOSP_OPTIONS0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_PROVIDER_CONTEXT2 {
-    public var providerContextKey: GUID = GUID()
-    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
-    public var flags: UInt32 = 0
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var type_: FWPM_PROVIDER_CONTEXT_TYPE = FWPM_PROVIDER_CONTEXT_TYPE()
-    public var Anonymous: FWPM_PROVIDER_CONTEXT2__Anonymous_e__Union = FWPM_PROVIDER_CONTEXT2__Anonymous_e__Union()
-    public var providerContextId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_PROVIDER_CONTEXT2__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func keyingPolicy(): CPointer<IPSEC_KEYING_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_keyingPolicy(val: CPointer<IPSEC_KEYING_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authipQmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authipQmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authipQmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authipQmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeMmPolicy(): CPointer<IKEEXT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmPolicy(val: CPointer<IKEEXT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authIpMmPolicy(): CPointer<IKEEXT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authIpMmPolicy(val: CPointer<IKEEXT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dataBuffer(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dataBuffer(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyOptions(): CPointer<FWPM_CLASSIFY_OPTIONS0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyOptions(val: CPointer<FWPM_CLASSIFY_OPTIONS0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeV2QmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeV2QmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeV2QmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeV2QmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeV2MmPolicy(): CPointer<IKEEXT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeV2MmPolicy(val: CPointer<IKEEXT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func idpOptions(): CPointer<IPSEC_DOSP_OPTIONS0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_idpOptions(val: CPointer<IPSEC_DOSP_OPTIONS0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_PROVIDER_CONTEXT3 {
-    public var providerContextKey: GUID = GUID()
-    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
-    public var flags: UInt32 = 0
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var type_: FWPM_PROVIDER_CONTEXT_TYPE = FWPM_PROVIDER_CONTEXT_TYPE()
-    public var Anonymous: FWPM_PROVIDER_CONTEXT3__Anonymous_e__Union = FWPM_PROVIDER_CONTEXT3__Anonymous_e__Union()
-    public var providerContextId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_PROVIDER_CONTEXT3__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func keyingPolicy(): CPointer<IPSEC_KEYING_POLICY1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_keyingPolicy(val: CPointer<IPSEC_KEYING_POLICY1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeQmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY3> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeQmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY3>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authipQmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authipQmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authipQmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY3> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authipQmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY3>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeMmPolicy(): CPointer<IKEEXT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeMmPolicy(val: CPointer<IKEEXT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func authIpMmPolicy(): CPointer<IKEEXT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_authIpMmPolicy(val: CPointer<IKEEXT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dataBuffer(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dataBuffer(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func classifyOptions(): CPointer<FWPM_CLASSIFY_OPTIONS0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_classifyOptions(val: CPointer<FWPM_CLASSIFY_OPTIONS0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeV2QmTunnelPolicy(): CPointer<IPSEC_TUNNEL_POLICY3> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeV2QmTunnelPolicy(val: CPointer<IPSEC_TUNNEL_POLICY3>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeV2QmTransportPolicy(): CPointer<IPSEC_TRANSPORT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeV2QmTransportPolicy(val: CPointer<IPSEC_TRANSPORT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ikeV2MmPolicy(): CPointer<IKEEXT_POLICY2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ikeV2MmPolicy(val: CPointer<IKEEXT_POLICY2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func idpOptions(): CPointer<IPSEC_DOSP_OPTIONS0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_idpOptions(val: CPointer<IPSEC_DOSP_OPTIONS0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func networkConnectionPolicy(): CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_networkConnectionPolicy(val: CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_PROVIDER_CONTEXT_CHANGE0 {
-    public var changeType: FWPM_CHANGE_TYPE = FWPM_CHANGE_TYPE()
+    public var changeType: Int32 = 0
     public var providerContextKey: GUID = GUID()
     public var providerContextId: UInt64 = 0
     public init() {}
@@ -4086,24 +492,6 @@ public type FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 = CFunc<(CPointer<Unit>, CPoi
 public type FWPM_PROVIDER_CONTEXT_ENUM_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0 {
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var providerContextType: FWPM_PROVIDER_CONTEXT_TYPE = FWPM_PROVIDER_CONTEXT_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0 {
-    public var enumTemplate: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0> = CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0>()
-    public var flags: FWPM_SUBSCRIPTION_FLAGS = FWPM_SUBSCRIPTION_FLAGS()
-    public var sessionKey: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_PROVIDER_CONTEXT_TYPE {
     public var value: Int32 = 0
 
@@ -4186,7 +574,6 @@ public struct FWPM_PROVIDER_SUBSCRIPTION0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_SERVICE_STATE {
     public var value: Int32 = 0
 
@@ -4219,7 +606,7 @@ public let FWPM_SERVICE_STATE_FWPM_SERVICE_RUNNING: FWPM_SERVICE_STATE = FWPM_SE
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public let FWPM_SERVICE_STATE_FWPM_SERVICE_STATE_MAX: FWPM_SERVICE_STATE = FWPM_SERVICE_STATE(4)
 
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
 @C
 public struct FWPM_SESSION0 {
     public var sessionKey: GUID = GUID()
@@ -4329,20 +716,8 @@ public struct FWPM_STATISTICS1 {
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct FWPM_SUBLAYER0 {
-    public var subLayerKey: GUID = GUID()
-    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
-    public var flags: UInt32 = 0
-    public var providerKey: CPointer<GUID> = CPointer<GUID>()
-    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var weight: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_SUBLAYER_CHANGE0 {
-    public var changeType: FWPM_CHANGE_TYPE = FWPM_CHANGE_TYPE()
+    public var changeType: Int32 = 0
     public var subLayerKey: GUID = GUID()
     public init() {}
 }
@@ -4361,16 +736,6 @@ public struct FWPM_SUBLAYER_ENUM_TEMPLATE0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_SUBLAYER_SUBSCRIPTION0 {
-    public var enumTemplate: CPointer<FWPM_SUBLAYER_ENUM_TEMPLATE0> = CPointer<FWPM_SUBLAYER_ENUM_TEMPLATE0>()
-    public var flags: FWPM_SUBSCRIPTION_FLAGS = FWPM_SUBSCRIPTION_FLAGS()
-    public var sessionKey: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_SUBSCRIPTION_FLAGS {
     public var value: UInt32 = 0
 
@@ -4395,27 +760,6 @@ public let FWPM_SUBSCRIPTION_FLAGS_FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD: FWPM_SU
 public let FWPM_SUBSCRIPTION_FLAGS_FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE: FWPM_SUBSCRIPTION_FLAGS = FWPM_SUBSCRIPTION_FLAGS(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_SYSTEM_PORTS0 {
-    public var numTypes: UInt32 = 0
-    public var types: CPointer<FWPM_SYSTEM_PORTS_BY_TYPE0> = CPointer<FWPM_SYSTEM_PORTS_BY_TYPE0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_SYSTEM_PORTS_BY_TYPE0 {
-    public var type_: FWPM_SYSTEM_PORT_TYPE = FWPM_SYSTEM_PORT_TYPE()
-    public var numPorts: UInt32 = 0
-    public var ports: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type FWPM_SYSTEM_PORTS_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWPM_SYSTEM_PORTS0>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_SYSTEM_PORT_TYPE {
     public var value: Int32 = 0
 
@@ -4450,85 +794,6 @@ public let FWPM_SYSTEM_PORT_TYPE_FWPM_SYSTEM_PORT_TYPE_MAX: FWPM_SYSTEM_PORT_TYP
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct FWPM_VSWITCH_EVENT0 {
-    public var eventType: FWPM_VSWITCH_EVENT_TYPE = FWPM_VSWITCH_EVENT_TYPE()
-    public var vSwitchId: CPointer<UInt16> = CPointer<UInt16>()
-    public var Anonymous: FWPM_VSWITCH_EVENT0__Anonymous_e__Union = FWPM_VSWITCH_EVENT0__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWPM_VSWITCH_EVENT0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func positionInfo(): FWPM_VSWITCH_EVENT0__Anonymous_e__Union__positionInfo_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWPM_VSWITCH_EVENT0__Anonymous_e__Union__positionInfo_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_positionInfo(val: FWPM_VSWITCH_EVENT0__Anonymous_e__Union__positionInfo_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWPM_VSWITCH_EVENT0__Anonymous_e__Union__positionInfo_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reorderInfo(): FWPM_VSWITCH_EVENT0__Anonymous_e__Union__reorderInfo_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWPM_VSWITCH_EVENT0__Anonymous_e__Union__reorderInfo_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reorderInfo(val: FWPM_VSWITCH_EVENT0__Anonymous_e__Union__reorderInfo_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FWPM_VSWITCH_EVENT0__Anonymous_e__Union__reorderInfo_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_VSWITCH_EVENT0__Anonymous_e__Union__positionInfo_e__Struct {
-    public var numvSwitchFilterExtensions: UInt32 = 0
-    public var vSwitchFilterExtensions: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWPM_VSWITCH_EVENT0__Anonymous_e__Union__reorderInfo_e__Struct {
-    public var inRequiredPosition: Int32 = 0
-    public var numvSwitchFilterExtensions: UInt32 = 0
-    public var vSwitchFilterExtensions: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type FWPM_VSWITCH_EVENT_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWPM_VSWITCH_EVENT0>) -> UInt32>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_VSWITCH_EVENT_SUBSCRIPTION0 {
     public var flags: UInt32 = 0
     public var sessionKey: GUID = GUID()
@@ -4536,7 +801,6 @@ public struct FWPM_VSWITCH_EVENT_SUBSCRIPTION0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWPM_VSWITCH_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -4573,7 +837,6 @@ public let FWPM_VSWITCH_EVENT_TYPE_FWPM_VSWITCH_EVENT_FILTER_ENGINE_REORDER: FWP
 public let FWPM_VSWITCH_EVENT_TYPE_FWPM_VSWITCH_EVENT_MAX: FWPM_VSWITCH_EVENT_TYPE = FWPM_VSWITCH_EVENT_TYPE(5)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_ACTION_TYPE {
     public var value: UInt32 = 0
 
@@ -4616,7 +879,6 @@ public let FWP_ACTION_TYPE_FWP_ACTION_NONE: FWP_ACTION_TYPE = FWP_ACTION_TYPE(7)
 public let FWP_ACTION_TYPE_FWP_ACTION_NONE_NO_MATCH: FWP_ACTION_TYPE = FWP_ACTION_TYPE(8)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_AF {
     public var value: Int32 = 0
 
@@ -4669,7 +931,6 @@ public struct FWP_BYTE_BLOB {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_CLASSIFY_OPTION_TYPE {
     public var value: Int32 = 0
 
@@ -4715,436 +976,6 @@ public let FWP_CLASSIFY_OPTION_TYPE_FWP_CLASSIFY_OPTION_LOCAL_ONLY_MAPPING: FWP_
 public let FWP_CLASSIFY_OPTION_TYPE_FWP_CLASSIFY_OPTION_MAX: FWP_CLASSIFY_OPTION_TYPE = FWP_CLASSIFY_OPTION_TYPE(8)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWP_CONDITION_VALUE0 {
-    public var type_: FWP_DATA_TYPE = FWP_DATA_TYPE()
-    public var Anonymous: FWP_CONDITION_VALUE0__Anonymous_e__Union = FWP_CONDITION_VALUE0__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FWP_CONDITION_VALUE0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func uint8(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_uint8(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uint16(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_uint16(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uint32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_uint32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uint64(): CPointer<UInt64> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt64>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_uint64(val: CPointer<UInt64>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt64>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func int8(): Int8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt8(base, 0)
-        }
-    }
-
-    public mut func set_int8(val: Int8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func int16(): Int16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt16(base, 0)
-        }
-    }
-
-    public mut func set_int16(val: Int16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func int32(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_int32(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func int64(): CPointer<Int64> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int64>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_int64(val: CPointer<Int64>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int64>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func float32(): Float32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadFloat32(base, 0)
-        }
-    }
-
-    public mut func set_float32(val: Float32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteFloat32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func double64(): CPointer<Float64> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Float64>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_double64(val: CPointer<Float64>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Float64>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func byteArray16(): CPointer<FWP_BYTE_ARRAY16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_ARRAY16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_byteArray16(val: CPointer<FWP_BYTE_ARRAY16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_ARRAY16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func byteBlob(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_byteBlob(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sid(): CPointer<Win32_Security.SID> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_Security.SID>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sid(val: CPointer<Win32_Security.SID>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_Security.SID>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sd(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sd(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func tokenInformation(): CPointer<FWP_TOKEN_INFORMATION> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_TOKEN_INFORMATION>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_tokenInformation(val: CPointer<FWP_TOKEN_INFORMATION>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_TOKEN_INFORMATION>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func tokenAccessInformation(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_tokenAccessInformation(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func unicodeString(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_unicodeString(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func byteArray6(): CPointer<FWP_BYTE_ARRAY6> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_ARRAY6>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_byteArray6(val: CPointer<FWP_BYTE_ARRAY6>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_ARRAY6>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func v4AddrMask(): CPointer<FWP_V4_ADDR_AND_MASK> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_V4_ADDR_AND_MASK>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v4AddrMask(val: CPointer<FWP_V4_ADDR_AND_MASK>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_V4_ADDR_AND_MASK>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func v6AddrMask(): CPointer<FWP_V6_ADDR_AND_MASK> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_V6_ADDR_AND_MASK>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v6AddrMask(val: CPointer<FWP_V6_ADDR_AND_MASK>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_V6_ADDR_AND_MASK>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func rangeValue(): CPointer<FWP_RANGE0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_RANGE0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_rangeValue(val: CPointer<FWP_RANGE0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_RANGE0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_DATA_TYPE {
     public var value: Int32 = 0
 
@@ -5235,7 +1066,6 @@ public let FWP_DATA_TYPE_FWP_RANGE_TYPE: FWP_DATA_TYPE = FWP_DATA_TYPE(258)
 public let FWP_DATA_TYPE_FWP_DATA_TYPE_MAX: FWP_DATA_TYPE = FWP_DATA_TYPE(259)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_DIRECTION {
     public var value: Int32 = 0
 
@@ -5263,7 +1093,6 @@ public let FWP_DIRECTION_FWP_DIRECTION_INBOUND: FWP_DIRECTION = FWP_DIRECTION(1)
 public let FWP_DIRECTION_FWP_DIRECTION_MAX: FWP_DIRECTION = FWP_DIRECTION(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_ETHER_ENCAP_METHOD {
     public var value: Int32 = 0
 
@@ -5291,7 +1120,6 @@ public let FWP_ETHER_ENCAP_METHOD_FWP_ETHER_ENCAP_METHOD_SNAP: FWP_ETHER_ENCAP_M
 public let FWP_ETHER_ENCAP_METHOD_FWP_ETHER_ENCAP_METHOD_SNAP_W_OUI_ZERO: FWP_ETHER_ENCAP_METHOD = FWP_ETHER_ENCAP_METHOD(3)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_FILTER_ENUM_TYPE {
     public var value: Int32 = 0
 
@@ -5319,7 +1147,6 @@ public let FWP_FILTER_ENUM_TYPE_FWP_FILTER_ENUM_OVERLAPPING: FWP_FILTER_ENUM_TYP
 public let FWP_FILTER_ENUM_TYPE_FWP_FILTER_ENUM_TYPE_MAX: FWP_FILTER_ENUM_TYPE = FWP_FILTER_ENUM_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_IP_VERSION {
     public var value: Int32 = 0
 
@@ -5350,7 +1177,6 @@ public let FWP_IP_VERSION_FWP_IP_VERSION_NONE: FWP_IP_VERSION = FWP_IP_VERSION(2
 public let FWP_IP_VERSION_FWP_IP_VERSION_MAX: FWP_IP_VERSION = FWP_IP_VERSION(3)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_MATCH_TYPE {
     public var value: Int32 = 0
 
@@ -5411,7 +1237,6 @@ public let FWP_MATCH_TYPE_FWP_MATCH_NOT_PREFIX: FWP_MATCH_TYPE = FWP_MATCH_TYPE(
 public let FWP_MATCH_TYPE_FWP_MATCH_TYPE_MAX: FWP_MATCH_TYPE = FWP_MATCH_TYPE(13)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE {
     public var value: Int32 = 0
 
@@ -5441,15 +1266,7 @@ public let FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE_FWP_NETWORK_CONNECTION_POL
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public let FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE_FWP_NETWORK_CONNECTION_POLICY_MAX: FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE = FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE(3)
 
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct FWP_RANGE0 {
-    public var valueLow: FWP_VALUE0 = FWP_VALUE0()
-    public var valueHigh: FWP_VALUE0 = FWP_VALUE0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
 @C
 public struct FWP_TOKEN_INFORMATION {
     public var sidCount: UInt32 = 0
@@ -5475,374 +1292,392 @@ public struct FWP_V6_ADDR_AND_MASK {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
 @C
 public struct FWP_VALUE0 {
-    public var type_: FWP_DATA_TYPE = FWP_DATA_TYPE()
+    public var type_: Int32 = 0
     public var Anonymous: FWP_VALUE0__Anonymous_e__Union = FWP_VALUE0__Anonymous_e__Union()
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FWP_VALUE0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func uint8(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
+    public mut prop uint8: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_uint8(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
+    public mut prop uint16: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func uint16(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
+    public mut prop uint32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_uint16(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop uint64: CPointer<UInt64> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt64>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt64>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func uint32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop int8: Int8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_uint32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop int16: Int16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func uint64(): CPointer<UInt64> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt64>>(p)
-            return ptr.read()
+    public mut prop int32: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_uint64(val: CPointer<UInt64>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt64>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop int64: CPointer<Int64> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int64>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int64>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func int8(): Int8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt8(base, 0)
+    public mut prop float32: Float32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadFloat32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteFloat32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_int8(val: Int8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt8(base, 0, val)
-            _raw = rawStorage
+    public mut prop double64: CPointer<Float64> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Float64>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Float64>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func int16(): Int16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt16(base, 0)
+    public mut prop byteArray16: CPointer<FWP_BYTE_ARRAY16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_ARRAY16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_ARRAY16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_int16(val: Int16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop byteBlob: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func int32(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
+    public mut prop sid: CPointer<Win32_Security.SID> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32_Security.SID>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32_Security.SID>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_int32(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop sd: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func int64(): CPointer<Int64> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int64>>(p)
-            return ptr.read()
+    public mut prop tokenInformation: CPointer<FWP_TOKEN_INFORMATION> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_TOKEN_INFORMATION>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_TOKEN_INFORMATION>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_int64(val: CPointer<Int64>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int64>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop tokenAccessInformation: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func float32(): Float32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadFloat32(base, 0)
+    public mut prop unicodeString: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_float32(val: Float32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteFloat32(base, 0, val)
-            _raw = rawStorage
+    public mut prop byteArray6: CPointer<FWP_BYTE_ARRAY6> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_ARRAY6>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func double64(): CPointer<Float64> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Float64>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_double64(val: CPointer<Float64>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Float64>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func byteArray16(): CPointer<FWP_BYTE_ARRAY16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_ARRAY16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_byteArray16(val: CPointer<FWP_BYTE_ARRAY16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_ARRAY16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func byteBlob(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_byteBlob(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sid(): CPointer<Win32_Security.SID> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_Security.SID>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sid(val: CPointer<Win32_Security.SID>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Win32_Security.SID>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sd(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sd(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func tokenInformation(): CPointer<FWP_TOKEN_INFORMATION> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_TOKEN_INFORMATION>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_tokenInformation(val: CPointer<FWP_TOKEN_INFORMATION>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_TOKEN_INFORMATION>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func tokenAccessInformation(): CPointer<FWP_BYTE_BLOB> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_tokenAccessInformation(val: CPointer<FWP_BYTE_BLOB>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func unicodeString(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_unicodeString(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func byteArray6(): CPointer<FWP_BYTE_ARRAY6> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_ARRAY6>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_byteArray6(val: CPointer<FWP_BYTE_ARRAY6>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<FWP_BYTE_ARRAY6>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_ARRAY6>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct FWP_VSWITCH_NETWORK_TYPE {
     public var value: Int32 = 0
 
@@ -5873,7 +1708,6 @@ public let FWP_VSWITCH_NETWORK_TYPE_FWP_VSWITCH_NETWORK_TYPE_INTERNAL: FWP_VSWIT
 public let FWP_VSWITCH_NETWORK_TYPE_FWP_VSWITCH_NETWORK_TYPE_EXTERNAL: FWP_VSWITCH_NETWORK_TYPE = FWP_VSWITCH_NETWORK_TYPE(3)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE {
     public var value: Int32 = 0
 
@@ -5901,496 +1735,6 @@ public let IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE_IKEEXT_IMPERSONATION_SOCKET_
 public let IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE_IKEEXT_IMPERSONATION_MAX: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_AUTHENTICATION_METHOD0 {
-    public var authenticationMethodType: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var Anonymous: IKEEXT_AUTHENTICATION_METHOD0__Anonymous_e__Union = IKEEXT_AUTHENTICATION_METHOD0__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_AUTHENTICATION_METHOD0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0)
-
-    public func presharedKeyAuthentication(): IKEEXT_PRESHARED_KEY_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_presharedKeyAuthentication(val: IKEEXT_PRESHARED_KEY_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func certificateAuthentication(): IKEEXT_CERTIFICATE_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_certificateAuthentication(val: IKEEXT_CERTIFICATE_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func kerberosAuthentication(): IKEEXT_KERBEROS_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_kerberosAuthentication(val: IKEEXT_KERBEROS_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ntlmV2Authentication(): IKEEXT_NTLM_V2_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ntlmV2Authentication(val: IKEEXT_NTLM_V2_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sslAuthentication(): IKEEXT_CERTIFICATE_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sslAuthentication(val: IKEEXT_CERTIFICATE_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cgaAuthentication(): IKEEXT_IPV6_CGA_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cgaAuthentication(val: IKEEXT_IPV6_CGA_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_AUTHENTICATION_METHOD1 {
-    public var authenticationMethodType: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var Anonymous: IKEEXT_AUTHENTICATION_METHOD1__Anonymous_e__Union = IKEEXT_AUTHENTICATION_METHOD1__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_AUTHENTICATION_METHOD1__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
-
-    public func presharedKeyAuthentication(): IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_presharedKeyAuthentication(val: IKEEXT_PRESHARED_KEY_AUTHENTICATION1): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func certificateAuthentication(): IKEEXT_CERTIFICATE_AUTHENTICATION1 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_certificateAuthentication(val: IKEEXT_CERTIFICATE_AUTHENTICATION1): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func kerberosAuthentication(): IKEEXT_KERBEROS_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_kerberosAuthentication(val: IKEEXT_KERBEROS_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ntlmV2Authentication(): IKEEXT_NTLM_V2_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ntlmV2Authentication(val: IKEEXT_NTLM_V2_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sslAuthentication(): IKEEXT_CERTIFICATE_AUTHENTICATION1 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sslAuthentication(val: IKEEXT_CERTIFICATE_AUTHENTICATION1): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cgaAuthentication(): IKEEXT_IPV6_CGA_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cgaAuthentication(val: IKEEXT_IPV6_CGA_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func eapAuthentication(): IKEEXT_EAP_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_EAP_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_eapAuthentication(val: IKEEXT_EAP_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_EAP_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_AUTHENTICATION_METHOD2 {
-    public var authenticationMethodType: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var Anonymous: IKEEXT_AUTHENTICATION_METHOD2__Anonymous_e__Union = IKEEXT_AUTHENTICATION_METHOD2__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_AUTHENTICATION_METHOD2__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
-
-    public func presharedKeyAuthentication(): IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_presharedKeyAuthentication(val: IKEEXT_PRESHARED_KEY_AUTHENTICATION1): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func certificateAuthentication(): IKEEXT_CERTIFICATE_AUTHENTICATION2 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_certificateAuthentication(val: IKEEXT_CERTIFICATE_AUTHENTICATION2): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func kerberosAuthentication(): IKEEXT_KERBEROS_AUTHENTICATION1 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION1>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_kerberosAuthentication(val: IKEEXT_KERBEROS_AUTHENTICATION1): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION1>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reservedAuthentication(): IKEEXT_RESERVED_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_RESERVED_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reservedAuthentication(val: IKEEXT_RESERVED_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_RESERVED_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ntlmV2Authentication(): IKEEXT_NTLM_V2_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ntlmV2Authentication(val: IKEEXT_NTLM_V2_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sslAuthentication(): IKEEXT_CERTIFICATE_AUTHENTICATION2 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sslAuthentication(val: IKEEXT_CERTIFICATE_AUTHENTICATION2): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cgaAuthentication(): IKEEXT_IPV6_CGA_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cgaAuthentication(val: IKEEXT_IPV6_CGA_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func eapAuthentication(): IKEEXT_EAP_AUTHENTICATION0 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_EAP_AUTHENTICATION0>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_eapAuthentication(val: IKEEXT_EAP_AUTHENTICATION0): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_EAP_AUTHENTICATION0>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_AUTHENTICATION_METHOD_TYPE {
     public var value: Int32 = 0
 
@@ -6452,547 +1796,6 @@ public let IKEEXT_AUTHENTICATION_METHOD_TYPE_IKEEXT_AUTHENTICATION_METHOD_TYPE_M
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION0 {
-    public var inboundConfigType: IKEEXT_CERT_CONFIG_TYPE = IKEEXT_CERT_CONFIG_TYPE()
-    public var Anonymous1: IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union()
-    public var outboundConfigType: IKEEXT_CERT_CONFIG_TYPE = IKEEXT_CERT_CONFIG_TYPE()
-    public var Anonymous2: IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union()
-    public var flags: IKEEXT_CERT_AUTH = IKEEXT_CERT_AUTH()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func anonymous(): IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func inboundEnterpriseStoreConfig(): CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_inboundEnterpriseStoreConfig(val: CPointer<IKEEXT_CERT_ROOT_CONFIG0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func inboundTrustedRootStoreConfig(): CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_inboundTrustedRootStoreConfig(val: CPointer<IKEEXT_CERT_ROOT_CONFIG0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union__Anonymous_e__Struct {
-    public var inboundRootArraySize: UInt32 = 0
-    public var inboundRootArray: CPointer<IKEEXT_CERT_ROOT_CONFIG0> = CPointer<IKEEXT_CERT_ROOT_CONFIG0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func anonymous(): IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func outboundEnterpriseStoreConfig(): CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_outboundEnterpriseStoreConfig(val: CPointer<IKEEXT_CERT_ROOT_CONFIG0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func outboundTrustedRootStoreConfig(): CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_outboundTrustedRootStoreConfig(val: CPointer<IKEEXT_CERT_ROOT_CONFIG0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union__Anonymous_e__Struct {
-    public var outboundRootArraySize: UInt32 = 0
-    public var outboundRootArray: CPointer<IKEEXT_CERT_ROOT_CONFIG0> = CPointer<IKEEXT_CERT_ROOT_CONFIG0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION1 {
-    public var inboundConfigType: IKEEXT_CERT_CONFIG_TYPE = IKEEXT_CERT_CONFIG_TYPE()
-    public var Anonymous1: IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union()
-    public var outboundConfigType: IKEEXT_CERT_CONFIG_TYPE = IKEEXT_CERT_CONFIG_TYPE()
-    public var Anonymous2: IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union()
-    public var flags: IKEEXT_CERT_AUTH = IKEEXT_CERT_AUTH()
-    public var localCertLocationUrl: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func anonymous(): IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func inboundEnterpriseStoreConfig(): CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_inboundEnterpriseStoreConfig(val: CPointer<IKEEXT_CERT_ROOT_CONFIG0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func inboundTrustedRootStoreConfig(): CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_inboundTrustedRootStoreConfig(val: CPointer<IKEEXT_CERT_ROOT_CONFIG0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union__Anonymous_e__Struct {
-    public var inboundRootArraySize: UInt32 = 0
-    public var inboundRootArray: CPointer<IKEEXT_CERT_ROOT_CONFIG0> = CPointer<IKEEXT_CERT_ROOT_CONFIG0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func anonymous(): IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func outboundEnterpriseStoreConfig(): CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_outboundEnterpriseStoreConfig(val: CPointer<IKEEXT_CERT_ROOT_CONFIG0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func outboundTrustedRootStoreConfig(): CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_outboundTrustedRootStoreConfig(val: CPointer<IKEEXT_CERT_ROOT_CONFIG0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union__Anonymous_e__Struct {
-    public var outboundRootArraySize: UInt32 = 0
-    public var outboundRootArray: CPointer<IKEEXT_CERT_ROOT_CONFIG0> = CPointer<IKEEXT_CERT_ROOT_CONFIG0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION2 {
-    public var inboundConfigType: IKEEXT_CERT_CONFIG_TYPE = IKEEXT_CERT_CONFIG_TYPE()
-    public var Anonymous1: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union()
-    public var outboundConfigType: IKEEXT_CERT_CONFIG_TYPE = IKEEXT_CERT_CONFIG_TYPE()
-    public var Anonymous2: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union()
-    public var flags: IKEEXT_CERT_AUTH = IKEEXT_CERT_AUTH()
-    public var localCertLocationUrl: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func anonymous1(): IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous1(val: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func anonymous2(): IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous2_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous2(val: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous2_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func anonymous3(): IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous3_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous3_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous3(val: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous3_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous3_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous1_e__Struct {
-    public var inboundRootArraySize: UInt32 = 0
-    public var inboundRootCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous2_e__Struct {
-    public var inboundEnterpriseStoreArraySize: UInt32 = 0
-    public var inboundEnterpriseStoreCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous3_e__Struct {
-    public var inboundRootStoreArraySize: UInt32 = 0
-    public var inboundTrustedRootStoreCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func anonymous1(): IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous1(val: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func anonymous2(): IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous2_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous2_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous2(val: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous2_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous2_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func anonymous3(): IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous3_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous3_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous3(val: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous3_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous3_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous1_e__Struct {
-    public var outboundRootArraySize: UInt32 = 0
-    public var outboundRootCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous2_e__Struct {
-    public var outboundEnterpriseStoreArraySize: UInt32 = 0
-    public var outboundEnterpriseStoreCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous3_e__Struct {
-    public var outboundRootStoreArraySize: UInt32 = 0
-    public var outboundTrustedRootStoreCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_CERTIFICATE_CREDENTIAL0 {
     public var subjectName: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
     public var certHash: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
@@ -7011,18 +1814,6 @@ public struct IKEEXT_CERTIFICATE_CREDENTIAL1 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CERTIFICATE_CRITERIA0 {
-    public var certData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var certHash: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var eku: CPointer<IKEEXT_CERT_EKUS0> = CPointer<IKEEXT_CERT_EKUS0>()
-    public var name: CPointer<IKEEXT_CERT_NAME0> = CPointer<IKEEXT_CERT_NAME0>()
-    public var flags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_CERT_AUTH {
     public var value: UInt32 = 0
 
@@ -7070,7 +1861,6 @@ public let IKEEXT_CERT_AUTH_IKEEXT_CERT_AUTH_ALLOW_HTTP_CERT_LOOKUP: IKEEXT_CERT
 public let IKEEXT_CERT_AUTH_IKEEXT_CERT_AUTH_URL_CONTAINS_BUNDLE: IKEEXT_CERT_AUTH = IKEEXT_CERT_AUTH(32)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_CERT_CONFIG_TYPE {
     public var value: Int32 = 0
 
@@ -7104,7 +1894,6 @@ public let IKEEXT_CERT_CONFIG_TYPE_IKEEXT_CERT_CONFIG_UNSPECIFIED: IKEEXT_CERT_C
 public let IKEEXT_CERT_CONFIG_TYPE_IKEEXT_CERT_CONFIG_TYPE_MAX: IKEEXT_CERT_CONFIG_TYPE = IKEEXT_CERT_CONFIG_TYPE(4)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_CERT_CRITERIA_NAME_TYPE {
     public var value: Int32 = 0
 
@@ -7155,7 +1944,6 @@ public struct IKEEXT_CERT_EKUS0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_CERT_FLAGS {
     public var value: UInt32 = 0
 
@@ -7217,7 +2005,7 @@ public let IKEEXT_CERT_FLAGS_IKEEXT_CERT_FLAG_FOLLOW_RENEWAL_CERTIFICATE: IKEEXT
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
 public struct IKEEXT_CERT_NAME0 {
-    public var nameType: IKEEXT_CERT_CRITERIA_NAME_TYPE = IKEEXT_CERT_CRITERIA_NAME_TYPE()
+    public var nameType: Int32 = 0
     public var certName: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
 }
@@ -7226,21 +2014,11 @@ public struct IKEEXT_CERT_NAME0 {
 @C
 public struct IKEEXT_CERT_ROOT_CONFIG0 {
     public var certData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var flags: IKEEXT_CERT_FLAGS = IKEEXT_CERT_FLAGS()
+    public var flags: UInt32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CIPHER_ALGORITHM0 {
-    public var algoIdentifier: IKEEXT_CIPHER_TYPE = IKEEXT_CIPHER_TYPE()
-    public var keyLen: UInt32 = 0
-    public var rounds: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_CIPHER_TYPE {
     public var value: Int32 = 0
 
@@ -7284,28 +2062,6 @@ public let IKEEXT_CIPHER_TYPE_IKEEXT_CIPHER_TYPE_MAX: IKEEXT_CIPHER_TYPE = IKEEX
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct IKEEXT_COMMON_STATISTICS0 {
-    public var v4Statistics: IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0 = IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0()
-    public var v6Statistics: IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0 = IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0()
-    public var totalPacketsReceived: UInt32 = 0
-    public var totalInvalidPacketsReceived: UInt32 = 0
-    public var currentQueuedWorkitems: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_COMMON_STATISTICS1 {
-    public var v4Statistics: IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1 = IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1()
-    public var v6Statistics: IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1 = IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1()
-    public var totalPacketsReceived: UInt32 = 0
-    public var totalInvalidPacketsReceived: UInt32 = 0
-    public var currentQueuedWorkitems: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_COOKIE_PAIR0 {
     public var initiator: UInt64 = 0
     public var responder: UInt64 = 0
@@ -7313,295 +2069,6 @@ public struct IKEEXT_COOKIE_PAIR0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CREDENTIAL0 {
-    public var authenticationMethodType: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var impersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE()
-    public var Anonymous: IKEEXT_CREDENTIAL0__Anonymous_e__Union = IKEEXT_CREDENTIAL0__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_CREDENTIAL0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func presharedKey(): CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_presharedKey(val: CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func certificate(): CPointer<IKEEXT_CERTIFICATE_CREDENTIAL0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_certificate(val: CPointer<IKEEXT_CERTIFICATE_CREDENTIAL0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func name(): CPointer<IKEEXT_NAME_CREDENTIAL0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_name(val: CPointer<IKEEXT_NAME_CREDENTIAL0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CREDENTIAL1 {
-    public var authenticationMethodType: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var impersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE()
-    public var Anonymous: IKEEXT_CREDENTIAL1__Anonymous_e__Union = IKEEXT_CREDENTIAL1__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_CREDENTIAL1__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func presharedKey(): CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_presharedKey(val: CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func certificate(): CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_certificate(val: CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func name(): CPointer<IKEEXT_NAME_CREDENTIAL0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_name(val: CPointer<IKEEXT_NAME_CREDENTIAL0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CREDENTIAL2 {
-    public var authenticationMethodType: IKEEXT_AUTHENTICATION_METHOD_TYPE = IKEEXT_AUTHENTICATION_METHOD_TYPE()
-    public var impersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE()
-    public var Anonymous: IKEEXT_CREDENTIAL2__Anonymous_e__Union = IKEEXT_CREDENTIAL2__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_CREDENTIAL2__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func presharedKey(): CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_presharedKey(val: CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func certificate(): CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_certificate(val: CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func name(): CPointer<IKEEXT_NAME_CREDENTIAL0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_name(val: CPointer<IKEEXT_NAME_CREDENTIAL0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CREDENTIALS0 {
-    public var numCredentials: UInt32 = 0
-    public var credentials: CPointer<IKEEXT_CREDENTIAL_PAIR0> = CPointer<IKEEXT_CREDENTIAL_PAIR0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CREDENTIALS1 {
-    public var numCredentials: UInt32 = 0
-    public var credentials: CPointer<IKEEXT_CREDENTIAL_PAIR1> = CPointer<IKEEXT_CREDENTIAL_PAIR1>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CREDENTIALS2 {
-    public var numCredentials: UInt32 = 0
-    public var credentials: CPointer<IKEEXT_CREDENTIAL_PAIR2> = CPointer<IKEEXT_CREDENTIAL_PAIR2>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CREDENTIAL_PAIR0 {
-    public var localCredentials: IKEEXT_CREDENTIAL0 = IKEEXT_CREDENTIAL0()
-    public var peerCredentials: IKEEXT_CREDENTIAL0 = IKEEXT_CREDENTIAL0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CREDENTIAL_PAIR1 {
-    public var localCredentials: IKEEXT_CREDENTIAL1 = IKEEXT_CREDENTIAL1()
-    public var peerCredentials: IKEEXT_CREDENTIAL1 = IKEEXT_CREDENTIAL1()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_CREDENTIAL_PAIR2 {
-    public var localCredentials: IKEEXT_CREDENTIAL2 = IKEEXT_CREDENTIAL2()
-    public var peerCredentials: IKEEXT_CREDENTIAL2 = IKEEXT_CREDENTIAL2()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_DH_GROUP {
     public var value: Int32 = 0
 
@@ -7647,14 +2114,6 @@ public let IKEEXT_DH_GROUP_IKEEXT_DH_GROUP_24: IKEEXT_DH_GROUP = IKEEXT_DH_GROUP
 public let IKEEXT_DH_GROUP_IKEEXT_DH_GROUP_MAX: IKEEXT_DH_GROUP = IKEEXT_DH_GROUP(7)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_EAP_AUTHENTICATION0 {
-    public var flags: IKEEXT_EAP_AUTHENTICATION_FLAGS = IKEEXT_EAP_AUTHENTICATION_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_EAP_AUTHENTICATION_FLAGS {
     public var value: UInt32 = 0
 
@@ -7693,34 +2152,6 @@ public let IKEEXT_EAP_AUTHENTICATION_FLAGS_IKEEXT_EAP_FLAG_LOCAL_AUTH_ONLY: IKEE
 public let IKEEXT_EAP_AUTHENTICATION_FLAGS_IKEEXT_EAP_FLAG_REMOTE_AUTH_ONLY: IKEEXT_EAP_AUTHENTICATION_FLAGS = IKEEXT_EAP_AUTHENTICATION_FLAGS(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_EM_POLICY0 {
-    public var numAuthenticationMethods: UInt32 = 0
-    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD0> = CPointer<IKEEXT_AUTHENTICATION_METHOD0>()
-    public var initiatorImpersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_EM_POLICY1 {
-    public var numAuthenticationMethods: UInt32 = 0
-    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD1> = CPointer<IKEEXT_AUTHENTICATION_METHOD1>()
-    public var initiatorImpersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_EM_POLICY2 {
-    public var numAuthenticationMethods: UInt32 = 0
-    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD2> = CPointer<IKEEXT_AUTHENTICATION_METHOD2>()
-    public var initiatorImpersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_EM_SA_STATE {
     public var value: Int32 = 0
 
@@ -7760,14 +2191,6 @@ public let IKEEXT_EM_SA_STATE_IKEEXT_EM_SA_STATE_COMPLETE: IKEEXT_EM_SA_STATE = 
 public let IKEEXT_EM_SA_STATE_IKEEXT_EM_SA_STATE_MAX: IKEEXT_EM_SA_STATE = IKEEXT_EM_SA_STATE(6)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_INTEGRITY_ALGORITHM0 {
-    public var algoIdentifier: IKEEXT_INTEGRITY_TYPE = IKEEXT_INTEGRITY_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_INTEGRITY_TYPE {
     public var value: Int32 = 0
 
@@ -7876,22 +2299,6 @@ public struct IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_KERBEROS_AUTHENTICATION0 {
-    public var flags: IKEEXT_KERBEROS_AUTHENTICATION_FLAGS = IKEEXT_KERBEROS_AUTHENTICATION_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_KERBEROS_AUTHENTICATION1 {
-    public var flags: IKEEXT_KERBEROS_AUTHENTICATION_FLAGS = IKEEXT_KERBEROS_AUTHENTICATION_FLAGS()
-    public var proxyServer: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_KERBEROS_AUTHENTICATION_FLAGS {
     public var value: UInt32 = 0
 
@@ -7954,7 +2361,6 @@ public struct IKEEXT_KEYMODULE_STATISTICS1 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_KEY_MODULE_TYPE {
     public var value: Int32 = 0
 
@@ -7985,7 +2391,6 @@ public let IKEEXT_KEY_MODULE_TYPE_IKEEXT_KEY_MODULE_IKEV2: IKEEXT_KEY_MODULE_TYP
 public let IKEEXT_KEY_MODULE_TYPE_IKEEXT_KEY_MODULE_MAX: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE(3)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_MM_SA_STATE {
     public var value: Int32 = 0
 
@@ -8039,51 +2444,6 @@ public struct IKEEXT_NTLM_V2_AUTHENTICATION0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_POLICY0 {
-    public var softExpirationTime: UInt32 = 0
-    public var numAuthenticationMethods: UInt32 = 0
-    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD0> = CPointer<IKEEXT_AUTHENTICATION_METHOD0>()
-    public var initiatorImpersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE()
-    public var numIkeProposals: UInt32 = 0
-    public var ikeProposals: CPointer<IKEEXT_PROPOSAL0> = CPointer<IKEEXT_PROPOSAL0>()
-    public var flags: IKEEXT_POLICY_FLAG = IKEEXT_POLICY_FLAG()
-    public var maxDynamicFilters: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_POLICY1 {
-    public var softExpirationTime: UInt32 = 0
-    public var numAuthenticationMethods: UInt32 = 0
-    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD1> = CPointer<IKEEXT_AUTHENTICATION_METHOD1>()
-    public var initiatorImpersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE()
-    public var numIkeProposals: UInt32 = 0
-    public var ikeProposals: CPointer<IKEEXT_PROPOSAL0> = CPointer<IKEEXT_PROPOSAL0>()
-    public var flags: IKEEXT_POLICY_FLAG = IKEEXT_POLICY_FLAG()
-    public var maxDynamicFilters: UInt32 = 0
-    public var retransmitDurationSecs: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_POLICY2 {
-    public var softExpirationTime: UInt32 = 0
-    public var numAuthenticationMethods: UInt32 = 0
-    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD2> = CPointer<IKEEXT_AUTHENTICATION_METHOD2>()
-    public var initiatorImpersonationType: IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE()
-    public var numIkeProposals: UInt32 = 0
-    public var ikeProposals: CPointer<IKEEXT_PROPOSAL0> = CPointer<IKEEXT_PROPOSAL0>()
-    public var flags: IKEEXT_POLICY_FLAG = IKEEXT_POLICY_FLAG()
-    public var maxDynamicFilters: UInt32 = 0
-    public var retransmitDurationSecs: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_POLICY_FLAG {
     public var value: UInt32 = 0
 
@@ -8135,15 +2495,6 @@ public struct IKEEXT_PRESHARED_KEY_AUTHENTICATION0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
-    public var presharedKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public var flags: IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS = IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS {
     public var value: UInt32 = 0
 
@@ -8182,18 +2533,6 @@ public let IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS_IKEEXT_PSK_FLAG_LOCAL_AUTH_
 public let IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS_IKEEXT_PSK_FLAG_REMOTE_AUTH_ONLY: IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS = IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_PROPOSAL0 {
-    public var cipherAlgorithm: IKEEXT_CIPHER_ALGORITHM0 = IKEEXT_CIPHER_ALGORITHM0()
-    public var integrityAlgorithm: IKEEXT_INTEGRITY_ALGORITHM0 = IKEEXT_INTEGRITY_ALGORITHM0()
-    public var maxLifetimeSeconds: UInt32 = 0
-    public var dhGroup: IKEEXT_DH_GROUP = IKEEXT_DH_GROUP()
-    public var quickModeLimit: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_QM_SA_STATE {
     public var value: Int32 = 0
 
@@ -8227,14 +2566,6 @@ public let IKEEXT_QM_SA_STATE_IKEEXT_QM_SA_STATE_COMPLETE: IKEEXT_QM_SA_STATE = 
 public let IKEEXT_QM_SA_STATE_IKEEXT_QM_SA_STATE_MAX: IKEEXT_QM_SA_STATE = IKEEXT_QM_SA_STATE(4)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_RESERVED_AUTHENTICATION0 {
-    public var flags: IKEEXT_RESERVED_AUTHENTICATION_FLAGS = IKEEXT_RESERVED_AUTHENTICATION_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_RESERVED_AUTHENTICATION_FLAGS {
     public var value: UInt32 = 0
 
@@ -8270,156 +2601,9 @@ public struct IKEEXT_RESERVED_AUTHENTICATION_FLAGS {
 public let IKEEXT_RESERVED_AUTHENTICATION_FLAGS_IKEEXT_RESERVED_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION: IKEEXT_RESERVED_AUTHENTICATION_FLAGS = IKEEXT_RESERVED_AUTHENTICATION_FLAGS(1)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_SA_DETAILS0 {
-    public var saId: UInt64 = 0
-    public var keyModuleType: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE()
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous: IKEEXT_SA_DETAILS0__Anonymous_e__Union = IKEEXT_SA_DETAILS0__Anonymous_e__Union()
-    public var ikeTraffic: IKEEXT_TRAFFIC0 = IKEEXT_TRAFFIC0()
-    public var ikeProposal: IKEEXT_PROPOSAL0 = IKEEXT_PROPOSAL0()
-    public var cookiePair: IKEEXT_COOKIE_PAIR0 = IKEEXT_COOKIE_PAIR0()
-    public var ikeCredentials: IKEEXT_CREDENTIALS0 = IKEEXT_CREDENTIALS0()
-    public var ikePolicyKey: GUID = GUID()
-    public var virtualIfTunnelId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_SA_DETAILS0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func v4UdpEncapsulation(): CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v4UdpEncapsulation(val: CPointer<IPSEC_V4_UDP_ENCAPSULATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_SA_DETAILS1 {
-    public var saId: UInt64 = 0
-    public var keyModuleType: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE()
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous: IKEEXT_SA_DETAILS1__Anonymous_e__Union = IKEEXT_SA_DETAILS1__Anonymous_e__Union()
-    public var ikeTraffic: IKEEXT_TRAFFIC0 = IKEEXT_TRAFFIC0()
-    public var ikeProposal: IKEEXT_PROPOSAL0 = IKEEXT_PROPOSAL0()
-    public var cookiePair: IKEEXT_COOKIE_PAIR0 = IKEEXT_COOKIE_PAIR0()
-    public var ikeCredentials: IKEEXT_CREDENTIALS1 = IKEEXT_CREDENTIALS1()
-    public var ikePolicyKey: GUID = GUID()
-    public var virtualIfTunnelId: UInt64 = 0
-    public var correlationKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_SA_DETAILS1__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func v4UdpEncapsulation(): CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v4UdpEncapsulation(val: CPointer<IPSEC_V4_UDP_ENCAPSULATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_SA_DETAILS2 {
-    public var saId: UInt64 = 0
-    public var keyModuleType: IKEEXT_KEY_MODULE_TYPE = IKEEXT_KEY_MODULE_TYPE()
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous: IKEEXT_SA_DETAILS2__Anonymous_e__Union = IKEEXT_SA_DETAILS2__Anonymous_e__Union()
-    public var ikeTraffic: IKEEXT_TRAFFIC0 = IKEEXT_TRAFFIC0()
-    public var ikeProposal: IKEEXT_PROPOSAL0 = IKEEXT_PROPOSAL0()
-    public var cookiePair: IKEEXT_COOKIE_PAIR0 = IKEEXT_COOKIE_PAIR0()
-    public var ikeCredentials: IKEEXT_CREDENTIALS2 = IKEEXT_CREDENTIALS2()
-    public var ikePolicyKey: GUID = GUID()
-    public var virtualIfTunnelId: UInt64 = 0
-    public var correlationKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IKEEXT_SA_DETAILS2__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func v4UdpEncapsulation(): CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v4UdpEncapsulation(val: CPointer<IPSEC_V4_UDP_ENCAPSULATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public type IKEEXT_SA_ENUM_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_SA_ENUM_TEMPLATE0 {
-    public var localSubNet: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
-    public var remoteSubNet: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
-    public var localMainModeCertHash: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_SA_ROLE {
     public var value: Int32 = 0
 
@@ -8448,27 +2632,8 @@ public let IKEEXT_SA_ROLE_IKEEXT_SA_ROLE_MAX: IKEEXT_SA_ROLE = IKEEXT_SA_ROLE(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct IKEEXT_STATISTICS0 {
-    public var ikeStatistics: IKEEXT_KEYMODULE_STATISTICS0 = IKEEXT_KEYMODULE_STATISTICS0()
-    public var authipStatistics: IKEEXT_KEYMODULE_STATISTICS0 = IKEEXT_KEYMODULE_STATISTICS0()
-    public var commonStatistics: IKEEXT_COMMON_STATISTICS0 = IKEEXT_COMMON_STATISTICS0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IKEEXT_STATISTICS1 {
-    public var ikeStatistics: IKEEXT_KEYMODULE_STATISTICS1 = IKEEXT_KEYMODULE_STATISTICS1()
-    public var authipStatistics: IKEEXT_KEYMODULE_STATISTICS1 = IKEEXT_KEYMODULE_STATISTICS1()
-    public var ikeV2Statistics: IKEEXT_KEYMODULE_STATISTICS1 = IKEEXT_KEYMODULE_STATISTICS1()
-    public var commonStatistics: IKEEXT_COMMON_STATISTICS1 = IKEEXT_COMMON_STATISTICS1()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IKEEXT_TRAFFIC0 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
+    public var ipVersion: Int32 = 0
     public var Anonymous1: IKEEXT_TRAFFIC0__Anonymous1_e__Union = IKEEXT_TRAFFIC0__Anonymous1_e__Union()
     public var Anonymous2: IKEEXT_TRAFFIC0__Anonymous2_e__Union = IKEEXT_TRAFFIC0__Anonymous2_e__Union()
     public var authIpFilterId: UInt64 = 0
@@ -8476,92 +2641,98 @@ public struct IKEEXT_TRAFFIC0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct IKEEXT_TRAFFIC0__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public func localV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop localV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_localV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop localV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func localV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct IKEEXT_TRAFFIC0__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public func remoteV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop remoteV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_remoteV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop remoteV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func remoteV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -8632,31 +2803,6 @@ public struct IPSEC_AH_DROP_PACKET_STATISTICS0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_AUTH_AND_CIPHER_TRANSFORM0 {
-    public var authTransform: IPSEC_AUTH_TRANSFORM0 = IPSEC_AUTH_TRANSFORM0()
-    public var cipherTransform: IPSEC_CIPHER_TRANSFORM0 = IPSEC_CIPHER_TRANSFORM0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_AUTH_TRANSFORM0 {
-    public var authTransformId: IPSEC_AUTH_TRANSFORM_ID0 = IPSEC_AUTH_TRANSFORM_ID0()
-    public var cryptoModuleId: CPointer<GUID> = CPointer<GUID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_AUTH_TRANSFORM_ID0 {
-    public var authType: IPSEC_AUTH_TYPE = IPSEC_AUTH_TYPE()
-    public var authConfig: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_AUTH_TYPE {
     public var value: Int32 = 0
 
@@ -8696,23 +2842,6 @@ public let IPSEC_AUTH_TYPE_IPSEC_AUTH_AES_256: IPSEC_AUTH_TYPE = IPSEC_AUTH_TYPE
 public let IPSEC_AUTH_TYPE_IPSEC_AUTH_MAX: IPSEC_AUTH_TYPE = IPSEC_AUTH_TYPE(6)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_CIPHER_TRANSFORM0 {
-    public var cipherTransformId: IPSEC_CIPHER_TRANSFORM_ID0 = IPSEC_CIPHER_TRANSFORM_ID0()
-    public var cryptoModuleId: CPointer<GUID> = CPointer<GUID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_CIPHER_TRANSFORM_ID0 {
-    public var cipherType: IPSEC_CIPHER_TYPE = IPSEC_CIPHER_TYPE()
-    public var cipherConfig: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_CIPHER_TYPE {
     public var value: Int32 = 0
 
@@ -8749,7 +2878,6 @@ public let IPSEC_CIPHER_TYPE_IPSEC_CIPHER_TYPE_AES_256: IPSEC_CIPHER_TYPE = IPSE
 public let IPSEC_CIPHER_TYPE_IPSEC_CIPHER_TYPE_MAX: IPSEC_CIPHER_TYPE = IPSEC_CIPHER_TYPE(6)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_DOSP_FLAGS {
     public var value: UInt32 = 0
 
@@ -8817,7 +2945,7 @@ public struct IPSEC_DOSP_OPTIONS0 {
     public var defBlockExemptRateLimitBytesPerSec: UInt32 = 0
     public var maxStateEntries: UInt32 = 0
     public var maxPerIPRateLimitQueues: UInt32 = 0
-    public var flags: IPSEC_DOSP_FLAGS = IPSEC_DOSP_FLAGS()
+    public var flags: UInt32 = 0
     public var numPublicIFLuids: UInt32 = 0
     public var publicIFLuids: CPointer<UInt64> = CPointer<UInt64>()
     public var numInternalIFLuids: UInt32 = 0
@@ -8885,7 +3013,6 @@ public struct IPSEC_ESP_DROP_PACKET_STATISTICS0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_FAILURE_POINT {
     public var value: Int32 = 0
 
@@ -8914,96 +3041,6 @@ public let IPSEC_FAILURE_POINT_IPSEC_FAILURE_PEER: IPSEC_FAILURE_POINT = IPSEC_F
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public let IPSEC_FAILURE_POINT_IPSEC_FAILURE_POINT_MAX: IPSEC_FAILURE_POINT = IPSEC_FAILURE_POINT(3)
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_GETSPI0 {
-    public var inboundIpsecTraffic: IPSEC_TRAFFIC0 = IPSEC_TRAFFIC0()
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous: IPSEC_GETSPI0__Anonymous_e__Union = IPSEC_GETSPI0__Anonymous_e__Union()
-    public var rngCryptoModuleID: CPointer<GUID> = CPointer<GUID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_GETSPI0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func inboundUdpEncapsulation(): CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_inboundUdpEncapsulation(val: CPointer<IPSEC_V4_UDP_ENCAPSULATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_GETSPI1 {
-    public var inboundIpsecTraffic: IPSEC_TRAFFIC1 = IPSEC_TRAFFIC1()
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous: IPSEC_GETSPI1__Anonymous_e__Union = IPSEC_GETSPI1__Anonymous_e__Union()
-    public var rngCryptoModuleID: CPointer<GUID> = CPointer<GUID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_GETSPI1__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func inboundUdpEncapsulation(): CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_inboundUdpEncapsulation(val: CPointer<IPSEC_V4_UDP_ENCAPSULATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_ID0 {
-    public var mmTargetName: CPointer<UInt16> = CPointer<UInt16>()
-    public var emTargetName: CPointer<UInt16> = CPointer<UInt16>()
-    public var numTokens: UInt32 = 0
-    public var tokens: CPointer<IPSEC_TOKEN0> = CPointer<IPSEC_TOKEN0>()
-    public var explicitCredentials: UInt64 = 0
-    public var logonId: UInt64 = 0
-    public init() {}
-}
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
@@ -9041,27 +3078,9 @@ public struct IPSEC_KEY_MANAGER0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_KEY_MANAGER_CALLBACKS0 {
-    public var reserved: GUID = GUID()
-    public var flags: UInt32 = 0
-    public var keyDictationCheck: IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0 = { _, _, _ => () }
-    public var keyDictation: IPSEC_KEY_MANAGER_DICTATE_KEY0 = { _, _, _ => 0 }
-    public var keyNotify: IPSEC_KEY_MANAGER_NOTIFY_KEY0 = { _, _ => () }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type IPSEC_KEY_MANAGER_DICTATE_KEY0 = CFunc<(CPointer<IPSEC_SA_DETAILS1>, CPointer<IPSEC_SA_DETAILS1>, CPointer<Int32>) -> UInt32>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public type IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0 = CFunc<(CPointer<IKEEXT_TRAFFIC0>, CPointer<Int32>, CPointer<UInt32>) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type IPSEC_KEY_MANAGER_NOTIFY_KEY0 = CFunc<(CPointer<IPSEC_SA_DETAILS1>, CPointer<IPSEC_SA_DETAILS1>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_PFS_GROUP {
     public var value: Int32 = 0
 
@@ -9110,7 +3129,6 @@ public let IPSEC_PFS_GROUP_IPSEC_PFS_24: IPSEC_PFS_GROUP = IPSEC_PFS_GROUP(7)
 public let IPSEC_PFS_GROUP_IPSEC_PFS_MAX: IPSEC_PFS_GROUP = IPSEC_PFS_GROUP(8)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_POLICY_FLAG {
     public var value: UInt32 = 0
 
@@ -9182,247 +3200,6 @@ public let IPSEC_POLICY_FLAG_IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ICMPV6: IPSEC_POLIC
 public let IPSEC_POLICY_FLAG_IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_DICTATE_KEY: IPSEC_POLICY_FLAG = IPSEC_POLICY_FLAG(8192)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_PROPOSAL0 {
-    public var lifetime: IPSEC_SA_LIFETIME0 = IPSEC_SA_LIFETIME0()
-    public var numSaTransforms: UInt32 = 0
-    public var saTransforms: CPointer<IPSEC_SA_TRANSFORM0> = CPointer<IPSEC_SA_TRANSFORM0>()
-    public var pfsGroup: IPSEC_PFS_GROUP = IPSEC_PFS_GROUP()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA0 {
-    public var spi: UInt32 = 0
-    public var saTransformType: IPSEC_TRANSFORM_TYPE = IPSEC_TRANSFORM_TYPE()
-    public var Anonymous: IPSEC_SA0__Anonymous_e__Union = IPSEC_SA0__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_SA0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ahInformation(): CPointer<IPSEC_SA_AUTH_INFORMATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ahInformation(val: CPointer<IPSEC_SA_AUTH_INFORMATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func espAuthInformation(): CPointer<IPSEC_SA_AUTH_INFORMATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_espAuthInformation(val: CPointer<IPSEC_SA_AUTH_INFORMATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func espCipherInformation(): CPointer<IPSEC_SA_CIPHER_INFORMATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_CIPHER_INFORMATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_espCipherInformation(val: CPointer<IPSEC_SA_CIPHER_INFORMATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_CIPHER_INFORMATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func espAuthAndCipherInformation(): CPointer<IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_espAuthAndCipherInformation(val: CPointer<IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func espAuthFwInformation(): CPointer<IPSEC_SA_AUTH_INFORMATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_espAuthFwInformation(val: CPointer<IPSEC_SA_AUTH_INFORMATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0 {
-    public var saCipherInformation: IPSEC_SA_CIPHER_INFORMATION0 = IPSEC_SA_CIPHER_INFORMATION0()
-    public var saAuthInformation: IPSEC_SA_AUTH_INFORMATION0 = IPSEC_SA_AUTH_INFORMATION0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_AUTH_INFORMATION0 {
-    public var authTransform: IPSEC_AUTH_TRANSFORM0 = IPSEC_AUTH_TRANSFORM0()
-    public var authKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_BUNDLE0 {
-    public var flags: IPSEC_SA_BUNDLE_FLAGS = IPSEC_SA_BUNDLE_FLAGS()
-    public var lifetime: IPSEC_SA_LIFETIME0 = IPSEC_SA_LIFETIME0()
-    public var idleTimeoutSeconds: UInt32 = 0
-    public var ndAllowClearTimeoutSeconds: UInt32 = 0
-    public var ipsecId: CPointer<IPSEC_ID0> = CPointer<IPSEC_ID0>()
-    public var napContext: UInt32 = 0
-    public var qmSaId: UInt32 = 0
-    public var numSAs: UInt32 = 0
-    public var saList: CPointer<IPSEC_SA0> = CPointer<IPSEC_SA0>()
-    public var keyModuleState: CPointer<IPSEC_KEYMODULE_STATE0> = CPointer<IPSEC_KEYMODULE_STATE0>()
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous: IPSEC_SA_BUNDLE0__Anonymous_e__Union = IPSEC_SA_BUNDLE0__Anonymous_e__Union()
-    public var mmSaId: UInt64 = 0
-    public var pfsGroup: IPSEC_PFS_GROUP = IPSEC_PFS_GROUP()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_SA_BUNDLE0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func peerV4PrivateAddress(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_peerV4PrivateAddress(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_BUNDLE1 {
-    public var flags: IPSEC_SA_BUNDLE_FLAGS = IPSEC_SA_BUNDLE_FLAGS()
-    public var lifetime: IPSEC_SA_LIFETIME0 = IPSEC_SA_LIFETIME0()
-    public var idleTimeoutSeconds: UInt32 = 0
-    public var ndAllowClearTimeoutSeconds: UInt32 = 0
-    public var ipsecId: CPointer<IPSEC_ID0> = CPointer<IPSEC_ID0>()
-    public var napContext: UInt32 = 0
-    public var qmSaId: UInt32 = 0
-    public var numSAs: UInt32 = 0
-    public var saList: CPointer<IPSEC_SA0> = CPointer<IPSEC_SA0>()
-    public var keyModuleState: CPointer<IPSEC_KEYMODULE_STATE0> = CPointer<IPSEC_KEYMODULE_STATE0>()
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous: IPSEC_SA_BUNDLE1__Anonymous_e__Union = IPSEC_SA_BUNDLE1__Anonymous_e__Union()
-    public var mmSaId: UInt64 = 0
-    public var pfsGroup: IPSEC_PFS_GROUP = IPSEC_PFS_GROUP()
-    public var saLookupContext: GUID = GUID()
-    public var qmFilterId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_SA_BUNDLE1__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func peerV4PrivateAddress(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_peerV4PrivateAddress(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_SA_BUNDLE_FLAGS {
     public var value: UInt32 = 0
 
@@ -9485,55 +3262,9 @@ public let IPSEC_SA_BUNDLE_FLAGS_IPSEC_SA_BUNDLE_FLAG_SUPPRESS_DUPLICATE_DELETIO
 public let IPSEC_SA_BUNDLE_FLAGS_IPSEC_SA_BUNDLE_FLAG_PEER_SUPPORTS_GUARANTEE_ENCRYPTION: IPSEC_SA_BUNDLE_FLAGS = IPSEC_SA_BUNDLE_FLAGS(16384)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_CIPHER_INFORMATION0 {
-    public var cipherTransform: IPSEC_CIPHER_TRANSFORM0 = IPSEC_CIPHER_TRANSFORM0()
-    public var cipherKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_CONTEXT0 {
-    public var saContextId: UInt64 = 0
-    public var inboundSa: CPointer<IPSEC_SA_DETAILS0> = CPointer<IPSEC_SA_DETAILS0>()
-    public var outboundSa: CPointer<IPSEC_SA_DETAILS0> = CPointer<IPSEC_SA_DETAILS0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_CONTEXT1 {
-    public var saContextId: UInt64 = 0
-    public var inboundSa: CPointer<IPSEC_SA_DETAILS1> = CPointer<IPSEC_SA_DETAILS1>()
-    public var outboundSa: CPointer<IPSEC_SA_DETAILS1> = CPointer<IPSEC_SA_DETAILS1>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-public type IPSEC_SA_CONTEXT_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<IPSEC_SA_CONTEXT_CHANGE0>) -> Unit>
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_CONTEXT_CHANGE0 {
-    public var changeType: IPSEC_SA_CONTEXT_EVENT_TYPE0 = IPSEC_SA_CONTEXT_EVENT_TYPE0()
-    public var saContextId: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public type IPSEC_SA_CONTEXT_ENUM_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_CONTEXT_ENUM_TEMPLATE0 {
-    public var localSubNet: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
-    public var remoteSubNet: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_SA_CONTEXT_EVENT_TYPE0 {
     public var value: Int32 = 0
 
@@ -9561,104 +3292,12 @@ public let IPSEC_SA_CONTEXT_EVENT_TYPE0_IPSEC_SA_CONTEXT_EVENT_DELETE: IPSEC_SA_
 public let IPSEC_SA_CONTEXT_EVENT_TYPE0_IPSEC_SA_CONTEXT_EVENT_MAX: IPSEC_SA_CONTEXT_EVENT_TYPE0 = IPSEC_SA_CONTEXT_EVENT_TYPE0(3)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_CONTEXT_SUBSCRIPTION0 {
-    public var enumTemplate: CPointer<IPSEC_SA_CONTEXT_ENUM_TEMPLATE0> = CPointer<IPSEC_SA_CONTEXT_ENUM_TEMPLATE0>()
-    public var flags: UInt32 = 0
-    public var sessionKey: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_DETAILS0 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var saDirection: FWP_DIRECTION = FWP_DIRECTION()
-    public var traffic: IPSEC_TRAFFIC0 = IPSEC_TRAFFIC0()
-    public var saBundle: IPSEC_SA_BUNDLE0 = IPSEC_SA_BUNDLE0()
-    public var Anonymous: IPSEC_SA_DETAILS0__Anonymous_e__Union = IPSEC_SA_DETAILS0__Anonymous_e__Union()
-    public var transportFilter: CPointer<FWPM_FILTER0> = CPointer<FWPM_FILTER0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_SA_DETAILS0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func udpEncapsulation(): CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_udpEncapsulation(val: CPointer<IPSEC_V4_UDP_ENCAPSULATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_DETAILS1 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var saDirection: FWP_DIRECTION = FWP_DIRECTION()
-    public var traffic: IPSEC_TRAFFIC1 = IPSEC_TRAFFIC1()
-    public var saBundle: IPSEC_SA_BUNDLE1 = IPSEC_SA_BUNDLE1()
-    public var Anonymous: IPSEC_SA_DETAILS1__Anonymous_e__Union = IPSEC_SA_DETAILS1__Anonymous_e__Union()
-    public var transportFilter: CPointer<FWPM_FILTER0> = CPointer<FWPM_FILTER0>()
-    public var virtualIfTunnelInfo: IPSEC_VIRTUAL_IF_TUNNEL_INFO0 = IPSEC_VIRTUAL_IF_TUNNEL_INFO0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_SA_DETAILS1__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func udpEncapsulation(): CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_udpEncapsulation(val: CPointer<IPSEC_V4_UDP_ENCAPSULATION0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 public type IPSEC_SA_ENUM_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
 public struct IPSEC_SA_ENUM_TEMPLATE0 {
-    public var saDirection: FWP_DIRECTION = FWP_DIRECTION()
+    public var saDirection: Int32 = 0
     public init() {}
 }
 
@@ -9680,162 +3319,6 @@ public struct IPSEC_SA_LIFETIME0 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_SA_TRANSFORM0 {
-    public var ipsecTransformType: IPSEC_TRANSFORM_TYPE = IPSEC_TRANSFORM_TYPE()
-    public var Anonymous: IPSEC_SA_TRANSFORM0__Anonymous_e__Union = IPSEC_SA_TRANSFORM0__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_SA_TRANSFORM0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ahTransform(): CPointer<IPSEC_AUTH_TRANSFORM0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ahTransform(val: CPointer<IPSEC_AUTH_TRANSFORM0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func espAuthTransform(): CPointer<IPSEC_AUTH_TRANSFORM0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_espAuthTransform(val: CPointer<IPSEC_AUTH_TRANSFORM0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func espCipherTransform(): CPointer<IPSEC_CIPHER_TRANSFORM0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_CIPHER_TRANSFORM0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_espCipherTransform(val: CPointer<IPSEC_CIPHER_TRANSFORM0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_CIPHER_TRANSFORM0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func espAuthAndCipherTransform(): CPointer<IPSEC_AUTH_AND_CIPHER_TRANSFORM0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_AUTH_AND_CIPHER_TRANSFORM0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_espAuthAndCipherTransform(val: CPointer<IPSEC_AUTH_AND_CIPHER_TRANSFORM0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_AUTH_AND_CIPHER_TRANSFORM0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func espAuthFwTransform(): CPointer<IPSEC_AUTH_TRANSFORM0> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_espAuthFwTransform(val: CPointer<IPSEC_AUTH_TRANSFORM0>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_STATISTICS0 {
-    public var aggregateSaStatistics: IPSEC_AGGREGATE_SA_STATISTICS0 = IPSEC_AGGREGATE_SA_STATISTICS0()
-    public var espDropPacketStatistics: IPSEC_ESP_DROP_PACKET_STATISTICS0 = IPSEC_ESP_DROP_PACKET_STATISTICS0()
-    public var ahDropPacketStatistics: IPSEC_AH_DROP_PACKET_STATISTICS0 = IPSEC_AH_DROP_PACKET_STATISTICS0()
-    public var aggregateDropPacketStatistics: IPSEC_AGGREGATE_DROP_PACKET_STATISTICS0 = IPSEC_AGGREGATE_DROP_PACKET_STATISTICS0()
-    public var inboundTrafficStatistics: IPSEC_TRAFFIC_STATISTICS0 = IPSEC_TRAFFIC_STATISTICS0()
-    public var outboundTrafficStatistics: IPSEC_TRAFFIC_STATISTICS0 = IPSEC_TRAFFIC_STATISTICS0()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_STATISTICS1 {
-    public var aggregateSaStatistics: IPSEC_AGGREGATE_SA_STATISTICS0 = IPSEC_AGGREGATE_SA_STATISTICS0()
-    public var espDropPacketStatistics: IPSEC_ESP_DROP_PACKET_STATISTICS0 = IPSEC_ESP_DROP_PACKET_STATISTICS0()
-    public var ahDropPacketStatistics: IPSEC_AH_DROP_PACKET_STATISTICS0 = IPSEC_AH_DROP_PACKET_STATISTICS0()
-    public var aggregateDropPacketStatistics: IPSEC_AGGREGATE_DROP_PACKET_STATISTICS1 = IPSEC_AGGREGATE_DROP_PACKET_STATISTICS1()
-    public var inboundTrafficStatistics: IPSEC_TRAFFIC_STATISTICS1 = IPSEC_TRAFFIC_STATISTICS1()
-    public var outboundTrafficStatistics: IPSEC_TRAFFIC_STATISTICS1 = IPSEC_TRAFFIC_STATISTICS1()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_TOKEN0 {
-    public var type_: IPSEC_TOKEN_TYPE = IPSEC_TOKEN_TYPE()
-    public var principal: IPSEC_TOKEN_PRINCIPAL = IPSEC_TOKEN_PRINCIPAL()
-    public var mode: IPSEC_TOKEN_MODE = IPSEC_TOKEN_MODE()
-    public var token: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_TOKEN_MODE {
     public var value: Int32 = 0
 
@@ -9863,7 +3346,6 @@ public let IPSEC_TOKEN_MODE_IPSEC_TOKEN_MODE_EXTENDED: IPSEC_TOKEN_MODE = IPSEC_
 public let IPSEC_TOKEN_MODE_IPSEC_TOKEN_MODE_MAX: IPSEC_TOKEN_MODE = IPSEC_TOKEN_MODE(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_TOKEN_PRINCIPAL {
     public var value: Int32 = 0
 
@@ -9891,7 +3373,6 @@ public let IPSEC_TOKEN_PRINCIPAL_IPSEC_TOKEN_PRINCIPAL_PEER: IPSEC_TOKEN_PRINCIP
 public let IPSEC_TOKEN_PRINCIPAL_IPSEC_TOKEN_PRINCIPAL_MAX: IPSEC_TOKEN_PRINCIPAL = IPSEC_TOKEN_PRINCIPAL(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_TOKEN_TYPE {
     public var value: Int32 = 0
 
@@ -9920,399 +3401,109 @@ public let IPSEC_TOKEN_TYPE_IPSEC_TOKEN_TYPE_MAX: IPSEC_TOKEN_TYPE = IPSEC_TOKEN
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct IPSEC_TRAFFIC0 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous1: IPSEC_TRAFFIC0__Anonymous1_e__Union = IPSEC_TRAFFIC0__Anonymous1_e__Union()
-    public var Anonymous2: IPSEC_TRAFFIC0__Anonymous2_e__Union = IPSEC_TRAFFIC0__Anonymous2_e__Union()
-    public var trafficType: IPSEC_TRAFFIC_TYPE = IPSEC_TRAFFIC_TYPE()
-    public var Anonymous3: IPSEC_TRAFFIC0__Anonymous3_e__Union = IPSEC_TRAFFIC0__Anonymous3_e__Union()
-    public var remotePort: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TRAFFIC0__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TRAFFIC0__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TRAFFIC0__Anonymous3_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ipsecFilterId(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_ipsecFilterId(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func tunnelPolicyId(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_tunnelPolicyId(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_TRAFFIC1 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous1: IPSEC_TRAFFIC1__Anonymous1_e__Union = IPSEC_TRAFFIC1__Anonymous1_e__Union()
-    public var Anonymous2: IPSEC_TRAFFIC1__Anonymous2_e__Union = IPSEC_TRAFFIC1__Anonymous2_e__Union()
-    public var trafficType: IPSEC_TRAFFIC_TYPE = IPSEC_TRAFFIC_TYPE()
-    public var Anonymous3: IPSEC_TRAFFIC1__Anonymous3_e__Union = IPSEC_TRAFFIC1__Anonymous3_e__Union()
-    public var remotePort: UInt16 = 0
-    public var localPort: UInt16 = 0
-    public var ipProtocol: UInt8 = 0
-    public var localIfLuid: UInt64 = 0
-    public var realIfProfileId: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TRAFFIC1__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TRAFFIC1__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TRAFFIC1__Anonymous3_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func ipsecFilterId(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_ipsecFilterId(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func tunnelPolicyId(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_tunnelPolicyId(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_TRAFFIC_SELECTOR0 {
     public var protocolId: UInt8 = 0
     public var portStart: UInt16 = 0
     public var portEnd: UInt16 = 0
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
+    public var ipVersion: Int32 = 0
     public var Anonymous1: IPSEC_TRAFFIC_SELECTOR0__Anonymous1_e__Union = IPSEC_TRAFFIC_SELECTOR0__Anonymous1_e__Union()
     public var Anonymous2: IPSEC_TRAFFIC_SELECTOR0__Anonymous2_e__Union = IPSEC_TRAFFIC_SELECTOR0__Anonymous2_e__Union()
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct IPSEC_TRAFFIC_SELECTOR0__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public func startV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop startV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_startV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop startV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func startV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_startV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct IPSEC_TRAFFIC_SELECTOR0__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public func endV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop endV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_endV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop endV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func endV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_endV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -10355,7 +3546,6 @@ public struct IPSEC_TRAFFIC_STATISTICS1 {
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_TRAFFIC_TYPE {
     public var value: Int32 = 0
 
@@ -10383,7 +3573,6 @@ public let IPSEC_TRAFFIC_TYPE_IPSEC_TRAFFIC_TYPE_TUNNEL: IPSEC_TRAFFIC_TYPE = IP
 public let IPSEC_TRAFFIC_TYPE_IPSEC_TRAFFIC_TYPE_MAX: IPSEC_TRAFFIC_TYPE = IPSEC_TRAFFIC_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_TRANSFORM_TYPE {
     public var value: Int32 = 0
 
@@ -10421,10 +3610,6358 @@ public let IPSEC_TRANSFORM_TYPE_IPSEC_TRANSFORM_TYPE_MAX: IPSEC_TRANSFORM_TYPE =
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
+public struct IPSEC_TUNNEL_ENDPOINT0 {
+    public var ipVersion: Int32 = 0
+    public var Anonymous: IPSEC_TUNNEL_ENDPOINT0__Anonymous_e__Union = IPSEC_TUNNEL_ENDPOINT0__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TUNNEL_ENDPOINT0__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop v4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop v6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_TUNNEL_ENDPOINTS0 {
+    public var ipVersion: Int32 = 0
+    public var Anonymous1: IPSEC_TUNNEL_ENDPOINTS0__Anonymous1_e__Union = IPSEC_TUNNEL_ENDPOINTS0__Anonymous1_e__Union()
+    public var Anonymous2: IPSEC_TUNNEL_ENDPOINTS0__Anonymous2_e__Union = IPSEC_TUNNEL_ENDPOINTS0__Anonymous2_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TUNNEL_ENDPOINTS0__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TUNNEL_ENDPOINTS0__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_TUNNEL_ENDPOINTS1 {
+    public var ipVersion: Int32 = 0
+    public var Anonymous1: IPSEC_TUNNEL_ENDPOINTS1__Anonymous1_e__Union = IPSEC_TUNNEL_ENDPOINTS1__Anonymous1_e__Union()
+    public var Anonymous2: IPSEC_TUNNEL_ENDPOINTS1__Anonymous2_e__Union = IPSEC_TUNNEL_ENDPOINTS1__Anonymous2_e__Union()
+    public var localIfLuid: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TUNNEL_ENDPOINTS1__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TUNNEL_ENDPOINTS1__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_TUNNEL_ENDPOINTS2 {
+    public var ipVersion: Int32 = 0
+    public var Anonymous1: IPSEC_TUNNEL_ENDPOINTS2__Anonymous1_e__Union = IPSEC_TUNNEL_ENDPOINTS2__Anonymous1_e__Union()
+    public var Anonymous2: IPSEC_TUNNEL_ENDPOINTS2__Anonymous2_e__Union = IPSEC_TUNNEL_ENDPOINTS2__Anonymous2_e__Union()
+    public var localIfLuid: UInt64 = 0
+    public var remoteFqdn: CPointer<UInt16> = CPointer<UInt16>()
+    public var numAddresses: UInt32 = 0
+    public var remoteAddresses: CPointer<IPSEC_TUNNEL_ENDPOINT0> = CPointer<IPSEC_TUNNEL_ENDPOINT0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TUNNEL_ENDPOINTS2__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TUNNEL_ENDPOINTS2__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_V4_UDP_ENCAPSULATION0 {
+    public var localUdpEncapPort: UInt16 = 0
+    public var remoteUdpEncapPort: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_VIRTUAL_IF_TUNNEL_INFO0 {
+    public var virtualIfTunnelId: UInt64 = 0
+    public var trafficSelectorId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_ACTION0 {
+    public var type_: UInt32 = 0
+    public var Anonymous: FWPM_ACTION0__Anonymous_e__Union = FWPM_ACTION0__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_ACTION0__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop filterType: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop calloutKey: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_CALLOUT0 {
+    public var calloutKey: GUID = GUID()
+    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
+    public var flags: UInt32 = 0
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var applicableLayer: GUID = GUID()
+    public var calloutId: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_CALLOUT_CHANGE0 {
+    public var changeType: Int32 = 0
+    public var calloutKey: GUID = GUID()
+    public var calloutId: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+public type FWPM_CALLOUT_CHANGE_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWPM_CALLOUT_CHANGE0>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_CLASSIFY_OPTION0 {
+    public var type_: Int32 = 0
+    public var value: FWP_VALUE0 = FWP_VALUE0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_CLASSIFY_OPTIONS0 {
+    public var numOptions: UInt32 = 0
+    public var options: CPointer<FWPM_CLASSIFY_OPTION0> = CPointer<FWPM_CLASSIFY_OPTION0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_FIELD0 {
+    public var fieldKey: CPointer<GUID> = CPointer<GUID>()
+    public var type_: Int32 = 0
+    public var dataType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_LAYER0 {
+    public var layerKey: GUID = GUID()
+    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
+    public var flags: UInt32 = 0
+    public var numFields: UInt32 = 0
+    public var field: CPointer<FWPM_FIELD0> = CPointer<FWPM_FIELD0>()
+    public var defaultSubLayerKey: GUID = GUID()
+    public var layerId: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NETWORK_CONNECTION_POLICY_SETTING0 {
+    public var type_: Int32 = 0
+    public var value: FWP_VALUE0 = FWP_VALUE0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0 {
+    public var numSettings: UInt32 = 0
+    public var settings: CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTING0> = CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTING0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_NET_EVENT_CLASSIFY_DROP2 {
+    public var filterId: UInt64 = 0
+    public var layerId: UInt16 = 0
+    public var reauthReason: UInt32 = 0
+    public var originalProfile: UInt32 = 0
+    public var currentProfile: UInt32 = 0
+    public var msFwpDirection: UInt32 = 0
+    public var isLoopback: Int32 = 0
+    public var vSwitchId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var vSwitchSourcePort: UInt32 = 0
+    public var vSwitchDestinationPort: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_NET_EVENT_CLASSIFY_DROP_MAC0 {
+    public var localMacAddr: FWP_BYTE_ARRAY6 = FWP_BYTE_ARRAY6()
+    public var remoteMacAddr: FWP_BYTE_ARRAY6 = FWP_BYTE_ARRAY6()
+    public var mediaType: UInt32 = 0
+    public var ifType: UInt32 = 0
+    public var etherType: UInt16 = 0
+    public var ndisPortNumber: UInt32 = 0
+    public var reserved: UInt32 = 0
+    public var vlanTag: UInt16 = 0
+    public var ifLuid: UInt64 = 0
+    public var filterId: UInt64 = 0
+    public var layerId: UInt16 = 0
+    public var reauthReason: UInt32 = 0
+    public var originalProfile: UInt32 = 0
+    public var currentProfile: UInt32 = 0
+    public var msFwpDirection: UInt32 = 0
+    public var isLoopback: Int32 = 0
+    public var vSwitchId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var vSwitchSourcePort: UInt32 = 0
+    public var vSwitchDestinationPort: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_HEADER0 {
+    public var timeStamp: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var flags: UInt32 = 0
+    public var ipVersion: Int32 = 0
+    public var ipProtocol: UInt8 = 0
+    public var Anonymous1: FWPM_NET_EVENT_HEADER0__Anonymous1_e__Union = FWPM_NET_EVENT_HEADER0__Anonymous1_e__Union()
+    public var Anonymous2: FWPM_NET_EVENT_HEADER0__Anonymous2_e__Union = FWPM_NET_EVENT_HEADER0__Anonymous2_e__Union()
+    public var localPort: UInt16 = 0
+    public var remotePort: UInt16 = 0
+    public var scopeId: UInt32 = 0
+    public var appId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var userId: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER0__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localAddrV4: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localAddrV6: FWP_BYTE_ARRAY16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER0__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteAddrV4: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteAddrV6: FWP_BYTE_ARRAY16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_HEADER1 {
+    public var timeStamp: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var flags: UInt32 = 0
+    public var ipVersion: Int32 = 0
+    public var ipProtocol: UInt8 = 0
+    public var Anonymous1: FWPM_NET_EVENT_HEADER1__Anonymous1_e__Union = FWPM_NET_EVENT_HEADER1__Anonymous1_e__Union()
+    public var Anonymous2: FWPM_NET_EVENT_HEADER1__Anonymous2_e__Union = FWPM_NET_EVENT_HEADER1__Anonymous2_e__Union()
+    public var localPort: UInt16 = 0
+    public var remotePort: UInt16 = 0
+    public var scopeId: UInt32 = 0
+    public var appId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var userId: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
+    public var Anonymous3: FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union = FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER1__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localAddrV4: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localAddrV6: FWP_BYTE_ARRAY16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER1__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteAddrV4: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteAddrV6: FWP_BYTE_ARRAY16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union {
+    public var _raw: VArray<UInt64, $7> = VArray<UInt64, $7>(repeat: 0)
+
+    public mut prop anonymous: FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct {
+    public var reserved1: Int32 = 0
+    public var Anonymous: FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union = FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+
+    public mut prop anonymous: FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_HEADER1__Anonymous3_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
+    public var reserved2: FWP_BYTE_ARRAY6 = FWP_BYTE_ARRAY6()
+    public var reserved3: FWP_BYTE_ARRAY6 = FWP_BYTE_ARRAY6()
+    public var reserved4: UInt32 = 0
+    public var reserved5: UInt32 = 0
+    public var reserved6: UInt16 = 0
+    public var reserved7: UInt32 = 0
+    public var reserved8: UInt32 = 0
+    public var reserved9: UInt16 = 0
+    public var reserved10: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_HEADER2 {
+    public var timeStamp: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var flags: UInt32 = 0
+    public var ipVersion: Int32 = 0
+    public var ipProtocol: UInt8 = 0
+    public var Anonymous1: FWPM_NET_EVENT_HEADER2__Anonymous1_e__Union = FWPM_NET_EVENT_HEADER2__Anonymous1_e__Union()
+    public var Anonymous2: FWPM_NET_EVENT_HEADER2__Anonymous2_e__Union = FWPM_NET_EVENT_HEADER2__Anonymous2_e__Union()
+    public var localPort: UInt16 = 0
+    public var remotePort: UInt16 = 0
+    public var scopeId: UInt32 = 0
+    public var appId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var userId: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
+    public var addressFamily: Int32 = 0
+    public var packageSid: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER2__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localAddrV4: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localAddrV6: FWP_BYTE_ARRAY16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER2__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteAddrV4: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteAddrV6: FWP_BYTE_ARRAY16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_HEADER3 {
+    public var timeStamp: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var flags: UInt32 = 0
+    public var ipVersion: Int32 = 0
+    public var ipProtocol: UInt8 = 0
+    public var Anonymous1: FWPM_NET_EVENT_HEADER3__Anonymous1_e__Union = FWPM_NET_EVENT_HEADER3__Anonymous1_e__Union()
+    public var Anonymous2: FWPM_NET_EVENT_HEADER3__Anonymous2_e__Union = FWPM_NET_EVENT_HEADER3__Anonymous2_e__Union()
+    public var localPort: UInt16 = 0
+    public var remotePort: UInt16 = 0
+    public var scopeId: UInt32 = 0
+    public var appId: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var userId: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
+    public var addressFamily: Int32 = 0
+    public var packageSid: CPointer<Win32_Security.SID> = CPointer<Win32_Security.SID>()
+    public var enterpriseId: CPointer<UInt16> = CPointer<UInt16>()
+    public var policyFlags: UInt64 = 0
+    public var effectiveName: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER3__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localAddrV4: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localAddrV6: FWP_BYTE_ARRAY16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_HEADER3__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteAddrV4: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteAddrV6: FWP_BYTE_ARRAY16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_BYTE_ARRAY16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_NET_EVENT_IKEEXT_EM_FAILURE0 {
+    public var failureErrorCode: UInt32 = 0
+    public var failurePoint: Int32 = 0
+    public var flags: UInt32 = 0
+    public var emState: Int32 = 0
+    public var saRole: Int32 = 0
+    public var emAuthMethod: Int32 = 0
+    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
+    public var mmId: UInt64 = 0
+    public var qmFilterId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_NET_EVENT_IKEEXT_EM_FAILURE1 {
+    public var failureErrorCode: UInt32 = 0
+    public var failurePoint: Int32 = 0
+    public var flags: UInt32 = 0
+    public var emState: Int32 = 0
+    public var saRole: Int32 = 0
+    public var emAuthMethod: Int32 = 0
+    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
+    public var mmId: UInt64 = 0
+    public var qmFilterId: UInt64 = 0
+    public var localPrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
+    public var remotePrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
+    public var numLocalPrincipalGroupSids: UInt32 = 0
+    public var localPrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+    public var numRemotePrincipalGroupSids: UInt32 = 0
+    public var remotePrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+    public var saTrafficType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE0 {
+    public var failureErrorCode: UInt32 = 0
+    public var failurePoint: Int32 = 0
+    public var flags: UInt32 = 0
+    public var keyingModuleType: Int32 = 0
+    public var mmState: Int32 = 0
+    public var saRole: Int32 = 0
+    public var mmAuthMethod: Int32 = 0
+    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
+    public var mmId: UInt64 = 0
+    public var mmFilterId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE1 {
+    public var failureErrorCode: UInt32 = 0
+    public var failurePoint: Int32 = 0
+    public var flags: UInt32 = 0
+    public var keyingModuleType: Int32 = 0
+    public var mmState: Int32 = 0
+    public var saRole: Int32 = 0
+    public var mmAuthMethod: Int32 = 0
+    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
+    public var mmId: UInt64 = 0
+    public var mmFilterId: UInt64 = 0
+    public var localPrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
+    public var remotePrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
+    public var numLocalPrincipalGroupSids: UInt32 = 0
+    public var localPrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+    public var numRemotePrincipalGroupSids: UInt32 = 0
+    public var remotePrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_NET_EVENT_IKEEXT_MM_FAILURE2 {
+    public var failureErrorCode: UInt32 = 0
+    public var failurePoint: Int32 = 0
+    public var flags: UInt32 = 0
+    public var keyingModuleType: Int32 = 0
+    public var mmState: Int32 = 0
+    public var saRole: Int32 = 0
+    public var mmAuthMethod: Int32 = 0
+    public var endCertHash: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
+    public var mmId: UInt64 = 0
+    public var mmFilterId: UInt64 = 0
+    public var localPrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
+    public var remotePrincipalNameForAuth: CPointer<UInt16> = CPointer<UInt16>()
+    public var numLocalPrincipalGroupSids: UInt32 = 0
+    public var localPrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+    public var numRemotePrincipalGroupSids: UInt32 = 0
+    public var remotePrincipalGroupSids: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+    public var providerContextKey: CPointer<GUID> = CPointer<GUID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_NET_EVENT_IPSEC_DOSP_DROP0 {
+    public var ipVersion: Int32 = 0
+    public var Anonymous1: FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous1_e__Union = FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous1_e__Union()
+    public var Anonymous2: FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous2_e__Union = FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous2_e__Union()
+    public var failureStatus: Int32 = 0
+    public var direction: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop publicHostV4Addr: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop publicHostV6Addr: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_IPSEC_DOSP_DROP0__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop internalHostV4Addr: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop internalHostV6Addr: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_NET_EVENT_IPSEC_KERNEL_DROP0 {
+    public var failureStatus: Int32 = 0
+    public var direction: Int32 = 0
+    public var spi: UInt32 = 0
+    public var filterId: UInt64 = 0
+    public var layerId: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_PROVIDER0 {
+    public var providerKey: GUID = GUID()
+    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
+    public var flags: UInt32 = 0
+    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var serviceName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0 {
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var providerContextType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0 {
+    public var enumTemplate: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0> = CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0>()
+    public var flags: UInt32 = 0
+    public var sessionKey: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_SUBLAYER0 {
+    public var subLayerKey: GUID = GUID()
+    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
+    public var flags: UInt32 = 0
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var weight: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_SUBLAYER_SUBSCRIPTION0 {
+    public var enumTemplate: CPointer<FWPM_SUBLAYER_ENUM_TEMPLATE0> = CPointer<FWPM_SUBLAYER_ENUM_TEMPLATE0>()
+    public var flags: UInt32 = 0
+    public var sessionKey: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_SYSTEM_PORTS_BY_TYPE0 {
+    public var type_: Int32 = 0
+    public var numPorts: UInt32 = 0
+    public var ports: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_VSWITCH_EVENT0 {
+    public var eventType: Int32 = 0
+    public var vSwitchId: CPointer<UInt16> = CPointer<UInt16>()
+    public var Anonymous: FWPM_VSWITCH_EVENT0__Anonymous_e__Union = FWPM_VSWITCH_EVENT0__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_VSWITCH_EVENT0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop positionInfo: FWPM_VSWITCH_EVENT0__Anonymous_e__Union__positionInfo_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWPM_VSWITCH_EVENT0__Anonymous_e__Union__positionInfo_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWPM_VSWITCH_EVENT0__Anonymous_e__Union__positionInfo_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reorderInfo: FWPM_VSWITCH_EVENT0__Anonymous_e__Union__reorderInfo_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWPM_VSWITCH_EVENT0__Anonymous_e__Union__reorderInfo_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWPM_VSWITCH_EVENT0__Anonymous_e__Union__reorderInfo_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_VSWITCH_EVENT0__Anonymous_e__Union__positionInfo_e__Struct {
+    public var numvSwitchFilterExtensions: UInt32 = 0
+    public var vSwitchFilterExtensions: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_VSWITCH_EVENT0__Anonymous_e__Union__reorderInfo_e__Struct {
+    public var inRequiredPosition: Int32 = 0
+    public var numvSwitchFilterExtensions: UInt32 = 0
+    public var vSwitchFilterExtensions: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+public type FWPM_VSWITCH_EVENT_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWPM_VSWITCH_EVENT0>) -> UInt32>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWP_RANGE0 {
+    public var valueLow: FWP_VALUE0 = FWP_VALUE0()
+    public var valueHigh: FWP_VALUE0 = FWP_VALUE0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION0 {
+    public var inboundConfigType: Int32 = 0
+    public var Anonymous1: IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union()
+    public var outboundConfigType: Int32 = 0
+    public var Anonymous2: IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union()
+    public var flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop anonymous: IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop inboundEnterpriseStoreConfig: CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop inboundTrustedRootStoreConfig: CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous1_e__Union__Anonymous_e__Struct {
+    public var inboundRootArraySize: UInt32 = 0
+    public var inboundRootArray: CPointer<IKEEXT_CERT_ROOT_CONFIG0> = CPointer<IKEEXT_CERT_ROOT_CONFIG0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop anonymous: IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop outboundEnterpriseStoreConfig: CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop outboundTrustedRootStoreConfig: CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION0__Anonymous2_e__Union__Anonymous_e__Struct {
+    public var outboundRootArraySize: UInt32 = 0
+    public var outboundRootArray: CPointer<IKEEXT_CERT_ROOT_CONFIG0> = CPointer<IKEEXT_CERT_ROOT_CONFIG0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION1 {
+    public var inboundConfigType: Int32 = 0
+    public var Anonymous1: IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union()
+    public var outboundConfigType: Int32 = 0
+    public var Anonymous2: IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union()
+    public var flags: UInt32 = 0
+    public var localCertLocationUrl: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop anonymous: IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop inboundEnterpriseStoreConfig: CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop inboundTrustedRootStoreConfig: CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous1_e__Union__Anonymous_e__Struct {
+    public var inboundRootArraySize: UInt32 = 0
+    public var inboundRootArray: CPointer<IKEEXT_CERT_ROOT_CONFIG0> = CPointer<IKEEXT_CERT_ROOT_CONFIG0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop anonymous: IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop outboundEnterpriseStoreConfig: CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop outboundTrustedRootStoreConfig: CPointer<IKEEXT_CERT_ROOT_CONFIG0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERT_ROOT_CONFIG0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION1__Anonymous2_e__Union__Anonymous_e__Struct {
+    public var outboundRootArraySize: UInt32 = 0
+    public var outboundRootArray: CPointer<IKEEXT_CERT_ROOT_CONFIG0> = CPointer<IKEEXT_CERT_ROOT_CONFIG0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_CRITERIA0 {
+    public var certData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var certHash: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var eku: CPointer<IKEEXT_CERT_EKUS0> = CPointer<IKEEXT_CERT_EKUS0>()
+    public var name: CPointer<IKEEXT_CERT_NAME0> = CPointer<IKEEXT_CERT_NAME0>()
+    public var flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CIPHER_ALGORITHM0 {
+    public var algoIdentifier: Int32 = 0
+    public var keyLen: UInt32 = 0
+    public var rounds: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_COMMON_STATISTICS0 {
+    public var v4Statistics: IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0 = IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0()
+    public var v6Statistics: IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0 = IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS0()
+    public var totalPacketsReceived: UInt32 = 0
+    public var totalInvalidPacketsReceived: UInt32 = 0
+    public var currentQueuedWorkitems: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_COMMON_STATISTICS1 {
+    public var v4Statistics: IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1 = IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1()
+    public var v6Statistics: IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1 = IKEEXT_IP_VERSION_SPECIFIC_COMMON_STATISTICS1()
+    public var totalPacketsReceived: UInt32 = 0
+    public var totalInvalidPacketsReceived: UInt32 = 0
+    public var currentQueuedWorkitems: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CREDENTIAL0 {
+    public var authenticationMethodType: Int32 = 0
+    public var impersonationType: Int32 = 0
+    public var Anonymous: IKEEXT_CREDENTIAL0__Anonymous_e__Union = IKEEXT_CREDENTIAL0__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_CREDENTIAL0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop presharedKey: CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop certificate: CPointer<IKEEXT_CERTIFICATE_CREDENTIAL0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop name: CPointer<IKEEXT_NAME_CREDENTIAL0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CREDENTIAL_PAIR0 {
+    public var localCredentials: IKEEXT_CREDENTIAL0 = IKEEXT_CREDENTIAL0()
+    public var peerCredentials: IKEEXT_CREDENTIAL0 = IKEEXT_CREDENTIAL0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_EAP_AUTHENTICATION0 {
+    public var flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_INTEGRITY_ALGORITHM0 {
+    public var algoIdentifier: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_KERBEROS_AUTHENTICATION0 {
+    public var flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_KERBEROS_AUTHENTICATION1 {
+    public var flags: UInt32 = 0
+    public var proxyServer: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
+    public var presharedKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_PROPOSAL0 {
+    public var cipherAlgorithm: IKEEXT_CIPHER_ALGORITHM0 = IKEEXT_CIPHER_ALGORITHM0()
+    public var integrityAlgorithm: IKEEXT_INTEGRITY_ALGORITHM0 = IKEEXT_INTEGRITY_ALGORITHM0()
+    public var maxLifetimeSeconds: UInt32 = 0
+    public var dhGroup: Int32 = 0
+    public var quickModeLimit: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_RESERVED_AUTHENTICATION0 {
+    public var flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_STATISTICS0 {
+    public var ikeStatistics: IKEEXT_KEYMODULE_STATISTICS0 = IKEEXT_KEYMODULE_STATISTICS0()
+    public var authipStatistics: IKEEXT_KEYMODULE_STATISTICS0 = IKEEXT_KEYMODULE_STATISTICS0()
+    public var commonStatistics: IKEEXT_COMMON_STATISTICS0 = IKEEXT_COMMON_STATISTICS0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_STATISTICS1 {
+    public var ikeStatistics: IKEEXT_KEYMODULE_STATISTICS1 = IKEEXT_KEYMODULE_STATISTICS1()
+    public var authipStatistics: IKEEXT_KEYMODULE_STATISTICS1 = IKEEXT_KEYMODULE_STATISTICS1()
+    public var ikeV2Statistics: IKEEXT_KEYMODULE_STATISTICS1 = IKEEXT_KEYMODULE_STATISTICS1()
+    public var commonStatistics: IKEEXT_COMMON_STATISTICS1 = IKEEXT_COMMON_STATISTICS1()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_AUTH_TRANSFORM_ID0 {
+    public var authType: Int32 = 0
+    public var authConfig: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_CIPHER_TRANSFORM_ID0 {
+    public var cipherType: Int32 = 0
+    public var cipherConfig: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_SA_CONTEXT_CHANGE0 {
+    public var changeType: Int32 = 0
+    public var saContextId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_STATISTICS0 {
+    public var aggregateSaStatistics: IPSEC_AGGREGATE_SA_STATISTICS0 = IPSEC_AGGREGATE_SA_STATISTICS0()
+    public var espDropPacketStatistics: IPSEC_ESP_DROP_PACKET_STATISTICS0 = IPSEC_ESP_DROP_PACKET_STATISTICS0()
+    public var ahDropPacketStatistics: IPSEC_AH_DROP_PACKET_STATISTICS0 = IPSEC_AH_DROP_PACKET_STATISTICS0()
+    public var aggregateDropPacketStatistics: IPSEC_AGGREGATE_DROP_PACKET_STATISTICS0 = IPSEC_AGGREGATE_DROP_PACKET_STATISTICS0()
+    public var inboundTrafficStatistics: IPSEC_TRAFFIC_STATISTICS0 = IPSEC_TRAFFIC_STATISTICS0()
+    public var outboundTrafficStatistics: IPSEC_TRAFFIC_STATISTICS0 = IPSEC_TRAFFIC_STATISTICS0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_STATISTICS1 {
+    public var aggregateSaStatistics: IPSEC_AGGREGATE_SA_STATISTICS0 = IPSEC_AGGREGATE_SA_STATISTICS0()
+    public var espDropPacketStatistics: IPSEC_ESP_DROP_PACKET_STATISTICS0 = IPSEC_ESP_DROP_PACKET_STATISTICS0()
+    public var ahDropPacketStatistics: IPSEC_AH_DROP_PACKET_STATISTICS0 = IPSEC_AH_DROP_PACKET_STATISTICS0()
+    public var aggregateDropPacketStatistics: IPSEC_AGGREGATE_DROP_PACKET_STATISTICS1 = IPSEC_AGGREGATE_DROP_PACKET_STATISTICS1()
+    public var inboundTrafficStatistics: IPSEC_TRAFFIC_STATISTICS1 = IPSEC_TRAFFIC_STATISTICS1()
+    public var outboundTrafficStatistics: IPSEC_TRAFFIC_STATISTICS1 = IPSEC_TRAFFIC_STATISTICS1()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_TOKEN0 {
+    public var type_: Int32 = 0
+    public var principal: Int32 = 0
+    public var mode: Int32 = 0
+    public var token: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_TRAFFIC0 {
+    public var ipVersion: Int32 = 0
+    public var Anonymous1: IPSEC_TRAFFIC0__Anonymous1_e__Union = IPSEC_TRAFFIC0__Anonymous1_e__Union()
+    public var Anonymous2: IPSEC_TRAFFIC0__Anonymous2_e__Union = IPSEC_TRAFFIC0__Anonymous2_e__Union()
+    public var trafficType: Int32 = 0
+    public var Anonymous3: IPSEC_TRAFFIC0__Anonymous3_e__Union = IPSEC_TRAFFIC0__Anonymous3_e__Union()
+    public var remotePort: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TRAFFIC0__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TRAFFIC0__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TRAFFIC0__Anonymous3_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ipsecFilterId: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop tunnelPolicyId: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_TRAFFIC1 {
+    public var ipVersion: Int32 = 0
+    public var Anonymous1: IPSEC_TRAFFIC1__Anonymous1_e__Union = IPSEC_TRAFFIC1__Anonymous1_e__Union()
+    public var Anonymous2: IPSEC_TRAFFIC1__Anonymous2_e__Union = IPSEC_TRAFFIC1__Anonymous2_e__Union()
+    public var trafficType: Int32 = 0
+    public var Anonymous3: IPSEC_TRAFFIC1__Anonymous3_e__Union = IPSEC_TRAFFIC1__Anonymous3_e__Union()
+    public var remotePort: UInt16 = 0
+    public var localPort: UInt16 = 0
+    public var ipProtocol: UInt8 = 0
+    public var localIfLuid: UInt64 = 0
+    public var realIfProfileId: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TRAFFIC1__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TRAFFIC1__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_TRAFFIC1__Anonymous3_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ipsecFilterId: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop tunnelPolicyId: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_SYSTEM_PORTS0 {
+    public var numTypes: UInt32 = 0
+    public var types: CPointer<FWPM_SYSTEM_PORTS_BY_TYPE0> = CPointer<FWPM_SYSTEM_PORTS_BY_TYPE0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+public type FWPM_SYSTEM_PORTS_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWPM_SYSTEM_PORTS0>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWP_CONDITION_VALUE0 {
+    public var type_: Int32 = 0
+    public var Anonymous: FWP_CONDITION_VALUE0__Anonymous_e__Union = FWP_CONDITION_VALUE0__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWP_CONDITION_VALUE0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop uint8: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uint16: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uint32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uint64: CPointer<UInt64> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt64>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt64>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop int8: Int8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop int16: Int16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop int32: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop int64: CPointer<Int64> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int64>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int64>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop float32: Float32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadFloat32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteFloat32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop double64: CPointer<Float64> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Float64>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Float64>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop byteArray16: CPointer<FWP_BYTE_ARRAY16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_ARRAY16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_ARRAY16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop byteBlob: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sid: CPointer<Win32_Security.SID> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32_Security.SID>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Win32_Security.SID>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sd: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop tokenInformation: CPointer<FWP_TOKEN_INFORMATION> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_TOKEN_INFORMATION>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_TOKEN_INFORMATION>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop tokenAccessInformation: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop unicodeString: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop byteArray6: CPointer<FWP_BYTE_ARRAY6> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_ARRAY6>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_ARRAY6>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop v4AddrMask: CPointer<FWP_V4_ADDR_AND_MASK> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_V4_ADDR_AND_MASK>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_V4_ADDR_AND_MASK>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop v6AddrMask: CPointer<FWP_V6_ADDR_AND_MASK> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_V6_ADDR_AND_MASK>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_V6_ADDR_AND_MASK>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop rangeValue: CPointer<FWP_RANGE0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_RANGE0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_RANGE0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_AUTHENTICATION_METHOD0 {
+    public var authenticationMethodType: Int32 = 0
+    public var Anonymous: IKEEXT_AUTHENTICATION_METHOD0__Anonymous_e__Union = IKEEXT_AUTHENTICATION_METHOD0__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_AUTHENTICATION_METHOD0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $7> = VArray<UInt64, $7>(repeat: 0)
+
+    public mut prop presharedKeyAuthentication: IKEEXT_PRESHARED_KEY_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop certificateAuthentication: IKEEXT_CERTIFICATE_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop kerberosAuthentication: IKEEXT_KERBEROS_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ntlmV2Authentication: IKEEXT_NTLM_V2_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sslAuthentication: IKEEXT_CERTIFICATE_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cgaAuthentication: IKEEXT_IPV6_CGA_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_AUTHENTICATION_METHOD1 {
+    public var authenticationMethodType: Int32 = 0
+    public var Anonymous: IKEEXT_AUTHENTICATION_METHOD1__Anonymous_e__Union = IKEEXT_AUTHENTICATION_METHOD1__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_AUTHENTICATION_METHOD1__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $9> = VArray<UInt64, $9>(repeat: 0)
+
+    public mut prop presharedKeyAuthentication: IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop certificateAuthentication: IKEEXT_CERTIFICATE_AUTHENTICATION1 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop kerberosAuthentication: IKEEXT_KERBEROS_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ntlmV2Authentication: IKEEXT_NTLM_V2_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sslAuthentication: IKEEXT_CERTIFICATE_AUTHENTICATION1 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION1>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cgaAuthentication: IKEEXT_IPV6_CGA_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop eapAuthentication: IKEEXT_EAP_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_EAP_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_EAP_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION2 {
+    public var inboundConfigType: Int32 = 0
+    public var Anonymous1: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union()
+    public var outboundConfigType: Int32 = 0
+    public var Anonymous2: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union = IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union()
+    public var flags: UInt32 = 0
+    public var localCertLocationUrl: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop anonymous1: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop anonymous2: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop anonymous3: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous3_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous3_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous3_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous1_e__Struct {
+    public var inboundRootArraySize: UInt32 = 0
+    public var inboundRootCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous2_e__Struct {
+    public var inboundEnterpriseStoreArraySize: UInt32 = 0
+    public var inboundEnterpriseStoreCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous1_e__Union__Anonymous3_e__Struct {
+    public var inboundRootStoreArraySize: UInt32 = 0
+    public var inboundTrustedRootStoreCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop anonymous1: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop anonymous2: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop anonymous3: IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous3_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous3_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous3_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous1_e__Struct {
+    public var outboundRootArraySize: UInt32 = 0
+    public var outboundRootCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous2_e__Struct {
+    public var outboundEnterpriseStoreArraySize: UInt32 = 0
+    public var outboundEnterpriseStoreCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CERTIFICATE_AUTHENTICATION2__Anonymous2_e__Union__Anonymous3_e__Struct {
+    public var outboundRootStoreArraySize: UInt32 = 0
+    public var outboundTrustedRootStoreCriteria: CPointer<IKEEXT_CERTIFICATE_CRITERIA0> = CPointer<IKEEXT_CERTIFICATE_CRITERIA0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CREDENTIAL1 {
+    public var authenticationMethodType: Int32 = 0
+    public var impersonationType: Int32 = 0
+    public var Anonymous: IKEEXT_CREDENTIAL1__Anonymous_e__Union = IKEEXT_CREDENTIAL1__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_CREDENTIAL1__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop presharedKey: CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop certificate: CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop name: CPointer<IKEEXT_NAME_CREDENTIAL0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CREDENTIAL2 {
+    public var authenticationMethodType: Int32 = 0
+    public var impersonationType: Int32 = 0
+    public var Anonymous: IKEEXT_CREDENTIAL2__Anonymous_e__Union = IKEEXT_CREDENTIAL2__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_CREDENTIAL2__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop presharedKey: CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop certificate: CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_CERTIFICATE_CREDENTIAL1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop name: CPointer<IKEEXT_NAME_CREDENTIAL0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_NAME_CREDENTIAL0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CREDENTIALS0 {
+    public var numCredentials: UInt32 = 0
+    public var credentials: CPointer<IKEEXT_CREDENTIAL_PAIR0> = CPointer<IKEEXT_CREDENTIAL_PAIR0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CREDENTIAL_PAIR1 {
+    public var localCredentials: IKEEXT_CREDENTIAL1 = IKEEXT_CREDENTIAL1()
+    public var peerCredentials: IKEEXT_CREDENTIAL1 = IKEEXT_CREDENTIAL1()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CREDENTIAL_PAIR2 {
+    public var localCredentials: IKEEXT_CREDENTIAL2 = IKEEXT_CREDENTIAL2()
+    public var peerCredentials: IKEEXT_CREDENTIAL2 = IKEEXT_CREDENTIAL2()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_EM_POLICY0 {
+    public var numAuthenticationMethods: UInt32 = 0
+    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD0> = CPointer<IKEEXT_AUTHENTICATION_METHOD0>()
+    public var initiatorImpersonationType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_EM_POLICY1 {
+    public var numAuthenticationMethods: UInt32 = 0
+    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD1> = CPointer<IKEEXT_AUTHENTICATION_METHOD1>()
+    public var initiatorImpersonationType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_POLICY0 {
+    public var softExpirationTime: UInt32 = 0
+    public var numAuthenticationMethods: UInt32 = 0
+    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD0> = CPointer<IKEEXT_AUTHENTICATION_METHOD0>()
+    public var initiatorImpersonationType: Int32 = 0
+    public var numIkeProposals: UInt32 = 0
+    public var ikeProposals: CPointer<IKEEXT_PROPOSAL0> = CPointer<IKEEXT_PROPOSAL0>()
+    public var flags: UInt32 = 0
+    public var maxDynamicFilters: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_POLICY1 {
+    public var softExpirationTime: UInt32 = 0
+    public var numAuthenticationMethods: UInt32 = 0
+    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD1> = CPointer<IKEEXT_AUTHENTICATION_METHOD1>()
+    public var initiatorImpersonationType: Int32 = 0
+    public var numIkeProposals: UInt32 = 0
+    public var ikeProposals: CPointer<IKEEXT_PROPOSAL0> = CPointer<IKEEXT_PROPOSAL0>()
+    public var flags: UInt32 = 0
+    public var maxDynamicFilters: UInt32 = 0
+    public var retransmitDurationSecs: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_SA_DETAILS0 {
+    public var saId: UInt64 = 0
+    public var keyModuleType: Int32 = 0
+    public var ipVersion: Int32 = 0
+    public var Anonymous: IKEEXT_SA_DETAILS0__Anonymous_e__Union = IKEEXT_SA_DETAILS0__Anonymous_e__Union()
+    public var ikeTraffic: IKEEXT_TRAFFIC0 = IKEEXT_TRAFFIC0()
+    public var ikeProposal: IKEEXT_PROPOSAL0 = IKEEXT_PROPOSAL0()
+    public var cookiePair: IKEEXT_COOKIE_PAIR0 = IKEEXT_COOKIE_PAIR0()
+    public var ikeCredentials: IKEEXT_CREDENTIALS0 = IKEEXT_CREDENTIALS0()
+    public var ikePolicyKey: GUID = GUID()
+    public var virtualIfTunnelId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_SA_DETAILS0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop v4UdpEncapsulation: CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct IKEEXT_SA_ENUM_TEMPLATE0 {
+    public var localSubNet: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
+    public var remoteSubNet: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
+    public var localMainModeCertHash: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_AUTH_TRANSFORM0 {
+    public var authTransformId: IPSEC_AUTH_TRANSFORM_ID0 = IPSEC_AUTH_TRANSFORM_ID0()
+    public var cryptoModuleId: CPointer<GUID> = CPointer<GUID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_CIPHER_TRANSFORM0 {
+    public var cipherTransformId: IPSEC_CIPHER_TRANSFORM_ID0 = IPSEC_CIPHER_TRANSFORM_ID0()
+    public var cryptoModuleId: CPointer<GUID> = CPointer<GUID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_GETSPI0 {
+    public var inboundIpsecTraffic: IPSEC_TRAFFIC0 = IPSEC_TRAFFIC0()
+    public var ipVersion: Int32 = 0
+    public var Anonymous: IPSEC_GETSPI0__Anonymous_e__Union = IPSEC_GETSPI0__Anonymous_e__Union()
+    public var rngCryptoModuleID: CPointer<GUID> = CPointer<GUID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_GETSPI0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop inboundUdpEncapsulation: CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_GETSPI1 {
+    public var inboundIpsecTraffic: IPSEC_TRAFFIC1 = IPSEC_TRAFFIC1()
+    public var ipVersion: Int32 = 0
+    public var Anonymous: IPSEC_GETSPI1__Anonymous_e__Union = IPSEC_GETSPI1__Anonymous_e__Union()
+    public var rngCryptoModuleID: CPointer<GUID> = CPointer<GUID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_GETSPI1__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop inboundUdpEncapsulation: CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_ID0 {
+    public var mmTargetName: CPointer<UInt16> = CPointer<UInt16>()
+    public var emTargetName: CPointer<UInt16> = CPointer<UInt16>()
+    public var numTokens: UInt32 = 0
+    public var tokens: CPointer<IPSEC_TOKEN0> = CPointer<IPSEC_TOKEN0>()
+    public var explicitCredentials: UInt64 = 0
+    public var logonId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_SA_AUTH_INFORMATION0 {
+    public var authTransform: IPSEC_AUTH_TRANSFORM0 = IPSEC_AUTH_TRANSFORM0()
+    public var authKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_SA_CIPHER_INFORMATION0 {
+    public var cipherTransform: IPSEC_CIPHER_TRANSFORM0 = IPSEC_CIPHER_TRANSFORM0()
+    public var cipherKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+public type IPSEC_SA_CONTEXT_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<IPSEC_SA_CONTEXT_CHANGE0>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct IPSEC_SA_CONTEXT_ENUM_TEMPLATE0 {
+    public var localSubNet: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
+    public var remoteSubNet: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct IPSEC_SA_CONTEXT_SUBSCRIPTION0 {
+    public var enumTemplate: CPointer<IPSEC_SA_CONTEXT_ENUM_TEMPLATE0> = CPointer<IPSEC_SA_CONTEXT_ENUM_TEMPLATE0>()
+    public var flags: UInt32 = 0
+    public var sessionKey: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct FWPM_CONNECTION0 {
+    public var connectionId: UInt64 = 0
+    public var ipVersion: Int32 = 0
+    public var Anonymous1: FWPM_CONNECTION0__Anonymous1_e__Union = FWPM_CONNECTION0__Anonymous1_e__Union()
+    public var Anonymous2: FWPM_CONNECTION0__Anonymous2_e__Union = FWPM_CONNECTION0__Anonymous2_e__Union()
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var ipsecTrafficModeType: Int32 = 0
+    public var keyModuleType: Int32 = 0
+    public var mmCrypto: IKEEXT_PROPOSAL0 = IKEEXT_PROPOSAL0()
+    public var mmPeer: IKEEXT_CREDENTIAL2 = IKEEXT_CREDENTIAL2()
+    public var emPeer: IKEEXT_CREDENTIAL2 = IKEEXT_CREDENTIAL2()
+    public var bytesTransferredIn: UInt64 = 0
+    public var bytesTransferredOut: UInt64 = 0
+    public var bytesTransferredTotal: UInt64 = 0
+    public var startSysTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_CONNECTION0__Anonymous1_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop localV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop localV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_CONNECTION0__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop remoteV4Address: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop remoteV6Address: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+public type FWPM_CONNECTION_CALLBACK0 = CFunc<(CPointer<Unit>, Int32, CPointer<FWPM_CONNECTION0>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_FILTER_CONDITION0 {
+    public var fieldKey: GUID = GUID()
+    public var matchType: Int32 = 0
+    public var conditionValue: FWP_CONDITION_VALUE0 = FWP_CONDITION_VALUE0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_FILTER_ENUM_TEMPLATE0 {
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var layerKey: GUID = GUID()
+    public var enumType: Int32 = 0
+    public var flags: UInt32 = 0
+    public var providerContextTemplate: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0> = CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0>()
+    public var numFilterConditions: UInt32 = 0
+    public var filterCondition: CPointer<FWPM_FILTER_CONDITION0> = CPointer<FWPM_FILTER_CONDITION0>()
+    public var actionMask: UInt32 = 0
+    public var calloutKey: CPointer<GUID> = CPointer<GUID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_FILTER_SUBSCRIPTION0 {
+    public var enumTemplate: CPointer<FWPM_FILTER_ENUM_TEMPLATE0> = CPointer<FWPM_FILTER_ENUM_TEMPLATE0>()
+    public var flags: UInt32 = 0
+    public var sessionKey: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_ENUM_TEMPLATE0 {
+    public var startTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var endTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var numFilterConditions: UInt32 = 0
+    public var filterCondition: CPointer<FWPM_FILTER_CONDITION0> = CPointer<FWPM_FILTER_CONDITION0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE0 {
+    public var failureErrorCode: UInt32 = 0
+    public var failurePoint: Int32 = 0
+    public var keyingModuleType: Int32 = 0
+    public var qmState: Int32 = 0
+    public var saRole: Int32 = 0
+    public var saTrafficType: Int32 = 0
+    public var Anonymous1: FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous1_e__Union = FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous1_e__Union()
+    public var Anonymous2: FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous2_e__Union = FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous2_e__Union()
+    public var qmFilterId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous1_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop localSubNet: FWP_CONDITION_VALUE0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE0__Anonymous2_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop remoteSubNet: FWP_CONDITION_VALUE0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE1 {
+    public var failureErrorCode: UInt32 = 0
+    public var failurePoint: Int32 = 0
+    public var keyingModuleType: Int32 = 0
+    public var qmState: Int32 = 0
+    public var saRole: Int32 = 0
+    public var saTrafficType: Int32 = 0
+    public var Anonymous1: FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous1_e__Union = FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous1_e__Union()
+    public var Anonymous2: FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous2_e__Union = FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous2_e__Union()
+    public var qmFilterId: UInt64 = 0
+    public var mmSaLuid: UInt64 = 0
+    public var mmProviderContextKey: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous1_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop localSubNet: FWP_CONDITION_VALUE0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT_IKEEXT_QM_FAILURE1__Anonymous2_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop remoteSubNet: FWP_CONDITION_VALUE0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FWP_CONDITION_VALUE0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT_SUBSCRIPTION0 {
+    public var enumTemplate: CPointer<FWPM_NET_EVENT_ENUM_TEMPLATE0> = CPointer<FWPM_NET_EVENT_ENUM_TEMPLATE0>()
+    public var flags: UInt32 = 0
+    public var sessionKey: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_AUTHENTICATION_METHOD2 {
+    public var authenticationMethodType: Int32 = 0
+    public var Anonymous: IKEEXT_AUTHENTICATION_METHOD2__Anonymous_e__Union = IKEEXT_AUTHENTICATION_METHOD2__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_AUTHENTICATION_METHOD2__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $9> = VArray<UInt64, $9>(repeat: 0)
+
+    public mut prop presharedKeyAuthentication: IKEEXT_PRESHARED_KEY_AUTHENTICATION1 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_PRESHARED_KEY_AUTHENTICATION1>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop certificateAuthentication: IKEEXT_CERTIFICATE_AUTHENTICATION2 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop kerberosAuthentication: IKEEXT_KERBEROS_AUTHENTICATION1 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION1>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_KERBEROS_AUTHENTICATION1>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reservedAuthentication: IKEEXT_RESERVED_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_RESERVED_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_RESERVED_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ntlmV2Authentication: IKEEXT_NTLM_V2_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_NTLM_V2_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sslAuthentication: IKEEXT_CERTIFICATE_AUTHENTICATION2 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_CERTIFICATE_AUTHENTICATION2>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cgaAuthentication: IKEEXT_IPV6_CGA_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_IPV6_CGA_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop eapAuthentication: IKEEXT_EAP_AUTHENTICATION0 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_EAP_AUTHENTICATION0>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IKEEXT_EAP_AUTHENTICATION0>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CREDENTIALS1 {
+    public var numCredentials: UInt32 = 0
+    public var credentials: CPointer<IKEEXT_CREDENTIAL_PAIR1> = CPointer<IKEEXT_CREDENTIAL_PAIR1>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_CREDENTIALS2 {
+    public var numCredentials: UInt32 = 0
+    public var credentials: CPointer<IKEEXT_CREDENTIAL_PAIR2> = CPointer<IKEEXT_CREDENTIAL_PAIR2>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_EM_POLICY2 {
+    public var numAuthenticationMethods: UInt32 = 0
+    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD2> = CPointer<IKEEXT_AUTHENTICATION_METHOD2>()
+    public var initiatorImpersonationType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_POLICY2 {
+    public var softExpirationTime: UInt32 = 0
+    public var numAuthenticationMethods: UInt32 = 0
+    public var authenticationMethods: CPointer<IKEEXT_AUTHENTICATION_METHOD2> = CPointer<IKEEXT_AUTHENTICATION_METHOD2>()
+    public var initiatorImpersonationType: Int32 = 0
+    public var numIkeProposals: UInt32 = 0
+    public var ikeProposals: CPointer<IKEEXT_PROPOSAL0> = CPointer<IKEEXT_PROPOSAL0>()
+    public var flags: UInt32 = 0
+    public var maxDynamicFilters: UInt32 = 0
+    public var retransmitDurationSecs: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_SA_DETAILS1 {
+    public var saId: UInt64 = 0
+    public var keyModuleType: Int32 = 0
+    public var ipVersion: Int32 = 0
+    public var Anonymous: IKEEXT_SA_DETAILS1__Anonymous_e__Union = IKEEXT_SA_DETAILS1__Anonymous_e__Union()
+    public var ikeTraffic: IKEEXT_TRAFFIC0 = IKEEXT_TRAFFIC0()
+    public var ikeProposal: IKEEXT_PROPOSAL0 = IKEEXT_PROPOSAL0()
+    public var cookiePair: IKEEXT_COOKIE_PAIR0 = IKEEXT_COOKIE_PAIR0()
+    public var ikeCredentials: IKEEXT_CREDENTIALS1 = IKEEXT_CREDENTIALS1()
+    public var ikePolicyKey: GUID = GUID()
+    public var virtualIfTunnelId: UInt64 = 0
+    public var correlationKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_SA_DETAILS1__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop v4UdpEncapsulation: CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IKEEXT_SA_DETAILS2 {
+    public var saId: UInt64 = 0
+    public var keyModuleType: Int32 = 0
+    public var ipVersion: Int32 = 0
+    public var Anonymous: IKEEXT_SA_DETAILS2__Anonymous_e__Union = IKEEXT_SA_DETAILS2__Anonymous_e__Union()
+    public var ikeTraffic: IKEEXT_TRAFFIC0 = IKEEXT_TRAFFIC0()
+    public var ikeProposal: IKEEXT_PROPOSAL0 = IKEEXT_PROPOSAL0()
+    public var cookiePair: IKEEXT_COOKIE_PAIR0 = IKEEXT_COOKIE_PAIR0()
+    public var ikeCredentials: IKEEXT_CREDENTIALS2 = IKEEXT_CREDENTIALS2()
+    public var ikePolicyKey: GUID = GUID()
+    public var virtualIfTunnelId: UInt64 = 0
+    public var correlationKey: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IKEEXT_SA_DETAILS2__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop v4UdpEncapsulation: CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_AUTH_AND_CIPHER_TRANSFORM0 {
+    public var authTransform: IPSEC_AUTH_TRANSFORM0 = IPSEC_AUTH_TRANSFORM0()
+    public var cipherTransform: IPSEC_CIPHER_TRANSFORM0 = IPSEC_CIPHER_TRANSFORM0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0 {
+    public var saCipherInformation: IPSEC_SA_CIPHER_INFORMATION0 = IPSEC_SA_CIPHER_INFORMATION0()
+    public var saAuthInformation: IPSEC_SA_AUTH_INFORMATION0 = IPSEC_SA_AUTH_INFORMATION0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_SA_TRANSFORM0 {
+    public var ipsecTransformType: Int32 = 0
+    public var Anonymous: IPSEC_SA_TRANSFORM0__Anonymous_e__Union = IPSEC_SA_TRANSFORM0__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_SA_TRANSFORM0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ahTransform: CPointer<IPSEC_AUTH_TRANSFORM0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop espAuthTransform: CPointer<IPSEC_AUTH_TRANSFORM0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop espCipherTransform: CPointer<IPSEC_CIPHER_TRANSFORM0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_CIPHER_TRANSFORM0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_CIPHER_TRANSFORM0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop espAuthAndCipherTransform: CPointer<IPSEC_AUTH_AND_CIPHER_TRANSFORM0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_AUTH_AND_CIPHER_TRANSFORM0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_AUTH_AND_CIPHER_TRANSFORM0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop espAuthFwTransform: CPointer<IPSEC_AUTH_TRANSFORM0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_AUTH_TRANSFORM0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_FILTER0 {
+    public var filterKey: GUID = GUID()
+    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
+    public var flags: UInt32 = 0
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var layerKey: GUID = GUID()
+    public var subLayerKey: GUID = GUID()
+    public var weight: FWP_VALUE0 = FWP_VALUE0()
+    public var numFilterConditions: UInt32 = 0
+    public var filterCondition: CPointer<FWPM_FILTER_CONDITION0> = CPointer<FWPM_FILTER_CONDITION0>()
+    public var action: FWPM_ACTION0 = FWPM_ACTION0()
+    public var Anonymous: FWPM_FILTER0__Anonymous_e__Union = FWPM_FILTER0__Anonymous_e__Union()
+    public var reserved: CPointer<GUID> = CPointer<GUID>()
+    public var filterId: UInt64 = 0
+    public var effectiveWeight: FWP_VALUE0 = FWP_VALUE0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_FILTER0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop rawContext: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop providerContextKey: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT0 {
+    public var header: FWPM_NET_EVENT_HEADER0 = FWPM_NET_EVENT_HEADER0()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_NET_EVENT0__Anonymous_e__Union = FWPM_NET_EVENT0__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ikeMmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeEmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDrop: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipsecDrop: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop idpDrop: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT1 {
+    public var header: FWPM_NET_EVENT_HEADER1 = FWPM_NET_EVENT_HEADER1()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_NET_EVENT1__Anonymous_e__Union = FWPM_NET_EVENT1__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT1__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ikeMmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeEmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDrop: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipsecDrop: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop idpDrop: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT2 {
+    public var header: FWPM_NET_EVENT_HEADER2 = FWPM_NET_EVENT_HEADER2()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_NET_EVENT2__Anonymous_e__Union = FWPM_NET_EVENT2__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT2__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ikeMmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeEmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDrop: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipsecDrop: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop idpDrop: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyAllow: CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop capabilityDrop: CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop capabilityAllow: CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDropMac: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT3 {
+    public var header: FWPM_NET_EVENT_HEADER3 = FWPM_NET_EVENT_HEADER3()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_NET_EVENT3__Anonymous_e__Union = FWPM_NET_EVENT3__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT3__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ikeMmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeEmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDrop: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipsecDrop: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop idpDrop: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyAllow: CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop capabilityDrop: CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop capabilityAllow: CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDropMac: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT4 {
+    public var header: FWPM_NET_EVENT_HEADER3 = FWPM_NET_EVENT_HEADER3()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_NET_EVENT4__Anonymous_e__Union = FWPM_NET_EVENT4__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT4__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ikeMmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeEmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDrop: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipsecDrop: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop idpDrop: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyAllow: CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop capabilityDrop: CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop capabilityAllow: CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDropMac: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_NET_EVENT5 {
+    public var header: FWPM_NET_EVENT_HEADER3 = FWPM_NET_EVENT_HEADER3()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_NET_EVENT5__Anonymous_e__Union = FWPM_NET_EVENT5__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_NET_EVENT5__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ikeMmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_MM_FAILURE2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_QM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeEmFailure: CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IKEEXT_EM_FAILURE1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDrop: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ipsecDrop: CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_KERNEL_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop idpDrop: CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_IPSEC_DOSP_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyAllow: CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_ALLOW0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop capabilityDrop: CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_DROP0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop capabilityAllow: CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CAPABILITY_ALLOW0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyDropMac: CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_CLASSIFY_DROP_MAC0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop lpmPacketArrival: CPointer<FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NET_EVENT_LPM_PACKET_ARRIVAL0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+public type FWPM_NET_EVENT_CALLBACK0 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT1>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+public type FWPM_NET_EVENT_CALLBACK1 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT2>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+public type FWPM_NET_EVENT_CALLBACK2 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT3>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+public type FWPM_NET_EVENT_CALLBACK3 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT4>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+public type FWPM_NET_EVENT_CALLBACK4 = CFunc<(CPointer<Unit>, CPointer<FWPM_NET_EVENT5>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_PROPOSAL0 {
+    public var lifetime: IPSEC_SA_LIFETIME0 = IPSEC_SA_LIFETIME0()
+    public var numSaTransforms: UInt32 = 0
+    public var saTransforms: CPointer<IPSEC_SA_TRANSFORM0> = CPointer<IPSEC_SA_TRANSFORM0>()
+    public var pfsGroup: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_SA0 {
+    public var spi: UInt32 = 0
+    public var saTransformType: Int32 = 0
+    public var Anonymous: IPSEC_SA0__Anonymous_e__Union = IPSEC_SA0__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_SA0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop ahInformation: CPointer<IPSEC_SA_AUTH_INFORMATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop espAuthInformation: CPointer<IPSEC_SA_AUTH_INFORMATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop espCipherInformation: CPointer<IPSEC_SA_CIPHER_INFORMATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_CIPHER_INFORMATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_CIPHER_INFORMATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop espAuthAndCipherInformation: CPointer<IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_AUTH_AND_CIPHER_INFORMATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop espAuthFwInformation: CPointer<IPSEC_SA_AUTH_INFORMATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_SA_AUTH_INFORMATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_SA_BUNDLE0 {
+    public var flags: UInt32 = 0
+    public var lifetime: IPSEC_SA_LIFETIME0 = IPSEC_SA_LIFETIME0()
+    public var idleTimeoutSeconds: UInt32 = 0
+    public var ndAllowClearTimeoutSeconds: UInt32 = 0
+    public var ipsecId: CPointer<IPSEC_ID0> = CPointer<IPSEC_ID0>()
+    public var napContext: UInt32 = 0
+    public var qmSaId: UInt32 = 0
+    public var numSAs: UInt32 = 0
+    public var saList: CPointer<IPSEC_SA0> = CPointer<IPSEC_SA0>()
+    public var keyModuleState: CPointer<IPSEC_KEYMODULE_STATE0> = CPointer<IPSEC_KEYMODULE_STATE0>()
+    public var ipVersion: Int32 = 0
+    public var Anonymous: IPSEC_SA_BUNDLE0__Anonymous_e__Union = IPSEC_SA_BUNDLE0__Anonymous_e__Union()
+    public var mmSaId: UInt64 = 0
+    public var pfsGroup: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_SA_BUNDLE0__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop peerV4PrivateAddress: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
+public struct IPSEC_SA_BUNDLE1 {
+    public var flags: UInt32 = 0
+    public var lifetime: IPSEC_SA_LIFETIME0 = IPSEC_SA_LIFETIME0()
+    public var idleTimeoutSeconds: UInt32 = 0
+    public var ndAllowClearTimeoutSeconds: UInt32 = 0
+    public var ipsecId: CPointer<IPSEC_ID0> = CPointer<IPSEC_ID0>()
+    public var napContext: UInt32 = 0
+    public var qmSaId: UInt32 = 0
+    public var numSAs: UInt32 = 0
+    public var saList: CPointer<IPSEC_SA0> = CPointer<IPSEC_SA0>()
+    public var keyModuleState: CPointer<IPSEC_KEYMODULE_STATE0> = CPointer<IPSEC_KEYMODULE_STATE0>()
+    public var ipVersion: Int32 = 0
+    public var Anonymous: IPSEC_SA_BUNDLE1__Anonymous_e__Union = IPSEC_SA_BUNDLE1__Anonymous_e__Union()
+    public var mmSaId: UInt64 = 0
+    public var pfsGroup: Int32 = 0
+    public var saLookupContext: GUID = GUID()
+    public var qmFilterId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_SA_BUNDLE1__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop peerV4PrivateAddress: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct IPSEC_SA_DETAILS0 {
+    public var ipVersion: Int32 = 0
+    public var saDirection: Int32 = 0
+    public var traffic: IPSEC_TRAFFIC0 = IPSEC_TRAFFIC0()
+    public var saBundle: IPSEC_SA_BUNDLE0 = IPSEC_SA_BUNDLE0()
+    public var Anonymous: IPSEC_SA_DETAILS0__Anonymous_e__Union = IPSEC_SA_DETAILS0__Anonymous_e__Union()
+    public var transportFilter: CPointer<FWPM_FILTER0> = CPointer<FWPM_FILTER0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_SA_DETAILS0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop udpEncapsulation: CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct IPSEC_SA_DETAILS1 {
+    public var ipVersion: Int32 = 0
+    public var saDirection: Int32 = 0
+    public var traffic: IPSEC_TRAFFIC1 = IPSEC_TRAFFIC1()
+    public var saBundle: IPSEC_SA_BUNDLE1 = IPSEC_SA_BUNDLE1()
+    public var Anonymous: IPSEC_SA_DETAILS1__Anonymous_e__Union = IPSEC_SA_DETAILS1__Anonymous_e__Union()
+    public var transportFilter: CPointer<FWPM_FILTER0> = CPointer<FWPM_FILTER0>()
+    public var virtualIfTunnelInfo: IPSEC_VIRTUAL_IF_TUNNEL_INFO0 = IPSEC_VIRTUAL_IF_TUNNEL_INFO0()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct IPSEC_SA_DETAILS1__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop udpEncapsulation: CPointer<IPSEC_V4_UDP_ENCAPSULATION0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_V4_UDP_ENCAPSULATION0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@C
 public struct IPSEC_TRANSPORT_POLICY0 {
     public var numIpsecProposals: UInt32 = 0
     public var ipsecProposals: CPointer<IPSEC_PROPOSAL0> = CPointer<IPSEC_PROPOSAL0>()
-    public var flags: IPSEC_POLICY_FLAG = IPSEC_POLICY_FLAG()
+    public var flags: UInt32 = 0
     public var ndAllowClearTimeoutSeconds: UInt32 = 0
     public var saIdleTimeout: IPSEC_SA_IDLE_TIMEOUT0 = IPSEC_SA_IDLE_TIMEOUT0()
     public var emPolicy: CPointer<IKEEXT_EM_POLICY0> = CPointer<IKEEXT_EM_POLICY0>()
@@ -10436,7 +9973,7 @@ public struct IPSEC_TRANSPORT_POLICY0 {
 public struct IPSEC_TRANSPORT_POLICY1 {
     public var numIpsecProposals: UInt32 = 0
     public var ipsecProposals: CPointer<IPSEC_PROPOSAL0> = CPointer<IPSEC_PROPOSAL0>()
-    public var flags: IPSEC_POLICY_FLAG = IPSEC_POLICY_FLAG()
+    public var flags: UInt32 = 0
     public var ndAllowClearTimeoutSeconds: UInt32 = 0
     public var saIdleTimeout: IPSEC_SA_IDLE_TIMEOUT0 = IPSEC_SA_IDLE_TIMEOUT0()
     public var emPolicy: CPointer<IKEEXT_EM_POLICY1> = CPointer<IKEEXT_EM_POLICY1>()
@@ -10448,7 +9985,7 @@ public struct IPSEC_TRANSPORT_POLICY1 {
 public struct IPSEC_TRANSPORT_POLICY2 {
     public var numIpsecProposals: UInt32 = 0
     public var ipsecProposals: CPointer<IPSEC_PROPOSAL0> = CPointer<IPSEC_PROPOSAL0>()
-    public var flags: IPSEC_POLICY_FLAG = IPSEC_POLICY_FLAG()
+    public var flags: UInt32 = 0
     public var ndAllowClearTimeoutSeconds: UInt32 = 0
     public var saIdleTimeout: IPSEC_SA_IDLE_TIMEOUT0 = IPSEC_SA_IDLE_TIMEOUT0()
     public var emPolicy: CPointer<IKEEXT_EM_POLICY2> = CPointer<IKEEXT_EM_POLICY2>()
@@ -10457,370 +9994,8 @@ public struct IPSEC_TRANSPORT_POLICY2 {
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
-public struct IPSEC_TUNNEL_ENDPOINT0 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous: IPSEC_TUNNEL_ENDPOINT0__Anonymous_e__Union = IPSEC_TUNNEL_ENDPOINT0__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TUNNEL_ENDPOINT0__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func v4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_v4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func v6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_TUNNEL_ENDPOINTS0 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous1: IPSEC_TUNNEL_ENDPOINTS0__Anonymous1_e__Union = IPSEC_TUNNEL_ENDPOINTS0__Anonymous1_e__Union()
-    public var Anonymous2: IPSEC_TUNNEL_ENDPOINTS0__Anonymous2_e__Union = IPSEC_TUNNEL_ENDPOINTS0__Anonymous2_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TUNNEL_ENDPOINTS0__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TUNNEL_ENDPOINTS0__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_TUNNEL_ENDPOINTS1 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous1: IPSEC_TUNNEL_ENDPOINTS1__Anonymous1_e__Union = IPSEC_TUNNEL_ENDPOINTS1__Anonymous1_e__Union()
-    public var Anonymous2: IPSEC_TUNNEL_ENDPOINTS1__Anonymous2_e__Union = IPSEC_TUNNEL_ENDPOINTS1__Anonymous2_e__Union()
-    public var localIfLuid: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TUNNEL_ENDPOINTS1__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TUNNEL_ENDPOINTS1__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
-public struct IPSEC_TUNNEL_ENDPOINTS2 {
-    public var ipVersion: FWP_IP_VERSION = FWP_IP_VERSION()
-    public var Anonymous1: IPSEC_TUNNEL_ENDPOINTS2__Anonymous1_e__Union = IPSEC_TUNNEL_ENDPOINTS2__Anonymous1_e__Union()
-    public var Anonymous2: IPSEC_TUNNEL_ENDPOINTS2__Anonymous2_e__Union = IPSEC_TUNNEL_ENDPOINTS2__Anonymous2_e__Union()
-    public var localIfLuid: UInt64 = 0
-    public var remoteFqdn: CPointer<UInt16> = CPointer<UInt16>()
-    public var numAddresses: UInt32 = 0
-    public var remoteAddresses: CPointer<IPSEC_TUNNEL_ENDPOINT0> = CPointer<IPSEC_TUNNEL_ENDPOINT0>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TUNNEL_ENDPOINTS2__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func localV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_localV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func localV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_localV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct IPSEC_TUNNEL_ENDPOINTS2__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func remoteV4Address(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_remoteV4Address(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func remoteV6Address(): VArray<UInt8, $16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_remoteV6Address(val: VArray<UInt8, $16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
-@C
 public struct IPSEC_TUNNEL_POLICY0 {
-    public var flags: IPSEC_POLICY_FLAG = IPSEC_POLICY_FLAG()
+    public var flags: UInt32 = 0
     public var numIpsecProposals: UInt32 = 0
     public var ipsecProposals: CPointer<IPSEC_PROPOSAL0> = CPointer<IPSEC_PROPOSAL0>()
     public var tunnelEndpoints: IPSEC_TUNNEL_ENDPOINTS0 = IPSEC_TUNNEL_ENDPOINTS0()
@@ -10832,7 +10007,7 @@ public struct IPSEC_TUNNEL_POLICY0 {
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
 public struct IPSEC_TUNNEL_POLICY1 {
-    public var flags: IPSEC_POLICY_FLAG = IPSEC_POLICY_FLAG()
+    public var flags: UInt32 = 0
     public var numIpsecProposals: UInt32 = 0
     public var ipsecProposals: CPointer<IPSEC_PROPOSAL0> = CPointer<IPSEC_PROPOSAL0>()
     public var tunnelEndpoints: IPSEC_TUNNEL_ENDPOINTS1 = IPSEC_TUNNEL_ENDPOINTS1()
@@ -10844,7 +10019,7 @@ public struct IPSEC_TUNNEL_POLICY1 {
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
 @C
 public struct IPSEC_TUNNEL_POLICY2 {
-    public var flags: IPSEC_POLICY_FLAG = IPSEC_POLICY_FLAG()
+    public var flags: UInt32 = 0
     public var numIpsecProposals: UInt32 = 0
     public var ipsecProposals: CPointer<IPSEC_PROPOSAL0> = CPointer<IPSEC_PROPOSAL0>()
     public var tunnelEndpoints: IPSEC_TUNNEL_ENDPOINTS2 = IPSEC_TUNNEL_ENDPOINTS2()
@@ -10870,27 +10045,1191 @@ public struct IPSEC_TUNNEL_POLICY3 {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
 @C
-public struct IPSEC_V4_UDP_ENCAPSULATION0 {
-    public var localUdpEncapPort: UInt16 = 0
-    public var remoteUdpEncapPort: UInt16 = 0
+public struct FWPM_PROVIDER_CONTEXT0 {
+    public var providerContextKey: GUID = GUID()
+    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
+    public var flags: UInt32 = 0
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_PROVIDER_CONTEXT0__Anonymous_e__Union = FWPM_PROVIDER_CONTEXT0__Anonymous_e__Union()
+    public var providerContextId: UInt64 = 0
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
-public struct IPSEC_VIRTUAL_IF_TUNNEL_INFO0 {
-    public var virtualIfTunnelId: UInt64 = 0
-    public var trafficSelectorId: UInt64 = 0
+public struct FWPM_PROVIDER_CONTEXT0__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop keyingPolicy: CPointer<IPSEC_KEYING_POLICY0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authipQmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authipQmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeMmPolicy: CPointer<IKEEXT_POLICY0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authIpMmPolicy: CPointer<IKEEXT_POLICY0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dataBuffer: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyOptions: CPointer<FWPM_CLASSIFY_OPTIONS0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_PROVIDER_CONTEXT1 {
+    public var providerContextKey: GUID = GUID()
+    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
+    public var flags: UInt32 = 0
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_PROVIDER_CONTEXT1__Anonymous_e__Union = FWPM_PROVIDER_CONTEXT1__Anonymous_e__Union()
+    public var providerContextId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_PROVIDER_CONTEXT1__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop keyingPolicy: CPointer<IPSEC_KEYING_POLICY0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authipQmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authipQmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeMmPolicy: CPointer<IKEEXT_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authIpMmPolicy: CPointer<IKEEXT_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dataBuffer: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyOptions: CPointer<FWPM_CLASSIFY_OPTIONS0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeV2QmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeV2MmPolicy: CPointer<IKEEXT_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop idpOptions: CPointer<IPSEC_DOSP_OPTIONS0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_PROVIDER_CONTEXT2 {
+    public var providerContextKey: GUID = GUID()
+    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
+    public var flags: UInt32 = 0
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_PROVIDER_CONTEXT2__Anonymous_e__Union = FWPM_PROVIDER_CONTEXT2__Anonymous_e__Union()
+    public var providerContextId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_PROVIDER_CONTEXT2__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop keyingPolicy: CPointer<IPSEC_KEYING_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authipQmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authipQmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeMmPolicy: CPointer<IKEEXT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authIpMmPolicy: CPointer<IKEEXT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dataBuffer: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyOptions: CPointer<FWPM_CLASSIFY_OPTIONS0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeV2QmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeV2QmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeV2MmPolicy: CPointer<IKEEXT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop idpOptions: CPointer<IPSEC_DOSP_OPTIONS0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct FWPM_PROVIDER_CONTEXT3 {
+    public var providerContextKey: GUID = GUID()
+    public var displayData: FWPM_DISPLAY_DATA0 = FWPM_DISPLAY_DATA0()
+    public var flags: UInt32 = 0
+    public var providerKey: CPointer<GUID> = CPointer<GUID>()
+    public var providerData: FWP_BYTE_BLOB = FWP_BYTE_BLOB()
+    public var type_: Int32 = 0
+    public var Anonymous: FWPM_PROVIDER_CONTEXT3__Anonymous_e__Union = FWPM_PROVIDER_CONTEXT3__Anonymous_e__Union()
+    public var providerContextId: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FWPM_PROVIDER_CONTEXT3__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop keyingPolicy: CPointer<IPSEC_KEYING_POLICY1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_KEYING_POLICY1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeQmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY3> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authipQmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authipQmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY3> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeMmPolicy: CPointer<IKEEXT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop authIpMmPolicy: CPointer<IKEEXT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dataBuffer: CPointer<FWP_BYTE_BLOB> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWP_BYTE_BLOB>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop classifyOptions: CPointer<FWPM_CLASSIFY_OPTIONS0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_CLASSIFY_OPTIONS0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeV2QmTunnelPolicy: CPointer<IPSEC_TUNNEL_POLICY3> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TUNNEL_POLICY3>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeV2QmTransportPolicy: CPointer<IPSEC_TRANSPORT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_TRANSPORT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ikeV2MmPolicy: CPointer<IKEEXT_POLICY2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IKEEXT_POLICY2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop idpOptions: CPointer<IPSEC_DOSP_OPTIONS0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<IPSEC_DOSP_OPTIONS0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop networkConnectionPolicy: CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<FWPM_NETWORK_CONNECTION_POLICY_SETTINGS0>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+public type IPSEC_KEY_MANAGER_DICTATE_KEY0 = CFunc<(CPointer<IPSEC_SA_DETAILS1>, CPointer<IPSEC_SA_DETAILS1>, CPointer<Int32>) -> UInt32>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+public type IPSEC_KEY_MANAGER_NOTIFY_KEY0 = CFunc<(CPointer<IPSEC_SA_DETAILS1>, CPointer<IPSEC_SA_DETAILS1>) -> Unit>
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct IPSEC_SA_CONTEXT0 {
+    public var saContextId: UInt64 = 0
+    public var inboundSa: CPointer<IPSEC_SA_DETAILS0> = CPointer<IPSEC_SA_DETAILS0>()
+    public var outboundSa: CPointer<IPSEC_SA_DETAILS0> = CPointer<IPSEC_SA_DETAILS0>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct IPSEC_SA_CONTEXT1 {
+    public var saContextId: UInt64 = 0
+    public var inboundSa: CPointer<IPSEC_SA_DETAILS1> = CPointer<IPSEC_SA_DETAILS1>()
+    public var outboundSa: CPointer<IPSEC_SA_DETAILS1> = CPointer<IPSEC_SA_DETAILS1>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on" && Windows_Win32_Security == "on"]
+@C
+public struct IPSEC_KEY_MANAGER_CALLBACKS0 {
+    public var reserved: GUID = GUID()
+    public var flags: UInt32 = 0
+    public var keyDictationCheck: IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0 = CFunc<(CPointer<IKEEXT_TRAFFIC0>, CPointer<Int32>, CPointer<UInt32>) -> Unit>(CPointer<Unit>())
+    public var keyDictation: IPSEC_KEY_MANAGER_DICTATE_KEY0 = CFunc<(CPointer<IPSEC_SA_DETAILS1>, CPointer<IPSEC_SA_DETAILS1>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
+    public var keyNotify: IPSEC_KEY_MANAGER_NOTIFY_KEY0 = CFunc<(CPointer<IPSEC_SA_DETAILS1>, CPointer<IPSEC_SA_DETAILS1>) -> Unit>(CPointer<Unit>())
     public init() {}
 }
 
 @When[FWPUCLNT == "on"]
 foreign {
-    // param-hint: sd optional
-    // param-hint: id optional
-    func FwpmCalloutAdd0(engineHandle: FWPM_ENGINE_HANDLE, callout: CPointer<FWPM_CALLOUT0>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt32>): UInt32
     // param-hint: enumTemplate optional
     func FwpmCalloutCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_CALLOUT_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_CALLOUT_ENUM_HANDLE>): UInt32
     func FwpmCalloutDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt32): UInt32
@@ -10899,14 +11238,6 @@ foreign {
     func FwpmCalloutEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CALLOUT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_CALLOUT0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     func FwpmCalloutGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt32, callout: CPointer<CPointer<FWPM_CALLOUT0>>): UInt32
     func FwpmCalloutGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, callout: CPointer<CPointer<FWPM_CALLOUT0>>): UInt32
-    // param-hint: key optional
-    func FwpmCalloutGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
-    // param-hint: key optional
-    // param-hint: sidOwner optional
-    // param-hint: sidGroup optional
-    // param-hint: dacl optional
-    // param-hint: sacl optional
-    func FwpmCalloutSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
     // param-hint: context optional
     func FwpmCalloutSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_CALLOUT_SUBSCRIPTION0>, callback: FWPM_CALLOUT_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
     func FwpmCalloutSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_CALLOUT_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
@@ -10916,16 +11247,7 @@ foreign {
     func FwpmConnectionDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CONNECTION_ENUM_HANDLE): UInt32
     func FwpmConnectionEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_CONNECTION_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_CONNECTION0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     func FwpmConnectionGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, connection: CPointer<CPointer<FWPM_CONNECTION0>>): UInt32
-    func FwpmConnectionGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
-    // param-hint: filterConditions len=param[4]
-    // param-hint: sd optional
-    func FwpmConnectionPolicyAdd0(engineHandle: FWPM_ENGINE_HANDLE, connectionPolicy: CPointer<FWPM_PROVIDER_CONTEXT3>, ipVersion: FWP_IP_VERSION, weight: UInt64, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
     func FwpmConnectionPolicyDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    // param-hint: sidOwner optional
-    // param-hint: sidGroup optional
-    // param-hint: dacl optional
-    // param-hint: sacl optional
-    func FwpmConnectionSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
     // param-hint: context optional
     func FwpmConnectionSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_CONNECTION_SUBSCRIPTION0>, callback: FWPM_CONNECTION_CALLBACK0, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
     func FwpmConnectionUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
@@ -10933,13 +11255,142 @@ foreign {
     func FwpmDynamicKeywordSubscribe0(flags: UInt32, callback: FWPM_DYNAMIC_KEYWORD_CALLBACK0, context: CPointer<Unit>, subscriptionHandle: CPointer<CPointer<Unit>>): UInt32
     func FwpmDynamicKeywordUnsubscribe0(subscriptionHandle: CPointer<Unit>): UInt32
     func FwpmEngineClose0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
-    func FwpmEngineGetOption0(engineHandle: FWPM_ENGINE_HANDLE, option: FWPM_ENGINE_OPTION, value: CPointer<CPointer<FWP_VALUE0>>): UInt32
-    func FwpmEngineGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+    func FwpmFilterDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+    func FwpmFilterDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+    func FwpmFilterDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_FILTER_ENUM_HANDLE): UInt32
+    func FwpmFilterUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
+    func FwpmFreeMemory0(p: CPointer<CPointer<Unit>>): Unit
+    func FwpmGetAppIdFromFileName0(fileName: CPointer<UInt16>, appId: CPointer<CPointer<FWP_BYTE_BLOB>>): UInt32
+    func FwpmIPsecTunnelDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+    // param-hint: enumTemplate optional
+    func FwpmLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_LAYER_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_LAYER_ENUM_HANDLE>): UInt32
+    func FwpmLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE): UInt32
+    func FwpmLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_LAYER0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+    func FwpmLayerGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt16, layer: CPointer<CPointer<FWPM_LAYER0>>): UInt32
+    func FwpmLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, layer: CPointer<CPointer<FWPM_LAYER0>>): UInt32
+    func FwpmNetEventDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE): UInt32
+    func FwpmNetEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
+    // param-hint: enumTemplate optional
+    func FwpmProviderContextCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_HANDLE>): UInt32
+    func FwpmProviderContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+    func FwpmProviderContextDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+    func FwpmProviderContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE): UInt32
+    // param-hint: context optional
+    func FwpmProviderContextSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0>, callback: FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
+    func FwpmProviderContextSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
+    func FwpmProviderContextUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
+    // param-hint: enumTemplate optional
+    func FwpmProviderCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_PROVIDER_ENUM_HANDLE>): UInt32
+    func FwpmProviderDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+    func FwpmProviderDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE): UInt32
+    func FwpmProviderEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+    func FwpmProviderGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, provider: CPointer<CPointer<FWPM_PROVIDER0>>): UInt32
+    // param-hint: context optional
+    func FwpmProviderSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_SUBSCRIPTION0>, callback: FWPM_PROVIDER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
+    func FwpmProviderSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
+    func FwpmProviderUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
+    // param-hint: enumTemplate optional
+    func FwpmSessionCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SESSION_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_SESSION_ENUM_HANDLE>): UInt32
+    func FwpmSessionDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SESSION_ENUM_HANDLE): UInt32
+    // param-hint: enumTemplate optional
+    func FwpmSubLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SUBLAYER_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_SUBLAYER_ENUM_HANDLE>): UInt32
+    func FwpmSubLayerDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
+    func FwpmSubLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE): UInt32
+    func FwpmSubLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+    func FwpmSubLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, subLayer: CPointer<CPointer<FWPM_SUBLAYER0>>): UInt32
+    // param-hint: context optional
+    func FwpmSubLayerSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_SUBLAYER_SUBSCRIPTION0>, callback: FWPM_SUBLAYER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
+    func FwpmSubLayerSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
+    func FwpmSubLayerUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
+    // param-hint: engineHandle optional
+    func FwpmSystemPortsGet0(engineHandle: FWPM_ENGINE_HANDLE, sysPorts: CPointer<CPointer<FWPM_SYSTEM_PORTS0>>): UInt32
+    // param-hint: engineHandle optional
+    // param-hint: reserved optional reserved
+    // param-hint: context optional
+    func FwpmSystemPortsSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, callback: FWPM_SYSTEM_PORTS_CALLBACK0, context: CPointer<Unit>, sysPortsHandle: CPointer<CPointer<Unit>>): UInt32
+    // param-hint: engineHandle optional
+    func FwpmSystemPortsUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, sysPortsHandle: CPointer<Unit>): UInt32
+    func FwpmTransactionAbort0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
+    func FwpmTransactionBegin0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32): UInt32
+    func FwpmTransactionCommit0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
+    // param-hint: context optional
+    func FwpmvSwitchEventSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_VSWITCH_EVENT_SUBSCRIPTION0>, callback: FWPM_VSWITCH_EVENT_CALLBACK0, context: CPointer<Unit>, subscriptionHandle: CPointer<CPointer<Unit>>): UInt32
+    func FwpmvSwitchEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscriptionHandle: CPointer<Unit>): UInt32
+    func IPsecDospGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, idpStatistics: CPointer<IPSEC_DOSP_STATISTICS0>): UInt32
+    // param-hint: enumTemplate optional
+    func IPsecDospStateCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_DOSP_STATE_ENUM_TEMPLATE0>, enumHandle: CPointer<IPSEC_DOSP_STATE_ENUM_HANDLE>): UInt32
+    func IPsecDospStateDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE): UInt32
+    func IPsecDospStateEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_DOSP_STATE0>>>, numEntries: CPointer<UInt32>): UInt32
+    func IPsecGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS0>): UInt32
+    func IPsecGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS1>): UInt32
+    func IPsecKeyManagerUnregisterAndDelete0(engineHandle: FWPM_ENGINE_HANDLE, keyMgmtHandle: CPointer<Unit>): UInt32
+    func IPsecKeyManagersGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<IPSEC_KEY_MANAGER0>>>, numEntries: CPointer<UInt32>): UInt32
+    func IPsecSaContextAddInbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE0>): UInt32
+    func IPsecSaContextAddInbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE1>): UInt32
+    func IPsecSaContextAddOutbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE0>): UInt32
+    func IPsecSaContextAddOutbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE1>): UInt32
+    // param-hint: inboundFilterId optional
+    func IPsecSaContextCreate0(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC0>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32
+    // param-hint: virtualIfTunnelInfo optional
+    // param-hint: inboundFilterId optional
+    func IPsecSaContextCreate1(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC1>, virtualIfTunnelInfo: CPointer<IPSEC_VIRTUAL_IF_TUNNEL_INFO0>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32
+    func IPsecSaContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+    func IPsecSaContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE): UInt32
+    func IPsecSaContextExpire0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+    func IPsecSaContextGetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI0>, inboundSpi: CPointer<UInt32>): UInt32
+    func IPsecSaContextGetSpi1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1>, inboundSpi: CPointer<UInt32>): UInt32
+    func IPsecSaContextSetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1>, inboundSpi: UInt32): UInt32
+    func IPsecSaContextUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
+    // param-hint: enumTemplate optional
+    func IPsecSaCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_SA_ENUM_TEMPLATE0>, enumHandle: CPointer<IPSEC_SA_ENUM_HANDLE>): UInt32
+    func IPsecSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE): UInt32
+    func IkeextGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS0>): UInt32
+    func IkeextGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS1>): UInt32
+    func IkeextSaDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
+    func IkeextSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE): UInt32
+    func IkeextSaEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+    func IkeextSaEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS1>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+    func IkeextSaEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS2>>>, numEntriesReturned: CPointer<UInt32>): UInt32
+    func IkeextSaGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, sa: CPointer<CPointer<IKEEXT_SA_DETAILS0>>): UInt32
+    // param-hint: saLookupContext optional
+    func IkeextSaGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS1>>): UInt32
+    // param-hint: saLookupContext optional
+    func IkeextSaGetById2(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS2>>): UInt32
+}
+
+@When[FWPUCLNT == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_Rpc == "on")]
+foreign {
     // param-hint: serverName optional reserved
     // param-hint: authIdentity optional
     // param-hint: session optional
     func FwpmEngineOpen0(serverName: CPointer<UInt16>, authnService: UInt32, authIdentity: CPointer<Win32_System_Rpc.SEC_WINNT_AUTH_IDENTITY_W>, session: CPointer<FWPM_SESSION0>, engineHandle: CPointer<FWPM_ENGINE_HANDLE>): UInt32
-    func FwpmEngineSetOption0(engineHandle: FWPM_ENGINE_HANDLE, option: FWPM_ENGINE_OPTION, newValue: CPointer<FWP_VALUE0>): UInt32
+}
+
+@When[FWPUCLNT == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: sd optional
+    // param-hint: id optional
+    func FwpmCalloutAdd0(engineHandle: FWPM_ENGINE_HANDLE, callout: CPointer<FWPM_CALLOUT0>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt32>): UInt32
+    // param-hint: key optional
+    func FwpmCalloutGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+    // param-hint: key optional
+    // param-hint: sidOwner optional
+    // param-hint: sidGroup optional
+    // param-hint: dacl optional
+    // param-hint: sacl optional
+    func FwpmCalloutSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
+    func FwpmConnectionGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+    // param-hint: filterConditions len=param[4]
+    // param-hint: sd optional
+    func FwpmConnectionPolicyAdd0(engineHandle: FWPM_ENGINE_HANDLE, connectionPolicy: CPointer<FWPM_PROVIDER_CONTEXT3>, ipVersion: Int32, weight: UInt64, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
+    // param-hint: sidOwner optional
+    // param-hint: sidGroup optional
+    // param-hint: dacl optional
+    // param-hint: sacl optional
+    func FwpmConnectionSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
+    func FwpmEngineGetOption0(engineHandle: FWPM_ENGINE_HANDLE, option: Int32, value: CPointer<CPointer<FWP_VALUE0>>): UInt32
+    func FwpmEngineGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
+    func FwpmEngineSetOption0(engineHandle: FWPM_ENGINE_HANDLE, option: Int32, newValue: CPointer<FWP_VALUE0>): UInt32
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
@@ -10950,9 +11401,6 @@ foreign {
     func FwpmFilterAdd0(engineHandle: FWPM_ENGINE_HANDLE, filter: CPointer<FWPM_FILTER0>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32
     // param-hint: enumTemplate optional
     func FwpmFilterCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_FILTER_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_FILTER_ENUM_HANDLE>): UInt32
-    func FwpmFilterDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
-    func FwpmFilterDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    func FwpmFilterDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_FILTER_ENUM_HANDLE): UInt32
     func FwpmFilterEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_FILTER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_FILTER0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     func FwpmFilterGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, filter: CPointer<CPointer<FWPM_FILTER0>>): UInt32
     func FwpmFilterGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, filter: CPointer<CPointer<FWPM_FILTER0>>): UInt32
@@ -10967,9 +11415,6 @@ foreign {
     // param-hint: context optional
     func FwpmFilterSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_FILTER_SUBSCRIPTION0>, callback: FWPM_FILTER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
     func FwpmFilterSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_FILTER_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
-    func FwpmFilterUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
-    func FwpmFreeMemory0(p: CPointer<CPointer<Unit>>): Unit
-    func FwpmGetAppIdFromFileName0(fileName: CPointer<UInt16>, appId: CPointer<CPointer<FWP_BYTE_BLOB>>): UInt32
     // param-hint: mainModePolicy optional
     // param-hint: filterConditions len=param[4]
     // param-hint: sd optional
@@ -10989,13 +11434,6 @@ foreign {
     // param-hint: keyModKey optional
     // param-hint: sd optional
     func FwpmIPsecTunnelAdd3(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32, mainModePolicy: CPointer<FWPM_PROVIDER_CONTEXT3>, tunnelPolicy: CPointer<FWPM_PROVIDER_CONTEXT3>, numFilterConditions: UInt32, filterConditions: CPointer<FWPM_FILTER_CONDITION0>, keyModKey: CPointer<GUID>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
-    func FwpmIPsecTunnelDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_LAYER_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_LAYER_ENUM_HANDLE>): UInt32
-    func FwpmLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE): UInt32
-    func FwpmLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_LAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_LAYER0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func FwpmLayerGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt16, layer: CPointer<CPointer<FWPM_LAYER0>>): UInt32
-    func FwpmLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, layer: CPointer<CPointer<FWPM_LAYER0>>): UInt32
     // param-hint: key optional
     func FwpmLayerGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
     // param-hint: key optional
@@ -11006,7 +11444,6 @@ foreign {
     func FwpmLayerSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
     // param-hint: enumTemplate optional
     func FwpmNetEventCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_NET_EVENT_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_NET_EVENT_ENUM_HANDLE>): UInt32
-    func FwpmNetEventDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE): UInt32
     func FwpmNetEventEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     func FwpmNetEventEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT1>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     func FwpmNetEventEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_NET_EVENT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT2>>>, numEntriesReturned: CPointer<UInt32>): UInt32
@@ -11024,7 +11461,6 @@ foreign {
     // param-hint: context optional
     func FwpmNetEventSubscribe4(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_NET_EVENT_SUBSCRIPTION0>, callback: FWPM_NET_EVENT_CALLBACK4, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
     func FwpmNetEventSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_NET_EVENT_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
-    func FwpmNetEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
     func FwpmNetEventsGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
@@ -11045,11 +11481,6 @@ foreign {
     // param-hint: sd optional
     // param-hint: id optional
     func FwpmProviderContextAdd3(engineHandle: FWPM_ENGINE_HANDLE, providerContext: CPointer<FWPM_PROVIDER_CONTEXT3>, sd: Win32_Security.PSECURITY_DESCRIPTOR, id: CPointer<UInt64>): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmProviderContextCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_PROVIDER_CONTEXT_ENUM_HANDLE>): UInt32
-    func FwpmProviderContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
-    func FwpmProviderContextDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    func FwpmProviderContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE): UInt32
     func FwpmProviderContextEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     func FwpmProviderContextEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT1>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     func FwpmProviderContextEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT2>>>, numEntriesReturned: CPointer<UInt32>): UInt32
@@ -11070,16 +11501,6 @@ foreign {
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmProviderContextSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
-    // param-hint: context optional
-    func FwpmProviderContextSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0>, callback: FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmProviderContextSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
-    func FwpmProviderContextUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmProviderCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_PROVIDER_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_PROVIDER_ENUM_HANDLE>): UInt32
-    func FwpmProviderDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    func FwpmProviderDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE): UInt32
-    func FwpmProviderEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_PROVIDER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func FwpmProviderGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, provider: CPointer<CPointer<FWPM_PROVIDER0>>): UInt32
     // param-hint: key optional
     func FwpmProviderGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
     // param-hint: key optional
@@ -11088,22 +11509,9 @@ foreign {
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmProviderSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
-    // param-hint: context optional
-    func FwpmProviderSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_PROVIDER_SUBSCRIPTION0>, callback: FWPM_PROVIDER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmProviderSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_PROVIDER_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
-    func FwpmProviderUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmSessionCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SESSION_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_SESSION_ENUM_HANDLE>): UInt32
-    func FwpmSessionDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SESSION_ENUM_HANDLE): UInt32
     func FwpmSessionEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SESSION_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_SESSION0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     // param-hint: sd optional
     func FwpmSubLayerAdd0(engineHandle: FWPM_ENGINE_HANDLE, subLayer: CPointer<FWPM_SUBLAYER0>, sd: Win32_Security.PSECURITY_DESCRIPTOR): UInt32
-    // param-hint: enumTemplate optional
-    func FwpmSubLayerCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<FWPM_SUBLAYER_ENUM_TEMPLATE0>, enumHandle: CPointer<FWPM_SUBLAYER_ENUM_HANDLE>): UInt32
-    func FwpmSubLayerDeleteByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>): UInt32
-    func FwpmSubLayerDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE): UInt32
-    func FwpmSubLayerEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: FWPM_SUBLAYER_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func FwpmSubLayerGetByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, subLayer: CPointer<CPointer<FWPM_SUBLAYER0>>): UInt32
     // param-hint: key optional
     func FwpmSubLayerGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
     // param-hint: key optional
@@ -11112,24 +11520,6 @@ foreign {
     // param-hint: dacl optional
     // param-hint: sacl optional
     func FwpmSubLayerSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, key: CPointer<GUID>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
-    // param-hint: context optional
-    func FwpmSubLayerSubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_SUBLAYER_SUBSCRIPTION0>, callback: FWPM_SUBLAYER_CHANGE_CALLBACK0, context: CPointer<Unit>, changeHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmSubLayerSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<FWPM_SUBLAYER_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
-    func FwpmSubLayerUnsubscribeChanges0(engineHandle: FWPM_ENGINE_HANDLE, changeHandle: CPointer<Unit>): UInt32
-    // param-hint: engineHandle optional
-    func FwpmSystemPortsGet0(engineHandle: FWPM_ENGINE_HANDLE, sysPorts: CPointer<CPointer<FWPM_SYSTEM_PORTS0>>): UInt32
-    // param-hint: engineHandle optional
-    // param-hint: reserved optional reserved
-    // param-hint: context optional
-    func FwpmSystemPortsSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, callback: FWPM_SYSTEM_PORTS_CALLBACK0, context: CPointer<Unit>, sysPortsHandle: CPointer<CPointer<Unit>>): UInt32
-    // param-hint: engineHandle optional
-    func FwpmSystemPortsUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, sysPortsHandle: CPointer<Unit>): UInt32
-    func FwpmTransactionAbort0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
-    func FwpmTransactionBegin0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt32): UInt32
-    func FwpmTransactionCommit0(engineHandle: FWPM_ENGINE_HANDLE): UInt32
-    // param-hint: context optional
-    func FwpmvSwitchEventSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<FWPM_VSWITCH_EVENT_SUBSCRIPTION0>, callback: FWPM_VSWITCH_EVENT_CALLBACK0, context: CPointer<Unit>, subscriptionHandle: CPointer<CPointer<Unit>>): UInt32
-    func FwpmvSwitchEventUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscriptionHandle: CPointer<Unit>): UInt32
     func FwpmvSwitchEventsGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
@@ -11137,18 +11527,11 @@ foreign {
     // param-hint: sacl optional
     func FwpmvSwitchEventsSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
     func IPsecDospGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
-    func IPsecDospGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, idpStatistics: CPointer<IPSEC_DOSP_STATISTICS0>): UInt32
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func IPsecDospSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
-    // param-hint: enumTemplate optional
-    func IPsecDospStateCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_DOSP_STATE_ENUM_TEMPLATE0>, enumHandle: CPointer<IPSEC_DOSP_STATE_ENUM_HANDLE>): UInt32
-    func IPsecDospStateDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE): UInt32
-    func IPsecDospStateEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_DOSP_STATE_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_DOSP_STATE0>>>, numEntries: CPointer<UInt32>): UInt32
-    func IPsecGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS0>): UInt32
-    func IPsecGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ipsecStatistics: CPointer<IPSEC_STATISTICS1>): UInt32
     func IPsecKeyManagerAddAndRegister0(engineHandle: FWPM_ENGINE_HANDLE, keyManager: CPointer<IPSEC_KEY_MANAGER0>, keyManagerCallbacks: CPointer<IPSEC_KEY_MANAGER_CALLBACKS0>, keyMgmtHandle: CPointer<CPointer<Unit>>): UInt32
     // param-hint: reserved optional reserved
     func IPsecKeyManagerGetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
@@ -11158,47 +11541,24 @@ foreign {
     // param-hint: dacl optional
     // param-hint: sacl optional
     func IPsecKeyManagerSetSecurityInfoByKey0(engineHandle: FWPM_ENGINE_HANDLE, reserved: CPointer<Unit>, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
-    func IPsecKeyManagerUnregisterAndDelete0(engineHandle: FWPM_ENGINE_HANDLE, keyMgmtHandle: CPointer<Unit>): UInt32
-    func IPsecKeyManagersGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<IPSEC_KEY_MANAGER0>>>, numEntries: CPointer<UInt32>): UInt32
-    func IPsecSaContextAddInbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE0>): UInt32
-    func IPsecSaContextAddInbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, inboundBundle: CPointer<IPSEC_SA_BUNDLE1>): UInt32
-    func IPsecSaContextAddOutbound0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE0>): UInt32
-    func IPsecSaContextAddOutbound1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, outboundBundle: CPointer<IPSEC_SA_BUNDLE1>): UInt32
-    // param-hint: inboundFilterId optional
-    func IPsecSaContextCreate0(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC0>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32
-    // param-hint: virtualIfTunnelInfo optional
-    // param-hint: inboundFilterId optional
-    func IPsecSaContextCreate1(engineHandle: FWPM_ENGINE_HANDLE, outboundTraffic: CPointer<IPSEC_TRAFFIC1>, virtualIfTunnelInfo: CPointer<IPSEC_VIRTUAL_IF_TUNNEL_INFO0>, inboundFilterId: CPointer<UInt64>, id: CPointer<UInt64>): UInt32
     // param-hint: enumTemplate optional
     func IPsecSaContextCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_SA_CONTEXT_ENUM_TEMPLATE0>, enumHandle: CPointer<IPSEC_SA_CONTEXT_ENUM_HANDLE>): UInt32
-    func IPsecSaContextDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
-    func IPsecSaContextDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE): UInt32
     func IPsecSaContextEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_CONTEXT0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     func IPsecSaContextEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_CONTEXT_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_CONTEXT1>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func IPsecSaContextExpire0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
     func IPsecSaContextGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saContext: CPointer<CPointer<IPSEC_SA_CONTEXT0>>): UInt32
     func IPsecSaContextGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saContext: CPointer<CPointer<IPSEC_SA_CONTEXT1>>): UInt32
-    func IPsecSaContextGetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI0>, inboundSpi: CPointer<UInt32>): UInt32
-    func IPsecSaContextGetSpi1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1>, inboundSpi: CPointer<UInt32>): UInt32
-    func IPsecSaContextSetSpi0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, getSpi: CPointer<IPSEC_GETSPI1>, inboundSpi: UInt32): UInt32
     // param-hint: context optional
     func IPsecSaContextSubscribe0(engineHandle: FWPM_ENGINE_HANDLE, subscription: CPointer<IPSEC_SA_CONTEXT_SUBSCRIPTION0>, callback: IPSEC_SA_CONTEXT_CALLBACK0, context: CPointer<Unit>, eventsHandle: CPointer<CPointer<Unit>>): UInt32
     func IPsecSaContextSubscriptionsGet0(engineHandle: FWPM_ENGINE_HANDLE, entries: CPointer<CPointer<CPointer<IPSEC_SA_CONTEXT_SUBSCRIPTION0>>>, numEntries: CPointer<UInt32>): UInt32
-    func IPsecSaContextUnsubscribe0(engineHandle: FWPM_ENGINE_HANDLE, eventsHandle: CPointer<Unit>): UInt32
     func IPsecSaContextUpdate0(engineHandle: FWPM_ENGINE_HANDLE, flags: UInt64, newValues: CPointer<IPSEC_SA_CONTEXT1>): UInt32
-    // param-hint: enumTemplate optional
-    func IPsecSaCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IPSEC_SA_ENUM_TEMPLATE0>, enumHandle: CPointer<IPSEC_SA_ENUM_HANDLE>): UInt32
     func IPsecSaDbGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
     // param-hint: sidOwner optional
     // param-hint: sidGroup optional
     // param-hint: dacl optional
     // param-hint: sacl optional
     func IPsecSaDbSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
-    func IPsecSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE): UInt32
     func IPsecSaEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_DETAILS0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
     func IPsecSaEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IPSEC_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IPSEC_SA_DETAILS1>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func IkeextGetStatistics0(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS0>): UInt32
-    func IkeextGetStatistics1(engineHandle: FWPM_ENGINE_HANDLE, ikeextStatistics: CPointer<IKEEXT_STATISTICS1>): UInt32
     // param-hint: enumTemplate optional
     func IkeextSaCreateEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumTemplate: CPointer<IKEEXT_SA_ENUM_TEMPLATE0>, enumHandle: CPointer<IKEEXT_SA_ENUM_HANDLE>): UInt32
     func IkeextSaDbGetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.PSID>, sidGroup: CPointer<Win32_Security.PSID>, dacl: CPointer<CPointer<Win32_Security.ACL>>, sacl: CPointer<CPointer<Win32_Security.ACL>>, securityDescriptor: CPointer<Win32_Security.PSECURITY_DESCRIPTOR>): UInt32
@@ -11207,16 +11567,6 @@ foreign {
     // param-hint: dacl optional
     // param-hint: sacl optional
     func IkeextSaDbSetSecurityInfo0(engineHandle: FWPM_ENGINE_HANDLE, securityInfo: UInt32, sidOwner: CPointer<Win32_Security.SID>, sidGroup: CPointer<Win32_Security.SID>, dacl: CPointer<Win32_Security.ACL>, sacl: CPointer<Win32_Security.ACL>): UInt32
-    func IkeextSaDeleteById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64): UInt32
-    func IkeextSaDestroyEnumHandle0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE): UInt32
-    func IkeextSaEnum0(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS0>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func IkeextSaEnum1(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS1>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func IkeextSaEnum2(engineHandle: FWPM_ENGINE_HANDLE, enumHandle: IKEEXT_SA_ENUM_HANDLE, numEntriesRequested: UInt32, entries: CPointer<CPointer<CPointer<IKEEXT_SA_DETAILS2>>>, numEntriesReturned: CPointer<UInt32>): UInt32
-    func IkeextSaGetById0(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, sa: CPointer<CPointer<IKEEXT_SA_DETAILS0>>): UInt32
-    // param-hint: saLookupContext optional
-    func IkeextSaGetById1(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS1>>): UInt32
-    // param-hint: saLookupContext optional
-    func IkeextSaGetById2(engineHandle: FWPM_ENGINE_HANDLE, id: UInt64, saLookupContext: CPointer<GUID>, sa: CPointer<CPointer<IKEEXT_SA_DETAILS2>>): UInt32
 }
 
 @When[Windows_Win32_NetworkManagement_WindowsFilteringPlatform == "on"]

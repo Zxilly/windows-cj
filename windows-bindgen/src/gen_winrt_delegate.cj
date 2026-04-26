@@ -16,34 +16,54 @@ public func generateWinrtDelegate(
     let arches = index.arches(TABLE_TYPE_DEF, fileIdx, row)
     let genericParams = winmdTypeGenericParameterNames(index, fileIdx, row)
     let genericDecl = typeGenericDeclaration(genericParams)
-    let genericWhere = runtimeTypeWhereClause(genericParams)
     let typeName = typedProjectionName(name, genericParams)
     let vtblName = "${name}Vtbl"
     let runtimeName = "${namespace}.${name}"
-    let methodNames = buildNormalizedMethodNames(index, fileIdx, row)
     let (mStart, mEnd) = index.typeDefMethods(fileIdx, row)
     let genericsArray = winmdBuildGenericArray(index, fileIdx, winmdRowGenericStart(index, fileIdx, row), winmdRowGenericEnd(index, fileIdx, row))
+    let methodNames = buildWinrtMethodNames(index, fileIdx, row, genericsArray)
+    let genericConstraintKinds = winrtGenericConstraintKindsForInterface(index, fileIdx, row, genericParams, genericsArray)
+    let genericWhere = winrtProjectionWhereClause(genericParams, genericConstraintKinds)
+    let delegateInvoke = findWinrtDelegateInvoke(index, fileIdx, row, methodNames, genericsArray)
     let typeTags = typeAvailabilityTags(namespace, name, fileIdx, row, arches)
 
     useSupportSymbol("windows_interface", "ComInterface")
+    useSupportSymbol("windows_interface", "DescriptorSchemaProvider")
+    useSupportSymbol("windows_interface", "InterfaceDescriptorSchema")
+    useSupportSymbol("windows_interface", "InterfaceMethodSchema")
+    useSupportSymbol("windows_interface", "InterfaceParameterBridgeKind")
+    useSupportSymbol("windows_interface", "InterfaceParameterSchema")
     useSupportSymbol("windows_interface", "InterfaceWrapperBase")
     useSupportSymbol("windows_interface", "RuntimeName")
     useSupportSymbol("windows_interface", "RuntimeType")
     useSupportSymbol("windows_interface", "RuntimeTypeContract")
     useSupportSymbol("windows_interface", "InterfaceDescriptor")
     useSupportSymbol("windows_interface", "GUID")
+    useSupportSymbol("windows_interface", "IInspectable")
+    useSupportSymbol("windows_interface", "IUnknown")
     useSupportSymbol("windows_interface", "IUnknownVtbl")
     useSupportSymbol("windows_core", "RuntimeType")
-    useSupportSymbol("windows_polyfill", "HRESULT")
+    useSupportSymbol("windows_core", "InParam")
+    useSupportSymbol("windows_core", "ComObject")
+    useSupportSymbol("windows_core", "asImplFromRaw")
+    useSupportSymbol("windows_core", "buildIUnknownVtbl")
+    useSupportSymbol("windows_core", "S_OK")
+    useSupportSymbol("windows_core", "E_NOTIMPL")
+    useSupportSymbol("windows_core", "HRESULT")
+    useSupportSymbol("windows_core", "winrtStoreGenericOut")
 
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
     w.writeLine("@C")
     w.writeBlock("public struct ${vtblName}", { =>
-        w.writeLine("public var base_: IInspectableVtbl = IInspectableVtbl()")
+        w.writeLine("public var base_: IUnknownVtbl = IUnknownVtbl()")
 
         var methodRow = mStart
         while (methodRow < mEnd) {
+            if (isWinrtDelegateConstructorMethod(index, fileIdx, methodRow)) {
+                methodRow += 1
+                continue
+            }
             let methodName = methodNames[methodRow]
             let sig = index.methodDefSignature(fileIdx, methodRow, genericsArray)
             let missing = missingMethodDependencies(index, fileIdx, methodRow, genericsArray)
@@ -67,7 +87,7 @@ public func generateWinrtDelegate(
 
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
-    w.writeBlock("public class ${name}${genericDecl} <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType${genericWhere}", { =>
+    w.writeBlock("public class ${name}${genericDecl} <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & DescriptorSchemaProvider${genericWhere}", { =>
         w.writeLine("public init(raw: CPointer<Unit>) {")
         w.writeLine("    super(raw)")
         w.writeLine("}")
@@ -84,11 +104,18 @@ public func generateWinrtDelegate(
         w.writeLine("    ${typeName}(raw)")
         w.writeLine("}")
         w.writeBlankLine()
-        writeIidMethod(w, index, fileIdx, row, name)
+        writeWinrtIidMethod(w, index, fileIdx, row, typeName, genericParams)
         w.writeBlankLine()
         w.writeLine("public static func descriptor(): InterfaceDescriptor<${typeName}> {")
-        w.writeLine("    return InterfaceDescriptor<${typeName}>(\"${name}\", ${typeName}.iid(), [IInspectable.iid(), IUnknown.iid()], { raw => ${typeName}.fromAbiTake(raw) }, { raw => ${typeName}.viewOf(raw) })")
+        w.writeLine("    return InterfaceDescriptor<${typeName}>(\"${name}\", ${typeName}.iid(), [IUnknown.iid()], { raw => ${typeName}.fromAbiTake(raw) }, { raw => ${typeName}.viewOf(raw) })")
         w.writeLine("}")
+        match (delegateInvoke) {
+            case Some((invokeMethodName, invokeSig, pStart, pEnd)) =>
+                let _ = invokeMethodName
+                w.writeBlankLine()
+                writeWinrtDelegateDescriptorSchemaMethod(w, index, fileIdx, name, typeName, vtblName, invokeSig, pStart, pEnd)
+            case None => ()
+        }
         w.writeBlankLine()
         w.writeLine("public static func abiType(): String {")
         w.writeLine("    \"CPointer<Unit>\"")
@@ -110,6 +137,10 @@ public func generateWinrtDelegate(
 
         var methodRow2 = mStart
         while (methodRow2 < mEnd) {
+            if (isWinrtDelegateConstructorMethod(index, fileIdx, methodRow2)) {
+                methodRow2 += 1
+                continue
+            }
             let methodName = methodNames[methodRow2]
             let sig = index.methodDefSignature(fileIdx, methodRow2, genericsArray)
             let (pStart, pEnd) = index.methodDefParams(fileIdx, methodRow2)
@@ -118,11 +149,11 @@ public func generateWinrtDelegate(
             if (!methodTags.isEmpty()) {
                 writeAvailabilityForTags(w, "", methodTags)
             }
-            writeWinrtWrapperMethod(w, index, fileIdx, sig, methodName, pStart, pEnd)
+            writeWinrtWrapperMethod(w, index, fileIdx, name, genericParams, sig, methodName, pStart, pEnd)
             methodRow2 += 1
         }
 
-        match (findWinrtDelegateInvoke(index, fileIdx, row, methodNames, genericsArray)) {
+        match (delegateInvoke) {
             case Some(invokeInfo) =>
                 let (invokeMethodName, invokeSig, pStart, pEnd) = invokeInfo
                 w.writeBlankLine()
@@ -130,12 +161,15 @@ public func generateWinrtDelegate(
             case None => ()
         }
     })
+    w.writeBlankLine()
+    writeAvailabilityForTags(w, feature, typeTags)
+    w.writeLine("extend${genericDecl} ${typeName} <: windows_core.Interface<${typeName}>${genericWhere} {}")
 
-    match (findWinrtDelegateInvoke(index, fileIdx, row, methodNames, genericsArray)) {
+    match (delegateInvoke) {
         case Some(invokeInfo) =>
             let (invokeMethodName, invokeSig, pStart, pEnd) = invokeInfo
             w.writeBlankLine()
-            writeWinrtDelegateBoxSupport(w, index, fileIdx, name, typeName, vtblName, genericParams, invokeMethodName, invokeSig, pStart, pEnd)
+            writeWinrtDelegateBoxSupport(w, index, fileIdx, name, typeName, vtblName, genericParams, genericConstraintKinds, invokeMethodName, invokeSig, pStart, pEnd)
         case None => ()
     }
 }
@@ -160,6 +194,11 @@ func findWinrtDelegateInvoke(
     None
 }
 
+func isWinrtDelegateConstructorMethod(index: TypeIndex, fileIdx: Int64, methodRow: Int64): Bool {
+    let rawName = index.methodDefName(fileIdx, methodRow)
+    return rawName == ".ctor" || rawName == ".cctor"
+}
+
 func writeWinrtDelegateFactoryMethod(
     w: CodeWriter,
     index: TypeIndex,
@@ -176,8 +215,79 @@ func writeWinrtDelegateFactoryMethod(
     let boxTypeName = typedProjectionName("${name}Box", genericParams)
     w.writeLine("public static func new(invoke: ${fnType}): ${typeName} {")
     w.writeLine("    let box = ${boxTypeName}(invoke)")
-    w.writeLine("    let object = ComObject<${boxTypeName}>.new(box, [${typeName}.descriptorSchema()], [box.vtblPtr()])")
+    w.writeLine("    let object = ComObject<${boxTypeName}>.new(box, [${typeName}.descriptorSchema()], box.vtblPtr())")
     w.writeLine("    return object.intoInterface(${typeName}.descriptor())")
+    w.writeLine("}")
+}
+
+func writeWinrtDelegateDescriptorSchemaMethod(
+    w: CodeWriter,
+    index: TypeIndex,
+    fileIdx: Int64,
+    name: String,
+    typeName: String,
+    vtblName: String,
+    sig: MethodSignature,
+    pStart: Int64,
+    pEnd: Int64
+): Unit {
+    let seqToName = HashMap<Int64, String>()
+    var paramRow = pStart
+    while (paramRow < pEnd) {
+        let seq = Int64(index.paramSequence(fileIdx, paramRow))
+        if (seq > 0) {
+            let paramName = index.paramName(fileIdx, paramRow)
+            if (!paramName.isEmpty()) {
+                seqToName[seq] = sanitizeIdentifier(paramName)
+            }
+        }
+        paramRow += 1
+    }
+
+    let parameters = ArrayList<String>()
+    var i: Int64 = 0
+    while (i < Int64(sig.paramTypes.size)) {
+        let seq = i + 1
+        let paramName = if (seqToName.contains(seq)) {
+            seqToName[seq]
+        } else {
+            "arg${i}"
+        }
+        match (sig.paramTypes[i]) {
+            case MetadataType.MdArray(elem) =>
+                parameters.add("InterfaceParameterSchema(\"${paramName}\", \"${escapeString(winrtPublicArrayPointerType(index, elem))}\", \"${escapeString(winrtPublicArrayPointerType(index, elem))}\", InterfaceParameterBridgeKind.Value)")
+            case _ =>
+                let publicType = highLevelType(index, sig.paramTypes[i])
+                let abiType = highLevelAbiType(index, sig.paramTypes[i])
+                let bridgeKind = if (highLevelArgumentExpr(index, sig.paramTypes[i], "value") != "value") {
+                    "InterfaceParameterBridgeKind.InParam"
+                } else {
+                    "InterfaceParameterBridgeKind.Value"
+                }
+                let callerType = if (bridgeKind == "InterfaceParameterBridgeKind.InParam") {
+                    "InParam<${escapeString(publicType)}>"
+                } else {
+                    escapeString(publicType)
+                }
+                parameters.add("InterfaceParameterSchema(\"${paramName}\", \"${escapeString(abiType)}\", \"${callerType}\", ${bridgeKind})")
+        }
+        i += 1
+    }
+    if (highLevelHasResult(sig)) {
+        parameters.add(
+            "InterfaceParameterSchema(\"result\", \"${escapeString("CPointer<${highLevelAbiType(index, sig.returnType)}>")}\", \"${escapeString("OutSlot<${highLevelType(index, sig.returnType)}>")}\", InterfaceParameterBridgeKind.OutSlot)"
+        )
+    }
+    let parameterLiteral = if (parameters.isEmpty()) {
+        "Array<InterfaceParameterSchema>()"
+    } else {
+        "[${joinStrings(parameters, ", ")}]"
+    }
+
+    w.writeLine("public static func descriptorSchema(): InterfaceDescriptorSchema {")
+    w.writeLine("    var schema = InterfaceDescriptorSchema(\"${name}\", ${typeName}.iid(), IUnknown.descriptorSchema(), \"${vtblName}\", \"${name}\", \"${name}Invoker\", [InterfaceMethodSchema(\"Invoke\", 3, ${parameterLiteral}, \"Int32\")])")
+    w.writeLine("    schema.runtimeTypeContract = Some(${typeName}.runtimeType())")
+    w.writeLine("    return schema")
     w.writeLine("}")
 }
 
@@ -189,6 +299,7 @@ func writeWinrtDelegateBoxSupport(
     typeName: String,
     vtblName: String,
     genericParams: ArrayList<String>,
+    genericConstraintKinds: HashMap<String, WinrtGenericConstraintKind>,
     methodName: String,
     sig: MethodSignature,
     pStart: Int64,
@@ -199,18 +310,26 @@ func writeWinrtDelegateBoxSupport(
     let delegateArgs = delegateInvokeArgs(index, sig, pStart, pEnd, fileIdx)
     let returnType = highLevelType(index, sig.returnType)
     let genericDecl = typeGenericDeclaration(genericParams)
-    let genericWhere = runtimeTypeWhereClause(genericParams)
+    let genericWhere = winrtProjectionWhereClause(genericParams, genericConstraintKinds)
+    let erasedInvokerTypeName = winrtDelegateInvokerErasedName(name)
     let invokerTypeName = "${name}Invoker${genericDecl}"
     let boxTypeName = "${name}Box${genericDecl}"
 
-    w.writeBlock("private open class ${invokerTypeName}${genericWhere}", { =>
+    w.writeBlock("private open class ${erasedInvokerTypeName}", { =>
+        writeWinrtDelegateThunkErasedMethod(w, index, sig, methodName)
+    })
+
+    w.writeBlankLine()
+    w.writeBlock("private open class ${invokerTypeName} <: ${erasedInvokerTypeName}${genericWhere}", { =>
         w.writeLine("public open func ${methodName}(${delegateParams}): ${returnType} {")
         if (returnType == "Unit") {
             w.writeLine("    ()")
         } else {
-            w.writeLine("    ${highLevelResultDefaultExpr(returnType)}")
+            w.writeLine("    ${highLevelDefaultExpr(index, sig.returnType)}")
         }
         w.writeLine("}")
+        w.writeBlankLine()
+        writeWinrtDelegateThunkHelperMethod(w, index, sig, methodName, override: true)
     })
 
     w.writeBlankLine()
@@ -243,26 +362,16 @@ func writeWinrtDelegateBoxSupport(
     w.writeBlankLine()
     w.writeLine("func build${name}BoxVtbl${genericDecl}(): ${vtblName}${genericWhere} {")
     w.writeLine("    var vtbl = ${vtblName}()")
-    w.writeLine("    vtbl.base_ = buildIInspectableVtbl()")
+    w.writeLine("    vtbl.base_ = buildIUnknownVtbl()")
     w.writeLine("    vtbl.${methodName} = { ${delegateThunkSignature(index, sig)} =>")
-    w.writeLine("        match (unsafe { asImplFromRaw<${invokerTypeName}>(instanceRaw) }) {")
+    w.writeLine("        match (unsafe { asImplFromRaw<${erasedInvokerTypeName}>(instanceRaw) }) {")
     w.writeLine("            case Some(invoker) =>")
-    if (returnType == "Unit") {
-        if (delegateArgs.isEmpty()) {
-            w.writeLine("                invoker.${methodName}()")
-        } else {
-            w.writeLine("                invoker.${methodName}(${delegateThunkArgs(index, sig)})")
-        }
-        w.writeLine("                return S_OK.value")
+    let thunkHelperArgs = delegateThunkHelperArgs(sig)
+    let helperName = winrtDelegateThunkHelperName(methodName)
+    if (thunkHelperArgs.isEmpty()) {
+        w.writeLine("                return invoker.${helperName}()")
     } else {
-        let callExpr = if (delegateArgs.isEmpty()) {
-            "invoker.${methodName}()"
-        } else {
-            "invoker.${methodName}(${delegateThunkArgs(index, sig)})"
-        }
-        w.writeLine("                let value = ${callExpr}")
-        w.writeLine("                unsafe { result.write(${highLevelThunkReturnExpr(index, sig.returnType, "value")}) }")
-        w.writeLine("                return S_OK.value")
+        w.writeLine("                return invoker.${helperName}(${thunkHelperArgs})")
     }
     w.writeLine("            case None =>")
     w.writeLine("                return E_NOTIMPL.value")
@@ -270,6 +379,71 @@ func writeWinrtDelegateBoxSupport(
     w.writeLine("    }")
     w.writeLine("    return vtbl")
     w.writeLine("}")
+}
+
+func winrtDelegateInvokerErasedName(name: String): String {
+    return "${name}InvokerErased"
+}
+
+func winrtDelegateThunkHelperName(methodName: String): String {
+    return "__winrtThunk_${methodName}"
+}
+
+func writeWinrtDelegateThunkErasedMethod(
+    w: CodeWriter,
+    index: TypeIndex,
+    sig: MethodSignature,
+    methodName: String
+): Unit {
+    let helperName = winrtDelegateThunkHelperName(methodName)
+    let helperParams = delegateThunkHelperParams(index, sig)
+    w.writeLine("public open func ${helperName}(${helperParams}): Int32 {")
+    w.writeLine("    E_NOTIMPL.value")
+    w.writeLine("}")
+}
+
+func writeWinrtDelegateThunkHelperMethod(
+    w: CodeWriter,
+    index: TypeIndex,
+    sig: MethodSignature,
+    methodName: String,
+    override!: Bool = false
+): Unit {
+    let helperName = winrtDelegateThunkHelperName(methodName)
+    let helperParams = delegateThunkHelperParams(index, sig)
+    let modifier = if (override) { "public override func" } else { "public open func" }
+    w.writeLine("${modifier} ${helperName}(${helperParams}): Int32 {")
+    writeWinrtDelegateThunkBody(w, index, sig, "this", methodName)
+    w.writeLine("}")
+}
+
+func writeWinrtDelegateThunkBody(
+    w: CodeWriter,
+    index: TypeIndex,
+    sig: MethodSignature,
+    receiver: String,
+    methodName: String
+): Unit {
+    let callArgs = delegateThunkProjectedArgs(index, sig)
+    let callExpr = if (callArgs.isEmpty()) {
+        "${receiver}.${methodName}()"
+    } else {
+        "${receiver}.${methodName}(${callArgs})"
+    }
+    if (!highLevelHasResult(sig)) {
+        w.writeLine("    ${callExpr}")
+        w.writeLine("    return S_OK.value")
+        return
+    }
+
+    w.writeLine("    let value = ${callExpr}")
+    match (sig.returnType) {
+        case MetadataType.Generic(name, _) =>
+            w.writeLine("    return windows_core.winrtStoreGenericOut<${name}>(result, value)")
+        case _ =>
+            w.writeLine("    unsafe { result.write(${highLevelThunkReturnExpr(index, sig.returnType, "value")}) }")
+            w.writeLine("    return S_OK.value")
+    }
 }
 
 func delegateInvokeFunctionType(
@@ -295,7 +469,13 @@ func delegateInvokeFunctionType(
 
     var i: Int64 = 0
     while (i < Int64(sig.paramTypes.size)) {
-        params.add(delegateCallbackType(index, sig.paramTypes[i]))
+        match (sig.paramTypes[i]) {
+            case MetadataType.MdArray(elem) =>
+                params.add("UInt32")
+                params.add(winrtPublicArrayPointerType(index, elem))
+            case _ =>
+                params.add(delegateCallbackType(index, sig.paramTypes[i]))
+        }
         i += 1
     }
     return "(${joinStrings(params, ", ")}) -> ${highLevelType(index, sig.returnType)}"
@@ -330,7 +510,13 @@ func delegateInvokeParams(
         } else {
             "param${i}"
         }
-        params.add("${paramName}: ${delegateCallbackType(index, sig.paramTypes[i])}")
+        match (sig.paramTypes[i]) {
+            case MetadataType.MdArray(elem) =>
+                params.add("${paramName}Size: UInt32")
+                params.add("${paramName}: ${winrtPublicArrayPointerType(index, elem)}")
+            case _ =>
+                params.add("${paramName}: ${delegateCallbackType(index, sig.paramTypes[i])}")
+        }
         i += 1
     }
     return joinStrings(params, ", ")
@@ -375,10 +561,17 @@ func delegateInvokeArgs(
     var i: Int64 = 0
     while (i < Int64(sig.paramTypes.size)) {
         let seq = i + 1
-        if (seqToName.contains(seq)) {
-            args.add(seqToName[seq])
+        let paramName = if (seqToName.contains(seq)) {
+            seqToName[seq]
         } else {
-            args.add("param${i}")
+            "param${i}"
+        }
+        match (sig.paramTypes[i]) {
+            case MetadataType.MdArray(_) =>
+                args.add("${paramName}Size")
+                args.add(paramName)
+            case _ =>
+                args.add(paramName)
         }
         i += 1
     }
@@ -388,9 +581,24 @@ func delegateInvokeArgs(
 func delegateThunkSignature(index: TypeIndex, sig: MethodSignature): String {
     let params = ArrayList<String>()
     params.add("instanceRaw: CPointer<Unit>")
+    let helperParams = delegateThunkHelperParams(index, sig)
+    if (!helperParams.isEmpty()) {
+        params.add(helperParams)
+    }
+    return joinStrings(params, ", ")
+}
+
+func delegateThunkHelperParams(index: TypeIndex, sig: MethodSignature): String {
+    let params = ArrayList<String>()
     var i: Int64 = 0
     while (i < Int64(sig.paramTypes.size)) {
-        params.add("arg${i}: ${highLevelAbiType(index, sig.paramTypes[i])}")
+        match (sig.paramTypes[i]) {
+            case MetadataType.MdArray(elem) =>
+                params.add("arg${i}Size: UInt32")
+                params.add("arg${i}: ${winrtPublicArrayPointerType(index, elem)}")
+            case _ =>
+                params.add("arg${i}: ${highLevelAbiType(index, sig.paramTypes[i])}")
+        }
         i += 1
     }
     if (highLevelHasResult(sig)) {
@@ -399,11 +607,52 @@ func delegateThunkSignature(index: TypeIndex, sig: MethodSignature): String {
     return joinStrings(params, ", ")
 }
 
-func delegateThunkArgs(index: TypeIndex, sig: MethodSignature): String {
+func delegateThunkHelperArgs(sig: MethodSignature): String {
     let args = ArrayList<String>()
     var i: Int64 = 0
     while (i < Int64(sig.paramTypes.size)) {
-        args.add(highLevelThunkParamExpr(index, sig.paramTypes[i], "arg${i}"))
+        match (sig.paramTypes[i]) {
+            case MetadataType.MdArray(_) =>
+                args.add("arg${i}Size")
+                args.add("arg${i}")
+            case _ =>
+                args.add("arg${i}")
+        }
+        i += 1
+    }
+    if (highLevelHasResult(sig)) {
+        args.add("result")
+    }
+    return joinStrings(args, ", ")
+}
+
+func delegateThunkProjectedArgs(index: TypeIndex, sig: MethodSignature): String {
+    let args = ArrayList<String>()
+    var i: Int64 = 0
+    while (i < Int64(sig.paramTypes.size)) {
+        match (sig.paramTypes[i]) {
+            case MetadataType.MdArray(_) =>
+                args.add("arg${i}Size")
+                args.add("arg${i}")
+            case MetadataType.MdString =>
+                args.add("${winrtStringProjectionType()}.viewOf(arg${i})")
+            case MetadataType.ClassName(tn) =>
+                if (isSystemStringTypeName(tn)) {
+                    args.add("${winrtStringProjectionType()}.viewOf(arg${i})")
+                } else {
+                    args.add(highLevelThunkParamExpr(index, sig.paramTypes[i], "arg${i}"))
+                }
+            case MetadataType.ValueName(tn) =>
+                if (isSystemStringTypeName(tn)) {
+                    args.add("${winrtStringProjectionType()}.viewOf(arg${i})")
+                } else {
+                    args.add(highLevelThunkParamExpr(index, sig.paramTypes[i], "arg${i}"))
+                }
+            case MetadataType.Generic(name, _) =>
+                args.add("windows_core.winrtProjectGenericIn<${name}>(arg${i})")
+            case _ =>
+                args.add(highLevelThunkParamExpr(index, sig.paramTypes[i], "arg${i}"))
+        }
         i += 1
     }
     return joinStrings(args, ", ")

@@ -2,11 +2,10 @@
 package windows_sys.Wdk.Devices.HumanInterfaceDevice
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
-
-@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on"]
-public type EVT_VHF_ASYNC_OPERATION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<HID_XFER_PACKET>) -> Unit>
 
 @When[Windows_Wdk_Devices_HumanInterfaceDevice == "on"]
 public type EVT_VHF_CLEANUP = CFunc<(CPointer<Unit>) -> Unit>
@@ -24,6 +23,9 @@ public struct HID_XFER_PACKET {
 }
 
 @When[Windows_Wdk_Devices_HumanInterfaceDevice == "on"]
+public type EVT_VHF_ASYNC_OPERATION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<HID_XFER_PACKET>) -> Unit>
+
+@When[Windows_Wdk_Devices_HumanInterfaceDevice == "on"]
 @C
 public struct VHF_CONFIG {
     public var Size: UInt32 = 0
@@ -38,12 +40,12 @@ public struct VHF_CONFIG {
     public var InstanceID: CPointer<UInt16> = CPointer<UInt16>()
     public var ReportDescriptorLength: UInt16 = 0
     public var ReportDescriptor: CPointer<UInt8> = CPointer<UInt8>()
-    public var EvtVhfReadyForNextReadReport: EVT_VHF_READY_FOR_NEXT_READ_REPORT = { _ => () }
-    public var EvtVhfAsyncOperationGetFeature: EVT_VHF_ASYNC_OPERATION = { _, _, _, _ => () }
-    public var EvtVhfAsyncOperationSetFeature: EVT_VHF_ASYNC_OPERATION = { _, _, _, _ => () }
-    public var EvtVhfAsyncOperationWriteReport: EVT_VHF_ASYNC_OPERATION = { _, _, _, _ => () }
-    public var EvtVhfAsyncOperationGetInputReport: EVT_VHF_ASYNC_OPERATION = { _, _, _, _ => () }
-    public var EvtVhfCleanup: EVT_VHF_CLEANUP = { _ => () }
+    public var EvtVhfReadyForNextReadReport: EVT_VHF_READY_FOR_NEXT_READ_REPORT = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var EvtVhfAsyncOperationGetFeature: EVT_VHF_ASYNC_OPERATION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<HID_XFER_PACKET>) -> Unit>(CPointer<Unit>())
+    public var EvtVhfAsyncOperationSetFeature: EVT_VHF_ASYNC_OPERATION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<HID_XFER_PACKET>) -> Unit>(CPointer<Unit>())
+    public var EvtVhfAsyncOperationWriteReport: EVT_VHF_ASYNC_OPERATION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<HID_XFER_PACKET>) -> Unit>(CPointer<Unit>())
+    public var EvtVhfAsyncOperationGetInputReport: EVT_VHF_ASYNC_OPERATION = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<HID_XFER_PACKET>) -> Unit>(CPointer<Unit>())
+    public var EvtVhfCleanup: EVT_VHF_CLEANUP = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var HardwareIDsLength: UInt16 = 0
     public var HardwareIDs: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
@@ -53,7 +55,7 @@ public struct VHF_CONFIG {
 foreign {
     func VhfAsyncOperationComplete(VhfOperationHandle: CPointer<Unit>, CompletionStatus: Int32): Int32
     func VhfCreate(VhfConfig: CPointer<VHF_CONFIG>, VhfHandle: CPointer<CPointer<Unit>>): Int32
-    func VhfDelete(VhfHandle: CPointer<Unit>, Wait: Win32_Foundation.BOOLEAN): Unit
+    func VhfDelete(VhfHandle: CPointer<Unit>, Wait: UInt8): Unit
     func VhfReadReportSubmit(VhfHandle: CPointer<Unit>, HidTransferPacket: CPointer<HID_XFER_PACKET>): Int32
     func VhfStart(VhfHandle: CPointer<Unit>): Int32
 }

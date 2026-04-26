@@ -5,6 +5,16 @@ package windows_sys.Win32.Devices
 
 @When[Windows_Win32_Devices == "on"]
 @C
+public struct IEEE1394_VDEV_PNP_REQUEST {
+    public var fulFlags: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public var InstanceId: UInt64 = 0
+    public var DeviceId: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices == "on"]
+@C
 public struct IEEE1394_API_REQUEST {
     public var RequestNumber: UInt32 = 0
     public var Flags: UInt32 = 0
@@ -13,62 +23,55 @@ public struct IEEE1394_API_REQUEST {
 }
 
 @When[Windows_Win32_Devices == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct IEEE1394_API_REQUEST__u_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
 
-    public func addVirtualDevice(): IEEE1394_VDEV_PNP_REQUEST {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
-            return ptr.read()
+    public mut prop addVirtualDevice: IEEE1394_VDEV_PNP_REQUEST {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_addVirtualDevice(val: IEEE1394_VDEV_PNP_REQUEST): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop removeVirtualDevice: IEEE1394_VDEV_PNP_REQUEST {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public func removeVirtualDevice(): IEEE1394_VDEV_PNP_REQUEST {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_removeVirtualDevice(val: IEEE1394_VDEV_PNP_REQUEST): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IEEE1394_VDEV_PNP_REQUEST>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices == "on"]
-@C
-public struct IEEE1394_VDEV_PNP_REQUEST {
-    public var fulFlags: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public var InstanceId: UInt64 = 0
-    public var DeviceId: UInt8 = 0
     public init() {}
 }
 

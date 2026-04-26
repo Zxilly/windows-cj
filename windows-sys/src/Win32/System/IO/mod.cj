@@ -2,6 +2,8 @@
 package windows_sys.Win32.System.IO
 
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -14,53 +16,53 @@ public struct IO_STATUS_BLOCK {
 }
 
 @When[Windows_Win32_System_IO == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct IO_STATUS_BLOCK__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func status(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
+    public mut prop status: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_status(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop pointer: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func pointer(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pointer(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
-
-@When[Windows_Win32_System_IO == "on"]
-public type LPOVERLAPPED_COMPLETION_ROUTINE = CFunc<(UInt32, UInt32, CPointer<OVERLAPPED>) -> Unit>
 
 @When[Windows_Win32_System_IO == "on"]
 @C
@@ -73,50 +75,53 @@ public struct OVERLAPPED {
 }
 
 @When[Windows_Win32_System_IO == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct OVERLAPPED__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<OVERLAPPED__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop pointer: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func pointer(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pointer(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -142,6 +147,9 @@ public struct OVERLAPPED_ENTRY {
 
 @When[Windows_Win32_System_IO == "on"]
 public type PIO_APC_ROUTINE = CFunc<(CPointer<Unit>, CPointer<IO_STATUS_BLOCK>, UInt32) -> Unit>
+
+@When[Windows_Win32_System_IO == "on"]
+public type LPOVERLAPPED_COMPLETION_ROUTINE = CFunc<(UInt32, UInt32, CPointer<OVERLAPPED>) -> Unit>
 
 @When[KERNEL32 == "on"]
 foreign {

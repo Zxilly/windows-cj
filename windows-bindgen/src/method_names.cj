@@ -53,7 +53,7 @@ func normalizedMethodName(index: TypeIndex, fileIdx: Int64, methodRow: Int64): S
     let rawName = index.methodDefName(fileIdx, methodRow)
     let flags = index.methodDefFlags(fileIdx, methodRow)
     let specialName = flags.contains(MethodAttributes.SpecialName) || flags.contains(MethodAttributes.RTSpecialName)
-    if (specialName || startsWith(rawName, "get_") || startsWith(rawName, "put_") || startsWith(rawName, "add_") || startsWith(rawName, "remove_")) {
+    if (specialName) {
         return normalizeAccessorName(rawName)
     }
 

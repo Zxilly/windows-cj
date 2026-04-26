@@ -39,14 +39,6 @@ public struct Matrix4x4 {
 
 @When[Windows_Foundation_Numerics == "on"]
 @C
-public struct Plane {
-    public var Normal: Vector3 = Vector3()
-    public var D: Float32 = 0.0
-    public init() {}
-}
-
-@When[Windows_Foundation_Numerics == "on"]
-@C
 public struct Quaternion {
     public var X: Float32 = 0.0
     public var Y: Float32 = 0.0
@@ -87,5 +79,13 @@ public struct Vector4 {
     public var Y: Float32 = 0.0
     public var Z: Float32 = 0.0
     public var W: Float32 = 0.0
+    public init() {}
+}
+
+@When[Windows_Foundation_Numerics == "on"]
+@C
+public struct Plane {
+    public var Normal: Vector3 = Vector3()
+    public var D: Float32 = 0.0
     public init() {}
 }

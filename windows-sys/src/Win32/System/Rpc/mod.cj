@@ -2,10 +2,16 @@
 package windows_sys.Win32.System.Rpc
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt16, unionReadInt32, unionReadUInt64, unionWriteInt16, unionWriteInt32, unionWriteUInt64}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
+import windows_sys.Win32._impl_l1 as Win32__impl_l1
+import windows_sys.Win32._impl_l2 as Win32__impl_l2
 
 
 @When[Windows_Win32_System_Rpc == "on"]
@@ -29,50 +35,53 @@ public struct BinaryParam {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct CLIENT_CALL_RETURN {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func pointer(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
+    public mut prop pointer: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pointer(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop simple: IntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IntNative>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func simple(): IntNative {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IntNative>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_simple(val: IntNative): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IntNative>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IntNative>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -93,19 +102,9 @@ public type CS_TAG_GETTING_ROUTINE = CFunc<(CPointer<Unit>, Int32, CPointer<UInt
 public type CS_TYPE_FROM_NETCS_ROUTINE = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-public type CS_TYPE_LOCAL_SIZE_ROUTINE = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<IDL_CS_CONVERT>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type CS_TYPE_NET_SIZE_ROUTINE = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<IDL_CS_CONVERT>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>
-
-@When[Windows_Win32_System_Rpc == "on"]
 public type CS_TYPE_TO_NETCS_ROUTINE = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-public type EXPR_EVAL = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct EXPR_TOKEN {
     public var value: Int32 = 0
 
@@ -148,7 +147,6 @@ public let EXPR_TOKEN_FC_EXPR_NOOP: EXPR_TOKEN = EXPR_TOKEN(5)
 public let EXPR_TOKEN_FC_EXPR_END: EXPR_TOKEN = EXPR_TOKEN(6)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct ExtendedErrorParamTypes {
     public var value: Int32 = 0
 
@@ -188,41 +186,12 @@ public let ExtendedErrorParamTypes_eeptNone: ExtendedErrorParamTypes = ExtendedE
 public let ExtendedErrorParamTypes_eeptBinary: ExtendedErrorParamTypes = ExtendedErrorParamTypes(7)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct FULL_PTR_XLAT_TABLES {
-    public var RefIdToPointer: CPointer<Unit> = CPointer<Unit>()
-    public var PointerToRefId: CPointer<Unit> = CPointer<Unit>()
-    public var NextRefId: UInt32 = 0
-    public var XlatSide: XLAT_SIDE = XLAT_SIDE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct GENERIC_BINDING_INFO {
-    public var pObj: CPointer<Unit> = CPointer<Unit>()
-    public var Size: UInt32 = 0
-    public var pfnBind: GENERIC_BINDING_ROUTINE = { _ => CPointer<Unit>() }
-    public var pfnUnbind: GENERIC_UNBIND_ROUTINE = { _, _ => () }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
 public type GENERIC_BINDING_ROUTINE = CFunc<(CPointer<Unit>) -> CPointer<Unit>>
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct GENERIC_BINDING_ROUTINE_PAIR {
-    public var pfnBind: GENERIC_BINDING_ROUTINE = { _ => CPointer<Unit>() }
-    public var pfnUnbind: GENERIC_UNBIND_ROUTINE = { _, _ => () }
-    public init() {}
-}
 
 @When[Windows_Win32_System_Rpc == "on"]
 public type GENERIC_UNBIND_ROUTINE = CFunc<(CPointer<Unit>, CPointer<UInt8>) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct GROUP_NAME_SYNTAX {
     public var value: UInt32 = 0
 
@@ -247,7 +216,6 @@ public let GROUP_NAME_SYNTAX_RPC_C_NS_SYNTAX_DEFAULT: GROUP_NAME_SYNTAX = GROUP_
 public let GROUP_NAME_SYNTAX_RPC_C_NS_SYNTAX_DCE: GROUP_NAME_SYNTAX = GROUP_NAME_SYNTAX(3)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct IDL_CS_CONVERT {
     public var value: Int32 = 0
 
@@ -275,49 +243,9 @@ public let IDL_CS_CONVERT_IDL_CS_IN_PLACE_CONVERT: IDL_CS_CONVERT = IDL_CS_CONVE
 public let IDL_CS_CONVERT_IDL_CS_NEW_BUFFER_CONVERT: IDL_CS_CONVERT = IDL_CS_CONVERT(2)
 
 @When[Windows_Win32_System_Rpc == "on"]
-public type I_RpcFreeCalloutStateFn = CFunc<(CPointer<RDR_CALLOUT_STATE>) -> Unit>
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type I_RpcPerformCalloutFn = CFunc<(CPointer<Unit>, CPointer<RDR_CALLOUT_STATE>, RPC_HTTP_REDIRECTOR_STAGE) -> RPC_STATUS>
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct I_RpcProxyCallbackInterface {
-    public var IsValidMachineFn: I_RpcProxyIsValidMachineFn = { _, _, _ => RPC_STATUS() }
-    public var GetClientAddressFn: I_RpcProxyGetClientAddressFn = { _, _, _ => RPC_STATUS() }
-    public var GetConnectionTimeoutFn: I_RpcProxyGetConnectionTimeoutFn = { _ => RPC_STATUS() }
-    public var PerformCalloutFn: I_RpcPerformCalloutFn = { _, _, _ => RPC_STATUS() }
-    public var FreeCalloutStateFn: I_RpcFreeCalloutStateFn = { _ => () }
-    public var GetClientSessionAndResourceUUIDFn: I_RpcProxyGetClientSessionAndResourceUUID = { _, _, _, _, _ => RPC_STATUS() }
-    public var ProxyFilterIfFn: I_RpcProxyFilterIfFn = { _, _, _, _ => RPC_STATUS() }
-    public var RpcProxyUpdatePerfCounterFn: I_RpcProxyUpdatePerfCounterFn = { _, _, _ => () }
-    public var RpcProxyUpdatePerfCounterBackendServerFn: I_RpcProxyUpdatePerfCounterBackendServerFn = { _, _ => () }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type I_RpcProxyFilterIfFn = CFunc<(CPointer<Unit>, CPointer<GUID>, UInt16, CPointer<Int32>) -> RPC_STATUS>
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type I_RpcProxyGetClientAddressFn = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt32>) -> RPC_STATUS>
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type I_RpcProxyGetClientSessionAndResourceUUID = CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<GUID>, CPointer<Int32>, CPointer<GUID>) -> RPC_STATUS>
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type I_RpcProxyGetConnectionTimeoutFn = CFunc<(CPointer<UInt32>) -> RPC_STATUS>
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type I_RpcProxyIsValidMachineFn = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32) -> RPC_STATUS>
-
-@When[Windows_Win32_System_Rpc == "on"]
 public type I_RpcProxyUpdatePerfCounterBackendServerFn = CFunc<(CPointer<UInt16>, Int32) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-public type I_RpcProxyUpdatePerfCounterFn = CFunc<(RpcPerfCounters, Int32, UInt32) -> Unit>
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTION {
     public var value: Int32 = 0
 
@@ -353,7 +281,6 @@ public struct MALLOC_FREE_STRUCT {
 public type MIDL_ES_ALLOC = CFunc<(CPointer<Unit>, CPointer<CPointer<Int8>>, CPointer<UInt32>) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct MIDL_ES_CODE {
     public var value: Int32 = 0
 
@@ -381,7 +308,6 @@ public let MIDL_ES_CODE_MES_DECODE: MIDL_ES_CODE = MIDL_ES_CODE(1)
 public let MIDL_ES_CODE_MES_ENCODE_NDR64: MIDL_ES_CODE = MIDL_ES_CODE(2)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct MIDL_ES_HANDLE_STYLE {
     public var value: Int32 = 0
 
@@ -435,14 +361,6 @@ public struct MIDL_INTERCEPTION_INFO {
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
-public struct MIDL_INTERFACE_METHOD_PROPERTIES {
-    public var MethodCount: UInt16 = 0
-    public var MethodProperties: CPointer<CPointer<MIDL_METHOD_PROPERTY_MAP>> = CPointer<CPointer<MIDL_METHOD_PROPERTY_MAP>>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct MIDL_METHOD_PROPERTY {
     public var Id: UInt32 = 0
     public var Value: UIntNative = 0
@@ -459,223 +377,10 @@ public struct MIDL_METHOD_PROPERTY_MAP {
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
-public struct MIDL_SERVER_INFO {
-    public var pStubDesc: CPointer<MIDL_STUB_DESC> = CPointer<MIDL_STUB_DESC>()
-    public var DispatchTable: CPointer<SERVER_ROUTINE> = CPointer<SERVER_ROUTINE>()
-    public var ProcString: CPointer<UInt8> = CPointer<UInt8>()
-    public var FmtStringOffset: CPointer<UInt16> = CPointer<UInt16>()
-    public var ThunkTable: CPointer<STUB_THUNK> = CPointer<STUB_THUNK>()
-    public var pTransferSyntax: CPointer<RPC_SYNTAX_IDENTIFIER> = CPointer<RPC_SYNTAX_IDENTIFIER>()
-    public var nCount: UIntNative = 0
-    public var pSyntaxInfo: CPointer<MIDL_SYNTAX_INFO> = CPointer<MIDL_SYNTAX_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct MIDL_STUBLESS_PROXY_INFO {
-    public var pStubDesc: CPointer<MIDL_STUB_DESC> = CPointer<MIDL_STUB_DESC>()
-    public var ProcFormatString: CPointer<UInt8> = CPointer<UInt8>()
-    public var FormatStringOffset: CPointer<UInt16> = CPointer<UInt16>()
-    public var pTransferSyntax: CPointer<RPC_SYNTAX_IDENTIFIER> = CPointer<RPC_SYNTAX_IDENTIFIER>()
-    public var nCount: UIntNative = 0
-    public var pSyntaxInfo: CPointer<MIDL_SYNTAX_INFO> = CPointer<MIDL_SYNTAX_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct MIDL_STUB_DESC {
-    public var RpcInterfaceInformation: CPointer<Unit> = CPointer<Unit>()
-    public var pfnAllocate: PFN_RPC_ALLOCATE = { _ => CPointer<Unit>() }
-    public var pfnFree: PFN_RPC_FREE = { _ => () }
-    public var IMPLICIT_HANDLE_INFO: MIDL_STUB_DESC__IMPLICIT_HANDLE_INFO_e__Union = MIDL_STUB_DESC__IMPLICIT_HANDLE_INFO_e__Union()
-    public var apfnNdrRundownRoutines: CPointer<NDR_RUNDOWN> = CPointer<NDR_RUNDOWN>()
-    public var aGenericBindingRoutinePairs: CPointer<GENERIC_BINDING_ROUTINE_PAIR> = CPointer<GENERIC_BINDING_ROUTINE_PAIR>()
-    public var apfnExprEval: CPointer<EXPR_EVAL> = CPointer<EXPR_EVAL>()
-    public var aXmitQuintuple: CPointer<XMIT_ROUTINE_QUINTUPLE> = CPointer<XMIT_ROUTINE_QUINTUPLE>()
-    public var pFormatTypes: CPointer<UInt8> = CPointer<UInt8>()
-    public var fCheckBounds: Int32 = 0
-    public var Version: UInt32 = 0
-    public var pMallocFreeStruct: CPointer<MALLOC_FREE_STRUCT> = CPointer<MALLOC_FREE_STRUCT>()
-    public var MIDLVersion: Int32 = 0
-    public var CommFaultOffsets: CPointer<COMM_FAULT_OFFSETS> = CPointer<COMM_FAULT_OFFSETS>()
-    public var aUserMarshalQuadruple: CPointer<USER_MARSHAL_ROUTINE_QUADRUPLE> = CPointer<USER_MARSHAL_ROUTINE_QUADRUPLE>()
-    public var NotifyRoutineTable: CPointer<NDR_NOTIFY_ROUTINE> = CPointer<NDR_NOTIFY_ROUTINE>()
-    public var mFlags: UIntNative = 0
-    public var CsRoutineTables: CPointer<NDR_CS_ROUTINES> = CPointer<NDR_CS_ROUTINES>()
-    public var ProxyServerInfo: CPointer<Unit> = CPointer<Unit>()
-    public var pExprInfo: CPointer<NDR_EXPR_DESC> = CPointer<NDR_EXPR_DESC>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct MIDL_STUB_DESC__IMPLICIT_HANDLE_INFO_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func pAutoHandle(): CPointer<CPointer<Unit>> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CPointer<Unit>>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pAutoHandle(val: CPointer<CPointer<Unit>>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CPointer<Unit>>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pPrimitiveHandle(): CPointer<CPointer<Unit>> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CPointer<Unit>>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pPrimitiveHandle(val: CPointer<CPointer<Unit>>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CPointer<Unit>>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pGenericBindingInfo(): CPointer<GENERIC_BINDING_INFO> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<GENERIC_BINDING_INFO>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pGenericBindingInfo(val: CPointer<GENERIC_BINDING_INFO>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<GENERIC_BINDING_INFO>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct MIDL_STUB_MESSAGE {
-    public var RpcMsg: CPointer<RPC_MESSAGE> = CPointer<RPC_MESSAGE>()
-    public var Buffer: CPointer<UInt8> = CPointer<UInt8>()
-    public var BufferStart: CPointer<UInt8> = CPointer<UInt8>()
-    public var BufferEnd: CPointer<UInt8> = CPointer<UInt8>()
-    public var BufferMark: CPointer<UInt8> = CPointer<UInt8>()
-    public var BufferLength: UInt32 = 0
-    public var MemorySize: UInt32 = 0
-    public var Memory: CPointer<UInt8> = CPointer<UInt8>()
-    public var IsClient: UInt8 = 0
-    public var Pad: UInt8 = 0
-    public var uFlags2: UInt16 = 0
-    public var ReuseBuffer: Int32 = 0
-    public var pAllocAllNodesContext: CPointer<NDR_ALLOC_ALL_NODES_CONTEXT> = CPointer<NDR_ALLOC_ALL_NODES_CONTEXT>()
-    public var pPointerQueueState: CPointer<NDR_POINTER_QUEUE_STATE> = CPointer<NDR_POINTER_QUEUE_STATE>()
-    public var IgnoreEmbeddedPointers: Int32 = 0
-    public var PointerBufferMark: CPointer<UInt8> = CPointer<UInt8>()
-    public var CorrDespIncrement: UInt8 = 0
-    public var uFlags: UInt8 = 0
-    public var UniquePtrCount: UInt16 = 0
-    public var MaxCount: UIntNative = 0
-    public var Offset: UInt32 = 0
-    public var ActualCount: UInt32 = 0
-    public var pfnAllocate: PFN_RPC_ALLOCATE = { _ => CPointer<Unit>() }
-    public var pfnFree: PFN_RPC_FREE = { _ => () }
-    public var StackTop: CPointer<UInt8> = CPointer<UInt8>()
-    public var pPresentedType: CPointer<UInt8> = CPointer<UInt8>()
-    public var pTransmitType: CPointer<UInt8> = CPointer<UInt8>()
-    public var SavedHandle: CPointer<Unit> = CPointer<Unit>()
-    public var StubDesc: CPointer<MIDL_STUB_DESC> = CPointer<MIDL_STUB_DESC>()
-    public var FullPtrXlatTables: CPointer<FULL_PTR_XLAT_TABLES> = CPointer<FULL_PTR_XLAT_TABLES>()
-    public var FullPtrRefId: UInt32 = 0
-    public var PointerLength: UInt32 = 0
-    public var _bitfield: Int32 = 0
-    public var dwDestContext: UInt32 = 0
-    public var pvDestContext: CPointer<Unit> = CPointer<Unit>()
-    public var SavedContextHandles: CPointer<CPointer<NDR_SCONTEXT>> = CPointer<CPointer<NDR_SCONTEXT>>()
-    public var ParamNumber: Int32 = 0
-    public var pRpcChannelBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var pArrayInfo: CPointer<ARRAY_INFO> = CPointer<ARRAY_INFO>()
-    public var SizePtrCountArray: CPointer<UInt32> = CPointer<UInt32>()
-    public var SizePtrOffsetArray: CPointer<UInt32> = CPointer<UInt32>()
-    public var SizePtrLengthArray: CPointer<UInt32> = CPointer<UInt32>()
-    public var pArgQueue: CPointer<Unit> = CPointer<Unit>()
-    public var dwStubPhase: UInt32 = 0
-    public var LowStackMark: CPointer<Unit> = CPointer<Unit>()
-    public var pAsyncMsg: PNDR_ASYNC_MESSAGE = CPointer<Unit>()
-    public var pCorrInfo: PNDR_CORRELATION_INFO = CPointer<Unit>()
-    public var pCorrMemory: CPointer<UInt8> = CPointer<UInt8>()
-    public var pMemoryList: CPointer<Unit> = CPointer<Unit>()
-    public var pCSInfo: IntNative = 0
-    public var ConformanceMark: CPointer<UInt8> = CPointer<UInt8>()
-    public var VarianceMark: CPointer<UInt8> = CPointer<UInt8>()
-    public var Unused: IntNative = 0
-    public var pContext: CPointer<_NDR_PROC_CONTEXT> = CPointer<_NDR_PROC_CONTEXT>()
-    public var ContextHandleHash: CPointer<Unit> = CPointer<Unit>()
-    public var pUserMarshalList: CPointer<Unit> = CPointer<Unit>()
-    public var pFullPtrFormat: CPointer<UInt8> = CPointer<UInt8>()
-    public var Reserved51_4: IntNative = 0
-    public var Reserved51_5: IntNative = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct MIDL_SYNTAX_INFO {
-    public var TransferSyntax: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
-    public var DispatchTable: CPointer<RPC_DISPATCH_TABLE> = CPointer<RPC_DISPATCH_TABLE>()
-    public var ProcString: CPointer<UInt8> = CPointer<UInt8>()
-    public var FmtStringOffset: CPointer<UInt16> = CPointer<UInt16>()
-    public var TypeString: CPointer<UInt8> = CPointer<UInt8>()
-    public var aUserMarshalQuadruple: CPointer<Unit> = CPointer<Unit>()
-    public var pMethodProperties: CPointer<MIDL_INTERFACE_METHOD_PROPERTIES> = CPointer<MIDL_INTERFACE_METHOD_PROPERTIES>()
-    public var pReserved2: UIntNative = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct MIDL_TYPE_PICKLING_INFO {
     public var Version: UInt32 = 0
     public var Flags: UInt32 = 0
     public var Reserved: VArray<UIntNative, $3> = VArray<UIntNative, $3>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct MIDL_WINRT_TYPE_SERIALIZATION_INFO {
-    public var Version: UInt32 = 0
-    public var TypeFormatString: CPointer<UInt8> = CPointer<UInt8>()
-    public var FormatStringSize: UInt16 = 0
-    public var TypeOffset: UInt16 = 0
-    public var StubDesc: CPointer<MIDL_STUB_DESC> = CPointer<MIDL_STUB_DESC>()
     public init() {}
 }
 
@@ -691,85 +396,6 @@ public struct NDR64_ARRAY_ELEMENT_INFO {
 @C
 public struct NDR64_ARRAY_FLAGS {
     public var _bitfield: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NDR64_BINDINGS {
-    public var _raw: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-
-    public func primitive(): NDR64_BIND_PRIMITIVE {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDR64_BIND_PRIMITIVE>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_primitive(val: NDR64_BIND_PRIMITIVE): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDR64_BIND_PRIMITIVE>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func generic(): NDR64_BIND_GENERIC {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDR64_BIND_GENERIC>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_generic(val: NDR64_BIND_GENERIC): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDR64_BIND_GENERIC>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func context(): NDR64_BIND_CONTEXT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDR64_BIND_CONTEXT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_context(val: NDR64_BIND_CONTEXT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDR64_BIND_CONTEXT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct NDR64_BIND_AND_NOTIFY_EXTENSION {
-    public var Binding: NDR64_BIND_CONTEXT = NDR64_BIND_CONTEXT()
-    public var NotifyIndex: UInt16 = 0
     public init() {}
 }
 
@@ -819,32 +445,11 @@ public struct NDR64_BOGUS_ARRAY_HEADER_FORMAT {
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
-public struct NDR64_BOGUS_STRUCTURE_HEADER_FORMAT {
-    public var FormatCode: UInt8 = 0
-    public var Alignment: UInt8 = 0
-    public var Flags: NDR64_STRUCTURE_FLAGS = NDR64_STRUCTURE_FLAGS()
-    public var Reserve: UInt8 = 0
-    public var MemorySize: UInt32 = 0
-    public var OriginalMemberLayout: CPointer<Unit> = CPointer<Unit>()
-    public var OriginalPointerLayout: CPointer<Unit> = CPointer<Unit>()
-    public var PointerLayout: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct NDR64_BUFFER_ALIGN_FORMAT {
     public var FormatCode: UInt8 = 0
     public var Alignment: UInt8 = 0
     public var Reserved: UInt16 = 0
     public var Reserved2: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct NDR64_CONFORMANT_STRING_FORMAT {
-    public var Header: NDR64_STRING_HEADER_FORMAT = NDR64_STRING_HEADER_FORMAT()
     public init() {}
 }
 
@@ -857,33 +462,6 @@ public struct NDR64_CONF_ARRAY_HEADER_FORMAT {
     public var Reserved: UInt8 = 0
     public var ElementSize: UInt32 = 0
     public var ConfDescriptor: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct NDR64_CONF_BOGUS_STRUCTURE_HEADER_FORMAT {
-    public var FormatCode: UInt8 = 0
-    public var Alignment: UInt8 = 0
-    public var Flags: NDR64_STRUCTURE_FLAGS = NDR64_STRUCTURE_FLAGS()
-    public var Dimensions: UInt8 = 0
-    public var MemorySize: UInt32 = 0
-    public var OriginalMemberLayout: CPointer<Unit> = CPointer<Unit>()
-    public var OriginalPointerLayout: CPointer<Unit> = CPointer<Unit>()
-    public var PointerLayout: CPointer<Unit> = CPointer<Unit>()
-    public var ConfArrayDescription: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct NDR64_CONF_STRUCTURE_HEADER_FORMAT {
-    public var FormatCode: UInt8 = 0
-    public var Alignment: UInt8 = 0
-    public var Flags: NDR64_STRUCTURE_FLAGS = NDR64_STRUCTURE_FLAGS()
-    public var Reserve: UInt8 = 0
-    public var MemorySize: UInt32 = 0
-    public var ArrayDescription: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
@@ -1011,15 +589,6 @@ public struct NDR64_EXPR_VAR {
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
-public struct NDR64_FIXED_REPEAT_FORMAT {
-    public var RepeatFormat: NDR64_REPEAT_FORMAT = NDR64_REPEAT_FORMAT()
-    public var Iterations: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct NDR64_FIX_ARRAY_HEADER_FORMAT {
     public var FormatCode: UInt8 = 0
     public var Alignment: UInt8 = 0
@@ -1053,14 +622,6 @@ public struct NDR64_MEMPAD_FORMAT {
     public var Reserve1: UInt8 = 0
     public var MemPad: UInt16 = 0
     public var Reserved2: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct NDR64_NON_CONFORMANT_STRING_FORMAT {
-    public var Header: NDR64_STRING_HEADER_FORMAT = NDR64_STRING_HEADER_FORMAT()
-    public var TotalSize: UInt32 = 0
     public init() {}
 }
 
@@ -1172,16 +733,6 @@ public struct NDR64_PROC_FORMAT {
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
-public struct NDR64_RANGED_STRING_FORMAT {
-    public var Header: NDR64_STRING_HEADER_FORMAT = NDR64_STRING_HEADER_FORMAT()
-    public var Reserved: UInt32 = 0
-    public var Min: UInt64 = 0
-    public var Max: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct NDR64_RANGE_FORMAT {
     public var FormatCode: UInt8 = 0
     public var RangeType: UInt8 = 0
@@ -1242,14 +793,6 @@ public struct NDR64_SIMPLE_REGION_FORMAT {
     public var Alignment: UInt8 = 0
     public var RegionSize: UInt16 = 0
     public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct NDR64_SIZED_CONFORMANT_STRING_FORMAT {
-    public var Header: NDR64_STRING_HEADER_FORMAT = NDR64_STRING_HEADER_FORMAT()
-    public var SizeDescription: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
 
@@ -1387,24 +930,6 @@ public type NDR_ALLOC_ALL_NODES_CONTEXT = CPointer<Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
-public struct NDR_CS_ROUTINES {
-    public var pSizeConvertRoutines: CPointer<NDR_CS_SIZE_CONVERT_ROUTINES> = CPointer<NDR_CS_SIZE_CONVERT_ROUTINES>()
-    public var pTagGettingRoutines: CPointer<CS_TAG_GETTING_ROUTINE> = CPointer<CS_TAG_GETTING_ROUTINE>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct NDR_CS_SIZE_CONVERT_ROUTINES {
-    public var pfnNetSize: CS_TYPE_NET_SIZE_ROUTINE = { _, _, _, _, _, _ => () }
-    public var pfnToNetCs: CS_TYPE_TO_NETCS_ROUTINE = { _, _, _, _, _, _, _ => () }
-    public var pfnLocalSize: CS_TYPE_LOCAL_SIZE_ROUTINE = { _, _, _, _, _, _ => () }
-    public var pfnFromNetCs: CS_TYPE_FROM_NETCS_ROUTINE = { _, _, _, _, _, _, _, _ => () }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct NDR_EXPR_DESC {
     public var pOffset: CPointer<UInt16> = CPointer<UInt16>()
     public var pFormatExpr: CPointer<UInt8> = CPointer<UInt8>()
@@ -1431,44 +956,7 @@ public struct NDR_SCONTEXT {
     public init() {}
 }
 
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct NDR_USER_MARSHAL_INFO {
-    public var InformationLevel: UInt32 = 0
-    public var Anonymous: NDR_USER_MARSHAL_INFO__Anonymous_e__Union = NDR_USER_MARSHAL_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NDR_USER_MARSHAL_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
-
-    public func level1(): NDR_USER_MARSHAL_INFO_LEVEL1 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDR_USER_MARSHAL_INFO_LEVEL1>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_level1(val: NDR_USER_MARSHAL_INFO_LEVEL1): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NDR_USER_MARSHAL_INFO_LEVEL1>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct NDR_USER_MARSHAL_INFO_LEVEL1 {
     public var Buffer: CPointer<Unit> = CPointer<Unit>()
@@ -1479,9 +967,6 @@ public struct NDR_USER_MARSHAL_INFO_LEVEL1 {
     public var Reserved: VArray<UIntNative, $5> = VArray<UIntNative, $5>(repeat: 0)
     public init() {}
 }
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type PFN_RPCNOTIFICATION_ROUTINE = CFunc<(CPointer<RPC_ASYNC_STATE>, CPointer<Unit>, RPC_ASYNC_EVENT) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
 public type PFN_RPC_ALLOCATE = CFunc<(UIntNative) -> CPointer<Unit>>
@@ -1496,7 +981,6 @@ public type PNDR_ASYNC_MESSAGE = CPointer<Unit>
 public type PNDR_CORRELATION_INFO = CPointer<Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct PROXY_PHASE {
     public var value: Int32 = 0
 
@@ -1533,33 +1017,12 @@ public let PROXY_PHASE_PROXY_UNMARSHAL: PROXY_PHASE = PROXY_PHASE(4)
 public type PRPC_RUNDOWN = CFunc<(CPointer<Unit>) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RDR_CALLOUT_STATE {
-    public var LastError: RPC_STATUS = RPC_STATUS()
-    public var LastEEInfo: CPointer<Unit> = CPointer<Unit>()
-    public var LastCalledStage: RPC_HTTP_REDIRECTOR_STAGE = RPC_HTTP_REDIRECTOR_STAGE()
-    public var ServerName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ServerPort: CPointer<UInt16> = CPointer<UInt16>()
-    public var RemoteUser: CPointer<UInt16> = CPointer<UInt16>()
-    public var AuthType: CPointer<UInt16> = CPointer<UInt16>()
-    public var ResourceTypePresent: UInt8 = 0
-    public var SessionIdPresent: UInt8 = 0
-    public var InterfacePresent: UInt8 = 0
-    public var ResourceType: GUID = GUID()
-    public var SessionId: GUID = GUID()
-    public var Interface: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
-    public var CertContext: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
 public type RPCLT_PDU_FILTER_FUNC = CFunc<(CPointer<Unit>, UInt32, Int32) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
 public type RPC_ADDRESS_CHANGE_FN = CFunc<(CPointer<Unit>) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_ADDRESS_CHANGE_TYPE {
     public var value: Int32 = 0
 
@@ -1587,7 +1050,6 @@ public let RPC_ADDRESS_CHANGE_TYPE_PROTOCOL_LOADED: RPC_ADDRESS_CHANGE_TYPE = RP
 public let RPC_ADDRESS_CHANGE_TYPE_PROTOCOL_ADDRESS_CHANGE: RPC_ADDRESS_CHANGE_TYPE = RPC_ADDRESS_CHANGE_TYPE(3)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_ASYNC_EVENT {
     public var value: Int32 = 0
 
@@ -1621,145 +1083,6 @@ public let RPC_ASYNC_EVENT_RpcClientDisconnect: RPC_ASYNC_EVENT = RPC_ASYNC_EVEN
 public let RPC_ASYNC_EVENT_RpcClientCancel: RPC_ASYNC_EVENT = RPC_ASYNC_EVENT(4)
 
 @When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RPC_ASYNC_NOTIFICATION_INFO {
-    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-
-    public func apc(): RPC_ASYNC_NOTIFICATION_INFO__APC_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__APC_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_apc(val: RPC_ASYNC_NOTIFICATION_INFO__APC_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__APC_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ioc(): RPC_ASYNC_NOTIFICATION_INFO__IOC_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__IOC_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ioc(val: RPC_ASYNC_NOTIFICATION_INFO__IOC_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__IOC_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func intPtr(): RPC_ASYNC_NOTIFICATION_INFO__IntPtr_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__IntPtr_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_intPtr(val: RPC_ASYNC_NOTIFICATION_INFO__IntPtr_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__IntPtr_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func hEvent(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_hEvent(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_ASYNC_NOTIFICATION_INFO__APC_e__Struct {
-    public var NotificationRoutine: PFN_RPCNOTIFICATION_ROUTINE = { _, _, _ => () }
-    public var hThread: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_ASYNC_NOTIFICATION_INFO__IOC_e__Struct {
-    public var hIOPort: CPointer<Unit> = CPointer<Unit>()
-    public var dwNumberOfBytesTransferred: UInt32 = 0
-    public var dwCompletionKey: UIntNative = 0
-    public var lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED> = CPointer<Win32_System_IO.OVERLAPPED>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_ASYNC_NOTIFICATION_INFO__IntPtr_e__Struct {
-    public var hWnd: CPointer<Unit> = CPointer<Unit>()
-    public var Msg: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_ASYNC_STATE {
-    public var Size: UInt32 = 0
-    public var Signature: UInt32 = 0
-    public var Lock: Int32 = 0
-    public var Flags: UInt32 = 0
-    public var StubInfo: CPointer<Unit> = CPointer<Unit>()
-    public var UserInfo: CPointer<Unit> = CPointer<Unit>()
-    public var RuntimeInfo: CPointer<Unit> = CPointer<Unit>()
-    public var Event: RPC_ASYNC_EVENT = RPC_ASYNC_EVENT()
-    public var NotificationType: RPC_NOTIFICATION_TYPES = RPC_NOTIFICATION_TYPES()
-    public var u: RPC_ASYNC_NOTIFICATION_INFO = RPC_ASYNC_NOTIFICATION_INFO()
-    public var Reserved: VArray<IntNative, $4> = VArray<IntNative, $4>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type RPC_AUTH_KEY_RETRIEVAL_FN = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<CPointer<Unit>>, CPointer<RPC_STATUS>) -> Unit>
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_BINDING_HANDLE_OPTIONS_FLAGS {
     public var value: UInt32 = 0
 
@@ -1801,33 +1124,9 @@ public let RPC_BINDING_HANDLE_OPTIONS_FLAGS_RPC_BHO_DONTLINGER: RPC_BINDING_HAND
 @C
 public struct RPC_BINDING_HANDLE_OPTIONS_V1 {
     public var Version: UInt32 = 0
-    public var Flags: RPC_BINDING_HANDLE_OPTIONS_FLAGS = RPC_BINDING_HANDLE_OPTIONS_FLAGS()
+    public var Flags: UInt32 = 0
     public var ComTimeout: UInt32 = 0
     public var CallTimeout: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_BINDING_HANDLE_SECURITY_V1_A {
-    public var Version: UInt32 = 0
-    public var ServerPrincName: CPointer<UInt8> = CPointer<UInt8>()
-    public var AuthnLevel: UInt32 = 0
-    public var AuthnSvc: UInt32 = 0
-    public var AuthIdentity: CPointer<SEC_WINNT_AUTH_IDENTITY_A> = CPointer<SEC_WINNT_AUTH_IDENTITY_A>()
-    public var SecurityQos: CPointer<RPC_SECURITY_QOS> = CPointer<RPC_SECURITY_QOS>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_BINDING_HANDLE_SECURITY_V1_W {
-    public var Version: UInt32 = 0
-    public var ServerPrincName: CPointer<UInt16> = CPointer<UInt16>()
-    public var AuthnLevel: UInt32 = 0
-    public var AuthnSvc: UInt32 = 0
-    public var AuthIdentity: CPointer<SEC_WINNT_AUTH_IDENTITY_W> = CPointer<SEC_WINNT_AUTH_IDENTITY_W>()
-    public var SecurityQos: CPointer<RPC_SECURITY_QOS> = CPointer<RPC_SECURITY_QOS>()
     public init() {}
 }
 
@@ -1845,29 +1144,31 @@ public struct RPC_BINDING_HANDLE_TEMPLATE_V1_A {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct RPC_BINDING_HANDLE_TEMPLATE_V1_A__u1_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func reserved(): CPointer<UInt8> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt8>>(p)
-            return ptr.read()
+    public mut prop reserved: CPointer<UInt8> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt8>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_reserved(val: CPointer<UInt8>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt8>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt8>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1887,29 +1188,31 @@ public struct RPC_BINDING_HANDLE_TEMPLATE_V1_W {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct RPC_BINDING_HANDLE_TEMPLATE_V1_W__u1_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func reserved(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
+    public mut prop reserved: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_reserved(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1922,9 +1225,6 @@ public struct RPC_BINDING_VECTOR {
     public var BindingH: VArray<CPointer<Unit>, $1> = VArray<CPointer<Unit>, $1>(repeat: CPointer<Unit>())
     public init() {}
 }
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type RPC_BLOCKING_FN = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> RPC_STATUS>
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
@@ -1957,116 +1257,6 @@ public struct RPC_CALL_ATTRIBUTES_V1_W {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_CALL_ATTRIBUTES_V2_A {
-    public var Version: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var ServerPrincipalNameBufferLength: UInt32 = 0
-    public var ServerPrincipalName: CPointer<UInt8> = CPointer<UInt8>()
-    public var ClientPrincipalNameBufferLength: UInt32 = 0
-    public var ClientPrincipalName: CPointer<UInt8> = CPointer<UInt8>()
-    public var AuthenticationLevel: UInt32 = 0
-    public var AuthenticationService: UInt32 = 0
-    public var NullSession: Int32 = 0
-    public var KernelModeCaller: Int32 = 0
-    public var ProtocolSequence: UInt32 = 0
-    public var IsClientLocal: UInt32 = 0
-    public var ClientPID: CPointer<Unit> = CPointer<Unit>()
-    public var CallStatus: UInt32 = 0
-    public var CallType: RpcCallType = RpcCallType()
-    public var CallLocalAddress: CPointer<RPC_CALL_LOCAL_ADDRESS_V1> = CPointer<RPC_CALL_LOCAL_ADDRESS_V1>()
-    public var OpNum: UInt16 = 0
-    public var InterfaceUuid: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_CALL_ATTRIBUTES_V2_W {
-    public var Version: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var ServerPrincipalNameBufferLength: UInt32 = 0
-    public var ServerPrincipalName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientPrincipalNameBufferLength: UInt32 = 0
-    public var ClientPrincipalName: CPointer<UInt16> = CPointer<UInt16>()
-    public var AuthenticationLevel: UInt32 = 0
-    public var AuthenticationService: UInt32 = 0
-    public var NullSession: Int32 = 0
-    public var KernelModeCaller: Int32 = 0
-    public var ProtocolSequence: UInt32 = 0
-    public var IsClientLocal: RpcCallClientLocality = RpcCallClientLocality()
-    public var ClientPID: CPointer<Unit> = CPointer<Unit>()
-    public var CallStatus: UInt32 = 0
-    public var CallType: RpcCallType = RpcCallType()
-    public var CallLocalAddress: CPointer<RPC_CALL_LOCAL_ADDRESS_V1> = CPointer<RPC_CALL_LOCAL_ADDRESS_V1>()
-    public var OpNum: UInt16 = 0
-    public var InterfaceUuid: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_CALL_ATTRIBUTES_V3_A {
-    public var Version: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var ServerPrincipalNameBufferLength: UInt32 = 0
-    public var ServerPrincipalName: CPointer<UInt8> = CPointer<UInt8>()
-    public var ClientPrincipalNameBufferLength: UInt32 = 0
-    public var ClientPrincipalName: CPointer<UInt8> = CPointer<UInt8>()
-    public var AuthenticationLevel: UInt32 = 0
-    public var AuthenticationService: UInt32 = 0
-    public var NullSession: Int32 = 0
-    public var KernelModeCaller: Int32 = 0
-    public var ProtocolSequence: UInt32 = 0
-    public var IsClientLocal: UInt32 = 0
-    public var ClientPID: CPointer<Unit> = CPointer<Unit>()
-    public var CallStatus: UInt32 = 0
-    public var CallType: RpcCallType = RpcCallType()
-    public var CallLocalAddress: CPointer<RPC_CALL_LOCAL_ADDRESS_V1> = CPointer<RPC_CALL_LOCAL_ADDRESS_V1>()
-    public var OpNum: UInt16 = 0
-    public var InterfaceUuid: GUID = GUID()
-    public var ClientIdentifierBufferLength: UInt32 = 0
-    public var ClientIdentifier: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_CALL_ATTRIBUTES_V3_W {
-    public var Version: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var ServerPrincipalNameBufferLength: UInt32 = 0
-    public var ServerPrincipalName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ClientPrincipalNameBufferLength: UInt32 = 0
-    public var ClientPrincipalName: CPointer<UInt16> = CPointer<UInt16>()
-    public var AuthenticationLevel: UInt32 = 0
-    public var AuthenticationService: UInt32 = 0
-    public var NullSession: Int32 = 0
-    public var KernelModeCaller: Int32 = 0
-    public var ProtocolSequence: UInt32 = 0
-    public var IsClientLocal: RpcCallClientLocality = RpcCallClientLocality()
-    public var ClientPID: CPointer<Unit> = CPointer<Unit>()
-    public var CallStatus: UInt32 = 0
-    public var CallType: RpcCallType = RpcCallType()
-    public var CallLocalAddress: CPointer<RPC_CALL_LOCAL_ADDRESS_V1> = CPointer<RPC_CALL_LOCAL_ADDRESS_V1>()
-    public var OpNum: UInt16 = 0
-    public var InterfaceUuid: GUID = GUID()
-    public var ClientIdentifierBufferLength: UInt32 = 0
-    public var ClientIdentifier: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_CALL_LOCAL_ADDRESS_V1 {
-    public var Version: UInt32 = 0
-    public var Buffer: CPointer<Unit> = CPointer<Unit>()
-    public var BufferSize: UInt32 = 0
-    public var AddressFormat: RpcLocalAddressFormat = RpcLocalAddressFormat()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
 public type RPC_CLIENT_ALLOC = CFunc<(UIntNative) -> CPointer<Unit>>
 
 @When[Windows_Win32_System_Rpc == "on"]
@@ -2083,22 +1273,6 @@ public struct RPC_CLIENT_INFORMATION1 {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_CLIENT_INTERFACE {
-    public var Length: UInt32 = 0
-    public var InterfaceId: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
-    public var TransferSyntax: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
-    public var DispatchTable: CPointer<RPC_DISPATCH_TABLE> = CPointer<RPC_DISPATCH_TABLE>()
-    public var RpcProtseqEndpointCount: UInt32 = 0
-    public var RpcProtseqEndpoint: CPointer<RPC_PROTSEQ_ENDPOINT> = CPointer<RPC_PROTSEQ_ENDPOINT>()
-    public var Reserved: UIntNative = 0
-    public var InterpreterInfo: CPointer<Unit> = CPointer<Unit>()
-    public var Flags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_C_AUTHN_INFO_TYPE {
     public var value: UInt32 = 0
 
@@ -2123,7 +1297,6 @@ public let RPC_C_AUTHN_INFO_TYPE_RPC_C_AUTHN_INFO_NONE: RPC_C_AUTHN_INFO_TYPE = 
 public let RPC_C_AUTHN_INFO_TYPE_RPC_C_AUTHN_INFO_TYPE_HTTP: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE(1)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_C_HTTP_AUTHN_TARGET {
     public var value: UInt32 = 0
 
@@ -2162,7 +1335,6 @@ public let RPC_C_HTTP_AUTHN_TARGET_RPC_C_HTTP_AUTHN_TARGET_SERVER: RPC_C_HTTP_AU
 public let RPC_C_HTTP_AUTHN_TARGET_RPC_C_HTTP_AUTHN_TARGET_PROXY: RPC_C_HTTP_AUTHN_TARGET = RPC_C_HTTP_AUTHN_TARGET(2)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_C_HTTP_FLAGS {
     public var value: UInt32 = 0
 
@@ -2215,7 +1387,6 @@ public struct RPC_C_OPT_COOKIE_AUTH_DESCRIPTOR {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_C_QOS_CAPABILITIES {
     public var value: UInt32 = 0
 
@@ -2269,7 +1440,6 @@ public let RPC_C_QOS_CAPABILITIES_RPC_C_QOS_CAPABILITIES_LOCAL_MA_HINT: RPC_C_QO
 public let RPC_C_QOS_CAPABILITIES_RPC_C_QOS_CAPABILITIES_SCHANNEL_FULL_AUTH_IDENTITY: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES(32)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_C_QOS_IDENTITY {
     public var value: UInt32 = 0
 
@@ -2294,142 +1464,137 @@ public let RPC_C_QOS_IDENTITY_RPC_C_QOS_IDENTITY_STATIC: RPC_C_QOS_IDENTITY = RP
 public let RPC_C_QOS_IDENTITY_RPC_C_QOS_IDENTITY_DYNAMIC: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY(1)
 
 @When[Windows_Win32_System_Rpc == "on"]
-public type RPC_DISPATCH_FUNCTION = CFunc<(CPointer<RPC_MESSAGE>) -> Unit>
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_DISPATCH_TABLE {
-    public var DispatchTableCount: UInt32 = 0
-    public var DispatchTable: RPC_DISPATCH_FUNCTION = { _ => () }
-    public var Reserved: IntNative = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
 @C
 public struct RPC_EE_INFO_PARAM {
-    public var ParameterType: ExtendedErrorParamTypes = ExtendedErrorParamTypes()
+    public var ParameterType: Int32 = 0
     public var u: RPC_EE_INFO_PARAM__u_e__Union = RPC_EE_INFO_PARAM__u_e__Union()
     public init() {}
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct RPC_EE_INFO_PARAM__u_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func ansiString(): CPointer<UInt8> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt8>>(p)
-            return ptr.read()
+    public mut prop ansiString: CPointer<UInt8> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt8>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt8>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ansiString(val: CPointer<UInt8>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt8>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop unicodeString: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func unicodeString(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
+    public mut prop lVal: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_unicodeString(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop sVal: Int16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func lVal(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
+    public mut prop pVal: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_lVal(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop bVal: BinaryParam {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BinaryParam>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func sVal(): Int16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt16(base, 0)
-        }
-    }
-
-    public mut func set_sVal(val: Int16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pVal(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_pVal(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func bVal(): BinaryParam {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BinaryParam>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_bVal(val: BinaryParam): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BinaryParam>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BinaryParam>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2483,63 +1648,62 @@ public struct RPC_EXTENDED_ERROR_INFO {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct RPC_EXTENDED_ERROR_INFO__u_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public func systemTime(): Win32_Foundation.SYSTEMTIME {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.SYSTEMTIME>(p)
-            return ptr.read()
+    public mut prop systemTime: Win32_Foundation.SYSTEMTIME {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32_Foundation.SYSTEMTIME>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32_Foundation.SYSTEMTIME>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_systemTime(val: Win32_Foundation.SYSTEMTIME): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.SYSTEMTIME>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop fileTime: Win32_Foundation.FILETIME {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32_Foundation.FILETIME>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func fileTime(): Win32_Foundation.FILETIME {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.FILETIME>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fileTime(val: Win32_Foundation.FILETIME): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.FILETIME>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32_Foundation.FILETIME>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-public type RPC_FORWARD_FUNCTION = CFunc<(CPointer<GUID>, CPointer<RPC_VERSION>, CPointer<GUID>, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> RPC_STATUS>
-
-@When[Windows_Win32_System_Rpc == "on"]
 public type RPC_HTTP_PROXY_FREE_STRING = CFunc<(CPointer<UInt16>) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_HTTP_REDIRECTOR_STAGE {
     public var value: Int32 = 0
 
@@ -2574,52 +1738,10 @@ public let RPC_HTTP_REDIRECTOR_STAGE_RPCHTTP_RS_INTERFACE: RPC_HTTP_REDIRECTOR_S
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
-public struct RPC_HTTP_TRANSPORT_CREDENTIALS_A {
-    public var TransportCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_A> = CPointer<SEC_WINNT_AUTH_IDENTITY_A>()
-    public var Flags: RPC_C_HTTP_FLAGS = RPC_C_HTTP_FLAGS()
-    public var AuthenticationTarget: RPC_C_HTTP_AUTHN_TARGET = RPC_C_HTTP_AUTHN_TARGET()
-    public var NumberOfAuthnSchemes: UInt32 = 0
-    public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
-    public var ServerCertificateSubject: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A {
-    public var TransportCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_A> = CPointer<SEC_WINNT_AUTH_IDENTITY_A>()
-    public var Flags: RPC_C_HTTP_FLAGS = RPC_C_HTTP_FLAGS()
-    public var AuthenticationTarget: RPC_C_HTTP_AUTHN_TARGET = RPC_C_HTTP_AUTHN_TARGET()
-    public var NumberOfAuthnSchemes: UInt32 = 0
-    public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
-    public var ServerCertificateSubject: CPointer<UInt8> = CPointer<UInt8>()
-    public var ProxyCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_A> = CPointer<SEC_WINNT_AUTH_IDENTITY_A>()
-    public var NumberOfProxyAuthnSchemes: UInt32 = 0
-    public var ProxyAuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W {
-    public var TransportCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_W> = CPointer<SEC_WINNT_AUTH_IDENTITY_W>()
-    public var Flags: RPC_C_HTTP_FLAGS = RPC_C_HTTP_FLAGS()
-    public var AuthenticationTarget: RPC_C_HTTP_AUTHN_TARGET = RPC_C_HTTP_AUTHN_TARGET()
-    public var NumberOfAuthnSchemes: UInt32 = 0
-    public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
-    public var ServerCertificateSubject: CPointer<UInt16> = CPointer<UInt16>()
-    public var ProxyCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_W> = CPointer<SEC_WINNT_AUTH_IDENTITY_W>()
-    public var NumberOfProxyAuthnSchemes: UInt32 = 0
-    public var ProxyAuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A {
     public var TransportCredentials: CPointer<Unit> = CPointer<Unit>()
-    public var Flags: RPC_C_HTTP_FLAGS = RPC_C_HTTP_FLAGS()
-    public var AuthenticationTarget: RPC_C_HTTP_AUTHN_TARGET = RPC_C_HTTP_AUTHN_TARGET()
+    public var Flags: UInt32 = 0
+    public var AuthenticationTarget: UInt32 = 0
     public var NumberOfAuthnSchemes: UInt32 = 0
     public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
     public var ServerCertificateSubject: CPointer<UInt8> = CPointer<UInt8>()
@@ -2633,8 +1755,8 @@ public struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A {
 @C
 public struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W {
     public var TransportCredentials: CPointer<Unit> = CPointer<Unit>()
-    public var Flags: RPC_C_HTTP_FLAGS = RPC_C_HTTP_FLAGS()
-    public var AuthenticationTarget: RPC_C_HTTP_AUTHN_TARGET = RPC_C_HTTP_AUTHN_TARGET()
+    public var Flags: UInt32 = 0
+    public var AuthenticationTarget: UInt32 = 0
     public var NumberOfAuthnSchemes: UInt32 = 0
     public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
     public var ServerCertificateSubject: CPointer<UInt16> = CPointer<UInt16>()
@@ -2643,21 +1765,6 @@ public struct RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W {
     public var ProxyAuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
     public init() {}
 }
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_HTTP_TRANSPORT_CREDENTIALS_W {
-    public var TransportCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_W> = CPointer<SEC_WINNT_AUTH_IDENTITY_W>()
-    public var Flags: RPC_C_HTTP_FLAGS = RPC_C_HTTP_FLAGS()
-    public var AuthenticationTarget: RPC_C_HTTP_AUTHN_TARGET = RPC_C_HTTP_AUTHN_TARGET()
-    public var NumberOfAuthnSchemes: UInt32 = 0
-    public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
-    public var ServerCertificateSubject: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type RPC_IF_CALLBACK_FN = CFunc<(CPointer<Unit>, CPointer<Unit>) -> RPC_STATUS>
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
@@ -2689,64 +1796,6 @@ public struct RPC_IMPORT_CONTEXT_P {
 public type RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_INTERFACE_TEMPLATEA {
-    public var Version: UInt32 = 0
-    public var IfSpec: CPointer<Unit> = CPointer<Unit>()
-    public var MgrTypeUuid: CPointer<GUID> = CPointer<GUID>()
-    public var MgrEpv: CPointer<Unit> = CPointer<Unit>()
-    public var Flags: UInt32 = 0
-    public var MaxCalls: UInt32 = 0
-    public var MaxRpcSize: UInt32 = 0
-    public var IfCallback: RPC_IF_CALLBACK_FN = { _, _ => RPC_STATUS() }
-    public var UuidVector: CPointer<UUID_VECTOR> = CPointer<UUID_VECTOR>()
-    public var Annotation: CPointer<UInt8> = CPointer<UInt8>()
-    public var SecurityDescriptor: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_INTERFACE_TEMPLATEW {
-    public var Version: UInt32 = 0
-    public var IfSpec: CPointer<Unit> = CPointer<Unit>()
-    public var MgrTypeUuid: CPointer<GUID> = CPointer<GUID>()
-    public var MgrEpv: CPointer<Unit> = CPointer<Unit>()
-    public var Flags: UInt32 = 0
-    public var MaxCalls: UInt32 = 0
-    public var MaxRpcSize: UInt32 = 0
-    public var IfCallback: RPC_IF_CALLBACK_FN = { _, _ => RPC_STATUS() }
-    public var UuidVector: CPointer<UUID_VECTOR> = CPointer<UUID_VECTOR>()
-    public var Annotation: CPointer<UInt16> = CPointer<UInt16>()
-    public var SecurityDescriptor: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_MESSAGE {
-    public var Handle: CPointer<Unit> = CPointer<Unit>()
-    public var DataRepresentation: UInt32 = 0
-    public var Buffer: CPointer<Unit> = CPointer<Unit>()
-    public var BufferLength: UInt32 = 0
-    public var ProcNum: UInt32 = 0
-    public var TransferSyntax: CPointer<RPC_SYNTAX_IDENTIFIER> = CPointer<RPC_SYNTAX_IDENTIFIER>()
-    public var RpcInterfaceInformation: CPointer<Unit> = CPointer<Unit>()
-    public var ReservedForRuntime: CPointer<Unit> = CPointer<Unit>()
-    public var ManagerEpv: CPointer<Unit> = CPointer<Unit>()
-    public var ImportContext: CPointer<Unit> = CPointer<Unit>()
-    public var RpcFlags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type RPC_MGMT_AUTHORIZATION_FN = CFunc<(CPointer<Unit>, UInt32, CPointer<RPC_STATUS>) -> Int32>
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type RPC_NEW_HTTP_PROXY_CHANNEL = CFunc<(RPC_HTTP_REDIRECTOR_STAGE, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> RPC_STATUS>
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_NOTIFICATIONS {
     public var value: Int32 = 0
 
@@ -2774,7 +1823,6 @@ public let RPC_NOTIFICATIONS_RpcNotificationClientDisconnect: RPC_NOTIFICATIONS 
 public let RPC_NOTIFICATIONS_RpcNotificationCallCancel: RPC_NOTIFICATIONS = RPC_NOTIFICATIONS(2)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_NOTIFICATION_TYPES {
     public var value: Int32 = 0
 
@@ -2809,9 +1857,6 @@ public let RPC_NOTIFICATION_TYPES_RpcNotificationTypeHwnd: RPC_NOTIFICATION_TYPE
 
 @When[Windows_Win32_System_Rpc == "on"]
 public let RPC_NOTIFICATION_TYPES_RpcNotificationTypeCallback: RPC_NOTIFICATION_TYPES = RPC_NOTIFICATION_TYPES(5)
-
-@When[Windows_Win32_System_Rpc == "on"]
-public type RPC_OBJECT_INQ_FN = CFunc<(CPointer<GUID>, CPointer<GUID>, CPointer<RPC_STATUS>) -> Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
@@ -2849,353 +1894,13 @@ public struct RPC_PROTSEQ_VECTORW {
 @When[Windows_Win32_System_Rpc == "on"]
 public type RPC_SECURITY_CALLBACK_FN = CFunc<(CPointer<Unit>) -> Unit>
 
-@When[Windows_Win32_System_Rpc == "on"]
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
 @C
 public struct RPC_SECURITY_QOS {
     public var Version: UInt32 = 0
-    public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
-    public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32_impl.RPC_C_IMP_LEVEL = Win32_impl.RPC_C_IMP_LEVEL()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_SECURITY_QOS_V2_A {
-    public var Version: UInt32 = 0
-    public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
-    public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32_impl.RPC_C_IMP_LEVEL = Win32_impl.RPC_C_IMP_LEVEL()
-    public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
-    public var u: RPC_SECURITY_QOS_V2_A__u_e__Union = RPC_SECURITY_QOS_V2_A__u_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RPC_SECURITY_QOS_V2_A__u_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func httpCredentials(): CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpCredentials(val: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_SECURITY_QOS_V2_W {
-    public var Version: UInt32 = 0
-    public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
-    public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32_impl.RPC_C_IMP_LEVEL = Win32_impl.RPC_C_IMP_LEVEL()
-    public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
-    public var u: RPC_SECURITY_QOS_V2_W__u_e__Union = RPC_SECURITY_QOS_V2_W__u_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RPC_SECURITY_QOS_V2_W__u_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func httpCredentials(): CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpCredentials(val: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_SECURITY_QOS_V3_A {
-    public var Version: UInt32 = 0
-    public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
-    public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32_impl.RPC_C_IMP_LEVEL = Win32_impl.RPC_C_IMP_LEVEL()
-    public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
-    public var u: RPC_SECURITY_QOS_V3_A__u_e__Union = RPC_SECURITY_QOS_V3_A__u_e__Union()
-    public var Sid: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RPC_SECURITY_QOS_V3_A__u_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func httpCredentials(): CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpCredentials(val: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_SECURITY_QOS_V3_W {
-    public var Version: UInt32 = 0
-    public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
-    public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32_impl.RPC_C_IMP_LEVEL = Win32_impl.RPC_C_IMP_LEVEL()
-    public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
-    public var u: RPC_SECURITY_QOS_V3_W__u_e__Union = RPC_SECURITY_QOS_V3_W__u_e__Union()
-    public var Sid: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RPC_SECURITY_QOS_V3_W__u_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func httpCredentials(): CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpCredentials(val: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_SECURITY_QOS_V4_A {
-    public var Version: UInt32 = 0
-    public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
-    public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32_impl.RPC_C_IMP_LEVEL = Win32_impl.RPC_C_IMP_LEVEL()
-    public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
-    public var u: RPC_SECURITY_QOS_V4_A__u_e__Union = RPC_SECURITY_QOS_V4_A__u_e__Union()
-    public var Sid: CPointer<Unit> = CPointer<Unit>()
-    public var EffectiveOnly: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RPC_SECURITY_QOS_V4_A__u_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func httpCredentials(): CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpCredentials(val: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_SECURITY_QOS_V4_W {
-    public var Version: UInt32 = 0
-    public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
-    public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32_impl.RPC_C_IMP_LEVEL = Win32_impl.RPC_C_IMP_LEVEL()
-    public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
-    public var u: RPC_SECURITY_QOS_V4_W__u_e__Union = RPC_SECURITY_QOS_V4_W__u_e__Union()
-    public var Sid: CPointer<Unit> = CPointer<Unit>()
-    public var EffectiveOnly: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RPC_SECURITY_QOS_V4_W__u_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func httpCredentials(): CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpCredentials(val: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_SECURITY_QOS_V5_A {
-    public var Version: UInt32 = 0
-    public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
-    public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32_impl.RPC_C_IMP_LEVEL = Win32_impl.RPC_C_IMP_LEVEL()
-    public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
-    public var u: RPC_SECURITY_QOS_V5_A__u_e__Union = RPC_SECURITY_QOS_V5_A__u_e__Union()
-    public var Sid: CPointer<Unit> = CPointer<Unit>()
-    public var EffectiveOnly: UInt32 = 0
-    public var ServerSecurityDescriptor: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RPC_SECURITY_QOS_V5_A__u_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func httpCredentials(): CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpCredentials(val: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_SECURITY_QOS_V5_W {
-    public var Version: UInt32 = 0
-    public var Capabilities: RPC_C_QOS_CAPABILITIES = RPC_C_QOS_CAPABILITIES()
-    public var IdentityTracking: RPC_C_QOS_IDENTITY = RPC_C_QOS_IDENTITY()
-    public var ImpersonationType: Win32_impl.RPC_C_IMP_LEVEL = Win32_impl.RPC_C_IMP_LEVEL()
-    public var AdditionalSecurityInfoType: RPC_C_AUTHN_INFO_TYPE = RPC_C_AUTHN_INFO_TYPE()
-    public var u: RPC_SECURITY_QOS_V5_W__u_e__Union = RPC_SECURITY_QOS_V5_W__u_e__Union()
-    public var Sid: CPointer<Unit> = CPointer<Unit>()
-    public var EffectiveOnly: UInt32 = 0
-    public var ServerSecurityDescriptor: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RPC_SECURITY_QOS_V5_W__u_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func httpCredentials(): CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_httpCredentials(val: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
+    public var Capabilities: UInt32 = 0
+    public var IdentityTracking: UInt32 = 0
+    public var ImpersonationType: UInt32 = 0
     public init() {}
 }
 
@@ -3205,21 +1910,6 @@ public struct RPC_SEC_CONTEXT_KEY_INFO {
     public var EncryptAlgorithm: UInt32 = 0
     public var KeySize: UInt32 = 0
     public var SignatureAlgorithm: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct RPC_SERVER_INTERFACE {
-    public var Length: UInt32 = 0
-    public var InterfaceId: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
-    public var TransferSyntax: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
-    public var DispatchTable: CPointer<RPC_DISPATCH_TABLE> = CPointer<RPC_DISPATCH_TABLE>()
-    public var RpcProtseqEndpointCount: UInt32 = 0
-    public var RpcProtseqEndpoint: CPointer<RPC_PROTSEQ_ENDPOINT> = CPointer<RPC_PROTSEQ_ENDPOINT>()
-    public var DefaultManagerEpv: CPointer<Unit> = CPointer<Unit>()
-    public var InterpreterInfo: CPointer<Unit> = CPointer<Unit>()
-    public var Flags: UInt32 = 0
     public init() {}
 }
 
@@ -3235,7 +1925,6 @@ public struct RPC_STATS_VECTOR {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_STATUS {
     public var value: Int32 = 0
 
@@ -3597,14 +2286,6 @@ public let RPC_STATUS_RPC_S_GRP_ELT_NOT_REMOVED: RPC_STATUS = RPC_STATUS(1929)
 
 @When[Windows_Win32_System_Rpc == "on"]
 @C
-public struct RPC_SYNTAX_IDENTIFIER {
-    public var SyntaxGUID: GUID = GUID()
-    public var SyntaxVersion: RPC_VERSION = RPC_VERSION()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RPC_TRANSFER_SYNTAX {
     public var Uuid: GUID = GUID()
     public var VersMajor: UInt16 = 0
@@ -3621,7 +2302,6 @@ public struct RPC_VERSION {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RpcCallClientLocality {
     public var value: Int32 = 0
 
@@ -3652,7 +2332,6 @@ public let RpcCallClientLocality_rcclRemote: RpcCallClientLocality = RpcCallClie
 public let RpcCallClientLocality_rcclClientUnknownLocality: RpcCallClientLocality = RpcCallClientLocality(3)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RpcCallType {
     public var value: Int32 = 0
 
@@ -3683,7 +2362,6 @@ public let RpcCallType_rctTraining: RpcCallType = RpcCallType(2)
 public let RpcCallType_rctGuaranteed: RpcCallType = RpcCallType(3)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RpcLocalAddressFormat {
     public var value: Int32 = 0
 
@@ -3711,7 +2389,6 @@ public let RpcLocalAddressFormat_rlafIPv4: RpcLocalAddressFormat = RpcLocalAddre
 public let RpcLocalAddressFormat_rlafIPv6: RpcLocalAddressFormat = RpcLocalAddressFormat(2)
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct RpcPerfCounters {
     public var value: Int32 = 0
 
@@ -3774,7 +2451,6 @@ public struct SCONTEXT_QUEUE {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct SEC_WINNT_AUTH_IDENTITY {
     public var value: UInt32 = 0
 
@@ -3807,7 +2483,7 @@ public struct SEC_WINNT_AUTH_IDENTITY_A {
     public var DomainLength: UInt32 = 0
     public var Password: CPointer<UInt8> = CPointer<UInt8>()
     public var PasswordLength: UInt32 = 0
-    public var Flags: SEC_WINNT_AUTH_IDENTITY = SEC_WINNT_AUTH_IDENTITY()
+    public var Flags: UInt32 = 0
     public init() {}
 }
 
@@ -3820,7 +2496,7 @@ public struct SEC_WINNT_AUTH_IDENTITY_W {
     public var DomainLength: UInt32 = 0
     public var Password: CPointer<UInt16> = CPointer<UInt16>()
     public var PasswordLength: UInt32 = 0
-    public var Flags: SEC_WINNT_AUTH_IDENTITY = SEC_WINNT_AUTH_IDENTITY()
+    public var Flags: UInt32 = 0
     public init() {}
 }
 
@@ -3828,7 +2504,6 @@ public struct SEC_WINNT_AUTH_IDENTITY_W {
 public type SERVER_ROUTINE = CFunc<() -> Int32>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct STUB_PHASE {
     public var value: Int32 = 0
 
@@ -3859,23 +2534,6 @@ public let STUB_PHASE_STUB_MARSHAL: STUB_PHASE = STUB_PHASE(2)
 public let STUB_PHASE_STUB_CALL_SERVER_NO_HRESULT: STUB_PHASE = STUB_PHASE(3)
 
 @When[Windows_Win32_System_Rpc == "on"]
-public type STUB_THUNK = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct USER_MARSHAL_CB {
-    public var Flags: UInt32 = 0
-    public var pStubMsg: CPointer<MIDL_STUB_MESSAGE> = CPointer<MIDL_STUB_MESSAGE>()
-    public var pReserve: CPointer<UInt8> = CPointer<UInt8>()
-    public var Signature: UInt32 = 0
-    public var CBType: USER_MARSHAL_CB_TYPE = USER_MARSHAL_CB_TYPE()
-    public var pFormat: CPointer<UInt8> = CPointer<UInt8>()
-    public var pTypeFormat: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct USER_MARSHAL_CB_TYPE {
     public var value: Int32 = 0
 
@@ -3912,16 +2570,6 @@ public type USER_MARSHAL_FREEING_ROUTINE = CFunc<(CPointer<UInt32>, CPointer<Uni
 public type USER_MARSHAL_MARSHALLING_ROUTINE = CFunc<(CPointer<UInt32>, CPointer<UInt8>, CPointer<Unit>) -> CPointer<UInt8>>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct USER_MARSHAL_ROUTINE_QUADRUPLE {
-    public var pfnBufferSize: USER_MARSHAL_SIZING_ROUTINE = { _, _, _ => 0 }
-    public var pfnMarshall: USER_MARSHAL_MARSHALLING_ROUTINE = { _, _, _ => CPointer<UInt8>() }
-    public var pfnUnmarshall: USER_MARSHAL_UNMARSHALLING_ROUTINE = { _, _, _ => CPointer<UInt8>() }
-    public var pfnFree: USER_MARSHAL_FREEING_ROUTINE = { _, _ => () }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
 public type USER_MARSHAL_SIZING_ROUTINE = CFunc<(CPointer<UInt32>, UInt32, CPointer<Unit>) -> UInt32>
 
 @When[Windows_Win32_System_Rpc == "on"]
@@ -3936,7 +2584,6 @@ public struct UUID_VECTOR {
 }
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct XLAT_SIDE {
     public var value: Int32 = 0
 
@@ -3961,23 +2608,9 @@ public let XLAT_SIDE_XLAT_SERVER: XLAT_SIDE = XLAT_SIDE(1)
 public let XLAT_SIDE_XLAT_CLIENT: XLAT_SIDE = XLAT_SIDE(2)
 
 @When[Windows_Win32_System_Rpc == "on"]
-public type XMIT_HELPER_ROUTINE = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>
-
-@When[Windows_Win32_System_Rpc == "on"]
-@C
-public struct XMIT_ROUTINE_QUINTUPLE {
-    public var pfnTranslateToXmit: XMIT_HELPER_ROUTINE = { _ => () }
-    public var pfnTranslateFromXmit: XMIT_HELPER_ROUTINE = { _ => () }
-    public var pfnFreeXmit: XMIT_HELPER_ROUTINE = { _ => () }
-    public var pfnFreeInst: XMIT_HELPER_ROUTINE = { _ => () }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Rpc == "on"]
 public type _NDR_PROC_CONTEXT = CPointer<Unit>
 
 @When[Windows_Win32_System_Rpc == "on"]
-@C
 public struct system_handle_t {
     public var value: Int32 = 0
 
@@ -4040,128 +2673,1542 @@ public let system_handle_t_SYSTEM_HANDLE_MAX: system_handle_t = system_handle_t(
 @When[Windows_Win32_System_Rpc == "on"]
 public let system_handle_t_SYSTEM_HANDLE_INVALID: system_handle_t = system_handle_t(255)
 
-@When[RPCNS4 == "on"]
-foreign {
-    func I_RpcNsGetBuffer(Message: CPointer<RPC_MESSAGE>): RPC_STATUS
-    func I_RpcNsRaiseException(Message: CPointer<RPC_MESSAGE>, Status: RPC_STATUS): Unit
-    func I_RpcNsSendReceive(Message: CPointer<RPC_MESSAGE>, Handle: CPointer<CPointer<Unit>>): RPC_STATUS
-    func I_RpcReBindBuffer(Message: CPointer<RPC_MESSAGE>): RPC_STATUS
-    func RpcIfIdVectorFree(IfIdVector: CPointer<CPointer<RPC_IF_ID_VECTOR>>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: BindingVec optional
-    // param-hint: ObjectUuidVec optional
-    func RpcNsBindingExportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, BindingVec: CPointer<RPC_BINDING_VECTOR>, ObjectUuidVec: CPointer<UUID_VECTOR>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjectVector optional
-    func RpcNsBindingExportPnPA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTOR>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjectVector optional
-    func RpcNsBindingExportPnPW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTOR>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: BindingVec optional
-    // param-hint: ObjectUuidVec optional
-    func RpcNsBindingExportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, BindingVec: CPointer<RPC_BINDING_VECTOR>, ObjectUuidVec: CPointer<UUID_VECTOR>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjUuid optional
-    func RpcNsBindingImportBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, ImportContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjUuid optional
-    func RpcNsBindingImportBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, ImportContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsBindingImportDone(ImportContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsBindingImportNext(ImportContext: CPointer<Unit>, Binding: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjUuid optional
-    func RpcNsBindingLookupBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, BindingMaxCount: UInt32, LookupContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjUuid optional
-    func RpcNsBindingLookupBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, BindingMaxCount: UInt32, LookupContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsBindingLookupDone(LookupContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsBindingLookupNext(LookupContext: CPointer<Unit>, BindingVec: CPointer<CPointer<RPC_BINDING_VECTOR>>): RPC_STATUS
-    func RpcNsBindingSelect(BindingVec: CPointer<RPC_BINDING_VECTOR>, Binding: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjectUuidVec optional
-    func RpcNsBindingUnexportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectUuidVec: CPointer<UUID_VECTOR>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjectVector optional
-    func RpcNsBindingUnexportPnPA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTOR>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjectVector optional
-    func RpcNsBindingUnexportPnPW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTOR>): RPC_STATUS
-    // param-hint: EntryName optional
-    // param-hint: IfSpec optional
-    // param-hint: ObjectUuidVec optional
-    func RpcNsBindingUnexportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectUuidVec: CPointer<UUID_VECTOR>): RPC_STATUS
-    func RpcNsEntryExpandNameA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, ExpandedName: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func RpcNsEntryExpandNameW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, ExpandedName: CPointer<CPointer<UInt16>>): RPC_STATUS
-    func RpcNsEntryObjectInqBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, InquiryContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsEntryObjectInqBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, InquiryContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsEntryObjectInqDone(InquiryContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsEntryObjectInqNext(InquiryContext: CPointer<Unit>, ObjUuid: CPointer<GUID>): RPC_STATUS
-    // param-hint: GroupName optional
-    func RpcNsGroupDeleteA(GroupNameSyntax: GROUP_NAME_SYNTAX, GroupName: CPointer<UInt8>): RPC_STATUS
-    // param-hint: GroupName optional
-    func RpcNsGroupDeleteW(GroupNameSyntax: GROUP_NAME_SYNTAX, GroupName: CPointer<UInt16>): RPC_STATUS
-    func RpcNsGroupMbrAddA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): RPC_STATUS
-    func RpcNsGroupMbrAddW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): RPC_STATUS
-    func RpcNsGroupMbrInqBeginA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, InquiryContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsGroupMbrInqBeginW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, InquiryContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsGroupMbrInqDone(InquiryContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsGroupMbrInqNextA(InquiryContext: CPointer<Unit>, MemberName: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func RpcNsGroupMbrInqNextW(InquiryContext: CPointer<Unit>, MemberName: CPointer<CPointer<UInt16>>): RPC_STATUS
-    func RpcNsGroupMbrRemoveA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): RPC_STATUS
-    func RpcNsGroupMbrRemoveW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): RPC_STATUS
-    // param-hint: IfId optional
-    // param-hint: ObjectUuidVec optional
-    func RpcNsMgmtBindingUnexportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, ObjectUuidVec: CPointer<UUID_VECTOR>): RPC_STATUS
-    // param-hint: IfId optional
-    // param-hint: ObjectUuidVec optional
-    func RpcNsMgmtBindingUnexportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, ObjectUuidVec: CPointer<UUID_VECTOR>): RPC_STATUS
-    func RpcNsMgmtEntryCreateA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): RPC_STATUS
-    func RpcNsMgmtEntryCreateW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): RPC_STATUS
-    func RpcNsMgmtEntryDeleteA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): RPC_STATUS
-    func RpcNsMgmtEntryDeleteW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): RPC_STATUS
-    func RpcNsMgmtEntryInqIfIdsA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfIdVec: CPointer<CPointer<RPC_IF_ID_VECTOR>>): RPC_STATUS
-    func RpcNsMgmtEntryInqIfIdsW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfIdVec: CPointer<CPointer<RPC_IF_ID_VECTOR>>): RPC_STATUS
-    func RpcNsMgmtHandleSetExpAge(NsHandle: CPointer<Unit>, ExpirationAge: UInt32): RPC_STATUS
-    func RpcNsMgmtInqExpAge(ExpirationAge: CPointer<UInt32>): RPC_STATUS
-    func RpcNsMgmtSetExpAge(ExpirationAge: UInt32): RPC_STATUS
-    func RpcNsProfileDeleteA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>): RPC_STATUS
-    func RpcNsProfileDeleteW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>): RPC_STATUS
-    // param-hint: IfId optional
-    // param-hint: Annotation optional
-    func RpcNsProfileEltAddA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, IfId: CPointer<RPC_IF_ID>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>, Priority: UInt32, Annotation: CPointer<UInt8>): RPC_STATUS
-    // param-hint: IfId optional
-    // param-hint: Annotation optional
-    func RpcNsProfileEltAddW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, IfId: CPointer<RPC_IF_ID>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>, Priority: UInt32, Annotation: CPointer<UInt16>): RPC_STATUS
-    // param-hint: IfId optional
-    // param-hint: MemberName optional
-    func RpcNsProfileEltInqBeginA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, InquiryType: UInt32, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>, InquiryContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: IfId optional
-    // param-hint: MemberName optional
-    func RpcNsProfileEltInqBeginW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, InquiryType: UInt32, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>, InquiryContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcNsProfileEltInqDone(InquiryContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: IfId optional
-    func RpcNsProfileEltInqNextA(InquiryContext: CPointer<Unit>, IfId: CPointer<RPC_IF_ID>, MemberName: CPointer<CPointer<UInt8>>, Priority: CPointer<UInt32>, Annotation: CPointer<CPointer<UInt8>>): RPC_STATUS
-    // param-hint: IfId optional
-    func RpcNsProfileEltInqNextW(InquiryContext: CPointer<Unit>, IfId: CPointer<RPC_IF_ID>, MemberName: CPointer<CPointer<UInt16>>, Priority: CPointer<UInt32>, Annotation: CPointer<CPointer<UInt16>>): RPC_STATUS
-    // param-hint: IfId optional
-    func RpcNsProfileEltRemoveA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, IfId: CPointer<RPC_IF_ID>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): RPC_STATUS
-    // param-hint: IfId optional
-    func RpcNsProfileEltRemoveW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, IfId: CPointer<RPC_IF_ID>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): RPC_STATUS
+@When[Windows_Win32_System_Rpc == "on"]
+public type CS_TYPE_LOCAL_SIZE_ROUTINE = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Int32>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type CS_TYPE_NET_SIZE_ROUTINE = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Int32>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct FULL_PTR_XLAT_TABLES {
+    public var RefIdToPointer: CPointer<Unit> = CPointer<Unit>()
+    public var PointerToRefId: CPointer<Unit> = CPointer<Unit>()
+    public var NextRefId: UInt32 = 0
+    public var XlatSide: Int32 = 0
+    public init() {}
 }
 
-@When[RPCRT4 == "on"]
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct GENERIC_BINDING_INFO {
+    public var pObj: CPointer<Unit> = CPointer<Unit>()
+    public var Size: UInt32 = 0
+    public var pfnBind: GENERIC_BINDING_ROUTINE = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(CPointer<Unit>())
+    public var pfnUnbind: GENERIC_UNBIND_ROUTINE = CFunc<(CPointer<Unit>, CPointer<UInt8>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct GENERIC_BINDING_ROUTINE_PAIR {
+    public var pfnBind: GENERIC_BINDING_ROUTINE = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(CPointer<Unit>())
+    public var pfnUnbind: GENERIC_UNBIND_ROUTINE = CFunc<(CPointer<Unit>, CPointer<UInt8>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type I_RpcProxyFilterIfFn = CFunc<(CPointer<Unit>, CPointer<GUID>, UInt16, CPointer<Int32>) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type I_RpcProxyGetClientAddressFn = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type I_RpcProxyGetClientSessionAndResourceUUID = CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<GUID>, CPointer<Int32>, CPointer<GUID>) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type I_RpcProxyGetConnectionTimeoutFn = CFunc<(CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type I_RpcProxyIsValidMachineFn = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type I_RpcProxyUpdatePerfCounterFn = CFunc<(Int32, Int32, UInt32) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct MIDL_INTERFACE_METHOD_PROPERTIES {
+    public var MethodCount: UInt16 = 0
+    public var MethodProperties: CPointer<CPointer<MIDL_METHOD_PROPERTY_MAP>> = CPointer<CPointer<MIDL_METHOD_PROPERTY_MAP>>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NDR64_BINDINGS {
+    public var _raw: VArray<UInt16, $3> = VArray<UInt16, $3>(repeat: 0)
+
+    public mut prop primitive: NDR64_BIND_PRIMITIVE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDR64_BIND_PRIMITIVE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDR64_BIND_PRIMITIVE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop generic: NDR64_BIND_GENERIC {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDR64_BIND_GENERIC>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDR64_BIND_GENERIC>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop context: NDR64_BIND_CONTEXT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDR64_BIND_CONTEXT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDR64_BIND_CONTEXT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR64_BIND_AND_NOTIFY_EXTENSION {
+    public var Binding: NDR64_BIND_CONTEXT = NDR64_BIND_CONTEXT()
+    public var NotifyIndex: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR64_BOGUS_STRUCTURE_HEADER_FORMAT {
+    public var FormatCode: UInt8 = 0
+    public var Alignment: UInt8 = 0
+    public var Flags: NDR64_STRUCTURE_FLAGS = NDR64_STRUCTURE_FLAGS()
+    public var Reserve: UInt8 = 0
+    public var MemorySize: UInt32 = 0
+    public var OriginalMemberLayout: CPointer<Unit> = CPointer<Unit>()
+    public var OriginalPointerLayout: CPointer<Unit> = CPointer<Unit>()
+    public var PointerLayout: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR64_CONFORMANT_STRING_FORMAT {
+    public var Header: NDR64_STRING_HEADER_FORMAT = NDR64_STRING_HEADER_FORMAT()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR64_CONF_BOGUS_STRUCTURE_HEADER_FORMAT {
+    public var FormatCode: UInt8 = 0
+    public var Alignment: UInt8 = 0
+    public var Flags: NDR64_STRUCTURE_FLAGS = NDR64_STRUCTURE_FLAGS()
+    public var Dimensions: UInt8 = 0
+    public var MemorySize: UInt32 = 0
+    public var OriginalMemberLayout: CPointer<Unit> = CPointer<Unit>()
+    public var OriginalPointerLayout: CPointer<Unit> = CPointer<Unit>()
+    public var PointerLayout: CPointer<Unit> = CPointer<Unit>()
+    public var ConfArrayDescription: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR64_CONF_STRUCTURE_HEADER_FORMAT {
+    public var FormatCode: UInt8 = 0
+    public var Alignment: UInt8 = 0
+    public var Flags: NDR64_STRUCTURE_FLAGS = NDR64_STRUCTURE_FLAGS()
+    public var Reserve: UInt8 = 0
+    public var MemorySize: UInt32 = 0
+    public var ArrayDescription: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR64_FIXED_REPEAT_FORMAT {
+    public var RepeatFormat: NDR64_REPEAT_FORMAT = NDR64_REPEAT_FORMAT()
+    public var Iterations: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR64_NON_CONFORMANT_STRING_FORMAT {
+    public var Header: NDR64_STRING_HEADER_FORMAT = NDR64_STRING_HEADER_FORMAT()
+    public var TotalSize: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR64_RANGED_STRING_FORMAT {
+    public var Header: NDR64_STRING_HEADER_FORMAT = NDR64_STRING_HEADER_FORMAT()
+    public var Reserved: UInt32 = 0
+    public var Min: UInt64 = 0
+    public var Max: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR64_SIZED_CONFORMANT_STRING_FORMAT {
+    public var Header: NDR64_STRING_HEADER_FORMAT = NDR64_STRING_HEADER_FORMAT()
+    public var SizeDescription: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR_CS_SIZE_CONVERT_ROUTINES {
+    public var pfnNetSize: CS_TYPE_NET_SIZE_ROUTINE = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Int32>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>(CPointer<Unit>())
+    public var pfnToNetCs: CS_TYPE_TO_NETCS_ROUTINE = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>(CPointer<Unit>())
+    public var pfnLocalSize: CS_TYPE_LOCAL_SIZE_ROUTINE = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Int32>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>(CPointer<Unit>())
+    public var pfnFromNetCs: CS_TYPE_FROM_NETCS_ROUTINE = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct NDR_USER_MARSHAL_INFO {
+    public var InformationLevel: UInt32 = 0
+    public var Anonymous: NDR_USER_MARSHAL_INFO__Anonymous_e__Union = NDR_USER_MARSHAL_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NDR_USER_MARSHAL_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $10> = VArray<UInt64, $10>(repeat: 0)
+
+    public mut prop level1: NDR_USER_MARSHAL_INFO_LEVEL1 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDR_USER_MARSHAL_INFO_LEVEL1>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NDR_USER_MARSHAL_INFO_LEVEL1>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type RPC_AUTH_KEY_RETRIEVAL_FN = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<CPointer<Unit>>, CPointer<Int32>) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_BINDING_HANDLE_SECURITY_V1_A {
+    public var Version: UInt32 = 0
+    public var ServerPrincName: CPointer<UInt8> = CPointer<UInt8>()
+    public var AuthnLevel: UInt32 = 0
+    public var AuthnSvc: UInt32 = 0
+    public var AuthIdentity: CPointer<SEC_WINNT_AUTH_IDENTITY_A> = CPointer<SEC_WINNT_AUTH_IDENTITY_A>()
+    public var SecurityQos: CPointer<RPC_SECURITY_QOS> = CPointer<RPC_SECURITY_QOS>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_BINDING_HANDLE_SECURITY_V1_W {
+    public var Version: UInt32 = 0
+    public var ServerPrincName: CPointer<UInt16> = CPointer<UInt16>()
+    public var AuthnLevel: UInt32 = 0
+    public var AuthnSvc: UInt32 = 0
+    public var AuthIdentity: CPointer<SEC_WINNT_AUTH_IDENTITY_W> = CPointer<SEC_WINNT_AUTH_IDENTITY_W>()
+    public var SecurityQos: CPointer<RPC_SECURITY_QOS> = CPointer<RPC_SECURITY_QOS>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type RPC_BLOCKING_FN = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_CALL_LOCAL_ADDRESS_V1 {
+    public var Version: UInt32 = 0
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+    public var BufferSize: UInt32 = 0
+    public var AddressFormat: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type RPC_FORWARD_FUNCTION = CFunc<(CPointer<GUID>, CPointer<RPC_VERSION>, CPointer<GUID>, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_HTTP_TRANSPORT_CREDENTIALS_A {
+    public var TransportCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_A> = CPointer<SEC_WINNT_AUTH_IDENTITY_A>()
+    public var Flags: UInt32 = 0
+    public var AuthenticationTarget: UInt32 = 0
+    public var NumberOfAuthnSchemes: UInt32 = 0
+    public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
+    public var ServerCertificateSubject: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A {
+    public var TransportCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_A> = CPointer<SEC_WINNT_AUTH_IDENTITY_A>()
+    public var Flags: UInt32 = 0
+    public var AuthenticationTarget: UInt32 = 0
+    public var NumberOfAuthnSchemes: UInt32 = 0
+    public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
+    public var ServerCertificateSubject: CPointer<UInt8> = CPointer<UInt8>()
+    public var ProxyCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_A> = CPointer<SEC_WINNT_AUTH_IDENTITY_A>()
+    public var NumberOfProxyAuthnSchemes: UInt32 = 0
+    public var ProxyAuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W {
+    public var TransportCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_W> = CPointer<SEC_WINNT_AUTH_IDENTITY_W>()
+    public var Flags: UInt32 = 0
+    public var AuthenticationTarget: UInt32 = 0
+    public var NumberOfAuthnSchemes: UInt32 = 0
+    public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
+    public var ServerCertificateSubject: CPointer<UInt16> = CPointer<UInt16>()
+    public var ProxyCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_W> = CPointer<SEC_WINNT_AUTH_IDENTITY_W>()
+    public var NumberOfProxyAuthnSchemes: UInt32 = 0
+    public var ProxyAuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_HTTP_TRANSPORT_CREDENTIALS_W {
+    public var TransportCredentials: CPointer<SEC_WINNT_AUTH_IDENTITY_W> = CPointer<SEC_WINNT_AUTH_IDENTITY_W>()
+    public var Flags: UInt32 = 0
+    public var AuthenticationTarget: UInt32 = 0
+    public var NumberOfAuthnSchemes: UInt32 = 0
+    public var AuthnSchemes: CPointer<UInt32> = CPointer<UInt32>()
+    public var ServerCertificateSubject: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type RPC_IF_CALLBACK_FN = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_INTERFACE_TEMPLATEA {
+    public var Version: UInt32 = 0
+    public var IfSpec: CPointer<Unit> = CPointer<Unit>()
+    public var MgrTypeUuid: CPointer<GUID> = CPointer<GUID>()
+    public var MgrEpv: CPointer<Unit> = CPointer<Unit>()
+    public var Flags: UInt32 = 0
+    public var MaxCalls: UInt32 = 0
+    public var MaxRpcSize: UInt32 = 0
+    public var IfCallback: RPC_IF_CALLBACK_FN = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UuidVector: CPointer<UUID_VECTOR> = CPointer<UUID_VECTOR>()
+    public var Annotation: CPointer<UInt8> = CPointer<UInt8>()
+    public var SecurityDescriptor: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_INTERFACE_TEMPLATEW {
+    public var Version: UInt32 = 0
+    public var IfSpec: CPointer<Unit> = CPointer<Unit>()
+    public var MgrTypeUuid: CPointer<GUID> = CPointer<GUID>()
+    public var MgrEpv: CPointer<Unit> = CPointer<Unit>()
+    public var Flags: UInt32 = 0
+    public var MaxCalls: UInt32 = 0
+    public var MaxRpcSize: UInt32 = 0
+    public var IfCallback: RPC_IF_CALLBACK_FN = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UuidVector: CPointer<UUID_VECTOR> = CPointer<UUID_VECTOR>()
+    public var Annotation: CPointer<UInt16> = CPointer<UInt16>()
+    public var SecurityDescriptor: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type RPC_MGMT_AUTHORIZATION_FN = CFunc<(CPointer<Unit>, UInt32, CPointer<Int32>) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type RPC_NEW_HTTP_PROXY_CHANNEL = CFunc<(Int32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type RPC_OBJECT_INQ_FN = CFunc<(CPointer<GUID>, CPointer<GUID>, CPointer<Int32>) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_SECURITY_QOS_V2_A {
+    public var Version: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var IdentityTracking: UInt32 = 0
+    public var ImpersonationType: UInt32 = 0
+    public var AdditionalSecurityInfoType: UInt32 = 0
+    public var u: RPC_SECURITY_QOS_V2_A__u_e__Union = RPC_SECURITY_QOS_V2_A__u_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RPC_SECURITY_QOS_V2_A__u_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop httpCredentials: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_SECURITY_QOS_V2_W {
+    public var Version: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var IdentityTracking: UInt32 = 0
+    public var ImpersonationType: UInt32 = 0
+    public var AdditionalSecurityInfoType: UInt32 = 0
+    public var u: RPC_SECURITY_QOS_V2_W__u_e__Union = RPC_SECURITY_QOS_V2_W__u_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RPC_SECURITY_QOS_V2_W__u_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop httpCredentials: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_SECURITY_QOS_V3_A {
+    public var Version: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var IdentityTracking: UInt32 = 0
+    public var ImpersonationType: UInt32 = 0
+    public var AdditionalSecurityInfoType: UInt32 = 0
+    public var u: RPC_SECURITY_QOS_V3_A__u_e__Union = RPC_SECURITY_QOS_V3_A__u_e__Union()
+    public var Sid: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RPC_SECURITY_QOS_V3_A__u_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop httpCredentials: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_SECURITY_QOS_V3_W {
+    public var Version: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var IdentityTracking: UInt32 = 0
+    public var ImpersonationType: UInt32 = 0
+    public var AdditionalSecurityInfoType: UInt32 = 0
+    public var u: RPC_SECURITY_QOS_V3_W__u_e__Union = RPC_SECURITY_QOS_V3_W__u_e__Union()
+    public var Sid: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RPC_SECURITY_QOS_V3_W__u_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop httpCredentials: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_SECURITY_QOS_V4_A {
+    public var Version: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var IdentityTracking: UInt32 = 0
+    public var ImpersonationType: UInt32 = 0
+    public var AdditionalSecurityInfoType: UInt32 = 0
+    public var u: RPC_SECURITY_QOS_V4_A__u_e__Union = RPC_SECURITY_QOS_V4_A__u_e__Union()
+    public var Sid: CPointer<Unit> = CPointer<Unit>()
+    public var EffectiveOnly: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RPC_SECURITY_QOS_V4_A__u_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop httpCredentials: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_SECURITY_QOS_V4_W {
+    public var Version: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var IdentityTracking: UInt32 = 0
+    public var ImpersonationType: UInt32 = 0
+    public var AdditionalSecurityInfoType: UInt32 = 0
+    public var u: RPC_SECURITY_QOS_V4_W__u_e__Union = RPC_SECURITY_QOS_V4_W__u_e__Union()
+    public var Sid: CPointer<Unit> = CPointer<Unit>()
+    public var EffectiveOnly: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RPC_SECURITY_QOS_V4_W__u_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop httpCredentials: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_SECURITY_QOS_V5_A {
+    public var Version: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var IdentityTracking: UInt32 = 0
+    public var ImpersonationType: UInt32 = 0
+    public var AdditionalSecurityInfoType: UInt32 = 0
+    public var u: RPC_SECURITY_QOS_V5_A__u_e__Union = RPC_SECURITY_QOS_V5_A__u_e__Union()
+    public var Sid: CPointer<Unit> = CPointer<Unit>()
+    public var EffectiveOnly: UInt32 = 0
+    public var ServerSecurityDescriptor: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RPC_SECURITY_QOS_V5_A__u_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop httpCredentials: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_A>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct RPC_SECURITY_QOS_V5_W {
+    public var Version: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var IdentityTracking: UInt32 = 0
+    public var ImpersonationType: UInt32 = 0
+    public var AdditionalSecurityInfoType: UInt32 = 0
+    public var u: RPC_SECURITY_QOS_V5_W__u_e__Union = RPC_SECURITY_QOS_V5_W__u_e__Union()
+    public var Sid: CPointer<Unit> = CPointer<Unit>()
+    public var EffectiveOnly: UInt32 = 0
+    public var ServerSecurityDescriptor: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RPC_SECURITY_QOS_V5_W__u_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop httpCredentials: CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<RPC_HTTP_TRANSPORT_CREDENTIALS_W>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_SYNTAX_IDENTIFIER {
+    public var SyntaxGUID: GUID = GUID()
+    public var SyntaxVersion: RPC_VERSION = RPC_VERSION()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct USER_MARSHAL_ROUTINE_QUADRUPLE {
+    public var pfnBufferSize: USER_MARSHAL_SIZING_ROUTINE = CFunc<(CPointer<UInt32>, UInt32, CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var pfnMarshall: USER_MARSHAL_MARSHALLING_ROUTINE = CFunc<(CPointer<UInt32>, CPointer<UInt8>, CPointer<Unit>) -> CPointer<UInt8>>(CPointer<Unit>())
+    public var pfnUnmarshall: USER_MARSHAL_UNMARSHALLING_ROUTINE = CFunc<(CPointer<UInt32>, CPointer<UInt8>, CPointer<Unit>) -> CPointer<UInt8>>(CPointer<Unit>())
+    public var pfnFree: USER_MARSHAL_FREEING_ROUTINE = CFunc<(CPointer<UInt32>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct NDR_CS_ROUTINES {
+    public var pSizeConvertRoutines: CPointer<NDR_CS_SIZE_CONVERT_ROUTINES> = CPointer<NDR_CS_SIZE_CONVERT_ROUTINES>()
+    public var pTagGettingRoutines: CPointer<CS_TAG_GETTING_ROUTINE> = CPointer<CS_TAG_GETTING_ROUTINE>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RDR_CALLOUT_STATE {
+    public var LastError: Int32 = 0
+    public var LastEEInfo: CPointer<Unit> = CPointer<Unit>()
+    public var LastCalledStage: Int32 = 0
+    public var ServerName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ServerPort: CPointer<UInt16> = CPointer<UInt16>()
+    public var RemoteUser: CPointer<UInt16> = CPointer<UInt16>()
+    public var AuthType: CPointer<UInt16> = CPointer<UInt16>()
+    public var ResourceTypePresent: UInt8 = 0
+    public var SessionIdPresent: UInt8 = 0
+    public var InterfacePresent: UInt8 = 0
+    public var ResourceType: GUID = GUID()
+    public var SessionId: GUID = GUID()
+    public var Interface: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
+    public var CertContext: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_CALL_ATTRIBUTES_V2_A {
+    public var Version: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ServerPrincipalNameBufferLength: UInt32 = 0
+    public var ServerPrincipalName: CPointer<UInt8> = CPointer<UInt8>()
+    public var ClientPrincipalNameBufferLength: UInt32 = 0
+    public var ClientPrincipalName: CPointer<UInt8> = CPointer<UInt8>()
+    public var AuthenticationLevel: UInt32 = 0
+    public var AuthenticationService: UInt32 = 0
+    public var NullSession: Int32 = 0
+    public var KernelModeCaller: Int32 = 0
+    public var ProtocolSequence: UInt32 = 0
+    public var IsClientLocal: UInt32 = 0
+    public var ClientPID: CPointer<Unit> = CPointer<Unit>()
+    public var CallStatus: UInt32 = 0
+    public var CallType: Int32 = 0
+    public var CallLocalAddress: CPointer<RPC_CALL_LOCAL_ADDRESS_V1> = CPointer<RPC_CALL_LOCAL_ADDRESS_V1>()
+    public var OpNum: UInt16 = 0
+    public var InterfaceUuid: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_CALL_ATTRIBUTES_V2_W {
+    public var Version: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ServerPrincipalNameBufferLength: UInt32 = 0
+    public var ServerPrincipalName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientPrincipalNameBufferLength: UInt32 = 0
+    public var ClientPrincipalName: CPointer<UInt16> = CPointer<UInt16>()
+    public var AuthenticationLevel: UInt32 = 0
+    public var AuthenticationService: UInt32 = 0
+    public var NullSession: Int32 = 0
+    public var KernelModeCaller: Int32 = 0
+    public var ProtocolSequence: UInt32 = 0
+    public var IsClientLocal: Int32 = 0
+    public var ClientPID: CPointer<Unit> = CPointer<Unit>()
+    public var CallStatus: UInt32 = 0
+    public var CallType: Int32 = 0
+    public var CallLocalAddress: CPointer<RPC_CALL_LOCAL_ADDRESS_V1> = CPointer<RPC_CALL_LOCAL_ADDRESS_V1>()
+    public var OpNum: UInt16 = 0
+    public var InterfaceUuid: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_CALL_ATTRIBUTES_V3_A {
+    public var Version: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ServerPrincipalNameBufferLength: UInt32 = 0
+    public var ServerPrincipalName: CPointer<UInt8> = CPointer<UInt8>()
+    public var ClientPrincipalNameBufferLength: UInt32 = 0
+    public var ClientPrincipalName: CPointer<UInt8> = CPointer<UInt8>()
+    public var AuthenticationLevel: UInt32 = 0
+    public var AuthenticationService: UInt32 = 0
+    public var NullSession: Int32 = 0
+    public var KernelModeCaller: Int32 = 0
+    public var ProtocolSequence: UInt32 = 0
+    public var IsClientLocal: UInt32 = 0
+    public var ClientPID: CPointer<Unit> = CPointer<Unit>()
+    public var CallStatus: UInt32 = 0
+    public var CallType: Int32 = 0
+    public var CallLocalAddress: CPointer<RPC_CALL_LOCAL_ADDRESS_V1> = CPointer<RPC_CALL_LOCAL_ADDRESS_V1>()
+    public var OpNum: UInt16 = 0
+    public var InterfaceUuid: GUID = GUID()
+    public var ClientIdentifierBufferLength: UInt32 = 0
+    public var ClientIdentifier: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_CALL_ATTRIBUTES_V3_W {
+    public var Version: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var ServerPrincipalNameBufferLength: UInt32 = 0
+    public var ServerPrincipalName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ClientPrincipalNameBufferLength: UInt32 = 0
+    public var ClientPrincipalName: CPointer<UInt16> = CPointer<UInt16>()
+    public var AuthenticationLevel: UInt32 = 0
+    public var AuthenticationService: UInt32 = 0
+    public var NullSession: Int32 = 0
+    public var KernelModeCaller: Int32 = 0
+    public var ProtocolSequence: UInt32 = 0
+    public var IsClientLocal: Int32 = 0
+    public var ClientPID: CPointer<Unit> = CPointer<Unit>()
+    public var CallStatus: UInt32 = 0
+    public var CallType: Int32 = 0
+    public var CallLocalAddress: CPointer<RPC_CALL_LOCAL_ADDRESS_V1> = CPointer<RPC_CALL_LOCAL_ADDRESS_V1>()
+    public var OpNum: UInt16 = 0
+    public var InterfaceUuid: GUID = GUID()
+    public var ClientIdentifierBufferLength: UInt32 = 0
+    public var ClientIdentifier: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_MESSAGE {
+    public var Handle: CPointer<Unit> = CPointer<Unit>()
+    public var DataRepresentation: UInt32 = 0
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+    public var BufferLength: UInt32 = 0
+    public var ProcNum: UInt32 = 0
+    public var TransferSyntax: CPointer<RPC_SYNTAX_IDENTIFIER> = CPointer<RPC_SYNTAX_IDENTIFIER>()
+    public var RpcInterfaceInformation: CPointer<Unit> = CPointer<Unit>()
+    public var ReservedForRuntime: CPointer<Unit> = CPointer<Unit>()
+    public var ManagerEpv: CPointer<Unit> = CPointer<Unit>()
+    public var ImportContext: CPointer<Unit> = CPointer<Unit>()
+    public var RpcFlags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type I_RpcFreeCalloutStateFn = CFunc<(CPointer<RDR_CALLOUT_STATE>) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type I_RpcPerformCalloutFn = CFunc<(CPointer<Unit>, CPointer<RDR_CALLOUT_STATE>, Int32) -> Int32>
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct I_RpcProxyCallbackInterface {
+    public var IsValidMachineFn: I_RpcProxyIsValidMachineFn = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetClientAddressFn: I_RpcProxyGetClientAddressFn = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var GetConnectionTimeoutFn: I_RpcProxyGetConnectionTimeoutFn = CFunc<(CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var PerformCalloutFn: I_RpcPerformCalloutFn = CFunc<(CPointer<Unit>, CPointer<RDR_CALLOUT_STATE>, Int32) -> Int32>(CPointer<Unit>())
+    public var FreeCalloutStateFn: I_RpcFreeCalloutStateFn = CFunc<(CPointer<RDR_CALLOUT_STATE>) -> Unit>(CPointer<Unit>())
+    public var GetClientSessionAndResourceUUIDFn: I_RpcProxyGetClientSessionAndResourceUUID = CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<GUID>, CPointer<Int32>, CPointer<GUID>) -> Int32>(CPointer<Unit>())
+    public var ProxyFilterIfFn: I_RpcProxyFilterIfFn = CFunc<(CPointer<Unit>, CPointer<GUID>, UInt16, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var RpcProxyUpdatePerfCounterFn: I_RpcProxyUpdatePerfCounterFn = CFunc<(Int32, Int32, UInt32) -> Unit>(CPointer<Unit>())
+    public var RpcProxyUpdatePerfCounterBackendServerFn: I_RpcProxyUpdatePerfCounterBackendServerFn = CFunc<(CPointer<UInt16>, Int32) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+public type RPC_DISPATCH_FUNCTION = CFunc<(CPointer<RPC_MESSAGE>) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_DISPATCH_TABLE {
+    public var DispatchTableCount: UInt32 = 0
+    public var DispatchTable: RPC_DISPATCH_FUNCTION = CFunc<(CPointer<RPC_MESSAGE>) -> Unit>(CPointer<Unit>())
+    public var Reserved: IntNative = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_SERVER_INTERFACE {
+    public var Length: UInt32 = 0
+    public var InterfaceId: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
+    public var TransferSyntax: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
+    public var DispatchTable: CPointer<RPC_DISPATCH_TABLE> = CPointer<RPC_DISPATCH_TABLE>()
+    public var RpcProtseqEndpointCount: UInt32 = 0
+    public var RpcProtseqEndpoint: CPointer<RPC_PROTSEQ_ENDPOINT> = CPointer<RPC_PROTSEQ_ENDPOINT>()
+    public var DefaultManagerEpv: CPointer<Unit> = CPointer<Unit>()
+    public var InterpreterInfo: CPointer<Unit> = CPointer<Unit>()
+    public var Flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct MIDL_SYNTAX_INFO {
+    public var TransferSyntax: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
+    public var DispatchTable: CPointer<RPC_DISPATCH_TABLE> = CPointer<RPC_DISPATCH_TABLE>()
+    public var ProcString: CPointer<UInt8> = CPointer<UInt8>()
+    public var FmtStringOffset: CPointer<UInt16> = CPointer<UInt16>()
+    public var TypeString: CPointer<UInt8> = CPointer<UInt8>()
+    public var aUserMarshalQuadruple: CPointer<Unit> = CPointer<Unit>()
+    public var pMethodProperties: CPointer<MIDL_INTERFACE_METHOD_PROPERTIES> = CPointer<MIDL_INTERFACE_METHOD_PROPERTIES>()
+    public var pReserved2: UIntNative = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on"]
+@C
+public struct RPC_CLIENT_INTERFACE {
+    public var Length: UInt32 = 0
+    public var InterfaceId: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
+    public var TransferSyntax: RPC_SYNTAX_IDENTIFIER = RPC_SYNTAX_IDENTIFIER()
+    public var DispatchTable: CPointer<RPC_DISPATCH_TABLE> = CPointer<RPC_DISPATCH_TABLE>()
+    public var RpcProtseqEndpointCount: UInt32 = 0
+    public var RpcProtseqEndpoint: CPointer<RPC_PROTSEQ_ENDPOINT> = CPointer<RPC_PROTSEQ_ENDPOINT>()
+    public var Reserved: UIntNative = 0
+    public var InterpreterInfo: CPointer<Unit> = CPointer<Unit>()
+    public var Flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+public type EXPR_EVAL = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct MIDL_SERVER_INFO {
+    public var pStubDesc: CPointer<MIDL_STUB_DESC> = CPointer<MIDL_STUB_DESC>()
+    public var DispatchTable: CPointer<SERVER_ROUTINE> = CPointer<SERVER_ROUTINE>()
+    public var ProcString: CPointer<UInt8> = CPointer<UInt8>()
+    public var FmtStringOffset: CPointer<UInt16> = CPointer<UInt16>()
+    public var ThunkTable: CPointer<STUB_THUNK> = CPointer<STUB_THUNK>()
+    public var pTransferSyntax: CPointer<RPC_SYNTAX_IDENTIFIER> = CPointer<RPC_SYNTAX_IDENTIFIER>()
+    public var nCount: UIntNative = 0
+    public var pSyntaxInfo: CPointer<MIDL_SYNTAX_INFO> = CPointer<MIDL_SYNTAX_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct MIDL_STUBLESS_PROXY_INFO {
+    public var pStubDesc: CPointer<MIDL_STUB_DESC> = CPointer<MIDL_STUB_DESC>()
+    public var ProcFormatString: CPointer<UInt8> = CPointer<UInt8>()
+    public var FormatStringOffset: CPointer<UInt16> = CPointer<UInt16>()
+    public var pTransferSyntax: CPointer<RPC_SYNTAX_IDENTIFIER> = CPointer<RPC_SYNTAX_IDENTIFIER>()
+    public var nCount: UIntNative = 0
+    public var pSyntaxInfo: CPointer<MIDL_SYNTAX_INFO> = CPointer<MIDL_SYNTAX_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct MIDL_STUB_DESC {
+    public var RpcInterfaceInformation: CPointer<Unit> = CPointer<Unit>()
+    public var pfnAllocate: PFN_RPC_ALLOCATE = CFunc<(UIntNative) -> CPointer<Unit>>(CPointer<Unit>())
+    public var pfnFree: PFN_RPC_FREE = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var IMPLICIT_HANDLE_INFO: MIDL_STUB_DESC__IMPLICIT_HANDLE_INFO_e__Union = MIDL_STUB_DESC__IMPLICIT_HANDLE_INFO_e__Union()
+    public var apfnNdrRundownRoutines: CPointer<NDR_RUNDOWN> = CPointer<NDR_RUNDOWN>()
+    public var aGenericBindingRoutinePairs: CPointer<GENERIC_BINDING_ROUTINE_PAIR> = CPointer<GENERIC_BINDING_ROUTINE_PAIR>()
+    public var apfnExprEval: CPointer<EXPR_EVAL> = CPointer<EXPR_EVAL>()
+    public var aXmitQuintuple: CPointer<XMIT_ROUTINE_QUINTUPLE> = CPointer<XMIT_ROUTINE_QUINTUPLE>()
+    public var pFormatTypes: CPointer<UInt8> = CPointer<UInt8>()
+    public var fCheckBounds: Int32 = 0
+    public var Version: UInt32 = 0
+    public var pMallocFreeStruct: CPointer<MALLOC_FREE_STRUCT> = CPointer<MALLOC_FREE_STRUCT>()
+    public var MIDLVersion: Int32 = 0
+    public var CommFaultOffsets: CPointer<COMM_FAULT_OFFSETS> = CPointer<COMM_FAULT_OFFSETS>()
+    public var aUserMarshalQuadruple: CPointer<USER_MARSHAL_ROUTINE_QUADRUPLE> = CPointer<USER_MARSHAL_ROUTINE_QUADRUPLE>()
+    public var NotifyRoutineTable: CPointer<NDR_NOTIFY_ROUTINE> = CPointer<NDR_NOTIFY_ROUTINE>()
+    public var mFlags: UIntNative = 0
+    public var CsRoutineTables: CPointer<NDR_CS_ROUTINES> = CPointer<NDR_CS_ROUTINES>()
+    public var ProxyServerInfo: CPointer<Unit> = CPointer<Unit>()
+    public var pExprInfo: CPointer<NDR_EXPR_DESC> = CPointer<NDR_EXPR_DESC>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct MIDL_STUB_DESC__IMPLICIT_HANDLE_INFO_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop pAutoHandle: CPointer<CPointer<Unit>> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CPointer<Unit>>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CPointer<Unit>>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pPrimitiveHandle: CPointer<CPointer<Unit>> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CPointer<Unit>>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CPointer<Unit>>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pGenericBindingInfo: CPointer<GENERIC_BINDING_INFO> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<GENERIC_BINDING_INFO>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<GENERIC_BINDING_INFO>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct MIDL_STUB_MESSAGE {
+    public var RpcMsg: CPointer<RPC_MESSAGE> = CPointer<RPC_MESSAGE>()
+    public var Buffer: CPointer<UInt8> = CPointer<UInt8>()
+    public var BufferStart: CPointer<UInt8> = CPointer<UInt8>()
+    public var BufferEnd: CPointer<UInt8> = CPointer<UInt8>()
+    public var BufferMark: CPointer<UInt8> = CPointer<UInt8>()
+    public var BufferLength: UInt32 = 0
+    public var MemorySize: UInt32 = 0
+    public var Memory: CPointer<UInt8> = CPointer<UInt8>()
+    public var IsClient: UInt8 = 0
+    public var Pad: UInt8 = 0
+    public var uFlags2: UInt16 = 0
+    public var ReuseBuffer: Int32 = 0
+    public var pAllocAllNodesContext: CPointer<NDR_ALLOC_ALL_NODES_CONTEXT> = CPointer<NDR_ALLOC_ALL_NODES_CONTEXT>()
+    public var pPointerQueueState: CPointer<NDR_POINTER_QUEUE_STATE> = CPointer<NDR_POINTER_QUEUE_STATE>()
+    public var IgnoreEmbeddedPointers: Int32 = 0
+    public var PointerBufferMark: CPointer<UInt8> = CPointer<UInt8>()
+    public var CorrDespIncrement: UInt8 = 0
+    public var uFlags: UInt8 = 0
+    public var UniquePtrCount: UInt16 = 0
+    public var MaxCount: UIntNative = 0
+    public var Offset: UInt32 = 0
+    public var ActualCount: UInt32 = 0
+    public var pfnAllocate: PFN_RPC_ALLOCATE = CFunc<(UIntNative) -> CPointer<Unit>>(CPointer<Unit>())
+    public var pfnFree: PFN_RPC_FREE = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var StackTop: CPointer<UInt8> = CPointer<UInt8>()
+    public var pPresentedType: CPointer<UInt8> = CPointer<UInt8>()
+    public var pTransmitType: CPointer<UInt8> = CPointer<UInt8>()
+    public var SavedHandle: CPointer<Unit> = CPointer<Unit>()
+    public var StubDesc: CPointer<MIDL_STUB_DESC> = CPointer<MIDL_STUB_DESC>()
+    public var FullPtrXlatTables: CPointer<FULL_PTR_XLAT_TABLES> = CPointer<FULL_PTR_XLAT_TABLES>()
+    public var FullPtrRefId: UInt32 = 0
+    public var PointerLength: UInt32 = 0
+    public var _bitfield: Int32 = 0
+    public var dwDestContext: UInt32 = 0
+    public var pvDestContext: CPointer<Unit> = CPointer<Unit>()
+    public var SavedContextHandles: CPointer<CPointer<NDR_SCONTEXT>> = CPointer<CPointer<NDR_SCONTEXT>>()
+    public var ParamNumber: Int32 = 0
+    public var pRpcChannelBuffer: CPointer<Unit> = CPointer<Unit>()
+    public var pArrayInfo: CPointer<ARRAY_INFO> = CPointer<ARRAY_INFO>()
+    public var SizePtrCountArray: CPointer<UInt32> = CPointer<UInt32>()
+    public var SizePtrOffsetArray: CPointer<UInt32> = CPointer<UInt32>()
+    public var SizePtrLengthArray: CPointer<UInt32> = CPointer<UInt32>()
+    public var pArgQueue: CPointer<Unit> = CPointer<Unit>()
+    public var dwStubPhase: UInt32 = 0
+    public var LowStackMark: CPointer<Unit> = CPointer<Unit>()
+    public var pAsyncMsg: PNDR_ASYNC_MESSAGE = CPointer<Unit>()
+    public var pCorrInfo: PNDR_CORRELATION_INFO = CPointer<Unit>()
+    public var pCorrMemory: CPointer<UInt8> = CPointer<UInt8>()
+    public var pMemoryList: CPointer<Unit> = CPointer<Unit>()
+    public var pCSInfo: IntNative = 0
+    public var ConformanceMark: CPointer<UInt8> = CPointer<UInt8>()
+    public var VarianceMark: CPointer<UInt8> = CPointer<UInt8>()
+    public var Unused: IntNative = 0
+    public var pContext: CPointer<_NDR_PROC_CONTEXT> = CPointer<_NDR_PROC_CONTEXT>()
+    public var ContextHandleHash: CPointer<Unit> = CPointer<Unit>()
+    public var pUserMarshalList: CPointer<Unit> = CPointer<Unit>()
+    public var pFullPtrFormat: CPointer<UInt8> = CPointer<UInt8>()
+    public var Reserved51_4: IntNative = 0
+    public var Reserved51_5: IntNative = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct MIDL_WINRT_TYPE_SERIALIZATION_INFO {
+    public var Version: UInt32 = 0
+    public var TypeFormatString: CPointer<UInt8> = CPointer<UInt8>()
+    public var FormatStringSize: UInt16 = 0
+    public var TypeOffset: UInt16 = 0
+    public var StubDesc: CPointer<MIDL_STUB_DESC> = CPointer<MIDL_STUB_DESC>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_IO == "on"]
+public type PFN_RPCNOTIFICATION_ROUTINE = CFunc<(CPointer<RPC_ASYNC_STATE>, CPointer<Unit>, Int32) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_IO == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RPC_ASYNC_NOTIFICATION_INFO {
+    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+
+    public mut prop apc: RPC_ASYNC_NOTIFICATION_INFO__APC_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__APC_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__APC_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ioc: RPC_ASYNC_NOTIFICATION_INFO__IOC_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__IOC_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__IOC_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop intPtr: RPC_ASYNC_NOTIFICATION_INFO__IntPtr_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__IntPtr_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RPC_ASYNC_NOTIFICATION_INFO__IntPtr_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop hEvent: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop notificationRoutine: PFN_RPCNOTIFICATION_ROUTINE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PFN_RPCNOTIFICATION_ROUTINE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PFN_RPCNOTIFICATION_ROUTINE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_IO == "on"]
+@C
+public struct RPC_ASYNC_NOTIFICATION_INFO__APC_e__Struct {
+    public var NotificationRoutine: PFN_RPCNOTIFICATION_ROUTINE = CFunc<(CPointer<RPC_ASYNC_STATE>, CPointer<Unit>, Int32) -> Unit>(CPointer<Unit>())
+    public var hThread: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_IO == "on"]
+@C
+public struct RPC_ASYNC_NOTIFICATION_INFO__IOC_e__Struct {
+    public var hIOPort: CPointer<Unit> = CPointer<Unit>()
+    public var dwNumberOfBytesTransferred: UInt32 = 0
+    public var dwCompletionKey: UIntNative = 0
+    public var lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED> = CPointer<Win32_System_IO.OVERLAPPED>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_IO == "on"]
+@C
+public struct RPC_ASYNC_NOTIFICATION_INFO__IntPtr_e__Struct {
+    public var hWnd: CPointer<Unit> = CPointer<Unit>()
+    public var Msg: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_IO == "on"]
+@C
+public struct RPC_ASYNC_STATE {
+    public var Size: UInt32 = 0
+    public var Signature: UInt32 = 0
+    public var Lock: Int32 = 0
+    public var Flags: UInt32 = 0
+    public var StubInfo: CPointer<Unit> = CPointer<Unit>()
+    public var UserInfo: CPointer<Unit> = CPointer<Unit>()
+    public var RuntimeInfo: CPointer<Unit> = CPointer<Unit>()
+    public var Event: Int32 = 0
+    public var NotificationType: Int32 = 0
+    public var u: RPC_ASYNC_NOTIFICATION_INFO = RPC_ASYNC_NOTIFICATION_INFO()
+    public var Reserved: VArray<IntNative, $4> = VArray<IntNative, $4>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+public type STUB_THUNK = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct USER_MARSHAL_CB {
+    public var Flags: UInt32 = 0
+    public var pStubMsg: CPointer<MIDL_STUB_MESSAGE> = CPointer<MIDL_STUB_MESSAGE>()
+    public var pReserve: CPointer<UInt8> = CPointer<UInt8>()
+    public var Signature: UInt32 = 0
+    public var CBType: Int32 = 0
+    public var pFormat: CPointer<UInt8> = CPointer<UInt8>()
+    public var pTypeFormat: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+public type XMIT_HELPER_ROUTINE = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>
+
+@When[Windows_Win32_System_Rpc == "on" && Windows_Win32_System_Com == "on"]
+@C
+public struct XMIT_ROUTINE_QUINTUPLE {
+    public var pfnTranslateToXmit: XMIT_HELPER_ROUTINE = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>(CPointer<Unit>())
+    public var pfnTranslateFromXmit: XMIT_HELPER_ROUTINE = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>(CPointer<Unit>())
+    public var pfnFreeXmit: XMIT_HELPER_ROUTINE = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>(CPointer<Unit>())
+    public var pfnFreeInst: XMIT_HELPER_ROUTINE = CFunc<(CPointer<MIDL_STUB_MESSAGE>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[RPCNS4 == "on"]
+foreign {
+    func I_RpcNsGetBuffer(Message: CPointer<RPC_MESSAGE>): Int32
+    func I_RpcNsRaiseException(Message: CPointer<RPC_MESSAGE>, Status: Int32): Unit
+    func I_RpcNsSendReceive(Message: CPointer<RPC_MESSAGE>, Handle: CPointer<CPointer<Unit>>): Int32
+    func I_RpcReBindBuffer(Message: CPointer<RPC_MESSAGE>): Int32
+    func RpcIfIdVectorFree(IfIdVector: CPointer<CPointer<RPC_IF_ID_VECTOR>>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: BindingVec optional
+    // param-hint: ObjectUuidVec optional
+    func RpcNsBindingExportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, BindingVec: CPointer<RPC_BINDING_VECTOR>, ObjectUuidVec: CPointer<UUID_VECTOR>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjectVector optional
+    func RpcNsBindingExportPnPA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTOR>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjectVector optional
+    func RpcNsBindingExportPnPW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTOR>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: BindingVec optional
+    // param-hint: ObjectUuidVec optional
+    func RpcNsBindingExportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, BindingVec: CPointer<RPC_BINDING_VECTOR>, ObjectUuidVec: CPointer<UUID_VECTOR>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjUuid optional
+    func RpcNsBindingImportBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, ImportContext: CPointer<CPointer<Unit>>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjUuid optional
+    func RpcNsBindingImportBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, ImportContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsBindingImportDone(ImportContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsBindingImportNext(ImportContext: CPointer<Unit>, Binding: CPointer<CPointer<Unit>>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjUuid optional
+    func RpcNsBindingLookupBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, BindingMaxCount: UInt32, LookupContext: CPointer<CPointer<Unit>>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjUuid optional
+    func RpcNsBindingLookupBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjUuid: CPointer<GUID>, BindingMaxCount: UInt32, LookupContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsBindingLookupDone(LookupContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsBindingLookupNext(LookupContext: CPointer<Unit>, BindingVec: CPointer<CPointer<RPC_BINDING_VECTOR>>): Int32
+    func RpcNsBindingSelect(BindingVec: CPointer<RPC_BINDING_VECTOR>, Binding: CPointer<CPointer<Unit>>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjectUuidVec optional
+    func RpcNsBindingUnexportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectUuidVec: CPointer<UUID_VECTOR>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjectVector optional
+    func RpcNsBindingUnexportPnPA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTOR>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjectVector optional
+    func RpcNsBindingUnexportPnPW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectVector: CPointer<UUID_VECTOR>): Int32
+    // param-hint: EntryName optional
+    // param-hint: IfSpec optional
+    // param-hint: ObjectUuidVec optional
+    func RpcNsBindingUnexportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfSpec: CPointer<Unit>, ObjectUuidVec: CPointer<UUID_VECTOR>): Int32
+    func RpcNsEntryExpandNameA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, ExpandedName: CPointer<CPointer<UInt8>>): Int32
+    func RpcNsEntryExpandNameW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, ExpandedName: CPointer<CPointer<UInt16>>): Int32
+    func RpcNsEntryObjectInqBeginA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, InquiryContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsEntryObjectInqBeginW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, InquiryContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsEntryObjectInqDone(InquiryContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsEntryObjectInqNext(InquiryContext: CPointer<Unit>, ObjUuid: CPointer<GUID>): Int32
+    // param-hint: GroupName optional
+    func RpcNsGroupDeleteA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>): Int32
+    // param-hint: GroupName optional
+    func RpcNsGroupDeleteW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>): Int32
+    func RpcNsGroupMbrAddA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): Int32
+    func RpcNsGroupMbrAddW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): Int32
+    func RpcNsGroupMbrInqBeginA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, InquiryContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsGroupMbrInqBeginW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, InquiryContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsGroupMbrInqDone(InquiryContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsGroupMbrInqNextA(InquiryContext: CPointer<Unit>, MemberName: CPointer<CPointer<UInt8>>): Int32
+    func RpcNsGroupMbrInqNextW(InquiryContext: CPointer<Unit>, MemberName: CPointer<CPointer<UInt16>>): Int32
+    func RpcNsGroupMbrRemoveA(GroupNameSyntax: UInt32, GroupName: CPointer<UInt8>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): Int32
+    func RpcNsGroupMbrRemoveW(GroupNameSyntax: UInt32, GroupName: CPointer<UInt16>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): Int32
+    // param-hint: IfId optional
+    // param-hint: ObjectUuidVec optional
+    func RpcNsMgmtBindingUnexportA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, ObjectUuidVec: CPointer<UUID_VECTOR>): Int32
+    // param-hint: IfId optional
+    // param-hint: ObjectUuidVec optional
+    func RpcNsMgmtBindingUnexportW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, ObjectUuidVec: CPointer<UUID_VECTOR>): Int32
+    func RpcNsMgmtEntryCreateA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): Int32
+    func RpcNsMgmtEntryCreateW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): Int32
+    func RpcNsMgmtEntryDeleteA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): Int32
+    func RpcNsMgmtEntryDeleteW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): Int32
+    func RpcNsMgmtEntryInqIfIdsA(EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>, IfIdVec: CPointer<CPointer<RPC_IF_ID_VECTOR>>): Int32
+    func RpcNsMgmtEntryInqIfIdsW(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, IfIdVec: CPointer<CPointer<RPC_IF_ID_VECTOR>>): Int32
+    func RpcNsMgmtHandleSetExpAge(NsHandle: CPointer<Unit>, ExpirationAge: UInt32): Int32
+    func RpcNsMgmtInqExpAge(ExpirationAge: CPointer<UInt32>): Int32
+    func RpcNsMgmtSetExpAge(ExpirationAge: UInt32): Int32
+    func RpcNsProfileDeleteA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>): Int32
+    func RpcNsProfileDeleteW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>): Int32
+    // param-hint: IfId optional
+    // param-hint: Annotation optional
+    func RpcNsProfileEltAddA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, IfId: CPointer<RPC_IF_ID>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>, Priority: UInt32, Annotation: CPointer<UInt8>): Int32
+    // param-hint: IfId optional
+    // param-hint: Annotation optional
+    func RpcNsProfileEltAddW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, IfId: CPointer<RPC_IF_ID>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>, Priority: UInt32, Annotation: CPointer<UInt16>): Int32
+    // param-hint: IfId optional
+    // param-hint: MemberName optional
+    func RpcNsProfileEltInqBeginA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, InquiryType: UInt32, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>, InquiryContext: CPointer<CPointer<Unit>>): Int32
+    // param-hint: IfId optional
+    // param-hint: MemberName optional
+    func RpcNsProfileEltInqBeginW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, InquiryType: UInt32, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>, InquiryContext: CPointer<CPointer<Unit>>): Int32
+    func RpcNsProfileEltInqDone(InquiryContext: CPointer<CPointer<Unit>>): Int32
+    // param-hint: IfId optional
+    func RpcNsProfileEltInqNextA(InquiryContext: CPointer<Unit>, IfId: CPointer<RPC_IF_ID>, MemberName: CPointer<CPointer<UInt8>>, Priority: CPointer<UInt32>, Annotation: CPointer<CPointer<UInt8>>): Int32
+    // param-hint: IfId optional
+    func RpcNsProfileEltInqNextW(InquiryContext: CPointer<Unit>, IfId: CPointer<RPC_IF_ID>, MemberName: CPointer<CPointer<UInt16>>, Priority: CPointer<UInt32>, Annotation: CPointer<CPointer<UInt16>>): Int32
+    // param-hint: IfId optional
+    func RpcNsProfileEltRemoveA(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt8>, IfId: CPointer<RPC_IF_ID>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt8>): Int32
+    // param-hint: IfId optional
+    func RpcNsProfileEltRemoveW(ProfileNameSyntax: UInt32, ProfileName: CPointer<UInt16>, IfId: CPointer<RPC_IF_ID>, MemberNameSyntax: UInt32, MemberName: CPointer<UInt16>): Int32
+}
+
+@When[RPCRT4 == "on" && Windows_Win32_System_Com == "on"]
 @CallingConv[CDECL]
 foreign {
     // pinvoke-hint: cc=cdecl
@@ -4187,111 +4234,106 @@ foreign {
 @When[RPCRT4 == "on"]
 foreign {
     // param-hint: ErrorText fixed=256
-    func DceErrorInqTextA(RpcStatus: RPC_STATUS, ErrorText: CPointer<UInt8>): RPC_STATUS
+    func DceErrorInqTextA(RpcStatus: Int32, ErrorText: CPointer<UInt8>): Int32
     // param-hint: ErrorText fixed=256
-    func DceErrorInqTextW(RpcStatus: RPC_STATUS, ErrorText: CPointer<UInt16>): RPC_STATUS
-    func IUnknown_AddRef_Proxy(This_: CPointer<Unit>): UInt32
-    func IUnknown_QueryInterface_Proxy(This_: CPointer<Unit>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
-    func IUnknown_Release_Proxy(This_: CPointer<Unit>): UInt32
+    func DceErrorInqTextW(RpcStatus: Int32, ErrorText: CPointer<UInt16>): Int32
     func I_RpcAllocate(Size: UInt32): CPointer<Unit>
-    func I_RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATE>, ExceptionCode: UInt32): RPC_STATUS
-    func I_RpcAsyncSetHandle(Message: CPointer<RPC_MESSAGE>, pAsync: CPointer<RPC_ASYNC_STATE>): RPC_STATUS
-    func I_RpcBindingCopy(SourceBinding: CPointer<Unit>, DestinationBinding: CPointer<CPointer<Unit>>): RPC_STATUS
-    func I_RpcBindingCreateNP(ServerName: CPointer<UInt16>, ServiceName: CPointer<UInt16>, NetworkOptions: CPointer<UInt16>, Binding: CPointer<CPointer<Unit>>): RPC_STATUS
-    func I_RpcBindingHandleToAsyncHandle(Binding: CPointer<Unit>, AsyncHandle: CPointer<CPointer<Unit>>): RPC_STATUS
+    func I_RpcBindingCopy(SourceBinding: CPointer<Unit>, DestinationBinding: CPointer<CPointer<Unit>>): Int32
+    func I_RpcBindingCreateNP(ServerName: CPointer<UInt16>, ServiceName: CPointer<UInt16>, NetworkOptions: CPointer<UInt16>, Binding: CPointer<CPointer<Unit>>): Int32
+    func I_RpcBindingHandleToAsyncHandle(Binding: CPointer<Unit>, AsyncHandle: CPointer<CPointer<Unit>>): Int32
     // param-hint: TokenId optional
     // param-hint: AuthenticationId optional
     // param-hint: ModifiedId optional
-    func I_RpcBindingInqClientTokenAttributes(Binding: CPointer<Unit>, TokenId: CPointer<Win32_Foundation.LUID>, AuthenticationId: CPointer<Win32_Foundation.LUID>, ModifiedId: CPointer<Win32_Foundation.LUID>): RPC_STATUS
-    func I_RpcBindingInqDynamicEndpointA(Binding: CPointer<Unit>, DynamicEndpoint: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func I_RpcBindingInqDynamicEndpointW(Binding: CPointer<Unit>, DynamicEndpoint: CPointer<CPointer<UInt16>>): RPC_STATUS
-    func I_RpcBindingInqLocalClientPID(Binding: CPointer<Unit>, Pid: CPointer<UInt32>): RPC_STATUS
-    func I_RpcBindingInqMarshalledTargetInfo(Binding: CPointer<Unit>, MarshalledTargetInfoSize: CPointer<UInt32>, MarshalledTargetInfo: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func I_RpcBindingInqSecurityContext(Binding: CPointer<Unit>, SecurityContextHandle: CPointer<CPointer<Unit>>): RPC_STATUS
+    func I_RpcBindingInqClientTokenAttributes(Binding: CPointer<Unit>, TokenId: CPointer<Win32_Foundation.LUID>, AuthenticationId: CPointer<Win32_Foundation.LUID>, ModifiedId: CPointer<Win32_Foundation.LUID>): Int32
+    func I_RpcBindingInqDynamicEndpointA(Binding: CPointer<Unit>, DynamicEndpoint: CPointer<CPointer<UInt8>>): Int32
+    func I_RpcBindingInqDynamicEndpointW(Binding: CPointer<Unit>, DynamicEndpoint: CPointer<CPointer<UInt16>>): Int32
+    func I_RpcBindingInqLocalClientPID(Binding: CPointer<Unit>, Pid: CPointer<UInt32>): Int32
+    func I_RpcBindingInqMarshalledTargetInfo(Binding: CPointer<Unit>, MarshalledTargetInfoSize: CPointer<UInt32>, MarshalledTargetInfo: CPointer<CPointer<UInt8>>): Int32
+    func I_RpcBindingInqSecurityContext(Binding: CPointer<Unit>, SecurityContextHandle: CPointer<CPointer<Unit>>): Int32
     // param-hint: Binding optional
-    func I_RpcBindingInqSecurityContextKeyInfo(Binding: CPointer<Unit>, KeyInfo: CPointer<Unit>): RPC_STATUS
-    func I_RpcBindingInqTransportType(Binding: CPointer<Unit>, Type: CPointer<UInt32>): RPC_STATUS
-    func I_RpcBindingInqWireIdForSnego(Binding: CPointer<Unit>, WireId: CPointer<UInt8>): RPC_STATUS
-    func I_RpcBindingIsClientLocal(BindingHandle: CPointer<Unit>, ClientLocalFlag: CPointer<UInt32>): RPC_STATUS
-    func I_RpcBindingIsServerLocal(Binding: CPointer<Unit>, ServerLocalFlag: CPointer<UInt32>): RPC_STATUS
-    func I_RpcBindingSetPrivateOption(hBinding: CPointer<Unit>, option: UInt32, optionValue: UIntNative): RPC_STATUS
-    func I_RpcBindingToStaticStringBindingW(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt16>>): RPC_STATUS
+    func I_RpcBindingInqSecurityContextKeyInfo(Binding: CPointer<Unit>, KeyInfo: CPointer<Unit>): Int32
+    func I_RpcBindingInqTransportType(Binding: CPointer<Unit>, Type: CPointer<UInt32>): Int32
+    func I_RpcBindingInqWireIdForSnego(Binding: CPointer<Unit>, WireId: CPointer<UInt8>): Int32
+    func I_RpcBindingIsClientLocal(BindingHandle: CPointer<Unit>, ClientLocalFlag: CPointer<UInt32>): Int32
+    func I_RpcBindingIsServerLocal(Binding: CPointer<Unit>, ServerLocalFlag: CPointer<UInt32>): Int32
+    func I_RpcBindingSetPrivateOption(hBinding: CPointer<Unit>, option: UInt32, optionValue: UIntNative): Int32
+    func I_RpcBindingToStaticStringBindingW(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt16>>): Int32
     func I_RpcClearMutex(Mutex: CPointer<Unit>): Unit
     func I_RpcDeleteMutex(Mutex: CPointer<Unit>): Unit
     func I_RpcExceptionFilter(ExceptionCode: UInt32): Int32
     func I_RpcFree(Object: CPointer<Unit>): Unit
-    func I_RpcFreeBuffer(Message: CPointer<RPC_MESSAGE>): RPC_STATUS
-    func I_RpcFreePipeBuffer(Message: CPointer<RPC_MESSAGE>): RPC_STATUS
-    func I_RpcGetBuffer(Message: CPointer<RPC_MESSAGE>): RPC_STATUS
-    func I_RpcGetBufferWithObject(Message: CPointer<RPC_MESSAGE>, ObjectUuid: CPointer<GUID>): RPC_STATUS
+    func I_RpcFreeBuffer(Message: CPointer<RPC_MESSAGE>): Int32
+    func I_RpcFreePipeBuffer(Message: CPointer<RPC_MESSAGE>): Int32
+    func I_RpcGetBuffer(Message: CPointer<RPC_MESSAGE>): Int32
+    func I_RpcGetBufferWithObject(Message: CPointer<RPC_MESSAGE>, ObjectUuid: CPointer<GUID>): Int32
     func I_RpcGetCurrentCallHandle(): CPointer<Unit>
-    func I_RpcGetDefaultSD(ppSecurityDescriptor: CPointer<CPointer<Unit>>): RPC_STATUS
-    func I_RpcGetExtendedError(): RPC_STATUS
-    func I_RpcIfInqTransferSyntaxes(RpcIfHandle: CPointer<Unit>, TransferSyntaxes: CPointer<RPC_TRANSFER_SYNTAX>, TransferSyntaxSize: UInt32, TransferSyntaxCount: CPointer<UInt32>): RPC_STATUS
-    func I_RpcMapWin32Status(Status: RPC_STATUS): Int32
-    func I_RpcMgmtEnableDedicatedThreadPool(): RPC_STATUS
-    func I_RpcNegotiateTransferSyntax(Message: CPointer<RPC_MESSAGE>): RPC_STATUS
-    func I_RpcNsBindingSetEntryNameA(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): RPC_STATUS
-    func I_RpcNsBindingSetEntryNameW(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): RPC_STATUS
-    func I_RpcNsInterfaceExported(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, RpcInterfaceInformation: CPointer<RPC_SERVER_INTERFACE>): RPC_STATUS
-    func I_RpcNsInterfaceUnexported(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, RpcInterfaceInformation: CPointer<RPC_SERVER_INTERFACE>): RPC_STATUS
+    func I_RpcGetDefaultSD(ppSecurityDescriptor: CPointer<CPointer<Unit>>): Int32
+    func I_RpcGetExtendedError(): Int32
+    func I_RpcIfInqTransferSyntaxes(RpcIfHandle: CPointer<Unit>, TransferSyntaxes: CPointer<RPC_TRANSFER_SYNTAX>, TransferSyntaxSize: UInt32, TransferSyntaxCount: CPointer<UInt32>): Int32
+    func I_RpcMapWin32Status(Status: Int32): Int32
+    func I_RpcMgmtEnableDedicatedThreadPool(): Int32
+    func I_RpcNegotiateTransferSyntax(Message: CPointer<RPC_MESSAGE>): Int32
+    func I_RpcNsBindingSetEntryNameA(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<UInt8>): Int32
+    func I_RpcNsBindingSetEntryNameW(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>): Int32
+    func I_RpcNsInterfaceExported(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, RpcInterfaceInformation: CPointer<RPC_SERVER_INTERFACE>): Int32
+    func I_RpcNsInterfaceUnexported(EntryNameSyntax: UInt32, EntryName: CPointer<UInt16>, RpcInterfaceInformation: CPointer<RPC_SERVER_INTERFACE>): Int32
     // param-hint: Binding optional
-    func I_RpcOpenClientProcess(Binding: CPointer<Unit>, DesiredAccess: UInt32, ClientProcess: CPointer<CPointer<Unit>>): RPC_STATUS
+    func I_RpcOpenClientProcess(Binding: CPointer<Unit>, DesiredAccess: UInt32, ClientProcess: CPointer<CPointer<Unit>>): Int32
     func I_RpcPauseExecution(Milliseconds: UInt32): Unit
-    func I_RpcReallocPipeBuffer(Message: CPointer<RPC_MESSAGE>, NewSize: UInt32): RPC_STATUS
-    func I_RpcReceive(Message: CPointer<RPC_MESSAGE>, Size: UInt32): RPC_STATUS
-    func I_RpcRecordCalloutFailure(RpcStatus: RPC_STATUS, CallOutState: CPointer<RDR_CALLOUT_STATE>, DllName: CPointer<UInt16>): Unit
+    func I_RpcReallocPipeBuffer(Message: CPointer<RPC_MESSAGE>, NewSize: UInt32): Int32
+    func I_RpcReceive(Message: CPointer<RPC_MESSAGE>, Size: UInt32): Int32
+    func I_RpcRecordCalloutFailure(RpcStatus: Int32, CallOutState: CPointer<RDR_CALLOUT_STATE>, DllName: CPointer<UInt16>): Unit
     func I_RpcRequestMutex(Mutex: CPointer<CPointer<Unit>>): Unit
-    func I_RpcSend(Message: CPointer<RPC_MESSAGE>): RPC_STATUS
-    func I_RpcSendReceive(Message: CPointer<RPC_MESSAGE>): RPC_STATUS
-    func I_RpcServerCheckClientRestriction(Context: CPointer<Unit>): RPC_STATUS
+    func I_RpcSend(Message: CPointer<RPC_MESSAGE>): Int32
+    func I_RpcSendReceive(Message: CPointer<RPC_MESSAGE>): Int32
+    func I_RpcServerCheckClientRestriction(Context: CPointer<Unit>): Int32
     func I_RpcServerDisableExceptionFilter(): Int32
     // param-hint: Binding optional
-    func I_RpcServerGetAssociationID(Binding: CPointer<Unit>, AssociationID: CPointer<UInt32>): RPC_STATUS
+    func I_RpcServerGetAssociationID(Binding: CPointer<Unit>, AssociationID: CPointer<UInt32>): Int32
     func I_RpcServerInqAddressChangeFn(): CPointer<RPC_ADDRESS_CHANGE_FN>
-    func I_RpcServerInqLocalConnAddress(Binding: CPointer<Unit>, Buffer: CPointer<Unit>, BufferSize: CPointer<UInt32>, AddressFormat: CPointer<UInt32>): RPC_STATUS
-    func I_RpcServerInqRemoteConnAddress(Binding: CPointer<Unit>, Buffer: CPointer<Unit>, BufferSize: CPointer<UInt32>, AddressFormat: CPointer<UInt32>): RPC_STATUS
-    func I_RpcServerInqTransportType(Type: CPointer<UInt32>): RPC_STATUS
-    func I_RpcServerRegisterForwardFunction(pForwardFunction: CPointer<RPC_FORWARD_FUNCTION>): RPC_STATUS
-    func I_RpcServerSetAddressChangeFn(pAddressChangeFn: CPointer<RPC_ADDRESS_CHANGE_FN>): RPC_STATUS
-    func I_RpcServerStartService(Protseq: CPointer<UInt16>, Endpoint: CPointer<UInt16>, IfSpec: CPointer<Unit>): RPC_STATUS
+    func I_RpcServerInqLocalConnAddress(Binding: CPointer<Unit>, Buffer: CPointer<Unit>, BufferSize: CPointer<UInt32>, AddressFormat: CPointer<UInt32>): Int32
+    func I_RpcServerInqRemoteConnAddress(Binding: CPointer<Unit>, Buffer: CPointer<Unit>, BufferSize: CPointer<UInt32>, AddressFormat: CPointer<UInt32>): Int32
+    func I_RpcServerInqTransportType(Type: CPointer<UInt32>): Int32
+    func I_RpcServerRegisterForwardFunction(pForwardFunction: CPointer<RPC_FORWARD_FUNCTION>): Int32
+    func I_RpcServerSetAddressChangeFn(pAddressChangeFn: CPointer<RPC_ADDRESS_CHANGE_FN>): Int32
+    func I_RpcServerStartService(Protseq: CPointer<UInt16>, Endpoint: CPointer<UInt16>, IfSpec: CPointer<Unit>): Int32
     // param-hint: Binding optional
     // param-hint: hEvent optional
-    func I_RpcServerSubscribeForDisconnectNotification(Binding: CPointer<Unit>, hEvent: CPointer<Unit>): RPC_STATUS
+    func I_RpcServerSubscribeForDisconnectNotification(Binding: CPointer<Unit>, hEvent: CPointer<Unit>): Int32
     // param-hint: Binding optional
-    func I_RpcServerSubscribeForDisconnectNotification2(Binding: CPointer<Unit>, hEvent: CPointer<Unit>, SubscriptionId: CPointer<GUID>): RPC_STATUS
+    func I_RpcServerSubscribeForDisconnectNotification2(Binding: CPointer<Unit>, hEvent: CPointer<Unit>, SubscriptionId: CPointer<GUID>): Int32
     // param-hint: Binding optional
-    func I_RpcServerUnsubscribeForDisconnectNotification(Binding: CPointer<Unit>, SubscriptionId: GUID): RPC_STATUS
+    func I_RpcServerUnsubscribeForDisconnectNotification(Binding: CPointer<Unit>, SubscriptionId: GUID): Int32
     // param-hint: NetworkAddress optional
     // param-hint: SecurityDescriptor optional
-    func I_RpcServerUseProtseq2A(NetworkAddress: CPointer<UInt8>, Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): RPC_STATUS
+    func I_RpcServerUseProtseq2A(NetworkAddress: CPointer<UInt8>, Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): Int32
     // param-hint: NetworkAddress optional
     // param-hint: SecurityDescriptor optional
-    func I_RpcServerUseProtseq2W(NetworkAddress: CPointer<UInt16>, Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): RPC_STATUS
+    func I_RpcServerUseProtseq2W(NetworkAddress: CPointer<UInt16>, Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): Int32
     // param-hint: NetworkAddress optional
     // param-hint: SecurityDescriptor optional
-    func I_RpcServerUseProtseqEp2A(NetworkAddress: CPointer<UInt8>, Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): RPC_STATUS
+    func I_RpcServerUseProtseqEp2A(NetworkAddress: CPointer<UInt8>, Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): Int32
     // param-hint: NetworkAddress optional
     // param-hint: SecurityDescriptor optional
-    func I_RpcServerUseProtseqEp2W(NetworkAddress: CPointer<UInt16>, Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): RPC_STATUS
+    func I_RpcServerUseProtseqEp2W(NetworkAddress: CPointer<UInt16>, Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<Unit>): Int32
     func I_RpcSessionStrictContextHandle(): Unit
     func I_RpcSsDontSerializeContext(): Unit
-    func I_RpcSystemHandleTypeSpecificWork(Handle: CPointer<Unit>, ActualType: UInt8, IdlType: UInt8, MarshalDirection: LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTION): RPC_STATUS
-    func I_RpcTurnOnEEInfoPropagation(): RPC_STATUS
-    func I_UuidCreate(Uuid: CPointer<GUID>): RPC_STATUS
+    func I_RpcSystemHandleTypeSpecificWork(Handle: CPointer<Unit>, ActualType: UInt8, IdlType: UInt8, MarshalDirection: Int32): Int32
+    func I_RpcTurnOnEEInfoPropagation(): Int32
+    func I_UuidCreate(Uuid: CPointer<GUID>): Int32
     // param-hint: pBuffer bytes=param[4] optional
     // param-hint: pEncodedSize optional
-    func MesBufferHandleReset(Handle: CPointer<Unit>, HandleStyle: UInt32, Operation: MIDL_ES_CODE, pBuffer: CPointer<CPointer<Int8>>, BufferSize: UInt32, pEncodedSize: CPointer<UInt32>): RPC_STATUS
+    func MesBufferHandleReset(Handle: CPointer<Unit>, HandleStyle: UInt32, Operation: Int32, pBuffer: CPointer<CPointer<Int8>>, BufferSize: UInt32, pEncodedSize: CPointer<UInt32>): Int32
     // param-hint: Buffer bytes=param[1]
-    func MesDecodeBufferHandleCreate(Buffer: CPointer<UInt8>, BufferSize: UInt32, pHandle: CPointer<CPointer<Unit>>): RPC_STATUS
-    func MesDecodeIncrementalHandleCreate(UserState: CPointer<Unit>, ReadFn: MIDL_ES_READ, pHandle: CPointer<CPointer<Unit>>): RPC_STATUS
-    func MesEncodeDynBufferHandleCreate(pBuffer: CPointer<CPointer<Int8>>, pEncodedSize: CPointer<UInt32>, pHandle: CPointer<CPointer<Unit>>): RPC_STATUS
+    func MesDecodeBufferHandleCreate(Buffer: CPointer<UInt8>, BufferSize: UInt32, pHandle: CPointer<CPointer<Unit>>): Int32
+    func MesDecodeIncrementalHandleCreate(UserState: CPointer<Unit>, ReadFn: MIDL_ES_READ, pHandle: CPointer<CPointer<Unit>>): Int32
+    func MesEncodeDynBufferHandleCreate(pBuffer: CPointer<CPointer<Int8>>, pEncodedSize: CPointer<UInt32>, pHandle: CPointer<CPointer<Unit>>): Int32
     // param-hint: pBuffer bytes=param[1]
-    func MesEncodeFixedBufferHandleCreate(pBuffer: CPointer<UInt8>, BufferSize: UInt32, pEncodedSize: CPointer<UInt32>, pHandle: CPointer<CPointer<Unit>>): RPC_STATUS
-    func MesEncodeIncrementalHandleCreate(UserState: CPointer<Unit>, AllocFn: MIDL_ES_ALLOC, WriteFn: MIDL_ES_WRITE, pHandle: CPointer<CPointer<Unit>>): RPC_STATUS
-    func MesHandleFree(Handle: CPointer<Unit>): RPC_STATUS
-    func MesIncrementalHandleReset(Handle: CPointer<Unit>, UserState: CPointer<Unit>, AllocFn: MIDL_ES_ALLOC, WriteFn: MIDL_ES_WRITE, ReadFn: MIDL_ES_READ, Operation: MIDL_ES_CODE): RPC_STATUS
-    func MesInqProcEncodingId(Handle: CPointer<Unit>, pInterfaceId: CPointer<RPC_SYNTAX_IDENTIFIER>, pProcNum: CPointer<UInt32>): RPC_STATUS
+    func MesEncodeFixedBufferHandleCreate(pBuffer: CPointer<UInt8>, BufferSize: UInt32, pEncodedSize: CPointer<UInt32>, pHandle: CPointer<CPointer<Unit>>): Int32
+    func MesEncodeIncrementalHandleCreate(UserState: CPointer<Unit>, AllocFn: MIDL_ES_ALLOC, WriteFn: MIDL_ES_WRITE, pHandle: CPointer<CPointer<Unit>>): Int32
+    func MesHandleFree(Handle: CPointer<Unit>): Int32
+    func MesIncrementalHandleReset(Handle: CPointer<Unit>, UserState: CPointer<Unit>, AllocFn: MIDL_ES_ALLOC, WriteFn: MIDL_ES_WRITE, ReadFn: MIDL_ES_READ, Operation: Int32): Int32
+    func MesInqProcEncodingId(Handle: CPointer<Unit>, pInterfaceId: CPointer<RPC_SYNTAX_IDENTIFIER>, pProcNum: CPointer<UInt32>): Int32
     func NDRCContextBinding(CContext: IntNative): CPointer<Unit>
     // param-hint: CContext optional
     func NDRCContextMarshall(CContext: IntNative, pBuff: CPointer<Unit>): Unit
@@ -4308,9 +4350,351 @@ foreign {
     func NDRSContextUnmarshallEx(BindingHandle: CPointer<Unit>, pBuff: CPointer<Unit>, DataRepresentation: UInt32): CPointer<NDR_SCONTEXT>
     func Ndr64AsyncServerCall64(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
     func Ndr64AsyncServerCallAll(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
+    func NdrAsyncServerCall(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
+    func NdrFullPointerXlatFree(pXlatTables: CPointer<FULL_PTR_XLAT_TABLES>): Unit
+    func NdrFullPointerXlatInit(NumberOfPointers: UInt32, XlatSide: Int32): CPointer<FULL_PTR_XLAT_TABLES>
+    func NdrMesSimpleTypeAlignSize(param0: CPointer<Unit>): UIntNative
+    func NdrMesSimpleTypeDecode(Handle: CPointer<Unit>, pObject: CPointer<Unit>, Size: Int16): Unit
+    func NdrOleAllocate(Size: UIntNative): CPointer<Unit>
+    func NdrOleFree(NodeToFree: CPointer<Unit>): Unit
+    func NdrRpcSmClientAllocate(Size: UIntNative): CPointer<Unit>
+    func NdrRpcSmClientFree(NodeToFree: CPointer<Unit>): Unit
+    func NdrRpcSsDefaultAllocate(Size: UIntNative): CPointer<Unit>
+    func NdrRpcSsDefaultFree(NodeToFree: CPointer<Unit>): Unit
+    func NdrServerCall2(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
+    func NdrServerCallAll(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
+    func NdrServerCallNdr64(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
+    func NdrStubCall2(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGE>, pdwStubPhase: CPointer<UInt32>): Int32
+    func NdrStubCall3(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGE>, pdwStubPhase: CPointer<UInt32>): Int32
+    func NdrUserMarshalSimpleTypeConvert(pFlags: CPointer<UInt32>, pBuffer: CPointer<UInt8>, FormatChar: UInt8): CPointer<UInt8>
+    func RpcBindingCopy(SourceBinding: CPointer<Unit>, DestinationBinding: CPointer<CPointer<Unit>>): Int32
+    func RpcBindingFree(Binding: CPointer<CPointer<Unit>>): Int32
+    func RpcBindingFromStringBindingA(StringBinding: CPointer<UInt8>, Binding: CPointer<CPointer<Unit>>): Int32
+    func RpcBindingFromStringBindingW(StringBinding: CPointer<UInt16>, Binding: CPointer<CPointer<Unit>>): Int32
+    // param-hint: ClientBinding optional
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthnLevel optional
+    // param-hint: AuthnSvc optional
+    // param-hint: AuthzSvc optional
+    func RpcBindingInqAuthClientA(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>): Int32
+    // param-hint: ClientBinding optional
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthnLevel optional
+    // param-hint: AuthnSvc optional
+    // param-hint: AuthzSvc optional
+    func RpcBindingInqAuthClientExA(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>, Flags: UInt32): Int32
+    // param-hint: ClientBinding optional
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthnLevel optional
+    // param-hint: AuthnSvc optional
+    // param-hint: AuthzSvc optional
+    func RpcBindingInqAuthClientExW(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>, Flags: UInt32): Int32
+    // param-hint: ClientBinding optional
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthnLevel optional
+    // param-hint: AuthnSvc optional
+    // param-hint: AuthzSvc optional
+    func RpcBindingInqAuthClientW(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>): Int32
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthnLevel optional
+    // param-hint: AuthnSvc optional
+    // param-hint: AuthIdentity optional
+    // param-hint: AuthzSvc optional
+    func RpcBindingInqAuthInfoA(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>): Int32
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthnLevel optional
+    // param-hint: AuthnSvc optional
+    // param-hint: AuthIdentity optional
+    // param-hint: AuthzSvc optional
+    func RpcBindingInqAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>): Int32
+    func RpcBindingInqMaxCalls(Binding: CPointer<Unit>, MaxCalls: CPointer<UInt32>): Int32
+    func RpcBindingInqObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): Int32
+    func RpcBindingInqOption(hBinding: CPointer<Unit>, option: UInt32, pOptionValue: CPointer<UIntNative>): Int32
+    func RpcBindingReset(Binding: CPointer<Unit>): Int32
+    // param-hint: ClientBinding optional
+    func RpcBindingServerFromClient(ClientBinding: CPointer<Unit>, ServerBinding: CPointer<CPointer<Unit>>): Int32
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthIdentity optional
+    func RpcBindingSetAuthInfoA(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt8>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): Int32
+    // param-hint: ServerPrincName optional
+    // param-hint: AuthIdentity optional
+    func RpcBindingSetAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt16>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): Int32
+    func RpcBindingSetObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): Int32
+    func RpcBindingSetOption(hBinding: CPointer<Unit>, option: UInt32, optionValue: UIntNative): Int32
+    func RpcBindingToStringBindingA(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt8>>): Int32
+    func RpcBindingToStringBindingW(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt16>>): Int32
+    func RpcBindingUnbind(Binding: CPointer<Unit>): Int32
+    func RpcBindingVectorFree(BindingVector: CPointer<CPointer<RPC_BINDING_VECTOR>>): Int32
+    func RpcCancelThread(Thread: CPointer<Unit>): Int32
+    func RpcCancelThreadEx(Thread: CPointer<Unit>, Timeout: Int32): Int32
+    // param-hint: UuidVector optional
+    // param-hint: Annotation optional
+    func RpcEpRegisterA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>, Annotation: CPointer<UInt8>): Int32
+    // param-hint: UuidVector optional
+    // param-hint: Annotation optional
+    func RpcEpRegisterNoReplaceA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>, Annotation: CPointer<UInt8>): Int32
+    // param-hint: UuidVector optional
+    // param-hint: Annotation optional
+    func RpcEpRegisterNoReplaceW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>, Annotation: CPointer<UInt16>): Int32
+    // param-hint: UuidVector optional
+    // param-hint: Annotation optional
+    func RpcEpRegisterW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>, Annotation: CPointer<UInt16>): Int32
+    func RpcEpResolveBinding(Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): Int32
+    // param-hint: UuidVector optional
+    func RpcEpUnregister(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>): Int32
+    func RpcErrorAddRecord(ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFO>): Int32
+    func RpcErrorClearInformation(): Unit
+    func RpcErrorEndEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>): Int32
+    func RpcErrorGetNextRecord(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>, CopyStrings: Int32, ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFO>): Int32
+    func RpcErrorGetNumberOfRecords(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>, Records: CPointer<Int32>): Int32
+    // param-hint: ErrorBlob bytes=param[1]
+    func RpcErrorLoadErrorInfo(ErrorBlob: CPointer<Unit>, BlobSize: UIntNative, EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>): Int32
+    func RpcErrorResetEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>): Int32
+    func RpcErrorSaveErrorInfo(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>, ErrorBlob: CPointer<CPointer<Unit>>, BlobSize: CPointer<UIntNative>): Int32
+    func RpcErrorStartEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>): Int32
+    func RpcExceptionFilter(ExceptionCode: UInt32): Int32
+    func RpcFreeAuthorizationContext(pAuthzClientContext: CPointer<CPointer<Unit>>): Int32
+    // param-hint: ClientBinding optional
+    // param-hint: Reserved1 optional
+    // param-hint: pExpirationTime optional
+    // param-hint: Reserved4 optional
+    func RpcGetAuthorizationContextForClient(ClientBinding: CPointer<Unit>, ImpersonateOnReturn: Int32, Reserved1: CPointer<Unit>, pExpirationTime: CPointer<Int64>, Reserved2: Win32_Foundation.LUID, Reserved3: UInt32, Reserved4: CPointer<Unit>, pAuthzClientContext: CPointer<CPointer<Unit>>): Int32
+    func RpcIfInqId(RpcIfHandle: CPointer<Unit>, RpcIfId: CPointer<RPC_IF_ID>): Int32
+    // param-hint: BindingHandle optional
+    func RpcImpersonateClient(BindingHandle: CPointer<Unit>): Int32
+    // param-hint: BindingHandle optional
+    func RpcImpersonateClient2(BindingHandle: CPointer<Unit>): Int32
+    // param-hint: BindingHandle optional
+    func RpcImpersonateClientContainer(BindingHandle: CPointer<Unit>): Int32
+    func RpcMgmtEnableIdleCleanup(): Int32
+    // param-hint: EpBinding optional
+    // param-hint: IfId optional
+    // param-hint: VersOption optional
+    // param-hint: ObjectUuid optional
+    func RpcMgmtEpEltInqBegin(EpBinding: CPointer<Unit>, InquiryType: UInt32, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, ObjectUuid: CPointer<GUID>, InquiryContext: CPointer<CPointer<CPointer<Unit>>>): Int32
+    func RpcMgmtEpEltInqDone(InquiryContext: CPointer<CPointer<CPointer<Unit>>>): Int32
+    // param-hint: Binding optional
+    // param-hint: ObjectUuid optional
+    // param-hint: Annotation optional
+    func RpcMgmtEpEltInqNextA(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_ID>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt8>>): Int32
+    // param-hint: Binding optional
+    // param-hint: ObjectUuid optional
+    // param-hint: Annotation optional
+    func RpcMgmtEpEltInqNextW(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_ID>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt16>>): Int32
+    // param-hint: EpBinding optional
+    // param-hint: ObjectUuid optional
+    func RpcMgmtEpUnregister(EpBinding: CPointer<Unit>, IfId: CPointer<RPC_IF_ID>, Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): Int32
+    func RpcMgmtInqComTimeout(Binding: CPointer<Unit>, Timeout: CPointer<UInt32>): Int32
+    func RpcMgmtInqDefaultProtectLevel(AuthnSvc: UInt32, AuthnLevel: CPointer<UInt32>): Int32
+    // param-hint: Binding optional
+    func RpcMgmtInqIfIds(Binding: CPointer<Unit>, IfIdVector: CPointer<CPointer<RPC_IF_ID_VECTOR>>): Int32
+    // param-hint: Binding optional
+    func RpcMgmtInqServerPrincNameA(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt8>>): Int32
+    // param-hint: Binding optional
+    func RpcMgmtInqServerPrincNameW(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt16>>): Int32
+    // param-hint: Binding optional
+    func RpcMgmtInqStats(Binding: CPointer<Unit>, Statistics: CPointer<CPointer<RPC_STATS_VECTOR>>): Int32
+    // param-hint: Binding optional
+    func RpcMgmtIsServerListening(Binding: CPointer<Unit>): Int32
+    func RpcMgmtSetAuthorizationFn(AuthorizationFn: RPC_MGMT_AUTHORIZATION_FN): Int32
+    func RpcMgmtSetCancelTimeout(Timeout: Int32): Int32
+    func RpcMgmtSetComTimeout(Binding: CPointer<Unit>, Timeout: UInt32): Int32
+    func RpcMgmtSetServerStackSize(ThreadStackSize: UInt32): Int32
+    func RpcMgmtStatsVectorFree(StatsVector: CPointer<CPointer<RPC_STATS_VECTOR>>): Int32
+    // param-hint: Binding optional
+    func RpcMgmtStopServerListening(Binding: CPointer<Unit>): Int32
+    func RpcMgmtWaitServerListen(): Int32
+    func RpcNetworkInqProtseqsA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORA>>): Int32
+    func RpcNetworkInqProtseqsW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORW>>): Int32
+    func RpcNetworkIsProtseqValidA(Protseq: CPointer<UInt8>): Int32
+    func RpcNetworkIsProtseqValidW(Protseq: CPointer<UInt16>): Int32
+    func RpcNsBindingInqEntryNameA(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt8>>): Int32
+    func RpcNsBindingInqEntryNameW(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt16>>): Int32
+    // param-hint: TypeUuid optional
+    func RpcObjectInqType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): Int32
+    func RpcObjectSetInqFn(InquiryFn: RPC_OBJECT_INQ_FN): Int32
+    // param-hint: TypeUuid optional
+    func RpcObjectSetType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): Int32
+    func RpcProtseqVectorFreeA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORA>>): Int32
+    func RpcProtseqVectorFreeW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORW>>): Int32
+    func RpcRaiseException(exception: Int32): Unit
+    func RpcRevertContainerImpersonation(): Int32
+    func RpcRevertToSelf(): Int32
+    // param-hint: BindingHandle optional
+    func RpcRevertToSelfEx(BindingHandle: CPointer<Unit>): Int32
+    func RpcServerCompleteSecurityCallback(BindingHandle: CPointer<Unit>, Status: Int32): Int32
+    func RpcServerInqBindingHandle(Binding: CPointer<CPointer<Unit>>): Int32
+    func RpcServerInqBindings(BindingVector: CPointer<CPointer<RPC_BINDING_VECTOR>>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerInqBindingsEx(SecurityDescriptor: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTOR>>): Int32
+    // param-hint: ClientBinding optional
+    func RpcServerInqCallAttributesA(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): Int32
+    // param-hint: ClientBinding optional
+    func RpcServerInqCallAttributesW(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): Int32
+    func RpcServerInqDefaultPrincNameA(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt8>>): Int32
+    func RpcServerInqDefaultPrincNameW(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt16>>): Int32
+    // param-hint: MgrTypeUuid optional
+    func RpcServerInqIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<CPointer<Unit>>): Int32
+    func RpcServerInterfaceGroupActivate(IfGroup: CPointer<Unit>): Int32
+    func RpcServerInterfaceGroupClose(IfGroup: CPointer<Unit>): Int32
+    // param-hint: Interfaces len=param[1]
+    // param-hint: Endpoints len=param[3]
+    func RpcServerInterfaceGroupCreateA(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEA>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEA>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): Int32
+    // param-hint: Interfaces len=param[1]
+    // param-hint: Endpoints len=param[3]
+    func RpcServerInterfaceGroupCreateW(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEW>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEW>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): Int32
+    func RpcServerInterfaceGroupDeactivate(IfGroup: CPointer<Unit>, ForceDeactivation: UInt32): Int32
+    func RpcServerInterfaceGroupInqBindings(IfGroup: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTOR>>): Int32
+    func RpcServerListen(MinimumCallThreads: UInt32, MaxCalls: UInt32, DontWait: UInt32): Int32
+    // param-hint: ServerPrincName optional
+    // param-hint: GetKeyFn optional
+    // param-hint: Arg optional
+    func RpcServerRegisterAuthInfoA(ServerPrincName: CPointer<UInt8>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): Int32
+    // param-hint: ServerPrincName optional
+    // param-hint: GetKeyFn optional
+    // param-hint: Arg optional
+    func RpcServerRegisterAuthInfoW(ServerPrincName: CPointer<UInt16>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): Int32
+    // param-hint: MgrTypeUuid optional
+    // param-hint: MgrEpv optional
+    func RpcServerRegisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>): Int32
+    // param-hint: MgrTypeUuid optional
+    // param-hint: MgrEpv optional
+    // param-hint: IfCallbackFn optional
+    func RpcServerRegisterIf2(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallbackFn: RPC_IF_CALLBACK_FN): Int32
+    // param-hint: MgrTypeUuid optional
+    // param-hint: MgrEpv optional
+    // param-hint: IfCallback optional
+    // param-hint: SecurityDescriptor optional
+    func RpcServerRegisterIf3(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallback: RPC_IF_CALLBACK_FN, SecurityDescriptor: CPointer<Unit>): Int32
+    // param-hint: MgrTypeUuid optional
+    // param-hint: MgrEpv optional
+    // param-hint: IfCallback optional
+    func RpcServerRegisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, IfCallback: RPC_IF_CALLBACK_FN): Int32
+    // param-hint: BindingHandle optional
+    func RpcServerTestCancel(BindingHandle: CPointer<Unit>): Int32
+    // param-hint: IfSpec optional
+    // param-hint: MgrTypeUuid optional
+    func RpcServerUnregisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, WaitForCallsToComplete: UInt32): Int32
+    // param-hint: IfSpec optional
+    // param-hint: MgrTypeUuid optional
+    func RpcServerUnregisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, RundownContextHandles: Int32): Int32
+    // param-hint: Binding optional
+    func RpcServerUnsubscribeForNotification(Binding: CPointer<Unit>, Notification: Int32, NotificationsQueued: CPointer<UInt32>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseAllProtseqs(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseAllProtseqsEx(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseAllProtseqsIf(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseAllProtseqsIfEx(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqEpA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqEpExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqEpExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqEpW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqIfA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqIfExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqIfExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqIfW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): Int32
+    // param-hint: SecurityDescriptor optional
+    func RpcServerUseProtseqW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): Int32
+    func RpcServerYield(): Unit
+    func RpcSmAllocate(Size: UIntNative, pStatus: CPointer<Int32>): CPointer<Unit>
+    func RpcSmClientFree(pNodeToFree: CPointer<Unit>): Int32
+    func RpcSmDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): Int32
+    func RpcSmDisableAllocate(): Int32
+    func RpcSmEnableAllocate(): Int32
+    func RpcSmFree(NodeToFree: CPointer<Unit>): Int32
+    func RpcSmGetThreadHandle(pStatus: CPointer<Int32>): CPointer<Unit>
+    func RpcSmSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): Int32
+    func RpcSmSetThreadHandle(Id: CPointer<Unit>): Int32
+    func RpcSmSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): Int32
+    func RpcSsAllocate(Size: UIntNative): CPointer<Unit>
+    // param-hint: ServerBindingHandle optional
+    func RpcSsContextLockExclusive(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): Int32
+    func RpcSsContextLockShared(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): Int32
+    func RpcSsDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): Unit
+    func RpcSsDisableAllocate(): Unit
+    func RpcSsDontSerializeContext(): Unit
+    func RpcSsEnableAllocate(): Unit
+    func RpcSsFree(NodeToFree: CPointer<Unit>): Unit
+    func RpcSsGetContextBinding(ContextHandle: CPointer<Unit>, Binding: CPointer<CPointer<Unit>>): Int32
+    func RpcSsGetThreadHandle(): CPointer<Unit>
+    func RpcSsSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): Unit
+    func RpcSsSetThreadHandle(Id: CPointer<Unit>): Unit
+    func RpcSsSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): Unit
+    // param-hint: ObjUuid optional
+    // param-hint: ProtSeq optional
+    // param-hint: NetworkAddr optional
+    // param-hint: Endpoint optional
+    // param-hint: Options optional
+    // param-hint: StringBinding optional
+    func RpcStringBindingComposeA(ObjUuid: CPointer<UInt8>, ProtSeq: CPointer<UInt8>, NetworkAddr: CPointer<UInt8>, Endpoint: CPointer<UInt8>, Options: CPointer<UInt8>, StringBinding: CPointer<CPointer<UInt8>>): Int32
+    // param-hint: ObjUuid optional
+    // param-hint: ProtSeq optional
+    // param-hint: NetworkAddr optional
+    // param-hint: Endpoint optional
+    // param-hint: Options optional
+    // param-hint: StringBinding optional
+    func RpcStringBindingComposeW(ObjUuid: CPointer<UInt16>, ProtSeq: CPointer<UInt16>, NetworkAddr: CPointer<UInt16>, Endpoint: CPointer<UInt16>, Options: CPointer<UInt16>, StringBinding: CPointer<CPointer<UInt16>>): Int32
+    // param-hint: ObjUuid optional
+    // param-hint: Protseq optional
+    // param-hint: NetworkAddr optional
+    // param-hint: Endpoint optional
+    // param-hint: NetworkOptions optional
+    func RpcStringBindingParseA(StringBinding: CPointer<UInt8>, ObjUuid: CPointer<CPointer<UInt8>>, Protseq: CPointer<CPointer<UInt8>>, NetworkAddr: CPointer<CPointer<UInt8>>, Endpoint: CPointer<CPointer<UInt8>>, NetworkOptions: CPointer<CPointer<UInt8>>): Int32
+    // param-hint: ObjUuid optional
+    // param-hint: Protseq optional
+    // param-hint: NetworkAddr optional
+    // param-hint: Endpoint optional
+    // param-hint: NetworkOptions optional
+    func RpcStringBindingParseW(StringBinding: CPointer<UInt16>, ObjUuid: CPointer<CPointer<UInt16>>, Protseq: CPointer<CPointer<UInt16>>, NetworkAddr: CPointer<CPointer<UInt16>>, Endpoint: CPointer<CPointer<UInt16>>, NetworkOptions: CPointer<CPointer<UInt16>>): Int32
+    func RpcStringFreeA(String: CPointer<CPointer<UInt8>>): Int32
+    func RpcStringFreeW(String: CPointer<CPointer<UInt16>>): Int32
+    func RpcTestCancel(): Int32
+    func RpcUserFree(AsyncHandle: CPointer<Unit>, pBuffer: CPointer<Unit>): Unit
+    func UuidCompare(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<Int32>): Int32
+    func UuidCreate(Uuid: CPointer<GUID>): Int32
+    func UuidCreateNil(NilUuid: CPointer<GUID>): Int32
+    func UuidCreateSequential(Uuid: CPointer<GUID>): Int32
+    func UuidEqual(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<Int32>): Int32
+    // param-hint: StringUuid optional
+    func UuidFromStringA(StringUuid: CPointer<UInt8>, Uuid: CPointer<GUID>): Int32
+    // param-hint: StringUuid optional
+    func UuidFromStringW(StringUuid: CPointer<UInt16>, Uuid: CPointer<GUID>): Int32
+    func UuidHash(Uuid: CPointer<GUID>, Status: CPointer<Int32>): UInt16
+    func UuidIsNil(Uuid: CPointer<GUID>, Status: CPointer<Int32>): Int32
+    func UuidToStringA(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt8>>): Int32
+    func UuidToStringW(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[RPCRT4 == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func RpcCertGeneratePrincipalNameA(Context: CPointer<Win32__impl_l2.CERT_CONTEXT>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt8>>): Int32
+    func RpcCertGeneratePrincipalNameW(Context: CPointer<Win32__impl_l2.CERT_CONTEXT>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt16>>): Int32
+}
+
+@When[RPCRT4 == "on" && Windows_Win32_System_Com == "on"]
+foreign {
+    func IUnknown_AddRef_Proxy(This_: CPointer<Unit>): UInt32
+    func IUnknown_QueryInterface_Proxy(This_: CPointer<Unit>, riid: CPointer<GUID>, ppvObject: CPointer<CPointer<Unit>>): Int32
+    func IUnknown_Release_Proxy(This_: CPointer<Unit>): UInt32
     func Ndr64DcomAsyncStubCall(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGE>, pdwStubPhase: CPointer<UInt32>): Int32
     func NdrAllocate(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, Len: UIntNative): CPointer<Unit>
-    func NdrAsyncServerCall(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
     func NdrByteCountPointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
     func NdrByteCountPointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
     func NdrByteCountPointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
@@ -4361,7 +4745,7 @@ foreign {
     func NdrCorrelationFree(pStubMsg: CPointer<MIDL_STUB_MESSAGE>): Unit
     func NdrCorrelationInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<Unit>, CacheSize: UInt32, flags: UInt32): Unit
     func NdrCorrelationPass(pStubMsg: CPointer<MIDL_STUB_MESSAGE>): Unit
-    func NdrCreateServerInterfaceFromStub(pStub: CPointer<Unit>, pServerIf: CPointer<RPC_SERVER_INTERFACE>): RPC_STATUS
+    func NdrCreateServerInterfaceFromStub(pStub: CPointer<Unit>, pServerIf: CPointer<RPC_SERVER_INTERFACE>): Int32
     func NdrDcomAsyncStubCall(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGE>, pdwStubPhase: CPointer<UInt32>): Int32
     func NdrEncapsulatedUnionBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
     func NdrEncapsulatedUnionFree(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
@@ -4374,20 +4758,16 @@ foreign {
     func NdrFixedArrayMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pFormat: CPointer<UInt8>): UInt32
     func NdrFixedArrayUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
     func NdrFreeBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGE>): Unit
-    func NdrFullPointerXlatFree(pXlatTables: CPointer<FULL_PTR_XLAT_TABLES>): Unit
-    func NdrFullPointerXlatInit(NumberOfPointers: UInt32, XlatSide: XLAT_SIDE): CPointer<FULL_PTR_XLAT_TABLES>
     func NdrGetBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, BufferLength: UInt32, Handle: CPointer<Unit>): CPointer<UInt8>
     func NdrGetDcomProtocolVersion(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pVersion: CPointer<RPC_VERSION>): Int32
-    func NdrGetUserMarshalInfo(pFlags: CPointer<UInt32>, InformationLevel: UInt32, pMarshalInfo: CPointer<NDR_USER_MARSHAL_INFO>): RPC_STATUS
+    func NdrGetUserMarshalInfo(pFlags: CPointer<UInt32>, InformationLevel: UInt32, pMarshalInfo: CPointer<NDR_USER_MARSHAL_INFO>): Int32
     func NdrInterfacePointerBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
     func NdrInterfacePointerFree(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
     func NdrInterfacePointerMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
     func NdrInterfacePointerMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pFormat: CPointer<UInt8>): UInt32
     func NdrInterfacePointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrMapCommAndFaultStatus(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pCommStatus: CPointer<UInt32>, pFaultStatus: CPointer<UInt32>, Status: RPC_STATUS): RPC_STATUS
-    func NdrMesSimpleTypeAlignSize(param0: CPointer<Unit>): UIntNative
+    func NdrMapCommAndFaultStatus(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pCommStatus: CPointer<UInt32>, pFaultStatus: CPointer<UInt32>, Status: Int32): Int32
     func NdrMesSimpleTypeAlignSizeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFO>): UIntNative
-    func NdrMesSimpleTypeDecode(Handle: CPointer<Unit>, pObject: CPointer<Unit>, Size: Int16): Unit
     func NdrMesSimpleTypeDecodeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFO>, pObject: CPointer<Unit>, Size: Int16): Unit
     func NdrMesSimpleTypeEncode(Handle: CPointer<Unit>, pStubDesc: CPointer<MIDL_STUB_DESC>, pObject: CPointer<Unit>, Size: Int16): Unit
     func NdrMesSimpleTypeEncodeAll(Handle: CPointer<Unit>, pProxyInfo: CPointer<MIDL_STUBLESS_PROXY_INFO>, pObject: CPointer<Unit>, Size: Int16): Unit
@@ -4413,8 +4793,6 @@ foreign {
     func NdrNonEncapsulatedUnionUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
     func NdrNsGetBuffer(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, BufferLength: UInt32, Handle: CPointer<Unit>): CPointer<UInt8>
     func NdrNsSendReceive(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pBufferEnd: CPointer<UInt8>, pAutoHandle: CPointer<CPointer<Unit>>): CPointer<UInt8>
-    func NdrOleAllocate(Size: UIntNative): CPointer<Unit>
-    func NdrOleFree(NodeToFree: CPointer<Unit>): Unit
     func NdrPartialIgnoreClientBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<Unit>): Unit
     func NdrPartialIgnoreClientMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<Unit>): Unit
     func NdrPartialIgnoreServerInitialize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ppMemory: CPointer<CPointer<Unit>>, pFormat: CPointer<UInt8>): Unit
@@ -4425,17 +4803,10 @@ foreign {
     func NdrPointerMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pFormat: CPointer<UInt8>): UInt32
     func NdrPointerUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
     func NdrRangeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func NdrRpcSmClientAllocate(Size: UIntNative): CPointer<Unit>
-    func NdrRpcSmClientFree(NodeToFree: CPointer<Unit>): Unit
     func NdrRpcSmSetClientToOsf(pMessage: CPointer<MIDL_STUB_MESSAGE>): Unit
-    func NdrRpcSsDefaultAllocate(Size: UIntNative): CPointer<Unit>
-    func NdrRpcSsDefaultFree(NodeToFree: CPointer<Unit>): Unit
     func NdrRpcSsDisableAllocate(pMessage: CPointer<MIDL_STUB_MESSAGE>): Unit
     func NdrRpcSsEnableAllocate(pMessage: CPointer<MIDL_STUB_MESSAGE>): Unit
     func NdrSendReceive(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pBufferEnd: CPointer<UInt8>): CPointer<UInt8>
-    func NdrServerCall2(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
-    func NdrServerCallAll(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
-    func NdrServerCallNdr64(pRpcMsg: CPointer<RPC_MESSAGE>): Unit
     func NdrServerContextMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ContextHandle: CPointer<NDR_SCONTEXT>, RundownRoutine: NDR_RUNDOWN): Unit
     func NdrServerContextNewMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ContextHandle: CPointer<NDR_SCONTEXT>, RundownRoutine: NDR_RUNDOWN, pFormat: CPointer<UInt8>): Unit
     func NdrServerContextNewUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pFormat: CPointer<UInt8>): CPointer<NDR_SCONTEXT>
@@ -4452,13 +4823,10 @@ foreign {
     func NdrSimpleStructUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
     func NdrSimpleTypeMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, FormatChar: UInt8): Unit
     func NdrSimpleTypeUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, FormatChar: UInt8): Unit
-    func NdrStubCall2(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGE>, pdwStubPhase: CPointer<UInt32>): Int32
-    func NdrStubCall3(pThis: CPointer<Unit>, pChannel: CPointer<Unit>, pRpcMsg: CPointer<RPC_MESSAGE>, pdwStubPhase: CPointer<UInt32>): Int32
     func NdrUserMarshalBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
     func NdrUserMarshalFree(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
     func NdrUserMarshalMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
     func NdrUserMarshalMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pFormat: CPointer<UInt8>): UInt32
-    func NdrUserMarshalSimpleTypeConvert(pFlags: CPointer<UInt32>, pBuffer: CPointer<UInt8>, FormatChar: UInt8): CPointer<UInt8>
     func NdrUserMarshalUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
     func NdrVaryingArrayBufferSize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
     func NdrVaryingArrayFree(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): Unit
@@ -4470,361 +4838,52 @@ foreign {
     func NdrXmitOrRepAsMarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pMemory: CPointer<UInt8>, pFormat: CPointer<UInt8>): CPointer<UInt8>
     func NdrXmitOrRepAsMemorySize(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, pFormat: CPointer<UInt8>): UInt32
     func NdrXmitOrRepAsUnmarshall(pStubMsg: CPointer<MIDL_STUB_MESSAGE>, ppMemory: CPointer<CPointer<UInt8>>, pFormat: CPointer<UInt8>, fMustAlloc: UInt8): CPointer<UInt8>
-    func RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATE>, ExceptionCode: UInt32): RPC_STATUS
-    func RpcAsyncCancelCall(pAsync: CPointer<RPC_ASYNC_STATE>, fAbort: Int32): RPC_STATUS
-    // param-hint: Reply optional
-    func RpcAsyncCompleteCall(pAsync: CPointer<RPC_ASYNC_STATE>, Reply: CPointer<Unit>): RPC_STATUS
-    func RpcAsyncGetCallStatus(pAsync: CPointer<RPC_ASYNC_STATE>): RPC_STATUS
-    // param-hint: pAsync bytes=param[1]
-    func RpcAsyncInitializeHandle(pAsync: CPointer<RPC_ASYNC_STATE>, Size: UInt32): RPC_STATUS
-    func RpcAsyncRegisterInfo(pAsync: CPointer<RPC_ASYNC_STATE>): RPC_STATUS
-    // param-hint: pAsync optional
-    func RpcBindingBind(pAsync: CPointer<RPC_ASYNC_STATE>, Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): RPC_STATUS
-    func RpcBindingCopy(SourceBinding: CPointer<Unit>, DestinationBinding: CPointer<CPointer<Unit>>): RPC_STATUS
     // param-hint: Security optional
     // param-hint: Options optional
-    func RpcBindingCreateA(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_A>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_A>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1>, Binding: CPointer<CPointer<Unit>>): RPC_STATUS
+    func RpcBindingCreateA(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_A>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_A>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1>, Binding: CPointer<CPointer<Unit>>): Int32
     // param-hint: Security optional
     // param-hint: Options optional
-    func RpcBindingCreateW(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_W>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_W>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1>, Binding: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcBindingFree(Binding: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcBindingFromStringBindingA(StringBinding: CPointer<UInt8>, Binding: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcBindingFromStringBindingW(StringBinding: CPointer<UInt16>, Binding: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: ClientBinding optional
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthnLevel optional
-    // param-hint: AuthnSvc optional
-    // param-hint: AuthzSvc optional
-    func RpcBindingInqAuthClientA(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>): RPC_STATUS
-    // param-hint: ClientBinding optional
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthnLevel optional
-    // param-hint: AuthnSvc optional
-    // param-hint: AuthzSvc optional
-    func RpcBindingInqAuthClientExA(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>, Flags: UInt32): RPC_STATUS
-    // param-hint: ClientBinding optional
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthnLevel optional
-    // param-hint: AuthnSvc optional
-    // param-hint: AuthzSvc optional
-    func RpcBindingInqAuthClientExW(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>, Flags: UInt32): RPC_STATUS
-    // param-hint: ClientBinding optional
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthnLevel optional
-    // param-hint: AuthnSvc optional
-    // param-hint: AuthzSvc optional
-    func RpcBindingInqAuthClientW(ClientBinding: CPointer<Unit>, Privs: CPointer<CPointer<Unit>>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthzSvc: CPointer<UInt32>): RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthnLevel optional
-    // param-hint: AuthnSvc optional
-    // param-hint: AuthIdentity optional
-    // param-hint: AuthzSvc optional
-    func RpcBindingInqAuthInfoA(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>): RPC_STATUS
+    func RpcBindingCreateW(Template: CPointer<RPC_BINDING_HANDLE_TEMPLATE_V1_W>, Security: CPointer<RPC_BINDING_HANDLE_SECURITY_V1_W>, Options: CPointer<RPC_BINDING_HANDLE_OPTIONS_V1>, Binding: CPointer<CPointer<Unit>>): Int32
     // param-hint: ServerPrincName optional
     // param-hint: AuthnLevel optional
     // param-hint: AuthnSvc optional
     // param-hint: AuthIdentity optional
     // param-hint: AuthzSvc optional
     // param-hint: SecurityQOS optional
-    func RpcBindingInqAuthInfoExA(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>, RpcQosVersion: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOS>): RPC_STATUS
+    func RpcBindingInqAuthInfoExA(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt8>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>, RpcQosVersion: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOS>): Int32
     // param-hint: ServerPrincName optional
     // param-hint: AuthnLevel optional
     // param-hint: AuthnSvc optional
     // param-hint: AuthIdentity optional
     // param-hint: AuthzSvc optional
     // param-hint: SecurityQOS optional
-    func RpcBindingInqAuthInfoExW(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>, RpcQosVersion: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOS>): RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthnLevel optional
-    // param-hint: AuthnSvc optional
-    // param-hint: AuthIdentity optional
-    // param-hint: AuthzSvc optional
-    func RpcBindingInqAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>): RPC_STATUS
-    func RpcBindingInqMaxCalls(Binding: CPointer<Unit>, MaxCalls: CPointer<UInt32>): RPC_STATUS
-    func RpcBindingInqObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): RPC_STATUS
-    func RpcBindingInqOption(hBinding: CPointer<Unit>, option: UInt32, pOptionValue: CPointer<UIntNative>): RPC_STATUS
-    func RpcBindingReset(Binding: CPointer<Unit>): RPC_STATUS
-    // param-hint: ClientBinding optional
-    func RpcBindingServerFromClient(ClientBinding: CPointer<Unit>, ServerBinding: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthIdentity optional
-    func RpcBindingSetAuthInfoA(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt8>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): RPC_STATUS
+    func RpcBindingInqAuthInfoExW(Binding: CPointer<Unit>, ServerPrincName: CPointer<CPointer<UInt16>>, AuthnLevel: CPointer<UInt32>, AuthnSvc: CPointer<UInt32>, AuthIdentity: CPointer<CPointer<Unit>>, AuthzSvc: CPointer<UInt32>, RpcQosVersion: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOS>): Int32
     // param-hint: ServerPrincName optional
     // param-hint: AuthIdentity optional
     // param-hint: SecurityQos optional
-    func RpcBindingSetAuthInfoExA(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt8>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32, SecurityQos: CPointer<RPC_SECURITY_QOS>): RPC_STATUS
+    func RpcBindingSetAuthInfoExA(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt8>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32, SecurityQos: CPointer<RPC_SECURITY_QOS>): Int32
     // param-hint: ServerPrincName optional
     // param-hint: AuthIdentity optional
     // param-hint: SecurityQOS optional
-    func RpcBindingSetAuthInfoExW(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt16>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOS>): RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: AuthIdentity optional
-    func RpcBindingSetAuthInfoW(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt16>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32): RPC_STATUS
-    func RpcBindingSetObject(Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): RPC_STATUS
-    func RpcBindingSetOption(hBinding: CPointer<Unit>, option: UInt32, optionValue: UIntNative): RPC_STATUS
-    func RpcBindingToStringBindingA(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func RpcBindingToStringBindingW(Binding: CPointer<Unit>, StringBinding: CPointer<CPointer<UInt16>>): RPC_STATUS
-    func RpcBindingUnbind(Binding: CPointer<Unit>): RPC_STATUS
-    func RpcBindingVectorFree(BindingVector: CPointer<CPointer<RPC_BINDING_VECTOR>>): RPC_STATUS
-    func RpcCancelThread(Thread: CPointer<Unit>): RPC_STATUS
-    func RpcCancelThreadEx(Thread: CPointer<Unit>, Timeout: Int32): RPC_STATUS
-    func RpcCertGeneratePrincipalNameA(Context: CPointer<Win32_impl.CERT_CONTEXT>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func RpcCertGeneratePrincipalNameW(Context: CPointer<Win32_impl.CERT_CONTEXT>, Flags: UInt32, pBuffer: CPointer<CPointer<UInt16>>): RPC_STATUS
-    // param-hint: UuidVector optional
-    // param-hint: Annotation optional
-    func RpcEpRegisterA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>, Annotation: CPointer<UInt8>): RPC_STATUS
-    // param-hint: UuidVector optional
-    // param-hint: Annotation optional
-    func RpcEpRegisterNoReplaceA(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>, Annotation: CPointer<UInt8>): RPC_STATUS
-    // param-hint: UuidVector optional
-    // param-hint: Annotation optional
-    func RpcEpRegisterNoReplaceW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>, Annotation: CPointer<UInt16>): RPC_STATUS
-    // param-hint: UuidVector optional
-    // param-hint: Annotation optional
-    func RpcEpRegisterW(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>, Annotation: CPointer<UInt16>): RPC_STATUS
-    func RpcEpResolveBinding(Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): RPC_STATUS
-    // param-hint: UuidVector optional
-    func RpcEpUnregister(IfSpec: CPointer<Unit>, BindingVector: CPointer<RPC_BINDING_VECTOR>, UuidVector: CPointer<UUID_VECTOR>): RPC_STATUS
-    func RpcErrorAddRecord(ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFO>): RPC_STATUS
-    func RpcErrorClearInformation(): Unit
-    func RpcErrorEndEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>): RPC_STATUS
-    func RpcErrorGetNextRecord(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>, CopyStrings: Int32, ErrorInfo: CPointer<RPC_EXTENDED_ERROR_INFO>): RPC_STATUS
-    func RpcErrorGetNumberOfRecords(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>, Records: CPointer<Int32>): RPC_STATUS
-    // param-hint: ErrorBlob bytes=param[1]
-    func RpcErrorLoadErrorInfo(ErrorBlob: CPointer<Unit>, BlobSize: UIntNative, EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>): RPC_STATUS
-    func RpcErrorResetEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>): RPC_STATUS
-    func RpcErrorSaveErrorInfo(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>, ErrorBlob: CPointer<CPointer<Unit>>, BlobSize: CPointer<UIntNative>): RPC_STATUS
-    func RpcErrorStartEnumeration(EnumHandle: CPointer<RPC_ERROR_ENUM_HANDLE>): RPC_STATUS
-    func RpcExceptionFilter(ExceptionCode: UInt32): Int32
-    func RpcFreeAuthorizationContext(pAuthzClientContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: ClientBinding optional
-    // param-hint: Reserved1 optional
-    // param-hint: pExpirationTime optional
-    // param-hint: Reserved4 optional
-    func RpcGetAuthorizationContextForClient(ClientBinding: CPointer<Unit>, ImpersonateOnReturn: Int32, Reserved1: CPointer<Unit>, pExpirationTime: CPointer<Int64>, Reserved2: Win32_Foundation.LUID, Reserved3: UInt32, Reserved4: CPointer<Unit>, pAuthzClientContext: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcIfInqId(RpcIfHandle: CPointer<Unit>, RpcIfId: CPointer<RPC_IF_ID>): RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcImpersonateClient(BindingHandle: CPointer<Unit>): RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcImpersonateClient2(BindingHandle: CPointer<Unit>): RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcImpersonateClientContainer(BindingHandle: CPointer<Unit>): RPC_STATUS
-    func RpcMgmtEnableIdleCleanup(): RPC_STATUS
-    // param-hint: EpBinding optional
-    // param-hint: IfId optional
-    // param-hint: VersOption optional
-    // param-hint: ObjectUuid optional
-    func RpcMgmtEpEltInqBegin(EpBinding: CPointer<Unit>, InquiryType: UInt32, IfId: CPointer<RPC_IF_ID>, VersOption: UInt32, ObjectUuid: CPointer<GUID>, InquiryContext: CPointer<CPointer<CPointer<Unit>>>): RPC_STATUS
-    func RpcMgmtEpEltInqDone(InquiryContext: CPointer<CPointer<CPointer<Unit>>>): RPC_STATUS
+    func RpcBindingSetAuthInfoExW(Binding: CPointer<Unit>, ServerPrincName: CPointer<UInt16>, AuthnLevel: UInt32, AuthnSvc: UInt32, AuthIdentity: CPointer<Unit>, AuthzSvc: UInt32, SecurityQOS: CPointer<RPC_SECURITY_QOS>): Int32
+}
+
+@When[RPCRT4 == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    func I_RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATE>, ExceptionCode: UInt32): Int32
+    func I_RpcAsyncSetHandle(Message: CPointer<RPC_MESSAGE>, pAsync: CPointer<RPC_ASYNC_STATE>): Int32
+    func RpcAsyncAbortCall(pAsync: CPointer<RPC_ASYNC_STATE>, ExceptionCode: UInt32): Int32
+    func RpcAsyncCancelCall(pAsync: CPointer<RPC_ASYNC_STATE>, fAbort: Int32): Int32
+    // param-hint: Reply optional
+    func RpcAsyncCompleteCall(pAsync: CPointer<RPC_ASYNC_STATE>, Reply: CPointer<Unit>): Int32
+    func RpcAsyncGetCallStatus(pAsync: CPointer<RPC_ASYNC_STATE>): Int32
+    // param-hint: pAsync bytes=param[1]
+    func RpcAsyncInitializeHandle(pAsync: CPointer<RPC_ASYNC_STATE>, Size: UInt32): Int32
+    func RpcAsyncRegisterInfo(pAsync: CPointer<RPC_ASYNC_STATE>): Int32
+    // param-hint: pAsync optional
+    func RpcBindingBind(pAsync: CPointer<RPC_ASYNC_STATE>, Binding: CPointer<Unit>, IfSpec: CPointer<Unit>): Int32
     // param-hint: Binding optional
-    // param-hint: ObjectUuid optional
-    // param-hint: Annotation optional
-    func RpcMgmtEpEltInqNextA(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_ID>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt8>>): RPC_STATUS
-    // param-hint: Binding optional
-    // param-hint: ObjectUuid optional
-    // param-hint: Annotation optional
-    func RpcMgmtEpEltInqNextW(InquiryContext: CPointer<CPointer<Unit>>, IfId: CPointer<RPC_IF_ID>, Binding: CPointer<CPointer<Unit>>, ObjectUuid: CPointer<GUID>, Annotation: CPointer<CPointer<UInt16>>): RPC_STATUS
-    // param-hint: EpBinding optional
-    // param-hint: ObjectUuid optional
-    func RpcMgmtEpUnregister(EpBinding: CPointer<Unit>, IfId: CPointer<RPC_IF_ID>, Binding: CPointer<Unit>, ObjectUuid: CPointer<GUID>): RPC_STATUS
-    func RpcMgmtInqComTimeout(Binding: CPointer<Unit>, Timeout: CPointer<UInt32>): RPC_STATUS
-    func RpcMgmtInqDefaultProtectLevel(AuthnSvc: UInt32, AuthnLevel: CPointer<UInt32>): RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtInqIfIds(Binding: CPointer<Unit>, IfIdVector: CPointer<CPointer<RPC_IF_ID_VECTOR>>): RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtInqServerPrincNameA(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt8>>): RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtInqServerPrincNameW(Binding: CPointer<Unit>, AuthnSvc: UInt32, ServerPrincName: CPointer<CPointer<UInt16>>): RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtInqStats(Binding: CPointer<Unit>, Statistics: CPointer<CPointer<RPC_STATS_VECTOR>>): RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtIsServerListening(Binding: CPointer<Unit>): RPC_STATUS
-    func RpcMgmtSetAuthorizationFn(AuthorizationFn: RPC_MGMT_AUTHORIZATION_FN): RPC_STATUS
-    func RpcMgmtSetCancelTimeout(Timeout: Int32): RPC_STATUS
-    func RpcMgmtSetComTimeout(Binding: CPointer<Unit>, Timeout: UInt32): RPC_STATUS
-    func RpcMgmtSetServerStackSize(ThreadStackSize: UInt32): RPC_STATUS
-    func RpcMgmtStatsVectorFree(StatsVector: CPointer<CPointer<RPC_STATS_VECTOR>>): RPC_STATUS
-    // param-hint: Binding optional
-    func RpcMgmtStopServerListening(Binding: CPointer<Unit>): RPC_STATUS
-    func RpcMgmtWaitServerListen(): RPC_STATUS
-    func RpcNetworkInqProtseqsA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORA>>): RPC_STATUS
-    func RpcNetworkInqProtseqsW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORW>>): RPC_STATUS
-    func RpcNetworkIsProtseqValidA(Protseq: CPointer<UInt8>): RPC_STATUS
-    func RpcNetworkIsProtseqValidW(Protseq: CPointer<UInt16>): RPC_STATUS
-    func RpcNsBindingInqEntryNameA(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func RpcNsBindingInqEntryNameW(Binding: CPointer<Unit>, EntryNameSyntax: UInt32, EntryName: CPointer<CPointer<UInt16>>): RPC_STATUS
-    // param-hint: TypeUuid optional
-    func RpcObjectInqType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): RPC_STATUS
-    func RpcObjectSetInqFn(InquiryFn: RPC_OBJECT_INQ_FN): RPC_STATUS
-    // param-hint: TypeUuid optional
-    func RpcObjectSetType(ObjUuid: CPointer<GUID>, TypeUuid: CPointer<GUID>): RPC_STATUS
-    func RpcProtseqVectorFreeA(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORA>>): RPC_STATUS
-    func RpcProtseqVectorFreeW(ProtseqVector: CPointer<CPointer<RPC_PROTSEQ_VECTORW>>): RPC_STATUS
-    func RpcRaiseException(exception: RPC_STATUS): Unit
-    func RpcRevertContainerImpersonation(): RPC_STATUS
-    func RpcRevertToSelf(): RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcRevertToSelfEx(BindingHandle: CPointer<Unit>): RPC_STATUS
-    func RpcServerCompleteSecurityCallback(BindingHandle: CPointer<Unit>, Status: RPC_STATUS): RPC_STATUS
-    func RpcServerInqBindingHandle(Binding: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcServerInqBindings(BindingVector: CPointer<CPointer<RPC_BINDING_VECTOR>>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerInqBindingsEx(SecurityDescriptor: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTOR>>): RPC_STATUS
-    // param-hint: ClientBinding optional
-    func RpcServerInqCallAttributesA(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): RPC_STATUS
-    // param-hint: ClientBinding optional
-    func RpcServerInqCallAttributesW(ClientBinding: CPointer<Unit>, RpcCallAttributes: CPointer<Unit>): RPC_STATUS
-    func RpcServerInqDefaultPrincNameA(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func RpcServerInqDefaultPrincNameW(AuthnSvc: UInt32, PrincName: CPointer<CPointer<UInt16>>): RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    func RpcServerInqIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcServerInterfaceGroupActivate(IfGroup: CPointer<Unit>): RPC_STATUS
-    func RpcServerInterfaceGroupClose(IfGroup: CPointer<Unit>): RPC_STATUS
-    // param-hint: Interfaces len=param[1]
-    // param-hint: Endpoints len=param[3]
-    func RpcServerInterfaceGroupCreateA(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEA>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEA>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): RPC_STATUS
-    // param-hint: Interfaces len=param[1]
-    // param-hint: Endpoints len=param[3]
-    func RpcServerInterfaceGroupCreateW(Interfaces: CPointer<RPC_INTERFACE_TEMPLATEW>, NumIfs: UInt32, Endpoints: CPointer<RPC_ENDPOINT_TEMPLATEW>, NumEndpoints: UInt32, IdlePeriod: UInt32, IdleCallbackFn: RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN, IdleCallbackContext: CPointer<Unit>, IfGroup: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcServerInterfaceGroupDeactivate(IfGroup: CPointer<Unit>, ForceDeactivation: UInt32): RPC_STATUS
-    func RpcServerInterfaceGroupInqBindings(IfGroup: CPointer<Unit>, BindingVector: CPointer<CPointer<RPC_BINDING_VECTOR>>): RPC_STATUS
-    func RpcServerListen(MinimumCallThreads: UInt32, MaxCalls: UInt32, DontWait: UInt32): RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: GetKeyFn optional
-    // param-hint: Arg optional
-    func RpcServerRegisterAuthInfoA(ServerPrincName: CPointer<UInt8>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): RPC_STATUS
-    // param-hint: ServerPrincName optional
-    // param-hint: GetKeyFn optional
-    // param-hint: Arg optional
-    func RpcServerRegisterAuthInfoW(ServerPrincName: CPointer<UInt16>, AuthnSvc: UInt32, GetKeyFn: RPC_AUTH_KEY_RETRIEVAL_FN, Arg: CPointer<Unit>): RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    // param-hint: MgrEpv optional
-    func RpcServerRegisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>): RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    // param-hint: MgrEpv optional
-    // param-hint: IfCallbackFn optional
-    func RpcServerRegisterIf2(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallbackFn: RPC_IF_CALLBACK_FN): RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    // param-hint: MgrEpv optional
-    // param-hint: IfCallback optional
-    // param-hint: SecurityDescriptor optional
-    func RpcServerRegisterIf3(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, MaxRpcSize: UInt32, IfCallback: RPC_IF_CALLBACK_FN, SecurityDescriptor: CPointer<Unit>): RPC_STATUS
-    // param-hint: MgrTypeUuid optional
-    // param-hint: MgrEpv optional
-    // param-hint: IfCallback optional
-    func RpcServerRegisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, MgrEpv: CPointer<Unit>, Flags: UInt32, MaxCalls: UInt32, IfCallback: RPC_IF_CALLBACK_FN): RPC_STATUS
-    // param-hint: Binding optional
-    func RpcServerSubscribeForNotification(Binding: CPointer<Unit>, Notification: RPC_NOTIFICATIONS, NotificationType: RPC_NOTIFICATION_TYPES, NotificationInfo: CPointer<RPC_ASYNC_NOTIFICATION_INFO>): RPC_STATUS
-    // param-hint: BindingHandle optional
-    func RpcServerTestCancel(BindingHandle: CPointer<Unit>): RPC_STATUS
-    // param-hint: IfSpec optional
-    // param-hint: MgrTypeUuid optional
-    func RpcServerUnregisterIf(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, WaitForCallsToComplete: UInt32): RPC_STATUS
-    // param-hint: IfSpec optional
-    // param-hint: MgrTypeUuid optional
-    func RpcServerUnregisterIfEx(IfSpec: CPointer<Unit>, MgrTypeUuid: CPointer<GUID>, RundownContextHandles: Int32): RPC_STATUS
-    // param-hint: Binding optional
-    func RpcServerUnsubscribeForNotification(Binding: CPointer<Unit>, Notification: RPC_NOTIFICATIONS, NotificationsQueued: CPointer<UInt32>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseAllProtseqs(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseAllProtseqsEx(MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseAllProtseqsIf(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseAllProtseqsIfEx(MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqEpA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqEpExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, Endpoint: CPointer<UInt8>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqEpExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqEpW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, Endpoint: CPointer<UInt16>, SecurityDescriptor: CPointer<Unit>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqIfA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqIfExA(Protseq: CPointer<UInt8>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqIfExW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>, Policy: CPointer<RPC_POLICY>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqIfW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, IfSpec: CPointer<Unit>, SecurityDescriptor: CPointer<Unit>): RPC_STATUS
-    // param-hint: SecurityDescriptor optional
-    func RpcServerUseProtseqW(Protseq: CPointer<UInt16>, MaxCalls: UInt32, SecurityDescriptor: CPointer<Unit>): RPC_STATUS
-    func RpcServerYield(): Unit
-    func RpcSmAllocate(Size: UIntNative, pStatus: CPointer<RPC_STATUS>): CPointer<Unit>
-    func RpcSmClientFree(pNodeToFree: CPointer<Unit>): RPC_STATUS
-    func RpcSmDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcSmDisableAllocate(): RPC_STATUS
-    func RpcSmEnableAllocate(): RPC_STATUS
-    func RpcSmFree(NodeToFree: CPointer<Unit>): RPC_STATUS
-    func RpcSmGetThreadHandle(pStatus: CPointer<RPC_STATUS>): CPointer<Unit>
-    func RpcSmSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): RPC_STATUS
-    func RpcSmSetThreadHandle(Id: CPointer<Unit>): RPC_STATUS
-    func RpcSmSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): RPC_STATUS
-    func RpcSsAllocate(Size: UIntNative): CPointer<Unit>
-    // param-hint: ServerBindingHandle optional
-    func RpcSsContextLockExclusive(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): RPC_STATUS
-    func RpcSsContextLockShared(ServerBindingHandle: CPointer<Unit>, UserContext: CPointer<Unit>): RPC_STATUS
-    func RpcSsDestroyClientContext(ContextHandle: CPointer<CPointer<Unit>>): Unit
-    func RpcSsDisableAllocate(): Unit
-    func RpcSsDontSerializeContext(): Unit
-    func RpcSsEnableAllocate(): Unit
-    func RpcSsFree(NodeToFree: CPointer<Unit>): Unit
-    func RpcSsGetContextBinding(ContextHandle: CPointer<Unit>, Binding: CPointer<CPointer<Unit>>): RPC_STATUS
-    func RpcSsGetThreadHandle(): CPointer<Unit>
-    func RpcSsSetClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE): Unit
-    func RpcSsSetThreadHandle(Id: CPointer<Unit>): Unit
-    func RpcSsSwapClientAllocFree(ClientAlloc: RPC_CLIENT_ALLOC, ClientFree: RPC_CLIENT_FREE, OldClientAlloc: CPointer<RPC_CLIENT_ALLOC>, OldClientFree: CPointer<RPC_CLIENT_FREE>): Unit
-    // param-hint: ObjUuid optional
-    // param-hint: ProtSeq optional
-    // param-hint: NetworkAddr optional
-    // param-hint: Endpoint optional
-    // param-hint: Options optional
-    // param-hint: StringBinding optional
-    func RpcStringBindingComposeA(ObjUuid: CPointer<UInt8>, ProtSeq: CPointer<UInt8>, NetworkAddr: CPointer<UInt8>, Endpoint: CPointer<UInt8>, Options: CPointer<UInt8>, StringBinding: CPointer<CPointer<UInt8>>): RPC_STATUS
-    // param-hint: ObjUuid optional
-    // param-hint: ProtSeq optional
-    // param-hint: NetworkAddr optional
-    // param-hint: Endpoint optional
-    // param-hint: Options optional
-    // param-hint: StringBinding optional
-    func RpcStringBindingComposeW(ObjUuid: CPointer<UInt16>, ProtSeq: CPointer<UInt16>, NetworkAddr: CPointer<UInt16>, Endpoint: CPointer<UInt16>, Options: CPointer<UInt16>, StringBinding: CPointer<CPointer<UInt16>>): RPC_STATUS
-    // param-hint: ObjUuid optional
-    // param-hint: Protseq optional
-    // param-hint: NetworkAddr optional
-    // param-hint: Endpoint optional
-    // param-hint: NetworkOptions optional
-    func RpcStringBindingParseA(StringBinding: CPointer<UInt8>, ObjUuid: CPointer<CPointer<UInt8>>, Protseq: CPointer<CPointer<UInt8>>, NetworkAddr: CPointer<CPointer<UInt8>>, Endpoint: CPointer<CPointer<UInt8>>, NetworkOptions: CPointer<CPointer<UInt8>>): RPC_STATUS
-    // param-hint: ObjUuid optional
-    // param-hint: Protseq optional
-    // param-hint: NetworkAddr optional
-    // param-hint: Endpoint optional
-    // param-hint: NetworkOptions optional
-    func RpcStringBindingParseW(StringBinding: CPointer<UInt16>, ObjUuid: CPointer<CPointer<UInt16>>, Protseq: CPointer<CPointer<UInt16>>, NetworkAddr: CPointer<CPointer<UInt16>>, Endpoint: CPointer<CPointer<UInt16>>, NetworkOptions: CPointer<CPointer<UInt16>>): RPC_STATUS
-    func RpcStringFreeA(String: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func RpcStringFreeW(String: CPointer<CPointer<UInt16>>): RPC_STATUS
-    func RpcTestCancel(): RPC_STATUS
-    func RpcUserFree(AsyncHandle: CPointer<Unit>, pBuffer: CPointer<Unit>): Unit
-    func UuidCompare(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<RPC_STATUS>): Int32
-    func UuidCreate(Uuid: CPointer<GUID>): RPC_STATUS
-    func UuidCreateNil(NilUuid: CPointer<GUID>): RPC_STATUS
-    func UuidCreateSequential(Uuid: CPointer<GUID>): RPC_STATUS
-    func UuidEqual(Uuid1: CPointer<GUID>, Uuid2: CPointer<GUID>, Status: CPointer<RPC_STATUS>): Int32
-    // param-hint: StringUuid optional
-    func UuidFromStringA(StringUuid: CPointer<UInt8>, Uuid: CPointer<GUID>): RPC_STATUS
-    // param-hint: StringUuid optional
-    func UuidFromStringW(StringUuid: CPointer<UInt16>, Uuid: CPointer<GUID>): RPC_STATUS
-    func UuidHash(Uuid: CPointer<GUID>, Status: CPointer<RPC_STATUS>): UInt16
-    func UuidIsNil(Uuid: CPointer<GUID>, Status: CPointer<RPC_STATUS>): Int32
-    func UuidToStringA(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt8>>): RPC_STATUS
-    func UuidToStringW(Uuid: CPointer<GUID>, StringUuid: CPointer<CPointer<UInt16>>): RPC_STATUS
+    func RpcServerSubscribeForNotification(Binding: CPointer<Unit>, Notification: Int32, NotificationType: Int32, NotificationInfo: CPointer<RPC_ASYNC_NOTIFICATION_INFO>): Int32
 }
 
 @When[Windows_Win32_System_Rpc == "on"]

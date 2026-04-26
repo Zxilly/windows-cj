@@ -4,8 +4,16 @@
   description = "High-level Windows API projections for Cangjie"
   output-type = "static"
   cjc-version = "1.1.0"
+  compile-option = "--cfg . -Woff unused -Woff parser -Woff package-import"
 
 [dependencies]
-  windows_sys = { path = "../windows-sys" }
+  windows_collections = { path = "../windows-collections" }
   windows_core = { path = "../windows-core" }
+  windows_future = { path = "../windows-future" }
+  windows_interface = { path = "../windows-interface" }
+  windows_numerics = { path = "../windows-numerics" }
+  windows_polyfill = { path = "../windows-polyfill" }
   windows_result = { path = "../windows-result" }
+  windows_strings = { path = "../windows-strings" }
+  windows_sys = { path = "../windows-sys" }
+  windows_threading = { path = "../windows-threading" }

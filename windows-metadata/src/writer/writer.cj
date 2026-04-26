@@ -5,9 +5,7 @@ import std.fs.*
 import windows_metadata.*
 
 let PE_OFFSET: Int64 = 64
-let FILE_HEADER_SIZE: Int64 = 20
 let OPTIONAL_HEADER_SIZE: Int64 = 224
-let SECTION_HEADER_SIZE: Int64 = 40
 let CLR_HEADER_SIZE: Int64 = 72
 let FILE_ALIGNMENT: Int64 = 512
 let SECTION_ALIGNMENT: Int64 = 4096
@@ -390,6 +388,23 @@ public class WinmdWriter {
         row.methodList = Int64(methodDefs.size)
         typeDefs.add(row)
         return Int64(typeDefs.size) - 1
+    }
+
+    public func typeDef(namespace: String, name: String, flags: TypeAttributes, extends: MetadataType): Int64 {
+        let row = typeDef(namespace, name, flags)
+        typeDefExtends(row, extends)
+        return row
+    }
+
+    public func typeDefExtends(rowIndex: Int64, extends: MetadataType): Unit {
+        if (rowIndex < 0 || rowIndex >= Int64(typeDefs.size)) {
+            throw Exception("TypeDef row out of range")
+        }
+
+        let (tag, rowValue) = typeDefOrRefForType(extends)
+        let row = typeDefs[rowIndex]
+        row.extendsTag = tag
+        row.extendsRow = rowValue
     }
 
     public func typeRef(namespace: String, name: String): Int64 {
@@ -1509,9 +1524,20 @@ func writeSerString(buffer: ArrayList<Byte>, value: String): Unit {
 }
 
 func writeUtf16Raw(buffer: ArrayList<Byte>, value: String): Unit {
-    for (b in value.toArray()) {
-        buffer.add(b)
-        buffer.add(0u8)
+    let iter = value.runes()
+    while (true) {
+        match (iter.next()) {
+            case Some(rune) =>
+                let codePoint = UInt32(rune)
+                if (codePoint <= 0xFFFFu32) {
+                    writeU16(buffer, UInt16(codePoint))
+                } else {
+                    let scalarOffset = codePoint - 0x10000u32
+                    writeU16(buffer, UInt16(0xD800u32 + (scalarOffset >> 10)))
+                    writeU16(buffer, UInt16(0xDC00u32 + (scalarOffset & 0x03FFu32)))
+                }
+            case None => break
+        }
     }
 }
 
@@ -1595,6 +1621,7 @@ func writeCode(buffer: ArrayList<Byte>, value: Int64, size: Int64): Unit {
 }
 
 func writeIndex(buffer: ArrayList<Byte>, index: Int64, len: Int64, size: Int64): Unit {
+    let _ = len
     let value = index + 1
     if (size == 2) {
         writeU16(buffer, UInt16(value))

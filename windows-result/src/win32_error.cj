@@ -7,8 +7,11 @@ import std.convert.*
 foreign func GetLastError(): UInt32
 
 // WIN32_ERROR — unsigned Win32 error code.
-public struct WIN32_ERROR <: ToString & Equatable<WIN32_ERROR> & Hashable & Comparable<WIN32_ERROR> {
-    public let value: UInt32
+@C
+public struct WIN32_ERROR {
+    public var value: UInt32 = 0u32
+
+    public init() {}
 
     public init(value: UInt32) {
         this.value = value

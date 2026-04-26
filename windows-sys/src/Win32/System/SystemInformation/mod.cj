@@ -2,86 +2,12 @@
 package windows_sys.Win32.System.SystemInformation
 
 import windows_polyfill.{unionReadUInt32, unionReadUInt8, unionWriteUInt32, unionWriteUInt8}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
-public struct CACHE_DESCRIPTOR {
-    public var Level: UInt8 = 0
-    public var Associativity: UInt8 = 0
-    public var LineSize: UInt16 = 0
-    public var Size: UInt32 = 0
-    public var Type: PROCESSOR_CACHE_TYPE = PROCESSOR_CACHE_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-@C
-public struct CACHE_RELATIONSHIP {
-    public var Level: UInt8 = 0
-    public var Associativity: UInt8 = 0
-    public var LineSize: UInt16 = 0
-    public var CacheSize: UInt32 = 0
-    public var Type: PROCESSOR_CACHE_TYPE = PROCESSOR_CACHE_TYPE()
-    public var Reserved: VArray<UInt8, $18> = VArray<UInt8, $18>(repeat: 0)
-    public var GroupCount: UInt16 = 0
-    public var Anonymous: CACHE_RELATIONSHIP__Anonymous_e__Union = CACHE_RELATIONSHIP__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CACHE_RELATIONSHIP__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func groupMask(): GROUP_AFFINITY {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GROUP_AFFINITY>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_groupMask(val: GROUP_AFFINITY): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GROUP_AFFINITY>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func groupMasks(): VArray<GROUP_AFFINITY, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_groupMasks(val: VArray<GROUP_AFFINITY, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct COMPUTER_NAME_FORMAT {
     public var value: Int32 = 0
 
@@ -127,7 +53,6 @@ public let COMPUTER_NAME_FORMAT_ComputerNamePhysicalDnsFullyQualified: COMPUTER_
 public let COMPUTER_NAME_FORMAT_ComputerNameMax: COMPUTER_NAME_FORMAT = COMPUTER_NAME_FORMAT(8)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct CPU_SET_INFORMATION_TYPE {
     public var value: Int32 = 0
 
@@ -149,7 +74,6 @@ public struct CPU_SET_INFORMATION_TYPE {
 public let CPU_SET_INFORMATION_TYPE_CpuSetInformation: CPU_SET_INFORMATION_TYPE = CPU_SET_INFORMATION_TYPE(0)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct DEP_SYSTEM_POLICY_TYPE {
     public var value: Int32 = 0
 
@@ -183,7 +107,6 @@ public let DEP_SYSTEM_POLICY_TYPE_DEPPolicyOptOut: DEP_SYSTEM_POLICY_TYPE = DEP_
 public let DEP_SYSTEM_POLICY_TYPE_DEPTotalPolicyCount: DEP_SYSTEM_POLICY_TYPE = DEP_SYSTEM_POLICY_TYPE(4)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct DEVELOPER_DRIVE_ENABLEMENT_STATE {
     public var value: Int32 = 0
 
@@ -214,7 +137,6 @@ public let DEVELOPER_DRIVE_ENABLEMENT_STATE_DeveloperDriveDisabledBySystemPolicy
 public let DEVELOPER_DRIVE_ENABLEMENT_STATE_DeveloperDriveDisabledByGroupPolicy: DEVELOPER_DRIVE_ENABLEMENT_STATE = DEVELOPER_DRIVE_ENABLEMENT_STATE(3)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct DEVICEFAMILYDEVICEFORM {
     public var value: UInt32 = 0
 
@@ -380,7 +302,6 @@ public let DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_GAMING_CONSOLE: DEVICEF
 public let DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_MAX: DEVICEFAMILYDEVICEFORM = DEVICEFAMILYDEVICEFORM(47)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct DEVICEFAMILYINFOENUM {
     public var value: UInt32 = 0
 
@@ -456,7 +377,6 @@ public let DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_WINDOWS_CORE_HEADLESS: DEVI
 public let DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_MAX: DEVICEFAMILYINFOENUM = DEVICEFAMILYINFOENUM(17)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct FIRMWARE_TABLE_PROVIDER {
     public var value: UInt32 = 0
 
@@ -484,7 +404,6 @@ public let FIRMWARE_TABLE_PROVIDER_FIRM: FIRMWARE_TABLE_PROVIDER = FIRMWARE_TABL
 public let FIRMWARE_TABLE_PROVIDER_RSMB: FIRMWARE_TABLE_PROVIDER = FIRMWARE_TABLE_PROVIDER(1381190978)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct FIRMWARE_TYPE {
     public var value: Int32 = 0
 
@@ -542,17 +461,6 @@ public struct GROUP_AFFINITY64 {
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
-public struct GROUP_RELATIONSHIP {
-    public var MaximumGroupCount: UInt16 = 0
-    public var ActiveGroupCount: UInt16 = 0
-    public var Reserved: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-    public var GroupInfo: VArray<PROCESSOR_GROUP_INFO, $1> = VArray<PROCESSOR_GROUP_INFO, $1>(repeat: PROCESSOR_GROUP_INFO())
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct IMAGE_FILE_MACHINE {
     public var value: UInt16 = 0
 
@@ -667,7 +575,6 @@ public let IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_ARM64: IMAGE_FILE_MACHINE = IMA
 public let IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_CEE: IMAGE_FILE_MACHINE = IMAGE_FILE_MACHINE(49390)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct LOGICAL_PROCESSOR_RELATIONSHIP {
     public var value: Int32 = 0
 
@@ -752,50 +659,53 @@ public struct NUMA_NODE_RELATIONSHIP {
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct NUMA_NODE_RELATIONSHIP__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func groupMask(): GROUP_AFFINITY {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GROUP_AFFINITY>(p)
-            return ptr.read()
+    public mut prop groupMask: GROUP_AFFINITY {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GROUP_AFFINITY>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GROUP_AFFINITY>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_groupMask(val: GROUP_AFFINITY): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GROUP_AFFINITY>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop groupMasks: VArray<GROUP_AFFINITY, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func groupMasks(): VArray<GROUP_AFFINITY, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_groupMasks(val: VArray<GROUP_AFFINITY, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -809,7 +719,7 @@ public struct OSVERSIONINFOA {
     public var dwMinorVersion: UInt32 = 0
     public var dwBuildNumber: UInt32 = 0
     public var dwPlatformId: UInt32 = 0
-    public var szCSDVersion: VArray<Win32_Foundation.CHAR, $128> = VArray<Win32_Foundation.CHAR, $128>(repeat: 0)
+    public var szCSDVersion: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0)
     public init() {}
 }
 
@@ -821,7 +731,7 @@ public struct OSVERSIONINFOEXA {
     public var dwMinorVersion: UInt32 = 0
     public var dwBuildNumber: UInt32 = 0
     public var dwPlatformId: UInt32 = 0
-    public var szCSDVersion: VArray<Win32_Foundation.CHAR, $128> = VArray<Win32_Foundation.CHAR, $128>(repeat: 0)
+    public var szCSDVersion: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0)
     public var wServicePackMajor: UInt16 = 0
     public var wServicePackMinor: UInt16 = 0
     public var wSuiteMask: UInt16 = 0
@@ -860,7 +770,6 @@ public struct OSVERSIONINFOW {
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct OS_DEPLOYEMENT_STATE_VALUES {
     public var value: Int32 = 0
 
@@ -885,7 +794,6 @@ public let OS_DEPLOYEMENT_STATE_VALUES_OS_DEPLOYMENT_STANDARD: OS_DEPLOYEMENT_ST
 public let OS_DEPLOYEMENT_STATE_VALUES_OS_DEPLOYMENT_COMPACT: OS_DEPLOYEMENT_STATE_VALUES = OS_DEPLOYEMENT_STATE_VALUES(2)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct OS_PRODUCT_TYPE {
     public var value: UInt32 = 0
 
@@ -1441,7 +1349,6 @@ public type PGET_SYSTEM_WOW64_DIRECTORY_A = CFunc<(CPointer<UInt8>, UInt32) -> U
 public type PGET_SYSTEM_WOW64_DIRECTORY_W = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct PROCESSOR_ARCHITECTURE {
     public var value: UInt16 = 0
 
@@ -1508,7 +1415,6 @@ public let PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_IA32_ON_ARM64: PROCESSO
 public let PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_UNKNOWN: PROCESSOR_ARCHITECTURE = PROCESSOR_ARCHITECTURE(65535)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct PROCESSOR_CACHE_TYPE {
     public var value: Int32 = 0
 
@@ -1563,7 +1469,6 @@ public struct PROCESSOR_RELATIONSHIP {
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct RTL_SYSTEM_GLOBAL_DATA_ID {
     public var value: Int32 = 0
 
@@ -1642,35 +1547,37 @@ public let RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdQpcBias: RTL_SYSTEM_GLOBAL_DATA
 @C
 public struct SYSTEM_CPU_SET_INFORMATION {
     public var Size: UInt32 = 0
-    public var Type: CPU_SET_INFORMATION_TYPE = CPU_SET_INFORMATION_TYPE()
+    public var Type: Int32 = 0
     public var Anonymous: SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union = SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union()
     public init() {}
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
 
-    public func cpuSet(): SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct>(p)
-            return ptr.read()
+    public mut prop cpuSet: SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_cpuSet(val: SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1693,46 +1600,49 @@ public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct {
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union {
     public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
 
-    public func allFlags(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
+    public mut prop allFlags: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_allFlags(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1746,42 +1656,45 @@ public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func reserved(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop reserved: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_reserved(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop schedulingClass: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
         }
-    }
-
-    public func schedulingClass(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_schedulingClass(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1804,46 +1717,49 @@ public struct SYSTEM_INFO {
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct SYSTEM_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func dwOemId(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop dwOemId: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwOemId(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1852,231 +1768,15 @@ public struct SYSTEM_INFO__Anonymous_e__Union {
 @When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct {
-    public var wProcessorArchitecture: PROCESSOR_ARCHITECTURE = PROCESSOR_ARCHITECTURE()
+    public var wProcessorArchitecture: UInt16 = 0
     public var wReserved: UInt16 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 @C
-public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
-    public var ProcessorMask: UIntNative = 0
-    public var Relationship: LOGICAL_PROCESSOR_RELATIONSHIP = LOGICAL_PROCESSOR_RELATIONSHIP()
-    public var Anonymous: SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union = SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func processorCore(): SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processorCore(val: SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func numaNode(): SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_numaNode(val: SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cache(): CACHE_DESCRIPTOR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CACHE_DESCRIPTOR>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cache(val: CACHE_DESCRIPTOR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CACHE_DESCRIPTOR>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func reserved(): VArray<UInt64, $2> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt64, $2>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reserved(val: VArray<UInt64, $2>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt64, $2>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-@C
-public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct {
-    public var Flags: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-@C
-public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct {
-    public var NodeNumber: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-@C
-public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX {
-    public var Relationship: LOGICAL_PROCESSOR_RELATIONSHIP = LOGICAL_PROCESSOR_RELATIONSHIP()
-    public var Size: UInt32 = 0
-    public var Anonymous: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union = SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
-
-    public func processor(): PROCESSOR_RELATIONSHIP {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PROCESSOR_RELATIONSHIP>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_processor(val: PROCESSOR_RELATIONSHIP): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PROCESSOR_RELATIONSHIP>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func numaNode(): NUMA_NODE_RELATIONSHIP {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NUMA_NODE_RELATIONSHIP>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_numaNode(val: NUMA_NODE_RELATIONSHIP): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NUMA_NODE_RELATIONSHIP>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cache(): CACHE_RELATIONSHIP {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CACHE_RELATIONSHIP>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_cache(val: CACHE_RELATIONSHIP): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CACHE_RELATIONSHIP>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func group(): GROUP_RELATIONSHIP {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GROUP_RELATIONSHIP>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_group(val: GROUP_RELATIONSHIP): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GROUP_RELATIONSHIP>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct SYSTEM_POOL_ZEROING_INFORMATION {
-    public var PoolZeroingSupportPresent: Win32_Foundation.BOOLEAN = 0
+    public var PoolZeroingSupportPresent: UInt8 = 0
     public init() {}
 }
 
@@ -2095,7 +1795,6 @@ public struct SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION {
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct USER_CET_ENVIRONMENT {
     public var value: UInt32 = 0
 
@@ -2126,7 +1825,6 @@ public let USER_CET_ENVIRONMENT_USER_CET_ENVIRONMENT_VBS_ENCLAVE: USER_CET_ENVIR
 public let USER_CET_ENVIRONMENT_USER_CET_ENVIRONMENT_VBS_BASIC_ENCLAVE: USER_CET_ENVIRONMENT = USER_CET_ENVIRONMENT(17)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
-@C
 public struct VER_FLAGS {
     public var value: UInt32 = 0
 
@@ -2182,35 +1880,349 @@ public let VER_FLAGS_VER_SUITENAME: VER_FLAGS = VER_FLAGS(64)
 @When[Windows_Win32_System_SystemInformation == "on"]
 public let VER_FLAGS_VER_PRODUCT_TYPE: VER_FLAGS = VER_FLAGS(128)
 
+@When[Windows_Win32_System_SystemInformation == "on"]
+@C
+public struct CACHE_DESCRIPTOR {
+    public var Level: UInt8 = 0
+    public var Associativity: UInt8 = 0
+    public var LineSize: UInt16 = 0
+    public var Size: UInt32 = 0
+    public var Type: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_SystemInformation == "on"]
+@C
+public struct CACHE_RELATIONSHIP {
+    public var Level: UInt8 = 0
+    public var Associativity: UInt8 = 0
+    public var LineSize: UInt16 = 0
+    public var CacheSize: UInt32 = 0
+    public var Type: Int32 = 0
+    public var Reserved: VArray<UInt8, $18> = VArray<UInt8, $18>(repeat: 0)
+    public var GroupCount: UInt16 = 0
+    public var Anonymous: CACHE_RELATIONSHIP__Anonymous_e__Union = CACHE_RELATIONSHIP__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_SystemInformation == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CACHE_RELATIONSHIP__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop groupMask: GROUP_AFFINITY {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GROUP_AFFINITY>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GROUP_AFFINITY>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop groupMasks: VArray<GROUP_AFFINITY, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<GROUP_AFFINITY, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_SystemInformation == "on"]
+@C
+public struct GROUP_RELATIONSHIP {
+    public var MaximumGroupCount: UInt16 = 0
+    public var ActiveGroupCount: UInt16 = 0
+    public var Reserved: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
+    public var GroupInfo: VArray<PROCESSOR_GROUP_INFO, $1> = VArray<PROCESSOR_GROUP_INFO, $1>(repeat: PROCESSOR_GROUP_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_System_SystemInformation == "on"]
+@C
+public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
+    public var ProcessorMask: UIntNative = 0
+    public var Relationship: Int32 = 0
+    public var Anonymous: SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union = SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_SystemInformation == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop processorCore: SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop numaNode: SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cache: CACHE_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CACHE_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CACHE_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop reserved: VArray<UInt64, $2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt64, $2>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt64, $2>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_SystemInformation == "on"]
+@C
+public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct {
+    public var Flags: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_SystemInformation == "on"]
+@C
+public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct {
+    public var NodeNumber: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_SystemInformation == "on"]
+@C
+public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX {
+    public var Relationship: Int32 = 0
+    public var Size: UInt32 = 0
+    public var Anonymous: SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union = SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_SystemInformation == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $9> = VArray<UInt64, $9>(repeat: 0)
+
+    public mut prop processor: PROCESSOR_RELATIONSHIP {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PROCESSOR_RELATIONSHIP>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PROCESSOR_RELATIONSHIP>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop numaNode: NUMA_NODE_RELATIONSHIP {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NUMA_NODE_RELATIONSHIP>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NUMA_NODE_RELATIONSHIP>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cache: CACHE_RELATIONSHIP {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CACHE_RELATIONSHIP>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CACHE_RELATIONSHIP>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop group: GROUP_RELATIONSHIP {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GROUP_RELATIONSHIP>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GROUP_RELATIONSHIP>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
 @When[KERNEL32 == "on"]
 foreign {
     // param-hint: ComputerName len=param[2] optional
     func DnsHostnameToComputerNameExW(Hostname: CPointer<UInt16>, ComputerName: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32
     // param-hint: pFirmwareTableEnumBuffer bytes=param[2] optional
     // pinvoke-hint: SetLastError
-    func EnumSystemFirmwareTables(FirmwareTableProviderSignature: FIRMWARE_TABLE_PROVIDER, pFirmwareTableEnumBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32
+    func EnumSystemFirmwareTables(FirmwareTableProviderSignature: UInt32, pFirmwareTableEnumBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32
     // param-hint: lpBuffer len=param[2] optional
     // pinvoke-hint: SetLastError
-    func GetComputerNameExA(NameType: COMPUTER_NAME_FORMAT, lpBuffer: CPointer<UInt8>, nSize: CPointer<UInt32>): Int32
+    func GetComputerNameExA(NameType: Int32, lpBuffer: CPointer<UInt8>, nSize: CPointer<UInt32>): Int32
     // param-hint: lpBuffer len=param[2] optional
     // pinvoke-hint: SetLastError
-    func GetComputerNameExW(NameType: COMPUTER_NAME_FORMAT, lpBuffer: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32
+    func GetComputerNameExW(NameType: Int32, lpBuffer: CPointer<UInt16>, nSize: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
-    func GetFirmwareType(FirmwareType: CPointer<FIRMWARE_TYPE>): Int32
+    func GetFirmwareType(FirmwareType: CPointer<Int32>): Int32
     func GetLocalTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIME>): Unit
     // param-hint: Buffer bytes=param[1] optional
     // pinvoke-hint: SetLastError
     func GetLogicalProcessorInformation(Buffer: CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION>, ReturnedLength: CPointer<UInt32>): Int32
     // param-hint: Buffer bytes=param[2] optional
     // pinvoke-hint: SetLastError
-    func GetLogicalProcessorInformationEx(RelationshipType: LOGICAL_PROCESSOR_RELATIONSHIP, Buffer: CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX>, ReturnedLength: CPointer<UInt32>): Int32
+    func GetLogicalProcessorInformationEx(RelationshipType: Int32, Buffer: CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX>, ReturnedLength: CPointer<UInt32>): Int32
     func GetNativeSystemInfo(lpSystemInfo: CPointer<SYSTEM_INFO>): Unit
     // pinvoke-hint: SetLastError
     func GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes: CPointer<UInt64>): Int32
     // param-hint: Buffer bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func GetProcessorSystemCycleTime(Group: UInt16, Buffer: CPointer<SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION>, ReturnedLength: CPointer<UInt32>): Int32
-    func GetProductInfo(dwOSMajorVersion: UInt32, dwOSMinorVersion: UInt32, dwSpMajorVersion: UInt32, dwSpMinorVersion: UInt32, pdwReturnedProductType: CPointer<OS_PRODUCT_TYPE>): Int32
+    func GetProductInfo(dwOSMajorVersion: UInt32, dwOSMinorVersion: UInt32, dwSpMajorVersion: UInt32, dwSpMinorVersion: UInt32, pdwReturnedProductType: CPointer<UInt32>): Int32
     // param-hint: Nonce fixed=32 optional
     // param-hint: ReportBuffer bytes=param[4] optional
     func GetRuntimeAttestationReport(Nonce: CPointer<UInt8>, PackageVersion: UInt16, ReportTypesBitmap: UInt64, ReportBuffer: CPointer<Unit>, ReportBufferSize: CPointer<UInt32>): Int32
@@ -2218,7 +2230,7 @@ foreign {
     // param-hint: Process optional
     // param-hint: Flags optional reserved
     func GetSystemCpuSetInformation(Information: CPointer<SYSTEM_CPU_SET_INFORMATION>, BufferLength: UInt32, ReturnedLength: CPointer<UInt32>, Process: CPointer<Unit>, Flags: UInt32): Int32
-    func GetSystemDEPPolicy(): DEP_SYSTEM_POLICY_TYPE
+    func GetSystemDEPPolicy(): Int32
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetSystemDirectoryA(lpBuffer: CPointer<UInt8>, uSize: UInt32): UInt32
@@ -2227,7 +2239,7 @@ foreign {
     func GetSystemDirectoryW(lpBuffer: CPointer<UInt16>, uSize: UInt32): UInt32
     // param-hint: pFirmwareTableBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func GetSystemFirmwareTable(FirmwareTableProviderSignature: FIRMWARE_TABLE_PROVIDER, FirmwareTableID: UInt32, pFirmwareTableBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32
+    func GetSystemFirmwareTable(FirmwareTableProviderSignature: UInt32, FirmwareTableID: UInt32, pFirmwareTableBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32
     func GetSystemInfo(lpSystemInfo: CPointer<SYSTEM_INFO>): Unit
     func GetSystemLeapSecondInformation(Enabled: CPointer<Int32>, Flags: CPointer<UInt32>): Int32
     func GetSystemTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIME>): Unit
@@ -2265,16 +2277,16 @@ foreign {
     func GlobalMemoryStatus(lpBuffer: CPointer<MEMORYSTATUS>): Unit
     // pinvoke-hint: SetLastError
     func GlobalMemoryStatusEx(lpBuffer: CPointer<MEMORYSTATUSEX>): Int32
-    func IsUserCetAvailableInEnvironment(UserCetEnvironment: USER_CET_ENVIRONMENT): Int32
+    func IsUserCetAvailableInEnvironment(UserCetEnvironment: UInt32): Int32
     // pinvoke-hint: SetLastError
-    func IsWow64GuestMachineSupported(WowGuestMachine: IMAGE_FILE_MACHINE, MachineIsSupported: CPointer<Int32>): Int32
+    func IsWow64GuestMachineSupported(WowGuestMachine: UInt16, MachineIsSupported: CPointer<Int32>): Int32
     // pinvoke-hint: SetLastError
     func SetComputerNameA(lpComputerName: CPointer<UInt8>): Int32
-    func SetComputerNameEx2W(NameType: COMPUTER_NAME_FORMAT, Flags: UInt32, lpBuffer: CPointer<UInt16>): Int32
+    func SetComputerNameEx2W(NameType: Int32, Flags: UInt32, lpBuffer: CPointer<UInt16>): Int32
     // pinvoke-hint: SetLastError
-    func SetComputerNameExA(NameType: COMPUTER_NAME_FORMAT, lpBuffer: CPointer<UInt8>): Int32
+    func SetComputerNameExA(NameType: Int32, lpBuffer: CPointer<UInt8>): Int32
     // pinvoke-hint: SetLastError
-    func SetComputerNameExW(NameType: COMPUTER_NAME_FORMAT, lpBuffer: CPointer<UInt16>): Int32
+    func SetComputerNameExW(NameType: Int32, lpBuffer: CPointer<UInt16>): Int32
     // pinvoke-hint: SetLastError
     func SetComputerNameW(lpComputerName: CPointer<UInt16>): Int32
     // pinvoke-hint: SetLastError
@@ -2283,11 +2295,11 @@ foreign {
     func SetSystemTime(lpSystemTime: CPointer<Win32_Foundation.SYSTEMTIME>): Int32
     // pinvoke-hint: SetLastError
     func SetSystemTimeAdjustment(dwTimeAdjustment: UInt32, bTimeAdjustmentDisabled: Int32): Int32
-    func VerSetConditionMask(ConditionMask: UInt64, TypeMask: VER_FLAGS, Condition: UInt8): UInt64
+    func VerSetConditionMask(ConditionMask: UInt64, TypeMask: UInt32, Condition: UInt8): UInt64
     // pinvoke-hint: SetLastError
-    func VerifyVersionInfoA(lpVersionInformation: CPointer<OSVERSIONINFOEXA>, dwTypeMask: VER_FLAGS, dwlConditionMask: UInt64): Int32
+    func VerifyVersionInfoA(lpVersionInformation: CPointer<OSVERSIONINFOEXA>, dwTypeMask: UInt32, dwlConditionMask: UInt64): Int32
     // pinvoke-hint: SetLastError
-    func VerifyVersionInfoW(lpVersionInformation: CPointer<OSVERSIONINFOEXW>, dwTypeMask: VER_FLAGS, dwlConditionMask: UInt64): Int32
+    func VerifyVersionInfoW(lpVersionInformation: CPointer<OSVERSIONINFOEXW>, dwTypeMask: UInt32, dwlConditionMask: UInt64): Int32
 }
 
 @When[API_MS_WIN_CORE_SYSINFO_L1_2_0 == "on"]
@@ -2311,17 +2323,17 @@ foreign {
 
 @When[API_MS_WIN_CORE_SYSINFO_L1_2_6 == "on"]
 foreign {
-    func GetDeveloperDriveEnablementState(): DEVELOPER_DRIVE_ENABLEMENT_STATE
+    func GetDeveloperDriveEnablementState(): Int32
 }
 
 @When[API_MS_WIN_CORE_WOW64_L1_1_1 == "on"]
 foreign {
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
-    func GetSystemWow64Directory2A(lpBuffer: CPointer<UInt8>, uSize: UInt32, ImageFileMachineType: IMAGE_FILE_MACHINE): UInt32
+    func GetSystemWow64Directory2A(lpBuffer: CPointer<UInt8>, uSize: UInt32, ImageFileMachineType: UInt16): UInt32
     // param-hint: lpBuffer len=param[1] optional
     // pinvoke-hint: SetLastError
-    func GetSystemWow64Directory2W(lpBuffer: CPointer<UInt16>, uSize: UInt32, ImageFileMachineType: IMAGE_FILE_MACHINE): UInt32
+    func GetSystemWow64Directory2W(lpBuffer: CPointer<UInt16>, uSize: UInt32, ImageFileMachineType: UInt16): UInt32
 }
 
 @When[NTDLL == "on"]
@@ -2332,15 +2344,15 @@ foreign {
     // param-hint: pullUAPInfo optional
     // param-hint: pulDeviceFamily optional
     // param-hint: pulDeviceForm optional
-    func RtlGetDeviceFamilyInfoEnum(pullUAPInfo: CPointer<UInt64>, pulDeviceFamily: CPointer<DEVICEFAMILYINFOENUM>, pulDeviceForm: CPointer<DEVICEFAMILYDEVICEFORM>): Unit
-    func RtlGetProductInfo(OSMajorVersion: UInt32, OSMinorVersion: UInt32, SpMajorVersion: UInt32, SpMinorVersion: UInt32, ReturnedProductType: CPointer<UInt32>): Win32_Foundation.BOOLEAN
-    func RtlOsDeploymentState(Flags: UInt32): OS_DEPLOYEMENT_STATE_VALUES
+    func RtlGetDeviceFamilyInfoEnum(pullUAPInfo: CPointer<UInt64>, pulDeviceFamily: CPointer<UInt32>, pulDeviceForm: CPointer<UInt32>): Unit
+    func RtlGetProductInfo(OSMajorVersion: UInt32, OSMinorVersion: UInt32, SpMajorVersion: UInt32, SpMinorVersion: UInt32, ReturnedProductType: CPointer<UInt32>): UInt8
+    func RtlOsDeploymentState(Flags: UInt32): Int32
     func RtlSwitchedVVI(VersionInfo: CPointer<OSVERSIONINFOEXW>, TypeMask: UInt32, ConditionMask: UInt64): UInt32
 }
 
 @When[NTDLLK == "on"]
 foreign {
-    func RtlGetSystemGlobalData(DataId: RTL_SYSTEM_GLOBAL_DATA_ID, Buffer: CPointer<Unit>, Size: UInt32): UInt32
+    func RtlGetSystemGlobalData(DataId: Int32, Buffer: CPointer<Unit>, Size: UInt32): UInt32
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]

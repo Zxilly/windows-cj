@@ -1,5 +1,0 @@
-[features.KERNEL32]
-link = ["-lkernel32"]
-
-[features.USER32]
-link = ["-luser32"]

@@ -2,6 +2,8 @@
 package windows_sys.Win32.UI.Input
 
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -9,7 +11,6 @@ import windows_sys.Win32.Foundation as Win32_Foundation
 public type HRAWINPUT = CPointer<Unit>
 
 @When[Windows_Win32_UI_Input == "on"]
-@C
 public struct INPUT_MESSAGE_DEVICE_TYPE {
     public var value: Int32 = 0
 
@@ -46,7 +47,6 @@ public let INPUT_MESSAGE_DEVICE_TYPE_IMDT_PEN: INPUT_MESSAGE_DEVICE_TYPE = INPUT
 public let INPUT_MESSAGE_DEVICE_TYPE_IMDT_TOUCHPAD: INPUT_MESSAGE_DEVICE_TYPE = INPUT_MESSAGE_DEVICE_TYPE(16)
 
 @When[Windows_Win32_UI_Input == "on"]
-@C
 public struct INPUT_MESSAGE_ORIGIN_ID {
     public var value: Int32 = 0
 
@@ -79,13 +79,12 @@ public let INPUT_MESSAGE_ORIGIN_ID_IMO_SYSTEM: INPUT_MESSAGE_ORIGIN_ID = INPUT_M
 @When[Windows_Win32_UI_Input == "on"]
 @C
 public struct INPUT_MESSAGE_SOURCE {
-    public var deviceType: INPUT_MESSAGE_DEVICE_TYPE = INPUT_MESSAGE_DEVICE_TYPE()
-    public var originId: INPUT_MESSAGE_ORIGIN_ID = INPUT_MESSAGE_ORIGIN_ID()
+    public var deviceType: Int32 = 0
+    public var originId: Int32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_UI_Input == "on"]
-@C
 public struct MOUSE_STATE {
     public var value: UInt16 = 0
 
@@ -128,104 +127,6 @@ public struct RAWHID {
 }
 
 @When[Windows_Win32_UI_Input == "on"]
-@C
-public struct RAWINPUT {
-    public var header: RAWINPUTHEADER = RAWINPUTHEADER()
-    public var data: RAWINPUT__data_e__Union = RAWINPUT__data_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_UI_Input == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RAWINPUT__data_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
-
-    public func mouse(): RAWMOUSE {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAWMOUSE>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mouse(val: RAWMOUSE): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAWMOUSE>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func keyboard(): RAWKEYBOARD {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAWKEYBOARD>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_keyboard(val: RAWKEYBOARD): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAWKEYBOARD>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func hid(): RAWHID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAWHID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_hid(val: RAWHID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAWHID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_UI_Input == "on"]
-@C
-public struct RAWINPUTDEVICE {
-    public var usUsagePage: UInt16 = 0
-    public var usUsage: UInt16 = 0
-    public var dwFlags: RAWINPUTDEVICE_FLAGS = RAWINPUTDEVICE_FLAGS()
-    public var hwndTarget: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_UI_Input == "on"]
-@C
-public struct RAWINPUTDEVICELIST {
-    public var hDevice: CPointer<Unit> = CPointer<Unit>()
-    public var dwType: RID_DEVICE_INFO_TYPE = RID_DEVICE_INFO_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_UI_Input == "on"]
-@C
 public struct RAWINPUTDEVICE_FLAGS {
     public var value: UInt32 = 0
 
@@ -312,7 +213,7 @@ public struct RAWKEYBOARD {
 @When[Windows_Win32_UI_Input == "on"]
 @C
 public struct RAWMOUSE {
-    public var usFlags: MOUSE_STATE = MOUSE_STATE()
+    public var usFlags: UInt16 = 0
     public var Anonymous: RAWMOUSE__Anonymous_e__Union = RAWMOUSE__Anonymous_e__Union()
     public var ulRawButtons: UInt32 = 0
     public var lLastX: Int32 = 0
@@ -322,46 +223,49 @@ public struct RAWMOUSE {
 }
 
 @When[Windows_Win32_UI_Input == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct RAWMOUSE__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func ulButtons(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop ulButtons: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ulButtons(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -376,7 +280,6 @@ public struct RAWMOUSE__Anonymous_e__Union__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_UI_Input == "on"]
-@C
 public struct RAW_INPUT_DATA_COMMAND_FLAGS {
     public var value: UInt32 = 0
 
@@ -401,7 +304,6 @@ public let RAW_INPUT_DATA_COMMAND_FLAGS_RID_HEADER: RAW_INPUT_DATA_COMMAND_FLAGS
 public let RAW_INPUT_DATA_COMMAND_FLAGS_RID_INPUT: RAW_INPUT_DATA_COMMAND_FLAGS = RAW_INPUT_DATA_COMMAND_FLAGS(268435459)
 
 @When[Windows_Win32_UI_Input == "on"]
-@C
 public struct RAW_INPUT_DEVICE_INFO_COMMAND {
     public var value: UInt32 = 0
 
@@ -427,86 +329,6 @@ public let RAW_INPUT_DEVICE_INFO_COMMAND_RIDI_DEVICENAME: RAW_INPUT_DEVICE_INFO_
 
 @When[Windows_Win32_UI_Input == "on"]
 public let RAW_INPUT_DEVICE_INFO_COMMAND_RIDI_DEVICEINFO: RAW_INPUT_DEVICE_INFO_COMMAND = RAW_INPUT_DEVICE_INFO_COMMAND(536870923)
-
-@When[Windows_Win32_UI_Input == "on"]
-@C
-public struct RID_DEVICE_INFO {
-    public var cbSize: UInt32 = 0
-    public var dwType: RID_DEVICE_INFO_TYPE = RID_DEVICE_INFO_TYPE()
-    public var Anonymous: RID_DEVICE_INFO__Anonymous_e__Union = RID_DEVICE_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_UI_Input == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RID_DEVICE_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
-
-    public func mouse(): RID_DEVICE_INFO_MOUSE {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RID_DEVICE_INFO_MOUSE>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mouse(val: RID_DEVICE_INFO_MOUSE): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RID_DEVICE_INFO_MOUSE>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func keyboard(): RID_DEVICE_INFO_KEYBOARD {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RID_DEVICE_INFO_KEYBOARD>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_keyboard(val: RID_DEVICE_INFO_KEYBOARD): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RID_DEVICE_INFO_KEYBOARD>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func hid(): RID_DEVICE_INFO_HID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RID_DEVICE_INFO_HID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_hid(val: RID_DEVICE_INFO_HID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RID_DEVICE_INFO_HID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
 
 @When[Windows_Win32_UI_Input == "on"]
 @C
@@ -542,7 +364,6 @@ public struct RID_DEVICE_INFO_MOUSE {
 }
 
 @When[Windows_Win32_UI_Input == "on"]
-@C
 public struct RID_DEVICE_INFO_TYPE {
     public var value: UInt32 = 0
 
@@ -569,6 +390,191 @@ public let RID_DEVICE_INFO_TYPE_RIM_TYPEKEYBOARD: RID_DEVICE_INFO_TYPE = RID_DEV
 @When[Windows_Win32_UI_Input == "on"]
 public let RID_DEVICE_INFO_TYPE_RIM_TYPEHID: RID_DEVICE_INFO_TYPE = RID_DEVICE_INFO_TYPE(2)
 
+@When[Windows_Win32_UI_Input == "on"]
+@C
+public struct RAWINPUT {
+    public var header: RAWINPUTHEADER = RAWINPUTHEADER()
+    public var data: RAWINPUT__data_e__Union = RAWINPUT__data_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_UI_Input == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RAWINPUT__data_e__Union {
+    public var _raw: VArray<UInt32, $6> = VArray<UInt32, $6>(repeat: 0)
+
+    public mut prop mouse: RAWMOUSE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAWMOUSE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAWMOUSE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop keyboard: RAWKEYBOARD {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAWKEYBOARD>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAWKEYBOARD>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop hid: RAWHID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAWHID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAWHID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_UI_Input == "on"]
+@C
+public struct RAWINPUTDEVICE {
+    public var usUsagePage: UInt16 = 0
+    public var usUsage: UInt16 = 0
+    public var dwFlags: UInt32 = 0
+    public var hwndTarget: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_UI_Input == "on"]
+@C
+public struct RAWINPUTDEVICELIST {
+    public var hDevice: CPointer<Unit> = CPointer<Unit>()
+    public var dwType: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_UI_Input == "on"]
+@C
+public struct RID_DEVICE_INFO {
+    public var cbSize: UInt32 = 0
+    public var dwType: UInt32 = 0
+    public var Anonymous: RID_DEVICE_INFO__Anonymous_e__Union = RID_DEVICE_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_UI_Input == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RID_DEVICE_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $6> = VArray<UInt32, $6>(repeat: 0)
+
+    public mut prop mouse: RID_DEVICE_INFO_MOUSE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RID_DEVICE_INFO_MOUSE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RID_DEVICE_INFO_MOUSE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop keyboard: RID_DEVICE_INFO_KEYBOARD {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RID_DEVICE_INFO_KEYBOARD>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RID_DEVICE_INFO_KEYBOARD>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop hid: RID_DEVICE_INFO_HID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RID_DEVICE_INFO_HID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RID_DEVICE_INFO_HID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
 @When[USER32 == "on"]
 foreign {
     // param-hint: paRawInput len=param[1]
@@ -580,15 +586,15 @@ foreign {
     // pinvoke-hint: SetLastError
     func GetRawInputBuffer(pData: CPointer<RAWINPUT>, pcbSize: CPointer<UInt32>, cbSizeHeader: UInt32): UInt32
     // param-hint: pData bytes=param[3] optional
-    func GetRawInputData(hRawInput: HRAWINPUT, uiCommand: RAW_INPUT_DATA_COMMAND_FLAGS, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>, cbSizeHeader: UInt32): UInt32
+    func GetRawInputData(hRawInput: HRAWINPUT, uiCommand: UInt32, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>, cbSizeHeader: UInt32): UInt32
     // param-hint: hDevice optional
     // param-hint: pData bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func GetRawInputDeviceInfoA(hDevice: CPointer<Unit>, uiCommand: RAW_INPUT_DEVICE_INFO_COMMAND, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>): UInt32
+    func GetRawInputDeviceInfoA(hDevice: CPointer<Unit>, uiCommand: UInt32, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>): UInt32
     // param-hint: hDevice optional
     // param-hint: pData bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func GetRawInputDeviceInfoW(hDevice: CPointer<Unit>, uiCommand: RAW_INPUT_DEVICE_INFO_COMMAND, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>): UInt32
+    func GetRawInputDeviceInfoW(hDevice: CPointer<Unit>, uiCommand: UInt32, pData: CPointer<Unit>, pcbSize: CPointer<UInt32>): UInt32
     // param-hint: pRawInputDeviceList len=param[1] optional
     // pinvoke-hint: SetLastError
     func GetRawInputDeviceList(pRawInputDeviceList: CPointer<RAWINPUTDEVICELIST>, puiNumDevices: CPointer<UInt32>, cbSize: UInt32): UInt32

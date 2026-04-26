@@ -1,5 +1,7 @@
 package windows_result
 
+import std.env.getVariables
+
 func originateError(code: HRESULT, message: String): Bool {
     let units = encodeUtf16Units(message)
     if (units.isEmpty()) {
@@ -110,6 +112,19 @@ func captureErrorInfoMessage(raw: CPointer<IErrorInfo>): Option<String> {
     captureDescription(raw)
 }
 
+func slimErrorsEnabled(): Bool {
+    try {
+        for ((key, value) in getVariables()) {
+            if (key == "WINDOWS_RESULT_SLIM_ERRORS") {
+                return value == "true"
+            }
+        }
+    } catch (_: Exception) {
+        return false
+    }
+    false
+}
+
 @When[os == "Windows"]
 func captureThreadErrorInfoPointer(): CPointer<IErrorInfo> {
     var infoPtr = CPointer<IErrorInfo>()
@@ -137,6 +152,9 @@ struct ErrorInfo {
     }
 
     static func fromThread(): ErrorInfo {
+        if (slimErrorsEnabled()) {
+            return ErrorInfo.empty()
+        }
         let raw = captureThreadErrorInfoPointer()
         if (raw.isNull()) {
             return ErrorInfo.empty()
@@ -145,13 +163,16 @@ struct ErrorInfo {
     }
 
     static func fromRaw(ptr: CPointer<IErrorInfo>, addRef!: Bool = false): ErrorInfo {
-        if (ptr.isNull()) {
+        if (slimErrorsEnabled() || ptr.isNull()) {
             return ErrorInfo.empty()
         }
         ErrorInfo(Some(ComHandle<IErrorInfo>(ptr, addRef: addRef)))
     }
 
     func intoThread(): Unit {
+        if (slimErrorsEnabled()) {
+            return
+        }
         match (ptr) {
             case Some(info) =>
                 if (HRESULT(setErrorInfoAbi(0u32, CPointer<Unit>(info.asRaw()))).failed()) {
@@ -165,6 +186,9 @@ struct ErrorInfo {
     }
 
     func message(): Option<String> {
+        if (slimErrorsEnabled()) {
+            return None
+        }
         match (ptr) {
             case Some(info) => captureErrorInfoMessage(info.asRaw())
             case None => None
@@ -172,6 +196,9 @@ struct ErrorInfo {
     }
 
     func asPtr(): CPointer<Unit> {
+        if (slimErrorsEnabled()) {
+            return CPointer<Unit>()
+        }
         match (ptr) {
             case Some(info) => CPointer<Unit>(info.asRaw())
             case None => CPointer<Unit>()
@@ -208,6 +235,9 @@ struct ErrorInfo {
 
 @When[os == "Windows"]
 func createNewError(code: HRESULT, text: String): Error {
+    if (slimErrorsEnabled()) {
+        return Error.fromHRESULT(code)
+    }
     originateError(code, text)
     Error.fromHRESULTWithInfo(code)
 }
@@ -217,14 +247,8 @@ func createNewError(code: HRESULT, _: String): Error {
     Error.fromHRESULT(code)
 }
 
-@When[os == "Windows"]
 func slimErrorsEnabledForTesting(): Bool {
-    false
-}
-
-@When[os != "Windows"]
-func slimErrorsEnabledForTesting(): Bool {
-    true
+    slimErrorsEnabled()
 }
 
 public struct Error <: ToString & Hashable & Comparable<Error> {

@@ -2,25 +2,31 @@
 package windows_sys.Win32.System.UserAccessLogging
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
-@When[Windows_Win32_System_UserAccessLogging == "on"]
+@When[Windows_Win32_System_UserAccessLogging == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct UAL_DATA_BLOB {
     public var Size: UInt32 = 0
     public var RoleGuid: GUID = GUID()
     public var TenantId: GUID = GUID()
-    public var Address: Win32_impl.SOCKADDR_STORAGE = Win32_impl.SOCKADDR_STORAGE()
+    public var Address: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
     public var UserName: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
     public init() {}
 }
 
 @When[UALAPI == "on"]
 foreign {
-    func UalInstrument(Data: CPointer<UAL_DATA_BLOB>): Int32
     func UalRegisterProduct(wszProductName: CPointer<UInt16>, wszRoleName: CPointer<UInt16>, wszGuid: CPointer<UInt16>): Int32
+}
+
+@When[UALAPI == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    func UalInstrument(Data: CPointer<UAL_DATA_BLOB>): Int32
     func UalStart(Data: CPointer<UAL_DATA_BLOB>): Int32
     func UalStop(Data: CPointer<UAL_DATA_BLOB>): Int32
 }

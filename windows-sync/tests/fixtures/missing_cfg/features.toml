@@ -1,6 +1,0 @@
-[features.KERNEL32]
-cfg = "KERNEL32"
-deps = []
-
-[features.USER32]
-deps = ["KERNEL32"]

@@ -76,7 +76,7 @@ public struct GUID {
         GUID()
     }
 
-    public static func fromValues(
+    public static func from_values(
         data1: UInt32,
         data2: UInt16,
         data3: UInt16,
@@ -92,24 +92,20 @@ public struct GUID {
         GUID(data1, data2, data3, data4_0, data4_1, data4_2, data4_3, data4_4, data4_5, data4_6, data4_7)
     }
 
-    public static func fromU128(high: UInt64, low: UInt64): GUID {
-        GUID(
-            UInt32(high >> 32),
-            UInt16((high >> 16) & 0xFFFFu64),
-            UInt16(high & 0xFFFFu64),
-            UInt8((low >> 56) & 0xFFu64),
-            UInt8((low >> 48) & 0xFFu64),
-            UInt8((low >> 40) & 0xFFu64),
-            UInt8((low >> 32) & 0xFFu64),
-            UInt8((low >> 24) & 0xFFu64),
-            UInt8((low >> 16) & 0xFFu64),
-            UInt8((low >> 8) & 0xFFu64),
-            UInt8(low & 0xFFu64)
-        )
-    }
-
     public static func from_u128(value: UInt128): GUID {
-        fromU128(value.high, value.low)
+        GUID(
+            UInt32(value.high >> 32),
+            UInt16((value.high >> 16) & 0xFFFFu64),
+            UInt16(value.high & 0xFFFFu64),
+            UInt8((value.low >> 56) & 0xFFu64),
+            UInt8((value.low >> 48) & 0xFFu64),
+            UInt8((value.low >> 40) & 0xFFu64),
+            UInt8((value.low >> 32) & 0xFFu64),
+            UInt8((value.low >> 24) & 0xFFu64),
+            UInt8((value.low >> 16) & 0xFFu64),
+            UInt8((value.low >> 8) & 0xFFu64),
+            UInt8(value.low & 0xFFu64)
+        )
     }
 
     // 调用系统 UUID 生成器创建一个新的 GUID。
@@ -133,12 +129,8 @@ public struct GUID {
         Result<GUID>.Err(WinErrorResult.fromWin32(UInt32(status)))
     }
 
-    public static func fromSignature(signature: String): GUID {
-        guidFromSignatureBytes(signature.toArray())
-    }
-
     public static func from_signature(signature: String): GUID {
-        fromSignature(signature)
+        guid_from_signature_bytes(signature.toArray())
     }
 
     // 解析标准 xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 形式的 GUID 字符串。
@@ -174,7 +166,7 @@ public struct GUID {
                                                                                         match (parseGuidHex(bytes, 34, 2)) {
                                                                                             case Some(data4_7) =>
                                                                                                 Some(
-                                                                                                    GUID.fromValues(
+                                                                                                    GUID.from_values(
                                                                                                         UInt32(data1),
                                                                                                         UInt16(data2),
                                                                                                         UInt16(data3),
@@ -264,8 +256,8 @@ public struct GUID {
     }
 
     public func hashCode(): Int64 {
-        let (high, low) = toU128()
-        Int64((high ^ low) & 0x7FFFFFFFFFFFFFFFu64)
+        let value = to_u128()
+        Int64((value.high ^ value.low) & 0x7FFFFFFFFFFFFFFFu64)
     }
 
     public func toString(): String {
@@ -282,7 +274,7 @@ public struct GUID {
         "${d1}-${d2}-${d3}-${d4a}-${d4b}"
     }
 
-    public func toU128(): (UInt64, UInt64) {
+    public func to_u128(): UInt128 {
         let high = (UInt64(data1) << 32) | (UInt64(data2) << 16) | UInt64(data3)
         var low = UInt64(data4[0]) << 56
         low |= UInt64(data4[1]) << 48
@@ -292,19 +284,19 @@ public struct GUID {
         low |= UInt64(data4[5]) << 16
         low |= UInt64(data4[6]) << 8
         low |= UInt64(data4[7])
-        (high, low)
-    }
-
-    public func to_u128(): UInt128 {
-        let (high, low) = toU128()
         UInt128(high, low)
     }
 }
 
 public let GUID_ZERO = GUID.zeroed()
-public let IID_IUNKNOWN = GUID.fromValues(0u32, 0u16, 0u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
-public let IID_IINSPECTABLE = GUID.fromValues(0xAF86E2E0u32, 0xB12Du16, 0x4C6Au16, 0x9Cu8, 0x5Au8, 0xD7u8, 0xAAu8, 0x65u8, 0x10u8, 0x1Eu8, 0x90u8)
-public let IID_IACTIVATIONFACTORY = GUID.fromValues(0x00000035u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
+public let IID_IUNKNOWN = GUID.from_values(0u32, 0u16, 0u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
+public let IID_IINSPECTABLE = GUID.from_values(0xAF86E2E0u32, 0xB12Du16, 0x4C6Au16, 0x9Cu8, 0x5Au8, 0xD7u8, 0xAAu8, 0x65u8, 0x10u8, 0x1Eu8, 0x90u8)
+public let IID_IACTIVATIONFACTORY = GUID.from_values(0x00000035u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
+public let IID_IAGILEOBJECT = GUID.from_values(0x94EA2B94u32, 0xE9CCu16, 0x49E0u16, 0xC0u8, 0xFFu8, 0xEEu8, 0x64u8, 0xCAu8, 0x8Fu8, 0x5Bu8, 0x90u8)
+public let IID_IAGILEREFERENCE = GUID.from_values(0xC03F6A43u32, 0x65A4u16, 0x9818u16, 0x98u8, 0x7Eu8, 0xE0u8, 0xB8u8, 0x10u8, 0xD2u8, 0xA6u8, 0xF2u8)
+public let IID_IMARSHAL = GUID.from_values(0x00000003u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
+public let IID_IWEAKREFERENCE = GUID.from_values(0x00000037u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
+public let IID_IWEAKREFERENCESOURCE = GUID.from_values(0x00000038u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
 
 func padHexUpper(value: UInt64, width: Int64): String {
     let digits = "0123456789ABCDEF".toArray()
@@ -389,7 +381,7 @@ func rpcrt4Module(): CPointer<Unit> {
     }
 }
 
-func guidFromSignatureBytes(signature: Array<UInt8>): GUID {
+func guid_from_signature_bytes(signature: Array<UInt8>): GUID {
     let buffer = Array<UInt8>(GUID_SIGNATURE_NAMESPACE.size + signature.size, repeat: 0u8)
     var index = 0
     while (index < GUID_SIGNATURE_NAMESPACE.size) {
@@ -413,7 +405,7 @@ func guidFromSignatureBytes(signature: Array<UInt8>): GUID {
     third = UInt16((third & 0x0FFFu16) | 0x5000u16)
     let fourth = UInt8((digest[8] & 0x3Fu8) | 0x80u8)
 
-    GUID.fromValues(
+    GUID.from_values(
         first,
         second,
         third,

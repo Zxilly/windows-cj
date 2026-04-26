@@ -2,32 +2,17 @@
 package windows_sys.Win32.System.Ioctl
 
 import windows_interface.{GUID}
-import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+import windows_interface as windows_interface
+import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
+@When[Windows_Win32_Storage_Vhd == "on"]
 import windows_sys.Win32.Storage.Vhd as Win32_Storage_Vhd
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct ASYNC_DUPLICATE_EXTENTS_STATUS {
-    public var Version: UInt32 = 0
-    public var State: DUPLICATE_EXTENTS_STATE = DUPLICATE_EXTENTS_STATE()
-    public var SourceFileOffset: UInt64 = 0
-    public var TargetFileOffset: UInt64 = 0
-    public var ByteCount: UInt64 = 0
-    public var BytesDuplicated: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct BIN_COUNT {
-    public var BinRange: BIN_RANGE = BIN_RANGE()
-    public var BinCount: UInt32 = 0
-    public init() {}
-}
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
@@ -38,15 +23,6 @@ public struct BIN_RANGE {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct BIN_RESULTS {
-    public var NumberOfBins: UInt32 = 0
-    public var BinCounts: VArray<BIN_COUNT, $1> = VArray<BIN_COUNT, $1>(repeat: BIN_COUNT())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct BIN_TYPES {
     public var value: Int32 = 0
 
@@ -94,7 +70,6 @@ public struct BULK_SECURITY_TEST_DATA {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct CHANGER_DEVICE_PROBLEM_TYPE {
     public var value: Int32 = 0
 
@@ -155,56 +130,6 @@ public let CHANGER_DEVICE_PROBLEM_TYPE_DeviceProblemGripperError: CHANGER_DEVICE
 public let CHANGER_DEVICE_PROBLEM_TYPE_DeviceProblemDriveError: CHANGER_DEVICE_PROBLEM_TYPE = CHANGER_DEVICE_PROBLEM_TYPE(13)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_ELEMENT {
-    public var ElementType: ELEMENT_TYPE = ELEMENT_TYPE()
-    public var ElementAddress: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_ELEMENT_LIST {
-    public var Element: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var NumberOfElements: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_ELEMENT_STATUS {
-    public var Element: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var SrcElementAddress: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Flags: CHANGER_ELEMENT_STATUS_FLAGS = CHANGER_ELEMENT_STATUS_FLAGS()
-    public var ExceptionCode: UInt32 = 0
-    public var TargetId: UInt8 = 0
-    public var Lun: UInt8 = 0
-    public var Reserved: UInt16 = 0
-    public var PrimaryVolumeID: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
-    public var AlternateVolumeID: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_ELEMENT_STATUS_EX {
-    public var Element: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var SrcElementAddress: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Flags: CHANGER_ELEMENT_STATUS_FLAGS = CHANGER_ELEMENT_STATUS_FLAGS()
-    public var ExceptionCode: UInt32 = 0
-    public var TargetId: UInt8 = 0
-    public var Lun: UInt8 = 0
-    public var Reserved: UInt16 = 0
-    public var PrimaryVolumeID: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
-    public var AlternateVolumeID: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
-    public var VendorIdentification: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-    public var ProductIdentification: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var SerialNumber: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct CHANGER_ELEMENT_STATUS_FLAGS {
     public var value: UInt32 = 0
 
@@ -279,19 +204,6 @@ public let CHANGER_ELEMENT_STATUS_FLAGS_ELEMENT_STATUS_SVALID: CHANGER_ELEMENT_S
 public let CHANGER_ELEMENT_STATUS_FLAGS_ELEMENT_STATUS_PRODUCT_DATA: CHANGER_ELEMENT_STATUS_FLAGS = CHANGER_ELEMENT_STATUS_FLAGS(64)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_EXCHANGE_MEDIUM {
-    public var Transport: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Source: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Destination1: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Destination2: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Flip1: Win32_Foundation.BOOLEAN = 0
-    public var Flip2: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct CHANGER_FEATURES {
     public var value: UInt32 = 0
 
@@ -412,64 +324,12 @@ public let CHANGER_FEATURES_CHANGER_VOLUME_UNDEFINE: CHANGER_FEATURES = CHANGER_
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct CHANGER_INITIALIZE_ELEMENT_STATUS {
-    public var ElementList: CHANGER_ELEMENT_LIST = CHANGER_ELEMENT_LIST()
-    public var BarCodeScan: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_MOVE_MEDIUM {
-    public var Transport: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Source: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Destination: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Flip: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct CHANGER_PRODUCT_DATA {
     public var VendorId: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
     public var ProductId: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
     public var Revision: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
     public var SerialNumber: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
     public var DeviceType: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_READ_ELEMENT_STATUS {
-    public var ElementList: CHANGER_ELEMENT_LIST = CHANGER_ELEMENT_LIST()
-    public var VolumeTagInfo: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_SEND_VOLUME_TAG_INFORMATION {
-    public var StartingElement: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var ActionCode: UInt32 = 0
-    public var VolumeIDTemplate: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_SET_ACCESS {
-    public var Element: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Control: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct CHANGER_SET_POSITION {
-    public var Transport: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Destination: CHANGER_ELEMENT = CHANGER_ELEMENT()
-    public var Flip: Win32_Foundation.BOOLEAN = 0
     public init() {}
 }
 
@@ -513,64 +373,6 @@ public struct CONTAINER_VOLUME_STATE {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct CREATE_DISK {
-    public var PartitionStyle: PARTITION_STYLE = PARTITION_STYLE()
-    public var Anonymous: CREATE_DISK__Anonymous_e__Union = CREATE_DISK__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CREATE_DISK__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func mbr(): CREATE_DISK_MBR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_DISK_MBR>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mbr(val: CREATE_DISK_MBR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_DISK_MBR>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func gpt(): CREATE_DISK_GPT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_DISK_GPT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_gpt(val: CREATE_DISK_GPT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_DISK_GPT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct CREATE_DISK_GPT {
     public var DiskId: GUID = GUID()
     public var MaxPartitionCount: UInt32 = 0
@@ -593,7 +395,6 @@ public struct CREATE_USN_JOURNAL_DATA {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct CSVFS_DISK_CONNECTIVITY {
     public var value: Int32 = 0
 
@@ -624,7 +425,6 @@ public let CSVFS_DISK_CONNECTIVITY_CsvFsDiskConnectivitySubsetOfNodes: CSVFS_DIS
 public let CSVFS_DISK_CONNECTIVITY_CsvFsDiskConnectivityAllNodes: CSVFS_DISK_CONNECTIVITY = CSVFS_DISK_CONNECTIVITY(3)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct CSV_CONTROL_OP {
     public var value: Int32 = 0
 
@@ -699,7 +499,7 @@ public let CSV_CONTROL_OP_CsvControlQueryVolumeId: CSV_CONTROL_OP = CSV_CONTROL_
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct CSV_CONTROL_PARAM {
-    public var Operation: CSV_CONTROL_OP = CSV_CONTROL_OP()
+    public var Operation: Int32 = 0
     public var Unused: Int64 = 0
     public init() {}
 }
@@ -707,7 +507,7 @@ public struct CSV_CONTROL_PARAM {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct CSV_IS_OWNED_BY_CSVFS {
-    public var OwnedByCSVFS: Win32_Foundation.BOOLEAN = 0
+    public var OwnedByCSVFS: UInt8 = 0
     public init() {}
 }
 
@@ -736,10 +536,10 @@ public struct CSV_QUERY_FILE_REVISION {
     public init() {}
 }
 
-@When[Windows_Win32_System_Ioctl == "on"]
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
 @C
 public struct CSV_QUERY_FILE_REVISION_FILE_ID_128 {
-    public var FileId: Win32_impl.FILE_ID_128 = Win32_impl.FILE_ID_128()
+    public var FileId: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
     public var FileRevision: VArray<Int64, $3> = VArray<Int64, $3>(repeat: 0)
     public init() {}
 }
@@ -762,7 +562,7 @@ public struct CSV_QUERY_MDS_PATH_V2 {
     public var MdsNodeId: UInt32 = 0
     public var DsNodeId: UInt32 = 0
     public var Flags: UInt32 = 0
-    public var DiskConnectivity: CSVFS_DISK_CONNECTIVITY = CSVFS_DISK_CONNECTIVITY()
+    public var DiskConnectivity: Int32 = 0
     public var VolumeId: GUID = GUID()
     public var IpAddressOffset: UInt32 = 0
     public var IpAddressLength: UInt32 = 0
@@ -776,7 +576,7 @@ public struct CSV_QUERY_MDS_PATH_V2 {
 public struct CSV_QUERY_REDIRECT_STATE {
     public var MdsNodeId: UInt32 = 0
     public var DsNodeId: UInt32 = 0
-    public var FileRedirected: Win32_Foundation.BOOLEAN = 0
+    public var FileRedirected: UInt8 = 0
     public init() {}
 }
 
@@ -801,9 +601,9 @@ public struct CSV_QUERY_VOLUME_ID {
 public struct CSV_QUERY_VOLUME_REDIRECT_STATE {
     public var MdsNodeId: UInt32 = 0
     public var DsNodeId: UInt32 = 0
-    public var IsDiskConnected: Win32_Foundation.BOOLEAN = 0
-    public var ClusterEnableDirectIo: Win32_Foundation.BOOLEAN = 0
-    public var DiskConnectivity: CSVFS_DISK_CONNECTIVITY = CSVFS_DISK_CONNECTIVITY()
+    public var IsDiskConnected: UInt8 = 0
+    public var ClusterEnableDirectIo: UInt8 = 0
+    public var DiskConnectivity: Int32 = 0
     public init() {}
 }
 
@@ -817,20 +617,11 @@ public struct CSV_SET_VOLUME_ID {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct DECRYPTION_STATUS_BUFFER {
-    public var NoEncryptedStreams: Win32_Foundation.BOOLEAN = 0
+    public var NoEncryptedStreams: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DELETE_USN_JOURNAL_DATA {
-    public var UsnJournalID: UInt64 = 0
-    public var DeleteFlags: USN_DELETE_FLAGS = USN_DELETE_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DETECTION_TYPE {
     public var value: Int32 = 0
 
@@ -858,7 +649,6 @@ public let DETECTION_TYPE_DetectInt13: DETECTION_TYPE = DETECTION_TYPE(1)
 public let DETECTION_TYPE_DetectExInt13: DETECTION_TYPE = DETECTION_TYPE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DEVICEDUMP_COLLECTION_TYPEIDE_NOTIFICATION_TYPE {
     public var value: Int32 = 0
 
@@ -887,587 +677,595 @@ public let DEVICEDUMP_COLLECTION_TYPEIDE_NOTIFICATION_TYPE_TCCollectionDeviceReq
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct DEVICEDUMP_PRIVATE_SUBSECTION {
-    public var _raw: VArray<UInt8, $9> = VArray<UInt8, $9>(repeat: 0u8)
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `GPLogId`: type `GP_LOG_PAGE_DESCRIPTOR` not supported by polyfill; skipped
-
-    // packed field `bData`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICEDUMP_PUBLIC_SUBSECTION {
-    public var _raw: VArray<UInt8, $85> = VArray<UInt8, $85>(repeat: 0u8)
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `GPLogTable`: type `VArray<GP_LOG_PAGE_DESCRIPTOR, $16>` not supported by polyfill; skipped
-
-    // packed field `szDescription`: type `VArray<Win32_Foundation.CHAR, $16>` not supported by polyfill; skipped
-
-    // packed field `bData`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DEVICEDUMP_RESTRICTED_SUBSECTION {
     public var bData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct DEVICEDUMP_SECTION_HEADER {
-    public var _raw: VArray<UInt8, $228> = VArray<UInt8, $228>(repeat: 0u8)
+    public var _raw: VArray<UInt8, $244> = VArray<UInt8, $244>(repeat: 0u8)
 
-    // packed field `guidDeviceDataId`: layout unknown; skipped
-
-    // packed field `sOrganizationID`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
-
-    public func dwFirmwareRevision(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 16)
+    public mut prop guidDeviceDataId: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: GUID = GUID()
+                return packedReadValue<GUID>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFirmwareRevision(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 16, val)
-            _raw = rawStorage
+    public mut prop sOrganizationID: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $16>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `sModelNumber`: type `VArray<UInt8, $32>` not supported by polyfill; skipped
-
-    // packed field `szDeviceManufacturingID`: type `VArray<UInt8, $32>` not supported by polyfill; skipped
-
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 84)
+    public mut prop dwFirmwareRevision: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 32)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 32, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 84, val)
-            _raw = rawStorage
+    public mut prop sModelNumber: VArray<UInt8, $32> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $32>>(base, 36, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 36, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func bRestrictedPrivateDataVersion(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 88)
+    public mut prop szDeviceManufacturingID: VArray<UInt8, $32> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $32>>(base, 68, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 68, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bRestrictedPrivateDataVersion(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 88, val)
-            _raw = rawStorage
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 100)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 100, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dwFirmwareIssueId(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 92)
+    public mut prop bRestrictedPrivateDataVersion: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 104)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 104, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwFirmwareIssueId(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 92, val)
-            _raw = rawStorage
+    public mut prop dwFirmwareIssueId: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 108)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 108, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `szIssueDescriptionString`: type `VArray<UInt8, $132>` not supported by polyfill; skipped
+    public mut prop szIssueDescriptionString: VArray<UInt8, $132> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $132> = VArray<UInt8, $132>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $132>>(base, 112, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 112, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICEDUMP_STORAGEDEVICE_DATA {
-    public var _raw: VArray<UInt8, $284> = VArray<UInt8, $284>(repeat: 0u8)
-
-    // packed field `Descriptor`: type `DEVICEDUMP_STRUCTURE_VERSION` not supported by polyfill; skipped
-
-    // packed field `SectionHeader`: type `DEVICEDUMP_SECTION_HEADER` not supported by polyfill; skipped
-
-    public func dwBufferSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 240)
-        }
-    }
-
-    public mut func set_dwBufferSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 240, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dwReasonForCollection(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 244)
-        }
-    }
-
-    public mut func set_dwReasonForCollection(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 244, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `PublicData`: type `DEVICEDUMP_SUBSECTION_POINTER` not supported by polyfill; skipped
-
-    // packed field `RestrictedData`: type `DEVICEDUMP_SUBSECTION_POINTER` not supported by polyfill; skipped
-
-    // packed field `PrivateData`: type `DEVICEDUMP_SUBSECTION_POINTER` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP {
-    public var _raw: VArray<UInt8, $96> = VArray<UInt8, $96>(repeat: 0u8)
-
-    // packed field `Descriptor`: type `DEVICEDUMP_STRUCTURE_VERSION` not supported by polyfill; skipped
-
-    public func dwReasonForCollection(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_dwReasonForCollection(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `cDriverName`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
-
-    public func uiNumRecords(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 32)
-        }
-    }
-
-    public mut func set_uiNumRecords(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 32, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `RecordArray`: type `VArray<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD, $1>` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD {
     public var _raw: VArray<UInt8, $60> = VArray<UInt8, $60>(repeat: 0u8)
 
-    // packed field `Cdb`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
-
-    // packed field `Command`: type `VArray<UInt8, $16>` not supported by polyfill; skipped
-
-    public func startTime(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 32)
+    public mut prop cdb: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $16>>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_startTime(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 32, val)
-            _raw = rawStorage
+    public mut prop command: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $16>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func endTime(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 40)
+    public mut prop startTime: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 32)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 32, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_endTime(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 40, val)
-            _raw = rawStorage
+    public mut prop endTime: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 40)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 40, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func operationStatus(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 48)
+    public mut prop operationStatus: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 48)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 48, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_operationStatus(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 48, val)
-            _raw = rawStorage
+    public mut prop operationError: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 52)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 52, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func operationError(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 52)
+    public mut prop stackSpecific: DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union = DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union()
+                return packedReadValue<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union>(base, 56, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 56, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_operationError(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 52, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `StackSpecific`: type `DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union {
     public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
 
-    public func externalStack(): DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__ExternalStack_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__ExternalStack_e__Struct>(p)
-            return ptr.read()
+    public mut prop externalStack: DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__ExternalStack_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__ExternalStack_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__ExternalStack_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_externalStack(val: DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__ExternalStack_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__ExternalStack_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop ataPort: DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__AtaPort_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__AtaPort_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__AtaPort_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func ataPort(): DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__AtaPort_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__AtaPort_e__Struct>(p)
-            return ptr.read()
+    public mut prop storPort: DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__StorPort_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__StorPort_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_ataPort(val: DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__AtaPort_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__AtaPort_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func storPort(): DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__StorPort_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__StorPort_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_storPort(val: DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__StorPort_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__StorPort_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__StorPort_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__ExternalStack_e__Struct {
     public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
 
-    public func dwReserved(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwReserved: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
         }
-    }
-
-    public mut func set_dwReserved(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__AtaPort_e__Struct {
     public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
 
-    public func dwAtaPortSpecific(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwAtaPortSpecific: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
         }
-    }
-
-    public mut func set_dwAtaPortSpecific(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD__StackSpecific_e__Union__StorPort_e__Struct {
     public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
 
-    public func srbTag(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop srbTag: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
         }
-    }
-
-    public mut func set_srbTag(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct DEVICEDUMP_STRUCTURE_VERSION {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public func dwSignature(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSignature: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSignature(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop dwVersion: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dwVersion(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
         }
-    }
-
-    public mut func set_dwVersion(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
-        }
-    }
-
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct DEVICEDUMP_SUBSECTION_POINTER {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public func dwSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dwSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dwSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop dwOffset: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
         }
-    }
-
-    public mut func set_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func dwOffset(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
-        }
-    }
-
-    public mut func set_dwOffset(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1590,10 +1388,10 @@ public struct DEVICE_DSM_CONVERSION_OUTPUT {
 @C
 public struct DEVICE_DSM_DEFINITION {
     public var Action: UInt32 = 0
-    public var SingleRange: Win32_Foundation.BOOLEAN = 0
+    public var SingleRange: UInt8 = 0
     public var ParameterBlockAlignment: UInt32 = 0
     public var ParameterBlockLength: UInt32 = 0
-    public var HasOutput: Win32_Foundation.BOOLEAN = 0
+    public var HasOutput: UInt8 = 0
     public var OutputBlockAlignment: UInt32 = 0
     public var OutputBlockLength: UInt32 = 0
     public init() {}
@@ -1656,52 +1454,9 @@ public struct DEVICE_DSM_OFFLOAD_READ_PARAMETERS {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct DEVICE_DSM_OFFLOAD_WRITE_PARAMETERS {
-    public var Flags: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public var TokenOffset: UInt64 = 0
-    public var Token: STORAGE_OFFLOAD_TOKEN = STORAGE_OFFLOAD_TOKEN()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICE_DSM_PHYSICAL_ADDRESSES_OUTPUT {
-    public var Version: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var TotalNumberOfRanges: UInt32 = 0
-    public var NumberOfRangesReturned: UInt32 = 0
-    public var Ranges: VArray<DEVICE_STORAGE_ADDRESS_RANGE, $1> = VArray<DEVICE_STORAGE_ADDRESS_RANGE, $1>(repeat: DEVICE_STORAGE_ADDRESS_RANGE())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DEVICE_DSM_QUERY_PREFER_LOCAL_REPAIR_OUTPUT {
     public var Version: UInt32 = 0
-    public var PreferLocalRepair: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICE_DSM_RANGE_ERROR_INFO {
-    public var Version: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var TotalNumberOfRanges: UInt32 = 0
-    public var NumberOfRangesReturned: UInt32 = 0
-    public var Ranges: VArray<DEVICE_STORAGE_RANGE_ATTRIBUTES, $1> = VArray<DEVICE_STORAGE_RANGE_ATTRIBUTES, $1>(repeat: DEVICE_STORAGE_RANGE_ATTRIBUTES())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICE_DSM_REPORT_ZONES_DATA {
-    public var Size: UInt32 = 0
-    public var ZoneCount: UInt32 = 0
-    public var Attributes: STORAGE_ZONES_ATTRIBUTES = STORAGE_ZONES_ATTRIBUTES()
-    public var Reserved0: UInt32 = 0
-    public var ZoneDescriptors: VArray<STORAGE_ZONE_DESCRIPTOR, $1> = VArray<STORAGE_ZONE_DESCRIPTOR, $1>(repeat: STORAGE_ZONE_DESCRIPTOR())
+    public var PreferLocalRepair: UInt8 = 0
     public init() {}
 }
 
@@ -1728,20 +1483,6 @@ public struct DEVICE_DSM_TIERING_QUERY_INPUT {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct DEVICE_DSM_TIERING_QUERY_OUTPUT {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public var Alignment: UInt64 = 0
-    public var TotalNumberOfRegions: UInt32 = 0
-    public var NumberOfRegionsReturned: UInt32 = 0
-    public var Regions: VArray<STORAGE_TIER_REGION, $1> = VArray<STORAGE_TIER_REGION, $1>(repeat: STORAGE_TIER_REGION())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DEVICE_INTERNAL_STATUS_DATA {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
@@ -1759,7 +1500,6 @@ public struct DEVICE_INTERNAL_STATUS_DATA {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE {
     public var value: Int32 = 0
 
@@ -1793,7 +1533,6 @@ public let DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE_DeviceSavedInternalStatusDat
 public let DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE_DeviceSavedInternalStatusData: DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE = DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE(4)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DEVICE_INTERNAL_STATUS_DATA_SET {
     public var value: Int32 = 0
 
@@ -1855,50 +1594,53 @@ public struct DEVICE_LOCATION {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct DEVICE_LOCATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
 
-    public func anonymous1(): DEVICE_LOCATION__Anonymous_e__Union__Anonymous1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_LOCATION__Anonymous_e__Union__Anonymous1_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous1: DEVICE_LOCATION__Anonymous_e__Union__Anonymous1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_LOCATION__Anonymous_e__Union__Anonymous1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_LOCATION__Anonymous_e__Union__Anonymous1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous1(val: DEVICE_LOCATION__Anonymous_e__Union__Anonymous1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_LOCATION__Anonymous_e__Union__Anonymous1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop anonymous2: DEVICE_LOCATION__Anonymous_e__Union__Anonymous2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_LOCATION__Anonymous_e__Union__Anonymous2_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous2(): DEVICE_LOCATION__Anonymous_e__Union__Anonymous2_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_LOCATION__Anonymous_e__Union__Anonymous2_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous2(val: DEVICE_LOCATION__Anonymous_e__Union__Anonymous2_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_LOCATION__Anonymous_e__Union__Anonymous2_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_LOCATION__Anonymous_e__Union__Anonymous2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1950,167 +1692,15 @@ public struct DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct DEVICE_MEDIA_INFO {
-    public var DeviceSpecific: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union = DEVICE_MEDIA_INFO__DeviceSpecific_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union {
-    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-
-    public func diskInfo(): DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__DiskInfo_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__DiskInfo_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_diskInfo(val: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__DiskInfo_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__DiskInfo_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func removableDiskInfo(): DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__RemovableDiskInfo_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__RemovableDiskInfo_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_removableDiskInfo(val: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__RemovableDiskInfo_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__RemovableDiskInfo_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func tapeInfo(): DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_tapeInfo(val: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__DiskInfo_e__Struct {
-    public var Cylinders: Int64 = 0
-    public var MediaType: STORAGE_MEDIA_TYPE = STORAGE_MEDIA_TYPE()
-    public var TracksPerCylinder: UInt32 = 0
-    public var SectorsPerTrack: UInt32 = 0
-    public var BytesPerSector: UInt32 = 0
-    public var NumberMediaSides: UInt32 = 0
-    public var MediaCharacteristics: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__RemovableDiskInfo_e__Struct {
-    public var Cylinders: Int64 = 0
-    public var MediaType: STORAGE_MEDIA_TYPE = STORAGE_MEDIA_TYPE()
-    public var TracksPerCylinder: UInt32 = 0
-    public var SectorsPerTrack: UInt32 = 0
-    public var BytesPerSector: UInt32 = 0
-    public var NumberMediaSides: UInt32 = 0
-    public var MediaCharacteristics: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct {
-    public var MediaType: STORAGE_MEDIA_TYPE = STORAGE_MEDIA_TYPE()
-    public var MediaCharacteristics: UInt32 = 0
-    public var CurrentBlockSize: UInt32 = 0
-    public var BusType: Win32_impl.STORAGE_BUS_TYPE = Win32_impl.STORAGE_BUS_TYPE()
-    public var BusSpecificData: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union = DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union {
-    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-
-    public func scsiInformation(): DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union__ScsiInformation_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union__ScsiInformation_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_scsiInformation(val: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union__ScsiInformation_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union__ScsiInformation_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union__ScsiInformation_e__Struct {
-    public var MediumType: UInt8 = 0
-    public var DensityCode: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DEVICE_POWER_DESCRIPTOR {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var DeviceAttentionSupported: Win32_Foundation.BOOLEAN = 0
-    public var AsynchronousNotificationSupported: Win32_Foundation.BOOLEAN = 0
-    public var IdlePowerManagementEnabled: Win32_Foundation.BOOLEAN = 0
-    public var D3ColdEnabled: Win32_Foundation.BOOLEAN = 0
-    public var D3ColdSupported: Win32_Foundation.BOOLEAN = 0
-    public var NoVerifyDuringIdlePower: Win32_Foundation.BOOLEAN = 0
+    public var DeviceAttentionSupported: UInt8 = 0
+    public var AsynchronousNotificationSupported: UInt8 = 0
+    public var IdlePowerManagementEnabled: UInt8 = 0
+    public var D3ColdEnabled: UInt8 = 0
+    public var D3ColdSupported: UInt8 = 0
+    public var NoVerifyDuringIdlePower: UInt8 = 0
     public var Reserved: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
     public var IdleTimeoutInMS: UInt32 = 0
     public init() {}
@@ -2121,7 +1711,7 @@ public struct DEVICE_POWER_DESCRIPTOR {
 public struct DEVICE_SEEK_PENALTY_DESCRIPTOR {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var IncursSeekPenalty: Win32_Foundation.BOOLEAN = 0
+    public var IncursSeekPenalty: UInt8 = 0
     public init() {}
 }
 
@@ -2143,46 +1733,49 @@ public struct DEVICE_STORAGE_RANGE_ATTRIBUTES {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct DEVICE_STORAGE_RANGE_ATTRIBUTES__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func allFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop allFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_allFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: DEVICE_STORAGE_RANGE_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_STORAGE_RANGE_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): DEVICE_STORAGE_RANGE_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_STORAGE_RANGE_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: DEVICE_STORAGE_RANGE_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DEVICE_STORAGE_RANGE_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_STORAGE_RANGE_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2200,7 +1793,7 @@ public struct DEVICE_STORAGE_RANGE_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__
 public struct DEVICE_TRIM_DESCRIPTOR {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var TrimEnabled: Win32_Foundation.BOOLEAN = 0
+    public var TrimEnabled: UInt8 = 0
     public init() {}
 }
 
@@ -2209,93 +1802,11 @@ public struct DEVICE_TRIM_DESCRIPTOR {
 public struct DEVICE_WRITE_AGGREGATION_DESCRIPTOR {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var BenefitsFromWriteAggregation: Win32_Foundation.BOOLEAN = 0
+    public var BenefitsFromWriteAggregation: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DISK_CACHE_INFORMATION {
-    public var ParametersSavable: Win32_Foundation.BOOLEAN = 0
-    public var ReadCacheEnabled: Win32_Foundation.BOOLEAN = 0
-    public var WriteCacheEnabled: Win32_Foundation.BOOLEAN = 0
-    public var ReadRetentionPriority: DISK_CACHE_RETENTION_PRIORITY = DISK_CACHE_RETENTION_PRIORITY()
-    public var WriteRetentionPriority: DISK_CACHE_RETENTION_PRIORITY = DISK_CACHE_RETENTION_PRIORITY()
-    public var DisablePrefetchTransferLength: UInt16 = 0
-    public var PrefetchScalar: Win32_Foundation.BOOLEAN = 0
-    public var Anonymous: DISK_CACHE_INFORMATION__Anonymous_e__Union = DISK_CACHE_INFORMATION__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DISK_CACHE_INFORMATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0)
-
-    public func scalarPrefetch(): DISK_CACHE_INFORMATION__Anonymous_e__Union__ScalarPrefetch_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_CACHE_INFORMATION__Anonymous_e__Union__ScalarPrefetch_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_scalarPrefetch(val: DISK_CACHE_INFORMATION__Anonymous_e__Union__ScalarPrefetch_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_CACHE_INFORMATION__Anonymous_e__Union__ScalarPrefetch_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func blockPrefetch(): DISK_CACHE_INFORMATION__Anonymous_e__Union__BlockPrefetch_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_CACHE_INFORMATION__Anonymous_e__Union__BlockPrefetch_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_blockPrefetch(val: DISK_CACHE_INFORMATION__Anonymous_e__Union__BlockPrefetch_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_CACHE_INFORMATION__Anonymous_e__Union__BlockPrefetch_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DISK_CACHE_INFORMATION__Anonymous_e__Union__ScalarPrefetch_e__Struct {
-    public var Minimum: UInt16 = 0
-    public var Maximum: UInt16 = 0
-    public var MaximumBlocks: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DISK_CACHE_INFORMATION__Anonymous_e__Union__BlockPrefetch_e__Struct {
-    public var Minimum: UInt16 = 0
-    public var Maximum: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DISK_CACHE_RETENTION_PRIORITY {
     public var value: Int32 = 0
 
@@ -2332,52 +1843,6 @@ public struct DISK_CONTROLLER_NUMBER {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct DISK_DETECTION_INFO {
-    public var SizeOfDetectInfo: UInt32 = 0
-    public var DetectionType: DETECTION_TYPE = DETECTION_TYPE()
-    public var Anonymous: DISK_DETECTION_INFO__Anonymous_e__Union = DISK_DETECTION_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DISK_DETECTION_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
-
-    public func anonymous(): DISK_DETECTION_INFO__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_DETECTION_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: DISK_DETECTION_INFO__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_DETECTION_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DISK_DETECTION_INFO__Anonymous_e__Union__Anonymous_e__Struct {
-    public var Int13: DISK_INT13_INFO = DISK_INT13_INFO()
-    public var ExInt13: DISK_EX_INT13_INFO = DISK_EX_INT13_INFO()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DISK_EXTENT {
     public var DiskNumber: UInt32 = 0
     public var StartingOffset: Int64 = 0
@@ -2401,46 +1866,9 @@ public struct DISK_EX_INT13_INFO {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct DISK_GEOMETRY {
-    public var Cylinders: Int64 = 0
-    public var MediaType: MEDIA_TYPE = MEDIA_TYPE()
-    public var TracksPerCylinder: UInt32 = 0
-    public var SectorsPerTrack: UInt32 = 0
-    public var BytesPerSector: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DISK_GEOMETRY_EX {
-    public var Geometry: DISK_GEOMETRY = DISK_GEOMETRY()
-    public var DiskSize: Int64 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DISK_GROW_PARTITION {
     public var PartitionNumber: UInt32 = 0
     public var BytesToGrow: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DISK_HISTOGRAM {
-    public var DiskSize: Int64 = 0
-    public var Start: Int64 = 0
-    public var End: Int64 = 0
-    public var Average: Int64 = 0
-    public var AverageRead: Int64 = 0
-    public var AverageWrite: Int64 = 0
-    public var Granularity: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var ReadCount: UInt32 = 0
-    public var WriteCount: UInt32 = 0
-    public var Histogram: CPointer<HISTOGRAM_BUCKET> = CPointer<HISTOGRAM_BUCKET>()
     public init() {}
 }
 
@@ -2461,80 +1889,6 @@ public struct DISK_LOGGING {
     public var Function: UInt8 = 0
     public var BufferAddress: CPointer<Unit> = CPointer<Unit>()
     public var BufferSize: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DISK_PARTITION_INFO {
-    public var SizeOfPartitionInfo: UInt32 = 0
-    public var PartitionStyle: PARTITION_STYLE = PARTITION_STYLE()
-    public var Anonymous: DISK_PARTITION_INFO__Anonymous_e__Union = DISK_PARTITION_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DISK_PARTITION_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func mbr(): DISK_PARTITION_INFO__Anonymous_e__Union__Mbr_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_PARTITION_INFO__Anonymous_e__Union__Mbr_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mbr(val: DISK_PARTITION_INFO__Anonymous_e__Union__Mbr_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_PARTITION_INFO__Anonymous_e__Union__Mbr_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func gpt(): DISK_PARTITION_INFO__Anonymous_e__Union__Gpt_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_PARTITION_INFO__Anonymous_e__Union__Gpt_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_gpt(val: DISK_PARTITION_INFO__Anonymous_e__Union__Gpt_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DISK_PARTITION_INFO__Anonymous_e__Union__Gpt_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DISK_PARTITION_INFO__Anonymous_e__Union__Mbr_e__Struct {
-    public var Signature: UInt32 = 0
-    public var CheckSum: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DISK_PARTITION_INFO__Anonymous_e__Union__Gpt_e__Struct {
-    public var DiskId: GUID = GUID()
     public init() {}
 }
 
@@ -2565,119 +1919,87 @@ public struct DISK_RECORD {
     public var VirtualAddress: CPointer<Unit> = CPointer<Unit>()
     public var NumberOfBytes: UInt32 = 0
     public var DeviceNumber: UInt8 = 0
-    public var ReadRequest: Win32_Foundation.BOOLEAN = 0
+    public var ReadRequest: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct DRIVERSTATUS {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public func bDriverError(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 0)
+    public mut prop bDriverError: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bDriverError(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 0, val)
-            _raw = rawStorage
+    public mut prop bideError: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 1)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 1, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func bideError(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 1)
+    public mut prop bReserved: VArray<UInt8, $2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $2>>(base, 2, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 2, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bideError(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 1, val)
-            _raw = rawStorage
+    public mut prop dwReserved: VArray<UInt32, $2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+                return packedReadValue<VArray<UInt32, $2>>(base, 4, defaultValue)
+            }
         }
-    }
-
-    // packed field `bReserved`: type `VArray<UInt8, $2>` not supported by polyfill; skipped
-
-    // packed field `dwReserved`: type `VArray<UInt32, $2>` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DRIVE_LAYOUT_INFORMATION {
-    public var PartitionCount: UInt32 = 0
-    public var Signature: UInt32 = 0
-    public var PartitionEntry: VArray<PARTITION_INFORMATION, $1> = VArray<PARTITION_INFORMATION, $1>(repeat: PARTITION_INFORMATION())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct DRIVE_LAYOUT_INFORMATION_EX {
-    public var PartitionStyle: UInt32 = 0
-    public var PartitionCount: UInt32 = 0
-    public var Anonymous: DRIVE_LAYOUT_INFORMATION_EX__Anonymous_e__Union = DRIVE_LAYOUT_INFORMATION_EX__Anonymous_e__Union()
-    public var PartitionEntry: VArray<PARTITION_INFORMATION_EX, $1> = VArray<PARTITION_INFORMATION_EX, $1>(repeat: PARTITION_INFORMATION_EX())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DRIVE_LAYOUT_INFORMATION_EX__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
-
-    public func mbr(): DRIVE_LAYOUT_INFORMATION_MBR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRIVE_LAYOUT_INFORMATION_MBR>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mbr(val: DRIVE_LAYOUT_INFORMATION_MBR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRIVE_LAYOUT_INFORMATION_MBR>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func gpt(): DRIVE_LAYOUT_INFORMATION_GPT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRIVE_LAYOUT_INFORMATION_GPT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_gpt(val: DRIVE_LAYOUT_INFORMATION_GPT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRIVE_LAYOUT_INFORMATION_GPT>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2746,7 +2068,6 @@ public struct DUPLICATE_EXTENTS_DATA_EX32 {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct DUPLICATE_EXTENTS_STATE {
     public var value: Int32 = 0
 
@@ -2774,7 +2095,6 @@ public let DUPLICATE_EXTENTS_STATE_FileSnapStateSource: DUPLICATE_EXTENTS_STATE 
 public let DUPLICATE_EXTENTS_STATE_FileSnapStateTarget: DUPLICATE_EXTENTS_STATE = DUPLICATE_EXTENTS_STATE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct ELEMENT_TYPE {
     public var value: Int32 = 0
 
@@ -2895,49 +2215,6 @@ public struct FAT_STATISTICS {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct FILESYSTEM_STATISTICS {
-    public var FileSystemType: FILESYSTEM_STATISTICS_TYPE = FILESYSTEM_STATISTICS_TYPE()
-    public var Version: UInt16 = 0
-    public var SizeOfCompleteStructure: UInt32 = 0
-    public var UserFileReads: UInt32 = 0
-    public var UserFileReadBytes: UInt32 = 0
-    public var UserDiskReads: UInt32 = 0
-    public var UserFileWrites: UInt32 = 0
-    public var UserFileWriteBytes: UInt32 = 0
-    public var UserDiskWrites: UInt32 = 0
-    public var MetaDataReads: UInt32 = 0
-    public var MetaDataReadBytes: UInt32 = 0
-    public var MetaDataDiskReads: UInt32 = 0
-    public var MetaDataWrites: UInt32 = 0
-    public var MetaDataWriteBytes: UInt32 = 0
-    public var MetaDataDiskWrites: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct FILESYSTEM_STATISTICS_EX {
-    public var FileSystemType: FILESYSTEM_STATISTICS_TYPE = FILESYSTEM_STATISTICS_TYPE()
-    public var Version: UInt16 = 0
-    public var SizeOfCompleteStructure: UInt32 = 0
-    public var UserFileReads: UInt64 = 0
-    public var UserFileReadBytes: UInt64 = 0
-    public var UserDiskReads: UInt64 = 0
-    public var UserFileWrites: UInt64 = 0
-    public var UserFileWriteBytes: UInt64 = 0
-    public var UserDiskWrites: UInt64 = 0
-    public var MetaDataReads: UInt64 = 0
-    public var MetaDataReadBytes: UInt64 = 0
-    public var MetaDataDiskReads: UInt64 = 0
-    public var MetaDataWrites: UInt64 = 0
-    public var MetaDataWriteBytes: UInt64 = 0
-    public var MetaDataDiskWrites: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FILESYSTEM_STATISTICS_TYPE {
     public var value: UInt16 = 0
 
@@ -2969,14 +2246,6 @@ public let FILESYSTEM_STATISTICS_TYPE_FILESYSTEM_STATISTICS_TYPE_NTFS: FILESYSTE
 public struct FILE_ALLOCATED_RANGE_BUFFER {
     public var FileOffset: Int64 = 0
     public var Length: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct FILE_DESIRED_STORAGE_CLASS_INFORMATION {
-    public var Class: FILE_STORAGE_TIER_CLASS = FILE_STORAGE_TIER_CLASS()
-    public var Flags: UInt32 = 0
     public init() {}
 }
 
@@ -3017,28 +2286,6 @@ public struct FILE_LAYOUT_ENTRY {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct FILE_LAYOUT_INFO_ENTRY {
-    public var BasicInformation: FILE_LAYOUT_INFO_ENTRY__BasicInformation_e__Struct = FILE_LAYOUT_INFO_ENTRY__BasicInformation_e__Struct()
-    public var OwnerId: UInt32 = 0
-    public var SecurityId: UInt32 = 0
-    public var Usn: Int64 = 0
-    public var StorageReserveId: STORAGE_RESERVE_ID = STORAGE_RESERVE_ID()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct FILE_LAYOUT_INFO_ENTRY__BasicInformation_e__Struct {
-    public var CreationTime: Int64 = 0
-    public var LastAccessTime: Int64 = 0
-    public var LastWriteTime: Int64 = 0
-    public var ChangeTime: Int64 = 0
-    public var FileAttributes: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FILE_LAYOUT_NAME_ENTRY {
     public var NextNameOffset: UInt32 = 0
     public var Flags: UInt32 = 0
@@ -3046,15 +2293,6 @@ public struct FILE_LAYOUT_NAME_ENTRY {
     public var FileNameLength: UInt32 = 0
     public var Reserved: UInt32 = 0
     public var FileName: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct FILE_LEVEL_TRIM {
-    public var Key: UInt32 = 0
-    public var NumRanges: UInt32 = 0
-    public var Ranges: VArray<FILE_LEVEL_TRIM_RANGE, $1> = VArray<FILE_LEVEL_TRIM_RANGE, $1>(repeat: FILE_LEVEL_TRIM_RANGE())
     public init() {}
 }
 
@@ -3076,7 +2314,7 @@ public struct FILE_LEVEL_TRIM_RANGE {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct FILE_MAKE_COMPATIBLE_BUFFER {
-    public var CloseDisc: Win32_Foundation.BOOLEAN = 0
+    public var CloseDisc: UInt8 = 0
     public init() {}
 }
 
@@ -3089,50 +2327,53 @@ public struct FILE_OBJECTID_BUFFER {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct FILE_OBJECTID_BUFFER__Anonymous_e__Union {
     public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
 
-    public func anonymous(): FILE_OBJECTID_BUFFER__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FILE_OBJECTID_BUFFER__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: FILE_OBJECTID_BUFFER__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FILE_OBJECTID_BUFFER__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FILE_OBJECTID_BUFFER__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: FILE_OBJECTID_BUFFER__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FILE_OBJECTID_BUFFER__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop extendedInfo: VArray<UInt8, $48> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $48>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func extendedInfo(): VArray<UInt8, $48> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $48>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_extendedInfo(val: VArray<UInt8, $48>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $48>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $48>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -3204,7 +2445,7 @@ public struct FILE_QUERY_ON_DISK_VOL_INFO_BUFFER {
 @C
 public struct FILE_QUERY_SPARING_BUFFER {
     public var SparingUnitBytes: UInt32 = 0
-    public var SoftwareSparing: Win32_Foundation.BOOLEAN = 0
+    public var SoftwareSparing: UInt8 = 0
     public var TotalSpareBlocks: UInt32 = 0
     public var FreeSpareBlocks: UInt32 = 0
     public init() {}
@@ -3251,32 +2492,18 @@ public struct FILE_REGION_OUTPUT {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct FILE_SET_DEFECT_MGMT_BUFFER {
-    public var Disable: Win32_Foundation.BOOLEAN = 0
+    public var Disable: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct FILE_SET_SPARSE_BUFFER {
-    public var SetSparse: Win32_Foundation.BOOLEAN = 0
+    public var SetSparse: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct FILE_STORAGE_TIER {
-    public var Id: GUID = GUID()
-    public var Name: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var Flags: UInt64 = 0
-    public var ProvisionedCapacity: UInt64 = 0
-    public var MediaType: FILE_STORAGE_TIER_MEDIA_TYPE = FILE_STORAGE_TIER_MEDIA_TYPE()
-    public var Class: FILE_STORAGE_TIER_CLASS = FILE_STORAGE_TIER_CLASS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FILE_STORAGE_TIER_CLASS {
     public var value: Int32 = 0
 
@@ -3307,7 +2534,6 @@ public let FILE_STORAGE_TIER_CLASS_FileStorageTierClassPerformance: FILE_STORAGE
 public let FILE_STORAGE_TIER_CLASS_FileStorageTierClassMax: FILE_STORAGE_TIER_CLASS = FILE_STORAGE_TIER_CLASS(3)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FILE_STORAGE_TIER_FLAGS {
     public var value: UInt32 = 0
 
@@ -3343,7 +2569,6 @@ public struct FILE_STORAGE_TIER_FLAGS {
 public let FILE_STORAGE_TIER_FLAGS_FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY: FILE_STORAGE_TIER_FLAGS = FILE_STORAGE_TIER_FLAGS(131072)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FILE_STORAGE_TIER_MEDIA_TYPE {
     public var value: Int32 = 0
 
@@ -3388,7 +2613,7 @@ public struct FILE_STORAGE_TIER_REGION {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct FILE_SYSTEM_RECOGNITION_INFORMATION {
-    public var FileSystem: VArray<Win32_Foundation.CHAR, $9> = VArray<Win32_Foundation.CHAR, $9>(repeat: 0)
+    public var FileSystem: VArray<Int8, $9> = VArray<Int8, $9>(repeat: 0)
     public init() {}
 }
 
@@ -3418,7 +2643,7 @@ public struct FILE_ZERO_DATA_INFORMATION_EX {
     public init() {}
 }
 
-@When[Windows_Win32_System_Ioctl == "on"]
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Security == "on"]
 @C
 public struct FIND_BY_SID_DATA {
     public var Restart: UInt32 = 0
@@ -3433,31 +2658,6 @@ public struct FIND_BY_SID_OUTPUT {
     public var FileIndex: UInt32 = 0
     public var FileNameLength: UInt32 = 0
     public var FileName: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct FORMAT_EX_PARAMETERS {
-    public var MediaType: MEDIA_TYPE = MEDIA_TYPE()
-    public var StartCylinderNumber: UInt32 = 0
-    public var EndCylinderNumber: UInt32 = 0
-    public var StartHeadNumber: UInt32 = 0
-    public var EndHeadNumber: UInt32 = 0
-    public var FormatGapLength: UInt16 = 0
-    public var SectorsPerTrack: UInt16 = 0
-    public var SectorNumber: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct FORMAT_PARAMETERS {
-    public var MediaType: MEDIA_TYPE = MEDIA_TYPE()
-    public var StartCylinderNumber: UInt32 = 0
-    public var EndCylinderNumber: UInt32 = 0
-    public var StartHeadNumber: UInt32 = 0
-    public var EndHeadNumber: UInt32 = 0
     public init() {}
 }
 
@@ -3549,18 +2749,6 @@ public struct FSCTL_QUERY_REGION_INFO_OUTPUT {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct FSCTL_QUERY_STORAGE_CLASSES_OUTPUT {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Flags: FILE_STORAGE_TIER_FLAGS = FILE_STORAGE_TIER_FLAGS()
-    public var TotalNumberOfTiers: UInt32 = 0
-    public var NumberOfTiersReturned: UInt32 = 0
-    public var Tiers: VArray<FILE_STORAGE_TIER, $1> = VArray<FILE_STORAGE_TIER, $1>(repeat: FILE_STORAGE_TIER())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FSCTL_SET_INTEGRITY_INFORMATION_BUFFER {
     public var ChecksumAlgorithm: UInt16 = 0
     public var Reserved: UInt16 = 0
@@ -3581,7 +2769,6 @@ public struct FSCTL_SET_INTEGRITY_INFORMATION_BUFFER_EX {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FS_BPIO_INFLAGS {
     public var value: Int32 = 0
 
@@ -3629,17 +2816,6 @@ public struct FS_BPIO_INFO {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct FS_BPIO_INPUT {
-    public var Operation: FS_BPIO_OPERATIONS = FS_BPIO_OPERATIONS()
-    public var InFlags: FS_BPIO_INFLAGS = FS_BPIO_INFLAGS()
-    public var Reserved1: UInt64 = 0
-    public var Reserved2: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FS_BPIO_OPERATIONS {
     public var value: Int32 = 0
 
@@ -3685,7 +2861,6 @@ public let FS_BPIO_OPERATIONS_FS_BPIO_OP_GET_INFO: FS_BPIO_OPERATIONS = FS_BPIO_
 public let FS_BPIO_OPERATIONS_FS_BPIO_OP_MAX_OPERATION: FS_BPIO_OPERATIONS = FS_BPIO_OPERATIONS(9)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FS_BPIO_OUTFLAGS {
     public var value: Int32 = 0
 
@@ -3734,130 +2909,6 @@ public let FS_BPIO_OUTFLAGS_FSBPIO_OUTFL_COMPATIBLE_STORAGE_DRIVER: FS_BPIO_OUTF
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct FS_BPIO_OUTPUT {
-    public var Operation: FS_BPIO_OPERATIONS = FS_BPIO_OPERATIONS()
-    public var OutFlags: FS_BPIO_OUTFLAGS = FS_BPIO_OUTFLAGS()
-    public var Reserved1: UInt64 = 0
-    public var Reserved2: UInt64 = 0
-    public var Anonymous: FS_BPIO_OUTPUT__Anonymous_e__Union = FS_BPIO_OUTPUT__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FS_BPIO_OUTPUT__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $328> = VArray<UInt8, $328>(repeat: 0)
-
-    public func enable(): FS_BPIO_RESULTS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_RESULTS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enable(val: FS_BPIO_RESULTS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_RESULTS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func query(): FS_BPIO_RESULTS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_RESULTS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_query(val: FS_BPIO_RESULTS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_RESULTS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func volumeStackResume(): FS_BPIO_RESULTS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_RESULTS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_volumeStackResume(val: FS_BPIO_RESULTS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_RESULTS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func streamResume(): FS_BPIO_RESULTS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_RESULTS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_streamResume(val: FS_BPIO_RESULTS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_RESULTS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func getInfo(): FS_BPIO_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_getInfo(val: FS_BPIO_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FS_BPIO_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct FS_BPIO_RESULTS {
     public var OpStatus: UInt32 = 0
     public var FailingDriverNameLen: UInt16 = 0
@@ -3868,135 +2919,123 @@ public struct FS_BPIO_RESULTS {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct GETVERSIONINPARAMS {
     public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
 
-    public func bVersion(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 0)
+    public mut prop bVersion: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bVersion(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 0, val)
-            _raw = rawStorage
+    public mut prop bRevision: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 1)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 1, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func bRevision(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 1)
+    public mut prop bReserved: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 2)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 2, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bRevision(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 1, val)
-            _raw = rawStorage
+    public mut prop bideDeviceMap: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 3)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 3, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func bReserved(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 2)
+    public mut prop fCapabilities: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bReserved(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 2, val)
-            _raw = rawStorage
+    public mut prop dwReserved: VArray<UInt32, $4> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+                return packedReadValue<VArray<UInt32, $4>>(base, 8, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public func bideDeviceMap(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 3)
-        }
-    }
-
-    public mut func set_bideDeviceMap(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 3, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fCapabilities(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
-        }
-    }
-
-    public mut func set_fCapabilities(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `dwReserved`: type `VArray<UInt32, $4>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct GET_CHANGER_PARAMETERS {
-    public var Size: UInt32 = 0
-    public var NumberTransportElements: UInt16 = 0
-    public var NumberStorageElements: UInt16 = 0
-    public var NumberCleanerSlots: UInt16 = 0
-    public var NumberIEElements: UInt16 = 0
-    public var NumberDataTransferElements: UInt16 = 0
-    public var NumberOfDoors: UInt16 = 0
-    public var FirstSlotNumber: UInt16 = 0
-    public var FirstDriveNumber: UInt16 = 0
-    public var FirstTransportNumber: UInt16 = 0
-    public var FirstIEPortNumber: UInt16 = 0
-    public var FirstCleanerSlotAddress: UInt16 = 0
-    public var MagazineSize: UInt16 = 0
-    public var DriveCleanTimeout: UInt32 = 0
-    public var Features0: CHANGER_FEATURES = CHANGER_FEATURES()
-    public var Features1: GET_CHANGER_PARAMETERS_FEATURES1 = GET_CHANGER_PARAMETERS_FEATURES1()
-    public var MoveFromTransport: UInt8 = 0
-    public var MoveFromSlot: UInt8 = 0
-    public var MoveFromIePort: UInt8 = 0
-    public var MoveFromDrive: UInt8 = 0
-    public var ExchangeFromTransport: UInt8 = 0
-    public var ExchangeFromSlot: UInt8 = 0
-    public var ExchangeFromIePort: UInt8 = 0
-    public var ExchangeFromDrive: UInt8 = 0
-    public var LockUnlockCapabilities: UInt8 = 0
-    public var PositionCapabilities: UInt8 = 0
-    public var Reserved1: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var Reserved2: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct GET_CHANGER_PARAMETERS_FEATURES1 {
     public var value: UInt32 = 0
 
@@ -4066,8 +3105,8 @@ public let GET_CHANGER_PARAMETERS_FEATURES1_CHANGER_TRUE_EXCHANGE_CAPABLE: GET_C
 public struct GET_DEVICE_INTERNAL_STATUS_DATA_REQUEST {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var RequestDataType: DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE = DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE()
-    public var RequestDataSet: DEVICE_INTERNAL_STATUS_DATA_SET = DEVICE_INTERNAL_STATUS_DATA_SET()
+    public var RequestDataType: Int32 = 0
+    public var RequestDataSet: Int32 = 0
     public init() {}
 }
 
@@ -4104,16 +3143,6 @@ public struct GET_LENGTH_INFORMATION {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct GET_MEDIA_TYPES {
-    public var DeviceType: UInt32 = 0
-    public var MediaInfoCount: UInt32 = 0
-    public var MediaInfo: VArray<DEVICE_MEDIA_INFO, $1> = VArray<DEVICE_MEDIA_INFO, $1>(repeat: DEVICE_MEDIA_INFO())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct GPT_ATTRIBUTES {
     public var value: UInt64 = 0
 
@@ -4161,41 +3190,44 @@ public let GPT_ATTRIBUTES_GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY: GPT_ATTRIBUTES =
 public let GPT_ATTRIBUTES_GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY: GPT_ATTRIBUTES = GPT_ATTRIBUTES(1152921504606846976)
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct GP_LOG_PAGE_DESCRIPTOR {
     public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
 
-    public func logAddress(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 0)
+    public mut prop logAddress: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_logAddress(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop logSectors: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 2)
+            }
         }
-    }
-
-    public func logSectors(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 2)
-        }
-    }
-
-    public mut func set_logSectors(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 2, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 2, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -4224,16 +3256,6 @@ public struct IDEREGS {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct IO_IRP_EXT_TRACK_OFFSET_HEADER {
-    public var Validation: UInt16 = 0
-    public var Flags: UInt16 = 0
-    public var TrackedOffsetCallback: PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK = { _, _, _ => () }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct LMR_QUERY_INFO_CLASS {
     public var value: Int32 = 0
 
@@ -4257,7 +3279,7 @@ public let LMR_QUERY_INFO_CLASS_LMRQuerySessionInfo: LMR_QUERY_INFO_CLASS = LMR_
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct LMR_QUERY_INFO_PARAM {
-    public var Operation: LMR_QUERY_INFO_CLASS = LMR_QUERY_INFO_CLASS()
+    public var Operation: Int32 = 0
     public init() {}
 }
 
@@ -4307,42 +3329,45 @@ public struct MARK_HANDLE_INFO {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct MARK_HANDLE_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func usnSourceInfo(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop usnSourceInfo: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_usnSourceInfo(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop copyNumber: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func copyNumber(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_copyNumber(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -4358,49 +3383,51 @@ public struct MARK_HANDLE_INFO32 {
 }
 
 @When[Windows_Win32_System_Ioctl == "on" && (arch == "x86_64" || arch == "aarch64")]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct MARK_HANDLE_INFO32__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func usnSourceInfo(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop usnSourceInfo: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_usnSourceInfo(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop copyNumber: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func copyNumber(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_copyNumber(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct MEDIA_TYPE {
     public var value: Int32 = 0
 
@@ -4831,72 +3858,9 @@ public struct PARTITION_INFORMATION {
     public var HiddenSectors: UInt32 = 0
     public var PartitionNumber: UInt32 = 0
     public var PartitionType: UInt8 = 0
-    public var BootIndicator: Win32_Foundation.BOOLEAN = 0
-    public var RecognizedPartition: Win32_Foundation.BOOLEAN = 0
-    public var RewritePartition: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct PARTITION_INFORMATION_EX {
-    public var PartitionStyle: PARTITION_STYLE = PARTITION_STYLE()
-    public var StartingOffset: Int64 = 0
-    public var PartitionLength: Int64 = 0
-    public var PartitionNumber: UInt32 = 0
-    public var RewritePartition: Win32_Foundation.BOOLEAN = 0
-    public var IsServicePartition: Win32_Foundation.BOOLEAN = 0
-    public var Anonymous: PARTITION_INFORMATION_EX__Anonymous_e__Union = PARTITION_INFORMATION_EX__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct PARTITION_INFORMATION_EX__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
-
-    public func mbr(): PARTITION_INFORMATION_MBR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PARTITION_INFORMATION_MBR>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_mbr(val: PARTITION_INFORMATION_MBR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PARTITION_INFORMATION_MBR>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func gpt(): PARTITION_INFORMATION_GPT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PARTITION_INFORMATION_GPT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_gpt(val: PARTITION_INFORMATION_GPT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PARTITION_INFORMATION_GPT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
+    public var BootIndicator: UInt8 = 0
+    public var RecognizedPartition: UInt8 = 0
+    public var RewritePartition: UInt8 = 0
     public init() {}
 }
 
@@ -4905,7 +3869,7 @@ public struct PARTITION_INFORMATION_EX__Anonymous_e__Union {
 public struct PARTITION_INFORMATION_GPT {
     public var PartitionType: GUID = GUID()
     public var PartitionId: GUID = GUID()
-    public var Attributes: GPT_ATTRIBUTES = GPT_ATTRIBUTES()
+    public var Attributes: UInt64 = 0
     public var Name: VArray<UInt16, $36> = VArray<UInt16, $36>(repeat: 0)
     public init() {}
 }
@@ -4914,15 +3878,14 @@ public struct PARTITION_INFORMATION_GPT {
 @C
 public struct PARTITION_INFORMATION_MBR {
     public var PartitionType: UInt8 = 0
-    public var BootIndicator: Win32_Foundation.BOOLEAN = 0
-    public var RecognizedPartition: Win32_Foundation.BOOLEAN = 0
+    public var BootIndicator: UInt8 = 0
+    public var RecognizedPartition: UInt8 = 0
     public var HiddenSectors: UInt32 = 0
     public var PartitionId: GUID = GUID()
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct PARTITION_STYLE {
     public var value: Int32 = 0
 
@@ -4976,50 +3939,53 @@ public struct PERSISTENT_RESERVE_COMMAND {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt16, $2> = VArray<UInt16, $2>(repeat: 0)
 
-    public func pr_IN(): PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_IN_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_IN_e__Struct>(p)
-            return ptr.read()
+    public mut prop pr_IN: PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_IN_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_IN_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_IN_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pr_IN(val: PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_IN_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_IN_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop pr_OUT: PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_OUT_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_OUT_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func pr_OUT(): PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_OUT_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_OUT_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pr_OUT(val: PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_OUT_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_OUT_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_OUT_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -5039,19 +4005,6 @@ public struct PERSISTENT_RESERVE_COMMAND__Anonymous_e__Union__PR_OUT_e__Struct {
     public var _bitfield1: UInt8 = 0
     public var _bitfield2: UInt8 = 0
     public var ParameterList: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct PHYSICAL_ELEMENT_STATUS {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var DescriptorCount: UInt32 = 0
-    public var ReturnedDescriptorCount: UInt32 = 0
-    public var ElementIdentifierBeingDepoped: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public var Descriptors: VArray<PHYSICAL_ELEMENT_STATUS_DESCRIPTOR, $1> = VArray<PHYSICAL_ELEMENT_STATUS_DESCRIPTOR, $1>(repeat: PHYSICAL_ELEMENT_STATUS_DESCRIPTOR())
     public init() {}
 }
 
@@ -5082,9 +4035,6 @@ public struct PHYSICAL_ELEMENT_STATUS_REQUEST {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-public type PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK = CFunc<(CPointer<IO_IRP_EXT_TRACK_OFFSET_HEADER>, CPointer<IO_IRP_EXT_TRACK_OFFSET_HEADER>, Int64) -> Unit>
-
-@When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct PLEX_READ_DATA_REQUEST {
     public var ByteOffset: Int64 = 0
@@ -5096,16 +4046,7 @@ public struct PLEX_READ_DATA_REQUEST {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct PREVENT_MEDIA_REMOVAL {
-    public var PreventMediaRemoval: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct QUERY_BAD_RANGES_INPUT {
-    public var Flags: UInt32 = 0
-    public var NumRanges: UInt32 = 0
-    public var Ranges: VArray<QUERY_BAD_RANGES_INPUT_RANGE, $1> = VArray<QUERY_BAD_RANGES_INPUT_RANGE, $1>(repeat: QUERY_BAD_RANGES_INPUT_RANGE())
+    public var PreventMediaRemoval: UInt8 = 0
     public init() {}
 }
 
@@ -5114,16 +4055,6 @@ public struct QUERY_BAD_RANGES_INPUT {
 public struct QUERY_BAD_RANGES_INPUT_RANGE {
     public var StartOffset: UInt64 = 0
     public var LengthInBytes: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct QUERY_BAD_RANGES_OUTPUT {
-    public var Flags: UInt32 = 0
-    public var NumBadRanges: UInt32 = 0
-    public var NextOffsetToLookUp: UInt64 = 0
-    public var BadRanges: VArray<QUERY_BAD_RANGES_OUTPUT_RANGE, $1> = VArray<QUERY_BAD_RANGES_OUTPUT_RANGE, $1>(repeat: QUERY_BAD_RANGES_OUTPUT_RANGE())
     public init() {}
 }
 
@@ -5138,7 +4069,6 @@ public struct QUERY_BAD_RANGES_OUTPUT_RANGE {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct QUERY_FILE_LAYOUT_FILTER_TYPE {
     public var value: Int32 = 0
 
@@ -5173,143 +4103,11 @@ public let QUERY_FILE_LAYOUT_FILTER_TYPE_QUERY_FILE_LAYOUT_NUM_FILTER_TYPES: QUE
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct QUERY_FILE_LAYOUT_INPUT {
-    public var Anonymous: QUERY_FILE_LAYOUT_INPUT__Anonymous_e__Union = QUERY_FILE_LAYOUT_INPUT__Anonymous_e__Union()
-    public var Flags: UInt32 = 0
-    public var FilterType: QUERY_FILE_LAYOUT_FILTER_TYPE = QUERY_FILE_LAYOUT_FILTER_TYPE()
-    public var Reserved: UInt32 = 0
-    public var Filter: QUERY_FILE_LAYOUT_INPUT__Filter_e__Union = QUERY_FILE_LAYOUT_INPUT__Filter_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct QUERY_FILE_LAYOUT_INPUT__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func filterEntryCount(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_filterEntryCount(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func numberOfPairs(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_numberOfPairs(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct QUERY_FILE_LAYOUT_INPUT__Filter_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func clusterRanges(): VArray<CLUSTER_RANGE, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<CLUSTER_RANGE, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_clusterRanges(val: VArray<CLUSTER_RANGE, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<CLUSTER_RANGE, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fileReferenceRanges(): VArray<FILE_REFERENCE_RANGE, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<FILE_REFERENCE_RANGE, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_fileReferenceRanges(val: VArray<FILE_REFERENCE_RANGE, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<FILE_REFERENCE_RANGE, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func storageReserveIds(): VArray<STORAGE_RESERVE_ID, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_RESERVE_ID, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_storageReserveIds(val: VArray<STORAGE_RESERVE_ID, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_RESERVE_ID, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct QUERY_FILE_LAYOUT_OUTPUT {
     public var FileEntryCount: UInt32 = 0
     public var FirstFileOffset: UInt32 = 0
     public var Flags: UInt32 = 0
     public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct READ_ELEMENT_ADDRESS_INFO {
-    public var NumberOfElements: UInt32 = 0
-    public var ElementStatus: VArray<CHANGER_ELEMENT_STATUS, $1> = VArray<CHANGER_ELEMENT_STATUS, $1>(repeat: CHANGER_ELEMENT_STATUS())
     public init() {}
 }
 
@@ -5357,50 +4155,69 @@ public struct REASSIGN_BLOCKS {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct REASSIGN_BLOCKS_EX {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public func reserved(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 0)
+    public mut prop reserved: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_reserved(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop count: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 2)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 2, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func count(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 2)
+    public mut prop blockNumber: VArray<Int64, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int64, $1> = VArray<Int64, $1>(repeat: 0)
+                return packedReadValue<VArray<Int64, $1>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_count(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 2, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `BlockNumber`: type `VArray<Int64, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct REFS_SMR_VOLUME_GC_ACTION {
     public var value: Int32 = 0
 
@@ -5431,7 +4248,6 @@ public let REFS_SMR_VOLUME_GC_ACTION_SmrGcActionPause: REFS_SMR_VOLUME_GC_ACTION
 public let REFS_SMR_VOLUME_GC_ACTION_SmrGcActionStop: REFS_SMR_VOLUME_GC_ACTION = REFS_SMR_VOLUME_GC_ACTION(4)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct REFS_SMR_VOLUME_GC_METHOD {
     public var value: Int32 = 0
 
@@ -5463,8 +4279,8 @@ public let REFS_SMR_VOLUME_GC_METHOD_SmrGcMethodRotation: REFS_SMR_VOLUME_GC_MET
 public struct REFS_SMR_VOLUME_GC_PARAMETERS {
     public var Version: UInt32 = 0
     public var Flags: UInt32 = 0
-    public var Action: REFS_SMR_VOLUME_GC_ACTION = REFS_SMR_VOLUME_GC_ACTION()
-    public var Method: REFS_SMR_VOLUME_GC_METHOD = REFS_SMR_VOLUME_GC_METHOD()
+    public var Action: Int32 = 0
+    public var Method: Int32 = 0
     public var IoGranularity: UInt32 = 0
     public var CompressionFormat: UInt32 = 0
     public var Unused: VArray<UInt64, $8> = VArray<UInt64, $8>(repeat: 0)
@@ -5472,7 +4288,6 @@ public struct REFS_SMR_VOLUME_GC_PARAMETERS {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct REFS_SMR_VOLUME_GC_STATE {
     public var value: Int32 = 0
 
@@ -5512,7 +4327,7 @@ public struct REFS_SMR_VOLUME_INFO_OUTPUT {
     public var SizeofSMRTier: Int64 = 0
     public var FreeSpaceInSMRTier: Int64 = 0
     public var UsableFreeSpaceInSMRTier: Int64 = 0
-    public var VolumeGcState: REFS_SMR_VOLUME_GC_STATE = REFS_SMR_VOLUME_GC_STATE()
+    public var VolumeGcState: Int32 = 0
     public var VolumeGcLastStatus: UInt32 = 0
     public var CurrentGcBandFillPercentage: UInt32 = 0
     public var Unused: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
@@ -5660,16 +4475,6 @@ public struct RETRIEVAL_POINTER_COUNT {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct SCM_BUS_DEDICATED_MEMORY_DEVICES_INFO {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var DeviceCount: UInt32 = 0
-    public var Devices: VArray<SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO, $1> = VArray<SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO, $1>(repeat: SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO {
     public var DeviceGuid: GUID = GUID()
     public var DeviceNumber: UInt32 = 0
@@ -5688,12 +4493,11 @@ public struct SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO__Flags_e__Struct {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct SCM_BUS_DEDICATED_MEMORY_STATE {
-    public var ActivateState: Win32_Foundation.BOOLEAN = 0
+    public var ActivateState: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_BUS_FIRMWARE_ACTIVATION_STATE {
     public var value: Int32 = 0
 
@@ -5721,7 +4525,6 @@ public let SCM_BUS_FIRMWARE_ACTIVATION_STATE_ScmBusFirmwareActivationState_Armed
 public let SCM_BUS_FIRMWARE_ACTIVATION_STATE_ScmBusFirmwareActivationState_Busy: SCM_BUS_FIRMWARE_ACTIVATION_STATE = SCM_BUS_FIRMWARE_ACTIVATION_STATE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_BUS_PROPERTY_ID {
     public var value: Int32 = 0
 
@@ -5752,29 +4555,6 @@ public let SCM_BUS_PROPERTY_ID_ScmBusProperty_DedicatedMemoryState: SCM_BUS_PROP
 public let SCM_BUS_PROPERTY_ID_ScmBusProperty_Max: SCM_BUS_PROPERTY_ID = SCM_BUS_PROPERTY_ID(3)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SCM_BUS_PROPERTY_QUERY {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var PropertyId: SCM_BUS_PROPERTY_ID = SCM_BUS_PROPERTY_ID()
-    public var QueryType: SCM_BUS_QUERY_TYPE = SCM_BUS_QUERY_TYPE()
-    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SCM_BUS_PROPERTY_SET {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var PropertyId: SCM_BUS_PROPERTY_ID = SCM_BUS_PROPERTY_ID()
-    public var SetType: SCM_BUS_SET_TYPE = SCM_BUS_SET_TYPE()
-    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_BUS_QUERY_TYPE {
     public var value: Int32 = 0
 
@@ -5806,8 +4586,8 @@ public let SCM_BUS_QUERY_TYPE_ScmBusQuery_Max: SCM_BUS_QUERY_TYPE = SCM_BUS_QUER
 public struct SCM_BUS_RUNTIME_FW_ACTIVATION_INFO {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var RuntimeFwActivationSupported: Win32_Foundation.BOOLEAN = 0
-    public var FirmwareActivationState: SCM_BUS_FIRMWARE_ACTIVATION_STATE = SCM_BUS_FIRMWARE_ACTIVATION_STATE()
+    public var RuntimeFwActivationSupported: UInt8 = 0
+    public var FirmwareActivationState: Int32 = 0
     public var FirmwareActivationCapability: SCM_BUS_RUNTIME_FW_ACTIVATION_INFO__FirmwareActivationCapability_e__Struct = SCM_BUS_RUNTIME_FW_ACTIVATION_INFO__FirmwareActivationCapability_e__Struct()
     public var EstimatedFirmwareActivationTimeInUSecs: UInt64 = 0
     public var EstimatedProcessorAccessQuiesceTimeInUSecs: UInt64 = 0
@@ -5824,7 +4604,6 @@ public struct SCM_BUS_RUNTIME_FW_ACTIVATION_INFO__FirmwareActivationCapability_e
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_BUS_SET_TYPE {
     public var value: Int32 = 0
 
@@ -5866,16 +4645,6 @@ public struct SCM_LD_INTERLEAVE_SET_INFO {
     public var Size: UInt32 = 0
     public var InterleaveSetSize: UInt32 = 0
     public var InterleaveSet: VArray<SCM_INTERLEAVED_PD_INFO, $1> = VArray<SCM_INTERLEAVED_PD_INFO, $1>(repeat: SCM_INTERLEAVED_PD_INFO())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SCM_LOGICAL_DEVICES {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var DeviceCount: UInt32 = 0
-    public var Devices: VArray<SCM_LOGICAL_DEVICE_INSTANCE, $1> = VArray<SCM_LOGICAL_DEVICE_INSTANCE, $1>(repeat: SCM_LOGICAL_DEVICE_INSTANCE())
     public init() {}
 }
 
@@ -5931,17 +4700,7 @@ public struct SCM_PD_DEVICE_INFO {
     public var ManufacturingYear: UInt8 = 0
     public var SerialNumber4Byte: UInt32 = 0
     public var SerialNumberLengthInChars: UInt32 = 0
-    public var SerialNumber: VArray<Win32_Foundation.CHAR, $1> = VArray<Win32_Foundation.CHAR, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SCM_PD_DEVICE_SPECIFIC_INFO {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var NumberOfProperties: UInt32 = 0
-    public var DeviceSpecificProperties: VArray<SCM_PD_DEVICE_SPECIFIC_PROPERTY, $1> = VArray<SCM_PD_DEVICE_SPECIFIC_PROPERTY, $1>(repeat: SCM_PD_DEVICE_SPECIFIC_PROPERTY())
+    public var SerialNumber: VArray<Int8, $1> = VArray<Int8, $1>(repeat: 0)
     public init() {}
 }
 
@@ -5964,7 +4723,6 @@ public struct SCM_PD_FIRMWARE_ACTIVATE {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_FIRMWARE_ACTIVATION_STATE {
     public var value: Int32 = 0
 
@@ -6007,18 +4765,6 @@ public struct SCM_PD_FIRMWARE_DOWNLOAD {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct SCM_PD_FIRMWARE_INFO {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var ActiveSlot: UInt8 = 0
-    public var NextActiveSlot: UInt8 = 0
-    public var SlotCount: UInt8 = 0
-    public var Slots: VArray<SCM_PD_FIRMWARE_SLOT_INFO, $1> = VArray<SCM_PD_FIRMWARE_SLOT_INFO, $1>(repeat: SCM_PD_FIRMWARE_SLOT_INFO())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_FIRMWARE_SLOT_INFO {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
@@ -6047,7 +4793,6 @@ public struct SCM_PD_HEALTH_NOTIFICATION_DATA {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_HEALTH_STATUS {
     public var value: Int32 = 0
 
@@ -6081,7 +4826,6 @@ public let SCM_PD_HEALTH_STATUS_ScmPhysicalDeviceHealth_Healthy: SCM_PD_HEALTH_S
 public let SCM_PD_HEALTH_STATUS_ScmPhysicalDeviceHealth_Max: SCM_PD_HEALTH_STATUS = SCM_PD_HEALTH_STATUS(4)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_LAST_FW_ACTIVATION_STATUS {
     public var value: Int32 = 0
 
@@ -6133,20 +4877,6 @@ public struct SCM_PD_LOCATION_STRING {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SCM_PD_MANAGEMENT_STATUS {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Health: SCM_PD_HEALTH_STATUS = SCM_PD_HEALTH_STATUS()
-    public var NumberOfOperationalStatus: UInt32 = 0
-    public var NumberOfAdditionalReasons: UInt32 = 0
-    public var OperationalStatus: VArray<SCM_PD_OPERATIONAL_STATUS, $16> = VArray<SCM_PD_OPERATIONAL_STATUS, $16>(repeat: SCM_PD_OPERATIONAL_STATUS())
-    public var AdditionalReasons: VArray<SCM_PD_OPERATIONAL_STATUS_REASON, $1> = VArray<SCM_PD_OPERATIONAL_STATUS_REASON, $1>(repeat: SCM_PD_OPERATIONAL_STATUS_REASON())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_MEDIA_REINITIALIZATION_STATUS {
     public var value: Int32 = 0
 
@@ -6177,7 +4907,6 @@ public let SCM_PD_MEDIA_REINITIALIZATION_STATUS_ScmPhysicalDeviceReinit_ColdBoot
 public let SCM_PD_MEDIA_REINITIALIZATION_STATUS_ScmPhysicalDeviceReinit_Max: SCM_PD_MEDIA_REINITIALIZATION_STATUS = SCM_PD_MEDIA_REINITIALIZATION_STATUS(3)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_OPERATIONAL_STATUS {
     public var value: Int32 = 0
 
@@ -6223,7 +4952,6 @@ public let SCM_PD_OPERATIONAL_STATUS_ScmPhysicalDeviceOpStatus_Missing: SCM_PD_O
 public let SCM_PD_OPERATIONAL_STATUS_ScmPhysicalDeviceOpStatus_Max: SCM_PD_OPERATIONAL_STATUS = SCM_PD_OPERATIONAL_STATUS(8)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_OPERATIONAL_STATUS_REASON {
     public var value: Int32 = 0
 
@@ -6355,7 +5083,6 @@ public struct SCM_PD_PASSTHROUGH_OUTPUT {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_PROPERTY_ID {
     public var value: Int32 = 0
 
@@ -6404,29 +5131,6 @@ public let SCM_PD_PROPERTY_ID_ScmPhysicalDeviceProperty_RuntimeFwActivationArmSt
 public let SCM_PD_PROPERTY_ID_ScmPhysicalDeviceProperty_Max: SCM_PD_PROPERTY_ID = SCM_PD_PROPERTY_ID(9)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SCM_PD_PROPERTY_QUERY {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var PropertyId: SCM_PD_PROPERTY_ID = SCM_PD_PROPERTY_ID()
-    public var QueryType: SCM_PD_QUERY_TYPE = SCM_PD_QUERY_TYPE()
-    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SCM_PD_PROPERTY_SET {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var PropertyId: SCM_PD_PROPERTY_ID = SCM_PD_PROPERTY_ID()
-    public var SetType: SCM_PD_SET_TYPE = SCM_PD_SET_TYPE()
-    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_QUERY_TYPE {
     public var value: Int32 = 0
 
@@ -6474,14 +5178,14 @@ public struct SCM_PD_REINITIALIZE_MEDIA_INPUT__Options_e__Struct {
 public struct SCM_PD_REINITIALIZE_MEDIA_OUTPUT {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var Status: SCM_PD_MEDIA_REINITIALIZATION_STATUS = SCM_PD_MEDIA_REINITIALIZATION_STATUS()
+    public var Status: Int32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct SCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE {
-    public var ArmState: Win32_Foundation.BOOLEAN = 0
+    public var ArmState: UInt8 = 0
     public init() {}
 }
 
@@ -6490,13 +5194,12 @@ public struct SCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE {
 public struct SCM_PD_RUNTIME_FW_ACTIVATION_INFO {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var LastFirmwareActivationStatus: SCM_PD_LAST_FW_ACTIVATION_STATUS = SCM_PD_LAST_FW_ACTIVATION_STATUS()
-    public var FirmwareActivationState: SCM_PD_FIRMWARE_ACTIVATION_STATE = SCM_PD_FIRMWARE_ACTIVATION_STATE()
+    public var LastFirmwareActivationStatus: Int32 = 0
+    public var FirmwareActivationState: Int32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_PD_SET_TYPE {
     public var value: Int32 = 0
 
@@ -6522,16 +5225,6 @@ public let SCM_PD_SET_TYPE_ScmPhysicalDeviceSet_IsSupported: SCM_PD_SET_TYPE = S
 
 @When[Windows_Win32_System_Ioctl == "on"]
 public let SCM_PD_SET_TYPE_ScmPhysicalDeviceSet_Max: SCM_PD_SET_TYPE = SCM_PD_SET_TYPE(2)
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SCM_PHYSICAL_DEVICES {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var DeviceCount: UInt32 = 0
-    public var Devices: VArray<SCM_PHYSICAL_DEVICE_INSTANCE, $1> = VArray<SCM_PHYSICAL_DEVICE_INSTANCE, $1>(repeat: SCM_PHYSICAL_DEVICE_INSTANCE())
-    public init() {}
-}
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
@@ -6572,7 +5265,6 @@ public struct SCM_REGIONS {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SCM_REGION_FLAG {
     public var value: Int32 = 0
 
@@ -6650,166 +5342,6 @@ public struct SD_ENUM_SDS_OUTPUT {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct SD_GLOBAL_CHANGE_INPUT {
-    public var Flags: UInt32 = 0
-    public var ChangeType: UInt32 = 0
-    public var Anonymous: SD_GLOBAL_CHANGE_INPUT__Anonymous_e__Union = SD_GLOBAL_CHANGE_INPUT__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct SD_GLOBAL_CHANGE_INPUT__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func sdChange(): SD_CHANGE_MACHINE_SID_INPUT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_CHANGE_MACHINE_SID_INPUT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sdChange(val: SD_CHANGE_MACHINE_SID_INPUT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_CHANGE_MACHINE_SID_INPUT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sdQueryStats(): SD_QUERY_STATS_INPUT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_QUERY_STATS_INPUT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sdQueryStats(val: SD_QUERY_STATS_INPUT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_QUERY_STATS_INPUT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sdEnumSds(): SD_ENUM_SDS_INPUT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_ENUM_SDS_INPUT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sdEnumSds(val: SD_ENUM_SDS_INPUT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_ENUM_SDS_INPUT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SD_GLOBAL_CHANGE_OUTPUT {
-    public var Flags: UInt32 = 0
-    public var ChangeType: UInt32 = 0
-    public var Anonymous: SD_GLOBAL_CHANGE_OUTPUT__Anonymous_e__Union = SD_GLOBAL_CHANGE_OUTPUT__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct SD_GLOBAL_CHANGE_OUTPUT__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
-
-    public func sdChange(): SD_CHANGE_MACHINE_SID_OUTPUT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_CHANGE_MACHINE_SID_OUTPUT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sdChange(val: SD_CHANGE_MACHINE_SID_OUTPUT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_CHANGE_MACHINE_SID_OUTPUT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sdQueryStats(): SD_QUERY_STATS_OUTPUT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_QUERY_STATS_OUTPUT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sdQueryStats(val: SD_QUERY_STATS_OUTPUT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_QUERY_STATS_OUTPUT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sdEnumSds(): SD_ENUM_SDS_OUTPUT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_ENUM_SDS_OUTPUT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sdEnumSds(val: SD_ENUM_SDS_OUTPUT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SD_ENUM_SDS_OUTPUT>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SD_QUERY_STATS_INPUT {
     public var Reserved: UInt32 = 0
     public init() {}
@@ -6830,79 +5362,186 @@ public struct SD_QUERY_STATS_OUTPUT {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct SENDCMDINPARAMS {
     public var _raw: VArray<UInt8, $33> = VArray<UInt8, $33>(repeat: 0u8)
 
-    public func cBufferSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop cBufferSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_cBufferSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop irDriveRegs: IDEREGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: IDEREGS = IDEREGS()
+                return packedReadValue<IDEREGS>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `irDriveRegs`: type `IDEREGS` not supported by polyfill; skipped
-
-    public func bDriveNumber(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 12)
+    public mut prop bDriveNumber: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bDriveNumber(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 12, val)
-            _raw = rawStorage
+    public mut prop bReserved: VArray<UInt8, $3> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $3>>(base, 13, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 13, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `bReserved`: type `VArray<UInt8, $3>` not supported by polyfill; skipped
+    public mut prop dwReserved: VArray<UInt32, $4> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+                return packedReadValue<VArray<UInt32, $4>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `dwReserved`: type `VArray<UInt32, $4>` not supported by polyfill; skipped
-
-    // packed field `bBuffer`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
+    public mut prop bBuffer: VArray<UInt8, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $1>>(base, 32, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
 @C
 public struct SENDCMDOUTPARAMS {
     public var _raw: VArray<UInt8, $17> = VArray<UInt8, $17>(repeat: 0u8)
 
-    public func cBufferSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop cBufferSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_cBufferSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop driverStatus: DRIVERSTATUS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DRIVERSTATUS = DRIVERSTATUS()
+                return packedReadValue<DRIVERSTATUS>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `DriverStatus`: type `DRIVERSTATUS` not supported by polyfill; skipped
-
-    // packed field `bBuffer`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
+    public mut prop bBuffer: VArray<UInt8, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $1>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
@@ -6920,7 +5559,7 @@ public struct SET_DAX_ALLOC_ALIGNMENT_HINT_INPUT {
 @C
 public struct SET_DISK_ATTRIBUTES {
     public var Version: UInt32 = 0
-    public var Persist: Win32_Foundation.BOOLEAN = 0
+    public var Persist: UInt8 = 0
     public var Reserved1: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
     public var Attributes: UInt64 = 0
     public var AttributesMask: UInt64 = 0
@@ -6938,56 +5577,59 @@ public struct SET_PARTITION_INFORMATION {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct SET_PARTITION_INFORMATION_EX {
-    public var PartitionStyle: PARTITION_STYLE = PARTITION_STYLE()
+    public var PartitionStyle: Int32 = 0
     public var Anonymous: SET_PARTITION_INFORMATION_EX__Anonymous_e__Union = SET_PARTITION_INFORMATION_EX__Anonymous_e__Union()
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct SET_PARTITION_INFORMATION_EX__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
+    public var _raw: VArray<UInt64, $14> = VArray<UInt64, $14>(repeat: 0)
 
-    public func mbr(): SET_PARTITION_INFORMATION {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SET_PARTITION_INFORMATION>(p)
-            return ptr.read()
+    public mut prop mbr: SET_PARTITION_INFORMATION {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SET_PARTITION_INFORMATION>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SET_PARTITION_INFORMATION>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mbr(val: SET_PARTITION_INFORMATION): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SET_PARTITION_INFORMATION>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop gpt: PARTITION_INFORMATION_GPT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PARTITION_INFORMATION_GPT>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func gpt(): PARTITION_INFORMATION_GPT {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PARTITION_INFORMATION_GPT>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_gpt(val: PARTITION_INFORMATION_GPT): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PARTITION_INFORMATION_GPT>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PARTITION_INFORMATION_GPT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7001,16 +5643,6 @@ public struct SET_PURGE_FAILURE_MODE_INPUT {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct SHRINK_VOLUME_INFORMATION {
-    public var ShrinkRequestType: SHRINK_VOLUME_REQUEST_TYPES = SHRINK_VOLUME_REQUEST_TYPES()
-    public var Flags: UInt64 = 0
-    public var NewNumberOfSectors: Int64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct SHRINK_VOLUME_REQUEST_TYPES {
     public var value: Int32 = 0
 
@@ -7104,10 +5736,10 @@ public struct STORAGE_ADAPTER_DESCRIPTOR {
     public var MaximumTransferLength: UInt32 = 0
     public var MaximumPhysicalPages: UInt32 = 0
     public var AlignmentMask: UInt32 = 0
-    public var AdapterUsesPio: Win32_Foundation.BOOLEAN = 0
-    public var AdapterScansDown: Win32_Foundation.BOOLEAN = 0
-    public var CommandQueueing: Win32_Foundation.BOOLEAN = 0
-    public var AcceleratedTransfer: Win32_Foundation.BOOLEAN = 0
+    public var AdapterUsesPio: UInt8 = 0
+    public var AdapterScansDown: UInt8 = 0
+    public var CommandQueueing: UInt8 = 0
+    public var AcceleratedTransfer: UInt8 = 0
     public var BusType: UInt8 = 0
     public var BusMajorVersion: UInt16 = 0
     public var BusMinorVersion: UInt16 = 0
@@ -7131,9 +5763,9 @@ public struct STORAGE_ALLOCATE_BC_STREAM_INPUT {
     public var Version: UInt32 = 0
     public var RequestsPerPeriod: UInt32 = 0
     public var Period: UInt32 = 0
-    public var RetryFailures: Win32_Foundation.BOOLEAN = 0
-    public var Discardable: Win32_Foundation.BOOLEAN = 0
-    public var Reserved1: VArray<Win32_Foundation.BOOLEAN, $2> = VArray<Win32_Foundation.BOOLEAN, $2>(repeat: 0)
+    public var RetryFailures: UInt8 = 0
+    public var Discardable: UInt8 = 0
+    public var Reserved1: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
     public var AccessType: UInt32 = 0
     public var AccessMode: UInt32 = 0
     public init() {}
@@ -7148,7 +5780,6 @@ public struct STORAGE_ALLOCATE_BC_STREAM_OUTPUT {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_ASSOCIATION_TYPE {
     public var value: Int32 = 0
 
@@ -7176,17 +5807,6 @@ public let STORAGE_ASSOCIATION_TYPE_StorageIdAssocPort: STORAGE_ASSOCIATION_TYPE
 public let STORAGE_ASSOCIATION_TYPE_StorageIdAssocTarget: STORAGE_ASSOCIATION_TYPE = STORAGE_ASSOCIATION_TYPE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_ATTRIBUTE_MGMT {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Action: STORAGE_ATTRIBUTE_MGMT_ACTION = STORAGE_ATTRIBUTE_MGMT_ACTION()
-    public var Attribute: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_ATTRIBUTE_MGMT_ACTION {
     public var value: Int32 = 0
 
@@ -7232,7 +5852,6 @@ public struct STORAGE_BUS_RESET_REQUEST {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_COMPONENT_HEALTH_STATUS {
     public var value: Int32 = 0
 
@@ -7269,79 +5888,6 @@ public let STORAGE_COMPONENT_HEALTH_STATUS_HealthStatusDisabled: STORAGE_COMPONE
 public let STORAGE_COMPONENT_HEALTH_STATUS_HealthStatusFailed: STORAGE_COMPONENT_HEALTH_STATUS = STORAGE_COMPONENT_HEALTH_STATUS(5)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_COUNTER {
-    public var Type: STORAGE_COUNTER_TYPE = STORAGE_COUNTER_TYPE()
-    public var Value: STORAGE_COUNTER__Value_e__Union = STORAGE_COUNTER__Value_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct STORAGE_COUNTER__Value_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func manufactureDate(): STORAGE_COUNTER__Value_e__Union__ManufactureDate_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_COUNTER__Value_e__Union__ManufactureDate_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_manufactureDate(val: STORAGE_COUNTER__Value_e__Union__ManufactureDate_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_COUNTER__Value_e__Union__ManufactureDate_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func asUlonglong(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUlonglong(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_COUNTER__Value_e__Union__ManufactureDate_e__Struct {
-    public var Week: UInt32 = 0
-    public var Year: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_COUNTERS {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var NumberOfCounters: UInt32 = 0
-    public var Counters: VArray<STORAGE_COUNTER, $1> = VArray<STORAGE_COUNTER, $1>(repeat: STORAGE_COUNTER())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_COUNTER_TYPE {
     public var value: Int32 = 0
 
@@ -7426,7 +5972,6 @@ public let STORAGE_COUNTER_TYPE_StorageCounterTypeFlushLatency100NSMax: STORAGE_
 public let STORAGE_COUNTER_TYPE_StorageCounterTypeMax: STORAGE_COUNTER_TYPE = STORAGE_COUNTER_TYPE(21)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_CRYPTO_ALGORITHM_ID {
     public var value: Int32 = 0
 
@@ -7478,59 +6023,6 @@ public let STORAGE_CRYPTO_ALGORITHM_ID_StorCryptoAlgorithmAESECB: STORAGE_CRYPTO
 public let STORAGE_CRYPTO_ALGORITHM_ID_StorCryptoAlgorithmESSIVAESCBC: STORAGE_CRYPTO_ALGORITHM_ID = STORAGE_CRYPTO_ALGORITHM_ID(4)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_CRYPTO_CAPABILITY {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var CryptoCapabilityIndex: UInt32 = 0
-    public var AlgorithmId: STORAGE_CRYPTO_ALGORITHM_ID = STORAGE_CRYPTO_ALGORITHM_ID()
-    public var KeySize: STORAGE_CRYPTO_KEY_SIZE = STORAGE_CRYPTO_KEY_SIZE()
-    public var DataUnitSizeBitmask: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_CRYPTO_CAPABILITY_V2 {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var CryptoCapabilityIndex: UInt32 = 0
-    public var AlgorithmId: STORAGE_CRYPTO_ALGORITHM_ID = STORAGE_CRYPTO_ALGORITHM_ID()
-    public var KeySize: STORAGE_CRYPTO_KEY_SIZE = STORAGE_CRYPTO_KEY_SIZE()
-    public var DataUnitSizeBitmask: UInt32 = 0
-    public var MaxIVBitSize: UInt16 = 0
-    public var Reserved: UInt16 = 0
-    public var SecurityComplianceBitmask: STORAGE_SECURITY_COMPLIANCE_BITMASK = STORAGE_SECURITY_COMPLIANCE_BITMASK()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_CRYPTO_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var NumKeysSupported: UInt32 = 0
-    public var NumCryptoCapabilities: UInt32 = 0
-    public var CryptoCapabilities: VArray<STORAGE_CRYPTO_CAPABILITY, $1> = VArray<STORAGE_CRYPTO_CAPABILITY, $1>(repeat: STORAGE_CRYPTO_CAPABILITY())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_CRYPTO_DESCRIPTOR_V2 {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var NumKeysSupported: UInt32 = 0
-    public var NumCryptoCapabilities: UInt32 = 0
-    public var IceType: STORAGE_ICE_TYPE = STORAGE_ICE_TYPE()
-    public var SecurityComplianceBitmask: STORAGE_SECURITY_COMPLIANCE_BITMASK = STORAGE_SECURITY_COMPLIANCE_BITMASK()
-    public var KeyTypeBitmask: STORAGE_CRYPTO_KEY_TYPE = STORAGE_CRYPTO_KEY_TYPE()
-    public var CryptoCapabilities: VArray<STORAGE_CRYPTO_CAPABILITY_V2, $1> = VArray<STORAGE_CRYPTO_CAPABILITY_V2, $1>(repeat: STORAGE_CRYPTO_CAPABILITY_V2())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_CRYPTO_KEY_SIZE {
     public var value: Int32 = 0
 
@@ -7582,46 +6074,49 @@ public let STORAGE_CRYPTO_KEY_SIZE_StorCryptoKeySize256Bits: STORAGE_CRYPTO_KEY_
 public let STORAGE_CRYPTO_KEY_SIZE_StorCryptoKeySize512Bits: STORAGE_CRYPTO_KEY_SIZE = STORAGE_CRYPTO_KEY_SIZE(4)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STORAGE_CRYPTO_KEY_TYPE {
     public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
 
-    public func anonymous(): STORAGE_CRYPTO_KEY_TYPE__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_CRYPTO_KEY_TYPE__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: STORAGE_CRYPTO_KEY_TYPE__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_CRYPTO_KEY_TYPE__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_CRYPTO_KEY_TYPE__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: STORAGE_CRYPTO_KEY_TYPE__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_CRYPTO_KEY_TYPE__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUchar: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
         }
-    }
-
-    public func asUchar(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_asUchar(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -7651,20 +6146,20 @@ public struct STORAGE_DEVICE_ATTRIBUTES_DESCRIPTOR {
     public init() {}
 }
 
-@When[Windows_Win32_System_Ioctl == "on"]
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
 @C
 public struct STORAGE_DEVICE_DESCRIPTOR {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
     public var DeviceType: UInt8 = 0
     public var DeviceTypeModifier: UInt8 = 0
-    public var RemovableMedia: Win32_Foundation.BOOLEAN = 0
-    public var CommandQueueing: Win32_Foundation.BOOLEAN = 0
+    public var RemovableMedia: UInt8 = 0
+    public var CommandQueueing: UInt8 = 0
     public var VendorIdOffset: UInt32 = 0
     public var ProductIdOffset: UInt32 = 0
     public var ProductRevisionOffset: UInt32 = 0
     public var SerialNumberOffset: UInt32 = 0
-    public var BusType: Win32_impl.STORAGE_BUS_TYPE = Win32_impl.STORAGE_BUS_TYPE()
+    public var BusType: Int32 = 0
     public var RawPropertiesLength: UInt32 = 0
     public var RawDeviceProperties: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
     public init() {}
@@ -7681,7 +6176,6 @@ public struct STORAGE_DEVICE_FAULT_DOMAIN_DESCRIPTOR {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_DEVICE_FORM_FACTOR {
     public var value: Int32 = 0
 
@@ -7773,19 +6267,6 @@ public struct STORAGE_DEVICE_LOCATION_DESCRIPTOR {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct STORAGE_DEVICE_MANAGEMENT_STATUS {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Health: STORAGE_DISK_HEALTH_STATUS = STORAGE_DISK_HEALTH_STATUS()
-    public var NumberOfOperationalStatus: UInt32 = 0
-    public var NumberOfAdditionalReasons: UInt32 = 0
-    public var OperationalStatus: VArray<STORAGE_DISK_OPERATIONAL_STATUS, $16> = VArray<STORAGE_DISK_OPERATIONAL_STATUS, $16>(repeat: STORAGE_DISK_OPERATIONAL_STATUS())
-    public var AdditionalReasons: VArray<STORAGE_OPERATIONAL_REASON, $1> = VArray<STORAGE_OPERATIONAL_REASON, $1>(repeat: STORAGE_OPERATIONAL_REASON())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_DEVICE_NUMA_PROPERTY {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
@@ -7826,17 +6307,6 @@ public struct STORAGE_DEVICE_NUMBER_EX {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_DEVICE_POWER_CAP {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Units: STORAGE_DEVICE_POWER_CAP_UNITS = STORAGE_DEVICE_POWER_CAP_UNITS()
-    public var MaxPower: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_DEVICE_POWER_CAP_UNITS {
     public var value: Int32 = 0
 
@@ -7879,29 +6349,7 @@ public struct STORAGE_DEVICE_RESILIENCY_DESCRIPTOR {
 public struct STORAGE_DEVICE_SELF_ENCRYPTION_PROPERTY {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var SupportsSelfEncryption: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_DEVICE_SELF_ENCRYPTION_PROPERTY_V2 {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var SupportsSelfEncryption: Win32_Foundation.BOOLEAN = 0
-    public var EncryptionType: STORAGE_ENCRYPTION_TYPE = STORAGE_ENCRYPTION_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_DEVICE_TIERING_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var TotalNumberOfTiers: UInt32 = 0
-    public var NumberOfTiersReturned: UInt32 = 0
-    public var Tiers: VArray<STORAGE_TIER, $1> = VArray<STORAGE_TIER, $1>(repeat: STORAGE_TIER())
+    public var SupportsSelfEncryption: UInt8 = 0
     public init() {}
 }
 
@@ -7927,7 +6375,6 @@ public struct STORAGE_DIAGNOSTIC_DATA {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_DIAGNOSTIC_LEVEL {
     public var value: Int32 = 0
 
@@ -7952,18 +6399,6 @@ public let STORAGE_DIAGNOSTIC_LEVEL_StorageDiagnosticLevelDefault: STORAGE_DIAGN
 public let STORAGE_DIAGNOSTIC_LEVEL_StorageDiagnosticLevelMax: STORAGE_DIAGNOSTIC_LEVEL = STORAGE_DIAGNOSTIC_LEVEL(1)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_DIAGNOSTIC_REQUEST {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var TargetType: STORAGE_DIAGNOSTIC_TARGET_TYPE = STORAGE_DIAGNOSTIC_TARGET_TYPE()
-    public var Level: STORAGE_DIAGNOSTIC_LEVEL = STORAGE_DIAGNOSTIC_LEVEL()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_DIAGNOSTIC_TARGET_TYPE {
     public var value: Int32 = 0
 
@@ -7997,7 +6432,6 @@ public let STORAGE_DIAGNOSTIC_TARGET_TYPE_StorageDiagnosticTargetTypeHbaFirmware
 public let STORAGE_DIAGNOSTIC_TARGET_TYPE_StorageDiagnosticTargetTypeMax: STORAGE_DIAGNOSTIC_TARGET_TYPE = STORAGE_DIAGNOSTIC_TARGET_TYPE(4)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_DISK_HEALTH_STATUS {
     public var value: Int32 = 0
 
@@ -8031,7 +6465,6 @@ public let STORAGE_DISK_HEALTH_STATUS_DiskHealthHealthy: STORAGE_DISK_HEALTH_STA
 public let STORAGE_DISK_HEALTH_STATUS_DiskHealthMax: STORAGE_DISK_HEALTH_STATUS = STORAGE_DISK_HEALTH_STATUS(4)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_DISK_OPERATIONAL_STATUS {
     public var value: Int32 = 0
 
@@ -8077,7 +6510,6 @@ public let STORAGE_DISK_OPERATIONAL_STATUS_DiskOpStatusTransientError: STORAGE_D
 public let STORAGE_DISK_OPERATIONAL_STATUS_DiskOpStatusMissing: STORAGE_DISK_OPERATIONAL_STATUS = STORAGE_DISK_OPERATIONAL_STATUS(8)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_ENCRYPTION_TYPE {
     public var value: Int32 = 0
 
@@ -8118,8 +6550,8 @@ public struct STORAGE_EVENT_NOTIFICATION {
 public struct STORAGE_FAILURE_PREDICTION_CONFIG {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
-    public var Set: Win32_Foundation.BOOLEAN = 0
-    public var Enabled: Win32_Foundation.BOOLEAN = 0
+    public var Set: UInt8 = 0
+    public var Enabled: UInt8 = 0
     public var Reserved: UInt16 = 0
     public init() {}
 }
@@ -8135,46 +6567,49 @@ public struct STORAGE_FEATURE_SUPPORT {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STORAGE_FEATURE_SUPPORT__Flags_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): STORAGE_FEATURE_SUPPORT__Flags_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_FEATURE_SUPPORT__Flags_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: STORAGE_FEATURE_SUPPORT__Flags_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_FEATURE_SUPPORT__Flags_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_FEATURE_SUPPORT__Flags_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: STORAGE_FEATURE_SUPPORT__Flags_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_FEATURE_SUPPORT__Flags_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUlonglong: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func asUlonglong(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_asUlonglong(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -8213,48 +6648,10 @@ public struct STORAGE_GET_BC_PROPERTIES_OUTPUT {
 @C
 public struct STORAGE_HOTPLUG_INFO {
     public var Size: UInt32 = 0
-    public var MediaRemovable: Win32_Foundation.BOOLEAN = 0
-    public var MediaHotplug: Win32_Foundation.BOOLEAN = 0
-    public var DeviceHotplug: Win32_Foundation.BOOLEAN = 0
-    public var WriteCacheEnableOverride: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_HW_CRYPTO_CAPABILITY {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var CryptoCapabilityIndex: UInt32 = 0
-    public var AlgorithmId: STORAGE_CRYPTO_ALGORITHM_ID = STORAGE_CRYPTO_ALGORITHM_ID()
-    public var KeySize: STORAGE_CRYPTO_KEY_SIZE = STORAGE_CRYPTO_KEY_SIZE()
-    public var DataUnitSizeBitmask: UInt32 = 0
-    public var MaxIVBitSize: UInt16 = 0
-    public var Reserved: UInt16 = 0
-    public var SecurityComplianceBitmask: STORAGE_SECURITY_COMPLIANCE_BITMASK = STORAGE_SECURITY_COMPLIANCE_BITMASK()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_HW_CRYPTO_DESCRIPTOR {
-    public var Header: STORAGE_DESCRIPTOR_HEADER = STORAGE_DESCRIPTOR_HEADER()
-    public var NumKeysSupported: UInt32 = 0
-    public var NumCryptoCapabilities: UInt32 = 0
-    public var OffsetToCryptoCapabilities: UInt32 = 0
-    public var SizeOfCryptoCapability: UInt32 = 0
-    public var IceType: STORAGE_ICE_TYPE = STORAGE_ICE_TYPE()
-    public var SecurityComplianceBitmask: STORAGE_SECURITY_COMPLIANCE_BITMASK = STORAGE_SECURITY_COMPLIANCE_BITMASK()
-    public var KeyTypeBitmask: STORAGE_CRYPTO_KEY_TYPE = STORAGE_CRYPTO_KEY_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var EnduranceInfo: STORAGE_HW_ENDURANCE_INFO = STORAGE_HW_ENDURANCE_INFO()
+    public var MediaRemovable: UInt8 = 0
+    public var MediaHotplug: UInt8 = 0
+    public var DeviceHotplug: UInt8 = 0
+    public var WriteCacheEnableOverride: UInt8 = 0
     public init() {}
 }
 
@@ -8320,23 +6717,6 @@ public struct STORAGE_HW_FIRMWARE_DOWNLOAD_V2 {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct STORAGE_HW_FIRMWARE_INFO {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var _bitfield: UInt8 = 0
-    public var SlotCount: UInt8 = 0
-    public var ActiveSlot: UInt8 = 0
-    public var PendingActivateSlot: UInt8 = 0
-    public var FirmwareShared: Win32_Foundation.BOOLEAN = 0
-    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var ImagePayloadAlignment: UInt32 = 0
-    public var ImagePayloadMaxSize: UInt32 = 0
-    public var Slot: VArray<STORAGE_HW_FIRMWARE_SLOT_INFO, $1> = VArray<STORAGE_HW_FIRMWARE_SLOT_INFO, $1>(repeat: STORAGE_HW_FIRMWARE_SLOT_INFO())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_HW_FIRMWARE_INFO_QUERY {
     public var Version: UInt32 = 0
     public var Size: UInt32 = 0
@@ -8358,7 +6738,6 @@ public struct STORAGE_HW_FIRMWARE_SLOT_INFO {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_ICE_TYPE {
     public var value: Int32 = 0
 
@@ -8386,19 +6765,6 @@ public let STORAGE_ICE_TYPE_StorageIceTypeUfs: STORAGE_ICE_TYPE = STORAGE_ICE_TY
 public let STORAGE_ICE_TYPE_StorageIceTypeNvme: STORAGE_ICE_TYPE = STORAGE_ICE_TYPE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_IDENTIFIER {
-    public var CodeSet: STORAGE_IDENTIFIER_CODE_SET = STORAGE_IDENTIFIER_CODE_SET()
-    public var Type: STORAGE_IDENTIFIER_TYPE = STORAGE_IDENTIFIER_TYPE()
-    public var IdentifierSize: UInt16 = 0
-    public var NextOffset: UInt16 = 0
-    public var Association: STORAGE_ASSOCIATION_TYPE = STORAGE_ASSOCIATION_TYPE()
-    public var Identifier: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_IDENTIFIER_CODE_SET {
     public var value: Int32 = 0
 
@@ -8429,7 +6795,6 @@ public let STORAGE_IDENTIFIER_CODE_SET_StorageIdCodeSetAscii: STORAGE_IDENTIFIER
 public let STORAGE_IDENTIFIER_CODE_SET_StorageIdCodeSetUtf8: STORAGE_IDENTIFIER_CODE_SET = STORAGE_IDENTIFIER_CODE_SET(3)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_IDENTIFIER_TYPE {
     public var value: Int32 = 0
 
@@ -8485,16 +6850,6 @@ public struct STORAGE_IDLE_POWER {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_IDLE_POWERUP_REASON {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var PowerupReason: STORAGE_POWERUP_REASON_TYPE = STORAGE_POWERUP_REASON_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_ID_NAA_FORMAT {
     public var value: Int32 = 0
 
@@ -8545,7 +6900,6 @@ public struct STORAGE_MEDIA_SERIAL_NUMBER_DATA {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_MEDIA_TYPE {
     public var value: Int32 = 0
 
@@ -8763,86 +7117,6 @@ public struct STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct STORAGE_MINIPORT_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Portdriver: STORAGE_PORT_CODE_SET = STORAGE_PORT_CODE_SET()
-    public var LUNResetSupported: Win32_Foundation.BOOLEAN = 0
-    public var TargetResetSupported: Win32_Foundation.BOOLEAN = 0
-    public var IoTimeoutValue: UInt16 = 0
-    public var ExtraIoInfoSupported: Win32_Foundation.BOOLEAN = 0
-    public var Flags: STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union = STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union()
-    public var Reserved0: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var Reserved1: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union {
-    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-
-    public func anonymous(): STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func asBYTE(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_asBYTE(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union__Anonymous_e__Struct {
-    public var _bitfield: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_OFFLOAD_READ_OUTPUT {
-    public var OffloadReadFlags: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public var LengthProtected: UInt64 = 0
-    public var TokenLength: UInt32 = 0
-    public var Token: STORAGE_OFFLOAD_TOKEN = STORAGE_OFFLOAD_TOKEN()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_OFFLOAD_TOKEN {
     public var TokenType: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
     public var Reserved: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
@@ -8852,50 +7126,53 @@ public struct STORAGE_OFFLOAD_TOKEN {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STORAGE_OFFLOAD_TOKEN__Anonymous_e__Union {
     public var _raw: VArray<UInt8, $504> = VArray<UInt8, $504>(repeat: 0)
 
-    public func storageOffloadZeroDataToken(): STORAGE_OFFLOAD_TOKEN__Anonymous_e__Union__StorageOffloadZeroDataToken_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_OFFLOAD_TOKEN__Anonymous_e__Union__StorageOffloadZeroDataToken_e__Struct>(p)
-            return ptr.read()
+    public mut prop storageOffloadZeroDataToken: STORAGE_OFFLOAD_TOKEN__Anonymous_e__Union__StorageOffloadZeroDataToken_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_OFFLOAD_TOKEN__Anonymous_e__Union__StorageOffloadZeroDataToken_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_OFFLOAD_TOKEN__Anonymous_e__Union__StorageOffloadZeroDataToken_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_storageOffloadZeroDataToken(val: STORAGE_OFFLOAD_TOKEN__Anonymous_e__Union__StorageOffloadZeroDataToken_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_OFFLOAD_TOKEN__Anonymous_e__Union__StorageOffloadZeroDataToken_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop token: VArray<UInt8, $504> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $504>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func token(): VArray<UInt8, $504> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $504>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_token(val: VArray<UInt8, $504>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $504>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $504>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -8918,103 +7195,6 @@ public struct STORAGE_OFFLOAD_WRITE_OUTPUT {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_OPERATIONAL_REASON {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var Reason: STORAGE_OPERATIONAL_STATUS_REASON = STORAGE_OPERATIONAL_STATUS_REASON()
-    public var RawBytes: STORAGE_OPERATIONAL_REASON__RawBytes_e__Union = STORAGE_OPERATIONAL_REASON__RawBytes_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct STORAGE_OPERATIONAL_REASON__RawBytes_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func scsiSenseKey(): STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__ScsiSenseKey_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__ScsiSenseKey_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_scsiSenseKey(val: STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__ScsiSenseKey_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__ScsiSenseKey_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func nvdimm_N(): STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__NVDIMM_N_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__NVDIMM_N_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_nvdimm_N(val: STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__NVDIMM_N_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__NVDIMM_N_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func asUlong(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_asUlong(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__ScsiSenseKey_e__Struct {
-    public var SenseKey: UInt8 = 0
-    public var ASC: UInt8 = 0
-    public var ASCQ: UInt8 = 0
-    public var Reserved: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__NVDIMM_N_e__Struct {
-    public var CriticalHealth: UInt8 = 0
-    public var ModuleHealth: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var ErrorThresholdStatus: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_OPERATIONAL_STATUS_REASON {
     public var value: Int32 = 0
 
@@ -9097,41 +7277,6 @@ public let STORAGE_OPERATIONAL_STATUS_REASON_DiskOpReasonMax: STORAGE_OPERATIONA
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct STORAGE_PHYSICAL_ADAPTER_DATA {
-    public var AdapterId: UInt32 = 0
-    public var HealthStatus: STORAGE_COMPONENT_HEALTH_STATUS = STORAGE_COMPONENT_HEALTH_STATUS()
-    public var CommandProtocol: STORAGE_PROTOCOL_TYPE = STORAGE_PROTOCOL_TYPE()
-    public var SpecVersion: STORAGE_SPEC_VERSION = STORAGE_SPEC_VERSION()
-    public var Vendor: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-    public var Model: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-    public var FirmwareRevision: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var PhysicalLocation: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var ExpanderConnected: Win32_Foundation.BOOLEAN = 0
-    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var Reserved1: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_PHYSICAL_DEVICE_DATA {
-    public var DeviceId: UInt32 = 0
-    public var Role: UInt32 = 0
-    public var HealthStatus: STORAGE_COMPONENT_HEALTH_STATUS = STORAGE_COMPONENT_HEALTH_STATUS()
-    public var CommandProtocol: STORAGE_PROTOCOL_TYPE = STORAGE_PROTOCOL_TYPE()
-    public var SpecVersion: STORAGE_SPEC_VERSION = STORAGE_SPEC_VERSION()
-    public var FormFactor: STORAGE_DEVICE_FORM_FACTOR = STORAGE_DEVICE_FORM_FACTOR()
-    public var Vendor: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-    public var Model: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-    public var FirmwareRevision: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-    public var Capacity: UInt64 = 0
-    public var PhysicalLocation: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public var Reserved: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_PHYSICAL_NODE_DATA {
     public var NodeId: UInt32 = 0
     public var AdapterCount: UInt32 = 0
@@ -9156,7 +7301,6 @@ public struct STORAGE_PHYSICAL_TOPOLOGY_DESCRIPTOR {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_PORT_CODE_SET {
     public var value: Int32 = 0
 
@@ -9199,7 +7343,6 @@ public let STORAGE_PORT_CODE_SET_StoragePortCodeSetSBP2port: STORAGE_PORT_CODE_S
 public let STORAGE_PORT_CODE_SET_StoragePortCodeSetSDport: STORAGE_PORT_CODE_SET = STORAGE_PORT_CODE_SET(7)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_POWERUP_REASON_TYPE {
     public var value: Int32 = 0
 
@@ -9242,7 +7385,6 @@ public struct STORAGE_PRIORITY_HINT_SUPPORT {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_PROPERTY_ID {
     public var value: Int32 = 0
 
@@ -9381,25 +7523,6 @@ public let STORAGE_PROPERTY_ID_StorageDeviceProtocolSpecificPropertyEx: STORAGE_
 public let STORAGE_PROPERTY_ID_StorageHwCryptoProperty: STORAGE_PROPERTY_ID = STORAGE_PROPERTY_ID(69)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_PROPERTY_QUERY {
-    public var PropertyId: STORAGE_PROPERTY_ID = STORAGE_PROPERTY_ID()
-    public var QueryType: STORAGE_QUERY_TYPE = STORAGE_QUERY_TYPE()
-    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_PROPERTY_SET {
-    public var PropertyId: STORAGE_PROPERTY_ID = STORAGE_PROPERTY_ID()
-    public var SetType: STORAGE_SET_TYPE = STORAGE_SET_TYPE()
-    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_PROTOCOL_ATA_DATA_TYPE {
     public var value: Int32 = 0
 
@@ -9427,90 +7550,49 @@ public let STORAGE_PROTOCOL_ATA_DATA_TYPE_AtaDataTypeIdentify: STORAGE_PROTOCOL_
 public let STORAGE_PROTOCOL_ATA_DATA_TYPE_AtaDataTypeLogPage: STORAGE_PROTOCOL_ATA_DATA_TYPE = STORAGE_PROTOCOL_ATA_DATA_TYPE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_PROTOCOL_COMMAND {
-    public var Version: UInt32 = 0
-    public var Length: UInt32 = 0
-    public var ProtocolType: STORAGE_PROTOCOL_TYPE = STORAGE_PROTOCOL_TYPE()
-    public var Flags: UInt32 = 0
-    public var ReturnStatus: UInt32 = 0
-    public var ErrorCode: UInt32 = 0
-    public var CommandLength: UInt32 = 0
-    public var ErrorInfoLength: UInt32 = 0
-    public var DataToDeviceTransferLength: UInt32 = 0
-    public var DataFromDeviceTransferLength: UInt32 = 0
-    public var TimeOutValue: UInt32 = 0
-    public var ErrorInfoOffset: UInt32 = 0
-    public var DataToDeviceBufferOffset: UInt32 = 0
-    public var DataFromDeviceBufferOffset: UInt32 = 0
-    public var CommandSpecific: UInt32 = 0
-    public var Reserved0: UInt32 = 0
-    public var FixedProtocolReturnData: UInt32 = 0
-    public var FixedProtocolReturnData2: UInt32 = 0
-    public var Reserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
-    public var Command: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_PROTOCOL_DATA_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var ProtocolSpecificData: STORAGE_PROTOCOL_SPECIFIC_DATA = STORAGE_PROTOCOL_SPECIFIC_DATA()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var ProtocolSpecificData: STORAGE_PROTOCOL_SPECIFIC_DATA_EXT = STORAGE_PROTOCOL_SPECIFIC_DATA_EXT()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func anonymous(): STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUlong: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func asUlong(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_asUlong(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -9524,7 +7606,6 @@ public struct STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_PROTOCOL_NVME_DATA_TYPE {
     public var value: Int32 = 0
 
@@ -9561,42 +7642,6 @@ public let STORAGE_PROTOCOL_NVME_DATA_TYPE_NVMeDataTypeLogPageEx: STORAGE_PROTOC
 public let STORAGE_PROTOCOL_NVME_DATA_TYPE_NVMeDataTypeFeatureEx: STORAGE_PROTOCOL_NVME_DATA_TYPE = STORAGE_PROTOCOL_NVME_DATA_TYPE(5)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_PROTOCOL_SPECIFIC_DATA {
-    public var ProtocolType: STORAGE_PROTOCOL_TYPE = STORAGE_PROTOCOL_TYPE()
-    public var DataType: UInt32 = 0
-    public var ProtocolDataRequestValue: UInt32 = 0
-    public var ProtocolDataRequestSubValue: UInt32 = 0
-    public var ProtocolDataOffset: UInt32 = 0
-    public var ProtocolDataLength: UInt32 = 0
-    public var FixedProtocolReturnData: UInt32 = 0
-    public var ProtocolDataRequestSubValue2: UInt32 = 0
-    public var ProtocolDataRequestSubValue3: UInt32 = 0
-    public var ProtocolDataRequestSubValue4: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_PROTOCOL_SPECIFIC_DATA_EXT {
-    public var ProtocolType: STORAGE_PROTOCOL_TYPE = STORAGE_PROTOCOL_TYPE()
-    public var DataType: UInt32 = 0
-    public var ProtocolDataValue: UInt32 = 0
-    public var ProtocolDataSubValue: UInt32 = 0
-    public var ProtocolDataOffset: UInt32 = 0
-    public var ProtocolDataLength: UInt32 = 0
-    public var FixedProtocolReturnData: UInt32 = 0
-    public var ProtocolDataSubValue2: UInt32 = 0
-    public var ProtocolDataSubValue3: UInt32 = 0
-    public var ProtocolDataSubValue4: UInt32 = 0
-    public var ProtocolDataSubValue5: UInt32 = 0
-    public var ProtocolDataSubValue6: UInt32 = 0
-    public var Reserved: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_PROTOCOL_TYPE {
     public var value: Int32 = 0
 
@@ -9639,7 +7684,6 @@ public let STORAGE_PROTOCOL_TYPE_ProtocolTypeProprietary: STORAGE_PROTOCOL_TYPE 
 public let STORAGE_PROTOCOL_TYPE_ProtocolTypeMaxReserved: STORAGE_PROTOCOL_TYPE = STORAGE_PROTOCOL_TYPE(127)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_PROTOCOL_UFS_DATA_TYPE {
     public var value: Int32 = 0
 
@@ -9678,7 +7722,7 @@ public let STORAGE_PROTOCOL_UFS_DATA_TYPE_UfsDataTypeQueryDmePeerAttribute: STOR
 @When[Windows_Win32_System_Ioctl == "on"]
 public let STORAGE_PROTOCOL_UFS_DATA_TYPE_UfsDataTypeMax: STORAGE_PROTOCOL_UFS_DATA_TYPE = STORAGE_PROTOCOL_UFS_DATA_TYPE(6)
 
-@When[Windows_Win32_System_Ioctl == "on"]
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_Vhd == "on"]
 @C
 public struct STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY {
     public var EntryLength: UInt32 = 0
@@ -9688,7 +7732,7 @@ public struct STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY {
     public init() {}
 }
 
-@When[Windows_Win32_System_Ioctl == "on"]
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_Vhd == "on"]
 @C
 public struct STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY {
     public var EntryLength: UInt32 = 0
@@ -9715,7 +7759,7 @@ public struct STORAGE_QUERY_DEPENDENT_VOLUME_REQUEST {
     public init() {}
 }
 
-@When[Windows_Win32_System_Ioctl == "on"]
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_Vhd == "on"]
 @C
 public struct STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE {
     public var ResponseLevel: UInt32 = 0
@@ -9724,58 +7768,60 @@ public struct STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE {
     public init() {}
 }
 
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $52> = VArray<UInt8, $52>(repeat: 0)
+    public var _raw: VArray<UInt32, $17> = VArray<UInt32, $17>(repeat: 0)
 
-    public func lev1Depends(): VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY, $1>>(p)
-            return ptr.read()
+    public mut prop lev1Depends: VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_lev1Depends(val: VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop lev2Depends: VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY, $1>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func lev2Depends(): VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_lev2Depends(val: VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_QUERY_TYPE {
     public var value: Int32 = 0
 
@@ -9834,7 +7880,6 @@ public struct STORAGE_REINITIALIZE_MEDIA__SanitizeOption_e__Struct {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_RESERVE_ID {
     public var value: Int32 = 0
 
@@ -9868,7 +7913,6 @@ public let STORAGE_RESERVE_ID_StorageReserveIdUpdateScratch: STORAGE_RESERVE_ID 
 public let STORAGE_RESERVE_ID_StorageReserveIdMax: STORAGE_RESERVE_ID = STORAGE_RESERVE_ID(4)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_RPMB_COMMAND_TYPE {
     public var value: Int32 = 0
 
@@ -9923,18 +7967,6 @@ public struct STORAGE_RPMB_DATA_FRAME {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_RPMB_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var SizeInBytes: UInt32 = 0
-    public var MaxReliableWriteSizeInBytes: UInt32 = 0
-    public var FrameFormat: STORAGE_RPMB_FRAME_TYPE = STORAGE_RPMB_FRAME_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_RPMB_FRAME_TYPE {
     public var value: Int32 = 0
 
@@ -9962,7 +7994,6 @@ public let STORAGE_RPMB_FRAME_TYPE_StorageRpmbFrameTypeStandard: STORAGE_RPMB_FR
 public let STORAGE_RPMB_FRAME_TYPE_StorageRpmbFrameTypeMax: STORAGE_RPMB_FRAME_TYPE = STORAGE_RPMB_FRAME_TYPE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_SANITIZE_METHOD {
     public var value: Int32 = 0
 
@@ -9990,46 +8021,49 @@ public let STORAGE_SANITIZE_METHOD_StorageSanitizeMethodBlockErase: STORAGE_SANI
 public let STORAGE_SANITIZE_METHOD_StorageSanitizeMethodCryptoErase: STORAGE_SANITIZE_METHOD = STORAGE_SANITIZE_METHOD(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STORAGE_SECURITY_COMPLIANCE_BITMASK {
     public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
 
-    public func anonymous(): STORAGE_SECURITY_COMPLIANCE_BITMASK__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_SECURITY_COMPLIANCE_BITMASK__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: STORAGE_SECURITY_COMPLIANCE_BITMASK__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_SECURITY_COMPLIANCE_BITMASK__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_SECURITY_COMPLIANCE_BITMASK__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: STORAGE_SECURITY_COMPLIANCE_BITMASK__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_SECURITY_COMPLIANCE_BITMASK__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUchar: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
         }
-    }
-
-    public func asUchar(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_asUchar(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -10043,7 +8077,6 @@ public struct STORAGE_SECURITY_COMPLIANCE_BITMASK__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_SET_TYPE {
     public var value: Int32 = 0
 
@@ -10071,46 +8104,49 @@ public let STORAGE_SET_TYPE_PropertyExistsSet: STORAGE_SET_TYPE = STORAGE_SET_TY
 public let STORAGE_SET_TYPE_PropertySetMaxDefined: STORAGE_SET_TYPE = STORAGE_SET_TYPE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STORAGE_SPEC_VERSION {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func anonymous(): STORAGE_SPEC_VERSION__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_SPEC_VERSION__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: STORAGE_SPEC_VERSION__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_SPEC_VERSION__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_SPEC_VERSION__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: STORAGE_SPEC_VERSION__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_SPEC_VERSION__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUlong: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public func asUlong(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_asUlong(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -10125,46 +8161,49 @@ public struct STORAGE_SPEC_VERSION__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STORAGE_SPEC_VERSION__Anonymous_e__Struct__MinorVersion_e__Union {
-    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
 
-    public func anonymous(): STORAGE_SPEC_VERSION__Anonymous_e__Struct__MinorVersion_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_SPEC_VERSION__Anonymous_e__Struct__MinorVersion_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: STORAGE_SPEC_VERSION__Anonymous_e__Struct__MinorVersion_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_SPEC_VERSION__Anonymous_e__Struct__MinorVersion_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_SPEC_VERSION__Anonymous_e__Struct__MinorVersion_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: STORAGE_SPEC_VERSION__Anonymous_e__Struct__MinorVersion_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_SPEC_VERSION__Anonymous_e__Struct__MinorVersion_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop asUshort: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
         }
-    }
-
-    public func asUshort(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_asUshort(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -10179,16 +8218,6 @@ public struct STORAGE_SPEC_VERSION__Anonymous_e__Struct__MinorVersion_e__Union__
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_STACK_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var StorageStackType: STORAGE_STACK_TYPE = STORAGE_STACK_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_STACK_TYPE {
     public var value: Int32 = 0
 
@@ -10217,28 +8246,14 @@ public let STORAGE_STACK_TYPE_StorageStackTypeNVMe: STORAGE_STACK_TYPE = STORAGE
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct STORAGE_TEMPERATURE_DATA_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var CriticalTemperature: Int16 = 0
-    public var WarningTemperature: Int16 = 0
-    public var InfoCount: UInt16 = 0
-    public var Reserved0: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
-    public var Reserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
-    public var TemperatureInfo: VArray<STORAGE_TEMPERATURE_INFO, $1> = VArray<STORAGE_TEMPERATURE_INFO, $1>(repeat: STORAGE_TEMPERATURE_INFO())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_TEMPERATURE_INFO {
     public var Index: UInt16 = 0
     public var Temperature: Int16 = 0
     public var OverThreshold: Int16 = 0
     public var UnderThreshold: Int16 = 0
-    public var OverThresholdChangable: Win32_Foundation.BOOLEAN = 0
-    public var UnderThresholdChangable: Win32_Foundation.BOOLEAN = 0
-    public var EventGenerated: Win32_Foundation.BOOLEAN = 0
+    public var OverThresholdChangable: UInt8 = 0
+    public var UnderThresholdChangable: UInt8 = 0
+    public var EventGenerated: UInt8 = 0
     public var Reserved0: UInt8 = 0
     public var Reserved1: UInt32 = 0
     public init() {}
@@ -10252,26 +8267,12 @@ public struct STORAGE_TEMPERATURE_THRESHOLD {
     public var Flags: UInt16 = 0
     public var Index: UInt16 = 0
     public var Threshold: Int16 = 0
-    public var OverThreshold: Win32_Foundation.BOOLEAN = 0
+    public var OverThreshold: UInt8 = 0
     public var Reserved: UInt8 = 0
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_TIER {
-    public var Id: GUID = GUID()
-    public var Name: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var Flags: UInt64 = 0
-    public var ProvisionedCapacity: UInt64 = 0
-    public var MediaType: STORAGE_TIER_MEDIA_TYPE = STORAGE_TIER_MEDIA_TYPE()
-    public var Class: STORAGE_TIER_CLASS = STORAGE_TIER_CLASS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_TIER_CLASS {
     public var value: Int32 = 0
 
@@ -10302,7 +8303,6 @@ public let STORAGE_TIER_CLASS_StorageTierClassPerformance: STORAGE_TIER_CLASS = 
 public let STORAGE_TIER_CLASS_StorageTierClassMax: STORAGE_TIER_CLASS = STORAGE_TIER_CLASS(3)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_TIER_MEDIA_TYPE {
     public var value: Int32 = 0
 
@@ -10345,102 +8345,6 @@ public struct STORAGE_TIER_REGION {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_WRITE_CACHE_PROPERTY {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var WriteCacheType: WRITE_CACHE_TYPE = WRITE_CACHE_TYPE()
-    public var WriteCacheEnabled: WRITE_CACHE_ENABLE = WRITE_CACHE_ENABLE()
-    public var WriteCacheChangeable: WRITE_CACHE_CHANGE = WRITE_CACHE_CHANGE()
-    public var WriteThroughSupported: WRITE_THROUGH = WRITE_THROUGH()
-    public var FlushCacheSupported: Win32_Foundation.BOOLEAN = 0
-    public var UserDefinedPowerProtection: Win32_Foundation.BOOLEAN = 0
-    public var NVCacheEnabled: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_ZONED_DEVICE_DESCRIPTOR {
-    public var Version: UInt32 = 0
-    public var Size: UInt32 = 0
-    public var DeviceType: STORAGE_ZONED_DEVICE_TYPES = STORAGE_ZONED_DEVICE_TYPES()
-    public var ZoneCount: UInt32 = 0
-    public var ZoneAttributes: STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union = STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union()
-    public var ZoneGroupCount: UInt32 = 0
-    public var ZoneGroup: VArray<STORAGE_ZONE_GROUP, $1> = VArray<STORAGE_ZONE_GROUP, $1>(repeat: STORAGE_ZONE_GROUP())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func sequentialRequiredZone(): STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialRequiredZone_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialRequiredZone_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sequentialRequiredZone(val: STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialRequiredZone_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialRequiredZone_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sequentialPreferredZone(): STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialPreferredZone_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialPreferredZone_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sequentialPreferredZone(val: STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialPreferredZone_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialPreferredZone_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialRequiredZone_e__Struct {
-    public var MaxOpenZoneCount: UInt32 = 0
-    public var UnrestrictedRead: Win32_Foundation.BOOLEAN = 0
-    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialPreferredZone_e__Struct {
-    public var OptimalOpenZoneCount: UInt32 = 0
-    public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_ZONED_DEVICE_TYPES {
     public var value: Int32 = 0
 
@@ -10471,7 +8375,6 @@ public let STORAGE_ZONED_DEVICE_TYPES_ZonedDeviceTypeHostAware: STORAGE_ZONED_DE
 public let STORAGE_ZONED_DEVICE_TYPES_ZonedDeviceTypeDeviceManaged: STORAGE_ZONED_DEVICE_TYPES = STORAGE_ZONED_DEVICE_TYPES(3)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_ZONES_ATTRIBUTES {
     public var value: Int32 = 0
 
@@ -10502,7 +8405,6 @@ public let STORAGE_ZONES_ATTRIBUTES_ZonesAttributeTypeSameLastZoneLengthDifferen
 public let STORAGE_ZONES_ATTRIBUTES_ZonesAttributeTypeMayDifferentLengthSame: STORAGE_ZONES_ATTRIBUTES = STORAGE_ZONES_ATTRIBUTES(3)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_ZONE_CONDITION {
     public var value: Int32 = 0
 
@@ -10545,29 +8447,6 @@ public let STORAGE_ZONE_CONDITION_ZoneConditionFull: STORAGE_ZONE_CONDITION = ST
 public let STORAGE_ZONE_CONDITION_ZoneConditionOffline: STORAGE_ZONE_CONDITION = STORAGE_ZONE_CONDITION(15)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_ZONE_DESCRIPTOR {
-    public var Size: UInt32 = 0
-    public var ZoneType: STORAGE_ZONE_TYPES = STORAGE_ZONE_TYPES()
-    public var ZoneCondition: STORAGE_ZONE_CONDITION = STORAGE_ZONE_CONDITION()
-    public var ResetWritePointerRecommend: Win32_Foundation.BOOLEAN = 0
-    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
-    public var ZoneSize: UInt64 = 0
-    public var WritePointerOffset: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct STORAGE_ZONE_GROUP {
-    public var ZoneCount: UInt32 = 0
-    public var ZoneType: STORAGE_ZONE_TYPES = STORAGE_ZONE_TYPES()
-    public var ZoneSize: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct STORAGE_ZONE_TYPES {
     public var value: Int32 = 0
 
@@ -10634,29 +8513,31 @@ public struct STREAM_EXTENT_ENTRY {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STREAM_EXTENT_ENTRY__ExtentInformation_e__Union {
-    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
 
-    public func retrievalPointers(): RETRIEVAL_POINTERS_BUFFER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RETRIEVAL_POINTERS_BUFFER>(p)
-            return ptr.read()
+    public mut prop retrievalPointers: RETRIEVAL_POINTERS_BUFFER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RETRIEVAL_POINTERS_BUFFER>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_retrievalPointers(val: RETRIEVAL_POINTERS_BUFFER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RETRIEVAL_POINTERS_BUFFER>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RETRIEVAL_POINTERS_BUFFER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -10672,92 +8553,97 @@ public struct STREAM_INFORMATION_ENTRY {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct STREAM_INFORMATION_ENTRY__StreamInformation {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
 
-    public func desiredStorageClass(): STREAM_INFORMATION_ENTRY__StreamInformation__DesiredStorageClass {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__DesiredStorageClass>(p)
-            return ptr.read()
+    public mut prop desiredStorageClass: STREAM_INFORMATION_ENTRY__StreamInformation__DesiredStorageClass {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__DesiredStorageClass>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__DesiredStorageClass>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_desiredStorageClass(val: STREAM_INFORMATION_ENTRY__StreamInformation__DesiredStorageClass): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__DesiredStorageClass>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop dataStream: STREAM_INFORMATION_ENTRY__StreamInformation__DataStream {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__DataStream>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__DataStream>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dataStream(): STREAM_INFORMATION_ENTRY__StreamInformation__DataStream {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__DataStream>(p)
-            return ptr.read()
+    public mut prop reparse: STREAM_INFORMATION_ENTRY__StreamInformation__Reparse {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__Reparse>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__Reparse>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dataStream(val: STREAM_INFORMATION_ENTRY__StreamInformation__DataStream): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__DataStream>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop ea: STREAM_INFORMATION_ENTRY__StreamInformation__Ea {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__Ea>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func reparse(): STREAM_INFORMATION_ENTRY__StreamInformation__Reparse {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__Reparse>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_reparse(val: STREAM_INFORMATION_ENTRY__StreamInformation__Reparse): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__Reparse>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func ea(): STREAM_INFORMATION_ENTRY__StreamInformation__Ea {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__Ea>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_ea(val: STREAM_INFORMATION_ENTRY__StreamInformation__Ea): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__Ea>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STREAM_INFORMATION_ENTRY__StreamInformation__Ea>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -10766,7 +8652,7 @@ public struct STREAM_INFORMATION_ENTRY__StreamInformation {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct STREAM_INFORMATION_ENTRY__StreamInformation__DesiredStorageClass {
-    public var Class: FILE_STORAGE_TIER_CLASS = FILE_STORAGE_TIER_CLASS()
+    public var Class: Int32 = 0
     public var Flags: UInt32 = 0
     public init() {}
 }
@@ -10922,105 +8808,61 @@ public struct TXFS_LIST_TRANSACTION_LOCKED_FILES_ENTRY {
 
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
-public struct TXFS_MODIFY_RM {
-    public var Flags: TXFS_RMF_LAGS = TXFS_RMF_LAGS()
-    public var LogContainerCountMax: UInt32 = 0
-    public var LogContainerCountMin: UInt32 = 0
-    public var LogContainerCount: UInt32 = 0
-    public var LogGrowthIncrement: UInt32 = 0
-    public var LogAutoShrinkPercentage: UInt32 = 0
-    public var Reserved: UInt64 = 0
-    public var LoggingMode: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct TXFS_QUERY_RM_INFORMATION {
-    public var BytesRequired: UInt32 = 0
-    public var TailLsn: UInt64 = 0
-    public var CurrentLsn: UInt64 = 0
-    public var ArchiveTailLsn: UInt64 = 0
-    public var LogContainerSize: UInt64 = 0
-    public var HighestVirtualClock: Int64 = 0
-    public var LogContainerCount: UInt32 = 0
-    public var LogContainerCountMax: UInt32 = 0
-    public var LogContainerCountMin: UInt32 = 0
-    public var LogGrowthIncrement: UInt32 = 0
-    public var LogAutoShrinkPercentage: UInt32 = 0
-    public var Flags: TXFS_RMF_LAGS = TXFS_RMF_LAGS()
-    public var LoggingMode: UInt16 = 0
-    public var Reserved: UInt16 = 0
-    public var RmState: UInt32 = 0
-    public var LogCapacity: UInt64 = 0
-    public var LogFree: UInt64 = 0
-    public var TopsSize: UInt64 = 0
-    public var TopsUsed: UInt64 = 0
-    public var TransactionCount: UInt64 = 0
-    public var OnePCCount: UInt64 = 0
-    public var TwoPCCount: UInt64 = 0
-    public var NumberLogFileFull: UInt64 = 0
-    public var OldestTransactionAge: UInt64 = 0
-    public var RMName: GUID = GUID()
-    public var TmLogPathOffset: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct TXFS_READ_BACKUP_INFORMATION_OUT {
     public var Anonymous: TXFS_READ_BACKUP_INFORMATION_OUT__Anonymous_e__Union = TXFS_READ_BACKUP_INFORMATION_OUT__Anonymous_e__Union()
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct TXFS_READ_BACKUP_INFORMATION_OUT__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func bufferLength(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop bufferLength: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_bufferLength(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop buffer: VArray<UInt8, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $1>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func buffer(): VArray<UInt8, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_buffer(val: VArray<UInt8, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct TXFS_RMF_LAGS {
     public var value: UInt32 = 0
 
@@ -11143,7 +8985,7 @@ public struct TXFS_START_RM_INFORMATION {
 @When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct TXFS_TRANSACTION_ACTIVE_INFO {
-    public var TransactionsActiveAtSnapshot: Win32_Foundation.BOOLEAN = 0
+    public var TransactionsActiveAtSnapshot: UInt8 = 0
     public init() {}
 }
 
@@ -11155,7 +8997,6 @@ public struct TXFS_WRITE_BACKUP_INFORMATION {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct USN_DELETE_FLAGS {
     public var value: UInt32 = 0
 
@@ -11264,98 +9105,6 @@ public struct USN_RECORD_EXTENT {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct USN_RECORD_UNION {
-    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
-
-    public func header(): USN_RECORD_COMMON_HEADER {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<USN_RECORD_COMMON_HEADER>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_header(val: USN_RECORD_COMMON_HEADER): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<USN_RECORD_COMMON_HEADER>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func v2(): USN_RECORD_V2 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<USN_RECORD_V2>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v2(val: USN_RECORD_V2): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<USN_RECORD_V2>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func v3(): USN_RECORD_V3 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<USN_RECORD_V3>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v3(val: USN_RECORD_V3): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<USN_RECORD_V3>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func v4(): USN_RECORD_V4 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<USN_RECORD_V4>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_v4(val: USN_RECORD_V4): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<USN_RECORD_V4>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
 @C
 public struct USN_RECORD_V2 {
     public var RecordLength: UInt32 = 0
@@ -11375,14 +9124,14 @@ public struct USN_RECORD_V2 {
     public init() {}
 }
 
-@When[Windows_Win32_System_Ioctl == "on"]
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
 @C
 public struct USN_RECORD_V3 {
     public var RecordLength: UInt32 = 0
     public var MajorVersion: UInt16 = 0
     public var MinorVersion: UInt16 = 0
-    public var FileReferenceNumber: Win32_impl.FILE_ID_128 = Win32_impl.FILE_ID_128()
-    public var ParentFileReferenceNumber: Win32_impl.FILE_ID_128 = Win32_impl.FILE_ID_128()
+    public var FileReferenceNumber: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
+    public var ParentFileReferenceNumber: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
     public var Usn: Int64 = 0
     public var TimeStamp: Int64 = 0
     public var Reason: UInt32 = 0
@@ -11396,23 +9145,6 @@ public struct USN_RECORD_V3 {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
-public struct USN_RECORD_V4 {
-    public var Header: USN_RECORD_COMMON_HEADER = USN_RECORD_COMMON_HEADER()
-    public var FileReferenceNumber: Win32_impl.FILE_ID_128 = Win32_impl.FILE_ID_128()
-    public var ParentFileReferenceNumber: Win32_impl.FILE_ID_128 = Win32_impl.FILE_ID_128()
-    public var Usn: Int64 = 0
-    public var Reason: UInt32 = 0
-    public var SourceInfo: USN_SOURCE_INFO_ID = USN_SOURCE_INFO_ID()
-    public var RemainingExtents: UInt32 = 0
-    public var NumberOfExtents: UInt16 = 0
-    public var ExtentSize: UInt16 = 0
-    public var Extents: VArray<USN_RECORD_EXTENT, $1> = VArray<USN_RECORD_EXTENT, $1>(repeat: USN_RECORD_EXTENT())
-    public init() {}
-}
-
-@When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct USN_SOURCE_INFO_ID {
     public var value: UInt32 = 0
 
@@ -11487,7 +9219,6 @@ public struct VIRTUALIZATION_INSTANCE_INFO_OUTPUT {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct VIRTUAL_STORAGE_BEHAVIOR_CODE {
     public var value: Int32 = 0
 
@@ -11524,7 +9255,7 @@ public let VIRTUAL_STORAGE_BEHAVIOR_CODE_VirtualStorageBehaviorRestartIoProcessi
 @C
 public struct VIRTUAL_STORAGE_SET_BEHAVIOR_INPUT {
     public var Size: UInt32 = 0
-    public var BehaviorCode: VIRTUAL_STORAGE_BEHAVIOR_CODE = VIRTUAL_STORAGE_BEHAVIOR_CODE()
+    public var BehaviorCode: Int32 = 0
     public init() {}
 }
 
@@ -11608,10 +9339,10 @@ public struct WIM_PROVIDER_UPDATE_OVERLAY_INPUT {
     public init() {}
 }
 
-@When[Windows_Win32_System_Ioctl == "on"]
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
 @C
 public struct WOF_EXTERNAL_FILE_ID {
-    public var FileId: Win32_impl.FILE_ID_128 = Win32_impl.FILE_ID_128()
+    public var FileId: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
     public init() {}
 }
 
@@ -11631,7 +9362,6 @@ public struct WOF_VERSION_INFO {
 }
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct WRITE_CACHE_CHANGE {
     public var value: Int32 = 0
 
@@ -11659,7 +9389,6 @@ public let WRITE_CACHE_CHANGE_WriteCacheNotChangeable: WRITE_CACHE_CHANGE = WRIT
 public let WRITE_CACHE_CHANGE_WriteCacheChangeable: WRITE_CACHE_CHANGE = WRITE_CACHE_CHANGE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct WRITE_CACHE_ENABLE {
     public var value: Int32 = 0
 
@@ -11687,7 +9416,6 @@ public let WRITE_CACHE_ENABLE_WriteCacheDisabled: WRITE_CACHE_ENABLE = WRITE_CAC
 public let WRITE_CACHE_ENABLE_WriteCacheEnabled: WRITE_CACHE_ENABLE = WRITE_CACHE_ENABLE(2)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct WRITE_CACHE_TYPE {
     public var value: Int32 = 0
 
@@ -11718,7 +9446,6 @@ public let WRITE_CACHE_TYPE_WriteCacheTypeWriteBack: WRITE_CACHE_TYPE = WRITE_CA
 public let WRITE_CACHE_TYPE_WriteCacheTypeWriteThrough: WRITE_CACHE_TYPE = WRITE_CACHE_TYPE(3)
 
 @When[Windows_Win32_System_Ioctl == "on"]
-@C
 public struct WRITE_THROUGH {
     public var value: Int32 = 0
 
@@ -11752,6 +9479,2895 @@ public struct WRITE_USN_REASON_INPUT {
     public var UsnReasonToWrite: UInt32 = 0
     public init() {}
 }
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct ASYNC_DUPLICATE_EXTENTS_STATUS {
+    public var Version: UInt32 = 0
+    public var State: Int32 = 0
+    public var SourceFileOffset: UInt64 = 0
+    public var TargetFileOffset: UInt64 = 0
+    public var ByteCount: UInt64 = 0
+    public var BytesDuplicated: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct BIN_COUNT {
+    public var BinRange: BIN_RANGE = BIN_RANGE()
+    public var BinCount: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct BIN_RESULTS {
+    public var NumberOfBins: UInt32 = 0
+    public var BinCounts: VArray<BIN_COUNT, $1> = VArray<BIN_COUNT, $1>(repeat: BIN_COUNT())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_ELEMENT {
+    public var ElementType: Int32 = 0
+    public var ElementAddress: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_ELEMENT_LIST {
+    public var Element: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var NumberOfElements: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_ELEMENT_STATUS {
+    public var Element: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var SrcElementAddress: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Flags: UInt32 = 0
+    public var ExceptionCode: UInt32 = 0
+    public var TargetId: UInt8 = 0
+    public var Lun: UInt8 = 0
+    public var Reserved: UInt16 = 0
+    public var PrimaryVolumeID: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
+    public var AlternateVolumeID: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_ELEMENT_STATUS_EX {
+    public var Element: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var SrcElementAddress: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Flags: UInt32 = 0
+    public var ExceptionCode: UInt32 = 0
+    public var TargetId: UInt8 = 0
+    public var Lun: UInt8 = 0
+    public var Reserved: UInt16 = 0
+    public var PrimaryVolumeID: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
+    public var AlternateVolumeID: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
+    public var VendorIdentification: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var ProductIdentification: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var SerialNumber: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_EXCHANGE_MEDIUM {
+    public var Transport: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Source: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Destination1: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Destination2: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Flip1: UInt8 = 0
+    public var Flip2: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_INITIALIZE_ELEMENT_STATUS {
+    public var ElementList: CHANGER_ELEMENT_LIST = CHANGER_ELEMENT_LIST()
+    public var BarCodeScan: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_MOVE_MEDIUM {
+    public var Transport: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Source: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Destination: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Flip: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_READ_ELEMENT_STATUS {
+    public var ElementList: CHANGER_ELEMENT_LIST = CHANGER_ELEMENT_LIST()
+    public var VolumeTagInfo: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_SEND_VOLUME_TAG_INFORMATION {
+    public var StartingElement: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var ActionCode: UInt32 = 0
+    public var VolumeIDTemplate: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_SET_ACCESS {
+    public var Element: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Control: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CHANGER_SET_POSITION {
+    public var Transport: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Destination: CHANGER_ELEMENT = CHANGER_ELEMENT()
+    public var Flip: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct CREATE_DISK {
+    public var PartitionStyle: Int32 = 0
+    public var Anonymous: CREATE_DISK__Anonymous_e__Union = CREATE_DISK__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CREATE_DISK__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
+
+    public mut prop mbr: CREATE_DISK_MBR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_DISK_MBR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_DISK_MBR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop gpt: CREATE_DISK_GPT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_DISK_GPT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_DISK_GPT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DELETE_USN_JOURNAL_DATA {
+    public var UsnJournalID: UInt64 = 0
+    public var DeleteFlags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
+@C
+public struct DEVICEDUMP_PRIVATE_SUBSECTION {
+    public var _raw: VArray<UInt8, $9> = VArray<UInt8, $9>(repeat: 0u8)
+
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop gpLogId: GP_LOG_PAGE_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: GP_LOG_PAGE_DESCRIPTOR = GP_LOG_PAGE_DESCRIPTOR()
+                return packedReadValue<GP_LOG_PAGE_DESCRIPTOR>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop bData: VArray<UInt8, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $1>>(base, 8, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 8, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
+@C
+public struct DEVICEDUMP_PUBLIC_SUBSECTION {
+    public var _raw: VArray<UInt8, $85> = VArray<UInt8, $85>(repeat: 0u8)
+
+    public mut prop dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop gpLogTable: VArray<GP_LOG_PAGE_DESCRIPTOR, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<GP_LOG_PAGE_DESCRIPTOR, $16> = VArray<GP_LOG_PAGE_DESCRIPTOR, $16>(repeat: GP_LOG_PAGE_DESCRIPTOR())
+                return packedReadValue<VArray<GP_LOG_PAGE_DESCRIPTOR, $16>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop szDescription: VArray<Int8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $16> = VArray<Int8, $16>(repeat: 0)
+                return packedReadValue<VArray<Int8, $16>>(base, 68, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 68, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop bData: VArray<UInt8, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $1>>(base, 84, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 84, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
+@C
+public struct DEVICEDUMP_STORAGEDEVICE_DATA {
+    public var _raw: VArray<UInt8, $300> = VArray<UInt8, $300>(repeat: 0u8)
+
+    public mut prop descriptor: DEVICEDUMP_STRUCTURE_VERSION {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DEVICEDUMP_STRUCTURE_VERSION = DEVICEDUMP_STRUCTURE_VERSION()
+                return packedReadValue<DEVICEDUMP_STRUCTURE_VERSION>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sectionHeader: DEVICEDUMP_SECTION_HEADER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DEVICEDUMP_SECTION_HEADER = DEVICEDUMP_SECTION_HEADER()
+                return packedReadValue<DEVICEDUMP_SECTION_HEADER>(base, 12, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 12, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwBufferSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 256)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 256, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwReasonForCollection: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 260)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 260, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop publicData: DEVICEDUMP_SUBSECTION_POINTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DEVICEDUMP_SUBSECTION_POINTER = DEVICEDUMP_SUBSECTION_POINTER()
+                return packedReadValue<DEVICEDUMP_SUBSECTION_POINTER>(base, 264, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 264, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop restrictedData: DEVICEDUMP_SUBSECTION_POINTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DEVICEDUMP_SUBSECTION_POINTER = DEVICEDUMP_SUBSECTION_POINTER()
+                return packedReadValue<DEVICEDUMP_SUBSECTION_POINTER>(base, 276, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 276, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop privateData: DEVICEDUMP_SUBSECTION_POINTER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DEVICEDUMP_SUBSECTION_POINTER = DEVICEDUMP_SUBSECTION_POINTER()
+                return packedReadValue<DEVICEDUMP_SUBSECTION_POINTER>(base, 288, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 288, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// packed(1)
+@C
+public struct DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP {
+    public var _raw: VArray<UInt8, $96> = VArray<UInt8, $96>(repeat: 0u8)
+
+    public mut prop descriptor: DEVICEDUMP_STRUCTURE_VERSION {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DEVICEDUMP_STRUCTURE_VERSION = DEVICEDUMP_STRUCTURE_VERSION()
+                return packedReadValue<DEVICEDUMP_STRUCTURE_VERSION>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dwReasonForCollection: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cDriverName: VArray<UInt8, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $16>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uiNumRecords: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 32)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 32, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop recordArray: VArray<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD, $1> = VArray<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD, $1>(repeat: DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD())
+                return packedReadValue<VArray<DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD, $1>>(base, 36, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 36, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DEVICE_DSM_OFFLOAD_WRITE_PARAMETERS {
+    public var Flags: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public var TokenOffset: UInt64 = 0
+    public var Token: STORAGE_OFFLOAD_TOKEN = STORAGE_OFFLOAD_TOKEN()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DEVICE_DSM_PHYSICAL_ADDRESSES_OUTPUT {
+    public var Version: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var TotalNumberOfRanges: UInt32 = 0
+    public var NumberOfRangesReturned: UInt32 = 0
+    public var Ranges: VArray<DEVICE_STORAGE_ADDRESS_RANGE, $1> = VArray<DEVICE_STORAGE_ADDRESS_RANGE, $1>(repeat: DEVICE_STORAGE_ADDRESS_RANGE())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DEVICE_DSM_RANGE_ERROR_INFO {
+    public var Version: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var TotalNumberOfRanges: UInt32 = 0
+    public var NumberOfRangesReturned: UInt32 = 0
+    public var Ranges: VArray<DEVICE_STORAGE_RANGE_ATTRIBUTES, $1> = VArray<DEVICE_STORAGE_RANGE_ATTRIBUTES, $1>(repeat: DEVICE_STORAGE_RANGE_ATTRIBUTES())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DEVICE_DSM_TIERING_QUERY_OUTPUT {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public var Alignment: UInt64 = 0
+    public var TotalNumberOfRegions: UInt32 = 0
+    public var NumberOfRegionsReturned: UInt32 = 0
+    public var Regions: VArray<STORAGE_TIER_REGION, $1> = VArray<STORAGE_TIER_REGION, $1>(repeat: STORAGE_TIER_REGION())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct DEVICE_MEDIA_INFO {
+    public var DeviceSpecific: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union = DEVICE_MEDIA_INFO__DeviceSpecific_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union {
+    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+
+    public mut prop diskInfo: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__DiskInfo_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__DiskInfo_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__DiskInfo_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop removableDiskInfo: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__RemovableDiskInfo_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__RemovableDiskInfo_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__RemovableDiskInfo_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop tapeInfo: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__DiskInfo_e__Struct {
+    public var Cylinders: Int64 = 0
+    public var MediaType: Int32 = 0
+    public var TracksPerCylinder: UInt32 = 0
+    public var SectorsPerTrack: UInt32 = 0
+    public var BytesPerSector: UInt32 = 0
+    public var NumberMediaSides: UInt32 = 0
+    public var MediaCharacteristics: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__RemovableDiskInfo_e__Struct {
+    public var Cylinders: Int64 = 0
+    public var MediaType: Int32 = 0
+    public var TracksPerCylinder: UInt32 = 0
+    public var SectorsPerTrack: UInt32 = 0
+    public var BytesPerSector: UInt32 = 0
+    public var NumberMediaSides: UInt32 = 0
+    public var MediaCharacteristics: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct {
+    public var MediaType: Int32 = 0
+    public var MediaCharacteristics: UInt32 = 0
+    public var CurrentBlockSize: UInt32 = 0
+    public var BusType: Int32 = 0
+    public var BusSpecificData: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union = DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union {
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+
+    public mut prop scsiInformation: DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union__ScsiInformation_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union__ScsiInformation_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union__ScsiInformation_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct DEVICE_MEDIA_INFO__DeviceSpecific_e__Union__TapeInfo_e__Struct__BusSpecificData_e__Union__ScsiInformation_e__Struct {
+    public var MediumType: UInt8 = 0
+    public var DensityCode: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_CACHE_INFORMATION {
+    public var ParametersSavable: UInt8 = 0
+    public var ReadCacheEnabled: UInt8 = 0
+    public var WriteCacheEnabled: UInt8 = 0
+    public var ReadRetentionPriority: Int32 = 0
+    public var WriteRetentionPriority: Int32 = 0
+    public var DisablePrefetchTransferLength: UInt16 = 0
+    public var PrefetchScalar: UInt8 = 0
+    public var Anonymous: DISK_CACHE_INFORMATION__Anonymous_e__Union = DISK_CACHE_INFORMATION__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DISK_CACHE_INFORMATION__Anonymous_e__Union {
+    public var _raw: VArray<UInt16, $3> = VArray<UInt16, $3>(repeat: 0)
+
+    public mut prop scalarPrefetch: DISK_CACHE_INFORMATION__Anonymous_e__Union__ScalarPrefetch_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_CACHE_INFORMATION__Anonymous_e__Union__ScalarPrefetch_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_CACHE_INFORMATION__Anonymous_e__Union__ScalarPrefetch_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop blockPrefetch: DISK_CACHE_INFORMATION__Anonymous_e__Union__BlockPrefetch_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_CACHE_INFORMATION__Anonymous_e__Union__BlockPrefetch_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_CACHE_INFORMATION__Anonymous_e__Union__BlockPrefetch_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_CACHE_INFORMATION__Anonymous_e__Union__ScalarPrefetch_e__Struct {
+    public var Minimum: UInt16 = 0
+    public var Maximum: UInt16 = 0
+    public var MaximumBlocks: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_CACHE_INFORMATION__Anonymous_e__Union__BlockPrefetch_e__Struct {
+    public var Minimum: UInt16 = 0
+    public var Maximum: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_DETECTION_INFO {
+    public var SizeOfDetectInfo: UInt32 = 0
+    public var DetectionType: Int32 = 0
+    public var Anonymous: DISK_DETECTION_INFO__Anonymous_e__Union = DISK_DETECTION_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DISK_DETECTION_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+
+    public mut prop anonymous: DISK_DETECTION_INFO__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_DETECTION_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_DETECTION_INFO__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_DETECTION_INFO__Anonymous_e__Union__Anonymous_e__Struct {
+    public var Int13: DISK_INT13_INFO = DISK_INT13_INFO()
+    public var ExInt13: DISK_EX_INT13_INFO = DISK_EX_INT13_INFO()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_GEOMETRY {
+    public var Cylinders: Int64 = 0
+    public var MediaType: Int32 = 0
+    public var TracksPerCylinder: UInt32 = 0
+    public var SectorsPerTrack: UInt32 = 0
+    public var BytesPerSector: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_GEOMETRY_EX {
+    public var Geometry: DISK_GEOMETRY = DISK_GEOMETRY()
+    public var DiskSize: Int64 = 0
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_HISTOGRAM {
+    public var DiskSize: Int64 = 0
+    public var Start: Int64 = 0
+    public var End: Int64 = 0
+    public var Average: Int64 = 0
+    public var AverageRead: Int64 = 0
+    public var AverageWrite: Int64 = 0
+    public var Granularity: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var ReadCount: UInt32 = 0
+    public var WriteCount: UInt32 = 0
+    public var Histogram: CPointer<HISTOGRAM_BUCKET> = CPointer<HISTOGRAM_BUCKET>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_PARTITION_INFO {
+    public var SizeOfPartitionInfo: UInt32 = 0
+    public var PartitionStyle: Int32 = 0
+    public var Anonymous: DISK_PARTITION_INFO__Anonymous_e__Union = DISK_PARTITION_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DISK_PARTITION_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop mbr: DISK_PARTITION_INFO__Anonymous_e__Union__Mbr_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_PARTITION_INFO__Anonymous_e__Union__Mbr_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_PARTITION_INFO__Anonymous_e__Union__Mbr_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop gpt: DISK_PARTITION_INFO__Anonymous_e__Union__Gpt_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_PARTITION_INFO__Anonymous_e__Union__Gpt_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DISK_PARTITION_INFO__Anonymous_e__Union__Gpt_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_PARTITION_INFO__Anonymous_e__Union__Mbr_e__Struct {
+    public var Signature: UInt32 = 0
+    public var CheckSum: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DISK_PARTITION_INFO__Anonymous_e__Union__Gpt_e__Struct {
+    public var DiskId: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DRIVE_LAYOUT_INFORMATION {
+    public var PartitionCount: UInt32 = 0
+    public var Signature: UInt32 = 0
+    public var PartitionEntry: VArray<PARTITION_INFORMATION, $1> = VArray<PARTITION_INFORMATION, $1>(repeat: PARTITION_INFORMATION())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FILESYSTEM_STATISTICS {
+    public var FileSystemType: UInt16 = 0
+    public var Version: UInt16 = 0
+    public var SizeOfCompleteStructure: UInt32 = 0
+    public var UserFileReads: UInt32 = 0
+    public var UserFileReadBytes: UInt32 = 0
+    public var UserDiskReads: UInt32 = 0
+    public var UserFileWrites: UInt32 = 0
+    public var UserFileWriteBytes: UInt32 = 0
+    public var UserDiskWrites: UInt32 = 0
+    public var MetaDataReads: UInt32 = 0
+    public var MetaDataReadBytes: UInt32 = 0
+    public var MetaDataDiskReads: UInt32 = 0
+    public var MetaDataWrites: UInt32 = 0
+    public var MetaDataWriteBytes: UInt32 = 0
+    public var MetaDataDiskWrites: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FILESYSTEM_STATISTICS_EX {
+    public var FileSystemType: UInt16 = 0
+    public var Version: UInt16 = 0
+    public var SizeOfCompleteStructure: UInt32 = 0
+    public var UserFileReads: UInt64 = 0
+    public var UserFileReadBytes: UInt64 = 0
+    public var UserDiskReads: UInt64 = 0
+    public var UserFileWrites: UInt64 = 0
+    public var UserFileWriteBytes: UInt64 = 0
+    public var UserDiskWrites: UInt64 = 0
+    public var MetaDataReads: UInt64 = 0
+    public var MetaDataReadBytes: UInt64 = 0
+    public var MetaDataDiskReads: UInt64 = 0
+    public var MetaDataWrites: UInt64 = 0
+    public var MetaDataWriteBytes: UInt64 = 0
+    public var MetaDataDiskWrites: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FILE_DESIRED_STORAGE_CLASS_INFORMATION {
+    public var Class: Int32 = 0
+    public var Flags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FILE_LAYOUT_INFO_ENTRY {
+    public var BasicInformation: FILE_LAYOUT_INFO_ENTRY__BasicInformation_e__Struct = FILE_LAYOUT_INFO_ENTRY__BasicInformation_e__Struct()
+    public var OwnerId: UInt32 = 0
+    public var SecurityId: UInt32 = 0
+    public var Usn: Int64 = 0
+    public var StorageReserveId: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FILE_LAYOUT_INFO_ENTRY__BasicInformation_e__Struct {
+    public var CreationTime: Int64 = 0
+    public var LastAccessTime: Int64 = 0
+    public var LastWriteTime: Int64 = 0
+    public var ChangeTime: Int64 = 0
+    public var FileAttributes: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FILE_LEVEL_TRIM {
+    public var Key: UInt32 = 0
+    public var NumRanges: UInt32 = 0
+    public var Ranges: VArray<FILE_LEVEL_TRIM_RANGE, $1> = VArray<FILE_LEVEL_TRIM_RANGE, $1>(repeat: FILE_LEVEL_TRIM_RANGE())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FILE_STORAGE_TIER {
+    public var Id: GUID = GUID()
+    public var Name: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var Flags: UInt64 = 0
+    public var ProvisionedCapacity: UInt64 = 0
+    public var MediaType: Int32 = 0
+    public var Class: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FORMAT_EX_PARAMETERS {
+    public var MediaType: Int32 = 0
+    public var StartCylinderNumber: UInt32 = 0
+    public var EndCylinderNumber: UInt32 = 0
+    public var StartHeadNumber: UInt32 = 0
+    public var EndHeadNumber: UInt32 = 0
+    public var FormatGapLength: UInt16 = 0
+    public var SectorsPerTrack: UInt16 = 0
+    public var SectorNumber: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FORMAT_PARAMETERS {
+    public var MediaType: Int32 = 0
+    public var StartCylinderNumber: UInt32 = 0
+    public var EndCylinderNumber: UInt32 = 0
+    public var StartHeadNumber: UInt32 = 0
+    public var EndHeadNumber: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FSCTL_QUERY_STORAGE_CLASSES_OUTPUT {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var TotalNumberOfTiers: UInt32 = 0
+    public var NumberOfTiersReturned: UInt32 = 0
+    public var Tiers: VArray<FILE_STORAGE_TIER, $1> = VArray<FILE_STORAGE_TIER, $1>(repeat: FILE_STORAGE_TIER())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FS_BPIO_INPUT {
+    public var Operation: Int32 = 0
+    public var InFlags: Int32 = 0
+    public var Reserved1: UInt64 = 0
+    public var Reserved2: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct FS_BPIO_OUTPUT {
+    public var Operation: Int32 = 0
+    public var OutFlags: Int32 = 0
+    public var Reserved1: UInt64 = 0
+    public var Reserved2: UInt64 = 0
+    public var Anonymous: FS_BPIO_OUTPUT__Anonymous_e__Union = FS_BPIO_OUTPUT__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FS_BPIO_OUTPUT__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $82> = VArray<UInt32, $82>(repeat: 0)
+
+    public mut prop enable: FS_BPIO_RESULTS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_RESULTS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_RESULTS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop query: FS_BPIO_RESULTS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_RESULTS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_RESULTS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop volumeStackResume: FS_BPIO_RESULTS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_RESULTS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_RESULTS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop streamResume: FS_BPIO_RESULTS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_RESULTS>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_RESULTS>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop getInfo: FS_BPIO_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FS_BPIO_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct GET_CHANGER_PARAMETERS {
+    public var Size: UInt32 = 0
+    public var NumberTransportElements: UInt16 = 0
+    public var NumberStorageElements: UInt16 = 0
+    public var NumberCleanerSlots: UInt16 = 0
+    public var NumberIEElements: UInt16 = 0
+    public var NumberDataTransferElements: UInt16 = 0
+    public var NumberOfDoors: UInt16 = 0
+    public var FirstSlotNumber: UInt16 = 0
+    public var FirstDriveNumber: UInt16 = 0
+    public var FirstTransportNumber: UInt16 = 0
+    public var FirstIEPortNumber: UInt16 = 0
+    public var FirstCleanerSlotAddress: UInt16 = 0
+    public var MagazineSize: UInt16 = 0
+    public var DriveCleanTimeout: UInt32 = 0
+    public var Features0: UInt32 = 0
+    public var Features1: UInt32 = 0
+    public var MoveFromTransport: UInt8 = 0
+    public var MoveFromSlot: UInt8 = 0
+    public var MoveFromIePort: UInt8 = 0
+    public var MoveFromDrive: UInt8 = 0
+    public var ExchangeFromTransport: UInt8 = 0
+    public var ExchangeFromSlot: UInt8 = 0
+    public var ExchangeFromIePort: UInt8 = 0
+    public var ExchangeFromDrive: UInt8 = 0
+    public var LockUnlockCapabilities: UInt8 = 0
+    public var PositionCapabilities: UInt8 = 0
+    public var Reserved1: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var Reserved2: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct GET_MEDIA_TYPES {
+    public var DeviceType: UInt32 = 0
+    public var MediaInfoCount: UInt32 = 0
+    public var MediaInfo: VArray<DEVICE_MEDIA_INFO, $1> = VArray<DEVICE_MEDIA_INFO, $1>(repeat: DEVICE_MEDIA_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct PARTITION_INFORMATION_EX {
+    public var PartitionStyle: Int32 = 0
+    public var StartingOffset: Int64 = 0
+    public var PartitionLength: Int64 = 0
+    public var PartitionNumber: UInt32 = 0
+    public var RewritePartition: UInt8 = 0
+    public var IsServicePartition: UInt8 = 0
+    public var Anonymous: PARTITION_INFORMATION_EX__Anonymous_e__Union = PARTITION_INFORMATION_EX__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct PARTITION_INFORMATION_EX__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $14> = VArray<UInt64, $14>(repeat: 0)
+
+    public mut prop mbr: PARTITION_INFORMATION_MBR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PARTITION_INFORMATION_MBR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PARTITION_INFORMATION_MBR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop gpt: PARTITION_INFORMATION_GPT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PARTITION_INFORMATION_GPT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PARTITION_INFORMATION_GPT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct PHYSICAL_ELEMENT_STATUS {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var DescriptorCount: UInt32 = 0
+    public var ReturnedDescriptorCount: UInt32 = 0
+    public var ElementIdentifierBeingDepoped: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public var Descriptors: VArray<PHYSICAL_ELEMENT_STATUS_DESCRIPTOR, $1> = VArray<PHYSICAL_ELEMENT_STATUS_DESCRIPTOR, $1>(repeat: PHYSICAL_ELEMENT_STATUS_DESCRIPTOR())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct QUERY_BAD_RANGES_INPUT {
+    public var Flags: UInt32 = 0
+    public var NumRanges: UInt32 = 0
+    public var Ranges: VArray<QUERY_BAD_RANGES_INPUT_RANGE, $1> = VArray<QUERY_BAD_RANGES_INPUT_RANGE, $1>(repeat: QUERY_BAD_RANGES_INPUT_RANGE())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct QUERY_BAD_RANGES_OUTPUT {
+    public var Flags: UInt32 = 0
+    public var NumBadRanges: UInt32 = 0
+    public var NextOffsetToLookUp: UInt64 = 0
+    public var BadRanges: VArray<QUERY_BAD_RANGES_OUTPUT_RANGE, $1> = VArray<QUERY_BAD_RANGES_OUTPUT_RANGE, $1>(repeat: QUERY_BAD_RANGES_OUTPUT_RANGE())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct QUERY_FILE_LAYOUT_INPUT {
+    public var Anonymous: QUERY_FILE_LAYOUT_INPUT__Anonymous_e__Union = QUERY_FILE_LAYOUT_INPUT__Anonymous_e__Union()
+    public var Flags: UInt32 = 0
+    public var FilterType: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public var Filter: QUERY_FILE_LAYOUT_INPUT__Filter_e__Union = QUERY_FILE_LAYOUT_INPUT__Filter_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct QUERY_FILE_LAYOUT_INPUT__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop filterEntryCount: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop numberOfPairs: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct QUERY_FILE_LAYOUT_INPUT__Filter_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop clusterRanges: VArray<CLUSTER_RANGE, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<CLUSTER_RANGE, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<CLUSTER_RANGE, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fileReferenceRanges: VArray<FILE_REFERENCE_RANGE, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<FILE_REFERENCE_RANGE, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<FILE_REFERENCE_RANGE, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop storageReserveIds: VArray<Int32, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<Int32, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<Int32, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct READ_ELEMENT_ADDRESS_INFO {
+    public var NumberOfElements: UInt32 = 0
+    public var ElementStatus: VArray<CHANGER_ELEMENT_STATUS, $1> = VArray<CHANGER_ELEMENT_STATUS, $1>(repeat: CHANGER_ELEMENT_STATUS())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_BUS_DEDICATED_MEMORY_DEVICES_INFO {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var DeviceCount: UInt32 = 0
+    public var Devices: VArray<SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO, $1> = VArray<SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO, $1>(repeat: SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_BUS_PROPERTY_QUERY {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var PropertyId: Int32 = 0
+    public var QueryType: Int32 = 0
+    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_BUS_PROPERTY_SET {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var PropertyId: Int32 = 0
+    public var SetType: Int32 = 0
+    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_LOGICAL_DEVICES {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var DeviceCount: UInt32 = 0
+    public var Devices: VArray<SCM_LOGICAL_DEVICE_INSTANCE, $1> = VArray<SCM_LOGICAL_DEVICE_INSTANCE, $1>(repeat: SCM_LOGICAL_DEVICE_INSTANCE())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_PD_DEVICE_SPECIFIC_INFO {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var NumberOfProperties: UInt32 = 0
+    public var DeviceSpecificProperties: VArray<SCM_PD_DEVICE_SPECIFIC_PROPERTY, $1> = VArray<SCM_PD_DEVICE_SPECIFIC_PROPERTY, $1>(repeat: SCM_PD_DEVICE_SPECIFIC_PROPERTY())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_PD_FIRMWARE_INFO {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var ActiveSlot: UInt8 = 0
+    public var NextActiveSlot: UInt8 = 0
+    public var SlotCount: UInt8 = 0
+    public var Slots: VArray<SCM_PD_FIRMWARE_SLOT_INFO, $1> = VArray<SCM_PD_FIRMWARE_SLOT_INFO, $1>(repeat: SCM_PD_FIRMWARE_SLOT_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_PD_MANAGEMENT_STATUS {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Health: Int32 = 0
+    public var NumberOfOperationalStatus: UInt32 = 0
+    public var NumberOfAdditionalReasons: UInt32 = 0
+    public var OperationalStatus: VArray<Int32, $16> = VArray<Int32, $16>(repeat: 0)
+    public var AdditionalReasons: VArray<Int32, $1> = VArray<Int32, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_PD_PROPERTY_QUERY {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var PropertyId: Int32 = 0
+    public var QueryType: Int32 = 0
+    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_PD_PROPERTY_SET {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var PropertyId: Int32 = 0
+    public var SetType: Int32 = 0
+    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SCM_PHYSICAL_DEVICES {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var DeviceCount: UInt32 = 0
+    public var Devices: VArray<SCM_PHYSICAL_DEVICE_INSTANCE, $1> = VArray<SCM_PHYSICAL_DEVICE_INSTANCE, $1>(repeat: SCM_PHYSICAL_DEVICE_INSTANCE())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SD_GLOBAL_CHANGE_INPUT {
+    public var Flags: UInt32 = 0
+    public var ChangeType: UInt32 = 0
+    public var Anonymous: SD_GLOBAL_CHANGE_INPUT__Anonymous_e__Union = SD_GLOBAL_CHANGE_INPUT__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SD_GLOBAL_CHANGE_INPUT__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop sdChange: SD_CHANGE_MACHINE_SID_INPUT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_CHANGE_MACHINE_SID_INPUT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_CHANGE_MACHINE_SID_INPUT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sdQueryStats: SD_QUERY_STATS_INPUT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_QUERY_STATS_INPUT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_QUERY_STATS_INPUT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sdEnumSds: SD_ENUM_SDS_INPUT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_ENUM_SDS_INPUT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_ENUM_SDS_INPUT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SD_GLOBAL_CHANGE_OUTPUT {
+    public var Flags: UInt32 = 0
+    public var ChangeType: UInt32 = 0
+    public var Anonymous: SD_GLOBAL_CHANGE_OUTPUT__Anonymous_e__Union = SD_GLOBAL_CHANGE_OUTPUT__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SD_GLOBAL_CHANGE_OUTPUT__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $8> = VArray<UInt64, $8>(repeat: 0)
+
+    public mut prop sdChange: SD_CHANGE_MACHINE_SID_OUTPUT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_CHANGE_MACHINE_SID_OUTPUT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_CHANGE_MACHINE_SID_OUTPUT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sdQueryStats: SD_QUERY_STATS_OUTPUT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_QUERY_STATS_OUTPUT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_QUERY_STATS_OUTPUT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sdEnumSds: SD_ENUM_SDS_OUTPUT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_ENUM_SDS_OUTPUT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SD_ENUM_SDS_OUTPUT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct SHRINK_VOLUME_INFORMATION {
+    public var ShrinkRequestType: Int32 = 0
+    public var Flags: UInt64 = 0
+    public var NewNumberOfSectors: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_ATTRIBUTE_MGMT {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Action: Int32 = 0
+    public var Attribute: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_COUNTER {
+    public var Type: Int32 = 0
+    public var Value: STORAGE_COUNTER__Value_e__Union = STORAGE_COUNTER__Value_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct STORAGE_COUNTER__Value_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop manufactureDate: STORAGE_COUNTER__Value_e__Union__ManufactureDate_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_COUNTER__Value_e__Union__ManufactureDate_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_COUNTER__Value_e__Union__ManufactureDate_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop asUlonglong: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_COUNTER__Value_e__Union__ManufactureDate_e__Struct {
+    public var Week: UInt32 = 0
+    public var Year: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_COUNTERS {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var NumberOfCounters: UInt32 = 0
+    public var Counters: VArray<STORAGE_COUNTER, $1> = VArray<STORAGE_COUNTER, $1>(repeat: STORAGE_COUNTER())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_CRYPTO_CAPABILITY {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var CryptoCapabilityIndex: UInt32 = 0
+    public var AlgorithmId: Int32 = 0
+    public var KeySize: Int32 = 0
+    public var DataUnitSizeBitmask: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_CRYPTO_CAPABILITY_V2 {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var CryptoCapabilityIndex: UInt32 = 0
+    public var AlgorithmId: Int32 = 0
+    public var KeySize: Int32 = 0
+    public var DataUnitSizeBitmask: UInt32 = 0
+    public var MaxIVBitSize: UInt16 = 0
+    public var Reserved: UInt16 = 0
+    public var SecurityComplianceBitmask: STORAGE_SECURITY_COMPLIANCE_BITMASK = STORAGE_SECURITY_COMPLIANCE_BITMASK()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_CRYPTO_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var NumKeysSupported: UInt32 = 0
+    public var NumCryptoCapabilities: UInt32 = 0
+    public var CryptoCapabilities: VArray<STORAGE_CRYPTO_CAPABILITY, $1> = VArray<STORAGE_CRYPTO_CAPABILITY, $1>(repeat: STORAGE_CRYPTO_CAPABILITY())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_CRYPTO_DESCRIPTOR_V2 {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var NumKeysSupported: UInt32 = 0
+    public var NumCryptoCapabilities: UInt32 = 0
+    public var IceType: Int32 = 0
+    public var SecurityComplianceBitmask: STORAGE_SECURITY_COMPLIANCE_BITMASK = STORAGE_SECURITY_COMPLIANCE_BITMASK()
+    public var KeyTypeBitmask: STORAGE_CRYPTO_KEY_TYPE = STORAGE_CRYPTO_KEY_TYPE()
+    public var CryptoCapabilities: VArray<STORAGE_CRYPTO_CAPABILITY_V2, $1> = VArray<STORAGE_CRYPTO_CAPABILITY_V2, $1>(repeat: STORAGE_CRYPTO_CAPABILITY_V2())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_DEVICE_POWER_CAP {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Units: Int32 = 0
+    public var MaxPower: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_DEVICE_SELF_ENCRYPTION_PROPERTY_V2 {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var SupportsSelfEncryption: UInt8 = 0
+    public var EncryptionType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_DIAGNOSTIC_REQUEST {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var TargetType: Int32 = 0
+    public var Level: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_HW_CRYPTO_CAPABILITY {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var CryptoCapabilityIndex: UInt32 = 0
+    public var AlgorithmId: Int32 = 0
+    public var KeySize: Int32 = 0
+    public var DataUnitSizeBitmask: UInt32 = 0
+    public var MaxIVBitSize: UInt16 = 0
+    public var Reserved: UInt16 = 0
+    public var SecurityComplianceBitmask: STORAGE_SECURITY_COMPLIANCE_BITMASK = STORAGE_SECURITY_COMPLIANCE_BITMASK()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_HW_CRYPTO_DESCRIPTOR {
+    public var Header: STORAGE_DESCRIPTOR_HEADER = STORAGE_DESCRIPTOR_HEADER()
+    public var NumKeysSupported: UInt32 = 0
+    public var NumCryptoCapabilities: UInt32 = 0
+    public var OffsetToCryptoCapabilities: UInt32 = 0
+    public var SizeOfCryptoCapability: UInt32 = 0
+    public var IceType: Int32 = 0
+    public var SecurityComplianceBitmask: STORAGE_SECURITY_COMPLIANCE_BITMASK = STORAGE_SECURITY_COMPLIANCE_BITMASK()
+    public var KeyTypeBitmask: STORAGE_CRYPTO_KEY_TYPE = STORAGE_CRYPTO_KEY_TYPE()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var EnduranceInfo: STORAGE_HW_ENDURANCE_INFO = STORAGE_HW_ENDURANCE_INFO()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_HW_FIRMWARE_INFO {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var _bitfield: UInt8 = 0
+    public var SlotCount: UInt8 = 0
+    public var ActiveSlot: UInt8 = 0
+    public var PendingActivateSlot: UInt8 = 0
+    public var FirmwareShared: UInt8 = 0
+    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public var ImagePayloadAlignment: UInt32 = 0
+    public var ImagePayloadMaxSize: UInt32 = 0
+    public var Slot: VArray<STORAGE_HW_FIRMWARE_SLOT_INFO, $1> = VArray<STORAGE_HW_FIRMWARE_SLOT_INFO, $1>(repeat: STORAGE_HW_FIRMWARE_SLOT_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_IDENTIFIER {
+    public var CodeSet: Int32 = 0
+    public var Type: Int32 = 0
+    public var IdentifierSize: UInt16 = 0
+    public var NextOffset: UInt16 = 0
+    public var Association: Int32 = 0
+    public var Identifier: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_IDLE_POWERUP_REASON {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var PowerupReason: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_MINIPORT_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Portdriver: Int32 = 0
+    public var LUNResetSupported: UInt8 = 0
+    public var TargetResetSupported: UInt8 = 0
+    public var IoTimeoutValue: UInt16 = 0
+    public var ExtraIoInfoSupported: UInt8 = 0
+    public var Flags: STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union = STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union()
+    public var Reserved0: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var Reserved1: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+
+    public mut prop anonymous: STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop asBYTE: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_MINIPORT_DESCRIPTOR__Flags_e__Union__Anonymous_e__Struct {
+    public var _bitfield: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_OFFLOAD_READ_OUTPUT {
+    public var OffloadReadFlags: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public var LengthProtected: UInt64 = 0
+    public var TokenLength: UInt32 = 0
+    public var Token: STORAGE_OFFLOAD_TOKEN = STORAGE_OFFLOAD_TOKEN()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_OPERATIONAL_REASON {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Reason: Int32 = 0
+    public var RawBytes: STORAGE_OPERATIONAL_REASON__RawBytes_e__Union = STORAGE_OPERATIONAL_REASON__RawBytes_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct STORAGE_OPERATIONAL_REASON__RawBytes_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop scsiSenseKey: STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__ScsiSenseKey_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__ScsiSenseKey_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__ScsiSenseKey_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop nvdimm_N: STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__NVDIMM_N_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__NVDIMM_N_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__NVDIMM_N_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop asUlong: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__ScsiSenseKey_e__Struct {
+    public var SenseKey: UInt8 = 0
+    public var ASC: UInt8 = 0
+    public var ASCQ: UInt8 = 0
+    public var Reserved: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_OPERATIONAL_REASON__RawBytes_e__Union__NVDIMM_N_e__Struct {
+    public var CriticalHealth: UInt8 = 0
+    public var ModuleHealth: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var ErrorThresholdStatus: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_PHYSICAL_ADAPTER_DATA {
+    public var AdapterId: UInt32 = 0
+    public var HealthStatus: Int32 = 0
+    public var CommandProtocol: Int32 = 0
+    public var SpecVersion: STORAGE_SPEC_VERSION = STORAGE_SPEC_VERSION()
+    public var Vendor: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var Model: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
+    public var FirmwareRevision: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var PhysicalLocation: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public var ExpanderConnected: UInt8 = 0
+    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public var Reserved1: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_PHYSICAL_DEVICE_DATA {
+    public var DeviceId: UInt32 = 0
+    public var Role: UInt32 = 0
+    public var HealthStatus: Int32 = 0
+    public var CommandProtocol: Int32 = 0
+    public var SpecVersion: STORAGE_SPEC_VERSION = STORAGE_SPEC_VERSION()
+    public var FormFactor: Int32 = 0
+    public var Vendor: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var Model: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
+    public var FirmwareRevision: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
+    public var Capacity: UInt64 = 0
+    public var PhysicalLocation: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public var Reserved: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_PROPERTY_QUERY {
+    public var PropertyId: Int32 = 0
+    public var QueryType: Int32 = 0
+    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_PROPERTY_SET {
+    public var PropertyId: Int32 = 0
+    public var SetType: Int32 = 0
+    public var AdditionalParameters: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_PROTOCOL_COMMAND {
+    public var Version: UInt32 = 0
+    public var Length: UInt32 = 0
+    public var ProtocolType: Int32 = 0
+    public var Flags: UInt32 = 0
+    public var ReturnStatus: UInt32 = 0
+    public var ErrorCode: UInt32 = 0
+    public var CommandLength: UInt32 = 0
+    public var ErrorInfoLength: UInt32 = 0
+    public var DataToDeviceTransferLength: UInt32 = 0
+    public var DataFromDeviceTransferLength: UInt32 = 0
+    public var TimeOutValue: UInt32 = 0
+    public var ErrorInfoOffset: UInt32 = 0
+    public var DataToDeviceBufferOffset: UInt32 = 0
+    public var DataFromDeviceBufferOffset: UInt32 = 0
+    public var CommandSpecific: UInt32 = 0
+    public var Reserved0: UInt32 = 0
+    public var FixedProtocolReturnData: UInt32 = 0
+    public var FixedProtocolReturnData2: UInt32 = 0
+    public var Reserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public var Command: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_PROTOCOL_SPECIFIC_DATA {
+    public var ProtocolType: Int32 = 0
+    public var DataType: UInt32 = 0
+    public var ProtocolDataRequestValue: UInt32 = 0
+    public var ProtocolDataRequestSubValue: UInt32 = 0
+    public var ProtocolDataOffset: UInt32 = 0
+    public var ProtocolDataLength: UInt32 = 0
+    public var FixedProtocolReturnData: UInt32 = 0
+    public var ProtocolDataRequestSubValue2: UInt32 = 0
+    public var ProtocolDataRequestSubValue3: UInt32 = 0
+    public var ProtocolDataRequestSubValue4: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_PROTOCOL_SPECIFIC_DATA_EXT {
+    public var ProtocolType: Int32 = 0
+    public var DataType: UInt32 = 0
+    public var ProtocolDataValue: UInt32 = 0
+    public var ProtocolDataSubValue: UInt32 = 0
+    public var ProtocolDataOffset: UInt32 = 0
+    public var ProtocolDataLength: UInt32 = 0
+    public var FixedProtocolReturnData: UInt32 = 0
+    public var ProtocolDataSubValue2: UInt32 = 0
+    public var ProtocolDataSubValue3: UInt32 = 0
+    public var ProtocolDataSubValue4: UInt32 = 0
+    public var ProtocolDataSubValue5: UInt32 = 0
+    public var ProtocolDataSubValue6: UInt32 = 0
+    public var Reserved: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_RPMB_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var SizeInBytes: UInt32 = 0
+    public var MaxReliableWriteSizeInBytes: UInt32 = 0
+    public var FrameFormat: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_STACK_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var StorageStackType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_TEMPERATURE_DATA_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var CriticalTemperature: Int16 = 0
+    public var WarningTemperature: Int16 = 0
+    public var InfoCount: UInt16 = 0
+    public var Reserved0: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var Reserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+    public var TemperatureInfo: VArray<STORAGE_TEMPERATURE_INFO, $1> = VArray<STORAGE_TEMPERATURE_INFO, $1>(repeat: STORAGE_TEMPERATURE_INFO())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_TIER {
+    public var Id: GUID = GUID()
+    public var Name: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var Flags: UInt64 = 0
+    public var ProvisionedCapacity: UInt64 = 0
+    public var MediaType: Int32 = 0
+    public var Class: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_WRITE_CACHE_PROPERTY {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var WriteCacheType: Int32 = 0
+    public var WriteCacheEnabled: Int32 = 0
+    public var WriteCacheChangeable: Int32 = 0
+    public var WriteThroughSupported: Int32 = 0
+    public var FlushCacheSupported: UInt8 = 0
+    public var UserDefinedPowerProtection: UInt8 = 0
+    public var NVCacheEnabled: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_ZONE_DESCRIPTOR {
+    public var Size: UInt32 = 0
+    public var ZoneType: Int32 = 0
+    public var ZoneCondition: Int32 = 0
+    public var ResetWritePointerRecommend: UInt8 = 0
+    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public var ZoneSize: UInt64 = 0
+    public var WritePointerOffset: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_ZONE_GROUP {
+    public var ZoneCount: UInt32 = 0
+    public var ZoneType: Int32 = 0
+    public var ZoneSize: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct TXFS_MODIFY_RM {
+    public var Flags: UInt32 = 0
+    public var LogContainerCountMax: UInt32 = 0
+    public var LogContainerCountMin: UInt32 = 0
+    public var LogContainerCount: UInt32 = 0
+    public var LogGrowthIncrement: UInt32 = 0
+    public var LogAutoShrinkPercentage: UInt32 = 0
+    public var Reserved: UInt64 = 0
+    public var LoggingMode: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct TXFS_QUERY_RM_INFORMATION {
+    public var BytesRequired: UInt32 = 0
+    public var TailLsn: UInt64 = 0
+    public var CurrentLsn: UInt64 = 0
+    public var ArchiveTailLsn: UInt64 = 0
+    public var LogContainerSize: UInt64 = 0
+    public var HighestVirtualClock: Int64 = 0
+    public var LogContainerCount: UInt32 = 0
+    public var LogContainerCountMax: UInt32 = 0
+    public var LogContainerCountMin: UInt32 = 0
+    public var LogGrowthIncrement: UInt32 = 0
+    public var LogAutoShrinkPercentage: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var LoggingMode: UInt16 = 0
+    public var Reserved: UInt16 = 0
+    public var RmState: UInt32 = 0
+    public var LogCapacity: UInt64 = 0
+    public var LogFree: UInt64 = 0
+    public var TopsSize: UInt64 = 0
+    public var TopsUsed: UInt64 = 0
+    public var TransactionCount: UInt64 = 0
+    public var OnePCCount: UInt64 = 0
+    public var TwoPCCount: UInt64 = 0
+    public var NumberLogFileFull: UInt64 = 0
+    public var OldestTransactionAge: UInt64 = 0
+    public var RMName: GUID = GUID()
+    public var TmLogPathOffset: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+@C
+public struct USN_RECORD_V4 {
+    public var Header: USN_RECORD_COMMON_HEADER = USN_RECORD_COMMON_HEADER()
+    public var FileReferenceNumber: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
+    public var ParentFileReferenceNumber: Win32__impl_l0.FILE_ID_128 = Win32__impl_l0.FILE_ID_128()
+    public var Usn: Int64 = 0
+    public var Reason: UInt32 = 0
+    public var SourceInfo: UInt32 = 0
+    public var RemainingExtents: UInt32 = 0
+    public var NumberOfExtents: UInt16 = 0
+    public var ExtentSize: UInt16 = 0
+    public var Extents: VArray<USN_RECORD_EXTENT, $1> = VArray<USN_RECORD_EXTENT, $1>(repeat: USN_RECORD_EXTENT())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DEVICE_DSM_REPORT_ZONES_DATA {
+    public var Size: UInt32 = 0
+    public var ZoneCount: UInt32 = 0
+    public var Attributes: Int32 = 0
+    public var Reserved0: UInt32 = 0
+    public var ZoneDescriptors: VArray<STORAGE_ZONE_DESCRIPTOR, $1> = VArray<STORAGE_ZONE_DESCRIPTOR, $1>(repeat: STORAGE_ZONE_DESCRIPTOR())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct DRIVE_LAYOUT_INFORMATION_EX {
+    public var PartitionStyle: UInt32 = 0
+    public var PartitionCount: UInt32 = 0
+    public var Anonymous: DRIVE_LAYOUT_INFORMATION_EX__Anonymous_e__Union = DRIVE_LAYOUT_INFORMATION_EX__Anonymous_e__Union()
+    public var PartitionEntry: VArray<PARTITION_INFORMATION_EX, $1> = VArray<PARTITION_INFORMATION_EX, $1>(repeat: PARTITION_INFORMATION_EX())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DRIVE_LAYOUT_INFORMATION_EX__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+
+    public mut prop mbr: DRIVE_LAYOUT_INFORMATION_MBR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRIVE_LAYOUT_INFORMATION_MBR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRIVE_LAYOUT_INFORMATION_MBR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop gpt: DRIVE_LAYOUT_INFORMATION_GPT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRIVE_LAYOUT_INFORMATION_GPT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRIVE_LAYOUT_INFORMATION_GPT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_DEVICE_MANAGEMENT_STATUS {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Health: Int32 = 0
+    public var NumberOfOperationalStatus: UInt32 = 0
+    public var NumberOfAdditionalReasons: UInt32 = 0
+    public var OperationalStatus: VArray<Int32, $16> = VArray<Int32, $16>(repeat: 0)
+    public var AdditionalReasons: VArray<STORAGE_OPERATIONAL_REASON, $1> = VArray<STORAGE_OPERATIONAL_REASON, $1>(repeat: STORAGE_OPERATIONAL_REASON())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_DEVICE_TIERING_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var TotalNumberOfTiers: UInt32 = 0
+    public var NumberOfTiersReturned: UInt32 = 0
+    public var Tiers: VArray<STORAGE_TIER, $1> = VArray<STORAGE_TIER, $1>(repeat: STORAGE_TIER())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_PROTOCOL_DATA_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var ProtocolSpecificData: STORAGE_PROTOCOL_SPECIFIC_DATA = STORAGE_PROTOCOL_SPECIFIC_DATA()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var ProtocolSpecificData: STORAGE_PROTOCOL_SPECIFIC_DATA_EXT = STORAGE_PROTOCOL_SPECIFIC_DATA_EXT()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_ZONED_DEVICE_DESCRIPTOR {
+    public var Version: UInt32 = 0
+    public var Size: UInt32 = 0
+    public var DeviceType: Int32 = 0
+    public var ZoneCount: UInt32 = 0
+    public var ZoneAttributes: STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union = STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union()
+    public var ZoneGroupCount: UInt32 = 0
+    public var ZoneGroup: VArray<STORAGE_ZONE_GROUP, $1> = VArray<STORAGE_ZONE_GROUP, $1>(repeat: STORAGE_ZONE_GROUP())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union {
+    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+
+    public mut prop sequentialRequiredZone: STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialRequiredZone_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialRequiredZone_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialRequiredZone_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sequentialPreferredZone: STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialPreferredZone_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialPreferredZone_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialPreferredZone_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialRequiredZone_e__Struct {
+    public var MaxOpenZoneCount: UInt32 = 0
+    public var UnrestrictedRead: UInt8 = 0
+    public var Reserved: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct STORAGE_ZONED_DEVICE_DESCRIPTOR__ZoneAttributes_e__Union__SequentialPreferredZone_e__Struct {
+    public var OptimalOpenZoneCount: UInt32 = 0
+    public var Reserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on" && Windows_Win32_Storage_FileSystem == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct USN_RECORD_UNION {
+    public var _raw: VArray<UInt64, $10> = VArray<UInt64, $10>(repeat: 0)
+
+    public mut prop header: USN_RECORD_COMMON_HEADER {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<USN_RECORD_COMMON_HEADER>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<USN_RECORD_COMMON_HEADER>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop v2: USN_RECORD_V2 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<USN_RECORD_V2>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<USN_RECORD_V2>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop v3: USN_RECORD_V3 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<USN_RECORD_V3>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<USN_RECORD_V3>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop v4: USN_RECORD_V4 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<USN_RECORD_V4>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<USN_RECORD_V4>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+@C
+public struct IO_IRP_EXT_TRACK_OFFSET_HEADER {
+    public var Validation: UInt16 = 0
+    public var Flags: UInt16 = 0
+    public var TrackedOffsetCallback: PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK = CFunc<(CPointer<IO_IRP_EXT_TRACK_OFFSET_HEADER>, CPointer<IO_IRP_EXT_TRACK_OFFSET_HEADER>, Int64) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_System_Ioctl == "on"]
+public type PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK = CFunc<(CPointer<IO_IRP_EXT_TRACK_OFFSET_HEADER>, CPointer<IO_IRP_EXT_TRACK_OFFSET_HEADER>, Int64) -> Unit>
 
 @When[Windows_Win32_System_Ioctl == "on"]
 public let IOCTL_STORAGE_BASE: UInt32 = 45u32

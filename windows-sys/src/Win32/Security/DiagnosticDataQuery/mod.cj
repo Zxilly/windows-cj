@@ -2,6 +2,8 @@
 package windows_sys.Win32.Security.DiagnosticDataQuery
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
@@ -103,29 +105,6 @@ public struct DIAGNOSTIC_DATA_SEARCH_CRITERIA {
 
 @When[Windows_Win32_Security_DiagnosticDataQuery == "on"]
 @C
-public struct DIAGNOSTIC_REPORT_DATA {
-    public var signature: DIAGNOSTIC_REPORT_SIGNATURE = DIAGNOSTIC_REPORT_SIGNATURE()
-    public var bucketId: GUID = GUID()
-    public var reportId: GUID = GUID()
-    public var creationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var sizeInBytes: UInt64 = 0
-    public var cabId: CPointer<UInt16> = CPointer<UInt16>()
-    public var reportStatus: UInt32 = 0
-    public var reportIntegratorId: GUID = GUID()
-    public var fileNames: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public var fileCount: UInt32 = 0
-    public var friendlyEventName: CPointer<UInt16> = CPointer<UInt16>()
-    public var applicationName: CPointer<UInt16> = CPointer<UInt16>()
-    public var applicationPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var description: CPointer<UInt16> = CPointer<UInt16>()
-    public var bucketIdString: CPointer<UInt16> = CPointer<UInt16>()
-    public var legacyBucketId: UInt64 = 0
-    public var reportKey: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_DiagnosticDataQuery == "on"]
-@C
 public struct DIAGNOSTIC_REPORT_PARAMETER {
     public var name: VArray<UInt16, $129> = VArray<UInt16, $129>(repeat: 0)
     public var value: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
@@ -141,7 +120,6 @@ public struct DIAGNOSTIC_REPORT_SIGNATURE {
 }
 
 @When[Windows_Win32_Security_DiagnosticDataQuery == "on"]
-@C
 public struct DdqAccessLevel {
     public var value: Int32 = 0
 
@@ -186,18 +164,41 @@ public type HDIAGNOSTIC_RECORD = CPointer<Unit>
 @When[Windows_Win32_Security_DiagnosticDataQuery == "on"]
 public type HDIAGNOSTIC_REPORT = CPointer<Unit>
 
+@When[Windows_Win32_Security_DiagnosticDataQuery == "on"]
+@C
+public struct DIAGNOSTIC_REPORT_DATA {
+    public var signature_: DIAGNOSTIC_REPORT_SIGNATURE = DIAGNOSTIC_REPORT_SIGNATURE()
+    public var bucketId: GUID = GUID()
+    public var reportId: GUID = GUID()
+    public var creationTime: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var sizeInBytes: UInt64 = 0
+    public var cabId: CPointer<UInt16> = CPointer<UInt16>()
+    public var reportStatus: UInt32 = 0
+    public var reportIntegratorId: GUID = GUID()
+    public var fileNames: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+    public var fileCount: UInt32 = 0
+    public var friendlyEventName: CPointer<UInt16> = CPointer<UInt16>()
+    public var applicationName: CPointer<UInt16> = CPointer<UInt16>()
+    public var applicationPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var description: CPointer<UInt16> = CPointer<UInt16>()
+    public var bucketIdString: CPointer<UInt16> = CPointer<UInt16>()
+    public var legacyBucketId: UInt64 = 0
+    public var reportKey: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
 @When[DIAGNOSTICDATAQUERY == "on"]
 foreign {
     func DdqCancelDiagnosticRecordOperation(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION): Int32
     func DdqCloseSession(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION): Int32
-    func DdqCreateSession(accessLevel: DdqAccessLevel, hSession: CPointer<HDIAGNOSTIC_DATA_QUERY_SESSION>): Int32
+    func DdqCreateSession(accessLevel: Int32, hSession: CPointer<HDIAGNOSTIC_DATA_QUERY_SESSION>): Int32
     func DdqExtractDiagnosticReport(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType: UInt32, reportKey: CPointer<UInt16>, destinationPath: CPointer<UInt16>): Int32
     func DdqFreeDiagnosticRecordLocaleTags(hTagDescription: HDIAGNOSTIC_EVENT_TAG_DESCRIPTION): Int32
     func DdqFreeDiagnosticRecordPage(hRecord: HDIAGNOSTIC_RECORD): Int32
     func DdqFreeDiagnosticRecordProducerCategories(hCategoryDescription: HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION): Int32
     func DdqFreeDiagnosticRecordProducers(hProducerDescription: HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION): Int32
     func DdqFreeDiagnosticReport(hReport: HDIAGNOSTIC_REPORT): Int32
-    func DdqGetDiagnosticDataAccessLevelAllowed(accessLevel: CPointer<DdqAccessLevel>): Int32
+    func DdqGetDiagnosticDataAccessLevelAllowed(accessLevel: CPointer<Int32>): Int32
     func DdqGetDiagnosticRecordAtIndex(hRecord: HDIAGNOSTIC_RECORD, index: UInt32, record: CPointer<DIAGNOSTIC_DATA_RECORD>): Int32
     // param-hint: producerNames len=param[2]
     func DdqGetDiagnosticRecordBinaryDistribution(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames: CPointer<CPointer<UInt16>>, producerNameCount: UInt32, topNBinaries: UInt32, binaryStats: CPointer<CPointer<DIAGNOSTIC_DATA_EVENT_BINARY_STATS>>, statCount: CPointer<UInt32>): Int32
@@ -222,7 +223,7 @@ foreign {
     func DdqGetDiagnosticReportAtIndex(hReport: HDIAGNOSTIC_REPORT, index: UInt32, report: CPointer<DIAGNOSTIC_REPORT_DATA>): Int32
     func DdqGetDiagnosticReportCount(hReport: HDIAGNOSTIC_REPORT, reportCount: CPointer<UInt32>): Int32
     func DdqGetDiagnosticReportStoreReportCount(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType: UInt32, reportCount: CPointer<UInt32>): Int32
-    func DdqGetSessionAccessLevel(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, accessLevel: CPointer<DdqAccessLevel>): Int32
+    func DdqGetSessionAccessLevel(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, accessLevel: CPointer<Int32>): Int32
     func DdqGetTranscriptConfiguration(hSession: HDIAGNOSTIC_DATA_QUERY_SESSION, currentConfig: CPointer<DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION>): Int32
     // param-hint: providerId optional
     // param-hint: eventId optional

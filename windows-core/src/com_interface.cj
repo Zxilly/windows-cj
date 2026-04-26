@@ -1,15 +1,32 @@
 package windows_core
 
-// Thin compatibility re-exports for the split interface package.
+// Intentional public compatibility surface for COM interface APIs that now live
+// in windows_interface. Keep these re-exports so existing windows_core users do
+// not need to change imports while the implementation remains split.
 public import windows_interface.{
     ComInterface,
     InterfaceDescriptor,
     InterfaceWrapperBase,
     IUnknownVtbl,
     IInspectableVtbl,
+    IAgileObjectVtbl,
+    IAgileReferenceVtbl,
+    IMarshalVtbl,
+    IWeakReferenceVtbl,
+    IWeakReferenceSourceVtbl,
     IUnknown,
     IInspectable,
+    IAgileObject,
+    IAgileReference,
+    IMarshal,
+    IWeakReference,
+    IWeakReferenceSource,
     IID_IUNKNOWN,
+    IID_IAGILEOBJECT,
+    IID_IAGILEREFERENCE,
+    IID_IMARSHAL,
+    IID_IWEAKREFERENCE,
+    IID_IWEAKREFERENCESOURCE,
     queryInterfaceRaw,
     queryInterfaceAs
 }

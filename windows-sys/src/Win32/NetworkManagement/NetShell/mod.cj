@@ -2,36 +2,14 @@
 package windows_sys.Win32.NetworkManagement.NetShell
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt64, unionWriteUInt64}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
 @When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
-public struct CMD_ENTRY {
-    public var pwszCmdToken: CPointer<UInt16> = CPointer<UInt16>()
-    public var pfnCmdHandler: PFN_HANDLE_CMD = { _, _, _, _, _, _, _ => 0 }
-    public var dwShortCmdHelpToken: UInt32 = 0
-    public var dwCmdHlpToken: UInt32 = 0
-    public var dwFlags: UInt32 = 0
-    public var pOsVersionCheck: PNS_OSVERSIONCHECK = { _, _, _, _, _, _, _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
-public struct CMD_GROUP_ENTRY {
-    public var pwszCmdGroupToken: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwShortCmdHelpToken: UInt32 = 0
-    public var ulCmdGroupSize: UInt32 = 0
-    public var dwFlags: UInt32 = 0
-    public var pCmdGroup: CPointer<CMD_ENTRY> = CPointer<CMD_ENTRY>()
-    public var pOsVersionCheck: PNS_OSVERSIONCHECK = { _, _, _, _, _, _, _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
 public struct NS_CMD_FLAGS {
     public var value: Int32 = 0
 
@@ -71,81 +49,6 @@ public let NS_CMD_FLAGS_CMD_FLAG_LIMIT_MASK: NS_CMD_FLAGS = NS_CMD_FLAGS(65535)
 public let NS_CMD_FLAGS_CMD_FLAG_PRIORITY: NS_CMD_FLAGS = NS_CMD_FLAGS(-2147483648)
 
 @When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
-public struct NS_CONTEXT_ATTRIBUTES {
-    public var Anonymous: NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union = NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union()
-    public var pwszContext: CPointer<UInt16> = CPointer<UInt16>()
-    public var guidHelper: GUID = GUID()
-    public var dwFlags: UInt32 = 0
-    public var ulPriority: UInt32 = 0
-    public var ulNumTopCmds: UInt32 = 0
-    public var pTopCmds: CPointer<CMD_ENTRY> = CPointer<CMD_ENTRY>()
-    public var ulNumGroups: UInt32 = 0
-    public var pCmdGroups: CPointer<CMD_GROUP_ENTRY> = CPointer<CMD_GROUP_ENTRY>()
-    public var pfnCommitFn: PNS_CONTEXT_COMMIT_FN = { _ => 0 }
-    public var pfnDumpFn: PNS_CONTEXT_DUMP_FN = { _, _, _, _ => 0 }
-    public var pfnConnectFn: PNS_CONTEXT_CONNECT_FN = { _ => 0 }
-    public var pReserved: CPointer<Unit> = CPointer<Unit>()
-    public var pfnOsVersionCheck: PNS_OSVERSIONCHECK = { _, _, _, _, _, _, _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_NetShell == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func anonymous(): NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func _ullAlign(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set__ullAlign(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
-public struct NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
-    public var dwVersion: UInt32 = 0
-    public var dwReserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
 public struct NS_EVENTS {
     public var value: Int32 = 0
 
@@ -179,71 +82,6 @@ public let NS_EVENTS_NS_EVENT_FROM_N: NS_EVENTS = NS_EVENTS(4)
 public let NS_EVENTS_NS_EVENT_FROM_START: NS_EVENTS = NS_EVENTS(8)
 
 @When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
-public struct NS_HELPER_ATTRIBUTES {
-    public var Anonymous: NS_HELPER_ATTRIBUTES__Anonymous_e__Union = NS_HELPER_ATTRIBUTES__Anonymous_e__Union()
-    public var guidHelper: GUID = GUID()
-    public var pfnStart: PNS_HELPER_START_FN = { _, _ => 0 }
-    public var pfnStop: PNS_HELPER_STOP_FN = { _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_NetShell == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct NS_HELPER_ATTRIBUTES__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func anonymous(): NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func _ullAlign(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set__ullAlign(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
-public struct NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
-    public var dwVersion: UInt32 = 0
-    public var dwReserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
 public struct NS_MODE_CHANGE {
     public var value: Int32 = 0
 
@@ -277,7 +115,6 @@ public let NS_MODE_CHANGE_NETSH_COMMIT_STATE: NS_MODE_CHANGE = NS_MODE_CHANGE(3)
 public let NS_MODE_CHANGE_NETSH_SAVE: NS_MODE_CHANGE = NS_MODE_CHANGE(4)
 
 @When[Windows_Win32_NetworkManagement_NetShell == "on"]
-@C
 public struct NS_REQS {
     public var value: Int32 = 0
 
@@ -351,6 +188,174 @@ public struct TAG_TYPE {
 public struct TOKEN_VALUE {
     public var pwszToken: CPointer<UInt16> = CPointer<UInt16>()
     public var dwValue: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on"]
+@C
+public struct CMD_ENTRY {
+    public var pwszCmdToken: CPointer<UInt16> = CPointer<UInt16>()
+    public var pfnCmdHandler: PFN_HANDLE_CMD = CFunc<(CPointer<UInt16>, CPointer<CPointer<UInt16>>, UInt32, UInt32, UInt32, CPointer<Unit>, CPointer<Int32>) -> UInt32>(CPointer<Unit>())
+    public var dwShortCmdHelpToken: UInt32 = 0
+    public var dwCmdHlpToken: UInt32 = 0
+    public var dwFlags: UInt32 = 0
+    public var pOsVersionCheck: PNS_OSVERSIONCHECK = CFunc<(UInt32, UInt32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on"]
+@C
+public struct CMD_GROUP_ENTRY {
+    public var pwszCmdGroupToken: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwShortCmdHelpToken: UInt32 = 0
+    public var ulCmdGroupSize: UInt32 = 0
+    public var dwFlags: UInt32 = 0
+    public var pCmdGroup: CPointer<CMD_ENTRY> = CPointer<CMD_ENTRY>()
+    public var pOsVersionCheck: PNS_OSVERSIONCHECK = CFunc<(UInt32, UInt32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on"]
+@C
+public struct NS_CONTEXT_ATTRIBUTES {
+    public var Anonymous: NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union = NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union()
+    public var pwszContext: CPointer<UInt16> = CPointer<UInt16>()
+    public var guidHelper: GUID = GUID()
+    public var dwFlags: UInt32 = 0
+    public var ulPriority: UInt32 = 0
+    public var ulNumTopCmds: UInt32 = 0
+    public var pTopCmds: CPointer<CMD_ENTRY> = CPointer<CMD_ENTRY>()
+    public var ulNumGroups: UInt32 = 0
+    public var pCmdGroups: CPointer<CMD_GROUP_ENTRY> = CPointer<CMD_GROUP_ENTRY>()
+    public var pfnCommitFn: PNS_CONTEXT_COMMIT_FN = CFunc<(UInt32) -> UInt32>(CPointer<Unit>())
+    public var pfnDumpFn: PNS_CONTEXT_DUMP_FN = CFunc<(CPointer<UInt16>, CPointer<CPointer<UInt16>>, UInt32, CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var pfnConnectFn: PNS_CONTEXT_CONNECT_FN = CFunc<(CPointer<UInt16>) -> UInt32>(CPointer<Unit>())
+    public var pReserved: CPointer<Unit> = CPointer<Unit>()
+    public var pfnOsVersionCheck: PNS_OSVERSIONCHECK = CFunc<(UInt32, UInt32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop anonymous: NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop _ullAlign: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on"]
+@C
+public struct NS_CONTEXT_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
+    public var dwVersion: UInt32 = 0
+    public var dwReserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on"]
+@C
+public struct NS_HELPER_ATTRIBUTES {
+    public var Anonymous: NS_HELPER_ATTRIBUTES__Anonymous_e__Union = NS_HELPER_ATTRIBUTES__Anonymous_e__Union()
+    public var guidHelper: GUID = GUID()
+    public var pfnStart: PNS_HELPER_START_FN = CFunc<(CPointer<GUID>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var pfnStop: PNS_HELPER_STOP_FN = CFunc<(UInt32) -> UInt32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct NS_HELPER_ATTRIBUTES__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop anonymous: NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop _ullAlign: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_NetShell == "on"]
+@C
+public struct NS_HELPER_ATTRIBUTES__Anonymous_e__Union__Anonymous_e__Struct {
+    public var dwVersion: UInt32 = 0
+    public var dwReserved: UInt32 = 0
     public init() {}
 }
 

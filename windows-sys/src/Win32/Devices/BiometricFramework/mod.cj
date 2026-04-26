@@ -2,408 +2,23 @@
 package windows_sys.Win32.Devices.BiometricFramework
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt32, unionWriteUInt32}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
 
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_ACCEPT_PRIVATE_SENSOR_TYPE_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_ACCEPT_SAMPLE_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_BIR>, UIntNative, UInt8, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_CHECK_FOR_DUPLICATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<Win32_Foundation.BOOLEAN>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_COMMIT_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<UInt8>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_CONTROL_UNIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_CONTROL_UNIT_PRIVILEGED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_CREATE_ENROLLMENT_AUTHENTICATED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_CREATE_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_CREATE_KEY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_DISCARD_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_EXPORT_ENGINE_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<CPointer<WINBIO_BIR>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_GET_ENROLLMENT_HASH_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_GET_ENROLLMENT_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_IDENTIFY_ALL_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<CPointer<WINBIO_PRESENCE>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_IDENTIFY_FEATURE_SET_AUTHENTICATED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_IDENTIFY_FEATURE_SET_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_IDENTIFY_FEATURE_SET_SECURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_QUERY_CALIBRATION_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<Win32_Foundation.BOOLEAN>, CPointer<UInt8>, CPointer<UIntNative>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_QUERY_EXTENDED_ENROLLMENT_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_ENGINE_INFO>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_QUERY_HASH_ALGORITHMS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<UIntNative>, CPointer<CPointer<UInt8>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_QUERY_INDEX_VECTOR_SIZE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_QUERY_PREFERRED_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_REGISTERED_FORMAT>, CPointer<GUID>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_QUERY_SAMPLE_HINT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_REFRESH_CACHE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_SELECT_CALIBRATION_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UIntNative, CPointer<GUID>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_SET_ACCOUNT_POLICY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_ACCOUNT_POLICY>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_SET_ENROLLMENT_PARAMETERS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_ENROLLMENT_PARAMETERS>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_SET_ENROLLMENT_SELECTOR_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt64) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_SET_HASH_ALGORITHM_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<UInt8>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_UPDATE_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_ENGINE_VERIFY_FEATURE_SET_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<Win32_Foundation.BOOLEAN>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_ALLOCATE_MEMORY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<CPointer<Unit>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_FREE_MEMORY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<Unit>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_GET_PROPERTY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, UInt32, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<CPointer<Unit>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_LOCK_AND_VALIDATE_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID, CPointer<CPointer<Unit>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_RELEASE_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_SET_UNIT_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_UNIT_STATUS>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_CACHE_CLEAR_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_BEGIN_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_END_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_NEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_BEGIN_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_END_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_NEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_DECRYPT_SAMPLE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_QUERY_AUTHORIZED_ENROLLMENTS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UIntNative>, CPointer<CPointer<WINBIO_IDENTITY>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_2_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_3_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_ACCEPT_CALIBRATION_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_ASYNC_IMPORT_RAW_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_ASYNC_IMPORT_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID, CPointer<UInt8>, UIntNative, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_CANCEL_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_CONNECT_SECURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_SECURE_CONNECTION_PARAMS>, CPointer<CPointer<WINBIO_SECURE_CONNECTION_DATA>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_CONTROL_UNIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_CONTROL_UNIT_PRIVILEGED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_EXPORT_SENSOR_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<WINBIO_BIR>>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_FINISH_CAPTURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_FINISH_NOTIFY_WAKE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_GET_INDICATOR_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_PUSH_DATA_TO_ENGINE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, UInt8, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_QUERY_CALIBRATION_FORMATS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UIntNative, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_SENSOR_INFO>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_QUERY_PRIVATE_SENSOR_TYPE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_QUERY_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_RESET_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_SET_CALIBRATION_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_SET_INDICATOR_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_SET_MODE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_START_CAPTURE_EX_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<UInt8>, UIntNative, UInt8, CPointer<CPointer<Win32_System_IO.OVERLAPPED>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_START_CAPTURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<CPointer<Win32_System_IO.OVERLAPPED>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_SENSOR_START_NOTIFY_WAKE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<Win32_System_IO.OVERLAPPED>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_ADD_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_CLOSE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_CONTROL_UNIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_CONTROL_UNIT_PRIVILEGED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_CREATE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UInt32, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>, UIntNative, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_DELETE_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_ERASE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_FIRST_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_GET_CURRENT_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_GET_DATABASE_SIZE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_GET_DATA_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<WINBIO_VERSION>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_GET_RECORD_COUNT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_NEXT_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_NOTIFY_DATABASE_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, Win32_Foundation.BOOLEAN) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_OPEN_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_QUERY_BY_CONTENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<UInt32>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_QUERY_BY_SUBJECT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_STORAGE_INFO>, UIntNative) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt64>, CPointer<UInt64>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_RESERVED_2_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_UPDATE_RECORD_BEGIN_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PIBIO_STORAGE_UPDATE_RECORD_COMMIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PWINBIO_ASYNC_COMPLETION_CALLBACK = CFunc<(CPointer<WINBIO_ASYNC_RESULT>) -> Unit>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PWINBIO_CAPTURE_CALLBACK = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<WINBIO_BIR>, UIntNative, UInt32) -> Unit>
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
 public type PWINBIO_ENROLL_CAPTURE_CALLBACK = CFunc<(CPointer<Unit>, Int32, UInt32) -> Unit>
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PWINBIO_EVENT_CALLBACK = CFunc<(CPointer<Unit>, Int32, CPointer<WINBIO_EVENT>) -> Unit>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PWINBIO_IDENTIFY_CALLBACK = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<WINBIO_IDENTITY>, UInt8, UInt32) -> Unit>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
 public type PWINBIO_LOCATE_SENSOR_CALLBACK = CFunc<(CPointer<Unit>, Int32, UInt32) -> Unit>
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PWINBIO_QUERY_ENGINE_INTERFACE_FN = CFunc<(CPointer<CPointer<WINBIO_ENGINE_INTERFACE>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PWINBIO_QUERY_SENSOR_INTERFACE_FN = CFunc<(CPointer<CPointer<WINBIO_SENSOR_INTERFACE>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PWINBIO_QUERY_STORAGE_INTERFACE_FN = CFunc<(CPointer<CPointer<WINBIO_STORAGE_INTERFACE>>) -> Int32>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-public type PWINBIO_VERIFY_CALLBACK = CFunc<(CPointer<Unit>, Int32, UInt32, Win32_Foundation.BOOLEAN, UInt32) -> Unit>
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ACCOUNT_POLICY {
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var AntiSpoofBehavior: WINBIO_ANTI_SPOOF_POLICY_ACTION = WINBIO_ANTI_SPOOF_POLICY_ACTION()
-    public init() {}
-}
+public type PWINBIO_VERIFY_CALLBACK = CFunc<(CPointer<Unit>, Int32, UInt32, UInt8, UInt32) -> Unit>
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
 @C
@@ -414,15 +29,6 @@ public struct WINBIO_ADAPTER_INTERFACE_VERSION {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ANTI_SPOOF_POLICY {
-    public var Action: WINBIO_ANTI_SPOOF_POLICY_ACTION = WINBIO_ANTI_SPOOF_POLICY_ACTION()
-    public var Source: WINBIO_POLICY_SOURCE = WINBIO_POLICY_SOURCE()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_ANTI_SPOOF_POLICY_ACTION {
     public var value: Int32 = 0
 
@@ -450,7 +56,6 @@ public let WINBIO_ANTI_SPOOF_POLICY_ACTION_WINBIO_ANTI_SPOOF_ENABLE: WINBIO_ANTI
 public let WINBIO_ANTI_SPOOF_POLICY_ACTION_WINBIO_ANTI_SPOOF_REMOVE: WINBIO_ANTI_SPOOF_POLICY_ACTION = WINBIO_ANTI_SPOOF_POLICY_ACTION(2)
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_ASYNC_NOTIFICATION_METHOD {
     public var value: Int32 = 0
 
@@ -482,674 +87,6 @@ public let WINBIO_ASYNC_NOTIFICATION_METHOD_WINBIO_ASYNC_NOTIFY_MAXIMUM_VALUE: W
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
 @C
-public struct WINBIO_ASYNC_RESULT {
-    public var SessionHandle: UInt32 = 0
-    public var Operation: UInt32 = 0
-    public var SequenceNumber: UInt64 = 0
-    public var TimeStamp: Int64 = 0
-    public var ApiStatus: Int32 = 0
-    public var UnitId: UInt32 = 0
-    public var UserData: CPointer<Unit> = CPointer<Unit>()
-    public var Parameters: WINBIO_ASYNC_RESULT__Parameters_e__Union = WINBIO_ASYNC_RESULT__Parameters_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
-    public var _raw: VArray<UInt8, $304> = VArray<UInt8, $304>(repeat: 0)
-
-    public func verify(): WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_verify(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func identify(): WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_identify(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func enrollBegin(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enrollBegin(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func enrollCapture(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enrollCapture(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func enrollCommit(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enrollCommit(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func enumEnrollments(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enumEnrollments(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func captureSample(): WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_captureSample(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deleteTemplate(): WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deleteTemplate(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func getProperty(): WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_getProperty(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func setProperty(): WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_setProperty(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func getEvent(): WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_getEvent(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func controlUnit(): WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_controlUnit(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func enumServiceProviders(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enumServiceProviders(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func enumBiometricUnits(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enumBiometricUnits(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func enumDatabases(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enumDatabases(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func verifyAndReleaseTicket(): WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_verifyAndReleaseTicket(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func identifyAndReleaseTicket(): WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_identifyAndReleaseTicket(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func enrollSelect(): WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_enrollSelect(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func monitorPresence(): WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_monitorPresence(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func getProtectionPolicy(): WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_getProtectionPolicy(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func notifyUnitStatusChange(): WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_notifyUnitStatusChange(val: WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct {
-    public var Match: Win32_Foundation.BOOLEAN = 0
-    public var RejectDetail: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct {
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var SubFactor: UInt8 = 0
-    public var RejectDetail: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct {
-    public var SubFactor: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct {
-    public var RejectDetail: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct {
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var IsNewTemplate: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct {
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var SubFactorCount: UIntNative = 0
-    public var SubFactorArray: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct {
-    public var Sample: CPointer<WINBIO_BIR> = CPointer<WINBIO_BIR>()
-    public var SampleSize: UIntNative = 0
-    public var RejectDetail: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct {
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var SubFactor: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct {
-    public var PropertyType: UInt32 = 0
-    public var PropertyId: UInt32 = 0
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var SubFactor: UInt8 = 0
-    public var PropertyBufferSize: UIntNative = 0
-    public var PropertyBuffer: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct {
-    public var PropertyType: UInt32 = 0
-    public var PropertyId: UInt32 = 0
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var SubFactor: UInt8 = 0
-    public var PropertyBufferSize: UIntNative = 0
-    public var PropertyBuffer: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct {
-    public var Event: WINBIO_EVENT = WINBIO_EVENT()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct {
-    public var Component: WINBIO_COMPONENT = WINBIO_COMPONENT()
-    public var ControlCode: UInt32 = 0
-    public var OperationStatus: UInt32 = 0
-    public var SendBuffer: CPointer<UInt8> = CPointer<UInt8>()
-    public var SendBufferSize: UIntNative = 0
-    public var ReceiveBuffer: CPointer<UInt8> = CPointer<UInt8>()
-    public var ReceiveBufferSize: UIntNative = 0
-    public var ReceiveDataSize: UIntNative = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct {
-    public var BspCount: UIntNative = 0
-    public var BspSchemaArray: CPointer<WINBIO_BSP_SCHEMA> = CPointer<WINBIO_BSP_SCHEMA>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct {
-    public var UnitCount: UIntNative = 0
-    public var UnitSchemaArray: CPointer<WINBIO_UNIT_SCHEMA> = CPointer<WINBIO_UNIT_SCHEMA>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct {
-    public var StorageCount: UIntNative = 0
-    public var StorageSchemaArray: CPointer<WINBIO_STORAGE_SCHEMA> = CPointer<WINBIO_STORAGE_SCHEMA>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct {
-    public var Match: Win32_Foundation.BOOLEAN = 0
-    public var RejectDetail: UInt32 = 0
-    public var Ticket: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct {
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var SubFactor: UInt8 = 0
-    public var RejectDetail: UInt32 = 0
-    public var Ticket: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct {
-    public var SelectorValue: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct {
-    public var ChangeType: UInt32 = 0
-    public var PresenceCount: UIntNative = 0
-    public var PresenceArray: CPointer<WINBIO_PRESENCE> = CPointer<WINBIO_PRESENCE>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct {
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var Policy: WINBIO_PROTECTION_POLICY = WINBIO_PROTECTION_POLICY()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct {
-    public var ExtendedStatus: WINBIO_EXTENDED_UNIT_STATUS = WINBIO_EXTENDED_UNIT_STATUS()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_BDB_ANSI_381_HEADER {
-    public var RecordLength: UInt64 = 0
-    public var FormatIdentifier: UInt32 = 0
-    public var VersionNumber: UInt32 = 0
-    public var ProductId: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
-    public var CaptureDeviceId: UInt16 = 0
-    public var ImageAcquisitionLevel: UInt16 = 0
-    public var HorizontalScanResolution: UInt16 = 0
-    public var VerticalScanResolution: UInt16 = 0
-    public var HorizontalImageResolution: UInt16 = 0
-    public var VerticalImageResolution: UInt16 = 0
-    public var ElementCount: UInt8 = 0
-    public var ScaleUnits: UInt8 = 0
-    public var PixelDepth: UInt8 = 0
-    public var ImageCompressionAlg: UInt8 = 0
-    public var Reserved: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_BDB_ANSI_381_RECORD {
     public var BlockLength: UInt32 = 0
     public var HorizontalLineLength: UInt16 = 0
@@ -1165,45 +102,9 @@ public struct WINBIO_BDB_ANSI_381_RECORD {
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
 @C
-public struct WINBIO_BIR {
-    public var HeaderBlock: WINBIO_BIR_DATA = WINBIO_BIR_DATA()
-    public var StandardDataBlock: WINBIO_BIR_DATA = WINBIO_BIR_DATA()
-    public var VendorDataBlock: WINBIO_BIR_DATA = WINBIO_BIR_DATA()
-    public var SignatureBlock: WINBIO_BIR_DATA = WINBIO_BIR_DATA()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_BIR_DATA {
     public var Size: UInt32 = 0
     public var Offset: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_BIR_HEADER {
-    public var ValidFields: UInt16 = 0
-    public var HeaderVersion: UInt8 = 0
-    public var PatronHeaderVersion: UInt8 = 0
-    public var DataFlags: UInt8 = 0
-    public var Type: UInt32 = 0
-    public var Subtype: UInt8 = 0
-    public var Purpose: UInt8 = 0
-    public var DataQuality: Int8 = 0
-    public var CreationDate: Int64 = 0
-    public var ValidityPeriod: WINBIO_BIR_HEADER__ValidityPeriod_e__Struct = WINBIO_BIR_HEADER__ValidityPeriod_e__Struct()
-    public var BiometricDataFormat: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
-    public var ProductId: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_BIR_HEADER__ValidityPeriod_e__Struct {
-    public var BeginDate: Int64 = 0
-    public var EndDate: Int64 = 0
     public init() {}
 }
 
@@ -1216,49 +117,6 @@ public struct WINBIO_BLANK_PAYLOAD {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_BSP_SCHEMA {
-    public var BiometricFactor: UInt32 = 0
-    public var BspId: GUID = GUID()
-    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var Vendor: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var Version: WINBIO_VERSION = WINBIO_VERSION()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_CALIBRATION_INFO {
-    public var PayloadSize: UInt32 = 0
-    public var WinBioHresult: Int32 = 0
-    public var CalibrationData: WINBIO_DATA = WINBIO_DATA()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_CAPTURE_DATA {
-    public var PayloadSize: UInt32 = 0
-    public var WinBioHresult: Int32 = 0
-    public var SensorStatus: UInt32 = 0
-    public var RejectDetail: UInt32 = 0
-    public var CaptureData: WINBIO_DATA = WINBIO_DATA()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_CAPTURE_PARAMETERS {
-    public var PayloadSize: UInt32 = 0
-    public var Purpose: UInt8 = 0
-    public var Format: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
-    public var VendorFormat: GUID = GUID()
-    public var Flags: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_COMPONENT {
     public var value: UInt32 = 0
 
@@ -1294,7 +152,6 @@ public struct WINBIO_CONNECTED_SENSOR {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_CREDENTIAL_FORMAT {
     public var value: Int32 = 0
 
@@ -1322,7 +179,6 @@ public let WINBIO_CREDENTIAL_FORMAT_WINBIO_PASSWORD_PACKED: WINBIO_CREDENTIAL_FO
 public let WINBIO_CREDENTIAL_FORMAT_WINBIO_PASSWORD_PROTECTED: WINBIO_CREDENTIAL_FORMAT = WINBIO_CREDENTIAL_FORMAT(3)
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_CREDENTIAL_STATE {
     public var value: Int32 = 0
 
@@ -1347,7 +203,6 @@ public let WINBIO_CREDENTIAL_STATE_WINBIO_CREDENTIAL_NOT_SET: WINBIO_CREDENTIAL_
 public let WINBIO_CREDENTIAL_STATE_WINBIO_CREDENTIAL_SET: WINBIO_CREDENTIAL_STATE = WINBIO_CREDENTIAL_STATE(2)
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_CREDENTIAL_TYPE {
     public var value: Int32 = 0
 
@@ -1390,70 +245,6 @@ public struct WINBIO_DIAGNOSTICS {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ENCRYPTED_CAPTURE_PARAMS {
-    public var PayloadSize: UInt32 = 0
-    public var Purpose: UInt8 = 0
-    public var Format: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
-    public var VendorFormat: GUID = GUID()
-    public var Flags: UInt8 = 0
-    public var NonceSize: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_ENGINE_INTERFACE {
-    public var Version: WINBIO_ADAPTER_INTERFACE_VERSION = WINBIO_ADAPTER_INTERFACE_VERSION()
-    public var Type: UInt32 = 0
-    public var Size: UIntNative = 0
-    public var AdapterId: GUID = GUID()
-    public var Attach: PIBIO_ENGINE_ATTACH_FN = { _ => 0 }
-    public var Detach: PIBIO_ENGINE_DETACH_FN = { _ => 0 }
-    public var ClearContext: PIBIO_ENGINE_CLEAR_CONTEXT_FN = { _ => 0 }
-    public var QueryPreferredFormat: PIBIO_ENGINE_QUERY_PREFERRED_FORMAT_FN = { _, _, _ => 0 }
-    public var QueryIndexVectorSize: PIBIO_ENGINE_QUERY_INDEX_VECTOR_SIZE_FN = { _, _ => 0 }
-    public var QueryHashAlgorithms: PIBIO_ENGINE_QUERY_HASH_ALGORITHMS_FN = { _, _, _, _ => 0 }
-    public var SetHashAlgorithm: PIBIO_ENGINE_SET_HASH_ALGORITHM_FN = { _, _, _ => 0 }
-    public var QuerySampleHint: PIBIO_ENGINE_QUERY_SAMPLE_HINT_FN = { _, _ => 0 }
-    public var AcceptSampleData: PIBIO_ENGINE_ACCEPT_SAMPLE_DATA_FN = { _, _, _, _, _ => 0 }
-    public var ExportEngineData: PIBIO_ENGINE_EXPORT_ENGINE_DATA_FN = { _, _, _, _ => 0 }
-    public var VerifyFeatureSet: PIBIO_ENGINE_VERIFY_FEATURE_SET_FN = { _, _, _, _, _, _, _, _, _ => 0 }
-    public var IdentifyFeatureSet: PIBIO_ENGINE_IDENTIFY_FEATURE_SET_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public var CreateEnrollment: PIBIO_ENGINE_CREATE_ENROLLMENT_FN = { _ => 0 }
-    public var UpdateEnrollment: PIBIO_ENGINE_UPDATE_ENROLLMENT_FN = { _, _ => 0 }
-    public var GetEnrollmentStatus: PIBIO_ENGINE_GET_ENROLLMENT_STATUS_FN = { _, _ => 0 }
-    public var GetEnrollmentHash: PIBIO_ENGINE_GET_ENROLLMENT_HASH_FN = { _, _, _ => 0 }
-    public var CheckForDuplicate: PIBIO_ENGINE_CHECK_FOR_DUPLICATE_FN = { _, _, _, _ => 0 }
-    public var CommitEnrollment: PIBIO_ENGINE_COMMIT_ENROLLMENT_FN = { _, _, _, _, _ => 0 }
-    public var DiscardEnrollment: PIBIO_ENGINE_DISCARD_ENROLLMENT_FN = { _ => 0 }
-    public var ControlUnit: PIBIO_ENGINE_CONTROL_UNIT_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public var ControlUnitPrivileged: PIBIO_ENGINE_CONTROL_UNIT_PRIVILEGED_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public var NotifyPowerChange: PIBIO_ENGINE_NOTIFY_POWER_CHANGE_FN = { _, _ => 0 }
-    public var Reserved_1: PIBIO_ENGINE_RESERVED_1_FN = { _, _ => 0 }
-    public var PipelineInit: PIBIO_ENGINE_PIPELINE_INIT_FN = { _ => 0 }
-    public var PipelineCleanup: PIBIO_ENGINE_PIPELINE_CLEANUP_FN = { _ => 0 }
-    public var Activate: PIBIO_ENGINE_ACTIVATE_FN = { _ => 0 }
-    public var Deactivate: PIBIO_ENGINE_DEACTIVATE_FN = { _ => 0 }
-    public var QueryExtendedInfo: PIBIO_ENGINE_QUERY_EXTENDED_INFO_FN = { _, _, _ => 0 }
-    public var IdentifyAll: PIBIO_ENGINE_IDENTIFY_ALL_FN = { _, _, _ => 0 }
-    public var SetEnrollmentSelector: PIBIO_ENGINE_SET_ENROLLMENT_SELECTOR_FN = { _, _ => 0 }
-    public var SetEnrollmentParameters: PIBIO_ENGINE_SET_ENROLLMENT_PARAMETERS_FN = { _, _ => 0 }
-    public var QueryExtendedEnrollmentStatus: PIBIO_ENGINE_QUERY_EXTENDED_ENROLLMENT_STATUS_FN = { _, _, _ => 0 }
-    public var RefreshCache: PIBIO_ENGINE_REFRESH_CACHE_FN = { _ => 0 }
-    public var SelectCalibrationFormat: PIBIO_ENGINE_SELECT_CALIBRATION_FORMAT_FN = { _, _, _, _, _ => 0 }
-    public var QueryCalibrationData: PIBIO_ENGINE_QUERY_CALIBRATION_DATA_FN = { _, _, _, _, _ => 0 }
-    public var SetAccountPolicy: PIBIO_ENGINE_SET_ACCOUNT_POLICY_FN = { _, _, _ => 0 }
-    public var CreateKey: PIBIO_ENGINE_CREATE_KEY_FN = { _, _, _, _, _, _ => 0 }
-    public var IdentifyFeatureSetSecure: PIBIO_ENGINE_IDENTIFY_FEATURE_SET_SECURE_FN = { _, _, _, _, _, _, _, _, _, _ => 0 }
-    public var AcceptPrivateSensorTypeInfo: PIBIO_ENGINE_ACCEPT_PRIVATE_SENSOR_TYPE_INFO_FN = { _, _, _ => 0 }
-    public var CreateEnrollmentAuthenticated: PIBIO_ENGINE_CREATE_ENROLLMENT_AUTHENTICATED_FN = { _, _, _ => 0 }
-    public var IdentifyFeatureSetAuthenticated: PIBIO_ENGINE_IDENTIFY_FEATURE_SET_AUTHENTICATED_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_ESS_STATE_FLAGS {
     public var value: Int32 = 0
 
@@ -1521,110 +312,6 @@ public let WINBIO_ESS_STATE_FLAGS_WINBIO_ESS_SOURCE_DEFAULT: WINBIO_ESS_STATE_FL
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
 @C
-public struct WINBIO_EVENT {
-    public var Type: UInt32 = 0
-    public var Parameters: WINBIO_EVENT__Parameters_e__Union = WINBIO_EVENT__Parameters_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct WINBIO_EVENT__Parameters_e__Union {
-    public var _raw: VArray<UInt8, $88> = VArray<UInt8, $88>(repeat: 0)
-
-    public func unclaimed(): WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_unclaimed(val: WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func unclaimedIdentify(): WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_unclaimedIdentify(val: WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func error(): WINBIO_EVENT__Parameters_e__Union__Error_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Error_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_error(val: WINBIO_EVENT__Parameters_e__Union__Error_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Error_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct {
-    public var UnitId: UInt32 = 0
-    public var RejectDetail: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct {
-    public var UnitId: UInt32 = 0
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var SubFactor: UInt8 = 0
-    public var RejectDetail: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_EVENT__Parameters_e__Union__Error_e__Struct {
-    public var ErrorCode: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_EXTENDED_ENGINE_INFO {
     public var GenericEngineCapabilities: UInt32 = 0
     public var Factor: UInt32 = 0
@@ -1633,109 +320,115 @@ public struct WINBIO_EXTENDED_ENGINE_INFO {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union {
-    public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0)
+    public var _raw: VArray<UInt32, $7> = VArray<UInt32, $7>(repeat: 0)
 
-    public func null(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop null: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_null(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop facialFeatures: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func facialFeatures(): WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
-            return ptr.read()
+    public mut prop fingerprint: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_facialFeatures(val: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop iris: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func fingerprint(): WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
-            return ptr.read()
+    public mut prop voice: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_fingerprint(val: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func iris(): WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_iris(val: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Iris_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func voice(): WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_voice(val: WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENGINE_INFO__Specific_e__Union__Voice_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1827,109 +520,115 @@ public struct WINBIO_EXTENDED_ENROLLMENT_STATUS {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union {
-    public var _raw: VArray<UInt8, $332> = VArray<UInt8, $332>(repeat: 0)
+    public var _raw: VArray<UInt32, $87> = VArray<UInt32, $87>(repeat: 0)
 
-    public func null(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop null: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_null(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop facialFeatures: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func facialFeatures(): WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct>(p)
-            return ptr.read()
+    public mut prop fingerprint: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_facialFeatures(val: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__FacialFeatures_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop iris: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func fingerprint(): WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct>(p)
-            return ptr.read()
+    public mut prop voice: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_fingerprint(val: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Fingerprint_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func iris(): WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_iris(val: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Iris_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func voice(): WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_voice(val: WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS__Specific_e__Union__Voice_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2005,109 +704,115 @@ public struct WINBIO_EXTENDED_SENSOR_INFO {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union {
-    public var _raw: VArray<UInt8, $1072> = VArray<UInt8, $1072>(repeat: 0)
+    public var _raw: VArray<UInt32, $268> = VArray<UInt32, $268>(repeat: 0)
 
-    public func null(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop null: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_null(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop facialFeatures: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func facialFeatures(): WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
-            return ptr.read()
+    public mut prop fingerprint: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_facialFeatures(val: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop iris: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func fingerprint(): WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
-            return ptr.read()
+    public mut prop voice: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_fingerprint(val: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func iris(): WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_iris(val: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Iris_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func voice(): WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_voice(val: WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_SENSOR_INFO__Specific_e__Union__Voice_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2165,109 +870,115 @@ public struct WINBIO_EXTENDED_STORAGE_INFO {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func null(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop null: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_null(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop facialFeatures: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func facialFeatures(): WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
-            return ptr.read()
+    public mut prop fingerprint: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_facialFeatures(val: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__FacialFeatures_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop iris: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func fingerprint(): WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
-            return ptr.read()
+    public mut prop voice: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_fingerprint(val: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Fingerprint_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func iris(): WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_iris(val: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Iris_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func voice(): WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_voice(val: WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EXTENDED_STORAGE_INFO__Specific_e__Union__Voice_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2319,60 +1030,6 @@ public struct WINBIO_FP_BU_STATE {
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
 @C
-public struct WINBIO_FRAMEWORK_INTERFACE {
-    public var Version: WINBIO_ADAPTER_INTERFACE_VERSION = WINBIO_ADAPTER_INTERFACE_VERSION()
-    public var Type: UInt32 = 0
-    public var Size: UIntNative = 0
-    public var AdapterId: GUID = GUID()
-    public var SetUnitStatus: PIBIO_FRAMEWORK_SET_UNIT_STATUS_FN = { _, _, _ => 0 }
-    public var VsmStorageAttach: PIBIO_STORAGE_ATTACH_FN = { _ => 0 }
-    public var VsmStorageDetach: PIBIO_STORAGE_DETACH_FN = { _ => 0 }
-    public var VsmStorageClearContext: PIBIO_STORAGE_CLEAR_CONTEXT_FN = { _ => 0 }
-    public var VsmStorageCreateDatabase: PIBIO_STORAGE_CREATE_DATABASE_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public var VsmStorageOpenDatabase: PIBIO_STORAGE_OPEN_DATABASE_FN = { _, _, _, _ => 0 }
-    public var VsmStorageCloseDatabase: PIBIO_STORAGE_CLOSE_DATABASE_FN = { _ => 0 }
-    public var VsmStorageDeleteRecord: PIBIO_STORAGE_DELETE_RECORD_FN = { _, _, _ => 0 }
-    public var VsmStorageNotifyPowerChange: PIBIO_STORAGE_NOTIFY_POWER_CHANGE_FN = { _, _ => 0 }
-    public var VsmStoragePipelineInit: PIBIO_STORAGE_PIPELINE_INIT_FN = { _ => 0 }
-    public var VsmStoragePipelineCleanup: PIBIO_STORAGE_PIPELINE_CLEANUP_FN = { _ => 0 }
-    public var VsmStorageActivate: PIBIO_STORAGE_ACTIVATE_FN = { _ => 0 }
-    public var VsmStorageDeactivate: PIBIO_STORAGE_DEACTIVATE_FN = { _ => 0 }
-    public var VsmStorageQueryExtendedInfo: PIBIO_STORAGE_QUERY_EXTENDED_INFO_FN = { _, _, _ => 0 }
-    public var VsmStorageCacheClear: PIBIO_FRAMEWORK_VSM_CACHE_CLEAR_FN = { _ => 0 }
-    public var VsmStorageCacheImportBegin: PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_BEGIN_FN = { _, _, _ => 0 }
-    public var VsmStorageCacheImportNext: PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_NEXT_FN = { _, _, _ => 0 }
-    public var VsmStorageCacheImportEnd: PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_END_FN = { _ => 0 }
-    public var VsmStorageCacheExportBegin: PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_BEGIN_FN = { _, _, _ => 0 }
-    public var VsmStorageCacheExportNext: PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_NEXT_FN = { _, _, _, _ => 0 }
-    public var VsmStorageCacheExportEnd: PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_END_FN = { _ => 0 }
-    public var VsmSensorAttach: PIBIO_SENSOR_ATTACH_FN = { _ => 0 }
-    public var VsmSensorDetach: PIBIO_SENSOR_DETACH_FN = { _ => 0 }
-    public var VsmSensorClearContext: PIBIO_SENSOR_CLEAR_CONTEXT_FN = { _ => 0 }
-    public var VsmSensorPushDataToEngine: PIBIO_SENSOR_PUSH_DATA_TO_ENGINE_FN = { _, _, _, _ => 0 }
-    public var VsmSensorNotifyPowerChange: PIBIO_SENSOR_NOTIFY_POWER_CHANGE_FN = { _, _ => 0 }
-    public var VsmSensorPipelineInit: PIBIO_SENSOR_PIPELINE_INIT_FN = { _ => 0 }
-    public var VsmSensorPipelineCleanup: PIBIO_SENSOR_PIPELINE_CLEANUP_FN = { _ => 0 }
-    public var VsmSensorActivate: PIBIO_SENSOR_ACTIVATE_FN = { _ => 0 }
-    public var VsmSensorDeactivate: PIBIO_SENSOR_DEACTIVATE_FN = { _ => 0 }
-    public var VsmSensorAsyncImportRawBuffer: PIBIO_SENSOR_ASYNC_IMPORT_RAW_BUFFER_FN = { _, _, _, _, _ => 0 }
-    public var VsmSensorAsyncImportSecureBuffer: PIBIO_SENSOR_ASYNC_IMPORT_SECURE_BUFFER_FN = { _, _, _, _, _, _ => 0 }
-    public var Reserved1: PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_1_FN = { _, _, _ => 0 }
-    public var Reserved2: PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_2_FN = { _, _, _ => 0 }
-    public var Reserved3: PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_3_FN = { _ => 0 }
-    public var Reserved4: PIBIO_STORAGE_RESERVED_1_FN = { _, _, _, _ => 0 }
-    public var Reserved5: PIBIO_STORAGE_RESERVED_2_FN = { _, _ => 0 }
-    public var AllocateMemory: PIBIO_FRAMEWORK_ALLOCATE_MEMORY_FN = { _, _, _ => 0 }
-    public var FreeMemory: PIBIO_FRAMEWORK_FREE_MEMORY_FN = { _, _ => 0 }
-    public var GetProperty: PIBIO_FRAMEWORK_GET_PROPERTY_FN = { _, _, _, _, _, _, _ => 0 }
-    public var LockAndValidateSecureBuffer: PIBIO_FRAMEWORK_LOCK_AND_VALIDATE_SECURE_BUFFER_FN = { _, _, _, _ => 0 }
-    public var ReleaseSecureBuffer: PIBIO_FRAMEWORK_RELEASE_SECURE_BUFFER_FN = { _, _ => 0 }
-    public var QueryAuthorizedEnrollments: PIBIO_FRAMEWORK_VSM_QUERY_AUTHORIZED_ENROLLMENTS_FN = { _, _, _, _ => 0 }
-    public var DecryptSample: PIBIO_FRAMEWORK_VSM_DECRYPT_SAMPLE_FN = { _, _, _, _, _, _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_GESTURE_METADATA {
     public var Size: UIntNative = 0
     public var BiometricType: UInt32 = 0
@@ -2399,105 +1056,111 @@ public struct WINBIO_IDENTITY {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WINBIO_IDENTITY__Value_e__Union {
-    public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0)
+    public var _raw: VArray<UInt32, $18> = VArray<UInt32, $18>(repeat: 0)
 
-    public func null(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop null: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_null(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop wildcard: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func wildcard(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop templateGuid: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_wildcard(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop accountSid: WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func templateGuid(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
+    public mut prop secureId: VArray<UInt8, $32> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $32>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_templateGuid(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func accountSid(): WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_accountSid(val: WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_IDENTITY__Value_e__Union__AccountSid_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func secureId(): VArray<UInt8, $32> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $32>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_secureId(val: VArray<UInt8, $32>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $32>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $32>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2521,23 +1184,6 @@ public struct WINBIO_NOTIFY_WAKE {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_PIPELINE {
-    public var SensorHandle: CPointer<Unit> = CPointer<Unit>()
-    public var EngineHandle: CPointer<Unit> = CPointer<Unit>()
-    public var StorageHandle: CPointer<Unit> = CPointer<Unit>()
-    public var SensorInterface: CPointer<WINBIO_SENSOR_INTERFACE> = CPointer<WINBIO_SENSOR_INTERFACE>()
-    public var EngineInterface: CPointer<WINBIO_ENGINE_INTERFACE> = CPointer<WINBIO_ENGINE_INTERFACE>()
-    public var StorageInterface: CPointer<WINBIO_STORAGE_INTERFACE> = CPointer<WINBIO_STORAGE_INTERFACE>()
-    public var SensorContext: CPointer<WINIBIO_SENSOR_CONTEXT> = CPointer<WINIBIO_SENSOR_CONTEXT>()
-    public var EngineContext: CPointer<WINIBIO_ENGINE_CONTEXT> = CPointer<WINIBIO_ENGINE_CONTEXT>()
-    public var StorageContext: CPointer<WINIBIO_STORAGE_CONTEXT> = CPointer<WINIBIO_STORAGE_CONTEXT>()
-    public var FrameworkInterface: CPointer<WINBIO_FRAMEWORK_INTERFACE> = CPointer<WINBIO_FRAMEWORK_INTERFACE>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_POLICY_SOURCE {
     public var value: Int32 = 0
 
@@ -2568,7 +1214,6 @@ public let WINBIO_POLICY_SOURCE_WINBIO_POLICY_LOCAL: WINBIO_POLICY_SOURCE = WINB
 public let WINBIO_POLICY_SOURCE_WINBIO_POLICY_ADMIN: WINBIO_POLICY_SOURCE = WINBIO_POLICY_SOURCE(3)
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_POOL {
     public var value: UInt32 = 0
 
@@ -2593,73 +1238,53 @@ public let WINBIO_POOL_WINBIO_POOL_SYSTEM: WINBIO_POOL = WINBIO_POOL(1)
 public let WINBIO_POOL_WINBIO_POOL_PRIVATE: WINBIO_POOL = WINBIO_POOL(2)
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_PRESENCE {
-    public var Factor: UInt32 = 0
-    public var SubFactor: UInt8 = 0
-    public var Status: Int32 = 0
-    public var RejectDetail: UInt32 = 0
-    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
-    public var TrackingId: UInt64 = 0
-    public var Ticket: UInt64 = 0
-    public var Properties: WINBIO_PRESENCE_PROPERTIES = WINBIO_PRESENCE_PROPERTIES()
-    public var Authorization: WINBIO_PRESENCE__Authorization_e__Struct = WINBIO_PRESENCE__Authorization_e__Struct()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_PRESENCE__Authorization_e__Struct {
-    public var Size: UInt32 = 0
-    public var Data: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WINBIO_PRESENCE_PROPERTIES {
-    public var _raw: VArray<UInt8, $332> = VArray<UInt8, $332>(repeat: 0)
+    public var _raw: VArray<UInt32, $87> = VArray<UInt32, $87>(repeat: 0)
 
-    public func facialFeatures(): WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct>(p)
-            return ptr.read()
+    public mut prop facialFeatures: WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_facialFeatures(val: WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__FacialFeatures_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop iris: WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func iris(): WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_iris(val: WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_PRESENCE_PROPERTIES__Iris_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2754,66 +1379,6 @@ public struct WINBIO_SECURE_CONNECTION_PARAMS {
 }
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_SENSOR_ATTRIBUTES {
-    public var PayloadSize: UInt32 = 0
-    public var WinBioHresult: Int32 = 0
-    public var WinBioVersion: WINBIO_VERSION = WINBIO_VERSION()
-    public var SensorType: UInt32 = 0
-    public var SensorSubType: UInt32 = 0
-    public var Capabilities: UInt32 = 0
-    public var ManufacturerName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var ModelName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var SerialNumber: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var FirmwareVersion: WINBIO_VERSION = WINBIO_VERSION()
-    public var SupportedFormatEntries: UInt32 = 0
-    public var SupportedFormat: VArray<WINBIO_REGISTERED_FORMAT, $1> = VArray<WINBIO_REGISTERED_FORMAT, $1>(repeat: WINBIO_REGISTERED_FORMAT())
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_SENSOR_INTERFACE {
-    public var Version: WINBIO_ADAPTER_INTERFACE_VERSION = WINBIO_ADAPTER_INTERFACE_VERSION()
-    public var Type: UInt32 = 0
-    public var Size: UIntNative = 0
-    public var AdapterId: GUID = GUID()
-    public var Attach: PIBIO_SENSOR_ATTACH_FN = { _ => 0 }
-    public var Detach: PIBIO_SENSOR_DETACH_FN = { _ => 0 }
-    public var ClearContext: PIBIO_SENSOR_CLEAR_CONTEXT_FN = { _ => 0 }
-    public var QueryStatus: PIBIO_SENSOR_QUERY_STATUS_FN = { _, _ => 0 }
-    public var Reset: PIBIO_SENSOR_RESET_FN = { _ => 0 }
-    public var SetMode: PIBIO_SENSOR_SET_MODE_FN = { _, _ => 0 }
-    public var SetIndicatorStatus: PIBIO_SENSOR_SET_INDICATOR_STATUS_FN = { _, _ => 0 }
-    public var GetIndicatorStatus: PIBIO_SENSOR_GET_INDICATOR_STATUS_FN = { _, _ => 0 }
-    public var StartCapture: PIBIO_SENSOR_START_CAPTURE_FN = { _, _, _ => 0 }
-    public var FinishCapture: PIBIO_SENSOR_FINISH_CAPTURE_FN = { _, _ => 0 }
-    public var ExportSensorData: PIBIO_SENSOR_EXPORT_SENSOR_DATA_FN = { _, _, _ => 0 }
-    public var Cancel: PIBIO_SENSOR_CANCEL_FN = { _ => 0 }
-    public var PushDataToEngine: PIBIO_SENSOR_PUSH_DATA_TO_ENGINE_FN = { _, _, _, _ => 0 }
-    public var ControlUnit: PIBIO_SENSOR_CONTROL_UNIT_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public var ControlUnitPrivileged: PIBIO_SENSOR_CONTROL_UNIT_PRIVILEGED_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public var NotifyPowerChange: PIBIO_SENSOR_NOTIFY_POWER_CHANGE_FN = { _, _ => 0 }
-    public var PipelineInit: PIBIO_SENSOR_PIPELINE_INIT_FN = { _ => 0 }
-    public var PipelineCleanup: PIBIO_SENSOR_PIPELINE_CLEANUP_FN = { _ => 0 }
-    public var Activate: PIBIO_SENSOR_ACTIVATE_FN = { _ => 0 }
-    public var Deactivate: PIBIO_SENSOR_DEACTIVATE_FN = { _ => 0 }
-    public var QueryExtendedInfo: PIBIO_SENSOR_QUERY_EXTENDED_INFO_FN = { _, _, _ => 0 }
-    public var QueryCalibrationFormats: PIBIO_SENSOR_QUERY_CALIBRATION_FORMATS_FN = { _, _, _, _ => 0 }
-    public var SetCalibrationFormat: PIBIO_SENSOR_SET_CALIBRATION_FORMAT_FN = { _, _ => 0 }
-    public var AcceptCalibrationData: PIBIO_SENSOR_ACCEPT_CALIBRATION_DATA_FN = { _, _, _ => 0 }
-    public var AsyncImportRawBuffer: PIBIO_SENSOR_ASYNC_IMPORT_RAW_BUFFER_FN = { _, _, _, _, _ => 0 }
-    public var AsyncImportSecureBuffer: PIBIO_SENSOR_ASYNC_IMPORT_SECURE_BUFFER_FN = { _, _, _, _, _, _ => 0 }
-    public var QueryPrivateSensorType: PIBIO_SENSOR_QUERY_PRIVATE_SENSOR_TYPE_FN = { _, _, _, _ => 0 }
-    public var ConnectSecure: PIBIO_SENSOR_CONNECT_SECURE_FN = { _, _, _ => 0 }
-    public var StartCaptureEx: PIBIO_SENSOR_START_CAPTURE_EX_FN = { _, _, _, _, _, _ => 0 }
-    public var StartNotifyWake: PIBIO_SENSOR_START_NOTIFY_WAKE_FN = { _, _ => 0 }
-    public var FinishNotifyWake: PIBIO_SENSOR_FINISH_NOTIFY_WAKE_FN = { _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_SETTING_SOURCE {
     public var value: UInt32 = 0
 
@@ -2848,46 +1413,6 @@ public let WINBIO_SETTING_SOURCE_WINBIO_SETTING_SOURCE_POLICY: WINBIO_SETTING_SO
 public struct WINBIO_SET_INDICATOR {
     public var PayloadSize: UInt32 = 0
     public var IndicatorStatus: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
-public struct WINBIO_STORAGE_INTERFACE {
-    public var Version: WINBIO_ADAPTER_INTERFACE_VERSION = WINBIO_ADAPTER_INTERFACE_VERSION()
-    public var Type: UInt32 = 0
-    public var Size: UIntNative = 0
-    public var AdapterId: GUID = GUID()
-    public var Attach: PIBIO_STORAGE_ATTACH_FN = { _ => 0 }
-    public var Detach: PIBIO_STORAGE_DETACH_FN = { _ => 0 }
-    public var ClearContext: PIBIO_STORAGE_CLEAR_CONTEXT_FN = { _ => 0 }
-    public var CreateDatabase: PIBIO_STORAGE_CREATE_DATABASE_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public var EraseDatabase: PIBIO_STORAGE_ERASE_DATABASE_FN = { _, _, _, _ => 0 }
-    public var OpenDatabase: PIBIO_STORAGE_OPEN_DATABASE_FN = { _, _, _, _ => 0 }
-    public var CloseDatabase: PIBIO_STORAGE_CLOSE_DATABASE_FN = { _ => 0 }
-    public var GetDataFormat: PIBIO_STORAGE_GET_DATA_FORMAT_FN = { _, _, _ => 0 }
-    public var GetDatabaseSize: PIBIO_STORAGE_GET_DATABASE_SIZE_FN = { _, _, _ => 0 }
-    public var AddRecord: PIBIO_STORAGE_ADD_RECORD_FN = { _, _ => 0 }
-    public var DeleteRecord: PIBIO_STORAGE_DELETE_RECORD_FN = { _, _, _ => 0 }
-    public var QueryBySubject: PIBIO_STORAGE_QUERY_BY_SUBJECT_FN = { _, _, _ => 0 }
-    public var QueryByContent: PIBIO_STORAGE_QUERY_BY_CONTENT_FN = { _, _, _, _ => 0 }
-    public var GetRecordCount: PIBIO_STORAGE_GET_RECORD_COUNT_FN = { _, _ => 0 }
-    public var FirstRecord: PIBIO_STORAGE_FIRST_RECORD_FN = { _ => 0 }
-    public var NextRecord: PIBIO_STORAGE_NEXT_RECORD_FN = { _ => 0 }
-    public var GetCurrentRecord: PIBIO_STORAGE_GET_CURRENT_RECORD_FN = { _, _ => 0 }
-    public var ControlUnit: PIBIO_STORAGE_CONTROL_UNIT_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public var ControlUnitPrivileged: PIBIO_STORAGE_CONTROL_UNIT_PRIVILEGED_FN = { _, _, _, _, _, _, _, _ => 0 }
-    public var NotifyPowerChange: PIBIO_STORAGE_NOTIFY_POWER_CHANGE_FN = { _, _ => 0 }
-    public var PipelineInit: PIBIO_STORAGE_PIPELINE_INIT_FN = { _ => 0 }
-    public var PipelineCleanup: PIBIO_STORAGE_PIPELINE_CLEANUP_FN = { _ => 0 }
-    public var Activate: PIBIO_STORAGE_ACTIVATE_FN = { _ => 0 }
-    public var Deactivate: PIBIO_STORAGE_DEACTIVATE_FN = { _ => 0 }
-    public var QueryExtendedInfo: PIBIO_STORAGE_QUERY_EXTENDED_INFO_FN = { _, _, _ => 0 }
-    public var NotifyDatabaseChange: PIBIO_STORAGE_NOTIFY_DATABASE_CHANGE_FN = { _, _ => 0 }
-    public var Reserved1: PIBIO_STORAGE_RESERVED_1_FN = { _, _, _, _ => 0 }
-    public var Reserved2: PIBIO_STORAGE_RESERVED_2_FN = { _, _ => 0 }
-    public var UpdateRecordBegin: PIBIO_STORAGE_UPDATE_RECORD_BEGIN_FN = { _, _, _, _ => 0 }
-    public var UpdateRecordCommit: PIBIO_STORAGE_UPDATE_RECORD_COMMIT_FN = { _, _ => 0 }
     public init() {}
 }
 
@@ -2929,23 +1454,6 @@ public struct WINBIO_SUPPORTED_ALGORITHMS {
 
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
 @C
-public struct WINBIO_UNIT_SCHEMA {
-    public var UnitId: UInt32 = 0
-    public var PoolType: UInt32 = 0
-    public var BiometricFactor: UInt32 = 0
-    public var SensorSubType: UInt32 = 0
-    public var Capabilities: UInt32 = 0
-    public var DeviceInstanceId: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var Manufacturer: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var Model: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var SerialNumber: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var FirmwareVersion: WINBIO_VERSION = WINBIO_VERSION()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_BiometricFramework == "on"]
-@C
 public struct WINBIO_UPDATE_FIRMWARE {
     public var PayloadSize: UInt32 = 0
     public var FirmwareData: WINBIO_DATA = WINBIO_DATA()
@@ -2969,6 +1477,1551 @@ public type WINIBIO_SENSOR_CONTEXT = CPointer<Unit>
 @When[Windows_Win32_Devices_BiometricFramework == "on"]
 public type WINIBIO_STORAGE_CONTEXT = CPointer<Unit>
 
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+public type PWINBIO_IDENTIFY_CALLBACK = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<WINBIO_IDENTITY>, UInt8, UInt32) -> Unit>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ACCOUNT_POLICY {
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var AntiSpoofBehavior: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ANTI_SPOOF_POLICY {
+    public var Action: Int32 = 0
+    public var Source: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_BDB_ANSI_381_HEADER {
+    public var RecordLength: UInt64 = 0
+    public var FormatIdentifier: UInt32 = 0
+    public var VersionNumber: UInt32 = 0
+    public var ProductId: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
+    public var CaptureDeviceId: UInt16 = 0
+    public var ImageAcquisitionLevel: UInt16 = 0
+    public var HorizontalScanResolution: UInt16 = 0
+    public var VerticalScanResolution: UInt16 = 0
+    public var HorizontalImageResolution: UInt16 = 0
+    public var VerticalImageResolution: UInt16 = 0
+    public var ElementCount: UInt8 = 0
+    public var ScaleUnits: UInt8 = 0
+    public var PixelDepth: UInt8 = 0
+    public var ImageCompressionAlg: UInt8 = 0
+    public var Reserved: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_BIR {
+    public var HeaderBlock: WINBIO_BIR_DATA = WINBIO_BIR_DATA()
+    public var StandardDataBlock: WINBIO_BIR_DATA = WINBIO_BIR_DATA()
+    public var VendorDataBlock: WINBIO_BIR_DATA = WINBIO_BIR_DATA()
+    public var SignatureBlock: WINBIO_BIR_DATA = WINBIO_BIR_DATA()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_BIR_HEADER {
+    public var ValidFields: UInt16 = 0
+    public var HeaderVersion: UInt8 = 0
+    public var PatronHeaderVersion: UInt8 = 0
+    public var DataFlags: UInt8 = 0
+    public var Type: UInt32 = 0
+    public var Subtype: UInt8 = 0
+    public var Purpose: UInt8 = 0
+    public var DataQuality: Int8 = 0
+    public var CreationDate: Int64 = 0
+    public var ValidityPeriod: WINBIO_BIR_HEADER__ValidityPeriod_e__Struct = WINBIO_BIR_HEADER__ValidityPeriod_e__Struct()
+    public var BiometricDataFormat: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
+    public var ProductId: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_BIR_HEADER__ValidityPeriod_e__Struct {
+    public var BeginDate: Int64 = 0
+    public var EndDate: Int64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_BSP_SCHEMA {
+    public var BiometricFactor: UInt32 = 0
+    public var BspId: GUID = GUID()
+    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var Vendor: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var Version: WINBIO_VERSION = WINBIO_VERSION()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_CALIBRATION_INFO {
+    public var PayloadSize: UInt32 = 0
+    public var WinBioHresult: Int32 = 0
+    public var CalibrationData: WINBIO_DATA = WINBIO_DATA()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_CAPTURE_DATA {
+    public var PayloadSize: UInt32 = 0
+    public var WinBioHresult: Int32 = 0
+    public var SensorStatus: UInt32 = 0
+    public var RejectDetail: UInt32 = 0
+    public var CaptureData: WINBIO_DATA = WINBIO_DATA()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_CAPTURE_PARAMETERS {
+    public var PayloadSize: UInt32 = 0
+    public var Purpose: UInt8 = 0
+    public var Format: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
+    public var VendorFormat: GUID = GUID()
+    public var Flags: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ENCRYPTED_CAPTURE_PARAMS {
+    public var PayloadSize: UInt32 = 0
+    public var Purpose: UInt8 = 0
+    public var Format: WINBIO_REGISTERED_FORMAT = WINBIO_REGISTERED_FORMAT()
+    public var VendorFormat: GUID = GUID()
+    public var Flags: UInt8 = 0
+    public var NonceSize: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_EVENT {
+    public var Type: UInt32 = 0
+    public var Parameters: WINBIO_EVENT__Parameters_e__Union = WINBIO_EVENT__Parameters_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WINBIO_EVENT__Parameters_e__Union {
+    public var _raw: VArray<UInt32, $22> = VArray<UInt32, $22>(repeat: 0)
+
+    public mut prop unclaimed: WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop unclaimedIdentify: WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop error: WINBIO_EVENT__Parameters_e__Union__Error_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Error_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_EVENT__Parameters_e__Union__Error_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_EVENT__Parameters_e__Union__Unclaimed_e__Struct {
+    public var UnitId: UInt32 = 0
+    public var RejectDetail: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_EVENT__Parameters_e__Union__UnclaimedIdentify_e__Struct {
+    public var UnitId: UInt32 = 0
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var SubFactor: UInt8 = 0
+    public var RejectDetail: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_EVENT__Parameters_e__Union__Error_e__Struct {
+    public var ErrorCode: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_PRESENCE {
+    public var Factor: UInt32 = 0
+    public var SubFactor: UInt8 = 0
+    public var Status: Int32 = 0
+    public var RejectDetail: UInt32 = 0
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var TrackingId: UInt64 = 0
+    public var Ticket: UInt64 = 0
+    public var Properties: WINBIO_PRESENCE_PROPERTIES = WINBIO_PRESENCE_PROPERTIES()
+    public var Authorization: WINBIO_PRESENCE__Authorization_e__Struct = WINBIO_PRESENCE__Authorization_e__Struct()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_PRESENCE__Authorization_e__Struct {
+    public var Size: UInt32 = 0
+    public var Data: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_SENSOR_ATTRIBUTES {
+    public var PayloadSize: UInt32 = 0
+    public var WinBioHresult: Int32 = 0
+    public var WinBioVersion: WINBIO_VERSION = WINBIO_VERSION()
+    public var SensorType: UInt32 = 0
+    public var SensorSubType: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var ManufacturerName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var ModelName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var SerialNumber: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var FirmwareVersion: WINBIO_VERSION = WINBIO_VERSION()
+    public var SupportedFormatEntries: UInt32 = 0
+    public var SupportedFormat: VArray<WINBIO_REGISTERED_FORMAT, $1> = VArray<WINBIO_REGISTERED_FORMAT, $1>(repeat: WINBIO_REGISTERED_FORMAT())
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_UNIT_SCHEMA {
+    public var UnitId: UInt32 = 0
+    public var PoolType: UInt32 = 0
+    public var BiometricFactor: UInt32 = 0
+    public var SensorSubType: UInt32 = 0
+    public var Capabilities: UInt32 = 0
+    public var DeviceInstanceId: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var Manufacturer: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var Model: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var SerialNumber: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var FirmwareVersion: WINBIO_VERSION = WINBIO_VERSION()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+public type PWINBIO_CAPTURE_CALLBACK = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<WINBIO_BIR>, UIntNative, UInt32) -> Unit>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+public type PWINBIO_EVENT_CALLBACK = CFunc<(CPointer<Unit>, Int32, CPointer<WINBIO_EVENT>) -> Unit>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT {
+    public var SessionHandle: UInt32 = 0
+    public var Operation: UInt32 = 0
+    public var SequenceNumber: UInt64 = 0
+    public var TimeStamp: Int64 = 0
+    public var ApiStatus: Int32 = 0
+    public var UnitId: UInt32 = 0
+    public var UserData: CPointer<Unit> = CPointer<Unit>()
+    public var Parameters: WINBIO_ASYNC_RESULT__Parameters_e__Union = WINBIO_ASYNC_RESULT__Parameters_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union {
+    public var _raw: VArray<UInt64, $40> = VArray<UInt64, $40>(repeat: 0)
+
+    public mut prop verify: WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop identify: WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop enrollBegin: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop enrollCapture: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop enrollCommit: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop enumEnrollments: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop captureSample: WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop deleteTemplate: WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop getProperty: WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop setProperty: WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop getEvent: WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop controlUnit: WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop enumServiceProviders: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop enumBiometricUnits: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop enumDatabases: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop verifyAndReleaseTicket: WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop identifyAndReleaseTicket: WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop enrollSelect: WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop monitorPresence: WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop getProtectionPolicy: WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop notifyUnitStatusChange: WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__Verify_e__Struct {
+    public var Match: UInt8 = 0
+    public var RejectDetail: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__Identify_e__Struct {
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var SubFactor: UInt8 = 0
+    public var RejectDetail: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollBegin_e__Struct {
+    public var SubFactor: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCapture_e__Struct {
+    public var RejectDetail: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollCommit_e__Struct {
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var IsNewTemplate: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumEnrollments_e__Struct {
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var SubFactorCount: UIntNative = 0
+    public var SubFactorArray: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__CaptureSample_e__Struct {
+    public var Sample: CPointer<WINBIO_BIR> = CPointer<WINBIO_BIR>()
+    public var SampleSize: UIntNative = 0
+    public var RejectDetail: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__DeleteTemplate_e__Struct {
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var SubFactor: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProperty_e__Struct {
+    public var PropertyType: UInt32 = 0
+    public var PropertyId: UInt32 = 0
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var SubFactor: UInt8 = 0
+    public var PropertyBufferSize: UIntNative = 0
+    public var PropertyBuffer: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__SetProperty_e__Struct {
+    public var PropertyType: UInt32 = 0
+    public var PropertyId: UInt32 = 0
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var SubFactor: UInt8 = 0
+    public var PropertyBufferSize: UIntNative = 0
+    public var PropertyBuffer: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__GetEvent_e__Struct {
+    public var Event: WINBIO_EVENT = WINBIO_EVENT()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__ControlUnit_e__Struct {
+    public var Component: UInt32 = 0
+    public var ControlCode: UInt32 = 0
+    public var OperationStatus: UInt32 = 0
+    public var SendBuffer: CPointer<UInt8> = CPointer<UInt8>()
+    public var SendBufferSize: UIntNative = 0
+    public var ReceiveBuffer: CPointer<UInt8> = CPointer<UInt8>()
+    public var ReceiveBufferSize: UIntNative = 0
+    public var ReceiveDataSize: UIntNative = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumServiceProviders_e__Struct {
+    public var BspCount: UIntNative = 0
+    public var BspSchemaArray: CPointer<WINBIO_BSP_SCHEMA> = CPointer<WINBIO_BSP_SCHEMA>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumBiometricUnits_e__Struct {
+    public var UnitCount: UIntNative = 0
+    public var UnitSchemaArray: CPointer<WINBIO_UNIT_SCHEMA> = CPointer<WINBIO_UNIT_SCHEMA>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnumDatabases_e__Struct {
+    public var StorageCount: UIntNative = 0
+    public var StorageSchemaArray: CPointer<WINBIO_STORAGE_SCHEMA> = CPointer<WINBIO_STORAGE_SCHEMA>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__VerifyAndReleaseTicket_e__Struct {
+    public var Match: UInt8 = 0
+    public var RejectDetail: UInt32 = 0
+    public var Ticket: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__IdentifyAndReleaseTicket_e__Struct {
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var SubFactor: UInt8 = 0
+    public var RejectDetail: UInt32 = 0
+    public var Ticket: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__EnrollSelect_e__Struct {
+    public var SelectorValue: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__MonitorPresence_e__Struct {
+    public var ChangeType: UInt32 = 0
+    public var PresenceCount: UIntNative = 0
+    public var PresenceArray: CPointer<WINBIO_PRESENCE> = CPointer<WINBIO_PRESENCE>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__GetProtectionPolicy_e__Struct {
+    public var Identity: WINBIO_IDENTITY = WINBIO_IDENTITY()
+    public var Policy: WINBIO_PROTECTION_POLICY = WINBIO_PROTECTION_POLICY()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+@C
+public struct WINBIO_ASYNC_RESULT__Parameters_e__Union__NotifyUnitStatusChange_e__Struct {
+    public var ExtendedStatus: WINBIO_EXTENDED_UNIT_STATUS = WINBIO_EXTENDED_UNIT_STATUS()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on"]
+public type PWINBIO_ASYNC_COMPLETION_CALLBACK = CFunc<(CPointer<WINBIO_ASYNC_RESULT>) -> Unit>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_ACCEPT_PRIVATE_SENSOR_TYPE_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_ACCEPT_SAMPLE_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_BIR>, UIntNative, UInt8, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_CHECK_FOR_DUPLICATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<UInt8>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_COMMIT_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<UInt8>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_CONTROL_UNIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_CONTROL_UNIT_PRIVILEGED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_CREATE_ENROLLMENT_AUTHENTICATED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_CREATE_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_CREATE_KEY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_DISCARD_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_EXPORT_ENGINE_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<CPointer<WINBIO_BIR>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_GET_ENROLLMENT_HASH_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_GET_ENROLLMENT_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_IDENTIFY_ALL_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<CPointer<WINBIO_PRESENCE>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_IDENTIFY_FEATURE_SET_AUTHENTICATED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_IDENTIFY_FEATURE_SET_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_IDENTIFY_FEATURE_SET_SECURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_QUERY_CALIBRATION_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UIntNative>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_QUERY_EXTENDED_ENROLLMENT_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_ENGINE_INFO>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_QUERY_HASH_ALGORITHMS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<UIntNative>, CPointer<CPointer<UInt8>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_QUERY_INDEX_VECTOR_SIZE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_QUERY_PREFERRED_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_REGISTERED_FORMAT>, CPointer<GUID>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_QUERY_SAMPLE_HINT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_REFRESH_CACHE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_SELECT_CALIBRATION_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UIntNative, CPointer<GUID>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_SET_ACCOUNT_POLICY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_ACCOUNT_POLICY>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_SET_ENROLLMENT_PARAMETERS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_ENROLLMENT_PARAMETERS>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_SET_ENROLLMENT_SELECTOR_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt64) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_SET_HASH_ALGORITHM_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<UInt8>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_UPDATE_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_ENGINE_VERIFY_FEATURE_SET_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<UInt8>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_ALLOCATE_MEMORY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<CPointer<Unit>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_FREE_MEMORY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<Unit>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_GET_PROPERTY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, UInt32, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<CPointer<Unit>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_LOCK_AND_VALIDATE_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID, CPointer<CPointer<Unit>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_RELEASE_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_SET_UNIT_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_UNIT_STATUS>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_CACHE_CLEAR_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_BEGIN_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_END_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_NEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_BEGIN_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_END_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_NEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_DECRYPT_SAMPLE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_QUERY_AUTHORIZED_ENROLLMENTS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UIntNative>, CPointer<CPointer<WINBIO_IDENTITY>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_2_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_3_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_ACCEPT_CALIBRATION_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_ASYNC_IMPORT_RAW_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_ASYNC_IMPORT_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID, CPointer<UInt8>, UIntNative, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_CANCEL_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_CONNECT_SECURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_SECURE_CONNECTION_PARAMS>, CPointer<CPointer<WINBIO_SECURE_CONNECTION_DATA>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_CONTROL_UNIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_CONTROL_UNIT_PRIVILEGED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_EXPORT_SENSOR_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<WINBIO_BIR>>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_FINISH_CAPTURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_FINISH_NOTIFY_WAKE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_GET_INDICATOR_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_PUSH_DATA_TO_ENGINE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, UInt8, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_QUERY_CALIBRATION_FORMATS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UIntNative, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_SENSOR_INFO>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_QUERY_PRIVATE_SENSOR_TYPE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_QUERY_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_RESET_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_SET_CALIBRATION_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_SET_INDICATOR_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_SET_MODE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_START_CAPTURE_EX_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<UInt8>, UIntNative, UInt8, CPointer<CPointer<Win32_System_IO.OVERLAPPED>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_START_CAPTURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<CPointer<Win32_System_IO.OVERLAPPED>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_SENSOR_START_NOTIFY_WAKE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<Win32_System_IO.OVERLAPPED>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_ADD_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_CLOSE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_CONTROL_UNIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_CONTROL_UNIT_PRIVILEGED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_CREATE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UInt32, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>, UIntNative, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_DELETE_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_ERASE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_FIRST_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_GET_CURRENT_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_GET_DATABASE_SIZE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_GET_DATA_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<WINBIO_VERSION>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_GET_RECORD_COUNT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_NEXT_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_NOTIFY_DATABASE_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_OPEN_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_QUERY_BY_CONTENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<UInt32>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_QUERY_BY_SUBJECT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_STORAGE_INFO>, UIntNative) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt64>, CPointer<UInt64>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_RESERVED_2_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_UPDATE_RECORD_BEGIN_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PIBIO_STORAGE_UPDATE_RECORD_COMMIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PWINBIO_QUERY_ENGINE_INTERFACE_FN = CFunc<(CPointer<CPointer<WINBIO_ENGINE_INTERFACE>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PWINBIO_QUERY_SENSOR_INTERFACE_FN = CFunc<(CPointer<CPointer<WINBIO_SENSOR_INTERFACE>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+public type PWINBIO_QUERY_STORAGE_INTERFACE_FN = CFunc<(CPointer<CPointer<WINBIO_STORAGE_INTERFACE>>) -> Int32>
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+@C
+public struct WINBIO_ENGINE_INTERFACE {
+    public var Version: WINBIO_ADAPTER_INTERFACE_VERSION = WINBIO_ADAPTER_INTERFACE_VERSION()
+    public var Type: UInt32 = 0
+    public var Size: UIntNative = 0
+    public var AdapterId: GUID = GUID()
+    public var Attach: PIBIO_ENGINE_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Detach: PIBIO_ENGINE_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var ClearContext: PIBIO_ENGINE_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var QueryPreferredFormat: PIBIO_ENGINE_QUERY_PREFERRED_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_REGISTERED_FORMAT>, CPointer<GUID>) -> Int32>(CPointer<Unit>())
+    public var QueryIndexVectorSize: PIBIO_ENGINE_QUERY_INDEX_VECTOR_SIZE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var QueryHashAlgorithms: PIBIO_ENGINE_QUERY_HASH_ALGORITHMS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<UIntNative>, CPointer<CPointer<UInt8>>) -> Int32>(CPointer<Unit>())
+    public var SetHashAlgorithm: PIBIO_ENGINE_SET_HASH_ALGORITHM_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<UInt8>) -> Int32>(CPointer<Unit>())
+    public var QuerySampleHint: PIBIO_ENGINE_QUERY_SAMPLE_HINT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var AcceptSampleData: PIBIO_ENGINE_ACCEPT_SAMPLE_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_BIR>, UIntNative, UInt8, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var ExportEngineData: PIBIO_ENGINE_EXPORT_ENGINE_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<CPointer<WINBIO_BIR>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var VerifyFeatureSet: PIBIO_ENGINE_VERIFY_FEATURE_SET_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<UInt8>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var IdentifyFeatureSet: PIBIO_ENGINE_IDENTIFY_FEATURE_SET_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var CreateEnrollment: PIBIO_ENGINE_CREATE_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var UpdateEnrollment: PIBIO_ENGINE_UPDATE_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var GetEnrollmentStatus: PIBIO_ENGINE_GET_ENROLLMENT_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var GetEnrollmentHash: PIBIO_ENGINE_GET_ENROLLMENT_HASH_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var CheckForDuplicate: PIBIO_ENGINE_CHECK_FOR_DUPLICATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<UInt8>) -> Int32>(CPointer<Unit>())
+    public var CommitEnrollment: PIBIO_ENGINE_COMMIT_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<UInt8>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var DiscardEnrollment: PIBIO_ENGINE_DISCARD_ENROLLMENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var ControlUnit: PIBIO_ENGINE_CONTROL_UNIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var ControlUnitPrivileged: PIBIO_ENGINE_CONTROL_UNIT_PRIVILEGED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var NotifyPowerChange: PIBIO_ENGINE_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Reserved_1: PIBIO_ENGINE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>) -> Int32>(CPointer<Unit>())
+    public var PipelineInit: PIBIO_ENGINE_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var PipelineCleanup: PIBIO_ENGINE_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Activate: PIBIO_ENGINE_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Deactivate: PIBIO_ENGINE_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var QueryExtendedInfo: PIBIO_ENGINE_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_ENGINE_INFO>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var IdentifyAll: PIBIO_ENGINE_IDENTIFY_ALL_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<CPointer<WINBIO_PRESENCE>>) -> Int32>(CPointer<Unit>())
+    public var SetEnrollmentSelector: PIBIO_ENGINE_SET_ENROLLMENT_SELECTOR_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt64) -> Int32>(CPointer<Unit>())
+    public var SetEnrollmentParameters: PIBIO_ENGINE_SET_ENROLLMENT_PARAMETERS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_ENROLLMENT_PARAMETERS>) -> Int32>(CPointer<Unit>())
+    public var QueryExtendedEnrollmentStatus: PIBIO_ENGINE_QUERY_EXTENDED_ENROLLMENT_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_ENROLLMENT_STATUS>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var RefreshCache: PIBIO_ENGINE_REFRESH_CACHE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var SelectCalibrationFormat: PIBIO_ENGINE_SELECT_CALIBRATION_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UIntNative, CPointer<GUID>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var QueryCalibrationData: PIBIO_ENGINE_QUERY_CALIBRATION_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UIntNative>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var SetAccountPolicy: PIBIO_ENGINE_SET_ACCOUNT_POLICY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_ACCOUNT_POLICY>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var CreateKey: PIBIO_ENGINE_CREATE_KEY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var IdentifyFeatureSetSecure: PIBIO_ENGINE_IDENTIFY_FEATURE_SET_SECURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var AcceptPrivateSensorTypeInfo: PIBIO_ENGINE_ACCEPT_PRIVATE_SENSOR_TYPE_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var CreateEnrollmentAuthenticated: PIBIO_ENGINE_CREATE_ENROLLMENT_AUTHENTICATED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var IdentifyFeatureSetAuthenticated: PIBIO_ENGINE_IDENTIFY_FEATURE_SET_AUTHENTICATED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<WINBIO_IDENTITY>, CPointer<UInt8>, CPointer<UInt32>, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+@C
+public struct WINBIO_FRAMEWORK_INTERFACE {
+    public var Version: WINBIO_ADAPTER_INTERFACE_VERSION = WINBIO_ADAPTER_INTERFACE_VERSION()
+    public var Type: UInt32 = 0
+    public var Size: UIntNative = 0
+    public var AdapterId: GUID = GUID()
+    public var SetUnitStatus: PIBIO_FRAMEWORK_SET_UNIT_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_UNIT_STATUS>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var VsmStorageAttach: PIBIO_STORAGE_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageDetach: PIBIO_STORAGE_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageClearContext: PIBIO_STORAGE_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageCreateDatabase: PIBIO_STORAGE_CREATE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UInt32, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>, UIntNative, UIntNative) -> Int32>(CPointer<Unit>())
+    public var VsmStorageOpenDatabase: PIBIO_STORAGE_OPEN_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageCloseDatabase: PIBIO_STORAGE_CLOSE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageDeleteRecord: PIBIO_STORAGE_DELETE_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8) -> Int32>(CPointer<Unit>())
+    public var VsmStorageNotifyPowerChange: PIBIO_STORAGE_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>(CPointer<Unit>())
+    public var VsmStoragePipelineInit: PIBIO_STORAGE_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStoragePipelineCleanup: PIBIO_STORAGE_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageActivate: PIBIO_STORAGE_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageDeactivate: PIBIO_STORAGE_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageQueryExtendedInfo: PIBIO_STORAGE_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_STORAGE_INFO>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var VsmStorageCacheClear: PIBIO_FRAMEWORK_VSM_CACHE_CLEAR_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageCacheImportBegin: PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_BEGIN_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageCacheImportNext: PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_NEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var VsmStorageCacheImportEnd: PIBIO_FRAMEWORK_VSM_CACHE_IMPORT_END_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageCacheExportBegin: PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_BEGIN_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageCacheExportNext: PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_NEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var VsmStorageCacheExportEnd: PIBIO_FRAMEWORK_VSM_CACHE_EXPORT_END_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorAttach: PIBIO_SENSOR_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorDetach: PIBIO_SENSOR_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorClearContext: PIBIO_SENSOR_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorPushDataToEngine: PIBIO_SENSOR_PUSH_DATA_TO_ENGINE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, UInt8, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorNotifyPowerChange: PIBIO_SENSOR_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>(CPointer<Unit>())
+    public var VsmSensorPipelineInit: PIBIO_SENSOR_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorPipelineCleanup: PIBIO_SENSOR_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorActivate: PIBIO_SENSOR_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorDeactivate: PIBIO_SENSOR_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorAsyncImportRawBuffer: PIBIO_SENSOR_ASYNC_IMPORT_RAW_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var VsmSensorAsyncImportSecureBuffer: PIBIO_SENSOR_ASYNC_IMPORT_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID, CPointer<UInt8>, UIntNative, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var Reserved1: PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var Reserved2: PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_2_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var Reserved3: PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_3_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Reserved4: PIBIO_STORAGE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt64>, CPointer<UInt64>) -> Int32>(CPointer<Unit>())
+    public var Reserved5: PIBIO_STORAGE_RESERVED_2_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>) -> Int32>(CPointer<Unit>())
+    public var AllocateMemory: PIBIO_FRAMEWORK_ALLOCATE_MEMORY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UIntNative, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var FreeMemory: PIBIO_FRAMEWORK_FREE_MEMORY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetProperty: PIBIO_FRAMEWORK_GET_PROPERTY_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, UInt32, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<CPointer<Unit>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var LockAndValidateSecureBuffer: PIBIO_FRAMEWORK_LOCK_AND_VALIDATE_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID, CPointer<CPointer<Unit>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var ReleaseSecureBuffer: PIBIO_FRAMEWORK_RELEASE_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID) -> Int32>(CPointer<Unit>())
+    public var QueryAuthorizedEnrollments: PIBIO_FRAMEWORK_VSM_QUERY_AUTHORIZED_ENROLLMENTS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UIntNative>, CPointer<CPointer<WINBIO_IDENTITY>>) -> Int32>(CPointer<Unit>())
+    public var DecryptSample: PIBIO_FRAMEWORK_VSM_DECRYPT_SAMPLE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+@C
+public struct WINBIO_PIPELINE {
+    public var SensorHandle: CPointer<Unit> = CPointer<Unit>()
+    public var EngineHandle: CPointer<Unit> = CPointer<Unit>()
+    public var StorageHandle: CPointer<Unit> = CPointer<Unit>()
+    public var SensorInterface: CPointer<WINBIO_SENSOR_INTERFACE> = CPointer<WINBIO_SENSOR_INTERFACE>()
+    public var EngineInterface: CPointer<WINBIO_ENGINE_INTERFACE> = CPointer<WINBIO_ENGINE_INTERFACE>()
+    public var StorageInterface: CPointer<WINBIO_STORAGE_INTERFACE> = CPointer<WINBIO_STORAGE_INTERFACE>()
+    public var SensorContext: CPointer<WINIBIO_SENSOR_CONTEXT> = CPointer<WINIBIO_SENSOR_CONTEXT>()
+    public var EngineContext: CPointer<WINIBIO_ENGINE_CONTEXT> = CPointer<WINIBIO_ENGINE_CONTEXT>()
+    public var StorageContext: CPointer<WINIBIO_STORAGE_CONTEXT> = CPointer<WINIBIO_STORAGE_CONTEXT>()
+    public var FrameworkInterface: CPointer<WINBIO_FRAMEWORK_INTERFACE> = CPointer<WINBIO_FRAMEWORK_INTERFACE>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+@C
+public struct WINBIO_SENSOR_INTERFACE {
+    public var Version: WINBIO_ADAPTER_INTERFACE_VERSION = WINBIO_ADAPTER_INTERFACE_VERSION()
+    public var Type: UInt32 = 0
+    public var Size: UIntNative = 0
+    public var AdapterId: GUID = GUID()
+    public var Attach: PIBIO_SENSOR_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Detach: PIBIO_SENSOR_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var ClearContext: PIBIO_SENSOR_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var QueryStatus: PIBIO_SENSOR_QUERY_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var Reset: PIBIO_SENSOR_RESET_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var SetMode: PIBIO_SENSOR_SET_MODE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetIndicatorStatus: PIBIO_SENSOR_SET_INDICATOR_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetIndicatorStatus: PIBIO_SENSOR_GET_INDICATOR_STATUS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var StartCapture: PIBIO_SENSOR_START_CAPTURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<CPointer<Win32_System_IO.OVERLAPPED>>) -> Int32>(CPointer<Unit>())
+    public var FinishCapture: PIBIO_SENSOR_FINISH_CAPTURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var ExportSensorData: PIBIO_SENSOR_EXPORT_SENSOR_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<WINBIO_BIR>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var Cancel: PIBIO_SENSOR_CANCEL_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var PushDataToEngine: PIBIO_SENSOR_PUSH_DATA_TO_ENGINE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, UInt8, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var ControlUnit: PIBIO_SENSOR_CONTROL_UNIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var ControlUnitPrivileged: PIBIO_SENSOR_CONTROL_UNIT_PRIVILEGED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var NotifyPowerChange: PIBIO_SENSOR_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>(CPointer<Unit>())
+    public var PipelineInit: PIBIO_SENSOR_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var PipelineCleanup: PIBIO_SENSOR_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Activate: PIBIO_SENSOR_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Deactivate: PIBIO_SENSOR_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var QueryExtendedInfo: PIBIO_SENSOR_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_SENSOR_INFO>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var QueryCalibrationFormats: PIBIO_SENSOR_QUERY_CALIBRATION_FORMATS_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UIntNative, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var SetCalibrationFormat: PIBIO_SENSOR_SET_CALIBRATION_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>) -> Int32>(CPointer<Unit>())
+    public var AcceptCalibrationData: PIBIO_SENSOR_ACCEPT_CALIBRATION_DATA_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var AsyncImportRawBuffer: PIBIO_SENSOR_ASYNC_IMPORT_RAW_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var AsyncImportSecureBuffer: PIBIO_SENSOR_ASYNC_IMPORT_SECURE_BUFFER_FN = CFunc<(CPointer<WINBIO_PIPELINE>, GUID, CPointer<UInt8>, UIntNative, CPointer<CPointer<UInt8>>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var QueryPrivateSensorType: PIBIO_SENSOR_QUERY_PRIVATE_SENSOR_TYPE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt8>, UIntNative, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var ConnectSecure: PIBIO_SENSOR_CONNECT_SECURE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_SECURE_CONNECTION_PARAMS>, CPointer<CPointer<WINBIO_SECURE_CONNECTION_DATA>>) -> Int32>(CPointer<Unit>())
+    public var StartCaptureEx: PIBIO_SENSOR_START_CAPTURE_EX_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<UInt8>, UIntNative, UInt8, CPointer<CPointer<Win32_System_IO.OVERLAPPED>>) -> Int32>(CPointer<Unit>())
+    public var StartNotifyWake: PIBIO_SENSOR_START_NOTIFY_WAKE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<CPointer<Win32_System_IO.OVERLAPPED>>) -> Int32>(CPointer<Unit>())
+    public var FinishNotifyWake: PIBIO_SENSOR_FINISH_NOTIFY_WAKE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_BiometricFramework == "on" && Windows_Win32_System_IO == "on"]
+@C
+public struct WINBIO_STORAGE_INTERFACE {
+    public var Version: WINBIO_ADAPTER_INTERFACE_VERSION = WINBIO_ADAPTER_INTERFACE_VERSION()
+    public var Type: UInt32 = 0
+    public var Size: UIntNative = 0
+    public var AdapterId: GUID = GUID()
+    public var Attach: PIBIO_STORAGE_ATTACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Detach: PIBIO_STORAGE_DETACH_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var ClearContext: PIBIO_STORAGE_CLEAR_CONTEXT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var CreateDatabase: PIBIO_STORAGE_CREATE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, UInt32, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>, UIntNative, UIntNative) -> Int32>(CPointer<Unit>())
+    public var EraseDatabase: PIBIO_STORAGE_ERASE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var OpenDatabase: PIBIO_STORAGE_OPEN_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var CloseDatabase: PIBIO_STORAGE_CLOSE_DATABASE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var GetDataFormat: PIBIO_STORAGE_GET_DATA_FORMAT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<GUID>, CPointer<WINBIO_VERSION>) -> Int32>(CPointer<Unit>())
+    public var GetDatabaseSize: PIBIO_STORAGE_GET_DATABASE_SIZE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var AddRecord: PIBIO_STORAGE_ADD_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>(CPointer<Unit>())
+    public var DeleteRecord: PIBIO_STORAGE_DELETE_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8) -> Int32>(CPointer<Unit>())
+    public var QueryBySubject: PIBIO_STORAGE_QUERY_BY_SUBJECT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8) -> Int32>(CPointer<Unit>())
+    public var QueryByContent: PIBIO_STORAGE_QUERY_BY_CONTENT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8, CPointer<UInt32>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var GetRecordCount: PIBIO_STORAGE_GET_RECORD_COUNT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<UIntNative>) -> Int32>(CPointer<Unit>())
+    public var FirstRecord: PIBIO_STORAGE_FIRST_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var NextRecord: PIBIO_STORAGE_NEXT_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var GetCurrentRecord: PIBIO_STORAGE_GET_CURRENT_RECORD_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>(CPointer<Unit>())
+    public var ControlUnit: PIBIO_STORAGE_CONTROL_UNIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var ControlUnitPrivileged: PIBIO_STORAGE_CONTROL_UNIT_PRIVILEGED_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32, CPointer<UInt8>, UIntNative, CPointer<UInt8>, UIntNative, CPointer<UIntNative>, CPointer<UInt32>) -> Int32>(CPointer<Unit>())
+    public var NotifyPowerChange: PIBIO_STORAGE_NOTIFY_POWER_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt32) -> Int32>(CPointer<Unit>())
+    public var PipelineInit: PIBIO_STORAGE_PIPELINE_INIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var PipelineCleanup: PIBIO_STORAGE_PIPELINE_CLEANUP_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Activate: PIBIO_STORAGE_ACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var Deactivate: PIBIO_STORAGE_DEACTIVATE_FN = CFunc<(CPointer<WINBIO_PIPELINE>) -> Int32>(CPointer<Unit>())
+    public var QueryExtendedInfo: PIBIO_STORAGE_QUERY_EXTENDED_INFO_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_EXTENDED_STORAGE_INFO>, UIntNative) -> Int32>(CPointer<Unit>())
+    public var NotifyDatabaseChange: PIBIO_STORAGE_NOTIFY_DATABASE_CHANGE_FN = CFunc<(CPointer<WINBIO_PIPELINE>, UInt8) -> Int32>(CPointer<Unit>())
+    public var Reserved1: PIBIO_STORAGE_RESERVED_1_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, CPointer<UInt64>, CPointer<UInt64>) -> Int32>(CPointer<Unit>())
+    public var Reserved2: PIBIO_STORAGE_RESERVED_2_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>) -> Int32>(CPointer<Unit>())
+    public var UpdateRecordBegin: PIBIO_STORAGE_UPDATE_RECORD_BEGIN_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_IDENTITY>, UInt8, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>(CPointer<Unit>())
+    public var UpdateRecordCommit: PIBIO_STORAGE_UPDATE_RECORD_COMMIT_FN = CFunc<(CPointer<WINBIO_PIPELINE>, CPointer<WINBIO_STORAGE_RECORD>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
 @When[WINBIO == "on"]
 foreign {
     func WinBioAcquireFocus(): Int32
@@ -2981,7 +3034,7 @@ foreign {
     // param-hint: CallbackRoutine optional
     // param-hint: UserData optional
     // param-hint: FrameworkHandle optional
-    func WinBioAsyncOpenFramework(NotificationMethod: WINBIO_ASYNC_NOTIFICATION_METHOD, TargetWindow: CPointer<Unit>, MessageCode: UInt32, CallbackRoutine: PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData: CPointer<Unit>, AsynchronousOpen: Int32, FrameworkHandle: CPointer<UInt32>): Int32
+    func WinBioAsyncOpenFramework(NotificationMethod: Int32, TargetWindow: CPointer<Unit>, MessageCode: UInt32, CallbackRoutine: PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData: CPointer<Unit>, AsynchronousOpen: Int32, FrameworkHandle: CPointer<UInt32>): Int32
     // param-hint: UnitArray len=param[4] optional
     // param-hint: UnitCount optional
     // param-hint: DatabaseId optional
@@ -2990,7 +3043,7 @@ foreign {
     // param-hint: CallbackRoutine optional
     // param-hint: UserData optional
     // param-hint: SessionHandle optional
-    func WinBioAsyncOpenSession(Factor: UInt32, PoolType: WINBIO_POOL, Flags: UInt32, UnitArray: CPointer<UInt32>, UnitCount: UIntNative, DatabaseId: CPointer<GUID>, NotificationMethod: WINBIO_ASYNC_NOTIFICATION_METHOD, TargetWindow: CPointer<Unit>, MessageCode: UInt32, CallbackRoutine: PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData: CPointer<Unit>, AsynchronousOpen: Int32, SessionHandle: CPointer<UInt32>): Int32
+    func WinBioAsyncOpenSession(Factor: UInt32, PoolType: UInt32, Flags: UInt32, UnitArray: CPointer<UInt32>, UnitCount: UIntNative, DatabaseId: CPointer<GUID>, NotificationMethod: Int32, TargetWindow: CPointer<Unit>, MessageCode: UInt32, CallbackRoutine: PWINBIO_ASYNC_COMPLETION_CALLBACK, UserData: CPointer<Unit>, AsynchronousOpen: Int32, SessionHandle: CPointer<UInt32>): Int32
     func WinBioCancel(SessionHandle: UInt32): Int32
     // param-hint: UnitId optional
     // param-hint: SampleSize optional
@@ -3003,11 +3056,11 @@ foreign {
     // param-hint: SendBuffer bytes=param[5]
     // param-hint: ReceiveBuffer bytes=param[7]
     // param-hint: OperationStatus optional
-    func WinBioControlUnit(SessionHandle: UInt32, UnitId: UInt32, Component: WINBIO_COMPONENT, ControlCode: UInt32, SendBuffer: CPointer<UInt8>, SendBufferSize: UIntNative, ReceiveBuffer: CPointer<UInt8>, ReceiveBufferSize: UIntNative, ReceiveDataSize: CPointer<UIntNative>, OperationStatus: CPointer<UInt32>): Int32
+    func WinBioControlUnit(SessionHandle: UInt32, UnitId: UInt32, Component: UInt32, ControlCode: UInt32, SendBuffer: CPointer<UInt8>, SendBufferSize: UIntNative, ReceiveBuffer: CPointer<UInt8>, ReceiveBufferSize: UIntNative, ReceiveDataSize: CPointer<UIntNative>, OperationStatus: CPointer<UInt32>): Int32
     // param-hint: SendBuffer bytes=param[5]
     // param-hint: ReceiveBuffer bytes=param[7]
     // param-hint: OperationStatus optional
-    func WinBioControlUnitPrivileged(SessionHandle: UInt32, UnitId: UInt32, Component: WINBIO_COMPONENT, ControlCode: UInt32, SendBuffer: CPointer<UInt8>, SendBufferSize: UIntNative, ReceiveBuffer: CPointer<UInt8>, ReceiveBufferSize: UIntNative, ReceiveDataSize: CPointer<UIntNative>, OperationStatus: CPointer<UInt32>): Int32
+    func WinBioControlUnitPrivileged(SessionHandle: UInt32, UnitId: UInt32, Component: UInt32, ControlCode: UInt32, SendBuffer: CPointer<UInt8>, SendBufferSize: UIntNative, ReceiveBuffer: CPointer<UInt8>, ReceiveBufferSize: UIntNative, ReceiveDataSize: CPointer<UIntNative>, OperationStatus: CPointer<UInt32>): Int32
     func WinBioDeleteTemplate(SessionHandle: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITY>, SubFactor: UInt8): Int32
     func WinBioEnrollBegin(SessionHandle: UInt32, SubFactor: UInt8, UnitId: UInt32): Int32
     // param-hint: RejectDetail optional
@@ -3025,11 +3078,11 @@ foreign {
     func WinBioEnumEnrollments(SessionHandle: UInt32, UnitId: UInt32, Identity: CPointer<WINBIO_IDENTITY>, SubFactorArray: CPointer<CPointer<UInt8>>, SubFactorCount: CPointer<UIntNative>): Int32
     func WinBioEnumServiceProviders(Factor: UInt32, BspSchemaArray: CPointer<CPointer<WINBIO_BSP_SCHEMA>>, BspCount: CPointer<UIntNative>): Int32
     func WinBioFree(Address: CPointer<Unit>): Int32
-    func WinBioGetCredentialState(Identity: WINBIO_IDENTITY, Type: WINBIO_CREDENTIAL_TYPE, CredentialState: CPointer<WINBIO_CREDENTIAL_STATE>): Int32
-    func WinBioGetDomainLogonSetting(Value: CPointer<UInt8>, Source: CPointer<WINBIO_SETTING_SOURCE>): Unit
-    func WinBioGetEnabledSetting(Value: CPointer<UInt8>, Source: CPointer<WINBIO_SETTING_SOURCE>): Unit
+    func WinBioGetCredentialState(Identity: WINBIO_IDENTITY, Type: Int32, CredentialState: CPointer<Int32>): Int32
+    func WinBioGetDomainLogonSetting(Value: CPointer<UInt8>, Source: CPointer<UInt32>): Unit
+    func WinBioGetEnabledSetting(Value: CPointer<UInt8>, Source: CPointer<UInt32>): Unit
     func WinBioGetEnrolledFactors(AccountOwner: CPointer<WINBIO_IDENTITY>, EnrolledFactors: CPointer<UInt32>): Int32
-    func WinBioGetLogonSetting(Value: CPointer<UInt8>, Source: CPointer<WINBIO_SETTING_SOURCE>): Unit
+    func WinBioGetLogonSetting(Value: CPointer<UInt8>, Source: CPointer<UInt32>): Unit
     // param-hint: UnitId optional
     // param-hint: Identity optional
     // param-hint: SubFactor optional
@@ -3055,15 +3108,15 @@ foreign {
     // param-hint: UnitArray len=param[4] optional
     // param-hint: UnitCount optional
     // param-hint: DatabaseId optional
-    func WinBioOpenSession(Factor: UInt32, PoolType: WINBIO_POOL, Flags: UInt32, UnitArray: CPointer<UInt32>, UnitCount: UIntNative, DatabaseId: CPointer<GUID>, SessionHandle: CPointer<UInt32>): Int32
+    func WinBioOpenSession(Factor: UInt32, PoolType: UInt32, Flags: UInt32, UnitArray: CPointer<UInt32>, UnitCount: UIntNative, DatabaseId: CPointer<GUID>, SessionHandle: CPointer<UInt32>): Int32
     // param-hint: EventCallbackContext optional
     func WinBioRegisterEventMonitor(SessionHandle: UInt32, EventMask: UInt32, EventCallback: PWINBIO_EVENT_CALLBACK, EventCallbackContext: CPointer<Unit>): Int32
     func WinBioReleaseFocus(): Int32
     func WinBioRemoveAllCredentials(): Int32
     func WinBioRemoveAllDomainCredentials(): Int32
-    func WinBioRemoveCredential(Identity: WINBIO_IDENTITY, Type: WINBIO_CREDENTIAL_TYPE): Int32
+    func WinBioRemoveCredential(Identity: WINBIO_IDENTITY, Type: Int32): Int32
     // param-hint: Credential bytes=param[2]
-    func WinBioSetCredential(Type: WINBIO_CREDENTIAL_TYPE, Credential: CPointer<UInt8>, CredentialSize: UIntNative, Format: WINBIO_CREDENTIAL_FORMAT): Int32
+    func WinBioSetCredential(Type: Int32, Credential: CPointer<UInt8>, CredentialSize: UIntNative, Format: Int32): Int32
     // param-hint: UnitId optional
     // param-hint: Identity optional
     // param-hint: SubFactor optional

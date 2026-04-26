@@ -2,16 +2,22 @@
 package windows_sys.Win32.NetworkManagement.P2P
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionWriteInt32}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
+import windows_sys.Win32._impl_l1 as Win32__impl_l1
+import windows_sys.Win32._impl_l2 as Win32__impl_l2
 
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct DRT_ADDRESS {
-    public var socketAddress: Win32_impl.SOCKADDR_STORAGE = Win32_impl.SOCKADDR_STORAGE()
+    public var socketAddress: Win32__impl_l1.SOCKADDR_STORAGE = Win32__impl_l1.SOCKADDR_STORAGE()
     public var flags: UInt32 = 0
     public var nearness: Int32 = 0
     public var latency: UInt32 = 0
@@ -19,7 +25,6 @@ public struct DRT_ADDRESS {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct DRT_ADDRESS_FLAGS {
     public var value: Int32 = 0
 
@@ -61,7 +66,7 @@ public let DRT_ADDRESS_FLAGS_DRT_ADDRESS_FLAG_SUSPECT_UNREGISTERED_ID: DRT_ADDRE
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
 public let DRT_ADDRESS_FLAGS_DRT_ADDRESS_FLAG_INQUIRE: DRT_ADDRESS_FLAGS = DRT_ADDRESS_FLAGS(128)
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct DRT_ADDRESS_LIST {
     public var AddressCount: UInt32 = 0
@@ -83,8 +88,8 @@ public struct DRT_BOOTSTRAP_PROVIDER {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-public type DRT_BOOTSTRAP_RESOLVE_CALLBACK = CFunc<(Int32, CPointer<Unit>, CPointer<Win32_impl.SOCKET_ADDRESS_LIST>, Int32) -> Unit>
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+public type DRT_BOOTSTRAP_RESOLVE_CALLBACK = CFunc<(Int32, CPointer<Unit>, CPointer<Win32__impl_l2.SOCKET_ADDRESS_LIST>, Int32) -> Unit>
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
 @C
@@ -95,121 +100,6 @@ public struct DRT_DATA {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct DRT_EVENT_DATA {
-    public var type_: DRT_EVENT_TYPE = DRT_EVENT_TYPE()
-    public var hr: Int32 = 0
-    public var pvContext: CPointer<Unit> = CPointer<Unit>()
-    public var Anonymous: DRT_EVENT_DATA__Anonymous_e__Union = DRT_EVENT_DATA__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct DRT_EVENT_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-
-    public func leafsetKeyChange(): DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_leafsetKeyChange(val: DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func registrationStateChange(): DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_registrationStateChange(val: DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func statusChange(): DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_statusChange(val: DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct {
-    public var change: DRT_LEAFSET_KEY_CHANGE_TYPE = DRT_LEAFSET_KEY_CHANGE_TYPE()
-    public var localKey: DRT_DATA = DRT_DATA()
-    public var remoteKey: DRT_DATA = DRT_DATA()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct {
-    public var state: DRT_REGISTRATION_STATE = DRT_REGISTRATION_STATE()
-    public var localKey: DRT_DATA = DRT_DATA()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct {
-    public var status: DRT_STATUS = DRT_STATUS()
-    public var bootstrapAddresses: DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct__bootstrapAddresses_e__Struct = DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct__bootstrapAddresses_e__Struct()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct__bootstrapAddresses_e__Struct {
-    public var cntAddress: UInt32 = 0
-    public var pAddresses: CPointer<Win32_impl.SOCKADDR_STORAGE> = CPointer<Win32_impl.SOCKADDR_STORAGE>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct DRT_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -237,7 +127,6 @@ public let DRT_EVENT_TYPE_DRT_EVENT_LEAFSET_KEY_CHANGED: DRT_EVENT_TYPE = DRT_EV
 public let DRT_EVENT_TYPE_DRT_EVENT_REGISTRATION_STATE_CHANGED: DRT_EVENT_TYPE = DRT_EVENT_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct DRT_LEAFSET_KEY_CHANGE_TYPE {
     public var value: Int32 = 0
 
@@ -262,7 +151,6 @@ public let DRT_LEAFSET_KEY_CHANGE_TYPE_DRT_LEAFSET_KEY_ADDED: DRT_LEAFSET_KEY_CH
 public let DRT_LEAFSET_KEY_CHANGE_TYPE_DRT_LEAFSET_KEY_DELETED: DRT_LEAFSET_KEY_CHANGE_TYPE = DRT_LEAFSET_KEY_CHANGE_TYPE(1)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct DRT_MATCH_TYPE {
     public var value: Int32 = 0
 
@@ -298,7 +186,6 @@ public struct DRT_REGISTRATION {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct DRT_REGISTRATION_STATE {
     public var value: Int32 = 0
 
@@ -320,7 +207,6 @@ public struct DRT_REGISTRATION_STATE {
 public let DRT_REGISTRATION_STATE_DRT_REGISTRATION_STATE_UNRESOLVEABLE: DRT_REGISTRATION_STATE = DRT_REGISTRATION_STATE(1)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct DRT_SCOPE {
     public var value: Int32 = 0
 
@@ -364,14 +250,13 @@ public struct DRT_SEARCH_INFO {
 @C
 public struct DRT_SEARCH_RESULT {
     public var dwSize: UInt32 = 0
-    public var type_: DRT_MATCH_TYPE = DRT_MATCH_TYPE()
+    public var type_: Int32 = 0
     public var pvContext: CPointer<Unit> = CPointer<Unit>()
     public var registration: DRT_REGISTRATION = DRT_REGISTRATION()
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct DRT_SECURITY_MODE {
     public var value: Int32 = 0
 
@@ -430,12 +315,11 @@ public struct DRT_SETTINGS {
     public var hTransport: CPointer<Unit> = CPointer<Unit>()
     public var pSecurityProvider: CPointer<DRT_SECURITY_PROVIDER> = CPointer<DRT_SECURITY_PROVIDER>()
     public var pBootstrapProvider: CPointer<DRT_BOOTSTRAP_PROVIDER> = CPointer<DRT_BOOTSTRAP_PROVIDER>()
-    public var eSecurityMode: DRT_SECURITY_MODE = DRT_SECURITY_MODE()
+    public var eSecurityMode: Int32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct DRT_STATUS {
     public var value: Int32 = 0
 
@@ -473,7 +357,6 @@ public struct PEERDIST_CLIENT_BASIC_INFO {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS {
     public var value: Int32 = 0
 
@@ -523,7 +406,6 @@ public struct PEERDIST_RETRIEVAL_OPTIONS {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE {
     public var value: UInt32 = 0
 
@@ -551,7 +433,6 @@ public let PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE_PEERDIST_RETRIEV
 public let PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE_PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION: PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE = PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE(2)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEERDIST_STATUS {
     public var value: Int32 = 0
 
@@ -582,41 +463,21 @@ public let PEERDIST_STATUS_PEERDIST_STATUS_AVAILABLE: PEERDIST_STATUS = PEERDIST
 @C
 public struct PEERDIST_STATUS_INFO {
     public var cbSize: UInt32 = 0
-    public var status: PEERDIST_STATUS = PEERDIST_STATUS()
-    public var dwMinVer: PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE = PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE()
-    public var dwMaxVer: PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE = PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE()
+    public var status: Int32 = 0
+    public var dwMinVer: UInt32 = 0
+    public var dwMaxVer: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct PEER_ADDRESS {
     public var dwSize: UInt32 = 0
-    public var sin6: Win32_impl.SOCKADDR_IN6 = Win32_impl.SOCKADDR_IN6()
+    public var sin6: Win32__impl_l1.SOCKADDR_IN6 = Win32__impl_l1.SOCKADDR_IN6()
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_APPLICATION {
-    public var id: GUID = GUID()
-    public var data: PEER_DATA = PEER_DATA()
-    public var pwzDescription: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_APPLICATION_REGISTRATION_INFO {
-    public var application: PEER_APPLICATION = PEER_APPLICATION()
-    public var pwzApplicationToLaunch: CPointer<UInt16> = CPointer<UInt16>()
-    public var pwzApplicationArguments: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwPublicationScope: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_APPLICATION_REGISTRATION_TYPE {
     public var value: Int32 = 0
 
@@ -641,16 +502,6 @@ public let PEER_APPLICATION_REGISTRATION_TYPE_PEER_APPLICATION_CURRENT_USER: PEE
 public let PEER_APPLICATION_REGISTRATION_TYPE_PEER_APPLICATION_ALL_USERS: PEER_APPLICATION_REGISTRATION_TYPE = PEER_APPLICATION_REGISTRATION_TYPE(1)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_APP_LAUNCH_INFO {
-    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
-    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
-    public var pInvitation: CPointer<PEER_INVITATION> = CPointer<PEER_INVITATION>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_CHANGE_TYPE {
     public var value: Int32 = 0
 
@@ -678,178 +529,6 @@ public let PEER_CHANGE_TYPE_PEER_CHANGE_DELETED: PEER_CHANGE_TYPE = PEER_CHANGE_
 public let PEER_CHANGE_TYPE_PEER_CHANGE_UPDATED: PEER_CHANGE_TYPE = PEER_CHANGE_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_COLLAB_EVENT_DATA {
-    public var eventType: PEER_COLLAB_EVENT_TYPE = PEER_COLLAB_EVENT_TYPE()
-    public var Anonymous: PEER_COLLAB_EVENT_DATA__Anonymous_e__Union = PEER_COLLAB_EVENT_DATA__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-
-    public func watchListChangedData(): PEER_EVENT_WATCHLIST_CHANGED_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_WATCHLIST_CHANGED_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_watchListChangedData(val: PEER_EVENT_WATCHLIST_CHANGED_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_WATCHLIST_CHANGED_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func presenceChangedData(): PEER_EVENT_PRESENCE_CHANGED_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_PRESENCE_CHANGED_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_presenceChangedData(val: PEER_EVENT_PRESENCE_CHANGED_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_PRESENCE_CHANGED_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func applicationChangedData(): PEER_EVENT_APPLICATION_CHANGED_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_APPLICATION_CHANGED_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_applicationChangedData(val: PEER_EVENT_APPLICATION_CHANGED_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_APPLICATION_CHANGED_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func objectChangedData(): PEER_EVENT_OBJECT_CHANGED_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_OBJECT_CHANGED_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_objectChangedData(val: PEER_EVENT_OBJECT_CHANGED_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_OBJECT_CHANGED_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func endpointChangedData(): PEER_EVENT_ENDPOINT_CHANGED_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_ENDPOINT_CHANGED_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_endpointChangedData(val: PEER_EVENT_ENDPOINT_CHANGED_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_ENDPOINT_CHANGED_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func peopleNearMeChangedData(): PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_peopleNearMeChangedData(val: PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func requestStatusChangedData(): PEER_EVENT_REQUEST_STATUS_CHANGED_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_REQUEST_STATUS_CHANGED_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_requestStatusChangedData(val: PEER_EVENT_REQUEST_STATUS_CHANGED_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_REQUEST_STATUS_CHANGED_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_COLLAB_EVENT_REGISTRATION {
-    public var eventType: PEER_COLLAB_EVENT_TYPE = PEER_COLLAB_EVENT_TYPE()
-    public var pInstance: CPointer<GUID> = CPointer<GUID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_COLLAB_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -901,7 +580,6 @@ public let PEER_COLLAB_EVENT_TYPE_PEER_EVENT_PEOPLE_NEAR_ME_CHANGED: PEER_COLLAB
 public let PEER_COLLAB_EVENT_TYPE_PEER_EVENT_REQUEST_STATUS_CHANGED: PEER_COLLAB_EVENT_TYPE = PEER_COLLAB_EVENT_TYPE(11)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_CONNECTION_FLAGS {
     public var value: Int32 = 0
 
@@ -925,7 +603,7 @@ public let PEER_CONNECTION_FLAGS_PEER_CONNECTION_NEIGHBOR: PEER_CONNECTION_FLAGS
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
 public let PEER_CONNECTION_FLAGS_PEER_CONNECTION_DIRECT: PEER_CONNECTION_FLAGS = PEER_CONNECTION_FLAGS(2)
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct PEER_CONNECTION_INFO {
     public var dwSize: UInt32 = 0
@@ -938,7 +616,6 @@ public struct PEER_CONNECTION_INFO {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_CONNECTION_STATUS {
     public var value: Int32 = 0
 
@@ -965,26 +642,13 @@ public let PEER_CONNECTION_STATUS_PEER_DISCONNECTED: PEER_CONNECTION_STATUS = PE
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
 public let PEER_CONNECTION_STATUS_PEER_CONNECTION_FAILED: PEER_CONNECTION_STATUS = PEER_CONNECTION_STATUS(3)
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_CONTACT {
-    public var pwzPeerName: CPointer<UInt16> = CPointer<UInt16>()
-    public var pwzNickName: CPointer<UInt16> = CPointer<UInt16>()
-    public var pwzDisplayName: CPointer<UInt16> = CPointer<UInt16>()
-    public var pwzEmailAddress: CPointer<UInt16> = CPointer<UInt16>()
-    public var fWatch: Int32 = 0
-    public var WatcherPermissions: PEER_WATCH_PERMISSION = PEER_WATCH_PERMISSION()
-    public var credentials: PEER_DATA = PEER_DATA()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct PEER_CREDENTIAL_INFO {
     public var dwSize: UInt32 = 0
     public var dwFlags: UInt32 = 0
     public var pwzFriendlyName: CPointer<UInt16> = CPointer<UInt16>()
-    public var pPublicKey: CPointer<Win32_impl.CERT_PUBLIC_KEY_INFO> = CPointer<Win32_impl.CERT_PUBLIC_KEY_INFO>()
+    public var pPublicKey: CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFO> = CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFO>()
     public var pwzIssuerPeerName: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzIssuerFriendlyName: CPointer<UInt16> = CPointer<UInt16>()
     public var ftValidityStart: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
@@ -1002,7 +666,7 @@ public struct PEER_DATA {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct PEER_ENDPOINT {
     public var address: PEER_ADDRESS = PEER_ADDRESS()
@@ -1012,31 +676,13 @@ public struct PEER_ENDPOINT {
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
 @C
-public struct PEER_EVENT_APPLICATION_CHANGED_DATA {
-    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
-    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
-    public var changeType: PEER_CHANGE_TYPE = PEER_CHANGE_TYPE()
-    public var pApplication: CPointer<PEER_APPLICATION> = CPointer<PEER_APPLICATION>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_EVENT_CONNECTION_CHANGE_DATA {
     public var dwSize: UInt32 = 0
-    public var status: PEER_CONNECTION_STATUS = PEER_CONNECTION_STATUS()
+    public var status: Int32 = 0
     public var ullConnectionId: UInt64 = 0
     public var ullNodeId: UInt64 = 0
     public var ullNextConnectionId: UInt64 = 0
     public var hrConnectionFailedReason: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_EVENT_ENDPOINT_CHANGED_DATA {
-    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
-    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
     public init() {}
 }
 
@@ -1050,64 +696,7 @@ public struct PEER_EVENT_INCOMING_DATA {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_EVENT_MEMBER_CHANGE_DATA {
-    public var dwSize: UInt32 = 0
-    public var changeType: PEER_MEMBER_CHANGE_TYPE = PEER_MEMBER_CHANGE_TYPE()
-    public var pwzIdentity: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_EVENT_NODE_CHANGE_DATA {
-    public var dwSize: UInt32 = 0
-    public var changeType: PEER_NODE_CHANGE_TYPE = PEER_NODE_CHANGE_TYPE()
-    public var ullNodeId: UInt64 = 0
-    public var pwzPeerId: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_EVENT_OBJECT_CHANGED_DATA {
-    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
-    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
-    public var changeType: PEER_CHANGE_TYPE = PEER_CHANGE_TYPE()
-    public var pObject: CPointer<PEER_OBJECT> = CPointer<PEER_OBJECT>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA {
-    public var changeType: PEER_CHANGE_TYPE = PEER_CHANGE_TYPE()
-    public var pPeopleNearMe: CPointer<PEER_PEOPLE_NEAR_ME> = CPointer<PEER_PEOPLE_NEAR_ME>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_EVENT_PRESENCE_CHANGED_DATA {
-    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
-    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
-    public var changeType: PEER_CHANGE_TYPE = PEER_CHANGE_TYPE()
-    public var pPresenceInfo: CPointer<PEER_PRESENCE_INFO> = CPointer<PEER_PRESENCE_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_EVENT_RECORD_CHANGE_DATA {
-    public var dwSize: UInt32 = 0
-    public var changeType: PEER_RECORD_CHANGE_TYPE = PEER_RECORD_CHANGE_TYPE()
-    public var recordId: GUID = GUID()
-    public var recordType: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct PEER_EVENT_REQUEST_STATUS_CHANGED_DATA {
     public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
@@ -1124,165 +713,6 @@ public struct PEER_EVENT_SYNCHRONIZED_DATA {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_EVENT_WATCHLIST_CHANGED_DATA {
-    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
-    public var changeType: PEER_CHANGE_TYPE = PEER_CHANGE_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_GRAPH_EVENT_DATA {
-    public var eventType: PEER_GRAPH_EVENT_TYPE = PEER_GRAPH_EVENT_TYPE()
-    public var Anonymous: PEER_GRAPH_EVENT_DATA__Anonymous_e__Union = PEER_GRAPH_EVENT_DATA__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-
-    public func dwStatus(): PEER_GRAPH_STATUS_FLAGS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_GRAPH_STATUS_FLAGS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dwStatus(val: PEER_GRAPH_STATUS_FLAGS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_GRAPH_STATUS_FLAGS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func incomingData(): PEER_EVENT_INCOMING_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_incomingData(val: PEER_EVENT_INCOMING_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func recordChangeData(): PEER_EVENT_RECORD_CHANGE_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_recordChangeData(val: PEER_EVENT_RECORD_CHANGE_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func connectionChangeData(): PEER_EVENT_CONNECTION_CHANGE_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_connectionChangeData(val: PEER_EVENT_CONNECTION_CHANGE_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func nodeChangeData(): PEER_EVENT_NODE_CHANGE_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_NODE_CHANGE_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_nodeChangeData(val: PEER_EVENT_NODE_CHANGE_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_NODE_CHANGE_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func synchronizedData(): PEER_EVENT_SYNCHRONIZED_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_SYNCHRONIZED_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_synchronizedData(val: PEER_EVENT_SYNCHRONIZED_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_SYNCHRONIZED_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_GRAPH_EVENT_REGISTRATION {
-    public var eventType: PEER_GRAPH_EVENT_TYPE = PEER_GRAPH_EVENT_TYPE()
-    public var pType: CPointer<GUID> = CPointer<GUID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_GRAPH_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -1344,7 +774,6 @@ public struct PEER_GRAPH_PROPERTIES {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_GRAPH_PROPERTY_FLAGS {
     public var value: Int32 = 0
 
@@ -1369,7 +798,6 @@ public let PEER_GRAPH_PROPERTY_FLAGS_PEER_GRAPH_PROPERTY_HEARTBEATS: PEER_GRAPH_
 public let PEER_GRAPH_PROPERTY_FLAGS_PEER_GRAPH_PROPERTY_DEFER_EXPIRATION: PEER_GRAPH_PROPERTY_FLAGS = PEER_GRAPH_PROPERTY_FLAGS(2)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_GRAPH_SCOPE {
     public var value: Int32 = 0
 
@@ -1403,7 +831,6 @@ public let PEER_GRAPH_SCOPE_PEER_GRAPH_SCOPE_LINKLOCAL: PEER_GRAPH_SCOPE = PEER_
 public let PEER_GRAPH_SCOPE_PEER_GRAPH_SCOPE_LOOPBACK: PEER_GRAPH_SCOPE = PEER_GRAPH_SCOPE(4)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_GRAPH_STATUS_FLAGS {
     public var value: Int32 = 0
 
@@ -1431,7 +858,6 @@ public let PEER_GRAPH_STATUS_FLAGS_PEER_GRAPH_STATUS_HAS_CONNECTIONS: PEER_GRAPH
 public let PEER_GRAPH_STATUS_FLAGS_PEER_GRAPH_STATUS_SYNCHRONIZED: PEER_GRAPH_STATUS_FLAGS = PEER_GRAPH_STATUS_FLAGS(4)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_GROUP_AUTHENTICATION_SCHEME {
     public var value: Int32 = 0
 
@@ -1456,153 +882,6 @@ public let PEER_GROUP_AUTHENTICATION_SCHEME_PEER_GROUP_GMC_AUTHENTICATION: PEER_
 public let PEER_GROUP_AUTHENTICATION_SCHEME_PEER_GROUP_PASSWORD_AUTHENTICATION: PEER_GROUP_AUTHENTICATION_SCHEME = PEER_GROUP_AUTHENTICATION_SCHEME(2)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_GROUP_EVENT_DATA {
-    public var eventType: PEER_GROUP_EVENT_TYPE = PEER_GROUP_EVENT_TYPE()
-    public var Anonymous: PEER_GROUP_EVENT_DATA__Anonymous_e__Union = PEER_GROUP_EVENT_DATA__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-
-    public func dwStatus(): PEER_GROUP_STATUS {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_GROUP_STATUS>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_dwStatus(val: PEER_GROUP_STATUS): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_GROUP_STATUS>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func incomingData(): PEER_EVENT_INCOMING_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_incomingData(val: PEER_EVENT_INCOMING_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func recordChangeData(): PEER_EVENT_RECORD_CHANGE_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_recordChangeData(val: PEER_EVENT_RECORD_CHANGE_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func connectionChangeData(): PEER_EVENT_CONNECTION_CHANGE_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_connectionChangeData(val: PEER_EVENT_CONNECTION_CHANGE_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func memberChangeData(): PEER_EVENT_MEMBER_CHANGE_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_MEMBER_CHANGE_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_memberChangeData(val: PEER_EVENT_MEMBER_CHANGE_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PEER_EVENT_MEMBER_CHANGE_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func hrConnectionFailedReason(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_hrConnectionFailedReason(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_GROUP_EVENT_REGISTRATION {
-    public var eventType: PEER_GROUP_EVENT_TYPE = PEER_GROUP_EVENT_TYPE()
-    public var pType: CPointer<GUID> = CPointer<GUID>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_GROUP_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -1648,7 +927,6 @@ public let PEER_GROUP_EVENT_TYPE_PEER_GROUP_EVENT_CONNECTION_FAILED: PEER_GROUP_
 public let PEER_GROUP_EVENT_TYPE_PEER_GROUP_EVENT_AUTHENTICATION_FAILED: PEER_GROUP_EVENT_TYPE = PEER_GROUP_EVENT_TYPE(11)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_GROUP_ISSUE_CREDENTIAL_FLAGS {
     public var value: Int32 = 0
 
@@ -1689,7 +967,6 @@ public struct PEER_GROUP_PROPERTIES {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_GROUP_PROPERTY_FLAGS {
     public var value: Int32 = 0
 
@@ -1717,7 +994,6 @@ public let PEER_GROUP_PROPERTY_FLAGS_PEER_DISABLE_PRESENCE: PEER_GROUP_PROPERTY_
 public let PEER_GROUP_PROPERTY_FLAGS_PEER_DEFER_EXPIRATION: PEER_GROUP_PROPERTY_FLAGS = PEER_GROUP_PROPERTY_FLAGS(4)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_GROUP_STATUS {
     public var value: Int32 = 0
 
@@ -1750,7 +1026,7 @@ public struct PEER_INVITATION {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct PEER_INVITATION_INFO {
     public var dwSize: UInt32 = 0
@@ -1770,22 +1046,12 @@ public struct PEER_INVITATION_INFO {
     public var pRoles: CPointer<GUID> = CPointer<GUID>()
     public var cClassifiers: UInt32 = 0
     public var ppwzClassifiers: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
-    public var pSubjectPublicKey: CPointer<Win32_impl.CERT_PUBLIC_KEY_INFO> = CPointer<Win32_impl.CERT_PUBLIC_KEY_INFO>()
-    public var authScheme: PEER_GROUP_AUTHENTICATION_SCHEME = PEER_GROUP_AUTHENTICATION_SCHEME()
+    public var pSubjectPublicKey: CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFO> = CPointer<Win32__impl_l1.CERT_PUBLIC_KEY_INFO>()
+    public var authScheme: Int32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_INVITATION_RESPONSE {
-    public var action: PEER_INVITATION_RESPONSE_TYPE = PEER_INVITATION_RESPONSE_TYPE()
-    public var pwzMessage: CPointer<UInt16> = CPointer<UInt16>()
-    public var hrExtendedInfo: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_INVITATION_RESPONSE_TYPE {
     public var value: Int32 = 0
 
@@ -1815,7 +1081,7 @@ public let PEER_INVITATION_RESPONSE_TYPE_PEER_INVITATION_RESPONSE_EXPIRED: PEER_
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
 public let PEER_INVITATION_RESPONSE_TYPE_PEER_INVITATION_RESPONSE_ERROR: PEER_INVITATION_RESPONSE_TYPE = PEER_INVITATION_RESPONSE_TYPE(3)
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_Security_Cryptography == "on")]
 @C
 public struct PEER_MEMBER {
     public var dwSize: UInt32 = 0
@@ -1830,7 +1096,6 @@ public struct PEER_MEMBER {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_MEMBER_CHANGE_TYPE {
     public var value: Int32 = 0
 
@@ -1864,7 +1129,6 @@ public let PEER_MEMBER_CHANGE_TYPE_PEER_MEMBER_JOINED: PEER_MEMBER_CHANGE_TYPE =
 public let PEER_MEMBER_CHANGE_TYPE_PEER_MEMBER_LEFT: PEER_MEMBER_CHANGE_TYPE = PEER_MEMBER_CHANGE_TYPE(5)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_MEMBER_FLAGS {
     public var value: Int32 = 0
 
@@ -1895,7 +1159,6 @@ public struct PEER_NAME_PAIR {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_NODE_CHANGE_TYPE {
     public var value: Int32 = 0
 
@@ -1922,7 +1185,7 @@ public let PEER_NODE_CHANGE_TYPE_PEER_NODE_CHANGE_DISCONNECTED: PEER_NODE_CHANGE
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
 public let PEER_NODE_CHANGE_TYPE_PEER_NODE_CHANGE_UPDATED: PEER_NODE_CHANGE_TYPE = PEER_NODE_CHANGE_TYPE(3)
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct PEER_NODE_INFO {
     public var dwSize: UInt32 = 0
@@ -1943,7 +1206,7 @@ public struct PEER_OBJECT {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct PEER_PEOPLE_NEAR_ME {
     public var pwzNickName: CPointer<UInt16> = CPointer<UInt16>()
@@ -1952,33 +1215,24 @@ public struct PEER_PEOPLE_NEAR_ME {
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_PNRP_CLOUD_INFO {
-    public var pwzCloudName: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwScope: PNRP_SCOPE = PNRP_SCOPE()
-    public var dwScopeId: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct PEER_PNRP_ENDPOINT_INFO {
     public var pwzPeerName: CPointer<UInt16> = CPointer<UInt16>()
     public var cAddresses: UInt32 = 0
-    public var ppAddresses: CPointer<CPointer<Win32_impl.SOCKADDR>> = CPointer<CPointer<Win32_impl.SOCKADDR>>()
+    public var ppAddresses: CPointer<CPointer<Win32__impl_l1.SOCKADDR>> = CPointer<CPointer<Win32__impl_l1.SOCKADDR>>()
     public var pwzComment: CPointer<UInt16> = CPointer<UInt16>()
     public var payload: PEER_DATA = PEER_DATA()
     public init() {}
 }
 
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
 @C
 public struct PEER_PNRP_REGISTRATION_INFO {
     public var pwzCloudName: CPointer<UInt16> = CPointer<UInt16>()
     public var pwzPublishingIdentity: CPointer<UInt16> = CPointer<UInt16>()
     public var cAddresses: UInt32 = 0
-    public var ppAddresses: CPointer<CPointer<Win32_impl.SOCKADDR>> = CPointer<CPointer<Win32_impl.SOCKADDR>>()
+    public var ppAddresses: CPointer<CPointer<Win32__impl_l1.SOCKADDR>> = CPointer<CPointer<Win32__impl_l1.SOCKADDR>>()
     public var wPort: UInt16 = 0
     public var pwzComment: CPointer<UInt16> = CPointer<UInt16>()
     public var payload: PEER_DATA = PEER_DATA()
@@ -1986,15 +1240,6 @@ public struct PEER_PNRP_REGISTRATION_INFO {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_PRESENCE_INFO {
-    public var status: PEER_PRESENCE_STATUS = PEER_PRESENCE_STATUS()
-    public var pwzDescriptiveText: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_PRESENCE_STATUS {
     public var value: Int32 = 0
 
@@ -2037,7 +1282,6 @@ public let PEER_PRESENCE_STATUS_PEER_PRESENCE_ON_THE_PHONE: PEER_PRESENCE_STATUS
 public let PEER_PRESENCE_STATUS_PEER_PRESENCE_ONLINE: PEER_PRESENCE_STATUS = PEER_PRESENCE_STATUS(7)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_PUBLICATION_SCOPE {
     public var value: Int32 = 0
 
@@ -2087,7 +1331,6 @@ public struct PEER_RECORD {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_RECORD_CHANGE_TYPE {
     public var value: Int32 = 0
 
@@ -2118,7 +1361,6 @@ public let PEER_RECORD_CHANGE_TYPE_PEER_RECORD_DELETED: PEER_RECORD_CHANGE_TYPE 
 public let PEER_RECORD_CHANGE_TYPE_PEER_RECORD_EXPIRED: PEER_RECORD_CHANGE_TYPE = PEER_RECORD_CHANGE_TYPE(4)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_RECORD_FLAGS {
     public var value: Int32 = 0
 
@@ -2143,23 +1385,6 @@ public let PEER_RECORD_FLAGS_PEER_RECORD_FLAG_AUTOREFRESH: PEER_RECORD_FLAGS = P
 public let PEER_RECORD_FLAGS_PEER_RECORD_FLAG_DELETED: PEER_RECORD_FLAGS = PEER_RECORD_FLAGS(2)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PEER_SECURITY_INTERFACE {
-    public var dwSize: UInt32 = 0
-    public var pwzSspFilename: CPointer<UInt16> = CPointer<UInt16>()
-    public var pwzPackageName: CPointer<UInt16> = CPointer<UInt16>()
-    public var cbSecurityInfo: UInt32 = 0
-    public var pbSecurityInfo: CPointer<UInt8> = CPointer<UInt8>()
-    public var pvContext: CPointer<Unit> = CPointer<Unit>()
-    public var pfnValidateRecord: PFNPEER_VALIDATE_RECORD = { _, _, _, _ => 0 }
-    public var pfnSecureRecord: PFNPEER_SECURE_RECORD = { _, _, _, _, _ => 0 }
-    public var pfnFreeSecurityData: PFNPEER_FREE_SECURITY_DATA = { _, _, _ => 0 }
-    public var pfnAuthFailed: PFNPEER_ON_PASSWORD_AUTH_FAILED = { _, _ => 0 }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_SIGNIN_FLAGS {
     public var value: Int32 = 0
 
@@ -2198,7 +1423,6 @@ public struct PEER_VERSION_DATA {
 }
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PEER_WATCH_PERMISSION {
     public var value: Int32 = 0
 
@@ -2229,105 +1453,12 @@ public type PFNPEER_FREE_SECURITY_DATA = CFunc<(CPointer<Unit>, CPointer<Unit>, 
 public type PFNPEER_ON_PASSWORD_AUTH_FAILED = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-public type PFNPEER_SECURE_RECORD = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<PEER_RECORD>, PEER_RECORD_CHANGE_TYPE, CPointer<CPointer<PEER_DATA>>) -> Int32>
+public type PFNPEER_SECURE_RECORD = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<PEER_RECORD>, Int32, CPointer<CPointer<PEER_DATA>>) -> Int32>
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-public type PFNPEER_VALIDATE_RECORD = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<PEER_RECORD>, PEER_RECORD_CHANGE_TYPE) -> Int32>
+public type PFNPEER_VALIDATE_RECORD = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<PEER_RECORD>, Int32) -> Int32>
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PNRPCLOUDINFO {
-    public var dwSize: UInt32 = 0
-    public var Cloud: PNRP_CLOUD_ID = PNRP_CLOUD_ID()
-    public var enCloudState: PNRP_CLOUD_STATE = PNRP_CLOUD_STATE()
-    public var enCloudFlags: PNRP_CLOUD_FLAGS = PNRP_CLOUD_FLAGS()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PNRPINFO_V1 {
-    public var dwSize: UInt32 = 0
-    public var lpwszIdentity: CPointer<UInt16> = CPointer<UInt16>()
-    public var nMaxResolve: UInt32 = 0
-    public var dwTimeout: UInt32 = 0
-    public var dwLifetime: UInt32 = 0
-    public var enResolveCriteria: PNRP_RESOLVE_CRITERIA = PNRP_RESOLVE_CRITERIA()
-    public var dwFlags: UInt32 = 0
-    public var saHint: Win32_impl.SOCKET_ADDRESS = Win32_impl.SOCKET_ADDRESS()
-    public var enNameState: PNRP_REGISTERED_ID_STATE = PNRP_REGISTERED_ID_STATE()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PNRPINFO_V2 {
-    public var dwSize: UInt32 = 0
-    public var lpwszIdentity: CPointer<UInt16> = CPointer<UInt16>()
-    public var nMaxResolve: UInt32 = 0
-    public var dwTimeout: UInt32 = 0
-    public var dwLifetime: UInt32 = 0
-    public var enResolveCriteria: PNRP_RESOLVE_CRITERIA = PNRP_RESOLVE_CRITERIA()
-    public var dwFlags: UInt32 = 0
-    public var saHint: Win32_impl.SOCKET_ADDRESS = Win32_impl.SOCKET_ADDRESS()
-    public var enNameState: PNRP_REGISTERED_ID_STATE = PNRP_REGISTERED_ID_STATE()
-    public var enExtendedPayloadType: PNRP_EXTENDED_PAYLOAD_TYPE = PNRP_EXTENDED_PAYLOAD_TYPE()
-    public var Anonymous: PNRPINFO_V2__Anonymous_e__Union = PNRPINFO_V2__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct PNRPINFO_V2__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func blobPayload(): Win32_impl.BLOB {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.BLOB>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_blobPayload(val: Win32_impl.BLOB): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_impl.BLOB>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pwszPayload(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pwszPayload(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PNRP_CLOUD_FLAGS {
     public var value: Int32 = 0
 
@@ -2358,16 +1489,6 @@ public let PNRP_CLOUD_FLAGS_PNRP_CLOUD_RESOLVE_ONLY: PNRP_CLOUD_FLAGS = PNRP_CLO
 public let PNRP_CLOUD_FLAGS_PNRP_CLOUD_FULL_PARTICIPANT: PNRP_CLOUD_FLAGS = PNRP_CLOUD_FLAGS(4)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
-public struct PNRP_CLOUD_ID {
-    public var AddressFamily: Int32 = 0
-    public var Scope: PNRP_SCOPE = PNRP_SCOPE()
-    public var ScopeId: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PNRP_CLOUD_STATE {
     public var value: Int32 = 0
 
@@ -2407,7 +1528,6 @@ public let PNRP_CLOUD_STATE_PNRP_CLOUD_STATE_NO_NET: PNRP_CLOUD_STATE = PNRP_CLO
 public let PNRP_CLOUD_STATE_PNRP_CLOUD_STATE_ALONE: PNRP_CLOUD_STATE = PNRP_CLOUD_STATE(6)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PNRP_EXTENDED_PAYLOAD_TYPE {
     public var value: Int32 = 0
 
@@ -2435,7 +1555,6 @@ public let PNRP_EXTENDED_PAYLOAD_TYPE_PNRP_EXTENDED_PAYLOAD_TYPE_BINARY: PNRP_EX
 public let PNRP_EXTENDED_PAYLOAD_TYPE_PNRP_EXTENDED_PAYLOAD_TYPE_STRING: PNRP_EXTENDED_PAYLOAD_TYPE = PNRP_EXTENDED_PAYLOAD_TYPE(2)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PNRP_REGISTERED_ID_STATE {
     public var value: Int32 = 0
 
@@ -2460,7 +1579,6 @@ public let PNRP_REGISTERED_ID_STATE_PNRP_REGISTERED_ID_STATE_OK: PNRP_REGISTERED
 public let PNRP_REGISTERED_ID_STATE_PNRP_REGISTERED_ID_STATE_PROBLEM: PNRP_REGISTERED_ID_STATE = PNRP_REGISTERED_ID_STATE(2)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PNRP_RESOLVE_CRITERIA {
     public var value: Int32 = 0
 
@@ -2500,7 +1618,6 @@ public let PNRP_RESOLVE_CRITERIA_PNRP_RESOLVE_CRITERIA_ANY_PEER_NAME: PNRP_RESOL
 public let PNRP_RESOLVE_CRITERIA_PNRP_RESOLVE_CRITERIA_NEAREST_PEER_NAME: PNRP_RESOLVE_CRITERIA = PNRP_RESOLVE_CRITERIA(6)
 
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
-@C
 public struct PNRP_SCOPE {
     public var value: Int32 = 0
 
@@ -2530,53 +1647,898 @@ public let PNRP_SCOPE_PNRP_SITE_LOCAL_SCOPE: PNRP_SCOPE = PNRP_SCOPE(2)
 @When[Windows_Win32_NetworkManagement_P2P == "on"]
 public let PNRP_SCOPE_PNRP_LINK_LOCAL_SCOPE: PNRP_SCOPE = PNRP_SCOPE(3)
 
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct DRT_EVENT_DATA {
+    public var type_: Int32 = 0
+    public var hr: Int32 = 0
+    public var pvContext: CPointer<Unit> = CPointer<Unit>()
+    public var Anonymous: DRT_EVENT_DATA__Anonymous_e__Union = DRT_EVENT_DATA__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DRT_EVENT_DATA__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+
+    public mut prop leafsetKeyChange: DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop registrationStateChange: DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop statusChange: DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct DRT_EVENT_DATA__Anonymous_e__Union__leafsetKeyChange_e__Struct {
+    public var change: Int32 = 0
+    public var localKey: DRT_DATA = DRT_DATA()
+    public var remoteKey: DRT_DATA = DRT_DATA()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct DRT_EVENT_DATA__Anonymous_e__Union__registrationStateChange_e__Struct {
+    public var state: Int32 = 0
+    public var localKey: DRT_DATA = DRT_DATA()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct {
+    public var status: Int32 = 0
+    public var bootstrapAddresses: DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct__bootstrapAddresses_e__Struct = DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct__bootstrapAddresses_e__Struct()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct DRT_EVENT_DATA__Anonymous_e__Union__statusChange_e__Struct__bootstrapAddresses_e__Struct {
+    public var cntAddress: UInt32 = 0
+    public var pAddresses: CPointer<Win32__impl_l1.SOCKADDR_STORAGE> = CPointer<Win32__impl_l1.SOCKADDR_STORAGE>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_APPLICATION {
+    public var id: GUID = GUID()
+    public var data: PEER_DATA = PEER_DATA()
+    public var pwzDescription: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_APPLICATION_REGISTRATION_INFO {
+    public var application: PEER_APPLICATION = PEER_APPLICATION()
+    public var pwzApplicationToLaunch: CPointer<UInt16> = CPointer<UInt16>()
+    public var pwzApplicationArguments: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwPublicationScope: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_COLLAB_EVENT_REGISTRATION {
+    public var eventType: Int32 = 0
+    public var pInstance: CPointer<GUID> = CPointer<GUID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_CONTACT {
+    public var pwzPeerName: CPointer<UInt16> = CPointer<UInt16>()
+    public var pwzNickName: CPointer<UInt16> = CPointer<UInt16>()
+    public var pwzDisplayName: CPointer<UInt16> = CPointer<UInt16>()
+    public var pwzEmailAddress: CPointer<UInt16> = CPointer<UInt16>()
+    public var fWatch: Int32 = 0
+    public var WatcherPermissions: Int32 = 0
+    public var credentials: PEER_DATA = PEER_DATA()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct PEER_EVENT_APPLICATION_CHANGED_DATA {
+    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
+    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
+    public var changeType: Int32 = 0
+    public var pApplication: CPointer<PEER_APPLICATION> = CPointer<PEER_APPLICATION>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct PEER_EVENT_ENDPOINT_CHANGED_DATA {
+    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
+    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_EVENT_MEMBER_CHANGE_DATA {
+    public var dwSize: UInt32 = 0
+    public var changeType: Int32 = 0
+    public var pwzIdentity: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_EVENT_NODE_CHANGE_DATA {
+    public var dwSize: UInt32 = 0
+    public var changeType: Int32 = 0
+    public var ullNodeId: UInt64 = 0
+    public var pwzPeerId: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct PEER_EVENT_OBJECT_CHANGED_DATA {
+    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
+    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
+    public var changeType: Int32 = 0
+    public var pObject: CPointer<PEER_OBJECT> = CPointer<PEER_OBJECT>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA {
+    public var changeType: Int32 = 0
+    public var pPeopleNearMe: CPointer<PEER_PEOPLE_NEAR_ME> = CPointer<PEER_PEOPLE_NEAR_ME>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_EVENT_RECORD_CHANGE_DATA {
+    public var dwSize: UInt32 = 0
+    public var changeType: Int32 = 0
+    public var recordId: GUID = GUID()
+    public var recordType: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_EVENT_WATCHLIST_CHANGED_DATA {
+    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
+    public var changeType: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_GRAPH_EVENT_DATA {
+    public var eventType: Int32 = 0
+    public var Anonymous: PEER_GRAPH_EVENT_DATA__Anonymous_e__Union = PEER_GRAPH_EVENT_DATA__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct PEER_GRAPH_EVENT_DATA__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+
+    public mut prop dwStatus: PEER_GRAPH_STATUS_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return PEER_GRAPH_STATUS_FLAGS(unionReadInt32(base, 0))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val.value)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop incomingData: PEER_EVENT_INCOMING_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop recordChangeData: PEER_EVENT_RECORD_CHANGE_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop connectionChangeData: PEER_EVENT_CONNECTION_CHANGE_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop nodeChangeData: PEER_EVENT_NODE_CHANGE_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_NODE_CHANGE_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_NODE_CHANGE_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop synchronizedData: PEER_EVENT_SYNCHRONIZED_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_SYNCHRONIZED_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_SYNCHRONIZED_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_GRAPH_EVENT_REGISTRATION {
+    public var eventType: Int32 = 0
+    public var pType: CPointer<GUID> = CPointer<GUID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_GROUP_EVENT_DATA {
+    public var eventType: Int32 = 0
+    public var Anonymous: PEER_GROUP_EVENT_DATA__Anonymous_e__Union = PEER_GROUP_EVENT_DATA__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct PEER_GROUP_EVENT_DATA__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0)
+
+    public mut prop dwStatus: PEER_GROUP_STATUS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return PEER_GROUP_STATUS(unionReadInt32(base, 0))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val.value)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop incomingData: PEER_EVENT_INCOMING_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_INCOMING_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop recordChangeData: PEER_EVENT_RECORD_CHANGE_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_RECORD_CHANGE_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop connectionChangeData: PEER_EVENT_CONNECTION_CHANGE_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_CONNECTION_CHANGE_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop memberChangeData: PEER_EVENT_MEMBER_CHANGE_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_MEMBER_CHANGE_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_MEMBER_CHANGE_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop hrConnectionFailedReason: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_GROUP_EVENT_REGISTRATION {
+    public var eventType: Int32 = 0
+    public var pType: CPointer<GUID> = CPointer<GUID>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_INVITATION_RESPONSE {
+    public var action: Int32 = 0
+    public var pwzMessage: CPointer<UInt16> = CPointer<UInt16>()
+    public var hrExtendedInfo: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_PNRP_CLOUD_INFO {
+    public var pwzCloudName: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwScope: Int32 = 0
+    public var dwScopeId: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_PRESENCE_INFO {
+    public var status: Int32 = 0
+    public var pwzDescriptiveText: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PEER_SECURITY_INTERFACE {
+    public var dwSize: UInt32 = 0
+    public var pwzSspFilename: CPointer<UInt16> = CPointer<UInt16>()
+    public var pwzPackageName: CPointer<UInt16> = CPointer<UInt16>()
+    public var cbSecurityInfo: UInt32 = 0
+    public var pbSecurityInfo: CPointer<UInt8> = CPointer<UInt8>()
+    public var pvContext: CPointer<Unit> = CPointer<Unit>()
+    public var pfnValidateRecord: PFNPEER_VALIDATE_RECORD = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<PEER_RECORD>, Int32) -> Int32>(CPointer<Unit>())
+    public var pfnSecureRecord: PFNPEER_SECURE_RECORD = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<PEER_RECORD>, Int32, CPointer<CPointer<PEER_DATA>>) -> Int32>(CPointer<Unit>())
+    public var pfnFreeSecurityData: PFNPEER_FREE_SECURITY_DATA = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<PEER_DATA>) -> Int32>(CPointer<Unit>())
+    public var pfnAuthFailed: PFNPEER_ON_PASSWORD_AUTH_FAILED = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct PNRPINFO_V1 {
+    public var dwSize: UInt32 = 0
+    public var lpwszIdentity: CPointer<UInt16> = CPointer<UInt16>()
+    public var nMaxResolve: UInt32 = 0
+    public var dwTimeout: UInt32 = 0
+    public var dwLifetime: UInt32 = 0
+    public var enResolveCriteria: Int32 = 0
+    public var dwFlags: UInt32 = 0
+    public var saHint: Win32__impl_l1.SOCKET_ADDRESS = Win32__impl_l1.SOCKET_ADDRESS()
+    public var enNameState: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_Com == "on")]
+@C
+public struct PNRPINFO_V2 {
+    public var dwSize: UInt32 = 0
+    public var lpwszIdentity: CPointer<UInt16> = CPointer<UInt16>()
+    public var nMaxResolve: UInt32 = 0
+    public var dwTimeout: UInt32 = 0
+    public var dwLifetime: UInt32 = 0
+    public var enResolveCriteria: Int32 = 0
+    public var dwFlags: UInt32 = 0
+    public var saHint: Win32__impl_l1.SOCKET_ADDRESS = Win32__impl_l1.SOCKET_ADDRESS()
+    public var enNameState: Int32 = 0
+    public var enExtendedPayloadType: Int32 = 0
+    public var Anonymous: PNRPINFO_V2__Anonymous_e__Union = PNRPINFO_V2__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && (Windows_Win32_Networking_WinSock == "on" && Windows_Win32_System_Com == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct PNRPINFO_V2__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop blobPayload: Win32__impl_l0.BLOB {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.BLOB>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Win32__impl_l0.BLOB>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pwszPayload: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PNRP_CLOUD_ID {
+    public var AddressFamily: Int32 = 0
+    public var Scope: Int32 = 0
+    public var ScopeId: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct PEER_APP_LAUNCH_INFO {
+    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
+    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
+    public var pInvitation: CPointer<PEER_INVITATION> = CPointer<PEER_INVITATION>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct PEER_EVENT_PRESENCE_CHANGED_DATA {
+    public var pContact: CPointer<PEER_CONTACT> = CPointer<PEER_CONTACT>()
+    public var pEndpoint: CPointer<PEER_ENDPOINT> = CPointer<PEER_ENDPOINT>()
+    public var changeType: Int32 = 0
+    public var pPresenceInfo: CPointer<PEER_PRESENCE_INFO> = CPointer<PEER_PRESENCE_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on"]
+@C
+public struct PNRPCLOUDINFO {
+    public var dwSize: UInt32 = 0
+    public var Cloud: PNRP_CLOUD_ID = PNRP_CLOUD_ID()
+    public var enCloudState: Int32 = 0
+    public var enCloudFlags: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+@C
+public struct PEER_COLLAB_EVENT_DATA {
+    public var eventType: Int32 = 0
+    public var Anonymous: PEER_COLLAB_EVENT_DATA__Anonymous_e__Union = PEER_COLLAB_EVENT_DATA__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_NetworkManagement_P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct PEER_COLLAB_EVENT_DATA__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0)
+
+    public mut prop watchListChangedData: PEER_EVENT_WATCHLIST_CHANGED_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_WATCHLIST_CHANGED_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_WATCHLIST_CHANGED_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop presenceChangedData: PEER_EVENT_PRESENCE_CHANGED_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_PRESENCE_CHANGED_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_PRESENCE_CHANGED_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop applicationChangedData: PEER_EVENT_APPLICATION_CHANGED_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_APPLICATION_CHANGED_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_APPLICATION_CHANGED_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop objectChangedData: PEER_EVENT_OBJECT_CHANGED_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_OBJECT_CHANGED_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_OBJECT_CHANGED_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop endpointChangedData: PEER_EVENT_ENDPOINT_CHANGED_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_ENDPOINT_CHANGED_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_ENDPOINT_CHANGED_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop peopleNearMeChangedData: PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop requestStatusChangedData: PEER_EVENT_REQUEST_STATUS_CHANGED_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_REQUEST_STATUS_CHANGED_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PEER_EVENT_REQUEST_STATUS_CHANGED_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
 @When[P2P == "on"]
 foreign {
     // param-hint: ppContact optional
     func PeerCollabAddContact(pwzContactData: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32
-    // param-hint: pcContact optional
-    // param-hint: hEvent optional
-    // param-hint: phInvitation optional
-    func PeerCollabAsyncInviteContact(pcContact: CPointer<PEER_CONTACT>, pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, hEvent: CPointer<Unit>, phInvitation: CPointer<CPointer<Unit>>): Int32
-    // param-hint: hEvent optional
-    // param-hint: phInvitation optional
-    func PeerCollabAsyncInviteEndpoint(pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, hEvent: CPointer<Unit>, phInvitation: CPointer<CPointer<Unit>>): Int32
     func PeerCollabCancelInvitation(hInvitation: CPointer<Unit>): Int32
     func PeerCollabCloseHandle(hInvitation: CPointer<Unit>): Int32
     func PeerCollabDeleteContact(pwzPeerName: CPointer<UInt16>): Int32
-    func PeerCollabDeleteEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
     func PeerCollabDeleteObject(pObjectId: CPointer<GUID>): Int32
-    func PeerCollabEnumApplicationRegistrationInfo(registrationType: PEER_APPLICATION_REGISTRATION_TYPE, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pcEndpoint optional
-    // param-hint: pApplicationId optional
-    func PeerCollabEnumApplications(pcEndpoint: CPointer<PEER_ENDPOINT>, pApplicationId: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+    func PeerCollabEnumApplicationRegistrationInfo(registrationType: Int32, phPeerEnum: CPointer<CPointer<Unit>>): Int32
     func PeerCollabEnumContacts(phPeerEnum: CPointer<CPointer<Unit>>): Int32
     // param-hint: pcContact optional
     func PeerCollabEnumEndpoints(pcContact: CPointer<PEER_CONTACT>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pcEndpoint optional
-    // param-hint: pObjectId optional
-    func PeerCollabEnumObjects(pcEndpoint: CPointer<PEER_ENDPOINT>, pObjectId: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
     func PeerCollabEnumPeopleNearMe(phPeerEnum: CPointer<CPointer<Unit>>): Int32
     // param-hint: pwzPeerName optional
     func PeerCollabExportContact(pwzPeerName: CPointer<UInt16>, ppwzContactData: CPointer<CPointer<UInt16>>): Int32
-    func PeerCollabGetAppLaunchInfo(ppLaunchInfo: CPointer<CPointer<PEER_APP_LAUNCH_INFO>>): Int32
-    func PeerCollabGetApplicationRegistrationInfo(pApplicationId: CPointer<GUID>, registrationType: PEER_APPLICATION_REGISTRATION_TYPE, ppApplication: CPointer<CPointer<PEER_APPLICATION_REGISTRATION_INFO>>): Int32
+    func PeerCollabGetApplicationRegistrationInfo(pApplicationId: CPointer<GUID>, registrationType: Int32, ppApplication: CPointer<CPointer<PEER_APPLICATION_REGISTRATION_INFO>>): Int32
     // param-hint: pwzPeerName optional
     func PeerCollabGetContact(pwzPeerName: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32
     func PeerCollabGetEndpointName(ppwzEndpointName: CPointer<CPointer<UInt16>>): Int32
-    func PeerCollabGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_COLLAB_EVENT_DATA>>): Int32
     func PeerCollabGetInvitationResponse(hInvitation: CPointer<Unit>, ppInvitationResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
-    // param-hint: pcEndpoint optional
-    func PeerCollabGetPresenceInfo(pcEndpoint: CPointer<PEER_ENDPOINT>, ppPresenceInfo: CPointer<CPointer<PEER_PRESENCE_INFO>>): Int32
     func PeerCollabGetSigninOptions(pdwSigninOptions: CPointer<UInt32>): Int32
-    // param-hint: pcContact optional
-    func PeerCollabInviteContact(pcContact: CPointer<PEER_CONTACT>, pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
-    func PeerCollabInviteEndpoint(pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
     func PeerCollabParseContact(pwzContactData: CPointer<UInt16>, ppContact: CPointer<CPointer<PEER_CONTACT>>): Int32
-    // param-hint: pcEndpoint optional
-    func PeerCollabQueryContactData(pcEndpoint: CPointer<PEER_ENDPOINT>, ppwzContactData: CPointer<CPointer<UInt16>>): Int32
-    func PeerCollabRefreshEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
-    func PeerCollabRegisterApplication(pcApplication: CPointer<PEER_APPLICATION_REGISTRATION_INFO>, registrationType: PEER_APPLICATION_REGISTRATION_TYPE): Int32
+    func PeerCollabRegisterApplication(pcApplication: CPointer<PEER_APPLICATION_REGISTRATION_INFO>, registrationType: Int32): Int32
     // param-hint: pEventRegistrations len=param[1]
     func PeerCollabRegisterEvent(hEvent: CPointer<Unit>, cEventRegistration: UInt32, pEventRegistrations: CPointer<PEER_COLLAB_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32
     func PeerCollabSetEndpointName(pwzEndpointName: CPointer<UInt16>): Int32
@@ -2587,10 +2549,8 @@ foreign {
     func PeerCollabSignin(hwndParent: CPointer<Unit>, dwSigninOptions: UInt32): Int32
     func PeerCollabSignout(dwSigninOptions: UInt32): Int32
     func PeerCollabStartup(wVersionRequested: UInt16): Int32
-    func PeerCollabSubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
-    func PeerCollabUnregisterApplication(pApplicationId: CPointer<GUID>, registrationType: PEER_APPLICATION_REGISTRATION_TYPE): Int32
+    func PeerCollabUnregisterApplication(pApplicationId: CPointer<GUID>, registrationType: Int32): Int32
     func PeerCollabUnregisterEvent(hPeerEvent: CPointer<Unit>): Int32
-    func PeerCollabUnsubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
     func PeerCollabUpdateContact(pContact: CPointer<PEER_CONTACT>): Int32
     // param-hint: pwzIdentity optional
     // param-hint: pwzClassifier optional
@@ -2606,8 +2566,6 @@ foreign {
     func PeerGroupClose(hGroup: CPointer<Unit>): Int32
     func PeerGroupCloseDirectConnection(hGroup: CPointer<Unit>, ullConnectionId: UInt64): Int32
     func PeerGroupConnect(hGroup: CPointer<Unit>): Int32
-    // param-hint: pAddresses len=param[1]
-    func PeerGroupConnectByAddress(hGroup: CPointer<Unit>, cAddresses: UInt32, pAddresses: CPointer<PEER_ADDRESS>): Int32
     func PeerGroupCreate(pProperties: CPointer<PEER_GROUP_PROPERTIES>, phGroup: CPointer<CPointer<Unit>>): Int32
     // param-hint: pftExpiration optional
     // param-hint: pRoles len=param[3] optional
@@ -2628,15 +2586,10 @@ foreign {
     func PeerGroupGetStatus(hGroup: CPointer<Unit>, pdwStatus: CPointer<UInt32>): Int32
     func PeerGroupImportConfig(pwzXML: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, fOverwrite: Int32, ppwzIdentity: CPointer<CPointer<UInt16>>, ppwzGroup: CPointer<CPointer<UInt16>>): Int32
     func PeerGroupImportDatabase(hGroup: CPointer<Unit>, pwzFilePath: CPointer<UInt16>): Int32
-    // param-hint: pCredentialInfo optional
-    // param-hint: ppwzInvitation optional
-    func PeerGroupIssueCredentials(hGroup: CPointer<Unit>, pwzSubjectIdentity: CPointer<UInt16>, pCredentialInfo: CPointer<PEER_CREDENTIAL_INFO>, dwFlags: UInt32, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32
     // param-hint: pwzCloud optional
     func PeerGroupJoin(pwzIdentity: CPointer<UInt16>, pwzInvitation: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32
     // param-hint: pwzCloud optional
     func PeerGroupOpen(pwzIdentity: CPointer<UInt16>, pwzGroupPeerName: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32
-    func PeerGroupOpenDirectConnection(hGroup: CPointer<Unit>, pwzIdentity: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
-    func PeerGroupParseInvitation(pwzInvitation: CPointer<UInt16>, ppInvitationInfo: CPointer<CPointer<PEER_INVITATION_INFO>>): Int32
     // param-hint: pwzCloud optional
     func PeerGroupPasswordJoin(pwzIdentity: CPointer<UInt16>, pwzInvitation: CPointer<UInt16>, pwzPassword: CPointer<UInt16>, pwzCloud: CPointer<UInt16>, phGroup: CPointer<CPointer<Unit>>): Int32
     func PeerGroupPeerTimeToUniversalTime(hGroup: CPointer<Unit>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>): Int32
@@ -2673,18 +2626,59 @@ foreign {
     func PeerNameToPeerHostName(pwzPeerName: CPointer<UInt16>, ppwzHostName: CPointer<CPointer<UInt16>>): Int32
     func PeerPnrpEndResolve(hResolve: CPointer<Unit>): Int32
     func PeerPnrpGetCloudInfo(pcNumClouds: CPointer<UInt32>, ppCloudInfo: CPointer<CPointer<PEER_PNRP_CLOUD_INFO>>): Int32
-    func PeerPnrpGetEndpoint(hResolve: CPointer<Unit>, ppEndpoint: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32
-    // param-hint: pRegistrationInfo optional
-    func PeerPnrpRegister(pcwzPeerName: CPointer<UInt16>, pRegistrationInfo: CPointer<PEER_PNRP_REGISTRATION_INFO>, phRegistration: CPointer<CPointer<Unit>>): Int32
-    // param-hint: pcwzCloudName optional
-    func PeerPnrpResolve(pcwzPeerName: CPointer<UInt16>, pcwzCloudName: CPointer<UInt16>, pcEndpoints: CPointer<UInt32>, ppEndpoints: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32
     func PeerPnrpShutdown(): Int32
     // param-hint: pcwzCloudName optional
     // param-hint: cMaxEndpoints optional
     func PeerPnrpStartResolve(pcwzPeerName: CPointer<UInt16>, pcwzCloudName: CPointer<UInt16>, cMaxEndpoints: UInt32, hEvent: CPointer<Unit>, phResolve: CPointer<CPointer<Unit>>): Int32
     func PeerPnrpStartup(wVersionRequested: UInt16): Int32
     func PeerPnrpUnregister(hRegistration: CPointer<Unit>): Int32
+}
+
+@When[P2P == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pcContact optional
+    // param-hint: hEvent optional
+    // param-hint: phInvitation optional
+    func PeerCollabAsyncInviteContact(pcContact: CPointer<PEER_CONTACT>, pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, hEvent: CPointer<Unit>, phInvitation: CPointer<CPointer<Unit>>): Int32
+    // param-hint: hEvent optional
+    // param-hint: phInvitation optional
+    func PeerCollabAsyncInviteEndpoint(pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, hEvent: CPointer<Unit>, phInvitation: CPointer<CPointer<Unit>>): Int32
+    func PeerCollabDeleteEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
+    // param-hint: pcEndpoint optional
+    // param-hint: pApplicationId optional
+    func PeerCollabEnumApplications(pcEndpoint: CPointer<PEER_ENDPOINT>, pApplicationId: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+    // param-hint: pcEndpoint optional
+    // param-hint: pObjectId optional
+    func PeerCollabEnumObjects(pcEndpoint: CPointer<PEER_ENDPOINT>, pObjectId: CPointer<GUID>, phPeerEnum: CPointer<CPointer<Unit>>): Int32
+    func PeerCollabGetAppLaunchInfo(ppLaunchInfo: CPointer<CPointer<PEER_APP_LAUNCH_INFO>>): Int32
+    func PeerCollabGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_COLLAB_EVENT_DATA>>): Int32
+    // param-hint: pcEndpoint optional
+    func PeerCollabGetPresenceInfo(pcEndpoint: CPointer<PEER_ENDPOINT>, ppPresenceInfo: CPointer<CPointer<PEER_PRESENCE_INFO>>): Int32
+    // param-hint: pcContact optional
+    func PeerCollabInviteContact(pcContact: CPointer<PEER_CONTACT>, pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
+    func PeerCollabInviteEndpoint(pcEndpoint: CPointer<PEER_ENDPOINT>, pcInvitation: CPointer<PEER_INVITATION>, ppResponse: CPointer<CPointer<PEER_INVITATION_RESPONSE>>): Int32
+    // param-hint: pcEndpoint optional
+    func PeerCollabQueryContactData(pcEndpoint: CPointer<PEER_ENDPOINT>, ppwzContactData: CPointer<CPointer<UInt16>>): Int32
+    func PeerCollabRefreshEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
+    func PeerCollabSubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
+    func PeerCollabUnsubscribeEndpointData(pcEndpoint: CPointer<PEER_ENDPOINT>): Int32
+    // param-hint: pAddresses len=param[1]
+    func PeerGroupConnectByAddress(hGroup: CPointer<Unit>, cAddresses: UInt32, pAddresses: CPointer<PEER_ADDRESS>): Int32
+    func PeerGroupOpenDirectConnection(hGroup: CPointer<Unit>, pwzIdentity: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
+    func PeerPnrpGetEndpoint(hResolve: CPointer<Unit>, ppEndpoint: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32
+    // param-hint: pRegistrationInfo optional
+    func PeerPnrpRegister(pcwzPeerName: CPointer<UInt16>, pRegistrationInfo: CPointer<PEER_PNRP_REGISTRATION_INFO>, phRegistration: CPointer<CPointer<Unit>>): Int32
+    // param-hint: pcwzCloudName optional
+    func PeerPnrpResolve(pcwzPeerName: CPointer<UInt16>, pcwzCloudName: CPointer<UInt16>, pcEndpoints: CPointer<UInt32>, ppEndpoints: CPointer<CPointer<PEER_PNRP_ENDPOINT_INFO>>): Int32
     func PeerPnrpUpdateRegistration(hRegistration: CPointer<Unit>, pRegistrationInfo: CPointer<PEER_PNRP_REGISTRATION_INFO>): Int32
+}
+
+@When[P2P == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    // param-hint: pCredentialInfo optional
+    // param-hint: ppwzInvitation optional
+    func PeerGroupIssueCredentials(hGroup: CPointer<Unit>, pwzSubjectIdentity: CPointer<UInt16>, pCredentialInfo: CPointer<PEER_CREDENTIAL_INFO>, dwFlags: UInt32, ppwzInvitation: CPointer<CPointer<UInt16>>): Int32
+    func PeerGroupParseInvitation(pwzInvitation: CPointer<UInt16>, ppInvitationInfo: CPointer<CPointer<PEER_INVITATION_INFO>>): Int32
 }
 
 @When[P2PGRAPH == "on"]
@@ -2692,8 +2686,6 @@ foreign {
     func PeerGraphAddRecord(hGraph: CPointer<Unit>, pRecord: CPointer<PEER_RECORD>, pRecordId: CPointer<GUID>): Int32
     func PeerGraphClose(hGraph: CPointer<Unit>): Int32
     func PeerGraphCloseDirectConnection(hGraph: CPointer<Unit>, ullConnectionId: UInt64): Int32
-    // param-hint: pwzPeerId optional
-    func PeerGraphConnect(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
     // param-hint: pSecurityInterface optional
     func PeerGraphCreate(pGraphProperties: CPointer<PEER_GRAPH_PROPERTIES>, pwzDatabaseName: CPointer<UInt16>, pSecurityInterface: CPointer<PEER_SECURITY_INTERFACE>, phGraph: CPointer<CPointer<Unit>>): Int32
     func PeerGraphDelete(pwzGraphId: CPointer<UInt16>, pwzPeerId: CPointer<UInt16>, pwzDatabaseName: CPointer<UInt16>): Int32
@@ -2710,7 +2702,6 @@ foreign {
     func PeerGraphGetEventData(hPeerEvent: CPointer<Unit>, ppEventData: CPointer<CPointer<PEER_GRAPH_EVENT_DATA>>): Int32
     func PeerGraphGetItemCount(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>): Int32
     func PeerGraphGetNextItem(hPeerEnum: CPointer<Unit>, pCount: CPointer<UInt32>, pppvItems: CPointer<CPointer<CPointer<Unit>>>): Int32
-    func PeerGraphGetNodeInfo(hGraph: CPointer<Unit>, ullNodeId: UInt64, ppNodeInfo: CPointer<CPointer<PEER_NODE_INFO>>): Int32
     func PeerGraphGetProperties(hGraph: CPointer<Unit>, ppGraphProperties: CPointer<CPointer<PEER_GRAPH_PROPERTIES>>): Int32
     func PeerGraphGetRecord(hGraph: CPointer<Unit>, pRecordId: CPointer<GUID>, ppRecord: CPointer<CPointer<PEER_RECORD>>): Int32
     func PeerGraphGetStatus(hGraph: CPointer<Unit>, pdwStatus: CPointer<UInt32>): Int32
@@ -2722,7 +2713,6 @@ foreign {
     // param-hint: pSecurityInterface optional
     // param-hint: pRecordTypeSyncPrecedence len=param[4] optional
     func PeerGraphOpen(pwzGraphId: CPointer<UInt16>, pwzPeerId: CPointer<UInt16>, pwzDatabaseName: CPointer<UInt16>, pSecurityInterface: CPointer<PEER_SECURITY_INTERFACE>, cRecordTypeSyncPrecedence: UInt32, pRecordTypeSyncPrecedence: CPointer<GUID>, phGraph: CPointer<CPointer<Unit>>): Int32
-    func PeerGraphOpenDirectConnection(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
     func PeerGraphPeerTimeToUniversalTime(hGraph: CPointer<Unit>, pftPeerTime: CPointer<Win32_Foundation.FILETIME>, pftUniversalTime: CPointer<Win32_Foundation.FILETIME>): Int32
     // param-hint: pEventRegistrations len=param[2]
     func PeerGraphRegisterEvent(hGraph: CPointer<Unit>, hEvent: CPointer<Unit>, cEventRegistrations: UInt32, pEventRegistrations: CPointer<PEER_GRAPH_EVENT_REGISTRATION>, phPeerEvent: CPointer<CPointer<Unit>>): Int32
@@ -2741,41 +2731,24 @@ foreign {
     func PeerGraphValidateDeferredRecords(hGraph: CPointer<Unit>, cRecordIds: UInt32, pRecordIds: CPointer<GUID>): Int32
 }
 
+@When[P2PGRAPH == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pwzPeerId optional
+    func PeerGraphConnect(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
+    func PeerGraphGetNodeInfo(hGraph: CPointer<Unit>, ullNodeId: UInt64, ppNodeInfo: CPointer<CPointer<PEER_NODE_INFO>>): Int32
+    func PeerGraphOpenDirectConnection(hGraph: CPointer<Unit>, pwzPeerId: CPointer<UInt16>, pAddress: CPointer<PEER_ADDRESS>, pullConnectionId: CPointer<UInt64>): Int32
+}
+
 @When[PEERDIST == "on"]
 foreign {
-    // param-hint: pBuffer bytes=param[2]
-    func PeerDistClientAddContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: pBuffer bytes=param[2]
-    func PeerDistClientAddData(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: pBuffer bytes=param[2] optional
-    func PeerDistClientBlockRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: pOverlapped optional
-    // pinvoke-hint: SetLastError
-    func PeerDistClientCancelAsyncOperation(hPeerDist: IntNative, hContentHandle: IntNative, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     func PeerDistClientCloseContent(hPeerDist: IntNative, hContentHandle: IntNative): UInt32
-    func PeerDistClientCompleteContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    // param-hint: hCompletionPort optional
-    // param-hint: ulCompletionKey optional
-    func PeerDistClientFlushContent(hPeerDist: IntNative, pContentTag: CPointer<PEERDIST_CONTENT_TAG>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: lpInformation bytes=param[3]
-    func PeerDistClientGetInformationByHandle(hPeerDist: IntNative, hContentHandle: IntNative, PeerDistClientInfoClass: PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS, dwBufferSize: UInt32, lpInformation: CPointer<Unit>): UInt32
+    func PeerDistClientGetInformationByHandle(hPeerDist: IntNative, hContentHandle: IntNative, PeerDistClientInfoClass: Int32, dwBufferSize: UInt32, lpInformation: CPointer<Unit>): UInt32
     // param-hint: hCompletionPort optional
     // param-hint: ulCompletionKey optional
     func PeerDistClientOpenContent(hPeerDist: IntNative, pContentTag: CPointer<PEERDIST_CONTENT_TAG>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phContentHandle: CPointer<IntNative>): UInt32
-    // param-hint: pBuffer bytes=param[2] optional
-    func PeerDistClientStreamRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    func PeerDistGetOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, bWait: Int32): Int32
-    func PeerDistGetStatus(hPeerDist: IntNative, pPeerDistStatus: CPointer<PEERDIST_STATUS>): UInt32
+    func PeerDistGetStatus(hPeerDist: IntNative, pPeerDistStatus: CPointer<Int32>): UInt32
     func PeerDistGetStatusEx(hPeerDist: IntNative, pPeerDistStatus: CPointer<PEERDIST_STATUS_INFO>): UInt32
-    // param-hint: hCompletionPort optional
-    // param-hint: ulCompletionKey optional
-    func PeerDistRegisterForStatusChangeNotification(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<PEERDIST_STATUS>): UInt32
-    // param-hint: hCompletionPort optional
-    // param-hint: ulCompletionKey optional
-    func PeerDistRegisterForStatusChangeNotificationEx(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<PEERDIST_STATUS_INFO>): UInt32
-    // param-hint: pContentIdentifier bytes=param[1]
-    // pinvoke-hint: SetLastError
-    func PeerDistServerCancelAsyncOperation(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     func PeerDistServerCloseContentInformation(hPeerDist: IntNative, hContentInfo: IntNative): UInt32
     func PeerDistServerCloseStreamHandle(hPeerDist: IntNative, hStream: IntNative): UInt32
     // param-hint: pContentIdentifier bytes=param[1]
@@ -2786,16 +2759,11 @@ foreign {
     // param-hint: hCompletionPort optional
     // param-hint: ulCompletionKey optional
     func PeerDistServerOpenContentInformationEx(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, ullContentOffset: UInt64, cbContentLength: UInt64, pRetrievalOptions: CPointer<PEERDIST_RETRIEVAL_OPTIONS>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phContentInfo: CPointer<IntNative>): UInt32
-    // param-hint: pBuffer bytes=param[2]
-    func PeerDistServerPublishAddToStream(hPeerDist: IntNative, hStream: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
-    func PeerDistServerPublishCompleteStream(hPeerDist: IntNative, hStream: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: pContentIdentifier bytes=param[1]
     // param-hint: pPublishOptions optional
     // param-hint: hCompletionPort optional
     // param-hint: ulCompletionKey optional
     func PeerDistServerPublishStream(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, cbContentLength: UInt64, pPublishOptions: CPointer<PEERDIST_PUBLICATION_OPTIONS>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, phStream: CPointer<IntNative>): UInt32
-    // param-hint: pBuffer bytes=param[2]
-    func PeerDistServerRetrieveContentInformation(hPeerDist: IntNative, hContentInfo: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
     // param-hint: pContentIdentifier bytes=param[1]
     func PeerDistServerUnpublish(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>): UInt32
     func PeerDistShutdown(hPeerDist: IntNative): UInt32
@@ -2805,19 +2773,49 @@ foreign {
     func PeerDistUnregisterForStatusChangeNotification(hPeerDist: IntNative): UInt32
 }
 
+@When[PEERDIST == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: pBuffer bytes=param[2]
+    func PeerDistClientAddContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: pBuffer bytes=param[2]
+    func PeerDistClientAddData(hPeerDist: IntNative, hContentHandle: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: pBuffer bytes=param[2] optional
+    func PeerDistClientBlockRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: pOverlapped optional
+    // pinvoke-hint: SetLastError
+    func PeerDistClientCancelAsyncOperation(hPeerDist: IntNative, hContentHandle: IntNative, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    func PeerDistClientCompleteContentInformation(hPeerDist: IntNative, hContentHandle: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: hCompletionPort optional
+    // param-hint: ulCompletionKey optional
+    func PeerDistClientFlushContent(hPeerDist: IntNative, pContentTag: CPointer<PEERDIST_CONTENT_TAG>, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: pBuffer bytes=param[2] optional
+    func PeerDistClientStreamRead(hPeerDist: IntNative, hContentHandle: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, dwTimeoutInMilliseconds: UInt32, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    func PeerDistGetOverlappedResult(lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, lpNumberOfBytesTransferred: CPointer<UInt32>, bWait: Int32): Int32
+    // param-hint: hCompletionPort optional
+    // param-hint: ulCompletionKey optional
+    func PeerDistRegisterForStatusChangeNotification(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<Int32>): UInt32
+    // param-hint: hCompletionPort optional
+    // param-hint: ulCompletionKey optional
+    func PeerDistRegisterForStatusChangeNotificationEx(hPeerDist: IntNative, hCompletionPort: CPointer<Unit>, ulCompletionKey: UIntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>, pPeerDistStatus: CPointer<PEERDIST_STATUS_INFO>): UInt32
+    // param-hint: pContentIdentifier bytes=param[1]
+    // pinvoke-hint: SetLastError
+    func PeerDistServerCancelAsyncOperation(hPeerDist: IntNative, cbContentIdentifier: UInt32, pContentIdentifier: CPointer<UInt8>, pOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: pBuffer bytes=param[2]
+    func PeerDistServerPublishAddToStream(hPeerDist: IntNative, hStream: IntNative, cbNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    func PeerDistServerPublishCompleteStream(hPeerDist: IntNative, hStream: IntNative, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: pBuffer bytes=param[2]
+    func PeerDistServerRetrieveContentInformation(hPeerDist: IntNative, hContentInfo: IntNative, cbMaxNumberOfBytes: UInt32, pBuffer: CPointer<UInt8>, lpOverlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+}
+
 @When[DRT == "on"]
 foreign {
     func DrtClose(hDrt: CPointer<Unit>): Unit
     func DrtContinueSearch(hSearchContext: CPointer<Unit>): Int32
     func DrtEndSearch(hSearchContext: CPointer<Unit>): Int32
-    // param-hint: pEventData bytes=param[1]
-    func DrtGetEventData(hDrt: CPointer<Unit>, ulEventDataLen: UInt32, pEventData: CPointer<DRT_EVENT_DATA>): Int32
     func DrtGetEventDataSize(hDrt: CPointer<Unit>, pulEventDataLen: CPointer<UInt32>): Int32
     // param-hint: pwzDrtInstanceName bytes=param[1]
     func DrtGetInstanceName(hDrt: CPointer<Unit>, ulcbInstanceNameSize: UInt32, pwzDrtInstanceName: CPointer<UInt16>): Int32
     func DrtGetInstanceNameSize(hDrt: CPointer<Unit>, pulcbInstanceNameSize: CPointer<UInt32>): Int32
-    // param-hint: pSearchPath bytes=param[1]
-    func DrtGetSearchPath(hSearchContext: CPointer<Unit>, ulSearchPathSize: UInt32, pSearchPath: CPointer<DRT_ADDRESS_LIST>): Int32
     func DrtGetSearchPathSize(hSearchContext: CPointer<Unit>, pulSearchPathSize: CPointer<UInt32>): Int32
     // param-hint: pSearchResult bytes=param[1]
     func DrtGetSearchResult(hSearchContext: CPointer<Unit>, ulSearchResultSize: UInt32, pSearchResult: CPointer<DRT_SEARCH_RESULT>): Int32
@@ -2834,11 +2832,16 @@ foreign {
     func DrtUpdateKey(hKeyRegistration: CPointer<Unit>, pAppData: CPointer<DRT_DATA>): Int32
 }
 
+@When[DRT == "on" && Windows_Win32_Networking_WinSock == "on"]
+foreign {
+    // param-hint: pEventData bytes=param[1]
+    func DrtGetEventData(hDrt: CPointer<Unit>, ulEventDataLen: UInt32, pEventData: CPointer<DRT_EVENT_DATA>): Int32
+    // param-hint: pSearchPath bytes=param[1]
+    func DrtGetSearchPath(hSearchContext: CPointer<Unit>, ulSearchPathSize: UInt32, pSearchPath: CPointer<DRT_ADDRESS_LIST>): Int32
+}
+
 @When[DRTPROV == "on"]
 foreign {
-    func DrtCreateDerivedKey(pLocalCert: CPointer<Win32_impl.CERT_CONTEXT>, pKey: CPointer<DRT_DATA>): Int32
-    // param-hint: pLocalCert optional
-    func DrtCreateDerivedKeySecurityProvider(pRootCert: CPointer<Win32_impl.CERT_CONTEXT>, pLocalCert: CPointer<Win32_impl.CERT_CONTEXT>, ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDER>>): Int32
     func DrtCreateDnsBootstrapResolver(port: UInt16, pwszAddress: CPointer<UInt16>, ppModule: CPointer<CPointer<DRT_BOOTSTRAP_PROVIDER>>): Int32
     func DrtCreateNullSecurityProvider(ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDER>>): Int32
     // param-hint: pwzCloudName optional
@@ -2850,9 +2853,16 @@ foreign {
     func DrtDeletePnrpBootstrapResolver(pResolver: CPointer<DRT_BOOTSTRAP_PROVIDER>): Unit
 }
 
+@When[DRTPROV == "on" && Windows_Win32_Security_Cryptography == "on"]
+foreign {
+    func DrtCreateDerivedKey(pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pKey: CPointer<DRT_DATA>): Int32
+    // param-hint: pLocalCert optional
+    func DrtCreateDerivedKeySecurityProvider(pRootCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, pLocalCert: CPointer<Win32__impl_l2.CERT_CONTEXT>, ppSecurityProvider: CPointer<CPointer<DRT_SECURITY_PROVIDER>>): Int32
+}
+
 @When[DRTTRANSPORT == "on"]
 foreign {
-    func DrtCreateIpv6UdpTransport(scope: DRT_SCOPE, dwScopeId: UInt32, dwLocalityThreshold: UInt32, pwPort: CPointer<UInt16>, phTransport: CPointer<CPointer<Unit>>): Int32
+    func DrtCreateIpv6UdpTransport(scope: Int32, dwScopeId: UInt32, dwLocalityThreshold: UInt32, pwPort: CPointer<UInt16>, phTransport: CPointer<CPointer<Unit>>): Int32
     func DrtDeleteIpv6UdpTransport(hTransport: CPointer<Unit>): Int32
 }
 

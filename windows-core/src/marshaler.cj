@@ -9,59 +9,6 @@ foreign {
     ): Int32
 }
 
-@C
-public struct IMarshalVtbl {
-    public var base_: IUnknownVtbl = IUnknownVtbl()
-    public var GetUnmarshalClass: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<GUID>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    public var GetMarshalSizeMax: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    public var MarshalInterface: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    public var UnmarshalInterface: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var ReleaseMarshalData: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var DisconnectObject: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
-
-    public init() {}
-}
-
-func takeIMarshalFromAbi(raw: CPointer<Unit>): IMarshal {
-    IMarshal.fromAbiTake(raw)
-}
-
-func viewIMarshal(raw: CPointer<Unit>): IMarshal {
-    IMarshal.viewOf(raw)
-}
-
-public class IMarshal <: InterfaceWrapperBase & ComInterface {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    init(raw: CPointer<Unit>, takeOwnership!: Bool) {
-        super(raw, takeOwnership: takeOwnership)
-    }
-
-    public static func iid(): GUID {
-        GUID.fromValues(0x00000003u32, 0x0000u16, 0x0000u16, 0xC0u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x00u8, 0x46u8)
-    }
-
-    public static func descriptor(): InterfaceDescriptor<IMarshal> {
-        InterfaceDescriptor<IMarshal>("IMarshal", IMarshal.iid(), takeIMarshalFromAbi, viewIMarshal)
-    }
-
-    public unsafe func vtbl(): IMarshalVtbl {
-        readVtbl<IMarshalVtbl>(IMarshalVtbl())
-    }
-}
-
-extend IMarshal {
-    public static func fromAbiTake(raw: CPointer<Unit>): IMarshal {
-        IMarshal(raw, takeOwnership: true)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): IMarshal {
-        IMarshal(raw)
-    }
-}
-
 extend IMarshal <: Interface<IMarshal> {}
 
 class AggregatedMarshalerState {

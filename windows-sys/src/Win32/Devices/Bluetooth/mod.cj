@@ -2,12 +2,14 @@
 package windows_sys.Win32.Devices.Bluetooth
 
 import windows_interface.{GUID}
-import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, unionReadInt16, unionReadInt32, unionReadInt64, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+import windows_interface as windows_interface
+import windows_polyfill.{packedReadUInt16, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteUInt16, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadInt16, unionReadInt32, unionReadInt64, unionReadInt8, unionReadUInt16, unionReadUInt32, unionReadUInt64, unionReadUInt8, unionWriteInt16, unionWriteInt32, unionWriteInt64, unionWriteInt8, unionWriteUInt16, unionWriteUInt32, unionWriteUInt64, unionWriteUInt8}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct AUTHENTICATION_REQUIREMENTS {
     public var value: Int32 = 0
 
@@ -54,208 +56,55 @@ public struct BLUETOOTH_ADDRESS {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct BLUETOOTH_ADDRESS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func ullLong(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop ullLong: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ullLong(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop rgBytes: VArray<UInt8, $6> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $6>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func rgBytes(): VArray<UInt8, $6> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $6>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_rgBytes(val: VArray<UInt8, $6>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $6>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BLUETOOTH_AUTHENTICATE_RESPONSE {
-    public var bthAddressRemote: BLUETOOTH_ADDRESS = BLUETOOTH_ADDRESS()
-    public var authMethod: BLUETOOTH_AUTHENTICATION_METHOD = BLUETOOTH_AUTHENTICATION_METHOD()
-    public var Anonymous: BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union = BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union()
-    public var negativeResponse: UInt8 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0)
-
-    public func pinInfo(): BLUETOOTH_PIN_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BLUETOOTH_PIN_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_pinInfo(val: BLUETOOTH_PIN_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BLUETOOTH_PIN_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func oobInfo(): BLUETOOTH_OOB_DATA_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BLUETOOTH_OOB_DATA_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_oobInfo(val: BLUETOOTH_OOB_DATA_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BLUETOOTH_OOB_DATA_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func numericCompInfo(): BLUETOOTH_NUMERIC_COMPARISON_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BLUETOOTH_NUMERIC_COMPARISON_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_numericCompInfo(val: BLUETOOTH_NUMERIC_COMPARISON_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BLUETOOTH_NUMERIC_COMPARISON_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func passkeyInfo(): BLUETOOTH_PASSKEY_INFO {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BLUETOOTH_PASSKEY_INFO>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_passkeyInfo(val: BLUETOOTH_PASSKEY_INFO): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BLUETOOTH_PASSKEY_INFO>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $6>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
-    public var deviceInfo: BLUETOOTH_DEVICE_INFO = BLUETOOTH_DEVICE_INFO()
-    public var authenticationMethod: BLUETOOTH_AUTHENTICATION_METHOD = BLUETOOTH_AUTHENTICATION_METHOD()
-    public var ioCapability: BLUETOOTH_IO_CAPABILITY = BLUETOOTH_IO_CAPABILITY()
-    public var authenticationRequirements: BLUETOOTH_AUTHENTICATION_REQUIREMENTS = BLUETOOTH_AUTHENTICATION_REQUIREMENTS()
-    public var Anonymous: BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union = BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func numeric_Value(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_numeric_Value(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func passkey(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_passkey(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct BLUETOOTH_AUTHENTICATION_METHOD {
     public var value: Int32 = 0
 
@@ -289,7 +138,6 @@ public let BLUETOOTH_AUTHENTICATION_METHOD_BLUETOOTH_AUTHENTICATION_METHOD_PASSK
 public let BLUETOOTH_AUTHENTICATION_METHOD_BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY: BLUETOOTH_AUTHENTICATION_METHOD = BLUETOOTH_AUTHENTICATION_METHOD(5)
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct BLUETOOTH_AUTHENTICATION_REQUIREMENTS {
     public var value: Int32 = 0
 
@@ -373,24 +221,6 @@ public struct BLUETOOTH_FIND_RADIO_PARAMS {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT {
-    public var ChangedAttributeHandle: UInt16 = 0
-    public var CharacteristicValueDataSize: UIntNative = 0
-    public var CharacteristicValue: CPointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> = CPointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION {
-    public var NumCharacteristics: UInt16 = 0
-    public var Characteristics: VArray<BTH_LE_GATT_CHARACTERISTIC, $1> = VArray<BTH_LE_GATT_CHARACTERISTIC, $1>(repeat: BTH_LE_GATT_CHARACTERISTIC())
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct BLUETOOTH_IO_CAPABILITY {
     public var value: Int32 = 0
 
@@ -477,32 +307,11 @@ public struct BLUETOOTH_RADIO_INFO {
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
 @C
-public struct BLUETOOTH_SELECT_DEVICE_PARAMS {
-    public var dwSize: UInt32 = 0
-    public var cNumOfClasses: UInt32 = 0
-    public var prgClassOfDevices: CPointer<BLUETOOTH_COD_PAIRS> = CPointer<BLUETOOTH_COD_PAIRS>()
-    public var pszInfo: CPointer<UInt16> = CPointer<UInt16>()
-    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
-    public var fForceAuthentication: Int32 = 0
-    public var fShowAuthenticated: Int32 = 0
-    public var fShowRemembered: Int32 = 0
-    public var fShowUnknown: Int32 = 0
-    public var fAddNewDeviceWizard: Int32 = 0
-    public var fSkipServicesPage: Int32 = 0
-    public var pfnDeviceCallback: PFN_DEVICE_CALLBACK = { _, _ => 0 }
-    public var pvParam: CPointer<Unit> = CPointer<Unit>()
-    public var cNumDevices: UInt32 = 0
-    public var pDevices: CPointer<BLUETOOTH_DEVICE_INFO> = CPointer<BLUETOOTH_DEVICE_INFO>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct BTH_DEVICE_INFO {
     public var flags: UInt32 = 0
     public var address: UInt64 = 0
     public var classOfDevice: UInt32 = 0
-    public var name: VArray<Win32_Foundation.CHAR, $248> = VArray<Win32_Foundation.CHAR, $248>(repeat: 0)
+    public var name: VArray<Int8, $248> = VArray<Int8, $248>(repeat: 0)
     public init() {}
 }
 
@@ -516,130 +325,156 @@ public struct BTH_HCI_EVENT_INFO {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
+// packed(1)
 @C
 public struct BTH_INFO_REQ {
     public var _raw: VArray<UInt8, $10> = VArray<UInt8, $10>(repeat: 0u8)
 
-    public func btAddr(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 0)
+    public mut prop btAddr: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_btAddr(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop infoType: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 8)
+            }
         }
-    }
-
-    public func infoType(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 8)
-        }
-    }
-
-    public mut func set_infoType(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 8, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
+// packed(1)
 @C
 public struct BTH_INFO_RSP {
     public var _raw: VArray<UInt8, $47> = VArray<UInt8, $47>(repeat: 0u8)
 
-    public func result(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 0)
+    public mut prop result: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_result(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop dataLen: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 2)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 2, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dataLen(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 2)
+    public mut prop anonymous: BTH_INFO_RSP__Anonymous_e__Union {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: BTH_INFO_RSP__Anonymous_e__Union = BTH_INFO_RSP__Anonymous_e__Union()
+                return packedReadValue<BTH_INFO_RSP__Anonymous_e__Union>(base, 3, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 3, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_dataLen(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 2, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `Anonymous`: type `BTH_INFO_RSP__Anonymous_e__Union` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct BTH_INFO_RSP__Anonymous_e__Union {
     public var _raw: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0)
 
-    public func connectionlessMTU(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
+    public mut prop connectionlessMTU: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_connectionlessMTU(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop data: VArray<UInt8, $44> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $44>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func data(): VArray<UInt8, $44> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $44>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_data(val: VArray<UInt8, $44>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $44>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $44>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -657,24 +492,6 @@ public struct BTH_L2CAP_EVENT_INFO {
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
 @C
-public struct BTH_LE_GATT_CHARACTERISTIC {
-    public var ServiceHandle: UInt16 = 0
-    public var CharacteristicUuid: BTH_LE_UUID = BTH_LE_UUID()
-    public var AttributeHandle: UInt16 = 0
-    public var CharacteristicValueHandle: UInt16 = 0
-    public var IsBroadcastable: Win32_Foundation.BOOLEAN = 0
-    public var IsReadable: Win32_Foundation.BOOLEAN = 0
-    public var IsWritable: Win32_Foundation.BOOLEAN = 0
-    public var IsWritableWithoutResponse: Win32_Foundation.BOOLEAN = 0
-    public var IsSignedWritable: Win32_Foundation.BOOLEAN = 0
-    public var IsNotifiable: Win32_Foundation.BOOLEAN = 0
-    public var IsIndicatable: Win32_Foundation.BOOLEAN = 0
-    public var HasExtendedProperties: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct BTH_LE_GATT_CHARACTERISTIC_VALUE {
     public var DataSize: UInt32 = 0
     public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
@@ -682,18 +499,6 @@ public struct BTH_LE_GATT_CHARACTERISTIC_VALUE {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BTH_LE_GATT_DESCRIPTOR {
-    public var ServiceHandle: UInt16 = 0
-    public var CharacteristicHandle: UInt16 = 0
-    public var DescriptorType: BTH_LE_GATT_DESCRIPTOR_TYPE = BTH_LE_GATT_DESCRIPTOR_TYPE()
-    public var DescriptorUuid: BTH_LE_UUID = BTH_LE_UUID()
-    public var AttributeHandle: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct BTH_LE_GATT_DESCRIPTOR_TYPE {
     public var value: Int32 = 0
 
@@ -733,144 +538,6 @@ public let BTH_LE_GATT_DESCRIPTOR_TYPE_CharacteristicAggregateFormat: BTH_LE_GAT
 public let BTH_LE_GATT_DESCRIPTOR_TYPE_CustomDescriptor: BTH_LE_GATT_DESCRIPTOR_TYPE = BTH_LE_GATT_DESCRIPTOR_TYPE(6)
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BTH_LE_GATT_DESCRIPTOR_VALUE {
-    public var DescriptorType: BTH_LE_GATT_DESCRIPTOR_TYPE = BTH_LE_GATT_DESCRIPTOR_TYPE()
-    public var DescriptorUuid: BTH_LE_UUID = BTH_LE_UUID()
-    public var Anonymous: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union = BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union()
-    public var DataSize: UInt32 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
-
-    public func characteristicExtendedProperties(): BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_characteristicExtendedProperties(val: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func clientCharacteristicConfiguration(): BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_clientCharacteristicConfiguration(val: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func serverCharacteristicConfiguration(): BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_serverCharacteristicConfiguration(val: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func characteristicFormat(): BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_characteristicFormat(val: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct {
-    public var IsReliableWriteEnabled: Win32_Foundation.BOOLEAN = 0
-    public var IsAuxiliariesWritable: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct {
-    public var IsSubscribeToNotification: Win32_Foundation.BOOLEAN = 0
-    public var IsSubscribeToIndication: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct {
-    public var IsBroadcast: Win32_Foundation.BOOLEAN = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct {
-    public var Format: UInt8 = 0
-    public var Exponent: UInt8 = 0
-    public var Unit_: BTH_LE_UUID = BTH_LE_UUID()
-    public var NameSpace: UInt8 = 0
-    public var Description: BTH_LE_UUID = BTH_LE_UUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct BTH_LE_GATT_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -893,106 +560,121 @@ public let BTH_LE_GATT_EVENT_TYPE_CharacteristicValueChangedEvent: BTH_LE_GATT_E
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
 @C
-public struct BTH_LE_GATT_SERVICE {
-    public var ServiceUuid: BTH_LE_UUID = BTH_LE_UUID()
-    public var AttributeHandle: UInt16 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct BTH_LE_UUID {
-    public var IsShortUuid: Win32_Foundation.BOOLEAN = 0
+    public var IsShortUuid: UInt8 = 0
     public var Value: BTH_LE_UUID__Value_e__Union = BTH_LE_UUID__Value_e__Union()
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct BTH_LE_UUID__Value_e__Union {
-    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
 
-    public func shortUuid(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
+    public mut prop shortUuid: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_shortUuid(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop longUuid: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func longUuid(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_longUuid(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
+// packed(1)
 @C
 public struct BTH_PING_REQ {
     public var _raw: VArray<UInt8, $53> = VArray<UInt8, $53>(repeat: 0u8)
 
-    public func btAddr(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 0)
+    public mut prop btAddr: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_btAddr(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop dataLen: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dataLen(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 8)
+    public mut prop data: VArray<UInt8, $44> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $44> = VArray<UInt8, $44>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $44>>(base, 9, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 9, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_dataLen(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 8, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `data`: type `VArray<UInt8, $44>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -1005,105 +687,46 @@ public struct BTH_PING_RSP {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
+// packed(1)
 @C
 public struct BTH_QUERY_DEVICE {
     public var _raw: VArray<UInt8, $5> = VArray<UInt8, $5>(repeat: 0u8)
 
-    public func lap(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop lap: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_lap(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop length: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public func length(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 4)
-        }
-    }
-
-    public mut func set_length(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct BTH_QUERY_SERVICE {
-    public var _raw: VArray<UInt8, $112> = VArray<UInt8, $112>(repeat: 0u8)
-
-    public func type_(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_type_(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func serviceHandle(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
-        }
-    }
-
-    public mut func set_serviceHandle(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `uuids`: type `VArray<SdpQueryUuid, $12>` not supported by polyfill; skipped
-
-    public func numRange(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 104)
-        }
-    }
-
-    public mut func set_numRange(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 104, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `pRange`: type `VArray<SdpAttributeRange, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
@@ -1116,51 +739,122 @@ public struct BTH_RADIO_IN_RANGE {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
+// packed(1)
 @C
 public struct BTH_SET_SERVICE {
     public var _raw: VArray<UInt8, $45> = VArray<UInt8, $45>(repeat: 0u8)
 
-    // packed field `pSdpVersion`: type `CPointer<UInt32>` not supported by polyfill; skipped
-
-    // packed field `pRecordHandle`: type `CPointer<CPointer<Unit>>` not supported by polyfill; skipped
-
-    public func fCodService(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 16)
+    public mut prop pSdpVersion: CPointer<UInt32> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<UInt32> = CPointer<UInt32>()
+                return packedReadValue<CPointer<UInt32>>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_fCodService(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 16, val)
-            _raw = rawStorage
+    public mut prop pRecordHandle: CPointer<CPointer<Unit>> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CPointer<CPointer<Unit>> = CPointer<CPointer<Unit>>()
+                return packedReadValue<CPointer<CPointer<Unit>>>(base, 8, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `Reserved`: type `VArray<UInt32, $5>` not supported by polyfill; skipped
-
-    public func ulRecordLength(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 40)
+    public mut prop fCodService: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ulRecordLength(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 40, val)
-            _raw = rawStorage
+    public mut prop reserved: VArray<UInt32, $5> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0)
+                return packedReadValue<VArray<UInt32, $5>>(base, 20, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `pRecord`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
+    public mut prop ulRecordLength: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 40)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 40, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pRecord: VArray<UInt8, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $1>>(base, 44, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 44, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
@@ -1174,7 +868,6 @@ public type HBLUETOOTH_DEVICE_FIND = CPointer<Unit>
 public type HBLUETOOTH_RADIO_FIND = CPointer<Unit>
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct IO_CAPABILITY {
     public var value: Int32 = 0
 
@@ -1208,7 +901,6 @@ public let IO_CAPABILITY_IoCaps_NoInputNoOutput: IO_CAPABILITY = IO_CAPABILITY(3
 public let IO_CAPABILITY_IoCaps_Undefined: IO_CAPABILITY = IO_CAPABILITY(255)
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct NodeContainerType {
     public var value: Int32 = 0
 
@@ -1233,116 +925,16 @@ public let NodeContainerType_NodeContainerTypeSequence: NodeContainerType = Node
 public let NodeContainerType_NodeContainerTypeAlternative: NodeContainerType = NodeContainerType(1)
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-public type PFNBLUETOOTH_GATT_EVENT_CALLBACK = CFunc<(BTH_LE_GATT_EVENT_TYPE, CPointer<Unit>, CPointer<Unit>) -> Unit>
+public type PFNBLUETOOTH_GATT_EVENT_CALLBACK = CFunc<(Int32, CPointer<Unit>, CPointer<Unit>) -> Unit>
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
 public type PFN_AUTHENTICATION_CALLBACK = CFunc<(CPointer<Unit>, CPointer<BLUETOOTH_DEVICE_INFO>) -> Int32>
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-public type PFN_AUTHENTICATION_CALLBACK_EX = CFunc<(CPointer<Unit>, CPointer<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>) -> Int32>
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
 public type PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK = CFunc<(UInt32, CPointer<UInt8>, UInt32, CPointer<Unit>) -> Int32>
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
 public type PFN_DEVICE_CALLBACK = CFunc<(CPointer<Unit>, CPointer<BLUETOOTH_DEVICE_INFO>) -> Int32>
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct RFCOMM_COMMAND {
-    public var _raw: VArray<UInt8, $11> = VArray<UInt8, $11>(repeat: 0u8)
-
-    public func cmdType(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_cmdType(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `Data`: type `RFCOMM_COMMAND__Data_e__Union` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RFCOMM_COMMAND__Data_e__Union {
-    public var _raw: VArray<UInt8, $7> = VArray<UInt8, $7>(repeat: 0)
-
-    public func msc(): RFCOMM_MSC_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RFCOMM_MSC_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_msc(val: RFCOMM_MSC_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RFCOMM_MSC_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func rls(): RFCOMM_RLS_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RFCOMM_RLS_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_rls(val: RFCOMM_RLS_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RFCOMM_RLS_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func rpn(): RFCOMM_RPN_DATA {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RFCOMM_RPN_DATA>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_rpn(val: RFCOMM_RPN_DATA): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RFCOMM_RPN_DATA>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
 @C
@@ -1374,393 +966,6 @@ public struct RFCOMM_RPN_DATA {
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
 @C
-public struct SDP_ELEMENT_DATA {
-    public var type_: SDP_TYPE = SDP_TYPE()
-    public var specificType: SDP_SPECIFICTYPE = SDP_SPECIFICTYPE()
-    public var data: SDP_ELEMENT_DATA__data_e__Union = SDP_ELEMENT_DATA__data_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct SDP_ELEMENT_DATA__data_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func int128(): SDP_LARGE_INTEGER_16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_LARGE_INTEGER_16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_int128(val: SDP_LARGE_INTEGER_16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_LARGE_INTEGER_16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func int64(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt64(base, 0)
-        }
-    }
-
-    public mut func set_int64(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func int32(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_int32(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func int16(): Int16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt16(base, 0)
-        }
-    }
-
-    public mut func set_int16(val: Int16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func int8(): Win32_Foundation.CHAR {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.CHAR>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_int8(val: Win32_Foundation.CHAR): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<Win32_Foundation.CHAR>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uint128(): SDP_ULARGE_INTEGER_16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ULARGE_INTEGER_16>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_uint128(val: SDP_ULARGE_INTEGER_16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ULARGE_INTEGER_16>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uint64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_uint64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uint32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_uint32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uint16(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_uint16(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uint8(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_uint8(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func booleanVal(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt8(base, 0)
-        }
-    }
-
-    public mut func set_booleanVal(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt8(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uuid128(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_uuid128(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uuid32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_uuid32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uuid16(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_uuid16(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func string(): SDP_ELEMENT_DATA__data_e__Union__string_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__string_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_string(val: SDP_ELEMENT_DATA__data_e__Union__string_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__string_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func url(): SDP_ELEMENT_DATA__data_e__Union__url_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__url_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_url(val: SDP_ELEMENT_DATA__data_e__Union__url_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__url_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func sequence(): SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_sequence(val: SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func alternative(): SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_alternative(val: SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct SDP_ELEMENT_DATA__data_e__Union__string_e__Struct {
-    public var value: CPointer<UInt8> = CPointer<UInt8>()
-    public var length: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct SDP_ELEMENT_DATA__data_e__Union__url_e__Struct {
-    public var value: CPointer<UInt8> = CPointer<UInt8>()
-    public var length: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct {
-    public var value: CPointer<UInt8> = CPointer<UInt8>()
-    public var length: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
-public struct SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct {
-    public var value: CPointer<UInt8> = CPointer<UInt8>()
-    public var length: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct SDP_LARGE_INTEGER_16 {
     public var LowPart: UInt64 = 0
     public var HighPart: Int64 = 0
@@ -1768,7 +973,6 @@ public struct SDP_LARGE_INTEGER_16 {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct SDP_SPECIFICTYPE {
     public var value: Int32 = 0
 
@@ -1838,7 +1042,6 @@ public struct SDP_STRING_TYPE_DATA {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-@C
 public struct SDP_TYPE {
     public var value: Int32 = 0
 
@@ -1895,60 +1098,81 @@ public struct SDP_ULARGE_INTEGER_16 {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
+// packed(1)
 @C
 public struct SOCKADDR_BTH {
-    public var _raw: VArray<UInt8, $14> = VArray<UInt8, $14>(repeat: 0u8)
+    public var _raw: VArray<UInt8, $30> = VArray<UInt8, $30>(repeat: 0u8)
 
-    public func addressFamily(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt16(base, 0)
+    public mut prop addressFamily: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_addressFamily(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop btAddr: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 2)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 2, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func btAddr(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 2)
+    public mut prop serviceClassId: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: GUID = GUID()
+                return packedReadValue<GUID>(base, 10, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 10, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_btAddr(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 2, val)
-            _raw = rawStorage
+    public mut prop port: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 26)
+            }
         }
-    }
-
-    // packed field `serviceClassId`: layout unknown; skipped
-
-    public func port(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 10)
-        }
-    }
-
-    public mut func set_port(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 10, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 26, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1963,6 +1187,970 @@ public struct SdpAttributeRange {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SdpQueryUuidUnion {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop uuid128: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uuid32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uuid16: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BLUETOOTH_AUTHENTICATE_RESPONSE {
+    public var bthAddressRemote: BLUETOOTH_ADDRESS = BLUETOOTH_ADDRESS()
+    public var authMethod: Int32 = 0
+    public var Anonymous: BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union = BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union()
+    public var negativeResponse: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct BLUETOOTH_AUTHENTICATE_RESPONSE__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $8> = VArray<UInt32, $8>(repeat: 0)
+
+    public mut prop pinInfo: BLUETOOTH_PIN_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BLUETOOTH_PIN_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BLUETOOTH_PIN_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop oobInfo: BLUETOOTH_OOB_DATA_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BLUETOOTH_OOB_DATA_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BLUETOOTH_OOB_DATA_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop numericCompInfo: BLUETOOTH_NUMERIC_COMPARISON_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BLUETOOTH_NUMERIC_COMPARISON_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BLUETOOTH_NUMERIC_COMPARISON_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop passkeyInfo: BLUETOOTH_PASSKEY_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BLUETOOTH_PASSKEY_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BLUETOOTH_PASSKEY_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
+    public var deviceInfo: BLUETOOTH_DEVICE_INFO = BLUETOOTH_DEVICE_INFO()
+    public var authenticationMethod: Int32 = 0
+    public var ioCapability: Int32 = 0
+    public var authenticationRequirements: Int32 = 0
+    public var Anonymous: BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union = BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop numeric_Value: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop passkey: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT {
+    public var ChangedAttributeHandle: UInt16 = 0
+    public var CharacteristicValueDataSize: UIntNative = 0
+    public var CharacteristicValue: CPointer<BTH_LE_GATT_CHARACTERISTIC_VALUE> = CPointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BLUETOOTH_SELECT_DEVICE_PARAMS {
+    public var dwSize: UInt32 = 0
+    public var cNumOfClasses: UInt32 = 0
+    public var prgClassOfDevices: CPointer<BLUETOOTH_COD_PAIRS> = CPointer<BLUETOOTH_COD_PAIRS>()
+    public var pszInfo: CPointer<UInt16> = CPointer<UInt16>()
+    public var hwndParent: CPointer<Unit> = CPointer<Unit>()
+    public var fForceAuthentication: Int32 = 0
+    public var fShowAuthenticated: Int32 = 0
+    public var fShowRemembered: Int32 = 0
+    public var fShowUnknown: Int32 = 0
+    public var fAddNewDeviceWizard: Int32 = 0
+    public var fSkipServicesPage: Int32 = 0
+    public var pfnDeviceCallback: PFN_DEVICE_CALLBACK = CFunc<(CPointer<Unit>, CPointer<BLUETOOTH_DEVICE_INFO>) -> Int32>(CPointer<Unit>())
+    public var pvParam: CPointer<Unit> = CPointer<Unit>()
+    public var cNumDevices: UInt32 = 0
+    public var pDevices: CPointer<BLUETOOTH_DEVICE_INFO> = CPointer<BLUETOOTH_DEVICE_INFO>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BTH_LE_GATT_CHARACTERISTIC {
+    public var ServiceHandle: UInt16 = 0
+    public var CharacteristicUuid: BTH_LE_UUID = BTH_LE_UUID()
+    public var AttributeHandle: UInt16 = 0
+    public var CharacteristicValueHandle: UInt16 = 0
+    public var IsBroadcastable: UInt8 = 0
+    public var IsReadable: UInt8 = 0
+    public var IsWritable: UInt8 = 0
+    public var IsWritableWithoutResponse: UInt8 = 0
+    public var IsSignedWritable: UInt8 = 0
+    public var IsNotifiable: UInt8 = 0
+    public var IsIndicatable: UInt8 = 0
+    public var HasExtendedProperties: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BTH_LE_GATT_DESCRIPTOR {
+    public var ServiceHandle: UInt16 = 0
+    public var CharacteristicHandle: UInt16 = 0
+    public var DescriptorType: Int32 = 0
+    public var DescriptorUuid: BTH_LE_UUID = BTH_LE_UUID()
+    public var AttributeHandle: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BTH_LE_GATT_DESCRIPTOR_VALUE {
+    public var DescriptorType: Int32 = 0
+    public var DescriptorUuid: BTH_LE_UUID = BTH_LE_UUID()
+    public var Anonymous: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union = BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union()
+    public var DataSize: UInt32 = 0
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $12> = VArray<UInt32, $12>(repeat: 0)
+
+    public mut prop characteristicExtendedProperties: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop clientCharacteristicConfiguration: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop serverCharacteristicConfiguration: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop characteristicFormat: BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicExtendedProperties_e__Struct {
+    public var IsReliableWriteEnabled: UInt8 = 0
+    public var IsAuxiliariesWritable: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ClientCharacteristicConfiguration_e__Struct {
+    public var IsSubscribeToNotification: UInt8 = 0
+    public var IsSubscribeToIndication: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__ServerCharacteristicConfiguration_e__Struct {
+    public var IsBroadcast: UInt8 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BTH_LE_GATT_DESCRIPTOR_VALUE__Anonymous_e__Union__CharacteristicFormat_e__Struct {
+    public var Format: UInt8 = 0
+    public var Exponent: UInt8 = 0
+    public var Unit_: BTH_LE_UUID = BTH_LE_UUID()
+    public var NameSpace: UInt8 = 0
+    public var Description: BTH_LE_UUID = BTH_LE_UUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct BTH_LE_GATT_SERVICE {
+    public var ServiceUuid: BTH_LE_UUID = BTH_LE_UUID()
+    public var AttributeHandle: UInt16 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+public type PFN_AUTHENTICATION_CALLBACK_EX = CFunc<(CPointer<Unit>, CPointer<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>) -> Int32>
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+// packed(1)
+@C
+public struct RFCOMM_COMMAND {
+    public var _raw: VArray<UInt8, $11> = VArray<UInt8, $11>(repeat: 0u8)
+
+    public mut prop cmdType: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop data: RFCOMM_COMMAND__Data_e__Union {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: RFCOMM_COMMAND__Data_e__Union = RFCOMM_COMMAND__Data_e__Union()
+                return packedReadValue<RFCOMM_COMMAND__Data_e__Union>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RFCOMM_COMMAND__Data_e__Union {
+    public var _raw: VArray<UInt8, $7> = VArray<UInt8, $7>(repeat: 0)
+
+    public mut prop msc: RFCOMM_MSC_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RFCOMM_MSC_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RFCOMM_MSC_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop rls: RFCOMM_RLS_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RFCOMM_RLS_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RFCOMM_RLS_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop rpn: RFCOMM_RPN_DATA {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RFCOMM_RPN_DATA>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RFCOMM_RPN_DATA>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct SDP_ELEMENT_DATA {
+    public var type_: Int32 = 0
+    public var specificType: Int32 = 0
+    public var data: SDP_ELEMENT_DATA__data_e__Union = SDP_ELEMENT_DATA__data_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SDP_ELEMENT_DATA__data_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop int128: SDP_LARGE_INTEGER_16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_LARGE_INTEGER_16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_LARGE_INTEGER_16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop int64: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop int32: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop int16: Int16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop int8: Int8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uint128: SDP_ULARGE_INTEGER_16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ULARGE_INTEGER_16>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ULARGE_INTEGER_16>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uint64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uint32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uint16: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uint8: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop booleanVal: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uuid128: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uuid32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uuid16: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop string: SDP_ELEMENT_DATA__data_e__Union__string_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__string_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__string_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop url: SDP_ELEMENT_DATA__data_e__Union__url_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__url_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__url_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop sequence: SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop alternative: SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct SDP_ELEMENT_DATA__data_e__Union__string_e__Struct {
+    public var value: CPointer<UInt8> = CPointer<UInt8>()
+    public var length: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct SDP_ELEMENT_DATA__data_e__Union__url_e__Struct {
+    public var value: CPointer<UInt8> = CPointer<UInt8>()
+    public var length: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct SDP_ELEMENT_DATA__data_e__Union__sequence_e__Struct {
+    public var value: CPointer<UInt8> = CPointer<UInt8>()
+    public var length: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+@C
+public struct SDP_ELEMENT_DATA__data_e__Union__alternative_e__Struct {
+    public var value: CPointer<UInt8> = CPointer<UInt8>()
+    public var length: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_Bluetooth == "on"]
 @C
 public struct SdpQueryUuid {
     public var u: SdpQueryUuidUnion = SdpQueryUuidUnion()
@@ -1971,63 +2159,108 @@ public struct SdpQueryUuid {
 }
 
 @When[Windows_Win32_Devices_Bluetooth == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
 @C
-public struct SdpQueryUuidUnion {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+public struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION {
+    public var NumCharacteristics: UInt16 = 0
+    public var Characteristics: VArray<BTH_LE_GATT_CHARACTERISTIC, $1> = VArray<BTH_LE_GATT_CHARACTERISTIC, $1>(repeat: BTH_LE_GATT_CHARACTERISTIC())
+    public init() {}
+}
 
-    public func uuid128(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
+@When[Windows_Win32_Devices_Bluetooth == "on"]
+// packed(1)
+@C
+public struct BTH_QUERY_SERVICE {
+    public var _raw: VArray<UInt8, $256> = VArray<UInt8, $256>(repeat: 0u8)
+
+    public mut prop type_: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_uuid128(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop serviceHandle: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func uuid32(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop uuids: VArray<SdpQueryUuid, $12> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<SdpQueryUuid, $12> = VArray<SdpQueryUuid, $12>(repeat: SdpQueryUuid())
+                return packedReadValue<VArray<SdpQueryUuid, $12>>(base, 8, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_uuid32(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop numRange: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 248)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 248, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func uuid16(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
+    public mut prop pRange: VArray<SdpAttributeRange, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<SdpAttributeRange, $1> = VArray<SdpAttributeRange, $1>(repeat: SdpAttributeRange())
+                return packedReadValue<VArray<SdpAttributeRange, $1>>(base, 252, defaultValue)
+            }
         }
-    }
-
-    public mut func set_uuid16(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 252, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2074,7 +2307,7 @@ foreign {
     // param-hint: ServicesBuffer len=param[1] optional
     func BluetoothGATTGetServices(hDevice: CPointer<Unit>, ServicesBufferCount: UInt16, ServicesBuffer: CPointer<BTH_LE_GATT_SERVICE>, ServicesBufferActual: CPointer<UInt16>, Flags: UInt32): Int32
     // param-hint: CallbackContext optional
-    func BluetoothGATTRegisterEvent(hService: CPointer<Unit>, EventType: BTH_LE_GATT_EVENT_TYPE, EventParameterIn: CPointer<Unit>, Callback: PFNBLUETOOTH_GATT_EVENT_CALLBACK, CallbackContext: CPointer<Unit>, pEventHandle: CPointer<IntNative>, Flags: UInt32): Int32
+    func BluetoothGATTRegisterEvent(hService: CPointer<Unit>, EventType: Int32, EventParameterIn: CPointer<Unit>, Callback: PFNBLUETOOTH_GATT_EVENT_CALLBACK, CallbackContext: CPointer<Unit>, pEventHandle: CPointer<IntNative>, Flags: UInt32): Int32
     // param-hint: ReliableWriteContext optional
     func BluetoothGATTSetCharacteristicValue(hDevice: CPointer<Unit>, Characteristic: CPointer<BTH_LE_GATT_CHARACTERISTIC>, CharacteristicValue: CPointer<BTH_LE_GATT_CHARACTERISTIC_VALUE>, ReliableWriteContext: UInt64, Flags: UInt32): Int32
     func BluetoothGATTSetDescriptorValue(hDevice: CPointer<Unit>, Descriptor: CPointer<BTH_LE_GATT_DESCRIPTOR>, DescriptorValue: CPointer<BTH_LE_GATT_DESCRIPTOR_VALUE>, Flags: UInt32): Int32
@@ -2133,7 +2366,7 @@ foreign {
     // param-hint: hwndParentIn optional
     // param-hint: hRadioIn optional
     // param-hint: pbtOobData optional
-    func BluetoothAuthenticateDeviceEx(hwndParentIn: CPointer<Unit>, hRadioIn: CPointer<Unit>, pbtdiInout: CPointer<BLUETOOTH_DEVICE_INFO>, pbtOobData: CPointer<BLUETOOTH_OOB_DATA_INFO>, authenticationRequirement: AUTHENTICATION_REQUIREMENTS): UInt32
+    func BluetoothAuthenticateDeviceEx(hwndParentIn: CPointer<Unit>, hRadioIn: CPointer<Unit>, pbtdiInout: CPointer<BLUETOOTH_DEVICE_INFO>, pbtOobData: CPointer<BLUETOOTH_OOB_DATA_INFO>, authenticationRequirement: Int32): UInt32
     // param-hint: hwndParent optional
     // param-hint: hRadio optional
     // param-hint: rgbtdi len=param[2]

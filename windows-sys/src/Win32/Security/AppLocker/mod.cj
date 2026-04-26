@@ -2,12 +2,15 @@
 package windows_sys.Win32.Security.AppLocker
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
 
-@When[Windows_Win32_Security_AppLocker == "on"]
+@When[Windows_Win32_Security_AppLocker == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct SAFER_CODE_PROPERTIES_V1 {
     public var cbSize: UInt32 = 0
@@ -18,14 +21,14 @@ public struct SAFER_CODE_PROPERTIES_V1 {
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
     public var dwImageHashSize: UInt32 = 0
     public var ImageSize: Int64 = 0
-    public var HashAlgorithm: Win32_impl.ALG_ID = Win32_impl.ALG_ID()
+    public var HashAlgorithm: UInt32 = 0
     public var pByteBlock: CPointer<UInt8> = CPointer<UInt8>()
     public var hWndParent: CPointer<Unit> = CPointer<Unit>()
     public var dwWVTUIChoice: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Security_AppLocker == "on"]
+@When[Windows_Win32_Security_AppLocker == "on" && Windows_Win32_Security_Cryptography == "on"]
 @C
 public struct SAFER_CODE_PROPERTIES_V2 {
     public var cbSize: UInt32 = 0
@@ -36,7 +39,7 @@ public struct SAFER_CODE_PROPERTIES_V2 {
     public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
     public var dwImageHashSize: UInt32 = 0
     public var ImageSize: Int64 = 0
-    public var HashAlgorithm: Win32_impl.ALG_ID = Win32_impl.ALG_ID()
+    public var HashAlgorithm: UInt32 = 0
     public var pByteBlock: CPointer<UInt8> = CPointer<UInt8>()
     public var hWndParent: CPointer<Unit> = CPointer<Unit>()
     public var dwWVTUIChoice: UInt32 = 0
@@ -49,7 +52,6 @@ public struct SAFER_CODE_PROPERTIES_V2 {
 }
 
 @When[Windows_Win32_Security_AppLocker == "on"]
-@C
 public struct SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS {
     public var value: UInt32 = 0
 
@@ -94,41 +96,6 @@ public let SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS_SAFER_TOKEN_MAKE_INERT: SAFER_CO
 public let SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS_SAFER_TOKEN_WANT_FLAGS: SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS = SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS(8)
 
 @When[Windows_Win32_Security_AppLocker == "on"]
-@C
-public struct SAFER_HASH_IDENTIFICATION {
-    public var header: SAFER_IDENTIFICATION_HEADER = SAFER_IDENTIFICATION_HEADER()
-    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var FriendlyName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var HashSize: UInt32 = 0
-    public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
-    public var HashAlgorithm: Win32_impl.ALG_ID = Win32_impl.ALG_ID()
-    public var ImageSize: Int64 = 0
-    public var dwSaferFlags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_AppLocker == "on"]
-@C
-public struct SAFER_HASH_IDENTIFICATION2 {
-    public var hashIdentification: SAFER_HASH_IDENTIFICATION = SAFER_HASH_IDENTIFICATION()
-    public var HashSize: UInt32 = 0
-    public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
-    public var HashAlgorithm: Win32_impl.ALG_ID = Win32_impl.ALG_ID()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_AppLocker == "on"]
-@C
-public struct SAFER_IDENTIFICATION_HEADER {
-    public var dwIdentificationType: SAFER_IDENTIFICATION_TYPES = SAFER_IDENTIFICATION_TYPES()
-    public var cbStructSize: UInt32 = 0
-    public var IdentificationGuid: GUID = GUID()
-    public var lastModified: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_AppLocker == "on"]
-@C
 public struct SAFER_IDENTIFICATION_TYPES {
     public var value: Int32 = 0
 
@@ -162,7 +129,6 @@ public let SAFER_IDENTIFICATION_TYPES_SaferIdentityTypeUrlZone: SAFER_IDENTIFICA
 public let SAFER_IDENTIFICATION_TYPES_SaferIdentityTypeCertificate: SAFER_IDENTIFICATION_TYPES = SAFER_IDENTIFICATION_TYPES(4)
 
 @When[Windows_Win32_Security_AppLocker == "on"]
-@C
 public struct SAFER_OBJECT_INFO_CLASS {
     public var value: Int32 = 0
 
@@ -229,17 +195,6 @@ public let SAFER_OBJECT_INFO_CLASS_SaferObjectSingleIdentification: SAFER_OBJECT
 public let SAFER_OBJECT_INFO_CLASS_SaferObjectExtendedError: SAFER_OBJECT_INFO_CLASS = SAFER_OBJECT_INFO_CLASS(16)
 
 @When[Windows_Win32_Security_AppLocker == "on"]
-@C
-public struct SAFER_PATHNAME_IDENTIFICATION {
-    public var header: SAFER_IDENTIFICATION_HEADER = SAFER_IDENTIFICATION_HEADER()
-    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
-    public var ImageName: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwSaferFlags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_AppLocker == "on"]
-@C
 public struct SAFER_POLICY_INFO_CLASS {
     public var value: Int32 = 0
 
@@ -280,6 +235,26 @@ public let SAFER_POLICY_INFO_CLASS_SaferPolicyAuthenticodeEnabled: SAFER_POLICY_
 
 @When[Windows_Win32_Security_AppLocker == "on"]
 @C
+public struct SAFER_IDENTIFICATION_HEADER {
+    public var dwIdentificationType: Int32 = 0
+    public var cbStructSize: UInt32 = 0
+    public var IdentificationGuid: GUID = GUID()
+    public var lastModified: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_AppLocker == "on"]
+@C
+public struct SAFER_PATHNAME_IDENTIFICATION {
+    public var header: SAFER_IDENTIFICATION_HEADER = SAFER_IDENTIFICATION_HEADER()
+    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var ImageName: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwSaferFlags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_AppLocker == "on"]
+@C
 public struct SAFER_URLZONE_IDENTIFICATION {
     public var header: SAFER_IDENTIFICATION_HEADER = SAFER_IDENTIFICATION_HEADER()
     public var UrlZoneId: UInt32 = 0
@@ -287,39 +262,71 @@ public struct SAFER_URLZONE_IDENTIFICATION {
     public init() {}
 }
 
+@When[Windows_Win32_Security_AppLocker == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct SAFER_HASH_IDENTIFICATION {
+    public var header: SAFER_IDENTIFICATION_HEADER = SAFER_IDENTIFICATION_HEADER()
+    public var Description: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var FriendlyName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0)
+    public var HashSize: UInt32 = 0
+    public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
+    public var HashAlgorithm: UInt32 = 0
+    public var ImageSize: Int64 = 0
+    public var dwSaferFlags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_AppLocker == "on" && Windows_Win32_Security_Cryptography == "on"]
+@C
+public struct SAFER_HASH_IDENTIFICATION2 {
+    public var hashIdentification: SAFER_HASH_IDENTIFICATION = SAFER_HASH_IDENTIFICATION()
+    public var HashSize: UInt32 = 0
+    public var ImageHash: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0)
+    public var HashAlgorithm: UInt32 = 0
+    public init() {}
+}
+
 @When[ADVAPI32 == "on"]
+foreign {
+    // param-hint: InfoBuffer bytes=param[2]
+    // param-hint: lpReserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SaferGetPolicyInformation(dwScopeId: UInt32, SaferPolicyInfoClass: Int32, InfoBufferSize: UInt32, InfoBuffer: CPointer<Unit>, InfoBufferRetSize: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32
+    // param-hint: InfoBuffer bytes=param[2]
+    // param-hint: lpReserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SaferSetPolicyInformation(dwScopeId: UInt32, SaferPolicyInfoClass: Int32, InfoBufferSize: UInt32, InfoBuffer: CPointer<Unit>, lpReserved: CPointer<Unit>): Int32
+    func SaferiIsExecutableFileType(szFullPathname: CPointer<UInt16>, bFromShellExecute: UInt8): Int32
+}
+
+@When[ADVAPI32 == "on" && (Windows_Win32_Security == "on" && Windows_Win32_Security_Cryptography == "on")]
+foreign {
+    // param-hint: pCodeProperties len=param[0] optional
+    // param-hint: lpReserved optional
+    // pinvoke-hint: SetLastError
+    func SaferIdentifyLevel(dwNumProperties: UInt32, pCodeProperties: CPointer<SAFER_CODE_PROPERTIES_V2>, pLevelHandle: CPointer<Win32_Security.SAFER_LEVEL_HANDLE>, lpReserved: CPointer<Unit>): Int32
+}
+
+@When[ADVAPI32 == "on" && Windows_Win32_Security == "on"]
 foreign {
     // pinvoke-hint: SetLastError
     func SaferCloseLevel(hLevelHandle: Win32_Security.SAFER_LEVEL_HANDLE): Int32
     // param-hint: InAccessToken optional
     // param-hint: lpReserved optional
     // pinvoke-hint: SetLastError
-    func SaferComputeTokenFromLevel(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, InAccessToken: CPointer<Unit>, OutAccessToken: CPointer<CPointer<Unit>>, dwFlags: SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS, lpReserved: CPointer<Unit>): Int32
+    func SaferComputeTokenFromLevel(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, InAccessToken: CPointer<Unit>, OutAccessToken: CPointer<CPointer<Unit>>, dwFlags: UInt32, lpReserved: CPointer<Unit>): Int32
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func SaferCreateLevel(dwScopeId: UInt32, dwLevelId: UInt32, OpenFlags: UInt32, pLevelHandle: CPointer<Win32_Security.SAFER_LEVEL_HANDLE>, lpReserved: CPointer<Unit>): Int32
     // param-hint: lpQueryBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func SaferGetLevelInformation(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, dwInfoType: SAFER_OBJECT_INFO_CLASS, lpQueryBuffer: CPointer<Unit>, dwInBufferSize: UInt32, lpdwOutBufferSize: CPointer<UInt32>): Int32
-    // param-hint: InfoBuffer bytes=param[2]
-    // param-hint: lpReserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SaferGetPolicyInformation(dwScopeId: UInt32, SaferPolicyInfoClass: SAFER_POLICY_INFO_CLASS, InfoBufferSize: UInt32, InfoBuffer: CPointer<Unit>, InfoBufferRetSize: CPointer<UInt32>, lpReserved: CPointer<Unit>): Int32
-    // param-hint: pCodeProperties len=param[0] optional
-    // param-hint: lpReserved optional
-    // pinvoke-hint: SetLastError
-    func SaferIdentifyLevel(dwNumProperties: UInt32, pCodeProperties: CPointer<SAFER_CODE_PROPERTIES_V2>, pLevelHandle: CPointer<Win32_Security.SAFER_LEVEL_HANDLE>, lpReserved: CPointer<Unit>): Int32
+    func SaferGetLevelInformation(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, dwInfoType: Int32, lpQueryBuffer: CPointer<Unit>, dwInBufferSize: UInt32, lpdwOutBufferSize: CPointer<UInt32>): Int32
     // param-hint: lpReserved optional reserved
     // pinvoke-hint: SetLastError
     func SaferRecordEventLogEntry(hLevel: Win32_Security.SAFER_LEVEL_HANDLE, szTargetPath: CPointer<UInt16>, lpReserved: CPointer<Unit>): Int32
     // param-hint: lpQueryBuffer bytes=param[3]
     // pinvoke-hint: SetLastError
-    func SaferSetLevelInformation(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, dwInfoType: SAFER_OBJECT_INFO_CLASS, lpQueryBuffer: CPointer<Unit>, dwInBufferSize: UInt32): Int32
-    // param-hint: InfoBuffer bytes=param[2]
-    // param-hint: lpReserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SaferSetPolicyInformation(dwScopeId: UInt32, SaferPolicyInfoClass: SAFER_POLICY_INFO_CLASS, InfoBufferSize: UInt32, InfoBuffer: CPointer<Unit>, lpReserved: CPointer<Unit>): Int32
-    func SaferiIsExecutableFileType(szFullPathname: CPointer<UInt16>, bFromShellExecute: Win32_Foundation.BOOLEAN): Int32
+    func SaferSetLevelInformation(LevelHandle: Win32_Security.SAFER_LEVEL_HANDLE, dwInfoType: Int32, lpQueryBuffer: CPointer<Unit>, dwInBufferSize: UInt32): Int32
 }
 
 @When[Windows_Win32_Security_AppLocker == "on"]

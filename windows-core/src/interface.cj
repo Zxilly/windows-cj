@@ -1,6 +1,6 @@
 package windows_core
 
-public interface Interface<T> <: InterfaceType & Type<T, CPointer<Unit>, Option<T>> where T <: ComInterface {
+public interface Interface<T> <: InterfaceType & RuntimeType & Type<T, CPointer<Unit>, Option<T>> & HandleWinrtType<T> where T <: ComInterface & HandleWinrtType<T> {
     static func descriptor(): InterfaceDescriptor<T>
     static func fromAbiTake(raw: CPointer<Unit>): T
     static func viewOf(raw: CPointer<Unit>): T
@@ -9,12 +9,35 @@ public interface Interface<T> <: InterfaceType & Type<T, CPointer<Unit>, Option<
         descriptor().iid
     }
 
+    static func signature(): String {
+        "{${descriptor().iid.toString()}}"
+    }
+
     static func UNKNOWN(): Bool {
         true
     }
 
     static func abiType(): String {
         "pointer"
+    }
+
+    static func projectAbi(value: T): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    static func intoWinrtHandle(value: T): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): T {
+        if (raw.isNull()) {
+            throw WindowsException(E_POINTER)
+        }
+        fromAbiTake(raw)
+    }
+
+    static func viewWinrtHandle(raw: CPointer<Unit>): T {
+        viewOf(raw)
     }
 
     static func isNullAbi(abi: CPointer<Unit>): Bool {
@@ -93,51 +116,11 @@ extend IUnknown <: Interface<IUnknown> {}
 
 extend IInspectable <: Interface<IInspectable> {}
 
-extend IAgileObject {
-    public static func fromAbiTake(raw: CPointer<Unit>): IAgileObject {
-        IAgileObject(raw, takeOwnership: true)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): IAgileObject {
-        IAgileObject(raw)
-    }
-}
-
 extend IAgileObject <: Interface<IAgileObject> {}
-
-extend IAgileReference {
-    public static func fromAbiTake(raw: CPointer<Unit>): IAgileReference {
-        IAgileReference(raw, takeOwnership: true)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): IAgileReference {
-        IAgileReference(raw)
-    }
-}
 
 extend IAgileReference <: Interface<IAgileReference> {}
 
-extend IWeakReference {
-    public static func fromAbiTake(raw: CPointer<Unit>): IWeakReference {
-        IWeakReference(raw, takeOwnership: true)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): IWeakReference {
-        IWeakReference(raw)
-    }
-}
-
 extend IWeakReference <: Interface<IWeakReference> {}
-
-extend IWeakReferenceSource {
-    public static func fromAbiTake(raw: CPointer<Unit>): IWeakReferenceSource {
-        IWeakReferenceSource(raw, takeOwnership: true)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): IWeakReferenceSource {
-        IWeakReferenceSource(raw)
-    }
-}
 
 extend IWeakReferenceSource <: Interface<IWeakReferenceSource> {}
 
@@ -148,9 +131,6 @@ public unsafe func cast<T, U>(
     let raw = value.asRaw()
     if (raw.isNull()) {
         return Result<U>.Err(WinError(E_POINTER))
-    }
-    if (descriptor.matches(T.IID())) {
-        return Result<U>.Ok(descriptor.viewOf(raw))
     }
     match (queryInterfaceRaw(raw, descriptor.iid)) {
         case Some(resolved) =>

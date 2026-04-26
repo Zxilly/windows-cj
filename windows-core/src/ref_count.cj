@@ -21,23 +21,23 @@ public struct RefCount {
     }
 
     public func addRef(): Int32 {
-        count.fetchAdd(1, memoryOrder: SeqCst) + 1
+        count.fetchAdd(1) + 1
     }
 
     public func release(): Int32 {
-        let oldCount = count.fetchSub(1, memoryOrder: SeqCst)
+        let oldCount = count.fetchSub(1)
         if (oldCount <= 0) {
-            count.fetchAdd(1, memoryOrder: SeqCst)
+            count.fetchAdd(1)
             throw IllegalStateException("RefCount over-release")
         }
         let remaining = oldCount - 1
         if (remaining == 0) {
-            let _ = count.load(memoryOrder: SeqCst)
+            let _ = count.load()
         }
         remaining
     }
 
     public func isOne(): Bool {
-        count.load(memoryOrder: SeqCst) == 1
+        count.load() == 1
     }
 }

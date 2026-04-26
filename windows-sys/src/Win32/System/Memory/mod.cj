@@ -2,7 +2,10 @@
 package windows_sys.Win32.System.Memory
 
 import windows_polyfill.{unionReadUInt32, unionReadUInt64, unionWriteUInt32, unionWriteUInt64}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
 
 
@@ -18,7 +21,6 @@ public struct CFG_CALL_TARGET_INFO {
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct FILE_MAP {
     public var value: UInt32 = 0
 
@@ -75,7 +77,6 @@ public let FILE_MAP_FILE_MAP_TARGETS_INVALID: FILE_MAP = FILE_MAP(1073741824)
 public let FILE_MAP_FILE_MAP_LARGE_PAGES: FILE_MAP = FILE_MAP(536870912)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct GLOBAL_ALLOC_FLAGS {
     public var value: UInt32 = 0
 
@@ -123,7 +124,6 @@ public let GLOBAL_ALLOC_FLAGS_GMEM_ZEROINIT: GLOBAL_ALLOC_FLAGS = GLOBAL_ALLOC_F
 public let GLOBAL_ALLOC_FLAGS_GPTR: GLOBAL_ALLOC_FLAGS = GLOBAL_ALLOC_FLAGS(64)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct HEAP_FLAGS {
     public var value: UInt32 = 0
 
@@ -207,7 +207,6 @@ public let HEAP_FLAGS_HEAP_CREATE_SEGMENT_HEAP: HEAP_FLAGS = HEAP_FLAGS(256)
 public let HEAP_FLAGS_HEAP_CREATE_HARDENED: HEAP_FLAGS = HEAP_FLAGS(512)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct HEAP_INFORMATION_CLASS {
     public var value: Int32 = 0
 
@@ -249,7 +248,6 @@ public struct HEAP_SUMMARY {
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct LOCAL_ALLOC_FLAGS {
     public var value: UInt32 = 0
 
@@ -302,59 +300,8 @@ public let LOCAL_ALLOC_FLAGS_NONZEROLHND: LOCAL_ALLOC_FLAGS = LOCAL_ALLOC_FLAGS(
 @When[Windows_Win32_System_Memory == "on"]
 public let LOCAL_ALLOC_FLAGS_NONZEROLPTR: LOCAL_ALLOC_FLAGS = LOCAL_ALLOC_FLAGS(0)
 
-@When[Windows_Win32_System_Memory == "on" && (arch == "x86_64" || arch == "aarch64")]
-@C
-public struct MEMORY_BASIC_INFORMATION {
-    public var BaseAddress: CPointer<Unit> = CPointer<Unit>()
-    public var AllocationBase: CPointer<Unit> = CPointer<Unit>()
-    public var AllocationProtect: PAGE_PROTECTION_FLAGS = PAGE_PROTECTION_FLAGS()
-    public var PartitionId: UInt16 = 0
-    public var RegionSize: UIntNative = 0
-    public var State: VIRTUAL_ALLOCATION_TYPE = VIRTUAL_ALLOCATION_TYPE()
-    public var Protect: PAGE_PROTECTION_FLAGS = PAGE_PROTECTION_FLAGS()
-    public var Type: PAGE_TYPE = PAGE_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Memory == "on"]
-@C
-public struct MEMORY_BASIC_INFORMATION32 {
-    public var BaseAddress: UInt32 = 0
-    public var AllocationBase: UInt32 = 0
-    public var AllocationProtect: PAGE_PROTECTION_FLAGS = PAGE_PROTECTION_FLAGS()
-    public var RegionSize: UInt32 = 0
-    public var State: VIRTUAL_ALLOCATION_TYPE = VIRTUAL_ALLOCATION_TYPE()
-    public var Protect: PAGE_PROTECTION_FLAGS = PAGE_PROTECTION_FLAGS()
-    public var Type: PAGE_TYPE = PAGE_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Memory == "on"]
-@C
-public struct MEMORY_BASIC_INFORMATION64 {
-    public var BaseAddress: UInt64 = 0
-    public var AllocationBase: UInt64 = 0
-    public var AllocationProtect: PAGE_PROTECTION_FLAGS = PAGE_PROTECTION_FLAGS()
-    public var __alignment1: UInt32 = 0
-    public var RegionSize: UInt64 = 0
-    public var State: VIRTUAL_ALLOCATION_TYPE = VIRTUAL_ALLOCATION_TYPE()
-    public var Protect: PAGE_PROTECTION_FLAGS = PAGE_PROTECTION_FLAGS()
-    public var Type: PAGE_TYPE = PAGE_TYPE()
-    public var __alignment2: UInt32 = 0
-    public init() {}
-}
-
 @When[Windows_Win32_System_Memory == "on"]
 public type MEMORY_MAPPED_VIEW_ADDRESS = CPointer<Unit>
-
-@When[Windows_Win32_System_Memory == "on"]
-@C
-public struct MEMORY_PARTITION_DEDICATED_MEMORY_ATTRIBUTE {
-    public var Type: MEM_DEDICATED_ATTRIBUTE_TYPE = MEM_DEDICATED_ATTRIBUTE_TYPE()
-    public var Reserved: UInt32 = 0
-    public var Value: UInt64 = 0
-    public init() {}
-}
 
 @When[Windows_Win32_System_Memory == "on"]
 @C
@@ -370,7 +317,6 @@ public struct MEMORY_PARTITION_DEDICATED_MEMORY_INFORMATION {
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct MEMORY_RESOURCE_NOTIFICATION_TYPE {
     public var value: Int32 = 0
 
@@ -404,7 +350,6 @@ public struct MEM_ADDRESS_REQUIREMENTS {
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct MEM_DEDICATED_ATTRIBUTE_TYPE {
     public var value: Int32 = 0
 
@@ -453,112 +398,117 @@ public struct MEM_EXTENDED_PARAMETER__Anonymous1_e__Struct {
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct MEM_EXTENDED_PARAMETER__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func uLong64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop uLong64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_uLong64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop pointer: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func pointer(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
+    public mut prop size: UIntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<UIntNative>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<UIntNative>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pointer(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop handle: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func size(): UIntNative {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<UIntNative>(p)
-            return ptr.read()
+    public mut prop uLong: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
         }
-    }
-
-    public mut func set_size(val: UIntNative): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<UIntNative>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func handle(): CPointer<Unit> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_handle(val: CPointer<Unit>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Unit>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uLong(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_uLong(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct MEM_EXTENDED_PARAMETER_TYPE {
     public var value: Int32 = 0
 
@@ -601,7 +551,6 @@ public let MEM_EXTENDED_PARAMETER_TYPE_MemExtendedParameterImageMachine: MEM_EXT
 public let MEM_EXTENDED_PARAMETER_TYPE_MemExtendedParameterMax: MEM_EXTENDED_PARAMETER_TYPE = MEM_EXTENDED_PARAMETER_TYPE(7)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct MEM_SECTION_EXTENDED_PARAMETER_TYPE {
     public var value: Int32 = 0
 
@@ -635,7 +584,6 @@ public let MEM_SECTION_EXTENDED_PARAMETER_TYPE_MemSectionExtendedParameterSignin
 public let MEM_SECTION_EXTENDED_PARAMETER_TYPE_MemSectionExtendedParameterMax: MEM_SECTION_EXTENDED_PARAMETER_TYPE = MEM_SECTION_EXTENDED_PARAMETER_TYPE(4)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct OFFER_PRIORITY {
     public var value: Int32 = 0
 
@@ -666,7 +614,6 @@ public let OFFER_PRIORITY_VmOfferPriorityBelowNormal: OFFER_PRIORITY = OFFER_PRI
 public let OFFER_PRIORITY_VmOfferPriorityNormal: OFFER_PRIORITY = OFFER_PRIORITY(4)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct PAGE_PROTECTION_FLAGS {
     public var value: UInt32 = 0
 
@@ -816,7 +763,6 @@ public let PAGE_PROTECTION_FLAGS_SEC_LARGE_PAGES: PAGE_PROTECTION_FLAGS = PAGE_P
 public let PAGE_PROTECTION_FLAGS_SEC_IMAGE_NO_EXECUTE: PAGE_PROTECTION_FLAGS = PAGE_PROTECTION_FLAGS(285212672)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct PAGE_TYPE {
     public var value: UInt32 = 0
 
@@ -873,50 +819,53 @@ public struct PROCESS_HEAP_ENTRY {
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct PROCESS_HEAP_ENTRY__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
 
-    public func block(): PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct>(p)
-            return ptr.read()
+    public mut prop block: PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_block(val: PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PROCESS_HEAP_ENTRY__Anonymous_e__Union__Block_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop region: PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func region(): PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_region(val: PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -941,10 +890,9 @@ public struct PROCESS_HEAP_ENTRY__Anonymous_e__Union__Region_e__Struct {
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-public type PSECURE_MEMORY_CACHE_CALLBACK = CFunc<(CPointer<Unit>, UIntNative) -> Win32_Foundation.BOOLEAN>
+public type PSECURE_MEMORY_CACHE_CALLBACK = CFunc<(CPointer<Unit>, UIntNative) -> UInt8>
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct SECTION_FLAGS {
     public var value: UInt32 = 0
 
@@ -998,7 +946,6 @@ public let SECTION_FLAGS_SECTION_EXTEND_SIZE: SECTION_FLAGS = SECTION_FLAGS(16)
 public let SECTION_FLAGS_SECTION_MAP_EXECUTE_EXPLICIT: SECTION_FLAGS = SECTION_FLAGS(32)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct SETPROCESSWORKINGSETSIZEEX_FLAGS {
     public var value: UInt32 = 0
 
@@ -1043,7 +990,6 @@ public let SETPROCESSWORKINGSETSIZEEX_FLAGS_QUOTA_LIMITS_HARDWS_MAX_ENABLE: SETP
 public let SETPROCESSWORKINGSETSIZEEX_FLAGS_QUOTA_LIMITS_HARDWS_MAX_DISABLE: SETPROCESSWORKINGSETSIZEEX_FLAGS = SETPROCESSWORKINGSETSIZEEX_FLAGS(8)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct UNMAP_VIEW_OF_FILE_FLAGS {
     public var value: UInt32 = 0
 
@@ -1071,7 +1017,6 @@ public let UNMAP_VIEW_OF_FILE_FLAGS_MEM_UNMAP_WITH_TRANSIENT_BOOST: UNMAP_VIEW_O
 public let UNMAP_VIEW_OF_FILE_FLAGS_MEM_PRESERVE_PLACEHOLDER: UNMAP_VIEW_OF_FILE_FLAGS = UNMAP_VIEW_OF_FILE_FLAGS(2)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct VIRTUAL_ALLOCATION_TYPE {
     public var value: UInt32 = 0
 
@@ -1128,7 +1073,6 @@ public let VIRTUAL_ALLOCATION_TYPE_MEM_RESERVE_PLACEHOLDER: VIRTUAL_ALLOCATION_T
 public let VIRTUAL_ALLOCATION_TYPE_MEM_FREE: VIRTUAL_ALLOCATION_TYPE = VIRTUAL_ALLOCATION_TYPE(65536)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct VIRTUAL_FREE_TYPE {
     public var value: UInt32 = 0
 
@@ -1153,7 +1097,6 @@ public let VIRTUAL_FREE_TYPE_MEM_DECOMMIT: VIRTUAL_FREE_TYPE = VIRTUAL_FREE_TYPE
 public let VIRTUAL_FREE_TYPE_MEM_RELEASE: VIRTUAL_FREE_TYPE = VIRTUAL_FREE_TYPE(32768)
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct WIN32_MEMORY_INFORMATION_CLASS {
     public var value: Int32 = 0
 
@@ -1225,7 +1168,6 @@ public struct WIN32_MEMORY_PARTITION_INFORMATION {
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-@C
 public struct WIN32_MEMORY_PARTITION_INFORMATION_CLASS {
     public var value: Int32 = 0
 
@@ -1269,46 +1211,49 @@ public struct WIN32_MEMORY_REGION_INFORMATION {
 }
 
 @When[Windows_Win32_System_Memory == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
 
-    public func flags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop flags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_flags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop anonymous: WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func anonymous(): WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_anonymous(val: WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1318,6 +1263,57 @@ public struct WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union {
 @C
 public struct WIN32_MEMORY_REGION_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct {
     public var _bitfield: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Memory == "on" && (arch == "x86_64" || arch == "aarch64")]
+@C
+public struct MEMORY_BASIC_INFORMATION {
+    public var BaseAddress: CPointer<Unit> = CPointer<Unit>()
+    public var AllocationBase: CPointer<Unit> = CPointer<Unit>()
+    public var AllocationProtect: UInt32 = 0
+    public var PartitionId: UInt16 = 0
+    public var RegionSize: UIntNative = 0
+    public var State: UInt32 = 0
+    public var Protect: UInt32 = 0
+    public var Type: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Memory == "on"]
+@C
+public struct MEMORY_BASIC_INFORMATION32 {
+    public var BaseAddress: UInt32 = 0
+    public var AllocationBase: UInt32 = 0
+    public var AllocationProtect: UInt32 = 0
+    public var RegionSize: UInt32 = 0
+    public var State: UInt32 = 0
+    public var Protect: UInt32 = 0
+    public var Type: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Memory == "on"]
+@C
+public struct MEMORY_BASIC_INFORMATION64 {
+    public var BaseAddress: UInt64 = 0
+    public var AllocationBase: UInt64 = 0
+    public var AllocationProtect: UInt32 = 0
+    public var __alignment1: UInt32 = 0
+    public var RegionSize: UInt64 = 0
+    public var State: UInt32 = 0
+    public var Protect: UInt32 = 0
+    public var Type: UInt32 = 0
+    public var __alignment2: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Memory == "on"]
+@C
+public struct MEMORY_PARTITION_DEDICATED_MEMORY_ATTRIBUTE {
+    public var Type: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public var Value: UInt64 = 0
     public init() {}
 }
 
@@ -1331,28 +1327,8 @@ foreign {
     // param-hint: PageArray len=param[1]
     // pinvoke-hint: SetLastError
     func AllocateUserPhysicalPagesNuma(hProcess: CPointer<Unit>, NumberOfPages: CPointer<UIntNative>, PageArray: CPointer<UIntNative>, nndPreferred: UInt32): Int32
-    // param-hint: lpFileMappingAttributes optional
-    // param-hint: lpName optional
     // pinvoke-hint: SetLastError
-    func CreateFileMappingA(hFile: CPointer<Unit>, lpFileMappingAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, flProtect: PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh: UInt32, dwMaximumSizeLow: UInt32, lpName: CPointer<UInt8>): CPointer<Unit>
-    // param-hint: SecurityAttributes optional
-    // param-hint: Name optional
-    // pinvoke-hint: SetLastError
-    func CreateFileMappingFromApp(hFile: CPointer<Unit>, SecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, PageProtection: PAGE_PROTECTION_FLAGS, MaximumSize: UInt64, Name: CPointer<UInt16>): CPointer<Unit>
-    // param-hint: lpFileMappingAttributes optional
-    // param-hint: lpName optional
-    // pinvoke-hint: SetLastError
-    func CreateFileMappingNumaA(hFile: CPointer<Unit>, lpFileMappingAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, flProtect: PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh: UInt32, dwMaximumSizeLow: UInt32, lpName: CPointer<UInt8>, nndPreferred: UInt32): CPointer<Unit>
-    // param-hint: lpFileMappingAttributes optional
-    // param-hint: lpName optional
-    // pinvoke-hint: SetLastError
-    func CreateFileMappingNumaW(hFile: CPointer<Unit>, lpFileMappingAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, flProtect: PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh: UInt32, dwMaximumSizeLow: UInt32, lpName: CPointer<UInt16>, nndPreferred: UInt32): CPointer<Unit>
-    // param-hint: lpFileMappingAttributes optional
-    // param-hint: lpName optional
-    // pinvoke-hint: SetLastError
-    func CreateFileMappingW(hFile: CPointer<Unit>, lpFileMappingAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, flProtect: PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh: UInt32, dwMaximumSizeLow: UInt32, lpName: CPointer<UInt16>): CPointer<Unit>
-    // pinvoke-hint: SetLastError
-    func CreateMemoryResourceNotification(NotificationType: MEMORY_RESOURCE_NOTIFICATION_TYPE): CPointer<Unit>
+    func CreateMemoryResourceNotification(NotificationType: Int32): CPointer<Unit>
     // param-hint: VirtualAddress len=param[1]
     func DiscardVirtualMemory(VirtualAddress: CPointer<Unit>, Size: UIntNative): UInt32
     // pinvoke-hint: SetLastError
@@ -1376,48 +1352,48 @@ foreign {
     // param-hint: lpdwGranularity optional
     func GetWriteWatch(dwFlags: UInt32, lpBaseAddress: CPointer<Unit>, dwRegionSize: UIntNative, lpAddresses: CPointer<CPointer<Unit>>, lpdwCount: CPointer<UIntNative>, lpdwGranularity: CPointer<UInt32>): UInt32
     // pinvoke-hint: SetLastError
-    func GlobalAlloc(uFlags: GLOBAL_ALLOC_FLAGS, dwBytes: UIntNative): Win32_Foundation.HGLOBAL
+    func GlobalAlloc(uFlags: UInt32, dwBytes: UIntNative): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func GlobalFlags(hMem: Win32_Foundation.HGLOBAL): UInt32
+    func GlobalFlags(hMem: CPointer<Unit>): UInt32
     // pinvoke-hint: SetLastError
-    func GlobalHandle(pMem: CPointer<Unit>): Win32_Foundation.HGLOBAL
+    func GlobalHandle(pMem: CPointer<Unit>): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func GlobalLock(hMem: Win32_Foundation.HGLOBAL): CPointer<Unit>
+    func GlobalLock(hMem: CPointer<Unit>): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func GlobalReAlloc(hMem: Win32_Foundation.HGLOBAL, dwBytes: UIntNative, uFlags: UInt32): Win32_Foundation.HGLOBAL
+    func GlobalReAlloc(hMem: CPointer<Unit>, dwBytes: UIntNative, uFlags: UInt32): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func GlobalSize(hMem: Win32_Foundation.HGLOBAL): UIntNative
+    func GlobalSize(hMem: CPointer<Unit>): UIntNative
     // pinvoke-hint: SetLastError
-    func GlobalUnlock(hMem: Win32_Foundation.HGLOBAL): Int32
-    func HeapAlloc(hHeap: CPointer<Unit>, dwFlags: HEAP_FLAGS, dwBytes: UIntNative): CPointer<Unit>
+    func GlobalUnlock(hMem: CPointer<Unit>): Int32
+    func HeapAlloc(hHeap: CPointer<Unit>, dwFlags: UInt32, dwBytes: UIntNative): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func HeapCompact(hHeap: CPointer<Unit>, dwFlags: HEAP_FLAGS): UIntNative
+    func HeapCompact(hHeap: CPointer<Unit>, dwFlags: UInt32): UIntNative
     // pinvoke-hint: SetLastError
-    func HeapCreate(flOptions: HEAP_FLAGS, dwInitialSize: UIntNative, dwMaximumSize: UIntNative): CPointer<Unit>
+    func HeapCreate(flOptions: UInt32, dwInitialSize: UIntNative, dwMaximumSize: UIntNative): CPointer<Unit>
     // pinvoke-hint: SetLastError
     func HeapDestroy(hHeap: CPointer<Unit>): Int32
     // param-hint: lpMem optional
     // pinvoke-hint: SetLastError
-    func HeapFree(hHeap: CPointer<Unit>, dwFlags: HEAP_FLAGS, lpMem: CPointer<Unit>): Int32
+    func HeapFree(hHeap: CPointer<Unit>, dwFlags: UInt32, lpMem: CPointer<Unit>): Int32
     // pinvoke-hint: SetLastError
     func HeapLock(hHeap: CPointer<Unit>): Int32
     // param-hint: HeapHandle optional
     // param-hint: HeapInformation bytes=param[3] optional
     // param-hint: ReturnLength optional
     // pinvoke-hint: SetLastError
-    func HeapQueryInformation(HeapHandle: CPointer<Unit>, HeapInformationClass: HEAP_INFORMATION_CLASS, HeapInformation: CPointer<Unit>, HeapInformationLength: UIntNative, ReturnLength: CPointer<UIntNative>): Int32
+    func HeapQueryInformation(HeapHandle: CPointer<Unit>, HeapInformationClass: Int32, HeapInformation: CPointer<Unit>, HeapInformationLength: UIntNative, ReturnLength: CPointer<UIntNative>): Int32
     // param-hint: lpMem optional
-    func HeapReAlloc(hHeap: CPointer<Unit>, dwFlags: HEAP_FLAGS, lpMem: CPointer<Unit>, dwBytes: UIntNative): CPointer<Unit>
+    func HeapReAlloc(hHeap: CPointer<Unit>, dwFlags: UInt32, lpMem: CPointer<Unit>, dwBytes: UIntNative): CPointer<Unit>
     // param-hint: HeapHandle optional
     // param-hint: HeapInformation bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func HeapSetInformation(HeapHandle: CPointer<Unit>, HeapInformationClass: HEAP_INFORMATION_CLASS, HeapInformation: CPointer<Unit>, HeapInformationLength: UIntNative): Int32
-    func HeapSize(hHeap: CPointer<Unit>, dwFlags: HEAP_FLAGS, lpMem: CPointer<Unit>): UIntNative
+    func HeapSetInformation(HeapHandle: CPointer<Unit>, HeapInformationClass: Int32, HeapInformation: CPointer<Unit>, HeapInformationLength: UIntNative): Int32
+    func HeapSize(hHeap: CPointer<Unit>, dwFlags: UInt32, lpMem: CPointer<Unit>): UIntNative
     func HeapSummary(hHeap: CPointer<Unit>, dwFlags: UInt32, lpSummary: CPointer<HEAP_SUMMARY>): Int32
     // pinvoke-hint: SetLastError
     func HeapUnlock(hHeap: CPointer<Unit>): Int32
     // param-hint: lpMem optional
-    func HeapValidate(hHeap: CPointer<Unit>, dwFlags: HEAP_FLAGS, lpMem: CPointer<Unit>): Int32
+    func HeapValidate(hHeap: CPointer<Unit>, dwFlags: UInt32, lpMem: CPointer<Unit>): Int32
     // pinvoke-hint: SetLastError
     func HeapWalk(hHeap: CPointer<Unit>, lpEntry: CPointer<PROCESS_HEAP_ENTRY>): Int32
     // param-hint: lpfn optional
@@ -1432,20 +1408,20 @@ foreign {
     // param-hint: lp optional
     func IsBadWritePtr(lp: CPointer<Unit>, ucb: UIntNative): Int32
     // pinvoke-hint: SetLastError
-    func LocalAlloc(uFlags: LOCAL_ALLOC_FLAGS, uBytes: UIntNative): Win32_Foundation.HLOCAL
+    func LocalAlloc(uFlags: UInt32, uBytes: UIntNative): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func LocalFlags(hMem: Win32_Foundation.HLOCAL): UInt32
+    func LocalFlags(hMem: CPointer<Unit>): UInt32
     // pinvoke-hint: SetLastError
-    func LocalHandle(pMem: CPointer<Unit>): Win32_Foundation.HLOCAL
+    func LocalHandle(pMem: CPointer<Unit>): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func LocalLock(hMem: Win32_Foundation.HLOCAL): CPointer<Unit>
+    func LocalLock(hMem: CPointer<Unit>): CPointer<Unit>
     // param-hint: hMem optional
     // pinvoke-hint: SetLastError
-    func LocalReAlloc(hMem: Win32_Foundation.HLOCAL, uBytes: UIntNative, uFlags: UInt32): Win32_Foundation.HLOCAL
+    func LocalReAlloc(hMem: CPointer<Unit>, uBytes: UIntNative, uFlags: UInt32): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func LocalSize(hMem: Win32_Foundation.HLOCAL): UIntNative
+    func LocalSize(hMem: CPointer<Unit>): UIntNative
     // pinvoke-hint: SetLastError
-    func LocalUnlock(hMem: Win32_Foundation.HLOCAL): Int32
+    func LocalUnlock(hMem: CPointer<Unit>): Int32
     // param-hint: PageArray len=param[1] optional
     // pinvoke-hint: SetLastError
     func MapUserPhysicalPages(VirtualAddress: CPointer<Unit>, NumberOfPages: UIntNative, PageArray: CPointer<UIntNative>): Int32
@@ -1454,17 +1430,17 @@ foreign {
     // pinvoke-hint: SetLastError
     func MapUserPhysicalPagesScatter(VirtualAddresses: CPointer<CPointer<Unit>>, NumberOfPages: UIntNative, PageArray: CPointer<UIntNative>): Int32
     // pinvoke-hint: SetLastError
-    func MapViewOfFile(hFileMappingObject: CPointer<Unit>, dwDesiredAccess: FILE_MAP, dwFileOffsetHigh: UInt32, dwFileOffsetLow: UInt32, dwNumberOfBytesToMap: UIntNative): MEMORY_MAPPED_VIEW_ADDRESS
+    func MapViewOfFile(hFileMappingObject: CPointer<Unit>, dwDesiredAccess: UInt32, dwFileOffsetHigh: UInt32, dwFileOffsetLow: UInt32, dwNumberOfBytesToMap: UIntNative): MEMORY_MAPPED_VIEW_ADDRESS
     // param-hint: lpBaseAddress optional
     // pinvoke-hint: SetLastError
-    func MapViewOfFileEx(hFileMappingObject: CPointer<Unit>, dwDesiredAccess: FILE_MAP, dwFileOffsetHigh: UInt32, dwFileOffsetLow: UInt32, dwNumberOfBytesToMap: UIntNative, lpBaseAddress: CPointer<Unit>): MEMORY_MAPPED_VIEW_ADDRESS
+    func MapViewOfFileEx(hFileMappingObject: CPointer<Unit>, dwDesiredAccess: UInt32, dwFileOffsetHigh: UInt32, dwFileOffsetLow: UInt32, dwNumberOfBytesToMap: UIntNative, lpBaseAddress: CPointer<Unit>): MEMORY_MAPPED_VIEW_ADDRESS
     // param-hint: lpBaseAddress optional
     // pinvoke-hint: SetLastError
-    func MapViewOfFileExNuma(hFileMappingObject: CPointer<Unit>, dwDesiredAccess: FILE_MAP, dwFileOffsetHigh: UInt32, dwFileOffsetLow: UInt32, dwNumberOfBytesToMap: UIntNative, lpBaseAddress: CPointer<Unit>, nndPreferred: UInt32): MEMORY_MAPPED_VIEW_ADDRESS
+    func MapViewOfFileExNuma(hFileMappingObject: CPointer<Unit>, dwDesiredAccess: UInt32, dwFileOffsetHigh: UInt32, dwFileOffsetLow: UInt32, dwNumberOfBytesToMap: UIntNative, lpBaseAddress: CPointer<Unit>, nndPreferred: UInt32): MEMORY_MAPPED_VIEW_ADDRESS
     // pinvoke-hint: SetLastError
-    func MapViewOfFileFromApp(hFileMappingObject: CPointer<Unit>, DesiredAccess: FILE_MAP, FileOffset: UInt64, NumberOfBytesToMap: UIntNative): MEMORY_MAPPED_VIEW_ADDRESS
+    func MapViewOfFileFromApp(hFileMappingObject: CPointer<Unit>, DesiredAccess: UInt32, FileOffset: UInt64, NumberOfBytesToMap: UIntNative): MEMORY_MAPPED_VIEW_ADDRESS
     // param-hint: VirtualAddress len=param[1]
-    func OfferVirtualMemory(VirtualAddress: CPointer<Unit>, Size: UIntNative, Priority: OFFER_PRIORITY): UInt32
+    func OfferVirtualMemory(VirtualAddress: CPointer<Unit>, Size: UIntNative, Priority: Int32): UInt32
     // pinvoke-hint: SetLastError
     func OpenFileMappingA(dwDesiredAccess: UInt32, bInheritHandle: Int32, lpName: CPointer<UInt8>): CPointer<Unit>
     // pinvoke-hint: SetLastError
@@ -1481,34 +1457,40 @@ foreign {
     func ResetWriteWatch(lpBaseAddress: CPointer<Unit>, dwRegionSize: UIntNative): UInt32
     func RtlCompareMemory(Source1: CPointer<Unit>, Source2: CPointer<Unit>, Length: UIntNative): UIntNative
     // pinvoke-hint: SetLastError
-    func SetProcessWorkingSetSizeEx(hProcess: CPointer<Unit>, dwMinimumWorkingSetSize: UIntNative, dwMaximumWorkingSetSize: UIntNative, Flags: SETPROCESSWORKINGSETSIZEEX_FLAGS): Int32
+    func SetProcessWorkingSetSizeEx(hProcess: CPointer<Unit>, dwMinimumWorkingSetSize: UIntNative, dwMaximumWorkingSetSize: UIntNative, Flags: UInt32): Int32
     // pinvoke-hint: SetLastError
     func SetSystemFileCacheSize(MinimumFileCacheSize: UIntNative, MaximumFileCacheSize: UIntNative, Flags: UInt32): Int32
     // pinvoke-hint: SetLastError
     func UnmapViewOfFile(lpBaseAddress: MEMORY_MAPPED_VIEW_ADDRESS): Int32
     // pinvoke-hint: SetLastError
-    func UnmapViewOfFileEx(BaseAddress: MEMORY_MAPPED_VIEW_ADDRESS, UnmapFlags: UNMAP_VIEW_OF_FILE_FLAGS): Int32
+    func UnmapViewOfFileEx(BaseAddress: MEMORY_MAPPED_VIEW_ADDRESS, UnmapFlags: UInt32): Int32
     // pinvoke-hint: SetLastError
     func UnregisterBadMemoryNotification(RegistrationHandle: CPointer<Unit>): Int32
     // param-hint: lpAddress optional
     // pinvoke-hint: SetLastError
-    func VirtualAlloc(lpAddress: CPointer<Unit>, dwSize: UIntNative, flAllocationType: VIRTUAL_ALLOCATION_TYPE, flProtect: PAGE_PROTECTION_FLAGS): CPointer<Unit>
+    func VirtualAlloc(lpAddress: CPointer<Unit>, dwSize: UIntNative, flAllocationType: UInt32, flProtect: UInt32): CPointer<Unit>
     // param-hint: lpAddress optional
     // pinvoke-hint: SetLastError
-    func VirtualAllocEx(hProcess: CPointer<Unit>, lpAddress: CPointer<Unit>, dwSize: UIntNative, flAllocationType: VIRTUAL_ALLOCATION_TYPE, flProtect: PAGE_PROTECTION_FLAGS): CPointer<Unit>
+    func VirtualAllocEx(hProcess: CPointer<Unit>, lpAddress: CPointer<Unit>, dwSize: UIntNative, flAllocationType: UInt32, flProtect: UInt32): CPointer<Unit>
     // param-hint: lpAddress optional
     // pinvoke-hint: SetLastError
-    func VirtualAllocExNuma(hProcess: CPointer<Unit>, lpAddress: CPointer<Unit>, dwSize: UIntNative, flAllocationType: VIRTUAL_ALLOCATION_TYPE, flProtect: UInt32, nndPreferred: UInt32): CPointer<Unit>
+    func VirtualAllocExNuma(hProcess: CPointer<Unit>, lpAddress: CPointer<Unit>, dwSize: UIntNative, flAllocationType: UInt32, flProtect: UInt32, nndPreferred: UInt32): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func VirtualFree(lpAddress: CPointer<Unit>, dwSize: UIntNative, dwFreeType: VIRTUAL_FREE_TYPE): Int32
+    func VirtualFree(lpAddress: CPointer<Unit>, dwSize: UIntNative, dwFreeType: UInt32): Int32
     // pinvoke-hint: SetLastError
-    func VirtualFreeEx(hProcess: CPointer<Unit>, lpAddress: CPointer<Unit>, dwSize: UIntNative, dwFreeType: VIRTUAL_FREE_TYPE): Int32
+    func VirtualFreeEx(hProcess: CPointer<Unit>, lpAddress: CPointer<Unit>, dwSize: UIntNative, dwFreeType: UInt32): Int32
     // pinvoke-hint: SetLastError
     func VirtualLock(lpAddress: CPointer<Unit>, dwSize: UIntNative): Int32
     // pinvoke-hint: SetLastError
-    func VirtualProtect(lpAddress: CPointer<Unit>, dwSize: UIntNative, flNewProtect: PAGE_PROTECTION_FLAGS, lpflOldProtect: CPointer<PAGE_PROTECTION_FLAGS>): Int32
+    func VirtualProtect(lpAddress: CPointer<Unit>, dwSize: UIntNative, flNewProtect: UInt32, lpflOldProtect: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
-    func VirtualProtectEx(hProcess: CPointer<Unit>, lpAddress: CPointer<Unit>, dwSize: UIntNative, flNewProtect: PAGE_PROTECTION_FLAGS, lpflOldProtect: CPointer<PAGE_PROTECTION_FLAGS>): Int32
+    func VirtualProtectEx(hProcess: CPointer<Unit>, lpAddress: CPointer<Unit>, dwSize: UIntNative, flNewProtect: UInt32, lpflOldProtect: CPointer<UInt32>): Int32
+    // pinvoke-hint: SetLastError
+    func VirtualUnlock(lpAddress: CPointer<Unit>, dwSize: UIntNative): Int32
+}
+
+@When[KERNEL32 == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+foreign {
     // param-hint: lpAddress optional
     // param-hint: lpBuffer bytes=param[2]
     // pinvoke-hint: SetLastError
@@ -1517,8 +1499,30 @@ foreign {
     // param-hint: lpBuffer bytes=param[3]
     // pinvoke-hint: SetLastError
     func VirtualQueryEx(hProcess: CPointer<Unit>, lpAddress: CPointer<Unit>, lpBuffer: CPointer<MEMORY_BASIC_INFORMATION>, dwLength: UIntNative): UIntNative
+}
+
+@When[KERNEL32 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpFileMappingAttributes optional
+    // param-hint: lpName optional
     // pinvoke-hint: SetLastError
-    func VirtualUnlock(lpAddress: CPointer<Unit>, dwSize: UIntNative): Int32
+    func CreateFileMappingA(hFile: CPointer<Unit>, lpFileMappingAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, flProtect: UInt32, dwMaximumSizeHigh: UInt32, dwMaximumSizeLow: UInt32, lpName: CPointer<UInt8>): CPointer<Unit>
+    // param-hint: SecurityAttributes optional
+    // param-hint: Name optional
+    // pinvoke-hint: SetLastError
+    func CreateFileMappingFromApp(hFile: CPointer<Unit>, SecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, PageProtection: UInt32, MaximumSize: UInt64, Name: CPointer<UInt16>): CPointer<Unit>
+    // param-hint: lpFileMappingAttributes optional
+    // param-hint: lpName optional
+    // pinvoke-hint: SetLastError
+    func CreateFileMappingNumaA(hFile: CPointer<Unit>, lpFileMappingAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, flProtect: UInt32, dwMaximumSizeHigh: UInt32, dwMaximumSizeLow: UInt32, lpName: CPointer<UInt8>, nndPreferred: UInt32): CPointer<Unit>
+    // param-hint: lpFileMappingAttributes optional
+    // param-hint: lpName optional
+    // pinvoke-hint: SetLastError
+    func CreateFileMappingNumaW(hFile: CPointer<Unit>, lpFileMappingAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, flProtect: UInt32, dwMaximumSizeHigh: UInt32, dwMaximumSizeLow: UInt32, lpName: CPointer<UInt16>, nndPreferred: UInt32): CPointer<Unit>
+    // param-hint: lpFileMappingAttributes optional
+    // param-hint: lpName optional
+    // pinvoke-hint: SetLastError
+    func CreateFileMappingW(hFile: CPointer<Unit>, lpFileMappingAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, flProtect: UInt32, dwMaximumSizeHigh: UInt32, dwMaximumSizeLow: UInt32, lpName: CPointer<UInt16>): CPointer<Unit>
 }
 
 @When[API_MS_WIN_CORE_MEMORY_L1_1_3 == "on"]
@@ -1530,7 +1534,7 @@ foreign {
     func SetProcessValidCallTargets(hProcess: CPointer<Unit>, VirtualAddress: CPointer<Unit>, RegionSize: UIntNative, NumberOfOffsets: UInt32, OffsetInformation: CPointer<CFG_CALL_TARGET_INFO>): Int32
     // param-hint: BaseAddress optional
     // pinvoke-hint: SetLastError
-    func VirtualAllocFromApp(BaseAddress: CPointer<Unit>, Size: UIntNative, AllocationType: VIRTUAL_ALLOCATION_TYPE, Protection: UInt32): CPointer<Unit>
+    func VirtualAllocFromApp(BaseAddress: CPointer<Unit>, Size: UIntNative, AllocationType: UInt32, Protection: UInt32): CPointer<Unit>
     // pinvoke-hint: SetLastError
     func VirtualProtectFromApp(Address: CPointer<Unit>, Size: UIntNative, NewProtection: UInt32, OldProtection: CPointer<UInt32>): Int32
 }
@@ -1540,7 +1544,7 @@ foreign {
     // param-hint: MemoryInformation bytes=param[4]
     // param-hint: ReturnSize optional
     // pinvoke-hint: SetLastError
-    func QueryVirtualMemoryInformation(Process: CPointer<Unit>, VirtualAddress: CPointer<Unit>, MemoryInformationClass: WIN32_MEMORY_INFORMATION_CLASS, MemoryInformation: CPointer<Unit>, MemoryInformationSize: UIntNative, ReturnSize: CPointer<UIntNative>): Int32
+    func QueryVirtualMemoryInformation(Process: CPointer<Unit>, VirtualAddress: CPointer<Unit>, MemoryInformationClass: Int32, MemoryInformation: CPointer<Unit>, MemoryInformationSize: UIntNative, ReturnSize: CPointer<UIntNative>): Int32
 }
 
 @When[API_MS_WIN_CORE_MEMORY_L1_1_5 == "on"]
@@ -1549,7 +1553,7 @@ foreign {
     // pinvoke-hint: SetLastError
     func MapViewOfFileNuma2(FileMappingHandle: CPointer<Unit>, ProcessHandle: CPointer<Unit>, Offset: UInt64, BaseAddress: CPointer<Unit>, ViewSize: UIntNative, AllocationType: UInt32, PageProtection: UInt32, PreferredNode: UInt32): MEMORY_MAPPED_VIEW_ADDRESS
     // pinvoke-hint: SetLastError
-    func UnmapViewOfFile2(Process: CPointer<Unit>, BaseAddress: MEMORY_MAPPED_VIEW_ADDRESS, UnmapFlags: UNMAP_VIEW_OF_FILE_FLAGS): Int32
+    func UnmapViewOfFile2(Process: CPointer<Unit>, BaseAddress: MEMORY_MAPPED_VIEW_ADDRESS, UnmapFlags: UInt32): Int32
     // param-hint: Process optional
     func VirtualUnlockEx(Process: CPointer<Unit>, Address: CPointer<Unit>, Size: UIntNative): Int32
 }
@@ -1560,33 +1564,37 @@ foreign {
     // param-hint: BaseAddress optional
     // param-hint: ExtendedParameters len=param[8] optional
     // pinvoke-hint: SetLastError
-    func MapViewOfFile3(FileMapping: CPointer<Unit>, Process: CPointer<Unit>, BaseAddress: CPointer<Unit>, Offset: UInt64, ViewSize: UIntNative, AllocationType: VIRTUAL_ALLOCATION_TYPE, PageProtection: UInt32, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): MEMORY_MAPPED_VIEW_ADDRESS
+    func MapViewOfFile3(FileMapping: CPointer<Unit>, Process: CPointer<Unit>, BaseAddress: CPointer<Unit>, Offset: UInt64, ViewSize: UIntNative, AllocationType: UInt32, PageProtection: UInt32, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): MEMORY_MAPPED_VIEW_ADDRESS
     // param-hint: Process optional
     // param-hint: BaseAddress optional
     // param-hint: ExtendedParameters len=param[8] optional
     // pinvoke-hint: SetLastError
-    func MapViewOfFile3FromApp(FileMapping: CPointer<Unit>, Process: CPointer<Unit>, BaseAddress: CPointer<Unit>, Offset: UInt64, ViewSize: UIntNative, AllocationType: VIRTUAL_ALLOCATION_TYPE, PageProtection: UInt32, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): MEMORY_MAPPED_VIEW_ADDRESS
+    func MapViewOfFile3FromApp(FileMapping: CPointer<Unit>, Process: CPointer<Unit>, BaseAddress: CPointer<Unit>, Offset: UInt64, ViewSize: UIntNative, AllocationType: UInt32, PageProtection: UInt32, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): MEMORY_MAPPED_VIEW_ADDRESS
     // param-hint: Process optional
     // param-hint: BaseAddress optional
     // param-hint: ExtendedParameters len=param[6] optional
     // pinvoke-hint: SetLastError
-    func VirtualAlloc2(Process: CPointer<Unit>, BaseAddress: CPointer<Unit>, Size: UIntNative, AllocationType: VIRTUAL_ALLOCATION_TYPE, PageProtection: UInt32, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): CPointer<Unit>
+    func VirtualAlloc2(Process: CPointer<Unit>, BaseAddress: CPointer<Unit>, Size: UIntNative, AllocationType: UInt32, PageProtection: UInt32, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): CPointer<Unit>
     // param-hint: Process optional
     // param-hint: BaseAddress optional
     // param-hint: ExtendedParameters len=param[6] optional
     // pinvoke-hint: SetLastError
-    func VirtualAlloc2FromApp(Process: CPointer<Unit>, BaseAddress: CPointer<Unit>, Size: UIntNative, AllocationType: VIRTUAL_ALLOCATION_TYPE, PageProtection: UInt32, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): CPointer<Unit>
+    func VirtualAlloc2FromApp(Process: CPointer<Unit>, BaseAddress: CPointer<Unit>, Size: UIntNative, AllocationType: UInt32, PageProtection: UInt32, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): CPointer<Unit>
 }
 
 @When[API_MS_WIN_CORE_MEMORY_L1_1_7 == "on"]
+foreign {
+    // param-hint: OffsetInformation len=param[3]
+    func SetProcessValidCallTargetsForMappedView(Process: CPointer<Unit>, VirtualAddress: CPointer<Unit>, RegionSize: UIntNative, NumberOfOffsets: UInt32, OffsetInformation: CPointer<CFG_CALL_TARGET_INFO>, Section: CPointer<Unit>, ExpectedFileOffset: UInt64): Int32
+}
+
+@When[API_MS_WIN_CORE_MEMORY_L1_1_7 == "on" && Windows_Win32_Security == "on"]
 foreign {
     // param-hint: SecurityAttributes optional
     // param-hint: Name optional
     // param-hint: ExtendedParameters len=param[8] optional
     // pinvoke-hint: SetLastError
-    func CreateFileMapping2(File: CPointer<Unit>, SecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, DesiredAccess: UInt32, PageProtection: PAGE_PROTECTION_FLAGS, AllocationAttributes: UInt32, MaximumSize: UInt64, Name: CPointer<UInt16>, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): CPointer<Unit>
-    // param-hint: OffsetInformation len=param[3]
-    func SetProcessValidCallTargetsForMappedView(Process: CPointer<Unit>, VirtualAddress: CPointer<Unit>, RegionSize: UIntNative, NumberOfOffsets: UInt32, OffsetInformation: CPointer<CFG_CALL_TARGET_INFO>, Section: CPointer<Unit>, ExpectedFileOffset: UInt64): Int32
+    func CreateFileMapping2(File: CPointer<Unit>, SecurityAttributes: CPointer<Win32_Security.SECURITY_ATTRIBUTES>, DesiredAccess: UInt32, PageProtection: UInt32, AllocationAttributes: UInt32, MaximumSize: UInt64, Name: CPointer<UInt16>, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ParameterCount: UInt32): CPointer<Unit>
 }
 
 @When[API_MS_WIN_CORE_MEMORY_L1_1_8 == "on"]
@@ -1596,7 +1604,7 @@ foreign {
     func AllocateUserPhysicalPages2(ObjectHandle: CPointer<Unit>, NumberOfPages: CPointer<UIntNative>, PageArray: CPointer<UIntNative>, ExtendedParameters: CPointer<MEM_EXTENDED_PARAMETER>, ExtendedParameterCount: UInt32): Int32
     func OpenDedicatedMemoryPartition(Partition: CPointer<Unit>, DedicatedMemoryTypeId: UInt64, DesiredAccess: UInt32, InheritHandle: Int32): CPointer<Unit>
     // param-hint: PartitionInformation bytes=param[3]
-    func QueryPartitionInformation(Partition: CPointer<Unit>, PartitionInformationClass: WIN32_MEMORY_PARTITION_INFORMATION_CLASS, PartitionInformation: CPointer<Unit>, PartitionInformationLength: UInt32): Int32
+    func QueryPartitionInformation(Partition: CPointer<Unit>, PartitionInformationClass: Int32, PartitionInformation: CPointer<Unit>, PartitionInformationLength: UInt32): Int32
 }
 
 @When[API_MS_WIN_CORE_MEMORY_L1_1_9 == "on"]
@@ -1611,7 +1619,7 @@ foreign {
     func RtlCrc32(Buffer: CPointer<Unit>, Size: UIntNative, InitialCrc: UInt32): UInt32
     // param-hint: Buffer bytes=param[1]
     func RtlCrc64(Buffer: CPointer<Unit>, Size: UIntNative, InitialCrc: UInt64): UInt64
-    func RtlIsZeroMemory(Buffer: CPointer<Unit>, Length: UIntNative): Win32_Foundation.BOOLEAN
+    func RtlIsZeroMemory(Buffer: CPointer<Unit>, Length: UIntNative): UInt8
 }
 
 @When[Windows_Win32_System_Memory == "on"]

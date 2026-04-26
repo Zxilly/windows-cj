@@ -2,13 +2,16 @@
 package windows_sys.Win32.System.Services
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
+@When[Windows_Win32_System_Registry == "on"]
 import windows_sys.Win32.System.Registry as Win32_System_Registry
 
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct ENUM_SERVICE_STATE {
     public var value: UInt32 = 0
 
@@ -36,43 +39,6 @@ public let ENUM_SERVICE_STATE_SERVICE_INACTIVE: ENUM_SERVICE_STATE = ENUM_SERVIC
 public let ENUM_SERVICE_STATE_SERVICE_STATE_ALL: ENUM_SERVICE_STATE = ENUM_SERVICE_STATE(3)
 
 @When[Windows_Win32_System_Services == "on"]
-@C
-public struct ENUM_SERVICE_STATUSA {
-    public var lpServiceName: CPointer<UInt8> = CPointer<UInt8>()
-    public var lpDisplayName: CPointer<UInt8> = CPointer<UInt8>()
-    public var ServiceStatus: SERVICE_STATUS = SERVICE_STATUS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct ENUM_SERVICE_STATUSW {
-    public var lpServiceName: CPointer<UInt16> = CPointer<UInt16>()
-    public var lpDisplayName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ServiceStatus: SERVICE_STATUS = SERVICE_STATUS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct ENUM_SERVICE_STATUS_PROCESSA {
-    public var lpServiceName: CPointer<UInt8> = CPointer<UInt8>()
-    public var lpDisplayName: CPointer<UInt8> = CPointer<UInt8>()
-    public var ServiceStatusProcess: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct ENUM_SERVICE_STATUS_PROCESSW {
-    public var lpServiceName: CPointer<UInt16> = CPointer<UInt16>()
-    public var lpDisplayName: CPointer<UInt16> = CPointer<UInt16>()
-    public var ServiceStatusProcess: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
 public struct ENUM_SERVICE_TYPE {
     public var value: UInt32 = 0
 
@@ -163,36 +129,6 @@ public type PSC_NOTIFICATION_REGISTRATION = CPointer<Unit>
 
 @When[Windows_Win32_System_Services == "on"]
 @C
-public struct QUERY_SERVICE_CONFIGA {
-    public var dwServiceType: ENUM_SERVICE_TYPE = ENUM_SERVICE_TYPE()
-    public var dwStartType: SERVICE_START_TYPE = SERVICE_START_TYPE()
-    public var dwErrorControl: SERVICE_ERROR = SERVICE_ERROR()
-    public var lpBinaryPathName: CPointer<UInt8> = CPointer<UInt8>()
-    public var lpLoadOrderGroup: CPointer<UInt8> = CPointer<UInt8>()
-    public var dwTagId: UInt32 = 0
-    public var lpDependencies: CPointer<UInt8> = CPointer<UInt8>()
-    public var lpServiceStartName: CPointer<UInt8> = CPointer<UInt8>()
-    public var lpDisplayName: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct QUERY_SERVICE_CONFIGW {
-    public var dwServiceType: ENUM_SERVICE_TYPE = ENUM_SERVICE_TYPE()
-    public var dwStartType: SERVICE_START_TYPE = SERVICE_START_TYPE()
-    public var dwErrorControl: SERVICE_ERROR = SERVICE_ERROR()
-    public var lpBinaryPathName: CPointer<UInt16> = CPointer<UInt16>()
-    public var lpLoadOrderGroup: CPointer<UInt16> = CPointer<UInt16>()
-    public var dwTagId: UInt32 = 0
-    public var lpDependencies: CPointer<UInt16> = CPointer<UInt16>()
-    public var lpServiceStartName: CPointer<UInt16> = CPointer<UInt16>()
-    public var lpDisplayName: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
 public struct QUERY_SERVICE_LOCK_STATUSA {
     public var fIsLocked: UInt32 = 0
     public var lpLockOwner: CPointer<UInt8> = CPointer<UInt8>()
@@ -210,15 +146,6 @@ public struct QUERY_SERVICE_LOCK_STATUSW {
 }
 
 @When[Windows_Win32_System_Services == "on"]
-@C
-public struct SC_ACTION {
-    public var Type: SC_ACTION_TYPE = SC_ACTION_TYPE()
-    public var Delay: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
 public struct SC_ACTION_TYPE {
     public var value: Int32 = 0
 
@@ -252,7 +179,6 @@ public let SC_ACTION_TYPE_SC_ACTION_RUN_COMMAND: SC_ACTION_TYPE = SC_ACTION_TYPE
 public let SC_ACTION_TYPE_SC_ACTION_OWN_RESTART: SC_ACTION_TYPE = SC_ACTION_TYPE(4)
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SC_ENUM_TYPE {
     public var value: Int32 = 0
 
@@ -274,7 +200,6 @@ public struct SC_ENUM_TYPE {
 public let SC_ENUM_TYPE_SC_ENUM_PROCESS_INFO: SC_ENUM_TYPE = SC_ENUM_TYPE(0)
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SC_EVENT_TYPE {
     public var value: Int32 = 0
 
@@ -305,7 +230,6 @@ public let SC_EVENT_TYPE_SC_EVENT_STATUS_CHANGE: SC_EVENT_TYPE = SC_EVENT_TYPE(2
 public type SC_HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SC_STATUS_TYPE {
     public var value: Int32 = 0
 
@@ -327,7 +251,6 @@ public struct SC_STATUS_TYPE {
 public let SC_STATUS_TYPE_SC_STATUS_PROCESS_INFO: SC_STATUS_TYPE = SC_STATUS_TYPE(0)
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_CONFIG {
     public var value: UInt32 = 0
 
@@ -377,89 +300,6 @@ public let SERVICE_CONFIG_SERVICE_CONFIG_LAUNCH_PROTECTED: SERVICE_CONFIG = SERV
 
 @When[Windows_Win32_System_Services == "on"]
 @C
-public struct SERVICE_CONTROL_STATUS_REASON_PARAMSA {
-    public var dwReason: UInt32 = 0
-    public var pszComment: CPointer<UInt8> = CPointer<UInt8>()
-    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_CONTROL_STATUS_REASON_PARAMSW {
-    public var dwReason: UInt32 = 0
-    public var pszComment: CPointer<UInt16> = CPointer<UInt16>()
-    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM {
-    public var u: SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union = SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func customStateId(): SERVICE_TRIGGER_CUSTOM_STATE_ID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SERVICE_TRIGGER_CUSTOM_STATE_ID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_customStateId(val: SERVICE_TRIGGER_CUSTOM_STATE_ID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SERVICE_TRIGGER_CUSTOM_STATE_ID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func s(): SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_s(val: SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct {
-    public var DataOffset: UInt32 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_DELAYED_AUTO_START_INFO {
     public var fDelayedAutostart: Int32 = 0
     public init() {}
@@ -480,7 +320,6 @@ public struct SERVICE_DESCRIPTIONW {
 }
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_DIRECTORY_TYPE {
     public var value: Int32 = 0
 
@@ -505,7 +344,6 @@ public let SERVICE_DIRECTORY_TYPE_ServiceDirectoryPersistentState: SERVICE_DIREC
 public let SERVICE_DIRECTORY_TYPE_ServiceDirectoryTypeMax: SERVICE_DIRECTORY_TYPE = SERVICE_DIRECTORY_TYPE(1)
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_ERROR {
     public var value: UInt32 = 0
 
@@ -537,28 +375,6 @@ public let SERVICE_ERROR_SERVICE_ERROR_SEVERE: SERVICE_ERROR = SERVICE_ERROR(2)
 
 @When[Windows_Win32_System_Services == "on"]
 @C
-public struct SERVICE_FAILURE_ACTIONSA {
-    public var dwResetPeriod: UInt32 = 0
-    public var lpRebootMsg: CPointer<UInt8> = CPointer<UInt8>()
-    public var lpCommand: CPointer<UInt8> = CPointer<UInt8>()
-    public var cActions: UInt32 = 0
-    public var lpsaActions: CPointer<SC_ACTION> = CPointer<SC_ACTION>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_FAILURE_ACTIONSW {
-    public var dwResetPeriod: UInt32 = 0
-    public var lpRebootMsg: CPointer<UInt16> = CPointer<UInt16>()
-    public var lpCommand: CPointer<UInt16> = CPointer<UInt16>()
-    public var cActions: UInt32 = 0
-    public var lpsaActions: CPointer<SC_ACTION> = CPointer<SC_ACTION>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_FAILURE_ACTIONS_FLAG {
     public var fFailureActionsOnNonCrashFailures: Int32 = 0
     public init() {}
@@ -578,7 +394,6 @@ public type SERVICE_MAIN_FUNCTIONA = CFunc<(UInt32, CPointer<CPointer<Int8>>) ->
 public type SERVICE_MAIN_FUNCTIONW = CFunc<(UInt32, CPointer<CPointer<UInt16>>) -> Unit>
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_NOTIFY {
     public var value: UInt32 = 0
 
@@ -642,46 +457,9 @@ public let SERVICE_NOTIFY_SERVICE_NOTIFY_STOPPED: SERVICE_NOTIFY = SERVICE_NOTIF
 
 @When[Windows_Win32_System_Services == "on"]
 @C
-public struct SERVICE_NOTIFY_1 {
-    public var dwVersion: UInt32 = 0
-    public var pfnNotifyCallback: PFN_SC_NOTIFY_CALLBACK = { _ => () }
-    public var pContext: CPointer<Unit> = CPointer<Unit>()
-    public var dwNotificationStatus: UInt32 = 0
-    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_NOTIFY_2A {
-    public var dwVersion: UInt32 = 0
-    public var pfnNotifyCallback: PFN_SC_NOTIFY_CALLBACK = { _ => () }
-    public var pContext: CPointer<Unit> = CPointer<Unit>()
-    public var dwNotificationStatus: UInt32 = 0
-    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
-    public var dwNotificationTriggered: UInt32 = 0
-    public var pszServiceNames: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_NOTIFY_2W {
-    public var dwVersion: UInt32 = 0
-    public var pfnNotifyCallback: PFN_SC_NOTIFY_CALLBACK = { _ => () }
-    public var pContext: CPointer<Unit> = CPointer<Unit>()
-    public var dwNotificationStatus: UInt32 = 0
-    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
-    public var dwNotificationTriggered: UInt32 = 0
-    public var pszServiceNames: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_PREFERRED_NODE_INFO {
     public var usPreferredNode: UInt16 = 0
-    public var fDelete: Win32_Foundation.BOOLEAN = 0
+    public var fDelete: UInt8 = 0
     public init() {}
 }
 
@@ -693,7 +471,6 @@ public struct SERVICE_PRESHUTDOWN_INFO {
 }
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_REGISTRY_STATE_TYPE {
     public var value: Int32 = 0
 
@@ -735,7 +512,6 @@ public struct SERVICE_REQUIRED_PRIVILEGES_INFOW {
 }
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_RUNS_IN_PROCESS {
     public var value: UInt32 = 0
 
@@ -760,7 +536,6 @@ public let SERVICE_RUNS_IN_PROCESS_SERVICE_RUNS_IN_NON_SYSTEM_OR_NOT_RUNNING: SE
 public let SERVICE_RUNS_IN_PROCESS_SERVICE_RUNS_IN_SYSTEM_PROCESS: SERVICE_RUNS_IN_PROCESS = SERVICE_RUNS_IN_PROCESS(1)
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_SHARED_DIRECTORY_TYPE {
     public var value: Int32 = 0
 
@@ -782,7 +557,6 @@ public struct SERVICE_SHARED_DIRECTORY_TYPE {
 public let SERVICE_SHARED_DIRECTORY_TYPE_ServiceSharedDirectoryPersistentState: SERVICE_SHARED_DIRECTORY_TYPE = SERVICE_SHARED_DIRECTORY_TYPE(0)
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_SHARED_REGISTRY_STATE_TYPE {
     public var value: Int32 = 0
 
@@ -818,7 +592,6 @@ public struct SERVICE_START_REASON {
 }
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_START_TYPE {
     public var value: UInt32 = 0
 
@@ -852,20 +625,6 @@ public let SERVICE_START_TYPE_SERVICE_DISABLED: SERVICE_START_TYPE = SERVICE_STA
 public let SERVICE_START_TYPE_SERVICE_SYSTEM_START: SERVICE_START_TYPE = SERVICE_START_TYPE(1)
 
 @When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_STATUS {
-    public var dwServiceType: ENUM_SERVICE_TYPE = ENUM_SERVICE_TYPE()
-    public var dwCurrentState: SERVICE_STATUS_CURRENT_STATE = SERVICE_STATUS_CURRENT_STATE()
-    public var dwControlsAccepted: UInt32 = 0
-    public var dwWin32ExitCode: UInt32 = 0
-    public var dwServiceSpecificExitCode: UInt32 = 0
-    public var dwCheckPoint: UInt32 = 0
-    public var dwWaitHint: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_STATUS_CURRENT_STATE {
     public var value: UInt32 = 0
 
@@ -910,15 +669,15 @@ public type SERVICE_STATUS_HANDLE = CPointer<Unit>
 @When[Windows_Win32_System_Services == "on"]
 @C
 public struct SERVICE_STATUS_PROCESS {
-    public var dwServiceType: ENUM_SERVICE_TYPE = ENUM_SERVICE_TYPE()
-    public var dwCurrentState: SERVICE_STATUS_CURRENT_STATE = SERVICE_STATUS_CURRENT_STATE()
+    public var dwServiceType: UInt32 = 0
+    public var dwCurrentState: UInt32 = 0
     public var dwControlsAccepted: UInt32 = 0
     public var dwWin32ExitCode: UInt32 = 0
     public var dwServiceSpecificExitCode: UInt32 = 0
     public var dwCheckPoint: UInt32 = 0
     public var dwWaitHint: UInt32 = 0
     public var dwProcessId: UInt32 = 0
-    public var dwServiceFlags: SERVICE_RUNS_IN_PROCESS = SERVICE_RUNS_IN_PROCESS()
+    public var dwServiceFlags: UInt32 = 0
     public init() {}
 }
 
@@ -926,7 +685,7 @@ public struct SERVICE_STATUS_PROCESS {
 @C
 public struct SERVICE_TABLE_ENTRYA {
     public var lpServiceName: CPointer<UInt8> = CPointer<UInt8>()
-    public var lpServiceProc: LPSERVICE_MAIN_FUNCTIONA = { _, _ => () }
+    public var lpServiceProc: LPSERVICE_MAIN_FUNCTIONA = CFunc<(UInt32, CPointer<CPointer<UInt8>>) -> Unit>(CPointer<Unit>())
     public init() {}
 }
 
@@ -934,7 +693,7 @@ public struct SERVICE_TABLE_ENTRYA {
 @C
 public struct SERVICE_TABLE_ENTRYW {
     public var lpServiceName: CPointer<UInt16> = CPointer<UInt16>()
-    public var lpServiceProc: LPSERVICE_MAIN_FUNCTIONW = { _, _ => () }
+    public var lpServiceProc: LPSERVICE_MAIN_FUNCTIONW = CFunc<(UInt32, CPointer<CPointer<UInt16>>) -> Unit>(CPointer<Unit>())
     public init() {}
 }
 
@@ -947,18 +706,6 @@ public struct SERVICE_TIMECHANGE_INFO {
 }
 
 @When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_TRIGGER {
-    public var dwTriggerType: SERVICE_TRIGGER_TYPE = SERVICE_TRIGGER_TYPE()
-    public var dwAction: SERVICE_TRIGGER_ACTION = SERVICE_TRIGGER_ACTION()
-    public var pTriggerSubtype: CPointer<GUID> = CPointer<GUID>()
-    public var cDataItems: UInt32 = 0
-    public var pDataItems: CPointer<SERVICE_TRIGGER_SPECIFIC_DATA_ITEM> = CPointer<SERVICE_TRIGGER_SPECIFIC_DATA_ITEM>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_TRIGGER_ACTION {
     public var value: UInt32 = 0
 
@@ -990,25 +737,6 @@ public struct SERVICE_TRIGGER_CUSTOM_STATE_ID {
 }
 
 @When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_TRIGGER_INFO {
-    public var cTriggers: UInt32 = 0
-    public var pTriggers: CPointer<SERVICE_TRIGGER> = CPointer<SERVICE_TRIGGER>()
-    public var pReserved: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
-public struct SERVICE_TRIGGER_SPECIFIC_DATA_ITEM {
-    public var dwDataType: SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE()
-    public var cbData: UInt32 = 0
-    public var pData: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE {
     public var value: UInt32 = 0
 
@@ -1042,7 +770,6 @@ public let SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE_SERVICE_TRIGGER_DATA_TYP
 public let SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE_SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ALL: SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE(5)
 
 @When[Windows_Win32_System_Services == "on"]
-@C
 public struct SERVICE_TRIGGER_TYPE {
     public var value: UInt32 = 0
 
@@ -1081,14 +808,275 @@ public let SERVICE_TRIGGER_TYPE_SERVICE_TRIGGER_TYPE_IP_ADDRESS_AVAILABILITY: SE
 @When[Windows_Win32_System_Services == "on"]
 public let SERVICE_TRIGGER_TYPE_SERVICE_TRIGGER_TYPE_NETWORK_ENDPOINT: SERVICE_TRIGGER_TYPE = SERVICE_TRIGGER_TYPE(6)
 
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct ENUM_SERVICE_STATUS_PROCESSA {
+    public var lpServiceName: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpDisplayName: CPointer<UInt8> = CPointer<UInt8>()
+    public var ServiceStatusProcess: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct ENUM_SERVICE_STATUS_PROCESSW {
+    public var lpServiceName: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpDisplayName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ServiceStatusProcess: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct QUERY_SERVICE_CONFIGA {
+    public var dwServiceType: UInt32 = 0
+    public var dwStartType: UInt32 = 0
+    public var dwErrorControl: UInt32 = 0
+    public var lpBinaryPathName: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpLoadOrderGroup: CPointer<UInt8> = CPointer<UInt8>()
+    public var dwTagId: UInt32 = 0
+    public var lpDependencies: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpServiceStartName: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpDisplayName: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct QUERY_SERVICE_CONFIGW {
+    public var dwServiceType: UInt32 = 0
+    public var dwStartType: UInt32 = 0
+    public var dwErrorControl: UInt32 = 0
+    public var lpBinaryPathName: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpLoadOrderGroup: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwTagId: UInt32 = 0
+    public var lpDependencies: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpServiceStartName: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpDisplayName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SC_ACTION {
+    public var Type: Int32 = 0
+    public var Delay: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_CONTROL_STATUS_REASON_PARAMSA {
+    public var dwReason: UInt32 = 0
+    public var pszComment: CPointer<UInt8> = CPointer<UInt8>()
+    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_CONTROL_STATUS_REASON_PARAMSW {
+    public var dwReason: UInt32 = 0
+    public var pszComment: CPointer<UInt16> = CPointer<UInt16>()
+    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM {
+    public var u: SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union = SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union {
+    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+
+    public mut prop customStateId: SERVICE_TRIGGER_CUSTOM_STATE_ID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SERVICE_TRIGGER_CUSTOM_STATE_ID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SERVICE_TRIGGER_CUSTOM_STATE_ID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop s: SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct {
+    public var DataOffset: UInt32 = 0
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_FAILURE_ACTIONSA {
+    public var dwResetPeriod: UInt32 = 0
+    public var lpRebootMsg: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpCommand: CPointer<UInt8> = CPointer<UInt8>()
+    public var cActions: UInt32 = 0
+    public var lpsaActions: CPointer<SC_ACTION> = CPointer<SC_ACTION>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_FAILURE_ACTIONSW {
+    public var dwResetPeriod: UInt32 = 0
+    public var lpRebootMsg: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpCommand: CPointer<UInt16> = CPointer<UInt16>()
+    public var cActions: UInt32 = 0
+    public var lpsaActions: CPointer<SC_ACTION> = CPointer<SC_ACTION>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_NOTIFY_1 {
+    public var dwVersion: UInt32 = 0
+    public var pfnNotifyCallback: PFN_SC_NOTIFY_CALLBACK = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var pContext: CPointer<Unit> = CPointer<Unit>()
+    public var dwNotificationStatus: UInt32 = 0
+    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_NOTIFY_2A {
+    public var dwVersion: UInt32 = 0
+    public var pfnNotifyCallback: PFN_SC_NOTIFY_CALLBACK = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var pContext: CPointer<Unit> = CPointer<Unit>()
+    public var dwNotificationStatus: UInt32 = 0
+    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
+    public var dwNotificationTriggered: UInt32 = 0
+    public var pszServiceNames: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_NOTIFY_2W {
+    public var dwVersion: UInt32 = 0
+    public var pfnNotifyCallback: PFN_SC_NOTIFY_CALLBACK = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var pContext: CPointer<Unit> = CPointer<Unit>()
+    public var dwNotificationStatus: UInt32 = 0
+    public var ServiceStatus: SERVICE_STATUS_PROCESS = SERVICE_STATUS_PROCESS()
+    public var dwNotificationTriggered: UInt32 = 0
+    public var pszServiceNames: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_STATUS {
+    public var dwServiceType: UInt32 = 0
+    public var dwCurrentState: UInt32 = 0
+    public var dwControlsAccepted: UInt32 = 0
+    public var dwWin32ExitCode: UInt32 = 0
+    public var dwServiceSpecificExitCode: UInt32 = 0
+    public var dwCheckPoint: UInt32 = 0
+    public var dwWaitHint: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_TRIGGER_SPECIFIC_DATA_ITEM {
+    public var dwDataType: UInt32 = 0
+    public var cbData: UInt32 = 0
+    public var pData: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct ENUM_SERVICE_STATUSA {
+    public var lpServiceName: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpDisplayName: CPointer<UInt8> = CPointer<UInt8>()
+    public var ServiceStatus: SERVICE_STATUS = SERVICE_STATUS()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct ENUM_SERVICE_STATUSW {
+    public var lpServiceName: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpDisplayName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ServiceStatus: SERVICE_STATUS = SERVICE_STATUS()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_TRIGGER {
+    public var dwTriggerType: UInt32 = 0
+    public var dwAction: UInt32 = 0
+    public var pTriggerSubtype: CPointer<GUID> = CPointer<GUID>()
+    public var cDataItems: UInt32 = 0
+    public var pDataItems: CPointer<SERVICE_TRIGGER_SPECIFIC_DATA_ITEM> = CPointer<SERVICE_TRIGGER_SPECIFIC_DATA_ITEM>()
+    public init() {}
+}
+
+@When[Windows_Win32_System_Services == "on"]
+@C
+public struct SERVICE_TRIGGER_INFO {
+    public var cTriggers: UInt32 = 0
+    public var pTriggers: CPointer<SERVICE_TRIGGER> = CPointer<SERVICE_TRIGGER>()
+    public var pReserved: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
 @When[ADVAPI32 == "on"]
 foreign {
     // param-hint: lpInfo optional
     // pinvoke-hint: SetLastError
-    func ChangeServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIG, lpInfo: CPointer<Unit>): Int32
+    func ChangeServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: UInt32, lpInfo: CPointer<Unit>): Int32
     // param-hint: lpInfo optional
     // pinvoke-hint: SetLastError
-    func ChangeServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIG, lpInfo: CPointer<Unit>): Int32
+    func ChangeServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: UInt32, lpInfo: CPointer<Unit>): Int32
     // param-hint: lpBinaryPathName optional
     // param-hint: lpLoadOrderGroup optional
     // param-hint: lpdwTagId optional
@@ -1097,7 +1085,7 @@ foreign {
     // param-hint: lpPassword optional
     // param-hint: lpDisplayName optional
     // pinvoke-hint: SetLastError
-    func ChangeServiceConfigA(hService: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPE, dwStartType: SERVICE_START_TYPE, dwErrorControl: SERVICE_ERROR, lpBinaryPathName: CPointer<UInt8>, lpLoadOrderGroup: CPointer<UInt8>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt8>, lpServiceStartName: CPointer<UInt8>, lpPassword: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>): Int32
+    func ChangeServiceConfigA(hService: SC_HANDLE, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: CPointer<UInt8>, lpLoadOrderGroup: CPointer<UInt8>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt8>, lpServiceStartName: CPointer<UInt8>, lpPassword: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>): Int32
     // param-hint: lpBinaryPathName optional
     // param-hint: lpLoadOrderGroup optional
     // param-hint: lpdwTagId optional
@@ -1106,7 +1094,7 @@ foreign {
     // param-hint: lpPassword optional
     // param-hint: lpDisplayName optional
     // pinvoke-hint: SetLastError
-    func ChangeServiceConfigW(hService: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPE, dwStartType: SERVICE_START_TYPE, dwErrorControl: SERVICE_ERROR, lpBinaryPathName: CPointer<UInt16>, lpLoadOrderGroup: CPointer<UInt16>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt16>, lpServiceStartName: CPointer<UInt16>, lpPassword: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>): Int32
+    func ChangeServiceConfigW(hService: SC_HANDLE, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: CPointer<UInt16>, lpLoadOrderGroup: CPointer<UInt16>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt16>, lpServiceStartName: CPointer<UInt16>, lpPassword: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>): Int32
     // pinvoke-hint: SetLastError
     func CloseServiceHandle(hSCObject: SC_HANDLE): Int32
     // pinvoke-hint: SetLastError
@@ -1123,7 +1111,7 @@ foreign {
     // param-hint: lpServiceStartName optional
     // param-hint: lpPassword optional
     // pinvoke-hint: SetLastError
-    func CreateServiceA(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>, dwDesiredAccess: UInt32, dwServiceType: ENUM_SERVICE_TYPE, dwStartType: SERVICE_START_TYPE, dwErrorControl: SERVICE_ERROR, lpBinaryPathName: CPointer<UInt8>, lpLoadOrderGroup: CPointer<UInt8>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt8>, lpServiceStartName: CPointer<UInt8>, lpPassword: CPointer<UInt8>): SC_HANDLE
+    func CreateServiceA(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>, dwDesiredAccess: UInt32, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: CPointer<UInt8>, lpLoadOrderGroup: CPointer<UInt8>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt8>, lpServiceStartName: CPointer<UInt8>, lpPassword: CPointer<UInt8>): SC_HANDLE
     // param-hint: lpDisplayName optional
     // param-hint: lpBinaryPathName optional
     // param-hint: lpLoadOrderGroup optional
@@ -1132,33 +1120,33 @@ foreign {
     // param-hint: lpServiceStartName optional
     // param-hint: lpPassword optional
     // pinvoke-hint: SetLastError
-    func CreateServiceW(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>, dwDesiredAccess: UInt32, dwServiceType: ENUM_SERVICE_TYPE, dwStartType: SERVICE_START_TYPE, dwErrorControl: SERVICE_ERROR, lpBinaryPathName: CPointer<UInt16>, lpLoadOrderGroup: CPointer<UInt16>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt16>, lpServiceStartName: CPointer<UInt16>, lpPassword: CPointer<UInt16>): SC_HANDLE
+    func CreateServiceW(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt16>, lpDisplayName: CPointer<UInt16>, dwDesiredAccess: UInt32, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: CPointer<UInt16>, lpLoadOrderGroup: CPointer<UInt16>, lpdwTagId: CPointer<UInt32>, lpDependencies: CPointer<UInt16>, lpServiceStartName: CPointer<UInt16>, lpPassword: CPointer<UInt16>): SC_HANDLE
     // pinvoke-hint: SetLastError
     func DeleteService(hService: SC_HANDLE): Int32
     // param-hint: lpServices bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func EnumDependentServicesA(hService: SC_HANDLE, dwServiceState: ENUM_SERVICE_STATE, lpServices: CPointer<ENUM_SERVICE_STATUSA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Int32
+    func EnumDependentServicesA(hService: SC_HANDLE, dwServiceState: UInt32, lpServices: CPointer<ENUM_SERVICE_STATUSA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Int32
     // param-hint: lpServices bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func EnumDependentServicesW(hService: SC_HANDLE, dwServiceState: ENUM_SERVICE_STATE, lpServices: CPointer<ENUM_SERVICE_STATUSW>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Int32
+    func EnumDependentServicesW(hService: SC_HANDLE, dwServiceState: UInt32, lpServices: CPointer<ENUM_SERVICE_STATUSW>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Int32
     // param-hint: lpServices bytes=param[4] optional
     // param-hint: lpResumeHandle optional
     // pinvoke-hint: SetLastError
-    func EnumServicesStatusA(hSCManager: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPE, dwServiceState: ENUM_SERVICE_STATE, lpServices: CPointer<ENUM_SERVICE_STATUSA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Int32
+    func EnumServicesStatusA(hSCManager: SC_HANDLE, dwServiceType: UInt32, dwServiceState: UInt32, lpServices: CPointer<ENUM_SERVICE_STATUSA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Int32
     // param-hint: lpServices bytes=param[5] optional
     // param-hint: lpResumeHandle optional
     // param-hint: pszGroupName optional
     // pinvoke-hint: SetLastError
-    func EnumServicesStatusExA(hSCManager: SC_HANDLE, InfoLevel: SC_ENUM_TYPE, dwServiceType: ENUM_SERVICE_TYPE, dwServiceState: ENUM_SERVICE_STATE, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: CPointer<UInt8>): Int32
+    func EnumServicesStatusExA(hSCManager: SC_HANDLE, InfoLevel: Int32, dwServiceType: UInt32, dwServiceState: UInt32, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: CPointer<UInt8>): Int32
     // param-hint: lpServices bytes=param[5] optional
     // param-hint: lpResumeHandle optional
     // param-hint: pszGroupName optional
     // pinvoke-hint: SetLastError
-    func EnumServicesStatusExW(hSCManager: SC_HANDLE, InfoLevel: SC_ENUM_TYPE, dwServiceType: ENUM_SERVICE_TYPE, dwServiceState: ENUM_SERVICE_STATE, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: CPointer<UInt16>): Int32
+    func EnumServicesStatusExW(hSCManager: SC_HANDLE, InfoLevel: Int32, dwServiceType: UInt32, dwServiceState: UInt32, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: CPointer<UInt16>): Int32
     // param-hint: lpServices bytes=param[4] optional
     // param-hint: lpResumeHandle optional
     // pinvoke-hint: SetLastError
-    func EnumServicesStatusW(hSCManager: SC_HANDLE, dwServiceType: ENUM_SERVICE_TYPE, dwServiceState: ENUM_SERVICE_STATE, lpServices: CPointer<ENUM_SERVICE_STATUSW>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Int32
+    func EnumServicesStatusW(hSCManager: SC_HANDLE, dwServiceType: UInt32, dwServiceState: UInt32, lpServices: CPointer<ENUM_SERVICE_STATUSW>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Int32
     // param-hint: lpDisplayName len=param[3] optional
     // pinvoke-hint: SetLastError
     func GetServiceDisplayNameA(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt8>, lpDisplayName: CPointer<UInt8>, lpcchBuffer: CPointer<UInt32>): Int32
@@ -1175,8 +1163,8 @@ foreign {
     func LockServiceDatabase(hSCManager: SC_HANDLE): CPointer<Unit>
     // pinvoke-hint: SetLastError
     func NotifyBootConfigStatus(BootAcceptable: Int32): Int32
-    func NotifyServiceStatusChangeA(hService: SC_HANDLE, dwNotifyMask: SERVICE_NOTIFY, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2A>): UInt32
-    func NotifyServiceStatusChangeW(hService: SC_HANDLE, dwNotifyMask: SERVICE_NOTIFY, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2W>): UInt32
+    func NotifyServiceStatusChangeA(hService: SC_HANDLE, dwNotifyMask: UInt32, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2A>): UInt32
+    func NotifyServiceStatusChangeW(hService: SC_HANDLE, dwNotifyMask: UInt32, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2W>): UInt32
     // param-hint: lpMachineName optional
     // param-hint: lpDatabaseName optional
     // pinvoke-hint: SetLastError
@@ -1191,10 +1179,10 @@ foreign {
     func OpenServiceW(hSCManager: SC_HANDLE, lpServiceName: CPointer<UInt16>, dwDesiredAccess: UInt32): SC_HANDLE
     // param-hint: lpBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func QueryServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIG, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+    func QueryServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: UInt32, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
     // param-hint: lpBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func QueryServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: SERVICE_CONFIG, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+    func QueryServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: UInt32, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
     // param-hint: lpServiceConfig bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func QueryServiceConfigA(hService: SC_HANDLE, lpServiceConfig: CPointer<QUERY_SERVICE_CONFIGA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
@@ -1209,14 +1197,11 @@ foreign {
     // param-hint: lpLockStatus bytes=param[2] optional
     // pinvoke-hint: SetLastError
     func QueryServiceLockStatusW(hSCManager: SC_HANDLE, lpLockStatus: CPointer<QUERY_SERVICE_LOCK_STATUSW>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
-    // param-hint: lpSecurityDescriptor bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func QueryServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: UInt32, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
     func QueryServiceStatus(hService: SC_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUS>): Int32
     // param-hint: lpBuffer bytes=param[3] optional
     // pinvoke-hint: SetLastError
-    func QueryServiceStatusEx(hService: SC_HANDLE, InfoLevel: SC_STATUS_TYPE, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+    func QueryServiceStatusEx(hService: SC_HANDLE, InfoLevel: Int32, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
     func RegisterServiceCtrlHandlerA(lpServiceName: CPointer<UInt8>, lpHandlerProc: LPHANDLER_FUNCTION): SERVICE_STATUS_HANDLE
     // param-hint: lpContext optional
@@ -1229,8 +1214,6 @@ foreign {
     func RegisterServiceCtrlHandlerW(lpServiceName: CPointer<UInt16>, lpHandlerProc: LPHANDLER_FUNCTION): SERVICE_STATUS_HANDLE
     // pinvoke-hint: SetLastError
     func SetServiceBits(hServiceStatus: SERVICE_STATUS_HANDLE, dwServiceBits: UInt32, bSetBitsOn: Int32, bUpdateImmediately: Int32): Int32
-    // pinvoke-hint: SetLastError
-    func SetServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: Win32_Security.OBJECT_SECURITY_INFORMATION, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
     // pinvoke-hint: SetLastError
     func SetServiceStatus(hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUS>): Int32
     // param-hint: lpServiceArgVectors len=param[1] optional
@@ -1250,29 +1233,42 @@ foreign {
     func WaitServiceState(hService: SC_HANDLE, dwNotify: UInt32, dwTimeout: UInt32, hCancelEvent: CPointer<Unit>): UInt32
 }
 
+@When[ADVAPI32 == "on" && Windows_Win32_Security == "on"]
+foreign {
+    // param-hint: lpSecurityDescriptor bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func QueryServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: UInt32, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Int32
+    // pinvoke-hint: SetLastError
+    func SetServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: UInt32, lpSecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR): Int32
+}
+
 @When[SECHOST == "on"]
 foreign {
     // param-hint: pCallbackContext optional
-    func SubscribeServiceChangeNotifications(hService: SC_HANDLE, eEventType: SC_EVENT_TYPE, pCallback: PSC_NOTIFICATION_CALLBACK, pCallbackContext: CPointer<Unit>, pSubscription: CPointer<PSC_NOTIFICATION_REGISTRATION>): UInt32
+    func SubscribeServiceChangeNotifications(hService: SC_HANDLE, eEventType: Int32, pCallback: PSC_NOTIFICATION_CALLBACK, pCallbackContext: CPointer<Unit>, pSubscription: CPointer<PSC_NOTIFICATION_REGISTRATION>): UInt32
     func UnsubscribeServiceChangeNotifications(pSubscription: PSC_NOTIFICATION_REGISTRATION): Unit
 }
 
-@When[API_MS_WIN_SERVICE_CORE_L1_1_3 == "on"]
+@When[API_MS_WIN_SERVICE_CORE_L1_1_3 == "on" && Windows_Win32_System_Registry == "on"]
 foreign {
-    func GetServiceRegistryStateKey(ServiceStatusHandle: SERVICE_STATUS_HANDLE, StateType: SERVICE_REGISTRY_STATE_TYPE, AccessMask: UInt32, ServiceStateKey: CPointer<Win32_System_Registry.HKEY>): UInt32
+    func GetServiceRegistryStateKey(ServiceStatusHandle: SERVICE_STATUS_HANDLE, StateType: Int32, AccessMask: UInt32, ServiceStateKey: CPointer<Win32_System_Registry.HKEY>): UInt32
 }
 
 @When[API_MS_WIN_SERVICE_CORE_L1_1_4 == "on"]
 foreign {
     // param-hint: lpPathBuffer len=param[3] optional
-    func GetServiceDirectory(hServiceStatus: SERVICE_STATUS_HANDLE, eDirectoryType: SERVICE_DIRECTORY_TYPE, lpPathBuffer: CPointer<UInt16>, cchPathBufferLength: UInt32, lpcchRequiredBufferLength: CPointer<UInt32>): UInt32
+    func GetServiceDirectory(hServiceStatus: SERVICE_STATUS_HANDLE, eDirectoryType: Int32, lpPathBuffer: CPointer<UInt16>, cchPathBufferLength: UInt32, lpcchRequiredBufferLength: CPointer<UInt32>): UInt32
 }
 
 @When[API_MS_WIN_SERVICE_CORE_L1_1_5 == "on"]
 foreign {
     // param-hint: PathBuffer len=param[3] optional
-    func GetSharedServiceDirectory(ServiceHandle: SC_HANDLE, DirectoryType: SERVICE_SHARED_DIRECTORY_TYPE, PathBuffer: CPointer<UInt16>, PathBufferLength: UInt32, RequiredBufferLength: CPointer<UInt32>): UInt32
-    func GetSharedServiceRegistryStateKey(ServiceHandle: SC_HANDLE, StateType: SERVICE_SHARED_REGISTRY_STATE_TYPE, AccessMask: UInt32, ServiceStateKey: CPointer<Win32_System_Registry.HKEY>): UInt32
+    func GetSharedServiceDirectory(ServiceHandle: SC_HANDLE, DirectoryType: Int32, PathBuffer: CPointer<UInt16>, PathBufferLength: UInt32, RequiredBufferLength: CPointer<UInt32>): UInt32
+}
+
+@When[API_MS_WIN_SERVICE_CORE_L1_1_5 == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    func GetSharedServiceRegistryStateKey(ServiceHandle: SC_HANDLE, StateType: Int32, AccessMask: UInt32, ServiceStateKey: CPointer<Win32_System_Registry.HKEY>): UInt32
 }
 
 @When[Windows_Win32_System_Services == "on"]

@@ -2,11 +2,12 @@
 package windows_sys.Win32.System.EventCollector
 
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
 @When[Windows_Win32_System_EventCollector == "on"]
-@C
 public struct EC_SUBSCRIPTION_CONFIGURATION_MODE {
     public var value: Int32 = 0
 
@@ -37,7 +38,6 @@ public let EC_SUBSCRIPTION_CONFIGURATION_MODE_EcConfigurationModeMinLatency: EC_
 public let EC_SUBSCRIPTION_CONFIGURATION_MODE_EcConfigurationModeMinBandwidth: EC_SUBSCRIPTION_CONFIGURATION_MODE = EC_SUBSCRIPTION_CONFIGURATION_MODE(3)
 
 @When[Windows_Win32_System_EventCollector == "on"]
-@C
 public struct EC_SUBSCRIPTION_CONTENT_FORMAT {
     public var value: Int32 = 0
 
@@ -62,7 +62,6 @@ public let EC_SUBSCRIPTION_CONTENT_FORMAT_EcContentFormatEvents: EC_SUBSCRIPTION
 public let EC_SUBSCRIPTION_CONTENT_FORMAT_EcContentFormatRenderedText: EC_SUBSCRIPTION_CONTENT_FORMAT = EC_SUBSCRIPTION_CONTENT_FORMAT(2)
 
 @When[Windows_Win32_System_EventCollector == "on"]
-@C
 public struct EC_SUBSCRIPTION_CREDENTIALS_TYPE {
     public var value: Int32 = 0
 
@@ -96,7 +95,6 @@ public let EC_SUBSCRIPTION_CREDENTIALS_TYPE_EcSubscriptionCredBasic: EC_SUBSCRIP
 public let EC_SUBSCRIPTION_CREDENTIALS_TYPE_EcSubscriptionCredLocalMachine: EC_SUBSCRIPTION_CREDENTIALS_TYPE = EC_SUBSCRIPTION_CREDENTIALS_TYPE(4)
 
 @When[Windows_Win32_System_EventCollector == "on"]
-@C
 public struct EC_SUBSCRIPTION_DELIVERY_MODE {
     public var value: Int32 = 0
 
@@ -121,7 +119,6 @@ public let EC_SUBSCRIPTION_DELIVERY_MODE_EcDeliveryModePull: EC_SUBSCRIPTION_DEL
 public let EC_SUBSCRIPTION_DELIVERY_MODE_EcDeliveryModePush: EC_SUBSCRIPTION_DELIVERY_MODE = EC_SUBSCRIPTION_DELIVERY_MODE(2)
 
 @When[Windows_Win32_System_EventCollector == "on"]
-@C
 public struct EC_SUBSCRIPTION_PROPERTY_ID {
     public var value: Int32 = 0
 
@@ -239,7 +236,6 @@ public let EC_SUBSCRIPTION_PROPERTY_ID_EcSubscriptionAllowedSourceDomainComputer
 public let EC_SUBSCRIPTION_PROPERTY_ID_EcSubscriptionPropertyIdEND: EC_SUBSCRIPTION_PROPERTY_ID = EC_SUBSCRIPTION_PROPERTY_ID(32)
 
 @When[Windows_Win32_System_EventCollector == "on"]
-@C
 public struct EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS {
     public var value: Int32 = 0
 
@@ -270,7 +266,6 @@ public let EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS_EcRuntimeStatusActiveSta
 public let EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS_EcRuntimeStatusActiveStatusTrying: EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS = EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS(4)
 
 @When[Windows_Win32_System_EventCollector == "on"]
-@C
 public struct EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID {
     public var value: Int32 = 0
 
@@ -313,7 +308,6 @@ public let EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID_EcSubscriptionRunTimeStatusLas
 public let EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID_EcSubscriptionRunTimeStatusInfoIdEND: EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID = EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID(7)
 
 @When[Windows_Win32_System_EventCollector == "on"]
-@C
 public struct EC_SUBSCRIPTION_TYPE {
     public var value: Int32 = 0
 
@@ -347,192 +341,201 @@ public struct EC_VARIANT {
 }
 
 @When[Windows_Win32_System_EventCollector == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct EC_VARIANT__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func booleanVal(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
+    public mut prop booleanVal: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_booleanVal(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop uInt32Val: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func uInt32Val(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
+    public mut prop dateTimeVal: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_uInt32Val(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop stringVal: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dateTimeVal(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
+    public mut prop binaryVal: CPointer<UInt8> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt8>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt8>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dateTimeVal(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop booleanArr: CPointer<Int32> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int32>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int32>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func stringVal(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
+    public mut prop int32Arr: CPointer<Int32> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int32>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int32>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_stringVal(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop stringArr: CPointer<CPointer<UInt16>> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func binaryVal(): CPointer<UInt8> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt8>>(p)
-            return ptr.read()
+    public mut prop propertyHandleVal: IntNative {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IntNative>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public mut func set_binaryVal(val: CPointer<UInt8>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt8>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func booleanArr(): CPointer<Int32> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int32>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_booleanArr(val: CPointer<Int32>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int32>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func int32Arr(): CPointer<Int32> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int32>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_int32Arr(val: CPointer<Int32>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<Int32>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func stringArr(): CPointer<CPointer<UInt16>> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_stringArr(val: CPointer<CPointer<UInt16>>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<CPointer<UInt16>>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func propertyHandleVal(): IntNative {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IntNative>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_propertyHandleVal(val: IntNative): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<IntNative>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IntNative>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_System_EventCollector == "on"]
-@C
 public struct EC_VARIANT_TYPE {
     public var value: Int32 = 0
 
@@ -574,10 +577,10 @@ foreign {
     func EcDeleteSubscription(SubscriptionName: CPointer<UInt16>, Flags: UInt32): Int32
     // param-hint: SubscriptionNameBuffer len=param[1] optional
     func EcEnumNextSubscription(SubscriptionEnum: IntNative, SubscriptionNameBufferSize: UInt32, SubscriptionNameBuffer: CPointer<UInt16>, SubscriptionNameBufferUsed: CPointer<UInt32>): Int32
-    func EcGetObjectArrayProperty(ObjectArray: IntNative, PropertyId: EC_SUBSCRIPTION_PROPERTY_ID, ArrayIndex: UInt32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EC_VARIANT>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
+    func EcGetObjectArrayProperty(ObjectArray: IntNative, PropertyId: Int32, ArrayIndex: UInt32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EC_VARIANT>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
     func EcGetObjectArraySize(ObjectArray: IntNative, ObjectArraySize: CPointer<UInt32>): Int32
-    func EcGetSubscriptionProperty(Subscription: IntNative, PropertyId: EC_SUBSCRIPTION_PROPERTY_ID, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EC_VARIANT>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
-    func EcGetSubscriptionRunTimeStatus(SubscriptionName: CPointer<UInt16>, StatusInfoId: EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID, EventSourceName: CPointer<UInt16>, Flags: UInt32, StatusValueBufferSize: UInt32, StatusValueBuffer: CPointer<EC_VARIANT>, StatusValueBufferUsed: CPointer<UInt32>): Int32
+    func EcGetSubscriptionProperty(Subscription: IntNative, PropertyId: Int32, Flags: UInt32, PropertyValueBufferSize: UInt32, PropertyValueBuffer: CPointer<EC_VARIANT>, PropertyValueBufferUsed: CPointer<UInt32>): Int32
+    func EcGetSubscriptionRunTimeStatus(SubscriptionName: CPointer<UInt16>, StatusInfoId: Int32, EventSourceName: CPointer<UInt16>, Flags: UInt32, StatusValueBufferSize: UInt32, StatusValueBuffer: CPointer<EC_VARIANT>, StatusValueBufferUsed: CPointer<UInt32>): Int32
     func EcInsertObjectArrayElement(ObjectArray: IntNative, ArrayIndex: UInt32): Int32
     // pinvoke-hint: SetLastError
     func EcOpenSubscription(SubscriptionName: CPointer<UInt16>, AccessMask: UInt32, Flags: UInt32): IntNative
@@ -586,8 +589,8 @@ foreign {
     func EcRemoveObjectArrayElement(ObjectArray: IntNative, ArrayIndex: UInt32): Int32
     func EcRetrySubscription(SubscriptionName: CPointer<UInt16>, EventSourceName: CPointer<UInt16>, Flags: UInt32): Int32
     func EcSaveSubscription(Subscription: IntNative, Flags: UInt32): Int32
-    func EcSetObjectArrayProperty(ObjectArray: IntNative, PropertyId: EC_SUBSCRIPTION_PROPERTY_ID, ArrayIndex: UInt32, Flags: UInt32, PropertyValue: CPointer<EC_VARIANT>): Int32
-    func EcSetSubscriptionProperty(Subscription: IntNative, PropertyId: EC_SUBSCRIPTION_PROPERTY_ID, Flags: UInt32, PropertyValue: CPointer<EC_VARIANT>): Int32
+    func EcSetObjectArrayProperty(ObjectArray: IntNative, PropertyId: Int32, ArrayIndex: UInt32, Flags: UInt32, PropertyValue: CPointer<EC_VARIANT>): Int32
+    func EcSetSubscriptionProperty(Subscription: IntNative, PropertyId: Int32, Flags: UInt32, PropertyValue: CPointer<EC_VARIANT>): Int32
 }
 
 @When[Windows_Win32_System_EventCollector == "on"]

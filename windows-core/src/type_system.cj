@@ -29,6 +29,8 @@ public interface CopyType {
 public interface Type<TProjected, TAbi, TDefault> <: WindowsType {
     static func typeKind(): TypeKind
 
+    static func projectAbi(value: TProjected): TAbi
+
     static func isNullAbi(abi: TAbi): Bool {
         let _ = abi
         false

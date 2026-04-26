@@ -41,109 +41,125 @@ func copyFromDefault<T>(defaultValue: T): Result<T> where T <: CopyType {
     Result<T>.Ok(defaultValue)
 }
 
-extend Bool <: CopyType & RuntimeType & Type<Bool, Bool, Bool> {
+extend Bool <: CopyType & RuntimeType & Type<Bool, Bool, Bool> & CopyWinrtType<Bool> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "Bool" }
+    public static func projectAbi(value: Bool): Bool { value }
     public static func signature(): String { "b1" }
     public static func assumeInitRef(abi: Bool): Bool { abi }
     public static func fromAbi(abi: Bool): Result<Bool> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: Bool): Result<Bool> { copyFromDefault(defaultValue) }
 }
 
-extend Int8 <: CopyType & RuntimeType & Type<Int8, Int8, Int8> {
+extend Int8 <: CopyType & RuntimeType & Type<Int8, Int8, Int8> & CopyWinrtType<Int8> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "Int8" }
+    public static func projectAbi(value: Int8): Int8 { value }
     public static func signature(): String { "i1" }
     public static func assumeInitRef(abi: Int8): Int8 { abi }
     public static func fromAbi(abi: Int8): Result<Int8> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: Int8): Result<Int8> { copyFromDefault(defaultValue) }
 }
 
-extend UInt8 <: CopyType & RuntimeType & Type<UInt8, UInt8, UInt8> {
+extend UInt8 <: CopyType & RuntimeType & Type<UInt8, UInt8, UInt8> & CopyWinrtType<UInt8> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "UInt8" }
+    public static func projectAbi(value: UInt8): UInt8 { value }
     public static func signature(): String { "u1" }
     public static func assumeInitRef(abi: UInt8): UInt8 { abi }
     public static func fromAbi(abi: UInt8): Result<UInt8> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: UInt8): Result<UInt8> { copyFromDefault(defaultValue) }
 }
 
-extend Int16 <: CopyType & RuntimeType & Type<Int16, Int16, Int16> {
+extend Int16 <: CopyType & RuntimeType & Type<Int16, Int16, Int16> & CopyWinrtType<Int16> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "Int16" }
+    public static func projectAbi(value: Int16): Int16 { value }
     public static func signature(): String { "i2" }
     public static func assumeInitRef(abi: Int16): Int16 { abi }
     public static func fromAbi(abi: Int16): Result<Int16> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: Int16): Result<Int16> { copyFromDefault(defaultValue) }
 }
 
-extend UInt16 <: CopyType & RuntimeType & Type<UInt16, UInt16, UInt16> {
+extend UInt16 <: CopyType & RuntimeType & Type<UInt16, UInt16, UInt16> & CopyWinrtType<UInt16> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "UInt16" }
+    public static func projectAbi(value: UInt16): UInt16 { value }
     public static func signature(): String { "u2" }
     public static func assumeInitRef(abi: UInt16): UInt16 { abi }
     public static func fromAbi(abi: UInt16): Result<UInt16> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: UInt16): Result<UInt16> { copyFromDefault(defaultValue) }
 }
 
-extend Int32 <: CopyType & RuntimeType & Type<Int32, Int32, Int32> {
+extend Int32 <: CopyType & RuntimeType & Type<Int32, Int32, Int32> & CopyWinrtType<Int32> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "Int32" }
+    public static func projectAbi(value: Int32): Int32 { value }
     public static func signature(): String { "i4" }
     public static func assumeInitRef(abi: Int32): Int32 { abi }
     public static func fromAbi(abi: Int32): Result<Int32> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: Int32): Result<Int32> { copyFromDefault(defaultValue) }
 }
 
-extend UInt32 <: CopyType & RuntimeType & Type<UInt32, UInt32, UInt32> {
+extend UInt32 <: CopyType & RuntimeType & Type<UInt32, UInt32, UInt32> & CopyWinrtType<UInt32> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "UInt32" }
+    public static func projectAbi(value: UInt32): UInt32 { value }
     public static func signature(): String { "u4" }
     public static func assumeInitRef(abi: UInt32): UInt32 { abi }
     public static func fromAbi(abi: UInt32): Result<UInt32> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: UInt32): Result<UInt32> { copyFromDefault(defaultValue) }
 }
 
-extend Int64 <: CopyType & RuntimeType & Type<Int64, Int64, Int64> {
+extend Int64 <: CopyType & RuntimeType & Type<Int64, Int64, Int64> & CopyWinrtType<Int64> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "Int64" }
+    public static func projectAbi(value: Int64): Int64 { value }
     public static func signature(): String { "i8" }
     public static func assumeInitRef(abi: Int64): Int64 { abi }
     public static func fromAbi(abi: Int64): Result<Int64> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: Int64): Result<Int64> { copyFromDefault(defaultValue) }
 }
 
-extend UInt64 <: CopyType & RuntimeType & Type<UInt64, UInt64, UInt64> {
+extend UInt64 <: CopyType & RuntimeType & Type<UInt64, UInt64, UInt64> & CopyWinrtType<UInt64> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "UInt64" }
+    public static func projectAbi(value: UInt64): UInt64 { value }
     public static func signature(): String { "u8" }
     public static func assumeInitRef(abi: UInt64): UInt64 { abi }
     public static func fromAbi(abi: UInt64): Result<UInt64> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: UInt64): Result<UInt64> { copyFromDefault(defaultValue) }
 }
 
-extend Float32 <: CopyType & RuntimeType & Type<Float32, Float32, Float32> {
+extend Float32 <: CopyType & RuntimeType & Type<Float32, Float32, Float32> & CopyWinrtType<Float32> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "Float32" }
+    public static func projectAbi(value: Float32): Float32 { value }
     public static func signature(): String { "f4" }
     public static func assumeInitRef(abi: Float32): Float32 { abi }
     public static func fromAbi(abi: Float32): Result<Float32> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: Float32): Result<Float32> { copyFromDefault(defaultValue) }
 }
 
-extend Float64 <: CopyType & RuntimeType & Type<Float64, Float64, Float64> {
+extend Float64 <: CopyType & RuntimeType & Type<Float64, Float64, Float64> & CopyWinrtType<Float64> {
     public static func typeKind(): TypeKind { TypeKind.Copy }
     public static func abiType(): String { "Float64" }
+    public static func projectAbi(value: Float64): Float64 { value }
     public static func signature(): String { "f8" }
     public static func assumeInitRef(abi: Float64): Float64 { abi }
     public static func fromAbi(abi: Float64): Result<Float64> { copyFromAbi(abi) }
     public static func fromDefault(defaultValue: Float64): Result<Float64> { copyFromDefault(defaultValue) }
 }
 
-extend HString <: CloneType & RuntimeType & Type<HString, HString, HString> {
+extend HString <: CloneType & RuntimeType & Type<HString, HString, HString> & HandleWinrtType<HString> {
     public static func typeKind(): TypeKind { TypeKind.Clone }
     public static func abiType(): String { "HString" }
+    public static func projectAbi(value: HString): HString { value }
     public static func signature(): String { "string" }
+    public static func intoWinrtHandle(value: HString): CPointer<Unit> { value.asRaw() }
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): HString { HString.fromAbiTake(raw) }
+    public static func viewWinrtHandle(raw: CPointer<Unit>): HString { HString.viewOf(raw) }
+    public static func allowNullWinrtHandle(): Bool { true }
     public static func isNullAbi(abi: HString): Bool { abi.isEmpty() }
     public static func assumeInitRef(abi: HString): HString { cloneProjectedValue(abi) }
     public static func fromAbi(abi: HString): Result<HString> { Result<HString>.Ok(cloneProjectedValue(abi)) }

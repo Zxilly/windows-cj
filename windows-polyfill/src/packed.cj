@@ -48,6 +48,16 @@ public unsafe func packedReadInt64(base: CPointer<UInt8>, byteOffset: Int64): In
     copyBytes(CPointer<UInt8>(inout tmp), base + byteOffset, 8)
     return tmp
 }
+public unsafe func packedReadUIntNative(base: CPointer<UInt8>, byteOffset: Int64): UIntNative {
+    var tmp: UIntNative = 0
+    copyBytes(CPointer<UInt8>(inout tmp), base + byteOffset, Int64(sizeOf<UIntNative>()))
+    return tmp
+}
+public unsafe func packedReadIntNative(base: CPointer<UInt8>, byteOffset: Int64): IntNative {
+    var tmp: IntNative = 0
+    copyBytes(CPointer<UInt8>(inout tmp), base + byteOffset, Int64(sizeOf<IntNative>()))
+    return tmp
+}
 public unsafe func packedReadFloat32(base: CPointer<UInt8>, byteOffset: Int64): Float32 {
     var tmp: Float32 = 0.0f32
     copyBytes(CPointer<UInt8>(inout tmp), base + byteOffset, 4)
@@ -57,6 +67,16 @@ public unsafe func packedReadFloat64(base: CPointer<UInt8>, byteOffset: Int64): 
     var tmp: Float64 = 0.0f64
     copyBytes(CPointer<UInt8>(inout tmp), base + byteOffset, 8)
     return tmp
+}
+public unsafe func packedReadValue<T>(base: CPointer<UInt8>, byteOffset: Int64, defaultValue: T): T where T <: CType {
+    let tmp = LibC.malloc<T>()
+    try {
+        tmp.write(defaultValue)
+        copyBytes(CPointer<UInt8>(tmp), base + byteOffset, Int64(sizeOf<T>()))
+        return tmp.read()
+    } finally {
+        LibC.free<T>(tmp)
+    }
 }
 
 public unsafe func packedWriteUInt8(base: CPointer<UInt8>, byteOffset: Int64, v: UInt8): Unit {
@@ -89,6 +109,14 @@ public unsafe func packedWriteInt64(base: CPointer<UInt8>, byteOffset: Int64, v:
     var tmp = v
     copyBytes(base + byteOffset, CPointer<UInt8>(inout tmp), 8)
 }
+public unsafe func packedWriteUIntNative(base: CPointer<UInt8>, byteOffset: Int64, v: UIntNative): Unit {
+    var tmp = v
+    copyBytes(base + byteOffset, CPointer<UInt8>(inout tmp), Int64(sizeOf<UIntNative>()))
+}
+public unsafe func packedWriteIntNative(base: CPointer<UInt8>, byteOffset: Int64, v: IntNative): Unit {
+    var tmp = v
+    copyBytes(base + byteOffset, CPointer<UInt8>(inout tmp), Int64(sizeOf<IntNative>()))
+}
 public unsafe func packedWriteFloat32(base: CPointer<UInt8>, byteOffset: Int64, v: Float32): Unit {
     var tmp = v
     copyBytes(base + byteOffset, CPointer<UInt8>(inout tmp), 4)
@@ -96,4 +124,13 @@ public unsafe func packedWriteFloat32(base: CPointer<UInt8>, byteOffset: Int64, 
 public unsafe func packedWriteFloat64(base: CPointer<UInt8>, byteOffset: Int64, v: Float64): Unit {
     var tmp = v
     copyBytes(base + byteOffset, CPointer<UInt8>(inout tmp), 8)
+}
+public unsafe func packedWriteValue<T>(base: CPointer<UInt8>, byteOffset: Int64, v: T): Unit where T <: CType {
+    let tmp = LibC.malloc<T>()
+    try {
+        tmp.write(v)
+        copyBytes(base + byteOffset, CPointer<UInt8>(tmp), Int64(sizeOf<T>()))
+    } finally {
+        LibC.free<T>(tmp)
+    }
 }

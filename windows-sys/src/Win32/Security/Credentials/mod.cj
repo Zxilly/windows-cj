@@ -2,9 +2,12 @@
 package windows_sys.Win32.Security.Credentials
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
 
 
 @When[Windows_Win32_Security_Credentials == "on"]
@@ -20,42 +23,6 @@ public struct BINARY_BLOB_CREDENTIAL_INFO {
 public struct CERT_CREDENTIAL_INFO {
     public var cbSize: UInt32 = 0
     public var rgbHashOfCert: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-@C
-public struct CREDENTIALA {
-    public var Flags: CRED_FLAGS = CRED_FLAGS()
-    public var Type: CRED_TYPE = CRED_TYPE()
-    public var TargetName: CPointer<UInt8> = CPointer<UInt8>()
-    public var Comment: CPointer<UInt8> = CPointer<UInt8>()
-    public var LastWritten: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var CredentialBlobSize: UInt32 = 0
-    public var CredentialBlob: CPointer<UInt8> = CPointer<UInt8>()
-    public var Persist: CRED_PERSIST = CRED_PERSIST()
-    public var AttributeCount: UInt32 = 0
-    public var Attributes: CPointer<CREDENTIAL_ATTRIBUTEA> = CPointer<CREDENTIAL_ATTRIBUTEA>()
-    public var TargetAlias: CPointer<UInt8> = CPointer<UInt8>()
-    public var UserName: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-@C
-public struct CREDENTIALW {
-    public var Flags: CRED_FLAGS = CRED_FLAGS()
-    public var Type: CRED_TYPE = CRED_TYPE()
-    public var TargetName: CPointer<UInt16> = CPointer<UInt16>()
-    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
-    public var LastWritten: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
-    public var CredentialBlobSize: UInt32 = 0
-    public var CredentialBlob: CPointer<UInt8> = CPointer<UInt8>()
-    public var Persist: CRED_PERSIST = CRED_PERSIST()
-    public var AttributeCount: UInt32 = 0
-    public var Attributes: CPointer<CREDENTIAL_ATTRIBUTEW> = CPointer<CREDENTIAL_ATTRIBUTEW>()
-    public var TargetAlias: CPointer<UInt16> = CPointer<UInt16>()
-    public var UserName: CPointer<UInt16> = CPointer<UInt16>()
     public init() {}
 }
 
@@ -112,7 +79,6 @@ public struct CREDENTIAL_TARGET_INFORMATIONW {
 }
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CREDSPP_SUBMIT_TYPE {
     public var value: Int32 = 0
 
@@ -151,7 +117,7 @@ public let CREDSPP_SUBMIT_TYPE_CredsspCredEx: CREDSPP_SUBMIT_TYPE = CREDSPP_SUBM
 @When[Windows_Win32_Security_Credentials == "on"]
 @C
 public struct CREDSSP_CRED {
-    public var Type: CREDSPP_SUBMIT_TYPE = CREDSPP_SUBMIT_TYPE()
+    public var Type: Int32 = 0
     public var pSchannelCred: CPointer<Unit> = CPointer<Unit>()
     public var pSpnegoCred: CPointer<Unit> = CPointer<Unit>()
     public init() {}
@@ -160,7 +126,7 @@ public struct CREDSSP_CRED {
 @When[Windows_Win32_Security_Credentials == "on"]
 @C
 public struct CREDSSP_CRED_EX {
-    public var Type: CREDSPP_SUBMIT_TYPE = CREDSPP_SUBMIT_TYPE()
+    public var Type: Int32 = 0
     public var Version: UInt32 = 0
     public var Flags: UInt32 = 0
     public var Reserved: UInt32 = 0
@@ -169,7 +135,6 @@ public struct CREDSSP_CRED_EX {
 }
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CREDUIWIN_FLAGS {
     public var value: UInt32 = 0
 
@@ -229,7 +194,6 @@ public let CREDUIWIN_FLAGS_CREDUIWIN_PREPROMPTING: CREDUIWIN_FLAGS = CREDUIWIN_F
 public let CREDUIWIN_FLAGS_CREDUIWIN_PACK_32_WOW: CREDUIWIN_FLAGS = CREDUIWIN_FLAGS(268435456)
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CREDUI_FLAGS {
     public var value: UInt32 = 0
 
@@ -312,7 +276,7 @@ public let CREDUI_FLAGS_CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS: CREDUI_FLAGS =
 @When[Windows_Win32_Security_Credentials == "on"]
 public let CREDUI_FLAGS_CREDUI_FLAGS_VALIDATE_USERNAME: CREDUI_FLAGS = CREDUI_FLAGS(1024)
 
-@When[Windows_Win32_Security_Credentials == "on"]
+@When[Windows_Win32_Security_Credentials == "on" && Windows_Win32_Graphics_Gdi == "on"]
 @C
 public struct CREDUI_INFOA {
     public var cbSize: UInt32 = 0
@@ -323,7 +287,7 @@ public struct CREDUI_INFOA {
     public init() {}
 }
 
-@When[Windows_Win32_Security_Credentials == "on"]
+@When[Windows_Win32_Security_Credentials == "on" && Windows_Win32_Graphics_Gdi == "on"]
 @C
 public struct CREDUI_INFOW {
     public var cbSize: UInt32 = 0
@@ -335,7 +299,6 @@ public struct CREDUI_INFOW {
 }
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CRED_ENUMERATE_FLAGS {
     public var value: UInt32 = 0
 
@@ -371,7 +334,6 @@ public struct CRED_ENUMERATE_FLAGS {
 public let CRED_ENUMERATE_FLAGS_CRED_ENUMERATE_ALL_CREDENTIALS: CRED_ENUMERATE_FLAGS = CRED_ENUMERATE_FLAGS(1)
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CRED_FLAGS {
     public var value: UInt32 = 0
 
@@ -434,7 +396,6 @@ public let CRED_FLAGS_CRED_FLAGS_VALID_FLAGS: CRED_FLAGS = CRED_FLAGS(61695)
 public let CRED_FLAGS_CRED_FLAGS_VALID_INPUT_FLAGS: CRED_FLAGS = CRED_FLAGS(61599)
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CRED_MARSHAL_TYPE {
     public var value: Int32 = 0
 
@@ -468,7 +429,6 @@ public let CRED_MARSHAL_TYPE_UsernameForPackedCredentials: CRED_MARSHAL_TYPE = C
 public let CRED_MARSHAL_TYPE_BinaryBlobForSystem: CRED_MARSHAL_TYPE = CRED_MARSHAL_TYPE(5)
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CRED_PACK_FLAGS {
     public var value: UInt32 = 0
 
@@ -513,7 +473,6 @@ public let CRED_PACK_FLAGS_CRED_PACK_GENERIC_CREDENTIALS: CRED_PACK_FLAGS = CRED
 public let CRED_PACK_FLAGS_CRED_PACK_ID_PROVIDER_CREDENTIALS: CRED_PACK_FLAGS = CRED_PACK_FLAGS(8)
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CRED_PERSIST {
     public var value: UInt32 = 0
 
@@ -544,7 +503,6 @@ public let CRED_PERSIST_CRED_PERSIST_LOCAL_MACHINE: CRED_PERSIST = CRED_PERSIST(
 public let CRED_PERSIST_CRED_PERSIST_ENTERPRISE: CRED_PERSIST = CRED_PERSIST(3)
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CRED_PROTECTION_TYPE {
     public var value: Int32 = 0
 
@@ -575,7 +533,6 @@ public let CRED_PROTECTION_TYPE_CredTrustedProtection: CRED_PROTECTION_TYPE = CR
 public let CRED_PROTECTION_TYPE_CredForSystemProtection: CRED_PROTECTION_TYPE = CRED_PROTECTION_TYPE(3)
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct CRED_TYPE {
     public var value: UInt32 = 0
 
@@ -625,7 +582,6 @@ public struct KeyCredentialManagerInfo {
 }
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct KeyCredentialManagerOperationErrorStates {
     public var value: Int32 = 0
 
@@ -682,7 +638,6 @@ public let KeyCredentialManagerOperationErrorStates_KeyCredentialManagerOperatio
 public let KeyCredentialManagerOperationErrorStates_KeyCredentialManagerOperationErrorStatePinExistsFailure: KeyCredentialManagerOperationErrorStates = KeyCredentialManagerOperationErrorStates(64)
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct KeyCredentialManagerOperationType {
     public var value: Int32 = 0
 
@@ -743,9 +698,9 @@ public struct OPENCARDNAMEA {
     public var dwShareMode: UInt32 = 0
     public var dwPreferredProtocols: UInt32 = 0
     public var dwActiveProtocol: UInt32 = 0
-    public var lpfnConnect: LPOCNCONNPROCA = { _, _, _, _ => 0 }
-    public var lpfnCheck: LPOCNCHKPROC = { _, _, _ => 0 }
-    public var lpfnDisconnect: LPOCNDSCPROC = { _, _, _ => () }
+    public var lpfnConnect: LPOCNCONNPROCA = CFunc<(UIntNative, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
+    public var lpfnCheck: LPOCNCHKPROC = CFunc<(UIntNative, UIntNative, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var lpfnDisconnect: LPOCNDSCPROC = CFunc<(UIntNative, UIntNative, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var hCardHandle: UIntNative = 0
     public init() {}
 }
@@ -772,57 +727,9 @@ public struct OPENCARDNAMEW {
     public var dwShareMode: UInt32 = 0
     public var dwPreferredProtocols: UInt32 = 0
     public var dwActiveProtocol: UInt32 = 0
-    public var lpfnConnect: LPOCNCONNPROCW = { _, _, _, _ => 0 }
-    public var lpfnCheck: LPOCNCHKPROC = { _, _, _ => 0 }
-    public var lpfnDisconnect: LPOCNDSCPROC = { _, _, _ => () }
-    public var hCardHandle: UIntNative = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-@C
-public struct OPENCARDNAME_EXA {
-    public var dwStructSize: UInt32 = 0
-    public var hSCardContext: UIntNative = 0
-    public var hwndOwner: CPointer<Unit> = CPointer<Unit>()
-    public var dwFlags: UInt32 = 0
-    public var lpstrTitle: CPointer<UInt8> = CPointer<UInt8>()
-    public var lpstrSearchDesc: CPointer<UInt8> = CPointer<UInt8>()
-    public var hIcon: Win32_impl.HICON = CPointer<Unit>()
-    public var pOpenCardSearchCriteria: CPointer<OPENCARD_SEARCH_CRITERIAA> = CPointer<OPENCARD_SEARCH_CRITERIAA>()
-    public var lpfnConnect: LPOCNCONNPROCA = { _, _, _, _ => 0 }
-    public var pvUserData: CPointer<Unit> = CPointer<Unit>()
-    public var dwShareMode: UInt32 = 0
-    public var dwPreferredProtocols: UInt32 = 0
-    public var lpstrRdr: CPointer<UInt8> = CPointer<UInt8>()
-    public var nMaxRdr: UInt32 = 0
-    public var lpstrCard: CPointer<UInt8> = CPointer<UInt8>()
-    public var nMaxCard: UInt32 = 0
-    public var dwActiveProtocol: UInt32 = 0
-    public var hCardHandle: UIntNative = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-@C
-public struct OPENCARDNAME_EXW {
-    public var dwStructSize: UInt32 = 0
-    public var hSCardContext: UIntNative = 0
-    public var hwndOwner: CPointer<Unit> = CPointer<Unit>()
-    public var dwFlags: UInt32 = 0
-    public var lpstrTitle: CPointer<UInt16> = CPointer<UInt16>()
-    public var lpstrSearchDesc: CPointer<UInt16> = CPointer<UInt16>()
-    public var hIcon: Win32_impl.HICON = CPointer<Unit>()
-    public var pOpenCardSearchCriteria: CPointer<OPENCARD_SEARCH_CRITERIAW> = CPointer<OPENCARD_SEARCH_CRITERIAW>()
-    public var lpfnConnect: LPOCNCONNPROCW = { _, _, _, _ => 0 }
-    public var pvUserData: CPointer<Unit> = CPointer<Unit>()
-    public var dwShareMode: UInt32 = 0
-    public var dwPreferredProtocols: UInt32 = 0
-    public var lpstrRdr: CPointer<UInt16> = CPointer<UInt16>()
-    public var nMaxRdr: UInt32 = 0
-    public var lpstrCard: CPointer<UInt16> = CPointer<UInt16>()
-    public var nMaxCard: UInt32 = 0
-    public var dwActiveProtocol: UInt32 = 0
+    public var lpfnConnect: LPOCNCONNPROCW = CFunc<(UIntNative, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
+    public var lpfnCheck: LPOCNCHKPROC = CFunc<(UIntNative, UIntNative, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var lpfnDisconnect: LPOCNDSCPROC = CFunc<(UIntNative, UIntNative, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var hCardHandle: UIntNative = 0
     public init() {}
 }
@@ -837,9 +744,9 @@ public struct OPENCARD_SEARCH_CRITERIAA {
     public var cguidInterfaces: UInt32 = 0
     public var lpstrCardNames: CPointer<UInt8> = CPointer<UInt8>()
     public var nMaxCardNames: UInt32 = 0
-    public var lpfnCheck: LPOCNCHKPROC = { _, _, _ => 0 }
-    public var lpfnConnect: LPOCNCONNPROCA = { _, _, _, _ => 0 }
-    public var lpfnDisconnect: LPOCNDSCPROC = { _, _, _ => () }
+    public var lpfnCheck: LPOCNCHKPROC = CFunc<(UIntNative, UIntNative, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var lpfnConnect: LPOCNCONNPROCA = CFunc<(UIntNative, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
+    public var lpfnDisconnect: LPOCNDSCPROC = CFunc<(UIntNative, UIntNative, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var pvUserData: CPointer<Unit> = CPointer<Unit>()
     public var dwShareMode: UInt32 = 0
     public var dwPreferredProtocols: UInt32 = 0
@@ -856,9 +763,9 @@ public struct OPENCARD_SEARCH_CRITERIAW {
     public var cguidInterfaces: UInt32 = 0
     public var lpstrCardNames: CPointer<UInt16> = CPointer<UInt16>()
     public var nMaxCardNames: UInt32 = 0
-    public var lpfnCheck: LPOCNCHKPROC = { _, _, _ => 0 }
-    public var lpfnConnect: LPOCNCONNPROCW = { _, _, _, _ => 0 }
-    public var lpfnDisconnect: LPOCNDSCPROC = { _, _, _ => () }
+    public var lpfnCheck: LPOCNCHKPROC = CFunc<(UIntNative, UIntNative, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var lpfnConnect: LPOCNCONNPROCW = CFunc<(UIntNative, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
+    public var lpfnDisconnect: LPOCNDSCPROC = CFunc<(UIntNative, UIntNative, CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public var pvUserData: CPointer<Unit> = CPointer<Unit>()
     public var dwShareMode: UInt32 = 0
     public var dwPreferredProtocols: UInt32 = 0
@@ -866,88 +773,6 @@ public struct OPENCARD_SEARCH_CRITERIAW {
 }
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
-public struct READER_SEL_REQUEST {
-    public var dwShareMode: UInt32 = 0
-    public var dwPreferredProtocols: UInt32 = 0
-    public var MatchType: READER_SEL_REQUEST_MATCH_TYPE = READER_SEL_REQUEST_MATCH_TYPE()
-    public var Anonymous: READER_SEL_REQUEST__Anonymous_e__Union = READER_SEL_REQUEST__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct READER_SEL_REQUEST__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
-
-    public func readerAndContainerParameter(): READER_SEL_REQUEST__Anonymous_e__Union__ReaderAndContainerParameter_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<READER_SEL_REQUEST__Anonymous_e__Union__ReaderAndContainerParameter_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_readerAndContainerParameter(val: READER_SEL_REQUEST__Anonymous_e__Union__ReaderAndContainerParameter_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<READER_SEL_REQUEST__Anonymous_e__Union__ReaderAndContainerParameter_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func serialNumberParameter(): READER_SEL_REQUEST__Anonymous_e__Union__SerialNumberParameter_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<READER_SEL_REQUEST__Anonymous_e__Union__SerialNumberParameter_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_serialNumberParameter(val: READER_SEL_REQUEST__Anonymous_e__Union__SerialNumberParameter_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<READER_SEL_REQUEST__Anonymous_e__Union__SerialNumberParameter_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-@C
-public struct READER_SEL_REQUEST__Anonymous_e__Union__ReaderAndContainerParameter_e__Struct {
-    public var cbReaderNameOffset: UInt32 = 0
-    public var cchReaderNameLength: UInt32 = 0
-    public var cbContainerNameOffset: UInt32 = 0
-    public var cchContainerNameLength: UInt32 = 0
-    public var dwDesiredCardModuleVersion: UInt32 = 0
-    public var dwCspFlags: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-@C
-public struct READER_SEL_REQUEST__Anonymous_e__Union__SerialNumberParameter_e__Struct {
-    public var cbSerialNumberOffset: UInt32 = 0
-    public var cbSerialNumberLength: UInt32 = 0
-    public var dwDesiredCardModuleVersion: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct READER_SEL_REQUEST_MATCH_TYPE {
     public var value: Int32 = 0
 
@@ -1002,31 +827,6 @@ public struct SCARD_IO_REQUEST {
 }
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
-public struct SCARD_READERSTATEA {
-    public var szReader: CPointer<UInt8> = CPointer<UInt8>()
-    public var pvUserData: CPointer<Unit> = CPointer<Unit>()
-    public var dwCurrentState: SCARD_STATE = SCARD_STATE()
-    public var dwEventState: SCARD_STATE = SCARD_STATE()
-    public var cbAtr: UInt32 = 0
-    public var rgbAtr: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-@C
-public struct SCARD_READERSTATEW {
-    public var szReader: CPointer<UInt16> = CPointer<UInt16>()
-    public var pvUserData: CPointer<Unit> = CPointer<Unit>()
-    public var dwCurrentState: SCARD_STATE = SCARD_STATE()
-    public var dwEventState: SCARD_STATE = SCARD_STATE()
-    public var cbAtr: UInt32 = 0
-    public var rgbAtr: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct SCARD_SCOPE {
     public var value: UInt32 = 0
 
@@ -1051,7 +851,6 @@ public let SCARD_SCOPE_SCARD_SCOPE_USER: SCARD_SCOPE = SCARD_SCOPE(0)
 public let SCARD_SCOPE_SCARD_SCOPE_SYSTEM: SCARD_SCOPE = SCARD_SCOPE(2)
 
 @When[Windows_Win32_Security_Credentials == "on"]
-@C
 public struct SCARD_STATE {
     public var value: UInt32 = 0
 
@@ -1124,50 +923,53 @@ public struct SCARD_T0_REQUEST {
 }
 
 @When[Windows_Win32_Security_Credentials == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct SCARD_T0_REQUEST__Anonymous_e__Union {
     public var _raw: VArray<UInt8, $5> = VArray<UInt8, $5>(repeat: 0)
 
-    public func cmdBytes(): SCARD_T0_COMMAND {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SCARD_T0_COMMAND>(p)
-            return ptr.read()
+    public mut prop cmdBytes: SCARD_T0_COMMAND {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SCARD_T0_COMMAND>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SCARD_T0_COMMAND>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_cmdBytes(val: SCARD_T0_COMMAND): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SCARD_T0_COMMAND>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop rgbHeader: VArray<UInt8, $5> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $5>>(p)
+                return ptr.read()
+            }
         }
-    }
-
-    public func rgbHeader(): VArray<UInt8, $5> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $5>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_rgbHeader(val: VArray<UInt8, $5>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<UInt8, $5>>(p)
-            ptr.write(val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $5>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -1203,22 +1005,214 @@ public struct USERNAME_TARGET_CREDENTIAL_INFO {
     public init() {}
 }
 
+@When[Windows_Win32_Security_Credentials == "on"]
+@C
+public struct CREDENTIALA {
+    public var Flags: UInt32 = 0
+    public var Type: UInt32 = 0
+    public var TargetName: CPointer<UInt8> = CPointer<UInt8>()
+    public var Comment: CPointer<UInt8> = CPointer<UInt8>()
+    public var LastWritten: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var CredentialBlobSize: UInt32 = 0
+    public var CredentialBlob: CPointer<UInt8> = CPointer<UInt8>()
+    public var Persist: UInt32 = 0
+    public var AttributeCount: UInt32 = 0
+    public var Attributes: CPointer<CREDENTIAL_ATTRIBUTEA> = CPointer<CREDENTIAL_ATTRIBUTEA>()
+    public var TargetAlias: CPointer<UInt8> = CPointer<UInt8>()
+    public var UserName: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Credentials == "on"]
+@C
+public struct CREDENTIALW {
+    public var Flags: UInt32 = 0
+    public var Type: UInt32 = 0
+    public var TargetName: CPointer<UInt16> = CPointer<UInt16>()
+    public var Comment: CPointer<UInt16> = CPointer<UInt16>()
+    public var LastWritten: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
+    public var CredentialBlobSize: UInt32 = 0
+    public var CredentialBlob: CPointer<UInt8> = CPointer<UInt8>()
+    public var Persist: UInt32 = 0
+    public var AttributeCount: UInt32 = 0
+    public var Attributes: CPointer<CREDENTIAL_ATTRIBUTEW> = CPointer<CREDENTIAL_ATTRIBUTEW>()
+    public var TargetAlias: CPointer<UInt16> = CPointer<UInt16>()
+    public var UserName: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@C
+public struct OPENCARDNAME_EXA {
+    public var dwStructSize: UInt32 = 0
+    public var hSCardContext: UIntNative = 0
+    public var hwndOwner: CPointer<Unit> = CPointer<Unit>()
+    public var dwFlags: UInt32 = 0
+    public var lpstrTitle: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpstrSearchDesc: CPointer<UInt8> = CPointer<UInt8>()
+    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var pOpenCardSearchCriteria: CPointer<OPENCARD_SEARCH_CRITERIAA> = CPointer<OPENCARD_SEARCH_CRITERIAA>()
+    public var lpfnConnect: LPOCNCONNPROCA = CFunc<(UIntNative, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
+    public var pvUserData: CPointer<Unit> = CPointer<Unit>()
+    public var dwShareMode: UInt32 = 0
+    public var dwPreferredProtocols: UInt32 = 0
+    public var lpstrRdr: CPointer<UInt8> = CPointer<UInt8>()
+    public var nMaxRdr: UInt32 = 0
+    public var lpstrCard: CPointer<UInt8> = CPointer<UInt8>()
+    public var nMaxCard: UInt32 = 0
+    public var dwActiveProtocol: UInt32 = 0
+    public var hCardHandle: UIntNative = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Credentials == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+@C
+public struct OPENCARDNAME_EXW {
+    public var dwStructSize: UInt32 = 0
+    public var hSCardContext: UIntNative = 0
+    public var hwndOwner: CPointer<Unit> = CPointer<Unit>()
+    public var dwFlags: UInt32 = 0
+    public var lpstrTitle: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpstrSearchDesc: CPointer<UInt16> = CPointer<UInt16>()
+    public var hIcon: Win32__impl_l0.HICON = CPointer<Unit>()
+    public var pOpenCardSearchCriteria: CPointer<OPENCARD_SEARCH_CRITERIAW> = CPointer<OPENCARD_SEARCH_CRITERIAW>()
+    public var lpfnConnect: LPOCNCONNPROCW = CFunc<(UIntNative, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>) -> UIntNative>(CPointer<Unit>())
+    public var pvUserData: CPointer<Unit> = CPointer<Unit>()
+    public var dwShareMode: UInt32 = 0
+    public var dwPreferredProtocols: UInt32 = 0
+    public var lpstrRdr: CPointer<UInt16> = CPointer<UInt16>()
+    public var nMaxRdr: UInt32 = 0
+    public var lpstrCard: CPointer<UInt16> = CPointer<UInt16>()
+    public var nMaxCard: UInt32 = 0
+    public var dwActiveProtocol: UInt32 = 0
+    public var hCardHandle: UIntNative = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Credentials == "on"]
+@C
+public struct READER_SEL_REQUEST {
+    public var dwShareMode: UInt32 = 0
+    public var dwPreferredProtocols: UInt32 = 0
+    public var MatchType: Int32 = 0
+    public var Anonymous: READER_SEL_REQUEST__Anonymous_e__Union = READER_SEL_REQUEST__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Credentials == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct READER_SEL_REQUEST__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $6> = VArray<UInt32, $6>(repeat: 0)
+
+    public mut prop readerAndContainerParameter: READER_SEL_REQUEST__Anonymous_e__Union__ReaderAndContainerParameter_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<READER_SEL_REQUEST__Anonymous_e__Union__ReaderAndContainerParameter_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<READER_SEL_REQUEST__Anonymous_e__Union__ReaderAndContainerParameter_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop serialNumberParameter: READER_SEL_REQUEST__Anonymous_e__Union__SerialNumberParameter_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<READER_SEL_REQUEST__Anonymous_e__Union__SerialNumberParameter_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<READER_SEL_REQUEST__Anonymous_e__Union__SerialNumberParameter_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Credentials == "on"]
+@C
+public struct READER_SEL_REQUEST__Anonymous_e__Union__ReaderAndContainerParameter_e__Struct {
+    public var cbReaderNameOffset: UInt32 = 0
+    public var cchReaderNameLength: UInt32 = 0
+    public var cbContainerNameOffset: UInt32 = 0
+    public var cchContainerNameLength: UInt32 = 0
+    public var dwDesiredCardModuleVersion: UInt32 = 0
+    public var dwCspFlags: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Credentials == "on"]
+@C
+public struct READER_SEL_REQUEST__Anonymous_e__Union__SerialNumberParameter_e__Struct {
+    public var cbSerialNumberOffset: UInt32 = 0
+    public var cbSerialNumberLength: UInt32 = 0
+    public var dwDesiredCardModuleVersion: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Credentials == "on"]
+@C
+public struct SCARD_READERSTATEA {
+    public var szReader: CPointer<UInt8> = CPointer<UInt8>()
+    public var pvUserData: CPointer<Unit> = CPointer<Unit>()
+    public var dwCurrentState: UInt32 = 0
+    public var dwEventState: UInt32 = 0
+    public var cbAtr: UInt32 = 0
+    public var rgbAtr: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Security_Credentials == "on"]
+@C
+public struct SCARD_READERSTATEW {
+    public var szReader: CPointer<UInt16> = CPointer<UInt16>()
+    public var pvUserData: CPointer<Unit> = CPointer<Unit>()
+    public var dwCurrentState: UInt32 = 0
+    public var dwEventState: UInt32 = 0
+    public var cbAtr: UInt32 = 0
+    public var rgbAtr: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0)
+    public init() {}
+}
+
 @When[ADVAPI32 == "on"]
 foreign {
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
-    func CredDeleteA(TargetName: CPointer<UInt8>, Type: CRED_TYPE, Flags: UInt32): Int32
+    func CredDeleteA(TargetName: CPointer<UInt8>, Type: UInt32, Flags: UInt32): Int32
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
-    func CredDeleteW(TargetName: CPointer<UInt16>, Type: CRED_TYPE, Flags: UInt32): Int32
+    func CredDeleteW(TargetName: CPointer<UInt16>, Type: UInt32, Flags: UInt32): Int32
     // param-hint: Filter optional
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
-    func CredEnumerateA(Filter: CPointer<UInt8>, Flags: CRED_ENUMERATE_FLAGS, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALA>>>): Int32
+    func CredEnumerateA(Filter: CPointer<UInt8>, Flags: UInt32, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALA>>>): Int32
     // param-hint: Filter optional
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
-    func CredEnumerateW(Filter: CPointer<UInt16>, Flags: CRED_ENUMERATE_FLAGS, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALW>>>): Int32
+    func CredEnumerateW(Filter: CPointer<UInt16>, Flags: UInt32, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALW>>>): Int32
     // pinvoke-hint: SetLastError
     func CredFindBestCredentialA(TargetName: CPointer<UInt8>, Type: UInt32, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALA>>): Int32
     // pinvoke-hint: SetLastError
@@ -1234,43 +1228,43 @@ foreign {
     func CredIsMarshaledCredentialA(MarshaledCredential: CPointer<UInt8>): Int32
     func CredIsMarshaledCredentialW(MarshaledCredential: CPointer<UInt16>): Int32
     // pinvoke-hint: SetLastError
-    func CredIsProtectedA(pszProtectedCredentials: CPointer<UInt8>, pProtectionType: CPointer<CRED_PROTECTION_TYPE>): Int32
+    func CredIsProtectedA(pszProtectedCredentials: CPointer<UInt8>, pProtectionType: CPointer<Int32>): Int32
     // pinvoke-hint: SetLastError
-    func CredIsProtectedW(pszProtectedCredentials: CPointer<UInt16>, pProtectionType: CPointer<CRED_PROTECTION_TYPE>): Int32
+    func CredIsProtectedW(pszProtectedCredentials: CPointer<UInt16>, pProtectionType: CPointer<Int32>): Int32
     // pinvoke-hint: SetLastError
-    func CredMarshalCredentialA(CredType: CRED_MARSHAL_TYPE, Credential: CPointer<Unit>, MarshaledCredential: CPointer<CPointer<UInt8>>): Int32
+    func CredMarshalCredentialA(CredType: Int32, Credential: CPointer<Unit>, MarshaledCredential: CPointer<CPointer<UInt8>>): Int32
     // pinvoke-hint: SetLastError
-    func CredMarshalCredentialW(CredType: CRED_MARSHAL_TYPE, Credential: CPointer<Unit>, MarshaledCredential: CPointer<CPointer<UInt16>>): Int32
+    func CredMarshalCredentialW(CredType: Int32, Credential: CPointer<Unit>, MarshaledCredential: CPointer<CPointer<UInt16>>): Int32
     // param-hint: pszCredentials len=param[2]
     // param-hint: pszProtectedCredentials len=param[4]
     // param-hint: ProtectionType optional
     // pinvoke-hint: SetLastError
-    func CredProtectA(fAsSelf: Int32, pszCredentials: CPointer<UInt8>, cchCredentials: UInt32, pszProtectedCredentials: CPointer<UInt8>, pcchMaxChars: CPointer<UInt32>, ProtectionType: CPointer<CRED_PROTECTION_TYPE>): Int32
+    func CredProtectA(fAsSelf: Int32, pszCredentials: CPointer<UInt8>, cchCredentials: UInt32, pszProtectedCredentials: CPointer<UInt8>, pcchMaxChars: CPointer<UInt32>, ProtectionType: CPointer<Int32>): Int32
     // param-hint: pszCredentials len=param[2]
     // param-hint: pszProtectedCredentials len=param[4]
     // param-hint: ProtectionType optional
     // pinvoke-hint: SetLastError
-    func CredProtectW(fAsSelf: Int32, pszCredentials: CPointer<UInt16>, cchCredentials: UInt32, pszProtectedCredentials: CPointer<UInt16>, pcchMaxChars: CPointer<UInt32>, ProtectionType: CPointer<CRED_PROTECTION_TYPE>): Int32
+    func CredProtectW(fAsSelf: Int32, pszCredentials: CPointer<UInt16>, cchCredentials: UInt32, pszProtectedCredentials: CPointer<UInt16>, pcchMaxChars: CPointer<UInt32>, ProtectionType: CPointer<Int32>): Int32
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
-    func CredReadA(TargetName: CPointer<UInt8>, Type: CRED_TYPE, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALA>>): Int32
+    func CredReadA(TargetName: CPointer<UInt8>, Type: UInt32, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALA>>): Int32
     // pinvoke-hint: SetLastError
     func CredReadDomainCredentialsA(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONA>, Flags: UInt32, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALA>>>): Int32
     // pinvoke-hint: SetLastError
     func CredReadDomainCredentialsW(TargetInfo: CPointer<CREDENTIAL_TARGET_INFORMATIONW>, Flags: UInt32, Count: CPointer<UInt32>, Credential: CPointer<CPointer<CPointer<CREDENTIALW>>>): Int32
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
-    func CredReadW(TargetName: CPointer<UInt16>, Type: CRED_TYPE, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALW>>): Int32
+    func CredReadW(TargetName: CPointer<UInt16>, Type: UInt32, Flags: UInt32, Credential: CPointer<CPointer<CREDENTIALW>>): Int32
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
-    func CredRenameA(OldTargetName: CPointer<UInt8>, NewTargetName: CPointer<UInt8>, Type: CRED_TYPE, Flags: UInt32): Int32
+    func CredRenameA(OldTargetName: CPointer<UInt8>, NewTargetName: CPointer<UInt8>, Type: UInt32, Flags: UInt32): Int32
     // param-hint: Flags optional reserved
     // pinvoke-hint: SetLastError
-    func CredRenameW(OldTargetName: CPointer<UInt16>, NewTargetName: CPointer<UInt16>, Type: CRED_TYPE, Flags: UInt32): Int32
+    func CredRenameW(OldTargetName: CPointer<UInt16>, NewTargetName: CPointer<UInt16>, Type: UInt32, Flags: UInt32): Int32
     // pinvoke-hint: SetLastError
-    func CredUnmarshalCredentialA(MarshaledCredential: CPointer<UInt8>, CredType: CPointer<CRED_MARSHAL_TYPE>, Credential: CPointer<CPointer<Unit>>): Int32
+    func CredUnmarshalCredentialA(MarshaledCredential: CPointer<UInt8>, CredType: CPointer<Int32>, Credential: CPointer<CPointer<Unit>>): Int32
     // pinvoke-hint: SetLastError
-    func CredUnmarshalCredentialW(MarshaledCredential: CPointer<UInt16>, CredType: CPointer<CRED_MARSHAL_TYPE>, Credential: CPointer<CPointer<Unit>>): Int32
+    func CredUnmarshalCredentialW(MarshaledCredential: CPointer<UInt16>, CredType: CPointer<Int32>, Credential: CPointer<CPointer<Unit>>): Int32
     // param-hint: pszProtectedCredentials len=param[2]
     // param-hint: pszCredentials len=param[4] optional
     // pinvoke-hint: SetLastError
@@ -1293,8 +1287,8 @@ foreign {
 foreign {
     func KeyCredentialManagerFreeInformation(keyCredentialManagerInfo: CPointer<KeyCredentialManagerInfo>): Unit
     func KeyCredentialManagerGetInformation(keyCredentialManagerInfo: CPointer<CPointer<KeyCredentialManagerInfo>>): Int32
-    func KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType: KeyCredentialManagerOperationType, isReady: CPointer<Int32>, keyCredentialManagerOperationErrorStates: CPointer<KeyCredentialManagerOperationErrorStates>): Int32
-    func KeyCredentialManagerShowUIOperation(hWndOwner: CPointer<Unit>, keyCredentialManagerOperationType: KeyCredentialManagerOperationType): Int32
+    func KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType: Int32, isReady: CPointer<Int32>, keyCredentialManagerOperationErrorStates: CPointer<Int32>): Int32
+    func KeyCredentialManagerShowUIOperation(hWndOwner: CPointer<Unit>, keyCredentialManagerOperationType: Int32): Int32
 }
 
 @When[SCARDDLG == "on"]
@@ -1302,6 +1296,10 @@ foreign {
     func GetOpenCardNameA(param0: CPointer<OPENCARDNAMEA>): Int32
     func GetOpenCardNameW(param0: CPointer<OPENCARDNAMEW>): Int32
     func SCardDlgExtendedError(): Int32
+}
+
+@When[SCARDDLG == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
     func SCardUIDlgSelectCardA(param0: CPointer<OPENCARDNAME_EXA>): Int32
     func SCardUIDlgSelectCardW(param0: CPointer<OPENCARDNAME_EXW>): Int32
 }
@@ -1324,7 +1322,7 @@ foreign {
     func SCardEndTransaction(hCard: UIntNative, dwDisposition: UInt32): Int32
     // param-hint: pvReserved1 optional reserved
     // param-hint: pvReserved2 optional reserved
-    func SCardEstablishContext(dwScope: SCARD_SCOPE, pvReserved1: CPointer<Unit>, pvReserved2: CPointer<Unit>, phContext: CPointer<UIntNative>): Int32
+    func SCardEstablishContext(dwScope: UInt32, pvReserved1: CPointer<Unit>, pvReserved2: CPointer<Unit>, phContext: CPointer<UIntNative>): Int32
     func SCardForgetCardTypeA(hContext: UIntNative, szCardName: CPointer<UInt8>): Int32
     func SCardForgetCardTypeW(hContext: UIntNative, szCardName: CPointer<UInt16>): Int32
     func SCardForgetReaderA(hContext: UIntNative, szReaderName: CPointer<UInt8>): Int32
@@ -1436,52 +1434,30 @@ foreign {
 foreign {
     // param-hint: pPackedCredentials bytes=param[4] optional
     // pinvoke-hint: SetLastError
-    func CredPackAuthenticationBufferA(dwFlags: CRED_PACK_FLAGS, pszUserName: CPointer<UInt8>, pszPassword: CPointer<UInt8>, pPackedCredentials: CPointer<UInt8>, pcbPackedCredentials: CPointer<UInt32>): Int32
+    func CredPackAuthenticationBufferA(dwFlags: UInt32, pszUserName: CPointer<UInt8>, pszPassword: CPointer<UInt8>, pPackedCredentials: CPointer<UInt8>, pcbPackedCredentials: CPointer<UInt32>): Int32
     // param-hint: pPackedCredentials bytes=param[4] optional
     // pinvoke-hint: SetLastError
-    func CredPackAuthenticationBufferW(dwFlags: CRED_PACK_FLAGS, pszUserName: CPointer<UInt16>, pszPassword: CPointer<UInt16>, pPackedCredentials: CPointer<UInt8>, pcbPackedCredentials: CPointer<UInt32>): Int32
+    func CredPackAuthenticationBufferW(dwFlags: UInt32, pszUserName: CPointer<UInt16>, pszPassword: CPointer<UInt16>, pPackedCredentials: CPointer<UInt8>, pcbPackedCredentials: CPointer<UInt32>): Int32
     // param-hint: pszTargetName optional
     // param-hint: pContext optional reserved
     // param-hint: UserName len=param[4]
     // param-hint: pszPassword len=param[6]
     // param-hint: pfSave optional
-    func CredUICmdLinePromptForCredentialsA(pszTargetName: CPointer<UInt8>, pContext: CPointer<SecHandle>, dwAuthError: UInt32, UserName: CPointer<UInt8>, ulUserBufferSize: UInt32, pszPassword: CPointer<UInt8>, ulPasswordBufferSize: UInt32, pfSave: CPointer<Int32>, dwFlags: CREDUI_FLAGS): UInt32
+    func CredUICmdLinePromptForCredentialsA(pszTargetName: CPointer<UInt8>, pContext: CPointer<SecHandle>, dwAuthError: UInt32, UserName: CPointer<UInt8>, ulUserBufferSize: UInt32, pszPassword: CPointer<UInt8>, ulPasswordBufferSize: UInt32, pfSave: CPointer<Int32>, dwFlags: UInt32): UInt32
     // param-hint: pszTargetName optional
     // param-hint: pContext optional reserved
     // param-hint: UserName len=param[4]
     // param-hint: pszPassword len=param[6]
     // param-hint: pfSave optional
-    func CredUICmdLinePromptForCredentialsW(pszTargetName: CPointer<UInt16>, pContext: CPointer<SecHandle>, dwAuthError: UInt32, UserName: CPointer<UInt16>, ulUserBufferSize: UInt32, pszPassword: CPointer<UInt16>, ulPasswordBufferSize: UInt32, pfSave: CPointer<Int32>, dwFlags: CREDUI_FLAGS): UInt32
+    func CredUICmdLinePromptForCredentialsW(pszTargetName: CPointer<UInt16>, pContext: CPointer<SecHandle>, dwAuthError: UInt32, UserName: CPointer<UInt16>, ulUserBufferSize: UInt32, pszPassword: CPointer<UInt16>, ulPasswordBufferSize: UInt32, pfSave: CPointer<Int32>, dwFlags: UInt32): UInt32
     func CredUIConfirmCredentialsA(pszTargetName: CPointer<UInt8>, bConfirm: Int32): UInt32
     func CredUIConfirmCredentialsW(pszTargetName: CPointer<UInt16>, bConfirm: Int32): UInt32
     // param-hint: user len=param[2]
     // param-hint: domain len=param[4]
-    func CredUIParseUserNameA(userName: CPointer<UInt8>, user: CPointer<UInt8>, userBufferSize: UInt32, domain: CPointer<UInt8>, domainBufferSize: UInt32): Win32_Foundation.WIN32_ERROR
+    func CredUIParseUserNameA(userName: CPointer<UInt8>, user: CPointer<UInt8>, userBufferSize: UInt32, domain: CPointer<UInt8>, domainBufferSize: UInt32): UInt32
     // param-hint: user len=param[2]
     // param-hint: domain len=param[4]
-    func CredUIParseUserNameW(UserName: CPointer<UInt16>, user: CPointer<UInt16>, userBufferSize: UInt32, domain: CPointer<UInt16>, domainBufferSize: UInt32): Win32_Foundation.WIN32_ERROR
-    // param-hint: pUiInfo optional
-    // param-hint: pszTargetName optional
-    // param-hint: pContext optional reserved
-    // param-hint: pszUserName len=param[5]
-    // param-hint: pszPassword len=param[7]
-    // param-hint: save optional
-    func CredUIPromptForCredentialsA(pUiInfo: CPointer<CREDUI_INFOA>, pszTargetName: CPointer<UInt8>, pContext: CPointer<SecHandle>, dwAuthError: UInt32, pszUserName: CPointer<UInt8>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt8>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: CREDUI_FLAGS): Win32_Foundation.WIN32_ERROR
-    // param-hint: pUiInfo optional
-    // param-hint: pszTargetName optional
-    // param-hint: pContext optional reserved
-    // param-hint: pszUserName len=param[5]
-    // param-hint: pszPassword len=param[7]
-    // param-hint: save optional
-    func CredUIPromptForCredentialsW(pUiInfo: CPointer<CREDUI_INFOW>, pszTargetName: CPointer<UInt16>, pContext: CPointer<SecHandle>, dwAuthError: UInt32, pszUserName: CPointer<UInt16>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt16>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: CREDUI_FLAGS): Win32_Foundation.WIN32_ERROR
-    // param-hint: pUiInfo optional
-    // param-hint: pvInAuthBuffer bytes=param[4] optional
-    // param-hint: pfSave optional
-    func CredUIPromptForWindowsCredentialsA(pUiInfo: CPointer<CREDUI_INFOA>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: CREDUIWIN_FLAGS): UInt32
-    // param-hint: pUiInfo optional
-    // param-hint: pvInAuthBuffer bytes=param[4] optional
-    // param-hint: pfSave optional
-    func CredUIPromptForWindowsCredentialsW(pUiInfo: CPointer<CREDUI_INFOW>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: CREDUIWIN_FLAGS): UInt32
+    func CredUIParseUserNameW(UserName: CPointer<UInt16>, user: CPointer<UInt16>, userBufferSize: UInt32, domain: CPointer<UInt16>, domainBufferSize: UInt32): UInt32
     // param-hint: pszRealm optional
     func CredUIReadSSOCredW(pszRealm: CPointer<UInt16>, ppszUsername: CPointer<CPointer<UInt16>>): UInt32
     // param-hint: pszRealm optional
@@ -1492,14 +1468,40 @@ foreign {
     // param-hint: pcchMaxDomainName optional
     // param-hint: pszPassword len=param[8] optional
     // pinvoke-hint: SetLastError
-    func CredUnPackAuthenticationBufferA(dwFlags: CRED_PACK_FLAGS, pAuthBuffer: CPointer<Unit>, cbAuthBuffer: UInt32, pszUserName: CPointer<UInt8>, pcchlMaxUserName: CPointer<UInt32>, pszDomainName: CPointer<UInt8>, pcchMaxDomainName: CPointer<UInt32>, pszPassword: CPointer<UInt8>, pcchMaxPassword: CPointer<UInt32>): Int32
+    func CredUnPackAuthenticationBufferA(dwFlags: UInt32, pAuthBuffer: CPointer<Unit>, cbAuthBuffer: UInt32, pszUserName: CPointer<UInt8>, pcchlMaxUserName: CPointer<UInt32>, pszDomainName: CPointer<UInt8>, pcchMaxDomainName: CPointer<UInt32>, pszPassword: CPointer<UInt8>, pcchMaxPassword: CPointer<UInt32>): Int32
     // param-hint: pAuthBuffer bytes=param[2]
     // param-hint: pszUserName len=param[4] optional
     // param-hint: pszDomainName len=param[6] optional
     // param-hint: pcchMaxDomainName optional
     // param-hint: pszPassword len=param[8] optional
     // pinvoke-hint: SetLastError
-    func CredUnPackAuthenticationBufferW(dwFlags: CRED_PACK_FLAGS, pAuthBuffer: CPointer<Unit>, cbAuthBuffer: UInt32, pszUserName: CPointer<UInt16>, pcchMaxUserName: CPointer<UInt32>, pszDomainName: CPointer<UInt16>, pcchMaxDomainName: CPointer<UInt32>, pszPassword: CPointer<UInt16>, pcchMaxPassword: CPointer<UInt32>): Int32
+    func CredUnPackAuthenticationBufferW(dwFlags: UInt32, pAuthBuffer: CPointer<Unit>, cbAuthBuffer: UInt32, pszUserName: CPointer<UInt16>, pcchMaxUserName: CPointer<UInt32>, pszDomainName: CPointer<UInt16>, pcchMaxDomainName: CPointer<UInt32>, pszPassword: CPointer<UInt16>, pcchMaxPassword: CPointer<UInt32>): Int32
+}
+
+@When[CREDUI == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    // param-hint: pUiInfo optional
+    // param-hint: pszTargetName optional
+    // param-hint: pContext optional reserved
+    // param-hint: pszUserName len=param[5]
+    // param-hint: pszPassword len=param[7]
+    // param-hint: save optional
+    func CredUIPromptForCredentialsA(pUiInfo: CPointer<CREDUI_INFOA>, pszTargetName: CPointer<UInt8>, pContext: CPointer<SecHandle>, dwAuthError: UInt32, pszUserName: CPointer<UInt8>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt8>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: UInt32): UInt32
+    // param-hint: pUiInfo optional
+    // param-hint: pszTargetName optional
+    // param-hint: pContext optional reserved
+    // param-hint: pszUserName len=param[5]
+    // param-hint: pszPassword len=param[7]
+    // param-hint: save optional
+    func CredUIPromptForCredentialsW(pUiInfo: CPointer<CREDUI_INFOW>, pszTargetName: CPointer<UInt16>, pContext: CPointer<SecHandle>, dwAuthError: UInt32, pszUserName: CPointer<UInt16>, ulUserNameBufferSize: UInt32, pszPassword: CPointer<UInt16>, ulPasswordBufferSize: UInt32, save: CPointer<Int32>, dwFlags: UInt32): UInt32
+    // param-hint: pUiInfo optional
+    // param-hint: pvInAuthBuffer bytes=param[4] optional
+    // param-hint: pfSave optional
+    func CredUIPromptForWindowsCredentialsA(pUiInfo: CPointer<CREDUI_INFOA>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: UInt32): UInt32
+    // param-hint: pUiInfo optional
+    // param-hint: pvInAuthBuffer bytes=param[4] optional
+    // param-hint: pfSave optional
+    func CredUIPromptForWindowsCredentialsW(pUiInfo: CPointer<CREDUI_INFOW>, dwAuthError: UInt32, pulAuthPackage: CPointer<UInt32>, pvInAuthBuffer: CPointer<Unit>, ulInAuthBufferSize: UInt32, ppvOutAuthBuffer: CPointer<CPointer<Unit>>, pulOutAuthBufferSize: CPointer<UInt32>, pfSave: CPointer<Int32>, dwFlags: UInt32): UInt32
 }
 
 @When[Windows_Win32_Security_Credentials == "on"]

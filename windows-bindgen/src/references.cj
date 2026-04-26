@@ -71,9 +71,18 @@ public class References {
         }
     }
 
-    public func rewriteQualified(namespace: String, name: String): String {
+    public func importPathForType(namespace: String, name: String): Option<String> {
         match (findType(namespace, name)) {
-            case Some(entry) => "${buildImportPath(entry, namespace)}.${name}"
+            case Some(entry) =>
+                return Some(buildImportPath(entry, namespace))
+            case None =>
+                return importPath(namespace)
+        }
+    }
+
+    public func rewriteQualified(namespace: String, name: String): String {
+        match (importPathForType(namespace, name)) {
+            case Some(path) => "${path}.${name}"
             case None => match (importPath(namespace)) {
                 case Some(path) => "${path}.${name}"
                 case None => "${namespace}.${name}"

@@ -1,7 +1,5 @@
 package windows_metadata
 
-import std.collection.*
-
 // Table indices used internally — these are logical indices into the File.tables array,
 // NOT the ECMA-335 table numbers. Mapped from ECMA-335 numbers during parsing.
 public let TABLE_ASSEMBLY: Int64 = 0

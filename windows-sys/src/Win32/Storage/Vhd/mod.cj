@@ -2,14 +2,18 @@
 package windows_sys.Win32.Storage.Vhd
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadInt32, unionReadUInt32, unionReadUInt64, unionWriteInt32, unionWriteUInt32, unionWriteUInt64}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Security == "on"]
 import windows_sys.Win32.Security as Win32_Security
+@When[Windows_Win32_System_IO == "on"]
 import windows_sys.Win32.System.IO as Win32_System_IO
 
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct APPLY_SNAPSHOT_VHDSET_FLAG {
     public var value: Int32 = 0
 
@@ -48,30 +52,6 @@ public let APPLY_SNAPSHOT_VHDSET_FLAG_APPLY_SNAPSHOT_VHDSET_FLAG_NONE: APPLY_SNA
 public let APPLY_SNAPSHOT_VHDSET_FLAG_APPLY_SNAPSHOT_VHDSET_FLAG_WRITEABLE: APPLY_SNAPSHOT_VHDSET_FLAG = APPLY_SNAPSHOT_VHDSET_FLAG(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct APPLY_SNAPSHOT_VHDSET_PARAMETERS {
-    public var Version: APPLY_SNAPSHOT_VHDSET_VERSION = APPLY_SNAPSHOT_VHDSET_VERSION()
-    public var Anonymous: APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union = APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union size unavailable; placeholder only
-@C
-public struct APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union {
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var SnapshotId: GUID = GUID()
-    public var LeafSnapshotId: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct APPLY_SNAPSHOT_VHDSET_VERSION {
     public var value: Int32 = 0
 
@@ -96,7 +76,6 @@ public let APPLY_SNAPSHOT_VHDSET_VERSION_APPLY_SNAPSHOT_VHDSET_VERSION_UNSPECIFI
 public let APPLY_SNAPSHOT_VHDSET_VERSION_APPLY_SNAPSHOT_VHDSET_VERSION_1: APPLY_SNAPSHOT_VHDSET_VERSION = APPLY_SNAPSHOT_VHDSET_VERSION(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct ATTACH_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -165,80 +144,6 @@ public let ATTACH_VIRTUAL_DISK_FLAG_ATTACH_VIRTUAL_DISK_FLAG_REGISTER_VOLUME: AT
 public let ATTACH_VIRTUAL_DISK_FLAG_ATTACH_VIRTUAL_DISK_FLAG_AT_BOOT: ATTACH_VIRTUAL_DISK_FLAG = ATTACH_VIRTUAL_DISK_FLAG(1024)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct ATTACH_VIRTUAL_DISK_PARAMETERS {
-    public var Version: ATTACH_VIRTUAL_DISK_VERSION = ATTACH_VIRTUAL_DISK_VERSION()
-    public var Anonymous: ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func version1(): ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func version2(): ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version2(val: ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
-    public var RestrictedOffset: UInt64 = 0
-    public var RestrictedLength: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct ATTACH_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -266,7 +171,6 @@ public let ATTACH_VIRTUAL_DISK_VERSION_ATTACH_VIRTUAL_DISK_VERSION_1: ATTACH_VIR
 public let ATTACH_VIRTUAL_DISK_VERSION_ATTACH_VIRTUAL_DISK_VERSION_2: ATTACH_VIRTUAL_DISK_VERSION = ATTACH_VIRTUAL_DISK_VERSION(2)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct COMPACT_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -308,51 +212,6 @@ public let COMPACT_VIRTUAL_DISK_FLAG_COMPACT_VIRTUAL_DISK_FLAG_NO_ZERO_SCAN: COM
 public let COMPACT_VIRTUAL_DISK_FLAG_COMPACT_VIRTUAL_DISK_FLAG_NO_BLOCK_MOVES: COMPACT_VIRTUAL_DISK_FLAG = COMPACT_VIRTUAL_DISK_FLAG(2)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct COMPACT_VIRTUAL_DISK_PARAMETERS {
-    public var Version: COMPACT_VIRTUAL_DISK_VERSION = COMPACT_VIRTUAL_DISK_VERSION()
-    public var Anonymous: COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0)
-
-    public func version1(): COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var Reserved: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct COMPACT_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -377,7 +236,6 @@ public let COMPACT_VIRTUAL_DISK_VERSION_COMPACT_VIRTUAL_DISK_VERSION_UNSPECIFIED
 public let COMPACT_VIRTUAL_DISK_VERSION_COMPACT_VIRTUAL_DISK_VERSION_1: COMPACT_VIRTUAL_DISK_VERSION = COMPACT_VIRTUAL_DISK_VERSION(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct CREATE_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -446,176 +304,6 @@ public let CREATE_VIRTUAL_DISK_FLAG_CREATE_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_
 public let CREATE_VIRTUAL_DISK_FLAG_CREATE_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS: CREATE_VIRTUAL_DISK_FLAG = CREATE_VIRTUAL_DISK_FLAG(1024)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct CREATE_VIRTUAL_DISK_PARAMETERS {
-    public var Version: CREATE_VIRTUAL_DISK_VERSION = CREATE_VIRTUAL_DISK_VERSION()
-    public var Anonymous: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0)
-
-    public func version1(): CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func version2(): CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version2(val: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func version3(): CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version3(val: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func version4(): CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version4(val: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var UniqueId: GUID = GUID()
-    public var MaximumSize: UInt64 = 0
-    public var BlockSizeInBytes: UInt32 = 0
-    public var SectorSizeInBytes: UInt32 = 0
-    public var ParentPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
-    public var UniqueId: GUID = GUID()
-    public var MaximumSize: UInt64 = 0
-    public var BlockSizeInBytes: UInt32 = 0
-    public var SectorSizeInBytes: UInt32 = 0
-    public var PhysicalSectorSizeInBytes: UInt32 = 0
-    public var ParentPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
-    public var OpenFlags: OPEN_VIRTUAL_DISK_FLAG = OPEN_VIRTUAL_DISK_FLAG()
-    public var ParentVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public var SourceVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public var ResiliencyGuid: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
-    public var UniqueId: GUID = GUID()
-    public var MaximumSize: UInt64 = 0
-    public var BlockSizeInBytes: UInt32 = 0
-    public var SectorSizeInBytes: UInt32 = 0
-    public var PhysicalSectorSizeInBytes: UInt32 = 0
-    public var ParentPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
-    public var OpenFlags: OPEN_VIRTUAL_DISK_FLAG = OPEN_VIRTUAL_DISK_FLAG()
-    public var ParentVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public var SourceVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public var ResiliencyGuid: GUID = GUID()
-    public var SourceLimitPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var BackingStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct {
-    public var UniqueId: GUID = GUID()
-    public var MaximumSize: UInt64 = 0
-    public var BlockSizeInBytes: UInt32 = 0
-    public var SectorSizeInBytes: UInt32 = 0
-    public var PhysicalSectorSizeInBytes: UInt32 = 0
-    public var ParentPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
-    public var OpenFlags: OPEN_VIRTUAL_DISK_FLAG = OPEN_VIRTUAL_DISK_FLAG()
-    public var ParentVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public var SourceVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public var ResiliencyGuid: GUID = GUID()
-    public var SourceLimitPath: CPointer<UInt16> = CPointer<UInt16>()
-    public var BackingStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public var PmemAddressAbstractionType: GUID = GUID()
-    public var DataAlignment: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct CREATE_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -649,7 +337,6 @@ public let CREATE_VIRTUAL_DISK_VERSION_CREATE_VIRTUAL_DISK_VERSION_3: CREATE_VIR
 public let CREATE_VIRTUAL_DISK_VERSION_CREATE_VIRTUAL_DISK_VERSION_4: CREATE_VIRTUAL_DISK_VERSION = CREATE_VIRTUAL_DISK_VERSION(4)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct DELETE_SNAPSHOT_VHDSET_FLAG {
     public var value: Int32 = 0
 
@@ -688,29 +375,6 @@ public let DELETE_SNAPSHOT_VHDSET_FLAG_DELETE_SNAPSHOT_VHDSET_FLAG_NONE: DELETE_
 public let DELETE_SNAPSHOT_VHDSET_FLAG_DELETE_SNAPSHOT_VHDSET_FLAG_PERSIST_RCT: DELETE_SNAPSHOT_VHDSET_FLAG = DELETE_SNAPSHOT_VHDSET_FLAG(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct DELETE_SNAPSHOT_VHDSET_PARAMETERS {
-    public var Version: DELETE_SNAPSHOT_VHDSET_VERSION = DELETE_SNAPSHOT_VHDSET_VERSION()
-    public var Anonymous: DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union = DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union size unavailable; placeholder only
-@C
-public struct DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union {
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var SnapshotId: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct DELETE_SNAPSHOT_VHDSET_VERSION {
     public var value: Int32 = 0
 
@@ -735,7 +399,6 @@ public let DELETE_SNAPSHOT_VHDSET_VERSION_DELETE_SNAPSHOT_VHDSET_VERSION_UNSPECI
 public let DELETE_SNAPSHOT_VHDSET_VERSION_DELETE_SNAPSHOT_VHDSET_VERSION_1: DELETE_SNAPSHOT_VHDSET_VERSION = DELETE_SNAPSHOT_VHDSET_VERSION(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct DEPENDENT_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -813,7 +476,6 @@ public let DEPENDENT_DISK_FLAG_DEPENDENT_DISK_FLAG_ALWAYS_ALLOW_SPARSE: DEPENDEN
 public let DEPENDENT_DISK_FLAG_DEPENDENT_DISK_FLAG_SUPPORT_ENCRYPTED_FILES: DEPENDENT_DISK_FLAG = DEPENDENT_DISK_FLAG(8192)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct DETACH_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -849,7 +511,6 @@ public struct DETACH_VIRTUAL_DISK_FLAG {
 public let DETACH_VIRTUAL_DISK_FLAG_DETACH_VIRTUAL_DISK_FLAG_NONE: DETACH_VIRTUAL_DISK_FLAG = DETACH_VIRTUAL_DISK_FLAG(0)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct EXPAND_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -888,51 +549,6 @@ public let EXPAND_VIRTUAL_DISK_FLAG_EXPAND_VIRTUAL_DISK_FLAG_NONE: EXPAND_VIRTUA
 public let EXPAND_VIRTUAL_DISK_FLAG_EXPAND_VIRTUAL_DISK_FLAG_NOTIFY_CHANGE: EXPAND_VIRTUAL_DISK_FLAG = EXPAND_VIRTUAL_DISK_FLAG(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct EXPAND_VIRTUAL_DISK_PARAMETERS {
-    public var Version: EXPAND_VIRTUAL_DISK_VERSION = EXPAND_VIRTUAL_DISK_VERSION()
-    public var Anonymous: EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func version1(): EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var NewSize: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct EXPAND_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -957,7 +573,6 @@ public let EXPAND_VIRTUAL_DISK_VERSION_EXPAND_VIRTUAL_DISK_VERSION_UNSPECIFIED: 
 public let EXPAND_VIRTUAL_DISK_VERSION_EXPAND_VIRTUAL_DISK_VERSION_1: EXPAND_VIRTUAL_DISK_VERSION = EXPAND_VIRTUAL_DISK_VERSION(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct FORK_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -996,51 +611,6 @@ public let FORK_VIRTUAL_DISK_FLAG_FORK_VIRTUAL_DISK_FLAG_NONE: FORK_VIRTUAL_DISK
 public let FORK_VIRTUAL_DISK_FLAG_FORK_VIRTUAL_DISK_FLAG_EXISTING_FILE: FORK_VIRTUAL_DISK_FLAG = FORK_VIRTUAL_DISK_FLAG(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct FORK_VIRTUAL_DISK_PARAMETERS {
-    public var Version: FORK_VIRTUAL_DISK_VERSION = FORK_VIRTUAL_DISK_VERSION()
-    public var Anonymous: FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func version1(): FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var ForkedVirtualDiskPath: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct FORK_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -1065,7 +635,6 @@ public let FORK_VIRTUAL_DISK_VERSION_FORK_VIRTUAL_DISK_VERSION_UNSPECIFIED: FORK
 public let FORK_VIRTUAL_DISK_VERSION_FORK_VIRTUAL_DISK_VERSION_1: FORK_VIRTUAL_DISK_VERSION = FORK_VIRTUAL_DISK_VERSION(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct GET_STORAGE_DEPENDENCY_FLAG {
     public var value: Int32 = 0
 
@@ -1107,346 +676,6 @@ public let GET_STORAGE_DEPENDENCY_FLAG_GET_STORAGE_DEPENDENCY_FLAG_HOST_VOLUMES:
 public let GET_STORAGE_DEPENDENCY_FLAG_GET_STORAGE_DEPENDENCY_FLAG_DISK_HANDLE: GET_STORAGE_DEPENDENCY_FLAG = GET_STORAGE_DEPENDENCY_FLAG(2)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct GET_VIRTUAL_DISK_INFO {
-    public var Version: GET_VIRTUAL_DISK_INFO_VERSION = GET_VIRTUAL_DISK_INFO_VERSION()
-    public var Anonymous: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union = GET_VIRTUAL_DISK_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0)
-
-    public func size(): GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_size(val: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func identifier(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_identifier(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func parentLocation(): GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_parentLocation(val: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func parentIdentifier(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_parentIdentifier(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func parentTimestamp(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_parentTimestamp(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func virtualStorageType(): VIRTUAL_STORAGE_TYPE {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_STORAGE_TYPE>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_virtualStorageType(val: VIRTUAL_STORAGE_TYPE): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VIRTUAL_STORAGE_TYPE>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func providerSubtype(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_providerSubtype(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func is4kAligned(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_is4kAligned(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func isLoaded(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_isLoaded(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func physicalDisk(): GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_physicalDisk(val: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func vhdPhysicalSectorSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_vhdPhysicalSectorSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func smallestSafeVirtualSize(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_smallestSafeVirtualSize(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func fragmentationPercentage(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_fragmentationPercentage(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func virtualDiskId(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_virtualDiskId(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func changeTrackingState(): GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_changeTrackingState(val: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct {
-    public var VirtualSize: UInt64 = 0
-    public var PhysicalSize: UInt64 = 0
-    public var BlockSize: UInt32 = 0
-    public var SectorSize: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct {
-    public var ParentResolved: Int32 = 0
-    public var ParentLocationBuffer: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct {
-    public var LogicalSectorSize: UInt32 = 0
-    public var PhysicalSectorSize: UInt32 = 0
-    public var IsRemote: Int32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct {
-    public var Enabled: Int32 = 0
-    public var NewerChanges: Int32 = 0
-    public var MostRecentId: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct GET_VIRTUAL_DISK_INFO_VERSION {
     public var value: Int32 = 0
 
@@ -1513,7 +742,6 @@ public let GET_VIRTUAL_DISK_INFO_VERSION_GET_VIRTUAL_DISK_INFO_VIRTUAL_DISK_ID: 
 public let GET_VIRTUAL_DISK_INFO_VERSION_GET_VIRTUAL_DISK_INFO_CHANGE_TRACKING_STATE: GET_VIRTUAL_DISK_INFO_VERSION = GET_VIRTUAL_DISK_INFO_VERSION(15)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct MERGE_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -1549,80 +777,6 @@ public struct MERGE_VIRTUAL_DISK_FLAG {
 public let MERGE_VIRTUAL_DISK_FLAG_MERGE_VIRTUAL_DISK_FLAG_NONE: MERGE_VIRTUAL_DISK_FLAG = MERGE_VIRTUAL_DISK_FLAG(0)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct MERGE_VIRTUAL_DISK_PARAMETERS {
-    public var Version: MERGE_VIRTUAL_DISK_VERSION = MERGE_VIRTUAL_DISK_VERSION()
-    public var Anonymous: MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func version1(): MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func version2(): MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version2(val: MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var MergeDepth: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
-    public var MergeSourceDepth: UInt32 = 0
-    public var MergeTargetDepth: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct MERGE_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -1650,7 +804,6 @@ public let MERGE_VIRTUAL_DISK_VERSION_MERGE_VIRTUAL_DISK_VERSION_1: MERGE_VIRTUA
 public let MERGE_VIRTUAL_DISK_VERSION_MERGE_VIRTUAL_DISK_VERSION_2: MERGE_VIRTUAL_DISK_VERSION = MERGE_VIRTUAL_DISK_VERSION(2)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct MIRROR_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -1698,51 +851,6 @@ public let MIRROR_VIRTUAL_DISK_FLAG_MIRROR_VIRTUAL_DISK_FLAG_ENABLE_SMB_COMPRESS
 public let MIRROR_VIRTUAL_DISK_FLAG_MIRROR_VIRTUAL_DISK_FLAG_IS_LIVE_MIGRATION: MIRROR_VIRTUAL_DISK_FLAG = MIRROR_VIRTUAL_DISK_FLAG(8)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct MIRROR_VIRTUAL_DISK_PARAMETERS {
-    public var Version: MIRROR_VIRTUAL_DISK_VERSION = MIRROR_VIRTUAL_DISK_VERSION()
-    public var Anonymous: MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func version1(): MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var MirrorVirtualDiskPath: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct MIRROR_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -1767,7 +875,6 @@ public let MIRROR_VIRTUAL_DISK_VERSION_MIRROR_VIRTUAL_DISK_VERSION_UNSPECIFIED: 
 public let MIRROR_VIRTUAL_DISK_VERSION_MIRROR_VIRTUAL_DISK_VERSION_1: MIRROR_VIRTUAL_DISK_VERSION = MIRROR_VIRTUAL_DISK_VERSION(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct MODIFY_VHDSET_FLAG {
     public var value: Int32 = 0
 
@@ -1806,94 +913,6 @@ public let MODIFY_VHDSET_FLAG_MODIFY_VHDSET_FLAG_NONE: MODIFY_VHDSET_FLAG = MODI
 public let MODIFY_VHDSET_FLAG_MODIFY_VHDSET_FLAG_WRITEABLE_SNAPSHOT: MODIFY_VHDSET_FLAG = MODIFY_VHDSET_FLAG(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct MODIFY_VHDSET_PARAMETERS {
-    public var Version: MODIFY_VHDSET_VERSION = MODIFY_VHDSET_VERSION()
-    public var Anonymous: MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union = MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func snapshotPath(): MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_snapshotPath(val: MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func snapshotId(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_snapshotId(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func defaultFilePath(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_defaultFilePath(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct {
-    public var SnapshotId: GUID = GUID()
-    public var SnapshotFilePath: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct MODIFY_VHDSET_VERSION {
     public var value: Int32 = 0
 
@@ -1924,7 +943,6 @@ public let MODIFY_VHDSET_VERSION_MODIFY_VHDSET_REMOVE_SNAPSHOT: MODIFY_VHDSET_VE
 public let MODIFY_VHDSET_VERSION_MODIFY_VHDSET_DEFAULT_SNAPSHOT_PATH: MODIFY_VHDSET_VERSION = MODIFY_VHDSET_VERSION(3)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct OPEN_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -1996,112 +1014,6 @@ public let OPEN_VIRTUAL_DISK_FLAG_OPEN_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_AN
 public let OPEN_VIRTUAL_DISK_FLAG_OPEN_VIRTUAL_DISK_FLAG_SUPPORT_ENCRYPTED_FILES: OPEN_VIRTUAL_DISK_FLAG = OPEN_VIRTUAL_DISK_FLAG(2048)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct OPEN_VIRTUAL_DISK_PARAMETERS {
-    public var Version: OPEN_VIRTUAL_DISK_VERSION = OPEN_VIRTUAL_DISK_VERSION()
-    public var Anonymous: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func version1(): OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func version2(): OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version2(val: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func version3(): OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version3(val: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var RWDepth: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
-    public var GetInfoOnly: Int32 = 0
-    public var ReadOnly: Int32 = 0
-    public var ResiliencyGuid: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
-    public var GetInfoOnly: Int32 = 0
-    public var ReadOnly: Int32 = 0
-    public var ResiliencyGuid: GUID = GUID()
-    public var SnapshotId: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct OPEN_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -2132,7 +1044,6 @@ public let OPEN_VIRTUAL_DISK_VERSION_OPEN_VIRTUAL_DISK_VERSION_2: OPEN_VIRTUAL_D
 public let OPEN_VIRTUAL_DISK_VERSION_OPEN_VIRTUAL_DISK_VERSION_3: OPEN_VIRTUAL_DISK_VERSION = OPEN_VIRTUAL_DISK_VERSION(3)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct QUERY_CHANGES_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -2177,7 +1088,6 @@ public struct QUERY_CHANGES_VIRTUAL_DISK_RANGE {
 }
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct RAW_SCSI_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -2213,105 +1123,6 @@ public struct RAW_SCSI_VIRTUAL_DISK_FLAG {
 public let RAW_SCSI_VIRTUAL_DISK_FLAG_RAW_SCSI_VIRTUAL_DISK_FLAG_NONE: RAW_SCSI_VIRTUAL_DISK_FLAG = RAW_SCSI_VIRTUAL_DISK_FLAG(0)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS {
-    public var Version: RAW_SCSI_VIRTUAL_DISK_VERSION = RAW_SCSI_VIRTUAL_DISK_VERSION()
-    public var Anonymous: RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0)
-
-    public func version1(): RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var RSVDHandle: Int32 = 0
-    public var DataIn: UInt8 = 0
-    public var CdbLength: UInt8 = 0
-    public var SenseInfoLength: UInt8 = 0
-    public var SrbFlags: UInt32 = 0
-    public var DataTransferLength: UInt32 = 0
-    public var DataBuffer: CPointer<Unit> = CPointer<Unit>()
-    public var SenseInfo: CPointer<UInt8> = CPointer<UInt8>()
-    public var Cdb: CPointer<UInt8> = CPointer<UInt8>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct RAW_SCSI_VIRTUAL_DISK_RESPONSE {
-    public var Version: RAW_SCSI_VIRTUAL_DISK_VERSION = RAW_SCSI_VIRTUAL_DISK_VERSION()
-    public var Anonymous: RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union = RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func version1(): RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct {
-    public var ScsiStatus: UInt8 = 0
-    public var SenseInfoLength: UInt8 = 0
-    public var DataTransferLength: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct RAW_SCSI_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -2336,7 +1147,6 @@ public let RAW_SCSI_VIRTUAL_DISK_VERSION_RAW_SCSI_VIRTUAL_DISK_VERSION_UNSPECIFI
 public let RAW_SCSI_VIRTUAL_DISK_VERSION_RAW_SCSI_VIRTUAL_DISK_VERSION_1: RAW_SCSI_VIRTUAL_DISK_VERSION = RAW_SCSI_VIRTUAL_DISK_VERSION(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct RESIZE_VIRTUAL_DISK_FLAG {
     public var value: Int32 = 0
 
@@ -2378,51 +1188,6 @@ public let RESIZE_VIRTUAL_DISK_FLAG_RESIZE_VIRTUAL_DISK_FLAG_ALLOW_UNSAFE_VIRTUA
 public let RESIZE_VIRTUAL_DISK_FLAG_RESIZE_VIRTUAL_DISK_FLAG_RESIZE_TO_SMALLEST_SAFE_VIRTUAL_SIZE: RESIZE_VIRTUAL_DISK_FLAG = RESIZE_VIRTUAL_DISK_FLAG(2)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct RESIZE_VIRTUAL_DISK_PARAMETERS {
-    public var Version: RESIZE_VIRTUAL_DISK_VERSION = RESIZE_VIRTUAL_DISK_VERSION()
-    public var Anonymous: RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
-
-    public func version1(): RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1(val: RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var NewSize: UInt64 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct RESIZE_VIRTUAL_DISK_VERSION {
     public var value: Int32 = 0
 
@@ -2447,178 +1212,6 @@ public let RESIZE_VIRTUAL_DISK_VERSION_RESIZE_VIRTUAL_DISK_VERSION_UNSPECIFIED: 
 public let RESIZE_VIRTUAL_DISK_VERSION_RESIZE_VIRTUAL_DISK_VERSION_1: RESIZE_VIRTUAL_DISK_VERSION = RESIZE_VIRTUAL_DISK_VERSION(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct SET_VIRTUAL_DISK_INFO {
-    public var Version: SET_VIRTUAL_DISK_INFO_VERSION = SET_VIRTUAL_DISK_INFO_VERSION()
-    public var Anonymous: SET_VIRTUAL_DISK_INFO__Anonymous_e__Union = SET_VIRTUAL_DISK_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0)
-
-    public func parentFilePath(): CPointer<UInt16> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_parentFilePath(val: CPointer<UInt16>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CPointer<UInt16>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func uniqueIdentifier(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_uniqueIdentifier(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func parentPathWithDepthInfo(): SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_parentPathWithDepthInfo(val: SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func vhdPhysicalSectorSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_vhdPhysicalSectorSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func virtualDiskId(): GUID {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_virtualDiskId(val: GUID): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<GUID>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func changeTrackingEnabled(): Int32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadInt32(base, 0)
-        }
-    }
-
-    public mut func set_changeTrackingEnabled(val: Int32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func parentLocator(): SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_parentLocator(val: SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct {
-    public var ChildDepth: UInt32 = 0
-    public var ParentFilePath: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct {
-    public var LinkageId: GUID = GUID()
-    public var ParentFilePath: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct SET_VIRTUAL_DISK_INFO_VERSION {
     public var value: Int32 = 0
 
@@ -2661,89 +1254,6 @@ public let SET_VIRTUAL_DISK_INFO_VERSION_SET_VIRTUAL_DISK_INFO_CHANGE_TRACKING_S
 public let SET_VIRTUAL_DISK_INFO_VERSION_SET_VIRTUAL_DISK_INFO_PARENT_LOCATOR: SET_VIRTUAL_DISK_INFO_VERSION = SET_VIRTUAL_DISK_INFO_VERSION(7)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct STORAGE_DEPENDENCY_INFO {
-    public var Version: STORAGE_DEPENDENCY_INFO_VERSION = STORAGE_DEPENDENCY_INFO_VERSION()
-    public var NumberEntries: UInt32 = 0
-    public var Anonymous: STORAGE_DEPENDENCY_INFO__Anonymous_e__Union = STORAGE_DEPENDENCY_INFO__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct STORAGE_DEPENDENCY_INFO__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $48> = VArray<UInt8, $48>(repeat: 0)
-
-    public func version1Entries(): VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version1Entries(val: VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func version2Entries(): VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1> {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1>>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_version2Entries(val: VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1>): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1>>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct STORAGE_DEPENDENCY_INFO_TYPE_1 {
-    public var DependencyTypeFlags: DEPENDENT_DISK_FLAG = DEPENDENT_DISK_FLAG()
-    public var ProviderSpecificFlags: UInt32 = 0
-    public var VirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct STORAGE_DEPENDENCY_INFO_TYPE_2 {
-    public var DependencyTypeFlags: DEPENDENT_DISK_FLAG = DEPENDENT_DISK_FLAG()
-    public var ProviderSpecificFlags: UInt32 = 0
-    public var VirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
-    public var AncestorLevel: UInt32 = 0
-    public var DependencyDeviceName: CPointer<UInt16> = CPointer<UInt16>()
-    public var HostVolumeName: CPointer<UInt16> = CPointer<UInt16>()
-    public var DependentVolumeName: CPointer<UInt16> = CPointer<UInt16>()
-    public var DependentVolumeRelativePath: CPointer<UInt16> = CPointer<UInt16>()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct STORAGE_DEPENDENCY_INFO_VERSION {
     public var value: Int32 = 0
 
@@ -2771,7 +1281,6 @@ public let STORAGE_DEPENDENCY_INFO_VERSION_STORAGE_DEPENDENCY_INFO_VERSION_1: ST
 public let STORAGE_DEPENDENCY_INFO_VERSION_STORAGE_DEPENDENCY_INFO_VERSION_2: STORAGE_DEPENDENCY_INFO_VERSION = STORAGE_DEPENDENCY_INFO_VERSION(2)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct TAKE_SNAPSHOT_VHDSET_FLAG {
     public var value: Int32 = 0
 
@@ -2810,29 +1319,6 @@ public let TAKE_SNAPSHOT_VHDSET_FLAG_TAKE_SNAPSHOT_VHDSET_FLAG_NONE: TAKE_SNAPSH
 public let TAKE_SNAPSHOT_VHDSET_FLAG_TAKE_SNAPSHOT_VHDSET_FLAG_WRITEABLE: TAKE_SNAPSHOT_VHDSET_FLAG = TAKE_SNAPSHOT_VHDSET_FLAG(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct TAKE_SNAPSHOT_VHDSET_PARAMETERS {
-    public var Version: TAKE_SNAPSHOT_VHDSET_VERSION = TAKE_SNAPSHOT_VHDSET_VERSION()
-    public var Anonymous: TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union = TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-// WARNING: union size unavailable; placeholder only
-@C
-public struct TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union {
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
-public struct TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
-    public var SnapshotId: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct TAKE_SNAPSHOT_VHDSET_VERSION {
     public var value: Int32 = 0
 
@@ -2857,7 +1343,6 @@ public let TAKE_SNAPSHOT_VHDSET_VERSION_TAKE_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED
 public let TAKE_SNAPSHOT_VHDSET_VERSION_TAKE_SNAPSHOT_VHDSET_VERSION_1: TAKE_SNAPSHOT_VHDSET_VERSION = TAKE_SNAPSHOT_VHDSET_VERSION(1)
 
 @When[Windows_Win32_Storage_Vhd == "on"]
-@C
 public struct VIRTUAL_DISK_ACCESS_MASK {
     public var value: Int32 = 0
 
@@ -2936,57 +1421,1681 @@ public struct VIRTUAL_STORAGE_TYPE {
     public init() {}
 }
 
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct APPLY_SNAPSHOT_VHDSET_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union = APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $8> = VArray<UInt32, $8>(repeat: 0)
+
+    public mut prop version1: APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct APPLY_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var SnapshotId: GUID = GUID()
+    public var LeafSnapshotId: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct ATTACH_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0)
+
+    public mut prop version1: ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop version2: ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var Reserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct ATTACH_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
+    public var RestrictedOffset: UInt64 = 0
+    public var RestrictedLength: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct COMPACT_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0)
+
+    public mut prop version1: COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct COMPACT_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var Reserved: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct CREATE_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $22> = VArray<UInt64, $22>(repeat: 0)
+
+    public mut prop version1: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop version2: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop version3: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop version4: CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var UniqueId: GUID = GUID()
+    public var MaximumSize: UInt64 = 0
+    public var BlockSizeInBytes: UInt32 = 0
+    public var SectorSizeInBytes: UInt32 = 0
+    public var ParentPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
+    public var UniqueId: GUID = GUID()
+    public var MaximumSize: UInt64 = 0
+    public var BlockSizeInBytes: UInt32 = 0
+    public var SectorSizeInBytes: UInt32 = 0
+    public var PhysicalSectorSizeInBytes: UInt32 = 0
+    public var ParentPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
+    public var OpenFlags: Int32 = 0
+    public var ParentVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public var SourceVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public var ResiliencyGuid: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
+    public var UniqueId: GUID = GUID()
+    public var MaximumSize: UInt64 = 0
+    public var BlockSizeInBytes: UInt32 = 0
+    public var SectorSizeInBytes: UInt32 = 0
+    public var PhysicalSectorSizeInBytes: UInt32 = 0
+    public var ParentPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
+    public var OpenFlags: Int32 = 0
+    public var ParentVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public var SourceVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public var ResiliencyGuid: GUID = GUID()
+    public var SourceLimitPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var BackingStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct CREATE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version4_e__Struct {
+    public var UniqueId: GUID = GUID()
+    public var MaximumSize: UInt64 = 0
+    public var BlockSizeInBytes: UInt32 = 0
+    public var SectorSizeInBytes: UInt32 = 0
+    public var PhysicalSectorSizeInBytes: UInt32 = 0
+    public var ParentPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var SourcePath: CPointer<UInt16> = CPointer<UInt16>()
+    public var OpenFlags: Int32 = 0
+    public var ParentVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public var SourceVirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public var ResiliencyGuid: GUID = GUID()
+    public var SourceLimitPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var BackingStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public var PmemAddressAbstractionType: GUID = GUID()
+    public var DataAlignment: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct DELETE_SNAPSHOT_VHDSET_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union = DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop version1: DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct DELETE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var SnapshotId: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct EXPAND_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop version1: EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct EXPAND_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var NewSize: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct FORK_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop version1: FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct FORK_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var ForkedVirtualDiskPath: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct GET_VIRTUAL_DISK_INFO {
+    public var Version: Int32 = 0
+    public var Anonymous: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union = GET_VIRTUAL_DISK_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+
+    public mut prop size: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop identifier: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop parentLocation: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop parentIdentifier: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop parentTimestamp: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop virtualStorageType: VIRTUAL_STORAGE_TYPE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_STORAGE_TYPE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VIRTUAL_STORAGE_TYPE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop providerSubtype: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop is4kAligned: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop isLoaded: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop physicalDisk: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop vhdPhysicalSectorSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop smallestSafeVirtualSize: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fragmentationPercentage: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop virtualDiskId: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop changeTrackingState: GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__Size_e__Struct {
+    public var VirtualSize: UInt64 = 0
+    public var PhysicalSize: UInt64 = 0
+    public var BlockSize: UInt32 = 0
+    public var SectorSize: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocation_e__Struct {
+    public var ParentResolved: Int32 = 0
+    public var ParentLocationBuffer: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__PhysicalDisk_e__Struct {
+    public var LogicalSectorSize: UInt32 = 0
+    public var PhysicalSectorSize: UInt32 = 0
+    public var IsRemote: Int32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct GET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ChangeTrackingState_e__Struct {
+    public var Enabled: Int32 = 0
+    public var NewerChanges: Int32 = 0
+    public var MostRecentId: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct MERGE_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+
+    public mut prop version1: MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop version2: MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var MergeDepth: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct MERGE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
+    public var MergeSourceDepth: UInt32 = 0
+    public var MergeTargetDepth: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct MIRROR_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop version1: MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct MIRROR_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var MirrorVirtualDiskPath: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct MODIFY_VHDSET_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union = MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+
+    public mut prop snapshotPath: MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop snapshotId: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop defaultFilePath: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct MODIFY_VHDSET_PARAMETERS__Anonymous_e__Union__SnapshotPath_e__Struct {
+    public var SnapshotId: GUID = GUID()
+    public var SnapshotFilePath: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct OPEN_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $10> = VArray<UInt32, $10>(repeat: 0)
+
+    public mut prop version1: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop version2: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop version3: OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var RWDepth: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version2_e__Struct {
+    public var GetInfoOnly: Int32 = 0
+    public var ReadOnly: Int32 = 0
+    public var ResiliencyGuid: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct OPEN_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version3_e__Struct {
+    public var GetInfoOnly: Int32 = 0
+    public var ReadOnly: Int32 = 0
+    public var ResiliencyGuid: GUID = GUID()
+    public var SnapshotId: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0)
+
+    public mut prop version1: RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct RAW_SCSI_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var RSVDHandle: Int32 = 0
+    public var DataIn: UInt8 = 0
+    public var CdbLength: UInt8 = 0
+    public var SenseInfoLength: UInt8 = 0
+    public var SrbFlags: UInt32 = 0
+    public var DataTransferLength: UInt32 = 0
+    public var DataBuffer: CPointer<Unit> = CPointer<Unit>()
+    public var SenseInfo: CPointer<UInt8> = CPointer<UInt8>()
+    public var Cdb: CPointer<UInt8> = CPointer<UInt8>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct RAW_SCSI_VIRTUAL_DISK_RESPONSE {
+    public var Version: Int32 = 0
+    public var Anonymous: RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union = RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+
+    public mut prop version1: RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct RAW_SCSI_VIRTUAL_DISK_RESPONSE__Anonymous_e__Union__Version1_e__Struct {
+    public var ScsiStatus: UInt8 = 0
+    public var SenseInfoLength: UInt8 = 0
+    public var DataTransferLength: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct RESIZE_VIRTUAL_DISK_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union = RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
+
+    public mut prop version1: RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct RESIZE_VIRTUAL_DISK_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var NewSize: UInt64 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct SET_VIRTUAL_DISK_INFO {
+    public var Version: Int32 = 0
+    public var Anonymous: SET_VIRTUAL_DISK_INFO__Anonymous_e__Union = SET_VIRTUAL_DISK_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0)
+
+    public mut prop parentFilePath: CPointer<UInt16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uniqueIdentifier: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop parentPathWithDepthInfo: SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop vhdPhysicalSectorSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop virtualDiskId: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<GUID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop changeTrackingEnabled: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop parentLocator: SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentPathWithDepthInfo_e__Struct {
+    public var ChildDepth: UInt32 = 0
+    public var ParentFilePath: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct SET_VIRTUAL_DISK_INFO__Anonymous_e__Union__ParentLocator_e__Struct {
+    public var LinkageId: GUID = GUID()
+    public var ParentFilePath: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct STORAGE_DEPENDENCY_INFO_TYPE_1 {
+    public var DependencyTypeFlags: Int32 = 0
+    public var ProviderSpecificFlags: UInt32 = 0
+    public var VirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct STORAGE_DEPENDENCY_INFO_TYPE_2 {
+    public var DependencyTypeFlags: Int32 = 0
+    public var ProviderSpecificFlags: UInt32 = 0
+    public var VirtualStorageType: VIRTUAL_STORAGE_TYPE = VIRTUAL_STORAGE_TYPE()
+    public var AncestorLevel: UInt32 = 0
+    public var DependencyDeviceName: CPointer<UInt16> = CPointer<UInt16>()
+    public var HostVolumeName: CPointer<UInt16> = CPointer<UInt16>()
+    public var DependentVolumeName: CPointer<UInt16> = CPointer<UInt16>()
+    public var DependentVolumeRelativePath: CPointer<UInt16> = CPointer<UInt16>()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct TAKE_SNAPSHOT_VHDSET_PARAMETERS {
+    public var Version: Int32 = 0
+    public var Anonymous: TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union = TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0)
+
+    public mut prop version1: TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct TAKE_SNAPSHOT_VHDSET_PARAMETERS__Anonymous_e__Union__Version1_e__Struct {
+    public var SnapshotId: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+@C
+public struct STORAGE_DEPENDENCY_INFO {
+    public var Version: Int32 = 0
+    public var NumberEntries: UInt32 = 0
+    public var Anonymous: STORAGE_DEPENDENCY_INFO__Anonymous_e__Union = STORAGE_DEPENDENCY_INFO__Anonymous_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Storage_Vhd == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct STORAGE_DEPENDENCY_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $8> = VArray<UInt64, $8>(repeat: 0)
+
+    public mut prop version1Entries: VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_1, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop version2Entries: VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<STORAGE_DEPENDENCY_INFO_TYPE_2, $1>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
 @When[VIRTDISK == "on"]
 foreign {
-    func AddVirtualDiskParent(VirtualDiskHandle: CPointer<Unit>, ParentPath: CPointer<UInt16>): Win32_Foundation.WIN32_ERROR
-    func ApplySnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<APPLY_SNAPSHOT_VHDSET_PARAMETERS>, Flags: APPLY_SNAPSHOT_VHDSET_FLAG): Win32_Foundation.WIN32_ERROR
-    // param-hint: SecurityDescriptor optional
-    // param-hint: Parameters optional
-    // param-hint: Overlapped optional
-    func AttachVirtualDisk(VirtualDiskHandle: CPointer<Unit>, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Flags: ATTACH_VIRTUAL_DISK_FLAG, ProviderSpecificFlags: UInt32, Parameters: CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Win32_Foundation.WIN32_ERROR
-    func BreakMirrorVirtualDisk(VirtualDiskHandle: CPointer<Unit>): Win32_Foundation.WIN32_ERROR
-    // param-hint: Parameters optional
-    // param-hint: Overlapped optional
-    func CompactVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: COMPACT_VIRTUAL_DISK_FLAG, Parameters: CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Win32_Foundation.WIN32_ERROR
-    func CompleteForkVirtualDisk(VirtualDiskHandle: CPointer<Unit>): Win32_Foundation.WIN32_ERROR
-    // param-hint: SecurityDescriptor optional
-    // param-hint: Overlapped optional
-    func CreateVirtualDisk(VirtualStorageType: CPointer<VIRTUAL_STORAGE_TYPE>, Path: CPointer<UInt16>, VirtualDiskAccessMask: VIRTUAL_DISK_ACCESS_MASK, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Flags: CREATE_VIRTUAL_DISK_FLAG, ProviderSpecificFlags: UInt32, Parameters: CPointer<CREATE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>, Handle: CPointer<CPointer<Unit>>): Win32_Foundation.WIN32_ERROR
-    func DeleteSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<DELETE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: DELETE_SNAPSHOT_VHDSET_FLAG): Win32_Foundation.WIN32_ERROR
-    func DeleteVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>): Win32_Foundation.WIN32_ERROR
-    func DetachVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: DETACH_VIRTUAL_DISK_FLAG, ProviderSpecificFlags: UInt32): Win32_Foundation.WIN32_ERROR
+    func AddVirtualDiskParent(VirtualDiskHandle: CPointer<Unit>, ParentPath: CPointer<UInt16>): UInt32
+    func ApplySnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<APPLY_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32
+    func BreakMirrorVirtualDisk(VirtualDiskHandle: CPointer<Unit>): UInt32
+    func CompleteForkVirtualDisk(VirtualDiskHandle: CPointer<Unit>): UInt32
+    func DeleteSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<DELETE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32
+    func DeleteVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>): UInt32
+    func DetachVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, ProviderSpecificFlags: UInt32): UInt32
     // param-hint: Items len=param[1]
-    func EnumerateVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, NumberOfItems: CPointer<UInt32>, Items: CPointer<GUID>): Win32_Foundation.WIN32_ERROR
-    // param-hint: Overlapped optional
-    func ExpandVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: EXPAND_VIRTUAL_DISK_FLAG, Parameters: CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Win32_Foundation.WIN32_ERROR
-    func ForkVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: FORK_VIRTUAL_DISK_FLAG, Parameters: CPointer<FORK_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Win32_Foundation.WIN32_ERROR
+    func EnumerateVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, NumberOfItems: CPointer<UInt32>, Items: CPointer<GUID>): UInt32
     // param-hint: PathsBuffer bytes=param[0]
-    func GetAllAttachedVirtualDiskPhysicalPaths(PathsBufferSizeInBytes: CPointer<UInt32>, PathsBuffer: CPointer<UInt16>): Win32_Foundation.WIN32_ERROR
+    func GetAllAttachedVirtualDiskPhysicalPaths(PathsBufferSizeInBytes: CPointer<UInt32>, PathsBuffer: CPointer<UInt16>): UInt32
     // param-hint: SizeUsed optional
-    func GetStorageDependencyInformation(ObjectHandle: CPointer<Unit>, Flags: GET_STORAGE_DEPENDENCY_FLAG, StorageDependencyInfoSize: UInt32, StorageDependencyInfo: CPointer<STORAGE_DEPENDENCY_INFO>, SizeUsed: CPointer<UInt32>): Win32_Foundation.WIN32_ERROR
+    func GetStorageDependencyInformation(ObjectHandle: CPointer<Unit>, Flags: Int32, StorageDependencyInfoSize: UInt32, StorageDependencyInfo: CPointer<STORAGE_DEPENDENCY_INFO>, SizeUsed: CPointer<UInt32>): UInt32
     // param-hint: VirtualDiskInfo bytes=param[1]
     // param-hint: SizeUsed optional
-    func GetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfoSize: CPointer<UInt32>, VirtualDiskInfo: CPointer<GET_VIRTUAL_DISK_INFO>, SizeUsed: CPointer<UInt32>): Win32_Foundation.WIN32_ERROR
+    func GetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfoSize: CPointer<UInt32>, VirtualDiskInfo: CPointer<GET_VIRTUAL_DISK_INFO>, SizeUsed: CPointer<UInt32>): UInt32
     // param-hint: MetaData bytes=param[2]
-    func GetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: CPointer<UInt32>, MetaData: CPointer<Unit>): Win32_Foundation.WIN32_ERROR
-    func GetVirtualDiskOperationProgress(VirtualDiskHandle: CPointer<Unit>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>, Progress: CPointer<VIRTUAL_DISK_PROGRESS>): Win32_Foundation.WIN32_ERROR
+    func GetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: CPointer<UInt32>, MetaData: CPointer<Unit>): UInt32
     // param-hint: DiskPath bytes=param[1]
-    func GetVirtualDiskPhysicalPath(VirtualDiskHandle: CPointer<Unit>, DiskPathSizeInBytes: CPointer<UInt32>, DiskPath: CPointer<UInt16>): Win32_Foundation.WIN32_ERROR
-    // param-hint: Overlapped optional
-    func MergeVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: MERGE_VIRTUAL_DISK_FLAG, Parameters: CPointer<MERGE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Win32_Foundation.WIN32_ERROR
-    func MirrorVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: MIRROR_VIRTUAL_DISK_FLAG, Parameters: CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Win32_Foundation.WIN32_ERROR
-    func ModifyVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<MODIFY_VHDSET_PARAMETERS>, Flags: MODIFY_VHDSET_FLAG): Win32_Foundation.WIN32_ERROR
+    func GetVirtualDiskPhysicalPath(VirtualDiskHandle: CPointer<Unit>, DiskPathSizeInBytes: CPointer<UInt32>, DiskPath: CPointer<UInt16>): UInt32
+    func ModifyVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<MODIFY_VHDSET_PARAMETERS>, Flags: Int32): UInt32
     // param-hint: Parameters optional
-    func OpenVirtualDisk(VirtualStorageType: CPointer<VIRTUAL_STORAGE_TYPE>, Path: CPointer<UInt16>, VirtualDiskAccessMask: VIRTUAL_DISK_ACCESS_MASK, Flags: OPEN_VIRTUAL_DISK_FLAG, Parameters: CPointer<OPEN_VIRTUAL_DISK_PARAMETERS>, Handle: CPointer<CPointer<Unit>>): Win32_Foundation.WIN32_ERROR
+    func OpenVirtualDisk(VirtualStorageType: CPointer<VIRTUAL_STORAGE_TYPE>, Path: CPointer<UInt16>, VirtualDiskAccessMask: Int32, Flags: Int32, Parameters: CPointer<OPEN_VIRTUAL_DISK_PARAMETERS>, Handle: CPointer<CPointer<Unit>>): UInt32
     // param-hint: Ranges len=param[6]
-    func QueryChangesVirtualDisk(VirtualDiskHandle: CPointer<Unit>, ChangeTrackingId: CPointer<UInt16>, ByteOffset: UInt64, ByteLength: UInt64, Flags: QUERY_CHANGES_VIRTUAL_DISK_FLAG, Ranges: CPointer<QUERY_CHANGES_VIRTUAL_DISK_RANGE>, RangeCount: CPointer<UInt32>, ProcessedLength: CPointer<UInt64>): Win32_Foundation.WIN32_ERROR
-    func RawSCSIVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS>, Flags: RAW_SCSI_VIRTUAL_DISK_FLAG, Response: CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE>): Win32_Foundation.WIN32_ERROR
-    // param-hint: Overlapped optional
-    func ResizeVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: RESIZE_VIRTUAL_DISK_FLAG, Parameters: CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): Win32_Foundation.WIN32_ERROR
-    func SetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfo: CPointer<SET_VIRTUAL_DISK_INFO>): Win32_Foundation.WIN32_ERROR
+    func QueryChangesVirtualDisk(VirtualDiskHandle: CPointer<Unit>, ChangeTrackingId: CPointer<UInt16>, ByteOffset: UInt64, ByteLength: UInt64, Flags: Int32, Ranges: CPointer<QUERY_CHANGES_VIRTUAL_DISK_RANGE>, RangeCount: CPointer<UInt32>, ProcessedLength: CPointer<UInt64>): UInt32
+    func RawSCSIVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<RAW_SCSI_VIRTUAL_DISK_PARAMETERS>, Flags: Int32, Response: CPointer<RAW_SCSI_VIRTUAL_DISK_RESPONSE>): UInt32
+    func SetVirtualDiskInformation(VirtualDiskHandle: CPointer<Unit>, VirtualDiskInfo: CPointer<SET_VIRTUAL_DISK_INFO>): UInt32
     // param-hint: MetaData bytes=param[2]
-    func SetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: UInt32, MetaData: CPointer<Unit>): Win32_Foundation.WIN32_ERROR
-    func TakeSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<TAKE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: TAKE_SNAPSHOT_VHDSET_FLAG): Win32_Foundation.WIN32_ERROR
+    func SetVirtualDiskMetadata(VirtualDiskHandle: CPointer<Unit>, Item: CPointer<GUID>, MetaDataSize: UInt32, MetaData: CPointer<Unit>): UInt32
+    func TakeSnapshotVhdSet(VirtualDiskHandle: CPointer<Unit>, Parameters: CPointer<TAKE_SNAPSHOT_VHDSET_PARAMETERS>, Flags: Int32): UInt32
+}
+
+@When[VIRTDISK == "on" && (Windows_Win32_Security == "on" && Windows_Win32_System_IO == "on")]
+foreign {
+    // param-hint: SecurityDescriptor optional
+    // param-hint: Parameters optional
+    // param-hint: Overlapped optional
+    func AttachVirtualDisk(VirtualDiskHandle: CPointer<Unit>, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Flags: Int32, ProviderSpecificFlags: UInt32, Parameters: CPointer<ATTACH_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: SecurityDescriptor optional
+    // param-hint: Overlapped optional
+    func CreateVirtualDisk(VirtualStorageType: CPointer<VIRTUAL_STORAGE_TYPE>, Path: CPointer<UInt16>, VirtualDiskAccessMask: Int32, SecurityDescriptor: Win32_Security.PSECURITY_DESCRIPTOR, Flags: Int32, ProviderSpecificFlags: UInt32, Parameters: CPointer<CREATE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>, Handle: CPointer<CPointer<Unit>>): UInt32
+}
+
+@When[VIRTDISK == "on" && Windows_Win32_System_IO == "on"]
+foreign {
+    // param-hint: Parameters optional
+    // param-hint: Overlapped optional
+    func CompactVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<COMPACT_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: Overlapped optional
+    func ExpandVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<EXPAND_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    func ForkVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<FORK_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    func GetVirtualDiskOperationProgress(VirtualDiskHandle: CPointer<Unit>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>, Progress: CPointer<VIRTUAL_DISK_PROGRESS>): UInt32
+    // param-hint: Overlapped optional
+    func MergeVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<MERGE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    func MirrorVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<MIRROR_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
+    // param-hint: Overlapped optional
+    func ResizeVirtualDisk(VirtualDiskHandle: CPointer<Unit>, Flags: Int32, Parameters: CPointer<RESIZE_VIRTUAL_DISK_PARAMETERS>, Overlapped: CPointer<Win32_System_IO.OVERLAPPED>): UInt32
 }
 
 @When[Windows_Win32_Storage_Vhd == "on"]

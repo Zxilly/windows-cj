@@ -1,57 +1,300 @@
 #!/usr/bin/env python3
-"""Rebuild bindgen, regenerate sys, then clean+build sys."""
+"""Build bindgen, regenerate windows-sys, and optionally build the live module."""
+
+from __future__ import annotations
+
+import argparse
 import os
+from pathlib import Path
 import subprocess
 import sys
 
-BINDGEN = r"E:\Project\CS_Project\2026\ling\windows-cj\windows-bindgen"
-SYS = r"E:\Project\CS_Project\2026\ling\windows-cj\windows-sys"
 
-env = dict(os.environ)
-env["cjHeapSize"] = "16gb"
+ROOT = Path(__file__).resolve().parent
+BINDGEN = ROOT / "windows-bindgen"
+SYS = ROOT / "windows-sys"
+LIVE_SYS_SRC = SYS / "src"
+WINMD_INPUTS = (
+    ROOT / "winmd" / "Windows.Win32.winmd",
+    ROOT / "winmd" / "Windows.winmd",
+    ROOT / "winmd" / "Windows.Wdk.winmd",
+)
+GENERATED_ROOT_ARTIFACTS = (
+    SYS / "cfg_list.toml",
+    SYS / "cfg.toml",
+    SYS / "features.toml",
+    SYS / "link-options.toml",
+)
+GENERATED_SENTINEL = ".windows-cj-generated-output"
+
+ENV = dict(os.environ)
+ENV["cjHeapSize"] = os.environ.get("cjHeapSize", "32GB")
 
 
-def run(cmd, cwd, capture=False):
-    print(f"=== {cwd} :: {' '.join(cmd)} ===", flush=True)
+def default_bindgen_jobs() -> int:
+    raw = os.environ.get("BINDGEN_JOBS")
+    if raw:
+        try:
+            value = int(raw)
+        except ValueError:
+            value = 0
+        if value <= 0:
+            raise SystemExit("BINDGEN_JOBS must be a positive integer")
+        return value
+    return max(1, os.cpu_count() or 1)
+
+
+def default_sys_build_jobs() -> int | None:
+    raw = os.environ.get("CJPM_BUILD_JOBS")
+    if not raw:
+        return None
+    try:
+        value = int(raw)
+    except ValueError:
+        value = 0
+    if value <= 0:
+        raise SystemExit("CJPM_BUILD_JOBS must be a positive integer")
+    return value
+
+
+def run(cmd: list[str], cwd: Path, *, capture: bool = False) -> subprocess.CompletedProcess[str]:
+    rendered = " ".join(str(part) for part in cmd)
+    print(f"=== {cwd} :: {rendered} ===", flush=True)
     if capture:
-        return subprocess.run(cmd, cwd=cwd, env=env, capture_output=True, text=True)
-    return subprocess.run(cmd, cwd=cwd, env=env)
+        return subprocess.run(
+            cmd,
+            cwd=cwd,
+            env=ENV,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    return subprocess.run(cmd, cwd=cwd, env=ENV, check=False)
 
 
-print("[1/4] build bindgen")
-res = run(["cjpm", "build"], BINDGEN)
-if res.returncode != 0:
-    print("bindgen build failed", flush=True)
-    sys.exit(1)
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Rebuild bindgen, regenerate windows-sys, and optionally build the live module."
+    )
+    parser.add_argument(
+        "--out",
+        default=str(LIVE_SYS_SRC),
+        help="Generated source output directory passed through to windows-bindgen.",
+    )
+    parser.add_argument(
+        "--filter",
+        action="append",
+        default=[],
+        help="Optional namespace filter(s) forwarded to windows-bindgen.",
+    )
+    parser.add_argument(
+        "--skip-bindgen-build",
+        action="store_true",
+        help="Skip rebuilding windows-bindgen before generation.",
+    )
+    parser.add_argument(
+        "--skip-sys-build",
+        action="store_true",
+        help="Do not clean/build the live windows-sys module after generation.",
+    )
+    parser.add_argument(
+        "--bindgen-jobs",
+        type=int,
+        default=default_bindgen_jobs(),
+        help="Namespace render jobs passed to windows-bindgen (default: BINDGEN_JOBS or CPU count).",
+    )
+    parser.add_argument(
+        "--sys-build-jobs",
+        type=int,
+        default=default_sys_build_jobs(),
+        help="Optional cjpm jobs for windows-sys build (default: cjpm auto parallelism; env CJPM_BUILD_JOBS).",
+    )
+    parser.add_argument(
+        "--skip-c-abi-audit",
+        action="store_true",
+        help="Skip the @C ABI ownership audit after generation.",
+    )
+    args = parser.parse_args()
+    if args.bindgen_jobs <= 0:
+        parser.error("--bindgen-jobs must be a positive integer")
+    if args.sys_build_jobs is not None and args.sys_build_jobs <= 0:
+        parser.error("--sys-build-jobs must be a positive integer")
+    return args
 
-print("[2/4] regen")
-res = run([
-    "cjpm", "run", "--",
-    "--in", "../winmd/Windows.Win32.winmd",
-    "--in", "../winmd/Windows.winmd",
-    "--in", "../winmd/Windows.Wdk.winmd",
-    "--out", "../windows-sys/src",
-    "--sys",
-], BINDGEN)
-if res.returncode != 0:
-    print("regen failed", flush=True)
-    sys.exit(1)
 
-print("[3/4] clean sys")
-run(["cjpm", "clean"], SYS, capture=True)
+def same_path(left: Path, right: Path) -> bool:
+    return left.resolve() == right.resolve()
 
-print("[4/4] build sys")
-log_path = os.path.join(SYS, "build_errors.log")
-with open(log_path, "w") as log:
-    res = subprocess.run(["cjpm", "build", "-j", "1"], cwd=SYS, env=env, stderr=log)
-print(f"sys cjpm exit: {res.returncode}", flush=True)
 
-with open(log_path) as f:
-    text = f.read()
-err_lines = [l for l in text.splitlines() if l.startswith("error")]
-print(f"error count: {len(err_lines)}", flush=True)
-counts = {}
-for l in err_lines:
-    counts[l] = counts.get(l, 0) + 1
-for line, n in sorted(counts.items(), key=lambda x: -x[1])[:10]:
-    print(f"  {n}\t{line}", flush=True)
+def path_contains(parent: Path, child: Path) -> bool:
+    try:
+        child.resolve().relative_to(parent.resolve())
+        return True
+    except ValueError:
+        return False
+
+
+def refuse_output_path(message: str) -> None:
+    print(f"refusing unsafe --out path: {message}", flush=True)
+    sys.exit(2)
+
+
+def validate_output_path(out_path: Path, filters: list[str]) -> None:
+    if same_path(out_path, LIVE_SYS_SRC) and filters:
+        joined_filters = ", ".join(filters)
+        print(
+            "refusing to regenerate filtered output into live windows-sys/src; "
+            f"use --out <scratch-dir> instead (filters: {joined_filters})",
+            flush=True,
+        )
+        sys.exit(2)
+    if same_path(out_path, LIVE_SYS_SRC):
+        return
+    if path_contains(ROOT, out_path) or path_contains(out_path, ROOT):
+        refuse_output_path("non-live output must be outside the repository")
+    if out_path.exists() and any(out_path.iterdir()) and not (out_path / GENERATED_SENTINEL).exists():
+        refuse_output_path("existing non-live output directory is not marked as generated by build_all.py")
+
+
+def build_bindgen() -> None:
+    print("[1/3] build bindgen", flush=True)
+    result = run(["cjpm", "build"], BINDGEN)
+    if result.returncode != 0:
+        print("bindgen build failed", flush=True)
+        sys.exit(1)
+
+
+def clean_generated_output(out_path: Path) -> None:
+    if out_path.exists():
+        for file_path in out_path.rglob("*.cj"):
+            file_path.unlink()
+        for artifact_name in ("cfg_list.toml", "cfg.toml", "features.toml", "link-options.toml"):
+            for file_path in out_path.rglob(artifact_name):
+                file_path.unlink()
+        for directory in sorted(
+            (path for path in out_path.rglob("*") if path.is_dir()),
+            key=lambda path: len(path.parts),
+            reverse=True,
+        ):
+            try:
+                directory.rmdir()
+            except OSError:
+                pass
+    out_path.mkdir(parents=True, exist_ok=True)
+
+    if same_path(out_path, LIVE_SYS_SRC):
+        for artifact in GENERATED_ROOT_ARTIFACTS:
+            artifact.unlink(missing_ok=True)
+    else:
+        (out_path / GENERATED_SENTINEL).write_text("generated by build_all.py\n", encoding="utf-8")
+
+
+def regenerate(out_path: Path, filters: list[str], bindgen_jobs: int) -> None:
+    print("[2/3] regen", flush=True)
+    clean_generated_output(out_path)
+    command = ["cjpm", "run", "--"]
+    for winmd in WINMD_INPUTS:
+        command.extend(["--in", str(winmd)])
+    command.extend(["--out", str(out_path), "--sys", "--jobs", str(bindgen_jobs)])
+    for namespace_filter in filters:
+        command.extend(["--filter", namespace_filter])
+    result = run(command, BINDGEN)
+    if result.returncode != 0:
+        print("regen failed", flush=True)
+        sys.exit(1)
+
+
+def generated_artifact_root(out_path: Path) -> Path:
+    if out_path.name == "src" and (out_path.parent / "cjpm.toml").exists():
+        return out_path.parent
+    return out_path
+
+
+def write_generated_cfg(out_path: Path) -> None:
+    artifact_root = generated_artifact_root(out_path)
+    cfg_list_path = artifact_root / "cfg_list.toml"
+    cfg_path = artifact_root / "cfg.toml"
+    if not cfg_list_path.exists():
+        print(f"cfg_list.toml was not generated at {cfg_list_path}", flush=True)
+        sys.exit(1)
+    cfg_path.write_text(cfg_list_path.read_text(encoding="utf-8"), encoding="utf-8")
+
+
+def should_build_live_sys(out_path: Path, filters: list[str], args: argparse.Namespace) -> bool:
+    if args.skip_sys_build:
+        print("skipping windows-sys build (--skip-sys-build)", flush=True)
+        return False
+    if filters:
+        print("skipping windows-sys build for filtered slice regeneration", flush=True)
+        return False
+    if not same_path(out_path, LIVE_SYS_SRC):
+        print("skipping windows-sys build because output is not the live src tree", flush=True)
+        return False
+    return True
+
+
+def build_live_sys(sys_build_jobs: int | None) -> None:
+    print("[3/3] clean sys", flush=True)
+    run(["cjpm", "clean"], SYS, capture=True)
+
+    print("[3/3] build sys", flush=True)
+    command = ["cjpm", "build"]
+    if sys_build_jobs is not None:
+        command.extend(["-j", str(sys_build_jobs)])
+    log_path = SYS / "build_errors.log"
+    with log_path.open("w", encoding="utf-8") as log:
+        result = subprocess.run(
+            command,
+            cwd=SYS,
+            env=ENV,
+            stderr=log,
+            check=False,
+        )
+    print(f"sys cjpm exit: {result.returncode}", flush=True)
+
+    with log_path.open(encoding="utf-8") as handle:
+        text = handle.read()
+    error_lines = [line for line in text.splitlines() if line.startswith("error")]
+    print(f"error count: {len(error_lines)}", flush=True)
+    counts: dict[str, int] = {}
+    for line in error_lines:
+        counts[line] = counts.get(line, 0) + 1
+    for line, count in sorted(counts.items(), key=lambda item: -item[1])[:10]:
+        print(f"  {count}\t{line}", flush=True)
+
+    if result.returncode != 0:
+        sys.exit(result.returncode)
+
+
+def audit_c_abi() -> None:
+    print("[audit] C ABI ownership", flush=True)
+    result = run([sys.executable, str(ROOT / "audit_c_abi.py")], ROOT)
+    if result.returncode != 0:
+        sys.exit(result.returncode)
+
+
+def main() -> None:
+    args = parse_args()
+    out_path = Path(args.out)
+    filters = list(args.filter)
+    validate_output_path(out_path, filters)
+
+    if not args.skip_bindgen_build:
+        build_bindgen()
+    else:
+        print("[1/3] skipping bindgen build", flush=True)
+
+    regenerate(out_path, filters, args.bindgen_jobs)
+    write_generated_cfg(out_path)
+
+    if args.skip_c_abi_audit:
+        print("[audit] skipping C ABI ownership (--skip-c-abi-audit)", flush=True)
+    else:
+        audit_c_abi()
+
+    if should_build_live_sys(out_path, filters, args):
+        build_live_sys(args.sys_build_jobs)
+
+
+if __name__ == "__main__":
+    main()

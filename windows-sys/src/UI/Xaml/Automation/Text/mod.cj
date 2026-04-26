@@ -4,7 +4,6 @@ package windows_sys.UI.Xaml.Automation.Text
 
 
 @When[Windows_UI_Xaml_Automation_Text == "on"]
-@C
 public struct TextPatternRangeEndpoint {
     public var value: Int32 = 0
 
@@ -29,7 +28,6 @@ public let TextPatternRangeEndpoint_Start: TextPatternRangeEndpoint = TextPatter
 public let TextPatternRangeEndpoint_End: TextPatternRangeEndpoint = TextPatternRangeEndpoint(1)
 
 @When[Windows_UI_Xaml_Automation_Text == "on"]
-@C
 public struct TextUnit {
     public var value: Int32 = 0
 

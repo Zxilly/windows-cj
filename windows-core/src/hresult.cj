@@ -21,3 +21,6 @@ public import windows_result.{
     E_UNEXPECTED,
     E_ABORT
 }
+
+public let CO_E_NOTINITIALIZED: HRESULT = HRESULT(-2147221008i32)
+public let REGDB_E_CLASSNOTREG: HRESULT = HRESULT(-2147221164i32)

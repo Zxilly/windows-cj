@@ -54,9 +54,10 @@ public func winmdRowGenericEnd(index: TypeIndex, fileIdx: Int64, row: Int64): In
 public func winmdFindBaseInterface(index: TypeIndex, fileIdx: Int64, row: Int64): Option<TypeName> {
     let file = index.getFile(fileIdx)
     let (iiStart, iiEnd) = index.typeDefInterfaceImpls(fileIdx, row)
+    let generics = winmdBuildGenericArray(index, fileIdx, winmdRowGenericStart(index, fileIdx, row), winmdRowGenericEnd(index, fileIdx, row))
     if (iiStart < iiEnd) {
         let ifaceValue = file.getUInt(iiStart, TABLE_INTERFACE_IMPL, 1)
-        match (decodeTypeDefOrRefTypeName(index, fileIdx, ifaceValue)) {
+        match (decodeTypeDefOrRefTypeNameWithGenerics(index, fileIdx, ifaceValue, generics)) {
             case Some(typeName) =>
                 if (trimTick(typeName.name) != "IUnknown") {
                     return Some(typeName.definition())
@@ -89,7 +90,7 @@ public func winmdExtendsIInspectable(index: TypeIndex, fileIdx: Int64, row: Int6
 }
 
 public func winmdFirstInterfaceType(index: TypeIndex, fileIdx: Int64, row: Int64): Option<TypeName> {
-    let direct = winmdDirectInterfaceTypes(index, fileIdx, row)
+    let direct = winmdDirectInterfaceTypesWithGenerics(index, fileIdx, row, winmdTypeGenericArray(index, fileIdx, row))
     if (direct.isEmpty()) {
         return None
     }
@@ -99,7 +100,7 @@ public func winmdFirstInterfaceType(index: TypeIndex, fileIdx: Int64, row: Int64
 public func winmdCollectInterfaceAncestors(index: TypeIndex, fileIdx: Int64, row: Int64): ArrayList<TypeName> {
     let result = ArrayList<TypeName>()
     let seen = HashMap<TypeName, Bool>()
-    for (iface in winmdDirectInterfaceTypes(index, fileIdx, row)) {
+    for (iface in winmdDirectInterfaceTypesWithGenerics(index, fileIdx, row, winmdTypeGenericArray(index, fileIdx, row))) {
         winmdCollectInterfaceAncestorsFromType(index, iface, result, seen)
     }
     return result
@@ -122,19 +123,28 @@ func winmdCollectInterfaceAncestorsFromType(
         return
     }
     let entry = candidates[0]
-    for (baseType in winmdDirectInterfaceTypes(index, entry.fileIdx, entry.row)) {
+    for (baseType in winmdDirectInterfaceTypesWithGenerics(index, entry.fileIdx, entry.row, metadataTypeArray(iface.generics))) {
         winmdCollectInterfaceAncestorsFromType(index, baseType, result, seen)
     }
 }
 
 public func winmdDirectInterfaceTypes(index: TypeIndex, fileIdx: Int64, row: Int64): ArrayList<TypeName> {
+    return winmdDirectInterfaceTypesWithGenerics(index, fileIdx, row, winmdTypeGenericArray(index, fileIdx, row))
+}
+
+func winmdDirectInterfaceTypesWithGenerics(
+    index: TypeIndex,
+    fileIdx: Int64,
+    row: Int64,
+    generics: Array<MetadataType>
+): ArrayList<TypeName> {
     let result = ArrayList<TypeName>()
     let file = index.getFile(fileIdx)
     let (iiStart, iiEnd) = index.typeDefInterfaceImpls(fileIdx, row)
     var ii = iiStart
     while (ii < iiEnd) {
         let ifaceValue = file.getUInt(ii, TABLE_INTERFACE_IMPL, 1)
-        match (decodeTypeDefOrRefTypeName(index, fileIdx, ifaceValue)) {
+        match (decodeTypeDefOrRefTypeNameWithGenerics(index, fileIdx, ifaceValue, generics)) {
             case Some(typeName) =>
                 let leaf = trimTick(typeName.name)
                 if (leaf != "IUnknown" && leaf != "IInspectable") {
@@ -150,15 +160,30 @@ public func winmdDirectInterfaceTypes(index: TypeIndex, fileIdx: Int64, row: Int
 public func winmdDefaultClassInterfaceType(index: TypeIndex, fileIdx: Int64, row: Int64): Option<TypeName> {
     let file = index.getFile(fileIdx)
     let (iiStart, iiEnd) = index.typeDefInterfaceImpls(fileIdx, row)
+    let generics = winmdTypeGenericArray(index, fileIdx, row)
     var ii = iiStart
     while (ii < iiEnd) {
         if (index.hasAttribute(TABLE_INTERFACE_IMPL, fileIdx, ii, "DefaultAttribute")) {
             let ifaceValue = file.getUInt(ii, TABLE_INTERFACE_IMPL, 1)
-            return decodeTypeDefOrRefTypeName(index, fileIdx, ifaceValue)
+            return decodeTypeDefOrRefTypeNameWithGenerics(index, fileIdx, ifaceValue, generics)
         }
         ii += 1
     }
     return None
+}
+
+func winmdTypeGenericArray(index: TypeIndex, fileIdx: Int64, row: Int64): Array<MetadataType> {
+    return winmdBuildGenericArray(index, fileIdx, winmdRowGenericStart(index, fileIdx, row), winmdRowGenericEnd(index, fileIdx, row))
+}
+
+func metadataTypeArray(values: ArrayList<MetadataType>): Array<MetadataType> {
+    let result = Array<MetadataType>(values.size, {_ => MetadataType.Void})
+    var i: Int64 = 0
+    while (i < Int64(values.size)) {
+        result[i] = values[i]
+        i += 1
+    }
+    return result
 }
 
 public func winmdCollectClassBases(index: TypeIndex, fileIdx: Int64, row: Int64): ArrayList<TypeName> {

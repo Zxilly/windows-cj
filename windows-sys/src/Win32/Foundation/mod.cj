@@ -2,7 +2,9 @@
 package windows_sys.Win32.Foundation
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
 import windows_polyfill.{unionReadUInt16, unionReadUInt64, unionWriteUInt16, unionWriteUInt64}
+import windows_polyfill as windows_polyfill
 
 
 @When[Windows_Win32_Foundation == "on"]
@@ -38,46 +40,49 @@ public struct DECIMAL {
 }
 
 @When[Windows_Win32_Foundation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct DECIMAL__Anonymous1_e__Union {
-    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
 
-    public func anonymous(): DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop signscale: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
         }
-    }
-
-    public func signscale(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_signscale(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -92,46 +97,49 @@ public struct DECIMAL__Anonymous1_e__Union__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_Foundation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct DECIMAL__Anonymous2_e__Union {
-    public var _raw: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0)
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0)
 
-    public func anonymous(): DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct>(p)
-            return ptr.read()
+    public mut prop anonymous: DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_anonymous(val: DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
+    public mut prop lo64: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt64(base, 0)
+            }
         }
-    }
-
-    public func lo64(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt64(base, 0)
-        }
-    }
-
-    public mut func set_lo64(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt64(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -146,15 +154,6 @@ public struct DECIMAL__Anonymous2_e__Union__Anonymous_e__Struct {
 }
 
 @When[Windows_Win32_Foundation == "on"]
-@C
-public struct DEVPROPKEY {
-    public var fmtid: GUID = GUID()
-    public var pid: UInt32 = 0
-    public init() {}
-}
-
-@When[Windows_Win32_Foundation == "on"]
-@C
 public struct DUPLICATE_HANDLE_OPTIONS {
     public var value: UInt32 = 0
 
@@ -212,7 +211,6 @@ public struct FLOAT128 {
 }
 
 @When[Windows_Win32_Foundation == "on"]
-@C
 public struct GENERIC_ACCESS_RIGHTS {
     public var value: UInt32 = 0
 
@@ -260,7 +258,6 @@ public let GENERIC_ACCESS_RIGHTS_GENERIC_ALL: GENERIC_ACCESS_RIGHTS = GENERIC_AC
 public type HANDLE = CPointer<Unit>
 
 @When[Windows_Win32_Foundation == "on"]
-@C
 public struct HANDLE_FLAGS {
     public var value: UInt32 = 0
 
@@ -305,16 +302,10 @@ public type HANDLE_PTR = CPointer<Unit>
 public type HGLOBAL = CPointer<Unit>
 
 @When[Windows_Win32_Foundation == "on"]
-public type HINSTANCE = CPointer<Unit>
-
-@When[Windows_Win32_Foundation == "on"]
 public type HLOCAL = CPointer<Unit>
 
 @When[Windows_Win32_Foundation == "on"]
 public type HLSURF = CPointer<Unit>
-
-@When[Windows_Win32_Foundation == "on"]
-public type HMODULE = CPointer<Unit>
 
 @When[Windows_Win32_Foundation == "on"]
 public type HRESULT = Int32
@@ -358,7 +349,6 @@ public type NEARPROC = CFunc<() -> IntNative>
 public type NTSTATUS = Int32
 
 @When[Windows_Win32_Foundation == "on"]
-@C
 public struct NTSTATUS_FACILITY_CODE {
     public var value: UInt32 = 0
 
@@ -557,7 +547,6 @@ public let NTSTATUS_FACILITY_CODE_FACILITY_WIN_ACCEL: NTSTATUS_FACILITY_CODE = N
 public let NTSTATUS_FACILITY_CODE_FACILITY_MAXIMUM_VALUE: NTSTATUS_FACILITY_CODE = NTSTATUS_FACILITY_CODE(240)
 
 @When[Windows_Win32_Foundation == "on"]
-@C
 public struct NTSTATUS_SEVERITY_CODE {
     public var value: UInt32 = 0
 
@@ -588,7 +577,6 @@ public let NTSTATUS_SEVERITY_CODE_STATUS_SEVERITY_WARNING: NTSTATUS_SEVERITY_COD
 public let NTSTATUS_SEVERITY_CODE_STATUS_SEVERITY_ERROR: NTSTATUS_SEVERITY_CODE = NTSTATUS_SEVERITY_CODE(3)
 
 @When[Windows_Win32_Foundation == "on"]
-@C
 public struct OBJECT_ATTRIBUTE_FLAGS {
     public var value: UInt32 = 0
 
@@ -755,7 +743,6 @@ public struct UNICODE_STRING {
 public type VARIANT_BOOL = Int16
 
 @When[Windows_Win32_Foundation == "on"]
-@C
 public struct WAIT_EVENT {
     public var value: UInt32 = 0
 
@@ -792,7 +779,6 @@ public let WAIT_EVENT_WAIT_TIMEOUT: WAIT_EVENT = WAIT_EVENT(258)
 public let WAIT_EVENT_WAIT_FAILED: WAIT_EVENT = WAIT_EVENT(4294967295)
 
 @When[Windows_Win32_Foundation == "on"]
-@C
 public struct WIN32_ERROR {
     public var value: UInt32 = 0
 
@@ -10947,30 +10933,44 @@ public let WIN32_ERROR_ERROR_QUERY_STORAGE_ERROR: WIN32_ERROR = WIN32_ERROR(2151
 @When[Windows_Win32_Foundation == "on"]
 public type WPARAM = UIntNative
 
+@When[Windows_Win32_Foundation == "on"]
+@C
+public struct DEVPROPKEY {
+    public var fmtid: GUID = GUID()
+    public var pid: UInt32 = 0
+    public init() {}
+}
+
+@When[Windows_Win32_Foundation == "on"]
+public type HINSTANCE = CPointer<Unit>
+
+@When[Windows_Win32_Foundation == "on"]
+public type HMODULE = CPointer<Unit>
+
 @When[KERNEL32 == "on"]
 foreign {
     @FastNative
     // pinvoke-hint: SetLastError
     func CloseHandle(hObject: CPointer<Unit>): Int32
     // pinvoke-hint: SetLastError
-    func DuplicateHandle(hSourceProcessHandle: CPointer<Unit>, hSourceHandle: CPointer<Unit>, hTargetProcessHandle: CPointer<Unit>, lpTargetHandle: CPointer<CPointer<Unit>>, dwDesiredAccess: UInt32, bInheritHandle: Int32, dwOptions: DUPLICATE_HANDLE_OPTIONS): Int32
+    func DuplicateHandle(hSourceProcessHandle: CPointer<Unit>, hSourceHandle: CPointer<Unit>, hTargetProcessHandle: CPointer<Unit>, lpTargetHandle: CPointer<CPointer<Unit>>, dwDesiredAccess: UInt32, bInheritHandle: Int32, dwOptions: UInt32): Int32
     // pinvoke-hint: SetLastError
     func FreeLibrary(hLibModule: CPointer<Unit>): Int32
     // pinvoke-hint: SetLastError
     func GetHandleInformation(hObject: CPointer<Unit>, lpdwFlags: CPointer<UInt32>): Int32
     @FastNative
-    func GetLastError(): WIN32_ERROR
+    func GetLastError(): UInt32
     // param-hint: hMem optional
     // pinvoke-hint: SetLastError
-    func GlobalFree(hMem: HGLOBAL): HGLOBAL
+    func GlobalFree(hMem: CPointer<Unit>): CPointer<Unit>
     // param-hint: hMem optional
     // pinvoke-hint: SetLastError
-    func LocalFree(hMem: HLOCAL): HLOCAL
+    func LocalFree(hMem: CPointer<Unit>): CPointer<Unit>
     // pinvoke-hint: SetLastError
-    func SetHandleInformation(hObject: CPointer<Unit>, dwMask: UInt32, dwFlags: HANDLE_FLAGS): Int32
+    func SetHandleInformation(hObject: CPointer<Unit>, dwMask: UInt32, dwFlags: UInt32): Int32
     @FastNative
     // pinvoke-hint: SetLastError
-    func SetLastError(dwErrCode: WIN32_ERROR): Unit
+    func SetLastError(dwErrCode: UInt32): Unit
 }
 
 @When[OLEAUT32 == "on"]
@@ -10998,7 +10998,7 @@ foreign {
 @When[USER32 == "on"]
 foreign {
     // pinvoke-hint: SetLastError
-    func SetLastErrorEx(dwErrCode: WIN32_ERROR, dwType: UInt32): Unit
+    func SetLastErrorEx(dwErrCode: UInt32, dwType: UInt32): Unit
 }
 
 @When[API_MS_WIN_CORE_HANDLE_L1_1_0 == "on"]
@@ -11016,9 +11016,9 @@ public let TRUE: Int32 = 1i32
 @When[Windows_Win32_Foundation == "on"]
 public let FALSE: Int32 = 0i32
 @When[Windows_Win32_Foundation == "on"]
-public let VARIANT_TRUE: VARIANT_BOOL = -1i16
+public let VARIANT_TRUE: Int16 = -1i16
 @When[Windows_Win32_Foundation == "on"]
-public let VARIANT_FALSE: VARIANT_BOOL = 0i16
+public let VARIANT_FALSE: Int16 = 0i16
 @When[Windows_Win32_Foundation == "on"]
 public let INVALID_HANDLE_VALUE: CPointer<Unit> = unsafe { CPointer<Unit>(CPointer<UInt8>() + -1) }
 @When[Windows_Win32_Foundation == "on"]

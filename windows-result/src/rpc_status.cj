@@ -4,8 +4,11 @@ import std.convert.*
 
 // RPC_STATUS — status code returned by Remote Procedure Call functions.
 // Zero indicates success; non-zero values are Win32-compatible error codes.
-public struct RPC_STATUS <: ToString & Equatable<RPC_STATUS> & Hashable & Comparable<RPC_STATUS> {
-    public let value: Int32
+@C
+public struct RPC_STATUS {
+    public var value: Int32 = 0
+
+    public init() {}
 
     public init(value: Int32) {
         this.value = value

@@ -2,191 +2,246 @@
 package windows_sys.Win32.Devices.DeviceAndDriverInstallation
 
 import windows_interface.{GUID}
-import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedWriteInt64, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, unionReadUInt16, unionWriteUInt16}
+import windows_interface as windows_interface
+import windows_polyfill.{packedReadInt64, packedReadUInt32, packedReadUInt64, packedReadUInt8, packedReadValue, packedWriteInt64, packedWriteUInt32, packedWriteUInt64, packedWriteUInt8, packedWriteValue, unionReadUInt16, unionWriteUInt16}
+import windows_polyfill as windows_polyfill
+@When[Windows_Win32_Data_HtmlHelp == "on"]
 import windows_sys.Win32.Data.HtmlHelp as Win32_Data_HtmlHelp
+@When[Windows_Win32_Devices_Properties == "on"]
 import windows_sys.Win32.Devices.Properties as Win32_Devices_Properties
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
+@When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Win32_Graphics_Gdi
+@When[Windows_Win32_System_Registry == "on"]
 import windows_sys.Win32.System.Registry as Win32_System_Registry
+@When[Windows_Win32_System_SystemInformation == "on"]
 import windows_sys.Win32.System.SystemInformation as Win32_System_SystemInformation
-import windows_sys.Win32.impl as Win32_impl
+import windows_sys.Win32._impl_l0 as Win32__impl_l0
+import windows_sys.Win32._impl_l1 as Win32__impl_l1
 
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct BUSNUMBER_DES {
     public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
 
-    public func busd_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop busd_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_busd_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop busd_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func busd_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop busd_Flags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_busd_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop busd_Alloc_Base: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func busd_Flags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop busd_Alloc_End: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 16)
+            }
         }
-    }
-
-    public mut func set_busd_Flags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func busd_Alloc_Base(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_busd_Alloc_Base(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func busd_Alloc_End(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 16)
-        }
-    }
-
-    public mut func set_busd_Alloc_End(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 16, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct BUSNUMBER_RANGE {
     public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
 
-    public func busr_Min(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop busr_Min: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_busr_Min(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop busr_Max: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func busr_Max(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop busr_nBusNumbers: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_busr_Max(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop busr_Flags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
         }
-    }
-
-    public func busr_nBusNumbers(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
-        }
-    }
-
-    public mut func set_busr_nBusNumbers(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func busr_Flags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_busr_Flags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct BUSNUMBER_RESOURCE {
     public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
 
-    // packed field `BusNumber_Header`: type `BUSNUMBER_DES` not supported by polyfill; skipped
+    public mut prop busNumber_Header: BUSNUMBER_DES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: BUSNUMBER_DES = BUSNUMBER_DES()
+                return packedReadValue<BUSNUMBER_DES>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `BusNumber_Data`: type `VArray<BUSNUMBER_RANGE, $1>` not supported by polyfill; skipped
+    public mut prop busNumber_Data: VArray<BUSNUMBER_RANGE, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<BUSNUMBER_RANGE, $1> = VArray<BUSNUMBER_RANGE, $1>(repeat: BUSNUMBER_RANGE())
+                return packedReadValue<VArray<BUSNUMBER_RANGE, $1>>(base, 20, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 20, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
@@ -213,7 +268,6 @@ public struct CABINET_INFO_W {
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_CDFLAGS {
     public var value: UInt32 = 0
 
@@ -255,7 +309,6 @@ public let CM_CDFLAGS_CM_CDFLAGS_ROOT_OWNED: CM_CDFLAGS = CM_CDFLAGS(2)
 public let CM_CDFLAGS_CM_CDFLAGS_RESERVED: CM_CDFLAGS = CM_CDFLAGS(4)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_CDMASK {
     public var value: UInt32 = 0
 
@@ -303,7 +356,6 @@ public let CM_CDMASK_CM_CDMASK_DESCRIPTION: CM_CDMASK = CM_CDMASK(8)
 public let CM_CDMASK_CM_CDMASK_VALID: CM_CDMASK = CM_CDMASK(15)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_DEVCAP {
     public var value: UInt32 = 0
 
@@ -369,7 +421,6 @@ public let CM_DEVCAP_CM_DEVCAP_NONDYNAMIC: CM_DEVCAP = CM_DEVCAP(512)
 public let CM_DEVCAP_CM_DEVCAP_SECUREDEVICE: CM_DEVCAP = CM_DEVCAP(1024)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_DEVNODE_STATUS_FLAGS {
     public var value: UInt32 = 0
 
@@ -522,7 +573,6 @@ public let CM_DEVNODE_STATUS_FLAGS_DN_QUERY_REMOVE_PENDING: CM_DEVNODE_STATUS_FL
 public let CM_DEVNODE_STATUS_FLAGS_DN_QUERY_REMOVE_ACTIVE: CM_DEVNODE_STATUS_FLAGS = CM_DEVNODE_STATUS_FLAGS(131072)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_ENUMERATE_FLAGS {
     public var value: UInt32 = 0
 
@@ -564,7 +614,6 @@ public let CM_ENUMERATE_FLAGS_CM_ENUMERATE_CLASSES_INTERFACE: CM_ENUMERATE_FLAGS
 public let CM_ENUMERATE_FLAGS_CM_ENUMERATE_CLASSES_BITS: CM_ENUMERATE_FLAGS = CM_ENUMERATE_FLAGS(1)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_GET_DEVICE_INTERFACE_LIST_FLAGS {
     public var value: UInt32 = 0
 
@@ -592,7 +641,6 @@ public let CM_GET_DEVICE_INTERFACE_LIST_FLAGS_CM_GET_DEVICE_INTERFACE_LIST_ALL_D
 public let CM_GET_DEVICE_INTERFACE_LIST_FLAGS_CM_GET_DEVICE_INTERFACE_LIST_BITS: CM_GET_DEVICE_INTERFACE_LIST_FLAGS = CM_GET_DEVICE_INTERFACE_LIST_FLAGS(1)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_INSTALL_STATE {
     public var value: UInt32 = 0
 
@@ -623,7 +671,6 @@ public let CM_INSTALL_STATE_CM_INSTALL_STATE_FAILED_INSTALL: CM_INSTALL_STATE = 
 public let CM_INSTALL_STATE_CM_INSTALL_STATE_FINISH_INSTALL: CM_INSTALL_STATE = CM_INSTALL_STATE(3)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_LOCATE_DEVNODE_FLAGS {
     public var value: UInt32 = 0
 
@@ -657,7 +704,6 @@ public let CM_LOCATE_DEVNODE_FLAGS_CM_LOCATE_DEVNODE_NOVALIDATION: CM_LOCATE_DEV
 public let CM_LOCATE_DEVNODE_FLAGS_CM_LOCATE_DEVNODE_BITS: CM_LOCATE_DEVNODE_FLAGS = CM_LOCATE_DEVNODE_FLAGS(7)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_LOG_CONF {
     public var value: UInt32 = 0
 
@@ -697,7 +743,6 @@ public let CM_LOG_CONF_OVERRIDE_LOG_CONF: CM_LOG_CONF = CM_LOG_CONF(5)
 public let CM_LOG_CONF_NUM_LOG_CONF: CM_LOG_CONF = CM_LOG_CONF(6)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_NOTIFY_ACTION {
     public var value: Int32 = 0
 
@@ -749,215 +794,6 @@ public let CM_NOTIFY_ACTION_CM_NOTIFY_ACTION_DEVICEINSTANCEREMOVED: CM_NOTIFY_AC
 public let CM_NOTIFY_ACTION_CM_NOTIFY_ACTION_MAX: CM_NOTIFY_ACTION = CM_NOTIFY_ACTION(10)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct CM_NOTIFY_EVENT_DATA {
-    public var FilterType: CM_NOTIFY_FILTER_TYPE = CM_NOTIFY_FILTER_TYPE()
-    public var Reserved: UInt32 = 0
-    public var u: CM_NOTIFY_EVENT_DATA__u_e__Union = CM_NOTIFY_EVENT_DATA__u_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CM_NOTIFY_EVENT_DATA__u_e__Union {
-    public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0)
-
-    public func deviceInterface(): CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInterface_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInterface_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deviceInterface(val: CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInterface_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInterface_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deviceHandle(): CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceHandle_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceHandle_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deviceHandle(val: CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceHandle_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceHandle_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deviceInstance(): CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInstance_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInstance_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deviceInstance(val: CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInstance_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInstance_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInterface_e__Struct {
-    public var ClassGuid: GUID = GUID()
-    public var SymbolicLink: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceHandle_e__Struct {
-    public var EventGuid: GUID = GUID()
-    public var NameOffset: Int32 = 0
-    public var DataSize: UInt32 = 0
-    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInstance_e__Struct {
-    public var InstanceId: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct CM_NOTIFY_FILTER {
-    public var cbSize: UInt32 = 0
-    public var Flags: UInt32 = 0
-    public var FilterType: CM_NOTIFY_FILTER_TYPE = CM_NOTIFY_FILTER_TYPE()
-    public var Reserved: UInt32 = 0
-    public var u: CM_NOTIFY_FILTER__u_e__Union = CM_NOTIFY_FILTER__u_e__Union()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
-@C
-public struct CM_NOTIFY_FILTER__u_e__Union {
-    public var _raw: VArray<UInt8, $400> = VArray<UInt8, $400>(repeat: 0)
-
-    public func deviceInterface(): CM_NOTIFY_FILTER__u_e__Union__DeviceInterface_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceInterface_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deviceInterface(val: CM_NOTIFY_FILTER__u_e__Union__DeviceInterface_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceInterface_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deviceHandle(): CM_NOTIFY_FILTER__u_e__Union__DeviceHandle_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceHandle_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deviceHandle(val: CM_NOTIFY_FILTER__u_e__Union__DeviceHandle_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceHandle_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-
-    public func deviceInstance(): CM_NOTIFY_FILTER__u_e__Union__DeviceInstance_e__Struct {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceInstance_e__Struct>(p)
-            return ptr.read()
-        }
-    }
-
-    public mut func set_deviceInstance(val: CM_NOTIFY_FILTER__u_e__Union__DeviceInstance_e__Struct): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            let p = base
-            let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceInstance_e__Struct>(p)
-            ptr.write(val)
-            _raw = rawStorage
-        }
-    }
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct CM_NOTIFY_FILTER__u_e__Union__DeviceInterface_e__Struct {
-    public var ClassGuid: GUID = GUID()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct CM_NOTIFY_FILTER__u_e__Union__DeviceHandle_e__Struct {
-    public var hTarget: CPointer<Unit> = CPointer<Unit>()
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct CM_NOTIFY_FILTER__u_e__Union__DeviceInstance_e__Struct {
-    public var InstanceId: VArray<UInt16, $200> = VArray<UInt16, $200>(repeat: 0)
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_NOTIFY_FILTER_TYPE {
     public var value: Int32 = 0
 
@@ -988,7 +824,6 @@ public let CM_NOTIFY_FILTER_TYPE_CM_NOTIFY_FILTER_TYPE_DEVICEINSTANCE: CM_NOTIFY
 public let CM_NOTIFY_FILTER_TYPE_CM_NOTIFY_FILTER_TYPE_MAX: CM_NOTIFY_FILTER_TYPE = CM_NOTIFY_FILTER_TYPE(3)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_PROB {
     public var value: UInt32 = 0
 
@@ -1178,7 +1013,6 @@ public let CM_PROB_CM_PROB_NEED_CLASS_CONFIG: CM_PROB = CM_PROB(56)
 public let CM_PROB_CM_PROB_GUEST_ASSIGNMENT_FAILED: CM_PROB = CM_PROB(57)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_REENUMERATE_FLAGS {
     public var value: UInt32 = 0
 
@@ -1226,7 +1060,6 @@ public let CM_REENUMERATE_FLAGS_CM_REENUMERATE_ASYNCHRONOUS: CM_REENUMERATE_FLAG
 public let CM_REENUMERATE_FLAGS_CM_REENUMERATE_BITS: CM_REENUMERATE_FLAGS = CM_REENUMERATE_FLAGS(7)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_REMOVAL_POLICY {
     public var value: UInt32 = 0
 
@@ -1254,7 +1087,6 @@ public let CM_REMOVAL_POLICY_CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL: CM_REMOVA
 public let CM_REMOVAL_POLICY_CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL: CM_REMOVAL_POLICY = CM_REMOVAL_POLICY(3)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CM_RESTYPE {
     public var value: UInt32 = 0
 
@@ -1333,7 +1165,6 @@ public struct COINSTALLER_CONTEXT_DATA {
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct CONFIGRET {
     public var value: UInt32 = 0
 
@@ -1550,11 +1381,11 @@ public let CONFIGRET_NUM_CR_RESULTS: CONFIGRET = CONFIGRET(60)
 @C
 public struct CONFLICT_DETAILS_A {
     public var CD_ulSize: UInt32 = 0
-    public var CD_ulMask: CM_CDMASK = CM_CDMASK()
+    public var CD_ulMask: UInt32 = 0
     public var CD_dnDevInst: UInt32 = 0
     public var CD_rdResDes: UIntNative = 0
-    public var CD_ulFlags: CM_CDFLAGS = CM_CDFLAGS()
-    public var CD_szDescription: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var CD_ulFlags: UInt32 = 0
+    public var CD_szDescription: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public init() {}
 }
 
@@ -1562,239 +1393,321 @@ public struct CONFLICT_DETAILS_A {
 @C
 public struct CONFLICT_DETAILS_W {
     public var CD_ulSize: UInt32 = 0
-    public var CD_ulMask: CM_CDMASK = CM_CDMASK()
+    public var CD_ulMask: UInt32 = 0
     public var CD_dnDevInst: UInt32 = 0
     public var CD_rdResDes: UIntNative = 0
-    public var CD_ulFlags: CM_CDFLAGS = CM_CDFLAGS()
+    public var CD_ulFlags: UInt32 = 0
     public var CD_szDescription: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0)
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct CONNECTION_DES {
     public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
 
-    public func cond_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop cond_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_cond_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop cond_Flags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func cond_Flags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop cond_Class: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_cond_Flags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop cond_ClassType: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 9)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 9, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func cond_Class(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 8)
+    public mut prop cond_Reserved1: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 10)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 10, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_cond_Class(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 8, val)
-            _raw = rawStorage
+    public mut prop cond_Reserved2: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 11)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 11, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func cond_ClassType(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 9)
+    public mut prop cond_Id: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadInt64(base, 12)
+            }
         }
-    }
-
-    public mut func set_cond_ClassType(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 9, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cond_Reserved1(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 10)
-        }
-    }
-
-    public mut func set_cond_Reserved1(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 10, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cond_Reserved2(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 11)
-        }
-    }
-
-    public mut func set_cond_Reserved2(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 11, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func cond_Id(): Int64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadInt64(base, 12)
-        }
-    }
-
-    public mut func set_cond_Id(val: Int64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteInt64(base, 12, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteInt64(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct CONNECTION_RESOURCE {
     public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
 
-    // packed field `Connection_Header`: type `CONNECTION_DES` not supported by polyfill; skipped
+    public mut prop connection_Header: CONNECTION_DES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CONNECTION_DES = CONNECTION_DES()
+                return packedReadValue<CONNECTION_DES>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct CS_DES {
-    public var _raw: VArray<UInt8, $17> = VArray<UInt8, $17>(repeat: 0u8)
+    public var _raw: VArray<UInt8, $33> = VArray<UInt8, $33>(repeat: 0u8)
 
-    public func csd_SignatureLength(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop csd_SignatureLength: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_csd_SignatureLength(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop csd_LegacyDataOffset: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func csd_LegacyDataOffset(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop csd_LegacyDataSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_csd_LegacyDataOffset(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop csd_Flags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func csd_LegacyDataSize(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop csd_ClassGuid: GUID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: GUID = GUID()
+                return packedReadValue<GUID>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_csd_LegacyDataSize(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+    public mut prop csd_Signature: VArray<UInt8, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $1>>(base, 32, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
         }
     }
-
-    public func csd_Flags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_csd_Flags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `CSD_ClassGuid`: layout unknown; skipped
-
-    // packed field `CSD_Signature`: type `VArray<UInt8, $1>` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct CS_RESOURCE {
-    public var _raw: VArray<UInt8, $17> = VArray<UInt8, $17>(repeat: 0u8)
+    public var _raw: VArray<UInt8, $33> = VArray<UInt8, $33>(repeat: 0u8)
 
-    // packed field `CS_Header`: type `CS_DES` not supported by polyfill; skipped
+    public mut prop cs_Header: CS_DES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: CS_DES = CS_DES()
+                return packedReadValue<CS_DES>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct DD_FLAGS {
     public var value: UInt32 = 0
 
@@ -1866,185 +1779,230 @@ public let DD_FLAGS_fDD_TypeB: DD_FLAGS = DD_FLAGS(16)
 public let DD_FLAGS_fDD_TypeF: DD_FLAGS = DD_FLAGS(24)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct DEVPRIVATE_DES {
     public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
 
-    public func pd_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop pd_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pd_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop pd_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func pd_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop pd_Data1: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pd_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop pd_Data2: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func pd_Data1(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop pd_Data3: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pd_Data1(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+    public mut prop pd_Flags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 20)
+            }
         }
-    }
-
-    public func pd_Data2(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_pd_Data2(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pd_Data3(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 16)
-        }
-    }
-
-    public mut func set_pd_Data3(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 16, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pd_Flags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 20)
-        }
-    }
-
-    public mut func set_pd_Flags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 20, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct DEVPRIVATE_RANGE {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public func pr_Data1(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop pr_Data1: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pr_Data1(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop pr_Data2: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func pr_Data2(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop pr_Data3: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
         }
-    }
-
-    public mut func set_pr_Data2(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pr_Data3(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
-        }
-    }
-
-    public mut func set_pr_Data3(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct DEVPRIVATE_RESOURCE {
     public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
 
-    // packed field `PRV_Header`: type `DEVPRIVATE_DES` not supported by polyfill; skipped
+    public mut prop prv_Header: DEVPRIVATE_DES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DEVPRIVATE_DES = DEVPRIVATE_DES()
+                return packedReadValue<DEVPRIVATE_DES>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `PRV_Data`: type `VArray<DEVPRIVATE_RANGE, $1>` not supported by polyfill; skipped
+    public mut prop prv_Data: VArray<DEVPRIVATE_RANGE, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<DEVPRIVATE_RANGE, $1> = VArray<DEVPRIVATE_RANGE, $1>(repeat: DEVPRIVATE_RANGE())
+                return packedReadValue<VArray<DEVPRIVATE_RANGE, $1>>(base, 24, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 24, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct DIINSTALLDEVICE_FLAGS {
     public var value: UInt32 = 0
 
@@ -2092,7 +2050,6 @@ public let DIINSTALLDEVICE_FLAGS_DIIDFLAG_INSTALLCOPYINFDRIVERS: DIINSTALLDEVICE
 public let DIINSTALLDEVICE_FLAGS_DIIDFLAG_BITS: DIINSTALLDEVICE_FLAGS = DIINSTALLDEVICE_FLAGS(15)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct DIINSTALLDRIVER_FLAGS {
     public var value: UInt32 = 0
 
@@ -2152,7 +2109,6 @@ public let DIINSTALLDRIVER_FLAGS_DIIRFLAG_PRE_CONFIGURE_INF: DIINSTALLDRIVER_FLA
 public let DIINSTALLDRIVER_FLAGS_DIIRFLAG_INSTALL_AS_SET: DIINSTALLDRIVER_FLAGS = DIINSTALLDRIVER_FLAGS(64)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct DIROLLBACKDRIVER_FLAGS {
     public var value: UInt32 = 0
 
@@ -2191,7 +2147,6 @@ public let DIROLLBACKDRIVER_FLAGS_ROLLBACK_FLAG_NO_UI: DIROLLBACKDRIVER_FLAGS = 
 public let DIROLLBACKDRIVER_FLAGS_ROLLBACK_BITS: DIROLLBACKDRIVER_FLAGS = DIROLLBACKDRIVER_FLAGS(1)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct DIUNINSTALLDRIVER_FLAGS {
     public var value: UInt32 = 0
 
@@ -2233,7 +2188,6 @@ public let DIUNINSTALLDRIVER_FLAGS_DIURFLAG_NO_REMOVE_INF: DIUNINSTALLDRIVER_FLA
 public let DIUNINSTALLDRIVER_FLAGS_DIURFLAG_RESERVED: DIUNINSTALLDRIVER_FLAGS = DIUNINSTALLDRIVER_FLAGS(2)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct DI_FUNCTION {
     public var value: UInt32 = 0
 
@@ -2381,116 +2335,190 @@ public let DI_FUNCTION_DIF_RESERVED2: DI_FUNCTION = DI_FUNCTION(48)
 public let DI_FUNCTION_DIF_MOVEDEVICE: DI_FUNCTION = DI_FUNCTION(14)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct DMA_DES {
     public var _raw: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
 
-    public func dd_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dd_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dd_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop dd_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dd_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop dd_Flags: DD_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return DD_FLAGS(packedReadUInt32(base, 8))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val.value)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dd_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop dd_Alloc_Chan: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
         }
-    }
-
-    // packed field `DD_Flags`: type `DD_FLAGS` not supported by polyfill; skipped
-
-    public func dd_Alloc_Chan(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
-        }
-    }
-
-    public mut func set_dd_Alloc_Chan(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct DMA_RANGE {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public func dr_Min(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop dr_Min: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_dr_Min(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop dr_Max: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func dr_Max(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop dr_Flags: DD_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return DD_FLAGS(packedReadUInt32(base, 8))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val.value)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_dr_Max(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `DR_Flags`: type `DD_FLAGS` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct DMA_RESOURCE {
     public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
 
-    // packed field `DMA_Header`: type `DMA_DES` not supported by polyfill; skipped
+    public mut prop dma_Header: DMA_DES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: DMA_DES = DMA_DES()
+                return packedReadValue<DMA_DES>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `DMA_Data`: type `VArray<DMA_RANGE, $1>` not supported by polyfill; skipped
+    public mut prop dma_Data: VArray<DMA_RANGE, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<DMA_RANGE, $1> = VArray<DMA_RANGE, $1>(repeat: DMA_RANGE())
+                return packedReadValue<VArray<DMA_RANGE, $1>>(base, 16, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
@@ -2541,7 +2569,6 @@ public struct FILEPATHS_W {
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct FILE_COMPRESSION_TYPE {
     public var value: UInt32 = 0
 
@@ -2594,7 +2621,7 @@ public struct FILE_IN_CABINET_INFO_A {
     public var DosDate: UInt16 = 0
     public var DosTime: UInt16 = 0
     public var DosAttribs: UInt16 = 0
-    public var FullTargetName: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var FullTargetName: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public init() {}
 }
 
@@ -2618,86 +2645,126 @@ public type HCMNOTIFICATION = CPointer<Unit>
 public type HDEVINFO = CPointer<Unit>
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct HWPROFILEINFO_A {
     public var _raw: VArray<UInt8, $88> = VArray<UInt8, $88>(repeat: 0u8)
 
-    public func hwpi_ulHWProfile(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop hwpi_ulHWProfile: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_hwpi_ulHWProfile(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop hwpi_szFriendlyName: VArray<Int8, $80> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<Int8, $80> = VArray<Int8, $80>(repeat: 0)
+                return packedReadValue<VArray<Int8, $80>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `HWPI_szFriendlyName`: type `VArray<Win32_Foundation.CHAR, $80>` not supported by polyfill; skipped
-
-    public func hwpi_dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 84)
+    public mut prop hwpi_dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 84)
+            }
         }
-    }
-
-    public mut func set_hwpi_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 84, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 84, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct HWPROFILEINFO_W {
     public var _raw: VArray<UInt8, $168> = VArray<UInt8, $168>(repeat: 0u8)
 
-    public func hwpi_ulHWProfile(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop hwpi_ulHWProfile: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_hwpi_ulHWProfile(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop hwpi_szFriendlyName: VArray<UInt16, $80> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $80> = VArray<UInt16, $80>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $80>>(base, 4, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `HWPI_szFriendlyName`: type `VArray<UInt16, $80>` not supported by polyfill; skipped
-
-    public func hwpi_dwFlags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 164)
+    public mut prop hwpi_dwFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 164)
+            }
         }
-    }
-
-    public mut func set_hwpi_dwFlags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 164, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 164, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -2714,7 +2781,6 @@ public struct INFCONTEXT {
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct INF_STYLE {
     public var value: UInt32 = 0
 
@@ -2765,7 +2831,6 @@ public let INF_STYLE_INF_STYLE_CACHE_DISABLE: INF_STYLE = INF_STYLE(32)
 public let INF_STYLE_INF_STYLE_CACHE_IGNORE: INF_STYLE = INF_STYLE(64)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct IOD_DESFLAGS {
     public var value: UInt32 = 0
 
@@ -2831,171 +2896,214 @@ public let IOD_DESFLAGS_fIOD_WINDOW_DECODE: IOD_DESFLAGS = IOD_DESFLAGS(128)
 public let IOD_DESFLAGS_fIOD_PORT_BAR: IOD_DESFLAGS = IOD_DESFLAGS(256)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct IO_DES {
     public var _raw: VArray<UInt8, $28> = VArray<UInt8, $28>(repeat: 0u8)
 
-    public func iod_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop iod_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_iod_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop iod_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func iod_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop iod_Alloc_Base: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_iod_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop iod_Alloc_End: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func iod_Alloc_Base(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 8)
+    public mut prop iod_DesFlags: IOD_DESFLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return IOD_DESFLAGS(packedReadUInt32(base, 24))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 24, val.value)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_iod_Alloc_Base(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 8, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func iod_Alloc_End(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 16)
-        }
-    }
-
-    public mut func set_iod_Alloc_End(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 16, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `IOD_DesFlags`: type `IOD_DESFLAGS` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct IO_RANGE {
     public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
 
-    public func ior_Align(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 0)
+    public mut prop ior_Align: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ior_Align(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop ior_nPorts: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func ior_nPorts(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop ior_Min: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ior_nPorts(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+    public mut prop ior_Max: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 20)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func ior_Min(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 12)
+    public mut prop ior_RangeFlags: IOD_DESFLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return IOD_DESFLAGS(packedReadUInt32(base, 28))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 28, val.value)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_ior_Min(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 12, val)
-            _raw = rawStorage
+    public mut prop ior_Alias: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 32)
+            }
         }
-    }
-
-    public func ior_Max(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 20)
-        }
-    }
-
-    public mut func set_ior_Max(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 20, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `IOR_RangeFlags`: type `IOD_DESFLAGS` not supported by polyfill; skipped
-
-    public func ior_Alias(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 32)
-        }
-    }
-
-    public mut func set_ior_Alias(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 32, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 32, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -3010,7 +3118,6 @@ public struct IO_RESOURCE {
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct IRQD_FLAGS {
     public var value: UInt32 = 0
 
@@ -3067,226 +3174,356 @@ public let IRQD_FLAGS_fIRQD_Level: IRQD_FLAGS = IRQD_FLAGS(0)
 public let IRQD_FLAGS_fIRQD_Edge: IRQD_FLAGS = IRQD_FLAGS(2)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct IRQ_DES_32 {
     public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
 
-    public func irqd_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop irqd_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_irqd_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop irqd_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func irqd_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop irqd_Flags: IRQD_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return IRQD_FLAGS(packedReadUInt32(base, 8))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val.value)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_irqd_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop irqd_Alloc_Num: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `IRQD_Flags`: type `IRQD_FLAGS` not supported by polyfill; skipped
-
-    public func irqd_Alloc_Num(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
+    public mut prop irqd_Affinity: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 16)
+            }
         }
-    }
-
-    public mut func set_irqd_Alloc_Num(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func irqd_Affinity(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 16)
-        }
-    }
-
-    public mut func set_irqd_Affinity(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 16, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct IRQ_DES_64 {
     public var _raw: VArray<UInt8, $24> = VArray<UInt8, $24>(repeat: 0u8)
 
-    public func irqd_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop irqd_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_irqd_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop irqd_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func irqd_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop irqd_Flags: IRQD_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return IRQD_FLAGS(packedReadUInt32(base, 8))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val.value)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_irqd_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop irqd_Alloc_Num: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    // packed field `IRQD_Flags`: type `IRQD_FLAGS` not supported by polyfill; skipped
-
-    public func irqd_Alloc_Num(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 12)
+    public mut prop irqd_Affinity: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 16)
+            }
         }
-    }
-
-    public mut func set_irqd_Alloc_Num(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func irqd_Affinity(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 16)
-        }
-    }
-
-    public mut func set_irqd_Affinity(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 16, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct IRQ_RANGE {
     public var _raw: VArray<UInt8, $12> = VArray<UInt8, $12>(repeat: 0u8)
 
-    public func irqr_Min(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop irqr_Min: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_irqr_Min(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop irqr_Max: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func irqr_Max(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop irqr_Flags: IRQD_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return IRQD_FLAGS(packedReadUInt32(base, 8))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val.value)
+                _raw = rawStorage
+            }
         }
     }
-
-    public mut func set_irqr_Max(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `IRQR_Flags`: type `IRQD_FLAGS` not supported by polyfill; skipped
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct IRQ_RESOURCE_32 {
     public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
 
-    // packed field `IRQ_Header`: type `IRQ_DES_32` not supported by polyfill; skipped
+    public mut prop irq_Header: IRQ_DES_32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: IRQ_DES_32 = IRQ_DES_32()
+                return packedReadValue<IRQ_DES_32>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `IRQ_Data`: type `VArray<IRQ_RANGE, $1>` not supported by polyfill; skipped
+    public mut prop irq_Data: VArray<IRQ_RANGE, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<IRQ_RANGE, $1> = VArray<IRQ_RANGE, $1>(repeat: IRQ_RANGE())
+                return packedReadValue<VArray<IRQ_RANGE, $1>>(base, 20, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 20, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct IRQ_RESOURCE_64 {
     public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
 
-    // packed field `IRQ_Header`: type `IRQ_DES_64` not supported by polyfill; skipped
+    public mut prop irq_Header: IRQ_DES_64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: IRQ_DES_64 = IRQ_DES_64()
+                return packedReadValue<IRQ_DES_64>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `IRQ_Data`: type `VArray<IRQ_RANGE, $1>` not supported by polyfill; skipped
+    public mut prop irq_Data: VArray<IRQ_RANGE, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<IRQ_RANGE, $1> = VArray<IRQ_RANGE, $1>(repeat: IRQ_RANGE())
+                return packedReadValue<VArray<IRQ_RANGE, $1>>(base, 24, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 24, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct MD_FLAGS {
     public var value: UInt32 = 0
 
@@ -3397,540 +3634,562 @@ public let MD_FLAGS_fMD_WINDOW_DECODE: MD_FLAGS = MD_FLAGS(64)
 public let MD_FLAGS_fMD_MEMORY_BAR: MD_FLAGS = MD_FLAGS(128)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct MEM_DES {
     public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
 
-    public func md_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop md_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_md_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop md_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func md_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop md_Alloc_Base: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_md_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop md_Alloc_End: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func md_Alloc_Base(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 8)
+    public mut prop md_Flags: MD_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return MD_FLAGS(packedReadUInt32(base, 24))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 24, val.value)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_md_Alloc_Base(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 8, val)
-            _raw = rawStorage
+    public mut prop md_Reserved: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 28)
+            }
         }
-    }
-
-    public func md_Alloc_End(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 16)
-        }
-    }
-
-    public mut func set_md_Alloc_End(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 16, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `MD_Flags`: type `MD_FLAGS` not supported by polyfill; skipped
-
-    public func md_Reserved(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 28)
-        }
-    }
-
-    public mut func set_md_Reserved(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 28, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 28, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct MEM_LARGE_DES {
     public var _raw: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
 
-    public func mld_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop mld_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mld_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop mld_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mld_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
+    public mut prop mld_Alloc_Base: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mld_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
+    public mut prop mld_Alloc_End: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mld_Alloc_Base(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 8)
+    public mut prop mld_Flags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 24)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 24, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mld_Alloc_Base(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 8, val)
-            _raw = rawStorage
+    public mut prop mld_Reserved: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 28)
+            }
         }
-    }
-
-    public func mld_Alloc_End(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 16)
-        }
-    }
-
-    public mut func set_mld_Alloc_End(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 16, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mld_Flags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 24)
-        }
-    }
-
-    public mut func set_mld_Flags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 24, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mld_Reserved(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 28)
-        }
-    }
-
-    public mut func set_mld_Reserved(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 28, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 28, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct MEM_LARGE_RANGE {
     public var _raw: VArray<UInt8, $40> = VArray<UInt8, $40>(repeat: 0u8)
 
-    public func mlr_Align(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 0)
+    public mut prop mlr_Align: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mlr_Align(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop mlr_nBytes: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mlr_nBytes(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 8)
+    public mut prop mlr_Min: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 16, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mlr_nBytes(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 8, val)
-            _raw = rawStorage
+    public mut prop mlr_Max: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 24)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 24, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mlr_Min(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 16)
+    public mut prop mlr_Flags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 32)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 32, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mlr_Min(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 16, val)
-            _raw = rawStorage
+    public mut prop mlr_Reserved: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 36)
+            }
         }
-    }
-
-    public func mlr_Max(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 24)
-        }
-    }
-
-    public mut func set_mlr_Max(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 24, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mlr_Flags(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 32)
-        }
-    }
-
-    public mut func set_mlr_Flags(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 32, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func mlr_Reserved(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 36)
-        }
-    }
-
-    public mut func set_mlr_Reserved(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 36, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 36, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct MEM_LARGE_RESOURCE {
     public var _raw: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0u8)
 
-    // packed field `MEM_LARGE_Header`: type `MEM_LARGE_DES` not supported by polyfill; skipped
+    public mut prop mem_LARGE_Header: MEM_LARGE_DES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: MEM_LARGE_DES = MEM_LARGE_DES()
+                return packedReadValue<MEM_LARGE_DES>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
 
-    // packed field `MEM_LARGE_Data`: type `VArray<MEM_LARGE_RANGE, $1>` not supported by polyfill; skipped
+    public mut prop mem_LARGE_Data: VArray<MEM_LARGE_RANGE, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<MEM_LARGE_RANGE, $1> = VArray<MEM_LARGE_RANGE, $1>(repeat: MEM_LARGE_RANGE())
+                return packedReadValue<VArray<MEM_LARGE_RANGE, $1>>(base, 32, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
+        }
+    }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct MEM_RANGE {
     public var _raw: VArray<UInt8, $36> = VArray<UInt8, $36>(repeat: 0u8)
 
-    public func mr_Align(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 0)
+    public mut prop mr_Align: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mr_Align(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 0, val)
-            _raw = rawStorage
+    public mut prop mr_nBytes: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 8)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mr_nBytes(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 8)
+    public mut prop mr_Min: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 12, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mr_nBytes(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 8, val)
-            _raw = rawStorage
+    public mut prop mr_Max: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt64(base, 20)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt64(base, 20, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public func mr_Min(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 12)
+    public mut prop mr_Flags: MD_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return MD_FLAGS(packedReadUInt32(base, 28))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 28, val.value)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_mr_Min(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 12, val)
-            _raw = rawStorage
+    public mut prop mr_Reserved: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 32)
+            }
         }
-    }
-
-    public func mr_Max(): UInt64 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt64(base, 20)
-        }
-    }
-
-    public mut func set_mr_Max(val: UInt64): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt64(base, 20, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `MR_Flags`: type `MD_FLAGS` not supported by polyfill; skipped
-
-    public func mr_Reserved(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 32)
-        }
-    }
-
-    public mut func set_mr_Reserved(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 32, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 32, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
 @C
 public struct MEM_RESOURCE {
     public var _raw: VArray<UInt8, $68> = VArray<UInt8, $68>(repeat: 0u8)
 
-    // packed field `MEM_Header`: type `MEM_DES` not supported by polyfill; skipped
-
-    // packed field `MEM_Data`: type `VArray<MEM_RANGE, $1>` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct MFCARD_DES {
-    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
-
-    public func pmf_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
+    public mut prop mem_Header: MEM_DES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: MEM_DES = MEM_DES()
+                return packedReadValue<MEM_DES>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_pmf_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
+    public mut prop mem_Data: VArray<MEM_RANGE, $1> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<MEM_RANGE, $1> = VArray<MEM_RANGE, $1>(repeat: MEM_RANGE())
+                return packedReadValue<VArray<MEM_RANGE, $1>>(base, 32, defaultValue)
+            }
         }
-    }
-
-    public func pmf_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
-        }
-    }
-
-    public mut func set_pmf_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `PMF_Flags`: type `PMF_FLAGS` not supported by polyfill; skipped
-
-    public func pmf_ConfigOptions(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 12)
-        }
-    }
-
-    public mut func set_pmf_ConfigOptions(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pmf_IoResourceIndex(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 13)
-        }
-    }
-
-    public mut func set_pmf_IoResourceIndex(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 13, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `PMF_Reserved`: type `VArray<UInt8, $2>` not supported by polyfill; skipped
-
-    public func pmf_ConfigRegisterBase(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 16)
-        }
-    }
-
-    public mut func set_pmf_ConfigRegisterBase(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 16, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct MFCARD_RESOURCE {
-    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
-
-    // packed field `MfCard_Header`: type `MFCARD_DES` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct OEM_SOURCE_MEDIA_TYPE {
     public var value: UInt32 = 0
 
@@ -3958,118 +4217,6 @@ public let OEM_SOURCE_MEDIA_TYPE_SPOST_PATH: OEM_SOURCE_MEDIA_TYPE = OEM_SOURCE_
 public let OEM_SOURCE_MEDIA_TYPE_SPOST_URL: OEM_SOURCE_MEDIA_TYPE = OEM_SOURCE_MEDIA_TYPE(2)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct PCCARD_DES {
-    public var _raw: VArray<UInt8, $38> = VArray<UInt8, $38>(repeat: 0u8)
-
-    public func pcd_Count(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 0)
-        }
-    }
-
-    public mut func set_pcd_Count(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 0, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pcd_Type(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 4)
-        }
-    }
-
-    public mut func set_pcd_Type(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 4, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `PCD_Flags`: type `PCD_FLAGS` not supported by polyfill; skipped
-
-    public func pcd_ConfigIndex(): UInt8 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt8(base, 12)
-        }
-    }
-
-    public mut func set_pcd_ConfigIndex(val: UInt8): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt8(base, 12, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `PCD_Reserved`: type `VArray<UInt8, $3>` not supported by polyfill; skipped
-
-    public func pcd_MemoryCardBase1(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 16)
-        }
-    }
-
-    public mut func set_pcd_MemoryCardBase1(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 16, val)
-            _raw = rawStorage
-        }
-    }
-
-    public func pcd_MemoryCardBase2(): UInt32 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return packedReadUInt32(base, 20)
-        }
-    }
-
-    public mut func set_pcd_MemoryCardBase2(val: UInt32): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            packedWriteUInt32(base, 20, val)
-            _raw = rawStorage
-        }
-    }
-
-    // packed field `PCD_MemoryCardBase`: type `VArray<UInt32, $2>` not supported by polyfill; skipped
-
-    // packed field `PCD_MemoryFlags`: type `VArray<UInt16, $2>` not supported by polyfill; skipped
-
-    // packed field `PCD_IoFlags`: type `VArray<UInt8, $2>` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
-public struct PCCARD_RESOURCE {
-    public var _raw: VArray<UInt8, $38> = VArray<UInt8, $38>(repeat: 0u8)
-
-    // packed field `PcCard_Header`: type `PCCARD_DES` not supported by polyfill; skipped
-    public init() {}
-}
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct PCD_FLAGS {
     public var value: UInt32 = 0
 
@@ -4210,13 +4357,9 @@ public let PCD_FLAGS_fPCD_MEM2_WS_THREE: PCD_FLAGS = PCD_FLAGS(805306368)
 public let PCD_FLAGS_fPCD_MEM2_16: PCD_FLAGS = PCD_FLAGS(1073741824)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-public type PCM_NOTIFY_CALLBACK = CFunc<(HCMNOTIFICATION, CPointer<Unit>, CM_NOTIFY_ACTION, CPointer<CM_NOTIFY_EVENT_DATA>, UInt32) -> UInt32>
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 public type PDETECT_PROGRESS_NOTIFY = CFunc<(CPointer<Unit>, UInt32) -> Int32>
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct PMF_FLAGS {
     public var value: UInt32 = 0
 
@@ -4252,7 +4395,6 @@ public struct PMF_FLAGS {
 public let PMF_FLAGS_fPMF_AUDIO_ENABLE: PMF_FLAGS = PMF_FLAGS(8)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct PNP_VETO_TYPE {
     public var value: Int32 = 0
 
@@ -4313,16 +4455,12 @@ public let PNP_VETO_TYPE_PNP_VetoInsufficientRights: PNP_VETO_TYPE = PNP_VETO_TY
 public let PNP_VETO_TYPE_PNP_VetoAlreadyRemoved: PNP_VETO_TYPE = PNP_VETO_TYPE(13)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-public type PSP_DETSIG_CMPPROC = CFunc<(HDEVINFO, CPointer<SP_DEVINFO_DATA>, CPointer<SP_DEVINFO_DATA>, CPointer<Unit>) -> UInt32>
-
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 public type PSP_FILE_CALLBACK_A = CFunc<(CPointer<Unit>, UInt32, UIntNative, UIntNative) -> UInt32>
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 public type PSP_FILE_CALLBACK_W = CFunc<(CPointer<Unit>, UInt32, UIntNative, UIntNative) -> UInt32>
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUPSCANFILEQUEUE_FLAGS {
     public var value: UInt32 = 0
 
@@ -4391,7 +4529,6 @@ public let SETUPSCANFILEQUEUE_FLAGS_SPQ_SCAN_ACTIVATE_DRP: SETUPSCANFILEQUEUE_FL
 public let SETUPSCANFILEQUEUE_FLAGS_SPQ_SCAN_USE_OEM_CATALOGS: SETUPSCANFILEQUEUE_FLAGS = SETUPSCANFILEQUEUE_FLAGS(2048)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_DEVICE_CONFIGURATION_FLAGS {
     public var value: UInt32 = 0
 
@@ -4484,7 +4621,6 @@ public let SETUP_DI_DEVICE_CONFIGURATION_FLAGS_CONFIGFLAG_BOOT_DEVICE: SETUP_DI_
 public let SETUP_DI_DEVICE_CONFIGURATION_FLAGS_CONFIGFLAG_NEEDS_CLASS_CONFIG: SETUP_DI_DEVICE_CONFIGURATION_FLAGS = SETUP_DI_DEVICE_CONFIGURATION_FLAGS(524288)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_DEVICE_CREATION_FLAGS {
     public var value: UInt32 = 0
 
@@ -4523,7 +4659,6 @@ public let SETUP_DI_DEVICE_CREATION_FLAGS_DICD_GENERATE_ID: SETUP_DI_DEVICE_CREA
 public let SETUP_DI_DEVICE_CREATION_FLAGS_DICD_INHERIT_CLASSDRVS: SETUP_DI_DEVICE_CREATION_FLAGS = SETUP_DI_DEVICE_CREATION_FLAGS(2)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_DEVICE_INSTALL_FLAGS {
     public var value: UInt32 = 0
 
@@ -4655,7 +4790,6 @@ public let SETUP_DI_DEVICE_INSTALL_FLAGS_DI_NOWRITE_IDS: SETUP_DI_DEVICE_INSTALL
 public let SETUP_DI_DEVICE_INSTALL_FLAGS_DI_UNREMOVEDEVICE_CONFIGSPECIFIC: SETUP_DI_DEVICE_INSTALL_FLAGS = SETUP_DI_DEVICE_INSTALL_FLAGS(2)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_DEVICE_INSTALL_FLAGS_EX {
     public var value: UInt32 = 0
 
@@ -4784,7 +4918,6 @@ public let SETUP_DI_DEVICE_INSTALL_FLAGS_EX_DI_FLAGSEX_RECURSIVESEARCH: SETUP_DI
 public let SETUP_DI_DEVICE_INSTALL_FLAGS_EX_DI_FLAGSEX_SEARCH_PUBLISHED_INFS: SETUP_DI_DEVICE_INSTALL_FLAGS_EX = SETUP_DI_DEVICE_INSTALL_FLAGS_EX(2147483648)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_DRIVER_INSTALL_FLAGS {
     public var value: UInt32 = 0
 
@@ -4913,7 +5046,6 @@ public let SETUP_DI_DRIVER_INSTALL_FLAGS_DNF_UNUSED_30: SETUP_DI_DRIVER_INSTALL_
 public let SETUP_DI_DRIVER_INSTALL_FLAGS_DNF_UNUSED_31: SETUP_DI_DRIVER_INSTALL_FLAGS = SETUP_DI_DRIVER_INSTALL_FLAGS(2147483648)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_DRIVER_TYPE {
     public var value: UInt32 = 0
 
@@ -4938,7 +5070,6 @@ public let SETUP_DI_DRIVER_TYPE_SPDIT_CLASSDRIVER: SETUP_DI_DRIVER_TYPE = SETUP_
 public let SETUP_DI_DRIVER_TYPE_SPDIT_COMPATDRIVER: SETUP_DI_DRIVER_TYPE = SETUP_DI_DRIVER_TYPE(2)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_GET_CLASS_DEVS_FLAGS {
     public var value: UInt32 = 0
 
@@ -4989,7 +5120,6 @@ public let SETUP_DI_GET_CLASS_DEVS_FLAGS_DIGCF_DEVICEINTERFACE: SETUP_DI_GET_CLA
 public let SETUP_DI_GET_CLASS_DEVS_FLAGS_DIGCF_INTERFACEDEVICE: SETUP_DI_GET_CLASS_DEVS_FLAGS = SETUP_DI_GET_CLASS_DEVS_FLAGS(16)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_PROPERTY_CHANGE_SCOPE {
     public var value: UInt32 = 0
 
@@ -5017,7 +5147,6 @@ public let SETUP_DI_PROPERTY_CHANGE_SCOPE_DICS_FLAG_CONFIGSPECIFIC: SETUP_DI_PRO
 public let SETUP_DI_PROPERTY_CHANGE_SCOPE_DICS_FLAG_CONFIGGENERAL: SETUP_DI_PROPERTY_CHANGE_SCOPE = SETUP_DI_PROPERTY_CHANGE_SCOPE(4)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_REGISTRY_PROPERTY {
     public var value: UInt32 = 0
 
@@ -5150,7 +5279,6 @@ public let SETUP_DI_REGISTRY_PROPERTY_SPDRP_BASE_CONTAINERID: SETUP_DI_REGISTRY_
 public let SETUP_DI_REGISTRY_PROPERTY_SPDRP_MAXIMUM_PROPERTY: SETUP_DI_REGISTRY_PROPERTY = SETUP_DI_REGISTRY_PROPERTY(37)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_REMOVE_DEVICE_SCOPE {
     public var value: UInt32 = 0
 
@@ -5175,7 +5303,6 @@ public let SETUP_DI_REMOVE_DEVICE_SCOPE_DI_REMOVEDEVICE_GLOBAL: SETUP_DI_REMOVE_
 public let SETUP_DI_REMOVE_DEVICE_SCOPE_DI_REMOVEDEVICE_CONFIGSPECIFIC: SETUP_DI_REMOVE_DEVICE_SCOPE = SETUP_DI_REMOVE_DEVICE_SCOPE(2)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_DI_STATE_CHANGE {
     public var value: UInt32 = 0
 
@@ -5209,7 +5336,6 @@ public let SETUP_DI_STATE_CHANGE_DICS_START: SETUP_DI_STATE_CHANGE = SETUP_DI_ST
 public let SETUP_DI_STATE_CHANGE_DICS_STOP: SETUP_DI_STATE_CHANGE = SETUP_DI_STATE_CHANGE(5)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SETUP_FILE_OPERATION {
     public var value: UInt32 = 0
 
@@ -5258,7 +5384,6 @@ public struct SOURCE_MEDIA_W {
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SPSVCINST_FLAGS {
     public var value: UInt32 = 0
 
@@ -5347,11 +5472,11 @@ public let SPSVCINST_FLAGS_SPSVCINST_NOCLOBBER_FAILUREACTIONS: SPSVCINST_FLAGS =
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 public let SPSVCINST_FLAGS_SPSVCINST_NOCLOBBER_BOOTFLAGS: SPSVCINST_FLAGS = SPSVCINST_FLAGS(262144)
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on")]
 @C
 public struct SP_ALTPLATFORM_INFO_V1 {
     public var cbSize: UInt32 = 0
-    public var Platform: Win32_impl.VER_PLATFORM = Win32_impl.VER_PLATFORM()
+    public var Platform: UInt32 = 0
     public var MajorVersion: UInt32 = 0
     public var MinorVersion: UInt32 = 0
     public var ProcessorArchitecture: UInt16 = 0
@@ -5359,57 +5484,60 @@ public struct SP_ALTPLATFORM_INFO_V1 {
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
 @C
 public struct SP_ALTPLATFORM_INFO_V2 {
     public var cbSize: UInt32 = 0
-    public var Platform: Win32_impl.VER_PLATFORM = Win32_impl.VER_PLATFORM()
+    public var Platform: UInt32 = 0
     public var MajorVersion: UInt32 = 0
     public var MinorVersion: UInt32 = 0
-    public var ProcessorArchitecture: Win32_System_SystemInformation.PROCESSOR_ARCHITECTURE = Win32_System_SystemInformation.PROCESSOR_ARCHITECTURE()
+    public var ProcessorArchitecture: UInt16 = 0
     public var Anonymous: SP_ALTPLATFORM_INFO_V2__Anonymous_e__Union = SP_ALTPLATFORM_INFO_V2__Anonymous_e__Union()
     public var FirstValidatedMajorVersion: UInt32 = 0
     public var FirstValidatedMinorVersion: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on" || arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct SP_ALTPLATFORM_INFO_V2__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
 
-    public func reserved(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
+    public mut prop reserved: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_reserved(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop flags: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
         }
-    }
-
-    public func flags(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_flags(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -5433,42 +5561,45 @@ public struct SP_ALTPLATFORM_INFO_V3 {
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
-// WARNING: union simulated as byte array (size-equivalent, not type-safe)
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
 @C
 public struct SP_ALTPLATFORM_INFO_V3__Anonymous_e__Union {
-    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
 
-    public func reserved(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
+    public mut prop reserved: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
 
-    public mut func set_reserved(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+    public mut prop flags: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return unionReadUInt16(base, 0)
+            }
         }
-    }
-
-    public func flags(): UInt16 {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            return unionReadUInt16(base, 0)
-        }
-    }
-
-    public mut func set_flags(val: UInt16): Unit {
-        unsafe {
-            var rawStorage = _raw
-            let base = CPointer<UInt8>(inout rawStorage)
-            unionWriteUInt16(base, 0, val)
-            _raw = rawStorage
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
         }
     }
     public init() {}
@@ -5478,7 +5609,7 @@ public struct SP_ALTPLATFORM_INFO_V3__Anonymous_e__Union {
 @C
 public struct SP_BACKUP_QUEUE_PARAMS_V1_A {
     public var cbSize: UInt32 = 0
-    public var FullInfPath: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var FullInfPath: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public var FilenameOffset: Int32 = 0
     public init() {}
 }
@@ -5496,9 +5627,9 @@ public struct SP_BACKUP_QUEUE_PARAMS_V1_W {
 @C
 public struct SP_BACKUP_QUEUE_PARAMS_V2_A {
     public var cbSize: UInt32 = 0
-    public var FullInfPath: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var FullInfPath: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public var FilenameOffset: Int32 = 0
-    public var ReinstallInstance: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var ReinstallInstance: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public init() {}
 }
 
@@ -5512,11 +5643,11 @@ public struct SP_BACKUP_QUEUE_PARAMS_V2_W {
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && Windows_Win32_UI_Controls == "on" || arch == "aarch64" && Windows_Win32_UI_Controls == "on")]
 @C
 public struct SP_CLASSIMAGELIST_DATA {
     public var cbSize: UInt32 = 0
-    public var ImageList: Win32_impl.HIMAGELIST = CPointer<Unit>()
+    public var ImageList: Win32__impl_l0.HIMAGELIST = CPointer<Unit>()
     public var Reserved: UIntNative = 0
     public init() {}
 }
@@ -5525,12 +5656,11 @@ public struct SP_CLASSIMAGELIST_DATA {
 @C
 public struct SP_CLASSINSTALL_HEADER {
     public var cbSize: UInt32 = 0
-    public var InstallFunction: DI_FUNCTION = DI_FUNCTION()
+    public var InstallFunction: UInt32 = 0
     public init() {}
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SP_COPY_STYLE {
     public var value: UInt32 = 0
 
@@ -5646,11 +5776,11 @@ public let SP_COPY_STYLE_SP_COPY_INBOX_INF: SP_COPY_STYLE = SP_COPY_STYLE(134217
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 public let SP_COPY_STYLE_SP_COPY_HARDLINK: SP_COPY_STYLE = SP_COPY_STYLE(268435456)
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_DETECTDEVICE_PARAMS {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
-    public var DetectProgressNotify: PDETECT_PROGRESS_NOTIFY = { _, _ => 0 }
+    public var DetectProgressNotify: PDETECT_PROGRESS_NOTIFY = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var ProgressNotifyParam: CPointer<Unit> = CPointer<Unit>()
     public init() {}
 }
@@ -5669,7 +5799,7 @@ public struct SP_DEVICE_INTERFACE_DATA {
 @C
 public struct SP_DEVICE_INTERFACE_DETAIL_DATA_A {
     public var cbSize: UInt32 = 0
-    public var DevicePath: VArray<Win32_Foundation.CHAR, $1> = VArray<Win32_Foundation.CHAR, $1>(repeat: 0)
+    public var DevicePath: VArray<Int8, $1> = VArray<Int8, $1>(repeat: 0)
     public init() {}
 }
 
@@ -5697,7 +5827,7 @@ public struct SP_DEVINFO_LIST_DETAIL_DATA_A {
     public var cbSize: UInt32 = 0
     public var ClassGuid: GUID = GUID()
     public var RemoteMachineHandle: CPointer<Unit> = CPointer<Unit>()
-    public var RemoteMachineName: VArray<Win32_Foundation.CHAR, $263> = VArray<Win32_Foundation.CHAR, $263>(repeat: 0)
+    public var RemoteMachineName: VArray<Int8, $263> = VArray<Int8, $263>(repeat: 0)
     public init() {}
 }
 
@@ -5715,15 +5845,15 @@ public struct SP_DEVINFO_LIST_DETAIL_DATA_W {
 @C
 public struct SP_DEVINSTALL_PARAMS_A {
     public var cbSize: UInt32 = 0
-    public var Flags: SETUP_DI_DEVICE_INSTALL_FLAGS = SETUP_DI_DEVICE_INSTALL_FLAGS()
-    public var FlagsEx: SETUP_DI_DEVICE_INSTALL_FLAGS_EX = SETUP_DI_DEVICE_INSTALL_FLAGS_EX()
+    public var Flags: UInt32 = 0
+    public var FlagsEx: UInt32 = 0
     public var hwndParent: CPointer<Unit> = CPointer<Unit>()
-    public var InstallMsgHandler: PSP_FILE_CALLBACK_A = { _, _, _, _ => 0 }
+    public var InstallMsgHandler: PSP_FILE_CALLBACK_A = CFunc<(CPointer<Unit>, UInt32, UIntNative, UIntNative) -> UInt32>(CPointer<Unit>())
     public var InstallMsgHandlerContext: CPointer<Unit> = CPointer<Unit>()
     public var FileQueue: CPointer<Unit> = CPointer<Unit>()
     public var ClassInstallReserved: UIntNative = 0
     public var Reserved: UInt32 = 0
-    public var DriverPath: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var DriverPath: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public init() {}
 }
 
@@ -5731,10 +5861,10 @@ public struct SP_DEVINSTALL_PARAMS_A {
 @C
 public struct SP_DEVINSTALL_PARAMS_W {
     public var cbSize: UInt32 = 0
-    public var Flags: SETUP_DI_DEVICE_INSTALL_FLAGS = SETUP_DI_DEVICE_INSTALL_FLAGS()
-    public var FlagsEx: SETUP_DI_DEVICE_INSTALL_FLAGS_EX = SETUP_DI_DEVICE_INSTALL_FLAGS_EX()
+    public var Flags: UInt32 = 0
+    public var FlagsEx: UInt32 = 0
     public var hwndParent: CPointer<Unit> = CPointer<Unit>()
-    public var InstallMsgHandler: PSP_FILE_CALLBACK_W = { _, _, _, _ => 0 }
+    public var InstallMsgHandler: PSP_FILE_CALLBACK_W = CFunc<(CPointer<Unit>, UInt32, UIntNative, UIntNative) -> UInt32>(CPointer<Unit>())
     public var InstallMsgHandlerContext: CPointer<Unit> = CPointer<Unit>()
     public var FileQueue: CPointer<Unit> = CPointer<Unit>()
     public var ClassInstallReserved: UIntNative = 0
@@ -5749,9 +5879,9 @@ public struct SP_DRVINFO_DATA_V1_A {
     public var cbSize: UInt32 = 0
     public var DriverType: UInt32 = 0
     public var Reserved: UIntNative = 0
-    public var Description: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var MfgName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var ProviderName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
+    public var Description: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var MfgName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var ProviderName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
     public init() {}
 }
 
@@ -5773,9 +5903,9 @@ public struct SP_DRVINFO_DATA_V2_A {
     public var cbSize: UInt32 = 0
     public var DriverType: UInt32 = 0
     public var Reserved: UIntNative = 0
-    public var Description: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var MfgName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var ProviderName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
+    public var Description: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var MfgName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var ProviderName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
     public var DriverDate: Win32_Foundation.FILETIME = Win32_Foundation.FILETIME()
     public var DriverVersion: UInt64 = 0
     public init() {}
@@ -5803,10 +5933,10 @@ public struct SP_DRVINFO_DETAIL_DATA_A {
     public var CompatIDsOffset: UInt32 = 0
     public var CompatIDsLength: UInt32 = 0
     public var Reserved: UIntNative = 0
-    public var SectionName: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var InfFileName: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var DrvDescription: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var HardwareID: VArray<Win32_Foundation.CHAR, $1> = VArray<Win32_Foundation.CHAR, $1>(repeat: 0)
+    public var SectionName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var InfFileName: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var DrvDescription: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var HardwareID: VArray<Int8, $1> = VArray<Int8, $1>(repeat: 0)
     public init() {}
 }
 
@@ -5830,13 +5960,13 @@ public struct SP_DRVINFO_DETAIL_DATA_W {
 public struct SP_DRVINSTALL_PARAMS {
     public var cbSize: UInt32 = 0
     public var Rank: UInt32 = 0
-    public var Flags: SETUP_DI_DRIVER_INSTALL_FLAGS = SETUP_DI_DRIVER_INSTALL_FLAGS()
+    public var Flags: UInt32 = 0
     public var PrivateData: UIntNative = 0
     public var Reserved: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_ENABLECLASS_PARAMS {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
@@ -5884,7 +6014,7 @@ public struct SP_FILE_COPY_PARAMS_W {
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
 @C
 public struct SP_INF_INFORMATION {
-    public var InfStyle: INF_STYLE = INF_STYLE()
+    public var InfStyle: UInt32 = 0
     public var InfCount: UInt32 = 0
     public var VersionData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
     public init() {}
@@ -5894,9 +6024,9 @@ public struct SP_INF_INFORMATION {
 @C
 public struct SP_INF_SIGNER_INFO_V1_A {
     public var cbSize: UInt32 = 0
-    public var CatalogFile: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var DigitalSigner: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var DigitalSignerVersion: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var CatalogFile: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var DigitalSigner: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var DigitalSignerVersion: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public init() {}
 }
 
@@ -5914,9 +6044,9 @@ public struct SP_INF_SIGNER_INFO_V1_W {
 @C
 public struct SP_INF_SIGNER_INFO_V2_A {
     public var cbSize: UInt32 = 0
-    public var CatalogFile: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var DigitalSigner: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var DigitalSignerVersion: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var CatalogFile: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var DigitalSigner: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var DigitalSignerVersion: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public var SignerScore: UInt32 = 0
     public init() {}
 }
@@ -5932,12 +6062,12 @@ public struct SP_INF_SIGNER_INFO_V2_W {
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on" || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")]
 @C
 public struct SP_INSTALLWIZARD_DATA {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
     public var Flags: UInt32 = 0
-    public var DynamicPages: VArray<Win32_impl.HPROPSHEETPAGE, $20> = VArray<Win32_impl.HPROPSHEETPAGE, $20>(repeat: CPointer<Unit>())
+    public var DynamicPages: VArray<Win32__impl_l0.HPROPSHEETPAGE, $20> = VArray<Win32__impl_l0.HPROPSHEETPAGE, $20>(repeat: CPointer<Unit>())
     public var NumDynamicPages: UInt32 = 0
     public var DynamicPageFlags: UInt32 = 0
     public var PrivateFlags: UInt32 = 0
@@ -5946,12 +6076,12 @@ public struct SP_INSTALLWIZARD_DATA {
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on" || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")]
 @C
 public struct SP_NEWDEVICEWIZARD_DATA {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
     public var Flags: UInt32 = 0
-    public var DynamicPages: VArray<Win32_impl.HPROPSHEETPAGE, $20> = VArray<Win32_impl.HPROPSHEETPAGE, $20>(repeat: CPointer<Unit>())
+    public var DynamicPages: VArray<Win32__impl_l0.HPROPSHEETPAGE, $20> = VArray<Win32__impl_l0.HPROPSHEETPAGE, $20>(repeat: CPointer<Unit>())
     public var NumDynamicPages: UInt32 = 0
     public var hwndWizardDlg: CPointer<Unit> = CPointer<Unit>()
     public init() {}
@@ -5961,8 +6091,8 @@ public struct SP_NEWDEVICEWIZARD_DATA {
 @C
 public struct SP_ORIGINAL_FILE_INFO_A {
     public var cbSize: UInt32 = 0
-    public var OriginalInfName: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var OriginalCatalogName: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var OriginalInfName: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var OriginalCatalogName: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public init() {}
 }
 
@@ -5975,15 +6105,15 @@ public struct SP_ORIGINAL_FILE_INFO_W {
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && ((arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_POWERMESSAGEWAKE_PARAMS_A {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
-    public var PowerMessageWake: VArray<Win32_Foundation.CHAR, $512> = VArray<Win32_Foundation.CHAR, $512>(repeat: 0)
+    public var PowerMessageWake: VArray<Int8, $512> = VArray<Int8, $512>(repeat: 0)
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_POWERMESSAGEWAKE_PARAMS_W {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
@@ -5991,17 +6121,17 @@ public struct SP_POWERMESSAGEWAKE_PARAMS_W {
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_PROPCHANGE_PARAMS {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
-    public var StateChange: SETUP_DI_STATE_CHANGE = SETUP_DI_STATE_CHANGE()
-    public var Scope: SETUP_DI_PROPERTY_CHANGE_SCOPE = SETUP_DI_PROPERTY_CHANGE_SCOPE()
+    public var StateChange: UInt32 = 0
+    public var Scope: UInt32 = 0
     public var HwProfile: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_PROPSHEETPAGE_REQUEST {
     public var cbSize: UInt32 = 0
@@ -6031,28 +6161,28 @@ public struct SP_REGISTER_CONTROL_STATUSW {
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_REMOVEDEVICE_PARAMS {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
-    public var Scope: SETUP_DI_REMOVE_DEVICE_SCOPE = SETUP_DI_REMOVE_DEVICE_SCOPE()
+    public var Scope: UInt32 = 0
     public var HwProfile: UInt32 = 0
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && ((arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_SELECTDEVICE_PARAMS_A {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
-    public var Title: VArray<Win32_Foundation.CHAR, $60> = VArray<Win32_Foundation.CHAR, $60>(repeat: 0)
-    public var Instructions: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
-    public var ListLabel: VArray<Win32_Foundation.CHAR, $30> = VArray<Win32_Foundation.CHAR, $30>(repeat: 0)
-    public var SubTitle: VArray<Win32_Foundation.CHAR, $256> = VArray<Win32_Foundation.CHAR, $256>(repeat: 0)
+    public var Title: VArray<Int8, $60> = VArray<Int8, $60>(repeat: 0)
+    public var Instructions: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
+    public var ListLabel: VArray<Int8, $30> = VArray<Int8, $30>(repeat: 0)
+    public var SubTitle: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0)
     public var Reserved: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_SELECTDEVICE_PARAMS_W {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
@@ -6063,16 +6193,16 @@ public struct SP_SELECTDEVICE_PARAMS_W {
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && ((arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_TROUBLESHOOTER_PARAMS_A {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
-    public var ChmFile: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
-    public var HtmlTroubleShooter: VArray<Win32_Foundation.CHAR, $260> = VArray<Win32_Foundation.CHAR, $260>(repeat: 0)
+    public var ChmFile: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
+    public var HtmlTroubleShooter: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0)
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_TROUBLESHOOTER_PARAMS_W {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
@@ -6081,7 +6211,7 @@ public struct SP_TROUBLESHOOTER_PARAMS_W {
     public init() {}
 }
 
-@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" || arch == "aarch64")]
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && (arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") || arch == "aarch64" && (arch == "x86_64" || arch == "aarch64"))]
 @C
 public struct SP_UNREMOVEDEVICE_PARAMS {
     public var ClassInstallHeader: SP_CLASSINSTALL_HEADER = SP_CLASSINSTALL_HEADER()
@@ -6091,7 +6221,6 @@ public struct SP_UNREMOVEDEVICE_PARAMS {
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct SetupFileLogInfo {
     public var value: Int32 = 0
 
@@ -6128,7 +6257,6 @@ public let SetupFileLogInfo_SetupFileLogOtherInfo: SetupFileLogInfo = SetupFileL
 public let SetupFileLogInfo_SetupFileLogMax: SetupFileLogInfo = SetupFileLogInfo(5)
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
-@C
 public struct UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS {
     public var value: UInt32 = 0
 
@@ -6172,496 +6300,1111 @@ public let UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS_INSTALLFLAG_NONINTERACTIVE: U
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
 public let UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS_INSTALLFLAG_BITS: UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS = UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS(7)
 
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@C
+public struct CM_NOTIFY_EVENT_DATA {
+    public var FilterType: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public var u: CM_NOTIFY_EVENT_DATA__u_e__Union = CM_NOTIFY_EVENT_DATA__u_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CM_NOTIFY_EVENT_DATA__u_e__Union {
+    public var _raw: VArray<UInt32, $7> = VArray<UInt32, $7>(repeat: 0)
+
+    public mut prop deviceInterface: CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInterface_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInterface_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInterface_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop deviceHandle: CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceHandle_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceHandle_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceHandle_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop deviceInstance: CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInstance_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInstance_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInstance_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@C
+public struct CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInterface_e__Struct {
+    public var ClassGuid: GUID = GUID()
+    public var SymbolicLink: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@C
+public struct CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceHandle_e__Struct {
+    public var EventGuid: GUID = GUID()
+    public var NameOffset: Int32 = 0
+    public var DataSize: UInt32 = 0
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@C
+public struct CM_NOTIFY_EVENT_DATA__u_e__Union__DeviceInstance_e__Struct {
+    public var InstanceId: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@C
+public struct CM_NOTIFY_FILTER {
+    public var cbSize: UInt32 = 0
+    public var Flags: UInt32 = 0
+    public var FilterType: Int32 = 0
+    public var Reserved: UInt32 = 0
+    public var u: CM_NOTIFY_FILTER__u_e__Union = CM_NOTIFY_FILTER__u_e__Union()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// NOTE: union represented as size-equivalent VArray slot with typed `mut prop` accessors
+// (Cangjie paradigm: `@C struct` cannot host a union variant; ABI footprint is preserved)
+@C
+public struct CM_NOTIFY_FILTER__u_e__Union {
+    public var _raw: VArray<UInt64, $50> = VArray<UInt64, $50>(repeat: 0)
+
+    public mut prop deviceInterface: CM_NOTIFY_FILTER__u_e__Union__DeviceInterface_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceInterface_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceInterface_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop deviceHandle: CM_NOTIFY_FILTER__u_e__Union__DeviceHandle_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceHandle_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceHandle_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop deviceInstance: CM_NOTIFY_FILTER__u_e__Union__DeviceInstance_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceInstance_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CM_NOTIFY_FILTER__u_e__Union__DeviceInstance_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@C
+public struct CM_NOTIFY_FILTER__u_e__Union__DeviceInterface_e__Struct {
+    public var ClassGuid: GUID = GUID()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@C
+public struct CM_NOTIFY_FILTER__u_e__Union__DeviceHandle_e__Struct {
+    public var hTarget: CPointer<Unit> = CPointer<Unit>()
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+@C
+public struct CM_NOTIFY_FILTER__u_e__Union__DeviceInstance_e__Struct {
+    public var InstanceId: VArray<UInt16, $200> = VArray<UInt16, $200>(repeat: 0)
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
+@C
+public struct MFCARD_DES {
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    public mut prop pmf_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pmf_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pmf_Flags: PMF_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return PMF_FLAGS(packedReadUInt32(base, 8))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val.value)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pmf_ConfigOptions: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 12, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pmf_IoResourceIndex: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 13)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 13, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pmf_Reserved: VArray<UInt8, $2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $2>>(base, 14, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 14, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pmf_ConfigRegisterBase: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
+@C
+public struct MFCARD_RESOURCE {
+    public var _raw: VArray<UInt8, $20> = VArray<UInt8, $20>(repeat: 0u8)
+
+    public mut prop mfCard_Header: MFCARD_DES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: MFCARD_DES = MFCARD_DES()
+                return packedReadValue<MFCARD_DES>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
+@C
+public struct PCCARD_DES {
+    public var _raw: VArray<UInt8, $38> = VArray<UInt8, $38>(repeat: 0u8)
+
+    public mut prop pcd_Count: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcd_Type: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 4)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 4, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcd_Flags: PCD_FLAGS {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return PCD_FLAGS(packedReadUInt32(base, 8))
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 8, val.value)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcd_ConfigIndex: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt8(base, 12)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt8(base, 12, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcd_Reserved: VArray<UInt8, $3> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $3>>(base, 13, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 13, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcd_MemoryCardBase1: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 16)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 16, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcd_MemoryCardBase2: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return packedReadUInt32(base, 20)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteUInt32(base, 20, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcd_MemoryCardBase: VArray<UInt32, $2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0)
+                return packedReadValue<VArray<UInt32, $2>>(base, 24, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 24, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcd_MemoryFlags: VArray<UInt16, $2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt16, $2> = VArray<UInt16, $2>(repeat: 0)
+                return packedReadValue<VArray<UInt16, $2>>(base, 32, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 32, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcd_IoFlags: VArray<UInt8, $2> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0)
+                return packedReadValue<VArray<UInt8, $2>>(base, 36, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 36, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+// packed(1)
+@C
+public struct PCCARD_RESOURCE {
+    public var _raw: VArray<UInt8, $38> = VArray<UInt8, $38>(repeat: 0u8)
+
+    public mut prop pcCard_Header: PCCARD_DES {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let defaultValue: PCCARD_DES = PCCARD_DES()
+                return packedReadValue<PCCARD_DES>(base, 0, defaultValue)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                packedWriteValue(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+    public init() {}
+}
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]
+public type PCM_NOTIFY_CALLBACK = CFunc<(HCMNOTIFICATION, CPointer<Unit>, Int32, CPointer<CM_NOTIFY_EVENT_DATA>, UInt32) -> UInt32>
+
+@When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+public type PSP_DETSIG_CMPPROC = CFunc<(HDEVINFO, CPointer<SP_DEVINFO_DATA>, CPointer<SP_DEVINFO_DATA>, CPointer<Unit>) -> UInt32>
+
 @When[CFGMGR32 == "on"]
 foreign {
     func CMP_WaitNoPendingInstallEvents(dwTimeout: UInt32): UInt32
-    func CM_Add_Empty_Log_Conf(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, Priority: Win32_Data_HtmlHelp.PRIORITY, ulFlags: UInt32): CONFIGRET
+    func CM_Add_IDA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32): UInt32
+    func CM_Add_IDW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Add_Empty_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, Priority: Win32_Data_HtmlHelp.PRIORITY, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Add_IDA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32): CONFIGRET
-    func CM_Add_IDW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32): CONFIGRET
+    func CM_Add_ID_ExA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: hMachine optional
-    func CM_Add_ID_ExA(dnDevInst: UInt32, pszID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: hMachine optional
-    func CM_Add_ID_ExW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Add_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRET
+    func CM_Add_ID_ExW(dnDevInst: UInt32, pszID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Add_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): UInt32
     // param-hint: prdResDes optional
     // param-hint: ResourceData bytes=param[4]
-    func CM_Add_Res_Des(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Add_Res_Des(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): UInt32
     // param-hint: prdResDes optional
     // param-hint: ResourceData bytes=param[4]
     // param-hint: hMachine optional
-    func CM_Add_Res_Des_Ex(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Add_Res_Des_Ex(prdResDes: CPointer<UIntNative>, lcLogConf: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: UNCServerName optional
-    func CM_Connect_MachineA(UNCServerName: CPointer<UInt8>, phMachine: CPointer<IntNative>): CONFIGRET
+    func CM_Connect_MachineA(UNCServerName: CPointer<UInt8>, phMachine: CPointer<IntNative>): UInt32
     // param-hint: UNCServerName optional
-    func CM_Connect_MachineW(UNCServerName: CPointer<UInt16>, phMachine: CPointer<IntNative>): CONFIGRET
-    func CM_Create_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32): CONFIGRET
-    func CM_Create_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Connect_MachineW(UNCServerName: CPointer<UInt16>, phMachine: CPointer<IntNative>): UInt32
+    func CM_Create_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32): UInt32
+    func CM_Create_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Create_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Create_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: hMachine optional
-    func CM_Create_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Create_Range_List(prlh: CPointer<UIntNative>, ulFlags: UInt32): CONFIGRET
-    func CM_Delete_Class_Key(ClassGuid: CPointer<GUID>, ulFlags: UInt32): CONFIGRET
+    func CM_Create_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, dnParent: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Create_Range_List(prlh: CPointer<UIntNative>, ulFlags: UInt32): UInt32
+    func CM_Delete_Class_Key(ClassGuid: CPointer<GUID>, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Delete_Class_Key_Ex(ClassGuid: CPointer<GUID>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Delete_DevNode_Key(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Delete_Class_Key_Ex(ClassGuid: CPointer<GUID>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Delete_DevNode_Key(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Delete_DevNode_Key_Ex(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Delete_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): CONFIGRET
-    func CM_Delete_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): CONFIGRET
+    func CM_Delete_DevNode_Key_Ex(dnDevNode: UInt32, ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Delete_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): UInt32
+    func CM_Delete_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Delete_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Delete_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: hMachine optional
-    func CM_Delete_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Delete_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRET
+    func CM_Delete_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Delete_Range(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): UInt32
     // param-hint: ResourceData bytes=param[3]
-    func CM_Detect_Resource_Conflict(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32): CONFIGRET
+    func CM_Detect_Resource_Conflict(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32): UInt32
     // param-hint: ResourceData bytes=param[3]
     // param-hint: hMachine optional
-    func CM_Detect_Resource_Conflict_Ex(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Disable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Detect_Resource_Conflict_Ex(dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, pbConflictDetected: CPointer<Int32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Disable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Disable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Disable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: hMachine optional
-    func CM_Disconnect_Machine(hMachine: IntNative): CONFIGRET
-    func CM_Dup_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRET
-    func CM_Enable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Disconnect_Machine(hMachine: IntNative): UInt32
+    func CM_Dup_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): UInt32
+    func CM_Enable_DevNode(dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Enable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Enumerate_Classes(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: CM_ENUMERATE_FLAGS): CONFIGRET
+    func CM_Enable_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Enumerate_Classes(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Enumerate_Classes_Ex(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: CM_ENUMERATE_FLAGS, hMachine: IntNative): CONFIGRET
+    func CM_Enumerate_Classes_Ex(ulClassIndex: UInt32, ClassGuid: CPointer<GUID>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: Buffer len=param[2]
-    func CM_Enumerate_EnumeratorsA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Enumerate_EnumeratorsA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: Buffer len=param[2]
-    func CM_Enumerate_EnumeratorsW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    // param-hint: Buffer len=param[2]
-    // param-hint: hMachine optional
-    func CM_Enumerate_Enumerators_ExA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Enumerate_EnumeratorsW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: Buffer len=param[2]
     // param-hint: hMachine optional
-    func CM_Enumerate_Enumerators_ExW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Find_Range(pullStart: CPointer<UInt64>, ullStart: UInt64, ulLength: UInt32, ullAlignment: UInt64, ullEnd: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRET
-    func CM_First_Range(rlh: UIntNative, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, preElement: CPointer<UIntNative>, ulFlags: UInt32): CONFIGRET
-    func CM_Free_Log_Conf(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32): CONFIGRET
+    func CM_Enumerate_Enumerators_ExA(ulEnumIndex: UInt32, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: Buffer len=param[2]
     // param-hint: hMachine optional
-    func CM_Free_Log_Conf_Ex(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Free_Log_Conf_Handle(lcLogConf: UIntNative): CONFIGRET
-    func CM_Free_Range_List(rlh: UIntNative, ulFlags: UInt32): CONFIGRET
+    func CM_Enumerate_Enumerators_ExW(ulEnumIndex: UInt32, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Find_Range(pullStart: CPointer<UInt64>, ullStart: UInt64, ulLength: UInt32, ullAlignment: UInt64, ullEnd: UInt64, rlh: UIntNative, ulFlags: UInt32): UInt32
+    func CM_First_Range(rlh: UIntNative, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, preElement: CPointer<UIntNative>, ulFlags: UInt32): UInt32
+    func CM_Free_Log_Conf(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32): UInt32
+    // param-hint: hMachine optional
+    func CM_Free_Log_Conf_Ex(lcLogConfToBeFreed: UIntNative, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Free_Log_Conf_Handle(lcLogConf: UIntNative): UInt32
+    func CM_Free_Range_List(rlh: UIntNative, ulFlags: UInt32): UInt32
     // param-hint: prdResDes optional
-    func CM_Free_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32): CONFIGRET
+    func CM_Free_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32): UInt32
     // param-hint: prdResDes optional
     // param-hint: hMachine optional
-    func CM_Free_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Free_Res_Des_Handle(rdResDes: UIntNative): CONFIGRET
-    func CM_Free_Resource_Conflict_Handle(clConflictList: UIntNative): CONFIGRET
-    func CM_Get_Child(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Free_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Free_Res_Des_Handle(rdResDes: UIntNative): UInt32
+    func CM_Free_Resource_Conflict_Handle(clConflictList: UIntNative): UInt32
+    func CM_Get_Child(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Child_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Child_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pszKeyName len=param[2] optional
-    func CM_Get_Class_Key_NameA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Class_Key_NameA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pszKeyName len=param[2] optional
-    func CM_Get_Class_Key_NameW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    // param-hint: pszKeyName len=param[2] optional
-    // param-hint: hMachine optional
-    func CM_Get_Class_Key_Name_ExA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Class_Key_NameW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pszKeyName len=param[2] optional
     // param-hint: hMachine optional
-    func CM_Get_Class_Key_Name_ExW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Class_Key_Name_ExA(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: pszKeyName len=param[2] optional
+    // param-hint: hMachine optional
+    func CM_Get_Class_Key_Name_ExW(ClassGuid: CPointer<GUID>, pszKeyName: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: Buffer len=param[2] optional
-    func CM_Get_Class_NameA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Class_NameA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: Buffer len=param[2] optional
-    func CM_Get_Class_NameW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Class_NameW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: Buffer len=param[2] optional
     // param-hint: hMachine optional
-    func CM_Get_Class_Name_ExA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Class_Name_ExA(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: Buffer len=param[2] optional
     // param-hint: hMachine optional
-    func CM_Get_Class_Name_ExW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    func CM_Get_Class_PropertyW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // param-hint: hMachine optional
-    func CM_Get_Class_Property_ExW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Class_Name_ExW(ClassGuid: CPointer<GUID>, Buffer: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: PropertyKeyArray len=param[2] optional
-    func CM_Get_Class_Property_Keys(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Class_Property_Keys(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: PropertyKeyArray len=param[2] optional
     // param-hint: hMachine optional
-    func CM_Get_Class_Property_Keys_Ex(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Class_Property_Keys_Ex(ClassGUID: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pulRegDataType optional
     // param-hint: Buffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Get_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pulRegDataType optional
     // param-hint: Buffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Get_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Get_Depth(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_Depth(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Depth_Ex(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Depth_Ex(pulDepth: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pulRegDataType optional
     // param-hint: Buffer bytes=param[4] optional
-    func CM_Get_DevNode_Custom_PropertyA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_DevNode_Custom_PropertyA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pulRegDataType optional
     // param-hint: Buffer bytes=param[4] optional
-    func CM_Get_DevNode_Custom_PropertyW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    // param-hint: hMachine optional
-    func CM_Get_DevNode_Custom_Property_ExA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_DevNode_Custom_PropertyW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pulRegDataType optional
     // param-hint: Buffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Get_DevNode_Custom_Property_ExW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    func CM_Get_DevNode_PropertyW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    // param-hint: PropertyBuffer bytes=param[4] optional
+    func CM_Get_DevNode_Custom_Property_ExA(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt8>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Get_DevNode_Property_ExW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_DevNode_Custom_Property_ExW(dnDevInst: UInt32, pszCustomPropertyName: CPointer<UInt16>, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: PropertyKeyArray len=param[2] optional
-    func CM_Get_DevNode_Property_Keys(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_DevNode_Property_Keys(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: PropertyKeyArray len=param[2] optional
     // param-hint: hMachine optional
-    func CM_Get_DevNode_Property_Keys_Ex(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_DevNode_Property_Keys_Ex(dnDevInst: UInt32, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pulRegDataType optional
     // param-hint: Buffer bytes=param[4] optional
-    func CM_Get_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pulRegDataType optional
     // param-hint: Buffer bytes=param[4] optional
-    func CM_Get_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    // param-hint: pulRegDataType optional
-    // param-hint: Buffer bytes=param[4] optional
-    // param-hint: hMachine optional
-    func CM_Get_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pulRegDataType optional
     // param-hint: Buffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Get_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Get_DevNode_Status(pulStatus: CPointer<CM_DEVNODE_STATUS_FLAGS>, pulProblemNumber: CPointer<CM_PROB>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: pulRegDataType optional
+    // param-hint: Buffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Get_DevNode_Status_Ex(pulStatus: CPointer<CM_DEVNODE_STATUS_FLAGS>, pulProblemNumber: CPointer<CM_PROB>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: Buffer len=param[2]
-    func CM_Get_Device_IDA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRET
-    // param-hint: Buffer len=param[2]
-    func CM_Get_Device_IDW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRET
-    // param-hint: Buffer len=param[2]
+    func CM_Get_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, pulRegDataType: CPointer<UInt32>, Buffer: CPointer<Unit>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_DevNode_Status(pulStatus: CPointer<UInt32>, pulProblemNumber: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Device_ID_ExA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_DevNode_Status_Ex(pulStatus: CPointer<UInt32>, pulProblemNumber: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: Buffer len=param[2]
-    // param-hint: hMachine optional
-    func CM_Get_Device_ID_ExW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: pszFilter optional
+    func CM_Get_Device_IDA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): UInt32
     // param-hint: Buffer len=param[2]
-    func CM_Get_Device_ID_ListA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRET
-    // param-hint: pszFilter optional
-    // param-hint: Buffer len=param[2]
-    func CM_Get_Device_ID_ListW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRET
-    // param-hint: pszFilter optional
+    func CM_Get_Device_IDW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): UInt32
     // param-hint: Buffer len=param[2]
     // param-hint: hMachine optional
-    func CM_Get_Device_ID_List_ExA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_ID_ExA(dnDevInst: UInt32, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: Buffer len=param[2]
+    // param-hint: hMachine optional
+    func CM_Get_Device_ID_ExW(dnDevInst: UInt32, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: pszFilter optional
+    // param-hint: Buffer len=param[2]
+    func CM_Get_Device_ID_ListA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: pszFilter optional
+    // param-hint: Buffer len=param[2]
+    func CM_Get_Device_ID_ListW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): UInt32
     // param-hint: pszFilter optional
     // param-hint: Buffer len=param[2]
     // param-hint: hMachine optional
-    func CM_Get_Device_ID_List_ExW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_ID_List_ExA(pszFilter: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pszFilter optional
-    func CM_Get_Device_ID_List_SizeA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32): CONFIGRET
+    // param-hint: Buffer len=param[2]
+    // param-hint: hMachine optional
+    func CM_Get_Device_ID_List_ExW(pszFilter: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pszFilter optional
-    func CM_Get_Device_ID_List_SizeW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Device_ID_List_SizeA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32): UInt32
+    // param-hint: pszFilter optional
+    func CM_Get_Device_ID_List_SizeW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32): UInt32
     // param-hint: pszFilter optional
     // param-hint: hMachine optional
-    func CM_Get_Device_ID_List_Size_ExA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_ID_List_Size_ExA(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pszFilter optional
     // param-hint: hMachine optional
-    func CM_Get_Device_ID_List_Size_ExW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Get_Device_ID_Size(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Device_ID_List_Size_ExW(pulLen: CPointer<UInt32>, pszFilter: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_Device_ID_Size(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Device_ID_Size_Ex(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_ID_Size_Ex(pulLen: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pszAliasDeviceInterface len=param[3]
-    func CM_Get_Device_Interface_AliasA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Device_Interface_AliasA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pszAliasDeviceInterface len=param[3]
-    func CM_Get_Device_Interface_AliasW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    // param-hint: pszAliasDeviceInterface len=param[3]
-    // param-hint: hMachine optional
-    func CM_Get_Device_Interface_Alias_ExA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_Interface_AliasW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pszAliasDeviceInterface len=param[3]
     // param-hint: hMachine optional
-    func CM_Get_Device_Interface_Alias_ExW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_Interface_Alias_ExA(pszDeviceInterface: CPointer<UInt8>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: pszAliasDeviceInterface len=param[3]
+    // param-hint: hMachine optional
+    func CM_Get_Device_Interface_Alias_ExW(pszDeviceInterface: CPointer<UInt16>, AliasInterfaceGuid: CPointer<GUID>, pszAliasDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pDeviceID optional
     // param-hint: Buffer len=param[3]
-    func CM_Get_Device_Interface_ListA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGS): CONFIGRET
+    func CM_Get_Device_Interface_ListA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32): UInt32
     // param-hint: pDeviceID optional
     // param-hint: Buffer len=param[3]
-    func CM_Get_Device_Interface_ListW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGS): CONFIGRET
+    func CM_Get_Device_Interface_ListW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32): UInt32
     // param-hint: pDeviceID optional
     // param-hint: Buffer len=param[3]
     // param-hint: hMachine optional
-    func CM_Get_Device_Interface_List_ExA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGS, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_Interface_List_ExA(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, Buffer: CPointer<UInt8>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pDeviceID optional
     // param-hint: Buffer len=param[3]
     // param-hint: hMachine optional
-    func CM_Get_Device_Interface_List_ExW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGS, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_Interface_List_ExW(InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, Buffer: CPointer<UInt16>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pDeviceID optional
-    func CM_Get_Device_Interface_List_SizeA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGS): CONFIGRET
+    func CM_Get_Device_Interface_List_SizeA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: UInt32): UInt32
     // param-hint: pDeviceID optional
-    func CM_Get_Device_Interface_List_SizeW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGS): CONFIGRET
-    // param-hint: pDeviceID optional
-    // param-hint: hMachine optional
-    func CM_Get_Device_Interface_List_Size_ExA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGS, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_Interface_List_SizeW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: UInt32): UInt32
     // param-hint: pDeviceID optional
     // param-hint: hMachine optional
-    func CM_Get_Device_Interface_List_Size_ExW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: CM_GET_DEVICE_INTERFACE_LIST_FLAGS, hMachine: IntNative): CONFIGRET
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    func CM_Get_Device_Interface_PropertyW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    // param-hint: PropertyBuffer bytes=param[4] optional
+    func CM_Get_Device_Interface_List_Size_ExA(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: pDeviceID optional
     // param-hint: hMachine optional
-    func CM_Get_Device_Interface_Property_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_Interface_List_Size_ExW(pulLen: CPointer<UInt32>, InterfaceClassGuid: CPointer<GUID>, pDeviceID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: PropertyKeyArray len=param[2] optional
-    func CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: PropertyKeyArray len=param[2] optional
     // param-hint: hMachine optional
-    func CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: plcLogConf optional
-    func CM_Get_First_Log_Conf(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: CM_LOG_CONF): CONFIGRET
+    func CM_Get_First_Log_Conf(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: plcLogConf optional
     // param-hint: hMachine optional
-    func CM_Get_First_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: CM_LOG_CONF, hMachine: IntNative): CONFIGRET
-    func CM_Get_Global_State(pulState: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_First_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_Global_State(pulState: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Global_State_Ex(pulState: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Get_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    func CM_Get_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Global_State_Ex(pulState: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): UInt32
+    func CM_Get_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: hMachine optional
-    func CM_Get_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Get_Hardware_Profile_InfoA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32): CONFIGRET
-    func CM_Get_Hardware_Profile_InfoW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulHardwareProfile: UInt32, pulValue: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_Hardware_Profile_InfoA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32): UInt32
+    func CM_Get_Hardware_Profile_InfoW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Hardware_Profile_Info_ExA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Hardware_Profile_Info_ExA(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_A>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Hardware_Profile_Info_ExW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Get_Log_Conf_Priority(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Hardware_Profile_Info_ExW(ulIndex: UInt32, pHWProfileInfo: CPointer<HWPROFILEINFO_W>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_Log_Conf_Priority(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Log_Conf_Priority_Ex(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Log_Conf_Priority_Ex(lcLogConf: UIntNative, pPriority: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: plcLogConf optional
     // param-hint: ulFlags reserved
-    func CM_Get_Next_Log_Conf(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Next_Log_Conf(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32): UInt32
     // param-hint: plcLogConf optional
     // param-hint: ulFlags reserved
     // param-hint: hMachine optional
-    func CM_Get_Next_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Next_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, lcLogConf: UIntNative, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pResourceID optional
-    func CM_Get_Next_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: CM_RESTYPE, pResourceID: CPointer<CM_RESTYPE>, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Next_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: UInt32, pResourceID: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pResourceID optional
     // param-hint: hMachine optional
-    func CM_Get_Next_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: CM_RESTYPE, pResourceID: CPointer<CM_RESTYPE>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Get_Parent(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Next_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ForResource: UInt32, pResourceID: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_Parent(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Parent_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Parent_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: Buffer bytes=param[2]
-    func CM_Get_Res_Des_Data(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Res_Des_Data(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32): UInt32
     // param-hint: Buffer bytes=param[2]
     // param-hint: hMachine optional
-    func CM_Get_Res_Des_Data_Ex(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Get_Res_Des_Data_Size(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Res_Des_Data_Ex(rdResDes: UIntNative, Buffer: CPointer<Unit>, BufferLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_Res_Des_Data_Size(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Res_Des_Data_Size_Ex(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Get_Resource_Conflict_Count(clConflictList: UIntNative, pulCount: CPointer<UInt32>): CONFIGRET
-    func CM_Get_Resource_Conflict_DetailsA(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_A>): CONFIGRET
-    func CM_Get_Resource_Conflict_DetailsW(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_W>): CONFIGRET
-    func CM_Get_Sibling(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Res_Des_Data_Size_Ex(pulSize: CPointer<UInt32>, rdResDes: UIntNative, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Get_Resource_Conflict_Count(clConflictList: UIntNative, pulCount: CPointer<UInt32>): UInt32
+    func CM_Get_Resource_Conflict_DetailsA(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_A>): UInt32
+    func CM_Get_Resource_Conflict_DetailsW(clConflictList: UIntNative, ulIndex: UInt32, pConflictDetails: CPointer<CONFLICT_DETAILS_W>): UInt32
+    func CM_Get_Sibling(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Get_Sibling_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Sibling_Ex(pdnDevInst: CPointer<UInt32>, dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // pinvoke-hint: SetLastError
     func CM_Get_Version(): UInt16
     // param-hint: hMachine optional
     // pinvoke-hint: SetLastError
     func CM_Get_Version_Ex(hMachine: IntNative): UInt16
-    func CM_Intersect_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRET
-    func CM_Invert_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ullMaxValue: UInt64, ulFlags: UInt32): CONFIGRET
-    func CM_Is_Dock_Station_Present(pbPresent: CPointer<Int32>): CONFIGRET
+    func CM_Intersect_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): UInt32
+    func CM_Invert_Range_List(rlhOld: UIntNative, rlhNew: UIntNative, ullMaxValue: UInt64, ulFlags: UInt32): UInt32
+    func CM_Is_Dock_Station_Present(pbPresent: CPointer<Int32>): UInt32
     // param-hint: hMachine optional
-    func CM_Is_Dock_Station_Present_Ex(pbPresent: CPointer<Int32>, hMachine: IntNative): CONFIGRET
+    func CM_Is_Dock_Station_Present_Ex(pbPresent: CPointer<Int32>, hMachine: IntNative): UInt32
     func CM_Is_Version_Available(wVersion: UInt16): Int32
     // param-hint: hMachine optional
     func CM_Is_Version_Available_Ex(wVersion: UInt16, hMachine: IntNative): Int32
     // param-hint: pDeviceID optional
-    func CM_Locate_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: CM_LOCATE_DEVNODE_FLAGS): CONFIGRET
+    func CM_Locate_DevNodeA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: UInt32): UInt32
     // param-hint: pDeviceID optional
-    func CM_Locate_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: CM_LOCATE_DEVNODE_FLAGS): CONFIGRET
-    // param-hint: pDeviceID optional
-    // param-hint: hMachine optional
-    func CM_Locate_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Locate_DevNodeW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: UInt32): UInt32
     // param-hint: pDeviceID optional
     // param-hint: hMachine optional
-    func CM_Locate_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_MapCrToWin32Err(CmReturnCode: CONFIGRET, DefaultErr: UInt32): UInt32
-    func CM_Merge_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): CONFIGRET
+    func CM_Locate_DevNode_ExA(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: pDeviceID optional
+    // param-hint: hMachine optional
+    func CM_Locate_DevNode_ExW(pdnDevInst: CPointer<UInt32>, pDeviceID: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_MapCrToWin32Err(CmReturnCode: UInt32, DefaultErr: UInt32): UInt32
+    func CM_Merge_Range_List(rlhOld1: UIntNative, rlhOld2: UIntNative, rlhNew: UIntNative, ulFlags: UInt32): UInt32
     // param-hint: ResourceData bytes=param[4]
-    func CM_Modify_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Modify_Res_Des(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32): UInt32
     // param-hint: ResourceData bytes=param[4]
     // param-hint: hMachine optional
-    func CM_Modify_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Move_DevNode(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Modify_Res_Des_Ex(prdResDes: CPointer<UIntNative>, rdResDes: UIntNative, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Move_DevNode(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Move_DevNode_Ex(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Next_Range(preElement: CPointer<UIntNative>, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, ulFlags: UInt32): CONFIGRET
-    // param-hint: ClassGuid optional
-    // param-hint: pszClassName optional
-    func CM_Open_Class_KeyA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRET
-    // param-hint: ClassGuid optional
-    // param-hint: pszClassName optional
-    func CM_Open_Class_KeyW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRET
-    // param-hint: ClassGuid optional
-    // param-hint: pszClassName optional
-    // param-hint: hMachine optional
-    func CM_Open_Class_Key_ExA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: ClassGuid optional
-    // param-hint: pszClassName optional
-    // param-hint: hMachine optional
-    func CM_Open_Class_Key_ExW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Open_DevNode_Key(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRET
-    // param-hint: hMachine optional
-    func CM_Open_DevNode_Key_Ex(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Open_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRET
-    func CM_Open_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): CONFIGRET
-    // param-hint: hMachine optional
-    func CM_Open_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: hMachine optional
-    func CM_Open_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Move_DevNode_Ex(dnFromDevInst: UInt32, dnToDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Next_Range(preElement: CPointer<UIntNative>, pullStart: CPointer<UInt64>, pullEnd: CPointer<UInt64>, ulFlags: UInt32): UInt32
     // param-hint: pVetoType optional
     // param-hint: pszVetoName len=param[3] optional
-    func CM_Query_And_Remove_SubTreeA(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPE>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Query_And_Remove_SubTreeA(dnAncestor: UInt32, pVetoType: CPointer<Int32>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): UInt32
     // param-hint: pVetoType optional
     // param-hint: pszVetoName len=param[3] optional
-    func CM_Query_And_Remove_SubTreeW(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPE>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Query_And_Remove_SubTreeW(dnAncestor: UInt32, pVetoType: CPointer<Int32>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): UInt32
     // param-hint: pVetoType optional
     // param-hint: pszVetoName len=param[3] optional
     // param-hint: hMachine optional
-    func CM_Query_And_Remove_SubTree_ExA(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPE>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Query_And_Remove_SubTree_ExA(dnAncestor: UInt32, pVetoType: CPointer<Int32>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pVetoType optional
     // param-hint: pszVetoName len=param[3] optional
     // param-hint: hMachine optional
-    func CM_Query_And_Remove_SubTree_ExW(dnAncestor: UInt32, pVetoType: CPointer<PNP_VETO_TYPE>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Query_And_Remove_SubTree_ExW(dnAncestor: UInt32, pVetoType: CPointer<Int32>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pData bytes=param[1]
-    func CM_Query_Arbitrator_Free_Data(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Query_Arbitrator_Free_Data(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): UInt32
     // param-hint: pData bytes=param[1]
     // param-hint: hMachine optional
-    func CM_Query_Arbitrator_Free_Data_Ex(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Query_Arbitrator_Free_Size(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Query_Arbitrator_Free_Data_Ex(pData: CPointer<Unit>, DataLen: UInt32, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Query_Arbitrator_Free_Size(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Query_Arbitrator_Free_Size_Ex(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Query_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Query_Arbitrator_Free_Size_Ex(pulSize: CPointer<UInt32>, dnDevInst: UInt32, ResourceID: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Query_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Query_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Query_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: ResourceData bytes=param[4]
     // param-hint: hMachine optional
-    func CM_Query_Resource_Conflict_List(pclConflictList: CPointer<UIntNative>, dnDevInst: UInt32, ResourceID: CM_RESTYPE, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Reenumerate_DevNode(dnDevInst: UInt32, ulFlags: CM_REENUMERATE_FLAGS): CONFIGRET
+    func CM_Query_Resource_Conflict_List(pclConflictList: CPointer<UIntNative>, dnDevInst: UInt32, ResourceID: UInt32, ResourceData: CPointer<Unit>, ResourceLen: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Reenumerate_DevNode(dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Reenumerate_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Register_Device_Driver(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Reenumerate_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Register_Device_Driver(dnDevInst: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Register_Device_Driver_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Register_Device_Driver_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pszReference optional
     // param-hint: pszDeviceInterface len=param[4]
-    func CM_Register_Device_InterfaceA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
+    func CM_Register_Device_InterfaceA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pszReference optional
     // param-hint: pszDeviceInterface len=param[4]
-    func CM_Register_Device_InterfaceW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): CONFIGRET
-    // param-hint: pszReference optional
-    // param-hint: pszDeviceInterface len=param[4]
-    // param-hint: hMachine optional
-    func CM_Register_Device_Interface_ExA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Register_Device_InterfaceW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: pszReference optional
     // param-hint: pszDeviceInterface len=param[4]
     // param-hint: hMachine optional
-    func CM_Register_Device_Interface_ExW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Register_Device_Interface_ExA(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt8>, pszDeviceInterface: CPointer<UInt8>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: pszReference optional
+    // param-hint: pszDeviceInterface len=param[4]
+    // param-hint: hMachine optional
+    func CM_Register_Device_Interface_ExW(dnDevInst: UInt32, InterfaceClassGuid: CPointer<GUID>, pszReference: CPointer<UInt16>, pszDeviceInterface: CPointer<UInt16>, pulLength: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pContext optional
-    func CM_Register_Notification(pFilter: CPointer<CM_NOTIFY_FILTER>, pContext: CPointer<Unit>, pCallback: PCM_NOTIFY_CALLBACK, pNotifyContext: CPointer<HCMNOTIFICATION>): CONFIGRET
-    func CM_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Register_Notification(pFilter: CPointer<CM_NOTIFY_FILTER>, pContext: CPointer<Unit>, pCallback: PCM_NOTIFY_CALLBACK, pNotifyContext: CPointer<HCMNOTIFICATION>): UInt32
+    func CM_Remove_SubTree(dnAncestor: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Remove_SubTree_Ex(dnAncestor: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: pVetoType optional
     // param-hint: pszVetoName len=param[3] optional
-    func CM_Request_Device_EjectA(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPE>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Request_Device_EjectA(dnDevInst: UInt32, pVetoType: CPointer<Int32>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32): UInt32
     // param-hint: pVetoType optional
     // param-hint: pszVetoName len=param[3] optional
-    func CM_Request_Device_EjectW(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPE>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): CONFIGRET
-    // param-hint: pVetoType optional
-    // param-hint: pszVetoName len=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Request_Device_Eject_ExA(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPE>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Request_Device_EjectW(dnDevInst: UInt32, pVetoType: CPointer<Int32>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32): UInt32
     // param-hint: pVetoType optional
     // param-hint: pszVetoName len=param[3] optional
     // param-hint: hMachine optional
-    func CM_Request_Device_Eject_ExW(dnDevInst: UInt32, pVetoType: CPointer<PNP_VETO_TYPE>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Request_Eject_PC(): CONFIGRET
+    func CM_Request_Device_Eject_ExA(dnDevInst: UInt32, pVetoType: CPointer<Int32>, pszVetoName: CPointer<UInt8>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: pVetoType optional
+    // param-hint: pszVetoName len=param[3] optional
     // param-hint: hMachine optional
-    func CM_Request_Eject_PC_Ex(hMachine: IntNative): CONFIGRET
-    func CM_Run_Detection(ulFlags: UInt32): CONFIGRET
+    func CM_Request_Device_Eject_ExW(dnDevInst: UInt32, pVetoType: CPointer<Int32>, pszVetoName: CPointer<UInt16>, ulNameLength: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Request_Eject_PC(): UInt32
     // param-hint: hMachine optional
-    func CM_Run_Detection_Ex(ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    func CM_Set_Class_PropertyW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): CONFIGRET
-    // param-hint: PropertyBuffer bytes=param[4] optional
+    func CM_Request_Eject_PC_Ex(hMachine: IntNative): UInt32
+    func CM_Run_Detection(ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Set_Class_Property_ExW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Run_Detection_Ex(ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: Buffer bytes=param[3] optional
     // param-hint: hMachine optional
-    func CM_Set_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Set_Class_Registry_PropertyA(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: Buffer bytes=param[3] optional
     // param-hint: hMachine optional
-    func CM_Set_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Set_DevNode_Problem(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Set_Class_Registry_PropertyW(ClassGuid: CPointer<GUID>, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Set_DevNode_Problem(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Set_DevNode_Problem_Ex(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Set_DevNode_Problem_Ex(dnDevInst: UInt32, ulProblem: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: Buffer bytes=param[3] optional
+    func CM_Set_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: Buffer bytes=param[3] optional
+    func CM_Set_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: Buffer bytes=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Set_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: Buffer bytes=param[3] optional
+    // param-hint: hMachine optional
+    func CM_Set_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Set_HW_Prof(ulHardwareProfile: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: hMachine optional
+    func CM_Set_HW_Prof_Ex(ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Set_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): UInt32
+    func CM_Set_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: hMachine optional
+    func CM_Set_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: hMachine optional
+    func CM_Set_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Setup_DevNode(dnDevInst: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: hMachine optional
+    func CM_Setup_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Test_Range_Available(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): UInt32
+    func CM_Uninstall_DevNode(dnDevInst: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: hMachine optional
+    func CM_Uninstall_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Unregister_Device_InterfaceA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): UInt32
+    func CM_Unregister_Device_InterfaceW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): UInt32
+    // param-hint: hMachine optional
+    func CM_Unregister_Device_Interface_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: hMachine optional
+    func CM_Unregister_Device_Interface_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Unregister_Notification(NotifyContext: HCMNOTIFICATION): UInt32
+}
+
+@When[CFGMGR32 == "on" && Windows_Win32_Data_HtmlHelp == "on"]
+foreign {
+    func CM_Add_Empty_Log_Conf(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, Priority: Int32, ulFlags: UInt32): UInt32
+    // param-hint: hMachine optional
+    func CM_Add_Empty_Log_Conf_Ex(plcLogConf: CPointer<UIntNative>, dnDevInst: UInt32, Priority: Int32, ulFlags: UInt32, hMachine: IntNative): UInt32
+}
+
+@When[CFGMGR32 == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
     // param-hint: PropertyBuffer bytes=param[4] optional
-    func CM_Set_DevNode_PropertyW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Class_PropertyW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Set_DevNode_Property_ExW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: Buffer bytes=param[3] optional
-    func CM_Set_DevNode_Registry_PropertyA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): CONFIGRET
-    // param-hint: Buffer bytes=param[3] optional
-    func CM_Set_DevNode_Registry_PropertyW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32): CONFIGRET
-    // param-hint: Buffer bytes=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Set_DevNode_Registry_Property_ExA(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    // param-hint: Buffer bytes=param[3] optional
-    // param-hint: hMachine optional
-    func CM_Set_DevNode_Registry_Property_ExW(dnDevInst: UInt32, ulProperty: UInt32, Buffer: CPointer<Unit>, ulLength: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Get_Class_Property_ExW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
     // param-hint: PropertyBuffer bytes=param[4] optional
-    func CM_Set_Device_Interface_PropertyW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_DevNode_PropertyW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): UInt32
     // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Set_Device_Interface_Property_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Set_HW_Prof(ulHardwareProfile: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_DevNode_Property_ExW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    func CM_Get_Device_Interface_PropertyW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32): UInt32
+    // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Set_HW_Prof_Ex(ulHardwareProfile: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Set_HW_Prof_FlagsA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): CONFIGRET
-    func CM_Set_HW_Prof_FlagsW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Get_Device_Interface_Property_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: CPointer<UInt32>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    func CM_Set_Class_PropertyW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Set_HW_Prof_Flags_ExA(pDeviceID: CPointer<UInt8>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Set_Class_Property_ExW(ClassGUID: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    func CM_Set_DevNode_PropertyW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Set_HW_Prof_Flags_ExW(pDeviceID: CPointer<UInt16>, ulConfig: UInt32, ulValue: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Setup_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Set_DevNode_Property_ExW(dnDevInst: UInt32, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    func CM_Set_Device_Interface_PropertyW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32): UInt32
+    // param-hint: PropertyBuffer bytes=param[4] optional
     // param-hint: hMachine optional
-    func CM_Setup_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Test_Range_Available(ullStartValue: UInt64, ullEndValue: UInt64, rlh: UIntNative, ulFlags: UInt32): CONFIGRET
-    func CM_Uninstall_DevNode(dnDevInst: UInt32, ulFlags: UInt32): CONFIGRET
+    func CM_Set_Device_Interface_Property_ExW(pszDeviceInterface: CPointer<UInt16>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, ulFlags: UInt32, hMachine: IntNative): UInt32
+}
+
+@When[CFGMGR32 == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // param-hint: pszClassName optional
+    func CM_Open_Class_KeyA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): UInt32
+    // param-hint: ClassGuid optional
+    // param-hint: pszClassName optional
+    func CM_Open_Class_KeyW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): UInt32
+    // param-hint: ClassGuid optional
+    // param-hint: pszClassName optional
     // param-hint: hMachine optional
-    func CM_Uninstall_DevNode_Ex(dnDevInst: UInt32, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Unregister_Device_InterfaceA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32): CONFIGRET
-    func CM_Unregister_Device_InterfaceW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32): CONFIGRET
+    func CM_Open_Class_Key_ExA(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: ClassGuid optional
+    // param-hint: pszClassName optional
     // param-hint: hMachine optional
-    func CM_Unregister_Device_Interface_ExA(pszDeviceInterface: CPointer<UInt8>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
+    func CM_Open_Class_Key_ExW(ClassGuid: CPointer<GUID>, pszClassName: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkClass: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Open_DevNode_Key(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): UInt32
     // param-hint: hMachine optional
-    func CM_Unregister_Device_Interface_ExW(pszDeviceInterface: CPointer<UInt16>, ulFlags: UInt32, hMachine: IntNative): CONFIGRET
-    func CM_Unregister_Notification(NotifyContext: HCMNOTIFICATION): CONFIGRET
+    func CM_Open_DevNode_Key_Ex(dnDevNode: UInt32, samDesired: UInt32, ulHardwareProfile: UInt32, Disposition: UInt32, phkDevice: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    func CM_Open_Device_Interface_KeyA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): UInt32
+    func CM_Open_Device_Interface_KeyW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32): UInt32
+    // param-hint: hMachine optional
+    func CM_Open_Device_Interface_Key_ExA(pszDeviceInterface: CPointer<UInt8>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): UInt32
+    // param-hint: hMachine optional
+    func CM_Open_Device_Interface_Key_ExW(pszDeviceInterface: CPointer<UInt16>, samDesired: UInt32, Disposition: UInt32, phkDeviceInterface: CPointer<Win32_System_Registry.HKEY>, ulFlags: UInt32, hMachine: IntNative): UInt32
 }
 
 @When[SETUPAPI == "on"]
@@ -6691,20 +7434,20 @@ foreign {
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
-    func SetupAddSectionToDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Operation: SETUP_FILE_OPERATION, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+    func SetupAddSectionToDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Operation: UInt32, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
     // param-hint: ListInfHandle optional
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
-    func SetupAddSectionToDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Operation: SETUP_FILE_OPERATION, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+    func SetupAddSectionToDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Operation: UInt32, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
-    func SetupAddToDiskSpaceListA(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt8>, FileSize: Int64, Operation: SETUP_FILE_OPERATION, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+    func SetupAddToDiskSpaceListA(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt8>, FileSize: Int64, Operation: UInt32, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
-    func SetupAddToDiskSpaceListW(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt16>, FileSize: Int64, Operation: SETUP_FILE_OPERATION, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+    func SetupAddToDiskSpaceListW(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt16>, FileSize: Int64, Operation: UInt32, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
     // pinvoke-hint: SetLastError
     func SetupAddToSourceListA(Flags: UInt32, Source: CPointer<UInt8>): Int32
     // pinvoke-hint: SetLastError
@@ -6757,13 +7500,13 @@ foreign {
     // param-hint: RequiredSize optional
     // param-hint: DestinationInfFileNameComponent optional
     // pinvoke-hint: SetLastError
-    func SetupCopyOEMInfA(SourceInfFileName: CPointer<UInt8>, OEMSourceMediaLocation: CPointer<UInt8>, OEMSourceMediaType: OEM_SOURCE_MEDIA_TYPE, CopyStyle: SP_COPY_STYLE, DestinationInfFileName: CPointer<UInt8>, DestinationInfFileNameSize: UInt32, RequiredSize: CPointer<UInt32>, DestinationInfFileNameComponent: CPointer<CPointer<UInt8>>): Int32
+    func SetupCopyOEMInfA(SourceInfFileName: CPointer<UInt8>, OEMSourceMediaLocation: CPointer<UInt8>, OEMSourceMediaType: UInt32, CopyStyle: UInt32, DestinationInfFileName: CPointer<UInt8>, DestinationInfFileNameSize: UInt32, RequiredSize: CPointer<UInt32>, DestinationInfFileNameComponent: CPointer<CPointer<UInt8>>): Int32
     // param-hint: OEMSourceMediaLocation optional
     // param-hint: DestinationInfFileName len=param[5] optional
     // param-hint: RequiredSize optional
     // param-hint: DestinationInfFileNameComponent optional
     // pinvoke-hint: SetLastError
-    func SetupCopyOEMInfW(SourceInfFileName: CPointer<UInt16>, OEMSourceMediaLocation: CPointer<UInt16>, OEMSourceMediaType: OEM_SOURCE_MEDIA_TYPE, CopyStyle: SP_COPY_STYLE, DestinationInfFileName: CPointer<UInt16>, DestinationInfFileNameSize: UInt32, RequiredSize: CPointer<UInt32>, DestinationInfFileNameComponent: CPointer<CPointer<UInt16>>): Int32
+    func SetupCopyOEMInfW(SourceInfFileName: CPointer<UInt16>, OEMSourceMediaLocation: CPointer<UInt16>, OEMSourceMediaType: UInt32, CopyStyle: UInt32, DestinationInfFileName: CPointer<UInt16>, DestinationInfFileNameSize: UInt32, RequiredSize: CPointer<UInt32>, DestinationInfFileNameComponent: CPointer<CPointer<UInt16>>): Int32
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
@@ -6774,10 +7517,10 @@ foreign {
     func SetupCreateDiskSpaceListW(Reserved1: CPointer<Unit>, Reserved2: UInt32, Flags: UInt32): CPointer<Unit>
     // param-hint: CompressionType optional
     // pinvoke-hint: SetLastError
-    func SetupDecompressOrCopyFileA(SourceFileName: CPointer<UInt8>, TargetFileName: CPointer<UInt8>, CompressionType: CPointer<FILE_COMPRESSION_TYPE>): UInt32
+    func SetupDecompressOrCopyFileA(SourceFileName: CPointer<UInt8>, TargetFileName: CPointer<UInt8>, CompressionType: CPointer<UInt32>): UInt32
     // param-hint: CompressionType optional
     // pinvoke-hint: SetLastError
-    func SetupDecompressOrCopyFileW(SourceFileName: CPointer<UInt16>, TargetFileName: CPointer<UInt16>, CompressionType: CPointer<FILE_COMPRESSION_TYPE>): UInt32
+    func SetupDecompressOrCopyFileW(SourceFileName: CPointer<UInt16>, TargetFileName: CPointer<UInt16>, CompressionType: CPointer<UInt32>): UInt32
     // pinvoke-hint: SetLastError
     func SetupDefaultQueueCallbackA(Context: CPointer<Unit>, Notification: UInt32, Param1: UIntNative, Param2: UIntNative): UInt32
     // pinvoke-hint: SetLastError
@@ -6790,9 +7533,6 @@ foreign {
     func SetupDeleteErrorW(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt16>, File: CPointer<UInt16>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
     // pinvoke-hint: SetLastError
     func SetupDestroyDiskSpaceList(DiskSpace: CPointer<Unit>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiAskForOEMDisk(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
     // param-hint: ClassGuidList len=param[2] optional
     // pinvoke-hint: SetLastError
     func SetupDiBuildClassInfoList(Flags: UInt32, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
@@ -6806,16 +7546,8 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiBuildClassInfoListExW(Flags: UInt32, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiBuildDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverType: SETUP_DI_DRIVER_TYPE): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCallClassInstaller(InstallFunction: DI_FUNCTION, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
     // pinvoke-hint: SetLastError
     func SetupDiCancelDriverInfoSearch(DeviceInfoSet: HDEVINFO): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiChangeState(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
     // param-hint: ClassGuidList len=param[2]
     // pinvoke-hint: SetLastError
     func SetupDiClassGuidsFromNameA(ClassName: CPointer<UInt8>, ClassGuidList: CPointer<GUID>, ClassGuidListSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
@@ -6852,19 +7584,6 @@ foreign {
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupDiClassNameFromGuidW(ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt16>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfHandle optional
-    // param-hint: InfSectionName optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDevRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY
-    // param-hint: InfHandle optional
-    // param-hint: InfSectionName optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDevRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY
-    // param-hint: DeviceDescription optional
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt8>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt8>, hwndParent: CPointer<Unit>, CreationFlags: SETUP_DI_DEVICE_CREATION_FLAGS, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
     // param-hint: ClassGuid optional
     // param-hint: hwndParent optional
     // pinvoke-hint: SetLastError
@@ -6881,88 +7600,13 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiCreateDeviceInfoListExW(ClassGuid: CPointer<GUID>, hwndParent: CPointer<Unit>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): HDEVINFO
-    // param-hint: DeviceDescription optional
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt16>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt16>, hwndParent: CPointer<Unit>, CreationFlags: SETUP_DI_DEVICE_CREATION_FLAGS, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: ReferenceString optional
-    // param-hint: DeviceInterfaceData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt8>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
-    // param-hint: Reserved optional reserved
-    // param-hint: InfHandle optional
-    // param-hint: InfSectionName optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInterfaceRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY
-    // param-hint: Reserved optional reserved
-    // param-hint: InfHandle optional
-    // param-hint: InfSectionName optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInterfaceRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY
-    // param-hint: ReferenceString optional
-    // param-hint: DeviceInterfaceData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiCreateDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt16>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiDeleteDevRegKey(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiDeleteDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiDeleteDeviceInterfaceData(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiDeleteDeviceInterfaceRegKey(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Reserved: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiDestroyClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>): Int32
     // pinvoke-hint: SetLastError
     func SetupDiDestroyDeviceInfoList(DeviceInfoSet: HDEVINFO): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiDestroyDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverType: SETUP_DI_DRIVER_TYPE): Int32
-    func SetupDiDrawMiniIcon(hdc: Win32_Graphics_Gdi.HDC, rc: Win32_Foundation.RECT, MiniIconIndex: Int32, Flags: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiEnumDeviceInfo(DeviceInfoSet: HDEVINFO, MemberIndex: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiEnumDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, InterfaceClassGuid: CPointer<GUID>, MemberIndex: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiEnumDriverInfoA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverType: SETUP_DI_DRIVER_TYPE, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiEnumDriverInfoW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverType: SETUP_DI_DRIVER_TYPE, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: InfSectionWithExt len=param[3] optional
-    // param-hint: RequiredSize optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetActualModelsSectionA(Context: CPointer<INFCONTEXT>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Reserved: CPointer<Unit>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: InfSectionWithExt len=param[3] optional
-    // param-hint: RequiredSize optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetActualModelsSectionW(Context: CPointer<INFCONTEXT>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Reserved: CPointer<Unit>): Int32
     // param-hint: InfSectionWithExt len=param[3] optional
     // param-hint: RequiredSize optional
     // param-hint: Extension optional
     // pinvoke-hint: SetLastError
     func SetupDiGetActualSectionToInstallA(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt8>>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: InfSectionWithExt len=param[4] optional
-    // param-hint: RequiredSize optional
-    // param-hint: Extension optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetActualSectionToInstallExA(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt8>>, Reserved: CPointer<Unit>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: InfSectionWithExt len=param[4] optional
-    // param-hint: RequiredSize optional
-    // param-hint: Extension optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetActualSectionToInstallExW(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt16>>, Reserved: CPointer<Unit>): Int32
     // param-hint: InfSectionWithExt len=param[3] optional
     // param-hint: RequiredSize optional
     // param-hint: Extension optional
@@ -6991,19 +7635,11 @@ foreign {
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupDiGetClassDescriptionW(ClassGuid: CPointer<GUID>, ClassDescription: CPointer<UInt16>, ClassDescriptionSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevPropertySheetsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertySheetHeader: CPointer<Win32_impl.PROPSHEETHEADERA_V2>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevPropertySheetsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertySheetHeader: CPointer<Win32_impl.PROPSHEETHEADERW_V2>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
     // param-hint: ClassGuid optional
     // param-hint: Enumerator optional
     // param-hint: hwndParent optional
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevsA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGS): HDEVINFO
+    func SetupDiGetClassDevsA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: UInt32): HDEVINFO
     // param-hint: ClassGuid optional
     // param-hint: Enumerator optional
     // param-hint: hwndParent optional
@@ -7011,7 +7647,7 @@ foreign {
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevsExA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGS, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): HDEVINFO
+    func SetupDiGetClassDevsExA(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt8>, hwndParent: CPointer<Unit>, Flags: UInt32, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): HDEVINFO
     // param-hint: ClassGuid optional
     // param-hint: Enumerator optional
     // param-hint: hwndParent optional
@@ -7019,40 +7655,12 @@ foreign {
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevsExW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGS, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): HDEVINFO
+    func SetupDiGetClassDevsExW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: UInt32, DeviceInfoSet: HDEVINFO, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): HDEVINFO
     // param-hint: ClassGuid optional
     // param-hint: Enumerator optional
     // param-hint: hwndParent optional
     // pinvoke-hint: SetLastError
-    func SetupDiGetClassDevsW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: SETUP_DI_GET_CLASS_DEVS_FLAGS): HDEVINFO
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassImageIndex(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>, ClassGuid: CPointer<GUID>, ImageIndex: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>): Int32
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassImageListExA(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassImageListExW(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: ClassInstallParams bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADER>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: ClassInstallParams bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADER>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // param-hint: RequiredSize optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+    func SetupDiGetClassDevsW(ClassGuid: CPointer<GUID>, Enumerator: CPointer<UInt16>, hwndParent: CPointer<Unit>, Flags: UInt32): HDEVINFO
     // param-hint: PropertyKeyArray len=param[2] optional
     // param-hint: RequiredPropertyKeyCount optional
     // pinvoke-hint: SetLastError
@@ -7063,10 +7671,6 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiGetClassPropertyKeysExW(ClassGuid: CPointer<GUID>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
     // param-hint: PropertyRegDataType optional
     // param-hint: PropertyBuffer bytes=param[4]
     // param-hint: RequiredSize optional
@@ -7081,90 +7685,8 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiGetClassRegistryPropertyW(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[6]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetCustomDevicePropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, CustomPropertyName: CPointer<UInt8>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[6]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetCustomDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, CustomPropertyName: CPointer<UInt16>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
     func SetupDiGetDeviceInfoListClass(DeviceInfoSet: HDEVINFO, ClassGuid: CPointer<GUID>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInfoListDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_A>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInfoListDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_W>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_A>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_W>): Int32
-    // param-hint: DeviceInstanceId len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInstanceIdA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstanceId: CPointer<UInt8>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInstanceId len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInstanceIdW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstanceId: CPointer<UInt16>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfaceAlias(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, AliasInterfaceClassGuid: CPointer<GUID>, AliasDeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
-    // param-hint: DeviceInterfaceDetailData bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfaceDetailA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_A>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: DeviceInterfaceDetailData bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfaceDetailW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_W>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: PropertyKeyArray len=param[3] optional
-    // param-hint: RequiredPropertyKeyCount optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyKeyArray len=param[3] optional
-    // param-hint: RequiredPropertyKeyCount optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDevicePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<Win32_Devices_Properties.DEVPROPTYPE>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Property: SETUP_DI_REGISTRY_PROPERTY, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: PropertyRegDataType optional
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Property: SETUP_DI_REGISTRY_PROPERTY, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: DriverInfoDetailData bytes=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDriverInfoDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_A>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: DriverInfoDetailData bytes=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDriverInfoDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_W>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMS>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMS>): Int32
     // param-hint: FriendlyName len=param[2]
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
@@ -7209,16 +7731,6 @@ foreign {
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupDiGetINFClassW(InfName: CPointer<UInt16>, ClassGuid: CPointer<GUID>, ClassName: CPointer<UInt16>, ClassNameSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiGetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiGetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>): Int32
-    // param-hint: DeviceInfoData optional
-    func SetupDiGetWizardPage(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, InstallWizardData: CPointer<SP_INSTALLWIZARD_DATA>, PageType: UInt32, Flags: UInt32): Win32_impl.HPROPSHEETPAGE
     // param-hint: hwndParent optional
     // param-hint: FileQueue optional
     // pinvoke-hint: SetLastError
@@ -7243,88 +7755,6 @@ foreign {
     // param-hint: FileQueue optional
     // pinvoke-hint: SetLastError
     func SetupDiInstallClassW(hwndParent: CPointer<Unit>, InfFileName: CPointer<UInt16>, Flags: UInt32, FileQueue: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiInstallDriverFiles(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: LargeIcon optional
-    // param-hint: MiniIconIndex optional
-    // pinvoke-hint: SetLastError
-    func SetupDiLoadClassIcon(ClassGuid: CPointer<GUID>, LargeIcon: CPointer<Win32_impl.HICON>, MiniIconIndex: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiLoadDeviceIcon(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, cxIcon: UInt32, cyIcon: UInt32, Flags: UInt32, hIcon: CPointer<Win32_impl.HICON>): Int32
-    // param-hint: ClassGuid optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenClassRegKey(ClassGuid: CPointer<GUID>, samDesired: UInt32): Win32_System_Registry.HKEY
-    // param-hint: ClassGuid optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenClassRegKeyExA(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY
-    // param-hint: ClassGuid optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenClassRegKeyExW(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDevRegKey(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, samDesired: UInt32): Win32_System_Registry.HKEY
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt8>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt16>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: DeviceInterfaceData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt8>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDeviceInterfaceRegKey(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Reserved: UInt32, samDesired: UInt32): Win32_System_Registry.HKEY
-    // param-hint: DeviceInterfaceData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiOpenDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt16>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiRegisterCoDeviceInstallers(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: CompareProc optional
-    // param-hint: CompareContext optional
-    // param-hint: DupDeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiRegisterDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Flags: UInt32, CompareProc: PSP_DETSIG_CMPPROC, CompareContext: CPointer<Unit>, DupDeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    func SetupDiRemoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiRemoveDeviceInterface(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiRestartDevices(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSelectBestCompatDrv(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSelectDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSelectOEMDrv(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: ClassInstallParams bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADER>, ClassInstallParamsSize: UInt32): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: ClassInstallParams bytes=param[3] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADER>, ClassInstallParamsSize: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // param-hint: MachineName optional
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
     // param-hint: PropertyBuffer bytes=param[3] optional
     // param-hint: MachineName optional
     // param-hint: Reserved optional reserved
@@ -7335,45 +7765,6 @@ foreign {
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupDiSetClassRegistryPropertyW(ClassGuid: CPointer<GUID>, Property: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_A>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_W>): Int32
-    // param-hint: Reserved optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceInterfaceDefault(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[5] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: Win32_Devices_Properties.DEVPROPTYPE, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Property: SETUP_DI_REGISTRY_PROPERTY, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32
-    // param-hint: PropertyBuffer bytes=param[4] optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Property: SETUP_DI_REGISTRY_PROPERTY, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMS>): Int32
-    // param-hint: DeviceInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMS>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiSetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: DriverInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>): Int32
-    // param-hint: DeviceInfoData optional
-    // param-hint: DriverInfoData optional
-    // pinvoke-hint: SetLastError
-    func SetupDiSetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupDiUnremoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
@@ -7390,80 +7781,38 @@ foreign {
     // param-hint: SizeNeeded optional
     // pinvoke-hint: SetLastError
     func SetupEnumInfSectionsW(InfHandle: CPointer<Unit>, Index: UInt32, Buffer: CPointer<UInt16>, Size: UInt32, SizeNeeded: CPointer<UInt32>): Int32
-    // param-hint: Key optional
-    // pinvoke-hint: SetLastError
-    func SetupFindFirstLineA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, Context: CPointer<INFCONTEXT>): Int32
-    // param-hint: Key optional
-    // pinvoke-hint: SetLastError
-    func SetupFindFirstLineW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, Context: CPointer<INFCONTEXT>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupFindNextLine(ContextIn: CPointer<INFCONTEXT>, ContextOut: CPointer<INFCONTEXT>): Int32
-    // param-hint: Key optional
-    // pinvoke-hint: SetLastError
-    func SetupFindNextMatchLineA(ContextIn: CPointer<INFCONTEXT>, Key: CPointer<UInt8>, ContextOut: CPointer<INFCONTEXT>): Int32
-    // param-hint: Key optional
-    // pinvoke-hint: SetLastError
-    func SetupFindNextMatchLineW(ContextIn: CPointer<INFCONTEXT>, Key: CPointer<UInt16>, ContextOut: CPointer<INFCONTEXT>): Int32
     // param-hint: List len=param[1]
     // pinvoke-hint: SetLastError
     func SetupFreeSourceListA(List: CPointer<CPointer<CPointer<UInt8>>>, Count: UInt32): Int32
     // param-hint: List len=param[1]
     // pinvoke-hint: SetLastError
     func SetupFreeSourceListW(List: CPointer<CPointer<CPointer<UInt16>>>, Count: UInt32): Int32
-    func SetupGetBackupInformationA(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_A>): Int32
-    func SetupGetBackupInformationW(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_W>): Int32
-    // param-hint: ReturnBuffer bytes=param[3] optional
-    // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
-    func SetupGetBinaryField(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetFieldCount(Context: CPointer<INFCONTEXT>): UInt32
-    // pinvoke-hint: SetLastError
-    func SetupGetFileCompressionInfoA(SourceFileName: CPointer<UInt8>, ActualSourceFileName: CPointer<CPointer<UInt8>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPE>): UInt32
+    func SetupGetFileCompressionInfoA(SourceFileName: CPointer<UInt8>, ActualSourceFileName: CPointer<CPointer<UInt8>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<UInt32>): UInt32
     // param-hint: ActualSourceFileNameBuffer len=param[2] optional
     // param-hint: RequiredBufferLen optional
     // pinvoke-hint: SetLastError
-    func SetupGetFileCompressionInfoExA(SourceFileName: CPointer<UInt8>, ActualSourceFileNameBuffer: CPointer<UInt8>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPE>): Int32
+    func SetupGetFileCompressionInfoExA(SourceFileName: CPointer<UInt8>, ActualSourceFileNameBuffer: CPointer<UInt8>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<UInt32>): Int32
     // param-hint: ActualSourceFileNameBuffer len=param[2] optional
     // param-hint: RequiredBufferLen optional
     // pinvoke-hint: SetLastError
-    func SetupGetFileCompressionInfoExW(SourceFileName: CPointer<UInt16>, ActualSourceFileNameBuffer: CPointer<UInt16>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPE>): Int32
+    func SetupGetFileCompressionInfoExW(SourceFileName: CPointer<UInt16>, ActualSourceFileNameBuffer: CPointer<UInt16>, ActualSourceFileNameBufferLen: UInt32, RequiredBufferLen: CPointer<UInt32>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
-    func SetupGetFileCompressionInfoW(SourceFileName: CPointer<UInt16>, ActualSourceFileName: CPointer<CPointer<UInt16>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<FILE_COMPRESSION_TYPE>): UInt32
+    func SetupGetFileCompressionInfoW(SourceFileName: CPointer<UInt16>, ActualSourceFileName: CPointer<CPointer<UInt16>>, SourceFileSize: CPointer<UInt32>, TargetFileSize: CPointer<UInt32>, CompressionType: CPointer<UInt32>): UInt32
     // pinvoke-hint: SetLastError
     func SetupGetFileQueueCount(FileQueue: CPointer<Unit>, SubQueueFileOp: UInt32, NumOperations: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
     func SetupGetFileQueueFlags(FileQueue: CPointer<Unit>, Flags: CPointer<UInt32>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: LocaleName optional
-    // param-hint: ReturnBuffer len=param[4]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfDriverStoreLocationA(FileName: CPointer<UInt8>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, LocaleName: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: LocaleName optional
-    // param-hint: ReturnBuffer len=param[4]
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfDriverStoreLocationW(FileName: CPointer<UInt16>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, LocaleName: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
     // param-hint: DirectoryPath optional
     // param-hint: ReturnBuffer len=param[3] optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
-    func SetupGetInfFileListA(DirectoryPath: CPointer<UInt8>, InfStyle: INF_STYLE, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    func SetupGetInfFileListA(DirectoryPath: CPointer<UInt8>, InfStyle: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
     // param-hint: DirectoryPath optional
     // param-hint: ReturnBuffer len=param[3]
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
-    func SetupGetInfFileListW(DirectoryPath: CPointer<UInt16>, InfStyle: INF_STYLE, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfInformationA(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATION>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer bytes=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetInfInformationW(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATION>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    func SetupGetInfFileListW(DirectoryPath: CPointer<UInt16>, InfStyle: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
     // param-hint: ReturnBuffer len=param[2]
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
@@ -7473,62 +7822,10 @@ foreign {
     // pinvoke-hint: SetLastError
     func SetupGetInfPublishedNameW(DriverStoreLocation: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
-    func SetupGetIntField(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, IntegerValue: CPointer<Int32>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetLineByIndexA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Index: UInt32, Context: CPointer<INFCONTEXT>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupGetLineByIndexW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Index: UInt32, Context: CPointer<INFCONTEXT>): Int32
-    // pinvoke-hint: SetLastError
     func SetupGetLineCountA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>): Int32
     // pinvoke-hint: SetLastError
     func SetupGetLineCountW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>): Int32
-    // param-hint: Context optional
-    // param-hint: InfHandle optional
-    // param-hint: Section optional
-    // param-hint: Key optional
-    // param-hint: ReturnBuffer len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetLineTextA(Context: CPointer<INFCONTEXT>, InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: Context optional
-    // param-hint: InfHandle optional
-    // param-hint: Section optional
-    // param-hint: Key optional
-    // param-hint: ReturnBuffer len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetLineTextW(Context: CPointer<INFCONTEXT>, InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetMultiSzFieldA(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetMultiSzFieldW(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
     func SetupGetNonInteractiveMode(): Int32
-    // param-hint: InfContext optional
-    // param-hint: FileName optional
-    // param-hint: ReturnBuffer len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceFileLocationA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, FileName: CPointer<UInt8>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfContext optional
-    // param-hint: FileName optional
-    // param-hint: ReturnBuffer len=param[5] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceFileLocationW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, FileName: CPointer<UInt16>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfContext optional
-    // param-hint: FileName optional
-    // param-hint: Section optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceFileSizeA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, FileName: CPointer<UInt8>, Section: CPointer<UInt8>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32
-    // param-hint: InfContext optional
-    // param-hint: FileName optional
-    // param-hint: Section optional
-    // pinvoke-hint: SetLastError
-    func SetupGetSourceFileSizeW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, FileName: CPointer<UInt16>, Section: CPointer<UInt16>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32
     // param-hint: ReturnBuffer len=param[4] optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
@@ -7537,26 +7834,6 @@ foreign {
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
     func SetupGetSourceInfoW(InfHandle: CPointer<Unit>, SourceId: UInt32, InfoDesired: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetStringFieldA(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetStringFieldW(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfContext optional
-    // param-hint: Section optional
-    // param-hint: ReturnBuffer len=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetTargetPathA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, Section: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: InfContext optional
-    // param-hint: Section optional
-    // param-hint: ReturnBuffer len=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupGetTargetPathW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, Section: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
     func SetupGetThreadLogToken(): UInt64
     // param-hint: OwnerWindow optional
     // pinvoke-hint: SetLastError
@@ -7572,42 +7849,6 @@ foreign {
     // param-hint: LogFileName optional
     // pinvoke-hint: SetLastError
     func SetupInitializeFileLogW(LogFileName: CPointer<UInt16>, Flags: UInt32): CPointer<Unit>
-    // param-hint: InfHandle optional
-    // param-hint: InfContext optional
-    // param-hint: SourceFile optional
-    // param-hint: SourcePathRoot optional
-    // param-hint: DestinationName optional
-    // param-hint: CopyMsgHandler optional
-    // param-hint: Context optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFileA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: SP_COPY_STYLE, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32
-    // param-hint: InfHandle optional
-    // param-hint: InfContext optional
-    // param-hint: SourceFile optional
-    // param-hint: SourcePathRoot optional
-    // param-hint: DestinationName optional
-    // param-hint: CopyMsgHandler optional
-    // param-hint: Context optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFileExA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: SP_COPY_STYLE, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32
-    // param-hint: InfHandle optional
-    // param-hint: InfContext optional
-    // param-hint: SourceFile optional
-    // param-hint: SourcePathRoot optional
-    // param-hint: DestinationName optional
-    // param-hint: CopyMsgHandler optional
-    // param-hint: Context optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFileExW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: SP_COPY_STYLE, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32
-    // param-hint: InfHandle optional
-    // param-hint: InfContext optional
-    // param-hint: SourceFile optional
-    // param-hint: SourcePathRoot optional
-    // param-hint: DestinationName optional
-    // param-hint: CopyMsgHandler optional
-    // param-hint: Context optional
-    // pinvoke-hint: SetLastError
-    func SetupInstallFileW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: SP_COPY_STYLE, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32
     // param-hint: LayoutInfHandle optional
     // param-hint: SourceRootPath optional
     // pinvoke-hint: SetLastError
@@ -7616,40 +7857,10 @@ foreign {
     // param-hint: SourceRootPath optional
     // pinvoke-hint: SetLastError
     func SetupInstallFilesFromInfSectionW(InfHandle: CPointer<Unit>, LayoutInfHandle: CPointer<Unit>, FileQueue: CPointer<Unit>, SectionName: CPointer<UInt16>, SourceRootPath: CPointer<UInt16>, CopyFlags: UInt32): Int32
-    // param-hint: Owner optional
-    // param-hint: RelativeKeyRoot optional
-    // param-hint: SourceRootPath optional
-    // param-hint: MsgHandler optional
-    // param-hint: Context optional
-    // param-hint: DeviceInfoSet optional
-    // param-hint: DeviceInfoData optional
     // pinvoke-hint: SetLastError
-    func SetupInstallFromInfSectionA(Owner: CPointer<Unit>, InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: UInt32, RelativeKeyRoot: Win32_System_Registry.HKEY, SourceRootPath: CPointer<UInt8>, CopyFlags: UInt32, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // param-hint: Owner optional
-    // param-hint: RelativeKeyRoot optional
-    // param-hint: SourceRootPath optional
-    // param-hint: MsgHandler optional
-    // param-hint: Context optional
-    // param-hint: DeviceInfoSet optional
-    // param-hint: DeviceInfoData optional
+    func SetupInstallServicesFromInfSectionA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: UInt32): Int32
     // pinvoke-hint: SetLastError
-    func SetupInstallFromInfSectionW(Owner: CPointer<Unit>, InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: UInt32, RelativeKeyRoot: Win32_System_Registry.HKEY, SourceRootPath: CPointer<UInt16>, CopyFlags: UInt32, MsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupInstallServicesFromInfSectionA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: SPSVCINST_FLAGS): Int32
-    // param-hint: DeviceInfoSet optional
-    // param-hint: DeviceInfoData optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupInstallServicesFromInfSectionExA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: SPSVCINST_FLAGS, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
-    // param-hint: DeviceInfoSet optional
-    // param-hint: DeviceInfoData optional
-    // param-hint: Reserved1 optional reserved
-    // param-hint: Reserved2 optional reserved
-    // pinvoke-hint: SetLastError
-    func SetupInstallServicesFromInfSectionExW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: SPSVCINST_FLAGS, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupInstallServicesFromInfSectionW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: SPSVCINST_FLAGS): Int32
+    func SetupInstallServicesFromInfSectionW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: UInt32): Int32
     // param-hint: Reserved optional reserved
     // pinvoke-hint: SetLastError
     func SetupIterateCabinetA(CabinetFile: CPointer<UInt8>, Reserved: UInt32, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32
@@ -7685,11 +7896,11 @@ foreign {
     // param-hint: InfClass optional
     // param-hint: ErrorLine optional
     // pinvoke-hint: SetLastError
-    func SetupOpenInfFileA(FileName: CPointer<UInt8>, InfClass: CPointer<UInt8>, InfStyle: INF_STYLE, ErrorLine: CPointer<UInt32>): CPointer<Unit>
+    func SetupOpenInfFileA(FileName: CPointer<UInt8>, InfClass: CPointer<UInt8>, InfStyle: UInt32, ErrorLine: CPointer<UInt32>): CPointer<Unit>
     // param-hint: InfClass optional
     // param-hint: ErrorLine optional
     // pinvoke-hint: SetLastError
-    func SetupOpenInfFileW(FileName: CPointer<UInt16>, InfClass: CPointer<UInt16>, InfStyle: INF_STYLE, ErrorLine: CPointer<UInt32>): CPointer<Unit>
+    func SetupOpenInfFileW(FileName: CPointer<UInt16>, InfClass: CPointer<UInt16>, InfStyle: UInt32, ErrorLine: CPointer<UInt32>): CPointer<Unit>
     // pinvoke-hint: SetLastError
     func SetupOpenLog(Erase: Int32): Int32
     // pinvoke-hint: SetLastError
@@ -7728,36 +7939,12 @@ foreign {
     // param-hint: DataOut len=param[5] optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
-    func SetupQueryFileLogA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, DesiredInfo: SetupFileLogInfo, DataOut: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    func SetupQueryFileLogA(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, DesiredInfo: Int32, DataOut: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
     // param-hint: LogSectionName optional
     // param-hint: DataOut len=param[5] optional
     // param-hint: RequiredSize optional
     // pinvoke-hint: SetLastError
-    func SetupQueryFileLogW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, DesiredInfo: SetupFileLogInfo, DataOut: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryInfFileInformationA(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: ReturnBuffer len=param[3] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryInfFileInformationW(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryInfOriginalFileInformationA(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_A>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryInfOriginalFileInformationW(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_W>): Int32
-    // param-hint: Key optional
-    // param-hint: ReturnBuffer len=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryInfVersionInformationA(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, Key: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
-    // param-hint: Key optional
-    // param-hint: ReturnBuffer len=param[4] optional
-    // param-hint: RequiredSize optional
-    // pinvoke-hint: SetLastError
-    func SetupQueryInfVersionInformationW(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, Key: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    func SetupQueryFileLogW(FileLogHandle: CPointer<Unit>, LogSectionName: CPointer<UInt16>, TargetFilename: CPointer<UInt16>, DesiredInfo: Int32, DataOut: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
     func SetupQuerySourceListA(Flags: UInt32, List: CPointer<CPointer<CPointer<UInt8>>>, Count: CPointer<UInt32>): Int32
     // pinvoke-hint: SetLastError
@@ -7777,10 +7964,6 @@ foreign {
     // param-hint: TargetFilename optional
     // pinvoke-hint: SetLastError
     func SetupQueueCopyA(QueueHandle: CPointer<Unit>, SourceRootPath: CPointer<UInt8>, SourcePath: CPointer<UInt8>, SourceFilename: CPointer<UInt8>, SourceDescription: CPointer<UInt8>, SourceTagfile: CPointer<UInt8>, TargetDirectory: CPointer<UInt8>, TargetFilename: CPointer<UInt8>, CopyStyle: UInt32): Int32
-    // pinvoke-hint: SetLastError
-    func SetupQueueCopyIndirectA(CopyParams: CPointer<SP_FILE_COPY_PARAMS_A>): Int32
-    // pinvoke-hint: SetLastError
-    func SetupQueueCopyIndirectW(CopyParams: CPointer<SP_FILE_COPY_PARAMS_W>): Int32
     // param-hint: SourceRootPath optional
     // param-hint: ListInfHandle optional
     // pinvoke-hint: SetLastError
@@ -7841,11 +8024,11 @@ foreign {
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
-    func SetupRemoveFromDiskSpaceListA(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt8>, Operation: SETUP_FILE_OPERATION, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+    func SetupRemoveFromDiskSpaceListA(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt8>, Operation: UInt32, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
-    func SetupRemoveFromDiskSpaceListW(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt16>, Operation: SETUP_FILE_OPERATION, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+    func SetupRemoveFromDiskSpaceListW(DiskSpace: CPointer<Unit>, TargetFilespec: CPointer<UInt16>, Operation: UInt32, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
     // pinvoke-hint: SetLastError
     func SetupRemoveFromSourceListA(Flags: UInt32, Source: CPointer<UInt8>): Int32
     // pinvoke-hint: SetLastError
@@ -7864,12 +8047,12 @@ foreign {
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
-    func SetupRemoveSectionFromDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Operation: SETUP_FILE_OPERATION, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+    func SetupRemoveSectionFromDiskSpaceListA(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Operation: UInt32, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
     // param-hint: ListInfHandle optional
     // param-hint: Reserved1 optional reserved
     // param-hint: Reserved2 optional reserved
     // pinvoke-hint: SetLastError
-    func SetupRemoveSectionFromDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Operation: SETUP_FILE_OPERATION, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
+    func SetupRemoveSectionFromDiskSpaceListW(DiskSpace: CPointer<Unit>, InfHandle: CPointer<Unit>, ListInfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Operation: UInt32, Reserved1: CPointer<Unit>, Reserved2: UInt32): Int32
     // param-hint: DialogTitle optional
     // pinvoke-hint: SetLastError
     func SetupRenameErrorA(hwndParent: CPointer<Unit>, DialogTitle: CPointer<UInt8>, SourceFile: CPointer<UInt8>, TargetFile: CPointer<UInt8>, Win32ErrorCode: UInt32, Style: UInt32): UInt32
@@ -7880,12 +8063,12 @@ foreign {
     // param-hint: CallbackRoutine optional
     // param-hint: CallbackContext optional
     // pinvoke-hint: SetLastError
-    func SetupScanFileQueueA(FileQueue: CPointer<Unit>, Flags: SETUPSCANFILEQUEUE_FLAGS, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_A, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32
+    func SetupScanFileQueueA(FileQueue: CPointer<Unit>, Flags: UInt32, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_A, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32
     // param-hint: Window optional
     // param-hint: CallbackRoutine optional
     // param-hint: CallbackContext optional
     // pinvoke-hint: SetLastError
-    func SetupScanFileQueueW(FileQueue: CPointer<Unit>, Flags: SETUPSCANFILEQUEUE_FLAGS, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_W, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32
+    func SetupScanFileQueueW(FileQueue: CPointer<Unit>, Flags: UInt32, Window: CPointer<Unit>, CallbackRoutine: PSP_FILE_CALLBACK_W, CallbackContext: CPointer<Unit>, Result: CPointer<UInt32>): Int32
     // param-hint: Directory optional
     // pinvoke-hint: SetLastError
     func SetupSetDirectoryIdA(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt8>): Int32
@@ -7902,14 +8085,6 @@ foreign {
     // param-hint: Directory optional
     // pinvoke-hint: SetLastError
     func SetupSetDirectoryIdW(InfHandle: CPointer<Unit>, Id: UInt32, Directory: CPointer<UInt16>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: AlternateDefaultCatalogFile optional
-    // pinvoke-hint: SetLastError
-    func SetupSetFileQueueAlternatePlatformA(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, AlternateDefaultCatalogFile: CPointer<UInt8>): Int32
-    // param-hint: AlternatePlatformInfo optional
-    // param-hint: AlternateDefaultCatalogFile optional
-    // pinvoke-hint: SetLastError
-    func SetupSetFileQueueAlternatePlatformW(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, AlternateDefaultCatalogFile: CPointer<UInt16>): Int32
     // pinvoke-hint: SetLastError
     func SetupSetFileQueueFlags(FileQueue: CPointer<Unit>, FlagMask: UInt32, Flags: UInt32): Int32
     func SetupSetNonInteractiveMode(NonInteractiveFlag: Int32): Int32
@@ -7937,59 +8112,683 @@ foreign {
     func SetupUninstallOEMInfA(InfFileName: CPointer<UInt8>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
     // param-hint: Reserved optional reserved
     func SetupUninstallOEMInfW(InfFileName: CPointer<UInt16>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
+}
+
+@When[SETUPAPI == "on" && (((arch == "x86_64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_Controls == "on")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    func SetupDiGetWizardPage(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, InstallWizardData: CPointer<SP_INSTALLWIZARD_DATA>, PageType: UInt32, Flags: UInt32): Win32__impl_l0.HPROPSHEETPAGE
+}
+
+@When[SETUPAPI == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && (arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: InfSectionWithExt len=param[3] optional
+    // param-hint: RequiredSize optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetActualModelsSectionA(Context: CPointer<INFCONTEXT>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Reserved: CPointer<Unit>): Int32
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: InfSectionWithExt len=param[3] optional
+    // param-hint: RequiredSize optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetActualModelsSectionW(Context: CPointer<INFCONTEXT>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Reserved: CPointer<Unit>): Int32
+    // param-hint: AlternatePlatformInfo optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryInfOriginalFileInformationA(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_A>): Int32
+    // param-hint: AlternatePlatformInfo optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryInfOriginalFileInformationW(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, OriginalFileInfo: CPointer<SP_ORIGINAL_FILE_INFO_W>): Int32
     // param-hint: AltPlatformInfo optional
     func SetupVerifyInfFileA(InfName: CPointer<UInt8>, AltPlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSignerInfo: CPointer<SP_INF_SIGNER_INFO_V2_A>): Int32
     // param-hint: AltPlatformInfo optional
     func SetupVerifyInfFileW(InfName: CPointer<UInt16>, AltPlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSignerInfo: CPointer<SP_INF_SIGNER_INFO_V2_W>): Int32
+}
+
+@When[SETUPAPI == "on" && (((arch == "x86_64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on") || (arch == "aarch64" && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")) && Windows_Win32_System_Diagnostics_Debug == "on" && Windows_Win32_System_SystemInformation == "on")]
+foreign {
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: InfSectionWithExt len=param[4] optional
+    // param-hint: RequiredSize optional
+    // param-hint: Extension optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetActualSectionToInstallExA(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSectionWithExt: CPointer<UInt8>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt8>>, Reserved: CPointer<Unit>): Int32
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: InfSectionWithExt len=param[4] optional
+    // param-hint: RequiredSize optional
+    // param-hint: Extension optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetActualSectionToInstallExW(InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, InfSectionWithExt: CPointer<UInt16>, InfSectionWithExtSize: UInt32, RequiredSize: CPointer<UInt32>, Extension: CPointer<CPointer<UInt16>>, Reserved: CPointer<Unit>): Int32
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: LocaleName optional
+    // param-hint: ReturnBuffer len=param[4]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfDriverStoreLocationA(FileName: CPointer<UInt8>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, LocaleName: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: LocaleName optional
+    // param-hint: ReturnBuffer len=param[4]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfDriverStoreLocationW(FileName: CPointer<UInt16>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, LocaleName: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: AlternateDefaultCatalogFile optional
+    // pinvoke-hint: SetLastError
+    func SetupSetFileQueueAlternatePlatformA(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, AlternateDefaultCatalogFile: CPointer<UInt8>): Int32
+    // param-hint: AlternatePlatformInfo optional
+    // param-hint: AlternateDefaultCatalogFile optional
+    // pinvoke-hint: SetLastError
+    func SetupSetFileQueueAlternatePlatformW(QueueHandle: CPointer<Unit>, AlternatePlatformInfo: CPointer<SP_ALTPLATFORM_INFO_V2>, AlternateDefaultCatalogFile: CPointer<UInt16>): Int32
+}
+
+@When[SETUPAPI == "on" && (((arch == "x86_64" && Windows_Win32_UI_Controls == "on") || (arch == "aarch64" && Windows_Win32_UI_Controls == "on")) && Windows_Win32_UI_Controls == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiDestroyClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassImageIndex(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>, ClassGuid: CPointer<GUID>, ImageIndex: CPointer<Int32>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassImageList(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>): Int32
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassImageListExA(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Int32
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassImageListExW(ClassImageListData: CPointer<SP_CLASSIMAGELIST_DATA>, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+}
+
+@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Devices_Properties == "on")]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceInterfacePropertyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
+}
+
+@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_Graphics_Gdi == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on" && Windows_Win32_UI_WindowsAndMessaging == "on" && Windows_Win32_UI_Controls == "on")]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassDevPropertySheetsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERA_V2>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
+    // param-hint: DeviceInfoData optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassDevPropertySheetsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertySheetHeader: CPointer<Win32__impl_l1.PROPSHEETHEADERW_V2>, PropertySheetHeaderPageListSize: UInt32, RequiredSize: CPointer<UInt32>, PropertySheetType: UInt32): Int32
+}
+
+@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_System_Registry == "on")]
+foreign {
+    // param-hint: InfHandle optional
+    // param-hint: InfSectionName optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDevRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY
+    // param-hint: InfHandle optional
+    // param-hint: InfSectionName optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDevRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY
+    // param-hint: Reserved optional reserved
+    // param-hint: InfHandle optional
+    // param-hint: InfSectionName optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInterfaceRegKeyA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt8>): Win32_System_Registry.HKEY
+    // param-hint: Reserved optional reserved
+    // param-hint: InfHandle optional
+    // param-hint: InfSectionName optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInterfaceRegKeyW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Reserved: UInt32, samDesired: UInt32, InfHandle: CPointer<Unit>, InfSectionName: CPointer<UInt16>): Win32_System_Registry.HKEY
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDevRegKey(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32, samDesired: UInt32): Win32_System_Registry.HKEY
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDeviceInterfaceRegKey(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Reserved: UInt32, samDesired: UInt32): Win32_System_Registry.HKEY
+    // param-hint: Owner optional
+    // param-hint: RelativeKeyRoot optional
+    // param-hint: SourceRootPath optional
+    // param-hint: MsgHandler optional
+    // param-hint: Context optional
+    // param-hint: DeviceInfoSet optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFromInfSectionA(Owner: CPointer<Unit>, InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: UInt32, RelativeKeyRoot: Win32_System_Registry.HKEY, SourceRootPath: CPointer<UInt8>, CopyFlags: UInt32, MsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: Owner optional
+    // param-hint: RelativeKeyRoot optional
+    // param-hint: SourceRootPath optional
+    // param-hint: MsgHandler optional
+    // param-hint: Context optional
+    // param-hint: DeviceInfoSet optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFromInfSectionW(Owner: CPointer<Unit>, InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: UInt32, RelativeKeyRoot: Win32_System_Registry.HKEY, SourceRootPath: CPointer<UInt16>, CopyFlags: UInt32, MsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+}
+
+@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64") && Windows_Win32_UI_WindowsAndMessaging == "on")]
+foreign {
+    // pinvoke-hint: SetLastError
+    func SetupDiLoadDeviceIcon(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, cxIcon: UInt32, cyIcon: UInt32, Flags: UInt32, hIcon: CPointer<Win32__impl_l0.HICON>): Int32
+}
+
+@When[SETUPAPI == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+foreign {
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiAskForOEMDisk(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiBuildDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverType: UInt32): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCallClassInstaller(InstallFunction: UInt32, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiChangeState(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceDescription optional
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt8>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt8>, hwndParent: CPointer<Unit>, CreationFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceDescription optional
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceName: CPointer<UInt16>, ClassGuid: CPointer<GUID>, DeviceDescription: CPointer<UInt16>, hwndParent: CPointer<Unit>, CreationFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: ReferenceString optional
+    // param-hint: DeviceInterfaceData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt8>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
+    // param-hint: ReferenceString optional
+    // param-hint: DeviceInterfaceData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiCreateDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, InterfaceClassGuid: CPointer<GUID>, ReferenceString: CPointer<UInt16>, CreationFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiDeleteDevRegKey(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Scope: UInt32, HwProfile: UInt32, KeyType: UInt32): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiDeleteDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiDeleteDeviceInterfaceData(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiDeleteDeviceInterfaceRegKey(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Reserved: UInt32): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiDestroyDriverInfoList(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverType: UInt32): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiEnumDeviceInfo(DeviceInfoSet: HDEVINFO, MemberIndex: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiEnumDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, InterfaceClassGuid: CPointer<GUID>, MemberIndex: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiEnumDriverInfoA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverType: UInt32, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiEnumDriverInfoW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverType: UInt32, MemberIndex: UInt32, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>): Int32
+    // param-hint: DeviceInfoData optional
+    // param-hint: ClassInstallParams bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADER>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: DeviceInfoData optional
+    // param-hint: ClassInstallParams bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADER>, ClassInstallParamsSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[6]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetCustomDevicePropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, CustomPropertyName: CPointer<UInt8>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[6]
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetCustomDevicePropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, CustomPropertyName: CPointer<UInt16>, Flags: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInfoListDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_A>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInfoListDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoSetDetailData: CPointer<SP_DEVINFO_LIST_DETAIL_DATA_W>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_A>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_W>): Int32
+    // param-hint: DeviceInstanceId len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInstanceIdA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstanceId: CPointer<UInt8>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: DeviceInstanceId len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInstanceIdW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstanceId: CPointer<UInt16>, DeviceInstanceIdSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfaceAlias(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, AliasInterfaceClassGuid: CPointer<GUID>, AliasDeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
+    // param-hint: DeviceInterfaceDetailData bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfaceDetailA(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_A>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceInterfaceDetailData bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfaceDetailW(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, DeviceInterfaceDetailData: CPointer<SP_DEVICE_INTERFACE_DETAIL_DATA_W>, DeviceInterfaceDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: PropertyKeyArray len=param[3] optional
+    // param-hint: RequiredPropertyKeyCount optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
+    // param-hint: PropertyKeyArray len=param[3] optional
+    // param-hint: RequiredPropertyKeyCount optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDevicePropertyKeys(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, PropertyKeyArray: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyKeyCount: UInt32, RequiredPropertyKeyCount: CPointer<UInt32>, Flags: UInt32): Int32
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Property: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: PropertyRegDataType optional
+    // param-hint: PropertyBuffer bytes=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Property: UInt32, PropertyRegDataType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: DeviceInfoData optional
+    // param-hint: DriverInfoDetailData bytes=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDriverInfoDetailA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_A>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: DeviceInfoData optional
+    // param-hint: DriverInfoDetailData bytes=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDriverInfoDetailW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>, DriverInfoDetailData: CPointer<SP_DRVINFO_DETAIL_DATA_W>, DriverInfoDetailDataSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMS>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMS>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiGetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallDeviceInterfaces(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiInstallDriverFiles(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDeviceInfoA(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt8>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDeviceInfoW(DeviceInfoSet: HDEVINFO, DeviceInstanceId: CPointer<UInt16>, hwndParent: CPointer<Unit>, OpenFlags: UInt32, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceInterfaceData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDeviceInterfaceA(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt8>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
+    // param-hint: DeviceInterfaceData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenDeviceInterfaceW(DeviceInfoSet: HDEVINFO, DevicePath: CPointer<UInt16>, OpenFlags: UInt32, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiRegisterCoDeviceInstallers(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: CompareProc optional
+    // param-hint: CompareContext optional
+    // param-hint: DupDeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiRegisterDeviceInfo(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Flags: UInt32, CompareProc: PSP_DETSIG_CMPPROC, CompareContext: CPointer<Unit>, DupDeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    func SetupDiRemoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiRemoveDeviceInterface(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiRestartDevices(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSelectBestCompatDrv(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSelectDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSelectOEMDrv(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceInfoData optional
+    // param-hint: ClassInstallParams bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADER>, ClassInstallParamsSize: UInt32): Int32
+    // param-hint: DeviceInfoData optional
+    // param-hint: ClassInstallParams bytes=param[3] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, ClassInstallParams: CPointer<SP_CLASSINSTALL_HEADER>, ClassInstallParamsSize: UInt32): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_A>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DeviceInstallParams: CPointer<SP_DEVINSTALL_PARAMS_W>): Int32
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceInterfaceDefault(DeviceInfoSet: HDEVINFO, DeviceInterfaceData: CPointer<SP_DEVICE_INTERFACE_DATA>, Flags: UInt32, Reserved: CPointer<Unit>): Int32
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceRegistryPropertyA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Property: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDeviceRegistryPropertyW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Property: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDriverInstallParamsA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMS>): Int32
+    // param-hint: DeviceInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetDriverInstallParamsW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>, DriverInstallParams: CPointer<SP_DRVINSTALL_PARAMS>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiSetSelectedDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: DeviceInfoData optional
+    // param-hint: DriverInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetSelectedDriverA(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_A>): Int32
+    // param-hint: DeviceInfoData optional
+    // param-hint: DriverInfoData optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetSelectedDriverW(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupDiUnremoveDevice(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>): Int32
+    // param-hint: Key optional
+    // pinvoke-hint: SetLastError
+    func SetupFindFirstLineA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, Context: CPointer<INFCONTEXT>): Int32
+    // param-hint: Key optional
+    // pinvoke-hint: SetLastError
+    func SetupFindFirstLineW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, Context: CPointer<INFCONTEXT>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupFindNextLine(ContextIn: CPointer<INFCONTEXT>, ContextOut: CPointer<INFCONTEXT>): Int32
+    // param-hint: Key optional
+    // pinvoke-hint: SetLastError
+    func SetupFindNextMatchLineA(ContextIn: CPointer<INFCONTEXT>, Key: CPointer<UInt8>, ContextOut: CPointer<INFCONTEXT>): Int32
+    // param-hint: Key optional
+    // pinvoke-hint: SetLastError
+    func SetupFindNextMatchLineW(ContextIn: CPointer<INFCONTEXT>, Key: CPointer<UInt16>, ContextOut: CPointer<INFCONTEXT>): Int32
+    func SetupGetBackupInformationA(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_A>): Int32
+    func SetupGetBackupInformationW(QueueHandle: CPointer<Unit>, BackupParams: CPointer<SP_BACKUP_QUEUE_PARAMS_V2_W>): Int32
+    // param-hint: ReturnBuffer bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetBinaryField(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupGetFieldCount(Context: CPointer<INFCONTEXT>): UInt32
+    // param-hint: ReturnBuffer bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfInformationA(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATION>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: ReturnBuffer bytes=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetInfInformationW(InfSpec: CPointer<Unit>, SearchControl: UInt32, ReturnBuffer: CPointer<SP_INF_INFORMATION>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupGetIntField(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, IntegerValue: CPointer<Int32>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupGetLineByIndexA(InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Index: UInt32, Context: CPointer<INFCONTEXT>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupGetLineByIndexW(InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Index: UInt32, Context: CPointer<INFCONTEXT>): Int32
+    // param-hint: Context optional
+    // param-hint: InfHandle optional
+    // param-hint: Section optional
+    // param-hint: Key optional
+    // param-hint: ReturnBuffer len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetLineTextA(Context: CPointer<INFCONTEXT>, InfHandle: CPointer<Unit>, Section: CPointer<UInt8>, Key: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: Context optional
+    // param-hint: InfHandle optional
+    // param-hint: Section optional
+    // param-hint: Key optional
+    // param-hint: ReturnBuffer len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetLineTextW(Context: CPointer<INFCONTEXT>, InfHandle: CPointer<Unit>, Section: CPointer<UInt16>, Key: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetMultiSzFieldA(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetMultiSzFieldW(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: InfContext optional
+    // param-hint: FileName optional
+    // param-hint: ReturnBuffer len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceFileLocationA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, FileName: CPointer<UInt8>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: InfContext optional
+    // param-hint: FileName optional
+    // param-hint: ReturnBuffer len=param[5] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceFileLocationW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, FileName: CPointer<UInt16>, SourceId: CPointer<UInt32>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: InfContext optional
+    // param-hint: FileName optional
+    // param-hint: Section optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceFileSizeA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, FileName: CPointer<UInt8>, Section: CPointer<UInt8>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32
+    // param-hint: InfContext optional
+    // param-hint: FileName optional
+    // param-hint: Section optional
+    // pinvoke-hint: SetLastError
+    func SetupGetSourceFileSizeW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, FileName: CPointer<UInt16>, Section: CPointer<UInt16>, FileSize: CPointer<UInt32>, RoundingFactor: UInt32): Int32
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetStringFieldA(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetStringFieldW(Context: CPointer<INFCONTEXT>, FieldIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: InfContext optional
+    // param-hint: Section optional
+    // param-hint: ReturnBuffer len=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetTargetPathA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, Section: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: InfContext optional
+    // param-hint: Section optional
+    // param-hint: ReturnBuffer len=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupGetTargetPathW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, Section: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: InfHandle optional
+    // param-hint: InfContext optional
+    // param-hint: SourceFile optional
+    // param-hint: SourcePathRoot optional
+    // param-hint: DestinationName optional
+    // param-hint: CopyMsgHandler optional
+    // param-hint: Context optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFileA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: UInt32, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>): Int32
+    // param-hint: InfHandle optional
+    // param-hint: InfContext optional
+    // param-hint: SourceFile optional
+    // param-hint: SourcePathRoot optional
+    // param-hint: DestinationName optional
+    // param-hint: CopyMsgHandler optional
+    // param-hint: Context optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFileExA(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, SourceFile: CPointer<UInt8>, SourcePathRoot: CPointer<UInt8>, DestinationName: CPointer<UInt8>, CopyStyle: UInt32, CopyMsgHandler: PSP_FILE_CALLBACK_A, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32
+    // param-hint: InfHandle optional
+    // param-hint: InfContext optional
+    // param-hint: SourceFile optional
+    // param-hint: SourcePathRoot optional
+    // param-hint: DestinationName optional
+    // param-hint: CopyMsgHandler optional
+    // param-hint: Context optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFileExW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: UInt32, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>, FileWasInUse: CPointer<Int32>): Int32
+    // param-hint: InfHandle optional
+    // param-hint: InfContext optional
+    // param-hint: SourceFile optional
+    // param-hint: SourcePathRoot optional
+    // param-hint: DestinationName optional
+    // param-hint: CopyMsgHandler optional
+    // param-hint: Context optional
+    // pinvoke-hint: SetLastError
+    func SetupInstallFileW(InfHandle: CPointer<Unit>, InfContext: CPointer<INFCONTEXT>, SourceFile: CPointer<UInt16>, SourcePathRoot: CPointer<UInt16>, DestinationName: CPointer<UInt16>, CopyStyle: UInt32, CopyMsgHandler: PSP_FILE_CALLBACK_W, Context: CPointer<Unit>): Int32
+    // param-hint: DeviceInfoSet optional
+    // param-hint: DeviceInfoData optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupInstallServicesFromInfSectionExA(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt8>, Flags: UInt32, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
+    // param-hint: DeviceInfoSet optional
+    // param-hint: DeviceInfoData optional
+    // param-hint: Reserved1 optional reserved
+    // param-hint: Reserved2 optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupInstallServicesFromInfSectionExW(InfHandle: CPointer<Unit>, SectionName: CPointer<UInt16>, Flags: UInt32, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Reserved1: CPointer<Unit>, Reserved2: CPointer<Unit>): Int32
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryInfFileInformationA(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: ReturnBuffer len=param[3] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryInfFileInformationW(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: Key optional
+    // param-hint: ReturnBuffer len=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryInfVersionInformationA(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, Key: CPointer<UInt8>, ReturnBuffer: CPointer<UInt8>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // param-hint: Key optional
+    // param-hint: ReturnBuffer len=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupQueryInfVersionInformationW(InfInformation: CPointer<SP_INF_INFORMATION>, InfIndex: UInt32, Key: CPointer<UInt16>, ReturnBuffer: CPointer<UInt16>, ReturnBufferSize: UInt32, RequiredSize: CPointer<UInt32>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupQueueCopyIndirectA(CopyParams: CPointer<SP_FILE_COPY_PARAMS_A>): Int32
+    // pinvoke-hint: SetLastError
+    func SetupQueueCopyIndirectW(CopyParams: CPointer<SP_FILE_COPY_PARAMS_W>): Int32
     func SetupWriteTextLogInfLine(LogToken: UInt64, Flags: UInt32, InfHandle: CPointer<Unit>, Context: CPointer<INFCONTEXT>): Unit
+}
+
+@When[SETUPAPI == "on" && Windows_Win32_Devices_Properties == "on"]
+foreign {
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // param-hint: RequiredSize optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // param-hint: RequiredSize optional
+    // pinvoke-hint: SetLastError
+    func SetupDiGetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: CPointer<UInt32>, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, RequiredSize: CPointer<UInt32>, Flags: UInt32): Int32
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassPropertyExW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Int32
+    // param-hint: PropertyBuffer bytes=param[4] optional
+    // pinvoke-hint: SetLastError
+    func SetupDiSetClassPropertyW(ClassGuid: CPointer<GUID>, PropertyKey: CPointer<Win32_Foundation.DEVPROPKEY>, PropertyType: UInt32, PropertyBuffer: CPointer<UInt8>, PropertyBufferSize: UInt32, Flags: UInt32): Int32
+}
+
+@When[SETUPAPI == "on" && Windows_Win32_Graphics_Gdi == "on"]
+foreign {
+    func SetupDiDrawMiniIcon(hdc: Win32_Graphics_Gdi.HDC, rc: Win32_Foundation.RECT, MiniIconIndex: Int32, Flags: UInt32): Int32
+}
+
+@When[SETUPAPI == "on" && Windows_Win32_System_Registry == "on"]
+foreign {
+    // param-hint: ClassGuid optional
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenClassRegKey(ClassGuid: CPointer<GUID>, samDesired: UInt32): Win32_System_Registry.HKEY
+    // param-hint: ClassGuid optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenClassRegKeyExA(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt8>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY
+    // param-hint: ClassGuid optional
+    // param-hint: MachineName optional
+    // param-hint: Reserved optional reserved
+    // pinvoke-hint: SetLastError
+    func SetupDiOpenClassRegKeyExW(ClassGuid: CPointer<GUID>, samDesired: UInt32, Flags: UInt32, MachineName: CPointer<UInt16>, Reserved: CPointer<Unit>): Win32_System_Registry.HKEY
+}
+
+@When[SETUPAPI == "on" && Windows_Win32_UI_WindowsAndMessaging == "on"]
+foreign {
+    // param-hint: LargeIcon optional
+    // param-hint: MiniIconIndex optional
+    // pinvoke-hint: SetLastError
+    func SetupDiLoadClassIcon(ClassGuid: CPointer<GUID>, LargeIcon: CPointer<Win32__impl_l0.HICON>, MiniIconIndex: CPointer<Int32>): Int32
 }
 
 @When[NEWDEV == "on"]
 foreign {
     // param-hint: hwndParent optional
-    // param-hint: DriverInfoData optional
     // param-hint: NeedReboot optional
     // pinvoke-hint: SetLastError
-    func DiInstallDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>, Flags: DIINSTALLDEVICE_FLAGS, NeedReboot: CPointer<Int32>): Int32
+    func DiInstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
     // param-hint: hwndParent optional
     // param-hint: NeedReboot optional
     // pinvoke-hint: SetLastError
-    func DiInstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: DIINSTALLDRIVER_FLAGS, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: NeedReboot optional
-    // pinvoke-hint: SetLastError
-    func DiInstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: DIINSTALLDRIVER_FLAGS, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: NeedReboot optional
-    // pinvoke-hint: SetLastError
-    func DiRollbackDriver(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, hwndParent: CPointer<Unit>, Flags: DIROLLBACKDRIVER_FLAGS, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: NeedReboot optional
-    // pinvoke-hint: SetLastError
-    func DiShowUpdateDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
+    func DiInstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
     // param-hint: hwndParent optional
     // param-hint: FilePath optional
     // param-hint: NeedReboot optional
     func DiShowUpdateDriver(hwndParent: CPointer<Unit>, FilePath: CPointer<UInt16>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: NeedReboot optional
+    // pinvoke-hint: SetLastError
+    func DiUninstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: NeedReboot optional
+    // pinvoke-hint: SetLastError
+    func DiUninstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: bRebootRequired optional
+    // pinvoke-hint: SetLastError
+    func UpdateDriverForPlugAndPlayDevicesA(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt8>, FullInfPath: CPointer<UInt8>, InstallFlags: UInt32, bRebootRequired: CPointer<Int32>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: bRebootRequired optional
+    // pinvoke-hint: SetLastError
+    func UpdateDriverForPlugAndPlayDevicesW(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt16>, FullInfPath: CPointer<UInt16>, InstallFlags: UInt32, bRebootRequired: CPointer<Int32>): Int32
+}
+
+@When[NEWDEV == "on" && ((arch == "x86_64" || arch == "aarch64"))]
+foreign {
+    // param-hint: hwndParent optional
+    // param-hint: DriverInfoData optional
+    // param-hint: NeedReboot optional
+    // pinvoke-hint: SetLastError
+    func DiInstallDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, DriverInfoData: CPointer<SP_DRVINFO_DATA_V2_W>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: NeedReboot optional
+    // pinvoke-hint: SetLastError
+    func DiRollbackDriver(DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, hwndParent: CPointer<Unit>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
+    // param-hint: hwndParent optional
+    // param-hint: NeedReboot optional
+    // pinvoke-hint: SetLastError
+    func DiShowUpdateDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
     // param-hint: NeedReboot optional
     // pinvoke-hint: SetLastError
     func DiUninstallDevice(hwndParent: CPointer<Unit>, DeviceInfoSet: HDEVINFO, DeviceInfoData: CPointer<SP_DEVINFO_DATA>, Flags: UInt32, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: NeedReboot optional
-    // pinvoke-hint: SetLastError
-    func DiUninstallDriverA(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt8>, Flags: DIUNINSTALLDRIVER_FLAGS, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: NeedReboot optional
-    // pinvoke-hint: SetLastError
-    func DiUninstallDriverW(hwndParent: CPointer<Unit>, InfPath: CPointer<UInt16>, Flags: DIUNINSTALLDRIVER_FLAGS, NeedReboot: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: bRebootRequired optional
-    // pinvoke-hint: SetLastError
-    func UpdateDriverForPlugAndPlayDevicesA(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt8>, FullInfPath: CPointer<UInt8>, InstallFlags: UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired: CPointer<Int32>): Int32
-    // param-hint: hwndParent optional
-    // param-hint: bRebootRequired optional
-    // pinvoke-hint: SetLastError
-    func UpdateDriverForPlugAndPlayDevicesW(hwndParent: CPointer<Unit>, HardwareId: CPointer<UInt16>, FullInfPath: CPointer<UInt16>, InstallFlags: UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired: CPointer<Int32>): Int32
 }
 
 @When[Windows_Win32_Devices_DeviceAndDriverInstallation == "on"]

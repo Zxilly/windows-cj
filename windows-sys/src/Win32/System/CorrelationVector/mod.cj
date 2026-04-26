@@ -2,14 +2,16 @@
 package windows_sys.Win32.System.CorrelationVector
 
 import windows_interface.{GUID}
+import windows_interface as windows_interface
+@When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Win32_Foundation
 
 
 @When[Windows_Win32_System_CorrelationVector == "on"]
 @C
 public struct CORRELATION_VECTOR {
-    public var Version: Win32_Foundation.CHAR = 0
-    public var Vector: VArray<Win32_Foundation.CHAR, $129> = VArray<Win32_Foundation.CHAR, $129>(repeat: 0)
+    public var Version: Int8 = 0
+    public var Vector: VArray<Int8, $129> = VArray<Int8, $129>(repeat: 0)
     public init() {}
 }
 

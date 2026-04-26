@@ -12,10 +12,12 @@ public func generateEnum(
     index: TypeIndex,
     fileIdx: Int64,
     row: Int64,
-    namespace: String
+    namespace: String,
+    winrtProjection!: Bool = false
 ): Unit {
     let rawName = trimTick(index.typeDefName(fileIdx, row))
     let name = escapeSourceIdentifier(rawName)
+    let abiName = appendSourceIdentifierSuffix(name, "Abi")
     let (fStart, fEnd) = index.typeDefFields(fileIdx, row)
     let underlyingType = resolveUnderlyingType(index, fileIdx, row)
 
@@ -28,7 +30,6 @@ public func generateEnum(
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
     writeDeriveAttributes(w, namespace, name)
-    w.writeLine("@C")
     w.writeBlock("public struct ${name}", {=>
         w.writeLine("public var value: ${underlyingType} = 0")
         w.writeBlankLine()
@@ -68,6 +69,21 @@ public func generateEnum(
         }
     })
 
+    if (winrtProjection) {
+        w.writeBlankLine()
+        writeAvailabilityForTags(w, feature, typeTags)
+        w.writeLine("@C")
+        w.writeBlock("public struct ${abiName}", { =>
+            w.writeLine("public var value: ${underlyingType} = 0")
+            w.writeBlankLine()
+            w.writeLine("public init() {}")
+            w.writeBlankLine()
+            w.writeLine("public init(value: ${underlyingType}) {")
+            w.writeLine("    this.value = value")
+            w.writeLine("}")
+        })
+    }
+
     // Generate enum/flag literals as top-level constants because @C structs cannot
     // carry non-CType static members inside the type body.
     var ci = fStart
@@ -93,6 +109,52 @@ public func generateEnum(
         }
         ci += 1
     }
+
+    if (winrtProjection) {
+        emitWinrtValueEnumExtension(w, index, fileIdx, row, name, abiName, feature, typeTags)
+    }
+}
+
+func emitWinrtValueEnumExtension(
+    w: CodeWriter,
+    index: TypeIndex,
+    fileIdx: Int64,
+    row: Int64,
+    name: String,
+    abiName: String,
+    feature: String,
+    typeTags: ArrayList<String>
+): Unit {
+    useSupportSymbol("windows_core", "CopyType")
+    useSupportSymbol("windows_core", "ProjectedCopyWinrtOutputBridge")
+    useSupportSymbol("windows_core", "Result")
+    useSupportSymbol("windows_core", "RuntimeType")
+    useSupportSymbol("windows_core", "Type")
+    useSupportSymbol("windows_core", "WinrtGenericType")
+    useSupportSymbol("windows_core", "WinrtOutputBridge")
+
+    let runtimeSignature = enumRuntimeSignature(index, fileIdx, row)
+    w.writeBlankLine()
+    writeAvailabilityForTags(w, feature, typeTags)
+    w.writeBlock(
+        "extend ${name} <: windows_core.CopyType & windows_core.RuntimeType & windows_core.Type<${name}, ${abiName}, ${name}> & windows_core.WinrtGenericType<${name}>",
+        { =>
+            w.writeLine("public static func typeKind(): windows_core.TypeKind { windows_core.TypeKind.Copy }")
+            w.writeLine("public static func abiType(): String { \"${abiName}\" }")
+            w.writeLine("public static func signature(): String { \"${runtimeSignature}\" }")
+            w.writeLine("public static func projectAbi(value: ${name}): ${abiName} {")
+            w.writeLine("    ${abiName}(value.value)")
+            w.writeLine("}")
+            w.writeLine("public static func assumeInitRef(abi: ${abiName}): ${name} {")
+            w.writeLine("    ${name}(abi.value)")
+            w.writeLine("}")
+            w.writeLine("public static func fromAbi(abi: ${abiName}): Result<${name}> { Result<${name}>.Ok(${name}.assumeInitRef(abi)) }")
+            w.writeLine("public static func fromDefault(defaultValue: ${name}): Result<${name}> { Result<${name}>.Ok(defaultValue) }")
+            w.writeLine("public static func winrtOutputBridge(): windows_core.WinrtOutputBridge<${name}> {")
+            w.writeLine("    windows_core.ProjectedCopyWinrtOutputBridge<${name}, ${abiName}, ${name}>()")
+            w.writeLine("}")
+        }
+    )
 }
 
 func mergeEnumCfgTags(first: ArrayList<String>, second: ArrayList<String>): ArrayList<String> {

@@ -231,11 +231,14 @@ func publishAndClearThreadError(infoPtr: CPointer<IErrorInfo>): Unit {
     let _ = setErrorInfoAbi(0u32, CPointer<Unit>())
 }
 
-@When[test && os == "Windows" && slim_errors != "true"]
+@When[test && os == "Windows"]
 @Test
 class WindowsResultInternalTests {
     @TestCase
     public func comHandleEqualityUsesCanonicalIUnknownIdentity(): Unit {
+        if (slimErrorsEnabledForTesting()) {
+            return
+        }
         resetIdentityState()
 
         var vtbl = IUnknownVtbl()
@@ -271,6 +274,9 @@ class WindowsResultInternalTests {
 
     @TestCase
     public func errorMessageReturnsExplicitEmptyString(): Unit {
+        if (slimErrorsEnabledForTesting()) {
+            return
+        }
         resetErrorInfoLifetimeState()
 
         var errorVtbl = IErrorInfoVtbl()
@@ -300,6 +306,9 @@ class WindowsResultInternalTests {
 
     @TestCase
     public func errorFromHRESULTCapturesThreadErrorInfo(): Unit {
+        if (slimErrorsEnabledForTesting()) {
+            return
+        }
         let threadError = errorNewForTesting(E_FAIL, "thread HRESULT failure")
         threadError.intoThread()
 
@@ -310,6 +319,9 @@ class WindowsResultInternalTests {
 
     @TestCase
     public func errorFromWin32CapturesThreadErrorInfo(): Unit {
+        if (slimErrorsEnabledForTesting()) {
+            return
+        }
         let code = 5u32
         let threadError = errorNewForTesting(HRESULT.fromWin32(code), "thread Win32 failure")
         threadError.intoThread()
@@ -321,6 +333,9 @@ class WindowsResultInternalTests {
 
     @TestCase
     public func errorIntoThreadDoesNotLeakAnExtraReference(): Unit {
+        if (slimErrorsEnabledForTesting()) {
+            return
+        }
         resetErrorInfoLifetimeState()
 
         var errorVtbl = IErrorInfoVtbl()
@@ -355,12 +370,14 @@ class WindowsResultInternalTests {
     }
 }
 
-@When[test && slim_errors == "true"]
+@When[test && os == "Windows"]
 @Test
 class WindowsResultSlimErrorTests {
     @TestCase
     public func newIgnoresCustomMessageWhenSlimErrorsEnabled(): Unit {
-        require(slimErrorsEnabledForTesting(), "slim test should compile against the slim_errors branch")
+        if (!slimErrorsEnabledForTesting()) {
+            return
+        }
         let error = errorNewForTesting(E_FAIL, "custom failure")
         require(error.asPtr().isNull(), "slim errors should not capture IErrorInfo")
         require(

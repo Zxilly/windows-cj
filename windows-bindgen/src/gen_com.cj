@@ -55,16 +55,7 @@ public func generateComInterface(
     useSupportSymbol("windows_interface", "ComInterface")
     useSupportSymbol("windows_interface", "GUID")
     useSupportSymbol("windows_interface", "InterfaceDescriptor")
-    useSupportSymbol("windows_interface", "IUnknownVtbl")
-    useSupportSymbol("windows_interface", "queryInterfaceAs")
-    if (isWinRT) {
-        useSupportSymbol("windows_interface", "IInspectableVtbl")
-    }
-    if (baseSubstitution.vtblType == "IInspectableVtbl") {
-        useSupportSymbol("windows_interface", "IInspectableVtbl")
-    } else if (baseSubstitution.vtblType == "IUnknownVtbl") {
-        useSupportSymbol("windows_interface", "IUnknownVtbl")
-    }
+    useSupportSymbol("windows_interface", "InterfaceWrapperBase")
     if (isWinRT && !isSysOnlyMode()) {
         useSupportSymbol("windows_interface", "RuntimeType")
         useSupportSymbol("windows_core", "RuntimeType")
@@ -91,14 +82,15 @@ public func generateComInterface(
             }
             // Rename when the vtable slot identifier would shadow any type
             // referenced in its signature (return type OR param types).
-            let returnType = cppType(sig.returnType)
-            let methodName = disambiguateMethodName(rawMethodName, methodSignatureText(sig, returnType))
+            let returnType = comAbiType(sig.returnType)
+            let signatureText = vtblSlotSignatureText(index, sig, returnType, isWinRT)
+            let methodName = disambiguateMethodName(rawMethodName, signatureText)
             if (!missing.isEmpty()) {
                 warnMissingMethodDependencies(index, fileIdx, mi, missing)
                 // Degrade to opaque function-pointer slot; avoids unresolvable type references
                 w.writeLine("public var ${methodName}: CPointer<Unit> = CPointer<Unit>.null")
             } else {
-                w.writeLine("public var ${methodName}: ${vtblSlotType(sig, returnType)} = ${vtblSlotDefault(sig)}")
+                w.writeLine("public var ${methodName}: ${vtblSlotType(index, sig, returnType, isWinRT)} = ${vtblSlotDefault(sig, isWinRT)}")
             }
             mi += 1
         }
@@ -114,44 +106,37 @@ public func generateComInterface(
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
     w.writeLine("func view${name}(raw: CPointer<Unit>): ${name} {")
-    w.writeLine("    ${name}(raw)")
+    w.writeLine("    ${name}.viewOf(raw)")
     w.writeLine("}")
 
     // --- Generate interface class ---
     w.writeBlankLine()
     writeAvailabilityForTags(w, feature, typeTags)
     let implInterfaces = if (isWinRT && !isSysOnlyMode()) {
-        "ComInterface & Resource & windows_interface.RuntimeType & windows_core.RuntimeType"
+        "InterfaceWrapperBase & ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType"
     } else {
-        "ComInterface & Resource"
+        "InterfaceWrapperBase & ComInterface"
     }
     w.writeBlock("public class ${name} <: ${implInterfaces}", {=>
-        // IID
-        w.writeLine("private let raw_: CPointer<Unit>")
-        w.writeLine("private let ownsHandle_: Bool")
-        w.writeLine("private var closed_: Bool = false")
-        w.writeBlankLine()
         w.writeLine("public init(raw: CPointer<Unit>) {")
-        w.writeLine("    this.raw_ = raw")
-        w.writeLine("    this.ownsHandle_ = false")
+        w.writeLine("    super(raw)")
         w.writeLine("}")
         w.writeBlankLine()
-        w.writeLine("private init(raw: CPointer<Unit>, takeOwnership!: Bool) {")
-        w.writeLine("    this.raw_ = raw")
-        w.writeLine("    this.ownsHandle_ = takeOwnership")
+        w.writeLine("protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {")
+        w.writeLine("    super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)")
         w.writeLine("}")
         w.writeBlankLine()
         w.writeLine("public static func fromAbiTake(raw: CPointer<Unit>): ${name} {")
-        w.writeLine("    ${name}(raw, takeOwnership: true)")
+        w.writeLine("    ${name}(raw, takeOwnership: true, allowManualRelease: false)")
         w.writeLine("}")
         w.writeBlankLine()
         w.writeLine("public static func viewOf(raw: CPointer<Unit>): ${name} {")
-        w.writeLine("    ${name}(raw)")
+        w.writeLine("    ${name}(raw, takeOwnership: false, allowManualRelease: false)")
         w.writeLine("}")
         w.writeBlankLine()
 
         // static iid() - try to extract from GuidAttribute
-        writeIidMethod(w, index, fileIdx, row, name)
+        writeIidMethod(w, index, fileIdx, row)
 
         if (isWinRT && !isSysOnlyMode()) {
             w.writeBlankLine()
@@ -180,67 +165,8 @@ public func generateComInterface(
                 w.writeLine("}")
         }
         w.writeBlankLine()
-        w.writeLine("public func asRaw(): CPointer<Unit> {")
-        w.writeLine("    if (closed_) {")
-        w.writeLine("        return CPointer<Unit>()")
-        w.writeLine("    }")
-        w.writeLine("    raw_")
-        w.writeLine("}")
-        w.writeBlankLine()
-        w.writeLine("public func isClosed(): Bool { closed_ }")
-
-        // Vtable accessor
-        w.writeBlankLine()
-        w.writeLine("unsafe func vtbl(): ${vtblName} {")
-        w.writeLine("    let liveRaw = asRaw()")
-        w.writeLine("    if (liveRaw.isNull()) {")
-        w.writeLine("        return ${vtblName}()")
-        w.writeLine("    }")
-        w.writeLine("    let vtblPtrPtr = CPointer<CPointer<${vtblName}>>(liveRaw)")
-        w.writeLine("    let vtblPtr = vtblPtrPtr.read()")
-        w.writeLine("    return vtblPtr.read()")
-        w.writeLine("}")
-        w.writeBlankLine()
-        w.writeLine("public func addRef(): UInt32 {")
-        w.writeLine("    let liveRaw = asRaw()")
-        w.writeLine("    if (liveRaw.isNull()) {")
-        w.writeLine("        return 0u32")
-        w.writeLine("    }")
-        w.writeLine("    unsafe {")
-        w.writeLine("        let baseVtblPtr = CPointer<CPointer<IUnknownVtbl>>(liveRaw).read()")
-        w.writeLine("        let baseVtbl = baseVtblPtr.read()")
-        w.writeLine("        return baseVtbl.AddRef(liveRaw)")
-        w.writeLine("    }")
-        w.writeLine("}")
-        w.writeBlankLine()
-        w.writeLine("public func release(): UInt32 {")
-        w.writeLine("    let liveRaw = asRaw()")
-        w.writeLine("    if (liveRaw.isNull()) {")
-        w.writeLine("        return 0u32")
-        w.writeLine("    }")
-        w.writeLine("    unsafe {")
-        w.writeLine("        let baseVtblPtr = CPointer<CPointer<IUnknownVtbl>>(liveRaw).read()")
-        w.writeLine("        let baseVtbl = baseVtblPtr.read()")
-        w.writeLine("        let count = baseVtbl.Release(liveRaw)")
-        w.writeLine("        closed_ = true")
-        w.writeLine("        return count")
-        w.writeLine("    }")
-        w.writeLine("}")
-        w.writeBlankLine()
-        w.writeLine("public unsafe func query<T>(descriptor: InterfaceDescriptor<T>): Option<T> {")
-        w.writeLine("    queryInterfaceAs(asRaw(), descriptor)")
-        w.writeLine("}")
-        w.writeBlankLine()
-        w.writeLine("public func close(): Unit {")
-        w.writeLine("    let liveRaw = asRaw()")
-        w.writeLine("    if (!liveRaw.isNull() && ownsHandle_) {")
-        w.writeLine("        unsafe {")
-        w.writeLine("            let baseVtblPtr = CPointer<CPointer<IUnknownVtbl>>(liveRaw).read()")
-        w.writeLine("            let baseVtbl = baseVtblPtr.read()")
-        w.writeLine("            baseVtbl.Release(liveRaw)")
-        w.writeLine("        }")
-        w.writeLine("    }")
-        w.writeLine("    closed_ = true")
+        w.writeLine("public unsafe func vtbl(): ${vtblName} {")
+        w.writeLine("    readVtbl<${vtblName}>(${vtblName}())")
         w.writeLine("}")
 
         // Wrapper methods
@@ -255,7 +181,11 @@ public func generateComInterface(
             if (!methodTags.isEmpty()) {
                 writeAvailabilityForTags(w, "", methodTags)
             }
-            writeWrapperMethod(w, index, fileIdx, sig, methodName, pStart, pEnd)
+            if (isWinRT) {
+                writeWinrtRawWrapperMethod(w, index, fileIdx, sig, methodName, pStart, pEnd)
+            } else {
+                writeWrapperMethod(w, index, fileIdx, sig, methodName, pStart, pEnd)
+            }
             mi2 += 1
         }
     })
@@ -352,38 +282,54 @@ func resolveBaseVtblSubstitution(
             let baseLeaf = trimTick(baseType.name)
             if (baseLeaf == "IInspectable" ||
                 (isSysOnlyMode() && isTypeNameGeneric(index, baseType.namespace, baseLeaf))) {
-                return BaseVtblSubstitution("IInspectableVtbl", None<String>)
+                return BaseVtblSubstitution("windows_interface.IInspectableVtbl", None<String>)
             }
             let baseTypePath = projectedTypePath(baseType.namespace, baseLeaf)
             return BaseVtblSubstitution("${baseTypePath}Vtbl", Some<String>("${baseTypePath}.iid()"))
         case None =>
             if (isWinRT) {
-                return BaseVtblSubstitution("IInspectableVtbl", None<String>)
+                return BaseVtblSubstitution("windows_interface.IInspectableVtbl", None<String>)
             }
-            return BaseVtblSubstitution("IUnknownVtbl", None<String>)
+            return BaseVtblSubstitution("windows_interface.IUnknownVtbl", None<String>)
     }
 }
 
-func vtblSlotType(sig: MethodSignature, returnType: String): String {
+func vtblSlotType(index: TypeIndex, sig: MethodSignature, returnType: String, isWinRT: Bool): String {
     var params = ArrayList<String>()
     params.add("CPointer<Unit>")
     var pi: Int64 = 0
     while (pi < Int64(sig.paramTypes.size)) {
-        params.add(cppType(sig.paramTypes[pi]))
+        if (isWinRT) {
+            addWinrtRawAbiParamTypes(index, params, sig.paramTypes[pi])
+        } else {
+            params.add(comAbiType(sig.paramTypes[pi]))
+        }
         pi += 1
+    }
+    if (isWinRT) {
+        addWinrtRawAbiResultTypes(index, params, sig.returnType)
+        return "CFunc<(${joinStrings(params, ", ")}) -> Int32>"
     }
     return "CFunc<(${joinStrings(params, ", ")}) -> ${returnType}>"
 }
 
-func vtblSlotDefault(sig: MethodSignature): String {
+func vtblSlotDefault(sig: MethodSignature, isWinRT: Bool): String {
     var paramNames = ArrayList<String>()
     paramNames.add("_")
     var pi: Int64 = 0
     while (pi < Int64(sig.paramTypes.size)) {
-        paramNames.add("_")
+        if (isWinRT) {
+            addWinrtRawAbiParamNames(paramNames, sig.paramTypes[pi])
+        } else {
+            paramNames.add("_")
+        }
         pi += 1
     }
-    return "{ ${joinStrings(paramNames, ", ")} => ${cppDefaultValue(sig.returnType)} }"
+    if (isWinRT) {
+        addWinrtRawAbiResultNames(paramNames, sig.returnType)
+        return "{ ${joinStrings(paramNames, ", ")} => 0 }"
+    }
+    return "{ ${joinStrings(paramNames, ", ")} => ${comAbiDefaultValue(sig.returnType)} }"
 }
 
 // Write the static iid() method by extracting GuidAttribute
@@ -391,8 +337,7 @@ func writeIidMethod(
     w: CodeWriter,
     index: TypeIndex,
     fileIdx: Int64,
-    row: Int64,
-    name: String
+    row: Int64
 ): Unit {
     let guid = guidAttributeLiteral(index, fileIdx, row)
     match (guid) {
@@ -401,17 +346,8 @@ func writeIidMethod(
             w.writeLine("    return GUID(${g})")
             w.writeLine("}")
         case None =>
-            let displayName = if (currentNamespace().isEmpty()) {
-                name
-            } else {
-                qualifiedTypeName(currentNamespace(), name)
-            }
-            match (bindgenContext()) {
-                case Some(context) => context.warnings.add("missing GuidAttribute for `${displayName}`")
-                case None => ()
-            }
             w.writeLine("public static func iid(): GUID {")
-            w.writeLine("    throw Exception(\"missing GuidAttribute for ${displayName}\")")
+            w.writeLine("    return GUID.zeroed()")
             w.writeLine("}")
     }
 }
@@ -450,13 +386,13 @@ func writeWrapperMethod(
         if (seqToName.contains(seq)) {
             paramName = seqToName[seq]
         }
-        let paramType = cppType(sig.paramTypes[pi])
+        let paramType = comAbiType(sig.paramTypes[pi])
         params.add("${paramName}: ${paramType}")
         argNames.add(paramName)
         pi += 1
     }
 
-    let returnType = cppType(sig.returnType)
+    let returnType = comAbiType(sig.returnType)
     let paramStr = joinStrings(params, ", ")
     let argStr = joinStrings(argNames, ", ")
 
@@ -484,6 +420,58 @@ func writeWrapperMethod(
     w.writeLine("}")
 }
 
+func writeWinrtRawWrapperMethod(
+    w: CodeWriter,
+    index: TypeIndex,
+    fileIdx: Int64,
+    sig: MethodSignature,
+    methodName: String,
+    pStart: Int64,
+    pEnd: Int64
+): Unit {
+    var seqToName = HashMap<Int64, String>()
+    var pr = pStart
+    while (pr < pEnd) {
+        let seq = Int64(index.paramSequence(fileIdx, pr))
+        if (seq > 0) {
+            let pn = index.paramName(fileIdx, pr)
+            if (!pn.isEmpty()) {
+                seqToName[seq] = sanitizeIdentifier(pn)
+            }
+        }
+        pr += 1
+    }
+
+    var params = ArrayList<String>()
+    var argNames = ArrayList<String>()
+    var pi: Int64 = 0
+    while (pi < Int64(sig.paramTypes.size)) {
+        var paramName = "param${pi}"
+        let seq = pi + 1
+        if (seqToName.contains(seq)) {
+            paramName = seqToName[seq]
+        }
+        addWinrtRawWrapperParam(index, params, argNames, paramName, sig.paramTypes[pi])
+        pi += 1
+    }
+    addWinrtRawWrapperResultParam(index, params, argNames, sig.returnType)
+
+    let returnType = comAbiType(sig.returnType)
+    let wrapperName = disambiguateMethodName(methodName, vtblSlotSignatureText(index, sig, returnType, true))
+    let paramStr = joinStrings(params, ", ")
+    let argStr = joinStrings(argNames, ", ")
+
+    w.writeLine("public unsafe func ${wrapperName}(${paramStr}): Int32 {")
+    w.writeLine("    let __vt = vtbl()")
+    w.writeLine("    let __liveRaw = asRaw()")
+    if (argStr.isEmpty()) {
+        w.writeLine("    return __vt.${wrapperName}(__liveRaw)")
+    } else {
+        w.writeLine("    return __vt.${wrapperName}(__liveRaw, ${argStr})")
+    }
+    w.writeLine("}")
+}
+
 // Concatenate every type referenced in a MethodSignature into a single string
 // so identifier-shadowing checks can scan the whole surface in one pass.
 func methodSignatureText(sig: MethodSignature, returnType: String): String {
@@ -491,10 +479,194 @@ func methodSignatureText(sig: MethodSignature, returnType: String): String {
     parts.add(returnType)
     var pi: Int64 = 0
     while (pi < Int64(sig.paramTypes.size)) {
-        parts.add(cppType(sig.paramTypes[pi]))
+        parts.add(comAbiType(sig.paramTypes[pi]))
         pi += 1
     }
     return joinStrings(parts, " ")
+}
+
+func vtblSlotSignatureText(index: TypeIndex, sig: MethodSignature, returnType: String, isWinRT: Bool): String {
+    if (!isWinRT) {
+        return methodSignatureText(sig, returnType)
+    }
+    let parts = ArrayList<String>()
+    var pi: Int64 = 0
+    while (pi < Int64(sig.paramTypes.size)) {
+        collectWinrtRawAbiParamTypeText(index, parts, sig.paramTypes[pi])
+        pi += 1
+    }
+    collectWinrtRawAbiResultTypeText(index, parts, sig.returnType)
+    parts.add("Int32")
+    return joinStrings(parts, " ")
+}
+
+func addWinrtRawAbiParamTypes(index: TypeIndex, params: ArrayList<String>, ty: MetadataType): Unit {
+    match (ty) {
+        case MetadataType.MdArray(elem) =>
+            params.add("UInt32")
+            params.add(winrtRawArrayPointerType(index, elem))
+        case _ =>
+            params.add(winrtRawSlotType(index, ty))
+    }
+}
+
+func addWinrtRawAbiResultTypes(index: TypeIndex, params: ArrayList<String>, ty: MetadataType): Unit {
+    match (ty) {
+        case MetadataType.Void => return
+        case MetadataType.MdArray(elem) =>
+            params.add("CPointer<UInt32>")
+            params.add("CPointer<${winrtRawArrayPointerType(index, elem)}>")
+        case _ =>
+            params.add("CPointer<${winrtRawSlotType(index, ty)}>")
+    }
+}
+
+func addWinrtRawAbiParamNames(names: ArrayList<String>, ty: MetadataType): Unit {
+    match (ty) {
+        case MetadataType.MdArray(_) =>
+            names.add("_")
+            names.add("_")
+        case _ =>
+            names.add("_")
+    }
+}
+
+func addWinrtRawAbiResultNames(names: ArrayList<String>, ty: MetadataType): Unit {
+    match (ty) {
+        case MetadataType.Void => ()
+        case MetadataType.MdArray(_) =>
+            names.add("_")
+            names.add("_")
+        case _ =>
+            names.add("_")
+    }
+}
+
+func addWinrtRawWrapperParam(
+    index: TypeIndex,
+    params: ArrayList<String>,
+    argNames: ArrayList<String>,
+    paramName: String,
+    ty: MetadataType
+): Unit {
+    match (ty) {
+        case MetadataType.MdArray(elem) =>
+            params.add("${paramName}Size: UInt32")
+            params.add("${paramName}: ${winrtRawArrayPointerType(index, elem)}")
+            argNames.add("${paramName}Size")
+            argNames.add(paramName)
+        case _ =>
+            params.add("${paramName}: ${winrtRawSlotType(index, ty)}")
+            argNames.add(paramName)
+    }
+}
+
+func addWinrtRawWrapperResultParam(
+    index: TypeIndex,
+    params: ArrayList<String>,
+    argNames: ArrayList<String>,
+    ty: MetadataType
+): Unit {
+    match (ty) {
+        case MetadataType.Void => ()
+        case MetadataType.MdArray(elem) =>
+            let arrayPointerType = winrtRawArrayPointerType(index, elem)
+            params.add("resultSize__: CPointer<UInt32>")
+            params.add("result__: CPointer<${arrayPointerType}>")
+            argNames.add("resultSize__")
+            argNames.add("result__")
+        case _ =>
+            let slotType = winrtRawSlotType(index, ty)
+            params.add("result__: CPointer<${slotType}>")
+            argNames.add("result__")
+    }
+}
+
+func collectWinrtRawAbiParamTypeText(index: TypeIndex, parts: ArrayList<String>, ty: MetadataType): Unit {
+    match (ty) {
+        case MetadataType.MdArray(elem) =>
+            parts.add("UInt32")
+            parts.add(winrtRawArrayPointerType(index, elem))
+        case _ =>
+            parts.add(winrtRawSlotType(index, ty))
+    }
+}
+
+func collectWinrtRawAbiResultTypeText(index: TypeIndex, parts: ArrayList<String>, ty: MetadataType): Unit {
+    match (ty) {
+        case MetadataType.Void => ()
+        case MetadataType.MdArray(elem) =>
+            parts.add("CPointer<UInt32>")
+            parts.add("CPointer<${winrtRawArrayPointerType(index, elem)}>")
+        case _ =>
+            parts.add("CPointer<${winrtRawSlotType(index, ty)}>")
+    }
+}
+
+func winrtRawArrayPointerType(index: TypeIndex, elem: MetadataType): String {
+    return "CPointer<${winrtRawSlotType(index, elem)}>"
+}
+
+func winrtRawSlotType(index: TypeIndex, ty: MetadataType): String {
+    if (isWinrtStringMetadataType(ty)) {
+        return "CPointer<Unit>"
+    }
+    match (ty) {
+        case MetadataType.MdObject => return "CPointer<Unit>"
+        case MetadataType.ClassName(typeName) =>
+            if (isNativeDelegateTypeName(index, typeName)) {
+                return cppType(ty)
+            }
+            return "CPointer<Unit>"
+        case MetadataType.ValueName(typeName) =>
+            if (isNativeDelegateTypeName(index, typeName)) {
+                return cppType(ty)
+            }
+            if (isReferenceProjectionType(index, typeName)) {
+                return "CPointer<Unit>"
+            }
+            return cppType(ty)
+        case MetadataType.MdArray(elem) =>
+            return winrtRawArrayPointerType(index, elem)
+        case MetadataType.Generic(_, _) =>
+            return "CPointer<Unit>"
+        case MetadataType.RefMut(inner) =>
+            return "CPointer<${winrtRawSlotType(index, inner)}>"
+        case MetadataType.RefConst(inner) =>
+            return "CPointer<${winrtRawSlotType(index, inner)}>"
+        case MetadataType.PtrMut(inner, depth) =>
+            return wrapWinrtRawSlotPointer(index, inner, depth)
+        case MetadataType.PtrConst(inner, depth) =>
+            return wrapWinrtRawSlotPointer(index, inner, depth)
+        case MetadataType.ArrayFixed(inner, size) =>
+            return "VArray<${winrtRawSlotType(index, inner)}, \$${size}>"
+        case MetadataType.Packed(inner, _) =>
+            return winrtRawSlotType(index, inner)
+        case _ =>
+            return cppType(ty)
+    }
+}
+
+func wrapWinrtRawSlotPointer(index: TypeIndex, inner: MetadataType, depth: Int64): String {
+    var result = winrtRawSlotType(index, inner)
+    var d = depth
+    while (d > 0) {
+        result = "CPointer<${result}>"
+        d -= 1
+    }
+    return result
+}
+
+func comAbiType(ty: MetadataType): String {
+    return functionAbiTypeForPointerInNamespace(currentNamespace(), ty)
+}
+
+func comAbiDefaultValue(ty: MetadataType): String {
+    let abiType = comAbiType(ty)
+    if (abiType != cppType(ty)) {
+        return highLevelResultDefaultExpr(abiType)
+    }
+    return cppDefaultValue(ty)
 }
 
 // Names of types referenced from every emitted COM class (iid, descriptor,
